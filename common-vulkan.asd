@@ -1,6 +1,6 @@
 
 (asdf:defsystem "common-vulkan"
-   :depends-on ("cffi")
+   :depends-on ("cffi" "cl-glfw")
    :components (
                 ; Vulkan
                 (:file "vulkan/package")

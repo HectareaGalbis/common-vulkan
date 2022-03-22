@@ -43,15 +43,21 @@
 		   collect (cl:second arg) collect (cl:first arg))
         ,result-type))))
 
+; Assigns the value 0 to all slots of p
 (cl:defun zero-struct (p struct-typespec)
   (cl:loop for i from 0 below (cffi:foreign-type-size struct-typespec)
      do (cl:setf (cffi:mem-aref p :unsigned-char i) 0))
   (cl:values))
 
-(cl:defmacro with-vk-struct ((p-info struct-type) cl:&body body)
-  `(cffi:with-foreign-object (,p-info '(:struct ,struct-type))
-     (zero-struct ,p-info '(:struct ,struct-type))
-     ,@(cl:when (cl:gethash struct-type *s-type-table*)
-	 `((cl:setf (cffi:foreign-slot-value ,p-info '(:struct ,struct-type) 'sType)
-		 ,(cl:gethash struct-type *s-type-table*))))
-     ,@body))
+; Wraps a body creating a vulkan object with all of its slots being 0.
+(cl:defmacro with-vulkan-object ((p-info struct-type) cl:&body body)
+             (let ((p-info-sym (gensym)) (struct-type-sym (gensym)))
+               `(let ((,p-info-sym ,p-info) (,struct-type-sym ,struct-type))
+                  (cffi:with-foreign-object (,p-info-sym '(:struct ,struct-type-sym))
+                                            (zero-struct ,p-info-sym '(:struct ,struct-type-sym))
+                                            ,@body))))
+
+
+; Creates an integer representing an vulkan version
+(defmacro make-version (major minor patch)
+  `(logior (ash ,major 22) (ash ,minor 12) ,patch))
