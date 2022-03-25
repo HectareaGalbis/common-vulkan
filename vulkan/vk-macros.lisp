@@ -25,22 +25,22 @@
   (cl:let ((instance-arg (cl:gensym "INSTANCE")))
     `(cl:defun ,lname (,instance-arg ,@(cl:mapcar 'cl:car args))
        (cffi:foreign-funcall-pointer
-	(cffi:with-foreign-string (p-native ,cname)
-	  (VkGetInstanceProcAddr ,instance-arg p-native))
+        (cffi:with-foreign-string (p-native ,cname)
+           (VkGetInstanceProcAddr ,instance-arg p-native))
         cl:nil
         ,@(cl:loop for arg in args
-		   collect (cl:second arg) collect (cl:first arg))
+           collect (cl:second arg) collect (cl:first arg))
         ,result-type))))
 
 (cl:defmacro defvkdevextfun ((cname lname) result-type cl:&body args)
   (cl:let ((device-arg (cl:gensym "DEVICE")))
     `(cl:defun ,lname (,device-arg ,@(cl:mapcar 'cl:car args))
        (cffi:foreign-funcall-pointer
-	(cffi:with-foreign-string (p-native ,cname)
-	  (VkGetDeviceProcAddr ,device-arg p-native))
+        (cffi:with-foreign-string (p-native ,cname)
+           (VkGetDeviceProcAddr ,device-arg p-native))
         cl:nil
         ,@(cl:loop for arg in args
-		   collect (cl:second arg) collect (cl:first arg))
+           collect (cl:second arg) collect (cl:first arg))
         ,result-type))))
 
 ; Assigns the value 0 to all slots of p

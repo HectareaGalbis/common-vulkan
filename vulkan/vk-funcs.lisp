@@ -69,14 +69,14 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 (cffi:defcfun ("vkAllocateCommandBuffers" vkAllocateCommandBuffers) VkResult
   (device VkDevice)
   (pAllocateInfo (:pointer (:struct VkCommandBufferAllocateInfo))) ;; :EXTERNSYNC "pAllocateInfo::commandPool"
-  (pCommandBuffers (:pointer VkCommandBuffer)) ;; :LEN "pAllocateInfo::commandBufferCount"
-)
+  (pCommandBuffers (:pointer VkCommandBuffer))) ;; :LEN "pAllocateInfo::commandBufferCount"
+
 
 (cffi:defcfun ("vkAllocateDescriptorSets" vkAllocateDescriptorSets) VkResult
   (device VkDevice)
   (pAllocateInfo (:pointer (:struct VkDescriptorSetAllocateInfo))) ;; :EXTERNSYNC "pAllocateInfo::descriptorPool"
-  (pDescriptorSets (:pointer VkDescriptorSet)) ;; :LEN "pAllocateInfo::descriptorSetCount"
-)
+  (pDescriptorSets (:pointer VkDescriptorSet))) ;; :LEN "pAllocateInfo::descriptorSetCount"
+
 
 (cffi:defcfun ("vkAllocateMemory" vkAllocateMemory) VkResult
   (device VkDevice)
@@ -97,8 +97,8 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 (defvkdevextfun ("vkBindBufferMemory2KHX" vkBindBufferMemory2KHX) VkResult
   (device VkDevice)
   (bindInfoCount :uint32)
-  (pBindInfos (:pointer (:struct VkBindBufferMemoryInfoKHX))) ;; :LEN "bindInfoCount"
-)
+  (pBindInfos (:pointer (:struct VkBindBufferMemoryInfoKHX)))) ;; :LEN "bindInfoCount"
+
 
 (cffi:defcfun ("vkBindImageMemory" vkBindImageMemory) VkResult
   (device VkDevice)
@@ -109,15 +109,15 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 (defvkdevextfun ("vkBindImageMemory2KHX" vkBindImageMemory2KHX) VkResult
   (device VkDevice)
   (bindInfoCount :uint32)
-  (pBindInfos (:pointer (:struct VkBindImageMemoryInfoKHX))) ;; :LEN "bindInfoCount"
-)
+  (pBindInfos (:pointer (:struct VkBindImageMemoryInfoKHX)))) ;; :LEN "bindInfoCount"
+
 
 (cffi:defcfun ("vkCmdBeginQuery" vkCmdBeginQuery) :void
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
   (queryPool VkQueryPool)
   (query :uint32)
-  (flags VkQueryControlFlags) ;; :OPTIONAL "true"
-)
+  (flags VkQueryControlFlags)) ;; :OPTIONAL "true"
+
 
 (cffi:defcfun ("vkCmdBeginRenderPass" vkCmdBeginRenderPass) :void
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
@@ -132,8 +132,8 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (descriptorSetCount :uint32)
   (pDescriptorSets (:pointer VkDescriptorSet)) ;; :LEN "descriptorSetCount"
   (dynamicOffsetCount :uint32) ;; :OPTIONAL "true"
-  (pDynamicOffsets (:pointer :uint32)) ;; :LEN "dynamicOffsetCount"
-)
+  (pDynamicOffsets (:pointer :uint32))) ;; :LEN "dynamicOffsetCount"
+
 
 (cffi:defcfun ("vkCmdBindIndexBuffer" vkCmdBindIndexBuffer) :void
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
@@ -151,8 +151,8 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (firstBinding :uint32)
   (bindingCount :uint32)
   (pBuffers (:pointer VkBuffer)) ;; :LEN "bindingCount"
-  (pOffsets (:pointer VkDeviceSize)) ;; :LEN "bindingCount"
-)
+  (pOffsets (:pointer VkDeviceSize))) ;; :LEN "bindingCount"
+
 
 (cffi:defcfun ("vkCmdBlitImage" vkCmdBlitImage) :void
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
@@ -169,8 +169,8 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (attachmentCount :uint32)
   (pAttachments (:pointer (:struct VkClearAttachment))) ;; :LEN "attachmentCount"
   (rectCount :uint32)
-  (pRects (:pointer (:struct VkClearRect))) ;; :LEN "rectCount"
-)
+  (pRects (:pointer (:struct VkClearRect)))) ;; :LEN "rectCount"
+
 
 (cffi:defcfun ("vkCmdClearColorImage" vkCmdClearColorImage) :void
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
@@ -178,8 +178,8 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (imageLayout VkImageLayout)
   (pColor (:pointer (:union VkClearColorValue)))
   (rangeCount :uint32)
-  (pRanges (:pointer (:struct VkImageSubresourceRange))) ;; :LEN "rangeCount"
-)
+  (pRanges (:pointer (:struct VkImageSubresourceRange)))) ;; :LEN "rangeCount"
+
 
 (cffi:defcfun ("vkCmdClearDepthStencilImage" vkCmdClearDepthStencilImage) :void
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
@@ -187,16 +187,16 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (imageLayout VkImageLayout)
   (pDepthStencil (:pointer (:struct VkClearDepthStencilValue)))
   (rangeCount :uint32)
-  (pRanges (:pointer (:struct VkImageSubresourceRange))) ;; :LEN "rangeCount"
-)
+  (pRanges (:pointer (:struct VkImageSubresourceRange)))) ;; :LEN "rangeCount"
+
 
 (cffi:defcfun ("vkCmdCopyBuffer" vkCmdCopyBuffer) :void
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
   (srcBuffer VkBuffer)
   (dstBuffer VkBuffer)
   (regionCount :uint32)
-  (pRegions (:pointer (:struct VkBufferCopy))) ;; :LEN "regionCount"
-)
+  (pRegions (:pointer (:struct VkBufferCopy)))) ;; :LEN "regionCount"
+
 
 (cffi:defcfun ("vkCmdCopyBufferToImage" vkCmdCopyBufferToImage) :void
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
@@ -204,8 +204,8 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (dstImage VkImage)
   (dstImageLayout VkImageLayout)
   (regionCount :uint32)
-  (pRegions (:pointer (:struct VkBufferImageCopy))) ;; :LEN "regionCount"
-)
+  (pRegions (:pointer (:struct VkBufferImageCopy)))) ;; :LEN "regionCount"
+
 
 (cffi:defcfun ("vkCmdCopyImage" vkCmdCopyImage) :void
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
@@ -214,8 +214,8 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (dstImage VkImage)
   (dstImageLayout VkImageLayout)
   (regionCount :uint32)
-  (pRegions (:pointer (:struct VkImageCopy))) ;; :LEN "regionCount"
-)
+  (pRegions (:pointer (:struct VkImageCopy)))) ;; :LEN "regionCount"
+
 
 (cffi:defcfun ("vkCmdCopyImageToBuffer" vkCmdCopyImageToBuffer) :void
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
@@ -223,8 +223,8 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (srcImageLayout VkImageLayout)
   (dstBuffer VkBuffer)
   (regionCount :uint32)
-  (pRegions (:pointer (:struct VkBufferImageCopy))) ;; :LEN "regionCount"
-)
+  (pRegions (:pointer (:struct VkBufferImageCopy)))) ;; :LEN "regionCount"
+
 
 (cffi:defcfun ("vkCmdCopyQueryPoolResults" vkCmdCopyQueryPoolResults) :void
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
@@ -234,8 +234,8 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (dstBuffer VkBuffer)
   (dstOffset VkDeviceSize)
   (stride VkDeviceSize)
-  (flags VkQueryResultFlags) ;; :OPTIONAL "true"
-)
+  (flags VkQueryResultFlags)) ;; :OPTIONAL "true"
+
 
 (defvkdevextfun ("vkCmdDebugMarkerBeginEXT" vkCmdDebugMarkerBeginEXT) :void
   (commandBuffer VkCommandBuffer)
@@ -321,14 +321,14 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (query :uint32))
 
 (cffi:defcfun ("vkCmdEndRenderPass" vkCmdEndRenderPass) :void
-  (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
-)
+  (commandBuffer VkCommandBuffer)) ;; :EXTERNSYNC "true"
+
 
 (cffi:defcfun ("vkCmdExecuteCommands" vkCmdExecuteCommands) :void
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
   (commandBufferCount :uint32)
-  (pCommandBuffers (:pointer VkCommandBuffer)) ;; :LEN "commandBufferCount"
-)
+  (pCommandBuffers (:pointer VkCommandBuffer))) ;; :LEN "commandBufferCount"
+
 
 (cffi:defcfun ("vkCmdFillBuffer" vkCmdFillBuffer) :void
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
@@ -351,8 +351,8 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (bufferMemoryBarrierCount :uint32) ;; :OPTIONAL "true"
   (pBufferMemoryBarriers (:pointer (:struct VkBufferMemoryBarrier))) ;; :LEN "bufferMemoryBarrierCount"
   (imageMemoryBarrierCount :uint32) ;; :OPTIONAL "true"
-  (pImageMemoryBarriers (:pointer (:struct VkImageMemoryBarrier))) ;; :LEN "imageMemoryBarrierCount"
-)
+  (pImageMemoryBarriers (:pointer (:struct VkImageMemoryBarrier)))) ;; :LEN "imageMemoryBarrierCount"
+
 
 (defvkdevextfun ("vkCmdProcessCommandsNVX" vkCmdProcessCommandsNVX) :void
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
@@ -364,8 +364,8 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (stageFlags VkShaderStageFlags)
   (offset :uint32)
   (size :uint32)
-  (pValues (:pointer :void)) ;; :LEN "size"
-)
+  (pValues (:pointer :void))) ;; :LEN "size"
+
 
 (defvkdevextfun ("vkCmdPushDescriptorSetKHR" vkCmdPushDescriptorSetKHR) :void
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
@@ -373,8 +373,8 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (layout VkPipelineLayout)
   (set :uint32)
   (descriptorWriteCount :uint32)
-  (pDescriptorWrites (:pointer (:struct VkWriteDescriptorSet))) ;; :LEN "descriptorWriteCount"
-)
+  (pDescriptorWrites (:pointer (:struct VkWriteDescriptorSet)))) ;; :LEN "descriptorWriteCount"
+
 
 (defvkdevextfun ("vkCmdPushDescriptorSetWithTemplateKHR" vkCmdPushDescriptorSetWithTemplateKHR) :void
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
@@ -405,8 +405,8 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (dstImage VkImage)
   (dstImageLayout VkImageLayout)
   (regionCount :uint32)
-  (pRegions (:pointer (:struct VkImageResolve))) ;; :LEN "regionCount"
-)
+  (pRegions (:pointer (:struct VkImageResolve)))) ;; :LEN "regionCount"
+
 
 (cffi:defcfun ("vkCmdSetBlendConstants" vkCmdSetBlendConstants) :void
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
@@ -431,8 +431,8 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
   (firstDiscardRectangle :uint32)
   (discardRectangleCount :uint32)
-  (pDiscardRectangles (:pointer (:struct VkRect2D))) ;; :LEN "discardRectangleCount"
-)
+  (pDiscardRectangles (:pointer (:struct VkRect2D)))) ;; :LEN "discardRectangleCount"
+
 
 (cffi:defcfun ("vkCmdSetEvent" vkCmdSetEvent) :void
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
@@ -447,8 +447,8 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
   (firstScissor :uint32)
   (scissorCount :uint32)
-  (pScissors (:pointer (:struct VkRect2D))) ;; :LEN "scissorCount"
-)
+  (pScissors (:pointer (:struct VkRect2D)))) ;; :LEN "scissorCount"
+
 
 (cffi:defcfun ("vkCmdSetStencilCompareMask" vkCmdSetStencilCompareMask) :void
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
@@ -469,23 +469,23 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
   (firstViewport :uint32)
   (viewportCount :uint32)
-  (pViewports (:pointer (:struct VkViewport))) ;; :LEN "viewportCount" :NOAUTOVALIDITY "true"
-)
+  (pViewports (:pointer (:struct VkViewport)))) ;; :LEN "viewportCount" :NOAUTOVALIDITY "true"
+
 
 (defvkdevextfun ("vkCmdSetViewportWScalingNV" vkCmdSetViewportWScalingNV) :void
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
   (firstViewport :uint32)
   (viewportCount :uint32)
-  (pViewportWScalings (:pointer (:struct VkViewportWScalingNV))) ;; :LEN "viewportCount" :NOAUTOVALIDITY "true"
-)
+  (pViewportWScalings (:pointer (:struct VkViewportWScalingNV)))) ;; :LEN "viewportCount" :NOAUTOVALIDITY "true"
+
 
 (cffi:defcfun ("vkCmdUpdateBuffer" vkCmdUpdateBuffer) :void
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
   (dstBuffer VkBuffer)
   (dstOffset VkDeviceSize)
   (dataSize VkDeviceSize)
-  (pData (:pointer :void)) ;; :LEN "dataSize"
-)
+  (pData (:pointer :void))) ;; :LEN "dataSize"
+
 
 (cffi:defcfun ("vkCmdWaitEvents" vkCmdWaitEvents) :void
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
@@ -498,8 +498,8 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (bufferMemoryBarrierCount :uint32) ;; :OPTIONAL "true"
   (pBufferMemoryBarriers (:pointer (:struct VkBufferMemoryBarrier))) ;; :LEN "bufferMemoryBarrierCount"
   (imageMemoryBarrierCount :uint32) ;; :OPTIONAL "true"
-  (pImageMemoryBarriers (:pointer (:struct VkImageMemoryBarrier))) ;; :LEN "imageMemoryBarrierCount"
-)
+  (pImageMemoryBarriers (:pointer (:struct VkImageMemoryBarrier)))) ;; :LEN "imageMemoryBarrierCount"
+
 
 (cffi:defcfun ("vkCmdWriteTimestamp" vkCmdWriteTimestamp) :void
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
@@ -537,8 +537,8 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (createInfoCount :uint32)
   (pCreateInfos (:pointer (:struct VkComputePipelineCreateInfo))) ;; :LEN "createInfoCount"
   (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-  (pPipelines (:pointer VkPipeline)) ;; :LEN "createInfoCount"
-)
+  (pPipelines (:pointer VkPipeline))) ;; :LEN "createInfoCount"
+
 
 (defvkinstextfun ("vkCreateDebugReportCallbackEXT" vkCreateDebugReportCallbackEXT) VkResult
   (instance VkInstance)
@@ -607,8 +607,8 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (createInfoCount :uint32)
   (pCreateInfos (:pointer (:struct VkGraphicsPipelineCreateInfo))) ;; :LEN "createInfoCount"
   (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-  (pPipelines (:pointer VkPipeline)) ;; :LEN "createInfoCount"
-)
+  (pPipelines (:pointer VkPipeline))) ;; :LEN "createInfoCount"
+
 
 (defvkinstextfun ("vkCreateIOSSurfaceMVK" vkCreateIOSSurfaceMVK) VkResult
   (instance VkInstance)
@@ -704,8 +704,8 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (swapchainCount :uint32)
   (pCreateInfos (:pointer (:struct VkSwapchainCreateInfoKHR))) ;; :LEN "swapchainCount" :EXTERNSYNC "pCreateInfos[].surface,pCreateInfos[].oldSwapchain"
   (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-  (pSwapchains (:pointer VkSwapchainKHR)) ;; :LEN "swapchainCount"
-)
+  (pSwapchains (:pointer VkSwapchainKHR))) ;; :LEN "swapchainCount"
+
 
 (cffi:defcfun ("vkCreateSwapchainKHR" vkCreateSwapchainKHR) VkResult
   (device VkDevice)
@@ -745,13 +745,13 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 
 (defvkdevextfun ("vkDebugMarkerSetObjectNameEXT" vkDebugMarkerSetObjectNameEXT) VkResult
   (device VkDevice)
-  (pNameInfo (:pointer (:struct VkDebugMarkerObjectNameInfoEXT))) ;; :EXTERNSYNC "pNameInfo.object"
-)
+  (pNameInfo (:pointer (:struct VkDebugMarkerObjectNameInfoEXT)))) ;; :EXTERNSYNC "pNameInfo.object"
+
 
 (defvkdevextfun ("vkDebugMarkerSetObjectTagEXT" vkDebugMarkerSetObjectTagEXT) VkResult
   (device VkDevice)
-  (pTagInfo (:pointer (:struct VkDebugMarkerObjectTagInfoEXT))) ;; :EXTERNSYNC "pTagInfo.object"
-)
+  (pTagInfo (:pointer (:struct VkDebugMarkerObjectTagInfoEXT)))) ;; :EXTERNSYNC "pTagInfo.object"
+
 
 (defvkinstextfun ("vkDebugReportMessageEXT" vkDebugReportMessageEXT) :void
   (instance VkInstance)
@@ -761,162 +761,162 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (location size-t)
   (messageCode :int32)
   (pLayerPrefix (:pointer :char)) ;; :LEN "null-terminated"
-  (pMessage (:pointer :char)) ;; :LEN "null-terminated"
-)
+  (pMessage (:pointer :char))) ;; :LEN "null-terminated"
+
 
 (cffi:defcfun ("vkDestroyBuffer" vkDestroyBuffer) :void
   (device VkDevice)
   (buffer VkBuffer) ;; :OPTIONAL "true" :EXTERNSYNC "true"
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-)
+  (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
+
 
 (cffi:defcfun ("vkDestroyBufferView" vkDestroyBufferView) :void
   (device VkDevice)
   (bufferView VkBufferView) ;; :OPTIONAL "true" :EXTERNSYNC "true"
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-)
+  (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
+
 
 (cffi:defcfun ("vkDestroyCommandPool" vkDestroyCommandPool) :void
   (device VkDevice)
   (commandPool VkCommandPool) ;; :OPTIONAL "true" :EXTERNSYNC "true"
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-)
+  (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
+
 
 (defvkinstextfun ("vkDestroyDebugReportCallbackEXT" vkDestroyDebugReportCallbackEXT) :void
   (instance VkInstance)
   (callback VkDebugReportCallbackEXT) ;; :EXTERNSYNC "true"
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-)
+  (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
+
 
 (cffi:defcfun ("vkDestroyDescriptorPool" vkDestroyDescriptorPool) :void
   (device VkDevice)
   (descriptorPool VkDescriptorPool) ;; :OPTIONAL "true" :EXTERNSYNC "true"
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-)
+  (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
+
 
 (cffi:defcfun ("vkDestroyDescriptorSetLayout" vkDestroyDescriptorSetLayout) :void
   (device VkDevice)
   (descriptorSetLayout VkDescriptorSetLayout) ;; :OPTIONAL "true" :EXTERNSYNC "true"
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-)
+  (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
+
 
 (defvkdevextfun ("vkDestroyDescriptorUpdateTemplateKHR" vkDestroyDescriptorUpdateTemplateKHR) :void
   (device VkDevice)
   (descriptorUpdateTemplate VkDescriptorUpdateTemplateKHR) ;; :OPTIONAL "true" :EXTERNSYNC "true"
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-)
+  (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
+
 
 (cffi:defcfun ("vkDestroyDevice" vkDestroyDevice) :void
   (device VkDevice) ;; :OPTIONAL "true" :EXTERNSYNC "true"
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-)
+  (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
+
 
 (cffi:defcfun ("vkDestroyEvent" vkDestroyEvent) :void
   (device VkDevice)
   (event VkEvent) ;; :OPTIONAL "true" :EXTERNSYNC "true"
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-)
+  (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
+
 
 (cffi:defcfun ("vkDestroyFence" vkDestroyFence) :void
   (device VkDevice)
   (fence VkFence) ;; :OPTIONAL "true" :EXTERNSYNC "true"
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-)
+  (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
+
 
 (cffi:defcfun ("vkDestroyFramebuffer" vkDestroyFramebuffer) :void
   (device VkDevice)
   (framebuffer VkFramebuffer) ;; :OPTIONAL "true" :EXTERNSYNC "true"
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-)
+  (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
+
 
 (cffi:defcfun ("vkDestroyImage" vkDestroyImage) :void
   (device VkDevice)
   (image VkImage) ;; :OPTIONAL "true" :EXTERNSYNC "true"
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-)
+  (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
+
 
 (cffi:defcfun ("vkDestroyImageView" vkDestroyImageView) :void
   (device VkDevice)
   (imageView VkImageView) ;; :OPTIONAL "true" :EXTERNSYNC "true"
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-)
+  (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
+
 
 (defvkdevextfun ("vkDestroyIndirectCommandsLayoutNVX" vkDestroyIndirectCommandsLayoutNVX) :void
   (device VkDevice)
   (indirectCommandsLayout VkIndirectCommandsLayoutNVX)
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-)
+  (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
+
 
 (cffi:defcfun ("vkDestroyInstance" vkDestroyInstance) :void
   (instance VkInstance) ;; :OPTIONAL "true" :EXTERNSYNC "true"
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-)
+  (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
+
 
 (defvkdevextfun ("vkDestroyObjectTableNVX" vkDestroyObjectTableNVX) :void
   (device VkDevice)
   (objectTable VkObjectTableNVX) ;; :EXTERNSYNC "true"
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-)
+  (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
+
 
 (cffi:defcfun ("vkDestroyPipeline" vkDestroyPipeline) :void
   (device VkDevice)
   (pipeline VkPipeline) ;; :OPTIONAL "true" :EXTERNSYNC "true"
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-)
+  (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
+
 
 (cffi:defcfun ("vkDestroyPipelineCache" vkDestroyPipelineCache) :void
   (device VkDevice)
   (pipelineCache VkPipelineCache) ;; :OPTIONAL "true" :EXTERNSYNC "true"
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-)
+  (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
+
 
 (cffi:defcfun ("vkDestroyPipelineLayout" vkDestroyPipelineLayout) :void
   (device VkDevice)
   (pipelineLayout VkPipelineLayout) ;; :OPTIONAL "true" :EXTERNSYNC "true"
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-)
+  (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
+
 
 (cffi:defcfun ("vkDestroyQueryPool" vkDestroyQueryPool) :void
   (device VkDevice)
   (queryPool VkQueryPool) ;; :OPTIONAL "true" :EXTERNSYNC "true"
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-)
+  (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
+
 
 (cffi:defcfun ("vkDestroyRenderPass" vkDestroyRenderPass) :void
   (device VkDevice)
   (renderPass VkRenderPass) ;; :OPTIONAL "true" :EXTERNSYNC "true"
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-)
+  (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
+
 
 (cffi:defcfun ("vkDestroySampler" vkDestroySampler) :void
   (device VkDevice)
   (sampler VkSampler) ;; :OPTIONAL "true" :EXTERNSYNC "true"
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-)
+  (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
+
 
 (cffi:defcfun ("vkDestroySemaphore" vkDestroySemaphore) :void
   (device VkDevice)
   (semaphore VkSemaphore) ;; :OPTIONAL "true" :EXTERNSYNC "true"
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-)
+  (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
+
 
 (cffi:defcfun ("vkDestroyShaderModule" vkDestroyShaderModule) :void
   (device VkDevice)
   (shaderModule VkShaderModule) ;; :OPTIONAL "true" :EXTERNSYNC "true"
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-)
+  (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
+
 
 (cffi:defcfun ("vkDestroySurfaceKHR" vkDestroySurfaceKHR) :void
   (instance VkInstance)
   (surface VkSurfaceKHR) ;; :OPTIONAL "true" :EXTERNSYNC "true"
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-)
+  (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
+
 
 (cffi:defcfun ("vkDestroySwapchainKHR" vkDestroySwapchainKHR) :void
   (device VkDevice)
   (swapchain VkSwapchainKHR) ;; :OPTIONAL "true" :EXTERNSYNC "true"
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-)
+  (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
+
 
 (cffi:defcfun ("vkDeviceWaitIdle" vkDeviceWaitIdle) VkResult
   (device VkDevice))
@@ -927,70 +927,70 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (pDisplayPowerInfo (:pointer (:struct VkDisplayPowerInfoEXT))))
 
 (cffi:defcfun ("vkEndCommandBuffer" vkEndCommandBuffer) VkResult
-  (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
-)
+  (commandBuffer VkCommandBuffer)) ;; :EXTERNSYNC "true"
+
 
 (cffi:defcfun ("vkEnumerateDeviceExtensionProperties" vkEnumerateDeviceExtensionProperties) VkResult
   (physicalDevice VkPhysicalDevice)
   (pLayerName (:pointer :char)) ;; :OPTIONAL "true" :LEN "null-terminated"
   (pPropertyCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
-  (pProperties (:pointer (:struct VkExtensionProperties))) ;; :OPTIONAL "true" :LEN "pPropertyCount"
-)
+  (pProperties (:pointer (:struct VkExtensionProperties)))) ;; :OPTIONAL "true" :LEN "pPropertyCount"
+
 
 (cffi:defcfun ("vkEnumerateDeviceLayerProperties" vkEnumerateDeviceLayerProperties) VkResult
   (physicalDevice VkPhysicalDevice)
   (pPropertyCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
-  (pProperties (:pointer (:struct VkLayerProperties))) ;; :OPTIONAL "true" :LEN "pPropertyCount"
-)
+  (pProperties (:pointer (:struct VkLayerProperties)))) ;; :OPTIONAL "true" :LEN "pPropertyCount"
+
 
 (cffi:defcfun ("vkEnumerateInstanceExtensionProperties" vkEnumerateInstanceExtensionProperties) VkResult
   (pLayerName (:pointer :char)) ;; :OPTIONAL "true" :LEN "null-terminated"
   (pPropertyCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
-  (pProperties (:pointer (:struct VkExtensionProperties))) ;; :OPTIONAL "true" :LEN "pPropertyCount"
-)
+  (pProperties (:pointer (:struct VkExtensionProperties)))) ;; :OPTIONAL "true" :LEN "pPropertyCount"
+
 
 (cffi:defcfun ("vkEnumerateInstanceLayerProperties" vkEnumerateInstanceLayerProperties) VkResult
   (pPropertyCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
-  (pProperties (:pointer (:struct VkLayerProperties))) ;; :OPTIONAL "true" :LEN "pPropertyCount"
-)
+  (pProperties (:pointer (:struct VkLayerProperties)))) ;; :OPTIONAL "true" :LEN "pPropertyCount"
+
 
 (defvkinstextfun ("vkEnumeratePhysicalDeviceGroupsKHX" vkEnumeratePhysicalDeviceGroupsKHX) VkResult
   (instance VkInstance)
   (pPhysicalDeviceGroupCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
-  (pPhysicalDeviceGroupProperties (:pointer (:struct VkPhysicalDeviceGroupPropertiesKHX))) ;; :OPTIONAL "true" :LEN "pPhysicalDeviceGroupCount"
-)
+  (pPhysicalDeviceGroupProperties (:pointer (:struct VkPhysicalDeviceGroupPropertiesKHX)))) ;; :OPTIONAL "true" :LEN "pPhysicalDeviceGroupCount"
+
 
 (cffi:defcfun ("vkEnumeratePhysicalDevices" vkEnumeratePhysicalDevices) VkResult
   (instance VkInstance)
   (pPhysicalDeviceCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
-  (pPhysicalDevices (:pointer VkPhysicalDevice)) ;; :OPTIONAL "true" :LEN "pPhysicalDeviceCount"
-)
+  (pPhysicalDevices (:pointer VkPhysicalDevice))) ;; :OPTIONAL "true" :LEN "pPhysicalDeviceCount"
+
 
 (cffi:defcfun ("vkFlushMappedMemoryRanges" vkFlushMappedMemoryRanges) VkResult
   (device VkDevice)
   (memoryRangeCount :uint32)
-  (pMemoryRanges (:pointer (:struct VkMappedMemoryRange))) ;; :LEN "memoryRangeCount"
-)
+  (pMemoryRanges (:pointer (:struct VkMappedMemoryRange)))) ;; :LEN "memoryRangeCount"
+
 
 (cffi:defcfun ("vkFreeCommandBuffers" vkFreeCommandBuffers) :void
   (device VkDevice)
   (commandPool VkCommandPool) ;; :EXTERNSYNC "true"
   (commandBufferCount :uint32)
-  (pCommandBuffers (:pointer VkCommandBuffer)) ;; :LEN "commandBufferCount" :NOAUTOVALIDITY "true" :EXTERNSYNC "true"
-)
+  (pCommandBuffers (:pointer VkCommandBuffer))) ;; :LEN "commandBufferCount" :NOAUTOVALIDITY "true" :EXTERNSYNC "true"
+
 
 (cffi:defcfun ("vkFreeDescriptorSets" vkFreeDescriptorSets) VkResult
   (device VkDevice)
   (descriptorPool VkDescriptorPool) ;; :EXTERNSYNC "true"
   (descriptorSetCount :uint32)
-  (pDescriptorSets (:pointer VkDescriptorSet)) ;; :LEN "descriptorSetCount" :NOAUTOVALIDITY "true" :EXTERNSYNC "true"
-)
+  (pDescriptorSets (:pointer VkDescriptorSet))) ;; :LEN "descriptorSetCount" :NOAUTOVALIDITY "true" :EXTERNSYNC "true"
+
 
 (cffi:defcfun ("vkFreeMemory" vkFreeMemory) :void
   (device VkDevice)
   (memory VkDeviceMemory) ;; :OPTIONAL "true" :EXTERNSYNC "true"
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-)
+  (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
+
 
 (cffi:defcfun ("vkGetBufferMemoryRequirements" vkGetBufferMemoryRequirements) :void
   (device VkDevice)
@@ -1020,8 +1020,8 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 
 (cffi:defcfun ("vkGetDeviceProcAddr" vkGetDeviceProcAddr) PFN_vkVoidFunction
   (device VkDevice)
-  (pName (:pointer :char)) ;; :LEN "null-terminated"
-)
+  (pName (:pointer :char))) ;; :LEN "null-terminated"
+
 
 (cffi:defcfun ("vkGetDeviceQueue" vkGetDeviceQueue) :void
   (device VkDevice)
@@ -1033,8 +1033,8 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (physicalDevice VkPhysicalDevice)
   (display VkDisplayKHR)
   (pPropertyCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
-  (pProperties (:pointer (:struct VkDisplayModePropertiesKHR))) ;; :OPTIONAL "true" :LEN "pPropertyCount"
-)
+  (pProperties (:pointer (:struct VkDisplayModePropertiesKHR)))) ;; :OPTIONAL "true" :LEN "pPropertyCount"
+
 
 (cffi:defcfun ("vkGetDisplayPlaneCapabilitiesKHR" vkGetDisplayPlaneCapabilitiesKHR) VkResult
   (physicalDevice VkPhysicalDevice)
@@ -1046,8 +1046,8 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (physicalDevice VkPhysicalDevice)
   (planeIndex :uint32)
   (pDisplayCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
-  (pDisplays (:pointer VkDisplayKHR)) ;; :OPTIONAL "true" :LEN "pDisplayCount"
-)
+  (pDisplays (:pointer VkDisplayKHR))) ;; :OPTIONAL "true" :LEN "pDisplayCount"
+
 
 (cffi:defcfun ("vkGetEventStatus" vkGetEventStatus) VkResult
   (device VkDevice)
@@ -1066,8 +1066,8 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (device VkDevice)
   (image VkImage)
   (pSparseMemoryRequirementCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
-  (pSparseMemoryRequirements (:pointer (:struct VkSparseImageMemoryRequirements))) ;; :OPTIONAL "true" :LEN "pSparseMemoryRequirementCount"
-)
+  (pSparseMemoryRequirements (:pointer (:struct VkSparseImageMemoryRequirements)))) ;; :OPTIONAL "true" :LEN "pSparseMemoryRequirementCount"
+
 
 (cffi:defcfun ("vkGetImageSubresourceLayout" vkGetImageSubresourceLayout) :void
   (device VkDevice)
@@ -1077,8 +1077,8 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 
 (cffi:defcfun ("vkGetInstanceProcAddr" vkGetInstanceProcAddr) PFN_vkVoidFunction
   (instance VkInstance) ;; :OPTIONAL "true"
-  (pName (:pointer :char)) ;; :LEN "null-terminated"
-)
+  (pName (:pointer :char))) ;; :LEN "null-terminated"
+
 
 (defvkdevextfun ("vkGetMemoryFdKHX" vkGetMemoryFdKHX) VkResult
   (device VkDevice)
@@ -1114,20 +1114,20 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (device VkDevice)
   (swapchain VkSwapchainKHR) ;; :EXTERNSYNC "true"
   (pPresentationTimingCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
-  (pPresentationTimings (:pointer (:struct VkPastPresentationTimingGOOGLE))) ;; :OPTIONAL "true" :LEN "pPresentationTimingCount"
-)
+  (pPresentationTimings (:pointer (:struct VkPastPresentationTimingGOOGLE)))) ;; :OPTIONAL "true" :LEN "pPresentationTimingCount"
+
 
 (cffi:defcfun ("vkGetPhysicalDeviceDisplayPlanePropertiesKHR" vkGetPhysicalDeviceDisplayPlanePropertiesKHR) VkResult
   (physicalDevice VkPhysicalDevice)
   (pPropertyCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
-  (pProperties (:pointer (:struct VkDisplayPlanePropertiesKHR))) ;; :OPTIONAL "true" :LEN "pPropertyCount"
-)
+  (pProperties (:pointer (:struct VkDisplayPlanePropertiesKHR)))) ;; :OPTIONAL "true" :LEN "pPropertyCount"
+
 
 (cffi:defcfun ("vkGetPhysicalDeviceDisplayPropertiesKHR" vkGetPhysicalDeviceDisplayPropertiesKHR) VkResult
   (physicalDevice VkPhysicalDevice)
   (pPropertyCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
-  (pProperties (:pointer (:struct VkDisplayPropertiesKHR))) ;; :OPTIONAL "true" :LEN "pPropertyCount"
-)
+  (pProperties (:pointer (:struct VkDisplayPropertiesKHR)))) ;; :OPTIONAL "true" :LEN "pPropertyCount"
+
 
 (defvkinstextfun ("vkGetPhysicalDeviceExternalBufferPropertiesKHX" vkGetPhysicalDeviceExternalBufferPropertiesKHX) :void
   (physicalDevice VkPhysicalDevice)
@@ -1203,8 +1203,8 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (physicalDevice VkPhysicalDevice)
   (surface VkSurfaceKHR) ;; :EXTERNSYNC "true"
   (pRectCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
-  (pRects (:pointer (:struct VkRect2D))) ;; :OPTIONAL "true" :LEN "pRectCount"
-)
+  (pRects (:pointer (:struct VkRect2D)))) ;; :OPTIONAL "true" :LEN "pRectCount"
+
 
 (cffi:defcfun ("vkGetPhysicalDeviceProperties" vkGetPhysicalDeviceProperties) :void
   (physicalDevice VkPhysicalDevice)
@@ -1217,14 +1217,14 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 (cffi:defcfun ("vkGetPhysicalDeviceQueueFamilyProperties" vkGetPhysicalDeviceQueueFamilyProperties) :void
   (physicalDevice VkPhysicalDevice)
   (pQueueFamilyPropertyCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
-  (pQueueFamilyProperties (:pointer (:struct VkQueueFamilyProperties))) ;; :OPTIONAL "true" :LEN "pQueueFamilyPropertyCount"
-)
+  (pQueueFamilyProperties (:pointer (:struct VkQueueFamilyProperties)))) ;; :OPTIONAL "true" :LEN "pQueueFamilyPropertyCount"
+
 
 (defvkinstextfun ("vkGetPhysicalDeviceQueueFamilyProperties2KHR" vkGetPhysicalDeviceQueueFamilyProperties2KHR) :void
   (physicalDevice VkPhysicalDevice)
   (pQueueFamilyPropertyCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
-  (pQueueFamilyProperties (:pointer (:struct VkQueueFamilyProperties2KHR))) ;; :OPTIONAL "true" :LEN "pQueueFamilyPropertyCount"
-)
+  (pQueueFamilyProperties (:pointer (:struct VkQueueFamilyProperties2KHR)))) ;; :OPTIONAL "true" :LEN "pQueueFamilyPropertyCount"
+
 
 (cffi:defcfun ("vkGetPhysicalDeviceSparseImageFormatProperties" vkGetPhysicalDeviceSparseImageFormatProperties) :void
   (physicalDevice VkPhysicalDevice)
@@ -1234,15 +1234,15 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (usage VkImageUsageFlags)
   (tiling VkImageTiling)
   (pPropertyCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
-  (pProperties (:pointer (:struct VkSparseImageFormatProperties))) ;; :OPTIONAL "true" :LEN "pPropertyCount"
-)
+  (pProperties (:pointer (:struct VkSparseImageFormatProperties)))) ;; :OPTIONAL "true" :LEN "pPropertyCount"
+
 
 (defvkinstextfun ("vkGetPhysicalDeviceSparseImageFormatProperties2KHR" vkGetPhysicalDeviceSparseImageFormatProperties2KHR) :void
   (physicalDevice VkPhysicalDevice)
   (pFormatInfo (:pointer (:struct VkPhysicalDeviceSparseImageFormatInfo2KHR)))
   (pPropertyCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
-  (pProperties (:pointer (:struct VkSparseImageFormatProperties2KHR))) ;; :OPTIONAL "true" :LEN "pPropertyCount"
-)
+  (pProperties (:pointer (:struct VkSparseImageFormatProperties2KHR)))) ;; :OPTIONAL "true" :LEN "pPropertyCount"
+
 
 (defvkinstextfun ("vkGetPhysicalDeviceSurfaceCapabilities2EXT" vkGetPhysicalDeviceSurfaceCapabilities2EXT) VkResult
   (physicalDevice VkPhysicalDevice)
@@ -1263,22 +1263,22 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (physicalDevice VkPhysicalDevice)
   (pSurfaceInfo (:pointer (:struct VkPhysicalDeviceSurfaceInfo2KHR)))
   (pSurfaceFormatCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
-  (pSurfaceFormats (:pointer (:struct VkSurfaceFormat2KHR))) ;; :OPTIONAL "true" :LEN "pSurfaceFormatCount"
-)
+  (pSurfaceFormats (:pointer (:struct VkSurfaceFormat2KHR)))) ;; :OPTIONAL "true" :LEN "pSurfaceFormatCount"
+
 
 (cffi:defcfun ("vkGetPhysicalDeviceSurfaceFormatsKHR" vkGetPhysicalDeviceSurfaceFormatsKHR) VkResult
   (physicalDevice VkPhysicalDevice)
   (surface VkSurfaceKHR)
   (pSurfaceFormatCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
-  (pSurfaceFormats (:pointer (:struct VkSurfaceFormatKHR))) ;; :OPTIONAL "true" :LEN "pSurfaceFormatCount"
-)
+  (pSurfaceFormats (:pointer (:struct VkSurfaceFormatKHR)))) ;; :OPTIONAL "true" :LEN "pSurfaceFormatCount"
+
 
 (cffi:defcfun ("vkGetPhysicalDeviceSurfacePresentModesKHR" vkGetPhysicalDeviceSurfacePresentModesKHR) VkResult
   (physicalDevice VkPhysicalDevice)
   (surface VkSurfaceKHR)
   (pPresentModeCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
-  (pPresentModes (:pointer VkPresentModeKHR)) ;; :OPTIONAL "true" :LEN "pPresentModeCount"
-)
+  (pPresentModes (:pointer VkPresentModeKHR))) ;; :OPTIONAL "true" :LEN "pPresentModeCount"
+
 
 (cffi:defcfun ("vkGetPhysicalDeviceSurfaceSupportKHR" vkGetPhysicalDeviceSurfaceSupportKHR) VkResult
   (physicalDevice VkPhysicalDevice)
@@ -1305,8 +1305,8 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (device VkDevice)
   (pipelineCache VkPipelineCache)
   (pDataSize (:pointer size-t)) ;; :OPTIONAL "false,true"
-  (pData (:pointer :void)) ;; :OPTIONAL "true" :LEN "pDataSize"
-)
+  (pData (:pointer :void))) ;; :OPTIONAL "true" :LEN "pDataSize"
+
 
 (cffi:defcfun ("vkGetQueryPoolResults" vkGetQueryPoolResults) VkResult
   (device VkDevice)
@@ -1316,8 +1316,8 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (dataSize size-t)
   (pData (:pointer :void)) ;; :LEN "dataSize"
   (stride VkDeviceSize)
-  (flags VkQueryResultFlags) ;; :OPTIONAL "true"
-)
+  (flags VkQueryResultFlags)) ;; :OPTIONAL "true"
+
 
 (defvkinstextfun ("vkGetRandROutputDisplayEXT" vkGetRandROutputDisplayEXT) VkResult
   (physicalDevice VkPhysicalDevice)
@@ -1357,13 +1357,13 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (device VkDevice)
   (swapchain VkSwapchainKHR)
   (pSwapchainImageCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
-  (pSwapchainImages (:pointer VkImage)) ;; :OPTIONAL "true" :LEN "pSwapchainImageCount"
-)
+  (pSwapchainImages (:pointer VkImage))) ;; :OPTIONAL "true" :LEN "pSwapchainImageCount"
+
 
 (defvkdevextfun ("vkGetSwapchainStatusKHR" vkGetSwapchainStatusKHR) VkResult
   (device VkDevice)
-  (swapchain VkSwapchainKHR) ;; :EXTERNSYNC "true"
-)
+  (swapchain VkSwapchainKHR)) ;; :EXTERNSYNC "true"
+
 
 (defvkdevextfun ("vkImportSemaphoreFdKHX" vkImportSemaphoreFdKHX) VkResult
   (device VkDevice)
@@ -1376,8 +1376,8 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 (cffi:defcfun ("vkInvalidateMappedMemoryRanges" vkInvalidateMappedMemoryRanges) VkResult
   (device VkDevice)
   (memoryRangeCount :uint32)
-  (pMemoryRanges (:pointer (:struct VkMappedMemoryRange))) ;; :LEN "memoryRangeCount"
-)
+  (pMemoryRanges (:pointer (:struct VkMappedMemoryRange)))) ;; :LEN "memoryRangeCount"
+
 
 (cffi:defcfun ("vkMapMemory" vkMapMemory) VkResult
   (device VkDevice)
@@ -1391,27 +1391,27 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (device VkDevice)
   (dstCache VkPipelineCache) ;; :EXTERNSYNC "true"
   (srcCacheCount :uint32)
-  (pSrcCaches (:pointer VkPipelineCache)) ;; :LEN "srcCacheCount"
-)
+  (pSrcCaches (:pointer VkPipelineCache))) ;; :LEN "srcCacheCount"
+
 
 (cffi:defcfun ("vkQueueBindSparse" vkQueueBindSparse) VkResult
   (queue VkQueue) ;; :EXTERNSYNC "true"
   (bindInfoCount :uint32) ;; :OPTIONAL "true"
   (pBindInfo (:pointer (:struct VkBindSparseInfo))) ;; :LEN "bindInfoCount" :EXTERNSYNC "pBindInfo[].pWaitSemaphores[],pBindInfo[].pSignalSemaphores[],pBindInfo[].pBufferBinds[].buffer,pBindInfo[].pImageOpaqueBinds[].image,pBindInfo[].pImageBinds[].image"
-  (fence VkFence) ;; :OPTIONAL "true" :EXTERNSYNC "true"
-)
+  (fence VkFence)) ;; :OPTIONAL "true" :EXTERNSYNC "true"
+
 
 (cffi:defcfun ("vkQueuePresentKHR" vkQueuePresentKHR) VkResult
   (queue VkQueue) ;; :EXTERNSYNC "true"
-  (pPresentInfo (:pointer (:struct VkPresentInfoKHR))) ;; :EXTERNSYNC "pPresentInfo.pWaitSemaphores[],pPresentInfo.pSwapchains[]"
-)
+  (pPresentInfo (:pointer (:struct VkPresentInfoKHR)))) ;; :EXTERNSYNC "pPresentInfo.pWaitSemaphores[],pPresentInfo.pSwapchains[]"
+
 
 (cffi:defcfun ("vkQueueSubmit" vkQueueSubmit) VkResult
   (queue VkQueue) ;; :EXTERNSYNC "true"
   (submitCount :uint32) ;; :OPTIONAL "true"
   (pSubmits (:pointer (:struct VkSubmitInfo))) ;; :LEN "submitCount" :EXTERNSYNC "pSubmits[].pWaitSemaphores[],pSubmits[].pSignalSemaphores[]"
-  (fence VkFence) ;; :OPTIONAL "true" :EXTERNSYNC "true"
-)
+  (fence VkFence)) ;; :OPTIONAL "true" :EXTERNSYNC "true"
+
 
 (cffi:defcfun ("vkQueueWaitIdle" vkQueueWaitIdle) VkResult
   (queue VkQueue))
@@ -1434,8 +1434,8 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (objectTable VkObjectTableNVX) ;; :EXTERNSYNC "true"
   (objectCount :uint32)
   (ppObjectTableEntries (:pointer (:pointer (:struct VkObjectTableEntryNVX)))) ;; :LEN "objectCount"
-  (pObjectIndices (:pointer :uint32)) ;; :LEN "objectCount"
-)
+  (pObjectIndices (:pointer :uint32))) ;; :LEN "objectCount"
+
 
 (defvkinstextfun ("vkReleaseDisplayEXT" vkReleaseDisplayEXT) VkResult
   (physicalDevice VkPhysicalDevice)
@@ -1443,62 +1443,62 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 
 (cffi:defcfun ("vkResetCommandBuffer" vkResetCommandBuffer) VkResult
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
-  (flags VkCommandBufferResetFlags) ;; :OPTIONAL "true"
-)
+  (flags VkCommandBufferResetFlags)) ;; :OPTIONAL "true"
+
 
 (cffi:defcfun ("vkResetCommandPool" vkResetCommandPool) VkResult
   (device VkDevice)
   (commandPool VkCommandPool) ;; :EXTERNSYNC "true"
-  (flags VkCommandPoolResetFlags) ;; :OPTIONAL "true"
-)
+  (flags VkCommandPoolResetFlags)) ;; :OPTIONAL "true"
+
 
 (cffi:defcfun ("vkResetDescriptorPool" vkResetDescriptorPool) VkResult
   (device VkDevice)
   (descriptorPool VkDescriptorPool) ;; :EXTERNSYNC "true"
-  (flags VkDescriptorPoolResetFlags) ;; :OPTIONAL "true"
-)
+  (flags VkDescriptorPoolResetFlags)) ;; :OPTIONAL "true"
+
 
 (cffi:defcfun ("vkResetEvent" vkResetEvent) VkResult
   (device VkDevice)
-  (event VkEvent) ;; :EXTERNSYNC "true"
-)
+  (event VkEvent)) ;; :EXTERNSYNC "true"
+
 
 (cffi:defcfun ("vkResetFences" vkResetFences) VkResult
   (device VkDevice)
   (fenceCount :uint32)
-  (pFences (:pointer VkFence)) ;; :LEN "fenceCount" :EXTERNSYNC "true"
-)
+  (pFences (:pointer VkFence))) ;; :LEN "fenceCount" :EXTERNSYNC "true"
+
 
 (cffi:defcfun ("vkSetEvent" vkSetEvent) VkResult
   (device VkDevice)
-  (event VkEvent) ;; :EXTERNSYNC "true"
-)
+  (event VkEvent)) ;; :EXTERNSYNC "true"
+
 
 (defvkdevextfun ("vkSetHdrMetadataEXT" vkSetHdrMetadataEXT) :void
   (device VkDevice)
   (swapchainCount :uint32)
   (pSwapchains (:pointer VkSwapchainKHR)) ;; :LEN "swapchainCount"
-  (pMetadata (:pointer (:struct VkHdrMetadataEXT))) ;; :LEN "swapchainCount"
-)
+  (pMetadata (:pointer (:struct VkHdrMetadataEXT)))) ;; :LEN "swapchainCount"
+
 
 (defvkdevextfun ("vkTrimCommandPoolKHR" vkTrimCommandPoolKHR) :void
   (device VkDevice)
   (commandPool VkCommandPool) ;; :EXTERNSYNC "true"
-  (flags VkCommandPoolTrimFlagsKHR) ;; :OPTIONAL "true"
-)
+  (flags VkCommandPoolTrimFlagsKHR)) ;; :OPTIONAL "true"
+
 
 (cffi:defcfun ("vkUnmapMemory" vkUnmapMemory) :void
   (device VkDevice)
-  (memory VkDeviceMemory) ;; :EXTERNSYNC "true"
-)
+  (memory VkDeviceMemory)) ;; :EXTERNSYNC "true"
+
 
 (defvkdevextfun ("vkUnregisterObjectsNVX" vkUnregisterObjectsNVX) VkResult
   (device VkDevice)
   (objectTable VkObjectTableNVX) ;; :EXTERNSYNC "true"
   (objectCount :uint32)
   (pObjectEntryTypes (:pointer VkObjectEntryTypeNVX)) ;; :LEN "objectCount"
-  (pObjectIndices (:pointer :uint32)) ;; :LEN "objectCount"
-)
+  (pObjectIndices (:pointer :uint32))) ;; :LEN "objectCount"
+
 
 (defvkdevextfun ("vkUpdateDescriptorSetWithTemplateKHR" vkUpdateDescriptorSetWithTemplateKHR) :void
   (device VkDevice)
@@ -1511,8 +1511,8 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (descriptorWriteCount :uint32) ;; :OPTIONAL "true"
   (pDescriptorWrites (:pointer (:struct VkWriteDescriptorSet))) ;; :LEN "descriptorWriteCount" :EXTERNSYNC "pDescriptorWrites[].dstSet"
   (descriptorCopyCount :uint32) ;; :OPTIONAL "true"
-  (pDescriptorCopies (:pointer (:struct VkCopyDescriptorSet))) ;; :LEN "descriptorCopyCount" :EXTERNSYNC "pDescriptorCopies[].dstSet"
-)
+  (pDescriptorCopies (:pointer (:struct VkCopyDescriptorSet)))) ;; :LEN "descriptorCopyCount" :EXTERNSYNC "pDescriptorCopies[].dstSet"
+
 
 (cffi:defcfun ("vkWaitForFences" vkWaitForFences) VkResult
   (device VkDevice)
