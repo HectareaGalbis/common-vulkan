@@ -10,9 +10,14 @@
 
 ;: Creates an application info structure
 (defun create-application-info (app-name app-version eng-name eng-version api-version)
-  (with-foreign-strings ((app-name-str    app-name)
-                         (engine-name-str eng-name))
-    (vk:with-vulkan-object (app-info vk:VkApplicationInfo)
+
+  ;; Create the strings
+  (let ((app-name-str    (foreign-string-alloc app-name))
+        (engine-name-str (foreign-string-alloc eng-name)))
+
+    ;; Create application info
+    (let (app-info (foreign-alloc vk:VkApplicationInfo))
+      (vk:struct-zero app-info)
       (with-foreign-slots ((sType pApplicationName applicationVersion pEngineName engineVersion apiVersion)
                            app-info '(struct vk:VkApplicationInfo))
         (setf sType              VK_STRUCTURE_TYPE_APPLICATION_INFO
@@ -21,7 +26,29 @@
               pEngineName        eng-name-str
               engineVersion      eng-version
               apiVersion         api-version))
+
       app-info)))
+
+
+;; Destroys an application info structure
+(defun destroy-application-info (app-info)
+
+  ;; Destroy strings
+  (with-foreign-slots ((pApplicationName pEngineName) app-info vk:VkApplicationInfo)
+    (foreign-string-free pApplicationName)
+    (foreign-string-free pEngineName))
+
+  ;; Destroy application info
+  (foreign-free app-info))
+
+
+;; With application info wrapper
+(defmacro with-application-info (var-args &body body)
+  (let ((var  (first var-args))
+        (args (rest var-args)))
+    `(let ((,var (create-application-info ,@args)))
+       ,@body
+       (destroy-application-info ,var))))
 
 
 ;; List of wanted layers
@@ -72,30 +99,61 @@
 
 ;; Creates an instance create info structure
 (defun create-instance-info (instance-flags app-info enabled-layers enabled-extensions)
-  (with-vulkan-object (instance-info vk:VkInstanceCreateInfo)
-    (with-foreign-slots ((sType flags pApplicationInfo enabledLayerCount
-                          ppEnabledLayerNames enabledExtensionCount ppEnabledExtensionNames)
-                         instance-info '(:struct vk:VkInstanceCreateInfo))
-      (setf sType VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO
-            flags instance-flags
-            enabledLayerCount (length enabled-layers)))))
-            
+
+  ;; Create strings and array of strings
+  (let ((enabled-layers-str     (foreign-alloc :string :initial-contents enabled-layers)) ; Cambiar por allocs
+        (enabled-extensions-str (foreign-alloc :string :initial-contents enabled-extensions)))
+
+    ;; Create instance info
+    (let ((instance-info (foreign-alloc vk:VkInstanceCreateInfo)))
+      (vk:zero-struct instance-info vk:VkInstanceCreateInfo)
+      (with-foreign-slots ((sType flags pApplicationInfo enabledLayerCount
+                            ppEnabledLayerNames enabledExtensionCount ppEnabledExtensionNames)
+                           instance-info '(:struct vk:VkInstanceCreateInfo))
+        (setf sType                   VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO
+              flags                   instance-flags
+              enabledLayerCount       (length enabled-layers)
+              ppEnabledLayerNames     enabled-layers-str
+              enabledExtensionCount   (length enabled-extensions)
+              ppEnabledExtensionNames enabled-extensions-str))
+
+      instance-info)))
+
+
+;; Destroys an instance info
+(defun destroy-instance-info (instance-info)
+
+  ;; Destroy strings
+  (with-foreign-slots ((enabledLayerCount ppEnabledLayerNames enabledExtensionCount ppEnabledExtensionNames)
+                       instance-info '(:struct vk:VkInstanceCreateInfo))
+    (loop for i from 0 to (1- enabledLayerCount)
+      (foreign-string-free (mem-aref ppEnabledLayerNames :string i)))
+    (loop for i from 0 to (1- enabledExtensionCount)
+      (foreign-string-free (mem-aref ppEnabledExtensionNames :string i)))
+
+    ;; Destroy arrays
+    (foreign-free ppEnabledLayerNames)
+    (foreign-free ppEnabledExtensionNames))
+
+  ;; Destroy instance info
+  (foreign-free instance-info))
+
+
+;; With application info wrapper
+(defmacro with-instance-info (var-args &body body)
+  (let ((var  (first var-args))
+        (args (rest var-args)))
+    `(let ((,var (create-instance-info ,@args)))
+       ,@body
+       (destroy-instance-info ,var))))
+
 
 ;; Creates the vulkan instance
 (defun create-instance (validation)
 
   ;; Application info
-  (with-foreign-strings ((app-name "Common Vulkan example")
-                         (engine-name "Common Vulkan"))
-    (vk:with-vulkan-object (app-info vk:VkApplicationInfo)
-      (with-foreign-slots ((sType pApplicationName applicationVersion pEngineName engineVersion apiVersion)
-                           app-info '(struct vk:VkApplicationInfo))
-        (setf sType              VK_STRUCTURE_TYPE_APPLICATION_INFO
-              pApplicationName   app-name
-              applicationVersion (vk:make-version 0 1 1)
-              pEngineName        engine-name
-              engineVersion      (make-version 0 1 1)
-              apiVersion         (make-version 1 0 0)))
+  (with-application-info (app-info "Common Vulkan example" (vk:make-version 0 1 1) "Common Vulkan"
+                                   (make-version 0 1 1) (make-version 1 0 0))
 
       ;; Layers and extensions
       (let ((required-layers     (get-required-layers validation))
@@ -106,9 +164,26 @@
           (error 'create-instance "Required extensions not present"))
 
         ;; Instance info
-        (with-vulkan-object (instance-info vk:VkInstanceCreateInfo)
-          (with-foreign-slots ((sType flags pApplicationInfo enabledLayerCount
-                                ppEnabledLayerNames enabledExtensionCount ppEnabledExtensionNames)
-                               instance-info '(:struct vk:VkInstanceCreateInfo))
-            (setf sType VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO
-                  flags)))))))
+        (with-instance-info (instance-info 0 app-info required-layers required-extensions)
+
+          ;; Instance
+          (with-foreign-object (instance-ptr vk:VkInstance)
+            (let ((result (vk:vkCreateInstance instance-info (null-pointer) instance-ptr)))
+              (vk:check-result result)
+              (make-instance (mem-ref instance-ptr vk:VkInstance)
+                             required-layers
+                             required-extensions)))))))
+
+
+;; Destroyes a vulkan instance
+(defun destroy-instance (instance)
+  (vk:vkDestroyInstance))
+
+
+;; With macro for vulkan instance
+(defmacro with-instance (var-args &body body)
+  (let ((var  (first var-args))
+        (args (rest var-args)))
+    `(let ((,var (create-instance ,@args)))
+       ,@body
+       (destroy-instance ,var))))
