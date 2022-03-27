@@ -19,12 +19,12 @@
 ;; OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 ;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-(cl:in-package :vk)
+(in-package :cvk)
 
-(cl:eval-when (:compile-toplevel :load-toplevel :execute)
-  (cl:defparameter *s-type-table*
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (defparameter *s-type-table*
     (alexandria:plist-hash-table
-     (cl:list 'VkAcquireNextImageInfoKHX
+     (list 'VkAcquireNextImageInfoKHX
         VK_STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHX
 
         'VkPipelineRasterizationLineStateCreateInfoEXT

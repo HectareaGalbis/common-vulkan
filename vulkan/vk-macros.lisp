@@ -19,38 +19,38 @@
 ;; OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 ;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-(cl:in-package #:vk)
+(in-package :cvk)
 
-(cl:defmacro defvkinstextfun ((cname lname) result-type cl:&body args)
-  (cl:let ((instance-arg (cl:gensym "INSTANCE")))
-    `(cl:defun ,lname (,instance-arg ,@(cl:mapcar 'cl:car args))
+(defmacro defvkinstextfun ((cname lname) result-type &body args)
+  (let ((instance-arg (gensym "INSTANCE")))
+    `(defun ,lname (,instance-arg ,@(mapcar 'car args))
        (cffi:foreign-funcall-pointer
         (cffi:with-foreign-string (p-native ,cname)
            (VkGetInstanceProcAddr ,instance-arg p-native))
-        cl:nil
-        ,@(cl:loop for arg in args
-           collect (cl:second arg) collect (cl:first arg))
+        nil
+        ,@(loop for arg in args
+           collect (second arg) collect (first arg))
         ,result-type))))
 
-(cl:defmacro defvkdevextfun ((cname lname) result-type cl:&body args)
-  (cl:let ((device-arg (cl:gensym "DEVICE")))
-    `(cl:defun ,lname (,device-arg ,@(cl:mapcar 'cl:car args))
+(defmacro defvkdevextfun ((cname lname) result-type &body args)
+  (let ((device-arg (gensym "DEVICE")))
+    `(defun ,lname (,device-arg ,@(mapcar 'car args))
        (cffi:foreign-funcall-pointer
         (cffi:with-foreign-string (p-native ,cname)
            (VkGetDeviceProcAddr ,device-arg p-native))
-        cl:nil
-        ,@(cl:loop for arg in args
-           collect (cl:second arg) collect (cl:first arg))
+        nil
+        ,@(loop for arg in args
+           collect (second arg) collect (first arg))
         ,result-type))))
 
 ;; Assigns the value 0 to all slots of p
-(cl:defun zero-struct (p struct-typespec)
-  (cl:loop for i from 0 below (cffi:foreign-type-size struct-typespec)
-     do (cl:setf (cffi:mem-aref p :unsigned-char i) 0))
-  (cl:values))
+(defun zero-struct (p struct-typespec)
+  (loop for i from 0 below (cffi:foreign-type-size struct-typespec)
+     do (setf (cffi:mem-aref p :unsigned-char i) 0))
+  (values))
 
 ;; Wraps a body creating a vulkan object with all of its slots being 0.
-(cl:defmacro with-vulkan-object ((p-info struct-type) cl:&body body)
+(defmacro with-vulkan-object ((p-info struct-type) &body body)
              (let ((p-info-sym (gensym)) (struct-type-sym (gensym)))
                `(let ((,p-info-sym ,p-info) (,struct-type-sym ,struct-type))
                   (cffi:with-foreign-object (,p-info-sym '(:struct ,struct-type-sym))
@@ -68,4 +68,4 @@
 (defun check-result (result)
   (let ((success-codes '(VK_OPERATION_NOT_DEFERRED_KHR VK_THREAD_DONE_KHR VK_EVENT_SET VK_OPERATION_DEFERRED_KHR VK_SUCCESS VK_INCOMPLETE
                          VK_THREAD_IDLE_KHR VK_PIPELINE_COMPILE_REQUIRED_EXT VK_SUBOPTIMAL_KHR VK_NOT_READY VK_TIMEOUT VK_EVENT_RESET)))
-    (unless (if (typep v 'symbol) (member v success-codes) (>= v 0)) (error who "failed: ~a" v))))
+    (unless (if (typep result 'symbol) (member result success-codes) (>= result 0)) (error "check-result failed: ~S" result))))

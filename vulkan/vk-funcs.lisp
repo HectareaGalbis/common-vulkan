@@ -46,7 +46,7 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 ;; OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 ;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-(cl:in-package #:vk)
+(in-package :cvk)
 
 (defvkdevextfun ("vkAcquireNextImage2KHX" vkAcquireNextImage2KHX) VkResult
   (device VkDevice)

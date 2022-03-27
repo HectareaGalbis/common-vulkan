@@ -20,12 +20,14 @@
 ;; OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 ;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-(cl:defpackage #:vk
-  (:use)
+(defpackage #:vk
+  (:use :cl)
   (:nicknames #:vulkan-internals)
   (:export
    #:with-vk-struct
    #:zero-struct
+   #:make-version
+   #:check-result
    #:VK_TRUE
    #:VK_FALSE
 

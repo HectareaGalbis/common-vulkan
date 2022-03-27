@@ -46,12 +46,12 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 ;; OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 ;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-(cl:in-package #:vk)
+(in-package :cvk)
 
-(cl:defconstant VK_TRUE 1)
-(cl:defconstant VK_FALSE 0)
+(defconstant VK_TRUE 1)
+(defconstant VK_FALSE 0)
 
-(cl:defparameter *known-extension-names*
+(defparameter *known-extension-names*
   '("VK_KHR_surface"
     "VK_KHR_swapchain"
     "VK_KHR_display"
@@ -220,12 +220,12 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 (cffi:defctype VkDeviceSize :uint64)
 
 (cffi:defctype handle :pointer)
-(cl:eval-when (:compile-toplevel :load-toplevel :execute)
-   (cl:if (cl:= 8 (cffi:foreign-type-size :pointer))
-       (cl:progn
+(eval-when (:compile-toplevel :load-toplevel :execute)
+   (if (= 8 (cffi:foreign-type-size :pointer))
+       (progn
           (cffi:defctype size-t :uint64)
           (cffi:defctype non-dispatch-handle :pointer))
-       (cl:progn
+       (progn
           (cffi:defctype size-t :uint32)
           (cffi:defctype non-dispatch-handle :uint64))))
 
@@ -330,131 +330,131 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 (cffi:defctype VkDebugReportCallbackEXT NON-DISPATCH-HANDLE)
 
 (cffi:defctype VkAccessFlagBits :int)
-(cl:defconstant VK_ACCESS_INDIRECT_COMMAND_READ_BIT #x1)
-(cl:defconstant VK_ACCESS_INDEX_READ_BIT #x2)
-(cl:defconstant VK_ACCESS_VERTEX_ATTRIBUTE_READ_BIT #x4)
-(cl:defconstant VK_ACCESS_UNIFORM_READ_BIT #x8)
-(cl:defconstant VK_ACCESS_INPUT_ATTACHMENT_READ_BIT #x10)
-(cl:defconstant VK_ACCESS_SHADER_READ_BIT #x20)
-(cl:defconstant VK_ACCESS_SHADER_WRITE_BIT #x40)
-(cl:defconstant VK_ACCESS_COLOR_ATTACHMENT_READ_BIT #x80)
-(cl:defconstant VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT #x100)
-(cl:defconstant VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT #x200)
-(cl:defconstant VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT #x400)
-(cl:defconstant VK_ACCESS_TRANSFER_READ_BIT #x800)
-(cl:defconstant VK_ACCESS_TRANSFER_WRITE_BIT #x1000)
-(cl:defconstant VK_ACCESS_HOST_READ_BIT #x2000)
-(cl:defconstant VK_ACCESS_HOST_WRITE_BIT #x4000)
-(cl:defconstant VK_ACCESS_MEMORY_READ_BIT #x8000)
-(cl:defconstant VK_ACCESS_MEMORY_WRITE_BIT #x10000)
-(cl:defconstant VK_ACCESS_COMMAND_PROCESS_READ_BIT_NVX #x20000)
-(cl:defconstant VK_ACCESS_COMMAND_PROCESS_WRITE_BIT_NVX #x40000)
+(defconstant VK_ACCESS_INDIRECT_COMMAND_READ_BIT #x1)
+(defconstant VK_ACCESS_INDEX_READ_BIT #x2)
+(defconstant VK_ACCESS_VERTEX_ATTRIBUTE_READ_BIT #x4)
+(defconstant VK_ACCESS_UNIFORM_READ_BIT #x8)
+(defconstant VK_ACCESS_INPUT_ATTACHMENT_READ_BIT #x10)
+(defconstant VK_ACCESS_SHADER_READ_BIT #x20)
+(defconstant VK_ACCESS_SHADER_WRITE_BIT #x40)
+(defconstant VK_ACCESS_COLOR_ATTACHMENT_READ_BIT #x80)
+(defconstant VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT #x100)
+(defconstant VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT #x200)
+(defconstant VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT #x400)
+(defconstant VK_ACCESS_TRANSFER_READ_BIT #x800)
+(defconstant VK_ACCESS_TRANSFER_WRITE_BIT #x1000)
+(defconstant VK_ACCESS_HOST_READ_BIT #x2000)
+(defconstant VK_ACCESS_HOST_WRITE_BIT #x4000)
+(defconstant VK_ACCESS_MEMORY_READ_BIT #x8000)
+(defconstant VK_ACCESS_MEMORY_WRITE_BIT #x10000)
+(defconstant VK_ACCESS_COMMAND_PROCESS_READ_BIT_NVX #x20000)
+(defconstant VK_ACCESS_COMMAND_PROCESS_WRITE_BIT_NVX #x40000)
 
 (cffi:defctype VkAccessFlags :int)
 
 (cffi:defctype VkAndroidSurfaceCreateFlagsKHR :int)
 
 (cffi:defctype VkAttachmentDescriptionFlagBits :int)
-(cl:defconstant VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT #x1)
+(defconstant VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT #x1)
 
 (cffi:defctype VkAttachmentDescriptionFlags :int)
 
 (cffi:defctype VkBufferCreateFlagBits :int)
-(cl:defconstant VK_BUFFER_CREATE_SPARSE_BINDING_BIT #x1)
-(cl:defconstant VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT #x2)
-(cl:defconstant VK_BUFFER_CREATE_SPARSE_ALIASED_BIT #x4)
+(defconstant VK_BUFFER_CREATE_SPARSE_BINDING_BIT #x1)
+(defconstant VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT #x2)
+(defconstant VK_BUFFER_CREATE_SPARSE_ALIASED_BIT #x4)
 
 (cffi:defctype VkBufferCreateFlags :int)
 
 (cffi:defctype VkBufferUsageFlagBits :int)
-(cl:defconstant VK_BUFFER_USAGE_TRANSFER_SRC_BIT #x1)
-(cl:defconstant VK_BUFFER_USAGE_TRANSFER_DST_BIT #x2)
-(cl:defconstant VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT #x4)
-(cl:defconstant VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT #x8)
-(cl:defconstant VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT #x10)
-(cl:defconstant VK_BUFFER_USAGE_STORAGE_BUFFER_BIT #x20)
-(cl:defconstant VK_BUFFER_USAGE_INDEX_BUFFER_BIT #x40)
-(cl:defconstant VK_BUFFER_USAGE_VERTEX_BUFFER_BIT #x80)
-(cl:defconstant VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT #x100)
+(defconstant VK_BUFFER_USAGE_TRANSFER_SRC_BIT #x1)
+(defconstant VK_BUFFER_USAGE_TRANSFER_DST_BIT #x2)
+(defconstant VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT #x4)
+(defconstant VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT #x8)
+(defconstant VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT #x10)
+(defconstant VK_BUFFER_USAGE_STORAGE_BUFFER_BIT #x20)
+(defconstant VK_BUFFER_USAGE_INDEX_BUFFER_BIT #x40)
+(defconstant VK_BUFFER_USAGE_VERTEX_BUFFER_BIT #x80)
+(defconstant VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT #x100)
 
 (cffi:defctype VkBufferUsageFlags :int)
 
 (cffi:defctype VkBufferViewCreateFlags :int)
 
 (cffi:defctype VkColorComponentFlagBits :int)
-(cl:defconstant VK_COLOR_COMPONENT_R_BIT #x1)
-(cl:defconstant VK_COLOR_COMPONENT_G_BIT #x2)
-(cl:defconstant VK_COLOR_COMPONENT_B_BIT #x4)
-(cl:defconstant VK_COLOR_COMPONENT_A_BIT #x8)
+(defconstant VK_COLOR_COMPONENT_R_BIT #x1)
+(defconstant VK_COLOR_COMPONENT_G_BIT #x2)
+(defconstant VK_COLOR_COMPONENT_B_BIT #x4)
+(defconstant VK_COLOR_COMPONENT_A_BIT #x8)
 
 (cffi:defctype VkColorComponentFlags :int)
 
 (cffi:defctype VkCommandBufferResetFlagBits :int)
-(cl:defconstant VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT #x1)
+(defconstant VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT #x1)
 
 (cffi:defctype VkCommandBufferResetFlags :int)
 
 (cffi:defctype VkCommandBufferUsageFlagBits :int)
-(cl:defconstant VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT #x1)
-(cl:defconstant VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT #x2)
-(cl:defconstant VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT #x4)
+(defconstant VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT #x1)
+(defconstant VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT #x2)
+(defconstant VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT #x4)
 
 (cffi:defctype VkCommandBufferUsageFlags :int)
 
 (cffi:defctype VkCommandPoolCreateFlagBits :int)
-(cl:defconstant VK_COMMAND_POOL_CREATE_TRANSIENT_BIT #x1)
-(cl:defconstant VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT #x2)
+(defconstant VK_COMMAND_POOL_CREATE_TRANSIENT_BIT #x1)
+(defconstant VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT #x2)
 
 (cffi:defctype VkCommandPoolCreateFlags :int)
 
 (cffi:defctype VkCommandPoolResetFlagBits :int)
-(cl:defconstant VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT #x1)
+(defconstant VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT #x1)
 
 (cffi:defctype VkCommandPoolResetFlags :int)
 
 (cffi:defctype VkCommandPoolTrimFlagsKHR :int)
 
 (cffi:defctype VkCompositeAlphaFlagBitsKHR :int)
-(cl:defconstant VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR #x1)
-(cl:defconstant VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR #x2)
-(cl:defconstant VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR #x4)
-(cl:defconstant VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR #x8)
+(defconstant VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR #x1)
+(defconstant VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR #x2)
+(defconstant VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR #x4)
+(defconstant VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR #x8)
 
 (cffi:defctype VkCompositeAlphaFlagsKHR :int)
 
 (cffi:defctype VkCullModeFlagBits :int)
-(cl:defconstant VK_CULL_MODE_NONE #x0)
-(cl:defconstant VK_CULL_MODE_FRONT_BIT #x1)
-(cl:defconstant VK_CULL_MODE_BACK_BIT #x2)
-(cl:defconstant VK_CULL_MODE_FRONT_AND_BACK #x3)
+(defconstant VK_CULL_MODE_NONE #x0)
+(defconstant VK_CULL_MODE_FRONT_BIT #x1)
+(defconstant VK_CULL_MODE_BACK_BIT #x2)
+(defconstant VK_CULL_MODE_FRONT_AND_BACK #x3)
 
 (cffi:defctype VkCullModeFlags :int)
 
 (cffi:defctype VkDebugReportFlagBitsEXT :int)
-(cl:defconstant VK_DEBUG_REPORT_INFORMATION_BIT_EXT #x1)
-(cl:defconstant VK_DEBUG_REPORT_WARNING_BIT_EXT #x2)
-(cl:defconstant VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT #x4)
-(cl:defconstant VK_DEBUG_REPORT_ERROR_BIT_EXT #x8)
-(cl:defconstant VK_DEBUG_REPORT_DEBUG_BIT_EXT #x10)
+(defconstant VK_DEBUG_REPORT_INFORMATION_BIT_EXT #x1)
+(defconstant VK_DEBUG_REPORT_WARNING_BIT_EXT #x2)
+(defconstant VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT #x4)
+(defconstant VK_DEBUG_REPORT_ERROR_BIT_EXT #x8)
+(defconstant VK_DEBUG_REPORT_DEBUG_BIT_EXT #x10)
 
 (cffi:defctype VkDebugReportFlagsEXT :int)
 
 (cffi:defctype VkDependencyFlagBits :int)
-(cl:defconstant VK_DEPENDENCY_BY_REGION_BIT #x1)
-(cl:defconstant VK_DEPENDENCY_VIEW_LOCAL_BIT_KHX #x2)
-(cl:defconstant VK_DEPENDENCY_DEVICE_GROUP_BIT_KHX #x4)
+(defconstant VK_DEPENDENCY_BY_REGION_BIT #x1)
+(defconstant VK_DEPENDENCY_VIEW_LOCAL_BIT_KHX #x2)
+(defconstant VK_DEPENDENCY_DEVICE_GROUP_BIT_KHX #x4)
 
 (cffi:defctype VkDependencyFlags :int)
 
 (cffi:defctype VkDescriptorPoolCreateFlagBits :int)
-(cl:defconstant VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT #x1)
+(defconstant VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT #x1)
 
 (cffi:defctype VkDescriptorPoolCreateFlags :int)
 
 (cffi:defctype VkDescriptorPoolResetFlags :int)
 
 (cffi:defctype VkDescriptorSetLayoutCreateFlagBits :int)
-(cl:defconstant VK_DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR #x1)
+(defconstant VK_DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR #x1)
 
 (cffi:defctype VkDescriptorSetLayoutCreateFlags :int)
 
@@ -463,10 +463,10 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 (cffi:defctype VkDeviceCreateFlags :int)
 
 (cffi:defctype VkDeviceGroupPresentModeFlagBitsKHX :int)
-(cl:defconstant VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHX #x1)
-(cl:defconstant VK_DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHX #x2)
-(cl:defconstant VK_DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHX #x4)
-(cl:defconstant VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHX #x8)
+(defconstant VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHX #x1)
+(defconstant VK_DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHX #x2)
+(defconstant VK_DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHX #x4)
+(defconstant VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHX #x8)
 
 (cffi:defctype VkDeviceGroupPresentModeFlagsKHX :int)
 
@@ -475,10 +475,10 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 (cffi:defctype VkDisplayModeCreateFlagsKHR :int)
 
 (cffi:defctype VkDisplayPlaneAlphaFlagBitsKHR :int)
-(cl:defconstant VK_DISPLAY_PLANE_ALPHA_OPAQUE_BIT_KHR #x1)
-(cl:defconstant VK_DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR #x2)
-(cl:defconstant VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_BIT_KHR #x4)
-(cl:defconstant VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_PREMULTIPLIED_BIT_KHR #x8)
+(defconstant VK_DISPLAY_PLANE_ALPHA_OPAQUE_BIT_KHR #x1)
+(defconstant VK_DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR #x2)
+(defconstant VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_BIT_KHR #x4)
+(defconstant VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_PREMULTIPLIED_BIT_KHR #x8)
 
 (cffi:defctype VkDisplayPlaneAlphaFlagsKHR :int)
 
@@ -487,75 +487,75 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 (cffi:defctype VkEventCreateFlags :int)
 
 (cffi:defctype VkExternalMemoryFeatureFlagBitsKHX :int)
-(cl:defconstant VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_KHX #x1)
-(cl:defconstant VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_KHX #x2)
-(cl:defconstant VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_KHX #x4)
+(defconstant VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_KHX #x1)
+(defconstant VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_KHX #x2)
+(defconstant VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_KHX #x4)
 
 (cffi:defctype VkExternalMemoryFeatureFlagBitsNV :int)
-(cl:defconstant VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_NV #x1)
-(cl:defconstant VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_NV #x2)
-(cl:defconstant VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_NV #x4)
+(defconstant VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_NV #x1)
+(defconstant VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_NV #x2)
+(defconstant VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_NV #x4)
 
 (cffi:defctype VkExternalMemoryFeatureFlagsKHX :int)
 
 (cffi:defctype VkExternalMemoryFeatureFlagsNV :int)
 
 (cffi:defctype VkExternalMemoryHandleTypeFlagBitsKHX :int)
-(cl:defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHX #x1)
-(cl:defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHX #x2)
-(cl:defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHX #x4)
-(cl:defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT_KHX #x8)
-(cl:defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT_KHX #x10)
-(cl:defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT_KHX #x20)
-(cl:defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT_KHX #x40)
+(defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHX #x1)
+(defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHX #x2)
+(defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHX #x4)
+(defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT_KHX #x8)
+(defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT_KHX #x10)
+(defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT_KHX #x20)
+(defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT_KHX #x40)
 
 (cffi:defctype VkExternalMemoryHandleTypeFlagBitsNV :int)
-(cl:defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV #x1)
-(cl:defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_NV #x2)
-(cl:defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_BIT_NV #x4)
-(cl:defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_KMT_BIT_NV #x8)
+(defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV #x1)
+(defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_NV #x2)
+(defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_BIT_NV #x4)
+(defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_KMT_BIT_NV #x8)
 
 (cffi:defctype VkExternalMemoryHandleTypeFlagsKHX :int)
 
 (cffi:defctype VkExternalMemoryHandleTypeFlagsNV :int)
 
 (cffi:defctype VkExternalSemaphoreFeatureFlagBitsKHX :int)
-(cl:defconstant VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT_KHX #x1)
-(cl:defconstant VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT_KHX #x2)
+(defconstant VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT_KHX #x1)
+(defconstant VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT_KHX #x2)
 
 (cffi:defctype VkExternalSemaphoreFeatureFlagsKHX :int)
 
 (cffi:defctype VkExternalSemaphoreHandleTypeFlagBitsKHX :int)
-(cl:defconstant VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHX #x1)
-(cl:defconstant VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHX #x2)
-(cl:defconstant VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHX #x4)
-(cl:defconstant VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT_KHX #x8)
-(cl:defconstant VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_FENCE_FD_BIT_KHX #x10)
+(defconstant VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHX #x1)
+(defconstant VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHX #x2)
+(defconstant VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHX #x4)
+(defconstant VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT_KHX #x8)
+(defconstant VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_FENCE_FD_BIT_KHX #x10)
 
 (cffi:defctype VkExternalSemaphoreHandleTypeFlagsKHX :int)
 
 (cffi:defctype VkFenceCreateFlagBits :int)
-(cl:defconstant VK_FENCE_CREATE_SIGNALED_BIT #x1)
+(defconstant VK_FENCE_CREATE_SIGNALED_BIT #x1)
 
 (cffi:defctype VkFenceCreateFlags :int)
 
 (cffi:defctype VkFormatFeatureFlagBits :int)
-(cl:defconstant VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT #x1)
-(cl:defconstant VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT #x2)
-(cl:defconstant VK_FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT #x4)
-(cl:defconstant VK_FORMAT_FEATURE_UNIFORM_TEXEL_BUFFER_BIT #x8)
-(cl:defconstant VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_BIT #x10)
-(cl:defconstant VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_ATOMIC_BIT #x20)
-(cl:defconstant VK_FORMAT_FEATURE_VERTEX_BUFFER_BIT #x40)
-(cl:defconstant VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT #x80)
-(cl:defconstant VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT #x100)
-(cl:defconstant VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT #x200)
-(cl:defconstant VK_FORMAT_FEATURE_BLIT_SRC_BIT #x400)
-(cl:defconstant VK_FORMAT_FEATURE_BLIT_DST_BIT #x800)
-(cl:defconstant VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT #x1000)
-(cl:defconstant VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG #x2000)
-(cl:defconstant VK_FORMAT_FEATURE_TRANSFER_SRC_BIT_KHR #x4000)
-(cl:defconstant VK_FORMAT_FEATURE_TRANSFER_DST_BIT_KHR #x8000)
+(defconstant VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT #x1)
+(defconstant VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT #x2)
+(defconstant VK_FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT #x4)
+(defconstant VK_FORMAT_FEATURE_UNIFORM_TEXEL_BUFFER_BIT #x8)
+(defconstant VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_BIT #x10)
+(defconstant VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_ATOMIC_BIT #x20)
+(defconstant VK_FORMAT_FEATURE_VERTEX_BUFFER_BIT #x40)
+(defconstant VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT #x80)
+(defconstant VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT #x100)
+(defconstant VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT #x200)
+(defconstant VK_FORMAT_FEATURE_BLIT_SRC_BIT #x400)
+(defconstant VK_FORMAT_FEATURE_BLIT_DST_BIT #x800)
+(defconstant VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT #x1000)
+(defconstant VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG #x2000)
+(defconstant VK_FORMAT_FEATURE_TRANSFER_SRC_BIT_KHR #x4000)
+(defconstant VK_FORMAT_FEATURE_TRANSFER_DST_BIT_KHR #x8000)
 
 (cffi:defctype VkFormatFeatureFlags :int)
 
@@ -564,43 +564,43 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 (cffi:defctype VkIOSSurfaceCreateFlagsMVK :int)
 
 (cffi:defctype VkImageAspectFlagBits :int)
-(cl:defconstant VK_IMAGE_ASPECT_COLOR_BIT #x1)
-(cl:defconstant VK_IMAGE_ASPECT_DEPTH_BIT #x2)
-(cl:defconstant VK_IMAGE_ASPECT_STENCIL_BIT #x4)
-(cl:defconstant VK_IMAGE_ASPECT_METADATA_BIT #x8)
+(defconstant VK_IMAGE_ASPECT_COLOR_BIT #x1)
+(defconstant VK_IMAGE_ASPECT_DEPTH_BIT #x2)
+(defconstant VK_IMAGE_ASPECT_STENCIL_BIT #x4)
+(defconstant VK_IMAGE_ASPECT_METADATA_BIT #x8)
 
 (cffi:defctype VkImageAspectFlags :int)
 
 (cffi:defctype VkImageCreateFlagBits :int)
-(cl:defconstant VK_IMAGE_CREATE_SPARSE_BINDING_BIT #x1)
-(cl:defconstant VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT #x2)
-(cl:defconstant VK_IMAGE_CREATE_SPARSE_ALIASED_BIT #x4)
-(cl:defconstant VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT #x8)
-(cl:defconstant VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT #x10)
-(cl:defconstant VK_IMAGE_CREATE_BIND_SFR_BIT_KHX #x40)
-(cl:defconstant VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT_KHR #x20)
+(defconstant VK_IMAGE_CREATE_SPARSE_BINDING_BIT #x1)
+(defconstant VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT #x2)
+(defconstant VK_IMAGE_CREATE_SPARSE_ALIASED_BIT #x4)
+(defconstant VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT #x8)
+(defconstant VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT #x10)
+(defconstant VK_IMAGE_CREATE_BIND_SFR_BIT_KHX #x40)
+(defconstant VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT_KHR #x20)
 
 (cffi:defctype VkImageCreateFlags :int)
 
 (cffi:defctype VkImageUsageFlagBits :int)
-(cl:defconstant VK_IMAGE_USAGE_TRANSFER_SRC_BIT #x1)
-(cl:defconstant VK_IMAGE_USAGE_TRANSFER_DST_BIT #x2)
-(cl:defconstant VK_IMAGE_USAGE_SAMPLED_BIT #x4)
-(cl:defconstant VK_IMAGE_USAGE_STORAGE_BIT #x8)
-(cl:defconstant VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT #x10)
-(cl:defconstant VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT #x20)
-(cl:defconstant VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT #x40)
-(cl:defconstant VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT #x80)
+(defconstant VK_IMAGE_USAGE_TRANSFER_SRC_BIT #x1)
+(defconstant VK_IMAGE_USAGE_TRANSFER_DST_BIT #x2)
+(defconstant VK_IMAGE_USAGE_SAMPLED_BIT #x4)
+(defconstant VK_IMAGE_USAGE_STORAGE_BIT #x8)
+(defconstant VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT #x10)
+(defconstant VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT #x20)
+(defconstant VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT #x40)
+(defconstant VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT #x80)
 
 (cffi:defctype VkImageUsageFlags :int)
 
 (cffi:defctype VkImageViewCreateFlags :int)
 
 (cffi:defctype VkIndirectCommandsLayoutUsageFlagBitsNVX :int)
-(cl:defconstant VK_INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NVX #x1)
-(cl:defconstant VK_INDIRECT_COMMANDS_LAYOUT_USAGE_SPARSE_SEQUENCES_BIT_NVX #x2)
-(cl:defconstant VK_INDIRECT_COMMANDS_LAYOUT_USAGE_EMPTY_EXECUTIONS_BIT_NVX #x4)
-(cl:defconstant VK_INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX #x8)
+(defconstant VK_INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NVX #x1)
+(defconstant VK_INDIRECT_COMMANDS_LAYOUT_USAGE_SPARSE_SEQUENCES_BIT_NVX #x2)
+(defconstant VK_INDIRECT_COMMANDS_LAYOUT_USAGE_EMPTY_EXECUTIONS_BIT_NVX #x4)
+(defconstant VK_INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX #x8)
 
 (cffi:defctype VkIndirectCommandsLayoutUsageFlagsNVX :int)
 
@@ -609,40 +609,40 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 (cffi:defctype VkMacOSSurfaceCreateFlagsMVK :int)
 
 (cffi:defctype VkMemoryAllocateFlagBitsKHX :int)
-(cl:defconstant VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT_KHX #x1)
+(defconstant VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT_KHX #x1)
 
 (cffi:defctype VkMemoryAllocateFlagsKHX :int)
 
 (cffi:defctype VkMemoryHeapFlagBits :int)
-(cl:defconstant VK_MEMORY_HEAP_DEVICE_LOCAL_BIT #x1)
-(cl:defconstant VK_MEMORY_HEAP_MULTI_INSTANCE_BIT_KHX #x2)
+(defconstant VK_MEMORY_HEAP_DEVICE_LOCAL_BIT #x1)
+(defconstant VK_MEMORY_HEAP_MULTI_INSTANCE_BIT_KHX #x2)
 
 (cffi:defctype VkMemoryHeapFlags :int)
 
 (cffi:defctype VkMemoryMapFlags :int)
 
 (cffi:defctype VkMemoryPropertyFlagBits :int)
-(cl:defconstant VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT #x1)
-(cl:defconstant VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT #x2)
-(cl:defconstant VK_MEMORY_PROPERTY_HOST_COHERENT_BIT #x4)
-(cl:defconstant VK_MEMORY_PROPERTY_HOST_CACHED_BIT #x8)
-(cl:defconstant VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT #x10)
+(defconstant VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT #x1)
+(defconstant VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT #x2)
+(defconstant VK_MEMORY_PROPERTY_HOST_COHERENT_BIT #x4)
+(defconstant VK_MEMORY_PROPERTY_HOST_CACHED_BIT #x8)
+(defconstant VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT #x10)
 
 (cffi:defctype VkMemoryPropertyFlags :int)
 
 (cffi:defctype VkMirSurfaceCreateFlagsKHR :int)
 
 (cffi:defctype VkObjectEntryUsageFlagBitsNVX :int)
-(cl:defconstant VK_OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX #x1)
-(cl:defconstant VK_OBJECT_ENTRY_USAGE_COMPUTE_BIT_NVX #x2)
+(defconstant VK_OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX #x1)
+(defconstant VK_OBJECT_ENTRY_USAGE_COMPUTE_BIT_NVX #x2)
 
 (cffi:defctype VkObjectEntryUsageFlagsNVX :int)
 
 (cffi:defctype VkPeerMemoryFeatureFlagBitsKHX :int)
-(cl:defconstant VK_PEER_MEMORY_FEATURE_COPY_SRC_BIT_KHX #x1)
-(cl:defconstant VK_PEER_MEMORY_FEATURE_COPY_DST_BIT_KHX #x2)
-(cl:defconstant VK_PEER_MEMORY_FEATURE_GENERIC_SRC_BIT_KHX #x4)
-(cl:defconstant VK_PEER_MEMORY_FEATURE_GENERIC_DST_BIT_KHX #x8)
+(defconstant VK_PEER_MEMORY_FEATURE_COPY_SRC_BIT_KHX #x1)
+(defconstant VK_PEER_MEMORY_FEATURE_COPY_DST_BIT_KHX #x2)
+(defconstant VK_PEER_MEMORY_FEATURE_GENERIC_SRC_BIT_KHX #x4)
+(defconstant VK_PEER_MEMORY_FEATURE_GENERIC_DST_BIT_KHX #x8)
 
 (cffi:defctype VkPeerMemoryFeatureFlagsKHX :int)
 
@@ -651,11 +651,11 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 (cffi:defctype VkPipelineColorBlendStateCreateFlags :int)
 
 (cffi:defctype VkPipelineCreateFlagBits :int)
-(cl:defconstant VK_PIPELINE_CREATE_DISABLE_OPTIMIZATION_BIT #x1)
-(cl:defconstant VK_PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT #x2)
-(cl:defconstant VK_PIPELINE_CREATE_DERIVATIVE_BIT #x4)
-(cl:defconstant VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT_KHX #x8)
-(cl:defconstant VK_PIPELINE_CREATE_DISPATCH_BASE_KHX #x10)
+(defconstant VK_PIPELINE_CREATE_DISABLE_OPTIMIZATION_BIT #x1)
+(defconstant VK_PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT #x2)
+(defconstant VK_PIPELINE_CREATE_DERIVATIVE_BIT #x4)
+(defconstant VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT_KHX #x8)
+(defconstant VK_PIPELINE_CREATE_DISPATCH_BASE_KHX #x10)
 
 (cffi:defctype VkPipelineCreateFlags :int)
 
@@ -676,24 +676,24 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 (cffi:defctype VkPipelineShaderStageCreateFlags :int)
 
 (cffi:defctype VkPipelineStageFlagBits :int)
-(cl:defconstant VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT #x1)
-(cl:defconstant VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT #x2)
-(cl:defconstant VK_PIPELINE_STAGE_VERTEX_INPUT_BIT #x4)
-(cl:defconstant VK_PIPELINE_STAGE_VERTEX_SHADER_BIT #x8)
-(cl:defconstant VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT #x10)
-(cl:defconstant VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT #x20)
-(cl:defconstant VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT #x40)
-(cl:defconstant VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT #x80)
-(cl:defconstant VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT #x100)
-(cl:defconstant VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT #x200)
-(cl:defconstant VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT #x400)
-(cl:defconstant VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT #x800)
-(cl:defconstant VK_PIPELINE_STAGE_TRANSFER_BIT #x1000)
-(cl:defconstant VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT #x2000)
-(cl:defconstant VK_PIPELINE_STAGE_HOST_BIT #x4000)
-(cl:defconstant VK_PIPELINE_STAGE_ALL_GRAPHICS_BIT #x8000)
-(cl:defconstant VK_PIPELINE_STAGE_ALL_COMMANDS_BIT #x10000)
-(cl:defconstant VK_PIPELINE_STAGE_COMMAND_PROCESS_BIT_NVX #x20000)
+(defconstant VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT #x1)
+(defconstant VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT #x2)
+(defconstant VK_PIPELINE_STAGE_VERTEX_INPUT_BIT #x4)
+(defconstant VK_PIPELINE_STAGE_VERTEX_SHADER_BIT #x8)
+(defconstant VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT #x10)
+(defconstant VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT #x20)
+(defconstant VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT #x40)
+(defconstant VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT #x80)
+(defconstant VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT #x100)
+(defconstant VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT #x200)
+(defconstant VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT #x400)
+(defconstant VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT #x800)
+(defconstant VK_PIPELINE_STAGE_TRANSFER_BIT #x1000)
+(defconstant VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT #x2000)
+(defconstant VK_PIPELINE_STAGE_HOST_BIT #x4000)
+(defconstant VK_PIPELINE_STAGE_ALL_GRAPHICS_BIT #x8000)
+(defconstant VK_PIPELINE_STAGE_ALL_COMMANDS_BIT #x10000)
+(defconstant VK_PIPELINE_STAGE_COMMAND_PROCESS_BIT_NVX #x20000)
 
 (cffi:defctype VkPipelineStageFlags :int)
 
@@ -706,53 +706,53 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 (cffi:defctype VkPipelineViewportSwizzleStateCreateFlagsNV :int)
 
 (cffi:defctype VkQueryControlFlagBits :int)
-(cl:defconstant VK_QUERY_CONTROL_PRECISE_BIT #x1)
+(defconstant VK_QUERY_CONTROL_PRECISE_BIT #x1)
 
 (cffi:defctype VkQueryControlFlags :int)
 
 (cffi:defctype VkQueryPipelineStatisticFlagBits :int)
-(cl:defconstant VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_VERTICES_BIT #x1)
-(cl:defconstant VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_PRIMITIVES_BIT #x2)
-(cl:defconstant VK_QUERY_PIPELINE_STATISTIC_VERTEX_SHADER_INVOCATIONS_BIT #x4)
-(cl:defconstant VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_INVOCATIONS_BIT #x8)
-(cl:defconstant VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_PRIMITIVES_BIT #x10)
-(cl:defconstant VK_QUERY_PIPELINE_STATISTIC_CLIPPING_INVOCATIONS_BIT #x20)
-(cl:defconstant VK_QUERY_PIPELINE_STATISTIC_CLIPPING_PRIMITIVES_BIT #x40)
-(cl:defconstant VK_QUERY_PIPELINE_STATISTIC_FRAGMENT_SHADER_INVOCATIONS_BIT #x80)
-(cl:defconstant VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_CONTROL_SHADER_PATCHES_BIT #x100)
-(cl:defconstant VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT #x200)
-(cl:defconstant VK_QUERY_PIPELINE_STATISTIC_COMPUTE_SHADER_INVOCATIONS_BIT #x400)
+(defconstant VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_VERTICES_BIT #x1)
+(defconstant VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_PRIMITIVES_BIT #x2)
+(defconstant VK_QUERY_PIPELINE_STATISTIC_VERTEX_SHADER_INVOCATIONS_BIT #x4)
+(defconstant VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_INVOCATIONS_BIT #x8)
+(defconstant VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_PRIMITIVES_BIT #x10)
+(defconstant VK_QUERY_PIPELINE_STATISTIC_CLIPPING_INVOCATIONS_BIT #x20)
+(defconstant VK_QUERY_PIPELINE_STATISTIC_CLIPPING_PRIMITIVES_BIT #x40)
+(defconstant VK_QUERY_PIPELINE_STATISTIC_FRAGMENT_SHADER_INVOCATIONS_BIT #x80)
+(defconstant VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_CONTROL_SHADER_PATCHES_BIT #x100)
+(defconstant VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT #x200)
+(defconstant VK_QUERY_PIPELINE_STATISTIC_COMPUTE_SHADER_INVOCATIONS_BIT #x400)
 
 (cffi:defctype VkQueryPipelineStatisticFlags :int)
 
 (cffi:defctype VkQueryPoolCreateFlags :int)
 
 (cffi:defctype VkQueryResultFlagBits :int)
-(cl:defconstant VK_QUERY_RESULT_64_BIT #x1)
-(cl:defconstant VK_QUERY_RESULT_WAIT_BIT #x2)
-(cl:defconstant VK_QUERY_RESULT_WITH_AVAILABILITY_BIT #x4)
-(cl:defconstant VK_QUERY_RESULT_PARTIAL_BIT #x8)
+(defconstant VK_QUERY_RESULT_64_BIT #x1)
+(defconstant VK_QUERY_RESULT_WAIT_BIT #x2)
+(defconstant VK_QUERY_RESULT_WITH_AVAILABILITY_BIT #x4)
+(defconstant VK_QUERY_RESULT_PARTIAL_BIT #x8)
 
 (cffi:defctype VkQueryResultFlags :int)
 
 (cffi:defctype VkQueueFlagBits :int)
-(cl:defconstant VK_QUEUE_GRAPHICS_BIT #x1)
-(cl:defconstant VK_QUEUE_COMPUTE_BIT #x2)
-(cl:defconstant VK_QUEUE_TRANSFER_BIT #x4)
-(cl:defconstant VK_QUEUE_SPARSE_BINDING_BIT #x8)
+(defconstant VK_QUEUE_GRAPHICS_BIT #x1)
+(defconstant VK_QUEUE_COMPUTE_BIT #x2)
+(defconstant VK_QUEUE_TRANSFER_BIT #x4)
+(defconstant VK_QUEUE_SPARSE_BINDING_BIT #x8)
 
 (cffi:defctype VkQueueFlags :int)
 
 (cffi:defctype VkRenderPassCreateFlags :int)
 
 (cffi:defctype VkSampleCountFlagBits :int)
-(cl:defconstant VK_SAMPLE_COUNT_1_BIT #x1)
-(cl:defconstant VK_SAMPLE_COUNT_2_BIT #x2)
-(cl:defconstant VK_SAMPLE_COUNT_4_BIT #x4)
-(cl:defconstant VK_SAMPLE_COUNT_8_BIT #x8)
-(cl:defconstant VK_SAMPLE_COUNT_16_BIT #x10)
-(cl:defconstant VK_SAMPLE_COUNT_32_BIT #x20)
-(cl:defconstant VK_SAMPLE_COUNT_64_BIT #x40)
+(defconstant VK_SAMPLE_COUNT_1_BIT #x1)
+(defconstant VK_SAMPLE_COUNT_2_BIT #x2)
+(defconstant VK_SAMPLE_COUNT_4_BIT #x4)
+(defconstant VK_SAMPLE_COUNT_8_BIT #x8)
+(defconstant VK_SAMPLE_COUNT_16_BIT #x10)
+(defconstant VK_SAMPLE_COUNT_32_BIT #x20)
+(defconstant VK_SAMPLE_COUNT_64_BIT #x40)
 
 (cffi:defctype VkSampleCountFlags :int)
 
@@ -763,62 +763,62 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 (cffi:defctype VkShaderModuleCreateFlags :int)
 
 (cffi:defctype VkShaderStageFlagBits :int)
-(cl:defconstant VK_SHADER_STAGE_VERTEX_BIT #x1)
-(cl:defconstant VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT #x2)
-(cl:defconstant VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT #x4)
-(cl:defconstant VK_SHADER_STAGE_GEOMETRY_BIT #x8)
-(cl:defconstant VK_SHADER_STAGE_FRAGMENT_BIT #x10)
-(cl:defconstant VK_SHADER_STAGE_COMPUTE_BIT #x20)
-(cl:defconstant VK_SHADER_STAGE_ALL_GRAPHICS #x1F)
-(cl:defconstant VK_SHADER_STAGE_ALL #x7FFFFFFF)
+(defconstant VK_SHADER_STAGE_VERTEX_BIT #x1)
+(defconstant VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT #x2)
+(defconstant VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT #x4)
+(defconstant VK_SHADER_STAGE_GEOMETRY_BIT #x8)
+(defconstant VK_SHADER_STAGE_FRAGMENT_BIT #x10)
+(defconstant VK_SHADER_STAGE_COMPUTE_BIT #x20)
+(defconstant VK_SHADER_STAGE_ALL_GRAPHICS #x1F)
+(defconstant VK_SHADER_STAGE_ALL #x7FFFFFFF)
 
 (cffi:defctype VkShaderStageFlags :int)
 
 (cffi:defctype VkSparseImageFormatFlagBits :int)
-(cl:defconstant VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT #x1)
-(cl:defconstant VK_SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT #x2)
-(cl:defconstant VK_SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT #x4)
+(defconstant VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT #x1)
+(defconstant VK_SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT #x2)
+(defconstant VK_SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT #x4)
 
 (cffi:defctype VkSparseImageFormatFlags :int)
 
 (cffi:defctype VkSparseMemoryBindFlagBits :int)
-(cl:defconstant VK_SPARSE_MEMORY_BIND_METADATA_BIT #x1)
+(defconstant VK_SPARSE_MEMORY_BIND_METADATA_BIT #x1)
 
 (cffi:defctype VkSparseMemoryBindFlags :int)
 
 (cffi:defctype VkStencilFaceFlagBits :int)
-(cl:defconstant VK_STENCIL_FACE_FRONT_BIT #x1)
-(cl:defconstant VK_STENCIL_FACE_BACK_BIT #x2)
-(cl:defconstant VK_STENCIL_FRONT_AND_BACK #x3)
+(defconstant VK_STENCIL_FACE_FRONT_BIT #x1)
+(defconstant VK_STENCIL_FACE_BACK_BIT #x2)
+(defconstant VK_STENCIL_FRONT_AND_BACK #x3)
 
 (cffi:defctype VkStencilFaceFlags :int)
 
 (cffi:defctype VkSubpassDescriptionFlagBits :int)
-(cl:defconstant VK_SUBPASS_DESCRIPTION_PER_VIEW_ATTRIBUTES_BIT_NVX #x1)
-(cl:defconstant VK_SUBPASS_DESCRIPTION_PER_VIEW_POSITION_X_ONLY_BIT_NVX #x2)
+(defconstant VK_SUBPASS_DESCRIPTION_PER_VIEW_ATTRIBUTES_BIT_NVX #x1)
+(defconstant VK_SUBPASS_DESCRIPTION_PER_VIEW_POSITION_X_ONLY_BIT_NVX #x2)
 
 (cffi:defctype VkSubpassDescriptionFlags :int)
 
 (cffi:defctype VkSurfaceCounterFlagBitsEXT :int)
-(cl:defconstant VK_SURFACE_COUNTER_VBLANK_EXT #x1)
+(defconstant VK_SURFACE_COUNTER_VBLANK_EXT #x1)
 
 (cffi:defctype VkSurfaceCounterFlagsEXT :int)
 
 (cffi:defctype VkSurfaceTransformFlagBitsKHR :int)
-(cl:defconstant VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR #x1)
-(cl:defconstant VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR #x2)
-(cl:defconstant VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR #x4)
-(cl:defconstant VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR #x8)
-(cl:defconstant VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_BIT_KHR #x10)
-(cl:defconstant VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR #x20)
-(cl:defconstant VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR #x40)
-(cl:defconstant VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR #x80)
-(cl:defconstant VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR #x100)
+(defconstant VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR #x1)
+(defconstant VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR #x2)
+(defconstant VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR #x4)
+(defconstant VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR #x8)
+(defconstant VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_BIT_KHR #x10)
+(defconstant VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR #x20)
+(defconstant VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR #x40)
+(defconstant VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR #x80)
+(defconstant VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR #x100)
 
 (cffi:defctype VkSurfaceTransformFlagsKHR :int)
 
 (cffi:defctype VkSwapchainCreateFlagBitsKHR :int)
-(cl:defconstant VK_SWAPCHAIN_CREATE_BIND_SFR_BIT_KHX #x1)
+(defconstant VK_SWAPCHAIN_CREATE_BIND_SFR_BIT_KHX #x1)
 
 (cffi:defctype VkSwapchainCreateFlagsKHR :int)
 
@@ -836,1192 +836,1192 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 
 (cffi:defctype VkAccessFlagBits :int)
 
-(cl:defconstant VK_ACCESS_INDIRECT_COMMAND_READ_BIT #x1) ;; Controls coherency of indirect command reads
-(cl:defconstant VK_ACCESS_INDEX_READ_BIT #x2) ;; Controls coherency of index reads
-(cl:defconstant VK_ACCESS_VERTEX_ATTRIBUTE_READ_BIT #x4) ;; Controls coherency of vertex attribute reads
-(cl:defconstant VK_ACCESS_UNIFORM_READ_BIT #x8) ;; Controls coherency of uniform buffer reads
-(cl:defconstant VK_ACCESS_INPUT_ATTACHMENT_READ_BIT #x10) ;; Controls coherency of input attachment reads
-(cl:defconstant VK_ACCESS_SHADER_READ_BIT #x20) ;; Controls coherency of shader reads
-(cl:defconstant VK_ACCESS_SHADER_WRITE_BIT #x40) ;; Controls coherency of shader writes
-(cl:defconstant VK_ACCESS_COLOR_ATTACHMENT_READ_BIT #x80) ;; Controls coherency of color attachment reads
-(cl:defconstant VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT #x100) ;; Controls coherency of color attachment writes
-(cl:defconstant VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT #x200) ;; Controls coherency of depth/stencil attachment reads
-(cl:defconstant VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT #x400) ;; Controls coherency of depth/stencil attachment writes
-(cl:defconstant VK_ACCESS_TRANSFER_READ_BIT #x800) ;; Controls coherency of transfer reads
-(cl:defconstant VK_ACCESS_TRANSFER_WRITE_BIT #x1000) ;; Controls coherency of transfer writes
-(cl:defconstant VK_ACCESS_HOST_READ_BIT #x2000) ;; Controls coherency of host reads
-(cl:defconstant VK_ACCESS_HOST_WRITE_BIT #x4000) ;; Controls coherency of host writes
-(cl:defconstant VK_ACCESS_MEMORY_READ_BIT #x8000) ;; Controls coherency of memory reads
-(cl:defconstant VK_ACCESS_MEMORY_WRITE_BIT #x10000) ;; Controls coherency of memory writes
-(cl:defconstant VK_ACCESS_COMMAND_PROCESS_READ_BIT_NVX #x20000) ;; "VK_NVX_device_generated_commands"
-(cl:defconstant VK_ACCESS_COMMAND_PROCESS_WRITE_BIT_NVX #x40000) ;; "VK_NVX_device_generated_commands"
+(defconstant VK_ACCESS_INDIRECT_COMMAND_READ_BIT #x1) ;; Controls coherency of indirect command reads
+(defconstant VK_ACCESS_INDEX_READ_BIT #x2) ;; Controls coherency of index reads
+(defconstant VK_ACCESS_VERTEX_ATTRIBUTE_READ_BIT #x4) ;; Controls coherency of vertex attribute reads
+(defconstant VK_ACCESS_UNIFORM_READ_BIT #x8) ;; Controls coherency of uniform buffer reads
+(defconstant VK_ACCESS_INPUT_ATTACHMENT_READ_BIT #x10) ;; Controls coherency of input attachment reads
+(defconstant VK_ACCESS_SHADER_READ_BIT #x20) ;; Controls coherency of shader reads
+(defconstant VK_ACCESS_SHADER_WRITE_BIT #x40) ;; Controls coherency of shader writes
+(defconstant VK_ACCESS_COLOR_ATTACHMENT_READ_BIT #x80) ;; Controls coherency of color attachment reads
+(defconstant VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT #x100) ;; Controls coherency of color attachment writes
+(defconstant VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT #x200) ;; Controls coherency of depth/stencil attachment reads
+(defconstant VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT #x400) ;; Controls coherency of depth/stencil attachment writes
+(defconstant VK_ACCESS_TRANSFER_READ_BIT #x800) ;; Controls coherency of transfer reads
+(defconstant VK_ACCESS_TRANSFER_WRITE_BIT #x1000) ;; Controls coherency of transfer writes
+(defconstant VK_ACCESS_HOST_READ_BIT #x2000) ;; Controls coherency of host reads
+(defconstant VK_ACCESS_HOST_WRITE_BIT #x4000) ;; Controls coherency of host writes
+(defconstant VK_ACCESS_MEMORY_READ_BIT #x8000) ;; Controls coherency of memory reads
+(defconstant VK_ACCESS_MEMORY_WRITE_BIT #x10000) ;; Controls coherency of memory writes
+(defconstant VK_ACCESS_COMMAND_PROCESS_READ_BIT_NVX #x20000) ;; "VK_NVX_device_generated_commands"
+(defconstant VK_ACCESS_COMMAND_PROCESS_WRITE_BIT_NVX #x40000) ;; "VK_NVX_device_generated_commands"
 
 (cffi:defctype VkAttachmentDescriptionFlagBits :int)
 
-(cl:defconstant VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT #x1) ;; The attachment may alias physical memory of another attachment in the same render pass
+(defconstant VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT #x1) ;; The attachment may alias physical memory of another attachment in the same render pass
 
 (cffi:defctype VkAttachmentLoadOp :int)
 
-(cl:defconstant VK_ATTACHMENT_LOAD_OP_LOAD #x0)
-(cl:defconstant VK_ATTACHMENT_LOAD_OP_CLEAR #x1)
-(cl:defconstant VK_ATTACHMENT_LOAD_OP_DONT_CARE #x2)
+(defconstant VK_ATTACHMENT_LOAD_OP_LOAD #x0)
+(defconstant VK_ATTACHMENT_LOAD_OP_CLEAR #x1)
+(defconstant VK_ATTACHMENT_LOAD_OP_DONT_CARE #x2)
 
 (cffi:defctype VkAttachmentStoreOp :int)
 
-(cl:defconstant VK_ATTACHMENT_STORE_OP_STORE #x0)
-(cl:defconstant VK_ATTACHMENT_STORE_OP_DONT_CARE #x1)
+(defconstant VK_ATTACHMENT_STORE_OP_STORE #x0)
+(defconstant VK_ATTACHMENT_STORE_OP_DONT_CARE #x1)
 
 (cffi:defctype VkBlendFactor :int)
 
-(cl:defconstant VK_BLEND_FACTOR_ZERO #x0)
-(cl:defconstant VK_BLEND_FACTOR_ONE #x1)
-(cl:defconstant VK_BLEND_FACTOR_SRC_COLOR #x2)
-(cl:defconstant VK_BLEND_FACTOR_ONE_MINUS_SRC_COLOR #x3)
-(cl:defconstant VK_BLEND_FACTOR_DST_COLOR #x4)
-(cl:defconstant VK_BLEND_FACTOR_ONE_MINUS_DST_COLOR #x5)
-(cl:defconstant VK_BLEND_FACTOR_SRC_ALPHA #x6)
-(cl:defconstant VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA #x7)
-(cl:defconstant VK_BLEND_FACTOR_DST_ALPHA #x8)
-(cl:defconstant VK_BLEND_FACTOR_ONE_MINUS_DST_ALPHA #x9)
-(cl:defconstant VK_BLEND_FACTOR_CONSTANT_COLOR #xA)
-(cl:defconstant VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR #xB)
-(cl:defconstant VK_BLEND_FACTOR_CONSTANT_ALPHA #xC)
-(cl:defconstant VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA #xD)
-(cl:defconstant VK_BLEND_FACTOR_SRC_ALPHA_SATURATE #xE)
-(cl:defconstant VK_BLEND_FACTOR_SRC1_COLOR #xF)
-(cl:defconstant VK_BLEND_FACTOR_ONE_MINUS_SRC1_COLOR #x10)
-(cl:defconstant VK_BLEND_FACTOR_SRC1_ALPHA #x11)
-(cl:defconstant VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA #x12)
+(defconstant VK_BLEND_FACTOR_ZERO #x0)
+(defconstant VK_BLEND_FACTOR_ONE #x1)
+(defconstant VK_BLEND_FACTOR_SRC_COLOR #x2)
+(defconstant VK_BLEND_FACTOR_ONE_MINUS_SRC_COLOR #x3)
+(defconstant VK_BLEND_FACTOR_DST_COLOR #x4)
+(defconstant VK_BLEND_FACTOR_ONE_MINUS_DST_COLOR #x5)
+(defconstant VK_BLEND_FACTOR_SRC_ALPHA #x6)
+(defconstant VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA #x7)
+(defconstant VK_BLEND_FACTOR_DST_ALPHA #x8)
+(defconstant VK_BLEND_FACTOR_ONE_MINUS_DST_ALPHA #x9)
+(defconstant VK_BLEND_FACTOR_CONSTANT_COLOR #xA)
+(defconstant VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR #xB)
+(defconstant VK_BLEND_FACTOR_CONSTANT_ALPHA #xC)
+(defconstant VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA #xD)
+(defconstant VK_BLEND_FACTOR_SRC_ALPHA_SATURATE #xE)
+(defconstant VK_BLEND_FACTOR_SRC1_COLOR #xF)
+(defconstant VK_BLEND_FACTOR_ONE_MINUS_SRC1_COLOR #x10)
+(defconstant VK_BLEND_FACTOR_SRC1_ALPHA #x11)
+(defconstant VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA #x12)
 
 (cffi:defctype VkBlendOp :int)
 
-(cl:defconstant VK_BLEND_OP_ADD #x0)
-(cl:defconstant VK_BLEND_OP_SUBTRACT #x1)
-(cl:defconstant VK_BLEND_OP_REVERSE_SUBTRACT #x2)
-(cl:defconstant VK_BLEND_OP_MIN #x3)
-(cl:defconstant VK_BLEND_OP_MAX #x4)
+(defconstant VK_BLEND_OP_ADD #x0)
+(defconstant VK_BLEND_OP_SUBTRACT #x1)
+(defconstant VK_BLEND_OP_REVERSE_SUBTRACT #x2)
+(defconstant VK_BLEND_OP_MIN #x3)
+(defconstant VK_BLEND_OP_MAX #x4)
 
 (cffi:defctype VkBorderColor :int)
 
-(cl:defconstant VK_BORDER_COLOR_FLOAT_TRANSPARENT_BLACK #x0)
-(cl:defconstant VK_BORDER_COLOR_INT_TRANSPARENT_BLACK #x1)
-(cl:defconstant VK_BORDER_COLOR_FLOAT_OPAQUE_BLACK #x2)
-(cl:defconstant VK_BORDER_COLOR_INT_OPAQUE_BLACK #x3)
-(cl:defconstant VK_BORDER_COLOR_FLOAT_OPAQUE_WHITE #x4)
-(cl:defconstant VK_BORDER_COLOR_INT_OPAQUE_WHITE #x5)
+(defconstant VK_BORDER_COLOR_FLOAT_TRANSPARENT_BLACK #x0)
+(defconstant VK_BORDER_COLOR_INT_TRANSPARENT_BLACK #x1)
+(defconstant VK_BORDER_COLOR_FLOAT_OPAQUE_BLACK #x2)
+(defconstant VK_BORDER_COLOR_INT_OPAQUE_BLACK #x3)
+(defconstant VK_BORDER_COLOR_FLOAT_OPAQUE_WHITE #x4)
+(defconstant VK_BORDER_COLOR_INT_OPAQUE_WHITE #x5)
 
 (cffi:defctype VkBufferCreateFlagBits :int)
 
-(cl:defconstant VK_BUFFER_CREATE_SPARSE_BINDING_BIT #x1) ;; Buffer should support sparse backing
-(cl:defconstant VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT #x2) ;; Buffer should support sparse backing with partial residency
-(cl:defconstant VK_BUFFER_CREATE_SPARSE_ALIASED_BIT #x4) ;; Buffer should support constent data access to physical memory ranges mapped into multiple locations of sparse buffers
+(defconstant VK_BUFFER_CREATE_SPARSE_BINDING_BIT #x1) ;; Buffer should support sparse backing
+(defconstant VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT #x2) ;; Buffer should support sparse backing with partial residency
+(defconstant VK_BUFFER_CREATE_SPARSE_ALIASED_BIT #x4) ;; Buffer should support constent data access to physical memory ranges mapped into multiple locations of sparse buffers
 
 (cffi:defctype VkBufferUsageFlagBits :int)
 
-(cl:defconstant VK_BUFFER_USAGE_TRANSFER_SRC_BIT #x1) ;; Can be used as a source of transfer operations
-(cl:defconstant VK_BUFFER_USAGE_TRANSFER_DST_BIT #x2) ;; Can be used as a destination of transfer operations
-(cl:defconstant VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT #x4) ;; Can be used as TBO
-(cl:defconstant VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT #x8) ;; Can be used as IBO
-(cl:defconstant VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT #x10) ;; Can be used as UBO
-(cl:defconstant VK_BUFFER_USAGE_STORAGE_BUFFER_BIT #x20) ;; Can be used as SSBO
-(cl:defconstant VK_BUFFER_USAGE_INDEX_BUFFER_BIT #x40) ;; Can be used as source of fixed-function index fetch (index buffer)
-(cl:defconstant VK_BUFFER_USAGE_VERTEX_BUFFER_BIT #x80) ;; Can be used as source of fixed-function vertex fetch (VBO)
-(cl:defconstant VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT #x100) ;; Can be the source of indirect parameters (e.g. indirect buffer, parameter buffer)
+(defconstant VK_BUFFER_USAGE_TRANSFER_SRC_BIT #x1) ;; Can be used as a source of transfer operations
+(defconstant VK_BUFFER_USAGE_TRANSFER_DST_BIT #x2) ;; Can be used as a destination of transfer operations
+(defconstant VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT #x4) ;; Can be used as TBO
+(defconstant VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT #x8) ;; Can be used as IBO
+(defconstant VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT #x10) ;; Can be used as UBO
+(defconstant VK_BUFFER_USAGE_STORAGE_BUFFER_BIT #x20) ;; Can be used as SSBO
+(defconstant VK_BUFFER_USAGE_INDEX_BUFFER_BIT #x40) ;; Can be used as source of fixed-function index fetch (index buffer)
+(defconstant VK_BUFFER_USAGE_VERTEX_BUFFER_BIT #x80) ;; Can be used as source of fixed-function vertex fetch (VBO)
+(defconstant VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT #x100) ;; Can be the source of indirect parameters (e.g. indirect buffer, parameter buffer)
 
 (cffi:defctype VkColorComponentFlagBits :int)
 
-(cl:defconstant VK_COLOR_COMPONENT_R_BIT #x1)
-(cl:defconstant VK_COLOR_COMPONENT_G_BIT #x2)
-(cl:defconstant VK_COLOR_COMPONENT_B_BIT #x4)
-(cl:defconstant VK_COLOR_COMPONENT_A_BIT #x8)
+(defconstant VK_COLOR_COMPONENT_R_BIT #x1)
+(defconstant VK_COLOR_COMPONENT_G_BIT #x2)
+(defconstant VK_COLOR_COMPONENT_B_BIT #x4)
+(defconstant VK_COLOR_COMPONENT_A_BIT #x8)
 
 (cffi:defctype VkColorSpaceKHR :int)
 
-(cl:defconstant VK_COLOR_SPACE_SRGB_NONLINEAR_KHR #x0)
-(cl:defconstant VK_COLOR_SPACE_DISPLAY_P3_NONLINEAR_EXT #x3B9C6041) ;; "VK_EXT_swapchain_colorspace"
-(cl:defconstant VK_COLOR_SPACE_EXTENDED_SRGB_LINEAR_EXT #x3B9C6042) ;; "VK_EXT_swapchain_colorspace"
-(cl:defconstant VK_COLOR_SPACE_DCI_P3_LINEAR_EXT #x3B9C6043) ;; "VK_EXT_swapchain_colorspace"
-(cl:defconstant VK_COLOR_SPACE_DCI_P3_NONLINEAR_EXT #x3B9C6044) ;; "VK_EXT_swapchain_colorspace"
-(cl:defconstant VK_COLOR_SPACE_BT709_LINEAR_EXT #x3B9C6045) ;; "VK_EXT_swapchain_colorspace"
-(cl:defconstant VK_COLOR_SPACE_BT709_NONLINEAR_EXT #x3B9C6046) ;; "VK_EXT_swapchain_colorspace"
-(cl:defconstant VK_COLOR_SPACE_BT2020_LINEAR_EXT #x3B9C6047) ;; "VK_EXT_swapchain_colorspace"
-(cl:defconstant VK_COLOR_SPACE_HDR10_ST2084_EXT #x3B9C6048) ;; "VK_EXT_swapchain_colorspace"
-(cl:defconstant VK_COLOR_SPACE_DOLBYVISION_EXT #x3B9C6049) ;; "VK_EXT_swapchain_colorspace"
-(cl:defconstant VK_COLOR_SPACE_HDR10_HLG_EXT #x3B9C604A) ;; "VK_EXT_swapchain_colorspace"
-(cl:defconstant VK_COLOR_SPACE_ADOBERGB_LINEAR_EXT #x3B9C604B) ;; "VK_EXT_swapchain_colorspace"
-(cl:defconstant VK_COLOR_SPACE_ADOBERGB_NONLINEAR_EXT #x3B9C604C) ;; "VK_EXT_swapchain_colorspace"
-(cl:defconstant VK_COLOR_SPACE_PASS_THROUGH_EXT #x3B9C604D) ;; "VK_EXT_swapchain_colorspace"
+(defconstant VK_COLOR_SPACE_SRGB_NONLINEAR_KHR #x0)
+(defconstant VK_COLOR_SPACE_DISPLAY_P3_NONLINEAR_EXT #x3B9C6041) ;; "VK_EXT_swapchain_colorspace"
+(defconstant VK_COLOR_SPACE_EXTENDED_SRGB_LINEAR_EXT #x3B9C6042) ;; "VK_EXT_swapchain_colorspace"
+(defconstant VK_COLOR_SPACE_DCI_P3_LINEAR_EXT #x3B9C6043) ;; "VK_EXT_swapchain_colorspace"
+(defconstant VK_COLOR_SPACE_DCI_P3_NONLINEAR_EXT #x3B9C6044) ;; "VK_EXT_swapchain_colorspace"
+(defconstant VK_COLOR_SPACE_BT709_LINEAR_EXT #x3B9C6045) ;; "VK_EXT_swapchain_colorspace"
+(defconstant VK_COLOR_SPACE_BT709_NONLINEAR_EXT #x3B9C6046) ;; "VK_EXT_swapchain_colorspace"
+(defconstant VK_COLOR_SPACE_BT2020_LINEAR_EXT #x3B9C6047) ;; "VK_EXT_swapchain_colorspace"
+(defconstant VK_COLOR_SPACE_HDR10_ST2084_EXT #x3B9C6048) ;; "VK_EXT_swapchain_colorspace"
+(defconstant VK_COLOR_SPACE_DOLBYVISION_EXT #x3B9C6049) ;; "VK_EXT_swapchain_colorspace"
+(defconstant VK_COLOR_SPACE_HDR10_HLG_EXT #x3B9C604A) ;; "VK_EXT_swapchain_colorspace"
+(defconstant VK_COLOR_SPACE_ADOBERGB_LINEAR_EXT #x3B9C604B) ;; "VK_EXT_swapchain_colorspace"
+(defconstant VK_COLOR_SPACE_ADOBERGB_NONLINEAR_EXT #x3B9C604C) ;; "VK_EXT_swapchain_colorspace"
+(defconstant VK_COLOR_SPACE_PASS_THROUGH_EXT #x3B9C604D) ;; "VK_EXT_swapchain_colorspace"
 
 (cffi:defctype VkCommandBufferLevel :int)
 
-(cl:defconstant VK_COMMAND_BUFFER_LEVEL_PRIMARY #x0)
-(cl:defconstant VK_COMMAND_BUFFER_LEVEL_SECONDARY #x1)
+(defconstant VK_COMMAND_BUFFER_LEVEL_PRIMARY #x0)
+(defconstant VK_COMMAND_BUFFER_LEVEL_SECONDARY #x1)
 
 (cffi:defctype VkCommandBufferResetFlagBits :int)
 
-(cl:defconstant VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT #x1) ;; Release resources owned by the buffer
+(defconstant VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT #x1) ;; Release resources owned by the buffer
 
 (cffi:defctype VkCommandBufferUsageFlagBits :int)
 
-(cl:defconstant VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT #x1)
-(cl:defconstant VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT #x2)
-(cl:defconstant VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT #x4) ;; Command buffer may be submitted/executed more than once simultaneously
+(defconstant VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT #x1)
+(defconstant VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT #x2)
+(defconstant VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT #x4) ;; Command buffer may be submitted/executed more than once simultaneously
 
 (cffi:defctype VkCommandPoolCreateFlagBits :int)
 
-(cl:defconstant VK_COMMAND_POOL_CREATE_TRANSIENT_BIT #x1) ;; Command buffers have a short lifetime
-(cl:defconstant VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT #x2) ;; Command buffers may release their memory individually
+(defconstant VK_COMMAND_POOL_CREATE_TRANSIENT_BIT #x1) ;; Command buffers have a short lifetime
+(defconstant VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT #x2) ;; Command buffers may release their memory individually
 
 (cffi:defctype VkCommandPoolResetFlagBits :int)
 
-(cl:defconstant VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT #x1) ;; Release resources owned by the pool
+(defconstant VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT #x1) ;; Release resources owned by the pool
 
 (cffi:defctype VkCompareOp :int)
 
-(cl:defconstant VK_COMPARE_OP_NEVER #x0)
-(cl:defconstant VK_COMPARE_OP_LESS #x1)
-(cl:defconstant VK_COMPARE_OP_EQUAL #x2)
-(cl:defconstant VK_COMPARE_OP_LESS_OR_EQUAL #x3)
-(cl:defconstant VK_COMPARE_OP_GREATER #x4)
-(cl:defconstant VK_COMPARE_OP_NOT_EQUAL #x5)
-(cl:defconstant VK_COMPARE_OP_GREATER_OR_EQUAL #x6)
-(cl:defconstant VK_COMPARE_OP_ALWAYS #x7)
+(defconstant VK_COMPARE_OP_NEVER #x0)
+(defconstant VK_COMPARE_OP_LESS #x1)
+(defconstant VK_COMPARE_OP_EQUAL #x2)
+(defconstant VK_COMPARE_OP_LESS_OR_EQUAL #x3)
+(defconstant VK_COMPARE_OP_GREATER #x4)
+(defconstant VK_COMPARE_OP_NOT_EQUAL #x5)
+(defconstant VK_COMPARE_OP_GREATER_OR_EQUAL #x6)
+(defconstant VK_COMPARE_OP_ALWAYS #x7)
 
 (cffi:defctype VkComponentSwizzle :int)
 
-(cl:defconstant VK_COMPONENT_SWIZZLE_IDENTITY #x0)
-(cl:defconstant VK_COMPONENT_SWIZZLE_ZERO #x1)
-(cl:defconstant VK_COMPONENT_SWIZZLE_ONE #x2)
-(cl:defconstant VK_COMPONENT_SWIZZLE_R #x3)
-(cl:defconstant VK_COMPONENT_SWIZZLE_G #x4)
-(cl:defconstant VK_COMPONENT_SWIZZLE_B #x5)
-(cl:defconstant VK_COMPONENT_SWIZZLE_A #x6)
+(defconstant VK_COMPONENT_SWIZZLE_IDENTITY #x0)
+(defconstant VK_COMPONENT_SWIZZLE_ZERO #x1)
+(defconstant VK_COMPONENT_SWIZZLE_ONE #x2)
+(defconstant VK_COMPONENT_SWIZZLE_R #x3)
+(defconstant VK_COMPONENT_SWIZZLE_G #x4)
+(defconstant VK_COMPONENT_SWIZZLE_B #x5)
+(defconstant VK_COMPONENT_SWIZZLE_A #x6)
 
 (cffi:defctype VkCompositeAlphaFlagBitsKHR :int)
 
-(cl:defconstant VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR #x1)
-(cl:defconstant VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR #x2)
-(cl:defconstant VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR #x4)
-(cl:defconstant VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR #x8)
+(defconstant VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR #x1)
+(defconstant VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR #x2)
+(defconstant VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR #x4)
+(defconstant VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR #x8)
 
 (cffi:defctype VkCullModeFlagBits :int)
 
-(cl:defconstant VK_CULL_MODE_NONE #x0)
-(cl:defconstant VK_CULL_MODE_FRONT_BIT #x1)
-(cl:defconstant VK_CULL_MODE_BACK_BIT #x2)
-(cl:defconstant VK_CULL_MODE_FRONT_AND_BACK #x3)
+(defconstant VK_CULL_MODE_NONE #x0)
+(defconstant VK_CULL_MODE_FRONT_BIT #x1)
+(defconstant VK_CULL_MODE_BACK_BIT #x2)
+(defconstant VK_CULL_MODE_FRONT_AND_BACK #x3)
 
 (cffi:defctype VkDebugReportFlagBitsEXT :int)
 
-(cl:defconstant VK_DEBUG_REPORT_INFORMATION_BIT_EXT #x1)
-(cl:defconstant VK_DEBUG_REPORT_WARNING_BIT_EXT #x2)
-(cl:defconstant VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT #x4)
-(cl:defconstant VK_DEBUG_REPORT_ERROR_BIT_EXT #x8)
-(cl:defconstant VK_DEBUG_REPORT_DEBUG_BIT_EXT #x10)
+(defconstant VK_DEBUG_REPORT_INFORMATION_BIT_EXT #x1)
+(defconstant VK_DEBUG_REPORT_WARNING_BIT_EXT #x2)
+(defconstant VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT #x4)
+(defconstant VK_DEBUG_REPORT_ERROR_BIT_EXT #x8)
+(defconstant VK_DEBUG_REPORT_DEBUG_BIT_EXT #x10)
 
 (cffi:defctype VkDebugReportObjectTypeEXT :int)
 
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT #x0)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_INSTANCE_EXT #x1)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_PHYSICAL_DEVICE_EXT #x2)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_DEVICE_EXT #x3)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_QUEUE_EXT #x4)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_SEMAPHORE_EXT #x5)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_BUFFER_EXT #x6)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_FENCE_EXT #x7)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_DEVICE_MEMORY_EXT #x8)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_EXT #x9)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_IMAGE_EXT #xA)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_EVENT_EXT #xB)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_QUERY_POOL_EXT #xC)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_VIEW_EXT #xD)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_IMAGE_VIEW_EXT #xE)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_SHADER_MODULE_EXT #xF)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_CACHE_EXT #x10)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_LAYOUT_EXT #x11)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_RENDER_PASS_EXT #x12)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_EXT #x13)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT_EXT #x14)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_EXT #x15)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_POOL_EXT #x16)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_EXT #x17)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_FRAMEBUFFER_EXT #x18)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_POOL_EXT #x19)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_SURFACE_KHR_EXT #x1A)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN_KHR_EXT #x1B)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT #x1C)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_KHR_EXT #x1D)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT #x1E)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_OBJECT_TABLE_NVX_EXT #x1F)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX_EXT #x20)
-(cl:defconstant VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR_EXT #x3B9C1608) ;; "VK_KHR_descriptor_update_template"
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT #x0)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_INSTANCE_EXT #x1)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_PHYSICAL_DEVICE_EXT #x2)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_DEVICE_EXT #x3)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_QUEUE_EXT #x4)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_SEMAPHORE_EXT #x5)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_BUFFER_EXT #x6)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_FENCE_EXT #x7)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_DEVICE_MEMORY_EXT #x8)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_EXT #x9)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_IMAGE_EXT #xA)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_EVENT_EXT #xB)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_QUERY_POOL_EXT #xC)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_VIEW_EXT #xD)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_IMAGE_VIEW_EXT #xE)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_SHADER_MODULE_EXT #xF)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_CACHE_EXT #x10)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_LAYOUT_EXT #x11)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_RENDER_PASS_EXT #x12)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_EXT #x13)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT_EXT #x14)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_EXT #x15)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_POOL_EXT #x16)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_EXT #x17)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_FRAMEBUFFER_EXT #x18)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_POOL_EXT #x19)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_SURFACE_KHR_EXT #x1A)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN_KHR_EXT #x1B)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT #x1C)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_KHR_EXT #x1D)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT #x1E)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_OBJECT_TABLE_NVX_EXT #x1F)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX_EXT #x20)
+(defconstant VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR_EXT #x3B9C1608) ;; "VK_KHR_descriptor_update_template"
 
 (cffi:defctype VkDependencyFlagBits :int)
 
-(cl:defconstant VK_DEPENDENCY_BY_REGION_BIT #x1) ;; Dependency is per pixel region
-(cl:defconstant VK_DEPENDENCY_VIEW_LOCAL_BIT_KHX #x2) ;; "VK_KHX_multiview"
-(cl:defconstant VK_DEPENDENCY_DEVICE_GROUP_BIT_KHX #x4) ;; "VK_KHX_device_group"
+(defconstant VK_DEPENDENCY_BY_REGION_BIT #x1) ;; Dependency is per pixel region
+(defconstant VK_DEPENDENCY_VIEW_LOCAL_BIT_KHX #x2) ;; "VK_KHX_multiview"
+(defconstant VK_DEPENDENCY_DEVICE_GROUP_BIT_KHX #x4) ;; "VK_KHX_device_group"
 
 (cffi:defctype VkDescriptorPoolCreateFlagBits :int)
 
-(cl:defconstant VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT #x1) ;; Descriptor sets may be freed individually
+(defconstant VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT #x1) ;; Descriptor sets may be freed individually
 
 (cffi:defctype VkDescriptorSetLayoutCreateFlagBits :int)
 
-(cl:defconstant VK_DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR #x1) ;; "VK_KHR_push_descriptor"
+(defconstant VK_DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR #x1) ;; "VK_KHR_push_descriptor"
 
 (cffi:defctype VkDescriptorType :int)
 
-(cl:defconstant VK_DESCRIPTOR_TYPE_SAMPLER #x0)
-(cl:defconstant VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER #x1)
-(cl:defconstant VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE #x2)
-(cl:defconstant VK_DESCRIPTOR_TYPE_STORAGE_IMAGE #x3)
-(cl:defconstant VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER #x4)
-(cl:defconstant VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER #x5)
-(cl:defconstant VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER #x6)
-(cl:defconstant VK_DESCRIPTOR_TYPE_STORAGE_BUFFER #x7)
-(cl:defconstant VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC #x8)
-(cl:defconstant VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC #x9)
-(cl:defconstant VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT #xA)
+(defconstant VK_DESCRIPTOR_TYPE_SAMPLER #x0)
+(defconstant VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER #x1)
+(defconstant VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE #x2)
+(defconstant VK_DESCRIPTOR_TYPE_STORAGE_IMAGE #x3)
+(defconstant VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER #x4)
+(defconstant VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER #x5)
+(defconstant VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER #x6)
+(defconstant VK_DESCRIPTOR_TYPE_STORAGE_BUFFER #x7)
+(defconstant VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC #x8)
+(defconstant VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC #x9)
+(defconstant VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT #xA)
 
 (cffi:defctype VkDescriptorUpdateTemplateTypeKHR :int)
 
-(cl:defconstant VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET_KHR #x0) ;; Create descriptor update template for descriptor set updates
-(cl:defconstant VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR #x1) ;; Create descriptor update template for pushed descriptor updates
+(defconstant VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET_KHR #x0) ;; Create descriptor update template for descriptor set updates
+(defconstant VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR #x1) ;; Create descriptor update template for pushed descriptor updates
 
 (cffi:defctype VkDeviceEventTypeEXT :int)
 
-(cl:defconstant VK_DEVICE_EVENT_TYPE_DISPLAY_HOTPLUG_EXT #x0)
+(defconstant VK_DEVICE_EVENT_TYPE_DISPLAY_HOTPLUG_EXT #x0)
 
 (cffi:defctype VkDeviceGroupPresentModeFlagBitsKHX :int)
 
-(cl:defconstant VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHX #x1) ;; Present from local memory
-(cl:defconstant VK_DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHX #x2) ;; Present from remote memory
-(cl:defconstant VK_DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHX #x4) ;; Present sum of local and/or remote memory
-(cl:defconstant VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHX #x8) ;; Each physical device presents from local memory
+(defconstant VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHX #x1) ;; Present from local memory
+(defconstant VK_DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHX #x2) ;; Present from remote memory
+(defconstant VK_DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHX #x4) ;; Present sum of local and/or remote memory
+(defconstant VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHX #x8) ;; Each physical device presents from local memory
 
 (cffi:defctype VkDiscardRectangleModeEXT :int)
 
-(cl:defconstant VK_DISCARD_RECTANGLE_MODE_INCLUSIVE_EXT #x0)
-(cl:defconstant VK_DISCARD_RECTANGLE_MODE_EXCLUSIVE_EXT #x1)
+(defconstant VK_DISCARD_RECTANGLE_MODE_INCLUSIVE_EXT #x0)
+(defconstant VK_DISCARD_RECTANGLE_MODE_EXCLUSIVE_EXT #x1)
 
 (cffi:defctype VkDisplayEventTypeEXT :int)
 
-(cl:defconstant VK_DISPLAY_EVENT_TYPE_FIRST_PIXEL_OUT_EXT #x0)
+(defconstant VK_DISPLAY_EVENT_TYPE_FIRST_PIXEL_OUT_EXT #x0)
 
 (cffi:defctype VkDisplayPlaneAlphaFlagBitsKHR :int)
 
-(cl:defconstant VK_DISPLAY_PLANE_ALPHA_OPAQUE_BIT_KHR #x1)
-(cl:defconstant VK_DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR #x2)
-(cl:defconstant VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_BIT_KHR #x4)
-(cl:defconstant VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_PREMULTIPLIED_BIT_KHR #x8)
+(defconstant VK_DISPLAY_PLANE_ALPHA_OPAQUE_BIT_KHR #x1)
+(defconstant VK_DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR #x2)
+(defconstant VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_BIT_KHR #x4)
+(defconstant VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_PREMULTIPLIED_BIT_KHR #x8)
 
 (cffi:defctype VkDisplayPowerStateEXT :int)
 
-(cl:defconstant VK_DISPLAY_POWER_STATE_OFF_EXT #x0)
-(cl:defconstant VK_DISPLAY_POWER_STATE_SUSPEND_EXT #x1)
-(cl:defconstant VK_DISPLAY_POWER_STATE_ON_EXT #x2)
+(defconstant VK_DISPLAY_POWER_STATE_OFF_EXT #x0)
+(defconstant VK_DISPLAY_POWER_STATE_SUSPEND_EXT #x1)
+(defconstant VK_DISPLAY_POWER_STATE_ON_EXT #x2)
 
 (cffi:defctype VkDynamicState :int)
 
-(cl:defconstant VK_DYNAMIC_STATE_VIEWPORT #x0)
-(cl:defconstant VK_DYNAMIC_STATE_SCISSOR #x1)
-(cl:defconstant VK_DYNAMIC_STATE_LINE_WIDTH #x2)
-(cl:defconstant VK_DYNAMIC_STATE_DEPTH_BIAS #x3)
-(cl:defconstant VK_DYNAMIC_STATE_BLEND_CONSTANTS #x4)
-(cl:defconstant VK_DYNAMIC_STATE_DEPTH_BOUNDS #x5)
-(cl:defconstant VK_DYNAMIC_STATE_STENCIL_COMPARE_MASK #x6)
-(cl:defconstant VK_DYNAMIC_STATE_STENCIL_WRITE_MASK #x7)
-(cl:defconstant VK_DYNAMIC_STATE_STENCIL_REFERENCE #x8)
-(cl:defconstant VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV #x3B9C1DD8) ;; "VK_NV_clip_space_w_scaling"
-(cl:defconstant VK_DYNAMIC_STATE_DISCARD_RECTANGLE_EXT #x3B9C4CB8) ;; "VK_EXT_discard_rectangles"
-(cl:defconstant VK_DYNAMIC_STATE_LINE_STIPPLE_EXT 1000259000)
+(defconstant VK_DYNAMIC_STATE_VIEWPORT #x0)
+(defconstant VK_DYNAMIC_STATE_SCISSOR #x1)
+(defconstant VK_DYNAMIC_STATE_LINE_WIDTH #x2)
+(defconstant VK_DYNAMIC_STATE_DEPTH_BIAS #x3)
+(defconstant VK_DYNAMIC_STATE_BLEND_CONSTANTS #x4)
+(defconstant VK_DYNAMIC_STATE_DEPTH_BOUNDS #x5)
+(defconstant VK_DYNAMIC_STATE_STENCIL_COMPARE_MASK #x6)
+(defconstant VK_DYNAMIC_STATE_STENCIL_WRITE_MASK #x7)
+(defconstant VK_DYNAMIC_STATE_STENCIL_REFERENCE #x8)
+(defconstant VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV #x3B9C1DD8) ;; "VK_NV_clip_space_w_scaling"
+(defconstant VK_DYNAMIC_STATE_DISCARD_RECTANGLE_EXT #x3B9C4CB8) ;; "VK_EXT_discard_rectangles"
+(defconstant VK_DYNAMIC_STATE_LINE_STIPPLE_EXT 1000259000)
 
 (cffi:defctype VkExternalMemoryFeatureFlagBitsKHX :int)
 
-(cl:defconstant VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_KHX #x1)
-(cl:defconstant VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_KHX #x2)
-(cl:defconstant VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_KHX #x4)
+(defconstant VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_KHX #x1)
+(defconstant VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_KHX #x2)
+(defconstant VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_KHX #x4)
 
 (cffi:defctype VkExternalMemoryFeatureFlagBitsNV :int)
 
-(cl:defconstant VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_NV #x1)
-(cl:defconstant VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_NV #x2)
-(cl:defconstant VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_NV #x4)
+(defconstant VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_NV #x1)
+(defconstant VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_NV #x2)
+(defconstant VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_NV #x4)
 
 (cffi:defctype VkExternalMemoryHandleTypeFlagBitsKHX :int)
 
-(cl:defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHX #x1)
-(cl:defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHX #x2)
-(cl:defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHX #x4)
-(cl:defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT_KHX #x8)
-(cl:defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT_KHX #x10)
-(cl:defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT_KHX #x20)
-(cl:defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT_KHX #x40)
+(defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHX #x1)
+(defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHX #x2)
+(defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHX #x4)
+(defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT_KHX #x8)
+(defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT_KHX #x10)
+(defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT_KHX #x20)
+(defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT_KHX #x40)
 
 (cffi:defctype VkExternalMemoryHandleTypeFlagBitsNV :int)
 
-(cl:defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV #x1)
-(cl:defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_NV #x2)
-(cl:defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_BIT_NV #x4)
-(cl:defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_KMT_BIT_NV #x8)
+(defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV #x1)
+(defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_NV #x2)
+(defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_BIT_NV #x4)
+(defconstant VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_KMT_BIT_NV #x8)
 
 (cffi:defctype VkExternalSemaphoreFeatureFlagBitsKHX :int)
 
-(cl:defconstant VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT_KHX #x1)
-(cl:defconstant VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT_KHX #x2)
+(defconstant VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT_KHX #x1)
+(defconstant VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT_KHX #x2)
 
 (cffi:defctype VkExternalSemaphoreHandleTypeFlagBitsKHX :int)
 
-(cl:defconstant VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHX #x1)
-(cl:defconstant VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHX #x2)
-(cl:defconstant VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHX #x4)
-(cl:defconstant VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT_KHX #x8)
-(cl:defconstant VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_FENCE_FD_BIT_KHX #x10)
+(defconstant VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHX #x1)
+(defconstant VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHX #x2)
+(defconstant VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHX #x4)
+(defconstant VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT_KHX #x8)
+(defconstant VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_FENCE_FD_BIT_KHX #x10)
 
 (cffi:defctype VkFenceCreateFlagBits :int)
 
-(cl:defconstant VK_FENCE_CREATE_SIGNALED_BIT #x1)
+(defconstant VK_FENCE_CREATE_SIGNALED_BIT #x1)
 
 (cffi:defctype VkFilter :int)
 
-(cl:defconstant VK_FILTER_NEAREST #x0)
-(cl:defconstant VK_FILTER_LINEAR #x1)
-(cl:defconstant VK_FILTER_CUBIC_IMG #x3B9B0498) ;; "VK_IMG_filter_cubic"
+(defconstant VK_FILTER_NEAREST #x0)
+(defconstant VK_FILTER_LINEAR #x1)
+(defconstant VK_FILTER_CUBIC_IMG #x3B9B0498) ;; "VK_IMG_filter_cubic"
 
 (cffi:defctype VkFormat :int)
 
-(cl:defconstant VK_FORMAT_UNDEFINED #x0)
-(cl:defconstant VK_FORMAT_R4G4_UNORM_PACK8 #x1)
-(cl:defconstant VK_FORMAT_R4G4B4A4_UNORM_PACK16 #x2)
-(cl:defconstant VK_FORMAT_B4G4R4A4_UNORM_PACK16 #x3)
-(cl:defconstant VK_FORMAT_R5G6B5_UNORM_PACK16 #x4)
-(cl:defconstant VK_FORMAT_B5G6R5_UNORM_PACK16 #x5)
-(cl:defconstant VK_FORMAT_R5G5B5A1_UNORM_PACK16 #x6)
-(cl:defconstant VK_FORMAT_B5G5R5A1_UNORM_PACK16 #x7)
-(cl:defconstant VK_FORMAT_A1R5G5B5_UNORM_PACK16 #x8)
-(cl:defconstant VK_FORMAT_R8_UNORM #x9)
-(cl:defconstant VK_FORMAT_R8_SNORM #xA)
-(cl:defconstant VK_FORMAT_R8_USCALED #xB)
-(cl:defconstant VK_FORMAT_R8_SSCALED #xC)
-(cl:defconstant VK_FORMAT_R8_UINT #xD)
-(cl:defconstant VK_FORMAT_R8_SINT #xE)
-(cl:defconstant VK_FORMAT_R8_SRGB #xF)
-(cl:defconstant VK_FORMAT_R8G8_UNORM #x10)
-(cl:defconstant VK_FORMAT_R8G8_SNORM #x11)
-(cl:defconstant VK_FORMAT_R8G8_USCALED #x12)
-(cl:defconstant VK_FORMAT_R8G8_SSCALED #x13)
-(cl:defconstant VK_FORMAT_R8G8_UINT #x14)
-(cl:defconstant VK_FORMAT_R8G8_SINT #x15)
-(cl:defconstant VK_FORMAT_R8G8_SRGB #x16)
-(cl:defconstant VK_FORMAT_R8G8B8_UNORM #x17)
-(cl:defconstant VK_FORMAT_R8G8B8_SNORM #x18)
-(cl:defconstant VK_FORMAT_R8G8B8_USCALED #x19)
-(cl:defconstant VK_FORMAT_R8G8B8_SSCALED #x1A)
-(cl:defconstant VK_FORMAT_R8G8B8_UINT #x1B)
-(cl:defconstant VK_FORMAT_R8G8B8_SINT #x1C)
-(cl:defconstant VK_FORMAT_R8G8B8_SRGB #x1D)
-(cl:defconstant VK_FORMAT_B8G8R8_UNORM #x1E)
-(cl:defconstant VK_FORMAT_B8G8R8_SNORM #x1F)
-(cl:defconstant VK_FORMAT_B8G8R8_USCALED #x20)
-(cl:defconstant VK_FORMAT_B8G8R8_SSCALED #x21)
-(cl:defconstant VK_FORMAT_B8G8R8_UINT #x22)
-(cl:defconstant VK_FORMAT_B8G8R8_SINT #x23)
-(cl:defconstant VK_FORMAT_B8G8R8_SRGB #x24)
-(cl:defconstant VK_FORMAT_R8G8B8A8_UNORM #x25)
-(cl:defconstant VK_FORMAT_R8G8B8A8_SNORM #x26)
-(cl:defconstant VK_FORMAT_R8G8B8A8_USCALED #x27)
-(cl:defconstant VK_FORMAT_R8G8B8A8_SSCALED #x28)
-(cl:defconstant VK_FORMAT_R8G8B8A8_UINT #x29)
-(cl:defconstant VK_FORMAT_R8G8B8A8_SINT #x2A)
-(cl:defconstant VK_FORMAT_R8G8B8A8_SRGB #x2B)
-(cl:defconstant VK_FORMAT_B8G8R8A8_UNORM #x2C)
-(cl:defconstant VK_FORMAT_B8G8R8A8_SNORM #x2D)
-(cl:defconstant VK_FORMAT_B8G8R8A8_USCALED #x2E)
-(cl:defconstant VK_FORMAT_B8G8R8A8_SSCALED #x2F)
-(cl:defconstant VK_FORMAT_B8G8R8A8_UINT #x30)
-(cl:defconstant VK_FORMAT_B8G8R8A8_SINT #x31)
-(cl:defconstant VK_FORMAT_B8G8R8A8_SRGB #x32)
-(cl:defconstant VK_FORMAT_A8B8G8R8_UNORM_PACK32 #x33)
-(cl:defconstant VK_FORMAT_A8B8G8R8_SNORM_PACK32 #x34)
-(cl:defconstant VK_FORMAT_A8B8G8R8_USCALED_PACK32 #x35)
-(cl:defconstant VK_FORMAT_A8B8G8R8_SSCALED_PACK32 #x36)
-(cl:defconstant VK_FORMAT_A8B8G8R8_UINT_PACK32 #x37)
-(cl:defconstant VK_FORMAT_A8B8G8R8_SINT_PACK32 #x38)
-(cl:defconstant VK_FORMAT_A8B8G8R8_SRGB_PACK32 #x39)
-(cl:defconstant VK_FORMAT_A2R10G10B10_UNORM_PACK32 #x3A)
-(cl:defconstant VK_FORMAT_A2R10G10B10_SNORM_PACK32 #x3B)
-(cl:defconstant VK_FORMAT_A2R10G10B10_USCALED_PACK32 #x3C)
-(cl:defconstant VK_FORMAT_A2R10G10B10_SSCALED_PACK32 #x3D)
-(cl:defconstant VK_FORMAT_A2R10G10B10_UINT_PACK32 #x3E)
-(cl:defconstant VK_FORMAT_A2R10G10B10_SINT_PACK32 #x3F)
-(cl:defconstant VK_FORMAT_A2B10G10R10_UNORM_PACK32 #x40)
-(cl:defconstant VK_FORMAT_A2B10G10R10_SNORM_PACK32 #x41)
-(cl:defconstant VK_FORMAT_A2B10G10R10_USCALED_PACK32 #x42)
-(cl:defconstant VK_FORMAT_A2B10G10R10_SSCALED_PACK32 #x43)
-(cl:defconstant VK_FORMAT_A2B10G10R10_UINT_PACK32 #x44)
-(cl:defconstant VK_FORMAT_A2B10G10R10_SINT_PACK32 #x45)
-(cl:defconstant VK_FORMAT_R16_UNORM #x46)
-(cl:defconstant VK_FORMAT_R16_SNORM #x47)
-(cl:defconstant VK_FORMAT_R16_USCALED #x48)
-(cl:defconstant VK_FORMAT_R16_SSCALED #x49)
-(cl:defconstant VK_FORMAT_R16_UINT #x4A)
-(cl:defconstant VK_FORMAT_R16_SINT #x4B)
-(cl:defconstant VK_FORMAT_R16_SFLOAT #x4C)
-(cl:defconstant VK_FORMAT_R16G16_UNORM #x4D)
-(cl:defconstant VK_FORMAT_R16G16_SNORM #x4E)
-(cl:defconstant VK_FORMAT_R16G16_USCALED #x4F)
-(cl:defconstant VK_FORMAT_R16G16_SSCALED #x50)
-(cl:defconstant VK_FORMAT_R16G16_UINT #x51)
-(cl:defconstant VK_FORMAT_R16G16_SINT #x52)
-(cl:defconstant VK_FORMAT_R16G16_SFLOAT #x53)
-(cl:defconstant VK_FORMAT_R16G16B16_UNORM #x54)
-(cl:defconstant VK_FORMAT_R16G16B16_SNORM #x55)
-(cl:defconstant VK_FORMAT_R16G16B16_USCALED #x56)
-(cl:defconstant VK_FORMAT_R16G16B16_SSCALED #x57)
-(cl:defconstant VK_FORMAT_R16G16B16_UINT #x58)
-(cl:defconstant VK_FORMAT_R16G16B16_SINT #x59)
-(cl:defconstant VK_FORMAT_R16G16B16_SFLOAT #x5A)
-(cl:defconstant VK_FORMAT_R16G16B16A16_UNORM #x5B)
-(cl:defconstant VK_FORMAT_R16G16B16A16_SNORM #x5C)
-(cl:defconstant VK_FORMAT_R16G16B16A16_USCALED #x5D)
-(cl:defconstant VK_FORMAT_R16G16B16A16_SSCALED #x5E)
-(cl:defconstant VK_FORMAT_R16G16B16A16_UINT #x5F)
-(cl:defconstant VK_FORMAT_R16G16B16A16_SINT #x60)
-(cl:defconstant VK_FORMAT_R16G16B16A16_SFLOAT #x61)
-(cl:defconstant VK_FORMAT_R32_UINT #x62)
-(cl:defconstant VK_FORMAT_R32_SINT #x63)
-(cl:defconstant VK_FORMAT_R32_SFLOAT #x64)
-(cl:defconstant VK_FORMAT_R32G32_UINT #x65)
-(cl:defconstant VK_FORMAT_R32G32_SINT #x66)
-(cl:defconstant VK_FORMAT_R32G32_SFLOAT #x67)
-(cl:defconstant VK_FORMAT_R32G32B32_UINT #x68)
-(cl:defconstant VK_FORMAT_R32G32B32_SINT #x69)
-(cl:defconstant VK_FORMAT_R32G32B32_SFLOAT #x6A)
-(cl:defconstant VK_FORMAT_R32G32B32A32_UINT #x6B)
-(cl:defconstant VK_FORMAT_R32G32B32A32_SINT #x6C)
-(cl:defconstant VK_FORMAT_R32G32B32A32_SFLOAT #x6D)
-(cl:defconstant VK_FORMAT_R64_UINT #x6E)
-(cl:defconstant VK_FORMAT_R64_SINT #x6F)
-(cl:defconstant VK_FORMAT_R64_SFLOAT #x70)
-(cl:defconstant VK_FORMAT_R64G64_UINT #x71)
-(cl:defconstant VK_FORMAT_R64G64_SINT #x72)
-(cl:defconstant VK_FORMAT_R64G64_SFLOAT #x73)
-(cl:defconstant VK_FORMAT_R64G64B64_UINT #x74)
-(cl:defconstant VK_FORMAT_R64G64B64_SINT #x75)
-(cl:defconstant VK_FORMAT_R64G64B64_SFLOAT #x76)
-(cl:defconstant VK_FORMAT_R64G64B64A64_UINT #x77)
-(cl:defconstant VK_FORMAT_R64G64B64A64_SINT #x78)
-(cl:defconstant VK_FORMAT_R64G64B64A64_SFLOAT #x79)
-(cl:defconstant VK_FORMAT_B10G11R11_UFLOAT_PACK32 #x7A)
-(cl:defconstant VK_FORMAT_E5B9G9R9_UFLOAT_PACK32 #x7B)
-(cl:defconstant VK_FORMAT_D16_UNORM #x7C)
-(cl:defconstant VK_FORMAT_X8_D24_UNORM_PACK32 #x7D)
-(cl:defconstant VK_FORMAT_D32_SFLOAT #x7E)
-(cl:defconstant VK_FORMAT_S8_UINT #x7F)
-(cl:defconstant VK_FORMAT_D16_UNORM_S8_UINT #x80)
-(cl:defconstant VK_FORMAT_D24_UNORM_S8_UINT #x81)
-(cl:defconstant VK_FORMAT_D32_SFLOAT_S8_UINT #x82)
-(cl:defconstant VK_FORMAT_BC1_RGB_UNORM_BLOCK #x83)
-(cl:defconstant VK_FORMAT_BC1_RGB_SRGB_BLOCK #x84)
-(cl:defconstant VK_FORMAT_BC1_RGBA_UNORM_BLOCK #x85)
-(cl:defconstant VK_FORMAT_BC1_RGBA_SRGB_BLOCK #x86)
-(cl:defconstant VK_FORMAT_BC2_UNORM_BLOCK #x87)
-(cl:defconstant VK_FORMAT_BC2_SRGB_BLOCK #x88)
-(cl:defconstant VK_FORMAT_BC3_UNORM_BLOCK #x89)
-(cl:defconstant VK_FORMAT_BC3_SRGB_BLOCK #x8A)
-(cl:defconstant VK_FORMAT_BC4_UNORM_BLOCK #x8B)
-(cl:defconstant VK_FORMAT_BC4_SNORM_BLOCK #x8C)
-(cl:defconstant VK_FORMAT_BC5_UNORM_BLOCK #x8D)
-(cl:defconstant VK_FORMAT_BC5_SNORM_BLOCK #x8E)
-(cl:defconstant VK_FORMAT_BC6H_UFLOAT_BLOCK #x8F)
-(cl:defconstant VK_FORMAT_BC6H_SFLOAT_BLOCK #x90)
-(cl:defconstant VK_FORMAT_BC7_UNORM_BLOCK #x91)
-(cl:defconstant VK_FORMAT_BC7_SRGB_BLOCK #x92)
-(cl:defconstant VK_FORMAT_ETC2_R8G8B8_UNORM_BLOCK #x93)
-(cl:defconstant VK_FORMAT_ETC2_R8G8B8_SRGB_BLOCK #x94)
-(cl:defconstant VK_FORMAT_ETC2_R8G8B8A1_UNORM_BLOCK #x95)
-(cl:defconstant VK_FORMAT_ETC2_R8G8B8A1_SRGB_BLOCK #x96)
-(cl:defconstant VK_FORMAT_ETC2_R8G8B8A8_UNORM_BLOCK #x97)
-(cl:defconstant VK_FORMAT_ETC2_R8G8B8A8_SRGB_BLOCK #x98)
-(cl:defconstant VK_FORMAT_EAC_R11_UNORM_BLOCK #x99)
-(cl:defconstant VK_FORMAT_EAC_R11_SNORM_BLOCK #x9A)
-(cl:defconstant VK_FORMAT_EAC_R11G11_UNORM_BLOCK #x9B)
-(cl:defconstant VK_FORMAT_EAC_R11G11_SNORM_BLOCK #x9C)
-(cl:defconstant VK_FORMAT_ASTC_4x4_UNORM_BLOCK #x9D)
-(cl:defconstant VK_FORMAT_ASTC_4x4_SRGB_BLOCK #x9E)
-(cl:defconstant VK_FORMAT_ASTC_5x4_UNORM_BLOCK #x9F)
-(cl:defconstant VK_FORMAT_ASTC_5x4_SRGB_BLOCK #xA0)
-(cl:defconstant VK_FORMAT_ASTC_5x5_UNORM_BLOCK #xA1)
-(cl:defconstant VK_FORMAT_ASTC_5x5_SRGB_BLOCK #xA2)
-(cl:defconstant VK_FORMAT_ASTC_6x5_UNORM_BLOCK #xA3)
-(cl:defconstant VK_FORMAT_ASTC_6x5_SRGB_BLOCK #xA4)
-(cl:defconstant VK_FORMAT_ASTC_6x6_UNORM_BLOCK #xA5)
-(cl:defconstant VK_FORMAT_ASTC_6x6_SRGB_BLOCK #xA6)
-(cl:defconstant VK_FORMAT_ASTC_8x5_UNORM_BLOCK #xA7)
-(cl:defconstant VK_FORMAT_ASTC_8x5_SRGB_BLOCK #xA8)
-(cl:defconstant VK_FORMAT_ASTC_8x6_UNORM_BLOCK #xA9)
-(cl:defconstant VK_FORMAT_ASTC_8x6_SRGB_BLOCK #xAA)
-(cl:defconstant VK_FORMAT_ASTC_8x8_UNORM_BLOCK #xAB)
-(cl:defconstant VK_FORMAT_ASTC_8x8_SRGB_BLOCK #xAC)
-(cl:defconstant VK_FORMAT_ASTC_10x5_UNORM_BLOCK #xAD)
-(cl:defconstant VK_FORMAT_ASTC_10x5_SRGB_BLOCK #xAE)
-(cl:defconstant VK_FORMAT_ASTC_10x6_UNORM_BLOCK #xAF)
-(cl:defconstant VK_FORMAT_ASTC_10x6_SRGB_BLOCK #xB0)
-(cl:defconstant VK_FORMAT_ASTC_10x8_UNORM_BLOCK #xB1)
-(cl:defconstant VK_FORMAT_ASTC_10x8_SRGB_BLOCK #xB2)
-(cl:defconstant VK_FORMAT_ASTC_10x10_UNORM_BLOCK #xB3)
-(cl:defconstant VK_FORMAT_ASTC_10x10_SRGB_BLOCK #xB4)
-(cl:defconstant VK_FORMAT_ASTC_12x10_UNORM_BLOCK #xB5)
-(cl:defconstant VK_FORMAT_ASTC_12x10_SRGB_BLOCK #xB6)
-(cl:defconstant VK_FORMAT_ASTC_12x12_UNORM_BLOCK #xB7)
-(cl:defconstant VK_FORMAT_ASTC_12x12_SRGB_BLOCK #xB8)
-(cl:defconstant VK_FORMAT_PVRTC1_2BPP_UNORM_BLOCK_IMG #x3B9B9CF0) ;; "VK_IMG_format_pvrtc"
-(cl:defconstant VK_FORMAT_PVRTC1_4BPP_UNORM_BLOCK_IMG #x3B9B9CF1) ;; "VK_IMG_format_pvrtc"
-(cl:defconstant VK_FORMAT_PVRTC2_2BPP_UNORM_BLOCK_IMG #x3B9B9CF2) ;; "VK_IMG_format_pvrtc"
-(cl:defconstant VK_FORMAT_PVRTC2_4BPP_UNORM_BLOCK_IMG #x3B9B9CF3) ;; "VK_IMG_format_pvrtc"
-(cl:defconstant VK_FORMAT_PVRTC1_2BPP_SRGB_BLOCK_IMG #x3B9B9CF4) ;; "VK_IMG_format_pvrtc"
-(cl:defconstant VK_FORMAT_PVRTC1_4BPP_SRGB_BLOCK_IMG #x3B9B9CF5) ;; "VK_IMG_format_pvrtc"
-(cl:defconstant VK_FORMAT_PVRTC2_2BPP_SRGB_BLOCK_IMG #x3B9B9CF6) ;; "VK_IMG_format_pvrtc"
-(cl:defconstant VK_FORMAT_PVRTC2_4BPP_SRGB_BLOCK_IMG #x3B9B9CF7) ;; "VK_IMG_format_pvrtc"
+(defconstant VK_FORMAT_UNDEFINED #x0)
+(defconstant VK_FORMAT_R4G4_UNORM_PACK8 #x1)
+(defconstant VK_FORMAT_R4G4B4A4_UNORM_PACK16 #x2)
+(defconstant VK_FORMAT_B4G4R4A4_UNORM_PACK16 #x3)
+(defconstant VK_FORMAT_R5G6B5_UNORM_PACK16 #x4)
+(defconstant VK_FORMAT_B5G6R5_UNORM_PACK16 #x5)
+(defconstant VK_FORMAT_R5G5B5A1_UNORM_PACK16 #x6)
+(defconstant VK_FORMAT_B5G5R5A1_UNORM_PACK16 #x7)
+(defconstant VK_FORMAT_A1R5G5B5_UNORM_PACK16 #x8)
+(defconstant VK_FORMAT_R8_UNORM #x9)
+(defconstant VK_FORMAT_R8_SNORM #xA)
+(defconstant VK_FORMAT_R8_USCALED #xB)
+(defconstant VK_FORMAT_R8_SSCALED #xC)
+(defconstant VK_FORMAT_R8_UINT #xD)
+(defconstant VK_FORMAT_R8_SINT #xE)
+(defconstant VK_FORMAT_R8_SRGB #xF)
+(defconstant VK_FORMAT_R8G8_UNORM #x10)
+(defconstant VK_FORMAT_R8G8_SNORM #x11)
+(defconstant VK_FORMAT_R8G8_USCALED #x12)
+(defconstant VK_FORMAT_R8G8_SSCALED #x13)
+(defconstant VK_FORMAT_R8G8_UINT #x14)
+(defconstant VK_FORMAT_R8G8_SINT #x15)
+(defconstant VK_FORMAT_R8G8_SRGB #x16)
+(defconstant VK_FORMAT_R8G8B8_UNORM #x17)
+(defconstant VK_FORMAT_R8G8B8_SNORM #x18)
+(defconstant VK_FORMAT_R8G8B8_USCALED #x19)
+(defconstant VK_FORMAT_R8G8B8_SSCALED #x1A)
+(defconstant VK_FORMAT_R8G8B8_UINT #x1B)
+(defconstant VK_FORMAT_R8G8B8_SINT #x1C)
+(defconstant VK_FORMAT_R8G8B8_SRGB #x1D)
+(defconstant VK_FORMAT_B8G8R8_UNORM #x1E)
+(defconstant VK_FORMAT_B8G8R8_SNORM #x1F)
+(defconstant VK_FORMAT_B8G8R8_USCALED #x20)
+(defconstant VK_FORMAT_B8G8R8_SSCALED #x21)
+(defconstant VK_FORMAT_B8G8R8_UINT #x22)
+(defconstant VK_FORMAT_B8G8R8_SINT #x23)
+(defconstant VK_FORMAT_B8G8R8_SRGB #x24)
+(defconstant VK_FORMAT_R8G8B8A8_UNORM #x25)
+(defconstant VK_FORMAT_R8G8B8A8_SNORM #x26)
+(defconstant VK_FORMAT_R8G8B8A8_USCALED #x27)
+(defconstant VK_FORMAT_R8G8B8A8_SSCALED #x28)
+(defconstant VK_FORMAT_R8G8B8A8_UINT #x29)
+(defconstant VK_FORMAT_R8G8B8A8_SINT #x2A)
+(defconstant VK_FORMAT_R8G8B8A8_SRGB #x2B)
+(defconstant VK_FORMAT_B8G8R8A8_UNORM #x2C)
+(defconstant VK_FORMAT_B8G8R8A8_SNORM #x2D)
+(defconstant VK_FORMAT_B8G8R8A8_USCALED #x2E)
+(defconstant VK_FORMAT_B8G8R8A8_SSCALED #x2F)
+(defconstant VK_FORMAT_B8G8R8A8_UINT #x30)
+(defconstant VK_FORMAT_B8G8R8A8_SINT #x31)
+(defconstant VK_FORMAT_B8G8R8A8_SRGB #x32)
+(defconstant VK_FORMAT_A8B8G8R8_UNORM_PACK32 #x33)
+(defconstant VK_FORMAT_A8B8G8R8_SNORM_PACK32 #x34)
+(defconstant VK_FORMAT_A8B8G8R8_USCALED_PACK32 #x35)
+(defconstant VK_FORMAT_A8B8G8R8_SSCALED_PACK32 #x36)
+(defconstant VK_FORMAT_A8B8G8R8_UINT_PACK32 #x37)
+(defconstant VK_FORMAT_A8B8G8R8_SINT_PACK32 #x38)
+(defconstant VK_FORMAT_A8B8G8R8_SRGB_PACK32 #x39)
+(defconstant VK_FORMAT_A2R10G10B10_UNORM_PACK32 #x3A)
+(defconstant VK_FORMAT_A2R10G10B10_SNORM_PACK32 #x3B)
+(defconstant VK_FORMAT_A2R10G10B10_USCALED_PACK32 #x3C)
+(defconstant VK_FORMAT_A2R10G10B10_SSCALED_PACK32 #x3D)
+(defconstant VK_FORMAT_A2R10G10B10_UINT_PACK32 #x3E)
+(defconstant VK_FORMAT_A2R10G10B10_SINT_PACK32 #x3F)
+(defconstant VK_FORMAT_A2B10G10R10_UNORM_PACK32 #x40)
+(defconstant VK_FORMAT_A2B10G10R10_SNORM_PACK32 #x41)
+(defconstant VK_FORMAT_A2B10G10R10_USCALED_PACK32 #x42)
+(defconstant VK_FORMAT_A2B10G10R10_SSCALED_PACK32 #x43)
+(defconstant VK_FORMAT_A2B10G10R10_UINT_PACK32 #x44)
+(defconstant VK_FORMAT_A2B10G10R10_SINT_PACK32 #x45)
+(defconstant VK_FORMAT_R16_UNORM #x46)
+(defconstant VK_FORMAT_R16_SNORM #x47)
+(defconstant VK_FORMAT_R16_USCALED #x48)
+(defconstant VK_FORMAT_R16_SSCALED #x49)
+(defconstant VK_FORMAT_R16_UINT #x4A)
+(defconstant VK_FORMAT_R16_SINT #x4B)
+(defconstant VK_FORMAT_R16_SFLOAT #x4C)
+(defconstant VK_FORMAT_R16G16_UNORM #x4D)
+(defconstant VK_FORMAT_R16G16_SNORM #x4E)
+(defconstant VK_FORMAT_R16G16_USCALED #x4F)
+(defconstant VK_FORMAT_R16G16_SSCALED #x50)
+(defconstant VK_FORMAT_R16G16_UINT #x51)
+(defconstant VK_FORMAT_R16G16_SINT #x52)
+(defconstant VK_FORMAT_R16G16_SFLOAT #x53)
+(defconstant VK_FORMAT_R16G16B16_UNORM #x54)
+(defconstant VK_FORMAT_R16G16B16_SNORM #x55)
+(defconstant VK_FORMAT_R16G16B16_USCALED #x56)
+(defconstant VK_FORMAT_R16G16B16_SSCALED #x57)
+(defconstant VK_FORMAT_R16G16B16_UINT #x58)
+(defconstant VK_FORMAT_R16G16B16_SINT #x59)
+(defconstant VK_FORMAT_R16G16B16_SFLOAT #x5A)
+(defconstant VK_FORMAT_R16G16B16A16_UNORM #x5B)
+(defconstant VK_FORMAT_R16G16B16A16_SNORM #x5C)
+(defconstant VK_FORMAT_R16G16B16A16_USCALED #x5D)
+(defconstant VK_FORMAT_R16G16B16A16_SSCALED #x5E)
+(defconstant VK_FORMAT_R16G16B16A16_UINT #x5F)
+(defconstant VK_FORMAT_R16G16B16A16_SINT #x60)
+(defconstant VK_FORMAT_R16G16B16A16_SFLOAT #x61)
+(defconstant VK_FORMAT_R32_UINT #x62)
+(defconstant VK_FORMAT_R32_SINT #x63)
+(defconstant VK_FORMAT_R32_SFLOAT #x64)
+(defconstant VK_FORMAT_R32G32_UINT #x65)
+(defconstant VK_FORMAT_R32G32_SINT #x66)
+(defconstant VK_FORMAT_R32G32_SFLOAT #x67)
+(defconstant VK_FORMAT_R32G32B32_UINT #x68)
+(defconstant VK_FORMAT_R32G32B32_SINT #x69)
+(defconstant VK_FORMAT_R32G32B32_SFLOAT #x6A)
+(defconstant VK_FORMAT_R32G32B32A32_UINT #x6B)
+(defconstant VK_FORMAT_R32G32B32A32_SINT #x6C)
+(defconstant VK_FORMAT_R32G32B32A32_SFLOAT #x6D)
+(defconstant VK_FORMAT_R64_UINT #x6E)
+(defconstant VK_FORMAT_R64_SINT #x6F)
+(defconstant VK_FORMAT_R64_SFLOAT #x70)
+(defconstant VK_FORMAT_R64G64_UINT #x71)
+(defconstant VK_FORMAT_R64G64_SINT #x72)
+(defconstant VK_FORMAT_R64G64_SFLOAT #x73)
+(defconstant VK_FORMAT_R64G64B64_UINT #x74)
+(defconstant VK_FORMAT_R64G64B64_SINT #x75)
+(defconstant VK_FORMAT_R64G64B64_SFLOAT #x76)
+(defconstant VK_FORMAT_R64G64B64A64_UINT #x77)
+(defconstant VK_FORMAT_R64G64B64A64_SINT #x78)
+(defconstant VK_FORMAT_R64G64B64A64_SFLOAT #x79)
+(defconstant VK_FORMAT_B10G11R11_UFLOAT_PACK32 #x7A)
+(defconstant VK_FORMAT_E5B9G9R9_UFLOAT_PACK32 #x7B)
+(defconstant VK_FORMAT_D16_UNORM #x7C)
+(defconstant VK_FORMAT_X8_D24_UNORM_PACK32 #x7D)
+(defconstant VK_FORMAT_D32_SFLOAT #x7E)
+(defconstant VK_FORMAT_S8_UINT #x7F)
+(defconstant VK_FORMAT_D16_UNORM_S8_UINT #x80)
+(defconstant VK_FORMAT_D24_UNORM_S8_UINT #x81)
+(defconstant VK_FORMAT_D32_SFLOAT_S8_UINT #x82)
+(defconstant VK_FORMAT_BC1_RGB_UNORM_BLOCK #x83)
+(defconstant VK_FORMAT_BC1_RGB_SRGB_BLOCK #x84)
+(defconstant VK_FORMAT_BC1_RGBA_UNORM_BLOCK #x85)
+(defconstant VK_FORMAT_BC1_RGBA_SRGB_BLOCK #x86)
+(defconstant VK_FORMAT_BC2_UNORM_BLOCK #x87)
+(defconstant VK_FORMAT_BC2_SRGB_BLOCK #x88)
+(defconstant VK_FORMAT_BC3_UNORM_BLOCK #x89)
+(defconstant VK_FORMAT_BC3_SRGB_BLOCK #x8A)
+(defconstant VK_FORMAT_BC4_UNORM_BLOCK #x8B)
+(defconstant VK_FORMAT_BC4_SNORM_BLOCK #x8C)
+(defconstant VK_FORMAT_BC5_UNORM_BLOCK #x8D)
+(defconstant VK_FORMAT_BC5_SNORM_BLOCK #x8E)
+(defconstant VK_FORMAT_BC6H_UFLOAT_BLOCK #x8F)
+(defconstant VK_FORMAT_BC6H_SFLOAT_BLOCK #x90)
+(defconstant VK_FORMAT_BC7_UNORM_BLOCK #x91)
+(defconstant VK_FORMAT_BC7_SRGB_BLOCK #x92)
+(defconstant VK_FORMAT_ETC2_R8G8B8_UNORM_BLOCK #x93)
+(defconstant VK_FORMAT_ETC2_R8G8B8_SRGB_BLOCK #x94)
+(defconstant VK_FORMAT_ETC2_R8G8B8A1_UNORM_BLOCK #x95)
+(defconstant VK_FORMAT_ETC2_R8G8B8A1_SRGB_BLOCK #x96)
+(defconstant VK_FORMAT_ETC2_R8G8B8A8_UNORM_BLOCK #x97)
+(defconstant VK_FORMAT_ETC2_R8G8B8A8_SRGB_BLOCK #x98)
+(defconstant VK_FORMAT_EAC_R11_UNORM_BLOCK #x99)
+(defconstant VK_FORMAT_EAC_R11_SNORM_BLOCK #x9A)
+(defconstant VK_FORMAT_EAC_R11G11_UNORM_BLOCK #x9B)
+(defconstant VK_FORMAT_EAC_R11G11_SNORM_BLOCK #x9C)
+(defconstant VK_FORMAT_ASTC_4x4_UNORM_BLOCK #x9D)
+(defconstant VK_FORMAT_ASTC_4x4_SRGB_BLOCK #x9E)
+(defconstant VK_FORMAT_ASTC_5x4_UNORM_BLOCK #x9F)
+(defconstant VK_FORMAT_ASTC_5x4_SRGB_BLOCK #xA0)
+(defconstant VK_FORMAT_ASTC_5x5_UNORM_BLOCK #xA1)
+(defconstant VK_FORMAT_ASTC_5x5_SRGB_BLOCK #xA2)
+(defconstant VK_FORMAT_ASTC_6x5_UNORM_BLOCK #xA3)
+(defconstant VK_FORMAT_ASTC_6x5_SRGB_BLOCK #xA4)
+(defconstant VK_FORMAT_ASTC_6x6_UNORM_BLOCK #xA5)
+(defconstant VK_FORMAT_ASTC_6x6_SRGB_BLOCK #xA6)
+(defconstant VK_FORMAT_ASTC_8x5_UNORM_BLOCK #xA7)
+(defconstant VK_FORMAT_ASTC_8x5_SRGB_BLOCK #xA8)
+(defconstant VK_FORMAT_ASTC_8x6_UNORM_BLOCK #xA9)
+(defconstant VK_FORMAT_ASTC_8x6_SRGB_BLOCK #xAA)
+(defconstant VK_FORMAT_ASTC_8x8_UNORM_BLOCK #xAB)
+(defconstant VK_FORMAT_ASTC_8x8_SRGB_BLOCK #xAC)
+(defconstant VK_FORMAT_ASTC_10x5_UNORM_BLOCK #xAD)
+(defconstant VK_FORMAT_ASTC_10x5_SRGB_BLOCK #xAE)
+(defconstant VK_FORMAT_ASTC_10x6_UNORM_BLOCK #xAF)
+(defconstant VK_FORMAT_ASTC_10x6_SRGB_BLOCK #xB0)
+(defconstant VK_FORMAT_ASTC_10x8_UNORM_BLOCK #xB1)
+(defconstant VK_FORMAT_ASTC_10x8_SRGB_BLOCK #xB2)
+(defconstant VK_FORMAT_ASTC_10x10_UNORM_BLOCK #xB3)
+(defconstant VK_FORMAT_ASTC_10x10_SRGB_BLOCK #xB4)
+(defconstant VK_FORMAT_ASTC_12x10_UNORM_BLOCK #xB5)
+(defconstant VK_FORMAT_ASTC_12x10_SRGB_BLOCK #xB6)
+(defconstant VK_FORMAT_ASTC_12x12_UNORM_BLOCK #xB7)
+(defconstant VK_FORMAT_ASTC_12x12_SRGB_BLOCK #xB8)
+(defconstant VK_FORMAT_PVRTC1_2BPP_UNORM_BLOCK_IMG #x3B9B9CF0) ;; "VK_IMG_format_pvrtc"
+(defconstant VK_FORMAT_PVRTC1_4BPP_UNORM_BLOCK_IMG #x3B9B9CF1) ;; "VK_IMG_format_pvrtc"
+(defconstant VK_FORMAT_PVRTC2_2BPP_UNORM_BLOCK_IMG #x3B9B9CF2) ;; "VK_IMG_format_pvrtc"
+(defconstant VK_FORMAT_PVRTC2_4BPP_UNORM_BLOCK_IMG #x3B9B9CF3) ;; "VK_IMG_format_pvrtc"
+(defconstant VK_FORMAT_PVRTC1_2BPP_SRGB_BLOCK_IMG #x3B9B9CF4) ;; "VK_IMG_format_pvrtc"
+(defconstant VK_FORMAT_PVRTC1_4BPP_SRGB_BLOCK_IMG #x3B9B9CF5) ;; "VK_IMG_format_pvrtc"
+(defconstant VK_FORMAT_PVRTC2_2BPP_SRGB_BLOCK_IMG #x3B9B9CF6) ;; "VK_IMG_format_pvrtc"
+(defconstant VK_FORMAT_PVRTC2_4BPP_SRGB_BLOCK_IMG #x3B9B9CF7) ;; "VK_IMG_format_pvrtc"
 
 (cffi:defctype VkFormatFeatureFlagBits :int)
 
-(cl:defconstant VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT #x1) ;; Format can be used for sampled images (SAMPLED_IMAGE and COMBINED_IMAGE_SAMPLER descriptor types)
-(cl:defconstant VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT #x2) ;; Format can be used for storage images (STORAGE_IMAGE descriptor type)
-(cl:defconstant VK_FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT #x4) ;; Format supports atomic operations in case it is used for storage images
-(cl:defconstant VK_FORMAT_FEATURE_UNIFORM_TEXEL_BUFFER_BIT #x8) ;; Format can be used for uniform texel buffers (TBOs)
-(cl:defconstant VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_BIT #x10) ;; Format can be used for storage texel buffers (IBOs)
-(cl:defconstant VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_ATOMIC_BIT #x20) ;; Format supports atomic operations in case it is used for storage texel buffers
-(cl:defconstant VK_FORMAT_FEATURE_VERTEX_BUFFER_BIT #x40) ;; Format can be used for vertex buffers (VBOs)
-(cl:defconstant VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT #x80) ;; Format can be used for color attachment images
-(cl:defconstant VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT #x100) ;; Format supports blending in case it is used for color attachment images
-(cl:defconstant VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT #x200) ;; Format can be used for depth/stencil attachment images
-(cl:defconstant VK_FORMAT_FEATURE_BLIT_SRC_BIT #x400) ;; Format can be used as the source image of blits with vkCmdBlitImage
-(cl:defconstant VK_FORMAT_FEATURE_BLIT_DST_BIT #x800) ;; Format can be used as the destination image of blits with vkCmdBlitImage
-(cl:defconstant VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT #x1000) ;; Format can be filtered with VK_FILTER_LINEAR when being sampled
-(cl:defconstant VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG #x2000) ;; "VK_IMG_filter_cubic"
-(cl:defconstant VK_FORMAT_FEATURE_TRANSFER_SRC_BIT_KHR #x4000) ;; "VK_KHR_maintenance1"
-(cl:defconstant VK_FORMAT_FEATURE_TRANSFER_DST_BIT_KHR #x8000) ;; "VK_KHR_maintenance1"
+(defconstant VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT #x1) ;; Format can be used for sampled images (SAMPLED_IMAGE and COMBINED_IMAGE_SAMPLER descriptor types)
+(defconstant VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT #x2) ;; Format can be used for storage images (STORAGE_IMAGE descriptor type)
+(defconstant VK_FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT #x4) ;; Format supports atomic operations in case it is used for storage images
+(defconstant VK_FORMAT_FEATURE_UNIFORM_TEXEL_BUFFER_BIT #x8) ;; Format can be used for uniform texel buffers (TBOs)
+(defconstant VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_BIT #x10) ;; Format can be used for storage texel buffers (IBOs)
+(defconstant VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_ATOMIC_BIT #x20) ;; Format supports atomic operations in case it is used for storage texel buffers
+(defconstant VK_FORMAT_FEATURE_VERTEX_BUFFER_BIT #x40) ;; Format can be used for vertex buffers (VBOs)
+(defconstant VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT #x80) ;; Format can be used for color attachment images
+(defconstant VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT #x100) ;; Format supports blending in case it is used for color attachment images
+(defconstant VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT #x200) ;; Format can be used for depth/stencil attachment images
+(defconstant VK_FORMAT_FEATURE_BLIT_SRC_BIT #x400) ;; Format can be used as the source image of blits with vkCmdBlitImage
+(defconstant VK_FORMAT_FEATURE_BLIT_DST_BIT #x800) ;; Format can be used as the destination image of blits with vkCmdBlitImage
+(defconstant VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT #x1000) ;; Format can be filtered with VK_FILTER_LINEAR when being sampled
+(defconstant VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG #x2000) ;; "VK_IMG_filter_cubic"
+(defconstant VK_FORMAT_FEATURE_TRANSFER_SRC_BIT_KHR #x4000) ;; "VK_KHR_maintenance1"
+(defconstant VK_FORMAT_FEATURE_TRANSFER_DST_BIT_KHR #x8000) ;; "VK_KHR_maintenance1"
 
 (cffi:defctype VkFrontFace :int)
 
-(cl:defconstant VK_FRONT_FACE_COUNTER_CLOCKWISE #x0)
-(cl:defconstant VK_FRONT_FACE_CLOCKWISE #x1)
+(defconstant VK_FRONT_FACE_COUNTER_CLOCKWISE #x0)
+(defconstant VK_FRONT_FACE_CLOCKWISE #x1)
 
 (cffi:defctype VkImageAspectFlagBits :int)
 
-(cl:defconstant VK_IMAGE_ASPECT_COLOR_BIT #x1)
-(cl:defconstant VK_IMAGE_ASPECT_DEPTH_BIT #x2)
-(cl:defconstant VK_IMAGE_ASPECT_STENCIL_BIT #x4)
-(cl:defconstant VK_IMAGE_ASPECT_METADATA_BIT #x8)
+(defconstant VK_IMAGE_ASPECT_COLOR_BIT #x1)
+(defconstant VK_IMAGE_ASPECT_DEPTH_BIT #x2)
+(defconstant VK_IMAGE_ASPECT_STENCIL_BIT #x4)
+(defconstant VK_IMAGE_ASPECT_METADATA_BIT #x8)
 
 (cffi:defctype VkImageCreateFlagBits :int)
 
-(cl:defconstant VK_IMAGE_CREATE_SPARSE_BINDING_BIT #x1) ;; Image should support sparse backing
-(cl:defconstant VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT #x2) ;; Image should support sparse backing with partial residency
-(cl:defconstant VK_IMAGE_CREATE_SPARSE_ALIASED_BIT #x4) ;; Image should support constent data access to physical memory ranges mapped into multiple locations of sparse images
-(cl:defconstant VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT #x8) ;; Allows image views to have different format than the base image
-(cl:defconstant VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT #x10) ;; Allows creating image views with cube type from the created image
-(cl:defconstant VK_IMAGE_CREATE_BIND_SFR_BIT_KHX #x40) ;; "VK_KHX_device_group"
-(cl:defconstant VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT_KHR #x20) ;; "VK_KHR_maintenance1"
+(defconstant VK_IMAGE_CREATE_SPARSE_BINDING_BIT #x1) ;; Image should support sparse backing
+(defconstant VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT #x2) ;; Image should support sparse backing with partial residency
+(defconstant VK_IMAGE_CREATE_SPARSE_ALIASED_BIT #x4) ;; Image should support constent data access to physical memory ranges mapped into multiple locations of sparse images
+(defconstant VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT #x8) ;; Allows image views to have different format than the base image
+(defconstant VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT #x10) ;; Allows creating image views with cube type from the created image
+(defconstant VK_IMAGE_CREATE_BIND_SFR_BIT_KHX #x40) ;; "VK_KHX_device_group"
+(defconstant VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT_KHR #x20) ;; "VK_KHR_maintenance1"
 
 (cffi:defctype VkImageLayout :int)
 
-(cl:defconstant VK_IMAGE_LAYOUT_UNDEFINED #x0) ;; Implicit layout an image is when its contents are undefined due to various reasons (e.g. right after creation)
-(cl:defconstant VK_IMAGE_LAYOUT_GENERAL #x1) ;; General layout when image can be used for any kind of access
-(cl:defconstant VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL #x2) ;; Optimal layout when image is only used for color attachment read/write
-(cl:defconstant VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL #x3) ;; Optimal layout when image is only used for depth/stencil attachment read/write
-(cl:defconstant VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL #x4) ;; Optimal layout when image is used for read only depth/stencil attachment and shader access
-(cl:defconstant VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL #x5) ;; Optimal layout when image is used for read only shader access
-(cl:defconstant VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL #x6) ;; Optimal layout when image is used only as source of transfer operations
-(cl:defconstant VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL #x7) ;; Optimal layout when image is used only as destination of transfer operations
-(cl:defconstant VK_IMAGE_LAYOUT_PREINITIALIZED #x8) ;; Initial layout used when the data is populated by the CPU
-(cl:defconstant VK_IMAGE_LAYOUT_PRESENT_SRC_KHR #x3B9ACDEA) ;; "VK_KHR_swapchain"
-(cl:defconstant VK_IMAGE_LAYOUT_SHARED_PRESENT_KHR #x3B9C7B98) ;; "VK_KHR_shared_presentable_image"
+(defconstant VK_IMAGE_LAYOUT_UNDEFINED #x0) ;; Implicit layout an image is when its contents are undefined due to various reasons (e.g. right after creation)
+(defconstant VK_IMAGE_LAYOUT_GENERAL #x1) ;; General layout when image can be used for any kind of access
+(defconstant VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL #x2) ;; Optimal layout when image is only used for color attachment read/write
+(defconstant VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL #x3) ;; Optimal layout when image is only used for depth/stencil attachment read/write
+(defconstant VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL #x4) ;; Optimal layout when image is used for read only depth/stencil attachment and shader access
+(defconstant VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL #x5) ;; Optimal layout when image is used for read only shader access
+(defconstant VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL #x6) ;; Optimal layout when image is used only as source of transfer operations
+(defconstant VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL #x7) ;; Optimal layout when image is used only as destination of transfer operations
+(defconstant VK_IMAGE_LAYOUT_PREINITIALIZED #x8) ;; Initial layout used when the data is populated by the CPU
+(defconstant VK_IMAGE_LAYOUT_PRESENT_SRC_KHR #x3B9ACDEA) ;; "VK_KHR_swapchain"
+(defconstant VK_IMAGE_LAYOUT_SHARED_PRESENT_KHR #x3B9C7B98) ;; "VK_KHR_shared_presentable_image"
 
 (cffi:defctype VkImageTiling :int)
 
-(cl:defconstant VK_IMAGE_TILING_OPTIMAL #x0)
-(cl:defconstant VK_IMAGE_TILING_LINEAR #x1)
+(defconstant VK_IMAGE_TILING_OPTIMAL #x0)
+(defconstant VK_IMAGE_TILING_LINEAR #x1)
 
 (cffi:defctype VkImageType :int)
 
-(cl:defconstant VK_IMAGE_TYPE_1D #x0)
-(cl:defconstant VK_IMAGE_TYPE_2D #x1)
-(cl:defconstant VK_IMAGE_TYPE_3D #x2)
+(defconstant VK_IMAGE_TYPE_1D #x0)
+(defconstant VK_IMAGE_TYPE_2D #x1)
+(defconstant VK_IMAGE_TYPE_3D #x2)
 
 (cffi:defctype VkImageUsageFlagBits :int)
 
-(cl:defconstant VK_IMAGE_USAGE_TRANSFER_SRC_BIT #x1) ;; Can be used as a source of transfer operations
-(cl:defconstant VK_IMAGE_USAGE_TRANSFER_DST_BIT #x2) ;; Can be used as a destination of transfer operations
-(cl:defconstant VK_IMAGE_USAGE_SAMPLED_BIT #x4) ;; Can be sampled from (SAMPLED_IMAGE and COMBINED_IMAGE_SAMPLER descriptor types)
-(cl:defconstant VK_IMAGE_USAGE_STORAGE_BIT #x8) ;; Can be used as storage image (STORAGE_IMAGE descriptor type)
-(cl:defconstant VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT #x10) ;; Can be used as framebuffer color attachment
-(cl:defconstant VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT #x20) ;; Can be used as framebuffer depth/stencil attachment
-(cl:defconstant VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT #x40) ;; Image data not needed outside of rendering
-(cl:defconstant VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT #x80) ;; Can be used as framebuffer input attachment
+(defconstant VK_IMAGE_USAGE_TRANSFER_SRC_BIT #x1) ;; Can be used as a source of transfer operations
+(defconstant VK_IMAGE_USAGE_TRANSFER_DST_BIT #x2) ;; Can be used as a destination of transfer operations
+(defconstant VK_IMAGE_USAGE_SAMPLED_BIT #x4) ;; Can be sampled from (SAMPLED_IMAGE and COMBINED_IMAGE_SAMPLER descriptor types)
+(defconstant VK_IMAGE_USAGE_STORAGE_BIT #x8) ;; Can be used as storage image (STORAGE_IMAGE descriptor type)
+(defconstant VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT #x10) ;; Can be used as framebuffer color attachment
+(defconstant VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT #x20) ;; Can be used as framebuffer depth/stencil attachment
+(defconstant VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT #x40) ;; Image data not needed outside of rendering
+(defconstant VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT #x80) ;; Can be used as framebuffer input attachment
 
 (cffi:defctype VkImageViewType :int)
 
-(cl:defconstant VK_IMAGE_VIEW_TYPE_1D #x0)
-(cl:defconstant VK_IMAGE_VIEW_TYPE_2D #x1)
-(cl:defconstant VK_IMAGE_VIEW_TYPE_3D #x2)
-(cl:defconstant VK_IMAGE_VIEW_TYPE_CUBE #x3)
-(cl:defconstant VK_IMAGE_VIEW_TYPE_1D_ARRAY #x4)
-(cl:defconstant VK_IMAGE_VIEW_TYPE_2D_ARRAY #x5)
-(cl:defconstant VK_IMAGE_VIEW_TYPE_CUBE_ARRAY #x6)
+(defconstant VK_IMAGE_VIEW_TYPE_1D #x0)
+(defconstant VK_IMAGE_VIEW_TYPE_2D #x1)
+(defconstant VK_IMAGE_VIEW_TYPE_3D #x2)
+(defconstant VK_IMAGE_VIEW_TYPE_CUBE #x3)
+(defconstant VK_IMAGE_VIEW_TYPE_1D_ARRAY #x4)
+(defconstant VK_IMAGE_VIEW_TYPE_2D_ARRAY #x5)
+(defconstant VK_IMAGE_VIEW_TYPE_CUBE_ARRAY #x6)
 
 (cffi:defctype VkIndexType :int)
 
-(cl:defconstant VK_INDEX_TYPE_UINT16 #x0)
-(cl:defconstant VK_INDEX_TYPE_UINT32 #x1)
+(defconstant VK_INDEX_TYPE_UINT16 #x0)
+(defconstant VK_INDEX_TYPE_UINT32 #x1)
 
 (cffi:defctype VkIndirectCommandsLayoutUsageFlagBitsNVX :int)
 
-(cl:defconstant VK_INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NVX #x1)
-(cl:defconstant VK_INDIRECT_COMMANDS_LAYOUT_USAGE_SPARSE_SEQUENCES_BIT_NVX #x2)
-(cl:defconstant VK_INDIRECT_COMMANDS_LAYOUT_USAGE_EMPTY_EXECUTIONS_BIT_NVX #x4)
-(cl:defconstant VK_INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX #x8)
+(defconstant VK_INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NVX #x1)
+(defconstant VK_INDIRECT_COMMANDS_LAYOUT_USAGE_SPARSE_SEQUENCES_BIT_NVX #x2)
+(defconstant VK_INDIRECT_COMMANDS_LAYOUT_USAGE_EMPTY_EXECUTIONS_BIT_NVX #x4)
+(defconstant VK_INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX #x8)
 
 (cffi:defctype VkIndirectCommandsTokenTypeNVX :int)
 
-(cl:defconstant VK_INDIRECT_COMMANDS_TOKEN_TYPE_PIPELINE_NVX #x0)
-(cl:defconstant VK_INDIRECT_COMMANDS_TOKEN_TYPE_DESCRIPTOR_SET_NVX #x1)
-(cl:defconstant VK_INDIRECT_COMMANDS_TOKEN_TYPE_INDEX_BUFFER_NVX #x2)
-(cl:defconstant VK_INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_NVX #x3)
-(cl:defconstant VK_INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NVX #x4)
-(cl:defconstant VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_INDEXED_NVX #x5)
-(cl:defconstant VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_NVX #x6)
-(cl:defconstant VK_INDIRECT_COMMANDS_TOKEN_TYPE_DISPATCH_NVX #x7)
+(defconstant VK_INDIRECT_COMMANDS_TOKEN_TYPE_PIPELINE_NVX #x0)
+(defconstant VK_INDIRECT_COMMANDS_TOKEN_TYPE_DESCRIPTOR_SET_NVX #x1)
+(defconstant VK_INDIRECT_COMMANDS_TOKEN_TYPE_INDEX_BUFFER_NVX #x2)
+(defconstant VK_INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_NVX #x3)
+(defconstant VK_INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NVX #x4)
+(defconstant VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_INDEXED_NVX #x5)
+(defconstant VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_NVX #x6)
+(defconstant VK_INDIRECT_COMMANDS_TOKEN_TYPE_DISPATCH_NVX #x7)
 
 (cffi:defctype VkInternalAllocationType :int)
 
-(cl:defconstant VK_INTERNAL_ALLOCATION_TYPE_EXECUTABLE #x0)
+(defconstant VK_INTERNAL_ALLOCATION_TYPE_EXECUTABLE #x0)
 
 (cffi:defctype VkLogicOp :int)
 
-(cl:defconstant VK_LOGIC_OP_CLEAR #x0)
-(cl:defconstant VK_LOGIC_OP_AND #x1)
-(cl:defconstant VK_LOGIC_OP_AND_REVERSE #x2)
-(cl:defconstant VK_LOGIC_OP_COPY #x3)
-(cl:defconstant VK_LOGIC_OP_AND_INVERTED #x4)
-(cl:defconstant VK_LOGIC_OP_NO_OP #x5)
-(cl:defconstant VK_LOGIC_OP_XOR #x6)
-(cl:defconstant VK_LOGIC_OP_OR #x7)
-(cl:defconstant VK_LOGIC_OP_NOR #x8)
-(cl:defconstant VK_LOGIC_OP_EQUIVALENT #x9)
-(cl:defconstant VK_LOGIC_OP_INVERT #xA)
-(cl:defconstant VK_LOGIC_OP_OR_REVERSE #xB)
-(cl:defconstant VK_LOGIC_OP_COPY_INVERTED #xC)
-(cl:defconstant VK_LOGIC_OP_OR_INVERTED #xD)
-(cl:defconstant VK_LOGIC_OP_NAND #xE)
-(cl:defconstant VK_LOGIC_OP_SET #xF)
+(defconstant VK_LOGIC_OP_CLEAR #x0)
+(defconstant VK_LOGIC_OP_AND #x1)
+(defconstant VK_LOGIC_OP_AND_REVERSE #x2)
+(defconstant VK_LOGIC_OP_COPY #x3)
+(defconstant VK_LOGIC_OP_AND_INVERTED #x4)
+(defconstant VK_LOGIC_OP_NO_OP #x5)
+(defconstant VK_LOGIC_OP_XOR #x6)
+(defconstant VK_LOGIC_OP_OR #x7)
+(defconstant VK_LOGIC_OP_NOR #x8)
+(defconstant VK_LOGIC_OP_EQUIVALENT #x9)
+(defconstant VK_LOGIC_OP_INVERT #xA)
+(defconstant VK_LOGIC_OP_OR_REVERSE #xB)
+(defconstant VK_LOGIC_OP_COPY_INVERTED #xC)
+(defconstant VK_LOGIC_OP_OR_INVERTED #xD)
+(defconstant VK_LOGIC_OP_NAND #xE)
+(defconstant VK_LOGIC_OP_SET #xF)
 
 (cffi:defctype VkMemoryAllocateFlagBitsKHX :int)
 
-(cl:defconstant VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT_KHX #x1) ;; Force allocation on specific devices
+(defconstant VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT_KHX #x1) ;; Force allocation on specific devices
 
 (cffi:defctype VkMemoryHeapFlagBits :int)
 
-(cl:defconstant VK_MEMORY_HEAP_DEVICE_LOCAL_BIT #x1) ;; If set, heap represents device memory
-(cl:defconstant VK_MEMORY_HEAP_MULTI_INSTANCE_BIT_KHX #x2) ;; "VK_KHX_device_group_creation"
+(defconstant VK_MEMORY_HEAP_DEVICE_LOCAL_BIT #x1) ;; If set, heap represents device memory
+(defconstant VK_MEMORY_HEAP_MULTI_INSTANCE_BIT_KHX #x2) ;; "VK_KHX_device_group_creation"
 
 (cffi:defctype VkMemoryPropertyFlagBits :int)
 
-(cl:defconstant VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT #x1) ;; If otherwise stated, then allocate memory on device
-(cl:defconstant VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT #x2) ;; Memory is mappable by host
-(cl:defconstant VK_MEMORY_PROPERTY_HOST_COHERENT_BIT #x4) ;; Memory will have i/o coherency. If not set, application may need to use vkFlushMappedMemoryRanges and vkInvalidateMappedMemoryRanges to flush/invalidate host cache
-(cl:defconstant VK_MEMORY_PROPERTY_HOST_CACHED_BIT #x8) ;; Memory will be cached by the host
-(cl:defconstant VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT #x10) ;; Memory may be allocated by the driver when it is required
+(defconstant VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT #x1) ;; If otherwise stated, then allocate memory on device
+(defconstant VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT #x2) ;; Memory is mappable by host
+(defconstant VK_MEMORY_PROPERTY_HOST_COHERENT_BIT #x4) ;; Memory will have i/o coherency. If not set, application may need to use vkFlushMappedMemoryRanges and vkInvalidateMappedMemoryRanges to flush/invalidate host cache
+(defconstant VK_MEMORY_PROPERTY_HOST_CACHED_BIT #x8) ;; Memory will be cached by the host
+(defconstant VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT #x10) ;; Memory may be allocated by the driver when it is required
 
 (cffi:defctype VkObjectEntryTypeNVX :int)
 
-(cl:defconstant VK_OBJECT_ENTRY_TYPE_DESCRIPTOR_SET_NVX #x0)
-(cl:defconstant VK_OBJECT_ENTRY_TYPE_PIPELINE_NVX #x1)
-(cl:defconstant VK_OBJECT_ENTRY_TYPE_INDEX_BUFFER_NVX #x2)
-(cl:defconstant VK_OBJECT_ENTRY_TYPE_VERTEX_BUFFER_NVX #x3)
-(cl:defconstant VK_OBJECT_ENTRY_TYPE_PUSH_CONSTANT_NVX #x4)
+(defconstant VK_OBJECT_ENTRY_TYPE_DESCRIPTOR_SET_NVX #x0)
+(defconstant VK_OBJECT_ENTRY_TYPE_PIPELINE_NVX #x1)
+(defconstant VK_OBJECT_ENTRY_TYPE_INDEX_BUFFER_NVX #x2)
+(defconstant VK_OBJECT_ENTRY_TYPE_VERTEX_BUFFER_NVX #x3)
+(defconstant VK_OBJECT_ENTRY_TYPE_PUSH_CONSTANT_NVX #x4)
 
 (cffi:defctype VkObjectEntryUsageFlagBitsNVX :int)
 
-(cl:defconstant VK_OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX #x1)
-(cl:defconstant VK_OBJECT_ENTRY_USAGE_COMPUTE_BIT_NVX #x2)
+(defconstant VK_OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX #x1)
+(defconstant VK_OBJECT_ENTRY_USAGE_COMPUTE_BIT_NVX #x2)
 
 (cffi:defctype VkObjectType :int)
 
-(cl:defconstant VK_OBJECT_TYPE_UNKNOWN #x0)
-(cl:defconstant VK_OBJECT_TYPE_INSTANCE #x1) ;; VkInstance
-(cl:defconstant VK_OBJECT_TYPE_PHYSICAL_DEVICE #x2) ;; VkPhysicalDevice
-(cl:defconstant VK_OBJECT_TYPE_DEVICE #x3) ;; VkDevice
-(cl:defconstant VK_OBJECT_TYPE_QUEUE #x4) ;; VkQueue
-(cl:defconstant VK_OBJECT_TYPE_SEMAPHORE #x5) ;; VkSemaphore
-(cl:defconstant VK_OBJECT_TYPE_COMMAND_BUFFER #x6) ;; VkCommandBuffer
-(cl:defconstant VK_OBJECT_TYPE_FENCE #x7) ;; VkFence
-(cl:defconstant VK_OBJECT_TYPE_DEVICE_MEMORY #x8) ;; VkDeviceMemory
-(cl:defconstant VK_OBJECT_TYPE_BUFFER #x9) ;; VkBuffer
-(cl:defconstant VK_OBJECT_TYPE_IMAGE #xA) ;; VkImage
-(cl:defconstant VK_OBJECT_TYPE_EVENT #xB) ;; VkEvent
-(cl:defconstant VK_OBJECT_TYPE_QUERY_POOL #xC) ;; VkQueryPool
-(cl:defconstant VK_OBJECT_TYPE_BUFFER_VIEW #xD) ;; VkBufferView
-(cl:defconstant VK_OBJECT_TYPE_IMAGE_VIEW #xE) ;; VkImageView
-(cl:defconstant VK_OBJECT_TYPE_SHADER_MODULE #xF) ;; VkShaderModule
-(cl:defconstant VK_OBJECT_TYPE_PIPELINE_CACHE #x10) ;; VkPipelineCache
-(cl:defconstant VK_OBJECT_TYPE_PIPELINE_LAYOUT #x11) ;; VkPipelineLayout
-(cl:defconstant VK_OBJECT_TYPE_RENDER_PASS #x12) ;; VkRenderPass
-(cl:defconstant VK_OBJECT_TYPE_PIPELINE #x13) ;; VkPipeline
-(cl:defconstant VK_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT #x14) ;; VkDescriptorSetLayout
-(cl:defconstant VK_OBJECT_TYPE_SAMPLER #x15) ;; VkSampler
-(cl:defconstant VK_OBJECT_TYPE_DESCRIPTOR_POOL #x16) ;; VkDescriptorPool
-(cl:defconstant VK_OBJECT_TYPE_DESCRIPTOR_SET #x17) ;; VkDescriptorSet
-(cl:defconstant VK_OBJECT_TYPE_FRAMEBUFFER #x18) ;; VkFramebuffer
-(cl:defconstant VK_OBJECT_TYPE_COMMAND_POOL #x19) ;; VkCommandPool
-(cl:defconstant VK_OBJECT_TYPE_SURFACE_KHR #x3B9ACA00) ;; "VK_KHR_surface"
-(cl:defconstant VK_OBJECT_TYPE_SWAPCHAIN_KHR #x3B9ACDE8) ;; "VK_KHR_swapchain"
-(cl:defconstant VK_OBJECT_TYPE_DISPLAY_KHR #x3B9AD1D0) ;; "VK_KHR_display"
-(cl:defconstant VK_OBJECT_TYPE_DISPLAY_MODE_KHR #x3B9AD1D1) ;; "VK_KHR_display"
-(cl:defconstant VK_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT #x3B9AF4F8) ;; "VK_EXT_debug_report"
-(cl:defconstant VK_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR #x3B9C1608) ;; "VK_KHR_descriptor_update_template"
-(cl:defconstant VK_OBJECT_TYPE_OBJECT_TABLE_NVX #x3B9C19F0) ;; "VK_NVX_device_generated_commands"
-(cl:defconstant VK_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX #x3B9C19F1) ;; "VK_NVX_device_generated_commands"
+(defconstant VK_OBJECT_TYPE_UNKNOWN #x0)
+(defconstant VK_OBJECT_TYPE_INSTANCE #x1) ;; VkInstance
+(defconstant VK_OBJECT_TYPE_PHYSICAL_DEVICE #x2) ;; VkPhysicalDevice
+(defconstant VK_OBJECT_TYPE_DEVICE #x3) ;; VkDevice
+(defconstant VK_OBJECT_TYPE_QUEUE #x4) ;; VkQueue
+(defconstant VK_OBJECT_TYPE_SEMAPHORE #x5) ;; VkSemaphore
+(defconstant VK_OBJECT_TYPE_COMMAND_BUFFER #x6) ;; VkCommandBuffer
+(defconstant VK_OBJECT_TYPE_FENCE #x7) ;; VkFence
+(defconstant VK_OBJECT_TYPE_DEVICE_MEMORY #x8) ;; VkDeviceMemory
+(defconstant VK_OBJECT_TYPE_BUFFER #x9) ;; VkBuffer
+(defconstant VK_OBJECT_TYPE_IMAGE #xA) ;; VkImage
+(defconstant VK_OBJECT_TYPE_EVENT #xB) ;; VkEvent
+(defconstant VK_OBJECT_TYPE_QUERY_POOL #xC) ;; VkQueryPool
+(defconstant VK_OBJECT_TYPE_BUFFER_VIEW #xD) ;; VkBufferView
+(defconstant VK_OBJECT_TYPE_IMAGE_VIEW #xE) ;; VkImageView
+(defconstant VK_OBJECT_TYPE_SHADER_MODULE #xF) ;; VkShaderModule
+(defconstant VK_OBJECT_TYPE_PIPELINE_CACHE #x10) ;; VkPipelineCache
+(defconstant VK_OBJECT_TYPE_PIPELINE_LAYOUT #x11) ;; VkPipelineLayout
+(defconstant VK_OBJECT_TYPE_RENDER_PASS #x12) ;; VkRenderPass
+(defconstant VK_OBJECT_TYPE_PIPELINE #x13) ;; VkPipeline
+(defconstant VK_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT #x14) ;; VkDescriptorSetLayout
+(defconstant VK_OBJECT_TYPE_SAMPLER #x15) ;; VkSampler
+(defconstant VK_OBJECT_TYPE_DESCRIPTOR_POOL #x16) ;; VkDescriptorPool
+(defconstant VK_OBJECT_TYPE_DESCRIPTOR_SET #x17) ;; VkDescriptorSet
+(defconstant VK_OBJECT_TYPE_FRAMEBUFFER #x18) ;; VkFramebuffer
+(defconstant VK_OBJECT_TYPE_COMMAND_POOL #x19) ;; VkCommandPool
+(defconstant VK_OBJECT_TYPE_SURFACE_KHR #x3B9ACA00) ;; "VK_KHR_surface"
+(defconstant VK_OBJECT_TYPE_SWAPCHAIN_KHR #x3B9ACDE8) ;; "VK_KHR_swapchain"
+(defconstant VK_OBJECT_TYPE_DISPLAY_KHR #x3B9AD1D0) ;; "VK_KHR_display"
+(defconstant VK_OBJECT_TYPE_DISPLAY_MODE_KHR #x3B9AD1D1) ;; "VK_KHR_display"
+(defconstant VK_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT #x3B9AF4F8) ;; "VK_EXT_debug_report"
+(defconstant VK_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR #x3B9C1608) ;; "VK_KHR_descriptor_update_template"
+(defconstant VK_OBJECT_TYPE_OBJECT_TABLE_NVX #x3B9C19F0) ;; "VK_NVX_device_generated_commands"
+(defconstant VK_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX #x3B9C19F1) ;; "VK_NVX_device_generated_commands"
 
 (cffi:defctype VkPeerMemoryFeatureFlagBitsKHX :int)
 
-(cl:defconstant VK_PEER_MEMORY_FEATURE_COPY_SRC_BIT_KHX #x1) ;; Can read with vkCmdCopy commands
-(cl:defconstant VK_PEER_MEMORY_FEATURE_COPY_DST_BIT_KHX #x2) ;; Can write with vkCmdCopy commands
-(cl:defconstant VK_PEER_MEMORY_FEATURE_GENERIC_SRC_BIT_KHX #x4) ;; Can read with any access type/command
-(cl:defconstant VK_PEER_MEMORY_FEATURE_GENERIC_DST_BIT_KHX #x8) ;; Can write with and access type/command
+(defconstant VK_PEER_MEMORY_FEATURE_COPY_SRC_BIT_KHX #x1) ;; Can read with vkCmdCopy commands
+(defconstant VK_PEER_MEMORY_FEATURE_COPY_DST_BIT_KHX #x2) ;; Can write with vkCmdCopy commands
+(defconstant VK_PEER_MEMORY_FEATURE_GENERIC_SRC_BIT_KHX #x4) ;; Can read with any access type/command
+(defconstant VK_PEER_MEMORY_FEATURE_GENERIC_DST_BIT_KHX #x8) ;; Can write with and access type/command
 
 (cffi:defctype VkPhysicalDeviceType :int)
 
-(cl:defconstant VK_PHYSICAL_DEVICE_TYPE_OTHER #x0)
-(cl:defconstant VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU #x1)
-(cl:defconstant VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU #x2)
-(cl:defconstant VK_PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU #x3)
-(cl:defconstant VK_PHYSICAL_DEVICE_TYPE_CPU #x4)
+(defconstant VK_PHYSICAL_DEVICE_TYPE_OTHER #x0)
+(defconstant VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU #x1)
+(defconstant VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU #x2)
+(defconstant VK_PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU #x3)
+(defconstant VK_PHYSICAL_DEVICE_TYPE_CPU #x4)
 
 (cffi:defctype VkPipelineBindPoint :int)
 
-(cl:defconstant VK_PIPELINE_BIND_POINT_GRAPHICS #x0)
-(cl:defconstant VK_PIPELINE_BIND_POINT_COMPUTE #x1)
+(defconstant VK_PIPELINE_BIND_POINT_GRAPHICS #x0)
+(defconstant VK_PIPELINE_BIND_POINT_COMPUTE #x1)
 
 (cffi:defctype VkPipelineCacheHeaderVersion :int)
 
-(cl:defconstant VK_PIPELINE_CACHE_HEADER_VERSION_ONE #x1)
+(defconstant VK_PIPELINE_CACHE_HEADER_VERSION_ONE #x1)
 
 (cffi:defctype VkPipelineCreateFlagBits :int)
 
-(cl:defconstant VK_PIPELINE_CREATE_DISABLE_OPTIMIZATION_BIT #x1)
-(cl:defconstant VK_PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT #x2)
-(cl:defconstant VK_PIPELINE_CREATE_DERIVATIVE_BIT #x4)
-(cl:defconstant VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT_KHX #x8) ;; "VK_KHX_device_group"
-(cl:defconstant VK_PIPELINE_CREATE_DISPATCH_BASE_KHX #x10) ;; "VK_KHX_device_group"
+(defconstant VK_PIPELINE_CREATE_DISABLE_OPTIMIZATION_BIT #x1)
+(defconstant VK_PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT #x2)
+(defconstant VK_PIPELINE_CREATE_DERIVATIVE_BIT #x4)
+(defconstant VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT_KHX #x8) ;; "VK_KHX_device_group"
+(defconstant VK_PIPELINE_CREATE_DISPATCH_BASE_KHX #x10) ;; "VK_KHX_device_group"
 
 (cffi:defctype VkPipelineStageFlagBits :int)
 
-(cl:defconstant VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT #x1) ;; Before subsequent commands are processed
-(cl:defconstant VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT #x2) ;; Draw/DispatchIndirect command fetch
-(cl:defconstant VK_PIPELINE_STAGE_VERTEX_INPUT_BIT #x4) ;; Vertex/index fetch
-(cl:defconstant VK_PIPELINE_STAGE_VERTEX_SHADER_BIT #x8) ;; Vertex shading
-(cl:defconstant VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT #x10) ;; Tessellation control shading
-(cl:defconstant VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT #x20) ;; Tessellation evaluation shading
-(cl:defconstant VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT #x40) ;; Geometry shading
-(cl:defconstant VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT #x80) ;; Fragment shading
-(cl:defconstant VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT #x100) ;; Early fragment (depth and stencil) tests
-(cl:defconstant VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT #x200) ;; Late fragment (depth and stencil) tests
-(cl:defconstant VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT #x400) ;; Color attachment writes
-(cl:defconstant VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT #x800) ;; Compute shading
-(cl:defconstant VK_PIPELINE_STAGE_TRANSFER_BIT #x1000) ;; Transfer/copy operations
-(cl:defconstant VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT #x2000) ;; After previous commands have completed
-(cl:defconstant VK_PIPELINE_STAGE_HOST_BIT #x4000) ;; Indicates host (CPU) is a source/sink of the dependency
-(cl:defconstant VK_PIPELINE_STAGE_ALL_GRAPHICS_BIT #x8000) ;; All stages of the graphics pipeline
-(cl:defconstant VK_PIPELINE_STAGE_ALL_COMMANDS_BIT #x10000) ;; All stages supported on the queue
-(cl:defconstant VK_PIPELINE_STAGE_COMMAND_PROCESS_BIT_NVX #x20000) ;; "VK_NVX_device_generated_commands"
+(defconstant VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT #x1) ;; Before subsequent commands are processed
+(defconstant VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT #x2) ;; Draw/DispatchIndirect command fetch
+(defconstant VK_PIPELINE_STAGE_VERTEX_INPUT_BIT #x4) ;; Vertex/index fetch
+(defconstant VK_PIPELINE_STAGE_VERTEX_SHADER_BIT #x8) ;; Vertex shading
+(defconstant VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT #x10) ;; Tessellation control shading
+(defconstant VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT #x20) ;; Tessellation evaluation shading
+(defconstant VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT #x40) ;; Geometry shading
+(defconstant VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT #x80) ;; Fragment shading
+(defconstant VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT #x100) ;; Early fragment (depth and stencil) tests
+(defconstant VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT #x200) ;; Late fragment (depth and stencil) tests
+(defconstant VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT #x400) ;; Color attachment writes
+(defconstant VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT #x800) ;; Compute shading
+(defconstant VK_PIPELINE_STAGE_TRANSFER_BIT #x1000) ;; Transfer/copy operations
+(defconstant VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT #x2000) ;; After previous commands have completed
+(defconstant VK_PIPELINE_STAGE_HOST_BIT #x4000) ;; Indicates host (CPU) is a source/sink of the dependency
+(defconstant VK_PIPELINE_STAGE_ALL_GRAPHICS_BIT #x8000) ;; All stages of the graphics pipeline
+(defconstant VK_PIPELINE_STAGE_ALL_COMMANDS_BIT #x10000) ;; All stages supported on the queue
+(defconstant VK_PIPELINE_STAGE_COMMAND_PROCESS_BIT_NVX #x20000) ;; "VK_NVX_device_generated_commands"
 
 (cffi:defctype VkPolygonMode :int)
 
-(cl:defconstant VK_POLYGON_MODE_FILL #x0)
-(cl:defconstant VK_POLYGON_MODE_LINE #x1)
-(cl:defconstant VK_POLYGON_MODE_POINT #x2)
+(defconstant VK_POLYGON_MODE_FILL #x0)
+(defconstant VK_POLYGON_MODE_LINE #x1)
+(defconstant VK_POLYGON_MODE_POINT #x2)
 
 (cffi:defctype VkPresentModeKHR :int)
 
-(cl:defconstant VK_PRESENT_MODE_IMMEDIATE_KHR #x0)
-(cl:defconstant VK_PRESENT_MODE_MAILBOX_KHR #x1)
-(cl:defconstant VK_PRESENT_MODE_FIFO_KHR #x2)
-(cl:defconstant VK_PRESENT_MODE_FIFO_RELAXED_KHR #x3)
-(cl:defconstant VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR #x3B9C7B98) ;; "VK_KHR_shared_presentable_image"
-(cl:defconstant VK_PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR #x3B9C7B99) ;; "VK_KHR_shared_presentable_image"
+(defconstant VK_PRESENT_MODE_IMMEDIATE_KHR #x0)
+(defconstant VK_PRESENT_MODE_MAILBOX_KHR #x1)
+(defconstant VK_PRESENT_MODE_FIFO_KHR #x2)
+(defconstant VK_PRESENT_MODE_FIFO_RELAXED_KHR #x3)
+(defconstant VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR #x3B9C7B98) ;; "VK_KHR_shared_presentable_image"
+(defconstant VK_PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR #x3B9C7B99) ;; "VK_KHR_shared_presentable_image"
 
 (cffi:defctype VkPrimitiveTopology :int)
 
-(cl:defconstant VK_PRIMITIVE_TOPOLOGY_POINT_LIST #x0)
-(cl:defconstant VK_PRIMITIVE_TOPOLOGY_LINE_LIST #x1)
-(cl:defconstant VK_PRIMITIVE_TOPOLOGY_LINE_STRIP #x2)
-(cl:defconstant VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST #x3)
-(cl:defconstant VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP #x4)
-(cl:defconstant VK_PRIMITIVE_TOPOLOGY_TRIANGLE_FAN #x5)
-(cl:defconstant VK_PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY #x6)
-(cl:defconstant VK_PRIMITIVE_TOPOLOGY_LINE_STRIP_WITH_ADJACENCY #x7)
-(cl:defconstant VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY #x8)
-(cl:defconstant VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY #x9)
-(cl:defconstant VK_PRIMITIVE_TOPOLOGY_PATCH_LIST #xA)
+(defconstant VK_PRIMITIVE_TOPOLOGY_POINT_LIST #x0)
+(defconstant VK_PRIMITIVE_TOPOLOGY_LINE_LIST #x1)
+(defconstant VK_PRIMITIVE_TOPOLOGY_LINE_STRIP #x2)
+(defconstant VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST #x3)
+(defconstant VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP #x4)
+(defconstant VK_PRIMITIVE_TOPOLOGY_TRIANGLE_FAN #x5)
+(defconstant VK_PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY #x6)
+(defconstant VK_PRIMITIVE_TOPOLOGY_LINE_STRIP_WITH_ADJACENCY #x7)
+(defconstant VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY #x8)
+(defconstant VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY #x9)
+(defconstant VK_PRIMITIVE_TOPOLOGY_PATCH_LIST #xA)
 
 (cffi:defctype VkQueryControlFlagBits :int)
 
-(cl:defconstant VK_QUERY_CONTROL_PRECISE_BIT #x1) ;; Require precise results to be collected by the query
+(defconstant VK_QUERY_CONTROL_PRECISE_BIT #x1) ;; Require precise results to be collected by the query
 
 (cffi:defctype VkQueryPipelineStatisticFlagBits :int)
 
-(cl:defconstant VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_VERTICES_BIT #x1) ;; Optional
-(cl:defconstant VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_PRIMITIVES_BIT #x2) ;; Optional
-(cl:defconstant VK_QUERY_PIPELINE_STATISTIC_VERTEX_SHADER_INVOCATIONS_BIT #x4) ;; Optional
-(cl:defconstant VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_INVOCATIONS_BIT #x8) ;; Optional
-(cl:defconstant VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_PRIMITIVES_BIT #x10) ;; Optional
-(cl:defconstant VK_QUERY_PIPELINE_STATISTIC_CLIPPING_INVOCATIONS_BIT #x20) ;; Optional
-(cl:defconstant VK_QUERY_PIPELINE_STATISTIC_CLIPPING_PRIMITIVES_BIT #x40) ;; Optional
-(cl:defconstant VK_QUERY_PIPELINE_STATISTIC_FRAGMENT_SHADER_INVOCATIONS_BIT #x80) ;; Optional
-(cl:defconstant VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_CONTROL_SHADER_PATCHES_BIT #x100) ;; Optional
-(cl:defconstant VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT #x200) ;; Optional
-(cl:defconstant VK_QUERY_PIPELINE_STATISTIC_COMPUTE_SHADER_INVOCATIONS_BIT #x400) ;; Optional
+(defconstant VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_VERTICES_BIT #x1) ;; Optional
+(defconstant VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_PRIMITIVES_BIT #x2) ;; Optional
+(defconstant VK_QUERY_PIPELINE_STATISTIC_VERTEX_SHADER_INVOCATIONS_BIT #x4) ;; Optional
+(defconstant VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_INVOCATIONS_BIT #x8) ;; Optional
+(defconstant VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_PRIMITIVES_BIT #x10) ;; Optional
+(defconstant VK_QUERY_PIPELINE_STATISTIC_CLIPPING_INVOCATIONS_BIT #x20) ;; Optional
+(defconstant VK_QUERY_PIPELINE_STATISTIC_CLIPPING_PRIMITIVES_BIT #x40) ;; Optional
+(defconstant VK_QUERY_PIPELINE_STATISTIC_FRAGMENT_SHADER_INVOCATIONS_BIT #x80) ;; Optional
+(defconstant VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_CONTROL_SHADER_PATCHES_BIT #x100) ;; Optional
+(defconstant VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT #x200) ;; Optional
+(defconstant VK_QUERY_PIPELINE_STATISTIC_COMPUTE_SHADER_INVOCATIONS_BIT #x400) ;; Optional
 
 (cffi:defctype VkQueryResultFlagBits :int)
 
-(cl:defconstant VK_QUERY_RESULT_64_BIT #x1) ;; Results of the queries are written to the destination buffer as 64-bit values
-(cl:defconstant VK_QUERY_RESULT_WAIT_BIT #x2) ;; Results of the queries are waited on before proceeding with the result copy
-(cl:defconstant VK_QUERY_RESULT_WITH_AVAILABILITY_BIT #x4) ;; Besides the results of the query, the availability of the results is also written
-(cl:defconstant VK_QUERY_RESULT_PARTIAL_BIT #x8) ;; Copy the partial results of the query even if the final results are not available
+(defconstant VK_QUERY_RESULT_64_BIT #x1) ;; Results of the queries are written to the destination buffer as 64-bit values
+(defconstant VK_QUERY_RESULT_WAIT_BIT #x2) ;; Results of the queries are waited on before proceeding with the result copy
+(defconstant VK_QUERY_RESULT_WITH_AVAILABILITY_BIT #x4) ;; Besides the results of the query, the availability of the results is also written
+(defconstant VK_QUERY_RESULT_PARTIAL_BIT #x8) ;; Copy the partial results of the query even if the final results are not available
 
 (cffi:defctype VkQueryType :int)
 
-(cl:defconstant VK_QUERY_TYPE_OCCLUSION #x0)
-(cl:defconstant VK_QUERY_TYPE_PIPELINE_STATISTICS #x1) ;; Optional
-(cl:defconstant VK_QUERY_TYPE_TIMESTAMP #x2)
+(defconstant VK_QUERY_TYPE_OCCLUSION #x0)
+(defconstant VK_QUERY_TYPE_PIPELINE_STATISTICS #x1) ;; Optional
+(defconstant VK_QUERY_TYPE_TIMESTAMP #x2)
 
 (cffi:defctype VkQueueFlagBits :int)
 
-(cl:defconstant VK_QUEUE_GRAPHICS_BIT #x1) ;; Queue supports graphics operations
-(cl:defconstant VK_QUEUE_COMPUTE_BIT #x2) ;; Queue supports compute operations
-(cl:defconstant VK_QUEUE_TRANSFER_BIT #x4) ;; Queue supports transfer operations
-(cl:defconstant VK_QUEUE_SPARSE_BINDING_BIT #x8) ;; Queue supports sparse resource memory management operations
+(defconstant VK_QUEUE_GRAPHICS_BIT #x1) ;; Queue supports graphics operations
+(defconstant VK_QUEUE_COMPUTE_BIT #x2) ;; Queue supports compute operations
+(defconstant VK_QUEUE_TRANSFER_BIT #x4) ;; Queue supports transfer operations
+(defconstant VK_QUEUE_SPARSE_BINDING_BIT #x8) ;; Queue supports sparse resource memory management operations
 
 (cffi:defctype VkRasterizationOrderAMD :int)
 
-(cl:defconstant VK_RASTERIZATION_ORDER_STRICT_AMD #x0)
-(cl:defconstant VK_RASTERIZATION_ORDER_RELAXED_AMD #x1)
+(defconstant VK_RASTERIZATION_ORDER_STRICT_AMD #x0)
+(defconstant VK_RASTERIZATION_ORDER_RELAXED_AMD #x1)
 
 (cffi:defctype VkResult :int)
 
-(cl:defconstant VK_SUCCESS #x0) ;; Command completed successfully
-(cl:defconstant VK_NOT_READY #x1) ;; A fence or query has not yet completed
-(cl:defconstant VK_TIMEOUT #x2) ;; A wait operation has not completed in the specified time
-(cl:defconstant VK_EVENT_SET #x3) ;; An event is signaled
-(cl:defconstant VK_EVENT_RESET #x4) ;; An event is unsignaled
-(cl:defconstant VK_INCOMPLETE #x5) ;; A return array was too small for the result
-(cl:defconstant VK_ERROR_OUT_OF_HOST_MEMORY -1) ;; A host memory allocation has failed
-(cl:defconstant VK_ERROR_OUT_OF_DEVICE_MEMORY -2) ;; A device memory allocation has failed
-(cl:defconstant VK_ERROR_INITIALIZATION_FAILED -3) ;; Initialization of a object has failed
-(cl:defconstant VK_ERROR_DEVICE_LOST -4) ;; The logical device has been lost. See <<devsandqueues-lost-device>>
-(cl:defconstant VK_ERROR_MEMORY_MAP_FAILED -5) ;; Mapping of a memory object has failed
-(cl:defconstant VK_ERROR_LAYER_NOT_PRESENT -6) ;; Layer specified does not exist
-(cl:defconstant VK_ERROR_EXTENSION_NOT_PRESENT -7) ;; Extension specified does not exist
-(cl:defconstant VK_ERROR_FEATURE_NOT_PRESENT -8) ;; Requested feature is not available on this device
-(cl:defconstant VK_ERROR_INCOMPATIBLE_DRIVER -9) ;; Unable to find a Vulkan driver
-(cl:defconstant VK_ERROR_TOO_MANY_OBJECTS -10) ;; Too many objects of the type have already been created
-(cl:defconstant VK_ERROR_FORMAT_NOT_SUPPORTED -11) ;; Requested format is not supported on this device
-(cl:defconstant VK_ERROR_FRAGMENTED_POOL -12) ;; A requested pool allocation has failed due to fragmentation of the pool's memory
-(cl:defconstant VK_ERROR_SURFACE_LOST_KHR -1000000000) ;; "VK_KHR_surface"
-(cl:defconstant VK_ERROR_NATIVE_WINDOW_IN_USE_KHR -1000000001) ;; "VK_KHR_surface"
-(cl:defconstant VK_SUBOPTIMAL_KHR #x3B9ACDEB) ;; "VK_KHR_swapchain"
-(cl:defconstant VK_ERROR_OUT_OF_DATE_KHR -1000001004) ;; "VK_KHR_swapchain"
-(cl:defconstant VK_ERROR_INCOMPATIBLE_DISPLAY_KHR -1000003001) ;; "VK_KHR_display_swapchain"
-(cl:defconstant VK_ERROR_VALIDATION_FAILED_EXT -1000011001) ;; "VK_EXT_debug_report"
-(cl:defconstant VK_ERROR_INVALID_SHADER_NV -1000012000) ;; "VK_NV_glsl_shader"
-(cl:defconstant VK_NV_EXTENSION_1_ERROR -1000013000) ;; "VK_NV_extension_1"
-(cl:defconstant VK_ERROR_OUT_OF_POOL_MEMORY_KHR -1000069000) ;; "VK_KHR_maintenance1"
-(cl:defconstant VK_ERROR_INVALID_EXTERNAL_HANDLE_KHX -1000072003) ;; "VK_KHX_external_memory"
+(defconstant VK_SUCCESS #x0) ;; Command completed successfully
+(defconstant VK_NOT_READY #x1) ;; A fence or query has not yet completed
+(defconstant VK_TIMEOUT #x2) ;; A wait operation has not completed in the specified time
+(defconstant VK_EVENT_SET #x3) ;; An event is signaled
+(defconstant VK_EVENT_RESET #x4) ;; An event is unsignaled
+(defconstant VK_INCOMPLETE #x5) ;; A return array was too small for the result
+(defconstant VK_ERROR_OUT_OF_HOST_MEMORY -1) ;; A host memory allocation has failed
+(defconstant VK_ERROR_OUT_OF_DEVICE_MEMORY -2) ;; A device memory allocation has failed
+(defconstant VK_ERROR_INITIALIZATION_FAILED -3) ;; Initialization of a object has failed
+(defconstant VK_ERROR_DEVICE_LOST -4) ;; The logical device has been lost. See <<devsandqueues-lost-device>>
+(defconstant VK_ERROR_MEMORY_MAP_FAILED -5) ;; Mapping of a memory object has failed
+(defconstant VK_ERROR_LAYER_NOT_PRESENT -6) ;; Layer specified does not exist
+(defconstant VK_ERROR_EXTENSION_NOT_PRESENT -7) ;; Extension specified does not exist
+(defconstant VK_ERROR_FEATURE_NOT_PRESENT -8) ;; Requested feature is not available on this device
+(defconstant VK_ERROR_INCOMPATIBLE_DRIVER -9) ;; Unable to find a Vulkan driver
+(defconstant VK_ERROR_TOO_MANY_OBJECTS -10) ;; Too many objects of the type have already been created
+(defconstant VK_ERROR_FORMAT_NOT_SUPPORTED -11) ;; Requested format is not supported on this device
+(defconstant VK_ERROR_FRAGMENTED_POOL -12) ;; A requested pool allocation has failed due to fragmentation of the pool's memory
+(defconstant VK_ERROR_SURFACE_LOST_KHR -1000000000) ;; "VK_KHR_surface"
+(defconstant VK_ERROR_NATIVE_WINDOW_IN_USE_KHR -1000000001) ;; "VK_KHR_surface"
+(defconstant VK_SUBOPTIMAL_KHR #x3B9ACDEB) ;; "VK_KHR_swapchain"
+(defconstant VK_ERROR_OUT_OF_DATE_KHR -1000001004) ;; "VK_KHR_swapchain"
+(defconstant VK_ERROR_INCOMPATIBLE_DISPLAY_KHR -1000003001) ;; "VK_KHR_display_swapchain"
+(defconstant VK_ERROR_VALIDATION_FAILED_EXT -1000011001) ;; "VK_EXT_debug_report"
+(defconstant VK_ERROR_INVALID_SHADER_NV -1000012000) ;; "VK_NV_glsl_shader"
+(defconstant VK_NV_EXTENSION_1_ERROR -1000013000) ;; "VK_NV_extension_1"
+(defconstant VK_ERROR_OUT_OF_POOL_MEMORY_KHR -1000069000) ;; "VK_KHR_maintenance1"
+(defconstant VK_ERROR_INVALID_EXTERNAL_HANDLE_KHX -1000072003) ;; "VK_KHX_external_memory"
 
 (cffi:defctype VkSampleCountFlagBits :int)
 
-(cl:defconstant VK_SAMPLE_COUNT_1_BIT #x1) ;; Sample count 1 supported
-(cl:defconstant VK_SAMPLE_COUNT_2_BIT #x2) ;; Sample count 2 supported
-(cl:defconstant VK_SAMPLE_COUNT_4_BIT #x4) ;; Sample count 4 supported
-(cl:defconstant VK_SAMPLE_COUNT_8_BIT #x8) ;; Sample count 8 supported
-(cl:defconstant VK_SAMPLE_COUNT_16_BIT #x10) ;; Sample count 16 supported
-(cl:defconstant VK_SAMPLE_COUNT_32_BIT #x20) ;; Sample count 32 supported
-(cl:defconstant VK_SAMPLE_COUNT_64_BIT #x40) ;; Sample count 64 supported
+(defconstant VK_SAMPLE_COUNT_1_BIT #x1) ;; Sample count 1 supported
+(defconstant VK_SAMPLE_COUNT_2_BIT #x2) ;; Sample count 2 supported
+(defconstant VK_SAMPLE_COUNT_4_BIT #x4) ;; Sample count 4 supported
+(defconstant VK_SAMPLE_COUNT_8_BIT #x8) ;; Sample count 8 supported
+(defconstant VK_SAMPLE_COUNT_16_BIT #x10) ;; Sample count 16 supported
+(defconstant VK_SAMPLE_COUNT_32_BIT #x20) ;; Sample count 32 supported
+(defconstant VK_SAMPLE_COUNT_64_BIT #x40) ;; Sample count 64 supported
 
 (cffi:defctype VkSamplerAddressMode :int)
 
-(cl:defconstant VK_SAMPLER_ADDRESS_MODE_REPEAT #x0)
-(cl:defconstant VK_SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT #x1)
-(cl:defconstant VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE #x2)
-(cl:defconstant VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER #x3)
-(cl:defconstant VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE #x4) ;; "VK_KHR_sampler_mirror_clamp_to_edge"
+(defconstant VK_SAMPLER_ADDRESS_MODE_REPEAT #x0)
+(defconstant VK_SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT #x1)
+(defconstant VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE #x2)
+(defconstant VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER #x3)
+(defconstant VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE #x4) ;; "VK_KHR_sampler_mirror_clamp_to_edge"
 
 (cffi:defctype VkSamplerMipmapMode :int)
 
-(cl:defconstant VK_SAMPLER_MIPMAP_MODE_NEAREST #x0) ;; Choose nearest mip level
-(cl:defconstant VK_SAMPLER_MIPMAP_MODE_LINEAR #x1) ;; Linear filter between mip levels
+(defconstant VK_SAMPLER_MIPMAP_MODE_NEAREST #x0) ;; Choose nearest mip level
+(defconstant VK_SAMPLER_MIPMAP_MODE_LINEAR #x1) ;; Linear filter between mip levels
 
 (cffi:defctype VkShaderStageFlagBits :int)
 
-(cl:defconstant VK_SHADER_STAGE_VERTEX_BIT #x1)
-(cl:defconstant VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT #x2)
-(cl:defconstant VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT #x4)
-(cl:defconstant VK_SHADER_STAGE_GEOMETRY_BIT #x8)
-(cl:defconstant VK_SHADER_STAGE_FRAGMENT_BIT #x10)
-(cl:defconstant VK_SHADER_STAGE_COMPUTE_BIT #x20)
-(cl:defconstant VK_SHADER_STAGE_ALL_GRAPHICS #x1F)
-(cl:defconstant VK_SHADER_STAGE_ALL #x7FFFFFFF)
+(defconstant VK_SHADER_STAGE_VERTEX_BIT #x1)
+(defconstant VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT #x2)
+(defconstant VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT #x4)
+(defconstant VK_SHADER_STAGE_GEOMETRY_BIT #x8)
+(defconstant VK_SHADER_STAGE_FRAGMENT_BIT #x10)
+(defconstant VK_SHADER_STAGE_COMPUTE_BIT #x20)
+(defconstant VK_SHADER_STAGE_ALL_GRAPHICS #x1F)
+(defconstant VK_SHADER_STAGE_ALL #x7FFFFFFF)
 
 (cffi:defctype VkSharingMode :int)
 
-(cl:defconstant VK_SHARING_MODE_EXCLUSIVE #x0)
-(cl:defconstant VK_SHARING_MODE_CONCURRENT #x1)
+(defconstant VK_SHARING_MODE_EXCLUSIVE #x0)
+(defconstant VK_SHARING_MODE_CONCURRENT #x1)
 
 (cffi:defctype VkSparseImageFormatFlagBits :int)
 
-(cl:defconstant VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT #x1) ;; Image uses a single mip tail region for all array layers
-(cl:defconstant VK_SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT #x2) ;; Image requires mip level dimensions to be an integer multiple of the sparse image block dimensions for non-tail mip levels.
-(cl:defconstant VK_SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT #x4) ;; Image uses a non-standard sparse image block dimensions
+(defconstant VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT #x1) ;; Image uses a single mip tail region for all array layers
+(defconstant VK_SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT #x2) ;; Image requires mip level dimensions to be an integer multiple of the sparse image block dimensions for non-tail mip levels.
+(defconstant VK_SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT #x4) ;; Image uses a non-standard sparse image block dimensions
 
 (cffi:defctype VkSparseMemoryBindFlagBits :int)
 
-(cl:defconstant VK_SPARSE_MEMORY_BIND_METADATA_BIT #x1) ;; Operation binds resource metadata to memory
+(defconstant VK_SPARSE_MEMORY_BIND_METADATA_BIT #x1) ;; Operation binds resource metadata to memory
 
 (cffi:defctype VkStencilFaceFlagBits :int)
 
-(cl:defconstant VK_STENCIL_FACE_FRONT_BIT #x1) ;; Front face
-(cl:defconstant VK_STENCIL_FACE_BACK_BIT #x2) ;; Back face
-(cl:defconstant VK_STENCIL_FRONT_AND_BACK #x3) ;; Front and back faces
+(defconstant VK_STENCIL_FACE_FRONT_BIT #x1) ;; Front face
+(defconstant VK_STENCIL_FACE_BACK_BIT #x2) ;; Back face
+(defconstant VK_STENCIL_FRONT_AND_BACK #x3) ;; Front and back faces
 
 (cffi:defctype VkStencilOp :int)
 
-(cl:defconstant VK_STENCIL_OP_KEEP #x0)
-(cl:defconstant VK_STENCIL_OP_ZERO #x1)
-(cl:defconstant VK_STENCIL_OP_REPLACE #x2)
-(cl:defconstant VK_STENCIL_OP_INCREMENT_AND_CLAMP #x3)
-(cl:defconstant VK_STENCIL_OP_DECREMENT_AND_CLAMP #x4)
-(cl:defconstant VK_STENCIL_OP_INVERT #x5)
-(cl:defconstant VK_STENCIL_OP_INCREMENT_AND_WRAP #x6)
-(cl:defconstant VK_STENCIL_OP_DECREMENT_AND_WRAP #x7)
+(defconstant VK_STENCIL_OP_KEEP #x0)
+(defconstant VK_STENCIL_OP_ZERO #x1)
+(defconstant VK_STENCIL_OP_REPLACE #x2)
+(defconstant VK_STENCIL_OP_INCREMENT_AND_CLAMP #x3)
+(defconstant VK_STENCIL_OP_DECREMENT_AND_CLAMP #x4)
+(defconstant VK_STENCIL_OP_INVERT #x5)
+(defconstant VK_STENCIL_OP_INCREMENT_AND_WRAP #x6)
+(defconstant VK_STENCIL_OP_DECREMENT_AND_WRAP #x7)
 
 (cffi:defctype VkStructureType :int)
 
-(cl:defconstant VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_EXT 1000259001)
-(cl:defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_EXT 1000259000)
+(defconstant VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_EXT 1000259001)
+(defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_EXT 1000259000)
 
-(cl:defconstant VK_STRUCTURE_TYPE_APPLICATION_INFO #x0)
-(cl:defconstant VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO #x1)
-(cl:defconstant VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO #x2)
-(cl:defconstant VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO #x3)
-(cl:defconstant VK_STRUCTURE_TYPE_SUBMIT_INFO #x4)
-(cl:defconstant VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO #x5)
-(cl:defconstant VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE #x6)
-(cl:defconstant VK_STRUCTURE_TYPE_BIND_SPARSE_INFO #x7)
-(cl:defconstant VK_STRUCTURE_TYPE_FENCE_CREATE_INFO #x8)
-(cl:defconstant VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO #x9)
-(cl:defconstant VK_STRUCTURE_TYPE_EVENT_CREATE_INFO #xA)
-(cl:defconstant VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO #xB)
-(cl:defconstant VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO #xC)
-(cl:defconstant VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO #xD)
-(cl:defconstant VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO #xE)
-(cl:defconstant VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO #xF)
-(cl:defconstant VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO #x10)
-(cl:defconstant VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO #x11)
-(cl:defconstant VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO #x12)
-(cl:defconstant VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO #x13)
-(cl:defconstant VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO #x14)
-(cl:defconstant VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO #x15)
-(cl:defconstant VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO #x16)
-(cl:defconstant VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO #x17)
-(cl:defconstant VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO #x18)
-(cl:defconstant VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO #x19)
-(cl:defconstant VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO #x1A)
-(cl:defconstant VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO #x1B)
-(cl:defconstant VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO #x1C)
-(cl:defconstant VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO #x1D)
-(cl:defconstant VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO #x1E)
-(cl:defconstant VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO #x1F)
-(cl:defconstant VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO #x20)
-(cl:defconstant VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO #x21)
-(cl:defconstant VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO #x22)
-(cl:defconstant VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET #x23)
-(cl:defconstant VK_STRUCTURE_TYPE_COPY_DESCRIPTOR_SET #x24)
-(cl:defconstant VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO #x25)
-(cl:defconstant VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO #x26)
-(cl:defconstant VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO #x27)
-(cl:defconstant VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO #x28)
-(cl:defconstant VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO #x29)
-(cl:defconstant VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO #x2A)
-(cl:defconstant VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO #x2B)
-(cl:defconstant VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER #x2C)
-(cl:defconstant VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER #x2D)
-(cl:defconstant VK_STRUCTURE_TYPE_MEMORY_BARRIER #x2E)
-(cl:defconstant VK_STRUCTURE_TYPE_LOADER_INSTANCE_CREATE_INFO #x2F)
-(cl:defconstant VK_STRUCTURE_TYPE_LOADER_DEVICE_CREATE_INFO #x30)
-(cl:defconstant VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR #x3B9ACDE8) ;; "VK_KHR_swapchain"
-(cl:defconstant VK_STRUCTURE_TYPE_PRESENT_INFO_KHR #x3B9ACDE9) ;; "VK_KHR_swapchain"
-(cl:defconstant VK_STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR #x3B9AD1D0) ;; "VK_KHR_display"
-(cl:defconstant VK_STRUCTURE_TYPE_DISPLAY_SURFACE_CREATE_INFO_KHR #x3B9AD1D1) ;; "VK_KHR_display"
-(cl:defconstant VK_STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR #x3B9AD5B8) ;; "VK_KHR_display_swapchain"
-(cl:defconstant VK_STRUCTURE_TYPE_XLIB_SURFACE_CREATE_INFO_KHR #x3B9AD9A0) ;; "VK_KHR_xlib_surface"
-(cl:defconstant VK_STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR #x3B9ADD88) ;; "VK_KHR_xcb_surface"
-(cl:defconstant VK_STRUCTURE_TYPE_WAYLAND_SURFACE_CREATE_INFO_KHR #x3B9AE170) ;; "VK_KHR_wayland_surface"
-(cl:defconstant VK_STRUCTURE_TYPE_MIR_SURFACE_CREATE_INFO_KHR #x3B9AE558) ;; "VK_KHR_mir_surface"
-(cl:defconstant VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR #x3B9AE940) ;; "VK_KHR_android_surface"
-(cl:defconstant VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR #x3B9AED28) ;; "VK_KHR_win32_surface"
-(cl:defconstant VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT #x3B9AF4F8) ;; "VK_EXT_debug_report"
-(cl:defconstant VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_RASTERIZATION_ORDER_AMD #x3B9B1050) ;; "VK_AMD_rasterization_order"
-(cl:defconstant VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_NAME_INFO_EXT #x3B9B1FF0) ;; "VK_EXT_debug_marker"
-(cl:defconstant VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT #x3B9B1FF1) ;; "VK_EXT_debug_marker"
-(cl:defconstant VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT #x3B9B1FF2) ;; "VK_EXT_debug_marker"
-(cl:defconstant VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV #x3B9B2F90) ;; "VK_NV_dedicated_allocation"
-(cl:defconstant VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_BUFFER_CREATE_INFO_NV #x3B9B2F91) ;; "VK_NV_dedicated_allocation"
-(cl:defconstant VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_MEMORY_ALLOCATE_INFO_NV #x3B9B2F92) ;; "VK_NV_dedicated_allocation"
-(cl:defconstant VK_STRUCTURE_TYPE_TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD #x3B9B6A28) ;; "VK_AMD_texture_gather_bias_lod"
-(cl:defconstant VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO_KHX #x3B9B9908) ;; "VK_KHX_multiview"
-(cl:defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES_KHX #x3B9B9909) ;; "VK_KHX_multiview"
-(cl:defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES_KHX #x3B9B990A) ;; "VK_KHX_multiview"
-(cl:defconstant VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV #x3B9BA4C0) ;; "VK_NV_external_memory"
-(cl:defconstant VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_NV #x3B9BA4C1) ;; "VK_NV_external_memory"
-(cl:defconstant VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_NV #x3B9BA8A8) ;; "VK_NV_external_memory_win32"
-(cl:defconstant VK_STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_NV #x3B9BA8A9) ;; "VK_NV_external_memory_win32"
-(cl:defconstant VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_NV #x3B9BAC90) ;; "VK_NV_win32_keyed_mutex"
-(cl:defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR #x3B9BB078) ;; "VK_KHR_get_physical_device_properties2"
-(cl:defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2_KHR #x3B9BB079) ;; "VK_KHR_get_physical_device_properties2"
-(cl:defconstant VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2_KHR #x3B9BB07A) ;; "VK_KHR_get_physical_device_properties2"
-(cl:defconstant VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2_KHR #x3B9BB07B) ;; "VK_KHR_get_physical_device_properties2"
-(cl:defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2_KHR #x3B9BB07C) ;; "VK_KHR_get_physical_device_properties2"
-(cl:defconstant VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2_KHR #x3B9BB07D) ;; "VK_KHR_get_physical_device_properties2"
-(cl:defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2_KHR #x3B9BB07E) ;; "VK_KHR_get_physical_device_properties2"
-(cl:defconstant VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2_KHR #x3B9BB07F) ;; "VK_KHR_get_physical_device_properties2"
-(cl:defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2_KHR #x3B9BB080) ;; "VK_KHR_get_physical_device_properties2"
-(cl:defconstant VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO_KHX #x3B9BB460) ;; "VK_KHX_device_group"
-(cl:defconstant VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO_KHX #x3B9BB461) ;; "VK_KHX_device_group"
-(cl:defconstant VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO_KHX #x3B9BB462) ;; "VK_KHX_device_group"
-(cl:defconstant VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO_KHX #x3B9BB463) ;; "VK_KHX_device_group"
-(cl:defconstant VK_STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO_KHX #x3B9BB464) ;; "VK_KHX_device_group"
-(cl:defconstant VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO_KHX #x3B9BB465) ;; "VK_KHX_device_group"
-(cl:defconstant VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO_KHX #x3B9BB466) ;; "VK_KHX_device_group"
-(cl:defconstant VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_CAPABILITIES_KHX #x3B9BB467) ;; "VK_KHX_device_group"
-(cl:defconstant VK_STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHX #x3B9BB468) ;; "VK_KHX_device_group"
-(cl:defconstant VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHX #x3B9BB469) ;; "VK_KHX_device_group"
-(cl:defconstant VK_STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHX #x3B9BB46A) ;; "VK_KHX_device_group"
-(cl:defconstant VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHX #x3B9BB46B) ;; "VK_KHX_device_group"
-(cl:defconstant VK_STRUCTURE_TYPE_DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHX #x3B9BB46C) ;; "VK_KHX_device_group"
-(cl:defconstant VK_STRUCTURE_TYPE_VALIDATION_FLAGS_EXT #x3B9BB848) ;; "VK_EXT_validation_flags"
-(cl:defconstant VK_STRUCTURE_TYPE_VI_SURFACE_CREATE_INFO_NN #x3B9BBC30) ;; "VK_NN_vi_surface"
-(cl:defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES_KHX #x3B9BDB70) ;; "VK_KHX_device_group_creation"
-(cl:defconstant VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO_KHX #x3B9BDB71) ;; "VK_KHX_device_group_creation"
-(cl:defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO_KHX #x3B9BDF58) ;; "VK_KHX_external_memory_capabilities"
-(cl:defconstant VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES_KHX #x3B9BDF59) ;; "VK_KHX_external_memory_capabilities"
-(cl:defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO_KHX #x3B9BDF5A) ;; "VK_KHX_external_memory_capabilities"
-(cl:defconstant VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES_KHX #x3B9BDF5B) ;; "VK_KHX_external_memory_capabilities"
-(cl:defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES_KHX #x3B9BDF5C) ;; "VK_KHX_external_memory_capabilities"
-(cl:defconstant VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO_KHX #x3B9BE340) ;; "VK_KHX_external_memory"
-(cl:defconstant VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_KHX #x3B9BE341) ;; "VK_KHX_external_memory"
-(cl:defconstant VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_KHX #x3B9BE342) ;; "VK_KHX_external_memory"
-(cl:defconstant VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHX #x3B9BE728) ;; "VK_KHX_external_memory_win32"
-(cl:defconstant VK_STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_KHX #x3B9BE729) ;; "VK_KHX_external_memory_win32"
-(cl:defconstant VK_STRUCTURE_TYPE_MEMORY_WIN32_HANDLE_PROPERTIES_KHX #x3B9BE72A) ;; "VK_KHX_external_memory_win32"
-(cl:defconstant VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHX #x3B9BEB10) ;; "VK_KHX_external_memory_fd"
-(cl:defconstant VK_STRUCTURE_TYPE_MEMORY_FD_PROPERTIES_KHX #x3B9BEB11) ;; "VK_KHX_external_memory_fd"
-(cl:defconstant VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHX #x3B9BEEF8) ;; "VK_KHX_win32_keyed_mutex"
-(cl:defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO_KHX #x3B9BF2E0) ;; "VK_KHX_external_semaphore_capabilities"
-(cl:defconstant VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES_KHX #x3B9BF2E1) ;; "VK_KHX_external_semaphore_capabilities"
-(cl:defconstant VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO_KHX #x3B9BF6C8) ;; "VK_KHX_external_semaphore"
-(cl:defconstant VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHX #x3B9BFAB0) ;; "VK_KHX_external_semaphore_win32"
-(cl:defconstant VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHX #x3B9BFAB1) ;; "VK_KHX_external_semaphore_win32"
-(cl:defconstant VK_STRUCTURE_TYPE_D3D12_FENCE_SUBMIT_INFO_KHX #x3B9BFAB2) ;; "VK_KHX_external_semaphore_win32"
-(cl:defconstant VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_FD_INFO_KHX #x3B9BFE98) ;; "VK_KHX_external_semaphore_fd"
-(cl:defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR #x3B9C0280) ;; "VK_KHR_push_descriptor"
-(cl:defconstant VK_STRUCTURE_TYPE_PRESENT_REGIONS_KHR #x3B9C1220) ;; "VK_KHR_incremental_present"
-(cl:defconstant VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO_KHR #x3B9C1608) ;; "VK_KHR_descriptor_update_template"
-(cl:defconstant VK_STRUCTURE_TYPE_OBJECT_TABLE_CREATE_INFO_NVX #x3B9C19F0) ;; "VK_NVX_device_generated_commands"
-(cl:defconstant VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_NVX #x3B9C19F1) ;; "VK_NVX_device_generated_commands"
-(cl:defconstant VK_STRUCTURE_TYPE_CMD_PROCESS_COMMANDS_INFO_NVX #x3B9C19F2) ;; "VK_NVX_device_generated_commands"
-(cl:defconstant VK_STRUCTURE_TYPE_CMD_RESERVE_SPACE_FOR_COMMANDS_INFO_NVX #x3B9C19F3) ;; "VK_NVX_device_generated_commands"
-(cl:defconstant VK_STRUCTURE_TYPE_DEVICE_GENERATED_COMMANDS_LIMITS_NVX #x3B9C19F4) ;; "VK_NVX_device_generated_commands"
-(cl:defconstant VK_STRUCTURE_TYPE_DEVICE_GENERATED_COMMANDS_FEATURES_NVX #x3B9C19F5) ;; "VK_NVX_device_generated_commands"
-(cl:defconstant VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_W_SCALING_STATE_CREATE_INFO_NV #x3B9C1DD8) ;; "VK_NV_clip_space_w_scaling"
-(cl:defconstant VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES2_EXT #x3B9C2990) ;; "VK_EXT_display_surface_counter"
-(cl:defconstant VK_STRUCTURE_TYPE_DISPLAY_POWER_INFO_EXT #x3B9C2D78) ;; "VK_EXT_display_control"
-(cl:defconstant VK_STRUCTURE_TYPE_DEVICE_EVENT_INFO_EXT #x3B9C2D79) ;; "VK_EXT_display_control"
-(cl:defconstant VK_STRUCTURE_TYPE_DISPLAY_EVENT_INFO_EXT #x3B9C2D7A) ;; "VK_EXT_display_control"
-(cl:defconstant VK_STRUCTURE_TYPE_SWAPCHAIN_COUNTER_CREATE_INFO_EXT #x3B9C2D7B) ;; "VK_EXT_display_control"
-(cl:defconstant VK_STRUCTURE_TYPE_PRESENT_TIMES_INFO_GOOGLE #x3B9C3160) ;; "VK_GOOGLE_display_timing"
-(cl:defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_ATTRIBUTES_PROPERTIES_NVX #x3B9C44E8) ;; "VK_NVX_multiview_per_view_attributes"
-(cl:defconstant VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SWIZZLE_STATE_CREATE_INFO_NV #x3B9C48D0) ;; "VK_NV_viewport_swizzle"
-(cl:defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT #x3B9C4CB8) ;; "VK_EXT_discard_rectangles"
-(cl:defconstant VK_STRUCTURE_TYPE_PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT #x3B9C4CB9) ;; "VK_EXT_discard_rectangles"
-(cl:defconstant VK_STRUCTURE_TYPE_HDR_METADATA_EXT #x3B9C6428) ;; "VK_EXT_hdr_metadata"
-(cl:defconstant VK_STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR #x3B9C7B98) ;; "VK_KHR_shared_presentable_image"
-(cl:defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR #x3B9C9AD8) ;; "VK_KHR_get_surface_capabilities2"
-(cl:defconstant VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_KHR #x3B9C9AD9) ;; "VK_KHR_get_surface_capabilities2"
-(cl:defconstant VK_STRUCTURE_TYPE_SURFACE_FORMAT_2_KHR #x3B9C9ADA) ;; "VK_KHR_get_surface_capabilities2"
-(cl:defconstant VK_STRUCTURE_TYPE_IOS_SURFACE_CREATE_INFO_MVK #x3B9CA690) ;; "VK_MVK_ios_surface"
-(cl:defconstant VK_STRUCTURE_TYPE_MACOS_SURFACE_CREATE_INFO_MVK #x3B9CAA78) ;; "VK_MVK_macos_surface"
+(defconstant VK_STRUCTURE_TYPE_APPLICATION_INFO #x0)
+(defconstant VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO #x1)
+(defconstant VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO #x2)
+(defconstant VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO #x3)
+(defconstant VK_STRUCTURE_TYPE_SUBMIT_INFO #x4)
+(defconstant VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO #x5)
+(defconstant VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE #x6)
+(defconstant VK_STRUCTURE_TYPE_BIND_SPARSE_INFO #x7)
+(defconstant VK_STRUCTURE_TYPE_FENCE_CREATE_INFO #x8)
+(defconstant VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO #x9)
+(defconstant VK_STRUCTURE_TYPE_EVENT_CREATE_INFO #xA)
+(defconstant VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO #xB)
+(defconstant VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO #xC)
+(defconstant VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO #xD)
+(defconstant VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO #xE)
+(defconstant VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO #xF)
+(defconstant VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO #x10)
+(defconstant VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO #x11)
+(defconstant VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO #x12)
+(defconstant VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO #x13)
+(defconstant VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO #x14)
+(defconstant VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO #x15)
+(defconstant VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO #x16)
+(defconstant VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO #x17)
+(defconstant VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO #x18)
+(defconstant VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO #x19)
+(defconstant VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO #x1A)
+(defconstant VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO #x1B)
+(defconstant VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO #x1C)
+(defconstant VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO #x1D)
+(defconstant VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO #x1E)
+(defconstant VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO #x1F)
+(defconstant VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO #x20)
+(defconstant VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO #x21)
+(defconstant VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO #x22)
+(defconstant VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET #x23)
+(defconstant VK_STRUCTURE_TYPE_COPY_DESCRIPTOR_SET #x24)
+(defconstant VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO #x25)
+(defconstant VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO #x26)
+(defconstant VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO #x27)
+(defconstant VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO #x28)
+(defconstant VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO #x29)
+(defconstant VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO #x2A)
+(defconstant VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO #x2B)
+(defconstant VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER #x2C)
+(defconstant VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER #x2D)
+(defconstant VK_STRUCTURE_TYPE_MEMORY_BARRIER #x2E)
+(defconstant VK_STRUCTURE_TYPE_LOADER_INSTANCE_CREATE_INFO #x2F)
+(defconstant VK_STRUCTURE_TYPE_LOADER_DEVICE_CREATE_INFO #x30)
+(defconstant VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR #x3B9ACDE8) ;; "VK_KHR_swapchain"
+(defconstant VK_STRUCTURE_TYPE_PRESENT_INFO_KHR #x3B9ACDE9) ;; "VK_KHR_swapchain"
+(defconstant VK_STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR #x3B9AD1D0) ;; "VK_KHR_display"
+(defconstant VK_STRUCTURE_TYPE_DISPLAY_SURFACE_CREATE_INFO_KHR #x3B9AD1D1) ;; "VK_KHR_display"
+(defconstant VK_STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR #x3B9AD5B8) ;; "VK_KHR_display_swapchain"
+(defconstant VK_STRUCTURE_TYPE_XLIB_SURFACE_CREATE_INFO_KHR #x3B9AD9A0) ;; "VK_KHR_xlib_surface"
+(defconstant VK_STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR #x3B9ADD88) ;; "VK_KHR_xcb_surface"
+(defconstant VK_STRUCTURE_TYPE_WAYLAND_SURFACE_CREATE_INFO_KHR #x3B9AE170) ;; "VK_KHR_wayland_surface"
+(defconstant VK_STRUCTURE_TYPE_MIR_SURFACE_CREATE_INFO_KHR #x3B9AE558) ;; "VK_KHR_mir_surface"
+(defconstant VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR #x3B9AE940) ;; "VK_KHR_android_surface"
+(defconstant VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR #x3B9AED28) ;; "VK_KHR_win32_surface"
+(defconstant VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT #x3B9AF4F8) ;; "VK_EXT_debug_report"
+(defconstant VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_RASTERIZATION_ORDER_AMD #x3B9B1050) ;; "VK_AMD_rasterization_order"
+(defconstant VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_NAME_INFO_EXT #x3B9B1FF0) ;; "VK_EXT_debug_marker"
+(defconstant VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT #x3B9B1FF1) ;; "VK_EXT_debug_marker"
+(defconstant VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT #x3B9B1FF2) ;; "VK_EXT_debug_marker"
+(defconstant VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV #x3B9B2F90) ;; "VK_NV_dedicated_allocation"
+(defconstant VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_BUFFER_CREATE_INFO_NV #x3B9B2F91) ;; "VK_NV_dedicated_allocation"
+(defconstant VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_MEMORY_ALLOCATE_INFO_NV #x3B9B2F92) ;; "VK_NV_dedicated_allocation"
+(defconstant VK_STRUCTURE_TYPE_TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD #x3B9B6A28) ;; "VK_AMD_texture_gather_bias_lod"
+(defconstant VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO_KHX #x3B9B9908) ;; "VK_KHX_multiview"
+(defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES_KHX #x3B9B9909) ;; "VK_KHX_multiview"
+(defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES_KHX #x3B9B990A) ;; "VK_KHX_multiview"
+(defconstant VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV #x3B9BA4C0) ;; "VK_NV_external_memory"
+(defconstant VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_NV #x3B9BA4C1) ;; "VK_NV_external_memory"
+(defconstant VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_NV #x3B9BA8A8) ;; "VK_NV_external_memory_win32"
+(defconstant VK_STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_NV #x3B9BA8A9) ;; "VK_NV_external_memory_win32"
+(defconstant VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_NV #x3B9BAC90) ;; "VK_NV_win32_keyed_mutex"
+(defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR #x3B9BB078) ;; "VK_KHR_get_physical_device_properties2"
+(defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2_KHR #x3B9BB079) ;; "VK_KHR_get_physical_device_properties2"
+(defconstant VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2_KHR #x3B9BB07A) ;; "VK_KHR_get_physical_device_properties2"
+(defconstant VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2_KHR #x3B9BB07B) ;; "VK_KHR_get_physical_device_properties2"
+(defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2_KHR #x3B9BB07C) ;; "VK_KHR_get_physical_device_properties2"
+(defconstant VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2_KHR #x3B9BB07D) ;; "VK_KHR_get_physical_device_properties2"
+(defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2_KHR #x3B9BB07E) ;; "VK_KHR_get_physical_device_properties2"
+(defconstant VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2_KHR #x3B9BB07F) ;; "VK_KHR_get_physical_device_properties2"
+(defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2_KHR #x3B9BB080) ;; "VK_KHR_get_physical_device_properties2"
+(defconstant VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO_KHX #x3B9BB460) ;; "VK_KHX_device_group"
+(defconstant VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO_KHX #x3B9BB461) ;; "VK_KHX_device_group"
+(defconstant VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO_KHX #x3B9BB462) ;; "VK_KHX_device_group"
+(defconstant VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO_KHX #x3B9BB463) ;; "VK_KHX_device_group"
+(defconstant VK_STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO_KHX #x3B9BB464) ;; "VK_KHX_device_group"
+(defconstant VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO_KHX #x3B9BB465) ;; "VK_KHX_device_group"
+(defconstant VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO_KHX #x3B9BB466) ;; "VK_KHX_device_group"
+(defconstant VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_CAPABILITIES_KHX #x3B9BB467) ;; "VK_KHX_device_group"
+(defconstant VK_STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHX #x3B9BB468) ;; "VK_KHX_device_group"
+(defconstant VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHX #x3B9BB469) ;; "VK_KHX_device_group"
+(defconstant VK_STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHX #x3B9BB46A) ;; "VK_KHX_device_group"
+(defconstant VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHX #x3B9BB46B) ;; "VK_KHX_device_group"
+(defconstant VK_STRUCTURE_TYPE_DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHX #x3B9BB46C) ;; "VK_KHX_device_group"
+(defconstant VK_STRUCTURE_TYPE_VALIDATION_FLAGS_EXT #x3B9BB848) ;; "VK_EXT_validation_flags"
+(defconstant VK_STRUCTURE_TYPE_VI_SURFACE_CREATE_INFO_NN #x3B9BBC30) ;; "VK_NN_vi_surface"
+(defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES_KHX #x3B9BDB70) ;; "VK_KHX_device_group_creation"
+(defconstant VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO_KHX #x3B9BDB71) ;; "VK_KHX_device_group_creation"
+(defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO_KHX #x3B9BDF58) ;; "VK_KHX_external_memory_capabilities"
+(defconstant VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES_KHX #x3B9BDF59) ;; "VK_KHX_external_memory_capabilities"
+(defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO_KHX #x3B9BDF5A) ;; "VK_KHX_external_memory_capabilities"
+(defconstant VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES_KHX #x3B9BDF5B) ;; "VK_KHX_external_memory_capabilities"
+(defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES_KHX #x3B9BDF5C) ;; "VK_KHX_external_memory_capabilities"
+(defconstant VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO_KHX #x3B9BE340) ;; "VK_KHX_external_memory"
+(defconstant VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_KHX #x3B9BE341) ;; "VK_KHX_external_memory"
+(defconstant VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_KHX #x3B9BE342) ;; "VK_KHX_external_memory"
+(defconstant VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHX #x3B9BE728) ;; "VK_KHX_external_memory_win32"
+(defconstant VK_STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_KHX #x3B9BE729) ;; "VK_KHX_external_memory_win32"
+(defconstant VK_STRUCTURE_TYPE_MEMORY_WIN32_HANDLE_PROPERTIES_KHX #x3B9BE72A) ;; "VK_KHX_external_memory_win32"
+(defconstant VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHX #x3B9BEB10) ;; "VK_KHX_external_memory_fd"
+(defconstant VK_STRUCTURE_TYPE_MEMORY_FD_PROPERTIES_KHX #x3B9BEB11) ;; "VK_KHX_external_memory_fd"
+(defconstant VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHX #x3B9BEEF8) ;; "VK_KHX_win32_keyed_mutex"
+(defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO_KHX #x3B9BF2E0) ;; "VK_KHX_external_semaphore_capabilities"
+(defconstant VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES_KHX #x3B9BF2E1) ;; "VK_KHX_external_semaphore_capabilities"
+(defconstant VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO_KHX #x3B9BF6C8) ;; "VK_KHX_external_semaphore"
+(defconstant VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHX #x3B9BFAB0) ;; "VK_KHX_external_semaphore_win32"
+(defconstant VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHX #x3B9BFAB1) ;; "VK_KHX_external_semaphore_win32"
+(defconstant VK_STRUCTURE_TYPE_D3D12_FENCE_SUBMIT_INFO_KHX #x3B9BFAB2) ;; "VK_KHX_external_semaphore_win32"
+(defconstant VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_FD_INFO_KHX #x3B9BFE98) ;; "VK_KHX_external_semaphore_fd"
+(defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR #x3B9C0280) ;; "VK_KHR_push_descriptor"
+(defconstant VK_STRUCTURE_TYPE_PRESENT_REGIONS_KHR #x3B9C1220) ;; "VK_KHR_incremental_present"
+(defconstant VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO_KHR #x3B9C1608) ;; "VK_KHR_descriptor_update_template"
+(defconstant VK_STRUCTURE_TYPE_OBJECT_TABLE_CREATE_INFO_NVX #x3B9C19F0) ;; "VK_NVX_device_generated_commands"
+(defconstant VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_NVX #x3B9C19F1) ;; "VK_NVX_device_generated_commands"
+(defconstant VK_STRUCTURE_TYPE_CMD_PROCESS_COMMANDS_INFO_NVX #x3B9C19F2) ;; "VK_NVX_device_generated_commands"
+(defconstant VK_STRUCTURE_TYPE_CMD_RESERVE_SPACE_FOR_COMMANDS_INFO_NVX #x3B9C19F3) ;; "VK_NVX_device_generated_commands"
+(defconstant VK_STRUCTURE_TYPE_DEVICE_GENERATED_COMMANDS_LIMITS_NVX #x3B9C19F4) ;; "VK_NVX_device_generated_commands"
+(defconstant VK_STRUCTURE_TYPE_DEVICE_GENERATED_COMMANDS_FEATURES_NVX #x3B9C19F5) ;; "VK_NVX_device_generated_commands"
+(defconstant VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_W_SCALING_STATE_CREATE_INFO_NV #x3B9C1DD8) ;; "VK_NV_clip_space_w_scaling"
+(defconstant VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES2_EXT #x3B9C2990) ;; "VK_EXT_display_surface_counter"
+(defconstant VK_STRUCTURE_TYPE_DISPLAY_POWER_INFO_EXT #x3B9C2D78) ;; "VK_EXT_display_control"
+(defconstant VK_STRUCTURE_TYPE_DEVICE_EVENT_INFO_EXT #x3B9C2D79) ;; "VK_EXT_display_control"
+(defconstant VK_STRUCTURE_TYPE_DISPLAY_EVENT_INFO_EXT #x3B9C2D7A) ;; "VK_EXT_display_control"
+(defconstant VK_STRUCTURE_TYPE_SWAPCHAIN_COUNTER_CREATE_INFO_EXT #x3B9C2D7B) ;; "VK_EXT_display_control"
+(defconstant VK_STRUCTURE_TYPE_PRESENT_TIMES_INFO_GOOGLE #x3B9C3160) ;; "VK_GOOGLE_display_timing"
+(defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_ATTRIBUTES_PROPERTIES_NVX #x3B9C44E8) ;; "VK_NVX_multiview_per_view_attributes"
+(defconstant VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SWIZZLE_STATE_CREATE_INFO_NV #x3B9C48D0) ;; "VK_NV_viewport_swizzle"
+(defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT #x3B9C4CB8) ;; "VK_EXT_discard_rectangles"
+(defconstant VK_STRUCTURE_TYPE_PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT #x3B9C4CB9) ;; "VK_EXT_discard_rectangles"
+(defconstant VK_STRUCTURE_TYPE_HDR_METADATA_EXT #x3B9C6428) ;; "VK_EXT_hdr_metadata"
+(defconstant VK_STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR #x3B9C7B98) ;; "VK_KHR_shared_presentable_image"
+(defconstant VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR #x3B9C9AD8) ;; "VK_KHR_get_surface_capabilities2"
+(defconstant VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_KHR #x3B9C9AD9) ;; "VK_KHR_get_surface_capabilities2"
+(defconstant VK_STRUCTURE_TYPE_SURFACE_FORMAT_2_KHR #x3B9C9ADA) ;; "VK_KHR_get_surface_capabilities2"
+(defconstant VK_STRUCTURE_TYPE_IOS_SURFACE_CREATE_INFO_MVK #x3B9CA690) ;; "VK_MVK_ios_surface"
+(defconstant VK_STRUCTURE_TYPE_MACOS_SURFACE_CREATE_INFO_MVK #x3B9CAA78) ;; "VK_MVK_macos_surface"
 
 (cffi:defctype VkSubpassContents :int)
 
-(cl:defconstant VK_SUBPASS_CONTENTS_INLINE #x0)
-(cl:defconstant VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS #x1)
+(defconstant VK_SUBPASS_CONTENTS_INLINE #x0)
+(defconstant VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS #x1)
 
 (cffi:defctype VkSubpassDescriptionFlagBits :int)
 
-(cl:defconstant VK_SUBPASS_DESCRIPTION_PER_VIEW_ATTRIBUTES_BIT_NVX #x1) ;; "VK_NVX_multiview_per_view_attributes"
-(cl:defconstant VK_SUBPASS_DESCRIPTION_PER_VIEW_POSITION_X_ONLY_BIT_NVX #x2) ;; "VK_NVX_multiview_per_view_attributes"
+(defconstant VK_SUBPASS_DESCRIPTION_PER_VIEW_ATTRIBUTES_BIT_NVX #x1) ;; "VK_NVX_multiview_per_view_attributes"
+(defconstant VK_SUBPASS_DESCRIPTION_PER_VIEW_POSITION_X_ONLY_BIT_NVX #x2) ;; "VK_NVX_multiview_per_view_attributes"
 
 (cffi:defctype VkSurfaceCounterFlagBitsEXT :int)
 
-(cl:defconstant VK_SURFACE_COUNTER_VBLANK_EXT #x1)
+(defconstant VK_SURFACE_COUNTER_VBLANK_EXT #x1)
 
 (cffi:defctype VkSurfaceTransformFlagBitsKHR :int)
 
-(cl:defconstant VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR #x1)
-(cl:defconstant VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR #x2)
-(cl:defconstant VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR #x4)
-(cl:defconstant VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR #x8)
-(cl:defconstant VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_BIT_KHR #x10)
-(cl:defconstant VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR #x20)
-(cl:defconstant VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR #x40)
-(cl:defconstant VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR #x80)
-(cl:defconstant VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR #x100)
+(defconstant VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR #x1)
+(defconstant VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR #x2)
+(defconstant VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR #x4)
+(defconstant VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR #x8)
+(defconstant VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_BIT_KHR #x10)
+(defconstant VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR #x20)
+(defconstant VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR #x40)
+(defconstant VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR #x80)
+(defconstant VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR #x100)
 
 (cffi:defctype VkSwapchainCreateFlagBitsKHR :int)
 
-(cl:defconstant VK_SWAPCHAIN_CREATE_BIND_SFR_BIT_KHX #x1) ;; "VK_KHX_device_group"
+(defconstant VK_SWAPCHAIN_CREATE_BIND_SFR_BIT_KHX #x1) ;; "VK_KHX_device_group"
 
 (cffi:defctype VkSystemAllocationScope :int)
 
-(cl:defconstant VK_SYSTEM_ALLOCATION_SCOPE_COMMAND #x0)
-(cl:defconstant VK_SYSTEM_ALLOCATION_SCOPE_OBJECT #x1)
-(cl:defconstant VK_SYSTEM_ALLOCATION_SCOPE_CACHE #x2)
-(cl:defconstant VK_SYSTEM_ALLOCATION_SCOPE_DEVICE #x3)
-(cl:defconstant VK_SYSTEM_ALLOCATION_SCOPE_INSTANCE #x4)
+(defconstant VK_SYSTEM_ALLOCATION_SCOPE_COMMAND #x0)
+(defconstant VK_SYSTEM_ALLOCATION_SCOPE_OBJECT #x1)
+(defconstant VK_SYSTEM_ALLOCATION_SCOPE_CACHE #x2)
+(defconstant VK_SYSTEM_ALLOCATION_SCOPE_DEVICE #x3)
+(defconstant VK_SYSTEM_ALLOCATION_SCOPE_INSTANCE #x4)
 
 (cffi:defctype VkValidationCheckEXT :int)
 
-(cl:defconstant VK_VALIDATION_CHECK_ALL_EXT #x0)
-(cl:defconstant VK_VALIDATION_CHECK_SHADERS_EXT #x1)
+(defconstant VK_VALIDATION_CHECK_ALL_EXT #x0)
+(defconstant VK_VALIDATION_CHECK_SHADERS_EXT #x1)
 
 (cffi:defctype VkVertexInputRate :int)
 
-(cl:defconstant VK_VERTEX_INPUT_RATE_VERTEX #x0)
-(cl:defconstant VK_VERTEX_INPUT_RATE_INSTANCE #x1)
+(defconstant VK_VERTEX_INPUT_RATE_VERTEX #x0)
+(defconstant VK_VERTEX_INPUT_RATE_INSTANCE #x1)
 
 (cffi:defctype VkViewportCoordinateSwizzleNV :int)
 
-(cl:defconstant VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_X_NV #x0)
-(cl:defconstant VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_X_NV #x1)
-(cl:defconstant VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_Y_NV #x2)
-(cl:defconstant VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_Y_NV #x3)
-(cl:defconstant VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_Z_NV #x4)
-(cl:defconstant VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_Z_NV #x5)
-(cl:defconstant VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_W_NV #x6)
-(cl:defconstant VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_W_NV #x7) ;; ("defcallback x"
+(defconstant VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_X_NV #x0)
+(defconstant VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_X_NV #x1)
+(defconstant VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_Y_NV #x2)
+(defconstant VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_Y_NV #x3)
+(defconstant VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_Z_NV #x4)
+(defconstant VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_Z_NV #x5)
+(defconstant VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_W_NV #x6)
+(defconstant VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_W_NV #x7) ;; ("defcallback x"
                                                                   ;;  (:POINTER
                                                                   ;;   ":void")
                                                                   ;;  (("\"pUserData\""
@@ -2926,10 +2926,10 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (lineWidth :float))
 
 (cffi:defctype VkLineRasterizationModeEXT :int)
-(cl:defconstant VK_LINE_RASTERIZATION_MODE_DEFAULT_EXT 0)
-(cl:defconstant VK_LINE_RASTERIZATION_MODE_RECTANGULAR_EXT 1)
-(cl:defconstant VK_LINE_RASTERIZATION_MODE_BRESENHAM_EXT 2)
-(cl:defconstant VK_LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_EXT 3)
+(defconstant VK_LINE_RASTERIZATION_MODE_DEFAULT_EXT 0)
+(defconstant VK_LINE_RASTERIZATION_MODE_RECTANGULAR_EXT 1)
+(defconstant VK_LINE_RASTERIZATION_MODE_BRESENHAM_EXT 2)
+(defconstant VK_LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_EXT 3)
 
 (cffi:defcstruct VkPipelineRasterizationLineStateCreateInfoEXT
   (sType VkStructureType)
