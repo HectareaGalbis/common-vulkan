@@ -7,6 +7,9 @@
   layers
   extensions)
 
+;;; -------------------------
+;;; --- Private functions ---
+;;; -------------------------
 
 ;: Creates an application info structure
 (defun create-application-info (app-name app-version eng-name eng-version api-version)
@@ -148,8 +151,12 @@
        (destroy-instance-info ,var))))
 
 
+;;; -------------------------
+;;; ---- Public functions ---
+;;; -------------------------
+
 ;; Creates the vulkan instance
-(defun create-instance (validation)
+(defun create-instance (&optional (validation t))
 
   ;; Application info
   (with-application-info (app-info "Common Vulkan example" (vk:make-version 0 1 1) "Common Vulkan"
@@ -187,3 +194,13 @@
     `(let ((,var (create-instance ,@args)))
        ,@body
        (destroy-instance ,var))))
+
+
+;; Returns the layers from a given instance
+(defun get-instance-enabled-layers (instance)
+  (instance-layers instance))
+
+
+;; Returns the extensions from a given instance
+(defun get-instance-enabled-extensions (instance)
+  (instance-extensions instance))
