@@ -1,5 +1,10 @@
 
+(glfw:init)
 
-(let ((instance (cvk:create-vulkan-instance)))
-  (format t "Hola vulkan")
-  (cvk:destroy-vulkan-instance instance))
+(cvk:with-vulkan-instance (instance t)
+  (format t "Dentro de vulkan-instance~%")
+  4)
+
+(format t "Por fin~%")
+
+(glfw:terminate)

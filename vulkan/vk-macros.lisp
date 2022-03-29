@@ -43,11 +43,13 @@
            collect (second arg) collect (first arg))
         ,result-type))))
 
+
 ;; Assigns the value 0 to all slots of p
 (defun zero-struct (p struct-typespec)
   (loop for i from 0 below (cffi:foreign-type-size struct-typespec)
      do (setf (cffi:mem-aref p :unsigned-char i) 0))
   (values))
+
 
 ;; Wraps a body creating a vulkan object with all of its slots being 0.
 (defmacro with-vulkan-object ((p-info struct-type) &body body)
@@ -69,3 +71,22 @@
   (let ((success-codes '(VK_OPERATION_NOT_DEFERRED_KHR VK_THREAD_DONE_KHR VK_EVENT_SET VK_OPERATION_DEFERRED_KHR VK_SUCCESS VK_INCOMPLETE
                          VK_THREAD_IDLE_KHR VK_PIPELINE_COMPILE_REQUIRED_EXT VK_SUBOPTIMAL_KHR VK_NOT_READY VK_TIMEOUT VK_EVENT_RESET)))
     (unless (if (typep result 'symbol) (member result success-codes) (>= result 0)) (error "check-result failed: ~S" result))))
+
+
+;; Defines a with macro named name, using a constructor and a destructor
+;; The constructor can receive zero or more arguments
+;; The destructor must receive only one argument. This argument is the one which the constructor creates
+(defmacro defwith (name create destroy)
+  (let ((var-args (gensym "var-args"))
+        (var-sym  (gensym "var"))
+        (args-sym (gensym "args")))
+    `(defmacro ,name (,var-args &body body)
+      (let ((,var-sym    (first ,var-args))
+            (,args-sym   (rest ,var-args))
+            (create-sym  ',create)
+            (destroy-sym ',destroy)
+            (body-result (gensym "body-result")))
+        `(let* ((,,var-sym (,create-sym ,@,args-sym))
+                (,body-result (progn ,@body)))
+          (,destroy-sym ,,var-sym)
+          ,body-result)))))

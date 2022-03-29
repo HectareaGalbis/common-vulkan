@@ -46,12 +46,9 @@
 
 
 ;; With application info wrapper
-(defmacro with-application-info (var-args &body body)
-  (let ((var  (first var-args))
-        (args (rest var-args)))
-    `(let ((,var (create-application-info ,@args)))
-       ,@body
-       (destroy-application-info ,var))))
+(defwith with-application-info
+         create-application-info
+         destroy-application-info)
 
 
 ;; List of wanted layers
@@ -69,19 +66,19 @@
     (vkEnumerateInstanceLayerProperties count (cffi:null-pointer))
     (cffi:with-foreign-object (properties '(:struct VkLayerProperties) (cffi:mem-ref count :uint32))
       (vkEnumerateInstanceLayerProperties count properties)
-
-      ;; We check the availability of the wanted layers
       (loop for required-layer in required-layers
-        always (loop for i from 0 to (1- (cffi:mem-ref count :uint32))
+        always (loop for i from 0 below (cffi:mem-ref count :uint32)
                  thereis (equal required-layer
-                                (cffi:foreign-string-to-lisp (cffi:foreign-slot-value (cffi:mem-aref properties '(:struct VkLayerProperties) i)
+                                (cffi:foreign-string-to-lisp (cffi:foreign-slot-value (cffi:mem-aptr properties '(:struct VkLayerProperties) i)
                                                                                       '(:struct VkLayerProperties) 'layerName))))))))
 
 
 ;; Returns the wanted extensions
 (defun get-required-extensions ()
-  (let (extensions (glfw:get-required-instance-extensions))
-    (or extensions (error "glfw error: ~S" (glfw:get-error)))))
+  (let ((extensions (glfw:get-required-instance-extensions)))
+    (unless extensions
+      (error "glfw error: ~S" (glfw:get-error)))
+    extensions))
 
 
 ;; Check whether the wanted extensions are available
@@ -92,20 +89,19 @@
     (vkEnumerateInstanceExtensionProperties (cffi:null-pointer) count (cffi:null-pointer))
     (cffi:with-foreign-object (properties '(:struct VkExtensionProperties) (cffi:mem-ref count :uint32))
       (vkEnumerateInstanceExtensionProperties (cffi:null-pointer) count properties)
-
       ;; We check the availability of the wanted extensions
       (loop for required-extension in required-extensions
-        always (loop for i from 0 to (1- (cffi:mem-ref count :uint32))
+        always (loop for i from 0 below (cffi:mem-ref count :uint32)
                  thereis (equal required-extension
-                                (cffi:foreign-string-to-lisp (cffi:foreign-slot-value (cffi:mem-aref properties '(:struct VkExtensionProperties) i)
-                                                                                      '(:struct VkExtensionProperties) 'extensionName))))))))
+                                (cffi:foreign-string-to-lisp (cffi:foreign-slot-value (cffi:mem-aptr properties '(:struct VkExtensionProperties) i)
+                                                                                     '(:struct VkExtensionProperties) 'extensionName))))))))
 
 
 ;; Creates an instance create info structure
 (defun create-instance-info (instance-flags app-info enabled-layers enabled-extensions)
 
   ;; Create strings and array of strings
-  (let ((enabled-layers-str     (cffi:foreign-alloc :string :initial-contents enabled-layers)) ; Cambiar por allocs
+  (let ((enabled-layers-str     (cffi:foreign-alloc :string :initial-contents enabled-layers))
         (enabled-extensions-str (cffi:foreign-alloc :string :initial-contents enabled-extensions)))
 
     ;; Create instance info
@@ -132,9 +128,9 @@
   (cffi:with-foreign-slots ((enabledLayerCount ppEnabledLayerNames enabledExtensionCount ppEnabledExtensionNames)
                             instance-info (:struct VkInstanceCreateInfo))
     (loop for i from 0 below enabledLayerCount
-      do (cffi:foreign-string-free (cffi:mem-aref ppEnabledLayerNames :string i)))
+      do (cffi:foreign-string-free (cffi:mem-aptr ppEnabledLayerNames :string i)))
     (loop for i from 0 below enabledExtensionCount
-      do (cffi:foreign-string-free (cffi:mem-aref ppEnabledExtensionNames :string i)))
+      do (cffi:foreign-string-free (cffi:mem-aptr ppEnabledExtensionNames :string i)))
 
     ;; Destroy arrays
     (cffi:foreign-free ppEnabledLayerNames)
@@ -145,12 +141,9 @@
 
 
 ;; With application info wrapper
-(defmacro with-instance-info (var-args &body body)
-  (let ((var  (first var-args))
-        (args (rest var-args)))
-    `(let ((,var (create-instance-info ,@args)))
-       ,@body
-       (destroy-instance-info ,var))))
+(defwith with-instance-info
+         create-instance-info
+         destroy-instance-info)
 
 
 ;;; -------------------------
@@ -160,22 +153,16 @@
 ;; Creates the vulkan instance
 (defun create-vulkan-instance (&optional (validation t))
 
-  (format t "Hola1")
-
   ;; Application info
   (with-application-info (app-info "Common Vulkan example" (make-version 0 1 1) "Common Vulkan"
                                    (make-version 0 1 1) (make-version 1 0 0))
-      (format t "Hola1.5")
       ;; Layers and extensions
       (let ((required-layers     (get-required-layers validation))
-            (required-extensions (progn (format t "Hola1.7") (get-required-extensions))))
-        (format t "Hola2")
+            (required-extensions (get-required-extensions)))
         (when (not (check-required-layers required-layers))
-          (error 'create-instance "Required layers not present"))
+          (error "Required layers not present"))
         (when (not (check-required-extensions required-extensions))
-          (error 'create-instance "Required extensions not present"))
-
-        (format t "Hola3")
+          (error "Required extensions not present"))
 
         ;; Instance info
         (with-instance-info (instance-info 0 app-info required-layers required-extensions)
@@ -184,23 +171,20 @@
           (cffi:with-foreign-object (instance-ptr 'VkInstance)
             (let ((result (vkCreateInstance instance-info (cffi:null-pointer) instance-ptr)))
               (check-result result)
-              (make-instance (cffi:mem-ref instance-ptr 'VkInstance)
-                             required-layers
-                             required-extensions)))))))
+              (make-vulkan-instance :vk-instance (cffi:mem-ref instance-ptr 'VkInstance)
+                                    :layers required-layers
+                                    :extensions required-extensions)))))))
 
 
 ;; Destroyes a vulkan instance
 (defun destroy-vulkan-instance (instance)
-  (vkDestroyInstance instance (cffi:null-pointer)))
+  (vkDestroyInstance (vulkan-instance-vk-instance instance) (cffi:null-pointer)))
 
 
 ;; With macro for vulkan instance
-(defmacro with-vulkan-instance (var-args &body body)
-  (let ((var  (first var-args))
-        (args (rest var-args)))
-    `(let ((,var (create-vulkan-instance ,@args)))
-       ,@body
-       (destroy-vulkan-instance ,var))))
+(defwith with-vulkan-instance
+         create-vulkan-instance
+         destroy-vulkan-instance)
 
 
 ;; Returns the layers from a given instance
