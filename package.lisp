@@ -6,5 +6,5 @@
     #:create-vulkan-instance
     #:destroy-vulkan-instance
     #:with-vulkan-instance
-    #:get-enabled-layers
-    #:get-enabled-extensions))
+    #:get-vulkan-instance-enabled-layers
+    #:get-vulkan-instance-enabled-extensions))

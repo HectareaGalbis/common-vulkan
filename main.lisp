@@ -1,10 +1,19 @@
 
-(glfw:init)
 
-(cvk:with-vulkan-instance (instance t)
-  (format t "Dentro de vulkan-instance~%")
-  4)
+(defun main ()
 
-(format t "Por fin~%")
+  (glfw:with-glfw
 
-(glfw:terminate)
+    (cvk:with-vulkan-instance (instance t)
+      (loop for extension in (cvk:get-vulkan-instance-enabled-extensions instance)
+        do (print extension)))
+
+    (format t "Por fin~%")
+
+    (unwind-protect
+      (unwind-protect
+        (* 1 0)
+        (print "Primero"))
+      (print "Segundo"))
+
+    (print "Tercero")))
