@@ -29,7 +29,7 @@ Destroys an instance.
 
 Wraps the body expressions with the creation and destruction of an instance. The instance is bound to `instance-var` and `args` are passed to `create-instance`.
 
-## get-instance-enabled-layers
+## get-vulkan-instance-enabled-layers
 
 ```
 (get-instance-enabled-layers instance)
@@ -39,7 +39,7 @@ Retrieves the enabled layers from `instance`.
 
 * **instance**: The instance the layers are retrieved from.
 
-## get-instance-extensions
+## get-vulkan-instance-enabled-extensions
 
 ```
 (get-instance-extensions instance)
