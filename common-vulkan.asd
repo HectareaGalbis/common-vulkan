@@ -12,5 +12,6 @@
                 (:file "vulkan/vk-funcs")
 
                 ; Common Vulkan
-                (:file "src/instance")))
-                
+                (:file "src/instance")
+                (:file "src/window")
+                (:file "src/surface")))
