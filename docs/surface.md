@@ -28,4 +28,4 @@ Destroys a surface.
 (with-surface (var instance window) &body body)
 ```
 
-Wraps `body` with the creation and destruction of a surface.
+Wraps `body` with the creation and destruction of a surface. `var` is bound to the created surface.
