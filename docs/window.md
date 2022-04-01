@@ -29,5 +29,5 @@ Destroys the specified window.
 (with-window (var &rest args) &body body)
 ```
 
-Wraps the body with the creation and destruction of a window. The args are passed to the constructor of the window.
+Wraps the body with the creation and destruction of a window. The `args` are passed to the constructor of the window. `var` is bound to the new window.
 
