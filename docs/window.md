@@ -26,8 +26,8 @@ Destroys the specified window.
 ## with-window
 
 ```lisp
-(with-window (var &rest args) &body body)
+(with-window (var name width height) &body body)
 ```
 
-Wraps the body with the creation and destruction of a window. The `args` are passed to the constructor of the window. `var` is bound to the new window.
+Wraps the body with the creation and destruction of a window. `var` is bound to the new window.
 
