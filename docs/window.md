@@ -13,3 +13,21 @@ Creates a window named `name`, and with dimensions `width` and `height`.
 * **width**: The width of the window.
 * **height**: The height of the window.
 
+## destroy-window
+
+```lisp
+(destroy-window window)
+```
+
+Destroys the specified window.
+
+* **window**: The window to be destroyed.
+
+## with-window
+
+```lisp
+(with-window (var &rest args) &body body)
+```
+
+Wraps the body with the creation and destruction of a window. The args are passed to the constructor of the window.
+
