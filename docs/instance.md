@@ -24,10 +24,10 @@ Destroys an instance.
 ## with-instance (macro)
 
 ```
-(with-instance (instance-var args ...) &body body)
+(with-instance (var &optional (validation t)) &body body)
 ```
 
-Wraps the body expressions with the creation and destruction of an instance. The instance is bound to `instance-var` and `args` are passed to `create-instance`.
+Wraps the body expressions with the creation and destruction of an instance. The `var` is bound to the created instance.
 
 ## get-vulkan-instance-enabled-layers
 
