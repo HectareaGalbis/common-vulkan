@@ -74,18 +74,20 @@
 
 
 ;; Defines a with macro named name, using a constructor and a destructor
-;; The constructor can receive zero or more arguments
-;; The destructor must receive only one argument. This argument is the one which the constructor creates
+;; The constructor can receive zero or more arguments and can return one or more values
+;; The destructor must receive only one argument. This argument is the first value the constructor returns
 (defmacro defwith (name create destroy)
   (let ((var-args (gensym "var-args"))
         (var-sym  (gensym "var"))
         (args-sym (gensym "args")))
     `(defmacro ,name (,var-args &body body)
-      (let ((,var-sym    (first ,var-args))
+      (let ((,var-sym    (if (listp (first ,var-args))
+                             (first ,var-args)
+                             (list ,var-args)))
             (,args-sym   (rest ,var-args))
             (create-sym  ',create)
             (destroy-sym ',destroy))
-        `(let* ((,,var-sym (,create-sym ,@,args-sym)))
+        `(multiple-value-bind ,,var-sym (,create-sym ,@,args-sym)
           (unwind-protect
             (progn ,@body)
-            (,destroy-sym ,,var-sym)))))))
+            (,destroy-sym ,(first ,var-sym))))))))
