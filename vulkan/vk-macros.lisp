@@ -83,7 +83,7 @@
     `(defmacro ,name (,var-args &body body)
       (let ((,var-sym    (if (listp (first ,var-args))
                              (first ,var-args)
-                             (list ,var-args)))
+                             (list (first ,var-args))))
             (,args-sym   (rest ,var-args))
             (create-sym  ',create)
             (destroy-sym ',destroy))

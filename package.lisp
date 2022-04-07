@@ -19,4 +19,9 @@
     ;; Surface
     #:create-surface
     #:destroy-surface
-    #:with-surface))
+    #:with-surface
+
+    ;; Physical device
+    #:get-physical-device
+    #:with-physical-device
+    #:get-device-queues-properties))

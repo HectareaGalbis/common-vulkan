@@ -5,7 +5,6 @@
                 ; Vulkan
                 (:file "vulkan/load-vulkan")
                 (:file "package")
-                #|(:file "vulkan/package")|#
                 (:file "vulkan/vk-types")
                 (:file "vulkan/s-type-table")
                 (:file "vulkan/vk-macros")
@@ -14,4 +13,5 @@
                 ; Common Vulkan
                 (:file "src/instance")
                 (:file "src/window")
-                (:file "src/surface")))
+                (:file "src/surface")
+                (:file "src/physical-device")))
