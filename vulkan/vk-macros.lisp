@@ -45,19 +45,22 @@
 
 
 ;; Assigns the value 0 to all slots of p
-(defun zero-struct (p struct-typespec)
-  (loop for i from 0 below (cffi:foreign-type-size struct-typespec)
-     do (setf (cffi:mem-aref p :unsigned-char i) 0))
-  (values))
+#|(defun zero-struct (p struct-typespec)
+    (loop for i from 0 below (cffi:foreign-type-size struct-typespec)
+       do (setf (cffi:mem-aref p :unsigned-char i) 0))
+    (values))|#
 
+;; memset from C standard library
+(cffi:defcfun "memset" :pointer
+  (str :pointer) (c :int) (n :size))
 
 ;; Wraps a body creating a vulkan object with all of its slots being 0.
-(defmacro with-vulkan-object ((p-info struct-type) &body body)
-             (let ((p-info-sym (gensym)) (struct-type-sym (gensym)))
-               `(let ((,p-info-sym ,p-info) (,struct-type-sym ,struct-type))
-                  (cffi:with-foreign-object (,p-info-sym '(:struct ,struct-type-sym))
-                                            (zero-struct ,p-info-sym '(:struct ,struct-type-sym))
-                                            ,@body))))
+(defmacro with-vulkan-object ((p-info struct-type &optional (count 1)) &body body)
+  (let ((p-info-sym (gensym)) (struct-type-sym (gensym)))
+    `(let ((,p-info-sym ,p-info) (,struct-type-sym ,struct-type))
+       (cffi:with-foreign-object (,p-info-sym '(:struct ,struct-type-sym) ,count)
+                                 (memset ,p-info-sym 0 (* (cffi:foreign-type-size '(:struct ,struct-type-sym)) ,count))
+                                 ,@body))))
 
 
 ;; Creates an integer representing an vulkan version

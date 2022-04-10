@@ -217,7 +217,7 @@
 ;; Returns a device verifying some requirements
 (defun create-vk-physical-device (instance &key (surface nil) (device-type VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU)
                                                 (extensions (list "VK_KHR_swapchain"))
-                                                (queue-flags (logior VK_QUEUE_GRAPHICS_BIT VK_QUEUE_TRANSFER_BIT VK_QUEUE_COMPUTE_BIT))
+                                                (queue-flags (logior VK_QUEUE_GRAPHICS_BIT VK_QUEUE_TRANSFER_BIT))
                                                 (features nil))
   (let ((instance-ptr (vk-instance-instance-ptr instance))
         (surface-ptr  (and surface (vk-surface-surface-ptr surface))))
@@ -230,8 +230,8 @@
                                                (implies surface-ptr  (check-surface-presentation-support physical-device-ptr surface-ptr))
                                                physical-device-ptr))))
       (when (not the-physical-device)
-        (error "get-physical-device error: No valid physical device found")
-        (make-vk-physical-device :physical-device-ptr the-physical-device)))))
+        (error "get-physical-device error: No valid physical device found"))
+      (make-vk-physical-device :physical-device-ptr the-physical-device))))
 
 
 ;; With physical-device macro

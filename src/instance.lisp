@@ -20,7 +20,7 @@
 
     ;; Create application info
     (let ((app-info (cffi:foreign-alloc '(:struct VkApplicationInfo))))
-      (zero-struct app-info '(:struct VkApplicationInfo))
+      (memset app-info 0 (cffi:foreign-type-size '(:struct VkApplicationInfo)))
       (cffi:with-foreign-slots ((sType pApplicationName applicationVersion pEngineName engineVersion apiVersion)
                                 app-info (:struct VkApplicationInfo))
         (setf sType              VK_STRUCTURE_TYPE_APPLICATION_INFO
@@ -106,7 +106,7 @@
 
     ;; Create instance info
     (let ((instance-info (cffi:foreign-alloc '(:struct VkInstanceCreateInfo))))
-      (zero-struct instance-info '(:struct VkInstanceCreateInfo))
+      (memset instance-info 0 (cffi:foreign-type-size '(:struct VkInstanceCreateInfo)))
       (cffi:with-foreign-slots ((sType flags pApplicationInfo enabledLayerCount
                                  ppEnabledLayerNames enabledExtensionCount ppEnabledExtensionNames)
                                 instance-info (:struct VkInstanceCreateInfo))
