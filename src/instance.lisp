@@ -2,8 +2,8 @@
 (in-package :cvk)
 
 ; Instance struct
-(defstruct vulkan-instance
-  vk-instance
+(defstruct vk-instance
+  instance-ptr
   layers
   extensions)
 
@@ -151,7 +151,7 @@
 ;;; -------------------------
 
 ;; Creates the vulkan instance
-(defun create-vulkan-instance (&optional (validation t))
+(defun create-vk-instance (&optional (validation t))
 
   ;; Application info
   (with-application-info (app-info "Common Vulkan example" (make-version 0 1 1) "Common Vulkan"
@@ -171,27 +171,17 @@
           (cffi:with-foreign-object (instance-ptr 'VkInstance)
             (let ((result (vkCreateInstance instance-info (cffi:null-pointer) instance-ptr)))
               (check-result result)
-              (make-vulkan-instance :vk-instance (cffi:mem-ref instance-ptr 'VkInstance)
-                                    :layers required-layers
-                                    :extensions required-extensions)))))))
+              (make-vk-instance :instance-ptr (cffi:mem-ref instance-ptr 'VkInstance)
+                                :layers       required-layers
+                                :extensions   required-extensions)))))))
 
 
 ;; Destroyes a vulkan instance
-(defun destroy-vulkan-instance (instance)
-  (vkDestroyInstance (vulkan-instance-vk-instance instance) (cffi:null-pointer)))
+(defun destroy-vk-instance (instance)
+  (vkDestroyInstance (vk-instance-instance-ptr instance) (cffi:null-pointer)))
 
 
 ;; With macro for vulkan instance
-(defwith with-vulkan-instance
-         create-vulkan-instance
-         destroy-vulkan-instance)
-
-
-;; Returns the layers from a given instance
-(defun get-vulkan-instance-enabled-layers (instance)
-  (vulkan-instance-layers instance))
-
-
-;; Returns the extensions from a given instance
-(defun get-vulkan-instance-enabled-extensions (instance)
-  (vulkan-instance-extensions instance))
+(defwith with-vk-instance
+         create-vk-instance
+         destroy-vk-instance)

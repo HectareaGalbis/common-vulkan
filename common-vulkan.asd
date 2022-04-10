@@ -14,4 +14,5 @@
                 (:file "src/instance")
                 (:file "src/window")
                 (:file "src/surface")
-                (:file "src/physical-device")))
+                (:file "src/physical-device")
+                (:file "src/queue-family")))

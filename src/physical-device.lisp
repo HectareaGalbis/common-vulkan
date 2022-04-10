@@ -1,10 +1,14 @@
 
 (in-package :cvk)
 
+;;; -------------------------
+;;; -------- Structs --------
+;;; -------------------------
 
 ;; physical device struct
-(defstruct physical-device
-  vk-physical-device)
+(defstruct vk-physical-device
+  physical-device-ptr)
+
 
 ;;; -------------------------
 ;;; --- Private functions ---
@@ -15,34 +19,34 @@
   (if x y t))
 
 ;; Returns a list of available devices
-(defun enumerate-physical-devices (vk-instance)
+(defun enumerate-physical-devices (instance-ptr)
   (cffi:with-foreign-object (physical-device-count-ptr :uint32)
-    (let ((result (vkEnumeratePhysicalDevices vk-instance physical-device-count-ptr (cffi:null-pointer))))
+    (let ((result (vkEnumeratePhysicalDevices instance-ptr physical-device-count-ptr (cffi:null-pointer))))
       (check-result result)
       (let ((physical-device-count (cffi:mem-ref physical-device-count-ptr :uint32)))
         (when (not (> physical-device-count 0))
           (error "enumerate-physical-devices error: No physical devices found"))
         (cffi:with-foreign-object (physical-devices-ptr 'VKPhysicalDevice physical-device-count)
-          (vkEnumeratePhysicalDevices vk-instance physical-device-count-ptr physical-devices-ptr)
+          (vkEnumeratePhysicalDevices instance-ptr physical-device-count-ptr physical-devices-ptr)
           (loop for i from 0 below physical-device-count
             collect (cffi:mem-aref physical-devices-ptr 'VKPhysicalDevice i)))))))
 
 
 ;; Checks the type of a device
-(defun check-device-type (vk-physical-device type)
+(defun check-device-type (physical-device-ptr type)
   (cffi:with-foreign-object (properties-ptr '(:struct VkPhysicalDeviceProperties))
-    (vkGetPhysicalDeviceProperties vk-physical-device properties-ptr)
+    (vkGetPhysicalDeviceProperties physical-device-ptr properties-ptr)
     (equal (cffi:foreign-slot-value properties-ptr '(:struct VkPhysicalDeviceProperties) 'deviceType) type)))
 
 
 ;; Returns the available device extensions
-(defun get-available-extensions (vk-physical-device)
+(defun get-available-extensions (physical-device-ptr)
   (cffi:with-foreign-object (extension-count-ptr :uint32)
-    (vkEnumerateDeviceExtensionProperties vk-physical-device (cffi:null-pointer)
+    (vkEnumerateDeviceExtensionProperties physical-device-ptr (cffi:null-pointer)
                                           extension-count-ptr (cffi:null-pointer))
     (let ((extension-count (cffi:mem-ref extension-count-ptr :uint32)))
       (cffi:with-foreign-object (available-extensions-ptr '(:struct VkExtensionProperties) extension-count)
-        (vkEnumerateDeviceExtensionProperties vk-physical-device (cffi:null-pointer)
+        (vkEnumerateDeviceExtensionProperties physical-device-ptr (cffi:null-pointer)
                                               extension-count-ptr available-extensions-ptr)
         (loop for i from 0 below extension-count
           collect (cffi:foreign-string-to-lisp (cffi:foreign-slot-value (cffi:mem-aptr available-extensions-ptr
@@ -51,53 +55,53 @@
 
 
 ;; Checks the availability of device extensions
-(defun check-device-extensions (vk-physical-device required-extensions)
-  (let ((available-extensions (get-available-extensions vk-physical-device)))
+(defun check-device-extensions (physical-device-ptr required-extensions)
+  (let ((available-extensions (get-available-extensions physical-device-ptr)))
     (loop for required-extension in required-extensions
       always (loop for available-extension in available-extensions
                thereis (equal required-extension available-extension)))))
 
 
 ;; Returns the family queue properties from a device
-(defun get-family-queues-properties (vk-physical-device)
+(defun get-queue-family-properties (physical-device-ptr)
   (cffi:with-foreign-object (family-queue-count-ptr :uint32)
-    (vkGetPhysicalDeviceQueueFamilyProperties vk-physical-device family-queue-count-ptr (cffi:null-pointer))
+    (vkGetPhysicalDeviceQueueFamilyProperties physical-device-ptr family-queue-count-ptr (cffi:null-pointer))
     (let* ((family-queue-count (cffi:mem-ref family-queue-count-ptr :uint32))
-           (family-queues-properties-ptr (cffi:foreign-alloc '(:struct VkQueueFamilyProperties) :count family-queue-count)))
-      (vkGetPhysicalDeviceQueueFamilyProperties vk-physical-device family-queue-count-ptr family-queues-properties-ptr)
-      (values family-queues-properties-ptr family-queue-count))))
+           (queue-family-properties-ptr (cffi:foreign-alloc '(:struct VkQueueFamilyProperties) :count family-queue-count)))
+      (vkGetPhysicalDeviceQueueFamilyProperties physical-device-ptr family-queue-count-ptr queue-family-properties-ptr)
+      (values queue-family-properties-ptr family-queue-count))))
 
 ;; Frees the array creted in get-family-queues-properties
-(defun free-family-queues-properties (family-queues-properties-ptr)
-  (cffi:foreign-free family-queues-properties-ptr))
+(defun free-queue-family-properties (queue-family-properties-ptr)
+  (cffi:foreign-free queue-family-properties-ptr))
 
 ;; With family properties macro
-(defwith with-family-queues-properties
-         get-family-queues-properties
-         free-family-queues-properties)
+(defwith with-queue-family-properties
+         get-queue-family-properties
+         free-queue-family-properties)
 
 
 ;; Checks the validity of family queues from a device
-(defun check-queue-family-validity (vk-physical-device required-flags &optional (vk-surface nil))
-  (with-family-queues-properties ((family-queues-properties-ptr family-queue-count) vk-physical-device)
+(defun check-queue-family-validity (physical-device-ptr required-flags &optional (surface-ptr nil))
+  (with-queue-family-properties ((queue-family-properties-ptr family-queue-count) physical-device-ptr)
     (loop for i from 0 below family-queue-count
-          for family-property = (cffi:mem-aptr family-queues-properties-ptr '(:struct VkQueueFamilyProperties) i)
+          for family-property = (cffi:mem-aptr queue-family-properties-ptr '(:struct VkQueueFamilyProperties) i)
           for saved-flags = (logand (cffi:foreign-slot-value family-property
                                                              '(:struct VkQueueFamilyProperties) 'queueFlags)
                                     required-flags)
-          and saved-present-queue = (implies vk-surface
+          and saved-present-queue = (implies surface-ptr
                                              (cffi:with-foreign-object (present-queue-ptr 'VkBool32)
-                                               (vkGetPhysicalDeviceSurfaceSupportKHR vk-physical-device i
-                                                                                     vk-surface present-queue-ptr)
+                                               (vkGetPhysicalDeviceSurfaceSupportKHR physical-device-ptr i
+                                                                                     surface-ptr present-queue-ptr)
                                                (or saved-present-queue (equal (cffi:mem-ref present-queue-ptr 'VkBool32) VK_TRUE))))
           when (and (equal saved-flags required-flags) saved-present-queue)
             return it)))
 
 
 ;; Checks the features availability of a device
-(defun check-available-features (vk-physical-device features)
+(defun check-available-features (physical-device-ptr features)
   (cffi:with-foreign-object (vk-supported-features '(:struct VkPhysicalDeviceFeatures))
-    (vkGetPhysicalDeviceFeatures vk-physical-device vk-supported-features)
+    (vkGetPhysicalDeviceFeatures physical-device-ptr vk-supported-features)
     (flet ((vk-check-feature (feature)
              (equal (cffi:foreign-slot-value vk-supported-features '(:struct VkPhysicalDeviceFeatures) feature)
                     VK_TRUE)))
@@ -106,9 +110,9 @@
 
 
 ;; Returns the capabilities of a surface
-(defun create-surface-capabilities (vk-physical-device vk-surface)
+(defun create-surface-capabilities (physical-device-ptr surface-ptr)
   (let ((capabilities-ptr (cffi:foreign-alloc '(:struct VkSurfaceCapabilitiesKHR))))
-    (vkGetPhysicalDeviceSurfaceCapabilitiesKHR vk-physical-device vk-surface capabilities-ptr)
+    (vkGetPhysicalDeviceSurfaceCapabilitiesKHR physical-device-ptr surface-ptr capabilities-ptr)
     capabilities-ptr))
 
 ;; Destroys the capabilities surface struct
@@ -122,12 +126,12 @@
 
 
 ;; Returns the available surface formats of a device and the count of surface formats
-(defun create-surface-formats (vk-physical-device vk-surface)
+(defun create-surface-formats (physical-device-ptr surface-ptr)
   (cffi:with-foreign-object (format-count-ptr :uint32)
-    (vkGetPhysicalDeviceSurfaceFormatsKHR vk-physical-device vk-surface format-count-ptr (cffi:null-pointer))
+    (vkGetPhysicalDeviceSurfaceFormatsKHR physical-device-ptr surface-ptr format-count-ptr (cffi:null-pointer))
     (let* ((format-count (cffi:mem-ref format-count-ptr :uint32))
            (formats-ptr (cffi:foreign-alloc '(:struct VkSurfaceFormatKHR) :count format-count)))
-      (vkGetPhysicalDeviceSurfaceFormatsKHR vk-physical-device vk-surface format-count-ptr formats-ptr)
+      (vkGetPhysicalDeviceSurfaceFormatsKHR physical-device-ptr surface-ptr format-count-ptr formats-ptr)
       (values formats-ptr format-count))))
 
 ;; Frees a surface formats pointer.
@@ -141,12 +145,12 @@
 
 
 ;; Returns the present modes of a surface and the count of present modes
-(defun create-surface-present-modes (vk-physical-device vk-surface)
+(defun create-surface-present-modes (physical-device-ptr surface-ptr)
   (cffi:with-foreign-object (mode-count-ptr :uint32)
-    (vkGetPhysicalDeviceSurfacePresentModesKHR vk-physical-device vk-surface mode-count-ptr (cffi:null-pointer))
+    (vkGetPhysicalDeviceSurfacePresentModesKHR physical-device-ptr surface-ptr mode-count-ptr (cffi:null-pointer))
     (let* ((mode-count (cffi:mem-ref mode-count-ptr :uint32))
            (present-modes-ptr (cffi:foreign-alloc 'VkPresentModeKHR :count mode-count)))
-      (vkGetPhysicalDeviceSurfacePresentModesKHR vk-physical-device vk-surface mode-count-ptr present-modes-ptr)
+      (vkGetPhysicalDeviceSurfacePresentModesKHR physical-device-ptr surface-ptr mode-count-ptr present-modes-ptr)
       (values present-modes-ptr mode-count))))
 
 ;; Frees a surface present modes pointer
@@ -160,17 +164,17 @@
 
 
 ;; Check a surface validity
-(defun check-surface-presentation-support (vk-physical-device vk-surface)
-  (with-surface-formats ((formats-ptr format-count) vk-physical-device vk-surface)
-    (with-surface-present-modes ((modes-ptr mode-count) vk-physical-device vk-surface)
+(defun check-surface-presentation-support (physical-device-ptr surface-ptr)
+  (with-surface-formats ((formats-ptr format-count) physical-device-ptr surface-ptr)
+    (with-surface-present-modes ((modes-ptr mode-count) physical-device-ptr surface-ptr)
       (and (> format-count 0) (> mode-count 0)))))
 
 
 ;; Returns a memory type verifying specific requirements
 ;; Returns nil if not memory type found
-(defun get-memory-type (vk-physical-device type-filter property-flags)
+(defun get-memory-type (physical-device-ptr type-filter property-flags)
   (cffi:with-foreign-object (mem-properties-ptr '(:struct VkPhysicalDeviceMemoryProperties))
-    (vkGetPhysicalDeviceMemoryProperties vk-physical-device mem-properties-ptr)
+    (vkGetPhysicalDeviceMemoryProperties physical-device-ptr mem-properties-ptr)
     (cffi:with-foreign-slots ((memoryTypeCount memoryTypes) mem-properties-ptr (:struct VkPhysicalDeviceMemoryProperties))
       (let ((the-type (loop for i from 0 below memoryTypeCount
                         thereis (if (and (not (zerop (logand type-filter (ash 1 i))))
@@ -185,10 +189,10 @@
 
 
 ;; Returns a format verifying some requirements
-(defun get-format (vk-physical-device possible-formats tiling features)
+(defun get-format (physical-device-ptr possible-formats tiling features)
   (let ((the-format (loop for format in possible-formats
                       thereis (cffi:with-foreign-object (format-properties-ptr '(:struct VkFormatProperties))
-                                (vkGetPhysicalDeviceFormatProperties vk-physical-device format format-properties-ptr)
+                                (vkGetPhysicalDeviceFormatProperties physical-device-ptr format format-properties-ptr)
                                 (cffi:with-foreign-slots ((linearTilingFeatures optimalTilingFeatures)
                                                           format-properties-ptr (:struct VkFormatProperties))
                                   (cond
@@ -211,30 +215,24 @@
 ;;; -------------------------
 
 ;; Returns a device verifying some requirements
-(defun get-physical-device (instance &key (surface nil) (device-type VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU)
-                            (extensions (list "VK_KHR_swapchain"))
-                            (queue-flags (logior VK_QUEUE_GRAPHICS_BIT VK_QUEUE_TRANSFER_BIT VK_QUEUE_COMPUTE_BIT))
-                            (features nil))
-  (let ((vk-instance (vulkan-instance-vk-instance instance))
-        (vk-surface  (and surface (surface-vk-surface surface))))
-    (let ((physical-devices (enumerate-physical-devices vk-instance)))
-      (let ((the-physical-device (loop for vk-physical-device in physical-devices
-                                   thereis (and (implies device-type (check-device-type vk-physical-device device-type))
-                                                (implies extensions  (check-device-extensions vk-physical-device extensions))
-                                                (check-queue-family-validity vk-physical-device queue-flags vk-surface)
-                                                (implies features    (check-available-features vk-physical-device features))
-                                                (implies vk-surface  (check-surface-presentation-support vk-physical-device vk-surface))
-                                                vk-physical-device))))
-        (when (not the-physical-device)
-          (error "get-physical-device error: No valid physical device found")
-          (make-physical-device :vk-physical-device the-physical-device))))))
+(defun create-vk-physical-device (instance &key (surface nil) (device-type VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU)
+                                                (extensions (list "VK_KHR_swapchain"))
+                                                (queue-flags (logior VK_QUEUE_GRAPHICS_BIT VK_QUEUE_TRANSFER_BIT VK_QUEUE_COMPUTE_BIT))
+                                                (features nil))
+  (let ((instance-ptr (vk-instance-instance-ptr instance))
+        (surface-ptr  (and surface (vk-surface-surface-ptr surface))))
+    (let* ((physical-devices (enumerate-physical-devices instance-ptr))
+           (the-physical-device (loop for physical-device-ptr in physical-devices
+                                  thereis (and (implies device-type (check-device-type physical-device-ptr device-type))
+                                               (implies extensions  (check-device-extensions physical-device-ptr extensions))
+                                               (check-queue-family-validity physical-device-ptr queue-flags surface-ptr)
+                                               (implies features    (check-available-features physical-device-ptr features))
+                                               (implies surface-ptr  (check-surface-presentation-support physical-device-ptr surface-ptr))
+                                               physical-device-ptr))))
+      (when (not the-physical-device)
+        (error "get-physical-device error: No valid physical device found")
+        (make-vk-physical-device :physical-device-ptr the-physical-device)))))
 
 
 ;; With physical-device macro
-(defwith with-physical-device get-physical-device values)
-
-
-;; Returns the family queues properties from a device
-#|(defun get-device-queues-properties (physical-device)
-    (let ((vk-physical-device (physical-device-vk-physical-device physical-device)))
-      (get-family-queues-properties vk-physical-device)))|#
+(defwith with-vk-physical-device create-vk-physical-device values)

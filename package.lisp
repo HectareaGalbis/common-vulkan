@@ -4,24 +4,30 @@
   (:nicknames :cvk)
   (:export
 
+    ;; Helpers
+    #:nest
+
     ;; Vulkan instance
-    #:create-vulkan-instance
-    #:destroy-vulkan-instance
-    #:with-vulkan-instance
-    #:get-vulkan-instance-enabled-layers
-    #:get-vulkan-instance-enabled-extensions
+    #:create-vk-instance
+    #:destroy-vk-instance
+    #:with-vk-instance
+    #:vk-instance-layers
+    #:vk-instance-extensions
 
     ;; Window
-    #:create-window
-    #:destroy-window
-    #:with-window
+    #:create-glfw-window
+    #:destroy-glfw-window
+    #:with-glfw-window
 
     ;; Surface
-    #:create-surface
-    #:destroy-surface
-    #:with-surface
+    #:create-vk-surface
+    #:destroy-vk-surface
+    #:with-vk-surface
 
     ;; Physical device
-    #:get-physical-device
-    #:with-physical-device
-    #:get-device-queues-properties))
+    #:create-vk-physical-device
+    #:with-vk-physical-device
+
+    ;; Queue family
+    #:vk-physical-device-queue-families
+    #:vk-physical-device-queue-family))

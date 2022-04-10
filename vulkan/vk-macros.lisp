@@ -91,3 +91,9 @@
           (unwind-protect
             (progn ,@body)
             (,destroy-sym ,(first ,var-sym))))))))
+
+
+;; Works like a let, but accepts macros whose last expression must be a body or forms* expression.
+;; This allows to avoid deep indentation.
+(defmacro nest (clauses &body body)
+  (first (reduce (lambda (c d) (list (append c d))) clauses :from-end t :initial-value body)))

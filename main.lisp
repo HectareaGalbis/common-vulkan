@@ -3,11 +3,12 @@
 
 
 (defun main ()
-  (glfw:with-glfw
-    (cvk:with-vulkan-instance (instance t)
-      (cvk:with-window (window "My window" 640 480)
-        (cvk:with-surface (surface instance window)
-          (cvk:with-physical-device (physical-device instance :surface surface)
-            (sleep 5)
-            (print "Hola")
-            (values)))))))
+  (cvk:nest ((glfw:with-glfw)
+             (cvk:with-vk-instance (instance t))
+             (cvk:with-glfw-window (window "My window" 640 480))
+             (let ((seconds 5) (text "Hello world")))
+             (cvk:with-vk-surface (surface instance window))
+             (cvk:with-vk-physical-device (physical-device instance :surface surface)))
+    (sleep seconds)
+    (print text)
+    (values)))

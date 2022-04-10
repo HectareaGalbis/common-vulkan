@@ -3,9 +3,9 @@
 
 
 ;; Struct surface
-(defstruct surface
-  vk-instance
-  vk-surface)
+(defstruct vk-surface
+  instance-ptr
+  surface-ptr)
 
 
 ;;; -------------------------
@@ -13,11 +13,11 @@
 ;;; -------------------------
 
 ;; Creates a vulkan surface from a window
-(defun create-window-surface (vk-instance glfw-window)
-  (cffi:with-foreign-object (vk-surface-ptr 'VkSurfaceKHR)
-    (let ((result (glfw:create-window-surface vk-instance glfw-window nil vk-surface-ptr)))
+(defun create-window-surface (instance-ptr window-ptr)
+  (cffi:with-foreign-object (surface-ptr 'VkSurfaceKHR)
+    (let ((result (glfw:create-window-surface instance-ptr window-ptr nil surface-ptr)))
       (check-result result)
-      (cffi:mem-ref vk-surface-ptr 'VkSurfaceKHR))))
+      (cffi:mem-ref surface-ptr 'VkSurfaceKHR))))
 
 
 ;;; -------------------------
@@ -25,19 +25,19 @@
 ;;; -------------------------
 
 ;; Creates a surface
-(defun create-surface (instance window)
-  (let ((vk-instance (vulkan-instance-vk-instance instance))
-        (glfw-window (window-glfw-window window)))
-    (let ((vk-surface (create-window-surface vk-instance glfw-window)))
-      (make-surface :vk-instance vk-instance :vk-surface vk-surface))))
+(defun create-vk-surface (instance window)
+  (let ((instance-ptr (vk-instance-instance-ptr instance))
+        (window-ptr (glfw-window-window-ptr window)))
+    (let ((surface-ptr (create-window-surface instance-ptr window-ptr)))
+      (make-vk-surface :instance-ptr instance-ptr :surface-ptr surface-ptr))))
 
 
 ;; Destroys a surface
-(defun destroy-surface (surface)
-  (let ((vk-instance (surface-vk-instance surface))
-        (vk-surface  (surface-vk-surface surface)))
-    (vkDestroySurfaceKHR vk-instance vk-surface (cffi:null-pointer))))
+(defun destroy-vk-surface (surface)
+  (let ((instance-ptr (vk-surface-instance-ptr surface))
+        (surface-ptr  (vk-surface-surface-ptr surface)))
+    (vkDestroySurfaceKHR instance-ptr surface-ptr (cffi:null-pointer))))
 
 
 ;; With surface macro
-(defwith with-surface create-surface destroy-surface)
+(defwith with-vk-surface create-vk-surface destroy-vk-surface)
