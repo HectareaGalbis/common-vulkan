@@ -1,7 +1,6 @@
 
 (asdf:load-system "common-vulkan")
 
-
 (defun main ()
   (cvk:nest ((glfw:with-glfw)
              (cvk:with-vk-instance (instance t))

@@ -57,7 +57,7 @@
 ;;; -------------------------
 
 ;; Returns a list of family queues that verifies some conditions
-(defun physical-device-ptr-queue-families (physical-device &key (queue-flags (logior VK_QUEUE_GRAPHICS_BIT VK_QUEUE_TRANSFER_BIT)))
+(defun vk-physical-device-queue-families (physical-device &key (queue-flags (logior VK_QUEUE_GRAPHICS_BIT VK_QUEUE_TRANSFER_BIT)))
                              (min-queue-count 0) (surface nil) (exclusive-flags nil)
                              (family-exceptions nil)
   (let ((physical-device-ptr (vk-physical-device-physical-device-ptr physical-device))
