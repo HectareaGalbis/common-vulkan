@@ -30,4 +30,9 @@
 
     ;; Queue family
     #:vk-physical-device-queue-families
-    #:vk-physical-device-queue-family))
+    #:vk-physical-device-queue-family
+
+    ;; Device
+    #:create-vk-device
+    #:destroy-vk-device
+    #:with-vk-device))

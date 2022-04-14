@@ -30,7 +30,7 @@
                                         (equal (cffi:mem-ref present-queue-ptr 'VKBool32) VK_TRUE)))
                   (>= property-queue-count min-queue-count)
                   (not (loop for family-exception in family-exceptions
-                             thereis (equal (queue-family-index family-exception) i))))
+                             thereis (equal (vk-queue-family-index family-exception) i))))
             collect (make-vk-queue-family :index i :queue-flags property-flags :queue-count property-queue-count))))
 
 
@@ -48,7 +48,7 @@
                                          (equal (cffi:mem-ref present-queue-ptr 'VKBool32) VK_TRUE)))
                   (>= property-queue-count min-queue-count)
                   (not (loop for family-exception in family-exceptions
-                             thereis (equal (queue-family-index family-exception) i))))
+                             thereis (equal (vk-queue-family-index family-exception) i))))
             return (make-vk-queue-family :index i :queue-flags property-flags :queue-count property-queue-count))))
 
 
@@ -57,9 +57,9 @@
 ;;; -------------------------
 
 ;; Returns a list of family queues that verifies some conditions
-(defun vk-physical-device-queue-families (physical-device &key (queue-flags (logior VK_QUEUE_GRAPHICS_BIT VK_QUEUE_TRANSFER_BIT)))
-                             (min-queue-count 0) (surface nil) (exclusive-flags nil)
-                             (family-exceptions nil)
+(defun vk-physical-device-queue-families (physical-device &key (queue-flags (logior VK_QUEUE_GRAPHICS_BIT VK_QUEUE_TRANSFER_BIT))
+                                                               (min-queue-count 0) (surface nil) (exclusive-flags nil)
+                                                               (family-exceptions nil))
   (let ((physical-device-ptr (vk-physical-device-physical-device-ptr physical-device))
         (surface-ptr (vk-surface-surface-ptr surface)))
     (get-queue-families physical-device-ptr queue-flags min-queue-count surface-ptr exclusive-flags family-exceptions)))

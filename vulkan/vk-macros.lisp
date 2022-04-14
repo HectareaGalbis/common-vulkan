@@ -78,8 +78,8 @@
 
 ;; Defines a with macro named name, using a constructor and a destructor
 ;; The constructor can receive zero or more arguments and can return one or more values
-;; The destructor must receive only one argument. This argument is the first value the constructor returns
-(defmacro defwith (name create destroy)
+;; The destructor must receive 'destructor-arity' arguments. These arguments are the first values the constructor returns
+(defmacro defwith (name create destroy &key (destructor-arity 1))
   (let ((var-args (gensym "var-args"))
         (var-sym  (gensym "var"))
         (args-sym (gensym "args")))
@@ -93,7 +93,7 @@
         `(multiple-value-bind ,,var-sym (,create-sym ,@,args-sym)
           (unwind-protect
             (progn ,@body)
-            (,destroy-sym ,(first ,var-sym))))))))
+            (,destroy-sym ,@(subseq ,var-sym 0 ,destructor-arity))))))))
 
 
 ;; Works like a let, but accepts macros whose last expression must be a body or forms* expression.

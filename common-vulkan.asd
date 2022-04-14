@@ -15,4 +15,5 @@
                 (:file "src/window")
                 (:file "src/surface")
                 (:file "src/physical-device")
-                (:file "src/queue-family")))
+                (:file "src/queue-family")
+                (:file "src/device")))
