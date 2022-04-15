@@ -14,30 +14,41 @@
 
 ;; Creates a list of pointers to queues create infos
 (defun create-queue-create-infos (queue-families)
-  (let ((queue-family-count (length queue-families))
-        (queue-create-infos-ptr (cffi:foreign-alloc '(:struct VkDeviceQueueCreateInfo) :count queue-family-count)))
+  (let* ((queue-family-count (length queue-families))
+         (queue-create-infos-ptr (cffi:foreign-alloc '(:struct VkDeviceQueueCreateInfo) :count queue-family-count)))
     (loop for queue-family in queue-families
           and i from 0 below queue-family-count
           for queue-count           = (vk-queue-family-queue-count queue-family)
           and family-index          = (vk-queue-family-index       queue-family)
           and queue-create-info-ptr = (cffi:mem-aptr queue-create-infos-ptr '(:struct VkDeviceQueueCreateInfo) i)
           for priority-ptr          = (cffi:foreign-alloc :float :count queue-count)
-          do (loop for i from 0 below queue-count (setf (cffi:mem-aref priority-ptr :float i) 1.0))
+          do (loop for i from 0 below queue-count do (setf (cffi:mem-aref priority-ptr :float i) 1.0))
              (cffi:with-foreign-slots ((sType queueFamilyIndex queueCount pQueuePriorities)
-                                       queue-create-info-ptr '(:struct VkDeviceQueueCreateInfo))
+                                       queue-create-info-ptr (:struct VkDeviceQueueCreateInfo))
                (setf sType            VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO
                      queueFamilyIndex family-index
                      queueCount       queue-count
                      pQueuePriorities priority-ptr)))
-    (values queue-create-infos-ptr queue-families)))
+    (values queue-create-infos-ptr queue-family-count)))
+
+(defun print-queue-create-info (queue-create-info-ptr)
+  (cffi:with-foreign-slots ((sType queueFamilyIndex queueCount pQueuePriorities)
+                            queue-create-info-ptr (:struct VkDeviceQueueCreateInfo))
+    (format t "~TsType: ~S~%" sType)
+    (format t "~TqueueFamilyIndex: ~S~%" queueFamilyIndex)
+    (format t "~TqueueCount: ~S~%" queueCount)
+    (format t "~TpQueuePriorities:~%")
+    (loop for i from 0 below queueCount
+          for queuePriority = (cffi:mem-aref pQueuePriorities :float i)
+          do (format t "~T~TqueuePriority: ~S~%" queuePriority))))
 
 ;; Destroys a list of pointers to queue create infos
 (defun destroy-queue-create-infos (queue-create-infos-ptr queue-create-info-count)
   (loop for i from 0 below queue-create-info-count
         for queue-create-info-ptr = (cffi:mem-aptr queue-create-infos-ptr '(:struct VkDeviceQueueCreateInfo) i)
-        do (cffi:with-foreign-slots ((pQueuePriorities) queue-create-info-ptr '(:struct VkDeviceQueueCreateInfo))
+        do (cffi:with-foreign-slots ((pQueuePriorities) queue-create-info-ptr (:struct VkDeviceQueueCreateInfo))
              (cffi:foreign-free pQueuePriorities)))
-  (cffi:foreign-free (first queue-create-infos-ptr)))
+  (cffi:foreign-free queue-create-infos-ptr))
 
 ;; With queue create infos macro
 (defwith with-queue-create-infos
@@ -51,10 +62,15 @@
   (let ((extensions-ptr (cffi:foreign-alloc :string :initial-contents extensions)))
     (values extensions-ptr (length extensions))))
 
+(defun print-device-extensions (extensions-ptr extension-count)
+  (loop for i from 0 below extension-count
+        for extension = (cffi:mem-aref extensions-ptr :string i)
+        do (format t "~Textension: ~S~%" extension)))
+
 ;; Destroys a physical device extensions struct
 (defun destroy-device-extensions (extensions-ptr extension-count)
   (loop for i from 0 below extension-count
-    do (cffi:foreign-free (cffi:mem-aref extensions-ptr :string i)))
+        do (cffi:foreign-string-free (cffi:mem-aptr extensions-ptr :string i)))
   (cffi:foreign-free extensions-ptr))
 
 ;; With device extensions macro
@@ -66,11 +82,69 @@
 
 ;; Creates a physical device features pointer
 (defun create-device-features (features)
-  (let ((device-fetures-ptr (cffi:foreign-alloc '(:struct VkPhysicalDeviceFeatures))))
+  (let ((device-features-ptr (cffi:foreign-alloc '(:struct VkPhysicalDeviceFeatures))))
     (memset device-features-ptr 0 (cffi:foreign-type-size '(:struct VkPhysicalDeviceFeatures)))
-    (loop feature in features
+    (loop for feature in features
       do (setf (cffi:foreign-slot-value device-features-ptr '(:struct VkPhysicalDeviceFeatures) feature) VK_TRUE))
     (values device-features-ptr)))
+
+(defun print-device-features (features-ptr features)
+  (loop for feature in '(robustBufferAccess
+                         fullDrawIndexUint32
+                         imageCubeArray
+                         independentBlend
+                         geometryShader
+                         tessellationShader
+                         sampleRateShading
+                         dualSrcBlend
+                         logicOp
+                         multiDrawIndirect
+                         drawIndirectFirstInstance
+                         depthClamp
+                         depthBiasClamp
+                         fillModeNonSolid
+                         depthBounds
+                         wideLines
+                         largePoints
+                         alphaToOne
+                         multiViewport
+                         samplerAnisotropy
+                         textureCompressionETC2
+                         textureCompressionASTC_LDR
+                         textureCompressionBC
+                         occlusionQueryPrecise
+                         pipelineStatisticsQuery
+                         vertexPipelineStoresAndAtomics
+                         fragmentStoresAndAtomics
+                         shaderTessellationAndGeometryPointSize
+                         shaderImageGatherExtended
+                         shaderStorageImageExtendedFormats
+                         shaderStorageImageMultisample
+                         shaderStorageImageReadWithoutFormat
+                         shaderStorageImageWriteWithoutFormat
+                         shaderUniformBufferArrayDynamicIndexing
+                         shaderSampledImageArrayDynamicIndexing
+                         shaderStorageBufferArrayDynamicIndexing
+                         shaderStorageImageArrayDynamicIndexing
+                         shaderClipDistance
+                         shaderCullDistance
+                         shaderFloat64
+                         shaderInt64
+                         shaderInt16
+                         shaderResourceResidency
+                         shaderResourceMinLod
+                         sparseBinding
+                         sparseResidencyBuffer
+                         sparseResidencyImage2D
+                         sparseResidencyImage3D
+                         sparseResidency2Samples
+                         sparseResidency4Samples
+                         sparseResidency8Samples
+                         sparseResidency16Samples
+                         sparseResidencyAliased
+                         variableMultisampleRate
+                         inheritedQueries)
+        do (format t "~T~S: ~S~%" (symbol-name feature) (cffi:foreign-slot-value features-ptr '(:struct VkPhysicalDeviceFeatures) feature))))
 
 ;; Destroys a physical device features pointer
 (defun destroy-device-features (device-features-ptr)
@@ -87,14 +161,30 @@
   (let ((device-create-info-ptr (cffi:foreign-alloc '(:struct VkDeviceCreateInfo))))
     (memset device-create-info-ptr 0 (cffi:foreign-type-size '(:struct VkDeviceCreateInfo)))
     (cffi:with-foreign-slots ((sType queueCreateInfoCount pQueueCreateInfos enabledExtensionCount
-                               ppEnabledExtensionNames pEnabledFeatures))
+                               ppEnabledExtensionNames pEnabledFeatures) device-create-info-ptr (:struct VkDeviceCreateInfo))
       (setf sType VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO
             queueCreateInfoCount queue-create-info-count
             pQueueCreateInfos queue-create-infos-ptr
             enabledExtensionCount extension-count
             ppEnabledExtensionNames extensions-ptr
             pEnabledFeatures features-ptr)
-      device-create-info-ptr)))
+      (values device-create-info-ptr))))
+
+(defun print-device-create-info (device-create-info-ptr features)
+  (cffi:with-foreign-slots ((sType queueCreateInfoCount pQueueCreateInfos enabledExtensionCount
+                             ppEnabledExtensionNames pEnabledFeatures) device-create-info-ptr (:struct VkDeviceCreateInfo))
+    (format t "sType: ~S~%" sType)
+    (format t "queueCreateInfoCount: ~S~%" queueCreateInfoCount)
+    (format t "pQueueCreateInfos:~%")
+    (loop for i from 0 below queueCreateInfoCount
+          for queueCreateInfo = (cffi:mem-aptr pQueueCreateInfos '(:struct VkDeviceQueueCreateInfo) i)
+          do (print-queue-create-info queueCreateInfo))
+    (format t "enabledExtensionCount: ~S~%" enabledExtensionCount)
+    (format t "ppEnabledExtensionNames:~%")
+    (print-device-extensions ppEnabledExtensionNames enabledExtensionCount)
+    (format t "pEnabledFeatures:~%")
+    (print-device-features pEnabledFeatures features)))
+
 
 ;; Destroys a device create info
 (defun destroy-device-create-info (device-create-info-ptr)
@@ -111,15 +201,17 @@
 
 ;; Creates a device
 (defun create-vk-device (physical-device queue-families &key (extensions (list "VK_KHR_swapchain")) (features nil))
-  (nest ((physical-device-ptr      (vk-physical-device-physical-device-ptr physical-device))
-         (queue-family-count       (length queue-families))
+  (nest ((let ((physical-device-ptr      (vk-physical-device-physical-device-ptr physical-device))))
          (with-queue-create-infos  ((queue-create-infos-ptr queue-create-info-count) queue-families))
          (with-device-extensions   ((extensions-ptr extension-count) extensions))
          (with-device-features     (features-ptr features))
          (with-device-create-info  (device-create-info-ptr queue-create-infos-ptr queue-create-info-count
                                                            extensions-ptr extension-count features-ptr))
          (cffi:with-foreign-object (device-ptr 'VkDevice)))
+    (format t "Hola1~%")
+    (print-device-create-info device-create-info-ptr features)
     (let ((result (vkCreateDevice physical-device-ptr device-create-info-ptr (cffi:null-pointer) device-ptr)))
+      (format t "Hola2~%")
       (check-result result)
       (make-vk-device :device-ptr (cffi:mem-ref device-ptr 'VkDevice)))))
 
