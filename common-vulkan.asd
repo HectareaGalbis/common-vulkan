@@ -9,6 +9,7 @@
                 (:file "vulkan/s-type-table")
                 (:file "vulkan/vk-macros")
                 (:file "vulkan/vk-funcs")
+                (:file "vulkan/support")
 
                 ; Common Vulkan
                 (:file "src/instance")

@@ -16,7 +16,7 @@
 (defun create-window-surface (instance-ptr window-ptr)
   (cffi:with-foreign-object (surface-ptr 'VkSurfaceKHR)
     (let ((result (glfw:create-window-surface instance-ptr window-ptr nil surface-ptr)))
-      (check-result result)
+      (check-vk-result result)
       (cffi:mem-ref surface-ptr 'VkSurfaceKHR))))
 
 

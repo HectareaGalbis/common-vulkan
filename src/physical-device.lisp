@@ -22,7 +22,7 @@
 (defun enumerate-physical-devices (instance-ptr)
   (cffi:with-foreign-object (physical-device-count-ptr :uint32)
     (let ((result (vkEnumeratePhysicalDevices instance-ptr physical-device-count-ptr (cffi:null-pointer))))
-      (check-result result)
+      (check-vk-result result)
       (let ((physical-device-count (cffi:mem-ref physical-device-count-ptr :uint32)))
         (when (not (> physical-device-count 0))
           (error "enumerate-physical-devices error: No physical devices found"))

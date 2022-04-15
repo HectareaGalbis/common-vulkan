@@ -68,14 +68,6 @@
   `(logior (ash ,major 22) (ash ,minor 12) ,patch))
 
 
-;; Checks the result of a vulkan function
-;; Taken from https://github.com/zyrolasting/racket-vulkan/blob/master/unsafe.rkt
-(defun check-result (result)
-  (let ((success-codes '(VK_OPERATION_NOT_DEFERRED_KHR VK_THREAD_DONE_KHR VK_EVENT_SET VK_OPERATION_DEFERRED_KHR VK_SUCCESS VK_INCOMPLETE
-                         VK_THREAD_IDLE_KHR VK_PIPELINE_COMPILE_REQUIRED_EXT VK_SUBOPTIMAL_KHR VK_NOT_READY VK_TIMEOUT VK_EVENT_RESET)))
-    (unless (if (typep result 'symbol) (member result success-codes) (>= result 0)) (error "check-result failed: ~S" result))))
-
-
 ;; Defines a with macro named name, using a constructor and a destructor
 ;; The constructor can receive zero or more arguments and can return one or more values
 ;; The destructor must receive 'destructor-arity' arguments. These arguments are the first values the constructor returns

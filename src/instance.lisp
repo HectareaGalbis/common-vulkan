@@ -29,7 +29,6 @@
               pEngineName        eng-name-str
               engineVersion      eng-version
               apiVersion         api-version))
-
       app-info)))
 
 
@@ -170,7 +169,7 @@
           ;; Instance
           (cffi:with-foreign-object (instance-ptr 'VkInstance)
             (let ((result (vkCreateInstance instance-info (cffi:null-pointer) instance-ptr)))
-              (check-result result)
+              (check-vk-result result)
               (make-vk-instance :instance-ptr (cffi:mem-ref instance-ptr 'VkInstance)
                                 :layers       required-layers
                                 :extensions   required-extensions)))))))

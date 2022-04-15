@@ -23,6 +23,7 @@
           and queue-create-info-ptr = (cffi:mem-aptr queue-create-infos-ptr '(:struct VkDeviceQueueCreateInfo) i)
           for priority-ptr          = (cffi:foreign-alloc :float :count queue-count)
           do (loop for i from 0 below queue-count do (setf (cffi:mem-aref priority-ptr :float i) 1.0))
+             (memset queue-create-info-ptr 0 (cffi:foreign-type-size '(:struct VkDeviceQueueCreateInfo)))
              (cffi:with-foreign-slots ((sType queueFamilyIndex queueCount pQueuePriorities)
                                        queue-create-info-ptr (:struct VkDeviceQueueCreateInfo))
                (setf sType            VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO
@@ -59,8 +60,10 @@
 
 ;; Creates a physical device extensions struct
 (defun create-device-extensions (extensions)
-  (let ((extensions-ptr (cffi:foreign-alloc :string :initial-contents extensions)))
-    (values extensions-ptr (length extensions))))
+  (if (null extensions)
+    (values (cffi:null-pointer) 0)
+    (let ((extensions-ptr (cffi:foreign-alloc :string :initial-contents extensions)))
+      (values extensions-ptr (length extensions)))))
 
 (defun print-device-extensions (extensions-ptr extension-count)
   (loop for i from 0 below extension-count
@@ -69,8 +72,9 @@
 
 ;; Destroys a physical device extensions struct
 (defun destroy-device-extensions (extensions-ptr extension-count)
-  (loop for i from 0 below extension-count
-        do (cffi:foreign-string-free (cffi:mem-aptr extensions-ptr :string i)))
+  (unless (zerop extension-count)
+    (loop for i from 0 below extension-count
+         do (cffi:foreign-string-free (cffi:mem-aptr extensions-ptr :string i))))
   (cffi:foreign-free extensions-ptr))
 
 ;; With device extensions macro
@@ -88,7 +92,7 @@
       do (setf (cffi:foreign-slot-value device-features-ptr '(:struct VkPhysicalDeviceFeatures) feature) VK_TRUE))
     (values device-features-ptr)))
 
-(defun print-device-features (features-ptr features)
+(defun print-device-features (features-ptr)
   (loop for feature in '(robustBufferAccess
                          fullDrawIndexUint32
                          imageCubeArray
@@ -170,7 +174,7 @@
             pEnabledFeatures features-ptr)
       (values device-create-info-ptr))))
 
-(defun print-device-create-info (device-create-info-ptr features)
+(defun print-device-create-info (device-create-info-ptr)
   (cffi:with-foreign-slots ((sType queueCreateInfoCount pQueueCreateInfos enabledExtensionCount
                              ppEnabledExtensionNames pEnabledFeatures) device-create-info-ptr (:struct VkDeviceCreateInfo))
     (format t "sType: ~S~%" sType)
@@ -183,7 +187,8 @@
     (format t "ppEnabledExtensionNames:~%")
     (print-device-extensions ppEnabledExtensionNames enabledExtensionCount)
     (format t "pEnabledFeatures:~%")
-    (print-device-features pEnabledFeatures features)))
+    (print-device-features pEnabledFeatures)
+    (format t "Done printing~%")))
 
 
 ;; Destroys a device create info
@@ -200,20 +205,16 @@
 ;;; -------------------------
 
 ;; Creates a device
-(defun create-vk-device (physical-device queue-families &key (extensions (list "VK_KHR_swapchain")) (features nil))
-  (nest ((let ((physical-device-ptr      (vk-physical-device-physical-device-ptr physical-device))))
-         (with-queue-create-infos  ((queue-create-infos-ptr queue-create-info-count) queue-families))
-         (with-device-extensions   ((extensions-ptr extension-count) extensions))
-         (with-device-features     (features-ptr features))
-         (with-device-create-info  (device-create-info-ptr queue-create-infos-ptr queue-create-info-count
-                                                           extensions-ptr extension-count features-ptr))
+(defun create-vk-device (physical-device queue-families &key (extensions nil) (features nil))
+  (nest ((let ((physical-device-ptr       (vk-physical-device-physical-device-ptr physical-device))))
+         (with-queue-create-infos       ((queue-create-infos-ptr queue-create-info-count) queue-families))
+         (with-device-extensions      ((extensions-ptr extension-count) extensions))
+         (with-device-features      (features-ptr features))
+         (with-device-create-info (device-create-info-ptr queue-create-infos-ptr queue-create-info-count
+                                                          extensions-ptr extension-count features-ptr))
          (cffi:with-foreign-object (device-ptr 'VkDevice)))
-    (format t "Hola1~%")
-    (print-device-create-info device-create-info-ptr features)
-    (let ((result (vkCreateDevice physical-device-ptr device-create-info-ptr (cffi:null-pointer) device-ptr)))
-      (format t "Hola2~%")
-      (check-result result)
-      (make-vk-device :device-ptr (cffi:mem-ref device-ptr 'VkDevice)))))
+    (check-vk-result (vkCreateDevice physical-device-ptr device-create-info-ptr (cffi:null-pointer) device-ptr))
+    (make-vk-device :device-ptr (cffi:mem-ref device-ptr 'VkDevice))))
 
 ;; Destroys a device
 (defun destroy-vk-device (device)
