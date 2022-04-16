@@ -25,6 +25,7 @@
     #:with-vk-surface
 
     ;; Physical device
+    #:get-available-extensions ; Revisar y documentar
     #:create-vk-physical-device
     #:with-vk-physical-device
 
