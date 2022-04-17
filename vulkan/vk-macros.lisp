@@ -71,21 +71,21 @@
 ;; Defines a with macro named name, using a constructor and a destructor
 ;; The constructor can receive zero or more arguments and can return one or more values
 ;; The destructor must receive 'destructor-arity' arguments. These arguments are the first values the constructor returns
+;; The resulting macro binds some vars to the results from the constructor. These vars can be fewer than the returned values
 (defmacro defwith (name create destroy &key (destructor-arity 1))
-  (let ((var-args (gensym "var-args"))
-        (var-sym  (gensym "var"))
-        (args-sym (gensym "args")))
-    `(defmacro ,name (,var-args &body body)
-      (let ((,var-sym    (if (listp (first ,var-args))
-                             (first ,var-args)
-                             (list (first ,var-args))))
-            (,args-sym   (rest ,var-args))
-            (create-sym  ',create)
-            (destroy-sym ',destroy))
-        `(multiple-value-bind ,,var-sym (,create-sym ,@,args-sym)
-          (unwind-protect
-            (progn ,@body)
-            (,destroy-sym ,@(subseq ,var-sym 0 ,destructor-arity))))))))
+  (let  ((var      (gensym "var"))
+         (var-list (gensym "var-list"))
+         (args     (gensym "args"))
+         (ret-list (gensym "ret-list")))
+    `(defmacro ,name (,var ,args &body body)
+      (let ((,var-list (if (listp ,var)
+                           ,var
+                           (list ,var))))
+        `(let ((,',ret-list (multiple-value-list (,',create ,@,args))))
+           (multiple-value-bind ,,var-list (values-list ,',ret-list)
+             (unwind-protect
+               (progn ,@body)
+               (apply ,#',destroy (subseq ,',ret-list 0 ,',destructor-arity)))))))))
 
 
 ;; Works like a let, but accepts macros whose last expression must be a body or forms* expression.
