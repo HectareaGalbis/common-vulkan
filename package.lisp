@@ -8,32 +8,35 @@
     #:nest
 
     ;; Vulkan instance
-    #:create-vk-instance
-    #:destroy-vk-instance
-    #:with-vk-instance
-    #:vk-instance-layers
-    #:vk-instance-extensions
+    #:create-instance
+    #:destroy-instance
+    #:with-instance
 
     ;; Window
-    #:create-glfw-window
-    #:destroy-glfw-window
-    #:with-glfw-window
+    #:create-window
+    #:destroy-window
+    #:with-window
 
     ;; Surface
-    #:create-vk-surface
-    #:destroy-vk-surface
-    #:with-vk-surface
+    #:create-surface
+    #:destroy-surface
+    #:with-surface
 
     ;; Physical device
     ;#:get-available-extensions ; Revisar y documentar
-    #:create-vk-physical-device
-    #:with-vk-physical-device
+    #:create-physical-device
+    #:with-physical-device
 
     ;; Queue family
-    #:vk-physical-device-queue-families
-    #:vk-physical-device-queue-family
+    #:physical-device-queue-families
+    #:physical-device-queue-family
 
     ;; Device
-    #:create-vk-device
-    #:destroy-vk-device
-    #:with-vk-device))
+    #:create-device
+    #:destroy-device
+    #:with-device
+
+    ;; Semaphore
+    #:create-semaphore
+    #:destroy-semaphore
+    #:with-semaphore))

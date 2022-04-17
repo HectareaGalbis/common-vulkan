@@ -54,6 +54,8 @@
 (cffi:defcfun "memset" :pointer
   (str :pointer) (c :int) (n :size))
 
+
+;; vvvv Cambiar por alloc-vulkan para que haga memset (y tambien with-slots?) vvvv
 ;; Wraps a body creating a vulkan object with all of its slots being 0.
 (defmacro with-vulkan-object ((p-info struct-type &optional (count 1)) &body body)
   (let ((p-info-sym (gensym)) (struct-type-sym (gensym)))

@@ -2,15 +2,6 @@
 (in-package :cvk)
 
 ;;; -------------------------
-;;; -------- Structs --------
-;;; -------------------------
-
-;; physical device struct
-(defstruct vk-physical-device
-  physical-device-ptr)
-
-
-;;; -------------------------
 ;;; --- Private functions ---
 ;;; -------------------------
 
@@ -83,7 +74,7 @@
 
 ;; Checks the validity of family queues from a device
 (defun check-queue-family-validity (physical-device-ptr required-flags &optional (surface-ptr nil))
-  (with-queue-family-properties ((queue-family-properties-ptr family-queue-count) physical-device-ptr)
+  (with-queue-family-properties (queue-family-properties-ptr family-queue-count) (physical-device-ptr)
     (loop for i from 0 below family-queue-count
           for family-property = (cffi:mem-aptr queue-family-properties-ptr '(:struct VkQueueFamilyProperties) i)
           for saved-flags = (logand (cffi:foreign-slot-value family-property
@@ -165,8 +156,8 @@
 
 ;; Check a surface validity
 (defun check-surface-presentation-support (physical-device-ptr surface-ptr)
-  (with-surface-formats ((formats-ptr format-count) physical-device-ptr surface-ptr)
-    (with-surface-present-modes ((modes-ptr mode-count) physical-device-ptr surface-ptr)
+  (with-surface-formats (formats-ptr format-count) (physical-device-ptr surface-ptr)
+    (with-surface-present-modes (modes-ptr mode-count) (physical-device-ptr surface-ptr)
       (and (> format-count 0) (> mode-count 0)))))
 
 
@@ -215,24 +206,22 @@
 ;;; -------------------------
 
 ;; Returns a device verifying some requirements
-(defun create-vk-physical-device (instance &key (surface nil) (device-type VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU)
-                                                (extensions (list "VK_KHR_swapchain"))
-                                                (queue-flags (logior VK_QUEUE_GRAPHICS_BIT VK_QUEUE_TRANSFER_BIT))
-                                                (features nil))
-  (let ((instance-ptr (vk-instance-instance-ptr instance))
-        (surface-ptr  (and surface (vk-surface-surface-ptr surface))))
-    (let* ((physical-devices (enumerate-physical-devices instance-ptr))
-           (the-physical-device (loop for physical-device-ptr in physical-devices
-                                  thereis (and (implies device-type (check-device-type physical-device-ptr device-type))
-                                               (implies extensions  (check-device-extensions physical-device-ptr extensions))
-                                               (check-queue-family-validity physical-device-ptr queue-flags surface-ptr)
-                                               (implies features    (check-available-features physical-device-ptr features))
-                                               (implies surface-ptr  (check-surface-presentation-support physical-device-ptr surface-ptr))
-                                               physical-device-ptr))))
-      (when (not the-physical-device)
-        (error "get-physical-device error: No valid physical device found"))
-      (make-vk-physical-device :physical-device-ptr the-physical-device))))
+(defun create-physical-device (instance &key (surface nil) (device-type VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU)
+                                             (extensions (list "VK_KHR_swapchain"))
+                                             (queue-flags (logior VK_QUEUE_GRAPHICS_BIT VK_QUEUE_TRANSFER_BIT))
+                                             (features nil))
+  (let* ((physical-devices (enumerate-physical-devices instance))
+         (the-physical-device (loop for physical-device in physical-devices
+                                thereis (and (implies device-type (check-device-type physical-device device-type))
+                                             (implies extensions  (check-device-extensions physical-device extensions))
+                                             (check-queue-family-validity physical-device queue-flags surface)
+                                             (implies features    (check-available-features physical-device features))
+                                             (implies surface  (check-surface-presentation-support physical-device surface))
+                                             physical-device))))
+    (when (not the-physical-device)
+      (error "get-physical-device error: No valid physical device found"))
+    the-physical-device))
 
 
 ;; With physical-device macro
-(defwith with-vk-physical-device create-vk-physical-device values)
+(defwith with-physical-device create-physical-device values)

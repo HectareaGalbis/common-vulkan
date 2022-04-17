@@ -1,12 +1,6 @@
 
 (in-package :cvk)
 
-; Instance struct
-(defstruct vk-instance
-  instance-ptr
-  layers
-  extensions)
-
 ;;; -------------------------
 ;;; --- Private functions ---
 ;;; -------------------------
@@ -150,10 +144,10 @@
 ;;; -------------------------
 
 ;; Creates the vulkan instance
-(defun create-vk-instance (&optional (validation t))
+(defun create-instance (&optional (validation t))
 
   ;; Application info
-  (with-application-info (app-info "Common Vulkan example" (make-version 0 1 1) "Common Vulkan"
+  (with-application-info app-info ("Common Vulkan example" (make-version 0 1 1) "Common Vulkan"
                                    (make-version 0 1 1) (make-version 1 0 0))
       ;; Layers and extensions
       (let ((required-layers     (get-required-layers validation))
@@ -164,23 +158,20 @@
           (error "Required extensions not present"))
 
         ;; Instance info
-        (with-instance-info (instance-info 0 app-info required-layers required-extensions)
+        (with-instance-info instance-info (0 app-info required-layers required-extensions)
 
           ;; Instance
           (cffi:with-foreign-object (instance-ptr 'VkInstance)
-            (let ((result (vkCreateInstance instance-info (cffi:null-pointer) instance-ptr)))
-              (check-vk-result result)
-              (make-vk-instance :instance-ptr (cffi:mem-ref instance-ptr 'VkInstance)
-                                :layers       required-layers
-                                :extensions   required-extensions)))))))
+            (check-vk-result (vkCreateInstance instance-info (cffi:null-pointer) instance-ptr))
+            (cffi:mem-ref instance-ptr 'VkInstance))))))
 
 
 ;; Destroyes a vulkan instance
-(defun destroy-vk-instance (instance)
-  (vkDestroyInstance (vk-instance-instance-ptr instance) (cffi:null-pointer)))
+(defun destroy-instance (instance)
+  (vkDestroyInstance instance (cffi:null-pointer)))
 
 
 ;; With macro for vulkan instance
-(defwith with-vk-instance
-         create-vk-instance
-         destroy-vk-instance)
+(defwith with-instance
+         create-instance
+         destroy-instance)

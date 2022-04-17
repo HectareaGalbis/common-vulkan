@@ -2,15 +2,6 @@
 (in-package :cvk)
 
 ;;; -------------------------
-;;; -------- Structs --------
-;;; -------------------------
-
-(defstruct vk-semaphore
-  device-ptr
-  semaphore-ptr)
-
-
-;;; -------------------------
 ;;; --- Private functions ---
 ;;; -------------------------
 
@@ -36,17 +27,15 @@
 ;;; ---- Public functions ---
 ;;; -------------------------
 
-(defun create-vk-semaphore (device)
-  (let ((device-ptr (vk-device-device-ptr device)))
-    (with-semaphore-info (semaphore-info-ptr)
-      (cffi:with-foreign-object (semaphore-ptr 'VkSemaphore)
-        (check-vk-result (vkCreateSemaphore device-ptr semaphore-info-ptr (cffi:null-pointer) semaphore-ptr))
-        (make-vk-device :device-ptr (cffi:mem-ref semaphore-ptr))))))
+(defun create-semaphore (device)
+  (with-semaphore-info semaphore-info-ptr ()
+    (cffi:with-foreign-object (semaphore-ptr 'VkSemaphore)
+      (check-vk-result (vkCreateSemaphore device-ptr semaphore-info-ptr (cffi:null-pointer) semaphore-ptr))
+      (values (cffi:mem-ref semaphore-ptr) device))))
 
-(defun destroy-vk-semaphore (semaphore)
-  (let ((device-ptr (vk-semaphore-device-ptr semaphore))
-        (semaphore-ptr (vk-semaphore-semaphore-ptr semaphore)))))
+(defun destroy-semaphore (semaphore device)
+  (vkDestroySemaphore device semaphore (cffi:null-pointer)))
 
-(defwith with-vk-semaphore
-         create-vk-semaphore
-         destroy-vk-semaphore)
+(defwith with-semaphore
+         create-semaphore
+         destroy-semaphore)
