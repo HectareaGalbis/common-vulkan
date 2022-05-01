@@ -55,16 +55,6 @@
   (str :pointer) (c :int) (n :size))
 
 
-;; vvvv Cambiar por alloc-vulkan para que haga memset (y tambien with-slots?) vvvv
-;; Wraps a body creating a vulkan object with all of its slots being 0.
-(defmacro with-vulkan-object ((p-info struct-type &optional (count 1)) &body body)
-  (let ((p-info-sym (gensym)) (struct-type-sym (gensym)))
-    `(let ((,p-info-sym ,p-info) (,struct-type-sym ,struct-type))
-       (cffi:with-foreign-object (,p-info-sym '(:struct ,struct-type-sym) ,count)
-                                 (memset ,p-info-sym 0 (* (cffi:foreign-type-size '(:struct ,struct-type-sym)) ,count))
-                                 ,@body))))
-
-
 ;; Creates an integer representing an vulkan version
 (defmacro make-version (major minor patch)
   `(logior (ash ,major 22) (ash ,minor 12) ,patch))
@@ -88,6 +78,22 @@
              (unwind-protect
                (progn ,@body)
                (apply ,#',destroy (subseq ,',ret-list 0 ,',destructor-arity)))))))))
+
+
+;; Allocates an object and initialize all its members to zero.
+(defun alloc-vulkan-object (struct-type &optional (count 1))
+  (let ((object-ptr (cffi:foreign-alloc struct-type :count count)))
+    (memset object-ptr 0 (* (cffi:foreign-type-size struct-type) count))
+    (values object-ptr)))
+
+;; Deallocates an object
+(defun free-vulkan-object (object-ptr)
+  (cffi:foreign-free object-ptr))
+
+;; with-vulkan-object macro
+(defwith with-vulkan-object
+         alloc-vulkan-object
+         free-vulkan-object)
 
 
 ;; Works like a let, but accepts macros whose last expression must be a body or forms* expression.

@@ -27,15 +27,18 @@
 ;;; ---- Public functions ---
 ;;; -------------------------
 
+;; Creates a semaphore
 (defun create-semaphore (device)
   (with-semaphore-info semaphore-info-ptr ()
     (cffi:with-foreign-object (semaphore-ptr 'VkSemaphore)
       (check-vk-result (vkCreateSemaphore device-ptr semaphore-info-ptr (cffi:null-pointer) semaphore-ptr))
       (values (cffi:mem-ref semaphore-ptr) device))))
 
+;; Destroys a semaphore
 (defun destroy-semaphore (semaphore device)
   (vkDestroySemaphore device semaphore (cffi:null-pointer)))
 
+;; with semaphore macro
 (defwith with-semaphore
          create-semaphore
          destroy-semaphore)
