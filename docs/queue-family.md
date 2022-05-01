@@ -1,12 +1,12 @@
 
 # Queue family
 
-## vk-physical-device-queue-families
+## physical-device-queue-families
 
 ```lisp
-(vk-physical-device-queue-families physical-device &key (queue-flags (logior VK_QUEUE_GRAPHICS_BIT VK_QUEUE_TRANSFER_BIT)) 
-                                                        (min-queue-count 0) (surface nil) (exclusive-flags nil)
-                                                        (family-exceptions nil))
+(physical-device-queue-families physical-device &key (queue-flags (logior VK_QUEUE_GRAPHICS_BIT VK_QUEUE_TRANSFER_BIT)) 
+                                                     (min-queue-count 0) (surface nil) (exclusive-flags nil)
+                                                     (family-exceptions nil))
 ```
 
 Returns a list of queue families from `physical-device` where every element must verify some requirements:
@@ -17,12 +17,12 @@ Returns a list of queue families from `physical-device` where every element must
 * `exclusive-flags`: If `t`, the queue families must have activated only the `queue-flags` and no more.
 * `family-exceptions`: The queue families in list are excluded from the returned list of queue families.
 
-## vk-physical-device-queue-family
+## physical-device-queue-family
 
 ```lisp
-(vk-physical-device-queue-family physical-device &key (queue-flags (logior VK_QUEUE_GRAPHICS_BIT VK_QUEUE_TRANSFER_BIT)) 
-                                                      (min-queue-count 0) (surface nil) (exclusive-flags nil)
-                                                      (family-exceptions nil))
+(physical-device-queue-family physical-device &key (queue-flags (logior VK_QUEUE_GRAPHICS_BIT VK_QUEUE_TRANSFER_BIT)) 
+                                                   (min-queue-count 0) (surface nil) (exclusive-flags nil)
+                                                   (family-exceptions nil))
 ```
 
-Same as `vk-physical-device-queue-families` but returns only the first queue family which verifies the requirements.
+Same as `physical-device-queue-families` but returns only the first queue family which verifies the requirements.
