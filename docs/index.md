@@ -12,4 +12,4 @@
 9. [Queue](https://hectarea1996.github.io/common-vulkan/queue.html)
 10. [Command pool](https://hectarea1996.github.io/common-vulkan/command-pool.html)
 11. [Command buffer](https://hectarea1996.github.io/common-vulkan/command-buffer.html)
-12. [swapchain](https://hectarea1996.github.io/common-vulkan/swapchain.html)
+12. [Swapchain](https://hectarea1996.github.io/common-vulkan/swapchain.html)
