@@ -82,8 +82,21 @@
   (vkEndCommandBuffer (cffi:mem-ref command-buffer-ptr 'VkCommandBuffer)))
 
 
-;; Quizas se quite esta macro. A veces es conveniente hacer un reset y otras no.
-;; Initializes a command recording, executes the bodies, and finalizes the command recording
-(defwith recording-command-buffer
-         begin-command-buffer
-         end-command-buffer)
+;; Creates a command buffer ready to submit
+;; This can't be rerecorded
+(defmacro do-command-buffer (buffer-name (device command-pool &body body))
+  `(let ((,buffer-name (create-command-buffer ,device ,command-pool)))
+     (begin-command-buffer ,buffer-name VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT)
+     ,@body
+     (end-command-buffer ,buffer-name)
+     (values ,buffer-name)))
+
+;; Creates a command buffer and a function that rerecord the command buffer
+(defmacro do-resetable-command-buffer (buffer-name args (device command-pool &body body))
+  `(let ((,buffer-name (create-command-buffer ,device ,command-pool)))
+     (values ,buffer-name
+             (lambda ,args
+               (reset-command-buffer ,buffer-name)
+               (begin-command-buffer ,buffer-name VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT)
+               ,@body
+               (end-command-buffer ,buffer-name)))))
