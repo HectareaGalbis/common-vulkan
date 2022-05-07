@@ -84,19 +84,25 @@
 
 ;; Creates a command buffer ready to submit
 ;; This can't be rerecorded
-(defmacro do-command-buffer (buffer-name (device command-pool &body body))
+(defmacro do-command-buffer (buffer-name (device command-pool) &body body)
   `(let ((,buffer-name (create-command-buffer ,device ,command-pool)))
      (begin-command-buffer ,buffer-name VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT)
      ,@body
      (end-command-buffer ,buffer-name)
-     (values ,buffer-name)))
+     (values ,buffer-name nil ,device ,command-pool)))
 
 ;; Creates a command buffer and a function that rerecord the command buffer
-(defmacro do-resetable-command-buffer (buffer-name args (device command-pool &body body))
+(defmacro do-resettable-command-buffer (buffer-name args (device command-pool) &body body)
   `(let ((,buffer-name (create-command-buffer ,device ,command-pool)))
      (values ,buffer-name
              (lambda ,args
                (reset-command-buffer ,buffer-name)
                (begin-command-buffer ,buffer-name VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT)
                ,@body
-               (end-command-buffer ,buffer-name)))))
+               (end-command-buffer ,buffer-name))
+             ,device
+             ,command-pool)))
+
+;; Same as destroy-command-buffer. Just for completeness
+(defun undo-command-buffer (command-buffer-ptr device command-pool)
+  (destroy-command-buffer command-buffer-ptr device command-pool))
