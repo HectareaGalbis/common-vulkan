@@ -123,15 +123,43 @@
                  (loop for ,proc in ,procs
                        do (funcall ,proc ,@args))
                  (queue-submit ,queue ,submit-infos ,fence))
-               ,pools))))
+               ,pools
+               ,submit-infos))))
 
 
 (flet ((body-transform (args device body)
          (if (eq 'submit (car body))
-             `(do-queue-submit ,args ,(cons device (cadr body)) ,@(cddr body)))))) ; Arreglar
-(defmacro do-vulkan-submission-aux (args (device) &body bodies))
+             `(do-queue-submit ,args ,(cons device (cadr body)) ,@(cddr body))
+             `(values (lambda ,args ,@body) nil nil))))
+  (defmacro do-vulkan-submission-aux (args (device) &body bodies)
+    (let ((procs            (gensym))
+          (pools            (gensym))
+          (submit-infos     (gensym))
+          (new-proc         (gensym))
+          (new-pools        (gensym))
+          (new-submit-infos (gensym))))
+    `(multiple-value-bind (,procs ,pools ,submit-infos) (do-vulkan-submission-aux ,args (,device) ,@(cdr bodies))
+       (multiple-value-bind (,new-proc ,new-pools ,new-submit-infos) ,(body-transform args device (car bodies))
+         (values (cons ,new-proc ,procs) (append ,new-pools ,pools) (append ,new-submit-infos ,submit-infos))))))
 
-
+(defmacro do-with-vulkan-submission (with-proc-name args (device) &body bodies)
+  (let ((proc         (gensym))
+        (procs        (gensym))
+        (pools        (gensym))
+        (submit-infos (gensym))
+        (submit-info  (gensym))
+        (pool-list    (gensym))
+        (proc-name    (gensym))
+        (body         (gensym)))
+    `(multiple-value-bind (,procs ,pools ,submit-infos) (do-vulkan-submission-aux ,args (,device) ,@bodies)
+       (defmacro ,with-proc (,proc-name &body ,body)
+         `(flet ((,,proc-name ,',args
+                   (loop for ,',proc in ,',procs
+                         do (funcall ,',proc ,@,args))))
+            ,@,body
+            (loop for ,',submit-info in ,',submit-infos
+                  and ,',pool-list in ,',pools
+                  do (undo-submit-info ,',submit-info ,',device ,',pool-list)))))))
 
 
 ;;; -------------------------
