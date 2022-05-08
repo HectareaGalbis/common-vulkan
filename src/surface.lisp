@@ -6,10 +6,10 @@
 ;;; -------------------------
 
 ;; Creates a surface
-(defun create-surface (instance window))
-(cffi:with-foreign-object (surface-ptr 'VkSurfaceKHR)
-  (check-vk-result (glfw:create-window-surface instance window nil surface-ptr))
-  (values (cffi:mem-ref surface-ptr 'VkSurfaceKHR) instance))
+(defun create-surface (instance window)
+  (cffi:with-foreign-object (surface-ptr 'VkSurfaceKHR)
+    (check-vk-result (glfw:create-window-surface instance window nil surface-ptr))
+    (values (cffi:mem-ref surface-ptr 'VkSurfaceKHR) instance)))
 
 
 ;; Destroys a surface

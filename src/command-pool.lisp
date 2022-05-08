@@ -6,16 +6,16 @@
 ;;; -------------------------
 
 ;; Creates a command pool info struct
-(defun (create-command-pool-info (index-family reset-buffers))
+(defun create-command-pool-info (index-family reset-buffers)
   (let ((pool-info-ptr (alloc-vulkan-object '(:struct VkCommandPoolCreateInfo))))
-    (cffi:with-foreign-slots ((sType flags queueFamilyIndex) pool-info-ptr '(:struct VkCommandPoolCreateInfo))
+    (cffi:with-foreign-slots ((sType flags queueFamilyIndex) pool-info-ptr (:struct VkCommandPoolCreateInfo))
       (setf sType VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO
             flags (if reset-buffers VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT 0)
             queueFamilyIndex index-family)
       pool-info-ptr)))
 
 ;; Destroys a command pool info struct
-(defun (destroy-command-pool-info (pool-info-ptr))
+(defun destroy-command-pool-info (pool-info-ptr)
   (free-vulkan-object pool-info-ptr))
 
 ;; with command pool info struct
@@ -28,7 +28,7 @@
 ;;; -------------------------
 
 ;; Creates a command pool
-(defun create-command-pool (device queue-family reset-buffers)
+(defun create-command-pool (device queue-family &key (reset-buffers nil))
   (with-command-pool-info pool-info-ptr ((vk-queue-family-index queue-family) reset-buffers)
     (cffi:with-foreign-object (command-pool-ptr 'VkCommandPool)
       (check-vk-result (vkCreateCommandPool device pool-info-ptr (cffi:null-pointer) command-pool-ptr))

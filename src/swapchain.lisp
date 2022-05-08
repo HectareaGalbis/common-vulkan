@@ -15,7 +15,7 @@
                                       (and (equal format     VK_FORMAT_B8G8R8A8_SRGB)
                                            (equal colorSpace VK_COLOR_SPACE_SRGB_NONLINEAR_KHR))))))
       (if the-format
-          (cffi:with-foreign-slots ((format colorSpace) format-ptr (:struct VkSurfaceFormatKHR))
+          (cffi:with-foreign-slots ((format colorSpace) the-format (:struct VkSurfaceFormatKHR))
             (values format colorSpace))
           (cffi:with-foreign-slots ((format colorSpace) formats-ptr (:struct VkSurfaceFormatKHR)) ; We return the first available format
             (values format colorSpace))))))
@@ -94,12 +94,12 @@
 
 
 ;; Creates a swapchain create info structure
-(defun create-swapchain-create-info (_surface image-count format color-space _width _height
+(defun create-swapchain-create-info (_surface image-count image-format color-space _width _height
                                      present-families transform present-mode)
   (let ((index-count (length present-families)))
     (when (equal index-count 0)
       (error "create-swapchain-create-info error: Expected 1 or more queue families"))
-    (let ((indices-ptr (cffi:foreign-alloc :uint32 :initial-contents (map #'vk-queue-family-index present-families)))
+    (let ((indices-ptr (cffi:foreign-alloc :uint32 :initial-contents (mapcar #'vk-queue-family-index present-families)))
           (sharing-mode (if (> index-count 1) VK_SHARING_MODE_CONCURRENT VK_SHARING_MODE_EXCLUSIVE))
           (swapchain-info-ptr (alloc-vulkan-object '(:struct VkSwapchainCreateInfoKHR))))
       (cffi:with-foreign-slots ((sType surface minImageCount imageFormat imageColorSpace (:pointer imageExtent) imageArrayLayers
@@ -108,7 +108,7 @@
         (setf sType                 VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR
               surface               _surface
               minImageCount         image-count
-              imageFormat           format
+              imageFormat           image-format
               imageColorSpace       color-space
               imageArrayLayers      1
               imageUsage            VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT
@@ -142,12 +142,12 @@
 ;; Creates a swapchain
 (defun create-swapchain (physical-device device surface present-families _width _height)
   (with-surface-capabilities capabilities-ptr (physical-device surface)
-    (multible-value-bind (format color-space) (choose-format-and-color physical-device surface)
-      (multiple-value-bind (width height) (choose-extent capabilities-ptr)
+    (multiple-value-bind (image-format color-space) (choose-format-and-color physical-device surface)
+      (multiple-value-bind (width height) (choose-extent _width _height capabilities-ptr)
         (let ((present-mode (choose-present-mode physical-device surface))
               (transform    (choose-transform capabilities-ptr))
               (image-count  (choose-image-count capabilities-ptr)))
-          (with-swapchain-create-info swapchain-info-ptr (surface image-count format color-space width height
+          (with-swapchain-create-info swapchain-info-ptr (surface image-count image-format color-space width height
                                                           present-families transform present-mode)
             (cffi:with-foreign-object (swapchain-ptr 'VkSwapchainKHR)
               (check-vk-result (vkCreateSwapchainKHR device swapchain-info-ptr (cffi:null-pointer) swapchain-ptr))
@@ -176,4 +176,4 @@
   (with-present-info present-info-ptr (swapchain image-index (if (listp sem-or-sems) sem-or-sems (list sem-or-sems)))
     (vkQueuePresentKHR queue present-info-ptr)
     (cffi:with-foreign-slots ((pResults) present-info-ptr (:struct VkPresentInfoKHR))
-      (check-vkResult (cffi:mem-ref pResults 'VkResult)))))
+      (check-vk-result (cffi:mem-ref pResults 'VkResult)))))

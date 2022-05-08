@@ -8,7 +8,7 @@
 ;; Creates a fence create info structure
 (defun create-fence-create-info (&key (signaled nil))
   (let ((fence-info-ptr (alloc-vulkan-object '(:struct VkFenceCreateInfo))))
-    (cffi:with-foreign-slots ((sType flags) fence-info-ptr '(:struct VkFenceCreateInfo))
+    (cffi:with-foreign-slots ((sType flags) fence-info-ptr (:struct VkFenceCreateInfo))
       (setf sType VK_STRUCTURE_TYPE_FENCE_CREATE_INFO
             flags (if signaled VK_FENCE_CREATE_SIGNALED_BIT 0)))
     (values fence-info-ptr)))
@@ -54,5 +54,5 @@
 ;; Performs a wait operation
 (defun wait-for-fences (device fences &key (wait-all t) (timeout UINT64_MAX))
   (let ((fences-ptr (cffi:foreign-alloc 'VkFence :initial-contents fences)))
-    (check-vk-result (vkWaitForFences device (length fences) fences-ptr (if waitAll VK_TRUE VK_FALSE) timeout))
+    (check-vk-result (vkWaitForFences device (length fences) fences-ptr (if wait-all VK_TRUE VK_FALSE) timeout))
     (cffi:foreign-free fences-ptr)))

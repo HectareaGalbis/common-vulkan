@@ -9,7 +9,7 @@
 ;; Creates a command buffer allocate info
 (defun create-command-buffer-allocate-info (command-pool &key (secondary-buffer nil) (count 1))
   (let ((allocate-info-ptr (alloc-vulkan-object '(:struct VkCommandBufferAllocateInfo))))
-    (cffi:with-foreign-slots ((sType commandPool level commandBufferCount) allocate-info-ptr '(:struct VkCommandBufferAllocateInfo))
+    (cffi:with-foreign-slots ((sType commandPool level commandBufferCount) allocate-info-ptr (:struct VkCommandBufferAllocateInfo))
       (setf sType              VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO
             commandPool        command-pool
             level              (if secondary-buffer VK_COMMAND_BUFFER_LEVEL_SECONDARY
@@ -30,7 +30,7 @@
 ;; Creates a command buffer begin info struct
 (defun create-command-buffer-begin-info (usage-flags)
   (let ((begin-info-ptr (alloc-vulkan-object '(:struct VkCommandBufferBeginInfo))))
-    (cffi:with-foreign-slots ((sType flags) begin-info-ptr '(:struct VkCommandBufferBeginInfo))
+    (cffi:with-foreign-slots ((sType flags) begin-info-ptr (:struct VkCommandBufferBeginInfo))
       (setf sType VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO
             flags usage-flags))
     (values begin-info-ptr)))
@@ -60,9 +60,9 @@
   (vkFreeCommandBuffers device command-pool 1 command-buffer-ptr))
 
 ;; With command buffers macro
-(defwith with-command-buffers
-         create-command-buffers
-         destroy-command-buffers
+(defwith with-command-buffer
+         create-command-buffer
+         destroy-command-buffer
          :destructor-arity 3)
 
 

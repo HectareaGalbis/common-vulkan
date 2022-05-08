@@ -38,6 +38,7 @@
 (defconstant +NULL+ 0)
 ;;(defconstant IMGUI_MAX_POSSIBLE_BACK_BUFFERS 16)
 (defconstant UINT64_MAX #.(1- (expt 2 64)))
+(defconstant UINT32_MAX #.(1- (expt 2 32)))
 
 (defconstant VK_WHOLE_SIZE #.(1- (expt 2 64)))
 

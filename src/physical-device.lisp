@@ -157,7 +157,9 @@
 ;; Check a surface validity
 (defun check-surface-presentation-support (physical-device-ptr surface-ptr)
   (with-surface-formats (formats-ptr format-count) (physical-device-ptr surface-ptr)
+    (declare (ignore formats-ptr))
     (with-surface-present-modes (modes-ptr mode-count) (physical-device-ptr surface-ptr)
+      (declare (ignore modes-ptr))
       (and (> format-count 0) (> mode-count 0)))))
 
 
@@ -212,12 +214,12 @@
                                              (features nil))
   (let* ((physical-devices (enumerate-physical-devices instance))
          (the-physical-device (loop for physical-device in physical-devices
-                                thereis (and (implies device-type (check-device-type physical-device device-type))
-                                             (implies extensions  (check-device-extensions physical-device extensions))
-                                             (check-queue-family-validity physical-device queue-flags surface)
-                                             (implies features    (check-available-features physical-device features))
-                                             (implies surface  (check-surface-presentation-support physical-device surface))
-                                             physical-device))))
+                                    thereis (and (implies device-type (check-device-type physical-device device-type))
+                                                 (implies extensions  (check-device-extensions physical-device extensions))
+                                                 (check-queue-family-validity physical-device queue-flags surface)
+                                                 (implies features    (check-available-features physical-device features))
+                                                 (implies surface     (check-surface-presentation-support physical-device surface))
+                                                 physical-device))))
     (when (not the-physical-device)
       (error "get-physical-device error: No valid physical device found"))
     the-physical-device))

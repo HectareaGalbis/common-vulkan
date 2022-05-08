@@ -39,4 +39,24 @@
     ;; Semaphore
     #:create-semaphore
     #:destroy-semaphore
-    #:with-semaphore))
+    #:with-semaphore
+
+    ;; Fence
+    #:create-fence
+    #:destroy-fence
+    #:with-fence
+    #:reset-fences
+    #:wait-for-fences
+
+    ;; Command pool
+    #:create-command-pool
+    #:destroy-command-pool
+    #:with-command-pool
+
+    ;; Command buffer
+    #:create-command-buffer
+    #:destroy-command-buffer
+    #:with-command-buffer
+    #:reset-command-buffer
+    #:begin-command-buffer
+    #:end-command-buffer))

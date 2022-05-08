@@ -68,16 +68,17 @@
   (let  ((var      (gensym "var"))
          (var-list (gensym "var-list"))
          (args     (gensym "args"))
-         (ret-list (gensym "ret-list")))
-    `(defmacro ,name (,var ,args &body body)
-      (let ((,var-list (if (listp ,var)
-                           ,var
-                           (list ,var))))
-        `(let ((,',ret-list (multiple-value-list (,',create ,@,args))))
-           (multiple-value-bind ,,var-list (values-list ,',ret-list)
-             (unwind-protect
-               (progn ,@body)
-               (apply ,#',destroy (subseq ,',ret-list 0 ,',destructor-arity)))))))))
+         (ret-list (gensym "ret-list"))
+         (body     (gensym "body")))
+    `(defmacro ,name (,var ,args &body ,body)
+       (let ((,var-list (if (listp ,var)
+                            ,var
+                            (list ,var))))
+         `(let ((,',ret-list (multiple-value-list (,',create ,@,args))))
+            (unwind-protect
+              (multiple-value-bind ,,var-list (values-list ,',ret-list)
+                ,@,body
+                (apply #',',destroy (subseq ,',ret-list 0 ,',destructor-arity)))))))))
 
 
 ;; Allocates an object and initialize all its members to zero.
