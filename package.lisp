@@ -70,4 +70,9 @@
     #:destroy-swapchain
     #:with-swapchain
     #:acquire-next-image
-    #:present-swapchain))
+    #:present-swapchain
+
+    ;; Shader module
+    #:create-shader-module
+    #:destroy-shader-module
+    #:with-shader-module))

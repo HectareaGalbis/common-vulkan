@@ -5,12 +5,19 @@
 ;;; --- Private functions ---
 ;;; -------------------------
 
+(defun read-spv-file (file-name)
+  (with-open-file (file-stream file-name :element-type '(unsigned-byte 8))
+    (let ((buffer (make-array (file-length file-stream) :element-type '(unsigned-byte 8))))
+      (read-sequence buffer file-stream)
+      buffer)))
+
+
 ;; Creates a shader module create info structure
 (defun create-shader-module-create-info (spv-file)
-  (let* ((code     (uiop:read-file-string spv-file))
-         (code-ptr (cffi:foreign-string-alloc code))
+  (let* ((code     (read-spv-file spv-file))
+         (code-ptr (cffi:foreign-alloc :uint32 :initial-contents code))
          (shader-module-info-ptr (alloc-vulkan-object '(:struct VkShaderModuleCreateInfo))))
-    (cffi:with-foreign-slots ((sType codeSize pCode))
+    (cffi:with-foreign-slots ((sType codeSize pCode) shader-module-info-ptr (:struct VkShaderModuleCreateInfo))
       (setf sType    VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO
             codeSize (length code)
             pCode    code-ptr)
