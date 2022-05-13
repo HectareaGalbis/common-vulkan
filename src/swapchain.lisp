@@ -13,7 +13,8 @@
                             for format-ptr = (cffi:mem-aptr formats-ptr '(:struct VkSurfaceFormatKHR) i)
                             thereis (cffi:with-foreign-slots ((format colorSpace) format-ptr (:struct VkSurfaceFormatKHR))
                                       (and (equal format     VK_FORMAT_B8G8R8A8_SRGB)
-                                           (equal colorSpace VK_COLOR_SPACE_SRGB_NONLINEAR_KHR))))))
+                                           (equal colorSpace VK_COLOR_SPACE_SRGB_NONLINEAR_KHR)
+                                           format-ptr)))))
       (if the-format
           (cffi:with-foreign-slots ((format colorSpace) the-format (:struct VkSurfaceFormatKHR))
             (values format colorSpace))
@@ -97,7 +98,7 @@
 (defun create-swapchain-create-info (_surface image-count image-format color-space _width _height
                                      present-families transform present-mode)
   (let ((index-count (length present-families)))
-    (when (equal index-count 0)
+    (when (zerop index-count)
       (error "create-swapchain-create-info error: Expected 1 or more queue families"))
     (let ((indices-ptr (cffi:foreign-alloc :uint32 :initial-contents (mapcar #'vk-queue-family-index present-families)))
           (sharing-mode (if (> index-count 1) VK_SHARING_MODE_CONCURRENT VK_SHARING_MODE_EXCLUSIVE))
@@ -118,6 +119,7 @@
               preTransform          transform
               compositeAlpha        VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR
               presentMode           present-mode)
+
         (cffi:with-foreign-slots ((width height) imageExtent (:struct VkExtent2D))
           (setf width  _width
                 height _height)))

@@ -77,8 +77,8 @@
          `(let ((,',ret-list (multiple-value-list (,',create ,@,args))))
             (unwind-protect
               (multiple-value-bind ,,var-list (values-list ,',ret-list)
-                ,@,body
-                (apply #',',destroy (subseq ,',ret-list 0 ,',destructor-arity)))))))))
+                ,@,body)
+              (apply #',',destroy (subseq ,',ret-list 0 ,',destructor-arity))))))))
 
 
 ;; Allocates an object and initialize all its members to zero.

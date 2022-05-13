@@ -31,7 +31,7 @@
 (defun create-semaphore (device)
   (with-semaphore-info semaphore-info-ptr ()
     (cffi:with-foreign-object (semaphore-ptr 'VkSemaphore)
-      (check-vk-result (vkCreateSemaphore device-ptr semaphore-info-ptr (cffi:null-pointer) semaphore-ptr))
+      (check-vk-result (vkCreateSemaphore device semaphore-info-ptr (cffi:null-pointer) semaphore-ptr))
       (values (cffi:mem-ref semaphore-ptr 'VkSemaphore) device))))
 
 ;; Destroys a semaphore

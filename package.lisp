@@ -59,4 +59,15 @@
     #:with-command-buffer
     #:reset-command-buffer
     #:begin-command-buffer
-    #:end-command-buffer))
+    #:end-command-buffer
+
+    ;; Queue
+    #:device-queue
+    #:device-queues
+
+    ;; Swapchain
+    #:create-swapchain
+    #:destroy-swapchain
+    #:with-swapchain
+    #:acquire-next-image
+    #:present-swapchain))

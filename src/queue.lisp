@@ -10,31 +10,31 @@
 (defun create-submit-info (wait-sems wait-stages signal-sems command-buffers)
   (let ((wait-sem-count       (length wait-sems))
         (signal-sem-count     (length signal-sems))
-        (command-buffer-count (length command-buffers-count))
-        (wait-sems-ptr        (if (not (zerop wait-sem-count))
-                                  (cffi:foreign-alloc 'VkSemaphore :initial-contents wait-sems)
-                                  (cffi:null-pointer)))
-        (wait-stages-ptr      (if (not (zerop wait-sem-count))
-                                  (cffi:foreign-alloc 'VkPipelineStageFlags :initial-contents wait-stages)
-                                  (cffi:null-pointer)))
-        (signal-sems-ptr      (if (not (zerop signal-sem-count))
-                                  (cffi:foreign-alloc 'VkSemaphore :initial-contents signal-sems)
-                                  (cffi:null-pointer)))
-        (command-buffers-ptr  (if (not (zerop command-buffer-count))
-                                  (cffi:foreign-alloc 'VkCommandBuffer :initial-contents command-buffers)
-                                  (cffi:null-pointer)))
-        (submit-info-ptr      (alloc-vulkan-object '(:struct VkSubmitInfo))))
-    (cffi:with-foreign-slots ((sType waitSemaphoreCount pWaitSemaphores pWaitDstStageMask commandBufferCount
-                               pCommandBuffers signalSemaphoreCount pSignalSemaphores) submit-info-ptr (:struct VkSubmitInfo))
-      (setf sType                VK_STRUCTURE_TYPE_SUBMIT_INFO
-            waitSemaphoreCount   wait-sem-count
-            pWaitSemaphores      wait-sems-ptr
-            pWaitDstStageMask    wait-stages-ptr
-            commandBufferCount   command-buffer-count
-            pCommandBuffers      command-buffers-ptr
-            signalSemaphoreCount signal-sem-count
-            pSignalSemaphores    signal-sems-ptr))
-    (values submit-info-ptr)))
+        (command-buffer-count (length command-buffers)))
+    (let ((wait-sems-ptr        (if (not (zerop wait-sem-count))
+                                    (cffi:foreign-alloc 'VkSemaphore :initial-contents wait-sems)
+                                    (cffi:null-pointer)))
+          (wait-stages-ptr      (if (not (zerop wait-sem-count))
+                                    (cffi:foreign-alloc 'VkPipelineStageFlags :initial-contents wait-stages)
+                                    (cffi:null-pointer)))
+          (signal-sems-ptr      (if (not (zerop signal-sem-count))
+                                    (cffi:foreign-alloc 'VkSemaphore :initial-contents signal-sems)
+                                    (cffi:null-pointer)))
+          (command-buffers-ptr  (if (not (zerop command-buffer-count))
+                                    (cffi:foreign-alloc 'VkCommandBuffer :initial-contents command-buffers)
+                                    (cffi:null-pointer)))
+          (submit-info-ptr      (alloc-vulkan-object '(:struct VkSubmitInfo))))
+      (cffi:with-foreign-slots ((sType waitSemaphoreCount pWaitSemaphores pWaitDstStageMask commandBufferCount
+                                 pCommandBuffers signalSemaphoreCount pSignalSemaphores) submit-info-ptr (:struct VkSubmitInfo))
+        (setf sType                VK_STRUCTURE_TYPE_SUBMIT_INFO
+              waitSemaphoreCount   wait-sem-count
+              pWaitSemaphores      wait-sems-ptr
+              pWaitDstStageMask    wait-stages-ptr
+              commandBufferCount   command-buffer-count
+              pCommandBuffers      command-buffers-ptr
+              signalSemaphoreCount signal-sem-count
+              pSignalSemaphores    signal-sems-ptr))
+      (values submit-info-ptr))))
 
 ;; Destroys a submit info structure
 (defun destroy-submit-info (submit-info-ptr)
@@ -42,7 +42,7 @@
                             submit-info-ptr (:struct VkSubmitInfo))
     (cffi:foreign-free pWaitSemaphores)
     (cffi:foreign-free pWaitDstStageMask)
-    (cffi:foreign-free pCommandBuffer)
+    (cffi:foreign-free pCommandBuffers)
     (cffi:foreign-free pSignalSemaphores))
   (free-vulkan-object submit-info-ptr))
 
@@ -60,7 +60,7 @@
              (t (eq arg tree))))
          (find-args (args tree)
            (mapcar (lambda (s) (rfind s tree)) args))
-         (transform-body (args body)
+         (transform-body (args device pool reset-pool body)
            (unless (eq 'do-command-buffer (car body))
              (error "do-submit-info error: Expected a do-command-buffer statement. Found ~S" (car body)))
            (if (find-args args body)
@@ -78,7 +78,7 @@
       (if (null buffer-bodies)
           '(values nil nil nil)
           `(multiple-value-bind (,command-buffers ,procs ,pools) (do-submit-info-aux ,args (,device ,pool ,reset-pool) ,(cdr buffer-bodies))
-             (multiple-value-bind (,command-buffer ,proc ,device-sym ,pool-sym) ,(transform-body args (car buffer-bodies))
+             (multiple-value-bind (,command-buffer ,proc ,device-sym ,pool-sym) ,(transform-body args device pool reset-pool (car buffer-bodies))
                (values (cons ,command-buffer ,command-buffers) (if ,proc (cons ,proc ,procs) ,procs) (cons ,pool-sym ,pools))))))))
 
 ;; Creates a submit info structure with new command buffers

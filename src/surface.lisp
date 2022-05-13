@@ -18,4 +18,4 @@
 
 
 ;; With surface macro
-(defwith with-surface create-surface destroy-surface)
+(defwith with-surface create-surface destroy-surface :destructor-arity 2)

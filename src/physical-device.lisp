@@ -72,21 +72,25 @@
          free-queue-family-properties)
 
 
+;; Checks if a family queue supports surface presentation
+(defun get-physical-device-surface-support (physical-device surface family-index)
+  (cffi:with-foreign-object (present-queue-ptr 'VkBool32)
+    (vkGetPhysicalDeviceSurfaceSupportKHR physical-device family-index surface present-queue-ptr)
+    (equal (cffi:mem-ref present-queue-ptr 'VkBool32) VK_TRUE)))
+
+
 ;; Checks the validity of family queues from a device
-(defun check-queue-family-validity (physical-device-ptr required-flags &optional (surface-ptr nil))
+(defun check-queue-family-validity (physical-device-ptr required-flags surface)
   (with-queue-family-properties (queue-family-properties-ptr family-queue-count) (physical-device-ptr)
     (loop for i from 0 below family-queue-count
           for family-property = (cffi:mem-aptr queue-family-properties-ptr '(:struct VkQueueFamilyProperties) i)
-          for saved-flags = (logand (cffi:foreign-slot-value family-property
-                                                             '(:struct VkQueueFamilyProperties) 'queueFlags)
+          for saved-flags = (logand (cffi:foreign-slot-value family-property '(:struct VkQueueFamilyProperties) 'queueFlags)
                                     required-flags)
-          and saved-present-queue = (implies surface-ptr
-                                             (cffi:with-foreign-object (present-queue-ptr 'VkBool32)
-                                               (vkGetPhysicalDeviceSurfaceSupportKHR physical-device-ptr i
-                                                                                     surface-ptr present-queue-ptr)
-                                               (or saved-present-queue (equal (cffi:mem-ref present-queue-ptr 'VkBool32) VK_TRUE))))
-          when (and (equal saved-flags required-flags) saved-present-queue)
-            return it)))
+            then (logior saved-flags (logand (cffi:foreign-slot-value family-property '(:struct VkQueueFamilyProperties) 'queueFlags)
+                                             required-flags))
+          for saved-present-queue = (implies surface (get-physical-device-surface-support physical-device-ptr surface i))
+            then (implies surface (or saved-present-queue (get-physical-device-surface-support physical-device-ptr surface i)))
+          thereis (and (equal saved-flags required-flags) saved-present-queue))))
 
 
 ;; Checks the features availability of a device
@@ -216,9 +220,9 @@
          (the-physical-device (loop for physical-device in physical-devices
                                     thereis (and (implies device-type (check-device-type physical-device device-type))
                                                  (implies extensions  (check-device-extensions physical-device extensions))
-                                                 (check-queue-family-validity physical-device queue-flags surface)
                                                  (implies features    (check-available-features physical-device features))
                                                  (implies surface     (check-surface-presentation-support physical-device surface))
+                                                 (check-queue-family-validity physical-device queue-flags surface)
                                                  physical-device))))
     (when (not the-physical-device)
       (error "get-physical-device error: No valid physical device found"))

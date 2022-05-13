@@ -107,7 +107,7 @@
 ;;; -------------------------
 
 ;; Creates a device
-(defun create-device (physical-device queue-families &key (extensions nil) (features nil))
+(defun create-device (physical-device queue-families &key (extensions (list "VK_KHR_swapchain")) (features nil))
   (nest ((with-queue-create-infos  (queue-create-infos-ptr queue-create-info-count) (queue-families))
          (with-device-extensions   (extensions-ptr extension-count) (extensions))
          (with-device-features     features-ptr (features))
