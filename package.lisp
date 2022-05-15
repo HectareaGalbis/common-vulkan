@@ -1,6 +1,6 @@
 
 (defpackage "common-vulkan"
-  (:use :cl)
+  (:use :cl :iterate)
   (:nicknames :cvk)
   (:export
 
