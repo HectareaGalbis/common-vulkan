@@ -153,17 +153,18 @@
                                                           present-families transform present-mode)
             (cffi:with-foreign-object (swapchain-ptr 'VkSwapchainKHR)
               (check-vk-result (vkCreateSwapchainKHR device swapchain-info-ptr (cffi:null-pointer) swapchain-ptr))
-              (values (cffi:mem-ref swapchain-ptr 'VkSwapchainKHR) device))))))))
+              (values (cffi:mem-ref swapchain-ptr 'VkSwapchainKHR) image-format device))))))))
 
 ;; Destroys a swapchain
-(defun destroy-swapchain (swapchain device)
+(defun destroy-swapchain (swapchain img-format device)
+  (declare (ignore img-format))
   (vkDestroySwapchainKHR device swapchain (cffi:null-pointer)))
 
 ;; With swapchain macro
 (defwith with-swapchain
          create-swapchain
          destroy-swapchain
-         :destructor-arity 2)
+         :destructor-arity 3)
 
 
 ;; Returns the next available image in the swapchain

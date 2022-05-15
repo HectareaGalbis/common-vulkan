@@ -1,6 +1,6 @@
 
 
-(asdf:load-system "common-vulkan" :force t)
+(asdf:load-system "common-vulkan") ;:force t)
 
 (defun main ()
   (cvk:nest ((glfw:with-glfw)
@@ -13,8 +13,15 @@
              (cvk:with-command-pool command-pool (device queue-family))
              (cvk:with-command-buffer command-buffer (device command-pool))
              (let ((queue (cvk:device-queue device queue-family 0))))
-             (cvk:with-swapchain swapchain (physical-device device surface (list queue-family) 640 480))
-             (cvk:with-shader-module module (device "shaders/shader/vert.spv")))
+             (cvk:with-swapchain (swapchain img-format) (physical-device device surface (list queue-family) 640 480))
+             (cvk:with-shader-module module (device "shaders/shader/vert.spv"))
+             (cvk:with-attachment-description color-attachment (img-format cvk:VK_SAMPLE_COUNT_1_BIT
+                                                                cvk:VK_ATTACHMENT_LOAD_OP_CLEAR     cvk:VK_ATTACHMENT_STORE_OP_STORE
+                                                                cvk:VK_ATTACHMENT_LOAD_OP_DONT_CARE cvk:VK_ATTACHMENT_STORE_OP_DONT_CARE
+                                                                cvk:VK_IMAGE_LAYOUT_UNDEFINED       cvk:VK_IMAGE_LAYOUT_PRESENT_SRC_KHR))
+             (cvk:with-attachment-reference color-reference (0 cvk:VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL))
+             (cvk:with-subpass-description subpass (cvk:VK_PIPELINE_BIND_POINT_GRAPHICS :color-attachments (list color-reference)))
+             (cvk:with-render-pass render-pass (device (list color-attachment) (list color-reference))))
     (format t "Hola~%")
     (format t "~S~%" swapchain)
     (sleep 3)

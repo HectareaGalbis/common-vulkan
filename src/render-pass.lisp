@@ -16,15 +16,15 @@
 (defun create-attachment-description (img-format img-samples load-op store-op stencil-load-op stencil-store-op initial-layout final-layout)
   (let ((description-ptr (alloc-vulkan-object '(:struct VkAttachmentDescription))))
     (cffi:with-foreign-slots ((format samples loadOp storeOp stencilLoadOp stencilStoreOp initialLayout finalLayout)
-                              description-ptr (:struct VkAttachmentDescription)))
-    (setf format         img-format
-          samples        img-samples
-          loadOp         load-op
-          storeOp        store-op
-          stencilLoadOp  stencil-load-op
-          stencilStoreOp stencil-store-op
-          initialLayout  initial-layout
-          finalLayout    final-layout)
+                              description-ptr (:struct VkAttachmentDescription))
+      (setf format         img-format
+            samples        img-samples
+            loadOp         load-op
+            storeOp        store-op
+            stencilLoadOp  stencil-load-op
+            stencilStoreOp stencil-store-op
+            initialLayout  initial-layout
+            finalLayout    final-layout))
     (values description-ptr)))
 
 ;; Destroys an attachment description structure
@@ -40,10 +40,10 @@
 ;; Creates an attachment reference structure
 (defun create-attachment-reference (_attachment _layout)
   (let ((attachment-ref-ptr (alloc-vulkan-object '(:struct VkAttachmentReference))))
-    (cffi:with-foreign-slots ((attachment layout))
+    (cffi:with-foreign-slots ((attachment layout) attachment-ref-ptr (:struct VkAttachmentReference))
       (setf attachment _attachment
-            layout     _layout)
-      attachment-ref-ptr)))
+            layout     _layout))
+    (values attachment-ref-ptr)))
 
 ;; Destroys an attachment reference structure
 (defun destroy-attachment-reference (attachment-ref-ptr)
@@ -130,20 +130,22 @@
 
 
 ;; Creates a render pass create info structure
-(defun create-render-pass-create-info (attachments subpasses dependencies)
+(defun create-render-pass-create-info (attachments subpasses &optional (dependencies nil))
   (let ((attachments-ptr (cffi:foreign-alloc '(:struct VkAttachmentDescription) :initial-contents attachments))
         (subpasses-ptr (cffi:foreign-alloc '(:struct VkSubpassDescription) :initial-contents subpasses))
-        (dependencies-ptr (cffi:foreign-alloc '(:struct VkSubpassDependency) :initial-contents dependencies))
+        (dependencies-ptr (if dependencies
+                              (cffi:foreign-alloc '(:struct VkSubpassDependency) :initial-contents dependencies)
+                              (cffi:null-pointer)))
         (render-pass-info-ptr (alloc-vulkan-object '(:struct VkRenderPassCreateInfo))))
     (cffi:with-foreign-slots ((sType attachmentCount pAttachments subpassCount pSubpasses dependencyCount pDependencies)
                               render-pass-info-ptr (:struct VkRenderPassCreateInfo))
-      (setf sType VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO
+      (setf sType           VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO
             attachmentCount (length attachments)
-            pAttachments attachments-ptr
-            subpassCount (length subpasses)
-            pSubpasses subpasses-ptr
+            pAttachments    attachments-ptr
+            subpassCount    (length subpasses)
+            pSubpasses      subpasses-ptr
             dependencyCount (length dependencies)
-            pDependencies dependencies-ptr))
+            pDependencies   dependencies-ptr))
     (values render-pass-info-ptr)))
 
 ;; Destroys a render pass create info structure
@@ -161,7 +163,7 @@
 
 
 ;; Creates a render pass
-(defun create-render-pass (device attachments subpasses dependencies)
+(defun create-render-pass (device attachments subpasses &optional (dependencies nil))
   (with-render-pass-create-info render-pass-info (attachments subpasses dependencies)
     (cffi:with-foreign-object (render-pass-ptr 'VkRenderPass)
       (check-vk-result (vkCreateRenderPass device render-pass-info (cffi:null-pointer) render-pass-ptr))
@@ -208,7 +210,7 @@
 
 (defun attachment-layout (code attachment-vars)
   (let ((ref-var (gensym)))
-    (values ,ref-var
+    (values ref-var
             `(create-attachment-reference ,(position (car code) attachment-vars) ,(cadr code))
             `(destroy-attachment-reference ,ref-var))))
 
@@ -219,8 +221,7 @@
 
 (defun attachment-layout-list (code attachment-vars)
   (loop for attachment in code
-        for (ref-var constructor destructor) = (values-list (progn (check-attachment-layout attachment)
-                                                                   (attachment-layout attachment)))
+        for (ref-var constructor destructor) = (values-list (attachment-layout attachment attachment-vars))
         collect ref-var     into ref-vars
         collect constructor into constructors
         collect destructor  into destructors
@@ -231,24 +232,28 @@
 
 (defun subpass-creation-p (code)
   (and (eq 'create-subpass (car code))
-       (loop for rcode = code then (cddr rcode)
-             for (key-symbol att-list) = (list (car rcode) (cadr rcode))
-             and (key-p key-symbol)
-                 (attachment-layout-list-p att-list))))
+       (iter (for rcode initially code then (cddr rcode))
+             (if (null code)
+                 (return t)
+                 (multiple-value-bind (key-symbol att-list) (list (car rcode) (cadr rcode))
+                   (always (and (key-p key-symbol)
+                                (attachment-layout-list-p att-list))))))))
+
 
 (defun subpass-creation (code attachment-vars subpass-var)
-  (loop for rcode = (cddr code)
-        for (key att-lay-list) = (list (car rcode) (cadr rcode))
-        for (ref-vars ref-const ref-dest) = (values-list (attachment-layout-list att-lay-list attachment-vars))
-        append (list key ref-vars) into key-att-code
-        append ref-vars            into all-ref-vars
-        append ref-const           into all-ref-const
-        append ref-dest            into all-ref-dest
-        finally (return (values `(,@all-ref-vars  ,subpass-var)
-                                `(,@all-ref-const (create-subpass-description ,(cadr code) ,@key-att-code))
-                                `(,@all-ref-dest  (destroy-subpass-description ,subpass-var))))))
+  (iter (for rcode initially (cddr code) then (cddr rcode))
+        (if (not (null rcode))
+            (multiple-value-bind (key att-lay-list) (list (car rcode) (cadr rcode))
+              (multiple-value-bind (ref-vars ref-const ref-dest) (attachment-layout-list att-lay-list attachment-vars)
+                (appending (list key ref-vars) into key-att-code)
+                (appending ref-vars            into all-ref-vars)
+                (appending ref-const           into all-ref-const)
+                (appending ref-dest            into all-ref-dest)))
+            (return (values `(,@all-ref-vars  ,subpass-var)
+                            `(,@all-ref-const (create-subpass-description ,(cadr code) ,@key-att-code))
+                            `(,@all-ref-dest  (destroy-subpass-description ,subpass-var)))))))
 
-(defun attachment-assigment-p (code)
+(defun attachment-assignment-p (code)
   (and (symbolp (car code))
        (eq '= (cadr code))
        (attachment-creation-p (caddr code))))
@@ -280,36 +285,37 @@
                                              ((subpass-assignment-p    rcode) (cdddr rcode))
                                              ((subpass-creation-p      rcode) (cdr   rcode))
                                              ((dependency-creation-p   rcode) (cdr   rcode))))
-        (cond ((attachment-assignment-p rcode) (multiple-value-bind (att-var att-const att-dest) (attachment-assignment rcode)
+        (cond ((null rcode) (let ((render-var (gensym)))
+                              `(let ,(mapcar #'list constructor-vars constructors)
+                                 (let ((,render-var (create-render-pass ,device (list ,@attachment-vars) (list ,@subpass-vars)
+                                                                        (list ,@dependency-vars))))
+                                   `(progn ,@destructors)
+                                   ,render-var))))
+              ((attachment-assignment-p rcode) (multiple-value-bind (att-var att-const att-dest) (attachment-assignment rcode)
                                                  (collect att-var   into attachment-vars)
                                                  (collect att-var   into constructor-vars)
                                                  (collect att-const into constructors)
                                                  (collect att-dest  into destructors at beginning)))
+              ((subpass-creation-p rcode)      (let ((subpass-var (gensym)))
+                                                 (multiple-value-bind (vars const-list dest-list)
+                                                                      (subpass-creation rcode attachment-vars subpass-var)
+                                                   (collect   subpass-var         into subpass-vars)
+                                                   (appending vars                into constructor-vars)
+                                                   (appending const-list          into constructors)
+                                                   (appending (reverse dest-list) into destructors at beginning)))) ;; Modificar para que no haga falta el reverse
               ((subpass-assignment-p rcode)    (multiple-value-bind (subpass-var vars const-list dest-list)
                                                                     (subpass-assignment rcode attachment-vars)
                                                  (collect   subpass-var         into subpass-vars)
                                                  (appending vars                into constructor-vars)
                                                  (appending const-list          into constructors)
                                                  (appending (reverse dest-list) into destructors at beginning)))  ;; Modificar para que no haga falta el reverse
-              ((subpass-creation-p rcode)      (let ((subpass-var (gensym)))
-                                                 (multiple-value-bind (vars const-list dest-list)
-                                                                     (subpass-creation attachment-vars subpass-var)
-                                                   (collect   subpass-var         into subpass-vars)
-                                                   (appending vars                into constructor-vars)
-                                                   (appending const-list          into constructors)
-                                                   (appending (reverse dest-list) into destructors at beginning)))) ;; Modificar para que no haga falta el reverse
               ((dependency-creation-p rcode)   (multiple-value-bind (dep-var constructor destructor)
                                                                     (dependency-creation rcode subpass-vars)
                                                  (collect dep-var     into dependency-vars)
                                                  (collect dep-var     into constructor-vars)
                                                  (collect constructor into constructors)
-                                                 (collect destructor  into destructors at beginning))))
-        (finally (let ((render-var (gensym)))
-                   `(let ,(mapcar #'list constructor-vars constructors)
-                      (let ((,render-var (create-render-pass ,device (list ,@attachment-vars) (list ,@subpass-vars)
-                                                             (list ,@dependency-vars))))
-                        `(progn ,@destructors)
-                        ,render-var))))))
+                                                 (collect destructor  into destructors at beginning)))
+              (t (error "No valid expression into render-pass-creation")))))
 
 (defmacro do-render-pass (device &rest args)
   (render-pass-creation device args))

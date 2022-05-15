@@ -75,4 +75,22 @@
     ;; Shader module
     #:create-shader-module
     #:destroy-shader-module
-    #:with-shader-module))
+    #:with-shader-module
+
+    ;; Render pass
+    #:create-attachment-description
+    #:destroy-attachment-description
+    #:with-attachment-description
+    #:create-attachment-reference
+    #:destroy-attachment-reference
+    #:with-attachment-reference
+    #:create-subpass-description
+    #:destroy-subpass-description
+    #:with-subpass-description
+    #:create-subpass-dependency
+    #:destroy-subpass-dependency
+    #:with-subpass-dependency
+    #:create-render-pass
+    #:destroy-render-pass
+    #:with-render-pass
+    #:do-render-pass))

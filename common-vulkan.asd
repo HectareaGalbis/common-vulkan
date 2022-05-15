@@ -24,4 +24,5 @@
                 (:file "src/command-buffer")
                 (:file "src/queue")
                 (:file "src/swapchain")
-                (:file "src/shader-module")))
+                (:file "src/shader-module")
+                (:file "src/render-pass")))
