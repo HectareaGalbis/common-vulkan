@@ -10,9 +10,11 @@
                 (:file "vulkan/vk-macros")
                 (:file "vulkan/vk-funcs")
                 (:file "vulkan/support")
+                (:file "vulkan/debug-utils")
 
                 ; Common Vulkan
                 (:file "src/instance")
+                (:file "src/debug-messenger")
                 (:file "src/window")
                 (:file "src/surface")
                 (:file "src/physical-device")

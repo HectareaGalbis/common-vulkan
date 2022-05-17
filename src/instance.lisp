@@ -60,18 +60,20 @@
     (cffi:with-foreign-object (properties '(:struct VkLayerProperties) (cffi:mem-ref count :uint32))
       (vkEnumerateInstanceLayerProperties count properties)
       (loop for required-layer in required-layers
-        always (loop for i from 0 below (cffi:mem-ref count :uint32)
-                 thereis (equal required-layer
-                                (cffi:foreign-string-to-lisp (cffi:foreign-slot-value (cffi:mem-aptr properties '(:struct VkLayerProperties) i)
-                                                                                      '(:struct VkLayerProperties) 'layerName))))))))
+            always (loop for i from 0 below (cffi:mem-ref count :uint32)
+                         for property-ptr = (cffi:mem-aptr properties '(:struct VkLayerProperties) i)
+                         thereis (equal required-layer
+                                        (cffi:foreign-string-to-lisp (cffi:foreign-slot-value property-ptr
+                                                                                              '(:struct VkLayerProperties)
+                                                                                              'layerName))))))))
 
 
 ;; Returns the wanted extensions
 (defun get-required-extensions ()
-  (let ((extensions (glfw:get-required-instance-extensions)))
-    (unless extensions
+  (let ((glfw-extensions (glfw:get-required-instance-extensions)))
+    (unless glfw-extensions
       (error "glfw error: ~S" (glfw:get-error)))
-    extensions))
+    (cons VK_EXT_DEBUG_UTILS_EXTENSION_NAME glfw-extensions)))
 
 
 ;; Check whether the wanted extensions are available
@@ -98,8 +100,7 @@
         (enabled-extensions-str (cffi:foreign-alloc :string :initial-contents enabled-extensions)))
 
     ;; Create instance info
-    (let ((instance-info (cffi:foreign-alloc '(:struct VkInstanceCreateInfo))))
-      (memset instance-info 0 (cffi:foreign-type-size '(:struct VkInstanceCreateInfo)))
+    (let ((instance-info (alloc-vulkan-object '(:struct VkInstanceCreateInfo))))
       (cffi:with-foreign-slots ((sType flags pApplicationInfo enabledLayerCount
                                  ppEnabledLayerNames enabledExtensionCount ppEnabledExtensionNames)
                                 instance-info (:struct VkInstanceCreateInfo))
@@ -110,8 +111,7 @@
               ppEnabledLayerNames     enabled-layers-str
               enabledExtensionCount   (length enabled-extensions)
               ppEnabledExtensionNames enabled-extensions-str))
-
-      instance-info)))
+      (values instance-info))))
 
 
 ;; Destroys an instance info

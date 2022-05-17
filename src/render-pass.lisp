@@ -25,6 +25,7 @@
             stencilStoreOp stencil-store-op
             initialLayout  initial-layout
             finalLayout    final-layout))
+    (print (cffi:mem-ref description-ptr '(:struct VkAttachmentDescription)))
     (values description-ptr)))
 
 ;; Destroys an attachment description structure
@@ -43,6 +44,7 @@
     (cffi:with-foreign-slots ((attachment layout) attachment-ref-ptr (:struct VkAttachmentReference))
       (setf attachment _attachment
             layout     _layout))
+    (print (cffi:mem-ref attachment-ref-ptr '(:struct VkAttachmentReference)))
     (values attachment-ref-ptr)))
 
 ;; Destroys an attachment reference structure
@@ -59,19 +61,31 @@
 (defun create-subpass-description (pipeline-bind-point &key (input-attachments nil) (color-attachments nil) (resolve-attachments nil)
                                    (depth-stencil-attachment nil) (preserve-attachments nil))
   (let ((input-attachments-ptr        (if input-attachments
-                                          (cffi:foreign-alloc '(:struct VkAttachmentReference) :initial-contents input-attachments)
+                                          (car input-attachments)
+                                          ;(cffi:foreign-alloc '(:struct VkAttachmentReference)
+                                          ;    :initial-contents (mapcar (lambda (x) (cffi:mem-ref x '(:struct VkAttachmentReference)))
+                                          ;                              input-attachments))
                                           (cffi:null-pointer)))
         (color-attachments-ptr        (if color-attachments
-                                          (cffi:foreign-alloc '(:struct VkAttachmentReference) :initial-contents color-attachments)
+                                          (car color-attachments)
+                                          ;(cffi:foreign-alloc '(:struct VkAttachmentReference)
+                                          ;    :initial-contents (mapcar (lambda (x) (cffi:mem-ref x '(:struct VkAttachmentReference)))
+                                          ;                              color-attachments))
                                           (cffi:null-pointer)))
         (resolve-attachments-ptr      (if resolve-attachments
-                                          (cffi:foreign-alloc '(:struct VkAttachmentReference) :initial-contents resolve-attachments)
+                                          (car resolve-attachments)
+                                          ;(cffi:foreign-alloc '(:struct VkAttachmentReference)
+                                          ;    :initial-contents (mapcar (lambda (x) (cffi:mem-ref x '(:struct VkAttachmentReference)))
+                                          ;                              resolve-attachments))
                                           (cffi:null-pointer)))
         (depth-stencil-attachment-ptr (if depth-stencil-attachment
-                                          (cffi:foreign-alloc '(:struct VkAttachmentReference) :initial-element depth-stencil-attachment)
+                                          depth-stencil-attachment
                                           (cffi:null-pointer)))
         (preserve-attachments-ptr     (if preserve-attachments
-                                          (cffi:foreign-alloc '(:struct VkAttachmentReference) :initial-contents preserve-attachments)
+                                          (car preserve-attachments)
+                                          ;(cffi:foreign-alloc '(:struct VkAttachmentReference)
+                                          ;    :initial-contents (mapcar (lambda (x) (cffi:mem-ref x '(:struct VkAttachmentReference)))
+                                          ;                              preserve-attachments))
                                           (cffi:null-pointer)))
         (subpass-description-ptr      (alloc-vulkan-object '(:struct VkSubpassDescription))))
     (cffi:with-foreign-slots ((pipelineBindPoint inputAttachmentCount pInputAttachments colorAttachmentCount pColorAttachments
@@ -86,6 +100,7 @@
             pDepthStencilAttachment depth-stencil-attachment-ptr
             preserveAttachmentCount (length preserve-attachments)
             pPreserveAttachments    preserve-attachments-ptr))
+    (print (cffi:mem-ref subpass-description-ptr '(:struct VkSubpassDescription)))
     (values subpass-description-ptr)))
 
 ;; Destroys a subpass description structure
@@ -117,6 +132,7 @@
             srcAccessMask   src-access-mask
             dstAccessMask   dst-access-mask
             dependencyFlags dependency-flags))
+    (print (cffi:mem-ref subpass-dependency-ptr '(:struct VkSubpassDependency)))
     (values subpass-dependency-ptr)))
 
 ;; Destroys a subpass dependency structure
@@ -131,10 +147,17 @@
 
 ;; Creates a render pass create info structure
 (defun create-render-pass-create-info (attachments subpasses &optional (dependencies nil))
-  (let ((attachments-ptr (cffi:foreign-alloc '(:struct VkAttachmentDescription) :initial-contents attachments))
-        (subpasses-ptr (cffi:foreign-alloc '(:struct VkSubpassDescription) :initial-contents subpasses))
+  (let ((attachments-ptr (car attachments));(cffi:foreign-alloc '(:struct VkAttachmentDescription)
+                                          ;                     :initial-contents (mapcar (lambda (x) (cffi:mem-ref x '(:struct VkAttachmentDescription)))
+                                          ;                                               attachments)))
+        (subpasses-ptr (car subpasses)) ;(cffi:foreign-alloc '(:struct VkSubpassDescription)
+                                      ;                      :initial-contents (mapcar (lambda (x) (cffi:mem-ref x '(:struct VkSubpassDescription)))
+                                      ;                                                subpasses)))
         (dependencies-ptr (if dependencies
-                              (cffi:foreign-alloc '(:struct VkSubpassDependency) :initial-contents dependencies)
+                              (car dependencies)
+                              ;(cffi:foreign-alloc '(:struct VkSubpassDependency)
+                              ;                    :initial-contents (mapcar (lambda (x) (cffi:mem-ref x '(:struct VkSubpassDependency)))
+                              ;                                              dependencies))
                               (cffi:null-pointer)))
         (render-pass-info-ptr (alloc-vulkan-object '(:struct VkRenderPassCreateInfo))))
     (cffi:with-foreign-slots ((sType attachmentCount pAttachments subpassCount pSubpasses dependencyCount pDependencies)
@@ -146,6 +169,7 @@
             pSubpasses      subpasses-ptr
             dependencyCount (length dependencies)
             pDependencies   dependencies-ptr))
+    (print (cffi:mem-ref render-pass-info-ptr '(:struct VkRenderPassCreateInfo)))
     (values render-pass-info-ptr)))
 
 ;; Destroys a render pass create info structure
@@ -165,8 +189,11 @@
 ;; Creates a render pass
 (defun create-render-pass (device attachments subpasses &optional (dependencies nil))
   (with-render-pass-create-info render-pass-info (attachments subpasses dependencies)
+    (print "Hola1")
     (cffi:with-foreign-object (render-pass-ptr 'VkRenderPass)
+      (print "Hola1.5")
       (check-vk-result (vkCreateRenderPass device render-pass-info (cffi:null-pointer) render-pass-ptr))
+      (print "Hola2")
       (values (cffi:mem-ref render-pass-ptr 'VkRenderPass) device))))
 
 ;; Destroys a render pass
