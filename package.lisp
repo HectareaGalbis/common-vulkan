@@ -1,6 +1,6 @@
 
 (defpackage "common-vulkan"
-  (:use :cl :iterate)
+  (:use :cl :iterate :alexandria)
   (:nicknames :cvk)
   (:export
 
@@ -15,7 +15,7 @@
     ;; Debug messenger
     #:create-debug-messenger
     #:destroy-debug-messenger
-    #:with-debug-messenger 
+    #:with-debug-messenger
 
     ;; Window
     #:create-window

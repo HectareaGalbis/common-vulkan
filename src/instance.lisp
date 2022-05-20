@@ -13,8 +13,7 @@
         (eng-name-str (cffi:foreign-string-alloc eng-name)))
 
     ;; Create application info
-    (let ((app-info (cffi:foreign-alloc '(:struct VkApplicationInfo))))
-      (memset app-info 0 (cffi:foreign-type-size '(:struct VkApplicationInfo)))
+    (let ((app-info (alloc-vulkan-object '(:struct VkApplicationInfo))))
       (cffi:with-foreign-slots ((sType pApplicationName applicationVersion pEngineName engineVersion apiVersion)
                                 app-info (:struct VkApplicationInfo))
         (setf sType              VK_STRUCTURE_TYPE_APPLICATION_INFO
@@ -35,7 +34,7 @@
     (cffi:foreign-string-free pEngineName))
 
   ;; Destroy application info
-  (cffi:foreign-free app-info))
+  (free-vulkan-object app-info))
 
 
 ;; With application info wrapper
@@ -116,24 +115,17 @@
 
 ;; Destroys an instance info
 (defun destroy-instance-info (instance-info)
-
-  ;; Destroy strings
   (cffi:with-foreign-slots ((enabledLayerCount ppEnabledLayerNames enabledExtensionCount ppEnabledExtensionNames)
                             instance-info (:struct VkInstanceCreateInfo))
     (loop for i from 0 below enabledLayerCount
       do (cffi:foreign-string-free (cffi:mem-aptr ppEnabledLayerNames :string i)))
     (loop for i from 0 below enabledExtensionCount
       do (cffi:foreign-string-free (cffi:mem-aptr ppEnabledExtensionNames :string i)))
-
-    ;; Destroy arrays
     (cffi:foreign-free ppEnabledLayerNames)
     (cffi:foreign-free ppEnabledExtensionNames))
-
-  ;; Destroy instance info
   (cffi:foreign-free instance-info))
 
-
-;; With application info wrapper
+;; With application info macro
 (defwith with-instance-info
          create-instance-info
          destroy-instance-info)

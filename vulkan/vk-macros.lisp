@@ -45,14 +45,14 @@
 
 
 ;; Assigns the value 0 to all slots of p
-#|(defun zero-struct (p struct-typespec)
-    (loop for i from 0 below (cffi:foreign-type-size struct-typespec)
-       do (setf (cffi:mem-aref p :unsigned-char i) 0))
-    (values))|#
+(defun zero-struct (p type &optional (count 1))
+  (loop for i from 0 below (* count (cffi:foreign-type-size type))
+     do (setf (cffi:mem-aref p :unsigned-char i) 0))
+  (values))
 
-;; memset from C standard library
-(cffi:defcfun "memset" :pointer
-  (str :pointer) (c :int) (n :size))
+;; memset from C standard library (parece ser que puede dar problemas, mejor usar zero-struct)
+#|(cffi:defcfun "memset" :pointer
+    (str :pointer) (c :int) (n :size))|#
 
 
 ;; Creates an integer representing an vulkan version
@@ -65,26 +65,23 @@
 ;; The destructor must receive 'destructor-arity' arguments. These arguments are the first values the constructor returns
 ;; The resulting macro binds some vars to the results from the constructor. These vars can be fewer than the returned values
 (defmacro defwith (name create destroy &key (destructor-arity 1))
-  (let  ((var      (gensym "var"))
-         (var-list (gensym "var-list"))
-         (args     (gensym "args"))
-         (ret-list (gensym "ret-list"))
-         (body     (gensym "body")))
+  (with-gensyms ((var "var") (var-list "var-list") (args "args") (ret-list "ret-list") (body "body"))
     `(defmacro ,name (,var ,args &body ,body)
-       (let ((,var-list (if (listp ,var)
-                            ,var
-                            (list ,var))))
-         `(let ((,',ret-list (multiple-value-list (,',create ,@,args))))
-            (unwind-protect
-              (multiple-value-bind ,,var-list (values-list ,',ret-list)
-                ,@,body)
-              (apply #',',destroy (subseq ,',ret-list 0 ,',destructor-arity))))))))
+       (with-gensyms ((,ret-list "ret-list"))
+         (let ((,var-list (if (listp ,var)
+                              ,var
+                              (list ,var))))
+           `(let ((,,ret-list (multiple-value-list (,',create ,@,args))))
+              (unwind-protect
+                (multiple-value-bind ,,var-list (values-list ,,ret-list)
+                  ,@,body)
+                (apply #',',destroy (subseq ,,ret-list 0 ,',destructor-arity)))))))))
 
 
 ;; Allocates an object and initialize all its members to zero.
 (defun alloc-vulkan-object (struct-type &optional (count 1))
   (let ((object-ptr (cffi:foreign-alloc struct-type :count count)))
-    (memset object-ptr 0 (* (cffi:foreign-type-size struct-type) count))
+    (zero-struct object-ptr struct-type count)
     (values object-ptr)))
 
 ;; Deallocates an object

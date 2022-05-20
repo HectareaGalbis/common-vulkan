@@ -58,7 +58,7 @@
   (pObjectName  (:pointer :char)))
 
 (cffi:defcstruct VkDebugUtilsMessengerCallbackDataEXT
-  (sType VkStructureType)
+  (sType            VkStructureType)
   (pNext            (:pointer :void))
   (flags            VkDebugUtilsMessengerCallbackDataFlagsEXT)
   (pMessageIdName   (:pointer :char))
@@ -72,7 +72,7 @@
   (pObjects         (:pointer (:struct VkDebugUtilsObjectNameInfoEXT))))
 
 (cffi:defcstruct VkDebugUtilsObjectTagInfoEXT
-  (sType VkStructureType)
+  (sType        VkStructureType)
   (pNext        (:pointer :void))
   (objectType   VkObjectType)
   (objectHandle :uint64)
@@ -81,12 +81,12 @@
   (pTag         (:pointer :void)))
 
 (cffi:defcstruct VkDebugUtilsMessengerCreateInfoEXT
-  (sType VkStructureType)
+  (sType           VkStructureType)
   (pNext           (:pointer :void))
   (flags           VkDebugUtilsMessengerCreateFlagsEXT)
   (messageSeverity VkDebugUtilsMessageSeverityFlagsEXT)
   (messageType     VkDebugUtilsMessageTypeFlagsEXT)
-  (pfnUserCallback  PFN_vkDebugUtilsMessengerCallbackEXT)
+  (pfnUserCallback PFN_vkDebugUtilsMessengerCallbackEXT)
   (pUserData       (:pointer :void)))
 
 

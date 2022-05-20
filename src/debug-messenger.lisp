@@ -9,7 +9,7 @@
                               messenger-info-ptr (:struct VkDebugUtilsMessengerCreateInfoEXT))
       (setf sType           VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT
             messageSeverity (logior VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT
-                                    VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT 
+                                    VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT
                                     VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT
                                     VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT)
             messageType     (logior VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT
@@ -30,29 +30,30 @@
 
 ;; Messenger callback
 (cffi:defcallback messenger-callback VkBool32 ((messageSeverity VkDebugUtilsMessageSeverityFlagBitsEXT)
-                                               (messageType VkDebugUtilsMessageTypeFlagsEXT)
+                                               (messageTypes VkDebugUtilsMessageTypeFlagsEXT)
                                                (pCallbackData (:pointer (:struct VkDebugUtilsMessengerCallbackDataEXT)))
                                                (pUserData (:pointer :void)))
   (declare (ignore pUserData))
-  (cffi:with-foreign-slots ((pMessageIdName pMessage objectCount pObjects)
-                            pCallbackData (:struct VkDebugUtilsMessengerCallbackDataEXT))
-    (warn "Validation layer message:~%  Severity: ~S~%  Type: ~S~%  MessageId: ~S~%  Message: ~S~%  Objects: ~S"
-          (cond
-            ((equal messageSeverity VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT) "verbose")
-            ((equal messageSeverity VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT)    "info")
-            ((equal messageSeverity VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT) "warning")
-            ((equal messageSeverity VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT)   "error"))
-          (cond
-            ((equal messageType VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT)     "general")
-            ((equal messageType VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT)  "validation")
-            ((equal messageType VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT) "performance"))
-          (cffi:foreign-string-to-lisp pMessageIdName)
-          (cffi:foreign-string-to-lisp pMessage)
-          (loop for i from 0 below objectCount
-                for object = (cffi:mem-aptr pObjects '(:struct VkDebugUtilsObjectNameInfoEXT) i)
-                collect (cffi:foreign-string-to-lisp (cffi:foreign-slot-value object
-                                                                              '(:struct VkDebugUtilsObjectNameInfoEXT)
-                                                                              'pObjectName)))))
+  (print "Hola debug utils")
+  #|(cffi:with-foreign-slots ((pMessageIdName pMessage objectCount pObjects)
+                              pCallbackData (:struct VkDebugUtilsMessengerCallbackDataEXT))
+      (warn "Validation layer message:~%  Severity: ~S~%  Type: ~S~%  MessageId: ~S~%  Message: ~S~%  Objects: ~S"
+            (cond
+              ((equal messageSeverity VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT) "verbose")
+              ((equal messageSeverity VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT)    "info")
+              ((equal messageSeverity VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT) "warning")
+              ((equal messageSeverity VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT)   "error"))
+            (cond
+              ((equal messageTypes VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT)     "general")
+              ((equal messageTypes VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT)  "validation")
+              ((equal messageTypes VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT) "performance"))
+            (cffi:foreign-string-to-lisp pMessageIdName)
+            (cffi:foreign-string-to-lisp pMessage)
+            (loop for i from 0 below objectCount
+                  for object = (cffi:mem-aptr pObjects '(:struct VkDebugUtilsObjectNameInfoEXT) i)
+                  collect (cffi:foreign-string-to-lisp (cffi:foreign-slot-value object
+                                                                                '(:struct VkDebugUtilsObjectNameInfoEXT)
+                                                                                'pObjectName)))))|#
   (values VK_FALSE))
 
 

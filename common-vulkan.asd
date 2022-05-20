@@ -1,6 +1,6 @@
 
 (asdf:defsystem "common-vulkan"
-   :depends-on ("cffi" "cl-glfw" "iterate")
+   :depends-on ("cffi" "cl-glfw" "iterate" "alexandria")
    :components (
                 ; Vulkan
                 (:file "vulkan/load-vulkan")

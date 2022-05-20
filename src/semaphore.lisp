@@ -7,15 +7,14 @@
 
 ;; Creates a semaphore info struct
 (defun create-semaphore-info ()
-  (let ((semaphore-info-ptr (cffi:foreign-alloc '(:struct VkSemaphoreCreateInfo))))
-    (memset semaphore-info-ptr 0 (cffi:foreign-type-size '(:struct VkSemaphoreCreateInfo)))
+  (let ((semaphore-info-ptr (alloc-vulkan-object '(:struct VkSemaphoreCreateInfo))))
     (cffi:with-foreign-slots ((sType) semaphore-info-ptr (:struct VkSemaphoreCreateInfo))
       (setf sType VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO))
     (values semaphore-info-ptr)))
 
 ;; Destroys a semaphore info struct
 (defun destroy-semaphore-info (semaphore-info-ptr)
-  (cffi:foreign-free semaphore-info-ptr))
+  (free-vulkan-object semaphore-info-ptr))
 
 ;; With semaphore info macro
 (defwith with-semaphore-info

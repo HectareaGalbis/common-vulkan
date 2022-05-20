@@ -10,15 +10,18 @@
   (if x y t))
 
 ;; Returns a list of available devices
-(defun enumerate-physical-devices (instance-ptr)
+(defun enumerate-physical-devices (instance)
   (cffi:with-foreign-object (physical-device-count-ptr :uint32)
-    (let ((result (vkEnumeratePhysicalDevices instance-ptr physical-device-count-ptr (cffi:null-pointer))))
+    (format t "~S, ~S~%" instance physical-device-count-ptr)
+    (let ((result (vkEnumeratePhysicalDevices instance physical-device-count-ptr (cffi:null-pointer))))
+      (print "Hola2")
       (check-vk-result result)
       (let ((physical-device-count (cffi:mem-ref physical-device-count-ptr :uint32)))
         (when (not (> physical-device-count 0))
           (error "enumerate-physical-devices error: No physical devices found"))
         (cffi:with-foreign-object (physical-devices-ptr 'VKPhysicalDevice physical-device-count)
-          (vkEnumeratePhysicalDevices instance-ptr physical-device-count-ptr physical-devices-ptr)
+          (vkEnumeratePhysicalDevices instance physical-device-count-ptr physical-devices-ptr)
+          (print "Hola3")
           (loop for i from 0 below physical-device-count
             collect (cffi:mem-aref physical-devices-ptr 'VKPhysicalDevice i)))))))
 
