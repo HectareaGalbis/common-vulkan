@@ -17,3 +17,23 @@ Creates an attachment description structure.
 * **stencil-store-op**: is a [VkAttachmentStoreOp](https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkAttachmentStoreOp.html) value specifying how the contents of stencil components of the attachment are treated at the end of the last subpass where it is used.
 * **initial-layout**: It is the layout the attachment image subresource will be in when a render pass instance begins.
 * **final-layout**: It is the layout the attachment image subresource will be transitioned to when a render pass instance ends.
+
+## destroy-attachment-description
+
+```lisp
+(destroy-attachment-description description)
+```
+
+Destroys an attachment description.
+
+* **description**: An attachment description created by **create-attachment-description**.
+
+
+
+
+
+
+
+
+
+
