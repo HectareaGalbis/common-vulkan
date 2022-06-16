@@ -50,7 +50,7 @@
 (defun destroy-device-extensions (extensions-ptr extension-count)
   (unless (zerop extension-count)
     (loop for i from 0 below extension-count
-         do (cffi:foreign-string-free (cffi:mem-aptr extensions-ptr :string i))))
+          do (cffi:foreign-free (cffi:mem-aref extensions-ptr :pointer i))))
   (cffi:foreign-free extensions-ptr))
 
 ;; With device extensions macro
@@ -64,7 +64,8 @@
 (defun create-device-features (features)
   (let ((device-features-ptr (alloc-vulkan-object '(:struct VkPhysicalDeviceFeatures))))
     (loop for feature in features
-      do (setf (cffi:foreign-slot-value device-features-ptr '(:struct VkPhysicalDeviceFeatures) feature) VK_TRUE))
+	  do (setf (cffi:foreign-slot-value device-features-ptr '(:struct VkPhysicalDeviceFeatures) feature)
+		   VK_TRUE))
     (values device-features-ptr)))
 
 ;; Destroys a physical device features pointer

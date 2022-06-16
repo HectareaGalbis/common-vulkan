@@ -5,27 +5,36 @@
 ;;; --- Private functions ---
 ;;; -------------------------
 
-(defun read-spv-file (file-name)
-  (with-open-file (file-stream file-name :element-type '(unsigned-byte 8))
-    (let ((buffer (make-array (file-length file-stream) :element-type '(unsigned-byte 8))))
-      (read-sequence buffer file-stream)
-      buffer)))
+;; Took from cl-vulkan
+(defun create-spv-code (filename)
+  (with-open-file (stream filename :element-type '(unsigned-byte 8))
+    (let ((buffer (make-array 1024 :element-type '(unsigned-byte 8) :adjustable t :fill-pointer 0))
+	  (byte))
+      (loop while (setq byte (read-byte stream nil))
+	 do (vector-push-extend byte buffer))
+      (let* ((size (fill-pointer buffer))
+	     (binary (cffi:foreign-alloc (list :array :unsigned-char size))))
+	(loop for b across buffer for i from 0
+	   do (setf (cffi:mem-aref binary :unsigned-char i) b))
+	(values binary size)))))
+
+(defun destroy-spv-code (binary)
+  (cffi:foreign-free binary))
 
 
 ;; Creates a shader module create info structure
 (defun create-shader-module-create-info (spv-file)
-  (let* ((code     (read-spv-file spv-file))
-         (code-ptr (cffi:foreign-alloc :uint32 :initial-contents code))
-         (shader-module-info-ptr (alloc-vulkan-object '(:struct VkShaderModuleCreateInfo))))
-    (cffi:with-foreign-slots ((sType codeSize pCode) shader-module-info-ptr (:struct VkShaderModuleCreateInfo))
-      (setf sType    VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO
-            codeSize (length code)
-            pCode    code-ptr)
+  (multiple-value-bind (code-ptr code-size) (create-spv-code spv-file)
+    (let ((shader-module-info-ptr (alloc-vulkan-object '(:struct VkShaderModuleCreateInfo))))
+      (cffi:with-foreign-slots ((sType codeSize pCode) shader-module-info-ptr (:struct VkShaderModuleCreateInfo))
+        (setf sType    VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO
+              codeSize code-size
+              pCode    code-ptr))
       (values shader-module-info-ptr))))
 
 ;; Destroys a shader module create info structure
 (defun destroy-shader-module-create-info (shader-info-ptr)
-  (cffi:foreign-string-free (cffi:foreign-slot-value shader-info-ptr '(:struct VkShaderModuleCreateInfo) 'pCode))
+  (destroy-spv-code (cffi:foreign-slot-value shader-info-ptr '(:struct VkShaderModuleCreateInfo) 'pCode))
   (free-vulkan-object shader-info-ptr))
 
 ;; With shader module create info macro
