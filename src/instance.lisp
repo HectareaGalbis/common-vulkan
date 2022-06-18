@@ -1,6 +1,27 @@
 
 (in-package :cvk)
 
+;;; -------------------
+;;; ----- Structs -----
+;;; -------------------
+
+;; Extension properties structure
+(defstruct extension-properties
+  extensionName
+  specVersion)
+
+
+;; Layer properties structure
+(defstruct layer-properties
+  layerName
+  specVersion
+  implementationVersion
+  description)
+
+
+;;; ---------------------
+;;; ----- Functions -----
+;;; ---------------------
 
 ;: Creates an application info structure
 (defun create-application-info (&key ((:sType sType-c) VK_STRUCTURE_TYPE_APPLICATION_INFO)
@@ -85,6 +106,7 @@
          destroy-instance-create-info)
 
 
+;; Creates an instance
 (defun create-instance (pCreateInfo-c _pAllocator)
   (let ((pAllocator-c (or _pAllocator (cffi:null-pointer))))
     (cffi:with-foreign-object (pInstance-c 'VkInstance)
@@ -103,6 +125,7 @@
   :destructor-arity 3)
 
 
+;; Returns global extension properties
 (defun enumerate-instance-extension-properties (_pLayerName)
   (let ((pLayerName-c (if _pLayerName
 			  (cffi:foreign-string-alloc _pLayerName)
@@ -112,61 +135,53 @@
       (cffi:with-foreign-object (pProperties-c '(:struct VkExtensionProperties)
 					       (cffi:mem-ref pPropertyCount-c :uint32))
 	(vkEnumerateInstanceExtensionProperties pLayerName-c pPropertyCount-c pProperties-c)
-	(loop for i from 0 below (cffi:mem-ref pPropertyCount-c :uint32)
-	      collect (cffi:mem-aref pProperties-c '(:struct VkExtensionProperties) i)))))) ; Crear VkExtensionProperties por mi cuenta? O quizas mejor una estructure de lisp con la info.
+	(iter (for i from 0 below (cffi:mem-ref pPropertyCount-c :uint32))
+	      (let ((extension-property-c (cffi:mem-aptr pProperties-c '(:struct VkExtensionProperties) i)))
+		(cffi:with-foreign-slots ((extensionName specVersion)
+					  extension-property-c '(:struct VkExtensionProperties))
+		  (collect (make-extension-properties (cffi:foreign-string-to-lisp extensionName)
+						      specVersion)))))))))
   
 
-;; List of wanted layers
-(defun get-required-layers (&optional (validation t))
-  (if validation
-      '("VK_LAYER_KHRONOS_validation")
-      nil))
+;; Returns up to requested number of global layer properties
+(defun enumerate-instance-layer-properties ()
+  (cffi:with-foreign-object (pPropertyCount-c :uint32)
+    (vkEnumerateInstanceLayerProperties pPropertyCount-c (cffi:null-pointer))
+    (cffi:with-foreign-object (pProperties-c '(:struct VkLayerProperties) (cffi:mem-ref pPropertyCount-c
+											:uint32))
+      (vkEnumerateInstanceLayerProperties pPropertyCount-c pProperties-c)
+      (iter (for i from 0 below (cffi:mem-ref pPropertyCount-c :uint32))
+	    (let ((layer-property-c (cffi:mem-aptr pProperties-c '(:struct VkLayerProperties) i)))
+	      (cffi:with-foreign-slots ((layerName specVersion implementationVersion description)
+					layer-property-c '(:struct VkLayerProperties))
+		(collect (make-layer-properties (cffi:foreign-string-to-lisp layerName)
+						specVersion implementationVersion
+						(cffi:foreign-string-to-lisp description)))))))))
 
 
-;; Check whether the wanted layers are available
-(defun check-required-layers (required-layers)
-
-  ;; We get the available layers
-  (cffi:with-foreign-object (count :uint32)
-    (vkEnumerateInstanceLayerProperties count (cffi:null-pointer))
-    (cffi:with-foreign-object (properties '(:struct VkLayerProperties) (cffi:mem-ref count :uint32))
-      (vkEnumerateInstanceLayerProperties count properties)
-      (loop for required-layer in required-layers
-            always (loop for i from 0 below (cffi:mem-ref count :uint32)
-                         for property-ptr = (cffi:mem-aptr properties '(:struct VkLayerProperties) i)
-                         thereis (equal required-layer
-                                        (cffi:foreign-string-to-lisp (cffi:foreign-slot-value property-ptr
-                                                                                              '(:struct VkLayerProperties)
-                                                                                              'layerName))))))))
-
-
-;; Returns the wanted extensions
-(defun get-required-extensions ()
-  (let ((glfw-extensions (glfw:get-required-instance-extensions)))
-    (unless glfw-extensions
-      (error "glfw error: ~S" (glfw:get-error)))
-    (cons VK_EXT_DEBUG_UTILS_EXTENSION_NAME glfw-extensions)))
-
-
-;; Check whether the wanted extensions are available
-(defun check-required-extensions (required-extensions)
-
-  ;; We get the available extensions
-  (cffi:with-foreign-object (count :uint32)
-    (vkEnumerateInstanceExtensionProperties (cffi:null-pointer) count (cffi:null-pointer))
-    (cffi:with-foreign-object (properties '(:struct VkExtensionProperties) (cffi:mem-ref count :uint32))
-      (vkEnumerateInstanceExtensionProperties (cffi:null-pointer) count properties)
-      ;; We check the availability of the wanted extensions
-      (loop for required-extension in required-extensions
-        always (loop for i from 0 below (cffi:mem-ref count :uint32)
-                 thereis (equal required-extension
-                                (cffi:foreign-string-to-lisp (cffi:foreign-slot-value (cffi:mem-aptr properties '(:struct VkExtensionProperties) i)
-                                                                                     '(:struct VkExtensionProperties) 'extensionName))))))))
-
-
-
-;;; -------------------------
-;;; ---- Public functions ---
-;;; -------------------------
-
-
+(defun get-instance-proc-addr (instance-c _pName)
+  (cffi:with-foreign-string (pName-c _pName)
+    (let ((func-c (vkGetInstanceProcAddr instance-c pName-c)))
+      (cond
+	;; Creates a debug utils messenger
+        ((string= pName "vkCreateDebugUtilsMessengerEXT")
+         (lambda (instance-c pCreateInfo-c _pAllocator)
+	   (let ((pAllocator-c (or _pAllocator (cffi:null-pointer))))
+	     (cffi:with-foreign-object (pMessenger-c 'VkDebugUtilsMessengerEXT)
+	       (let ((result (foreign-funcall-pointer func-c ()
+	  					      'VkInstance instance-c
+					              '(:struct VkDebugUtilsMessengerCreateInfoEXT)
+						      pCreateInfo-c
+					              '(:struct VkAllocationCallbacks) pAllocator-c
+					              'VkDebugUtilsMessengerEXT pMessenger-c))))
+	       (values (cffi:mem-ref pMessenger-c 'VkDebugUtilsMessengerEXT) result)))))
+	;; Destroys a debug utils messenger
+	((string= pName "vkDestroyDebugUtilsMessengerEXT")
+	 (lambda (instance-c messenger-c _pAllocator)
+	   (let ((pAllocator-c (or _pAllocator (cffi:null-pointer))))
+	     (cffi:foreign-funcall-pointer func-c ()
+					   'VkInstance instance-c
+					   'VkDebugUtilsMessengerEXT messenger-c
+					   '(:struct VkAllocationCallbacks) pAllocator-c))))))))
+    
+    
