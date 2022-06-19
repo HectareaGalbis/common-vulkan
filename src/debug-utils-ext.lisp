@@ -61,27 +61,42 @@
   sType
   pNext
   flags
-  (pMessageIdName  (cffi:foreign-string-to-lisp pMessageIdName))
+  (pMessageIdName  :getter (() (cffi:foreign-string-to-lisp pMessageIdName)))
   messageIdNumber
-  (pMessage        (cffi:foreign-string-to-lisp pMessage))
+  (pMessage        :getter (() (cffi:foreign-string-to-lisp pMessage)))
   queueLabelCount
-  (pQueueLabels    (loop for i from 0 below queueLabelCount
-			 collect (cffi:mem-aptr pQueueLabels '(:struct VkDebugUtilsLabelEXT) i)))
+  (pQueueLabels    :getter ((&optional (index nil))
+			    (if index
+                                (cffi:mem-aptr pQueueLabels '(struct VkDebugUtilsLabelExt) index)
+			        (loop for i from 0 below queueLabelCount
+			              collect (cffi:mem-aptr pQueueLabels
+							     '(:struct VkDebugUtilsLabelEXT) i)))))
   cmdBufLabelCount
-  (pCmdBufLabels   (loop for i from 0 below cmdBufLabelCount
-			 collect (cffi:mem-aptr pCmdBufLabels '(:struct VkDebugUtilsLabelEXT) i)))
+  (pCmdBufLabels   :getter ((&optional (index nil))
+			    (if index
+                                (cffi:mem-aptr pCmdBufLabels '(:struct VkDebugUtilsLabelEXT) index)
+				(loop for i from 0 below cmdBufLabelCount
+			              collect (cffi:mem-aptr pCmdBufLabels
+							     '(:struct VkDebugUtilsLabelEXT) i)))))
   objectCount
-  (pObjects        (loop for i from 0 below objectCount
-			 collect (cffi:mem-aptr pObjects '(:struct VkDebugUtilsObjectNameInfoEXT) i))))
+  (pObjects        :getter ((&optional (index nil))
+			    (if index
+                                (cffi:mem-aptr pObjects '(:struct VkDebugUtilsObjectNameInfoEXT) index)
+			        (loop for i from 0 below objectCount
+			              collect (cffi:mem-aptr pObjects
+				 			     '(:struct VkDebugUtilsObjectNameInfoEXT) i))))))
   
 
 ;; VkDebugUtilsLabelEXT accessors
 (def-foreign-accessors debug-utils-label (:struct VkDebugUtilsLabelEXT)
   sType
   pNext
-  (pLabelName (cffi:foreign-string-to-lisp pLabelName))
-  (color      (loop for i from 0 below 4
-		    collect (cffi:mem-aref color :float i))))
+  (pLabelName :getter (() (cffi:foreign-string-to-lisp pLabelName)))
+  (color      :getter ((&optional (index nil))
+	              (if index
+		          (cffi:mem-aref color :float index)
+		          (loop for i from 0 below 4
+		                collect (cffi:mem-aref color :float i))))))
 
 
 ;; VkDebugUtilsObjectNameInfoEXT accessors
@@ -90,4 +105,4 @@
   pNext
   objectType
   objectHandle
-  (pObjectName (cffi:foreign-string-to-lisp pObjectName)))
+  (pObjectName :getter (() (cffi:foreign-string-to-lisp pObjectName))))

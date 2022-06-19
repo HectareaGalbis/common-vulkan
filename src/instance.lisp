@@ -1,23 +1,6 @@
 
 (in-package :cvk)
 
-;;; -------------------
-;;; ----- Structs -----
-;;; -------------------
-
-;; Extension properties structure
-(defstruct extension-properties
-  extensionName
-  specVersion)
-
-
-;; Layer properties structure
-(defstruct layer-properties
-  layerName
-  specVersion
-  implementationVersion
-  description)
-
 
 ;;; ---------------------
 ;;; ----- Functions -----
@@ -63,19 +46,19 @@
 
 
 (def-foreign-constructor-destructor application-info (:struct VkApplicationInfo)
-  ((sType              VK_STRUCTURE_TYPE_APPLICATION_INFO)))
-  ;; ((pNext              nil) (or pNext (cffi:null-pointer)))
-  ;; ((pApplicationName   nil) (if pApplicationName
-  ;; 			        (cffi:foreign-string-alloc pApplicationName)
-  ;; 			        (cffi:null-pointer))
-  ;; 			    (cffi:foreign-string-free pApplicationName))
-  ;; ((applicationVersion 0))
-  ;; ((pEngineName        nil) (if pEngineName
-  ;; 			        (cffi:foreign-alloc pEngineName)
-  ;; 			        (cffi:null-pointer))
-  ;; 		            (cffi:foreign-string-free))
-  ;; ((engineVersion      0))
-  ;; ((apiVersion         0)))
+  ((sType              VK_STRUCTURE_TYPE_APPLICATION_INFO))
+  ((pNext              nil) (or pNext (cffi:null-pointer)))
+  ((pApplicationName   nil) (if pApplicationName
+			        (cffi:foreign-string-alloc pApplicationName)
+			        (cffi:null-pointer))
+			    (cffi:foreign-string-free pApplicationName))
+  ((applicationVersion 0))
+  ((pEngineName        nil) (if pEngineName
+			        (cffi:foreign-alloc pEngineName)
+			        (cffi:null-pointer))
+		            (cffi:foreign-string-free))
+  ((engineVersion      0))
+  ((apiVersion         0)))
 
 
 
@@ -124,21 +107,21 @@
 
 
 (def-foreign-constructor-destructor instance-create-info (:struct VkInstanceCreateInfo)
-  ;; ((sType VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO))
-   ((pNext nil) (or pNext (cffi:null-pointer))))
-  ;; ((flags 0))
-  ;; ((pApplicationInfo nil) (or pApplicationInfo (cffi:null-pointer)))
-  ;; ((enabledLayerCount 0))
-  ;; ((ppEnabledLayerNames nil) (cffi:foreign-alloc :string :initial-contents ppEnabledLayerNames)
-  ;; 			     (loop for i from 0 below enabledLayerCount
-  ;; 				   do (cffi:foreign-free (cffi:mem-aref ppEnabledLayerNames :pointer i))
-  ;; 				   finally (cffi:foreign-free ppEnabledLayerNames)))
-  ;; ((enabledExtensionCount 0))
-  ;; ((ppEnabledExtensionNames nil) (cffi:foreign-alloc :string :initial-contents ppEnabledExtensionNames)
-  ;; 				 (loop for i from 0 below enabledExtensionCount
-  ;; 				       do (cffi:foreign-free (cffi:mem-aref ppEnabledExtensionNames
-  ;; 									    :pointer i))
-  ;; 				       finally (cffi:foreign-free ppEnabledExtensionNames))))
+  ((sType VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO))
+  ((pNext nil) (or pNext (cffi:null-pointer)))
+  ((flags 0))
+  ((pApplicationInfo nil) (or pApplicationInfo (cffi:null-pointer)))
+  ((enabledLayerCount 0))
+  ((ppEnabledLayerNames nil) (cffi:foreign-alloc :string :initial-contents ppEnabledLayerNames)
+			     (loop for i from 0 below enabledLayerCount
+				   do (cffi:foreign-free (cffi:mem-aref ppEnabledLayerNames :pointer i))
+				   finally (cffi:foreign-free ppEnabledLayerNames)))
+  ((enabledExtensionCount 0))
+  ((ppEnabledExtensionNames nil) (cffi:foreign-alloc :string :initial-contents ppEnabledExtensionNames)
+				 (loop for i from 0 below enabledExtensionCount
+				       do (cffi:foreign-free (cffi:mem-aref ppEnabledExtensionNames
+									    :pointer i))
+				       finally (cffi:foreign-free ppEnabledExtensionNames))))
 
 
 
@@ -172,12 +155,8 @@
 					       (cffi:mem-ref pPropertyCount-c :uint32))
 	(vkEnumerateInstanceExtensionProperties pLayerName-c pPropertyCount-c pProperties-c)
 	(iter (for i from 0 below (cffi:mem-ref pPropertyCount-c :uint32))
-	      (let ((extension-property-c (cffi:mem-aptr pProperties-c '(:struct VkExtensionProperties) i)))
-		(cffi:with-foreign-slots ((extensionName specVersion)
-					  extension-property-c (:struct VkExtensionProperties))
-		  (collect (make-extension-properties :extensionName (cffi:foreign-string-to-lisp extensionName)
-						      :specVersion specVersion)))))))))
-  
+	      (collect (cffi:mem-aptr pProperties-c '(:struct VkExtensionProperties) i)))))))
+   
 
 ;; Returns up to requested number of global layer properties
 (defun enumerate-instance-layer-properties ()
@@ -187,15 +166,10 @@
 											:uint32))
       (vkEnumerateInstanceLayerProperties pPropertyCount-c pProperties-c)
       (iter (for i from 0 below (cffi:mem-ref pPropertyCount-c :uint32))
-	    (let ((layer-property-c (cffi:mem-aptr pProperties-c '(:struct VkLayerProperties) i)))
-	      (cffi:with-foreign-slots ((layerName specVersion implementationVersion description)
-					layer-property-c (:struct VkLayerProperties))
-		(collect (make-layer-properties :layerName (cffi:foreign-string-to-lisp layerName)
-						:specVersion specVersion
-						:implementationVersion implementationVersion
-						:description (cffi:foreign-string-to-lisp description)))))))))
+	    (collect (cffi:mem-aptr pProperties-c '(:struct VkLayerProperties) i))))))
+	     
 
-
+;; Returns an instance procedure 
 (defun get-instance-proc-addr (instance-c _pName)
   (cffi:with-foreign-string (pName-c _pName)
     (let ((func-c (vkGetInstanceProcAddr instance-c pName-c)))
