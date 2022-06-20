@@ -45,7 +45,7 @@
 ;;          destroy-application-info)
 
 
-(def-foreign-constructor-destructor application-info (:struct VkApplicationInfo)
+(mcffi:def-foreign-constructor-destructor application-info (:struct VkApplicationInfo)
   ((sType              VK_STRUCTURE_TYPE_APPLICATION_INFO))
   ((pNext              nil) (or pNext (cffi:null-pointer)))
   ((pApplicationName   nil) (if pApplicationName
@@ -56,7 +56,7 @@
   ((pEngineName        nil) (if pEngineName
 			        (cffi:foreign-alloc pEngineName)
 			        (cffi:null-pointer))
-		            (cffi:foreign-string-free))
+		            (cffi:foreign-string-free pEngineName))
   ((engineVersion      0))
   ((apiVersion         0)))
 
@@ -106,7 +106,7 @@
 ;;          destroy-instance-create-info)
 
 
-(def-foreign-constructor-destructor instance-create-info (:struct VkInstanceCreateInfo)
+(mcffi:def-foreign-constructor-destructor instance-create-info (:struct VkInstanceCreateInfo)
   ((sType VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO))
   ((pNext nil) (or pNext (cffi:null-pointer)))
   ((flags 0))
@@ -138,7 +138,7 @@
   (vkDestroyInstance instance-c pAllocator-c))
 
 ;; With instance macro
-(defwith with-instance
+(mcffi:defwith with-instance
   create-instance
   destroy-instance
   :destructor-arity 3)
@@ -170,8 +170,8 @@
 	     
 
 ;; Returns an instance procedure 
-(defun get-instance-proc-addr (instance-c _pName)
-  (cffi:with-foreign-string (pName-c _pName)
+(defun get-instance-proc-addr (instance-c pName)
+  (cffi:with-foreign-string (pName-c pName)
     (let ((func-c (vkGetInstanceProcAddr instance-c pName-c)))
       (cond
 	;; Creates a debug utils messenger
@@ -179,7 +179,7 @@
          (lambda (instance-c pCreateInfo-c _pAllocator)
 	   (let ((pAllocator-c (or _pAllocator (cffi:null-pointer))))
 	     (cffi:with-foreign-object (pMessenger-c 'VkDebugUtilsMessengerEXT)
-	       (let ((result (foreign-funcall-pointer func-c ()
+	       (let ((result (cffi:foreign-funcall-pointer func-c ()
 	  					      VkInstance instance-c
 					              :pointer pCreateInfo-c
 					              :pointer pAllocator-c

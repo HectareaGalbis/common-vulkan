@@ -33,8 +33,8 @@
 (defmethod init-window ((obj hello-triangle-application))
   (glfw:init)
   
-  (glfw:window-hint glfw:+CLIENT-API+ glfw:+NO-API+)
-  (glfw:window-hint glfw:+RESIZABLE+ glfw:+FALSE+)
+  (glfw:window-hint glfw:GLFW_CLIENT_API glfw:GLFW_NO_API)
+  (glfw:window-hint glfw:GLFW_RESIZABLE glfw:GLFW_FALSE)
 
   (setf (window obj) (glfw:create-window width height "Vulkan" nil nil))
   (print "Hola"))

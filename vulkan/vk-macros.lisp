@@ -23,9 +23,9 @@
   (cffi:foreign-free object-ptr))
 
 ;; with-vulkan-object macro
-(defwith with-vulkan-object
-         alloc-vulkan-object
-         free-vulkan-object)
+(mcffi:defwith with-vulkan-object
+  alloc-vulkan-object
+  free-vulkan-object)
 
 
 ;; Works like a let, but accepts macros whose last expression must be a body or forms* expression.
