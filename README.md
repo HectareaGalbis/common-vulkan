@@ -2,7 +2,7 @@
 
 Bindings for the common vulkan library. 
 
-**WARNING**: This library is still in development. My first objective is to be able to complete the official vulkan tutorial with these bindings. I'll be adding code and documentation as I can.
+**WARNING**: This library is still in development. My first objective is to be able to complete the official vulkan tutorial with these bindings. I'll be adding code and documentation in my free time.
 
 # Documentation
 
