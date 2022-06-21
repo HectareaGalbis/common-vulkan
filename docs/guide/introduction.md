@@ -80,5 +80,9 @@ the last way too.
 
 > It is possible that *slime* (or *alive* or *slima*) generates an error because it doesn't find the "common-vulkan-guide" component. This is possibly
 > due to have generated the asd file manually. Try to run in *slime* `(ql:register-local-projects)`. If the problems persist, make sure that you 
-> wrote every name from files correctly.
+> wrote every name correctly.
 
+As the official tutorial says, you are now all set for the real thing.
+
+**Next**:[Base code](https://github.com/Hectarea1996/common-vulkan/guide/base-code)
+**Previous**:[Common Vulkan Guide](https://github.com/Hectarea1996/common-vulkan/guide/)
