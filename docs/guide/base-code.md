@@ -88,7 +88,7 @@ We fill the `main-loop` function:
 ```lisp
 (defmethod main-loop ((obj hello-triangle-application))
   (loop while (not (glfw:window-should-close (window obj)))
-	      do (glfw:poll-events)))
+	do (glfw:poll-events)))
 ```
 
 And lastly, we need to clean up the resources.
