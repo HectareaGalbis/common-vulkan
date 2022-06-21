@@ -9,3 +9,6 @@ I tried to generate functions that are as close as possible as the original ones
 need to be slightly modified. If you don't know how a function works in the Common Lisp side you can find it in the 
 [Api Reference](https://hectarea1996.github.io/common-vulkan/api/).
 
+I think I'm not missing anything so..., let's code!
+
+**Next**: [Introduction](https://hectarea1996.github.io/common-vulkan/guide/introduction.html)
