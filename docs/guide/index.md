@@ -11,4 +11,4 @@ need to be slightly modified. If you don't know how a function works in the Comm
 
 I think I'm not missing anything so..., let's code!
 
-**Next**: [Introduction](https://hectarea1996.github.io/common-vulkan/guide/introduction.html)
+* **Next**: [Introduction](https://hectarea1996.github.io/common-vulkan/guide/introduction.html)
