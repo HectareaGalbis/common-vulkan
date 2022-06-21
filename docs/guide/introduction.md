@@ -25,4 +25,8 @@ folder.
 We have already all we need to start coding. You should create a new project that depends on the previous ones (cl-glfw and common-vulkan). 
 
 You can place your project where you want, but I prefer to create them in the same folder as the rest. In order to do this, create a folder into your
-`quicklisp/local-projects/` folder. You should have something like this: `quicklisp/local-projects/name-of-my-project`. Now, inside this folder we  
+`quicklisp/local-projects/` folder. You should have something like this: `quicklisp/local-projects/name-of-my-project`. Now, inside this folder we are going to create the next file named `cl-vulkan-guide`:
+
+```lisp
+
+```
