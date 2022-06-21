@@ -84,5 +84,5 @@ the last way too.
 
 As the official tutorial says, you are now all set for the real thing.
 
-* **Next**:[Base code](https://Hectarea1996.github.io/common-vulkan/guide/base-code.html)
-* **Previous**:[Common Vulkan Guide](https://hectarea1996.github.io/common-vulkan/guide/index.html)
+* **Next**: [Base code](https://Hectarea1996.github.io/common-vulkan/guide/base-code.html)
+* **Previous**: [Common Vulkan Guide](https://hectarea1996.github.io/common-vulkan/guide/index.html)
