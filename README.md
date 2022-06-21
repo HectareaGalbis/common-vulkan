@@ -2,7 +2,7 @@
 
 Bindings for the common vulkan library. 
 
-**WARNING**: This library is still in development. My first objective is to be able to complete the official vulkan tutorial with these bindings. I'll be adding code and documentation in my free time.
+**WARNING**: This library is still in development. My first objective is to be able to complete the official vulkan tutorial with these bindings. I'll be adding code and documentation in my free time. I want to make my own game engine made completely with Common Lisp, so I think that this project will be active for a long time.
 
 # Documentation
 
