@@ -102,5 +102,5 @@ And lastly, we need to clean up the resources.
 
 When you load the `run.lisp` file you should see a window titled `Vulkan`. After closing the window, the resources will clean up and the function will end.
 
-* **Next**:[Instance](https://hectarea1996.github.io/common-vulkan/guide/instance.html)
-* **Previous**[Base code](https://hectarea1996.github.io/common-vulkan/guide/introduction.html)
+* **Next**: [Instance](https://hectarea1996.github.io/common-vulkan/guide/instance.html)
+* **Previous**: [Base code](https://hectarea1996.github.io/common-vulkan/guide/introduction.html)
