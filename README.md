@@ -6,7 +6,7 @@ Bindings for the common vulkan library.
 
 # Documentation
 
-The [API reference](https://hectarea1996.github.io/common-vulkan/) shows you how the functions are in this library and how to use them.
+The [documentation](https://hectarea1996.github.io/common-vulkan/) contains an API reference and a Vulkan guide.
 
 # Dependencies
 
