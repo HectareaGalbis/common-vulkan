@@ -2,127 +2,121 @@
 (in-package :cvk)
 
 
-;;; ---------------------
-;;; ----- Functions -----
-;;; ---------------------
-
-;; ;: Creates an application info structure
-;; (defun create-application-info (&key ((:sType sType-c) VK_STRUCTURE_TYPE_APPLICATION_INFO)
-;; 				  ((:pNext _pNext) nil) ((:pApplicationName _pApplicationName) nil)
-;; 				  ((:applicationVersion applicationVersion-c) 0)
-;; 				  ((:pEngineName _pEngineName) nil) ((:engineVersion engineVersion-c) 0)
-;; 				  ((:apiVersion apiVersion-c) 0))
-;;   (let ((pNext-c            (or _pNext (cffi:null-pointer)))
-;; 	(pApplicationName-c (if _pApplicationName
-;; 				(cffi:foreign-string-alloc _pApplicationName)
-;; 				(cffi:null-pointer)))
-;;         (pEngineName-c      (if _pEngineName
-;; 				(cffi:foreign-string-alloc _pEngineName)
-;; 				(cffi:null-pointer)))
-;; 	(application-info-c (alloc-vulkan-object '(:struct VkApplicationInfo))))
-;;     (cffi:with-foreign-slots ((sType pNext pApplicationName applicationVersion pEngineName engineVersion
-;; 				     apiVersion)
-;;                               application-info-c (:struct VkApplicationInfo))
-;;       (setf sType              sType-c
-;; 	    pNext              pNext-c
-;;             pApplicationName   pApplicationName-c
-;;             applicationVersion applicationVersion-c
-;;             pEngineName        pEngineName-c
-;;             engineVersion      engineVersion-c
-;;             apiVersion         apiVersion-c))
-;;     (values application-info-c)))
-
-;; ;; Destroys an application info structure
-;; (defun destroy-application-info (application-info-c)
-;;   (cffi:with-foreign-slots ((pApplicationName pEngineName) application-info-c (:struct VkApplicationInfo))
-;;     (cffi:foreign-string-free pApplicationName)
-;;     (cffi:foreign-string-free pEngineName))
-;;   (free-vulkan-object app-info))
-
-;; ;; With application info macro
-;; (defwith with-application-info
-;;          create-application-info
-;;          destroy-application-info)
-
-
+;; Constructor and destructor of VkApplicationInfo structure
 (mcffi:def-foreign-constructor-destructor application-info (:struct VkApplicationInfo)
   ((sType              VK_STRUCTURE_TYPE_APPLICATION_INFO))
   ((pNext              nil) (or pNext (cffi:null-pointer)))
   ((pApplicationName   nil) (if pApplicationName
 			        (cffi:foreign-string-alloc pApplicationName)
 			        (cffi:null-pointer))
-			    (cffi:foreign-string-free pApplicationName))
+			    (if (not (cffi:null-pointer-p pApplicationName))
+				(cffi:foreign-string-free pApplicationName)))
   ((applicationVersion 0))
   ((pEngineName        nil) (if pEngineName
-			        (cffi:foreign-alloc pEngineName)
+			        (cffi:foreign-string-alloc pEngineName)
 			        (cffi:null-pointer))
-		            (cffi:foreign-string-free pEngineName))
+		            (if (not (cffi:null-pointer-p pEngineName))
+				(cffi:foreign-string-free pEngineName)))
   ((engineVersion      0))
   ((apiVersion         0)))
 
+;; VkApplicationInfo getters and setters
+(mcffi:def-foreign-accessors application-info (:struct VkApplicationInfo)
+  sType
+  pNext
+  (pApplicationName :getter (() (cffi:foreign-string-to-lisp pApplicationName))
+		    :setter ((new-value)
+			     (if (not (cffi:null-pointer-p pApplicationName))
+				 (cffi:foreign-string-free pApplicationName))
+			     (setf pApplicationName (cffi:foreign-string-alloc new-value))))
+  applicationVersion
+  (pEngineName :getter (() (cffi:foreign-string-to-lisp pEngineName))
+	       :setter ((new-value)
+			(if (not (cffi:null-pointer-p pEngineName))
+			    (cffi:foreign-string-free pEngineName))
+			(setf pEngineName (cffi:foreign-string-alloc new-value))))
+  engineVersion
+  apiVersion)
 
 
-;; ;; Creates an instance create info structure
-;; (defun create-instance-create-info (((:sType sType-c) VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO)
-;; 				    ((:pNext _pNext) nil) ((:flags flags-c) 0)
-;; 				    ((:pApplicationInfo _pApplicationInfo) nil)
-;; 				    ((:ppEnabledLayerNames _ppEnabledLayerNames) nil)
-;; 				    ((:ppEnabledExtensionNames _ppEnabledExtensionNames) nil))
-;;   (let ((pNext-c                   (or _pNext (cffi:null-pointer)))
-;; 	(pApplicationInfo-c        (or _pApplicationInfo (cffi:null-pointer)))
-;; 	(enabledLayerCount-c       (length _ppEnabledLayerNames))
-;; 	(ppEnabledLayerNames-c     (cffi:foreign-alloc :string :initial-contents _ppEnabledLayerNames))
-;; 	(enabledExtensionCount     (length _ppEnabledExtensionNames))
-;;         (ppEnabledExtensionNames-c (cffi:foreign-alloc :string :initial-contents _ppEnabledExtensionNames)))
-;;         (instance-create-info-c    (alloc-vulkan-object '(:struct VkInstanceCreateInfo)))
-;;     (cffi:with-foreign-slots ((sType pNext flags pApplicationInfo enabledLayerCount ppEnabledLayerNames
-;; 				     enabledExtensionCount ppEnabledExtensionNames)
-;;                               instance-create-info-c (:struct VkInstanceCreateInfo))
-;;         (setf sType                   sType-c
-;;               flags                   flags-c
-;;               pApplicationInfo        pApplicationInfo-c
-;;               enabledLayerCount       enabledLayerCount-c
-;;               ppEnabledLayerNames     ppEnabledLayerNames-c
-;;               enabledExtensionCount   enabledExtensionCount-c
-;;               ppEnabledExtensionNames ppEnabledExtensionNames-c))
-;;     (values instance-create-info-c)))
-
-
-;; ;; Destroys an instance create info structure
-;; (defun destroy-instance-info (instance-create-info-c)
-;;   (cffi:with-foreign-slots ((enabledLayerCount ppEnabledLayerNames enabledExtensionCount
-;; 			     ppEnabledExtensionNames)  instance-info (:struct VkInstanceCreateInfo))
-;;     (loop for i from 0 below enabledLayerCount
-;; 	  do (cffi:foreign-free (cffi:mem-aref ppEnabledLayerNames :pointer i)))
-;;     (loop for i from 0 below enabledExtensionCount
-;; 	  do (cffi:foreign-free (cffi:mem-aref ppEnabledExtensionNames :pointer i)))
-;;     (cffi:foreign-free ppEnabledLayerNames)
-;;     (cffi:foreign-free ppEnabledExtensionNames))
-;;   (cffi:foreign-free instance-info))
-
-;; ;; With instance create info macro
-;; (defwith with-instance-create-info
-;;          create-instance-create-info
-;;          destroy-instance-create-info)
-
-
+;; Constructor and destructor of VkInstanceCreateInfo structure
 (mcffi:def-foreign-constructor-destructor instance-create-info (:struct VkInstanceCreateInfo)
   ((sType VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO))
   ((pNext nil) (or pNext (cffi:null-pointer)))
   ((flags 0))
   ((pApplicationInfo nil) (or pApplicationInfo (cffi:null-pointer)))
   ((enabledLayerCount 0))
-  ((ppEnabledLayerNames nil) (cffi:foreign-alloc :string :initial-contents ppEnabledLayerNames)
-			     (loop for i from 0 below enabledLayerCount
-				   do (cffi:foreign-free (cffi:mem-aref ppEnabledLayerNames :pointer i))
-				   finally (cffi:foreign-free ppEnabledLayerNames)))
+  ((ppEnabledLayerNames nil) (if ppEnabledLayerNames
+				 (cffi:foreign-alloc :string :initial-contents ppEnabledLayerNames)
+				 (cffi:null-pointer))
+			     (if (not (cffi:null-pointer-p ppEnabledLayerNames))
+				 (loop for i from 0 below enabledLayerCount
+				       do (cffi:foreign-free (cffi:mem-aref ppEnabledLayerNames :pointer i))
+				       finally (cffi:foreign-free ppEnabledLayerNames))))
   ((enabledExtensionCount 0))
-  ((ppEnabledExtensionNames nil) (cffi:foreign-alloc :string :initial-contents ppEnabledExtensionNames)
-				 (loop for i from 0 below enabledExtensionCount
-				       do (cffi:foreign-free (cffi:mem-aref ppEnabledExtensionNames
-									    :pointer i))
-				       finally (cffi:foreign-free ppEnabledExtensionNames))))
+  ((ppEnabledExtensionNames nil) (if ppEnabledExtensionNames
+				     (cffi:foreign-alloc :string :initial-contents ppEnabledExtensionNames)
+				     (cffi:null-pointer))
+				 (if (not (cffi:null-pointer-p ppEnabledExtensionNames))
+				     (loop for i from 0 below enabledExtensionCount
+					   do (cffi:foreign-free (cffi:mem-aref ppEnabledExtensionNames
+										:pointer i))
+					   finally (cffi:foreign-free ppEnabledExtensionNames)))))
 
+;; VkInstanceCreateInfo getters and setters
+(mcffi:def-foreign-accessors instance-create-info (:struct VkInstanceCreateInfo)
+  sType
+  pNext
+  flags
+  pApplicationInfo
+  enabledLayerCount
+  (ppEnabledLayerNames :getter ((&optional (index nil))
+				(if index
+				    (cffi:foreign-string-to-lisp (cffi:mem-aref ppEnabledLayerNames
+										:pointer index))
+				    (if (not (cffi:null-pointer-p ppEnabledLayerNames))
+					(loop for i from 0 below enabledLayerCount
+					      collect (cffi:foreign-string-to-lisp
+						       (cffi:mem-aref ppEnabledLayerNames :pointer i))))))
+		       :setter ((new-value &optional (index nil))
+				(if index
+				    (progn
+				      (cffi:foreign-free (cffi:mem-aref ppEnabledLayerNames :pointer index))
+				      (setf (cffi:mem-aref ppEnabledLayerNames :pointer index)
+					    (cffi:foreign-string-alloc new-value)))
+				    (progn
+				      (if (not (cffi:null-pointer-p ppEnabledLayerNames))
+					  (loop for i from 0 below enabledLayerCount
+						do (cffi:foreign-free (cffi:mem-aref ppEnabledLayerNames
+										     :pointer i))
+						finally (cffi:foreign-free ppEnabledLayerNames)))
+				      (setf ppEnabledLayerNames
+					    (cffi:foreign-alloc :string :initial-contents new-value))))))
+  enabledExtensionCount
+  (ppEnabledExtensionNames :getter ((&optional (index nil))
+				    (if index
+					(cffi:foreign-string-to-lisp (cffi:mem-aref ppEnabledExtensionNames
+										    :pointer index))
+					(if (not (cffi:null-pointer-p ppEnabledExtensionNames))
+					    (loop for i from 0 below enabledExtensionCount
+						  collect (cffi:foreign-string-to-lisp
+							   (cffi:mem-aref ppEnabledExtensionNames
+									  :pointer i))))))
+			   :setter ((new-value &optional (index nil))
+				    (if index
+					(progn
+					  (cffi:foreign-free (cffi:mem-aref ppEnabledExtensionNames
+									    :pointer index))
+					  (setf (cffi:mem-aref ppEnabledExtensionNames :pointer index)
+						(cffi:foreign-string-alloc new-value)))
+					(progn
+					  (if (not (cffi:null-pointer-p ppEnabledExtensionNames))
+					      (loop for i from 0 below enabledExtensionCount
+						    do (cffi:foreign-free (cffi:mem-aref ppEnabledExtensionNames
+											 :pointer i))
+						    finally (cffi:foreign-free ppEnabledExtensionNames)))
+					  (setf ppEnabledExtensionNames
+						(cffi:foreign-alloc :string :initial-contents new-value)))))))
 
 
 ;; Creates an instance
@@ -133,15 +127,15 @@
 	(values (cffi:mem-ref pInstance-c 'VkInstance) result-c pAllocator-c)))))
 
 ;; Destroyes an instance
-(defun destroy-instance (instance-c result pAllocator-c)
-  (declare (ignore result))
-  (vkDestroyInstance instance-c pAllocator-c))
+(defun destroy-instance (instance-c _pAllocator)
+  (let ((pAllocator-c (or _pAllocator (cffi:null-pointer))))
+    (vkDestroyInstance instance-c pAllocator-c)))
 
 ;; With instance macro
 (mcffi:defwith with-instance
   create-instance
   destroy-instance
-  :destructor-arity 3)
+  :destructor-arguments (0 2))
 
 
 ;; Returns global extension properties
