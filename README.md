@@ -2,6 +2,8 @@
 
 Bindings for the common vulkan library. 
 
+**WARNING**: This library is still in development. My first objective is to be able to complete the official vulkan tutorial with these bindings. I'll be adding code and documentation as I can.
+
 # Documentation
 
 The [API reference](https://hectarea1996.github.io/common-vulkan/index.html) shows you how the functions are in this library and how to use them.
