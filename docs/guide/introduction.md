@@ -48,3 +48,37 @@ Next, we are going to create the `package.lisp` file. It is always a good idea t
   (:nicknames :cvg)
   (:export #:main))
 ```
+
+Now, create a `main.lisp` file when we will put the main code. For now, put inside the next code.
+
+```lisp
+;;; main.lisp
+
+(in-package :cvg)
+
+(defun main ()
+  (print "Hello world"))
+```
+
+As you can see, it is a simple *Hello world* program.
+
+Lastly, to make thing a bit simpler, create this `run.lisp` file:
+
+```lisp
+;;; run.lisp
+
+(asdf:load-system "common-vulkan-guide")
+
+(cvg:main)
+```
+
+This last file is just a script that load our entirely new project. We oly need to load this file to load the project and execute the main function.
+
+Now, we have a project that runs a *Hello world* project. Try to load the `run.lisp` file. If you are using emacs, make current the window whit this
+file and use `C-c C-k`. Another way is to tell *slime* to run `(load "run.lisp")`. If you are using *alive* in VSCode or *slima* in Atom, you can use
+the last way too. 
+
+> It is possible that *slime* (or *alive* or *slima*) generates an error because it doesn't find the "common-vulkan-guide" component. This is possibly
+> due to have generated the asd file manually. Try to run in *slime* `(ql:register-local-projects)`. If the problems persist, make sure that you 
+> wrote every name from files correctly.
+
