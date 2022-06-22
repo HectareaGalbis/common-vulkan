@@ -51,7 +51,7 @@ We are going to add a `init-window` function inside our `run` function.
   (cleanup app))
 ```
 
-Inside `init-window` we must call `glfw:init` to initialize the GLFW system, `glfw:window-hint` to not create an OpenGL context and disable window resizing, and finally `glfw:create-window` to create a window. Also, we define the `width` and `height` constants and create a `window` member in out class.
+Inside `init-window` we must call `glfw:init` to initialize the GLFW system, `glfw:window-hint` to not create an OpenGL context and disable window resizing, and finally `glfw:create-window` to create a window. Also, we define the `width` and `height` constants and create a `window` member in our class.
 
 ```lisp
 ;;; main.lisp at the top
