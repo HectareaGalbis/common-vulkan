@@ -27,7 +27,7 @@
 ```lisp
 (destroy-application-info app-info)
 ```
-* *app-info*: VkApplicationInfo
+* *app-info*: `VkApplicationInfo`
 
 **with-application-info**
 ```lisp
@@ -52,9 +52,9 @@ Wraps the `body` expressions with the creation and destruction of a `VkApplicati
 (application-info-engineVersion app-info)
 (application-info-apiVersion app-info)
 ```
-Getters of the `VkApplicationInfo` structure. They all are **setf-able**.
+* *app-info*: `VkApplicationInfo`
 
-* *app-info*: VkApplicationInfo
+* **Note**: All these functions are setf-able.
 
 ### VkInstanceCreateInfo
 
@@ -69,20 +69,20 @@ Getters of the `VkApplicationInfo` structure. They all are **setf-able**.
                                   (enabledExtensionCount   0)
                                   (ppEnabledExtensionNames nil))
 ```
-* *sType*: VkStructureType
-* *pNext*: pointer
-* *flags*: VkInstanceCreateFlags
-* *pApplicationInfo*: VkApplicationInfo
-* *enabledLayerCount*: uint32
-* *ppEnabledLayerNames*: (list string)
-* *enabledExtensionCount*: uint32
-* *ppEnabledExtensionNames*: (list string)
+* *sType*: `VkStructureType`
+* *pNext*: `pointer`
+* *flags*: `VkInstanceCreateFlags`
+* *pApplicationInfo*: `VkApplicationInfo`
+* *enabledLayerCount*: `uint32`
+* *ppEnabledLayerNames*: `(list string)`
+* *enabledExtensionCount*: `uint32`
+* *ppEnabledExtensionNames*: `(list string)`
 
 **destroy-instance-create-info**
 ```lisp
 (destroy-instance-create-info instance-info)
 ```
-Destroys a `VkInstanceCreateInfo` structure.
+* *instance-info*: `VkInstanceCreateInfo`
 
 **with-instace-create-info**
 ```lisp
@@ -109,7 +109,11 @@ Wraps the `body` expressions with the creation and destruction of a `VkInstanceC
 (instance-create-info-enabledExtensionCount instance-info)
 (instance-create-info-ppEnabledExtensionNames instance-info)
 ```
-Getters of the `VkInstanceCreateInfo` structure. They all are **setf-able**.
+* *instance-info*: `VkInstanceCreateInfo`
+
+* **Note**: All these functions are setf-able.
+
+* **Note**: *ppEnabledLayerNames* and *ppEnabledExtensionNames* depend on `enabledLayerCount` and `enabledExtensionCount` respectively. If they are not `nil` and you are going to update their contents make sure to update `ppEnabledLayerNames` and `ppEnabledExtensionNames` before `enabledLayerCount` and `enabledExtensionCount` respectively.
 
 ### VkExtensionProperties
 
@@ -118,7 +122,9 @@ Getters of the `VkInstanceCreateInfo` structure. They all are **setf-able**.
 (extension-properties-extensionName extension-props)
 (extension-properties-specVersion extension-props)
 ```
-Getters of the `VkExtensionProperties` structure. They are **NOT setf-able**.
+* *extension-props*: `VkExtensionProperties
+* *extensionName*: `string`
+* *specVersion*: `uint32`
 
 ## Functions
 
@@ -127,56 +133,63 @@ Getters of the `VkExtensionProperties` structure. They are **NOT setf-able**.
 ```
 (create-instance create-info allocator) => (values instance result)
 ```
-Creates a vulkan instance.
-
 * *Parameters:*
-  * *create-info*: A `VkInstanceCreateInfo` structure.
-  * *allocator*: A `VkAllocationCallbacks` structure.
+  * *create-info*: `VkInstanceCreateInfo`
+  * *allocator*: `VkAllocationCallbacks`
   
 * *Returns*:
-  * *instance*: The created vulkan instance.
-  * *result*: A `VkResult` value.
-
-* **validation**: `t` if validation layer must be enabled.
+  * *instance*: `VkInstance`
+  * *result*: `VkResult`
 
 ## destroy-instance
 
 ```
 (destroy-instance instance allocator)
 ```
-Destroys an instance.
-
 * *Parameters*:
-  * *instance*: The instance to destroy.
-  * *allocator*: A `VkAllocationCallbacks` structure.
+  * *instance*: `VkInstance`
+  * *allocator*: `VkAllocationCallbacks`
 
-* **instance**: The instance to be destroyed.
 
-## with-instance (macro)
-
-```
-(with-instance (var &optional (validation t)) &body body)
-```
-
-Wraps the body expressions with the creation and destruction of an instance. The `var` is bound to the created instance.
-
-## get-vulkan-instance-enabled-layers
+## with-instance
 
 ```
-(get-instance-enabled-layers instance)
+(with-instance var (instance allocator) &body body)
+```
+Wraps the body expressions with the creation and destruction of an instance. The `var` is bound to the created instance. The arguments are passed to the constructor `create-instance`.
+
+* **Note**: The allocator used in this macro is passed to both the constructor and the destructor.
+
+## enumerate-instance-extension-properties
+
+```
+(enumerate-instance-extension-properties layer-name) => extension-props
+```
+* *Parameters*:
+  * *layer-name*: `string`
+
+* *Returns*:
+  * *extension-props*: `(list VkExtensionProperties)`
+
+## enumerate-instance-layer-properties
+
+```
+(enumerate-instance-layer-properties) => layer-props
 ```
 
-Retrieves the enabled layers from `instance`.
+* *Returns*:
+  * *layer-props*: `(list VkLayerProperties)`
 
-* **instance**: The instance the layers are retrieved from.
+## get-instance-proc-addr
 
-## get-vulkan-instance-enabled-extensions
-
+```lisp
+(get-instance-proc-addr instance name) => proc
 ```
-(get-instance-extensions instance)
-```
+* *Parameters*:
+  * *instance*: `VkInstance`
+  * *name*: `string`
 
-Retrieves the enabled extensions from `instance`.
+* *Returns*:
+  * *proc*: `function`
 
-* **instance**: The instance that the extensions are retrieved from.
-
+* **Note**: The available functions so far are the following: `vkCreateDebugUtilsMessengerEXT`, `vkDestroyDebugUtilsMessengerEXT`.
