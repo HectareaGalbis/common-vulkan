@@ -14,22 +14,16 @@ We are going to start with the following code in our `main.lisp` file.
 (defclass hello-triangle-application ()
   ((window :accessor window :initform nil)))
 
-(defgeneric init-vulkan (obj))
-(defgeneric main-loop (obj))
-(defgeneric cleanup (obj))
-(defgeneric run (obj))
+(defun init-vulkan (app))
 
+(defun main-loop (app))
 
-(defmethod init-vulkan ((obj hello-triangle-application)))
+(defun cleanup (app))
 
-(defmethod main-loop ((obj hello-triangle-application)))
-
-(defmethod cleanup ((obj hello-triangle-application)))
-
-(defmethod run ((obj hello-triangle-application))
-  (init-vulkan obj)
-  (main-loop obj)
-  (cleanup obj))
+(defmethod run (app)
+  (init-vulkan app)
+  (main-loop app)
+  (cleanup app))
 
 
 (defun main ()
@@ -50,11 +44,11 @@ You don't need to use GLFW if you don't want to. But I like it and the tutorial 
 We are going to add a `init-window` function inside our `run` function.
 
 ```lisp
-(defmethod run ((obj hello-triangle-application))
-  (init-window obj)
-  (init-vulkan obj)
-  (main-loop obj)
-  (cleanup obj))
+(defmethod run (app)
+  (init-window app)
+  (init-vulkan app)
+  (main-loop app)
+  (cleanup app))
 ```
 
 Inside `init-window` we must call `glfw:init` to initialize the GLFW system, `glfw:window-hint` to not create an OpenGL context and disable window resizing, and finally `glfw:create-window` to create a window. Also, we define the `width` and `height` constants and create a `window` member in out class.
@@ -74,28 +68,28 @@ Inside `init-window` we must call `glfw:init` to initialize the GLFW system, `gl
 ```lisp
 ;;; main.lisp
 
-(defun init-window ()
+(defun init-window (app)
   (glfw:init)
   
   (glfw:window-hint glfw:GLFW_CLIENT_API glfw:GLFW_NO_API)
   (glfw:window-hint glfw:GLFW_RESIZABLE glfw:GLFW_FALSE))
   
-  (setf (window obj) (glfw:create-window width height "Vulkan" nil nil)))
+  (setf (window app) (glfw:create-window width height "Vulkan" nil nil)))
 ```
 
 We fill the `main-loop` function:
 
 ```lisp
-(defmethod main-loop ((obj hello-triangle-application))
-  (loop while (not (glfw:window-should-close (window obj)))
+(defmethod main-loop (app)
+  (loop while (not (glfw:window-should-close (window app)))
 	do (glfw:poll-events)))
 ```
 
 And lastly, we need to clean up the resources.
 
 ```lisp
-(defmethod cleanup ((obj hello-triangle-application))
-  (glfw:destroy-window (window obj))
+(defmethod cleanup (app)
+  (glfw:destroy-window (window app))
   
   (glfw:terminate))
 ```
