@@ -29,9 +29,13 @@
    #:instance-create-info-ppEnabledLayerNames
    #:instance-create-info-enabledExtensionCount
    #:instance-create-info-ppEnabledExtensionNames
+   #:extension-properties-extensionName
+   #:extension-properties-specVersion
    #:create-instance
    #:destroy-instance
    #:with-instance
+   #:enumerate-instance-extension-properties
+   #:enumerate-instance-layer-properties
 
    ;; Debug messenger
    #:create-debug-messenger

@@ -1,6 +1,9 @@
 
 (in-package :cvk)
 
+;; -------------------
+;; ----- Structs -----
+;; -------------------
 
 ;; Constructor and destructor of VkApplicationInfo structure
 (mcffi:def-foreign-constructor-destructor application-info (:struct VkApplicationInfo)
@@ -118,6 +121,16 @@
 					  (setf ppEnabledExtensionNames
 						(cffi:foreign-alloc :string :initial-contents new-value)))))))
 
+
+;; VkExtensionProperties getters and setters
+(mcffi:def-foreign-accessors extension-properties (:struct VkExtensionProperties)
+  (extensionName :getter (() (cffi:foreign-string-to-lisp extensionName))
+		 :setter nil)
+  (specVersion :setter nil))
+
+;; ---------------------
+;; ----- Functions -----
+;; ---------------------
 
 ;; Creates an instance
 (defun create-instance (pCreateInfo-c _pAllocator)
