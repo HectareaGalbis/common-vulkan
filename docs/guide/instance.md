@@ -96,5 +96,5 @@ We need to destroy the instance before the program exits.
 
 * [main.lisp](https://github.com/Hectarea1996/common-vulkan-guide/blob/main/code-guide/instance.lisp)
 
-* **Next**: [Validation layers]()
-* **Previous**: [Base code]()
+* **Next**: [Validation layers](https://hectarea1996.github.io/common-vulkan/guide/validation-layers.html)
+* **Previous**: [Base code](https://hectarea1996.github.io/common-vulkan/guide/base-code.html)
