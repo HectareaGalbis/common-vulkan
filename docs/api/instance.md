@@ -113,7 +113,7 @@ Wraps the `body` expressions with the creation and destruction of a `VkInstanceC
 
 * **Note**: All these functions are setf-able.
 
-* **Note**: *ppEnabledLayerNames* and *ppEnabledExtensionNames* depend on `enabledLayerCount` and `enabledExtensionCount` respectively. If they are not `nil` and you are going to update their contents make sure to update `ppEnabledLayerNames` and `ppEnabledExtensionNames` before `enabledLayerCount` and `enabledExtensionCount` respectively.
+* **Note**: `ppEnabledLayerNames` and `ppEnabledExtensionNames` depend on `enabledLayerCount` and `enabledExtensionCount` respectively. If they are not `nil` and you are going to update their contents make sure to update `ppEnabledLayerNames` and `ppEnabledExtensionNames` before `enabledLayerCount` and `enabledExtensionCount` respectively.
 
 ### VkExtensionProperties
 
