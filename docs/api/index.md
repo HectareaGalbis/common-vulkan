@@ -9,7 +9,7 @@ I have to advise you that this reference will not teach you what the Vulkan func
 
 ## How the names work?
 
-Vulkan names have a common structure. They all start with the *vk* prefix followed by words in *Camel case*. Also, some of them ends with a suffix like *KHR* or *EXT*. Depending on what we are deling with, the names are obtained in a different way.
+Vulkan names have a common structure. They all start with the *vk* prefix followed by words in *Camel case*. Also, some of them end with a suffix like *KHR* or *EXT*. Depending on what we are deling with, the names are obtained in a different way.
 
 ### Function names
 
