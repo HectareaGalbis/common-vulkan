@@ -15,13 +15,13 @@
                               (engineVersion      0)
                               (apiVersion         0))
 ```
-* *sType*: VkStructureType
-* *pNext*: pointer
-* *pApplicationName*: string
-* *applicationVersion*: uint32
-* *pEngineName*: string
-* *engineVersion*: uint32
-* *apiVersion*: uint32
+* *sType*: `VkStructureType`
+* *pNext*: `pointer`
+* *pApplicationName*: `string`
+* *applicationVersion*: `uint32`
+* *pEngineName*: `string`
+* *engineVersion*: `uint32`
+* *apiVersion*: `uint32`
 
 **destroy-application-info**
 ```lisp
