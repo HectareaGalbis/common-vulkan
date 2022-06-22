@@ -82,3 +82,19 @@ You can add the following code to see what extensions are present.
 ```
 
 ## Cleaning up
+
+We need to destroy the instance before the program exits. 
+
+```lisp
+(defun cleanup (app)
+  (cvk:destroy-instance (instance app) nil)
+  
+  (glfw:destroy-window (window app))
+  
+  (glfw:terminate))
+```
+
+* [main.lisp]()
+
+* **Next**: [Validation layers]()
+* **Previous**: [Base code]()
