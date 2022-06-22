@@ -15,13 +15,19 @@
                               (engineVersion      0)
                               (apiVersion         0))
 ```
-Creates a `VkApplicationInfo` structure.
+* *sType*: VkStructureType
+* *pNext*: pointer
+* *pApplicationName*: string
+* *applicationVersion*: uint32
+* *pEngineName*: string
+* *engineVersion*: uint32
+* *apiVersion*: uint32
 
 **destroy-application-info**
 ```lisp
 (destroy-application-info app-info)
 ```
-Destroys a `VkApplicationInfo` structure.
+* *app-info*: VkApplicationInfo
 
 **with-application-info**
 ```lisp
@@ -34,7 +40,7 @@ Destroys a `VkApplicationInfo` structure.
                                  (apiVersion         0))
   &body body)
 ```
-Wraps the `body` expressions with the creation and destruction of a `VkApplicationInfo` structure. The new structure is bound to `var`. The arguments are passed to the constructor.
+Wraps the `body` expressions with the creation and destruction of a `VkApplicationInfo` structure. The new structure is bound to `var`. The arguments are passed to the constructor `create-application-info`.
 
 **accessors**
 ```lisp
@@ -47,6 +53,8 @@ Wraps the `body` expressions with the creation and destruction of a `VkApplicati
 (application-info-apiVersion app-info)
 ```
 Getters of the `VkApplicationInfo` structure. They all are **setf-able**.
+
+* *app-info*: VkApplicationInfo
 
 ### VkInstanceCreateInfo
 
@@ -61,7 +69,14 @@ Getters of the `VkApplicationInfo` structure. They all are **setf-able**.
                                   (enabledExtensionCount   0)
                                   (ppEnabledExtensionNames nil))
 ```
-Creates a `VkInstanceCreateInfo`. `ppEnabledLayerNames` and `ppEnabledExtensionNames` must be lists of strings.
+* *sType*: VkStructureType
+* *pNext*: pointer
+* *flags*: VkInstanceCreateFlags
+* *pApplicationInfo*: VkApplicationInfo
+* *enabledLayerCount*: uint32
+* *ppEnabledLayerNames*: (list string)
+* *enabledExtensionCount*: uint32
+* *ppEnabledExtensionNames*: (list string)
 
 **destroy-instance-create-info**
 ```lisp
