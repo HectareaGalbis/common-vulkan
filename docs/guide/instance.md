@@ -83,7 +83,7 @@ You can add the following code to see what extensions are present.
 
 ## Cleaning up
 
-We need to destroy the instance before the program exits. 
+Lastly, we need to destroy the instance before the program exits. 
 
 ```lisp
 (defun cleanup (app)
