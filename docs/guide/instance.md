@@ -22,5 +22,63 @@ Now, we need some info structures like an `VkApplicationInfo` and `VkInstanceCre
 
 ```lisp
 (defun create-instance (app)
-  )
+  (cvk:with-application-info app-info (:sType cvk:VK_STRUCTURE_TYPE_APPLICATION_INFO
+				                               :pApplicationName "Hello triangle"
+				                               :applicationVersion (cvk:make-version 1 0 0)
+				                               :pEngineName "No Engine"
+				                               :engineVersion (cvk:make-version 1 0 0)
+				                               :apiVersion (cvk:make-version 1 0 0)))
+                                 
+    )
 ```
+
+See how we use the keywords to initialize every member of the struct. Also, the new application info structure is bound to `app-info`.
+
+To create the next struture we need some extra information. Use the `get-required-instance-extensions` from GLFW to get the extensions we need to enable in the vulkan instance.
+
+```lisp
+(cvk:with-application-info app-info (:sType ...)
+                                      
+  (let ((glfw-extensions (glfw:get-required-instance-extensions)))
+    
+    ))                     
+```
+
+And now we can create the `VkInstanceCreateInfo` structure.
+
+```lisp
+(let ((glfw-extensions (glfw:get-required-instance-extensions)))
+  (cvk:with-instance-create-info create-info (:sType cvk:VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO
+						                                  :pApplicationInfo app-info
+						                                  :enabledExtensionCount (length glfw-extensions)
+						                                  :ppEnabledExtensionNames glfw-extensions)
+    ))
+```
+
+In the official tutorial you can see that the create info structure is created before getting the glfw-extensions. We can do it the same way using only the first two keywords (`:sType` and `:pApplicationInfo`) and then using `setf` with the getters (`application-info-enabledExtensionCount` and `application-info-ppEnabledExtensionNames`). However, initializing every member at the beginning is more efficient. 
+
+Finally we can create the instance.
+
+```lisp
+(cvk:with-instance-create-info create-info (:sType ...)
+  (multiple-value-bind (instance result) (cvk:create-instance create-info nil)
+	  
+	  (if (not (equal result cvk:VK_SUCCESS))
+	      (error "Failed to create instance"))
+
+	  (setf (instance app) instance)))
+```
+
+There is a `with-instance` macro that works exactly the same way that the others. But, we are going to follow the steps of the official tutorial. 
+
+## Checking for extension support
+
+You can add the following code to see what extensions are present.
+
+```lisp
+(format t "available extensions:~%")
+  (loop for extension-prop in (cvk:enumerate-instance-extension-properties nil)
+	      do (format t "  ~S~%" (cvk:extension-properties-extensionName extension-prop)))
+```
+
+## Cleaning up
