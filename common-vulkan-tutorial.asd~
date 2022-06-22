@@ -1,7 +1,0 @@
-
-
-
-(asdf:defsystem "common-vulkan-tutorial"
-  :depends-on ("cl-glfw" "common-vulkan")
-  :components ((:file "examples/vulkan-tutorial/package")
-	       (:file "examples/vulkan-tutorial/main")))
