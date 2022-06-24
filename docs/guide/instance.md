@@ -82,6 +82,8 @@ You can add the following code to see what extensions are present.
         do (format t "  ~S~%" (cvk:extension-properties-extensionName extension-prop))))
 ```
 
+Note that we didn't use `enumerate-instance-extension-properties`. The reason is that this function does memory allocation, so it must be freed in some point later. We can use `create-` and `destroy-` versions, but I prefer the `with-` version.
+
 ## Cleaning up
 
 Lastly, we need to destroy the instance before the program exits. 
