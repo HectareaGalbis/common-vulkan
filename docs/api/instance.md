@@ -164,6 +164,8 @@ Wraps the body expressions with the creation and destruction of an instance. The
 
 ## vkEnumerateInstanceExtensionProperties
 
+* **Note**: This function requires an allocation for retrieving the information. For that reason this function is splitted up in two creation and destruction functions.
+
 **create-enumerate-instance-extension-properties**
 ```
 (create-enumerate-instance-extension-properties layer-name) => extension-props
@@ -189,6 +191,8 @@ Wraps the body expressions with the creation and destruction of an instance. The
 Wraps the `body` expressions with the construction and destruction of a list of extension properties. The new list is bound to `var`. The arguments are passed to the constructor `create-enumerate-instance-extension-properties`.
 
 ## vkEnumerateInstanceLayerProperties
+
+* **Note**: This function requires an allocation for retrieving the information. For that reason this function is splitted up in two creation and destruction functions.
 
 **create-enumerate-instance-layer-properties**
 ```
