@@ -128,8 +128,9 @@ Wraps the `body` expressions with the creation and destruction of a `VkInstanceC
 
 ## Functions
 
-## create-instance
+## vkCreateInstance
 
+**create-instance**
 ```
 (create-instance create-info allocator) => (values instance result)
 ```
@@ -141,8 +142,9 @@ Wraps the `body` expressions with the creation and destruction of a `VkInstanceC
   * *instance*: `VkInstance`
   * *result*: `VkResult`
 
-## destroy-instance
+## vkDestroyInstance
 
+**destroy-instance**
 ```
 (destroy-instance instance allocator)
 ```
@@ -160,7 +162,7 @@ Wraps the body expressions with the creation and destruction of an instance. The
 
 * **Note**: The allocator used in this macro is passed to both the constructor and the destructor.
 
-## enumerate-instance-extension-properties
+## vkEnumerateInstanceExtensionProperties
 
 ```
 (enumerate-instance-extension-properties layer-name) => extension-props
@@ -171,7 +173,7 @@ Wraps the body expressions with the creation and destruction of an instance. The
 * *Returns*:
   * *extension-props*: `(list VkExtensionProperties)`
 
-## enumerate-instance-layer-properties
+## vkEnumerateInstanceLayerProperties
 
 ```
 (enumerate-instance-layer-properties) => layer-props
@@ -180,8 +182,9 @@ Wraps the body expressions with the creation and destruction of an instance. The
 * *Returns*:
   * *layer-props*: `(list VkLayerProperties)`
 
-## get-instance-proc-addr
+## vkGetInstanceProcAddr
 
+**get-instance-proc-addr**
 ```lisp
 (get-instance-proc-addr instance name) => proc
 ```
