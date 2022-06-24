@@ -199,3 +199,43 @@ And use it in the `cleanup` function:
   
   (glfw:terminate))
 ```
+
+## Debugging instance creation and destruction
+
+To debug the creation and destruction of the vulkan instance we need to pass to the `pNext` member of `VkInstanceCreateInfo` a `VkDebugUtilsMessengerCreateInfoEXT` structure. We create a messenger create info in `create-instance`:
+
+```lisp
+(let ((extensions (get-required-extensions))
+      (validation-layers (if *enable-validation-layers*
+		             (get-validation-layers)
+			     nil)))
+
+  (cvk:with-debug-utils-messenger-create-info debug-info
+      (:sType cvk:VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT
+       :messageSeverity (logior cvk:VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT
+				cvk:VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT
+				cvk:VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT)
+       :messageType (logior cvk:VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT
+		            cvk:VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT
+			    cvk:VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT)
+       :pfnUserCallback 'debug-callback
+       :pUserData nil)
+	
+    (cvk:with-instance-create-info create-info (:sType cvk:VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO
+						:pNext debug-info
+						:pApplicationInfo app-info
+						:enabledExtensionCount (length extensions)
+						:ppEnabledExtensionNames extensions
+						:enabledLayerCount (length validation-layers)
+						:ppEnabledLayerNames validation-layers)
+
+      ...
+      )))
+```
+
+We are done with the instance for now!
+
+* [main.lisp](https://github.com/Hectarea1996/common-vulkan-guide/blob/main/code-guide/validation-layers.lisp)
+
+* **Next**: [Physical devices and queue families](https://hectarea1996.github.io/common-vulkan/guide/physical-devices.html)
+* **Previous**: [Instance](https://hectarea1996.github.io/common-vulkan/guide/instance.html)
