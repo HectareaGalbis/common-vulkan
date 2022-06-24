@@ -91,49 +91,49 @@
 
 
 ;; Functions
-(defvkinstextfun ("vkCmdBeginDebugUtilsLabelEXT" vkCmdBeginDebugUtilsLabelEXT) :void
-  (commandBuffer VkCommandBuffer)
-  (pLabelInfo (:pointer (:struct VkDebugUtilsLabelEXT))))
+;; (defvkinstextfun ("vkCmdBeginDebugUtilsLabelEXT" vkCmdBeginDebugUtilsLabelEXT) :void
+;;   (commandBuffer VkCommandBuffer)
+;;   (pLabelInfo (:pointer (:struct VkDebugUtilsLabelEXT))))
 
-(defvkinstextfun ("vkCmdEndDebugUtilsLabelEXT" vkCmdEndDebugUtilsLabelEXT) :void
-  (commandBuffer VkCommandBuffer))
+;; (defvkinstextfun ("vkCmdEndDebugUtilsLabelEXT" vkCmdEndDebugUtilsLabelEXT) :void
+;;   (commandBuffer VkCommandBuffer))
 
-(defvkinstextfun ("vkCmdInsertDebugUtilsLabelEXT" vkCmdInsertDebugUtilsLabelEXT) :void
-  (commandBuffer VkCommandBuffer)
-  (pLabelInfo (:pointer (:struct VkDebugUtilsLabelEXT))))
+;; (defvkinstextfun ("vkCmdInsertDebugUtilsLabelEXT" vkCmdInsertDebugUtilsLabelEXT) :void
+;;   (commandBuffer VkCommandBuffer)
+;;   (pLabelInfo (:pointer (:struct VkDebugUtilsLabelEXT))))
 
-(defvkinstextfun ("vkCreateDebugUtilsMessengerEXT" vkCreateDebugUtilsMessengerEXT) VkResult
-  (instance VkInstance)
-  (pCreateInfo (:pointer (:struct VkDebugUtilsMessengerCreateInfoEXT)))
-  (pAllocator (:pointer (:struct VkAllocationCallbacks)))
-  (pMessenger (:pointer VkDebugUtilsMessengerEXT)))
+;; (defvkinstextfun ("vkCreateDebugUtilsMessengerEXT" vkCreateDebugUtilsMessengerEXT) VkResult
+;;   (instance VkInstance)
+;;   (pCreateInfo (:pointer (:struct VkDebugUtilsMessengerCreateInfoEXT)))
+;;   (pAllocator (:pointer (:struct VkAllocationCallbacks)))
+;;   (pMessenger (:pointer VkDebugUtilsMessengerEXT)))
 
-(defvkinstextfun ("vkDestroyDebugUtilsMessengerEXT" vkDestroyDebugUtilsMessengerEXT) :void
-  (instance VkInstance)
-  (messenger VkDebugUtilsMessengerEXT)
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))))
+;; (defvkinstextfun ("vkDestroyDebugUtilsMessengerEXT" vkDestroyDebugUtilsMessengerEXT) :void
+;;   (instance VkInstance)
+;;   (messenger VkDebugUtilsMessengerEXT)
+;;   (pAllocator (:pointer (:struct VkAllocationCallbacks))))
 
-(defvkinstextfun ("vkQueueBeginDebugUtilsLabelEXT" vkQueueBeginDebugUtilsLabelEXT) :void
-  (queue VkQueue)
-  (pLabelInfo (:pointer (:struct VkDebugUtilsLabelEXT))))
+;; (defvkinstextfun ("vkQueueBeginDebugUtilsLabelEXT" vkQueueBeginDebugUtilsLabelEXT) :void
+;;   (queue VkQueue)
+;;   (pLabelInfo (:pointer (:struct VkDebugUtilsLabelEXT))))
 
-(defvkinstextfun ("vkQueueEndDebugUtilsLabelEXT" vkQueueEndDebugUtilsLabelEXT) :void
-  (queue VkQueue))
+;; (defvkinstextfun ("vkQueueEndDebugUtilsLabelEXT" vkQueueEndDebugUtilsLabelEXT) :void
+;;   (queue VkQueue))
 
-(defvkinstextfun ("vkQueueInsertDebugUtilsLabelEXT" vkQueueInsertDebugUtilsLabelEXT) :void
-  (queue VkQueue)
-  (pLabelInfo (:pointer (:struct VkDebugUtilsLabelEXT))))
+;; (defvkinstextfun ("vkQueueInsertDebugUtilsLabelEXT" vkQueueInsertDebugUtilsLabelEXT) :void
+;;   (queue VkQueue)
+;;   (pLabelInfo (:pointer (:struct VkDebugUtilsLabelEXT))))
 
-(defvkinstextfun ("vkSetDebugUtilsObjectNameEXT" vkSetDebugUtilsObjectNameEXT) VkResult
-  (device VkDevice)
-  (pNameInfo (:pointer (:struct VkDebugUtilsObjectNameInfoEXT))))
+;; (defvkinstextfun ("vkSetDebugUtilsObjectNameEXT" vkSetDebugUtilsObjectNameEXT) VkResult
+;;   (device VkDevice)
+;;   (pNameInfo (:pointer (:struct VkDebugUtilsObjectNameInfoEXT))))
 
-(defvkinstextfun ("vkSetDebugUtilsObjectTagEXT" vkSetDebugUtilsObjectTagEXT) VkResult
-  (device VkDevice)
-  (pTagInfo (:pointer (:struct VkDebugUtilsObjectTagInfoEXT))))
+;; (defvkinstextfun ("vkSetDebugUtilsObjectTagEXT" vkSetDebugUtilsObjectTagEXT) VkResult
+;;   (device VkDevice)
+;;   (pTagInfo (:pointer (:struct VkDebugUtilsObjectTagInfoEXT))))
 
-(defvkinstextfun ("vkSubmitDebugUtilsMessageEXT" vkSubmitDebugUtilsMessageEXT) :void
-  (instance VkInstance)
-  (messageSeverity VkDebugUtilsMessageSeverityFlagBitsEXT)
-  (messageTypes VkDebugUtilsMessageTypeFlagsEXT)
-  (pCallbackData (:pointer (:struct VkDebugUtilsMessengerCallbackDataEXT))))
+;; (defvkinstextfun ("vkSubmitDebugUtilsMessageEXT" vkSubmitDebugUtilsMessageEXT) :void
+;;   (instance VkInstance)
+;;   (messageSeverity VkDebugUtilsMessageSeverityFlagBitsEXT)
+;;   (messageTypes VkDebugUtilsMessageTypeFlagsEXT)
+;;   (pCallbackData (:pointer (:struct VkDebugUtilsMessengerCallbackDataEXT))))

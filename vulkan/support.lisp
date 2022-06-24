@@ -26,10 +26,10 @@
   (src :pointer)
   (count size-t))
 
-(defvkdevextfun ("vkCmdSetLineStippleEXT" vkCmdSetLineStippleEXT) :void
-  (command-buffer VkCommandBuffer)
-  (line-stipple-factor :unsigned-int)
-  (line-stipple-pattern :unsigned-short))
+;; (defvkdevextfun ("vkCmdSetLineStippleEXT" vkCmdSetLineStippleEXT) :void
+;;   (command-buffer VkCommandBuffer)
+;;   (line-stipple-factor :unsigned-int)
+;;   (line-stipple-pattern :unsigned-short))
 
 (defvar *debug* #+(or windows linux) 1 #+darwin nil)
 

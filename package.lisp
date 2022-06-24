@@ -31,17 +31,49 @@
    #:instance-create-info-ppEnabledExtensionNames
    #:extension-properties-extensionName
    #:extension-properties-specVersion
+   #:layer-properties-layerName
+   #:layer-properties-specVersion
+   #:layer-properties-implementationVersion
+   #:layer-properties-description
    #:create-instance
    #:destroy-instance
    #:with-instance
-   #:enumerate-instance-extension-properties
+   #:create-enumerate-instance-extension-properties
+   #:destroy-enumerate-instance-extension-properties
+   #:with-enumerate-instance-extension-properties
    #:enumerate-instance-layer-properties
+   #:create-enumerate-instance-layer-properties
+   #:destroy-enumerate-instance-layer-properties
+   #:with-enumerate-instance-layer-properties
+   #:get-instance-proc-addr
 
    ;; Debug messenger
-   #:create-debug-messenger
-   #:destroy-debug-messenger
-   #:with-debug-messenger
-
+   #:create-debug-utils-messenger-create-info
+   #:destroy-debug-utils-messenger-create-info
+   #:with-debug-utils-messenger-create-info
+   #:def-debug-utils-messenger-callback
+   #:debug-utils-messenger-callback-data-sType
+   #:debug-utils-messenger-callback-data-pNext
+   #:debug-utils-messenger-callback-data-flags
+   #:debug-utils-messenger-callback-data-pMessageIdName
+   #:debug-utils-messenger-callback-data-messageIdNumber
+   #:debug-utils-messenger-callback-data-pMessage
+   #:debug-utils-messenger-callback-data-queueLabelCount
+   #:debug-utils-messenger-callback-data-pQueueLabels
+   #:debug-utils-messenger-callback-data-cmdBufLabelCount
+   #:debug-utils-messenger-callback-data-pCmdBufLabels
+   #:debug-utils-messenger-callback-data-objectCount
+   #:debug-utils-messenger-callback-data-pObjects
+   #:debug-utils-label-sType
+   #:debug-utils-label-pNext
+   #:debug-utils-label-pLabelName
+   #:debug-utils-label-color
+   #:debug-utils-object-name-info-sType
+   #:debug-utils-object-name-info-pNext
+   #:debug-utils-object-name-info-objectType
+   #:debug-utils-object-name-info-objectHandle
+   #:debug-utils-object-name-info-pObjectName
+   
    ;; Window
    #:create-window
    #:destroy-window
@@ -184,6 +216,13 @@
    #:VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT
    #:VK_DEBUG_REPORT_ERROR_BIT_EXT
    #:VK_DEBUG_REPORT_DEBUG_BIT_EXT
+   #:VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT
+   #:VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT
+   #:VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT
+   #:VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT
+   #:VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT
+   #:VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT
+   #:VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT
    #:VK_DEPENDENCY_BY_REGION_BIT
    #:VK_DEPENDENCY_VIEW_LOCAL_BIT_KHX
    #:VK_DEPENDENCY_DEVICE_GROUP_BIT_KHX
@@ -508,7 +547,7 @@
    #:VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT
    #:VK_DEBUG_REPORT_OBJECT_TYPE_OBJECT_TABLE_NVX_EXT
    #:VK_DEBUG_REPORT_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX_EXT
-   #:VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR_EXT  ;; "VK_KHR_descriptor_update_template"
+   #:VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR_EXT  ;; "VK_KHR_descriptor_update_template"   
    #:VK_DEPENDENCY_BY_REGION_BIT  ;; Dependency is per pixel region
    #:VK_DEPENDENCY_VIEW_LOCAL_BIT_KHX  ;; "VK_KHX_multiview"
    #:VK_DEPENDENCY_DEVICE_GROUP_BIT_KHX  ;; "VK_KHX_device_group"
@@ -1125,6 +1164,11 @@
    #:VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR  ;; "VK_KHR_android_surface"
    #:VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR  ;; "VK_KHR_win32_surface"
    #:VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT  ;; "VK_EXT_debug_report"
+   #:VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT
+   #:VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_TAG_INFO_EXT
+   #:VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT
+   #:VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT
+   #:VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT
    #:VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_RASTERIZATION_ORDER_AMD  ;; "VK_AMD_rasterization_order"
    #:VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_NAME_INFO_EXT  ;; "VK_EXT_debug_marker"
    #:VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT  ;; "VK_EXT_debug_marker"
@@ -1262,6 +1306,7 @@
    #:VK_KHR_ANDROID_SURFACE_EXTENSION_NAME
    #:VK_KHR_WIN32_SURFACE_EXTENSION_NAME
    #:VK_EXT_DEBUG_REPORT_EXTENSION_NAME
+   #:VK_EXT_DEBUG_UTILS_EXTENSION_NAME
    #:VK_NV_GLSL_SHADER_EXTENSION_NAME
    #:VK_NV_EXTENSION_1_EXTENSION_NAME
    #:VK_KHR_SAMPLER_MIRROR_CLAMP_TO_EDGE_EXTENSION_NAME

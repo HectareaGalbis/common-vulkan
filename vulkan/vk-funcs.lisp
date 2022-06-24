@@ -48,10 +48,10 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 
 (in-package :cvk)
 
-(defvkdevextfun ("vkAcquireNextImage2KHX" vkAcquireNextImage2KHX) VkResult
-  (device VkDevice)
-  (pAcquireInfo (:pointer (:struct VkAcquireNextImageInfoKHX)))
-  (pImageIndex (:pointer :uint32)))
+;; (defvkdevextfun ("vkAcquireNextImage2KHX" vkAcquireNextImage2KHX) VkResult
+;;   (device VkDevice)
+;;   (pAcquireInfo (:pointer (:struct VkAcquireNextImageInfoKHX)))
+;;   (pImageIndex (:pointer :uint32)))
 
 (cffi:defcfun ("vkAcquireNextImageKHR" vkAcquireNextImageKHR) VkResult
   (device VkDevice)
@@ -61,10 +61,10 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (fence VkFence) ;; :OPTIONAL "true" :EXTERNSYNC "true"
   (pImageIndex (:pointer :uint32)))
 
-(defvkinstextfun ("vkAcquireXlibDisplayEXT" vkAcquireXlibDisplayEXT) VkResult
-  (physicalDevice VkPhysicalDevice)
-  (dpy (:pointer Display))
-  (display VkDisplayKHR))
+;; (defvkinstextfun ("vkAcquireXlibDisplayEXT" vkAcquireXlibDisplayEXT) VkResult
+;;   (physicalDevice VkPhysicalDevice)
+;;   (dpy (:pointer Display))
+;;   (display VkDisplayKHR))
 
 (cffi:defcfun ("vkAllocateCommandBuffers" vkAllocateCommandBuffers) VkResult
   (device VkDevice)
@@ -94,10 +94,11 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (memory VkDeviceMemory)
   (memoryOffset VkDeviceSize))
 
-(defvkdevextfun ("vkBindBufferMemory2KHX" vkBindBufferMemory2KHX) VkResult
-  (device VkDevice)
-  (bindInfoCount :uint32)
-  (pBindInfos (:pointer (:struct VkBindBufferMemoryInfoKHX)))) ;; :LEN "bindInfoCount"
+;; (defvkdevextfun ("vkBindBufferMemory2KHX" vkBindBufferMemory2KHX) VkResult
+;;   (device VkDevice)
+;;   (bindInfoCount :uint32)
+;;   (pBindInfos (:pointer (:struct VkBindBufferMemoryInfoKHX))))
+;; :LEN "bindInfoCount"
 
 
 (cffi:defcfun ("vkBindImageMemory" vkBindImageMemory) VkResult
@@ -106,10 +107,11 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (memory VkDeviceMemory)
   (memoryOffset VkDeviceSize))
 
-(defvkdevextfun ("vkBindImageMemory2KHX" vkBindImageMemory2KHX) VkResult
-  (device VkDevice)
-  (bindInfoCount :uint32)
-  (pBindInfos (:pointer (:struct VkBindImageMemoryInfoKHX)))) ;; :LEN "bindInfoCount"
+;; (defvkdevextfun ("vkBindImageMemory2KHX" vkBindImageMemory2KHX) VkResult
+;;   (device VkDevice)
+;;   (bindInfoCount :uint32)
+;;   (pBindInfos (:pointer (:struct VkBindImageMemoryInfoKHX))))
+;; :LEN "bindInfoCount"
 
 
 (cffi:defcfun ("vkCmdBeginQuery" vkCmdBeginQuery) :void
@@ -237,16 +239,16 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (flags VkQueryResultFlags)) ;; :OPTIONAL "true"
 
 
-(defvkdevextfun ("vkCmdDebugMarkerBeginEXT" vkCmdDebugMarkerBeginEXT) :void
-  (commandBuffer VkCommandBuffer)
-  (pMarkerInfo (:pointer (:struct VkDebugMarkerMarkerInfoEXT))))
+;; (defvkdevextfun ("vkCmdDebugMarkerBeginEXT" vkCmdDebugMarkerBeginEXT) :void
+;;   (commandBuffer VkCommandBuffer)
+;;   (pMarkerInfo (:pointer (:struct VkDebugMarkerMarkerInfoEXT))))
 
-(defvkdevextfun ("vkCmdDebugMarkerEndEXT" vkCmdDebugMarkerEndEXT) :void
-  (commandBuffer VkCommandBuffer))
+;; (defvkdevextfun ("vkCmdDebugMarkerEndEXT" vkCmdDebugMarkerEndEXT) :void
+;;   (commandBuffer VkCommandBuffer))
 
-(defvkdevextfun ("vkCmdDebugMarkerInsertEXT" vkCmdDebugMarkerInsertEXT) :void
-  (commandBuffer VkCommandBuffer)
-  (pMarkerInfo (:pointer (:struct VkDebugMarkerMarkerInfoEXT))))
+;; (defvkdevextfun ("vkCmdDebugMarkerInsertEXT" vkCmdDebugMarkerInsertEXT) :void
+;;   (commandBuffer VkCommandBuffer)
+;;   (pMarkerInfo (:pointer (:struct VkDebugMarkerMarkerInfoEXT))))
 
 (cffi:defcfun ("vkCmdDispatch" vkCmdDispatch) :void
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
@@ -254,14 +256,14 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (groupCountY :uint32)
   (groupCountZ :uint32))
 
-(defvkdevextfun ("vkCmdDispatchBaseKHX" vkCmdDispatchBaseKHX) :void
-  (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
-  (baseGroupX :uint32)
-  (baseGroupY :uint32)
-  (baseGroupZ :uint32)
-  (groupCountX :uint32)
-  (groupCountY :uint32)
-  (groupCountZ :uint32))
+;; (defvkdevextfun ("vkCmdDispatchBaseKHX" vkCmdDispatchBaseKHX) :void
+;;   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
+;;   (baseGroupX :uint32)
+;;   (baseGroupY :uint32)
+;;   (baseGroupZ :uint32)
+;;   (groupCountX :uint32)
+;;   (groupCountY :uint32)
+;;   (groupCountZ :uint32))
 
 (cffi:defcfun ("vkCmdDispatchIndirect" vkCmdDispatchIndirect) :void
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
@@ -290,14 +292,14 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (drawCount :uint32)
   (stride :uint32))
 
-(defvkdevextfun ("vkCmdDrawIndexedIndirectCountAMD" vkCmdDrawIndexedIndirectCountAMD) :void
-  (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
-  (buffer VkBuffer)
-  (offset VkDeviceSize)
-  (countBuffer VkBuffer)
-  (countBufferOffset VkDeviceSize)
-  (maxDrawCount :uint32)
-  (stride :uint32))
+;; (defvkdevextfun ("vkCmdDrawIndexedIndirectCountAMD" vkCmdDrawIndexedIndirectCountAMD) :void
+;;   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
+;;   (buffer VkBuffer)
+;;   (offset VkDeviceSize)
+;;   (countBuffer VkBuffer)
+;;   (countBufferOffset VkDeviceSize)
+;;   (maxDrawCount :uint32)
+;;   (stride :uint32))
 
 (cffi:defcfun ("vkCmdDrawIndirect" vkCmdDrawIndirect) :void
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
@@ -306,14 +308,14 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (drawCount :uint32)
   (stride :uint32))
 
-(defvkdevextfun ("vkCmdDrawIndirectCountAMD" vkCmdDrawIndirectCountAMD) :void
-  (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
-  (buffer VkBuffer)
-  (offset VkDeviceSize)
-  (countBuffer VkBuffer)
-  (countBufferOffset VkDeviceSize)
-  (maxDrawCount :uint32)
-  (stride :uint32))
+;; (defvkdevextfun ("vkCmdDrawIndirectCountAMD" vkCmdDrawIndirectCountAMD) :void
+;;   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
+;;   (buffer VkBuffer)
+;;   (offset VkDeviceSize)
+;;   (countBuffer VkBuffer)
+;;   (countBufferOffset VkDeviceSize)
+;;   (maxDrawCount :uint32)
+;;   (stride :uint32))
 
 (cffi:defcfun ("vkCmdEndQuery" vkCmdEndQuery) :void
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
@@ -354,9 +356,9 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (pImageMemoryBarriers (:pointer (:struct VkImageMemoryBarrier)))) ;; :LEN "imageMemoryBarrierCount"
 
 
-(defvkdevextfun ("vkCmdProcessCommandsNVX" vkCmdProcessCommandsNVX) :void
-  (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
-  (pProcessCommandsInfo (:pointer (:struct VkCmdProcessCommandsInfoNVX))))
+;; (defvkdevextfun ("vkCmdProcessCommandsNVX" vkCmdProcessCommandsNVX) :void
+;;   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
+;;   (pProcessCommandsInfo (:pointer (:struct VkCmdProcessCommandsInfoNVX))))
 
 (cffi:defcfun ("vkCmdPushConstants" vkCmdPushConstants) :void
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
@@ -367,25 +369,26 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (pValues (:pointer :void))) ;; :LEN "size"
 
 
-(defvkdevextfun ("vkCmdPushDescriptorSetKHR" vkCmdPushDescriptorSetKHR) :void
-  (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
-  (pipelineBindPoint VkPipelineBindPoint)
-  (layout VkPipelineLayout)
-  (set :uint32)
-  (descriptorWriteCount :uint32)
-  (pDescriptorWrites (:pointer (:struct VkWriteDescriptorSet)))) ;; :LEN "descriptorWriteCount"
+;; (defvkdevextfun ("vkCmdPushDescriptorSetKHR" vkCmdPushDescriptorSetKHR) :void
+;;   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
+;;   (pipelineBindPoint VkPipelineBindPoint)
+;;   (layout VkPipelineLayout)
+;;   (set :uint32)
+;;   (descriptorWriteCount :uint32)
+;;   (pDescriptorWrites (:pointer (:struct VkWriteDescriptorSet))))
+;; :LEN "descriptorWriteCount"
 
 
-(defvkdevextfun ("vkCmdPushDescriptorSetWithTemplateKHR" vkCmdPushDescriptorSetWithTemplateKHR) :void
-  (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
-  (descriptorUpdateTemplate VkDescriptorUpdateTemplateKHR)
-  (layout VkPipelineLayout)
-  (set :uint32)
-  (pData (:pointer :void)))
+;; (defvkdevextfun ("vkCmdPushDescriptorSetWithTemplateKHR" vkCmdPushDescriptorSetWithTemplateKHR) :void
+;;   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
+;;   (descriptorUpdateTemplate VkDescriptorUpdateTemplateKHR)
+;;   (layout VkPipelineLayout)
+;;   (set :uint32)
+;;   (pData (:pointer :void)))
 
-(defvkdevextfun ("vkCmdReserveSpaceForCommandsNVX" vkCmdReserveSpaceForCommandsNVX) :void
-  (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
-  (pReserveSpaceInfo (:pointer (:struct VkCmdReserveSpaceForCommandsInfoNVX))))
+;; (defvkdevextfun ("vkCmdReserveSpaceForCommandsNVX" vkCmdReserveSpaceForCommandsNVX) :void
+;;   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
+;;   (pReserveSpaceInfo (:pointer (:struct VkCmdReserveSpaceForCommandsInfoNVX))))
 
 (cffi:defcfun ("vkCmdResetEvent" vkCmdResetEvent) :void
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
@@ -423,15 +426,16 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (minDepthBounds :float)
   (maxDepthBounds :float))
 
-(defvkdevextfun ("vkCmdSetDeviceMaskKHX" vkCmdSetDeviceMaskKHX) :void
-  (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
-  (deviceMask :uint32))
+;; (defvkdevextfun ("vkCmdSetDeviceMaskKHX" vkCmdSetDeviceMaskKHX) :void
+;;   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
+;;   (deviceMask :uint32))
 
-(defvkdevextfun ("vkCmdSetDiscardRectangleEXT" vkCmdSetDiscardRectangleEXT) :void
-  (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
-  (firstDiscardRectangle :uint32)
-  (discardRectangleCount :uint32)
-  (pDiscardRectangles (:pointer (:struct VkRect2D)))) ;; :LEN "discardRectangleCount"
+;; (defvkdevextfun ("vkCmdSetDiscardRectangleEXT" vkCmdSetDiscardRectangleEXT) :void
+;;   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
+;;   (firstDiscardRectangle :uint32)
+;;   (discardRectangleCount :uint32)
+;;   (pDiscardRectangles (:pointer (:struct VkRect2D))))
+;; :LEN "discardRectangleCount"
 
 
 (cffi:defcfun ("vkCmdSetEvent" vkCmdSetEvent) :void
@@ -472,11 +476,12 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (pViewports (:pointer (:struct VkViewport)))) ;; :LEN "viewportCount" :NOAUTOVALIDITY "true"
 
 
-(defvkdevextfun ("vkCmdSetViewportWScalingNV" vkCmdSetViewportWScalingNV) :void
-  (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
-  (firstViewport :uint32)
-  (viewportCount :uint32)
-  (pViewportWScalings (:pointer (:struct VkViewportWScalingNV)))) ;; :LEN "viewportCount" :NOAUTOVALIDITY "true"
+;; (defvkdevextfun ("vkCmdSetViewportWScalingNV" vkCmdSetViewportWScalingNV) :void
+;;   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
+;;   (firstViewport :uint32)
+;;   (viewportCount :uint32)
+;;   (pViewportWScalings (:pointer (:struct VkViewportWScalingNV))))
+;; :LEN "viewportCount" :NOAUTOVALIDITY "true"
 
 
 (cffi:defcfun ("vkCmdUpdateBuffer" vkCmdUpdateBuffer) :void
@@ -507,11 +512,11 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (queryPool VkQueryPool)
   (query :uint32))
 
-(defvkinstextfun ("vkCreateAndroidSurfaceKHR" vkCreateAndroidSurfaceKHR) VkResult
-  (instance VkInstance)
-  (pCreateInfo (:pointer (:struct VkAndroidSurfaceCreateInfoKHR)))
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-  (pSurface (:pointer VkSurfaceKHR)))
+;; (defvkinstextfun ("vkCreateAndroidSurfaceKHR" vkCreateAndroidSurfaceKHR) VkResult
+;;   (instance VkInstance)
+;;   (pCreateInfo (:pointer (:struct VkAndroidSurfaceCreateInfoKHR)))
+;;   (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
+;;   (pSurface (:pointer VkSurfaceKHR)))
 
 (cffi:defcfun ("vkCreateBuffer" vkCreateBuffer) VkResult
   (device VkDevice)
@@ -540,11 +545,11 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (pPipelines (:pointer VkPipeline))) ;; :LEN "createInfoCount"
 
 
-(defvkinstextfun ("vkCreateDebugReportCallbackEXT" vkCreateDebugReportCallbackEXT) VkResult
-  (instance VkInstance)
-  (pCreateInfo (:pointer (:struct VkDebugReportCallbackCreateInfoEXT)))
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-  (pCallback (:pointer VkDebugReportCallbackEXT)))
+;; (defvkinstextfun ("vkCreateDebugReportCallbackEXT" vkCreateDebugReportCallbackEXT) VkResult
+;;   (instance VkInstance)
+;;   (pCreateInfo (:pointer (:struct VkDebugReportCallbackCreateInfoEXT)))
+;;   (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
+;;   (pCallback (:pointer VkDebugReportCallbackEXT)))
 
 (cffi:defcfun ("vkCreateDescriptorPool" vkCreateDescriptorPool) VkResult
   (device VkDevice)
@@ -558,11 +563,11 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
   (pSetLayout (:pointer VkDescriptorSetLayout)))
 
-(defvkdevextfun ("vkCreateDescriptorUpdateTemplateKHR" vkCreateDescriptorUpdateTemplateKHR) VkResult
-  (device VkDevice)
-  (pCreateInfo (:pointer (:struct VkDescriptorUpdateTemplateCreateInfoKHR)))
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-  (pDescriptorUpdateTemplate (:pointer VkDescriptorUpdateTemplateKHR)))
+;; (defvkdevextfun ("vkCreateDescriptorUpdateTemplateKHR" vkCreateDescriptorUpdateTemplateKHR) VkResult
+;;   (device VkDevice)
+;;   (pCreateInfo (:pointer (:struct VkDescriptorUpdateTemplateCreateInfoKHR)))
+;;   (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
+;;   (pDescriptorUpdateTemplate (:pointer VkDescriptorUpdateTemplateKHR)))
 
 (cffi:defcfun ("vkCreateDevice" vkCreateDevice) VkResult
   (physicalDevice VkPhysicalDevice)
@@ -610,11 +615,11 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (pPipelines (:pointer VkPipeline))) ;; :LEN "createInfoCount"
 
 
-(defvkinstextfun ("vkCreateIOSSurfaceMVK" vkCreateIOSSurfaceMVK) VkResult
-  (instance VkInstance)
-  (pCreateInfo (:pointer (:struct VkIOSSurfaceCreateInfoMVK)))
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-  (pSurface (:pointer VkSurfaceKHR)))
+;; (defvkinstextfun ("vkCreateIOSSurfaceMVK" vkCreateIOSSurfaceMVK) VkResult
+;;   (instance VkInstance)
+;;   (pCreateInfo (:pointer (:struct VkIOSSurfaceCreateInfoMVK)))
+;;   (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
+;;   (pSurface (:pointer VkSurfaceKHR)))
 
 (cffi:defcfun ("vkCreateImage" vkCreateImage) VkResult
   (device VkDevice)
@@ -628,34 +633,34 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
   (pView (:pointer VkImageView)))
 
-(defvkdevextfun ("vkCreateIndirectCommandsLayoutNVX" vkCreateIndirectCommandsLayoutNVX) VkResult
-  (device VkDevice)
-  (pCreateInfo (:pointer (:struct VkIndirectCommandsLayoutCreateInfoNVX)))
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-  (pIndirectCommandsLayout (:pointer VkIndirectCommandsLayoutNVX)))
+;; (defvkdevextfun ("vkCreateIndirectCommandsLayoutNVX" vkCreateIndirectCommandsLayoutNVX) VkResult
+;;   (device VkDevice)
+;;   (pCreateInfo (:pointer (:struct VkIndirectCommandsLayoutCreateInfoNVX)))
+;;   (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
+;;   (pIndirectCommandsLayout (:pointer VkIndirectCommandsLayoutNVX)))
 
 (cffi:defcfun ("vkCreateInstance" vkCreateInstance) VkResult
   (pCreateInfo (:pointer (:struct VkInstanceCreateInfo)))
   (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
   (pInstance (:pointer VkInstance)))
 
-(defvkinstextfun ("vkCreateMacOSSurfaceMVK" vkCreateMacOSSurfaceMVK) VkResult
-  (instance VkInstance)
-  (pCreateInfo (:pointer (:struct VkMacOSSurfaceCreateInfoMVK)))
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-  (pSurface (:pointer VkSurfaceKHR)))
+;; (defvkinstextfun ("vkCreateMacOSSurfaceMVK" vkCreateMacOSSurfaceMVK) VkResult
+;;   (instance VkInstance)
+;;   (pCreateInfo (:pointer (:struct VkMacOSSurfaceCreateInfoMVK)))
+;;   (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
+;;   (pSurface (:pointer VkSurfaceKHR)))
 
-(defvkinstextfun ("vkCreateMirSurfaceKHR" vkCreateMirSurfaceKHR) VkResult
-  (instance VkInstance)
-  (pCreateInfo (:pointer (:struct VkMirSurfaceCreateInfoKHR)))
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-  (pSurface (:pointer VkSurfaceKHR)))
+;; (defvkinstextfun ("vkCreateMirSurfaceKHR" vkCreateMirSurfaceKHR) VkResult
+;;   (instance VkInstance)
+;;   (pCreateInfo (:pointer (:struct VkMirSurfaceCreateInfoKHR)))
+;;   (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
+;;   (pSurface (:pointer VkSurfaceKHR)))
 
-(defvkdevextfun ("vkCreateObjectTableNVX" vkCreateObjectTableNVX) VkResult
-  (device VkDevice)
-  (pCreateInfo (:pointer (:struct VkObjectTableCreateInfoNVX)))
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-  (pObjectTable (:pointer VkObjectTableNVX)))
+;; (defvkdevextfun ("vkCreateObjectTableNVX" vkCreateObjectTableNVX) VkResult
+;;   (device VkDevice)
+;;   (pCreateInfo (:pointer (:struct VkObjectTableCreateInfoNVX)))
+;;   (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
+;;   (pObjectTable (:pointer VkObjectTableNVX)))
 
 (cffi:defcfun ("vkCreatePipelineCache" vkCreatePipelineCache) VkResult
   (device VkDevice)
@@ -713,17 +718,17 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
   (pSwapchain (:pointer VkSwapchainKHR)))
 
-(defvkinstextfun ("vkCreateViSurfaceNN" vkCreateViSurfaceNN) VkResult
-  (instance VkInstance)
-  (pCreateInfo (:pointer (:struct VkViSurfaceCreateInfoNN)))
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-  (pSurface (:pointer VkSurfaceKHR)))
+;; (defvkinstextfun ("vkCreateViSurfaceNN" vkCreateViSurfaceNN) VkResult
+;;   (instance VkInstance)
+;;   (pCreateInfo (:pointer (:struct VkViSurfaceCreateInfoNN)))
+;;   (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
+;;   (pSurface (:pointer VkSurfaceKHR)))
 
-(defvkinstextfun ("vkCreateWaylandSurfaceKHR" vkCreateWaylandSurfaceKHR) VkResult
-  (instance VkInstance)
-  (pCreateInfo (:pointer (:struct VkWaylandSurfaceCreateInfoKHR)))
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-  (pSurface (:pointer VkSurfaceKHR)))
+;; (defvkinstextfun ("vkCreateWaylandSurfaceKHR" vkCreateWaylandSurfaceKHR) VkResult
+;;   (instance VkInstance)
+;;   (pCreateInfo (:pointer (:struct VkWaylandSurfaceCreateInfoKHR)))
+;;   (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
+;;   (pSurface (:pointer VkSurfaceKHR)))
 
 (cffi:defcfun ("vkCreateWin32SurfaceKHR" vkCreateWin32SurfaceKHR) VkResult
   (instance VkInstance)
@@ -731,37 +736,40 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
   (pSurface (:pointer VkSurfaceKHR)))
 
-(defvkinstextfun ("vkCreateXcbSurfaceKHR" vkCreateXcbSurfaceKHR) VkResult
-  (instance VkInstance)
-  (pCreateInfo (:pointer (:struct VkXcbSurfaceCreateInfoKHR)))
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-  (pSurface (:pointer VkSurfaceKHR)))
+;; (defvkinstextfun ("vkCreateXcbSurfaceKHR" vkCreateXcbSurfaceKHR) VkResult
+;;   (instance VkInstance)
+;;   (pCreateInfo (:pointer (:struct VkXcbSurfaceCreateInfoKHR)))
+;;   (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
+;;   (pSurface (:pointer VkSurfaceKHR)))
 
-(defvkinstextfun ("vkCreateXlibSurfaceKHR" vkCreateXlibSurfaceKHR) VkResult
-  (instance VkInstance)
-  (pCreateInfo (:pointer (:struct VkXlibSurfaceCreateInfoKHR)))
-  (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
-  (pSurface (:pointer VkSurfaceKHR)))
+;; (defvkinstextfun ("vkCreateXlibSurfaceKHR" vkCreateXlibSurfaceKHR) VkResult
+;;   (instance VkInstance)
+;;   (pCreateInfo (:pointer (:struct VkXlibSurfaceCreateInfoKHR)))
+;;   (pAllocator (:pointer (:struct VkAllocationCallbacks))) ;; :OPTIONAL "true"
+;;   (pSurface (:pointer VkSurfaceKHR)))
 
-(defvkdevextfun ("vkDebugMarkerSetObjectNameEXT" vkDebugMarkerSetObjectNameEXT) VkResult
-  (device VkDevice)
-  (pNameInfo (:pointer (:struct VkDebugMarkerObjectNameInfoEXT)))) ;; :EXTERNSYNC "pNameInfo.object"
-
-
-(defvkdevextfun ("vkDebugMarkerSetObjectTagEXT" vkDebugMarkerSetObjectTagEXT) VkResult
-  (device VkDevice)
-  (pTagInfo (:pointer (:struct VkDebugMarkerObjectTagInfoEXT)))) ;; :EXTERNSYNC "pTagInfo.object"
+;; (defvkdevextfun ("vkDebugMarkerSetObjectNameEXT" vkDebugMarkerSetObjectNameEXT) VkResult
+;;   (device VkDevice)
+;;   (pNameInfo (:pointer (:struct VkDebugMarkerObjectNameInfoEXT))))
+;; :EXTERNSYNC "pNameInfo.object"
 
 
-(defvkinstextfun ("vkDebugReportMessageEXT" vkDebugReportMessageEXT) :void
-  (instance VkInstance)
-  (flags VkDebugReportFlagsEXT)
-  (objectType VkDebugReportObjectTypeEXT)
-  (object :uint64)
-  (location size-t)
-  (messageCode :int32)
-  (pLayerPrefix (:pointer :char)) ;; :LEN "null-terminated"
-  (pMessage (:pointer :char))) ;; :LEN "null-terminated"
+;; (defvkdevextfun ("vkDebugMarkerSetObjectTagEXT" vkDebugMarkerSetObjectTagEXT) VkResult
+;;   (device VkDevice)
+;;   (pTagInfo (:pointer (:struct VkDebugMarkerObjectTagInfoEXT))))
+;; :EXTERNSYNC "pTagInfo.object"
+
+
+;; (defvkinstextfun ("vkDebugReportMessageEXT" vkDebugReportMessageEXT) :void
+;;   (instance VkInstance)
+;;   (flags VkDebugReportFlagsEXT)
+;;   (objectType VkDebugReportObjectTypeEXT)
+;;   (object :uint64)
+;;   (location size-t)
+;;   (messageCode :int32)
+;;   (pLayerPrefix (:pointer :char)) ;; :LEN "null-terminated"
+;;   (pMessage (:pointer :char)))
+;; :LEN "null-terminated"
 
 
 (cffi:defcfun ("vkDestroyBuffer" vkDestroyBuffer) :void
@@ -782,10 +790,11 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
 
 
-(defvkinstextfun ("vkDestroyDebugReportCallbackEXT" vkDestroyDebugReportCallbackEXT) :void
-  (instance VkInstance)
-  (callback VkDebugReportCallbackEXT) ;; :EXTERNSYNC "true"
-  (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
+;; (defvkinstextfun ("vkDestroyDebugReportCallbackEXT" vkDestroyDebugReportCallbackEXT) :void
+;;   (instance VkInstance)
+;;   (callback VkDebugReportCallbackEXT) ;; :EXTERNSYNC "true"
+;;   (pAllocator (:pointer (:struct VkAllocationCallbacks))))
+;; :OPTIONAL "true"
 
 
 (cffi:defcfun ("vkDestroyDescriptorPool" vkDestroyDescriptorPool) :void
@@ -800,10 +809,11 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
 
 
-(defvkdevextfun ("vkDestroyDescriptorUpdateTemplateKHR" vkDestroyDescriptorUpdateTemplateKHR) :void
-  (device VkDevice)
-  (descriptorUpdateTemplate VkDescriptorUpdateTemplateKHR) ;; :OPTIONAL "true" :EXTERNSYNC "true"
-  (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
+;; (defvkdevextfun ("vkDestroyDescriptorUpdateTemplateKHR" vkDestroyDescriptorUpdateTemplateKHR) :void
+;;   (device VkDevice)
+;;   (descriptorUpdateTemplate VkDescriptorUpdateTemplateKHR) ;; :OPTIONAL "true" :EXTERNSYNC "true"
+;;   (pAllocator (:pointer (:struct VkAllocationCallbacks))))
+;; :OPTIONAL "true"
 
 
 (cffi:defcfun ("vkDestroyDevice" vkDestroyDevice) :void
@@ -841,10 +851,11 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
 
 
-(defvkdevextfun ("vkDestroyIndirectCommandsLayoutNVX" vkDestroyIndirectCommandsLayoutNVX) :void
-  (device VkDevice)
-  (indirectCommandsLayout VkIndirectCommandsLayoutNVX)
-  (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
+;; (defvkdevextfun ("vkDestroyIndirectCommandsLayoutNVX" vkDestroyIndirectCommandsLayoutNVX) :void
+;;   (device VkDevice)
+;;   (indirectCommandsLayout VkIndirectCommandsLayoutNVX)
+;;   (pAllocator (:pointer (:struct VkAllocationCallbacks))))
+;; :OPTIONAL "true"
 
 
 (cffi:defcfun ("vkDestroyInstance" vkDestroyInstance) :void
@@ -852,10 +863,11 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
 
 
-(defvkdevextfun ("vkDestroyObjectTableNVX" vkDestroyObjectTableNVX) :void
-  (device VkDevice)
-  (objectTable VkObjectTableNVX) ;; :EXTERNSYNC "true"
-  (pAllocator (:pointer (:struct VkAllocationCallbacks)))) ;; :OPTIONAL "true"
+;; (defvkdevextfun ("vkDestroyObjectTableNVX" vkDestroyObjectTableNVX) :void
+;;   (device VkDevice)
+;;   (objectTable VkObjectTableNVX) ;; :EXTERNSYNC "true"
+;;   (pAllocator (:pointer (:struct VkAllocationCallbacks))))
+;; :OPTIONAL "true"
 
 
 (cffi:defcfun ("vkDestroyPipeline" vkDestroyPipeline) :void
@@ -921,10 +933,10 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 (cffi:defcfun ("vkDeviceWaitIdle" vkDeviceWaitIdle) VkResult
   (device VkDevice))
 
-(defvkdevextfun ("vkDisplayPowerControlEXT" vkDisplayPowerControlEXT) VkResult
-  (device VkDevice)
-  (display VkDisplayKHR)
-  (pDisplayPowerInfo (:pointer (:struct VkDisplayPowerInfoEXT))))
+;; (defvkdevextfun ("vkDisplayPowerControlEXT" vkDisplayPowerControlEXT) VkResult
+;;   (device VkDevice)
+;;   (display VkDisplayKHR)
+;;   (pDisplayPowerInfo (:pointer (:struct VkDisplayPowerInfoEXT))))
 
 (cffi:defcfun ("vkEndCommandBuffer" vkEndCommandBuffer) VkResult
   (commandBuffer VkCommandBuffer)) ;; :EXTERNSYNC "true"
@@ -954,10 +966,11 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (pProperties (:pointer (:struct VkLayerProperties)))) ;; :OPTIONAL "true" :LEN "pPropertyCount"
 
 
-(defvkinstextfun ("vkEnumeratePhysicalDeviceGroupsKHX" vkEnumeratePhysicalDeviceGroupsKHX) VkResult
-  (instance VkInstance)
-  (pPhysicalDeviceGroupCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
-  (pPhysicalDeviceGroupProperties (:pointer (:struct VkPhysicalDeviceGroupPropertiesKHX)))) ;; :OPTIONAL "true" :LEN "pPhysicalDeviceGroupCount"
+;; (defvkinstextfun ("vkEnumeratePhysicalDeviceGroupsKHX" vkEnumeratePhysicalDeviceGroupsKHX) VkResult
+;;   (instance VkInstance)
+;;   (pPhysicalDeviceGroupCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
+;;   (pPhysicalDeviceGroupProperties (:pointer (:struct VkPhysicalDeviceGroupPropertiesKHX))))
+;; :OPTIONAL "true" :LEN "pPhysicalDeviceGroupCount"
 
 
 (cffi:defcfun ("vkEnumeratePhysicalDevices" vkEnumeratePhysicalDevices) VkResult
@@ -997,21 +1010,21 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (buffer VkBuffer)
   (pMemoryRequirements (:pointer (:struct VkMemoryRequirements))))
 
-(defvkdevextfun ("vkGetDeviceGroupPeerMemoryFeaturesKHX" vkGetDeviceGroupPeerMemoryFeaturesKHX) :void
-  (device VkDevice)
-  (heapIndex :uint32)
-  (localDeviceIndex :uint32)
-  (remoteDeviceIndex :uint32)
-  (pPeerMemoryFeatures (:pointer VkPeerMemoryFeatureFlagsKHX)))
+;; (defvkdevextfun ("vkGetDeviceGroupPeerMemoryFeaturesKHX" vkGetDeviceGroupPeerMemoryFeaturesKHX) :void
+;;   (device VkDevice)
+;;   (heapIndex :uint32)
+;;   (localDeviceIndex :uint32)
+;;   (remoteDeviceIndex :uint32)
+;;   (pPeerMemoryFeatures (:pointer VkPeerMemoryFeatureFlagsKHX)))
 
-(defvkdevextfun ("vkGetDeviceGroupPresentCapabilitiesKHX" vkGetDeviceGroupPresentCapabilitiesKHX) VkResult
-  (device VkDevice)
-  (pDeviceGroupPresentCapabilities (:pointer (:struct VkDeviceGroupPresentCapabilitiesKHX))))
+;; (defvkdevextfun ("vkGetDeviceGroupPresentCapabilitiesKHX" vkGetDeviceGroupPresentCapabilitiesKHX) VkResult
+;;   (device VkDevice)
+;;   (pDeviceGroupPresentCapabilities (:pointer (:struct VkDeviceGroupPresentCapabilitiesKHX))))
 
-(defvkdevextfun ("vkGetDeviceGroupSurfacePresentModesKHX" vkGetDeviceGroupSurfacePresentModesKHX) VkResult
-  (device VkDevice)
-  (surface VkSurfaceKHR) ;; :EXTERNSYNC "true"
-  (pModes (:pointer VkDeviceGroupPresentModeFlagsKHX)))
+;; (defvkdevextfun ("vkGetDeviceGroupSurfacePresentModesKHX" vkGetDeviceGroupSurfacePresentModesKHX) VkResult
+;;   (device VkDevice)
+;;   (surface VkSurfaceKHR) ;; :EXTERNSYNC "true"
+;;   (pModes (:pointer VkDeviceGroupPresentModeFlagsKHX)))
 
 (cffi:defcfun ("vkGetDeviceMemoryCommitment" vkGetDeviceMemoryCommitment) :void
   (device VkDevice)
@@ -1080,41 +1093,42 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (pName (:pointer :char))) ;; :LEN "null-terminated"
 
 
-(defvkdevextfun ("vkGetMemoryFdKHX" vkGetMemoryFdKHX) VkResult
-  (device VkDevice)
-  (memory VkDeviceMemory)
-  (handleType VkExternalMemoryHandleTypeFlagBitsKHX)
-  (pFd (:pointer :int)))
+;; (defvkdevextfun ("vkGetMemoryFdKHX" vkGetMemoryFdKHX) VkResult
+;;   (device VkDevice)
+;;   (memory VkDeviceMemory)
+;;   (handleType VkExternalMemoryHandleTypeFlagBitsKHX)
+;;   (pFd (:pointer :int)))
 
-(defvkdevextfun ("vkGetMemoryFdPropertiesKHX" vkGetMemoryFdPropertiesKHX) VkResult
-  (device VkDevice)
-  (handleType VkExternalMemoryHandleTypeFlagBitsKHX)
-  (fd :int)
-  (pMemoryFdProperties (:pointer (:struct VkMemoryFdPropertiesKHX))))
+;; (defvkdevextfun ("vkGetMemoryFdPropertiesKHX" vkGetMemoryFdPropertiesKHX) VkResult
+;;   (device VkDevice)
+;;   (handleType VkExternalMemoryHandleTypeFlagBitsKHX)
+;;   (fd :int)
+;;   (pMemoryFdProperties (:pointer (:struct VkMemoryFdPropertiesKHX))))
 
-(defvkdevextfun ("vkGetMemoryWin32HandleKHX" vkGetMemoryWin32HandleKHX) VkResult
-  (device VkDevice)
-  (memory VkDeviceMemory)
-  (handleType VkExternalMemoryHandleTypeFlagBitsKHX)
-  (pHandle (:pointer HANDLE)))
+;; (defvkdevextfun ("vkGetMemoryWin32HandleKHX" vkGetMemoryWin32HandleKHX) VkResult
+;;   (device VkDevice)
+;;   (memory VkDeviceMemory)
+;;   (handleType VkExternalMemoryHandleTypeFlagBitsKHX)
+;;   (pHandle (:pointer HANDLE)))
 
-(defvkdevextfun ("vkGetMemoryWin32HandleNV" vkGetMemoryWin32HandleNV) VkResult
-  (device VkDevice)
-  (memory VkDeviceMemory)
-  (handleType VkExternalMemoryHandleTypeFlagsNV)
-  (pHandle (:pointer HANDLE)))
+;; (defvkdevextfun ("vkGetMemoryWin32HandleNV" vkGetMemoryWin32HandleNV) VkResult
+;;   (device VkDevice)
+;;   (memory VkDeviceMemory)
+;;   (handleType VkExternalMemoryHandleTypeFlagsNV)
+;;   (pHandle (:pointer HANDLE)))
 
-(defvkdevextfun ("vkGetMemoryWin32HandlePropertiesKHX" vkGetMemoryWin32HandlePropertiesKHX) VkResult
-  (device VkDevice)
-  (handleType VkExternalMemoryHandleTypeFlagBitsKHX)
-  (handle HANDLE)
-  (pMemoryWin32HandleProperties (:pointer (:struct VkMemoryWin32HandlePropertiesKHX))))
+;; (defvkdevextfun ("vkGetMemoryWin32HandlePropertiesKHX" vkGetMemoryWin32HandlePropertiesKHX) VkResult
+;;   (device VkDevice)
+;;   (handleType VkExternalMemoryHandleTypeFlagBitsKHX)
+;;   (handle HANDLE)
+;;   (pMemoryWin32HandleProperties (:pointer (:struct VkMemoryWin32HandlePropertiesKHX))))
 
-(defvkdevextfun ("vkGetPastPresentationTimingGOOGLE" vkGetPastPresentationTimingGOOGLE) VkResult
-  (device VkDevice)
-  (swapchain VkSwapchainKHR) ;; :EXTERNSYNC "true"
-  (pPresentationTimingCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
-  (pPresentationTimings (:pointer (:struct VkPastPresentationTimingGOOGLE)))) ;; :OPTIONAL "true" :LEN "pPresentationTimingCount"
+;; (defvkdevextfun ("vkGetPastPresentationTimingGOOGLE" vkGetPastPresentationTimingGOOGLE) VkResult
+;;   (device VkDevice)
+;;   (swapchain VkSwapchainKHR) ;; :EXTERNSYNC "true"
+;;   (pPresentationTimingCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
+;;   (pPresentationTimings (:pointer (:struct VkPastPresentationTimingGOOGLE))))
+;; :OPTIONAL "true" :LEN "pPresentationTimingCount"
 
 
 (cffi:defcfun ("vkGetPhysicalDeviceDisplayPlanePropertiesKHR" vkGetPhysicalDeviceDisplayPlanePropertiesKHR) VkResult
@@ -1129,48 +1143,48 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (pProperties (:pointer (:struct VkDisplayPropertiesKHR)))) ;; :OPTIONAL "true" :LEN "pPropertyCount"
 
 
-(defvkinstextfun ("vkGetPhysicalDeviceExternalBufferPropertiesKHX" vkGetPhysicalDeviceExternalBufferPropertiesKHX) :void
-  (physicalDevice VkPhysicalDevice)
-  (pExternalBufferInfo (:pointer (:struct VkPhysicalDeviceExternalBufferInfoKHX)))
-  (pExternalBufferProperties (:pointer (:struct VkExternalBufferPropertiesKHX))))
+;; (defvkinstextfun ("vkGetPhysicalDeviceExternalBufferPropertiesKHX" vkGetPhysicalDeviceExternalBufferPropertiesKHX) :void
+;;   (physicalDevice VkPhysicalDevice)
+;;   (pExternalBufferInfo (:pointer (:struct VkPhysicalDeviceExternalBufferInfoKHX)))
+;;   (pExternalBufferProperties (:pointer (:struct VkExternalBufferPropertiesKHX))))
 
-(defvkinstextfun ("vkGetPhysicalDeviceExternalImageFormatPropertiesNV" vkGetPhysicalDeviceExternalImageFormatPropertiesNV) VkResult
-  (physicalDevice VkPhysicalDevice)
-  (format VkFormat)
-  (type VkImageType)
-  (tiling VkImageTiling)
-  (usage VkImageUsageFlags)
-  (flags VkImageCreateFlags) ;; :OPTIONAL "true"
-  (externalHandleType VkExternalMemoryHandleTypeFlagsNV) ;; :OPTIONAL "true"
-  (pExternalImageFormatProperties (:pointer (:struct VkExternalImageFormatPropertiesNV))))
+;; (defvkinstextfun ("vkGetPhysicalDeviceExternalImageFormatPropertiesNV" vkGetPhysicalDeviceExternalImageFormatPropertiesNV) VkResult
+;;   (physicalDevice VkPhysicalDevice)
+;;   (format VkFormat)
+;;   (type VkImageType)
+;;   (tiling VkImageTiling)
+;;   (usage VkImageUsageFlags)
+;;   (flags VkImageCreateFlags) ;; :OPTIONAL "true"
+;;   (externalHandleType VkExternalMemoryHandleTypeFlagsNV) ;; :OPTIONAL "true"
+;;   (pExternalImageFormatProperties (:pointer (:struct VkExternalImageFormatPropertiesNV))))
 
-(defvkinstextfun ("vkGetPhysicalDeviceExternalSemaphorePropertiesKHX" vkGetPhysicalDeviceExternalSemaphorePropertiesKHX) :void
-  (physicalDevice VkPhysicalDevice)
-  (pExternalSemaphoreInfo (:pointer (:struct VkPhysicalDeviceExternalSemaphoreInfoKHX)))
-  (pExternalSemaphoreProperties (:pointer (:struct VkExternalSemaphorePropertiesKHX))))
+;; (defvkinstextfun ("vkGetPhysicalDeviceExternalSemaphorePropertiesKHX" vkGetPhysicalDeviceExternalSemaphorePropertiesKHX) :void
+;;   (physicalDevice VkPhysicalDevice)
+;;   (pExternalSemaphoreInfo (:pointer (:struct VkPhysicalDeviceExternalSemaphoreInfoKHX)))
+;;   (pExternalSemaphoreProperties (:pointer (:struct VkExternalSemaphorePropertiesKHX))))
 
 (cffi:defcfun ("vkGetPhysicalDeviceFeatures" vkGetPhysicalDeviceFeatures) :void
   (physicalDevice VkPhysicalDevice)
   (pFeatures (:pointer (:struct VkPhysicalDeviceFeatures))))
 
-(defvkinstextfun ("vkGetPhysicalDeviceFeatures2KHR" vkGetPhysicalDeviceFeatures2KHR) :void
-  (physicalDevice VkPhysicalDevice)
-  (pFeatures (:pointer (:struct VkPhysicalDeviceFeatures2KHR))))
+;; (defvkinstextfun ("vkGetPhysicalDeviceFeatures2KHR" vkGetPhysicalDeviceFeatures2KHR) :void
+;;   (physicalDevice VkPhysicalDevice)
+;;   (pFeatures (:pointer (:struct VkPhysicalDeviceFeatures2KHR))))
 
 (cffi:defcfun ("vkGetPhysicalDeviceFormatProperties" vkGetPhysicalDeviceFormatProperties) :void
   (physicalDevice VkPhysicalDevice)
   (format VkFormat)
   (pFormatProperties (:pointer (:struct VkFormatProperties))))
 
-(defvkinstextfun ("vkGetPhysicalDeviceFormatProperties2KHR" vkGetPhysicalDeviceFormatProperties2KHR) :void
-  (physicalDevice VkPhysicalDevice)
-  (format VkFormat)
-  (pFormatProperties (:pointer (:struct VkFormatProperties2KHR))))
+;; (defvkinstextfun ("vkGetPhysicalDeviceFormatProperties2KHR" vkGetPhysicalDeviceFormatProperties2KHR) :void
+;;   (physicalDevice VkPhysicalDevice)
+;;   (format VkFormat)
+;;   (pFormatProperties (:pointer (:struct VkFormatProperties2KHR))))
 
-(defvkdevextfun ("vkGetPhysicalDeviceGeneratedCommandsPropertiesNVX" vkGetPhysicalDeviceGeneratedCommandsPropertiesNVX) :void
-  (physicalDevice VkPhysicalDevice)
-  (pFeatures (:pointer (:struct VkDeviceGeneratedCommandsFeaturesNVX)))
-  (pLimits (:pointer (:struct VkDeviceGeneratedCommandsLimitsNVX))))
+;; (defvkdevextfun ("vkGetPhysicalDeviceGeneratedCommandsPropertiesNVX" vkGetPhysicalDeviceGeneratedCommandsPropertiesNVX) :void
+;;   (physicalDevice VkPhysicalDevice)
+;;   (pFeatures (:pointer (:struct VkDeviceGeneratedCommandsFeaturesNVX)))
+;;   (pLimits (:pointer (:struct VkDeviceGeneratedCommandsLimitsNVX))))
 
 (cffi:defcfun ("vkGetPhysicalDeviceImageFormatProperties" vkGetPhysicalDeviceImageFormatProperties) VkResult
   (physicalDevice VkPhysicalDevice)
@@ -1181,38 +1195,39 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (flags VkImageCreateFlags) ;; :OPTIONAL "true"
   (pImageFormatProperties (:pointer (:struct VkImageFormatProperties))))
 
-(defvkinstextfun ("vkGetPhysicalDeviceImageFormatProperties2KHR" vkGetPhysicalDeviceImageFormatProperties2KHR) VkResult
-  (physicalDevice VkPhysicalDevice)
-  (pImageFormatInfo (:pointer (:struct VkPhysicalDeviceImageFormatInfo2KHR)))
-  (pImageFormatProperties (:pointer (:struct VkImageFormatProperties2KHR))))
+;; (defvkinstextfun ("vkGetPhysicalDeviceImageFormatProperties2KHR" vkGetPhysicalDeviceImageFormatProperties2KHR) VkResult
+;;   (physicalDevice VkPhysicalDevice)
+;;   (pImageFormatInfo (:pointer (:struct VkPhysicalDeviceImageFormatInfo2KHR)))
+;;   (pImageFormatProperties (:pointer (:struct VkImageFormatProperties2KHR))))
 
 (cffi:defcfun ("vkGetPhysicalDeviceMemoryProperties" vkGetPhysicalDeviceMemoryProperties) :void
   (physicalDevice VkPhysicalDevice)
   (pMemoryProperties (:pointer (:struct VkPhysicalDeviceMemoryProperties))))
 
-(defvkinstextfun ("vkGetPhysicalDeviceMemoryProperties2KHR" vkGetPhysicalDeviceMemoryProperties2KHR) :void
-  (physicalDevice VkPhysicalDevice)
-  (pMemoryProperties (:pointer (:struct VkPhysicalDeviceMemoryProperties2KHR))))
+;; (defvkinstextfun ("vkGetPhysicalDeviceMemoryProperties2KHR" vkGetPhysicalDeviceMemoryProperties2KHR) :void
+;;   (physicalDevice VkPhysicalDevice)
+;;   (pMemoryProperties (:pointer (:struct VkPhysicalDeviceMemoryProperties2KHR))))
 
-(defvkinstextfun ("vkGetPhysicalDeviceMirPresentationSupportKHR" vkGetPhysicalDeviceMirPresentationSupportKHR) VkBool32
-  (physicalDevice VkPhysicalDevice)
-  (queueFamilyIndex :uint32)
-  (connection (:pointer MirConnection)))
+;; (defvkinstextfun ("vkGetPhysicalDeviceMirPresentationSupportKHR" vkGetPhysicalDeviceMirPresentationSupportKHR) VkBool32
+;;   (physicalDevice VkPhysicalDevice)
+;;   (queueFamilyIndex :uint32)
+;;   (connection (:pointer MirConnection)))
 
-(defvkdevextfun ("vkGetPhysicalDevicePresentRectanglesKHX" vkGetPhysicalDevicePresentRectanglesKHX) VkResult
-  (physicalDevice VkPhysicalDevice)
-  (surface VkSurfaceKHR) ;; :EXTERNSYNC "true"
-  (pRectCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
-  (pRects (:pointer (:struct VkRect2D)))) ;; :OPTIONAL "true" :LEN "pRectCount"
+;; (defvkdevextfun ("vkGetPhysicalDevicePresentRectanglesKHX" vkGetPhysicalDevicePresentRectanglesKHX) VkResult
+;;   (physicalDevice VkPhysicalDevice)
+;;   (surface VkSurfaceKHR) ;; :EXTERNSYNC "true"
+;;   (pRectCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
+;;   (pRects (:pointer (:struct VkRect2D))))
+;; :OPTIONAL "true" :LEN "pRectCount"
 
 
 (cffi:defcfun ("vkGetPhysicalDeviceProperties" vkGetPhysicalDeviceProperties) :void
   (physicalDevice VkPhysicalDevice)
   (pProperties (:pointer (:struct VkPhysicalDeviceProperties))))
 
-(defvkinstextfun ("vkGetPhysicalDeviceProperties2KHR" vkGetPhysicalDeviceProperties2KHR) :void
-  (physicalDevice VkPhysicalDevice)
-  (pProperties (:pointer (:struct VkPhysicalDeviceProperties2KHR))))
+;; (defvkinstextfun ("vkGetPhysicalDeviceProperties2KHR" vkGetPhysicalDeviceProperties2KHR) :void
+;;   (physicalDevice VkPhysicalDevice)
+;;   (pProperties (:pointer (:struct VkPhysicalDeviceProperties2KHR))))
 
 (cffi:defcfun ("vkGetPhysicalDeviceQueueFamilyProperties" vkGetPhysicalDeviceQueueFamilyProperties) :void
   (physicalDevice VkPhysicalDevice)
@@ -1220,10 +1235,11 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (pQueueFamilyProperties (:pointer (:struct VkQueueFamilyProperties)))) ;; :OPTIONAL "true" :LEN "pQueueFamilyPropertyCount"
 
 
-(defvkinstextfun ("vkGetPhysicalDeviceQueueFamilyProperties2KHR" vkGetPhysicalDeviceQueueFamilyProperties2KHR) :void
-  (physicalDevice VkPhysicalDevice)
-  (pQueueFamilyPropertyCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
-  (pQueueFamilyProperties (:pointer (:struct VkQueueFamilyProperties2KHR)))) ;; :OPTIONAL "true" :LEN "pQueueFamilyPropertyCount"
+;; (defvkinstextfun ("vkGetPhysicalDeviceQueueFamilyProperties2KHR" vkGetPhysicalDeviceQueueFamilyProperties2KHR) :void
+;;   (physicalDevice VkPhysicalDevice)
+;;   (pQueueFamilyPropertyCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
+;;   (pQueueFamilyProperties (:pointer (:struct VkQueueFamilyProperties2KHR))))
+;; :OPTIONAL "true" :LEN "pQueueFamilyPropertyCount"
 
 
 (cffi:defcfun ("vkGetPhysicalDeviceSparseImageFormatProperties" vkGetPhysicalDeviceSparseImageFormatProperties) :void
@@ -1237,33 +1253,35 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (pProperties (:pointer (:struct VkSparseImageFormatProperties)))) ;; :OPTIONAL "true" :LEN "pPropertyCount"
 
 
-(defvkinstextfun ("vkGetPhysicalDeviceSparseImageFormatProperties2KHR" vkGetPhysicalDeviceSparseImageFormatProperties2KHR) :void
-  (physicalDevice VkPhysicalDevice)
-  (pFormatInfo (:pointer (:struct VkPhysicalDeviceSparseImageFormatInfo2KHR)))
-  (pPropertyCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
-  (pProperties (:pointer (:struct VkSparseImageFormatProperties2KHR)))) ;; :OPTIONAL "true" :LEN "pPropertyCount"
+;; (defvkinstextfun ("vkGetPhysicalDeviceSparseImageFormatProperties2KHR" vkGetPhysicalDeviceSparseImageFormatProperties2KHR) :void
+;;   (physicalDevice VkPhysicalDevice)
+;;   (pFormatInfo (:pointer (:struct VkPhysicalDeviceSparseImageFormatInfo2KHR)))
+;;   (pPropertyCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
+;;   (pProperties (:pointer (:struct VkSparseImageFormatProperties2KHR))))
+;; :OPTIONAL "true" :LEN "pPropertyCount"
 
 
-(defvkinstextfun ("vkGetPhysicalDeviceSurfaceCapabilities2EXT" vkGetPhysicalDeviceSurfaceCapabilities2EXT) VkResult
-  (physicalDevice VkPhysicalDevice)
-  (surface VkSurfaceKHR)
-  (pSurfaceCapabilities (:pointer (:struct VkSurfaceCapabilities2EXT))))
+;; (defvkinstextfun ("vkGetPhysicalDeviceSurfaceCapabilities2EXT" vkGetPhysicalDeviceSurfaceCapabilities2EXT) VkResult
+;;   (physicalDevice VkPhysicalDevice)
+;;   (surface VkSurfaceKHR)
+;;   (pSurfaceCapabilities (:pointer (:struct VkSurfaceCapabilities2EXT))))
 
-(defvkinstextfun ("vkGetPhysicalDeviceSurfaceCapabilities2KHR" vkGetPhysicalDeviceSurfaceCapabilities2KHR) VkResult
-  (physicalDevice VkPhysicalDevice)
-  (pSurfaceInfo (:pointer (:struct VkPhysicalDeviceSurfaceInfo2KHR)))
-  (pSurfaceCapabilities (:pointer (:struct VkSurfaceCapabilities2KHR))))
+;; (defvkinstextfun ("vkGetPhysicalDeviceSurfaceCapabilities2KHR" vkGetPhysicalDeviceSurfaceCapabilities2KHR) VkResult
+;;   (physicalDevice VkPhysicalDevice)
+;;   (pSurfaceInfo (:pointer (:struct VkPhysicalDeviceSurfaceInfo2KHR)))
+;;   (pSurfaceCapabilities (:pointer (:struct VkSurfaceCapabilities2KHR))))
 
 (cffi:defcfun ("vkGetPhysicalDeviceSurfaceCapabilitiesKHR" vkGetPhysicalDeviceSurfaceCapabilitiesKHR) VkResult
   (physicalDevice VkPhysicalDevice)
   (surface VkSurfaceKHR)
   (pSurfaceCapabilities (:pointer (:struct VkSurfaceCapabilitiesKHR))))
 
-(defvkinstextfun ("vkGetPhysicalDeviceSurfaceFormats2KHR" vkGetPhysicalDeviceSurfaceFormats2KHR) VkResult
-  (physicalDevice VkPhysicalDevice)
-  (pSurfaceInfo (:pointer (:struct VkPhysicalDeviceSurfaceInfo2KHR)))
-  (pSurfaceFormatCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
-  (pSurfaceFormats (:pointer (:struct VkSurfaceFormat2KHR)))) ;; :OPTIONAL "true" :LEN "pSurfaceFormatCount"
+;; (defvkinstextfun ("vkGetPhysicalDeviceSurfaceFormats2KHR" vkGetPhysicalDeviceSurfaceFormats2KHR) VkResult
+;;   (physicalDevice VkPhysicalDevice)
+;;   (pSurfaceInfo (:pointer (:struct VkPhysicalDeviceSurfaceInfo2KHR)))
+;;   (pSurfaceFormatCount (:pointer :uint32)) ;; :OPTIONAL "false,true"
+;;   (pSurfaceFormats (:pointer (:struct VkSurfaceFormat2KHR))))
+;; :OPTIONAL "true" :LEN "pSurfaceFormatCount"
 
 
 (cffi:defcfun ("vkGetPhysicalDeviceSurfaceFormatsKHR" vkGetPhysicalDeviceSurfaceFormatsKHR) VkResult
@@ -1286,20 +1304,20 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (surface VkSurfaceKHR)
   (pSupported (:pointer VkBool32)))
 
-(defvkinstextfun ("vkGetPhysicalDeviceWaylandPresentationSupportKHR" vkGetPhysicalDeviceWaylandPresentationSupportKHR) VkBool32
-  (physicalDevice VkPhysicalDevice)
-  (queueFamilyIndex :uint32)
-  (display (:pointer (:struct wl_display))))
+;; (defvkinstextfun ("vkGetPhysicalDeviceWaylandPresentationSupportKHR" vkGetPhysicalDeviceWaylandPresentationSupportKHR) VkBool32
+;;   (physicalDevice VkPhysicalDevice)
+;;   (queueFamilyIndex :uint32)
+;;   (display (:pointer (:struct wl_display))))
 
 (cffi:defcfun ("vkGetPhysicalDeviceWin32PresentationSupportKHR" vkGetPhysicalDeviceWin32PresentationSupportKHR) VkBool32
   (physicalDevice VkPhysicalDevice)
   (queueFamilyIndex :uint32))
 
-(defvkinstextfun ("vkGetPhysicalDeviceXlibPresentationSupportKHR" vkGetPhysicalDeviceXlibPresentationSupportKHR) VkBool32
-  (physicalDevice VkPhysicalDevice)
-  (queueFamilyIndex :uint32)
-  (dpy (:pointer Display))
-  (visualID VisualID))
+;; (defvkinstextfun ("vkGetPhysicalDeviceXlibPresentationSupportKHR" vkGetPhysicalDeviceXlibPresentationSupportKHR) VkBool32
+;;   (physicalDevice VkPhysicalDevice)
+;;   (queueFamilyIndex :uint32)
+;;   (dpy (:pointer Display))
+;;   (visualID VisualID))
 
 (cffi:defcfun ("vkGetPipelineCacheData" vkGetPipelineCacheData) VkResult
   (device VkDevice)
@@ -1319,39 +1337,39 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (flags VkQueryResultFlags)) ;; :OPTIONAL "true"
 
 
-(defvkinstextfun ("vkGetRandROutputDisplayEXT" vkGetRandROutputDisplayEXT) VkResult
-  (physicalDevice VkPhysicalDevice)
-  (dpy (:pointer Display))
-  (rrOutput RROutput)
-  (pDisplay (:pointer VkDisplayKHR)))
+;; (defvkinstextfun ("vkGetRandROutputDisplayEXT" vkGetRandROutputDisplayEXT) VkResult
+;;   (physicalDevice VkPhysicalDevice)
+;;   (dpy (:pointer Display))
+;;   (rrOutput RROutput)
+;;   (pDisplay (:pointer VkDisplayKHR)))
 
-(defvkdevextfun ("vkGetRefreshCycleDurationGOOGLE" vkGetRefreshCycleDurationGOOGLE) VkResult
-  (device VkDevice)
-  (swapchain VkSwapchainKHR) ;; :EXTERNSYNC "true"
-  (pDisplayTimingProperties (:pointer (:struct VkRefreshCycleDurationGOOGLE))))
+;; (defvkdevextfun ("vkGetRefreshCycleDurationGOOGLE" vkGetRefreshCycleDurationGOOGLE) VkResult
+;;   (device VkDevice)
+;;   (swapchain VkSwapchainKHR) ;; :EXTERNSYNC "true"
+;;   (pDisplayTimingProperties (:pointer (:struct VkRefreshCycleDurationGOOGLE))))
 
 (cffi:defcfun ("vkGetRenderAreaGranularity" vkGetRenderAreaGranularity) :void
   (device VkDevice)
   (renderPass VkRenderPass)
   (pGranularity (:pointer (:struct VkExtent2D))))
 
-(defvkdevextfun ("vkGetSemaphoreFdKHX" vkGetSemaphoreFdKHX) VkResult
-  (device VkDevice)
-  (semaphore VkSemaphore)
-  (handleType VkExternalSemaphoreHandleTypeFlagBitsKHX)
-  (pFd (:pointer :int)))
+;; (defvkdevextfun ("vkGetSemaphoreFdKHX" vkGetSemaphoreFdKHX) VkResult
+;;   (device VkDevice)
+;;   (semaphore VkSemaphore)
+;;   (handleType VkExternalSemaphoreHandleTypeFlagBitsKHX)
+;;   (pFd (:pointer :int)))
 
-(defvkdevextfun ("vkGetSemaphoreWin32HandleKHX" vkGetSemaphoreWin32HandleKHX) VkResult
-  (device VkDevice)
-  (semaphore VkSemaphore)
-  (handleType VkExternalSemaphoreHandleTypeFlagBitsKHX)
-  (pHandle (:pointer HANDLE)))
+;; (defvkdevextfun ("vkGetSemaphoreWin32HandleKHX" vkGetSemaphoreWin32HandleKHX) VkResult
+;;   (device VkDevice)
+;;   (semaphore VkSemaphore)
+;;   (handleType VkExternalSemaphoreHandleTypeFlagBitsKHX)
+;;   (pHandle (:pointer HANDLE)))
 
-(defvkdevextfun ("vkGetSwapchainCounterEXT" vkGetSwapchainCounterEXT) VkResult
-  (device VkDevice)
-  (swapchain VkSwapchainKHR)
-  (counter VkSurfaceCounterFlagBitsEXT)
-  (pCounterValue (:pointer :uint64)))
+;; (defvkdevextfun ("vkGetSwapchainCounterEXT" vkGetSwapchainCounterEXT) VkResult
+;;   (device VkDevice)
+;;   (swapchain VkSwapchainKHR)
+;;   (counter VkSurfaceCounterFlagBitsEXT)
+;;   (pCounterValue (:pointer :uint64)))
 
 (cffi:defcfun ("vkGetSwapchainImagesKHR" vkGetSwapchainImagesKHR) VkResult
   (device VkDevice)
@@ -1360,18 +1378,19 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (pSwapchainImages (:pointer VkImage))) ;; :OPTIONAL "true" :LEN "pSwapchainImageCount"
 
 
-(defvkdevextfun ("vkGetSwapchainStatusKHR" vkGetSwapchainStatusKHR) VkResult
-  (device VkDevice)
-  (swapchain VkSwapchainKHR)) ;; :EXTERNSYNC "true"
+;; (defvkdevextfun ("vkGetSwapchainStatusKHR" vkGetSwapchainStatusKHR) VkResult
+;;   (device VkDevice)
+;;   (swapchain VkSwapchainKHR))
+;; :EXTERNSYNC "true"
 
 
-(defvkdevextfun ("vkImportSemaphoreFdKHX" vkImportSemaphoreFdKHX) VkResult
-  (device VkDevice)
-  (pImportSemaphoreFdInfo (:pointer (:struct VkImportSemaphoreFdInfoKHX))))
+;; (defvkdevextfun ("vkImportSemaphoreFdKHX" vkImportSemaphoreFdKHX) VkResult
+;;   (device VkDevice)
+;;   (pImportSemaphoreFdInfo (:pointer (:struct VkImportSemaphoreFdInfoKHX))))
 
-(defvkdevextfun ("vkImportSemaphoreWin32HandleKHX" vkImportSemaphoreWin32HandleKHX) VkResult
-  (device VkDevice)
-  (pImportSemaphoreWin32HandleInfo (:pointer (:struct VkImportSemaphoreWin32HandleInfoKHX))))
+;; (defvkdevextfun ("vkImportSemaphoreWin32HandleKHX" vkImportSemaphoreWin32HandleKHX) VkResult
+;;   (device VkDevice)
+;;   (pImportSemaphoreWin32HandleInfo (:pointer (:struct VkImportSemaphoreWin32HandleInfoKHX))))
 
 (cffi:defcfun ("vkInvalidateMappedMemoryRanges" vkInvalidateMappedMemoryRanges) VkResult
   (device VkDevice)
@@ -1416,30 +1435,31 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 (cffi:defcfun ("vkQueueWaitIdle" vkQueueWaitIdle) VkResult
   (queue VkQueue))
 
-(defvkdevextfun ("vkRegisterDeviceEventEXT" vkRegisterDeviceEventEXT) VkResult
-  (device VkDevice)
-  (pDeviceEventInfo (:pointer (:struct VkDeviceEventInfoEXT)))
-  (pAllocator (:pointer (:struct VkAllocationCallbacks)))
-  (pFence (:pointer VkFence)))
+;; (defvkdevextfun ("vkRegisterDeviceEventEXT" vkRegisterDeviceEventEXT) VkResult
+;;   (device VkDevice)
+;;   (pDeviceEventInfo (:pointer (:struct VkDeviceEventInfoEXT)))
+;;   (pAllocator (:pointer (:struct VkAllocationCallbacks)))
+;;   (pFence (:pointer VkFence)))
 
-(defvkdevextfun ("vkRegisterDisplayEventEXT" vkRegisterDisplayEventEXT) VkResult
-  (device VkDevice)
-  (display VkDisplayKHR)
-  (pDisplayEventInfo (:pointer (:struct VkDisplayEventInfoEXT)))
-  (pAllocator (:pointer (:struct VkAllocationCallbacks)))
-  (pFence (:pointer VkFence)))
+;; (defvkdevextfun ("vkRegisterDisplayEventEXT" vkRegisterDisplayEventEXT) VkResult
+;;   (device VkDevice)
+;;   (display VkDisplayKHR)
+;;   (pDisplayEventInfo (:pointer (:struct VkDisplayEventInfoEXT)))
+;;   (pAllocator (:pointer (:struct VkAllocationCallbacks)))
+;;   (pFence (:pointer VkFence)))
 
-(defvkdevextfun ("vkRegisterObjectsNVX" vkRegisterObjectsNVX) VkResult
-  (device VkDevice)
-  (objectTable VkObjectTableNVX) ;; :EXTERNSYNC "true"
-  (objectCount :uint32)
-  (ppObjectTableEntries (:pointer (:pointer (:struct VkObjectTableEntryNVX)))) ;; :LEN "objectCount"
-  (pObjectIndices (:pointer :uint32))) ;; :LEN "objectCount"
+;; (defvkdevextfun ("vkRegisterObjectsNVX" vkRegisterObjectsNVX) VkResult
+;;   (device VkDevice)
+;;   (objectTable VkObjectTableNVX) ;; :EXTERNSYNC "true"
+;;   (objectCount :uint32)
+;;   (ppObjectTableEntries (:pointer (:pointer (:struct VkObjectTableEntryNVX)))) ;; :LEN "objectCount"
+;;   (pObjectIndices (:pointer :uint32)))
+;; :LEN "objectCount"
 
 
-(defvkinstextfun ("vkReleaseDisplayEXT" vkReleaseDisplayEXT) VkResult
-  (physicalDevice VkPhysicalDevice)
-  (display VkDisplayKHR))
+;; (defvkinstextfun ("vkReleaseDisplayEXT" vkReleaseDisplayEXT) VkResult
+;;   (physicalDevice VkPhysicalDevice)
+;;   (display VkDisplayKHR))
 
 (cffi:defcfun ("vkResetCommandBuffer" vkResetCommandBuffer) VkResult
   (commandBuffer VkCommandBuffer) ;; :EXTERNSYNC "true"
@@ -1474,17 +1494,19 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (event VkEvent)) ;; :EXTERNSYNC "true"
 
 
-(defvkdevextfun ("vkSetHdrMetadataEXT" vkSetHdrMetadataEXT) :void
-  (device VkDevice)
-  (swapchainCount :uint32)
-  (pSwapchains (:pointer VkSwapchainKHR)) ;; :LEN "swapchainCount"
-  (pMetadata (:pointer (:struct VkHdrMetadataEXT)))) ;; :LEN "swapchainCount"
+;; (defvkdevextfun ("vkSetHdrMetadataEXT" vkSetHdrMetadataEXT) :void
+;;   (device VkDevice)
+;;   (swapchainCount :uint32)
+;;   (pSwapchains (:pointer VkSwapchainKHR)) ;; :LEN "swapchainCount"
+;;   (pMetadata (:pointer (:struct VkHdrMetadataEXT))))
+;; :LEN "swapchainCount"
 
 
-(defvkdevextfun ("vkTrimCommandPoolKHR" vkTrimCommandPoolKHR) :void
-  (device VkDevice)
-  (commandPool VkCommandPool) ;; :EXTERNSYNC "true"
-  (flags VkCommandPoolTrimFlagsKHR)) ;; :OPTIONAL "true"
+;; (defvkdevextfun ("vkTrimCommandPoolKHR" vkTrimCommandPoolKHR) :void
+;;   (device VkDevice)
+;;   (commandPool VkCommandPool) ;; :EXTERNSYNC "true"
+;;   (flags VkCommandPoolTrimFlagsKHR))
+;; :OPTIONAL "true"
 
 
 (cffi:defcfun ("vkUnmapMemory" vkUnmapMemory) :void
@@ -1492,19 +1514,20 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
   (memory VkDeviceMemory)) ;; :EXTERNSYNC "true"
 
 
-(defvkdevextfun ("vkUnregisterObjectsNVX" vkUnregisterObjectsNVX) VkResult
-  (device VkDevice)
-  (objectTable VkObjectTableNVX) ;; :EXTERNSYNC "true"
-  (objectCount :uint32)
-  (pObjectEntryTypes (:pointer VkObjectEntryTypeNVX)) ;; :LEN "objectCount"
-  (pObjectIndices (:pointer :uint32))) ;; :LEN "objectCount"
+;; (defvkdevextfun ("vkUnregisterObjectsNVX" vkUnregisterObjectsNVX) VkResult
+;;   (device VkDevice)
+;;   (objectTable VkObjectTableNVX) ;; :EXTERNSYNC "true"
+;;   (objectCount :uint32)
+;;   (pObjectEntryTypes (:pointer VkObjectEntryTypeNVX)) ;; :LEN "objectCount"
+;;   (pObjectIndices (:pointer :uint32)))
+;; :LEN "objectCount"
 
 
-(defvkdevextfun ("vkUpdateDescriptorSetWithTemplateKHR" vkUpdateDescriptorSetWithTemplateKHR) :void
-  (device VkDevice)
-  (descriptorSet VkDescriptorSet) ;; :EXTERNSYNC "true"
-  (descriptorUpdateTemplate VkDescriptorUpdateTemplateKHR)
-  (pData (:pointer :void)))
+;; (defvkdevextfun ("vkUpdateDescriptorSetWithTemplateKHR" vkUpdateDescriptorSetWithTemplateKHR) :void
+;;   (device VkDevice)
+;;   (descriptorSet VkDescriptorSet) ;; :EXTERNSYNC "true"
+;;   (descriptorUpdateTemplate VkDescriptorUpdateTemplateKHR)
+;;   (pData (:pointer :void)))
 
 (cffi:defcfun ("vkUpdateDescriptorSets" vkUpdateDescriptorSets) :void
   (device VkDevice)

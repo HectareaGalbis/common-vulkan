@@ -13,8 +13,8 @@
                 (:file "vulkan/debug-utils")
 
                 ; Common Vulkan
-                (:file "src/instance")))
-                ;; (:file "src/debug-messenger")
+                (:file "src/instance")
+                (:file "src/debug-utils-ext")))
                 ;; (:file "src/window")
                 ;; (:file "src/surface")
                 ;; (:file "src/physical-device")
