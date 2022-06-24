@@ -23,11 +23,11 @@ Now, we need some info structures like an `VkApplicationInfo` and `VkInstanceCre
 ```lisp
 (defun create-instance (app)
   (cvk:with-application-info app-info (:sType cvk:VK_STRUCTURE_TYPE_APPLICATION_INFO
-				                               :pApplicationName "Hello triangle"
-				                               :applicationVersion (cvk:make-version 1 0 0)
-				                               :pEngineName "No Engine"
-				                               :engineVersion (cvk:make-version 1 0 0)
-				                               :apiVersion (cvk:make-version 1 0 0)))
+				       :pApplicationName "Hello triangle"
+				       :applicationVersion (cvk:make-version 1 0 0)
+				       :pEngineName "No Engine"
+				       :engineVersion (cvk:make-version 1 0 0)
+				       :apiVersion (cvk:make-version 1 0 0)))
                                  
     )
 ```
@@ -49,9 +49,9 @@ And now we can create the `VkInstanceCreateInfo` structure.
 ```lisp
 (let ((glfw-extensions (glfw:get-required-instance-extensions)))
   (cvk:with-instance-create-info create-info (:sType cvk:VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO
-						                                  :pApplicationInfo app-info
-						                                  :enabledExtensionCount (length glfw-extensions)
-						                                  :ppEnabledExtensionNames glfw-extensions)
+					      :pApplicationInfo app-info
+					      :enabledExtensionCount (length glfw-extensions)
+					      :ppEnabledExtensionNames glfw-extensions)
     ))
 ```
 
@@ -63,10 +63,10 @@ Finally we can create the instance.
 (cvk:with-instance-create-info create-info (:sType ...)
   (multiple-value-bind (instance result) (cvk:create-instance create-info nil)
 	  
-	  (if (not (equal result cvk:VK_SUCCESS))
-	      (error "Failed to create instance"))
+    (if (not (equal result cvk:VK_SUCCESS))
+	(error "Failed to create instance"))
 
-	  (setf (instance app) instance)))
+    (setf (instance app) instance)))
 ```
 
 There is a `with-instance` macro that works exactly the same way that the others. But, we are going to follow the steps of the official tutorial. 
