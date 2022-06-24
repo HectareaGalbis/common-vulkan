@@ -136,7 +136,66 @@ Add a function `setup-debug-messenger` in `init-vulkan` after `create-instance`:
     ))
 ```
 
-Like the creation of every object Vulkan, we need first to fill a create info structure:
+Like the creation of every object in Vulkan, we need first to fill a create info structure:
 
 ```lisp
+(defun setup-debug-messenger (app)
+  (if *enable-validation-layers*
+      
+      (cvk:with-debug-utils-messenger-create-info create-info
+	(:sType cvk:VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT
+	 :messageSeverity (logior cvk:VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT
+				  cvk:VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT
+				  cvk:VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT)
+	 :messageType (logior cvk:VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT
+			      cvk:VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT
+			      cvk:VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT)
+	 :pfnUserCallback 'debug-callback
+	 :pUserData nil)
+  ...
+  ))
+```
+
+Before we finish this function, we need the function that creates the debug messenger. However, this function belongs to an extension, so it is not directly available. We need to use `get-instance-proc-addr`. We use it in a function that gets the required function and calls it.
+
+```lisp
+(defun create-debug-utils-messenger (instance create-info allocator)
+  (let ((func (cvk:get-instance-proc-addr instance "vkCreateDebugUtilsMessengerEXT")))
+    (if func
+	(funcall func instance create-info allocator)
+	(values nil cvk:VK_ERROR_EXTENSION_NOT_PRESENT))))
+```
+
+Now we can finish our `setup-debug-messenger` function.
+
+```lisp
+(multiple-value-bind (messenger result) (create-debug-utils-messenger (instance app) create-info nil)
+  (if (not (equal result cvk:VK_SUCCESS))
+      (error "failed to set up debug messenger! ~S" result))
+  (setf (debug-messenger app) messenger))
+```
+
+To destroy de debug messenger we need to do a similar thing. First create `destroy-debug-utils-messenger`.
+
+```lisp
+(defun destroy-debug-utils-messenger (instance debug-messenger allocator)
+  (let ((func (cvk:get-instance-proc-addr instance "vkDestroyDebugUtilsMessengerEXT")))
+    (if func
+	(funcall func instance debug-messenger allocator)
+	(values nil cvk:VK_ERROR_EXTENSION_NOT_PRESENT))))
+
+```
+
+And use it in the `cleanup` function:
+
+```lisp
+(defun cleanup (app)
+  (if *enable-validation-layers*
+      (destroy-debug-utils-messenger (instance app) (debug-messenger app) nil))
+  
+  (cvk:destroy-instance (instance app) nil)
+  
+  (glfw:destroy-window (window app))
+  
+  (glfw:terminate))
 ```
