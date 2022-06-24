@@ -164,8 +164,9 @@ Wraps the body expressions with the creation and destruction of an instance. The
 
 ## vkEnumerateInstanceExtensionProperties
 
+**create-enumerate-instance-extension-properties**
 ```
-(enumerate-instance-extension-properties layer-name) => extension-props
+(create-enumerate-instance-extension-properties layer-name) => extension-props
 ```
 * *Parameters*:
   * *layer-name*: `string`
@@ -173,14 +174,42 @@ Wraps the body expressions with the creation and destruction of an instance. The
 * *Returns*:
   * *extension-props*: `(list VkExtensionProperties)`
 
+**destroy-enumerate-instance-extension-properties**
+```lisp
+(destroy-enumerate-instance-extension-properties extension-props)
+```
+* *Parameters*:
+  * *extension-props*: `(list VkExtensionProperties)`
+
+**with-enumerate-instance-extension-properties**
+```lisp
+(with-enumerate-instance-extension-properties var (layer-name)
+  &body body)
+```
+Wraps the `body` expressions with the construction and destruction of a list of extension properties. The new list is bound to `var`. The arguments are passed to the constructor `create-enumerate-instance-extension-properties`.
+
 ## vkEnumerateInstanceLayerProperties
 
+**create-enumerate-instance-layer-properties**
 ```
-(enumerate-instance-layer-properties) => layer-props
+(create-enumerate-instance-layer-properties) => layer-props
 ```
-
 * *Returns*:
   * *layer-props*: `(list VkLayerProperties)`
+
+**destroy-enumerate-instance-layer-properties**
+```lisp
+(destroy-enumerate-instance-layer-properties layer-props)
+```
+* *Parameters*:
+  *layer-props*: `(list VkLayerProperties)`
+
+**with-enumerate-instance-layer-properties**
+```lisp
+(with-enumerate-instance-layer-properties var ()
+  &body body)
+```
+Wraps the `body` expressions with the creation and destruction of a list of layer properties. The new list is bound to `var`.
 
 ## vkGetInstanceProcAddr
 
