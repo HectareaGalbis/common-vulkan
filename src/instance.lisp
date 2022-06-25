@@ -7,21 +7,24 @@
 
 ;; Constructor and destructor of VkApplicationInfo structure
 (mcffi:def-foreign-constructor-destructor application-info (:struct VkApplicationInfo)
-  ((sType              VK_STRUCTURE_TYPE_APPLICATION_INFO))
-  ((pNext              nil) (or pNext (cffi:null-pointer)))
-  ((pApplicationName   nil) (if pApplicationName
+  (sType :init-form VK_STRUCTURE_TYPE_APPLICATION_INFO)
+  (pNext :init-form nil
+	 :create (or pNext (cffi:null-pointer)))
+  (pApplicationName :init-form nil
+		    :create (if pApplicationName
 			        (cffi:foreign-string-alloc pApplicationName)
 			        (cffi:null-pointer))
-			    (if (not (cffi:null-pointer-p pApplicationName))
-				(cffi:foreign-string-free pApplicationName)))
-  ((applicationVersion 0))
-  ((pEngineName        nil) (if pEngineName
-			        (cffi:foreign-string-alloc pEngineName)
-			        (cffi:null-pointer))
-		            (if (not (cffi:null-pointer-p pEngineName))
-				(cffi:foreign-string-free pEngineName)))
-  ((engineVersion      0))
-  ((apiVersion         0)))
+		    :destroy (if (not (cffi:null-pointer-p pApplicationName))
+				 (cffi:foreign-string-free pApplicationName)))
+  (applicationVersion :init-form 0)
+  (pEngineName :init-form nil
+	       :create (if pEngineName
+			   (cffi:foreign-string-alloc pEngineName)
+			   (cffi:null-pointer))
+	       :destroy (if (not (cffi:null-pointer-p pEngineName))
+			    (cffi:foreign-string-free pEngineName)))
+  (engineVersion :init-form 0)
+  (apiVersion :init-form 0))
 
 ;; VkApplicationInfo getters and setters
 (mcffi:def-foreign-accessors application-info (:struct VkApplicationInfo)
@@ -44,27 +47,31 @@
 
 ;; Constructor and destructor of VkInstanceCreateInfo structure
 (mcffi:def-foreign-constructor-destructor instance-create-info (:struct VkInstanceCreateInfo)
-  ((sType VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO))
-  ((pNext nil) (or pNext (cffi:null-pointer)))
-  ((flags 0))
-  ((pApplicationInfo nil) (or pApplicationInfo (cffi:null-pointer)))
-  ((enabledLayerCount 0))
-  ((ppEnabledLayerNames nil) (if ppEnabledLayerNames
-				 (cffi:foreign-alloc :string :initial-contents ppEnabledLayerNames)
-				 (cffi:null-pointer))
-			     (if (not (cffi:null-pointer-p ppEnabledLayerNames))
-				 (loop for i from 0 below enabledLayerCount
-				       do (cffi:foreign-free (cffi:mem-aref ppEnabledLayerNames :pointer i))
-				       finally (cffi:foreign-free ppEnabledLayerNames))))
-  ((enabledExtensionCount 0))
-  ((ppEnabledExtensionNames nil) (if ppEnabledExtensionNames
-				     (cffi:foreign-alloc :string :initial-contents ppEnabledExtensionNames)
-				     (cffi:null-pointer))
-				 (if (not (cffi:null-pointer-p ppEnabledExtensionNames))
-				     (loop for i from 0 below enabledExtensionCount
-					   do (cffi:foreign-free (cffi:mem-aref ppEnabledExtensionNames
-										:pointer i))
-					   finally (cffi:foreign-free ppEnabledExtensionNames)))))
+  (sType :init-form VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO)
+  (pNext :init-form nil
+	 :create (or pNext (cffi:null-pointer)))
+  (flags :init-form 0)
+  (pApplicationInfo :init-form nil
+		    :create (or pApplicationInfo (cffi:null-pointer)))
+  (enabledLayerCount :init-form 0)
+  (ppEnabledLayerNames :init-form nil
+		       :create (if ppEnabledLayerNames
+				   (cffi:foreign-alloc :string :initial-contents ppEnabledLayerNames)
+				   (cffi:null-pointer))
+		       :destroy (if (not (cffi:null-pointer-p ppEnabledLayerNames))
+				    (loop for i from 0 below enabledLayerCount
+					  do (cffi:foreign-free (cffi:mem-aref ppEnabledLayerNames :pointer i))
+					  finally (cffi:foreign-free ppEnabledLayerNames))))
+  (enabledExtensionCount :init-form 0)
+  (ppEnabledExtensionNames :init-form nil
+			   :create (if ppEnabledExtensionNames
+				       (cffi:foreign-alloc :string :initial-contents ppEnabledExtensionNames)
+				       (cffi:null-pointer))
+			   :destroy (if (not (cffi:null-pointer-p ppEnabledExtensionNames))
+					(loop for i from 0 below enabledExtensionCount
+					      do (cffi:foreign-free (cffi:mem-aref ppEnabledExtensionNames
+										   :pointer i))
+					      finally (cffi:foreign-free ppEnabledExtensionNames)))))
 
 ;; VkInstanceCreateInfo getters and setters
 (mcffi:def-foreign-accessors instance-create-info (:struct VkInstanceCreateInfo)

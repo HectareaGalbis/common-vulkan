@@ -1,71 +1,101 @@
 
-(in-package :cvk)
+(in-package :cvk)	
 
 
+;; Keys for user data table and the user data table 
+(defvar *next-address* 1)
+(defvar *user-data-table* (make-hash-table))
 
-(let ((next-address 1) (user-data-table (make-hash-table)))
 
-  ;; Constructor and destructor of VkDebugUtilsMessengerCreateInfoEXT structure
-  (mcffi:def-foreign-constructor-destructor debug-utils-messenger-create-info
-      (:struct VkDebugUtilsMessengerCreateInfoEXT)
-    ((sType VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT))
-    ((pNext nil) (or pNext (cffi:null-pointer)))
-    ((flags 0))
-    ((messageSeverity 0))
-    ((messageType 0))
-    ((pfnUserCallback nil) (if pfnUserCallback
-			       (cffi:get-callback pfnUserCallback)
-			       (cffi:null-pointer)))
-    ((pUserData nil) (if pUserData
-			 (prog2
-			     (setf (gethash next-address user-data-table) pUserData)
-			     (cffi:make-pointer next-address)
-			   (setf next-address (+1 next-address)))
-			 (cffi:null-pointer))
-     (if (not (cffi:null-pointer-p pUserData))
-	 (setf (gethash (cffi:pointer-address pUserData) user-data-table) nil))))
+;; The callback table
+(defvar *callback-table* (make-hash-table))
 
-  (let ((callback-table (make-hash-table)))
 
-    ;; VkDebugUtilsMessengerCreateInfoEXT getters and setters
-    (mcffi:def-foreign-accessors debug-utils-messenger-create-info (:struct VkDebugUtilsMessengerCreateInfoEXT)
-      sType
-      pNext
-      flags
-      messageSeverity
-      messageType
-      (pfnUserCallback :getter (() (if (cffi:null-pointer-p pfnUserCallback)
-				       nil
-				       (gethash (cffi:pointer-address pfnUserCallback) user-data-table)))
-		       :setter ((new-value)
-				(setf pfnUserCallback (if new-value
-							  (cffi:get-callback new-value)
-							  (cffi:null-pointer)))))
-      (pUserData :getter (() (gethash (cffi:pointer-address pUserData) user-data-table))
-		 :setter ((new-value)
-			  (if (cffi:null-pointer-p pUserData)
-			      (if pUserData
+;; Constructor and destructor of VkDebugUtilsMessengerCreateInfoEXT structure
+(mcffi:def-foreign-constructor-destructor debug-utils-messenger-create-info
+    (:struct VkDebugUtilsMessengerCreateInfoEXT)
+  (sType :init-form VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT)
+  (pNext :init-form nil
+	 :create (or pNext (cffi:null-pointer)))
+  (flags :init-form 0)
+  (messageSeverity :init-form 0)
+  (messageType :init-form 0)
+  (pfnUserCallback :init-form nil
+		   :create    (if pfnUserCallback
 				  (prog2
-				      (setf (gethash next-address user-data-table) new-value)
-				      (cffi:make-pointer next-address)
-				    (setf next-address (+1 next-address)))
-				  (cffi:null-pointer))
-			      (if pUserData
-				  (setf (gethash (cffi:pointer-address pUserData) user-data-table) new-value)
-				  (progn
-				    (setf (gethash (cffi:pointer-address pUserData) user-data-table) nil)
-				    (setf pUserData (cffi:null-pointer))))))))
+				      (setf (gethash (cffi:pointer-address (cffi:get-callback pfnUserCallback))
+						     *callback-table*)
+					    pfnUserCallback)
+				      (cffi:get-callback pfnUserCallback))
+				  (cffi:null-pointer)))
+  (pUserData :init-form nil
+	     :create    (if pUserData
+			    (prog2
+				(setf (gethash *next-address* *user-data-table*) pUserData)
+				(cffi:make-pointer *next-address*)
+			      (setf *next-address* (1+ *next-address*)))
+			    (cffi:null-pointer))))
 
-    ;; Defines a debug utils messenger callback
-    (defmacro def-debug-utils-messenger-callback (name (messageSeverity-c messageTypes-c pCallbackData-c
-							pUserData-c) &body body)
-      `(progn
-	 (cffi:defcallback ,name VkBool32 ((,messageSeverity-c VkDebugUtilsMessageSeverityFlagBitsEXT)
-					   (,messageTypes-c    VkDebugUtilsMessageTypeFlagsEXT)
-					   (,pCallbackData-c   :pointer)
-					   (,pUserData-c       :pointer))
-	   ,@body)
-	 (setf (gethash (cffi:pointer-address (cffi:get-callback ',name)) callback-table) ',name)))))
+
+;; VkDebugUtilsMessengerCreateInfoEXT getters and setters
+(mcffi:def-foreign-accessors debug-utils-messenger-create-info (:struct VkDebugUtilsMessengerCreateInfoEXT)
+  sType
+  pNext
+  flags
+  messageSeverity
+  messageType
+  (pfnUserCallback :getter (() (if (cffi:null-pointer-p pfnUserCallback)
+				   nil
+				   (gethash (cffi:pointer-address pfnUserCallback) *callback-table*)))
+		   :setter ((new-value)
+			    (if (cffi:null-pointer-p pfnUserCallback)
+				(if new-value
+				    (progn
+				      (setf (gethash (cffi:pointer-address (cffi:get-callback new-value))
+						     *callback-table*)
+					    new-value)
+				      (setf pfnUserCallback (cffi:get-callback new-value))))
+				(if new-value
+				    (progn
+				      (setf (gethash (cffi:pointer-address pfnUserCallback) *callback-table*)
+					    new-value)
+				      (setf pfnUserCallback (cffi:get-callback new-value)))
+				    (progn
+				      (remhash (cffi:pointer-address pfnUserCallback) *callback-table*)
+				      (setf pfnUserCallback (cffi:null-pointer)))))))
+  (pUserData :getter (() (gethash (cffi:pointer-address pUserData) *user-data-table*))
+	     :setter ((new-value)
+		      (if (cffi:null-pointer-p pUserData)
+			  (if new-value
+			      (progn
+				(setf (gethash *next-address* *user-data-table*) new-value)
+				(setf pUserData (cffi:make-pointer *next-address*))
+				(setf *next-address* (1+ *next-address*))))
+			  (if new-value
+			      (setf (gethash (cffi:pointer-address pUserData) *user-data-table*) new-value)
+			      (progn
+				(remhash (cffi:pointer-address pUserData) *user-data-table*)
+				(setf pUserData (cffi:null-pointer))))))))
+
+
+;; Defines a debug utils messenger callback
+(defmacro def-debug-utils-messenger-callback (name (messageSeverity messageTypes pCallbackData
+						    pUserData) &body body)
+  (let ((messageSeverity-c (gensym))
+	(messageTypes-c (gensym))
+	(pCallbackData-c (gensym))
+	(pUserData-c (gensym)))
+    `(progn 
+       (cffi:defcallback ,name VkBool32 ((,messageSeverity-c VkDebugUtilsMessageSeverityFlagBitsEXT)
+					 (,messageTypes-c    VkDebugUtilsMessageTypeFlagsEXT)
+					 (,pCallbackData-c   :pointer)
+					 (,pUserData-c       :pointer))
+	 (let ((,messageSeverity ,messageSeverity-c)
+	       (,messageTypes ,messageTypes-c)
+	       (,pCallbackData ,pCallbackData-c)
+	       (,pUserData (gethash (cffi:pointer-address ,pUserData-c) cvk::*user-data-table*)))
+	   ,@body))
+       (setf (gethash (cffi:pointer-address (cffi:get-callback ',name)) cvk::*callback-table*) ',name))))
 
 
 ;; VkDebugUtilsMessengerCallbackDataEXT accessors

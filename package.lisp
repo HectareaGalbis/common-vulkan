@@ -51,6 +51,13 @@
    #:create-debug-utils-messenger-create-info
    #:destroy-debug-utils-messenger-create-info
    #:with-debug-utils-messenger-create-info
+   #:debug-utils-messenger-create-info-sType
+   #:debug-utils-messenger-create-info-pNext
+   #:debug-utils-messenger-create-info-flags
+   #:debug-utils-messenger-create-info-messageSeverity
+   #:debug-utils-messenger-create-info-messageType
+   #:debug-utils-messenger-create-info-pfnUserCallback
+   #:debug-utils-messenger-create-info-pUserData
    #:def-debug-utils-messenger-callback
    #:debug-utils-messenger-callback-data-sType
    #:debug-utils-messenger-callback-data-pNext
