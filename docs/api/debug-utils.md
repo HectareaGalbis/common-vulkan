@@ -129,4 +129,15 @@ Wraps the body expressions with the creation and destruction of a `VkDebugUtilsM
 (debug-utils-object-name-info-pObjectName object-info)
 ```
 
-## Functions
+## Macros
+
+### def-debug-utils-messenger-callback
+
+```lisp
+(def-debug-utils-messenger-callback name (message-severity message-types callback-data user-data)
+  &body body) 
+```
+Define a debug utils messenger callback. The new callback is bound to `name`.
+
+* *Parameters*:
+  * *message-severity*: 
