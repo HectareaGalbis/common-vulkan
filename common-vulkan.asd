@@ -14,10 +14,11 @@
 
                 ; Common Vulkan
                 (:file "src/instance")
-                (:file "src/debug-utils-ext")))
+                (:file "src/debug-utils-ext")
+		(:file "src/physical-device")
+		(:file "src/image")))
                 ;; (:file "src/window")
                 ;; (:file "src/surface")
-                ;; (:file "src/physical-device")
                 ;; (:file "src/queue-family")
                 ;; (:file "src/device")
                 ;; (:file "src/semaphore")
