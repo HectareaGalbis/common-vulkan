@@ -80,90 +80,199 @@
    #:debug-utils-object-name-info-objectType
    #:debug-utils-object-name-info-objectHandle
    #:debug-utils-object-name-info-pObjectName
-   
-   ;; Window
-   #:create-window
-   #:destroy-window
-   #:with-window
-
-   ;; Surface
-   #:create-surface
-   #:destroy-surface
-   #:with-surface
 
    ;; Physical device
-					;#:get-available-extensions ; Revisar y documentar
-   #:create-physical-device
-   #:with-physical-device
+   #:physical-device-properties-apiVersion
+   #:physical-device-properties-driverVersion
+   #:physical-device-properties-vendorID
+   #:physical-device-properties-deviceID
+   #:physical-device-properties-deviceType
+   #:physical-device-properties-deviceName
+   #:physical-device-properties-pipelineCacheUUID
+   #:physical-device-properties-limits
+   #:physical-device-properties-sparseProperties
+   #:physical-device-limits-maxImageDimension1D
+   #:physical-device-limits-maxImageDimension2D
+   #:physical-device-limits-maxImageDimension3D
+   #:physical-device-limits-maxImageDimensionCube
+   #:physical-device-limits-maxImageArrayLayers
+   #:physical-device-limits-maxTexelBufferElements
+   #:physical-device-limits-maxUniformBufferRange
+   #:physical-device-limits-maxStorageBufferRange
+   #:physical-device-limits-maxPushConstantsSize
+   #:physical-device-limits-maxMemoryAllocationCount
+   #:physical-device-limits-maxSamplerAllocationCount
+   #:physical-device-limits-bufferImageGranularity
+   #:physical-device-limits-sparseAddressSpaceSize
+   #:physical-device-limits-maxBoundDescriptorSets
+   #:physical-device-limits-maxPerStageDescriptorSamplers
+   #:physical-device-limits-maxPerStageDescriptorUniformBuffers
+   #:physical-device-limits-maxPerStageDescriptorStorageBuffers
+   #:physical-device-limits-maxPerStageDescriptorSampledImages
+   #:physical-device-limits-maxPerStageDescriptorStorageImages
+   #:physical-device-limits-maxPerStageDescriptorInputAttachments
+   #:physical-device-limits-maxPerStageResources
+   #:physical-device-limits-maxDescriptorSetSamplers
+   #:physical-device-limits-maxDescriptorSetUniformBuffers
+   #:physical-device-limits-maxDescriptorSetUniformBuffersDynamic
+   #:physical-device-limits-maxDescriptorSetStorageBuffers
+   #:physical-device-limits-maxDescriptorSetStorageBuffersDynamic
+   #:physical-device-limits-maxDescriptorSetSampledImages
+   #:physical-device-limits-maxDescriptorSetStorageImages
+   #:physical-device-limits-maxDescriptorSetInputAttachments
+   #:physical-device-limits-maxVertexInputAttributes
+   #:physical-device-limits-maxVertexInputBindings
+   #:physical-device-limits-maxVertexInputAttributeOffset
+   #:physical-device-limits-maxVertexInputBindingStride
+   #:physical-device-limits-maxVertexOutputComponents
+   #:physical-device-limits-maxTessellationGenerationLevel
+   #:physical-device-limits-maxTessellationPatchSize
+   #:physical-device-limits-maxTessellationControlPerVertexInputComponents
+   #:physical-device-limits-maxTessellationControlPerVertexOutputComponents
+   #:physical-device-limits-maxTessellationControlPerPatchOutputComponents
+   #:physical-device-limits-maxTessellationControlTotalOutputComponents
+   #:physical-device-limits-maxTessellationEvaluationInputComponents
+   #:physical-device-limits-maxTessellationEvaluationOutputComponents
+   #:physical-device-limits-maxGeometryShaderInvocations
+   #:physical-device-limits-maxGeometryInputComponents
+   #:physical-device-limits-maxGeometryOutputComponents
+   #:physical-device-limits-maxGeometryOutputVertices
+   #:physical-device-limits-maxGeometryTotalOutputComponents
+   #:physical-device-limits-maxFragmentInputComponents
+   #:physical-device-limits-maxFragmentOutputAttachments
+   #:physical-device-limits-maxFragmentDualSrcAttachments
+   #:physical-device-limits-maxFragmentCombinedOutputResources
+   #:physical-device-limits-maxComputeSharedMemorySize
+   #:physical-device-limits-maxComputeWorkGroupCount
+   #:physical-device-limits-maxComputeWorkGroupInvocations
+   #:physical-device-limits-maxComputeWorkGroupSize
+   #:physical-device-limits-subPixelPrecisionBits
+   #:physical-device-limits-subTexelPrecisionBits
+   #:physical-device-limits-mipmapPrecisionBits
+   #:physical-device-limits-maxDrawIndexedIndexValue
+   #:physical-device-limits-maxDrawIndirectCount
+   #:physical-device-limits-maxSamplerLodBias
+   #:physical-device-limits-maxSamplerAnisotropy
+   #:physical-device-limits-maxViewports
+   #:physical-device-limits-maxViewportDimensions
+   #:physical-device-limits-viewportBoundsRange
+   #:physical-device-limits-viewportSubPixelBits
+   #:physical-device-limits-minMemoryMapAlignment
+   #:physical-device-limits-minTexelBufferOffsetAlignment
+   #:physical-device-limits-minUniformBufferOffsetAlignment
+   #:physical-device-limits-minStorageBufferOffsetAlignment
+   #:physical-device-limits-minTexelOffset
+   #:physical-device-limits-maxTexelOffset
+   #:physical-device-limits-minTexelGatherOffset
+   #:physical-device-limits-maxTexelGatherOffset
+   #:physical-device-limits-minInterpolationOffset
+   #:physical-device-limits-maxInterpolationOffset
+   #:physical-device-limits-subPixelInterpolationOffsetBits
+   #:physical-device-limits-maxFramebufferWidth
+   #:physical-device-limits-maxFramebufferHeight
+   #:physical-device-limits-maxFramebufferLayers
+   #:physical-device-limits-framebufferColorSampleCounts
+   #:physical-device-limits-framebufferDepthSampleCounts
+   #:physical-device-limits-framebufferStencilSampleCounts
+   #:physical-device-limits-framebufferNoAttachmentsSampleCounts
+   #:physical-device-limits-maxColorAttachments
+   #:physical-device-limits-sampledImageColorSampleCounts
+   #:physical-device-limits-sampledImageIntegerSampleCounts
+   #:physical-device-limits-sampledImageDepthSampleCounts
+   #:physical-device-limits-sampledImageStencilSampleCounts
+   #:physical-device-limits-storageImageSampleCounts
+   #:physical-device-limits-maxSampleMaskWords
+   #:physical-device-limits-timestampComputeAndGraphics
+   #:physical-device-limits-timestampPeriod
+   #:physical-device-limits-maxClipDistances
+   #:physical-device-limits-maxCullDistances
+   #:physical-device-limits-maxCombinedClipAndCullDistances
+   #:physical-device-limits-discreteQueuePriorities
+   #:physical-device-limits-pointSizeRange
+   #:physical-device-limits-lineWidthRange
+   #:physical-device-limits-pointSizeGranularity
+   #:physical-device-limits-lineWidthGranularity
+   #:physical-device-limits-strictLines
+   #:physical-device-limits-standardSampleLocations
+   #:physical-device-limits-optimalBufferCopyOffsetAlignment
+   #:physical-device-limits-optimalBufferCopyRowPitchAlignment
+   #:physical-device-limits-nonCoherentAtomSize
+   #:physical-device-sparse-properties-residencyStandard2DBlockShape
+   #:physical-device-sparse-properties-residencyStandard2DMultisampleBlockShape
+   #:physical-device-sparse-properties-residencyStandard3DBlockShape
+   #:physical-device-sparse-properties-residencyAlignedMipSize
+   #:physical-device-sparse-properties-residencyNonResidentStrict
+   #:physical-device-features-robustBufferAccess
+   #:physical-device-features-fullDrawIndexUint32
+   #:physical-device-features-imageCubeArray
+   #:physical-device-features-independentBlend
+   #:physical-device-features-geometryShader
+   #:physical-device-features-tessellationShader
+   #:physical-device-features-sampleRateShading
+   #:physical-device-features-dualSrcBlend
+   #:physical-device-features-logicOp
+   #:physical-device-features-multiDrawIndirect
+   #:physical-device-features-drawIndirectFirstInstance
+   #:physical-device-features-depthClamp
+   #:physical-device-features-depthBiasClamp
+   #:physical-device-features-fillModeNonSolid
+   #:physical-device-features-depthBounds
+   #:physical-device-features-wideLines
+   #:physical-device-features-largePoints
+   #:physical-device-features-alphaToOne
+   #:physical-device-features-multiViewport
+   #:physical-device-features-samplerAnisotropy
+   #:physical-device-features-textureCompressionETC2
+   #:physical-device-features-textureCompressionASTC_LDR
+   #:physical-device-features-textureCompressionBC
+   #:physical-device-features-occlusionQueryPrecise
+   #:physical-device-features-pipelineStatisticsQuery
+   #:physical-device-features-vertexPipelineStoresAndAtomics
+   #:physical-device-features-fragmentStoresAndAtomics
+   #:physical-device-features-shaderTessellationAndGeometryPointSize
+   #:physical-device-features-shaderImageGatherExtended
+   #:physical-device-features-shaderStorageImageExtendedFormats
+   #:physical-device-features-shaderStorageImageMultisample
+   #:physical-device-features-shaderStorageImageReadWithoutFormat
+   #:physical-device-features-shaderStorageImageWriteWithoutFormat
+   #:physical-device-features-shaderUniformBufferArrayDynamicIndexing
+   #:physical-device-features-shaderSampledImageArrayDynamicIndexing
+   #:physical-device-features-shaderStorageBufferArrayDynamicIndexing
+   #:physical-device-features-shaderStorageImageArrayDynamicIndexing
+   #:physical-device-features-shaderClipDistance
+   #:physical-device-features-shaderCullDistance
+   #:physical-device-features-shaderFloat64
+   #:physical-device-features-shaderInt64
+   #:physical-device-features-shaderInt16
+   #:physical-device-features-shaderResourceResidency
+   #:physical-device-features-shaderResourceMinLod
+   #:physical-device-features-sparseBinding
+   #:physical-device-features-sparseResidencyBuffer
+   #:physical-device-features-sparseResidencyImage2D
+   #:physical-device-features-sparseResidencyImage3D
+   #:physical-device-features-sparseResidency2Samples
+   #:physical-device-features-sparseResidency4Samples
+   #:physical-device-features-sparseResidency8Samples
+   #:physical-device-features-sparseResidency16Samples
+   #:physical-device-features-sparseResidencyAliased
+   #:physical-device-features-variableMultisampleRate
+   #:physical-device-features-inheritedQueries
+   #:queue-family-properties-queueFlags
+   #:queue-family-properties-queueCount
+   #:queue-family-properties-timestampValidBits
+   #:queue-family-properties-minImageTransferGranularity
+   #:enumerate-physical-devices
+   #:create-get-physical-device-properties
+   #:destroy-get-physical-device-properties
+   #:with-get-physical-device-properties
+   #:create-get-physical-device-features
+   #:destroy-get-physical-device-features
+   #:with-get-physical-device-features
+   #:create-get-physical-device-queue-family-properties
+   #:destroy-get-physical-device-queue-family-properties
+   #:with-get-physical-device-queue-family-properties
 
-   ;; Queue family
-   #:physical-device-queue-families
-   #:physical-device-queue-family
-
-   ;; Device
-   #:create-device
-   #:destroy-device
-   #:with-device
-
-   ;; Semaphore
-   #:create-semaphore
-   #:destroy-semaphore
-   #:with-semaphore
-
-   ;; Fence
-   #:create-fence
-   #:destroy-fence
-   #:with-fence
-   #:reset-fences
-   #:wait-for-fences
-
-   ;; Command pool
-   #:create-command-pool
-   #:destroy-command-pool
-   #:with-command-pool
-
-   ;; Command buffer
-   #:create-command-buffer
-   #:destroy-command-buffer
-   #:with-command-buffer
-   #:reset-command-buffer
-   #:begin-command-buffer
-   #:end-command-buffer
-
-   ;; Queue
-   #:device-queue
-   #:device-queues
-
-   ;; Swapchain
-   #:create-swapchain
-   #:destroy-swapchain
-   #:with-swapchain
-   #:acquire-next-image
-   #:present-swapchain
-
-   ;; Shader module
-   #:create-shader-module
-   #:destroy-shader-module
-   #:with-shader-module
-
-   ;; Render pass
-   #:create-attachment-description
-   #:destroy-attachment-description
-   #:with-attachment-description
-   #:create-attachment-reference
-   #:destroy-attachment-reference
-   #:with-attachment-reference
-   #:create-subpass-description
-   #:destroy-subpass-description
-   #:with-subpass-description
-   #:create-subpass-dependency
-   #:destroy-subpass-dependency
-   #:with-subpass-dependency
-   #:create-render-pass
-   #:destroy-render-pass
-   #:with-render-pass
-   #:do-render-pass
-
+   
    ;; Constants
    #:VK_TRUE
    #:VK_FALSE

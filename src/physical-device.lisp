@@ -246,23 +246,14 @@
 ;;; ---------------------
 
 ;; Returns a list of available devices
-(defun create-enumerate-physical-devices (instance-c)
+(defun enumerate-physical-devices (instance-c)
   (cffi:with-foreign-object (pPhysicalDeviceCount-c :uint32)
     (vkEnumeratePhysicalDevices instance-c pPhysicalDeviceCount-c (cffi:null-pointer))
-    (let* ((physical-device-count (cffi:mem-ref pPhysicalDeviceCount-c :uint32))
-	   (pPhysicalDevices-c (cffi:foreign-alloc 'VKPhysicalDevice :count physical-device-count))) 
-      (vkEnumeratePhysicalDevices instance-c pPhysicalDeviceCount-c pPhysicalDevices-c)
-      (loop for i from 0 below physical-device-count
-            collect (cffi:mem-aptr pPhysicalDevices-c 'VKPhysicalDevice i)))))
-
-;; Destroy the allocated array from create-enumerate-physical-devices
-(defun destroy-enumerate-physical-devices (physical-devices)
-  (cffi:foreign-free (car physical-devices)))
-
-;; With enumerate physical devices macro
-(mcffi:defwith with-enumerate-physical-devices
-  create-enumerate-physical-devices
-  destroy-enumerate-physical-devices)
+    (let ((physical-device-count (cffi:mem-ref pPhysicalDeviceCount-c :uint32)))
+      (cffi:with-foreign-object (pPhysicalDevices-c 'VKPhysicalDevice physical-device-count) 
+	(vkEnumeratePhysicalDevices instance-c pPhysicalDeviceCount-c pPhysicalDevices-c)
+	(loop for i from 0 below physical-device-count
+              collect (cffi:mem-aref pPhysicalDevices-c 'VKPhysicalDevice i))))))
 
 
 ;; Return properties of a physical device
