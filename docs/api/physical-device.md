@@ -3,7 +3,7 @@
 
 ## Structs
 
-### VKPhysicalDeviceProperties
+### VkPhysicalDeviceProperties
 
 **Members**
 * *apiVersion*: `uint32`
