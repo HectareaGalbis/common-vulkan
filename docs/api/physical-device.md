@@ -414,31 +414,15 @@
 
 ### vkEnumeratePhysicalDevices
 
-* **Note**: This function requires an array allocation, so it is required to split it up in two creation and destruction functions.
-
-**create-enumerate-physical-devices**
+**enumerate-physical-devices**
 ```lisp
-(create-enumerate-physical-devices instance) => physical-devices
+(enumerate-physical-devices instance) => physical-devices
 ```
 * *Parameters*:
   * *instance*: `VkInstance`
 
 * *Returns*:
   * *physical-devices*: `(list VkPhysicalDevice)`
-
-**destroy-enumerate-physical-devices**
-```lisp
-(destroy-enumerate-physical-devices physical-devices)
-```
-* *Parameters*:
-  * *physical-devices*: `(list VkPhysicalDevice)`
-
-**with-enumerate-physical-devices**
-```lisp
-(with-enumerate-physical-devices var (instance)
-  &body body)
-```
-Wraps the `body` expressions with the creation and destruction of a list of physical devices. The new list is bound to `var`. The argument is passed to the constructor `create-enumerate-physical-devices`.
 
 ### vkGetPhysicalDeviceProperties
 
