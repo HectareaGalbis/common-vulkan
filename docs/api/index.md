@@ -23,9 +23,9 @@ In common lisp we don't need types, but we need a way to create and destroy the 
 
 1. [Instance](https://hectarea1996.github.io/common-vulkan/api/instance.html)
 2. [Debug utils](https://hectarea1996.github.io/common-vulkan/api/debug-utils.html)
-3. [Window](https://hectarea1996.github.io/common-vulkan/api/window.html)(WIP)
-4. [Surface](https://hectarea1996.github.io/common-vulkan/api/surface.html)(WIP)
-5. [Phsysical device](https://hectarea1996.github.io/common-vulkan/api/physical-device.html)(WIP)
+3. [Phsysical device](https://hectarea1996.github.io/common-vulkan/api/physical-device.html)
+4. [Window](https://hectarea1996.github.io/common-vulkan/api/window.html)(WIP)
+5. [Surface](https://hectarea1996.github.io/common-vulkan/api/surface.html)(WIP)
 6. [Queue families](https://hectarea1996.github.io/common-vulkan/api/queue-family.html)(WIP)
 7. [Device](https://hectarea1996.github.io/common-vulkan/api/device.html)(WIP)
 8. [Semaphore](https://hectarea1996.github.io/common-vulkan/api/semaphore.html)(WIP)
