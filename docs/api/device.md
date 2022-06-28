@@ -1,6 +1,26 @@
 
 # Device
 
+## VkDeviceQueueCreateInfo
+
+**Members**
+* *sType*: `VkStructureType`
+* *pNext*: `pointer`
+* *flags*: `VkDeviceQueueCreateFlags`
+* *queueFamilyIndex*: `uint32`
+* *queueCount*: `uint32`
+* *pQueuePriorities*: `(list float)`
+
+**create-device-queue-create-info**
+```lisp
+(create-device-queue-create-info &key (sType VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO)
+                                      (pNext nil)
+                                      (flags 0)
+                                      (queueFamilyIndex 0)
+                                      (queueCount 0)
+                                      (pQueuePriorities nil))
+```
+
 ## create-vk-device
 
 ```lisp
