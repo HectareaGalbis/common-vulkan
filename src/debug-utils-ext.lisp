@@ -11,71 +11,64 @@
 (defvar *callback-table* (make-hash-table))
 
 
-;; Constructor and destructor of VkDebugUtilsMessengerCreateInfoEXT structure
-(mcffi:def-foreign-constructor-destructor debug-utils-messenger-create-info
-    (:struct VkDebugUtilsMessengerCreateInfoEXT)
-  (sType :init-form VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT)
-  (pNext :init-form nil
-	 :create (or pNext (cffi:null-pointer)))
-  (flags :init-form 0)
-  (messageSeverity :init-form 0)
-  (messageType :init-form 0)
-  (pfnUserCallback :init-form nil
-		   :create    (if pfnUserCallback
-				  (prog2
-				      (setf (gethash (cffi:pointer-address (cffi:get-callback pfnUserCallback))
-						     *callback-table*)
-					    pfnUserCallback)
-				      (cffi:get-callback pfnUserCallback))
-				  (cffi:null-pointer)))
-  (pUserData :init-form nil
-	     :create    (if pUserData
-			    (prog2
-				(setf (gethash *next-address* *user-data-table*) pUserData)
-				(cffi:make-pointer *next-address*)
-			      (setf *next-address* (1+ *next-address*)))
-			    (cffi:null-pointer))))
-
-
-;; VkDebugUtilsMessengerCreateInfoEXT getters and setters
-(mcffi:def-foreign-accessors debug-utils-messenger-create-info (:struct VkDebugUtilsMessengerCreateInfoEXT)
-  sType
-  pNext
+;; Functions for VkDebugUtilsMessengerCreateInfoEXT
+(mcffi:def-foreign-struct-functions debug-utils-messenger-create-info
+    (:struct VkDebugUtilsMessengerCreateInfoEXT) (:enable-default-create :enable-default-get
+						  :enable-default-set)
+  (sType :create ((sType VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT)
+		  sType))
+  (pNext :create ((pNext nil)
+		  (or pNext (cffi:null-pointer))))
   flags
   messageSeverity
   messageType
-  (pfnUserCallback :getter (() (if (cffi:null-pointer-p pfnUserCallback)
-				   nil
-				   (gethash (cffi:pointer-address pfnUserCallback) *callback-table*)))
-		   :setter ((new-value)
-			    (if (cffi:null-pointer-p pfnUserCallback)
-				(if new-value
-				    (progn
-				      (setf (gethash (cffi:pointer-address (cffi:get-callback new-value))
-						     *callback-table*)
-					    new-value)
-				      (setf pfnUserCallback (cffi:get-callback new-value))))
-				(if new-value
-				    (progn
-				      (setf (gethash (cffi:pointer-address pfnUserCallback) *callback-table*)
-					    new-value)
-				      (setf pfnUserCallback (cffi:get-callback new-value)))
-				    (progn
-				      (remhash (cffi:pointer-address pfnUserCallback) *callback-table*)
-				      (setf pfnUserCallback (cffi:null-pointer)))))))
-  (pUserData :getter (() (gethash (cffi:pointer-address pUserData) *user-data-table*))
-	     :setter ((new-value)
-		      (if (cffi:null-pointer-p pUserData)
-			  (if new-value
-			      (progn
-				(setf (gethash *next-address* *user-data-table*) new-value)
-				(setf pUserData (cffi:make-pointer *next-address*))
-				(setf *next-address* (1+ *next-address*))))
-			  (if new-value
-			      (setf (gethash (cffi:pointer-address pUserData) *user-data-table*) new-value)
-			      (progn
-				(remhash (cffi:pointer-address pUserData) *user-data-table*)
-				(setf pUserData (cffi:null-pointer))))))))
+  (pfnUserCallback :create ((pfnUserCallback nil)
+			    (if pfnUserCallback
+				(prog2
+				    (setf (gethash (cffi:pointer-address (cffi:get-callback pfnUserCallback))
+						   *callback-table*)
+					  pfnUserCallback)
+				    (cffi:get-callback pfnUserCallback))
+				(cffi:null-pointer)))
+		   :get (() (if (cffi:null-pointer-p pfnUserCallback)
+				nil
+				(gethash (cffi:pointer-address pfnUserCallback) *callback-table*)))
+		   :set ((new-value)
+			 (if (cffi:null-pointer-p pfnUserCallback)
+			     (if new-value
+				 (progn
+				   (setf (gethash (cffi:pointer-address (cffi:get-callback new-value))
+						  *callback-table*)
+					 new-value)
+				   (setf pfnUserCallback (cffi:get-callback new-value))))
+			     (if new-value
+				 (progn
+				   (setf (gethash (cffi:pointer-address pfnUserCallback) *callback-table*)
+					 new-value)
+				   (setf pfnUserCallback (cffi:get-callback new-value)))
+				 (progn
+				   (remhash (cffi:pointer-address pfnUserCallback) *callback-table*)
+				   (setf pfnUserCallback (cffi:null-pointer)))))))
+  (pUserData :create ((pUserData nil)
+		      (if pUserData
+			  (prog2
+			      (setf (gethash *next-address* *user-data-table*) pUserData)
+			      (cffi:make-pointer *next-address*)
+			    (setf *next-address* (1+ *next-address*)))
+			  (cffi:null-pointer)))
+	     :get (() (gethash (cffi:pointer-address pUserData) *user-data-table*))
+	     :set ((new-value)
+		   (if (cffi:null-pointer-p pUserData)
+		       (if new-value
+			   (progn
+			     (setf (gethash *next-address* *user-data-table*) new-value)
+			     (setf pUserData (cffi:make-pointer *next-address*))
+			     (setf *next-address* (1+ *next-address*))))
+		       (if new-value
+			   (setf (gethash (cffi:pointer-address pUserData) *user-data-table*) new-value)
+			   (progn
+			     (remhash (cffi:pointer-address pUserData) *user-data-table*)
+			     (setf pUserData (cffi:null-pointer))))))))
 
 
 ;; Defines a debug utils messenger callback
@@ -98,61 +91,56 @@
        (setf (gethash (cffi:pointer-address (cffi:get-callback ',name)) cvk::*callback-table*) ',name))))
 
 
-;; VkDebugUtilsMessengerCallbackDataEXT accessors
-(mcffi:def-foreign-accessors debug-utils-messenger-callback-data (:struct VkDebugUtilsMessengerCallbackDataEXT)
-  (sType :setter nil)
-  (pNext :setter nil)
-  (flags :setter nil)
-  (pMessageIdName  :getter (() (cffi:foreign-string-to-lisp pMessageIdName))
-		   :setter nil)
-  (messageIdNumber :setter nil)
-  (pMessage        :getter (() (cffi:foreign-string-to-lisp pMessage))
-		   :setter nil)
-  (queueLabelCount :setter nil)
-  (pQueueLabels    :getter ((&optional (index nil))
-			    (if index
-                                (cffi:mem-aptr pQueueLabels '(:struct VkDebugUtilsLabelExt) index)
-			        (loop for i from 0 below queueLabelCount
-			              collect (cffi:mem-aptr pQueueLabels
-							     '(:struct VkDebugUtilsLabelEXT) i))))
-		   :setter nil)
-  (cmdBufLabelCount :setter nil)
-  (pCmdBufLabels   :getter ((&optional (index nil))
-			    (if index
-                                (cffi:mem-aptr pCmdBufLabels '(:struct VkDebugUtilsLabelEXT) index)
-				(loop for i from 0 below cmdBufLabelCount
-			              collect (cffi:mem-aptr pCmdBufLabels
-							     '(:struct VkDebugUtilsLabelEXT) i))))
-		   :setter nil)
-  (objectCount :setter nil)
-  (pObjects        :getter ((&optional (index nil))
-			    (if index
-                                (cffi:mem-aptr pObjects '(:struct VkDebugUtilsObjectNameInfoEXT) index)
-			        (loop for i from 0 below objectCount
-			              collect (cffi:mem-aptr pObjects
-				 			     '(:struct VkDebugUtilsObjectNameInfoEXT) i))))
-		   :setter nil))
+;; Functions for VkDebugUtilsMessengerCallbackDataEXT
+(mcffi:def-foreign-struct-functions debug-utils-messenger-callback-data
+    (:struct VkDebugUtilsMessengerCallbackDataEXT) (:no-constructor :no-destructor :enable-default-get)
+  sType
+  pNext
+  flags
+  (pMessageIdName  :get (() (cffi:foreign-string-to-lisp pMessageIdName)))
+  messageIdNumber
+  (pMessage        :get (() (cffi:foreign-string-to-lisp pMessage)))
+  queueLabelCount
+  (pQueueLabels    :get ((&optional (index nil))
+			 (if index
+                             (cffi:mem-aptr pQueueLabels '(:struct VkDebugUtilsLabelExt) index)
+			     (loop for i from 0 below queueLabelCount
+			           collect (cffi:mem-aptr pQueueLabels
+							  '(:struct VkDebugUtilsLabelEXT) i)))))
+  cmdBufLabelCount
+  (pCmdBufLabels   :get ((&optional (index nil))
+			 (if index
+                             (cffi:mem-aptr pCmdBufLabels '(:struct VkDebugUtilsLabelEXT) index)
+			     (loop for i from 0 below cmdBufLabelCount
+			           collect (cffi:mem-aptr pCmdBufLabels
+							  '(:struct VkDebugUtilsLabelEXT) i)))))
+  objectCount
+  (pObjects        :get ((&optional (index nil))
+			 (if index
+                             (cffi:mem-aptr pObjects '(:struct VkDebugUtilsObjectNameInfoEXT) index)
+			     (loop for i from 0 below objectCount
+			           collect (cffi:mem-aptr pObjects
+				 			  '(:struct VkDebugUtilsObjectNameInfoEXT) i))))))
   
 
-;; VkDebugUtilsLabelEXT accessors
-(mcffi:def-foreign-accessors debug-utils-label (:struct VkDebugUtilsLabelEXT)
-  (sType :setter nil)
-  (pNext :setter nil)
-  (pLabelName :getter (() (cffi:foreign-string-to-lisp pLabelName))
-	      :setter nil)
-  (color      :getter ((&optional (index nil))
-	              (if index
-		          (cffi:mem-aref color :float index)
-		          (loop for i from 0 below 4
-		                collect (cffi:mem-aref color :float i))))
-	      :setter nil))
+;; Functions for VkDebugUtilsLabelEXT 
+(mcffi:def-foreign-struct-functions debug-utils-label (:struct VkDebugUtilsLabelEXT)
+    (:no-constructor :no-destructor :enable-default-get)
+  sType
+  pNext
+  (pLabelName :get (() (cffi:foreign-string-to-lisp pLabelName)))
+  (color      :get ((&optional (index nil))
+	            (if index
+		        (cffi:mem-aref color :float index)
+		        (loop for i from 0 below 4
+		              collect (cffi:mem-aref color :float i))))))
 
 
-;; VkDebugUtilsObjectNameInfoEXT accessors
-(mcffi:def-foreign-accessors debug-utils-object-name-info (:struct VkDebugUtilsObjectNameInfoEXT)
-  (sType :setter nil)
-  (pNext :setter nil)
-  (objectType :setter nil)
-  (objectHandle :setter nil)
-  (pObjectName :getter (() (cffi:foreign-string-to-lisp pObjectName))
-	       :setter nil))
+;; Functions for VkDebugUtilsObjectNameInfoEXT
+(mcffi:def-foreign-struct-functions debug-utils-object-name-info (:struct VkDebugUtilsObjectNameInfoEXT)
+    (:no-constructor :no-destructor :enable-default-get)
+  sType
+  pNext
+  objectType
+  objectHandle
+  (pObjectName :get (() (cffi:foreign-string-to-lisp pObjectName))))
