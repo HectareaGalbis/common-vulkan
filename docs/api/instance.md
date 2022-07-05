@@ -142,6 +142,7 @@ Wrap the body expressions with `create-instance-create-info` and `destroy-instan
 
 * *Return:*
   * *instance*: `VkInstance`
+
 ### vkDestroyInstance
 
 **destroy-instance**
@@ -179,6 +180,7 @@ this function is splitted up in two creation and destruction functions.
 
 * *Return:*
   * *extension-props*: `(list VkExtensionProperties)`
+
 **destroy-enumerate-instance-extension-properties**
 ```lisp
 (destroy-enumerate-instance-extension-properties extension-props)
@@ -206,6 +208,7 @@ this function is splitted up in two creation and destruction functions.
 
 * *Return:*
   * *layer-props*: `(list VkLayerProperties)`
+
 **destroy-enumerate-instance-layer-properties**
 ```lisp
 (destroy-enumerate-instance-layer-properties layer-props)
@@ -234,3 +237,4 @@ Wrap the body expressions with `create-enumerate-instance-layer-properties` and 
 
 * *Return:*
   * *proc*: `function`
+
