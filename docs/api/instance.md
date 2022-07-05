@@ -1,20 +1,10 @@
-
 # Instance
 
 ## Structs
 
 ### VkApplicationInfo
 
-**create-application-info**
-```lisp
-(create-application-info &key (sType              VK_STRUCTURE_TYPE_APPLICATION_INFO)
-                              (pNext              nil)
-                              (pApplicationName   nil)
-                              (applicationVersion 0)
-                              (pEngineName        nil)
-                              (engineVersion      0)
-                              (apiVersion         0))
-```
+**Members**
 * *sType*: `VkStructureType`
 * *pNext*: `pointer`
 * *pApplicationName*: `string`
@@ -23,209 +13,205 @@
 * *engineVersion*: `uint32`
 * *apiVersion*: `uint32`
 
+**create-application-info**
+```lisp
+(create-application-info &key (sType VK_STRUCTURE_TYPE_APPLICATION_INFO) (pNext NIL) (pApplicationName NIL) (applicationVersion 0) (pEngineName NIL) (engineVersion 0) (apiVersion 0))
+```
+
 **destroy-application-info**
 ```lisp
-(destroy-application-info app-info)
+(destroy-application-info obj)
 ```
-* *app-info*: `VkApplicationInfo`
 
 **with-application-info**
 ```lisp
-(with-application-info var (&key (sType              VK_STRUCTURE_TYPE_APPLICATION_INFO)
-                                 (pNext              nil)
-                                 (pApplicationName   nil)
-                                 (applicationVersion 0)
-                                 (pEngineName        nil)
-                                 (engineVersion      0)
-                                 (apiVersion         0))
+(with-application-info var-or-vars (&rest args)
   &body body)
 ```
-Wraps the `body` expressions with the creation and destruction of a `VkApplicationInfo` structure. The new structure is bound to `var`. The arguments are passed to the constructor `create-application-info`.
+Wrap the body expressions with `create-application-info` and `destroy-application-info`. The new object(s) is(are) bound to var. The arguments `args` are passed to the constructor.
 
-**accessors**
+**Accessors**
 ```lisp
-(application-info-sType app-info)
-(application-info-pNext app-info)
-(application-info-pApplicationName app-info)
-(application-info-applicationVersion app-info)
-(application-info-pEngineName app-info)
-(application-info-engineVersion app-info)
-(application-info-apiVersion app-info)
-```
-* *app-info*: `VkApplicationInfo`
+(application-info-sType obj) ; setf-able
+(application-info-pNext obj) ; setf-able
+(application-info-pApplicationName obj) ; setf-able
+(application-info-applicationVersion obj) ; setf-able
+(application-info-pEngineName obj) ; setf-able
+(application-info-engineVersion obj) ; setf-able
+(application-info-apiVersion obj) ; setf-able
 
-* **Note**: All these functions are setf-able.
+```
 
 ### VkInstanceCreateInfo
 
-**create-instance-create-info**
-```lisp
-(create-instance-create-info &key (sType                   VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO)
-                                  (pNext                   nil)
-                                  (flags                   0)
-                                  (pApplicationInfo        nil)
-                                  (enabledLayerCount       0)
-                                  (ppEnabledLayerNames     nil)
-                                  (enabledExtensionCount   0)
-                                  (ppEnabledExtensionNames nil))
-```
+**Members**
 * *sType*: `VkStructureType`
 * *pNext*: `pointer`
 * *flags*: `VkInstanceCreateFlags`
-* *pApplicationInfo*: `VkApplicationInfo`
+* *pApplicationInfo*: `string`
 * *enabledLayerCount*: `uint32`
 * *ppEnabledLayerNames*: `(list string)`
 * *enabledExtensionCount*: `uint32`
 * *ppEnabledExtensionNames*: `(list string)`
 
+**create-instance-create-info**
+```lisp
+(create-instance-create-info &key (sType VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO) (pNext NIL) (flags 0) (pApplicationInfo NIL) (enabledLayerCount 0) (ppEnabledLayerNames NIL) (enabledExtensionCount 0) (ppEnabledExtensionNames NIL))
+```
+
 **destroy-instance-create-info**
 ```lisp
-(destroy-instance-create-info instance-info)
+(destroy-instance-create-info obj)
 ```
-* *instance-info*: `VkInstanceCreateInfo`
 
-**with-instace-create-info**
+**with-instance-create-info**
 ```lisp
-(with-instance-create-info var (&key (sType                   VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO)
-                                     (pNext                   nil)
-                                     (flags                   0)
-                                     (pApplicationInfo        nil)
-                                     (enabledLayerCount       0)
-                                     (ppEnabledLayerNames     nil)
-                                     (enabledExtensionCount   0)
-                                     (ppEnabledExtensionNames nil))
+(with-instance-create-info var-or-vars (&rest args)
   &body body)
 ```
-Wraps the `body` expressions with the creation and destruction of a `VkInstanceCreateInfo` structure. The new structure is bound to `var`. The arguments are passed to the constructor.
+Wrap the body expressions with `create-instance-create-info` and `destroy-instance-create-info`. The new object(s) is(are) bound to var. The arguments `args` are passed to the constructor.
 
-**accessors**
+**Accessors**
 ```lisp
-(instance-create-info-sType instance-info)
-(instance-create-info-pNext instance-info)
-(instance-create-info-flags instance-info)
-(instance-create-info-pApplicationInfo instance-info)
-(instance-create-info-enabledLayerCount instance-info)
-(instance-create-info-ppEnabledLayerNames instance-info)
-(instance-create-info-enabledExtensionCount instance-info)
-(instance-create-info-ppEnabledExtensionNames instance-info)
+(instance-create-info-sType obj) ; setf-able
+(instance-create-info-pNext obj) ; setf-able
+(instance-create-info-flags obj) ; setf-able
+(instance-create-info-pApplicationInfo obj) ; setf-able
+(instance-create-info-enabledLayerCount obj) ; setf-able
+(instance-create-info-ppEnabledLayerNames obj &OPTIONAL (INDEX NIL)) ; setf-able
+(instance-create-info-enabledExtensionCount obj) ; setf-able
+(instance-create-info-ppEnabledExtensionNames obj &OPTIONAL (INDEX NIL)) ; setf-able
+
 ```
-* *instance-info*: `VkInstanceCreateInfo`
-
-* **Note**: All these functions are setf-able.
-
-* **Note**: `ppEnabledLayerNames` and `ppEnabledExtensionNames` depend on `enabledLayerCount` and `enabledExtensionCount` respectively. If they are not `nil` and you are going to update their contents make sure to update `ppEnabledLayerNames` and `ppEnabledExtensionNames` before `enabledLayerCount` and `enabledExtensionCount` respectively.
 
 ### VkExtensionProperties
 
-**accessors**
-```lisp
-(extension-properties-extensionName extension-props)
-(extension-properties-specVersion extension-props)
-```
-* *extension-props*: `VkExtensionProperties
-* *extensionName*: `string`
+**Members**
 * *specVersion*: `uint32`
+* *extensionName*: `string`
+
+**Accessors**
+```lisp
+(extension-properties-extensionName obj)(extension-properties-specVersion obj)
+```
+
+### VkLayerProperties
+
+**Members**
+* *description*: `string`
+* *implementationVersion*: `uint32`
+* *specVersion*: `uint32`
+* *layerName*: `string`
+
+**Accessors**
+```lisp
+(layer-properties-layerName obj)(layer-properties-specVersion obj)(layer-properties-implementationVersion obj)(layer-properties-description obj)
+```
 
 ## Functions
 
-## vkCreateInstance
+### vkCreateInstance
 
 **create-instance**
+```lisp
+(create-instance PCREATEINFO PALLOCATOR) => instance
 ```
-(create-instance create-info allocator) => (values instance result)
-```
-* *Parameters:*
-  * *create-info*: `VkInstanceCreateInfo`
-  * *allocator*: `VkAllocationCallbacks`
-  
-* *Returns*:
-  * *instance*: `VkInstance`
-  * *result*: `VkResult`
 
-## vkDestroyInstance
+* *Parameters*:
+  * *pCreateInfo*: `VkInstanceCreateInfo`
+  * *pAllocator*: `VkAllocationCallbacks`
+
+* *Return:*
+  * *instance*: `VkInstance`
+### vkDestroyInstance
 
 **destroy-instance**
+```lisp
+(destroy-instance INSTANCE PALLOCATOR)
 ```
-(destroy-instance instance allocator)
-```
+
 * *Parameters*:
   * *instance*: `VkInstance`
-  * *allocator*: `VkAllocationCallbacks`
+  * *pAllocator*: `VkAllocationCallbacks`
 
+### with-instance
 
-## with-instance
-
+**with-instance**
+```lisp
+(with-instance var-or-vars (&rest args)
+  &body body)
 ```
-(with-instance var (instance allocator) &body body)
-```
-Wraps the body expressions with the creation and destruction of an instance. The `var` is bound to the created instance. The arguments are passed to the constructor `create-instance`.
+Wrap the body expressions with `create-instance` and `destroy-instance`. The new object(s) is(are) bound to var. The arguments `args` are passed to the constructor.
 
-* **Note**: The allocator used in this macro is passed to both the constructor and the destructor.
+* **Note**: The allocator is passed to both constructor and destructor.
 
-## vkEnumerateInstanceExtensionProperties
+### vkEnumerateInstanceExtensionProperties
 
-* **Note**: This function requires an allocation for retrieving the information. For that reason this function is splitted up in two creation and destruction functions.
+* **Note**: This function requires an allocation for retrieving the information. For that reason 
+this function is splitted up in two creation and destruction functions.
 
 **create-enumerate-instance-extension-properties**
+```lisp
+(create-enumerate-instance-extension-properties PLAYERNAME) => extension-props
 ```
-(create-enumerate-instance-extension-properties layer-name) => extension-props
-```
+
 * *Parameters*:
-  * *layer-name*: `string`
+  * *pLayerName*: `string`
 
-* *Returns*:
+* *Return:*
   * *extension-props*: `(list VkExtensionProperties)`
-
 **destroy-enumerate-instance-extension-properties**
 ```lisp
-(destroy-enumerate-instance-extension-properties extension-props)
+(destroy-enumerate-instance-extension-properties EXTENSION-PROPS)
 ```
+
 * *Parameters*:
   * *extension-props*: `(list VkExtensionProperties)`
 
 **with-enumerate-instance-extension-properties**
 ```lisp
-(with-enumerate-instance-extension-properties var (layer-name)
+(with-enumerate-instance-extension-properties var-or-vars (&rest args)
   &body body)
 ```
-Wraps the `body` expressions with the construction and destruction of a list of extension properties. The new list is bound to `var`. The arguments are passed to the constructor `create-enumerate-instance-extension-properties`.
+Wrap the body expressions with `create-enumerate-instance-extension-properties` and `destroy-enumerate-instance-extension-properties`. The new object(s) is(are) bound to var. The arguments `args` are passed to the constructor.
 
-## vkEnumerateInstanceLayerProperties
+### vkEnumerateInstanceLayerProperties
 
-* **Note**: This function requires an allocation for retrieving the information. For that reason this function is splitted up in two creation and destruction functions.
+* **Note**: This function requires an allocation for retrieving the information. For that reason 
+this function is splitted up in two creation and destruction functions.
 
 **create-enumerate-instance-layer-properties**
-```
+```lisp
 (create-enumerate-instance-layer-properties) => layer-props
 ```
-* *Returns*:
-  * *layer-props*: `(list VkLayerProperties)`
 
+* *Return:*
+  * *layer-props*: `(list VkLayerProperties)`
 **destroy-enumerate-instance-layer-properties**
 ```lisp
-(destroy-enumerate-instance-layer-properties layer-props)
+(destroy-enumerate-instance-layer-properties LAYER-PROPS)
 ```
+
 * *Parameters*:
-  *layer-props*: `(list VkLayerProperties)`
+  * *layer-props*: `(list VkLayerProperties)`
 
 **with-enumerate-instance-layer-properties**
 ```lisp
-(with-enumerate-instance-layer-properties var ()
+(with-enumerate-instance-layer-properties var-or-vars (&rest args)
   &body body)
 ```
-Wraps the `body` expressions with the creation and destruction of a list of layer properties. The new list is bound to `var`.
+Wrap the body expressions with `create-enumerate-instance-layer-properties` and `destroy-enumerate-instance-layer-properties`. The new object(s) is(are) bound to var. The arguments `args` are passed to the constructor.
 
-## vkGetInstanceProcAddr
+### vkGetInstanceProcAddr
 
 **get-instance-proc-addr**
 ```lisp
-(get-instance-proc-addr instance name) => proc
+(get-instance-proc-addr INSTANCE PNAME) => proc
 ```
+
 * *Parameters*:
   * *instance*: `VkInstance`
-  * *name*: `string`
+  * *pName*: `string`
 
-* *Returns*:
+* *Return:*
   * *proc*: `function`
-
-* **Note**: The available functions so far are the following: `vkCreateDebugUtilsMessengerEXT`, `vkDestroyDebugUtilsMessengerEXT`.

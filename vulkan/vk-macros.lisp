@@ -23,7 +23,7 @@
   (cffi:foreign-free object-ptr))
 
 ;; with-vulkan-object macro
-(mcffi:defwith with-vulkan-object
+(mcffi:defwith with-vulkan-object nil
   alloc-vulkan-object
   free-vulkan-object)
 

@@ -1,6 +1,6 @@
 
 (asdf:defsystem "common-vulkan"
-   :depends-on ("cffi" "iterate" "alexandria")
+   :depends-on ("cffi" "more-cffi" "iterate" "alexandria")
    :components (
                 ; Vulkan
                 (:file "vulkan/load-vulkan")
@@ -13,10 +13,10 @@
                 (:file "vulkan/debug-utils")
 
                 ; Common Vulkan
-                (:file "src/instance")
-                (:file "src/debug-utils-ext")
-		(:file "src/physical-device")
-		(:file "src/image")))
+                (:file "src/instance")))
+                ;; (:file "src/debug-utils-ext")
+		;; (:file "src/physical-device")
+		;;(:file "src/image")))
                 ;; (:file "src/window")
                 ;; (:file "src/surface")
                 ;; (:file "src/queue-family")
