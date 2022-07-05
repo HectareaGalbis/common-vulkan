@@ -15,7 +15,15 @@
 
 **create-application-info**
 ```lisp
-(create-application-info &key (sType VK_STRUCTURE_TYPE_APPLICATION_INFO) (pNext NIL) (pApplicationName NIL) (applicationVersion 0) (pEngineName NIL) (engineVersion 0) (apiVersion 0))
+(create-application-info &key
+                           (sType VK_STRUCTURE_TYPE_APPLICATION_INFO)
+                           (pNext NIL)
+                           (pApplicationName NIL)
+                           (applicationVersion 0)
+                           (pEngineName NIL)
+                           (engineVersion 0)
+                           (apiVersion 0)
+)
 ```
 
 **destroy-application-info**
@@ -39,7 +47,6 @@ Wrap the body expressions with `create-application-info` and `destroy-applicatio
 (application-info-pEngineName obj) ; setf-able
 (application-info-engineVersion obj) ; setf-able
 (application-info-apiVersion obj) ; setf-able
-
 ```
 
 ### VkInstanceCreateInfo
@@ -56,7 +63,16 @@ Wrap the body expressions with `create-application-info` and `destroy-applicatio
 
 **create-instance-create-info**
 ```lisp
-(create-instance-create-info &key (sType VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO) (pNext NIL) (flags 0) (pApplicationInfo NIL) (enabledLayerCount 0) (ppEnabledLayerNames NIL) (enabledExtensionCount 0) (ppEnabledExtensionNames NIL))
+(create-instance-create-info &key
+                               (sType VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO)
+                               (pNext NIL)
+                               (flags 0)
+                               (pApplicationInfo NIL)
+                               (enabledLayerCount 0)
+                               (ppEnabledLayerNames NIL)
+                               (enabledExtensionCount 0)
+                               (ppEnabledExtensionNames NIL)
+)
 ```
 
 **destroy-instance-create-info**
@@ -81,7 +97,6 @@ Wrap the body expressions with `create-instance-create-info` and `destroy-instan
 (instance-create-info-ppEnabledLayerNames obj &OPTIONAL (INDEX NIL)) ; setf-able
 (instance-create-info-enabledExtensionCount obj) ; setf-able
 (instance-create-info-ppEnabledExtensionNames obj &OPTIONAL (INDEX NIL)) ; setf-able
-
 ```
 
 ### VkExtensionProperties
@@ -92,7 +107,8 @@ Wrap the body expressions with `create-instance-create-info` and `destroy-instan
 
 **Accessors**
 ```lisp
-(extension-properties-extensionName obj)(extension-properties-specVersion obj)
+(extension-properties-extensionName obj)
+(extension-properties-specVersion obj)
 ```
 
 ### VkLayerProperties
@@ -105,7 +121,10 @@ Wrap the body expressions with `create-instance-create-info` and `destroy-instan
 
 **Accessors**
 ```lisp
-(layer-properties-layerName obj)(layer-properties-specVersion obj)(layer-properties-implementationVersion obj)(layer-properties-description obj)
+(layer-properties-layerName obj)
+(layer-properties-specVersion obj)
+(layer-properties-implementationVersion obj)
+(layer-properties-description obj)
 ```
 
 ## Functions
@@ -114,7 +133,7 @@ Wrap the body expressions with `create-instance-create-info` and `destroy-instan
 
 **create-instance**
 ```lisp
-(create-instance PCREATEINFO PALLOCATOR) => instance
+(create-instance pCreateInfo pAllocator) => instance
 ```
 
 * *Parameters*:
@@ -127,7 +146,7 @@ Wrap the body expressions with `create-instance-create-info` and `destroy-instan
 
 **destroy-instance**
 ```lisp
-(destroy-instance INSTANCE PALLOCATOR)
+(destroy-instance instance pAllocator)
 ```
 
 * *Parameters*:
@@ -152,7 +171,7 @@ this function is splitted up in two creation and destruction functions.
 
 **create-enumerate-instance-extension-properties**
 ```lisp
-(create-enumerate-instance-extension-properties PLAYERNAME) => extension-props
+(create-enumerate-instance-extension-properties pLayerName) => extension-props
 ```
 
 * *Parameters*:
@@ -162,7 +181,7 @@ this function is splitted up in two creation and destruction functions.
   * *extension-props*: `(list VkExtensionProperties)`
 **destroy-enumerate-instance-extension-properties**
 ```lisp
-(destroy-enumerate-instance-extension-properties EXTENSION-PROPS)
+(destroy-enumerate-instance-extension-properties extension-props)
 ```
 
 * *Parameters*:
@@ -189,7 +208,7 @@ this function is splitted up in two creation and destruction functions.
   * *layer-props*: `(list VkLayerProperties)`
 **destroy-enumerate-instance-layer-properties**
 ```lisp
-(destroy-enumerate-instance-layer-properties LAYER-PROPS)
+(destroy-enumerate-instance-layer-properties layer-props)
 ```
 
 * *Parameters*:
@@ -206,7 +225,7 @@ Wrap the body expressions with `create-enumerate-instance-layer-properties` and 
 
 **get-instance-proc-addr**
 ```lisp
-(get-instance-proc-addr INSTANCE PNAME) => proc
+(get-instance-proc-addr instance pName) => proc
 ```
 
 * *Parameters*:
