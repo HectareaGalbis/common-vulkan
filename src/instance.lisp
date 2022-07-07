@@ -12,10 +12,15 @@
 
   
   (mcffi:def-foreign-struct "VkApplicationInfo" application-info doc-file
-    (:enable-default-create :enable-default-get :enable-default-set)
+      (:enable-default-create :enable-default-get :enable-default-set)
     (sType              :name "sType" :type "VkStructureType" :init-form VK_STRUCTURE_TYPE_APPLICATION_INFO)
     (pNext              :name "pNext" :type "pointer" :init-form nil
-	                :create (or pNext (cffi:null-pointer)))
+	                :create (or pNext (cffi:null-pointer))
+			:get (() (if (cffi:null-pointer-p pNext)
+				     nil
+				     pNext))
+			:set ((new-value)
+			      (setf pNext (or new-value (cffi:null-pointer)))))
     (pApplicationName   :name "pApplicationName" :type string :init-form nil
 		        :create (if pApplicationName
 			            (cffi:foreign-string-alloc pApplicationName)
@@ -45,11 +50,16 @@
 
   
   (mcffi:def-foreign-struct "VkInstanceCreateInfo" instance-create-info doc-file 
-    (:enable-default-create :enable-default-get :enable-default-set)
+      (:enable-default-create :enable-default-get :enable-default-set)
     (sType                   :name "sType" :type "VkStructureType"
 			     :init-form VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO)
     (pNext                   :name "pNext" :type pointer :init-form nil
-	                     :create (or pNext (cffi:null-pointer)))
+	                     :create (or pNext (cffi:null-pointer))
+			     :get (() (if (cffi:null-pointer-p pNext)
+					  nil
+					  pNext))
+			     :set ((new-value)
+				   (setf pNext (or new-value (cffi:null-pointer)))))
     (flags                   :type "VkInstanceCreateFlags")
     (pApplicationInfo        :name "pApplicationInfo" :type string :init-form nil
 		             :create (or pApplicationInfo (cffi:null-pointer)))
@@ -88,8 +98,8 @@
     (enabledExtensionCount   :name "enabledExtensionCount" :type uint32)
     (ppEnabledExtensionNames :name "ppEnabledExtensionNames" :type (list string) :init-form nil
 			     :create (if ppEnabledExtensionNames
-					  (cffi:foreign-alloc :string :initial-contents ppEnabledExtensionNames)
-					  (cffi:null-pointer))
+					 (cffi:foreign-alloc :string :initial-contents ppEnabledExtensionNames)
+					 (cffi:null-pointer))
 			     :destroy (if (not (cffi:null-pointer-p ppEnabledExtensionNames))
 					  (loop for i from 0 below enabledExtensionCount
 						do (cffi:foreign-free (cffi:mem-aref ppEnabledExtensionNames
@@ -123,14 +133,14 @@
   
 
   (mcffi:def-foreign-struct "VkExtensionProperties" extension-properties doc-file 
-    (:no-constructor :no-destructor :enable-default-get)
+      (:no-constructor :no-destructor :enable-default-get)
     (extensionName :name "extensionName" :type string
 		   :get (() (cffi:foreign-string-to-lisp extensionName)))
     (specVersion   :name "specVersion" :type uint32))
 
   
   (mcffi:def-foreign-struct "VkLayerProperties" layer-properties doc-file 
-    (:no-constructor :no-destructor :enable-default-get)
+      (:no-constructor :no-destructor :enable-default-get)
     (layerName             :name "layerName" :type string
 	                   :get (() (cffi:foreign-string-to-lisp layerName)))
     (specVersion           :name "specVersion" :type uint32)
