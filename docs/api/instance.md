@@ -22,8 +22,7 @@
                            (applicationVersion 0)
                            (pEngineName NIL)
                            (engineVersion 0)
-                           (apiVersion 0)
-)
+                           (apiVersion 0))
 ```
 
 **destroy-application-info**
@@ -71,8 +70,7 @@ Wrap the body expressions with `create-application-info` and `destroy-applicatio
                                (enabledLayerCount 0)
                                (ppEnabledLayerNames NIL)
                                (enabledExtensionCount 0)
-                               (ppEnabledExtensionNames NIL)
-)
+                               (ppEnabledExtensionNames NIL))
 ```
 
 **destroy-instance-create-info**

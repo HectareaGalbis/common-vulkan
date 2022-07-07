@@ -2,17 +2,15 @@
 (in-package :cvk)	
 
 
+;; Keys for user data table and the user data table 
+(defvar *next-address* 1)
+(defvar *user-data-table* (make-hash-table))
+
+;; The callback table
+(defvar *callback-table* (make-hash-table))
+
 (with-open-file (doc-file (asdf:system-relative-pathname "common-vulkan" "docs/api/debug-utils.md")
 			  :direction :output :if-exists :supersede :if-does-not-exist :create)
-
-
-  ;; Keys for user data table and the user data table 
-  (defvar *next-address* 1)
-  (defvar *user-data-table* (make-hash-table))
-
-  ;; The callback table
-  (defvar *callback-table* (make-hash-table))
-
 
   
   (mcffi:def-foreign-struct "VkDebugUtilsMessengerCreateInfoEXT" debug-utils-messenger-create-info doc-file
@@ -72,52 +70,74 @@
 			       (remhash (cffi:pointer-address pUserData) *user-data-table*)
 			       (setf pUserData (cffi:null-pointer))))))))
 
+  
 
+  (mcffi:doc-subsubheader "PFN_vkDebugUtilsMessengerCallbackEXT" doc-file)
+
+  (mcffi:def-foreign-callback-definer def-debug-utils-messenger-callback doc-file 
+    ("messageSeverity" :type "VkDebugUtilsMessageSeverityFlagBitsEXT"
+		       :foreign-type VkDebugUtilsMessageSeverityFlagBitsEXT)
+    ("messageTypes" :type VkDebugUtilsMessageTypeFlagsEXT
+		    :foreign-type VkDebugUtilsMessageTypeFlagsEXT)
+    ("pCallbackData" :type "VkDebugUtilsMessengerCallbackDataEXT"
+		     :foreign-type :pointer)
+    ("pUserData" :type t
+		 :foreign-type :pointer
+		 :create (gethash (cffi:pointer-address pUserData) *user-data-table*))
+    (result :type boolean
+	    :foreign-type VkBool32
+	    :return (if (null result) VK_FALSE VK_TRUE)))
+
+  
   ;; Defines a debug utils messenger callback
-  (defmacro def-debug-utils-messenger-callback (name (messageSeverity messageTypes pCallbackData
-						      pUserData) &body body)
-    (let ((messageSeverity-c (gensym))
-	  (messageTypes-c (gensym))
-	  (pCallbackData-c (gensym))
-	  (pUserData-c (gensym)))
-      `(progn 
-	 (cffi:defcallback ,name VkBool32 ((,messageSeverity-c VkDebugUtilsMessageSeverityFlagBitsEXT)
-					   (,messageTypes-c    VkDebugUtilsMessageTypeFlagsEXT)
-					   (,pCallbackData-c   :pointer)
-					   (,pUserData-c       :pointer))
-	   (let ((,messageSeverity ,messageSeverity-c)
-		 (,messageTypes ,messageTypes-c)
-		 (,pCallbackData ,pCallbackData-c)
-		 (,pUserData (gethash (cffi:pointer-address ,pUserData-c) cvk::*user-data-table*)))
-	     ,@body))
-	 (setf (gethash (cffi:pointer-address (cffi:get-callback ',name)) cvk::*callback-table*) ',name))))
+  ;; (defmacro def-debug-utils-messenger-callback (name (messageSeverity messageTypes pCallbackData
+  ;; 						      pUserData) &body body)
+  ;;   (let ((messageSeverity-c (gensym))
+  ;; 	  (messageTypes-c (gensym))
+  ;; 	  (pCallbackData-c (gensym))
+  ;; 	  (pUserData-c (gensym)))
+  ;;     `(progn 
+  ;; 	 (cffi:defcallback ,name VkBool32 ((,messageSeverity-c VkDebugUtilsMessageSeverityFlagBitsEXT)
+  ;; 					   (,messageTypes-c    VkDebugUtilsMessageTypeFlagsEXT)
+  ;; 					   (,pCallbackData-c   :pointer)
+  ;; 					   (,pUserData-c       :pointer))
+  ;; 	   (let ((,messageSeverity ,messageSeverity-c)
+  ;; 		 (,messageTypes ,messageTypes-c)
+  ;; 		 (,pCallbackData ,pCallbackData-c)
+  ;; 		 (,pUserData (gethash (cffi:pointer-address ,pUserData-c) cvk::*user-data-table*)))
+  ;; 	     ,@body))
+  ;; 	 (setf (gethash (cffi:pointer-address (cffi:get-callback ',name)) cvk::*callback-table*) ',name))))
 
 
-  ;; Functions for VkDebugUtilsMessengerCallbackDataEXT
-  (mcffi:def-foreign-struct-functions debug-utils-messenger-callback-data
-      (:struct VkDebugUtilsMessengerCallbackDataEXT) (:no-constructor :no-destructor :enable-default-get)
-    sType
-    pNext
-    flags
-    (pMessageIdName  :get (() (cffi:foreign-string-to-lisp pMessageIdName)))
-    messageIdNumber
-    (pMessage        :get (() (cffi:foreign-string-to-lisp pMessage)))
-    queueLabelCount
-    (pQueueLabels    :get ((&optional (index nil))
+  (mcffi:def-foreign-struct "VkDebugUtilsMessengerCallbackDataEXT" debug-utils-messenger-callback-data doc-file
+      (:no-constructor :no-destructor :enable-default-get)
+    (sType :name "sType" :type "VkStructureType")
+    (pNext :name "pNext" :type "pointer")
+    (flags :type "VkDebugUtilsMessengerCallbackDataFlagsEXT")
+    (pMessageIdName :name "pMessageIdName" :type string
+		    :get (() (cffi:foreign-string-to-lisp pMessageIdName)))
+    (messageIdNumber :name "messageIdNumber" :type int32)
+    (pMessage        :name "pMessage" :type string
+		     :get (() (cffi:foreign-string-to-lisp pMessage)))
+    (queueLabelCount :name "queueLabelCount" :type uint32)
+    (pQueueLabels    :name "pQueueLabels" :type (list "VkDebugUtilsLabelEXT")
+		     :get ((&optional (index nil))
 			   (if index
                                (cffi:mem-aptr pQueueLabels '(:struct VkDebugUtilsLabelExt) index)
 			       (loop for i from 0 below queueLabelCount
 			             collect (cffi:mem-aptr pQueueLabels
 							    '(:struct VkDebugUtilsLabelEXT) i)))))
-    cmdBufLabelCount
-    (pCmdBufLabels   :get ((&optional (index nil))
+    (cmdBufLabelCount :name "cmdBufLabelCount" :type uint32)
+    (pCmdBufLabels   :name "pCmdBufLabels" :type (list "VkDebugUtilsLabelEXT")
+		     :get ((&optional (index nil))
 			   (if index
                                (cffi:mem-aptr pCmdBufLabels '(:struct VkDebugUtilsLabelEXT) index)
 			       (loop for i from 0 below cmdBufLabelCount
 			             collect (cffi:mem-aptr pCmdBufLabels
 							    '(:struct VkDebugUtilsLabelEXT) i)))))
-    objectCount
-    (pObjects        :get ((&optional (index nil))
+    (objectCount :name "objectCount" :type uint32)
+    (pObjects        :name "pObjects" :type (list "VkDebugUtilsObjectNameInfoEXT")
+		     :get ((&optional (index nil))
 			   (if index
                                (cffi:mem-aptr pObjects '(:struct VkDebugUtilsObjectNameInfoEXT) index)
 			       (loop for i from 0 below objectCount
@@ -126,12 +146,14 @@
   
 
   ;; Functions for VkDebugUtilsLabelEXT 
-  (mcffi:def-foreign-struct-functions debug-utils-label (:struct VkDebugUtilsLabelEXT)
-    (:no-constructor :no-destructor :enable-default-get)
-    sType
-    pNext
-    (pLabelName :get (() (cffi:foreign-string-to-lisp pLabelName)))
-    (color      :get ((&optional (index nil))
+  (mcffi:def-foreign-struct "VkDebugUtilsLabelEXT" debug-utils-label doc-file
+      (:no-constructor :no-destructor :enable-default-get)
+    (sType :name "sType" :type "VkStructureType")
+    (pNext :name "pNext" :type pointer)
+    (pLabelName :name "pLabelName" :type string
+		:get (() (cffi:foreign-string-to-lisp pLabelName)))
+    (color      :type float
+		:get ((&optional (index nil))
 	              (if index
 		          (cffi:mem-aref color :float index)
 		          (loop for i from 0 below 4
@@ -139,10 +161,11 @@
 
 
   ;; Functions for VkDebugUtilsObjectNameInfoEXT
-  (mcffi:def-foreign-struct-functions debug-utils-object-name-info (:struct VkDebugUtilsObjectNameInfoEXT)
-    (:no-constructor :no-destructor :enable-default-get)
-    sType
-    pNext
-    objectType
-    objectHandle
-    (pObjectName :get (() (cffi:foreign-string-to-lisp pObjectName)))))
+  (mcffi:def-foreign-struct "VkDebugUtilsObjectNameInfoEXT" debug-utils-object-name-info doc-file
+      (:no-constructor :no-destructor :enable-default-get)
+    (sType :name "sType" :type "VkStructureType")
+    (pNext :name "pNext" :type pointer)
+    (objectType :name "objectType" :type "VkObjectType")
+    (objectHandle :name "objectHandle" :type uint64)
+    (pObjectName :name "pObjectName" :type string
+		 :get (() (cffi:foreign-string-to-lisp pObjectName)))))
