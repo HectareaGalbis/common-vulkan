@@ -31,7 +31,7 @@
 (with-debug-utils-messenger-create-info var-or-vars (&rest args)
   &body body)
 ```
-Wrap the body expressions with `create-debug-utils-messenger-create-info` and `destroy-debug-utils-messenger-create-info`. The new object(s) is(are) bound to var. The arguments `args` are passed to the constructor.
+Wrap the body expressions with `create-debug-utils-messenger-create-info` and `destroy-debug-utils-messenger-create-info`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
 **Accessors**
 ```lisp
@@ -87,11 +87,11 @@ Define a callback function.
 (debug-utils-messenger-callback-data-messageIdNumber obj)
 (debug-utils-messenger-callback-data-pMessage obj)
 (debug-utils-messenger-callback-data-queueLabelCount obj)
-(debug-utils-messenger-callback-data-pQueueLabels obj &OPTIONAL (INDEX NIL))
+(debug-utils-messenger-callback-data-pQueueLabels obj &optional (index nil))
 (debug-utils-messenger-callback-data-cmdBufLabelCount obj)
-(debug-utils-messenger-callback-data-pCmdBufLabels obj &OPTIONAL (INDEX NIL))
+(debug-utils-messenger-callback-data-pCmdBufLabels obj &optional (index nil))
 (debug-utils-messenger-callback-data-objectCount obj)
-(debug-utils-messenger-callback-data-pObjects obj &OPTIONAL (INDEX NIL))
+(debug-utils-messenger-callback-data-pObjects obj &optional (index nil))
 ```
 
 ### VkDebugUtilsLabelEXT
@@ -107,7 +107,7 @@ Define a callback function.
 (debug-utils-label-sType obj)
 (debug-utils-label-pNext obj)
 (debug-utils-label-pLabelName obj)
-(debug-utils-label-color obj &OPTIONAL (INDEX NIL))
+(debug-utils-label-color obj &optional (index nil))
 ```
 
 ### VkDebugUtilsObjectNameInfoEXT

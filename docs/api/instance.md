@@ -35,7 +35,7 @@
 (with-application-info var-or-vars (&rest args)
   &body body)
 ```
-Wrap the body expressions with `create-application-info` and `destroy-application-info`. The new object(s) is(are) bound to var. The arguments `args` are passed to the constructor.
+Wrap the body expressions with `create-application-info` and `destroy-application-info`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
 **Accessors**
 ```lisp
@@ -83,7 +83,7 @@ Wrap the body expressions with `create-application-info` and `destroy-applicatio
 (with-instance-create-info var-or-vars (&rest args)
   &body body)
 ```
-Wrap the body expressions with `create-instance-create-info` and `destroy-instance-create-info`. The new object(s) is(are) bound to var. The arguments `args` are passed to the constructor.
+Wrap the body expressions with `create-instance-create-info` and `destroy-instance-create-info`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
 **Accessors**
 ```lisp
@@ -92,9 +92,9 @@ Wrap the body expressions with `create-instance-create-info` and `destroy-instan
 (instance-create-info-flags obj) ; setf-able
 (instance-create-info-pApplicationInfo obj) ; setf-able
 (instance-create-info-enabledLayerCount obj) ; setf-able
-(instance-create-info-ppEnabledLayerNames obj &OPTIONAL (INDEX NIL)) ; setf-able
+(instance-create-info-ppEnabledLayerNames obj &optional (index nil)) ; setf-able
 (instance-create-info-enabledExtensionCount obj) ; setf-able
-(instance-create-info-ppEnabledExtensionNames obj &OPTIONAL (INDEX NIL)) ; setf-able
+(instance-create-info-ppEnabledExtensionNames obj &optional (index nil)) ; setf-able
 ```
 
 ### VkExtensionProperties
@@ -159,7 +159,7 @@ Wrap the body expressions with `create-instance-create-info` and `destroy-instan
 (with-instance var-or-vars (&rest args)
   &body body)
 ```
-Wrap the body expressions with `create-instance` and `destroy-instance`. The new object(s) is(are) bound to var. The arguments `args` are passed to the constructor.
+Wrap the body expressions with `create-instance` and `destroy-instance`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
 * **Note**: The allocator is passed to both constructor and destructor.
 
@@ -192,7 +192,7 @@ this function is splitted up in two creation and destruction functions.
 (with-enumerate-instance-extension-properties var-or-vars (&rest args)
   &body body)
 ```
-Wrap the body expressions with `create-enumerate-instance-extension-properties` and `destroy-enumerate-instance-extension-properties`. The new object(s) is(are) bound to var. The arguments `args` are passed to the constructor.
+Wrap the body expressions with `create-enumerate-instance-extension-properties` and `destroy-enumerate-instance-extension-properties`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
 ### vkEnumerateInstanceLayerProperties
 
@@ -220,7 +220,7 @@ this function is splitted up in two creation and destruction functions.
 (with-enumerate-instance-layer-properties var-or-vars (&rest args)
   &body body)
 ```
-Wrap the body expressions with `create-enumerate-instance-layer-properties` and `destroy-enumerate-instance-layer-properties`. The new object(s) is(are) bound to var. The arguments `args` are passed to the constructor.
+Wrap the body expressions with `create-enumerate-instance-layer-properties` and `destroy-enumerate-instance-layer-properties`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
 ### vkGetInstanceProcAddr
 
