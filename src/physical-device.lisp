@@ -183,7 +183,7 @@
 
 
   (mcffi:def-foreign-struct "VkPhysicalDeviceFeatures" physical-device-features doc-file 
-      (:no-constructor :no-destructor :enable-default-get)
+      (:enable-default-create :enable-default-get)
     (robustBufferAccess :name "robustBufferAccess" :type "VkBool32")
     (fullDrawIndexUint32 :name "fullDrawIndexUint32" :type "VkBool32")
     (imageCubeArray :name "imageCubeArray" :type "VkBool32")

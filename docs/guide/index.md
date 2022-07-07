@@ -11,4 +11,12 @@ need to be slightly modified. If you don't know how a function works in the Comm
 
 I think I'm not missing anything so..., let's code!
 
-* **Next**: [Introduction](https://hectarea1996.github.io/common-vulkan/guide/introduction.html)
+* **Introduction**
+  * [Introduction](https://hectarea1996.github.io/common-vulkan/guide/introduction.html)
+
+* **Setup**
+  * [Base code](https://hectarea1996.github.io/common-vulkan/guide/base-code.html)
+  * [Instance](https://hectarea1996.github.io/common-vulkan/guide/instance.html)
+  * [Validation layers](https://hectarea1996.github.io/common-vulkan/guide/validation-layers.html)
+  * [Physical devices and queue families](https://hectarea1996.github.io/common-vulkan/guide/physical-devices.html)
+  * [Logical device and queues](https://hectarea1996.github.io/common-vulkan/guide/logical-device.html)

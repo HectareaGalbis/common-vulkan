@@ -202,6 +202,9 @@
    #:physical-device-sparse-properties-residencyStandard3DBlockShape
    #:physical-device-sparse-properties-residencyAlignedMipSize
    #:physical-device-sparse-properties-residencyNonResidentStrict
+   #:create-physical-device-features
+   #:destroy-physical-device-features
+   #:with-physical-device-features
    #:physical-device-features-robustBufferAccess
    #:physical-device-features-fullDrawIndexUint32
    #:physical-device-features-imageCubeArray
@@ -272,6 +275,33 @@
    #:destroy-get-physical-device-queue-family-properties
    #:with-get-physical-device-queue-family-properties
 
+   ;; Device
+   #:create-device-queue-create-info
+   #:destroy-device-queue-create-info
+   #:with-device-queue-create-info
+   #:device-queue-create-info-sType
+   #:device-queue-create-info-pNext
+   #:device-queue-create-info-flags
+   #:device-queue-create-info-queueFamilyIndex
+   #:device-queue-create-info-queueCount
+   #:device-queue-create-info-pQueuePriorities
+   #:create-device-create-info
+   #:destroy-device-create-info
+   #:with-device-create-info
+   #:device-create-info-sType
+   #:device-create-info-pNext
+   #:device-create-info-flags
+   #:device-create-info-queueCreateInfoCount
+   #:device-create-info-pQueueCreateInfos
+   #:device-create-info-enabledLayerCount
+   #:device-create-info-ppEnabledLayerNames
+   #:device-create-info-enabledExtensionCount
+   #:device-create-info-ppEnabledExtensionNames
+   #:device-create-info-pEnabledFeatures
+   #:create-device
+   #:destroy-device
+   #:with-device
+   #:get-device-queue
    
    ;; Constants
    #:VK_TRUE
