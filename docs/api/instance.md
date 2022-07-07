@@ -165,8 +165,7 @@ Wrap the body expressions with `create-instance` and `destroy-instance`. The new
 
 ### vkEnumerateInstanceExtensionProperties
 
-* **Note**: This function requires an allocation for retrieving the information. For that reason 
-this function is splitted up in two creation and destruction functions.
+* **Note**: This function requires an allocation for retrieving the information. For that reason this function is splitted up in two creation and destruction functions.
 
 **create-enumerate-instance-extension-properties**
 ```lisp
@@ -196,8 +195,7 @@ Wrap the body expressions with `create-enumerate-instance-extension-properties` 
 
 ### vkEnumerateInstanceLayerProperties
 
-* **Note**: This function requires an allocation for retrieving the information. For that reason 
-this function is splitted up in two creation and destruction functions.
+* **Note**: This function requires an allocation for retrieving the information. For that reason this function is splitted up in two creation and destruction functions.
 
 **create-enumerate-instance-layer-properties**
 ```lisp

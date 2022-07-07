@@ -144,6 +144,7 @@
 
 
   (mcffi:doc-subsubheader "vkCreateInstance" doc-file)
+
   
   (mcffi:def-foreign-function create-instance doc-file (pCreateInfo pAllocator)
     (declare-types ("VkInstanceCreateInfo" "pCreateInfo") ("VkAllocationCallbacks" "pAllocator")
@@ -178,8 +179,7 @@
   
   (mcffi:doc-subsubheader "vkEnumerateInstanceExtensionProperties" doc-file)
 
-  (mcffi:doc-note "This function requires an allocation for retrieving the information. For that reason \
-this function is splitted up in two creation and destruction functions." doc-file)
+  (mcffi:doc-note "This function requires an allocation for retrieving the information. For that reason this function is splitted up in two creation and destruction functions." doc-file)
 
   (mcffi:def-foreign-function create-enumerate-instance-extension-properties doc-file (pLayerName)
     (declare-types (string "pLayerName") :return ("(list VkExtensionProperties)" extension-props))
@@ -206,8 +206,7 @@ this function is splitted up in two creation and destruction functions." doc-fil
   
   (mcffi:doc-subsubheader "vkEnumerateInstanceLayerProperties" doc-file)
 
-  (mcffi:doc-note "This function requires an allocation for retrieving the information. For that reason \
-this function is splitted up in two creation and destruction functions." doc-file)
+  (mcffi:doc-note "This function requires an allocation for retrieving the information. For that reason this function is splitted up in two creation and destruction functions." doc-file)
   
   (mcffi:def-foreign-function create-enumerate-instance-layer-properties doc-file ()
     (declare-types :return ("(list VkLayerProperties)" layer-props))

@@ -1,4 +1,3 @@
-
 # Physical device
 
 ## Structs
@@ -9,28 +8,25 @@
 * *apiVersion*: `uint32`
 * *driverVersion*: `uint32`
 * *vendorID*: `uint32`
-* *deviceID*: `uint32`
+* *deviceId*: `uint32`
 * *deviceType*: `VkPhysicalDeviceType`
 * *deviceName*: `string`
-* *pipelineCacheUUID*: `(list uint8)`
+* *pipelineCacheUUID*: `uint8`
 * *limits*: `VkPhysicalDeviceLimits`
 * *sparseProperties*: `VkPhysicalDeviceSparseProperties`
 
 **Accessors**
 ```lisp
-(physical-device-properties-apiVersion device-properties)
-(physical-device-properties-driverVersion device-properties)
-(physical-device-properties-vendorID device-properties)
-(physical-device-properties-deviceID device-properties)
-(physical-device-properties-deviceType device-properties)
-(physical-device-properties-deviceName device-properties)
-(physical-device-properties-pipelineCacheUUID device-properties &optional index)
-(physical-device-properties-limits device-properties)
-(physical-device-properties-sparseProperties device-properties)
+(physical-device-properties-apiVersion obj)
+(physical-device-properties-driverVersion obj)
+(physical-device-properties-vendorID obj)
+(physical-device-properties-deviceId obj)
+(physical-device-properties-deviceType obj)
+(physical-device-properties-deviceName obj)
+(physical-device-properties-pipelineCacheUUID obj &optional index)
+(physical-device-properties-limits obj)
+(physical-device-properties-sparseProperties obj)
 ```
-* *device-properties*: `VKPhysicalDeviceProperties`
-
-* **Note**: If `index` is supplied to the function `physical-device-properties-pipelineCacheUUID`, only the element at `index` position is returned.
 
 ### VkPhysicalDeviceLimits
 
@@ -144,116 +140,113 @@
 
 **Accessors**
 ```lisp
-(physical-device-limits-maxImageDimension1D device-limits)
-(physical-device-limits-maxImageDimension2D device-limits)
-(physical-device-limits-maxImageDimension3D device-limits)
-(physical-device-limits-maxImageDimensionCube device-limits)
-(physical-device-limits-maxImageArrayLayers device-limits)
-(physical-device-limits-maxTexelBufferElements device-limits)
-(physical-device-limits-maxUniformBufferRange device-limits)
-(physical-device-limits-maxStorageBufferRange device-limits)
-(physical-device-limits-maxPushConstantsSize device-limits)
-(physical-device-limits-maxMemoryAllocationCount device-limits)
-(physical-device-limits-maxSamplerAllocationCount device-limits)
-(physical-device-limits-bufferImageGranularity device-limits)
-(physical-device-limits-sparseAddressSpaceSize device-limits)
-(physical-device-limits-maxBoundDescriptorSets device-limits)
-(physical-device-limits-maxPerStageDescriptorSamplers device-limits)
-(physical-device-limits-maxPerStageDescriptorUniformBuffers device-limits)
-(physical-device-limits-maxPerStageDescriptorStorageBuffers device-limits)
-(physical-device-limits-maxPerStageDescriptorSampledImages device-limits)
-(physical-device-limits-maxPerStageDescriptorStorageImages device-limits)
-(physical-device-limits-maxPerStageDescriptorInputAttachments device-limits)
-(physical-device-limits-maxPerStageResources device-limits)
-(physical-device-limits-maxDescriptorSetSamplers device-limits)
-(physical-device-limits-maxDescriptorSetUniformBuffers device-limits)
-(physical-device-limits-maxDescriptorSetUniformBuffersDynamic device-limits)
-(physical-device-limits-maxDescriptorSetStorageBuffers device-limits)
-(physical-device-limits-maxDescriptorSetStorageBuffersDynamic device-limits)
-(physical-device-limits-maxDescriptorSetSampledImages device-limits)
-(physical-device-limits-maxDescriptorSetStorageImages device-limits)
-(physical-device-limits-maxDescriptorSetInputAttachments device-limits)
-(physical-device-limits-maxVertexInputAttributes device-limits)
-(physical-device-limits-maxVertexInputBindings device-limits)
-(physical-device-limits-maxVertexInputAttributeOffset device-limits)
-(physical-device-limits-maxVertexInputBindingStride device-limits)
-(physical-device-limits-maxVertexOutputComponents device-limits)
-(physical-device-limits-maxTessellationGenerationLevel device-limits)
-(physical-device-limits-maxTessellationPatchSize device-limits)
-(physical-device-limits-maxTessellationControlPerVertexInputComponents device-limits)
-(physical-device-limits-maxTessellationControlPerVertexOutputComponents device-limits)
-(physical-device-limits-maxTessellationControlPerPatchOutputComponents device-limits)
-(physical-device-limits-maxTessellationControlTotalOutputComponents device-limits)
-(physical-device-limits-maxTessellationEvaluationInputComponents device-limits)
-(physical-device-limits-maxTessellationEvaluationOutputComponents device-limits)
-(physical-device-limits-maxGeometryShaderInvocations device-limits)
-(physical-device-limits-maxGeometryInputComponents device-limits)
-(physical-device-limits-maxGeometryOutputComponents device-limits)
-(physical-device-limits-maxGeometryOutputVertices device-limits)
-(physical-device-limits-maxGeometryTotalOutputComponents device-limits)
-(physical-device-limits-maxFragmentInputComponents device-limits)
-(physical-device-limits-maxFragmentOutputAttachments device-limits)
-(physical-device-limits-maxFragmentDualSrcAttachments device-limits)
-(physical-device-limits-maxFragmentCombinedOutputResources device-limits)
-(physical-device-limits-maxComputeSharedMemorySize device-limits)
-(physical-device-limits-maxComputeWorkGroupCount device-limits &optional index)
-(physical-device-limits-maxComputeWorkGroupInvocations device-limits)
-(physical-device-limits-maxComputeWorkGroupSize device-limits &optional index)
-(physical-device-limits-subPixelPrecisionBits device-limits)
-(physical-device-limits-subTexelPrecisionBits device-limits)
-(physical-device-limits-mipmapPrecisionBits device-limits)
-(physical-device-limits-maxDrawIndexedIndexValue device-limits)
-(physical-device-limits-maxDrawIndirectCount device-limits)
-(physical-device-limits-maxSamplerLodBias device-limits)
-(physical-device-limits-maxSamplerAnisotropy device-limits)
-(physical-device-limits-maxViewports device-limits)
-(physical-device-limits-maxViewportDimensions device-limits &optional index)
-(physical-device-limits-viewportBoundsRange device-limits &optional index)
-(physical-device-limits-viewportSubPixelBits device-limits)
-(physical-device-limits-minMemoryMapAlignment device-limits)
-(physical-device-limits-minTexelBufferOffsetAlignment device-limits)
-(physical-device-limits-minUniformBufferOffsetAlignment device-limits)
-(physical-device-limits-minStorageBufferOffsetAlignment device-limits)
-(physical-device-limits-minTexelOffset device-limits)
-(physical-device-limits-maxTexelOffset device-limits)
-(physical-device-limits-minTexelGatherOffset device-limits)
-(physical-device-limits-maxTexelGatherOffset device-limits)
-(physical-device-limits-minInterpolationOffset device-limits)
-(physical-device-limits-maxInterpolationOffset device-limits)
-(physical-device-limits-subPixelInterpolationOffsetBits device-limits)
-(physical-device-limits-maxFramebufferWidth device-limits)
-(physical-device-limits-maxFramebufferHeight device-limits)
-(physical-device-limits-maxFramebufferLayers device-limits)
-(physical-device-limits-framebufferColorSampleCounts device-limits)
-(physical-device-limits-framebufferDepthSampleCounts device-limits)
-(physical-device-limits-framebufferStencilSampleCounts device-limits)
-(physical-device-limits-framebufferNoAttachmentsSampleCounts device-limits)
-(physical-device-limits-maxColorAttachments device-limits)
-(physical-device-limits-sampledImageColorSampleCounts device-limits)
-(physical-device-limits-sampledImageIntegerSampleCounts device-limits)
-(physical-device-limits-sampledImageDepthSampleCounts device-limits)
-(physical-device-limits-sampledImageStencilSampleCounts device-limits)
-(physical-device-limits-storageImageSampleCounts device-limits)
-(physical-device-limits-maxSampleMaskWords device-limits)
-(physical-device-limits-timestampComputeAndGraphics device-limits)
-(physical-device-limits-timestampPeriod device-limits)
-(physical-device-limits-maxClipDistances device-limits)
-(physical-device-limits-maxCullDistances device-limits)
-(physical-device-limits-maxCombinedClipAndCullDistances device-limits)
-(physical-device-limits-discreteQueuePriorities device-limits)
-(physical-device-limits-pointSizeRange device-limits &optional index)
-(physical-device-limits-lineWidthRange device-limits &optional index)
-(physical-device-limits-pointSizeGranularity device-limits)
-(physical-device-limits-lineWidthGranularity device-limits)
-(physical-device-limits-strictLines device-limits)
-(physical-device-limits-standardSampleLocations device-limits)
-(physical-device-limits-optimalBufferCopyOffsetAlignment device-limits)
-(physical-device-limits-optimalBufferCopyRowPitchAlignment device-limits)
-(physical-device-limits-nonCoherentAtomSize device-limits)
+(physical-device-limits-maxImageDimension1D obj)
+(physical-device-limits-maxImageDimension2D obj)
+(physical-device-limits-maxImageDimension3D obj)
+(physical-device-limits-maxImageDimensionCube obj)
+(physical-device-limits-maxImageArrayLayers obj)
+(physical-device-limits-maxTexelBufferElements obj)
+(physical-device-limits-maxUniformBufferRange obj)
+(physical-device-limits-maxStorageBufferRange obj)
+(physical-device-limits-maxPushConstantsSize obj)
+(physical-device-limits-maxMemoryAllocationCount obj)
+(physical-device-limits-maxSamplerAllocationCount obj)
+(physical-device-limits-bufferImageGranularity obj)
+(physical-device-limits-sparseAddressSpaceSize obj)
+(physical-device-limits-maxBoundDescriptorSets obj)
+(physical-device-limits-maxPerStageDescriptorSamplers obj)
+(physical-device-limits-maxPerStageDescriptorUniformBuffers obj)
+(physical-device-limits-maxPerStageDescriptorStorageBuffers obj)
+(physical-device-limits-maxPerStageDescriptorSampledImages obj)
+(physical-device-limits-maxPerStageDescriptorStorageImages obj)
+(physical-device-limits-maxPerStageDescriptorInputAttachments obj)
+(physical-device-limits-maxPerStageResources obj)
+(physical-device-limits-maxDescriptorSetSamplers obj)
+(physical-device-limits-maxDescriptorSetUniformBuffers obj)
+(physical-device-limits-maxDescriptorSetUniformBuffersDynamic obj)
+(physical-device-limits-maxDescriptorSetStorageBuffers obj)
+(physical-device-limits-maxDescriptorSetStorageBuffersDynamic obj)
+(physical-device-limits-maxDescriptorSetSampledImages obj)
+(physical-device-limits-maxDescriptorSetStorageImages obj)
+(physical-device-limits-maxDescriptorSetInputAttachments obj)
+(physical-device-limits-maxVertexInputAttributes obj)
+(physical-device-limits-maxVertexInputBindings obj)
+(physical-device-limits-maxVertexInputAttributeOffset obj)
+(physical-device-limits-maxVertexInputBindingStride obj)
+(physical-device-limits-maxVertexOutputComponents obj)
+(physical-device-limits-maxTessellationGenerationLevel obj)
+(physical-device-limits-maxTessellationPatchSize obj)
+(physical-device-limits-maxTessellationControlPerVertexInputComponents obj)
+(physical-device-limits-maxTessellationControlPerVertexOutputComponents obj)
+(physical-device-limits-maxTessellationControlPerPatchOutputComponents obj)
+(physical-device-limits-maxTessellationControlTotalOutputComponents obj)
+(physical-device-limits-maxTessellationEvaluationInputComponents obj)
+(physical-device-limits-maxTessellationEvaluationOutputComponents obj)
+(physical-device-limits-maxGeometryShaderInvocations obj)
+(physical-device-limits-maxGeometryInputComponents obj)
+(physical-device-limits-maxGeometryOutputComponents obj)
+(physical-device-limits-maxGeometryOutputVertices obj)
+(physical-device-limits-maxGeometryTotalOutputComponents obj)
+(physical-device-limits-maxFragmentInputComponents obj)
+(physical-device-limits-maxFragmentOutputAttachments obj)
+(physical-device-limits-maxFragmentDualSrcAttachments obj)
+(physical-device-limits-maxFragmentCombinedOutputResources obj)
+(physical-device-limits-maxComputeSharedMemorySize obj)
+(physical-device-limits-maxComputeWorkGroupCount obj &optional index)
+(physical-device-limits-maxComputeWorkGroupInvocations obj)
+(physical-device-limits-maxComputeWorkGroupSize obj &optional index)
+(physical-device-limits-subPixelPrecisionBits obj)
+(physical-device-limits-subTexelPrecisionBits obj)
+(physical-device-limits-mipmapPrecisionBits obj)
+(physical-device-limits-maxDrawIndexedIndexValue obj)
+(physical-device-limits-maxDrawIndirectCount obj)
+(physical-device-limits-maxSamplerLodBias obj)
+(physical-device-limits-maxSamplerAnisotropy obj)
+(physical-device-limits-maxViewports obj)
+(physical-device-limits-maxViewportDimensions obj &optional index)
+(physical-device-limits-viewportBoundsRange obj &optional index)
+(physical-device-limits-viewportSubPixelBits obj)
+(physical-device-limits-minMemoryMapAlignment obj)
+(physical-device-limits-minTexelBufferOffsetAlignment obj)
+(physical-device-limits-minUniformBufferOffsetAlignment obj)
+(physical-device-limits-minStorageBufferOffsetAlignment obj)
+(physical-device-limits-minTexelOffset obj)
+(physical-device-limits-maxTexelOffset obj)
+(physical-device-limits-minTexelGatherOffset obj)
+(physical-device-limits-maxTexelGatherOffset obj)
+(physical-device-limits-minInterpolationOffset obj)
+(physical-device-limits-maxInterpolationOffset obj)
+(physical-device-limits-subPixelInterpolationOffsetBits obj)
+(physical-device-limits-maxFramebufferWidth obj)
+(physical-device-limits-maxFramebufferHeight obj)
+(physical-device-limits-maxFramebufferLayers obj)
+(physical-device-limits-framebufferColorSampleCounts obj)
+(physical-device-limits-framebufferDepthSampleCounts obj)
+(physical-device-limits-framebufferStencilSampleCounts obj)
+(physical-device-limits-framebufferNoAttachmentsSampleCounts obj)
+(physical-device-limits-maxColorAttachments obj)
+(physical-device-limits-sampledImageColorSampleCounts obj)
+(physical-device-limits-sampledImageIntegerSampleCounts obj)
+(physical-device-limits-sampledImageDepthSampleCounts obj)
+(physical-device-limits-sampledImageStencilSampleCounts obj)
+(physical-device-limits-storageImageSampleCounts obj)
+(physical-device-limits-maxSampleMaskWords obj)
+(physical-device-limits-timestampComputeAndGraphics obj)
+(physical-device-limits-timestampPeriod obj)
+(physical-device-limits-maxClipDistances obj)
+(physical-device-limits-maxCullDistances obj)
+(physical-device-limits-maxCombinedClipAndCullDistances obj)
+(physical-device-limits-discreteQueuePriorities obj)
+(physical-device-limits-pointSizeRange obj &optional index)
+(physical-device-limits-lineWidthRange obj &optional index)
+(physical-device-limits-pointSizeGranularity obj)
+(physical-device-limits-lineWidthGranularity obj)
+(physical-device-limits-strictLines obj)
+(physical-device-limits-standardSampleLocations obj)
+(physical-device-limits-optimalBufferCopyOffsetAlignment obj)
+(physical-device-limits-optimalBufferCopyRowPitchAlignment obj)
+(physical-device-limits-nonCoherentAtomSize obj)
 ```
-* *device-limits*: `VkPhysicalDeviceLimits`
-
-* **Note**: If `index` is supplied to the functions `physical-device-limits-maxComputeWorkGroupCount`, `physical-device-limits-maxComputeWorkGroupSize`, `physical-device-limits-maxViewportDimensions`, `physical-device-limits-viewportBoundsRange`, `physical-device-limits-pointSizeRange` and `physical-device-limits-lineWidthRange`, they will return the element at `index` position.
 
 ### VkPhysicalDeviceSparseProperties
 
@@ -266,13 +259,12 @@
 
 **Accessors**
 ```lisp
-(physical-device-sparse-properties-residencyStandard2DBlockShape sparse-properties)
-(physical-device-sparse-properties-residencyStandard2DMultisampleBlockShape sparse-properties)
-(physical-device-sparse-properties-residencyStandard3DBlockShape sparse-properties)
-(physical-device-sparse-properties-residencyAlignedMipSize sparse-properties)
-(physical-device-sparse-properties-residencyNonResidentStrict sparse-properties)
+(physical-device-sparse-properties-residencyStandard2DBlockShape obj)
+(physical-device-sparse-properties-residencyStandard2DMultisampleBlockShape obj)
+(physical-device-sparse-properties-residencyStandard3DBlockShape obj)
+(physical-device-sparse-properties-residencyAlignedMipSize obj)
+(physical-device-sparse-properties-residencyNonResidentStrict obj)
 ```
-* *sparse-properties*: `VkPhysicalDeviceSparseProperties`
 
 ### VkPhysicalDeviceFeatures
 
@@ -335,63 +327,62 @@
 
 **Accessors**
 ```lisp
-(physical-device-features-robustBufferAccess features)
-(physical-device-features-fullDrawIndexUint32 features)
-(physical-device-features-imageCubeArray features)
-(physical-device-features-independentBlend features)
-(physical-device-features-geometryShader features)
-(physical-device-features-tessellationShader features)
-(physical-device-features-sampleRateShading features)
-(physical-device-features-dualSrcBlend features)
-(physical-device-features-logicOp features)
-(physical-device-features-multiDrawIndirect features)
-(physical-device-features-drawIndirectFirstInstance features)
-(physical-device-features-depthClamp features)
-(physical-device-features-depthBiasClamp features)
-(physical-device-features-fillModeNonSolid features)
-(physical-device-features-depthBounds features)
-(physical-device-features-wideLines features)
-(physical-device-features-largePoints features)
-(physical-device-features-alphaToOne features)
-(physical-device-features-multiViewport features)
-(physical-device-features-samplerAnisotropy features)
-(physical-device-features-textureCompressionETC2 features)
-(physical-device-features-textureCompressionASTC_LDR features)
-(physical-device-features-textureCompressionBC features)
-(physical-device-features-occlusionQueryPrecise features)
-(physical-device-features-pipelineStatisticsQuery features)
-(physical-device-features-vertexPipelineStoresAndAtomics features)
-(physical-device-features-fragmentStoresAndAtomics features)
-(physical-device-features-shaderTessellationAndGeometryPointSize features)
-(physical-device-features-shaderImageGatherExtended features)
-(physical-device-features-shaderStorageImageExtendedFormats features)
-(physical-device-features-shaderStorageImageMultisample features)
-(physical-device-features-shaderStorageImageReadWithoutFormat features)
-(physical-device-features-shaderStorageImageWriteWithoutFormat features)
-(physical-device-features-shaderUniformBufferArrayDynamicIndexing features)
-(physical-device-features-shaderSampledImageArrayDynamicIndexing features)
-(physical-device-features-shaderStorageBufferArrayDynamicIndexing features)
-(physical-device-features-shaderStorageImageArrayDynamicIndexing features)
-(physical-device-features-shaderClipDistance features)
-(physical-device-features-shaderCullDistance features)
-(physical-device-features-shaderFloat64 features)
-(physical-device-features-shaderInt64 features)
-(physical-device-features-shaderInt16 features)
-(physical-device-features-shaderResourceResidency features)
-(physical-device-features-shaderResourceMinLod features)
-(physical-device-features-sparseBinding features)
-(physical-device-features-sparseResidencyBuffer features)
-(physical-device-features-sparseResidencyImage2D features)
-(physical-device-features-sparseResidencyImage3D features)
-(physical-device-features-sparseResidency2Samples features)
-(physical-device-features-sparseResidency4Samples features)
-(physical-device-features-sparseResidency8Samples features)
-(physical-device-features-sparseResidency16Samples features)
-(physical-device-features-sparseResidencyAliased features)
-(physical-device-features-variableMultisampleRate features)
-(physical-device-features-inheritedQueries features)
+(physical-device-features-robustBufferAccess obj)
+(physical-device-features-fullDrawIndexUint32 obj)
+(physical-device-features-imageCubeArray obj)
+(physical-device-features-independentBlend obj)
+(physical-device-features-geometryShader obj)
+(physical-device-features-tessellationShader obj)
+(physical-device-features-sampleRateShading obj)
+(physical-device-features-dualSrcBlend obj)
+(physical-device-features-logicOp obj)
+(physical-device-features-multiDrawIndirect obj)
+(physical-device-features-drawIndirectFirstInstance obj)
+(physical-device-features-depthClamp obj)
+(physical-device-features-depthBiasClamp obj)
+(physical-device-features-fillModeNonSolid obj)
+(physical-device-features-depthBounds obj)
+(physical-device-features-wideLines obj)
+(physical-device-features-largePoints obj)
+(physical-device-features-alphaToOne obj)
+(physical-device-features-multiViewport obj)
+(physical-device-features-samplerAnisotropy obj)
+(physical-device-features-textureCompressionETC2 obj)
+(physical-device-features-textureCompressionASTC_LDR obj)
+(physical-device-features-textureCompressionBC obj)
+(physical-device-features-occlusionQueryPrecise obj)
+(physical-device-features-pipelineStatisticsQuery obj)
+(physical-device-features-vertexPipelineStoresAndAtomics obj)
+(physical-device-features-fragmentStoresAndAtomics obj)
+(physical-device-features-shaderTessellationAndGeometryPointSize obj)
+(physical-device-features-shaderImageGatherExtended obj)
+(physical-device-features-shaderStorageImageExtendedFormats obj)
+(physical-device-features-shaderStorageImageMultisample obj)
+(physical-device-features-shaderStorageImageReadWithoutFormat obj)
+(physical-device-features-shaderStorageImageWriteWithoutFormat obj)
+(physical-device-features-shaderUniformBufferArrayDynamicIndexing obj)
+(physical-device-features-shaderSampledImageArrayDynamicIndexing obj)
+(physical-device-features-shaderStorageBufferArrayDynamicIndexing obj)
+(physical-device-features-shaderStorageImageArrayDynamicIndexing obj)
+(physical-device-features-shaderClipDistance obj)
+(physical-device-features-shaderCullDistance obj)
+(physical-device-features-shaderFloat64 obj)
+(physical-device-features-shaderInt64 obj)
+(physical-device-features-shaderInt16 obj)
+(physical-device-features-shaderResourceResidency obj)
+(physical-device-features-shaderResourceMinLod obj)
+(physical-device-features-sparseBinding obj)
+(physical-device-features-sparseResidencyBuffer obj)
+(physical-device-features-sparseResidencyImage2D obj)
+(physical-device-features-sparseResidencyImage3D obj)
+(physical-device-features-sparseResidency2Samples obj)
+(physical-device-features-sparseResidency4Samples obj)
+(physical-device-features-sparseResidency8Samples obj)
+(physical-device-features-sparseResidency16Samples obj)
+(physical-device-features-sparseResidencyAliased obj)
+(physical-device-features-variableMultisampleRate obj)
+(physical-device-features-inheritedQueries obj)
 ```
-* *features*: `VkPhysicalDeviceFeatures`
 
 ### VkQueueFamilyProperties
 
@@ -403,12 +394,11 @@
 
 **Accessors**
 ```lisp
-(queue-family-properties-queueFlags properties)
-(queue-family-properties-queueCount properties)
-(queue-family-properties-timestampValidBits properties)
-(queue-family-properties-minImageTransferGranularity properties)
+(queue-family-properties-queueFlags obj)
+(queue-family-properties-queueCount obj)
+(queue-family-properties-timestampValidBits obj)
+(queue-family-properties-minImageTransferGranularity obj)
 ```
-* *properties*: `VkQueueFamilyProperties`
 
 ## Functions
 
@@ -416,94 +406,103 @@
 
 **enumerate-physical-devices**
 ```lisp
-(enumerate-physical-devices instance) => physical-devices
+(enumerate-physical-devices instance) => (values physical-devices result)
 ```
+
 * *Parameters*:
   * *instance*: `VkInstance`
 
-* *Returns*:
+* *Return:*
   * *physical-devices*: `(list VkPhysicalDevice)`
+  * *result*: `VkResult`
 
 ### vkGetPhysicalDeviceProperties
 
-* **Note**: This function requires an allocation, so it is required to split it up in two creation and destruction functions.
+* **Note**: This function requires an allocation for retrieving the information. For that reason this function is splitted up in two creation and destruction functions.
 
 **create-get-physical-device-properties**
 ```lisp
-(create-get-physical-device-properties physical-device) => device-properties
+(create-get-physical-device-properties physicalDevice) => props
 ```
+
 * *Parameters*:
-  * *physical-device*: `VkPhysicalDevice`
+  * *physicalDevice*: `VkPhysicalDevice`
 
-* *Returns*:
-  * *device-properties*: `VkPhysicalDeviceProperties`
+* *Return:*
+  * *props*: `VkPhysicalDeviceProperties`
 
-**destroy-physical-device-properties**
+**destroy-get-physical-device-properties**
 ```lisp
-(destroy-physical-device-properties device-properties)
+(destroy-get-physical-device-properties props)
 ```
-* *Parameters*:
-  * *device-properties*: `VkPhysicalDeviceProperties`
 
-**with-physical-device-properties**
+* *Parameters*:
+  * *props*: `VkPhysicalDeviceProperties`
+
+**with-get-physical-device-properties**
 ```lisp
-(with-physical-device-properties var (physical-device)
+(with-get-physical-device-properties var-or-vars (&rest args)
   &body body)
 ```
-Wraps the `body` expressions with the creation and destruction of a `VkPhysicalDeviceProperties` structure. The new list is bound to `var`. The argument is passed to the constructor `create-get-physical-device-properties`.
+Wrap the body expressions with `create-get-physical-device-properties` and `destroy-get-physical-device-properties`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
 ### vkGetPhysicalDeviceFeatures
 
-* **Note**: This function requires an allocation, so it is required to split it up in two creation and destruction functions.
+* **Note**: This function requires an allocation for retrieving the information. For that reason this function is splitted up in two creation and destruction functions.
 
 **create-get-physical-device-features**
 ```lisp
-(create-get-physical-device-features physical-device) => features
+(create-get-physical-device-features physicalDevice) => features
 ```
-* *Parameters*:
-  * *physical-device*: `VkPhysicalDevice`
 
-* *Returns*:
+* *Parameters*:
+  * *physicalDevice*: `VkPhysicalDevice`
+
+* *Return:*
   * *features*: `VkPhysicalDeviceFeatures`
 
 **destroy-get-physical-device-features**
 ```lisp
 (destroy-get-physical-device-features features)
 ```
+
 * *Parameters*:
   * *features*: `VkPhysicalDeviceFeatures`
 
 **with-get-physical-device-features**
 ```lisp
-(with-get-physical-device-features var (physical-device)
+(with-get-physical-device-features var-or-vars (&rest args)
   &body body)
 ```
-Wraps the `body` expressions with the creation and destruction of a `VkPhysicalDeviceFeatures` structure. The new structure is bound to `var`. The argument is passed to the constructor `create-get-physical-device-features`.
+Wrap the body expressions with `create-get-physical-device-features` and `destroy-get-physical-device-features`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
 ### vkGetPhysicalDeviceQueueFamilyProperties
 
-* **Note**: This function requires an array allocation, so it is required to split it up in two creation and destruction functions.
+* **Note**: This function requires an allocation for retrieving the information. For that reason this function is splitted up in two creation and destruction functions.
 
 **create-get-physical-device-queue-family-properties**
 ```lisp
-(create-get-physical-device-queue-family-properties physical-device) => queue-family-properties
+(create-get-physical-device-queue-family-properties physicalDevice) => family-props
 ```
+
 * *Parameters*:
-  * *physical-device*: `VkPhysicalDevice`
+  * *physicalDevice*: `VkPhysicalDevice`
 
-* *Returns*:
-  * *queue-family-properties*: `(list VkQueueFamilyProperties)`
+* *Return:*
+  * *family-props*: `(list VkQueueFamilyProperties)`
 
-**destroy-get-physical-queue-family-properties**
+**destroy-get-physical-device-queue-family-properties**
 ```lisp
-(destroy-get-family-queue-family-properties queue-family-properties)
+(destroy-get-physical-device-queue-family-properties family-props)
 ```
+
 * *Parameters*:
-  * *queue-family-properties*: `(list VkQueueFamilyProperties)`
+  * *family-props*: `(list VkQueueFamilyProperties)`
 
 **with-get-physical-device-queue-family-properties**
 ```lisp
-(with-get-physical-device-queue-family-properties var (physical-device)
+(with-get-physical-device-queue-family-properties var-or-vars (&rest args)
   &body body)
 ```
-Wraps the `body` expression with the creation and destruction of a list of `VkQueueFamilyProperties` structures. The new list is bound to `var`. The argument is passed to the constructor `create-get-physical-device-queue-family-properties`.
+Wrap the body expressions with `create-get-physical-device-queue-family-properties` and `destroy-get-physical-device-queue-family-properties`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
+

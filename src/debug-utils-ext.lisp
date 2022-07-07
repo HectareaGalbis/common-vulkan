@@ -6,8 +6,6 @@
 (defvar *next-address* 1)
 (defvar *user-data-table* (make-hash-table))
 
-;; The callback table
-(defvar *callback-table* (make-hash-table))
 
 (with-open-file (doc-file (asdf:system-relative-pathname "common-vulkan" "docs/api/debug-utils.md")
 			  :direction :output :if-exists :supersede :if-does-not-exist :create)
@@ -24,31 +22,16 @@
     (messageType :name "messageType" :type "VkDebugUtilsMessageTypeFlagsEXT")
     (pfnUserCallback :name "pfnUserCallback" :type "PFN_vkDebugUtilsMessengerCallbackEXT" :init-form nil
 		     :create (if pfnUserCallback
-				 (prog2
-				     (setf (gethash (cffi:pointer-address (cffi:get-callback pfnUserCallback))
-						    *callback-table*)
-					   pfnUserCallback)
-				     (cffi:get-callback pfnUserCallback))
+				 (if (symbolp pfnUserCallback)
+				     (cffi:get-callback pfnUserCallback)
+				     pfnUserCallback)
 				 (cffi:null-pointer))
-		     :get (() (if (cffi:null-pointer-p pfnUserCallback)
-				  nil
-				  (gethash (cffi:pointer-address pfnUserCallback) *callback-table*)))
-		     :set ((new-value)
-			   (if (cffi:null-pointer-p pfnUserCallback)
-			       (if new-value
-				   (progn
-				     (setf (gethash (cffi:pointer-address (cffi:get-callback new-value))
-						    *callback-table*)
-					   new-value)
-				     (setf pfnUserCallback (cffi:get-callback new-value))))
-			       (if new-value
-				   (progn
-				     (setf (gethash (cffi:pointer-address pfnUserCallback) *callback-table*)
-					   new-value)
-				     (setf pfnUserCallback (cffi:get-callback new-value)))
-				   (progn
-				     (remhash (cffi:pointer-address pfnUserCallback) *callback-table*)
-				     (setf pfnUserCallback (cffi:null-pointer)))))))
+		     :set ((new-value)			   
+			   (if new-value
+			       (if (symbolp new-value)
+				   (setf pfnUserCallback (cffi:get-callback new-value))
+				   (setf pfnUserCallback new-value))
+			       (setf pfnUserCallback (cffi:null-pointer)))))
     (pUserData :name "pUserData" :type t :init-form nil
 	       :create (if pUserData
 			   (prog2
