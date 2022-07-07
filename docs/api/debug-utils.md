@@ -65,18 +65,18 @@ Define a callback function.
 ### VkDebugUtilsMessengerCallbackDataEXT
 
 **Members**
-* *pObjects*: `(list VkDebugUtilsObjectNameInfoEXT)`
-* *objectCount*: `uint32`
-* *pCmdBufLabels*: `(list VkDebugUtilsLabelEXT)`
-* *cmdBufLabelCount*: `uint32`
-* *pQueueLabels*: `(list VkDebugUtilsLabelEXT)`
-* *queueLabelCount*: `uint32`
-* *pMessage*: `string`
-* *messageIdNumber*: `int32`
-* *pMessageIdName*: `string`
-* *flags*: `VkDebugUtilsMessengerCallbackDataFlagsEXT`
-* *pNext*: `pointer`
 * *sType*: `VkStructureType`
+* *pNext*: `pointer`
+* *flags*: `VkDebugUtilsMessengerCallbackDataFlagsEXT`
+* *pMessageIdName*: `string`
+* *messageIdNumber*: `int32`
+* *pMessage*: `string`
+* *queueLabelCount*: `uint32`
+* *pQueueLabels*: `(list VkDebugUtilsLabelEXT)`
+* *cmdBufLabelCount*: `uint32`
+* *pCmdBufLabels*: `(list VkDebugUtilsLabelEXT)`
+* *objectCount*: `uint32`
+* *pObjects*: `(list VkDebugUtilsObjectNameInfoEXT)`
 
 **Accessors**
 ```lisp
@@ -97,10 +97,10 @@ Define a callback function.
 ### VkDebugUtilsLabelEXT
 
 **Members**
-* *color*: `float`
-* *pLabelName*: `string`
-* *pNext*: `pointer`
 * *sType*: `VkStructureType`
+* *pNext*: `pointer`
+* *pLabelName*: `string`
+* *color*: `float`
 
 **Accessors**
 ```lisp
@@ -113,11 +113,11 @@ Define a callback function.
 ### VkDebugUtilsObjectNameInfoEXT
 
 **Members**
-* *pObjectName*: `string`
-* *objectHandle*: `uint64`
-* *objectType*: `VkObjectType`
-* *pNext*: `pointer`
 * *sType*: `VkStructureType`
+* *pNext*: `pointer`
+* *objectType*: `VkObjectType`
+* *objectHandle*: `uint64`
+* *pObjectName*: `string`
 
 **Accessors**
 ```lisp

@@ -100,8 +100,8 @@ Wrap the body expressions with `create-instance-create-info` and `destroy-instan
 ### VkExtensionProperties
 
 **Members**
-* *specVersion*: `uint32`
 * *extensionName*: `string`
+* *specVersion*: `uint32`
 
 **Accessors**
 ```lisp
@@ -112,10 +112,10 @@ Wrap the body expressions with `create-instance-create-info` and `destroy-instan
 ### VkLayerProperties
 
 **Members**
-* *description*: `string`
-* *implementationVersion*: `uint32`
-* *specVersion*: `uint32`
 * *layerName*: `string`
+* *specVersion*: `uint32`
+* *implementationVersion*: `uint32`
+* *description*: `string`
 
 **Accessors**
 ```lisp
