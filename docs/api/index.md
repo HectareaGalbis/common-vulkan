@@ -17,17 +17,17 @@ To turn a vulkan function name into a common lisp name you need to remove the pr
 
 ### Structures
 
-In common lisp we don't need types, but we need a way to create and destroy the structures, and also a way to access its members. How we obtain these names are similar to how we did with function names. Remove any prefix or suffix from the structure type, separate words by hyphens and make the words lowercase. Now, depending on what we add to this name we get a function or another. Adding the prefixes `create-` or `destroy-` we get the functions to create and destroy the structure. If we add the name of a slot member as a suffix, get a getter. Example: `VkInstanceCreateInfo` -> `create-instance-create-info`, `destroy-create-info`, `with-instance-create-info` (with macro), `instance-create-info-sType`, `instance-create-info-pNext`, `instance-create-info-ppEnabledLayerNames`, etc.
+In common lisp we don't need types, but we need a way to create and destroy the structures, and also a way to access its members. How we obtain these names are similar to how we did with function names. Remove any prefix or suffix from the structure type, separate words by hyphens and make the words lowercase. Now, depending on what we add to this name we get a function or another. Adding the prefixes `create-` or `destroy-` we get the functions to create and destroy the structure. If we add the name of a slot member as a suffix, we get a getter. Example: `VkInstanceCreateInfo` -> `create-instance-create-info`, `destroy-create-info`, `with-instance-create-info` (with macro), `instance-create-info-sType`, `instance-create-info-pNext`, `instance-create-info-ppEnabledLayerNames`, etc.
 
 ## The reference sections
 
 1. [Instance](https://hectarea1996.github.io/common-vulkan/api/instance.html)
 2. [Debug utils](https://hectarea1996.github.io/common-vulkan/api/debug-utils.html)
 3. [Phsysical device](https://hectarea1996.github.io/common-vulkan/api/physical-device.html)
-4. [Window](https://hectarea1996.github.io/common-vulkan/api/window.html)(WIP)
-5. [Surface](https://hectarea1996.github.io/common-vulkan/api/surface.html)(WIP)
-6. [Queue families](https://hectarea1996.github.io/common-vulkan/api/queue-family.html)(WIP)
-7. [Device](https://hectarea1996.github.io/common-vulkan/api/device.html)(WIP)
+4. [Device](https://hectarea1996.github.io/common-vulkan/api/device.html)
+5. [Window](https://hectarea1996.github.io/common-vulkan/api/window.html)(WIP)
+6. [Surface](https://hectarea1996.github.io/common-vulkan/api/surface.html)(WIP)
+7. [Queue families](https://hectarea1996.github.io/common-vulkan/api/queue-family.html)(WIP)
 8. [Semaphore](https://hectarea1996.github.io/common-vulkan/api/semaphore.html)(WIP)
 9. [Fence](https://hectarea1996.github.io/common-vulkan/api/fence.html)(WIP)
 10. [Queue](https://hectarea1996.github.io/common-vulkan/api/queue.html)(WIP)

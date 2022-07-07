@@ -274,7 +274,8 @@
    #:create-get-physical-device-queue-family-properties
    #:destroy-get-physical-device-queue-family-properties
    #:with-get-physical-device-queue-family-properties
-
+   #:get-physical-device-surface-support
+   
    ;; Device
    #:create-device-queue-create-info
    #:destroy-device-queue-create-info
@@ -302,6 +303,9 @@
    #:destroy-device
    #:with-device
    #:get-device-queue
+   
+   ;; Surface
+   #:destroy-surface
    
    ;; Constants
    #:VK_TRUE

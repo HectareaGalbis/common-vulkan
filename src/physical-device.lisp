@@ -330,4 +330,16 @@
 
   (mcffi:defwith with-get-physical-device-queue-family-properties doc-file
     create-get-physical-device-queue-family-properties
-    destroy-get-physical-device-queue-family-properties))
+    destroy-get-physical-device-queue-family-properties)
+
+
+
+  (mcffi:doc-subsubheader "vkGetPhysicalDeviceSurfaceSupportKHR" doc-file)
+
+  (mcffi:def-foreign-function get-physical-device-surface-support doc-file (physicalDevice queueFamilyIndex surface)
+    (declare-types ("VkPhysicalDevice" "physicalDevice") (uint32 "queueFamilyIndex") ("VkSurfaceKHR" surface)
+		   :return (boolean "pSupported"))
+    (cffi:with-foreign-object (pSupported 'VkBool32)
+      (vkGetPhysicalDeviceSurfaceSupportKHR physicalDevice queueFamilyIndex surface pSupported)
+      (let ((supportedp (cffi:mem-ref pSupported 'VkBool32)))
+        (equal supportedp VK_TRUE)))))

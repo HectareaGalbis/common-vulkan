@@ -1,21 +1,20 @@
 
 (in-package :cvk)
 
-;;; -------------------------
-;;; ---- Public functions ---
-;;; -------------------------
 
-;; Creates a surface
-(defun create-surface (instance window)
-  (cffi:with-foreign-object (surface-ptr 'VkSurfaceKHR)
-    (check-vk-result (glfw:create-window-surface instance window nil surface-ptr))
-    (values (cffi:mem-ref surface-ptr 'VkSurfaceKHR) instance)))
+(with-open-file (doc-file (asdf:system-relative-pathname "common-vulkan" "docs/api/surface.md")
+			  :direction :output :if-exists :supersede :if-does-not-exist :create)
 
 
-;; Destroys a surface
-(defun destroy-surface (surface instance)
-  (vkDestroySurfaceKHR instance surface (cffi:null-pointer)))
+  (mcffi:doc-header "Surface" doc-file)
 
 
-;; With surface macro
-(defwith with-surface create-surface destroy-surface :destructor-arity 2)
+  (mcffi:doc-subheader "Functions" doc-file)
+  
+
+  (mcffi:doc-subsubheader "vkDestroySurfaceKHR" doc-file)
+  
+  (mcffi:def-foreign-function destroy-surface doc-file (instance surface pAllocator)
+    (declare-types ("VkInstance" instance) ("VkSurfaceKHR" surface) ("VkAllocationCallbacks" "pAllocator"))
+    (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
+      (vkDestroySurfaceKHR instance surface pAllocator-c))))

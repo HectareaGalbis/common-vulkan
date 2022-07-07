@@ -49,7 +49,7 @@ If there are 0 devices with Vulkan support then we can't continue.
 In order to evaluate each device, we'll create a new function:
 
 ```lisp
-(defun is-device-suitable (device)
+(defun is-device-suitable (app device)
   t)
 ```
 
@@ -75,7 +75,7 @@ We can check the suitability of a device in very different ways. We show 2 examp
 We can check basic device properties. In the next example we check if the device is a discrete gpu and if it supports geometry shaders.
 
 ```lisp
-(defun is-device-suitable (device)
+(defun is-device-suitable (app device)
   (cvk:with-get-physical-device-properties properties (device)
     (cvk:with-get-physical-device-features features (device)
       (and (equal (cvk:physical-device-properties-deviceType properties)
@@ -87,7 +87,7 @@ We can check basic device properties. In the next example we check if the device
 We can also give each device a score and pick the highest one.
 
 ```lisp
-(defun rate-device-suitability (device)
+(defun rate-device-suitability (app device)
 
   ...
 
@@ -104,7 +104,7 @@ We can also give each device a score and pick the highest one.
   ...
 
   (loop for device in devices
-        for score = (rate-device-suitability device)
+        for score = (rate-device-suitability app device)
         for (max-score best-device) = '(0 nil) then (if (> score max-score)
 	                                                (list score device)
 							(list max-score best-device))
@@ -117,11 +117,11 @@ We will use another aproach.
 
 ## Queue families
 
-Add a function to find the queue families:
+Add a function to find the queue families. We will ignore the app argument for now.
 
 ```lisp
-(defun find-queue-families (device)
-
+(defun find-queue-families (app device)
+  (declare (ignore app))
   )
 ```
 
@@ -131,7 +131,8 @@ We will use a struct to store the available queue families.
 (defstruct queue-family-indices
   (graphics-family nil))
 
-(defun find-queue-families (device)
+(defun find-queue-families (app device)
+  (declare (ignore app))
   (let ((indices (make-queue-family-indices)))
 
     ; Logic to find queue family indicesto populate struct with
@@ -153,8 +154,8 @@ We'll use `with-get-physical-device-queue-family-properties` to retrieve the lis
 Now we can use that lookup function as a check in the `is-device-suitable` function to ensure that the device the commands we want to use:
 
 ```lisp
-(defun is-device-suitable (device)
-  (let ((indices (find-queue-families device)))
+(defun is-device-suitable (app device)
+  (let ((indices (find-queue-families app device)))
     (queue-family-indices-graphics-family indices)))
 ```
 
@@ -166,8 +167,8 @@ To make this a little more convenient, we'll add a generic check:
 
 ...
 
-(defun is-device-suitable (device)
-  (let ((indices (find-queue-families device)))
+(defun is-device-suitable (app device)
+  (let ((indices (find-queue-families app device)))
     (is-queue-family-indices-complete indices)))
 ```
 

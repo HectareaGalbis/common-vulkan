@@ -31,7 +31,7 @@ In order to create the device, first we need a `VkDeviceQueueCreateInfo`.
 
 ```lisp
 (defun create-logical-device (app)
-  (let ((indices (find-queue-families (physical-device app))))
+  (let ((indices (find-queue-families app (physical-device app))))
     (cvk:with-device-queue-create-info queue-create-info (:sType cvk:VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO
 							  :queueFamilyIndex (queue-family-indices-graphics-family indices)
 							  :queueCount 1
@@ -46,7 +46,7 @@ We have to indicate what features we want to enable in our device. To do that, w
 
 ```lisp
 (defun create-logical-device (app)
-  (let ((indices (find-queue-families (physical-device app))))
+  (let ((indices (find-queue-families app (physical-device app))))
     (cvk:with-device-queue-create-info queue-create-info (:sType cvk:VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO
 							  :queueFamilyIndex (queue-family-indices-graphics-family indices)
 							  :queueCount 1
