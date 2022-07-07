@@ -32,7 +32,7 @@
 
 **with-application-info**
 ```lisp
-(with-application-info var-or-vars (&rest args)
+(with-application-info var (&rest args)
   &body body)
 ```
 Wrap the body expressions with `create-application-info` and `destroy-application-info`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
@@ -80,7 +80,7 @@ Wrap the body expressions with `create-application-info` and `destroy-applicatio
 
 **with-instance-create-info**
 ```lisp
-(with-instance-create-info var-or-vars (&rest args)
+(with-instance-create-info var (&rest args)
   &body body)
 ```
 Wrap the body expressions with `create-instance-create-info` and `destroy-instance-create-info`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
@@ -156,7 +156,7 @@ Wrap the body expressions with `create-instance-create-info` and `destroy-instan
 
 **with-instance**
 ```lisp
-(with-instance var-or-vars (&rest args)
+(with-instance var (&rest args)
   &body body)
 ```
 Wrap the body expressions with `create-instance` and `destroy-instance`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
@@ -188,7 +188,7 @@ Wrap the body expressions with `create-instance` and `destroy-instance`. The new
 
 **with-enumerate-instance-extension-properties**
 ```lisp
-(with-enumerate-instance-extension-properties var-or-vars (&rest args)
+(with-enumerate-instance-extension-properties var (&rest args)
   &body body)
 ```
 Wrap the body expressions with `create-enumerate-instance-extension-properties` and `destroy-enumerate-instance-extension-properties`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
@@ -215,7 +215,7 @@ Wrap the body expressions with `create-enumerate-instance-extension-properties` 
 
 **with-enumerate-instance-layer-properties**
 ```lisp
-(with-enumerate-instance-layer-properties var-or-vars (&rest args)
+(with-enumerate-instance-layer-properties var (&rest args)
   &body body)
 ```
 Wrap the body expressions with `create-enumerate-instance-layer-properties` and `destroy-enumerate-instance-layer-properties`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.

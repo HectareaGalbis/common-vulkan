@@ -28,7 +28,7 @@
 
 **with-debug-utils-messenger-create-info**
 ```lisp
-(with-debug-utils-messenger-create-info var-or-vars (&rest args)
+(with-debug-utils-messenger-create-info var (&rest args)
   &body body)
 ```
 Wrap the body expressions with `create-debug-utils-messenger-create-info` and `destroy-debug-utils-messenger-create-info`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.

@@ -441,7 +441,7 @@
 
 **with-get-physical-device-properties**
 ```lisp
-(with-get-physical-device-properties var-or-vars (&rest args)
+(with-get-physical-device-properties var (&rest args)
   &body body)
 ```
 Wrap the body expressions with `create-get-physical-device-properties` and `destroy-get-physical-device-properties`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
@@ -471,7 +471,7 @@ Wrap the body expressions with `create-get-physical-device-properties` and `dest
 
 **with-get-physical-device-features**
 ```lisp
-(with-get-physical-device-features var-or-vars (&rest args)
+(with-get-physical-device-features var (&rest args)
   &body body)
 ```
 Wrap the body expressions with `create-get-physical-device-features` and `destroy-get-physical-device-features`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
@@ -501,7 +501,7 @@ Wrap the body expressions with `create-get-physical-device-features` and `destro
 
 **with-get-physical-device-queue-family-properties**
 ```lisp
-(with-get-physical-device-queue-family-properties var-or-vars (&rest args)
+(with-get-physical-device-queue-family-properties var (&rest args)
   &body body)
 ```
 Wrap the body expressions with `create-get-physical-device-queue-family-properties` and `destroy-get-physical-device-queue-family-properties`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
