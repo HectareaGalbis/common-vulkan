@@ -5,9 +5,9 @@
 
 The first we need is to install the GLFW library and the Vulkan SDK.
 
-In the [GLFW main page] you will see how to install its library in your computer. 
+In the [GLFW main page](https://www.glfw.org) you will see how to install its library in your computer. 
 
-The same goes to Vulkan. Go to its [main page] and install the SDK in your computer.
+The same goes to Vulkan. Go to its [main page](https://vulkan.lunarg.com) and install the SDK in your computer.
 
 ## Installing some Common Lisp libraries
 
