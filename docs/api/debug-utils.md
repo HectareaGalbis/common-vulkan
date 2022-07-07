@@ -1,3 +1,7 @@
+# Debug utils extension
+
+## Structs
+
 ---
 
 ### VkDebugUtilsMessengerCreateInfoEXT

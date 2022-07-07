@@ -10,6 +10,12 @@
 (with-open-file (doc-file (asdf:system-relative-pathname "common-vulkan" "docs/api/debug-utils.md")
 			  :direction :output :if-exists :supersede :if-does-not-exist :create)
 
+
+  (mcffi:doc-header "Debug utils extension" doc-file)
+
+
+  (mcffi:doc-subheader "Structs" doc-file)
+
   
   (mcffi:def-foreign-struct "VkDebugUtilsMessengerCreateInfoEXT" debug-utils-messenger-create-info doc-file
       (:enable-default-create :enable-default-get :enable-default-set)
@@ -72,25 +78,6 @@
 	    :return (if (null result) VK_FALSE VK_TRUE)))
 
   
-  ;; Defines a debug utils messenger callback
-  ;; (defmacro def-debug-utils-messenger-callback (name (messageSeverity messageTypes pCallbackData
-  ;; 						      pUserData) &body body)
-  ;;   (let ((messageSeverity-c (gensym))
-  ;; 	  (messageTypes-c (gensym))
-  ;; 	  (pCallbackData-c (gensym))
-  ;; 	  (pUserData-c (gensym)))
-  ;;     `(progn 
-  ;; 	 (cffi:defcallback ,name VkBool32 ((,messageSeverity-c VkDebugUtilsMessageSeverityFlagBitsEXT)
-  ;; 					   (,messageTypes-c    VkDebugUtilsMessageTypeFlagsEXT)
-  ;; 					   (,pCallbackData-c   :pointer)
-  ;; 					   (,pUserData-c       :pointer))
-  ;; 	   (let ((,messageSeverity ,messageSeverity-c)
-  ;; 		 (,messageTypes ,messageTypes-c)
-  ;; 		 (,pCallbackData ,pCallbackData-c)
-  ;; 		 (,pUserData (gethash (cffi:pointer-address ,pUserData-c) cvk::*user-data-table*)))
-  ;; 	     ,@body))
-  ;; 	 (setf (gethash (cffi:pointer-address (cffi:get-callback ',name)) cvk::*callback-table*) ',name))))
-
 
   (mcffi:def-foreign-struct "VkDebugUtilsMessengerCallbackDataEXT" debug-utils-messenger-callback-data doc-file
       (:no-constructor :no-destructor :enable-default-get)
@@ -128,7 +115,7 @@
 				 			    '(:struct VkDebugUtilsObjectNameInfoEXT) i))))))
   
 
-  ;; Functions for VkDebugUtilsLabelEXT 
+  
   (mcffi:def-foreign-struct "VkDebugUtilsLabelEXT" debug-utils-label doc-file
       (:no-constructor :no-destructor :enable-default-get)
     (sType :name "sType" :type "VkStructureType")
@@ -143,7 +130,7 @@
 				collect (cffi:mem-aref color :float i))))))
 
 
-  ;; Functions for VkDebugUtilsObjectNameInfoEXT
+
   (mcffi:def-foreign-struct "VkDebugUtilsObjectNameInfoEXT" debug-utils-object-name-info doc-file
       (:no-constructor :no-destructor :enable-default-get)
     (sType :name "sType" :type "VkStructureType")
