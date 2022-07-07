@@ -2,6 +2,8 @@
 
 ## Structs
 
+---
+
 ### VkPhysicalDeviceProperties
 
 **Members**
@@ -408,9 +410,9 @@
 (queue-family-properties-minImageTransferGranularity obj)
 ```
 
----
-
 ## Functions
+
+---
 
 ### vkEnumeratePhysicalDevices
 
@@ -442,8 +444,6 @@
 
 * *Return:*
   * *props*: `VkPhysicalDeviceProperties`
-
----
 
 **destroy-get-physical-device-properties**
 ```lisp
@@ -477,8 +477,6 @@ Wrap the body expressions with `create-get-physical-device-properties` and `dest
 * *Return:*
   * *features*: `VkPhysicalDeviceFeatures`
 
----
-
 **destroy-get-physical-device-features**
 ```lisp
 (destroy-get-physical-device-features features)
@@ -511,8 +509,6 @@ Wrap the body expressions with `create-get-physical-device-features` and `destro
 * *Return:*
   * *family-props*: `(list VkQueueFamilyProperties)`
 
----
-
 **destroy-get-physical-device-queue-family-properties**
 ```lisp
 (destroy-get-physical-device-queue-family-properties family-props)
@@ -527,6 +523,4 @@ Wrap the body expressions with `create-get-physical-device-features` and `destro
   &body body)
 ```
 Wrap the body expressions with `create-get-physical-device-queue-family-properties` and `destroy-get-physical-device-queue-family-properties`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
-
----
 

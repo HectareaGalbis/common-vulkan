@@ -2,6 +2,8 @@
 
 ## Structs
 
+---
+
 ### VkApplicationInfo
 
 **Members**
@@ -36,8 +38,6 @@
   &body body)
 ```
 Wrap the body expressions with `create-application-info` and `destroy-application-info`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
-
----
 
 **Accessors**
 ```lisp
@@ -89,8 +89,6 @@ Wrap the body expressions with `create-application-info` and `destroy-applicatio
 ```
 Wrap the body expressions with `create-instance-create-info` and `destroy-instance-create-info`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
----
-
 **Accessors**
 ```lisp
 (instance-create-info-sType obj) ; setf-able
@@ -135,9 +133,9 @@ Wrap the body expressions with `create-instance-create-info` and `destroy-instan
 (layer-properties-description obj)
 ```
 
----
-
 ## Functions
+
+---
 
 ### vkCreateInstance
 
@@ -166,6 +164,8 @@ Wrap the body expressions with `create-instance-create-info` and `destroy-instan
   * *instance*: `VkInstance`
   * *pAllocator*: `VkAllocationCallbacks`
 
+---
+
 ### with-instance
 
 **with-instance**
@@ -175,9 +175,9 @@ Wrap the body expressions with `create-instance-create-info` and `destroy-instan
 ```
 Wrap the body expressions with `create-instance` and `destroy-instance`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
----
-
 * **Note**: The allocator is passed to both constructor and destructor.
+
+---
 
 ### vkEnumerateInstanceExtensionProperties
 
@@ -193,8 +193,6 @@ Wrap the body expressions with `create-instance` and `destroy-instance`. The new
 
 * *Return:*
   * *extension-props*: `(list VkExtensionProperties)`
-
----
 
 **destroy-enumerate-instance-extension-properties**
 ```lisp
@@ -224,8 +222,6 @@ Wrap the body expressions with `create-enumerate-instance-extension-properties` 
 
 * *Return:*
   * *layer-props*: `(list VkLayerProperties)`
-
----
 
 **destroy-enumerate-instance-layer-properties**
 ```lisp
@@ -257,6 +253,4 @@ Wrap the body expressions with `create-enumerate-instance-layer-properties` and 
 
 * *Return:*
   * *proc*: `function`
-
----
 

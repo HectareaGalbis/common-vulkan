@@ -2,6 +2,8 @@
 
 ## Structs
 
+---
+
 ### VkDeviceQueueCreateInfo
 
 **Members**
@@ -34,8 +36,6 @@
   &body body)
 ```
 Wrap the body expressions with `create-device-queue-create-info` and `destroy-device-queue-create-info`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
-
----
 
 **Accessors**
 ```lisp
@@ -90,8 +90,6 @@ Wrap the body expressions with `create-device-queue-create-info` and `destroy-de
 ```
 Wrap the body expressions with `create-device-create-info` and `destroy-device-create-info`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
----
-
 **Accessors**
 ```lisp
 (device-create-info-sType obj) ; setf-able
@@ -106,9 +104,9 @@ Wrap the body expressions with `create-device-create-info` and `destroy-device-c
 (device-create-info-pEnabledFeatures obj) ; setf-able
 ```
 
----
-
 ## Functions
+
+---
 
 ### vkCreateDevice
 
@@ -139,6 +137,8 @@ Wrap the body expressions with `create-device-create-info` and `destroy-device-c
   * *device*: `VkDevice`
   * *pAllocator*: `VkAllocationCallbacks`
 
+---
+
 ### with-device
 
 **with-device**
@@ -164,6 +164,4 @@ Wrap the body expressions with `create-device` and `destroy-device`. The new obj
 
 * *Return:*
   * *queue*: `VkQueue`
-
----
 

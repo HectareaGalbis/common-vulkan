@@ -1,3 +1,5 @@
+---
+
 ### VkDebugUtilsMessengerCreateInfoEXT
 
 **Members**
@@ -32,8 +34,6 @@
   &body body)
 ```
 Wrap the body expressions with `create-debug-utils-messenger-create-info` and `destroy-debug-utils-messenger-create-info`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
-
----
 
 **Accessors**
 ```lisp
@@ -137,6 +137,4 @@ Define a callback function.
 (debug-utils-object-name-info-objectHandle obj)
 (debug-utils-object-name-info-pObjectName obj)
 ```
-
----
 
