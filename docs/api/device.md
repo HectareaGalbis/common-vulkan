@@ -35,6 +35,8 @@
 ```
 Wrap the body expressions with `create-device-queue-create-info` and `destroy-device-queue-create-info`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
+---
+
 **Accessors**
 ```lisp
 (device-queue-create-info-sType obj) ; setf-able
@@ -44,6 +46,8 @@ Wrap the body expressions with `create-device-queue-create-info` and `destroy-de
 (device-queue-create-info-queueCount obj) ; setf-able
 (device-queue-create-info-pQueuePriorities obj &optional (index nil)) ; setf-able
 ```
+
+---
 
 ### VkDeviceCreateInfo
 
@@ -86,6 +90,8 @@ Wrap the body expressions with `create-device-queue-create-info` and `destroy-de
 ```
 Wrap the body expressions with `create-device-create-info` and `destroy-device-create-info`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
+---
+
 **Accessors**
 ```lisp
 (device-create-info-sType obj) ; setf-able
@@ -99,6 +105,8 @@ Wrap the body expressions with `create-device-create-info` and `destroy-device-c
 (device-create-info-ppEnabledExtensionNames obj &optional (index nil)) ; setf-able
 (device-create-info-pEnabledFeatures obj) ; setf-able
 ```
+
+---
 
 ## Functions
 
@@ -117,6 +125,8 @@ Wrap the body expressions with `create-device-create-info` and `destroy-device-c
 * *Return:*
   * *device*: `VkDevice`
   * *result*: `VkResult`
+
+---
 
 ### vkDestroyDevice
 
@@ -138,6 +148,8 @@ Wrap the body expressions with `create-device-create-info` and `destroy-device-c
 ```
 Wrap the body expressions with `create-device` and `destroy-device`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
+---
+
 ### vkGetDeviceQueue
 
 **get-device-queue**
@@ -152,4 +164,6 @@ Wrap the body expressions with `create-device` and `destroy-device`. The new obj
 
 * *Return:*
   * *queue*: `VkQueue`
+
+---
 

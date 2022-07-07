@@ -28,6 +28,8 @@
 (physical-device-properties-sparseProperties obj)
 ```
 
+---
+
 ### VkPhysicalDeviceLimits
 
 **Members**
@@ -248,6 +250,8 @@
 (physical-device-limits-nonCoherentAtomSize obj)
 ```
 
+---
+
 ### VkPhysicalDeviceSparseProperties
 
 **Members**
@@ -265,6 +269,8 @@
 (physical-device-sparse-properties-residencyAlignedMipSize obj)
 (physical-device-sparse-properties-residencyNonResidentStrict obj)
 ```
+
+---
 
 ### VkPhysicalDeviceFeatures
 
@@ -384,6 +390,8 @@
 (physical-device-features-inheritedQueries obj)
 ```
 
+---
+
 ### VkQueueFamilyProperties
 
 **Members**
@@ -399,6 +407,8 @@
 (queue-family-properties-timestampValidBits obj)
 (queue-family-properties-minImageTransferGranularity obj)
 ```
+
+---
 
 ## Functions
 
@@ -416,6 +426,8 @@
   * *physical-devices*: `(list VkPhysicalDevice)`
   * *result*: `VkResult`
 
+---
+
 ### vkGetPhysicalDeviceProperties
 
 * **Note**: This function requires an allocation for retrieving the information. For that reason this function is splitted up in two creation and destruction functions.
@@ -430,6 +442,8 @@
 
 * *Return:*
   * *props*: `VkPhysicalDeviceProperties`
+
+---
 
 **destroy-get-physical-device-properties**
 ```lisp
@@ -446,6 +460,8 @@
 ```
 Wrap the body expressions with `create-get-physical-device-properties` and `destroy-get-physical-device-properties`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
+---
+
 ### vkGetPhysicalDeviceFeatures
 
 * **Note**: This function requires an allocation for retrieving the information. For that reason this function is splitted up in two creation and destruction functions.
@@ -460,6 +476,8 @@ Wrap the body expressions with `create-get-physical-device-properties` and `dest
 
 * *Return:*
   * *features*: `VkPhysicalDeviceFeatures`
+
+---
 
 **destroy-get-physical-device-features**
 ```lisp
@@ -476,6 +494,8 @@ Wrap the body expressions with `create-get-physical-device-properties` and `dest
 ```
 Wrap the body expressions with `create-get-physical-device-features` and `destroy-get-physical-device-features`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
+---
+
 ### vkGetPhysicalDeviceQueueFamilyProperties
 
 * **Note**: This function requires an allocation for retrieving the information. For that reason this function is splitted up in two creation and destruction functions.
@@ -491,6 +511,8 @@ Wrap the body expressions with `create-get-physical-device-features` and `destro
 * *Return:*
   * *family-props*: `(list VkQueueFamilyProperties)`
 
+---
+
 **destroy-get-physical-device-queue-family-properties**
 ```lisp
 (destroy-get-physical-device-queue-family-properties family-props)
@@ -505,4 +527,6 @@ Wrap the body expressions with `create-get-physical-device-features` and `destro
   &body body)
 ```
 Wrap the body expressions with `create-get-physical-device-queue-family-properties` and `destroy-get-physical-device-queue-family-properties`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
+
+---
 

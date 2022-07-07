@@ -33,6 +33,8 @@
 ```
 Wrap the body expressions with `create-debug-utils-messenger-create-info` and `destroy-debug-utils-messenger-create-info`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
+---
+
 **Accessors**
 ```lisp
 (debug-utils-messenger-create-info-sType obj) ; setf-able
@@ -43,6 +45,8 @@ Wrap the body expressions with `create-debug-utils-messenger-create-info` and `d
 (debug-utils-messenger-create-info-pfnUserCallback obj) ; setf-able
 (debug-utils-messenger-create-info-pUserData obj) ; setf-able
 ```
+
+---
 
 ### PFN_vkDebugUtilsMessengerCallbackEXT
 
@@ -61,6 +65,8 @@ Define a callback function.
 
 * *Return:*
   * *result*: `boolean`
+
+---
 
 ### VkDebugUtilsMessengerCallbackDataEXT
 
@@ -94,6 +100,8 @@ Define a callback function.
 (debug-utils-messenger-callback-data-pObjects obj &optional (index nil))
 ```
 
+---
+
 ### VkDebugUtilsLabelEXT
 
 **Members**
@@ -109,6 +117,8 @@ Define a callback function.
 (debug-utils-label-pLabelName obj)
 (debug-utils-label-color obj &optional (index nil))
 ```
+
+---
 
 ### VkDebugUtilsObjectNameInfoEXT
 
@@ -127,4 +137,6 @@ Define a callback function.
 (debug-utils-object-name-info-objectHandle obj)
 (debug-utils-object-name-info-pObjectName obj)
 ```
+
+---
 

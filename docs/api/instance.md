@@ -37,6 +37,8 @@
 ```
 Wrap the body expressions with `create-application-info` and `destroy-application-info`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
+---
+
 **Accessors**
 ```lisp
 (application-info-sType obj) ; setf-able
@@ -47,6 +49,8 @@ Wrap the body expressions with `create-application-info` and `destroy-applicatio
 (application-info-engineVersion obj) ; setf-able
 (application-info-apiVersion obj) ; setf-able
 ```
+
+---
 
 ### VkInstanceCreateInfo
 
@@ -85,6 +89,8 @@ Wrap the body expressions with `create-application-info` and `destroy-applicatio
 ```
 Wrap the body expressions with `create-instance-create-info` and `destroy-instance-create-info`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
+---
+
 **Accessors**
 ```lisp
 (instance-create-info-sType obj) ; setf-able
@@ -97,6 +103,8 @@ Wrap the body expressions with `create-instance-create-info` and `destroy-instan
 (instance-create-info-ppEnabledExtensionNames obj &optional (index nil)) ; setf-able
 ```
 
+---
+
 ### VkExtensionProperties
 
 **Members**
@@ -108,6 +116,8 @@ Wrap the body expressions with `create-instance-create-info` and `destroy-instan
 (extension-properties-extensionName obj)
 (extension-properties-specVersion obj)
 ```
+
+---
 
 ### VkLayerProperties
 
@@ -125,6 +135,8 @@ Wrap the body expressions with `create-instance-create-info` and `destroy-instan
 (layer-properties-description obj)
 ```
 
+---
+
 ## Functions
 
 ### vkCreateInstance
@@ -140,6 +152,8 @@ Wrap the body expressions with `create-instance-create-info` and `destroy-instan
 
 * *Return:*
   * *instance*: `VkInstance`
+
+---
 
 ### vkDestroyInstance
 
@@ -161,6 +175,8 @@ Wrap the body expressions with `create-instance-create-info` and `destroy-instan
 ```
 Wrap the body expressions with `create-instance` and `destroy-instance`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
+---
+
 * **Note**: The allocator is passed to both constructor and destructor.
 
 ### vkEnumerateInstanceExtensionProperties
@@ -178,6 +194,8 @@ Wrap the body expressions with `create-instance` and `destroy-instance`. The new
 * *Return:*
   * *extension-props*: `(list VkExtensionProperties)`
 
+---
+
 **destroy-enumerate-instance-extension-properties**
 ```lisp
 (destroy-enumerate-instance-extension-properties extension-props)
@@ -193,6 +211,8 @@ Wrap the body expressions with `create-instance` and `destroy-instance`. The new
 ```
 Wrap the body expressions with `create-enumerate-instance-extension-properties` and `destroy-enumerate-instance-extension-properties`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
+---
+
 ### vkEnumerateInstanceLayerProperties
 
 * **Note**: This function requires an allocation for retrieving the information. For that reason this function is splitted up in two creation and destruction functions.
@@ -204,6 +224,8 @@ Wrap the body expressions with `create-enumerate-instance-extension-properties` 
 
 * *Return:*
   * *layer-props*: `(list VkLayerProperties)`
+
+---
 
 **destroy-enumerate-instance-layer-properties**
 ```lisp
@@ -220,6 +242,8 @@ Wrap the body expressions with `create-enumerate-instance-extension-properties` 
 ```
 Wrap the body expressions with `create-enumerate-instance-layer-properties` and `destroy-enumerate-instance-layer-properties`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
+---
+
 ### vkGetInstanceProcAddr
 
 **get-instance-proc-addr**
@@ -233,4 +257,6 @@ Wrap the body expressions with `create-enumerate-instance-layer-properties` and 
 
 * *Return:*
   * *proc*: `function`
+
+---
 
