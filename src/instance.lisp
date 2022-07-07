@@ -239,6 +239,8 @@
 
   
   (mcffi:doc-subsubheader "vkGetInstanceProcAddr" doc-file)
+
+  (mcffi:doc-note "Available functions: vkCreateDebugUtilsMessengerEXT, vkDestroyDebugUtilsMessengerEXT" doc-file)
   
   (mcffi:def-foreign-function get-instance-proc-addr doc-file (instance pName)
     (declare-types ("VkInstance" instance) (string "pName")

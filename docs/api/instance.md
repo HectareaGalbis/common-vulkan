@@ -242,6 +242,8 @@ Wrap the body expressions with `create-enumerate-instance-layer-properties` and 
 
 ### vkGetInstanceProcAddr
 
+* **Note**: Available functions: vkCreateDebugUtilsMessengerEXT, vkDestroyDebugUtilsMessengerEXT
+
 **get-instance-proc-addr**
 ```lisp
 (get-instance-proc-addr instance pName) => proc
