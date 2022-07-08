@@ -20,3 +20,8 @@ I think I'm not missing anything so..., let's code!
   * [Validation layers](https://hectarea1996.github.io/common-vulkan/guide/validation-layers.html)
   * [Physical devices and queue families](https://hectarea1996.github.io/common-vulkan/guide/physical-devices.html)
   * [Logical device and queues](https://hectarea1996.github.io/common-vulkan/guide/logical-device.html)
+
+* **Presentation**
+  * [Window surface](https://hectarea1996.github.io/common-vulkan/guide/window-surface.html)
+  * [Swap chain](https://hectarea1996.github.io/common-vulkan/guide/swap-chain.html)
+  * [Image views](https://hectarea1996.github.io/common-vulkan/guide/image-views.html)
