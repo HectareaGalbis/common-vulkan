@@ -400,5 +400,5 @@ Remember that the extent was created with the `create-choose-swap-extent` functi
 
 * [main.lisp](https://github.com/Hectarea1996/common-vulkan-guide/blob/main/code-guide/swap-chain.lisp)
 
-* **Next**: [Validation layers](https://hectarea1996.github.io/common-vulkan/guide/image-views.html)
-* **Previous**: [Base code](https://hectarea1996.github.io/common-vulkan/guide/window-surface.html)
+* **Next**: [Image views](https://hectarea1996.github.io/common-vulkan/guide/image-views.html)
+* **Previous**: [Window surface](https://hectarea1996.github.io/common-vulkan/guide/window-surface.html)
