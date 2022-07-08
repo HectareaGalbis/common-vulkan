@@ -374,7 +374,6 @@ One last thing, store the format and extent we have chosen for the swap chain im
    (swap-chain-images :accessor swap-chain-images :initform nil)
    (swap-chain-image-format :accessor swap-chain-image-format :initform nil)
    (swap-chain-extent :accessor swap-chain-extent :initform nil)))
-   
 ...
 
 (defun create-swap-chain (app)
@@ -387,6 +386,16 @@ One last thing, store the format and extent we have chosen for the swap chain im
     (setf (swap-chain-images app) (cvk:get-swapchain-images (device app) (swap-chain app)))
     (setf (swap-chain-image-format app) (cvk:surface-format-format surface-format))
     (setf (swap-chain-extent app) extent)))
+```
+
+Remember that the extent was created with the `create-choose-swap-extent` function. Destroy the extent in the `cleanup` function.
+
+```lisp
+(defun cleanup (app)
+  (cvk:destroy-swapchain (device app) (swap-chain app) nil)
+  (destroy-choose-swap-extent app (swap-chain-extent app))
+  ...
+  )
 ```
 
 * [main.lisp](https://github.com/Hectarea1996/common-vulkan-guide/blob/main/code-guide/swap-chain.lisp)
