@@ -63,7 +63,14 @@
     (compositeAlpha :name "compositeAlpha" :type "VkCompositeAlphaFlagBitsKHR")
     (presentMode :name "presentMode" :type "VkPresentModeKHR")
     (clipped :type "VkBool32")
-    (oldSwapchain :name "oldSwapchain" :type "VkSwapchainKHR"))
+    (oldSwapchain :name "oldSwapchain" :type "VkSwapchainKHR" :init-form nil
+		  :create ((oldSwapchain-arg)
+			   (setf oldSwapchain (or oldSwapchain-arg (cffi:null-pointer))))
+		  :get (() (if (cffi:null-pointer-p oldSwapchain)
+			       nil
+			       oldSwapchain))
+		  :set ((new-value)
+			(setf oldSwapchain (or new-value (cffi:null-pointer))))))
 
 
 

@@ -14,15 +14,15 @@
   (mcffi:def-foreign-struct "VkSurfaceCapabilitiesKHR" surface-capabilities doc-file
       (:no-constructor :no-destructor :enable-default-get)
     (minImageCount :name "minImageCount" :type uint32)
-    (maxImageCount :name "maxImageCount" :type uint32_t)
-    (currentExtent :name "currentExtent" :type VkExtent2D)
-    (minImageExtent :name "minImageExtent" :type VkExtent2D)
-    (maxImageExtent :name "maxImageExtent" :type VkExtent2D)
-    (maxImageArrayLayers :name "maxImageArrayLayers" :type uint32_t)
-    (supportedTransforms :name "supportedTransforms" :type VkSurfaceTransformFlagsKHR)
-    (currentTransform :name "currentTransform" :type VkSurfaceTransformFlagBitsKHR)
-    (supportedCompositeAlpha :name "supportedCompositeAlpha" :type VkCompositeAlphaFlagsKHR)
-    (supportedUsageFlags :name "supportedUsageFlags" :type VkImageUsageFlags))
+    (maxImageCount :name "maxImageCount" :type uint32)
+    (currentExtent :pointer t :name "currentExtent" :type "VkExtent2D")
+    (minImageExtent :name "minImageExtent" :type "VkExtent2D")
+    (maxImageExtent :name "maxImageExtent" :type "VkExtent2D")
+    (maxImageArrayLayers :name "maxImageArrayLayers" :type uint32)
+    (supportedTransforms :name "supportedTransforms" :type "VkSurfaceTransformFlagsKHR")
+    (currentTransform :name "currentTransform" :type "VkSurfaceTransformFlagBitsKHR")
+    (supportedCompositeAlpha :name "supportedCompositeAlpha" :type "VkCompositeAlphaFlagsKHR")
+    (supportedUsageFlags :name "supportedUsageFlags" :type "VkImageUsageFlags"))
 
 
 
