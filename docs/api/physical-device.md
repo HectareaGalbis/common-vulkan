@@ -613,3 +613,122 @@ Wrap the body expressions with `create-get-physical-device-queue-family-properti
 * *Return:*
   * *pSupported*: `boolean`
 
+---
+
+### vkEnumerateDeviceExtensionProperties
+
+* **Note**: This function requires an allocation for retrieving the information. For that reason this function is splitted up in two creation and destruction functions.
+
+**create-enumerate-device-extension-properties**
+```lisp
+(create-enumerate-device-extension-properties physicalDevice pLayerName) => (values pProperties result)
+```
+
+* *Parameters*:
+  * *physicalDevice*: `VkPhysicalDevice`
+  * *pLayerName*: `string`
+
+* *Return:*
+  * *pProperties*: `(list VkExtensionProperties)`
+  * *result*: `VkResult`
+
+**destroy-enumerate-device-extension-properties**
+```lisp
+(destroy-enumerate-device-extension-properties pProperties)
+```
+
+* *Parameters*:
+  * *pProperties*: `(list VkExtensionProperties)`
+
+**with-enumerate-device-extension-properties**
+```lisp
+(with-enumerate-device-extension-properties var (&rest args)
+  &body body)
+```
+Wrap the body expressions with `create-enumerate-device-extension-properties` and `destroy-enumerate-device-extension-properties`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
+
+---
+
+### vkGetPhysicalDeviceSurfaceCapabilitiesKHR
+
+* **Note**: This function requires an allocation for retrieving the information. For that reason this function is splitted up in two creation and destruction functions.
+
+**create-get-physical-device-surface-capabilities**
+```lisp
+(create-get-physical-device-surface-capabilities physicalDevice surface) => (values pSurfaceCapabilities result)
+```
+
+* *Parameters*:
+  * *physicalDevice*: `VkPhysicalDevice`
+  * *surface*: `VkSurfaceKHR`
+
+* *Return:*
+  * *pSurfaceCapabilities*: `VkSurfaceCapabilitiesKHR`
+  * *result*: `VkResult`
+
+**destroy-get-physical-device-surface-capabilities**
+```lisp
+(destroy-get-physical-device-surface-capabilities pSurfaceCapabilities)
+```
+
+* *Parameters*:
+  * *pSurfaceCapabilities*: `VkSurfaceCapabilitiesKHR`
+
+**with-get-physical-device-surface-capabilities**
+```lisp
+(with-get-physical-device-surface-capabilities var (&rest args)
+  &body body)
+```
+Wrap the body expressions with `create-get-physical-device-surface-capabilities` and `destroy-get-physical-device-surface-capabilities`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
+
+---
+
+### vkGetPhysicalDeviceSurfaceFormatsKHR
+
+* **Note**: This function requires an allocation for retrieving the information. For that reason this function is splitted up in two creation and destruction functions.
+
+**create-get-physical-device-surface-formats**
+```lisp
+(create-get-physical-device-surface-formats physicalDevice surface) => (values pSurfaceFormats result)
+```
+
+* *Parameters*:
+  * *physicalDevice*: `VkPhysicalDevice`
+  * *surface*: `VkSurfaceKHR`
+
+* *Return:*
+  * *pSurfaceFormats*: `(list VkSurfaceFormatKHR)`
+  * *result*: `VkResult`
+
+**destroy-get-physical-device-surface-formats**
+```lisp
+(destroy-get-physical-device-surface-formats pSurfaceFormats)
+```
+
+* *Parameters*:
+  * *pSurfaceFormats*: `(list VkSurfaceFormatKHR)`
+
+**with-get-physical-device-surface-formats**
+```lisp
+(with-get-physical-device-surface-formats var (&rest args)
+  &body body)
+```
+Wrap the body expressions with `create-get-physical-device-surface-formats` and `destroy-get-physical-device-surface-formats`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
+
+---
+
+### vkGetPhysicalDeviceSurfacePresentModesKHR
+
+**get-physical-device-surface-present-modes**
+```lisp
+(get-physical-device-surface-present-modes physicalDevice surface) => (values pPresentModes result)
+```
+
+* *Parameters*:
+  * *physicalDevice*: `VkPhysicalDevice`
+  * *surface*: `VkSurfaceKHR`
+
+* *Return:*
+  * *pPresentModes*: `(list VkPresentModeKHR)`
+  * *result*: `VkResult`
+

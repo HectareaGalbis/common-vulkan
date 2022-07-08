@@ -1,6 +1,6 @@
 
 (in-package :cvk)
-
+  
 (mcffi:with-doc-file (doc-file (asdf:system-relative-pathname "common-vulkan" "docs/api/instance.md"))
 
   
@@ -14,16 +14,18 @@
       (:enable-default-create :enable-default-get :enable-default-set)
     (sType              :name "sType" :type "VkStructureType" :init-form VK_STRUCTURE_TYPE_APPLICATION_INFO)
     (pNext              :name "pNext" :type "pointer" :init-form nil
-	                :create (or pNext (cffi:null-pointer))
+	                :create ((pNext-arg)
+				 (setf pNext (or pNext-arg (cffi:null-pointer))))
 			:get (() (if (cffi:null-pointer-p pNext)
 				     nil
 				     pNext))
 			:set ((new-value)
 			      (setf pNext (or new-value (cffi:null-pointer)))))
     (pApplicationName   :name "pApplicationName" :type string :init-form nil
-		        :create (if pApplicationName
-			            (cffi:foreign-string-alloc pApplicationName)
-			            (cffi:null-pointer))
+		        :create ((pApplicationName-arg)
+				 (setf pApplicationName (if pApplicationName-arg
+							    (cffi:foreign-string-alloc pApplicationName-arg)
+							    (cffi:null-pointer))))
 		        :destroy (if (not (cffi:null-pointer-p pApplicationName))
 				     (cffi:foreign-string-free pApplicationName))
 		        :get (() (cffi:foreign-string-to-lisp pApplicationName))
@@ -33,9 +35,10 @@
 			      (setf pApplicationName (cffi:foreign-string-alloc new-value))))
     (applicationVersion :name "applicationVersion" :type uint32 :init-form 0)
     (pEngineName        :name "pEngineName" :type string :init-form nil
-		        :create (if pEngineName
-				    (cffi:foreign-string-alloc pEngineName)
-				    (cffi:null-pointer))
+		        :create ((pEngineName-arg)
+				 (setf pEngineName (if pEngineName-arg
+						       (cffi:foreign-string-alloc pEngineName-arg)
+						       (cffi:null-pointer))))
 		        :destroy (if (not (cffi:null-pointer-p pEngineName))
 				     (cffi:foreign-string-free pEngineName))
 		        :get (() (cffi:foreign-string-to-lisp pEngineName))
@@ -53,7 +56,8 @@
     (sType                   :name "sType" :type "VkStructureType"
 			     :init-form VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO)
     (pNext                   :name "pNext" :type pointer :init-form nil
-	                     :create (or pNext (cffi:null-pointer))
+	                     :create ((pNext-arg)
+				      (setf pNext (or pNext-arg (cffi:null-pointer))))
 			     :get (() (if (cffi:null-pointer-p pNext)
 					  nil
 					  pNext))
@@ -61,12 +65,14 @@
 				   (setf pNext (or new-value (cffi:null-pointer)))))
     (flags                   :type "VkInstanceCreateFlags")
     (pApplicationInfo        :name "pApplicationInfo" :type string :init-form nil
-		             :create (or pApplicationInfo (cffi:null-pointer)))
+		             :create ((pApplicationInfo-arg)
+				      (setf pApplicationInfo (or pApplicationInfo-arg (cffi:null-pointer)))))
     (enabledLayerCount       :name "enabledLayerCount" :type uint32)
     (ppEnabledLayerNames     :name "ppEnabledLayerNames" :type (list string) :init-form nil
-			     :create (if ppEnabledLayerNames
-					 (cffi:foreign-alloc :string :initial-contents ppEnabledLayerNames)
-					 (cffi:null-pointer))
+			     :create ((ppEnabledLayerNames-arg)
+				      (setf ppEnabledLayerNames (if ppEnabledLayerNames-arg
+								    (cffi:foreign-alloc :string :initial-contents ppEnabledLayerNames-arg)
+								    (cffi:null-pointer))))
 			     :destroy (if (not (cffi:null-pointer-p ppEnabledLayerNames))
 					  (loop for i from 0 below enabledLayerCount
 						do (cffi:foreign-free (cffi:mem-aref ppEnabledLayerNames
@@ -96,9 +102,10 @@
 					       (cffi:foreign-alloc :string :initial-contents new-value))))))
     (enabledExtensionCount   :name "enabledExtensionCount" :type uint32)
     (ppEnabledExtensionNames :name "ppEnabledExtensionNames" :type (list string) :init-form nil
-			     :create (if ppEnabledExtensionNames
-					 (cffi:foreign-alloc :string :initial-contents ppEnabledExtensionNames)
-					 (cffi:null-pointer))
+			     :create ((ppEnabledExtensionNames-arg)
+				      (setf ppEnabledExtensionNames (if ppEnabledExtensionNames-arg
+									(cffi:foreign-alloc :string :initial-contents ppEnabledExtensionNames-arg)
+									(cffi:null-pointer))))
 			     :destroy (if (not (cffi:null-pointer-p ppEnabledExtensionNames))
 					  (loop for i from 0 below enabledExtensionCount
 						do (cffi:foreign-free (cffi:mem-aref ppEnabledExtensionNames

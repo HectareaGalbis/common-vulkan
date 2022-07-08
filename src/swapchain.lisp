@@ -2,181 +2,114 @@
 (in-package :cvk)
 
 
-;;; -------------------------
-;;; --- Private functions ---
-;;; -------------------------
-
-;; Returns a format and a color space for the swapchain
-(defun choose-format-and-color (physical-device surface)
-  (with-surface-formats (formats-ptr format-count) (physical-device surface)
-    (let ((the-format (loop for i from 0 below format-count
-                            for format-ptr = (cffi:mem-aptr formats-ptr '(:struct VkSurfaceFormatKHR) i)
-                            thereis (cffi:with-foreign-slots ((format colorSpace) format-ptr (:struct VkSurfaceFormatKHR))
-                                      (and (equal format     VK_FORMAT_B8G8R8A8_SRGB)
-                                           (equal colorSpace VK_COLOR_SPACE_SRGB_NONLINEAR_KHR)
-                                           format-ptr)))))
-      (if the-format
-          (cffi:with-foreign-slots ((format colorSpace) the-format (:struct VkSurfaceFormatKHR))
-            (values format colorSpace))
-          (cffi:with-foreign-slots ((format colorSpace) formats-ptr (:struct VkSurfaceFormatKHR)) ; We return the first available format
-            (values format colorSpace))))))
+(mcffi:with-doc-file (doc-file (asdf:system-relative-pathname "common-vulkan" "docs/api/swapchain.md"))
 
 
-;; Returns a present mode for the swapchain
-(defun choose-present-mode (physical-device surface)
-  (with-surface-present-modes (modes-ptr mode-count) (physical-device surface)
-    (or (loop for i from 0 below mode-count
-             for mode = (cffi:mem-aref modes-ptr 'VkPresentModeKHR i)
-             thereis (and (equal mode VK_PRESENT_MODE_MAILBOX_KHR) mode))
-        VK_PRESENT_MODE_FIFO_KHR)))
+  (mcffi:doc-header "Swapchain" doc-file)
 
 
-;; Returns an extent for the swapchain
-(defun choose-extent (width height capabilities-ptr)
-  (cffi:with-foreign-slots (((:pointer currentExtent) (:pointer minImageExtent) (:pointer maxImageExtent))
-                            capabilities-ptr (:struct VkSurfaceCapabilitiesKHR))
-    (if (not (equal (cffi:foreign-slot-value currentExtent '(:struct VkExtent2D) 'width) UINT32_MAX))
-        (values (cffi:foreign-slot-value currentExtent '(:struct VkExtent2D) 'width)
-                (cffi:foreign-slot-value currentExtent '(:struct VkExtent2D) 'height))
-        (values (max (cffi:foreign-slot-value minImageExtent '(:struct VkExtent2D) 'width)
-                     (min (cffi:foreign-slot-value maxImageExtent '(:struct VkExtent2D) 'width)
-                          width))
-                (max (cffi:foreign-slot-value minImageExtent '(:struct VkExtent2D) 'height)
-                     (min (cffi:foreign-slot-value maxImageExtent '(:struct VkExtent2D) 'height)
-                          height))))))
+  (mcffi:doc-subheader "Structs" doc-file)
 
 
-;; Returns a transform for the swapchain
-(defun choose-transform (capabilities-ptr)
-  (cffi:foreign-slot-value capabilities-ptr '(:struct VkSurfaceCapabilitiesKHR) 'currentTransform))
+  (mcffi:def-foreign-struct "VkSwapchainCreateInfoKHR" swapchain-create-info doc-file
+      (:enable-default-create :enable-default-get :enable-default-set)
+    (sType :name "sType" :type "VkStructureType" :init-form VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR)
+    (pNext :name "pNext" :type pointer :init-form nil
+	   :create ((pNext-arg)
+		    (setf pNext (or pNext-arg (cffi:null-pointer))))
+	   :get (() (if (cffi:null-pointer-p pNext)
+			nil
+			pNext))
+	   :set ((new-value)
+		 (setf pNext (or new-value (cffi:null-pointer)))))
+    (flags :type "VkSwapchainCreateFlagsKHR")
+    (surface :type "VkSurfaceKHR")
+    (minImageCount :name "minImageCount" :type uint32)
+    (imageFormat :name "imageFormat" :type "VkFormat")
+    (imageColorSpace :name "imageColorSpace" :type "VkColorSpaceKHR")
+    (imageExtent :pointer t :name "imageExtent" :type "VkExtent2D" :init-form nil
+		 :create ((imageExtent-arg)
+			  (setf (extent-2d-width imageExtent) (if imageExtent-arg
+								  (extent-2d-width imageExtent-arg)
+								  0))
+			  (setf (extent-2d-height imageExtent) (if imageExtent-arg
+								   (extent-2d-height imageExtent-arg)
+								   0)))
+		 :set ((new-value)
+		       (setf (extent-2d-width imageExtent) (extent-2d-width new-value))
+		       (setf (extent-2d-height imageExtent) (extent-2d-height new-value))))
+    (imageArrayLayers :name "imageArrayLayers" :type uint32)
+    (imageUsage :name "imageUsage" :type "VkImageUsageFlags")
+    (imageSharingMode :name "imageSharingMode" :type "VkSharingMode")
+    (queueFamilyIndexCount :name "queueFamilyIndexCount" :type uint32)
+    (pQueueFamilyIndices :name "pQueueFamilyIndices" :type (list uint32) :init-form nil
+			 :create ((pQueueFamilyIndices-arg)
+				  (if pQueueFamilyIndices-arg
+				      (setf pQueueFamilyIndices (cffi:foreign-alloc :uint32 :initial-contents pQueueFamilyIndices-arg))
+				      (setf pQueueFamilyIndices (cffi:null-pointer))))
+			 :destroy (cffi:foreign-free pQueueFamilyIndices)
+			 :get ((&optional (index nil))
+			       (if index
+				   (cffi:mem-aref pQueueFamilyIndices :uint32 index)
+				   (iter (for i from 0 below queueFamilyIndexCount)
+				     (collect (cffi:mem-aref pQueueFamilyIndices :uint32 i)))))
+			 :set ((new-value &optional (index nil))
+			       (if index
+				   (setf (cffi:mem-aref pQueueFamilyIndices :uint32 index) new-value)
+				   (progn
+				     (cffi:foreign-free pQueueFamilyIndices)
+				     (setf pQueueFamilyIndices (cffi:foreign-alloc :uint32 :initial-contents new-value))))))
+    (preTransform :name "preTransform" :type "VkSurfaceTransformFlagBitsKHR")
+    (compositeAlpha :name "compositeAlpha" :type "VkCompositeAlphaFlagBitsKHR")
+    (presentMode :name "presentMode" :type "VkPresentModeKHR")
+    (clipped :type "VkBool32")
+    (oldSwapchain :name "oldSwapchain" :type "VkSwapchainKHR"))
 
 
 
-;; Returns an image count for the swapchain
-(defun choose-image-count (capabilities-ptr)
-  (cffi:with-foreign-slots ((minImageCount maxImageCount) capabilities-ptr (:struct VkSurfaceCapabilitiesKHR))
-    (if (and (> maxImageCount 0) (>= minImageCount maxImageCount))
-        maxImageCount
-        (1+ minImageCount))))
+  (mcffi:doc-subheader "Functions" doc-file)
 
 
-;; Creates a present info structure
-(defun create-present-info (swapchain image-index semaphores)
-  (let ((semaphores-ptr (if semaphores
-                            (cffi:foreign-alloc 'VkSemaphore :initial-contents semaphores)
-                            (cffi:null-pointer)))
-        (image-index-ptr (cffi:foreign-alloc :uint32 :initial-element image-index))
-        (result-ptr (cffi:foreign-alloc 'VkResult))
-        (present-info-ptr (alloc-vulkan-object '(:struct VkPresentInfoKHR))))
-    (cffi:with-foreign-slots ((sType waitSemaphoreCount pWaitSemaphores swapchainCount pSwapchains pImageIndices pResults)
-                              present-info-ptr (:struct VkPresentInfoKHR))
-      (setf sType              VK_STRUCTURE_TYPE_PRESENT_INFO_KHR
-            waitSemaphoreCount (length semaphores)
-            pWaitSemaphores    semaphores-ptr
-            swapchainCount     1
-            pSwapchains        swapchain
-            pImageIndices      image-index-ptr
-            pResults           result-ptr))
-    (values present-info-ptr)))
+  (mcffi:doc-subsubheader "vkCreateSwapchainKHR" doc-file)
 
-;; Destroys a present info structure
-(defun destroy-present-info (present-info-ptr)
-  (cffi:with-foreign-slots ((pWaitSemaphores pImageIndices pResults) present-info-ptr (:struct VkPresentInfoKHR))
-    (unless (cffi:null-pointer-p pWaitSemaphores)
-      (cffi:foreign-free pWaitSemaphores))
-    (cffi:foreign-free pImageIndices)
-    (cffi:foreign-free pResults))
-  (free-vulkan-object present-info-ptr))
-
-;; With present info macro
-(defwith with-present-info
-         create-present-info
-         destroy-present-info)
+  (mcffi:def-foreign-function create-swapchain doc-file (device pCreateInfo pAllocator)
+    (declare-types ("VkDevice" device) ("VkSwapchainCreateInfoKHR" "pCreateInfo") ("VkAllocationCallbacks" "pAllocator")
+		   :return ("VkSwapchainKHR" "pSwapchain") ("VkResult" result))
+    (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
+      (cffi:with-foreign-object (pSwapchain 'VkSwapchainKHR)
+	(let ((result (vkCreateSwapchainKHR device pCreateInfo pAllocator-c pSwapchain)))
+	  (values (cffi:mem-ref pSwapchain 'VkSwapchainKHR) result device pAllocator)))))
 
 
-;; Creates a swapchain create info structure
-(defun create-swapchain-create-info (_surface image-count image-format color-space _width _height
-                                     present-families transform present-mode)
-  (let ((index-count (length present-families)))
-    (when (zerop index-count)
-      (error "create-swapchain-create-info error: Expected 1 or more queue families"))
-    (let ((indices-ptr (cffi:foreign-alloc :uint32 :initial-contents (mapcar #'vk-queue-family-index present-families)))
-          (sharing-mode (if (> index-count 1) VK_SHARING_MODE_CONCURRENT VK_SHARING_MODE_EXCLUSIVE))
-          (swapchain-info-ptr (alloc-vulkan-object '(:struct VkSwapchainCreateInfoKHR))))
-      (cffi:with-foreign-slots ((sType surface minImageCount imageFormat imageColorSpace (:pointer imageExtent) imageArrayLayers
-                                 imageUsage imageSharingMode queueFamilyIndexCount pQueueFamilyIndices preTransform
-                                 compositeAlpha presentMode) swapchain-info-ptr (:struct VkSwapchainCreateInfoKHR))
-        (setf sType                 VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR
-              surface               _surface
-              minImageCount         image-count
-              imageFormat           image-format
-              imageColorSpace       color-space
-              imageArrayLayers      1
-              imageUsage            VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT
-              imageSharingMode      sharing-mode
-              queueFamilyIndexCount index-count
-              pQueueFamilyIndices   indices-ptr
-              preTransform          transform
-              compositeAlpha        VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR
-              presentMode           present-mode)
 
-        (cffi:with-foreign-slots ((width height) imageExtent (:struct VkExtent2D))
-          (setf width  _width
-                height _height)))
-      (values swapchain-info-ptr))))
+  (mcffi:doc-subsubheader "vkDestroySwapchainKHR" doc-file)
 
-;; Destroys a swapchain create info structure
-(defun destroy-swapchain-create-info (swapchain-info-ptr)
-  (cffi:with-foreign-slots ((pQueueFamilyIndices) swapchain-info-ptr (:struct VkSwapchainCreateInfoKHR))
-    (cffi:foreign-free pQueueFamilyIndices))
-  (free-vulkan-object swapchain-info-ptr))
-
-;; With swapchain create info macro
-(defwith with-swapchain-create-info
-         create-swapchain-create-info
-         destroy-swapchain-create-info)
+  (mcffi:def-foreign-function destroy-swapchain doc-file (device swapchain pAllocator)
+    (declare-types ("VkDevice" device) ("VkSwapchainKHR" swapchain) ("VkAllocationCallbacks" "pAllocator"))
+    (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
+      (vkDestroySwapchainKHR device swapchain pAllocator-c)))
 
 
-;;; -------------------------
-;;; ---- Public functions ---
-;;; -------------------------
 
-;; Creates a swapchain
-(defun create-swapchain (physical-device device surface present-families _width _height)
-  (with-surface-capabilities capabilities-ptr (physical-device surface)
-    (multiple-value-bind (image-format color-space) (choose-format-and-color physical-device surface)
-      (multiple-value-bind (width height) (choose-extent _width _height capabilities-ptr)
-        (let ((present-mode (choose-present-mode physical-device surface))
-              (transform    (choose-transform capabilities-ptr))
-              (image-count  (choose-image-count capabilities-ptr)))
-          (with-swapchain-create-info swapchain-info-ptr (surface image-count image-format color-space width height
-                                                          present-families transform present-mode)
-            (cffi:with-foreign-object (swapchain-ptr 'VkSwapchainKHR)
-              (check-vk-result (vkCreateSwapchainKHR device swapchain-info-ptr (cffi:null-pointer) swapchain-ptr))
-              (values (cffi:mem-ref swapchain-ptr 'VkSwapchainKHR) image-format device))))))))
+  (mcffi:doc-subsubheader "with-swapchain" doc-file)
 
-;; Destroys a swapchain
-(defun destroy-swapchain (swapchain img-format device)
-  (declare (ignore img-format))
-  (vkDestroySwapchainKHR device swapchain (cffi:null-pointer)))
+  (mcffi:defwith with-swapchain doc-file
+    create-swapchain
+    destroy-swapchain
+    :destructor-arguments (2 0 3))
 
-;; With swapchain macro
-(defwith with-swapchain
-         create-swapchain
-         destroy-swapchain
-         :destructor-arity 3)
+  
 
+  (mcffi:doc-subsubheader "vkGetSwapchainImagesKHR" doc-file)
 
-;; Returns the next available image in the swapchain
-(defun acquire-next-image (device swapchain &key (semaphore nil) (fence nil))
-  (cffi:with-foreign-object (image-index-ptr :uint32)
-    (vkAcquireNextImageKHR device swapchain UINT64_MAX semaphore fence image-index-ptr)
-    (cffi:mem-ref image-index-ptr :uint32)))
-
-
-;; Presents on screen an image from the swapchain
-(defun present-swapchain (queue swapchain image-index &key (sem-or-sems nil))
-  (with-present-info present-info-ptr (swapchain image-index (if (listp sem-or-sems) sem-or-sems (list sem-or-sems)))
-    (vkQueuePresentKHR queue present-info-ptr)
-    (cffi:with-foreign-slots ((pResults) present-info-ptr (:struct VkPresentInfoKHR))
-      (check-vk-result (cffi:mem-ref pResults 'VkResult)))))
+  (mcffi:def-foreign-function get-swapchain-images doc-file (device swapchain)
+    (declare-types ("VkDevice" device) ("VkSwapchainKHR" swapchain)
+		   :return ((list "VkImage") pSwapchainImages))
+    (cffi:with-foreign-object (pSwapchainImageCount :uint32)
+      (vkGetSwapchainImagesKHR device swapchain pSwapchainImageCount (cffi:null-pointer))
+      (let* ((swapchain-image-count (cffi:mem-ref pSwapchainImageCount :uint32)))
+	(cffi:with-foreign-object (pSwapchainImages 'VkImage swapchain-image-count)
+	  (let ((result (vkGetSwapchainImagesKHR device swapchain pSwapchainImageCount pSwapchainImages))
+		(swapchain-images (iter (for i from 0 below swapchain-image-count)
+				    (collect (cffi:mem-aref pSwapchainImages 'VkImage i)))))
+	    (values swapchain-images result)))))))

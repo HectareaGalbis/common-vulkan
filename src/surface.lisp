@@ -8,6 +8,31 @@
   (mcffi:doc-header "Surface" doc-file)
 
 
+  (mcffi:doc-subheader "Structs" doc-file)
+
+
+  (mcffi:def-foreign-struct "VkSurfaceCapabilitiesKHR" surface-capabilities doc-file
+      (:no-constructor :no-destructor :enable-default-get)
+    (minImageCount :name "minImageCount" :type uint32)
+    (maxImageCount :name "maxImageCount" :type uint32_t)
+    (currentExtent :name "currentExtent" :type VkExtent2D)
+    (minImageExtent :name "minImageExtent" :type VkExtent2D)
+    (maxImageExtent :name "maxImageExtent" :type VkExtent2D)
+    (maxImageArrayLayers :name "maxImageArrayLayers" :type uint32_t)
+    (supportedTransforms :name "supportedTransforms" :type VkSurfaceTransformFlagsKHR)
+    (currentTransform :name "currentTransform" :type VkSurfaceTransformFlagBitsKHR)
+    (supportedCompositeAlpha :name "supportedCompositeAlpha" :type VkCompositeAlphaFlagsKHR)
+    (supportedUsageFlags :name "supportedUsageFlags" :type VkImageUsageFlags))
+
+
+
+  (mcffi:def-foreign-struct "VkSurfaceFormatKHR" surface-format doc-file
+      (:no-constructor :no-destructor :enable-default-get)
+    (format :type "VkFormat")
+    (colorSpace :name "colorSpace" :type "VkColorSpaceKHR"))
+  
+  
+
   (mcffi:doc-subheader "Functions" doc-file)
   
 

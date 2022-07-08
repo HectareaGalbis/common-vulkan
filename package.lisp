@@ -275,6 +275,18 @@
    #:destroy-get-physical-device-queue-family-properties
    #:with-get-physical-device-queue-family-properties
    #:get-physical-device-surface-support
+   #:create-enumerate-device-extension-properties
+   #:destroy-enumerate-device-extension-properties
+   #:with-enumerate-device-extension-properties
+   #:create-get-physical-device-surface-capabilities
+   #:destroy-get-physical-device-surface-capabilities
+   #:with-get-physical-device-surface-capabilities
+   #:create-get-physical-device-surface-formats
+   #:destroy-get-physical-device-surface-formats
+   #:with-get-physical-device-surface-formats
+   #:get-physical-device-surface-present-modes
+   #:surface-format-format
+   #:surface-format-colorSpace
    
    ;; Device
    #:create-device-queue-create-info
@@ -305,7 +317,54 @@
    #:get-device-queue
    
    ;; Surface
+   #:create-surface-capabilities
+   #:destroy-surface-capabilities
+   #:with-surface-capabilities
+   #:surface-capabilities-minImageCount
+   #:surface-capabilities-maxImageCount
+   #:surface-capabilities-currentExtent
+   #:surface-capabilities-minImageExtent
+   #:surface-capabilities-maxImageExtent
+   #:surface-capabilities-maxImageArrayLayers
+   #:surface-capabilities-supportedTransforms
+   #:surface-capabilities-currentTransform
+   #:surface-capabilities-supportedCompositeAlpha
+   #:surface-capabilities-supportedUsageFlags
    #:destroy-surface
+
+   ;; Swapchain
+   #:create-swapchain-create-info
+   #:destroy-swapchain-create-info
+   #:with-swapchain-create-info
+   #:swapchain-create-info-sType
+   #:swapchain-create-info-pNext
+   #:swapchain-create-info-flags
+   #:swapchain-create-info-surface
+   #:swapchain-create-info-minImageCount
+   #:swapchain-create-info-imageFormat
+   #:swapchain-create-info-imageColorSpace
+   #:swapchain-create-info-imageExtent
+   #:swapchain-create-info-imageArrayLayers
+   #:swapchain-create-info-imageUsage
+   #:swapchain-create-info-imageSharingMode
+   #:swapchain-create-info-queueFamilyIndexCount
+   #:swapchain-create-info-pQueueFamilyIndices
+   #:swapchain-create-info-preTransform
+   #:swapchain-create-info-compositeAlpha
+   #:swapchain-create-info-presentMode
+   #:swapchain-create-info-clipped
+   #:swapchain-create-info-oldSwapchain
+   #:create-swapchain
+   #:destroy-swapchain
+   #:with-swapchain
+   #:get-swapchain-images
+
+   ;; Miscellanea
+   #:create-extent-2d
+   #:destroy-extent-2d
+   #:with-extent-2d
+   #:extent-2d-width
+   #:extent-2d-height
    
    ;; Constants
    #:VK_TRUE

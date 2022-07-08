@@ -15,7 +15,8 @@
       (:enable-default-create :enable-default-get :enable-default-set)
     (sType :name "sType" :type "VkStrutureType" :init-form VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO)
     (pNext :name "pNext" :type pointer :init-form nil
-	   :create (or pNext (cffi:null-pointer))
+	   :create ((pNext-arg)
+		    (setf pNext (or pNext-arg (cffi:null-pointer))))
 	   :get (()
 		 (if (cffi:null-pointer-p pNext)
 		     nil
@@ -26,9 +27,10 @@
     (queueFamilyIndex :name "queueFamilyIndex" :type uint32)
     (queueCount :name "queueCount" :type uint32)
     (pQueuePriorities :name "pQueuePriorities" :type (list float)
-		      :create (if pQueuePriorities
-				   (cffi:foreign-alloc :float :initial-contents pQueuePriorities)
-				   (cffi:null-pointer))
+		      :create ((pQueuePriorities-arg)
+			       (setf pQueuePriorities (if pQueuePriorities-arg
+							  (cffi:foreign-alloc :float :initial-contents pQueuePriorities-arg)
+							  (cffi:null-pointer))))
 		      :destroy (if (not (cffi:null-pointer-p pQueuePriorities))
 				   (cffi:foreign-free pQueuePriorities))
 		      :get ((&optional (index nil))
@@ -53,7 +55,8 @@
       (:enable-default-create :enable-default-get :enable-default-set)
     (sType :name "sType" :type "VkStructureType" :init-form VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO)
     (pNext :name "pNext" :type pointer :init-form nil
-	   :create (or pNext (cffi:null-pointer))
+	   :create ((pNext-arg)
+		    (setf pNext (or pNext-arg (cffi:null-pointer))))
 	   :get (() (if (cffi:null-pointer-p pNext)
 			nil
 			pNext))
@@ -62,14 +65,15 @@
     (flags :type "VkDeviceCreateFlags")
     (queueCreateInfoCount :name "queueCreateInfoCount" :type uint32)
     (pQueueCreateInfos :name "pQueueCreateInfos" :type (list "VkDeviceQueueCreateInfo") :init-form nil
-		       :create (if pQueueCreateInfos
-				   (cffi:foreign-alloc '(:struct VkDeviceQueueCreateInfo)
-						       :initial-contents
-						       (mapcar
-							(lambda (x)
-							  (cffi:mem-ref x '(:struct VkDeviceQueueCreateInfo)))
-							pQueueCreateInfos))
-				   (cffi:null-pointer))
+		       :create ((pQueueCreateInfos-arg)
+				(setf pQueueCreateInfos (if pQueueCreateInfos-arg
+							    (cffi:foreign-alloc '(:struct VkDeviceQueueCreateInfo)
+										:initial-contents
+										(mapcar
+										 (lambda (x)
+										   (cffi:mem-ref x '(:struct VkDeviceQueueCreateInfo)))
+										 pQueueCreateInfos-arg))
+							    (cffi:null-pointer))))
 		       :destroy (when (not (cffi:null-pointer-p pQueueCreateInfos))
 				  (cffi:foreign-free pQueueCreateInfos))
 		       :get ((&optional (index nil))
@@ -92,9 +96,10 @@
 							new-value)))))
     (enabledLayerCount :name "enabledLayerCount" :type uint32)
     (ppEnabledLayerNames :name "ppEnabledLayerNames" :type (list string) :init-form nil
-			 :create (if ppEnabledLayerNames
-				     (cffi:foreign-alloc :string :initial-contents ppEnabledLayerNames)
-				     (cffi:null-pointer))
+			 :create ((ppEnabledLayerNames-arg)
+				  (setf ppEnabledLayerNames (if ppEnabledLayerNames-arg
+								(cffi:foreign-alloc :string :initial-contents ppEnabledLayerNames-arg)
+								(cffi:null-pointer))))
 			 :destroy (loop for i from 0 below enabledLayerCount
 					do (cffi:foreign-free (cffi:mem-aref ppEnabledLayerNames :pointer i))
 					finally (cffi:foreign-free ppEnabledLayerNames))
@@ -123,9 +128,10 @@
 										   new-value))))))
     (enabledExtensionCount :name "enabledExtensionCount" :type uint32)
     (ppEnabledExtensionNames :name "ppEnabledExtensionNames" :type (list string) :init-form nil
-			     :create (if ppEnabledExtensionNames
-					 (cffi:foreign-alloc :string :initial-contents ppEnabledExtensionNames)
-					 (cffi:null-pointer))
+			     :create ((ppEnabledExtensionNames-arg)
+				      (setf ppEnabledExtensionNames (if ppEnabledExtensionNames-arg
+									(cffi:foreign-alloc :string :initial-contents ppEnabledExtensionNames-arg)
+									(cffi:null-pointer))))
 			     :destroy (loop for i from 0 below enabledExtensionCount
 					    do (cffi:foreign-free (cffi:mem-aref ppEnabledExtensionNames
 										 :pointer i))
@@ -156,7 +162,8 @@
 											   :initial-contents
 											   new-value))))))
     (pEnabledFeatures :name "pEnabledFeatures" :type "VkPhysicalDeviceFeatures" :init-form nil
-		      :create (or pEnabledFeatures (cffi:null-pointer))
+		      :create ((pEnabledFeatures-arg)
+			       (setf pEnabledFeatures (or pEnabledFeatures-arg (cffi:null-pointer))))
 		      :get (() (if (cffi:null-pointer-p pEnabledFeatures)
 				   nil
 				   pEnabledFeatures))

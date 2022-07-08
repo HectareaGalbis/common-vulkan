@@ -21,16 +21,18 @@
     (sType :name "sType" :type "VkStructureType"
 	   :init-form VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT)
     (pNext :name "pNext" :type pointer :init-form nil
-	   :create (or pNext (cffi:null-pointer)))
+	   :create ((pNext-arg)
+		    (setf pNext (or pNext-arg (cffi:null-pointer)))))
     (flags :type "VkDebugUtilsMessengerCreateFlagsEXT")
     (messageSeverity :name "messageSeverity" :type "VkDebugUtilsMessageSeverityFlagsEXT")
     (messageType :name "messageType" :type "VkDebugUtilsMessageTypeFlagsEXT")
     (pfnUserCallback :name "pfnUserCallback" :type "PFN_vkDebugUtilsMessengerCallbackEXT" :init-form nil
-		     :create (if pfnUserCallback
-				 (if (symbolp pfnUserCallback)
-				     (cffi:get-callback pfnUserCallback)
-				     pfnUserCallback)
-				 (cffi:null-pointer))
+		     :create ((pfnUserCallback-arg)
+			      (setf pfnUserCallback (if pfnUserCallback-arg
+							(if (symbolp pfnUserCallback-arg)
+							    (cffi:get-callback pfnUserCallback-arg)
+							    pfnUserCallback-arg)
+							(cffi:null-pointer))))
 		     :set ((new-value)			   
 			   (if new-value
 			       (if (symbolp new-value)
@@ -38,12 +40,13 @@
 				   (setf pfnUserCallback new-value))
 			       (setf pfnUserCallback (cffi:null-pointer)))))
     (pUserData :name "pUserData" :type t :init-form nil
-	       :create (if pUserData
-			   (prog2
-			       (setf (gethash *next-address* *user-data-table*) pUserData)
-			       (cffi:make-pointer *next-address*)
-			     (setf *next-address* (1+ *next-address*)))
-			   (cffi:null-pointer))
+	       :create ((pUserData-arg)
+			(setf pUserData (if pUserData-arg
+					    (prog2
+						(setf (gethash *next-address* *user-data-table*) pUserData-arg)
+						(cffi:make-pointer *next-address*)
+					      (setf *next-address* (1+ *next-address*)))
+					    (cffi:null-pointer))))
 	       :get (() (gethash (cffi:pointer-address pUserData) *user-data-table*))
 	       :set ((new-value)
 		     (if (cffi:null-pointer-p pUserData)
@@ -57,24 +60,6 @@
 			     (progn
 			       (remhash (cffi:pointer-address pUserData) *user-data-table*)
 			       (setf pUserData (cffi:null-pointer))))))))
-
-  
-
-  (mcffi:doc-subsubheader "PFN_vkDebugUtilsMessengerCallbackEXT" doc-file)
-
-  (mcffi:def-foreign-callback-definer def-debug-utils-messenger-callback doc-file 
-    ("messageSeverity" :type "VkDebugUtilsMessageSeverityFlagBitsEXT"
-		       :foreign-type VkDebugUtilsMessageSeverityFlagBitsEXT)
-    ("messageTypes" :type VkDebugUtilsMessageTypeFlagsEXT
-		    :foreign-type VkDebugUtilsMessageTypeFlagsEXT)
-    ("pCallbackData" :type "VkDebugUtilsMessengerCallbackDataEXT"
-		     :foreign-type :pointer)
-    ("pUserData" :type t
-		 :foreign-type :pointer
-		 :create (gethash (cffi:pointer-address pUserData) *user-data-table*))
-    (result :type boolean
-	    :foreign-type VkBool32
-	    :return (if (null result) VK_FALSE VK_TRUE)))
 
   
 
@@ -137,4 +122,27 @@
     (objectType :name "objectType" :type "VkObjectType")
     (objectHandle :name "objectHandle" :type uint64)
     (pObjectName :name "pObjectName" :type string
-		 :get (() (cffi:foreign-string-to-lisp pObjectName)))))
+		 :get (() (cffi:foreign-string-to-lisp pObjectName))))
+
+
+
+  (mcffi:doc-subheader "Callbacks" doc-file)
+  
+
+  (mcffi:doc-subsubheader "PFN_vkDebugUtilsMessengerCallbackEXT" doc-file)
+
+  (mcffi:def-foreign-callback-definer def-debug-utils-messenger-callback doc-file 
+    ("messageSeverity" :type "VkDebugUtilsMessageSeverityFlagBitsEXT"
+		       :foreign-type VkDebugUtilsMessageSeverityFlagBitsEXT)
+    ("messageTypes" :type VkDebugUtilsMessageTypeFlagsEXT
+		    :foreign-type VkDebugUtilsMessageTypeFlagsEXT)
+    ("pCallbackData" :type "VkDebugUtilsMessengerCallbackDataEXT"
+		     :foreign-type :pointer)
+    ("pUserData" :type t
+		 :foreign-type :pointer
+		 :create (gethash (cffi:pointer-address pUserData) *user-data-table*))
+    (result :type boolean
+	    :foreign-type VkBool32
+	    :return (if (null result) VK_FALSE VK_TRUE))))
+
+

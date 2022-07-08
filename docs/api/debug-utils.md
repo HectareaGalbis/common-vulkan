@@ -52,26 +52,6 @@ Wrap the body expressions with `create-debug-utils-messenger-create-info` and `d
 
 ---
 
-### PFN_vkDebugUtilsMessengerCallbackEXT
-
-**def-debug-utils-messenger-callback**
-```lisp
-(def-debug-utils-messenger-callback (messageSeverity messageTypes pCallbackData pUserData)
- &body body) => result
-```
-Define a callback function.
-
-* *Parameters:*
-  * *messageSeverity*: `VkDebugUtilsMessageSeverityFlagBitsEXT`
-  * *messageTypes*: `vkdebugutilsmessagetypeflagsext`
-  * *pCallbackData*: `VkDebugUtilsMessengerCallbackDataEXT`
-  * *pUserData*: `t`
-
-* *Return:*
-  * *result*: `boolean`
-
----
-
 ### VkDebugUtilsMessengerCallbackDataEXT
 
 **Members**
@@ -141,4 +121,26 @@ Define a callback function.
 (debug-utils-object-name-info-objectHandle obj)
 (debug-utils-object-name-info-pObjectName obj)
 ```
+
+## Callbacks
+
+---
+
+### PFN_vkDebugUtilsMessengerCallbackEXT
+
+**def-debug-utils-messenger-callback**
+```lisp
+(def-debug-utils-messenger-callback (messageSeverity messageTypes pCallbackData pUserData)
+ &body body) => result
+```
+Define a callback function.
+
+* *Parameters:*
+  * *messageSeverity*: `VkDebugUtilsMessageSeverityFlagBitsEXT`
+  * *messageTypes*: `vkdebugutilsmessagetypeflagsext`
+  * *pCallbackData*: `VkDebugUtilsMessengerCallbackDataEXT`
+  * *pUserData*: `t`
+
+* *Return:*
+  * *result*: `boolean`
 

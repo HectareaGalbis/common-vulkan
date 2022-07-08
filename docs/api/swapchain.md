@@ -1,66 +1,146 @@
 # Swapchain
 
-## create-swapchain
+## Structs
 
+---
+
+### VkSwapchainCreateInfoKHR
+
+**Members**
+* *sType*: `VkStructureType`
+* *pNext*: `pointer`
+* *flags*: `VkSwapchainCreateFlagsKHR`
+* *surface*: `VkSurfaceKHR`
+* *minImageCount*: `uint32`
+* *imageFormat*: `VkFormat`
+* *imageColorSpace*: `VkColorSpaceKHR`
+* *imageExtent*: `VkExtent2D`
+* *imageArrayLayers*: `uint32`
+* *imageUsage*: `VkImageUsageFlags`
+* *imageSharingMode*: `VkSharingMode`
+* *queueFamilyIndexCount*: `uint32`
+* *pQueueFamilyIndices*: `(list uint32)`
+* *preTransform*: `VkSurfaceTransformFlagBitsKHR`
+* *compositeAlpha*: `VkCompositeAlphaFlagBitsKHR`
+* *presentMode*: `VkPresentModeKHR`
+* *clipped*: `VkBool32`
+* *oldSwapchain*: `VkSwapchainKHR`
+
+**create-swapchain-create-info**
 ```lisp
-(create-swapchain physical-device device surface present-families width height)
+(create-swapchain-create-info &key
+                                (sType VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR)
+                                (pNext NIL)
+                                (flags 0)
+                                (surface 0)
+                                (minImageCount 0)
+                                (imageFormat 0)
+                                (imageColorSpace 0)
+                                (imageExtent NIL)
+                                (imageArrayLayers 0)
+                                (imageUsage 0)
+                                (imageSharingMode 0)
+                                (queueFamilyIndexCount 0)
+                                (pQueueFamilyIndices NIL)
+                                (preTransform 0)
+                                (compositeAlpha 0)
+                                (presentMode 0)
+                                (clipped 0)
+                                (oldSwapchain 0))
 ```
 
-Creates a swapchain.
-
-* **physical-device**: A physical device used to retrieve some information in order to create the swapchain.
-* **device**: A device created from the `physical-device` and used to create the swapchain.
-* **surface**: The surface onto which the swapchain will present the images.
-* **present-families**: These are the families that have access to the images of the swapchain.
-* **width**: The width of the swapchain images. This value could be adjusted according to the limits of the `surface`.
-* **height**: The height of the swapchain image. This value could be adjusted according to the limits of the `surface`.
-
-## destroy-swapchain
-
+**destroy-swapchain-create-info**
 ```lisp
-(destroy-swapchain swapchain device)
+(destroy-swapchain-create-info obj)
 ```
 
-Destroys a swapchain.
-
-* **swapchain**: The swapchain to be destroyed.
-* **device**: The device used to create the swapchain.
-
-## with-swapchain
-
+**with-swapchain-create-info**
 ```lisp
-(with-swapchain var (physical-device device surface present-families width height)
+(with-swapchain-create-info var (&rest args)
   &body body)
 ```
+Wrap the body expressions with `create-swapchain-create-info` and `destroy-swapchain-create-info`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
-Wraps the body expressions with the creation and destruction of a swapchain. The new swapchain is bound to `var`. The args are passed to the constructor `create-swapchain`.
-
-## acquire-next-image
-
+**Accessors**
 ```lisp
-(acquire-next-image device swapchain &key (semaphore nil) (fence nil))
+(swapchain-create-info-sType obj) ; setf-able
+(swapchain-create-info-pNext obj) ; setf-able
+(swapchain-create-info-flags obj) ; setf-able
+(swapchain-create-info-surface obj) ; setf-able
+(swapchain-create-info-minImageCount obj) ; setf-able
+(swapchain-create-info-imageFormat obj) ; setf-able
+(swapchain-create-info-imageColorSpace obj) ; setf-able
+(swapchain-create-info-imageExtent obj) ; setf-able
+(swapchain-create-info-imageArrayLayers obj) ; setf-able
+(swapchain-create-info-imageUsage obj) ; setf-able
+(swapchain-create-info-imageSharingMode obj) ; setf-able
+(swapchain-create-info-queueFamilyIndexCount obj) ; setf-able
+(swapchain-create-info-pQueueFamilyIndices obj &optional (index nil)) ; setf-able
+(swapchain-create-info-preTransform obj) ; setf-able
+(swapchain-create-info-compositeAlpha obj) ; setf-able
+(swapchain-create-info-presentMode obj) ; setf-able
+(swapchain-create-info-clipped obj) ; setf-able
+(swapchain-create-info-oldSwapchain obj) ; setf-able
 ```
 
-Returns the index of the next available image of the swapchain. 
+## Functions
 
-* **device**: The device that the swapchain was created from.
-* **swapchain**: The swapchain to retrieve the image index.
-* **semaphore**: If not `nil`, the semaphore will be signaled when the operation ends.
-* **fence**: If not `nil`, the fence will be signaled when the operation ends.
+---
 
-## present-swapchain
+### vkCreateSwapchainKHR
 
+**create-swapchain**
 ```lisp
-(present-swapchain queue swapchain image-index &key (sem-or-sems nil))
+(create-swapchain device pCreateInfo pAllocator) => (values pSwapchain result)
 ```
 
-Queue an image for presentation.
+* *Parameters*:
+  * *device*: `VkDevice`
+  * *pCreateInfo*: `VkSwapchainCreateInfoKHR`
+  * *pAllocator*: `VkAllocationCallbacks`
 
-* **queue**: The queue where the command will be committed. It must be capable of present an image.
-* **swapchain**: The swapchain that contains the image to be presented.
-* **image-index**: The index of the image to be presented.
-* **sem-or-sems**: If not `nil`, this can be a semaphore or a list of semaphores. The operation will wait for each semaphore before trying to present the image.
+* *Return:*
+  * *pSwapchain*: `VkSwapchainKHR`
+  * *result*: `VkResult`
 
+---
 
+### vkDestroySwapchainKHR
 
+**destroy-swapchain**
+```lisp
+(destroy-swapchain device swapchain pAllocator)
+```
+
+* *Parameters*:
+  * *device*: `VkDevice`
+  * *swapchain*: `VkSwapchainKHR`
+  * *pAllocator*: `VkAllocationCallbacks`
+
+---
+
+### with-swapchain
+
+**with-swapchain**
+```lisp
+(with-swapchain var (&rest args)
+  &body body)
+```
+Wrap the body expressions with `create-swapchain` and `destroy-swapchain`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
+
+---
+
+### vkGetSwapchainImagesKHR
+
+**get-swapchain-images**
+```lisp
+(get-swapchain-images device swapchain) => pswapchainimages
+```
+
+* *Parameters*:
+  * *device*: `VkDevice`
+  * *swapchain*: `VkSwapchainKHR`
+
+* *Return:*
+  * *pswapchainimages*: `(list VkImage)`
 

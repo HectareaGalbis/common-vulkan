@@ -341,4 +341,94 @@
     (cffi:with-foreign-object (pSupported 'VkBool32)
       (vkGetPhysicalDeviceSurfaceSupportKHR physicalDevice queueFamilyIndex surface pSupported)
       (let ((supportedp (cffi:mem-ref pSupported 'VkBool32)))
-        (equal supportedp VK_TRUE)))))
+        (equal supportedp VK_TRUE))))
+
+
+
+  (mcffi:doc-subsubheader "vkEnumerateDeviceExtensionProperties" doc-file)
+
+  (mcffi:doc-note "This function requires an allocation for retrieving the information. For that reason this function is splitted up in two creation and destruction functions." doc-file)
+
+  (mcffi:def-foreign-function create-enumerate-device-extension-properties doc-file (physicalDevice pLayerName)
+    (declare-types ("VkPhysicalDevice" "physicalDevice") (string "pLayerName")
+		   :return ((list "VkExtensionProperties") "pProperties") ("VkResult" result))
+    (let ((pLayerName-c (or pLayerName (cffi:null-pointer))))
+      (cffi:with-foreign-object (pPropertyCount :uint32)
+	(vkEnumerateDeviceExtensionProperties physicalDevice pLayerName-c pPropertyCount (cffi:null-pointer))
+	(let* ((property-count (cffi:mem-ref pPropertyCount :uint32))
+	       (pProperties (cffi:foreign-alloc '(:struct VkExtensionProperties) :count property-count)))
+	  (let ((result (vkEnumerateDeviceExtensionProperties physicalDevice pLayerName-c pPropertyCount pProperties))
+		(properties (iter (for i from 0 below property-count)
+			      (collect (cffi:mem-aptr pProperties '(:struct VkExtensionProperties) i)))))
+	    (values properties result))))))
+
+  (mcffi:def-foreign-function destroy-enumerate-device-extension-properties doc-file (pProperties)
+    (declare-types ((list "VkExtensionProperties") "pProperties"))
+    (cffi:foreign-free (car pProperties)))
+
+  (mcffi:defwith with-enumerate-device-extension-properties doc-file
+    create-enumerate-device-extension-properties
+    destroy-enumerate-device-extension-properties)
+
+
+
+  (mcffi:doc-subsubheader "vkGetPhysicalDeviceSurfaceCapabilitiesKHR" doc-file)
+
+  (mcffi:doc-note "This function requires an allocation for retrieving the information. For that reason this function is splitted up in two creation and destruction functions." doc-file)
+  
+  (mcffi:def-foreign-function create-get-physical-device-surface-capabilities doc-file (physicalDevice surface)
+    (declare-types ("VkPhysicalDevice" "physicalDevice") ("VkSurfaceKHR" surface)
+		   :return ("VkSurfaceCapabilitiesKHR" "pSurfaceCapabilities") ("VkResult" result))
+    (let* ((pSurfaceCapabilities (cffi:foreign-alloc '(:struct VkSurfaceCapabilitiesKHR)))
+	   (result (vkGetPhysicalDeviceSurfaceCapabilitiesKHR physicalDevice surface pSurfaceCapabilities)))
+      (values pSurfaceCapabilities result)))
+
+  (mcffi:def-foreign-function destroy-get-physical-device-surface-capabilities doc-file (pSurfaceCapabilities)
+    (declare-types ("VkSurfaceCapabilitiesKHR" "pSurfaceCapabilities"))
+    (cffi:foreign-free pSurfaceCapabilities))
+
+  (mcffi:defwith with-get-physical-device-surface-capabilities doc-file
+    create-get-physical-device-surface-capabilities
+    destroy-get-physical-device-surface-capabilities)
+
+
+
+  (mcffi:doc-subsubheader "vkGetPhysicalDeviceSurfaceFormatsKHR" doc-file)
+
+  (mcffi:doc-note "This function requires an allocation for retrieving the information. For that reason this function is splitted up in two creation and destruction functions." doc-file)
+  
+  (mcffi:def-foreign-function create-get-physical-device-surface-formats doc-file (physicalDevice surface)
+    (declare-types ("VkPhysicalDevice" "physicalDevice") ("VkSurfaceKHR" surface)
+		   :return ((list "VkSurfaceFormatKHR") "pSurfaceFormats") ("VkResult" result))
+    (cffi:with-foreign-object (pSurfaceFormatCount :uint32)
+      (vkGetPhysicalDeviceSurfaceFormatsKHR physicalDevice surface pSurfaceFormatCount (cffi:null-pointer))
+      (let* ((surface-format-count (cffi:mem-ref pSurfaceFormatCount :uint32))
+	     (pSurfaceFormats (cffi:foreign-alloc '(:struct VkSurfaceFormatKHR) :count surface-format-count))
+	     (result (vkGetPhysicalDeviceSurfaceFormatsKHR physicalDevice surface pSurfaceFormatCount (cffi:null-pointer)))
+	     (surface-formats (iter (for i from 0 below surface-format-count)
+				(collect (cffi:mem-aptr pSurfaceFormats '(:struct VkSurfaceFormatKHR) i)))))
+	(values surface-formats result))))
+
+  (mcffi:def-foreign-function destroy-get-physical-device-surface-formats doc-file (pSurfaceFormats)
+    (declare-types ((list "VkSurfaceFormatKHR") "pSurfaceFormats"))
+    (cffi:foreign-free (car pSurfaceFormats)))
+
+  (mcffi:defwith with-get-physical-device-surface-formats doc-file
+    create-get-physical-device-surface-formats
+    destroy-get-physical-device-surface-formats)
+
+
+
+  (mcffi:doc-subsubheader "vkGetPhysicalDeviceSurfacePresentModesKHR" doc-file)
+
+  (mcffi:def-foreign-function get-physical-device-surface-present-modes doc-file (physicalDevice surface)
+    (declare-types ("VkPhysicalDevice" "physicalDevice") ("VkSurfaceKHR" surface)
+		   :return ((list "VkPresentModeKHR") "pPresentModes") ("VkResult" result))
+    (cffi:with-foreign-object (pPresentModeCount :uint32)
+      (vkGetPhysicalDeviceSurfacePresentModesKHR physicalDevice surface pPresentModeCount (cffi:null-pointer))
+      (let* ((present-mode-count (cffi:mem-ref pPresentModeCount :uint32)))
+	(cffi:with-foreign-object (pPresentModes 'VkPresentModeKHR present-mode-count)
+	  (let ((result (vkGetPhysicalDeviceSurfacePresentModesKHR physicalDevice surface pPresentModeCount pPresentModes))
+		(present-modes (iter (for i from 0 below present-mode-count)
+				 (collect (cffi:mem-aref pPresentModes 'VkPresentModeKHR i)))))
+	    (values present-modes result)))))))
