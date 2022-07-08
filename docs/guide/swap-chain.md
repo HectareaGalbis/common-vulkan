@@ -361,8 +361,8 @@ After creating the swap chain, we can retrieve its images using `get-swapchain-i
       (multiple-value-bind (swap-chain result) (cvk:create-swapchain (device app) create-info nil)
 	...
 	(setf (swap-chain app) swap-chain)
-	(destroy-query-swap-chain-support swap-chain-support)))
-    (setf (swap-chain-images app) (cvk:get-swapchain-images (device app) (swap-chain app)))))
+	(setf (swap-chain-images app) (cvk:get-swapchain-images (device app) (swap-chain app)))
+	(destroy-query-swap-chain-support swap-chain-support)))))
 ```
 
 One last thing, store the format and extent we have chosen for the swap chain images.
@@ -382,10 +382,10 @@ One last thing, store the format and extent we have chosen for the swap chain im
       (multiple-value-bind (swap-chain result) (cvk:create-swapchain (device app) create-info nil)
 	...
 	(setf (swap-chain app) swap-chain)
-	(destroy-query-swap-chain-support swap-chain-support)))
-    (setf (swap-chain-images app) (cvk:get-swapchain-images (device app) (swap-chain app)))
-    (setf (swap-chain-image-format app) (cvk:surface-format-format surface-format))
-    (setf (swap-chain-extent app) extent)))
+	(setf (swap-chain-images app) (cvk:get-swapchain-images (device app) (swap-chain app)))
+        (setf (swap-chain-image-format app) (cvk:surface-format-format surface-format))
+        (setf (swap-chain-extent app) extent)
+	(destroy-query-swap-chain-support swap-chain-support)))))
 ```
 
 Remember that the extent was created with the `create-choose-swap-extent` function. Destroy the extent in the `cleanup` function.
