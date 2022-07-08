@@ -7,8 +7,7 @@
 (defvar *user-data-table* (make-hash-table))
 
 
-(with-open-file (doc-file (asdf:system-relative-pathname "common-vulkan" "docs/api/debug-utils.md")
-			  :direction :output :if-exists :supersede :if-does-not-exist :create)
+(mcffi:with-doc-file (doc-file (asdf:system-relative-pathname "common-vulkan" "docs/api/debug-utils.md"))
 
 
   (mcffi:doc-header "Debug utils extension" doc-file)

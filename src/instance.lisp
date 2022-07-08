@@ -1,8 +1,7 @@
 
 (in-package :cvk)
 
-(with-open-file (doc-file (asdf:system-relative-pathname "common-vulkan" "docs/api/instance.md")
-			  :direction :output :if-exists :supersede :if-does-not-exist :create)
+(mcffi:with-doc-file (doc-file (asdf:system-relative-pathname "common-vulkan" "docs/api/instance.md"))
 
   
   (mcffi:doc-header "Instance" doc-file)
