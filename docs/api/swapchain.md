@@ -46,7 +46,7 @@
                                 (compositeAlpha 0)
                                 (presentMode 0)
                                 (clipped 0)
-                                (oldSwapchain 0))
+                                (oldSwapchain NIL))
 ```
 
 **destroy-swapchain-create-info**

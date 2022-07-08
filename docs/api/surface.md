@@ -8,15 +8,15 @@
 
 **Members**
 * *minImageCount*: `uint32`
-* *maxImageCount*: `uint32_t`
-* *currentExtent*: `vkextent2d`
-* *minImageExtent*: `vkextent2d`
-* *maxImageExtent*: `vkextent2d`
-* *maxImageArrayLayers*: `uint32_t`
-* *supportedTransforms*: `vksurfacetransformflagskhr`
-* *currentTransform*: `vksurfacetransformflagbitskhr`
-* *supportedCompositeAlpha*: `vkcompositealphaflagskhr`
-* *supportedUsageFlags*: `vkimageusageflags`
+* *maxImageCount*: `uint32`
+* *currentExtent*: `VkExtent2D`
+* *minImageExtent*: `VkExtent2D`
+* *maxImageExtent*: `VkExtent2D`
+* *maxImageArrayLayers*: `uint32`
+* *supportedTransforms*: `VkSurfaceTransformFlagsKHR`
+* *currentTransform*: `VkSurfaceTransformFlagBitsKHR`
+* *supportedCompositeAlpha*: `VkCompositeAlphaFlagsKHR`
+* *supportedUsageFlags*: `VkImageUsageFlags`
 
 **Accessors**
 ```lisp

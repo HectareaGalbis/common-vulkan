@@ -359,12 +359,43 @@
    #:with-swapchain
    #:get-swapchain-images
 
+   ;; Image view
+   #:create-image-view-create-info
+   #:destroy-image-view-create-info
+   #:with-image-view-create-info
+   #:image-view-create-info-sType
+   #:image-view-create-info-pNext
+   #:image-view-create-info-flags
+   #:image-view-create-info-image
+   #:image-view-create-info-viewType
+   #:image-view-create-info-format
+   #:image-view-create-info-components
+   #:image-view-create-info-subresourceRange
+   #:create-image-view
+   #:destroy-image-view
+   #:with-image-view
+   
    ;; Miscellanea
    #:create-extent-2d
    #:destroy-extent-2d
    #:with-extent-2d
    #:extent-2d-width
    #:extent-2d-height
+   #:create-component-mapping
+   #:destroy-component-mapping
+   #:with-component-mapping
+   #:component-mapping-r
+   #:component-mapping-g
+   #:component-mapping-b
+   #:component-mapping-a
+   #:create-image-subresource-range
+   #:destroy-image-subresource-range
+   #:with-image-subresource-range
+   #:image-subresource-range-aspectMask
+   #:image-subresource-range-baseMipLevel
+   #:image-subresource-range-levelCount
+   #:image-subresource-range-baseArrayLayer
+   #:image-subresource-range-layerCount
    
    ;; Constants
    #:VK_TRUE
