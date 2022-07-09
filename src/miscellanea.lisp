@@ -33,4 +33,61 @@
     (baseMipLevel :name "baseMipLevel" :type uint32)
     (levelCount :name "levelCount" :type uint32)
     (baseArrayLayer :name "baseArrayLayer" :type uint32)
-    (layerCount :name "layerCount" :type uint32)))
+    (layerCount :name "layerCount" :type uint32))
+
+
+
+  (mcffi:def-foreign-struct "VkSpecializationMapEntry" specialization-map-entry doc-file
+      (:enable-default-create :enable-default-get :enable-default-set)
+    (constantID :name "constantID" :type uint32)
+    (offset :type uint32)
+    (size :type size))
+  
+  
+
+  (mcffi:def-foreign-struct "VkSpecializationInfo" specialization-info doc-file
+      (:enable-default-create :enable-default-get :enable-default-set)
+    (mapEntryCount :name "mapEntryCount" :type uint32)
+    (pMapEntries :name "pMapEntries" :type "VkSpecializationMapEntry" :init-form nil
+		 :create ((pMapEntries-arg)
+			  (setf pMapEntries (or pMapEntries-arg (cffi:null-pointer))))
+		 :get (() (if (cffi:null-pointer-p pMapEntries)
+			      nil
+			      pMapEntries))
+		 :set ((new-value)
+		       (setf pMapEntries (or new-value (cffi:null-pointer)))))
+    (dataSize :name "dataSize" :type size)
+    (pData :name "pData" :type void*)) ; Sin tratar de momento
+
+
+
+  (mcffi:doc-subheader "Functions" doc-file)
+
+
+  (mcffi:doc-subsubheader "create-spv-code" doc-file)
+
+  (mcffi:def-foreign-function create-spv-code doc-file (file)
+    (declare-types ("pathname designator" file) :return ("spv code" code) ("uint" size))
+    (with-open-file (stream file :direction :input :element-type '(unsigned-byte 8))
+      (let ((buffer (make-array 1024 :element-type '(unsigned-byte 8) :fill-pointer 0 :adjustable t)))
+	(loop for byte = (read-byte stream nil)
+	      while byte
+	      do (vector-push-extend byte buffer))
+	(let ((code (cffi:foreign-alloc :uint8 :initial-contents buffer)))
+	  (values code (fill-pointer buffer))))))
+
+
+
+  (mcffi:doc-subsubheader "destroy-spv-code" doc-file)
+  
+  (mcffi:def-foreign-function destroy-spv-code doc-file (code)
+    (declare-types ("spv code" code))
+    (cffi:foreign-free code))
+
+
+
+  (mcffi:doc-subsubheader "with-spv-code" doc-file)
+
+  (mcffi:defwith with-spv-code doc-file
+    create-spv-code
+    destroy-spv-code)) 

@@ -1,65 +1,60 @@
 
 (in-package :cvk)
 
-;;; -------------------------
-;;; --- Private functions ---
-;;; -------------------------
 
-;; Took from cl-vulkan
-(defun create-spv-code (filename)
-  (with-open-file (stream filename :element-type '(unsigned-byte 8))
-    (let ((buffer (make-array 1024 :element-type '(unsigned-byte 8) :adjustable t :fill-pointer 0))
-	  (byte))
-      (loop while (setq byte (read-byte stream nil))
-	 do (vector-push-extend byte buffer))
-      (let* ((size (fill-pointer buffer))
-	     (binary (cffi:foreign-alloc (list :array :unsigned-char size))))
-	(loop for b across buffer for i from 0
-	   do (setf (cffi:mem-aref binary :unsigned-char i) b))
-	(values binary size)))))
-
-(defun destroy-spv-code (binary)
-  (cffi:foreign-free binary))
+(mcffi:with-doc-file (doc-file (asdf:system-relative-pathname "common-vulkan" "docs/api/shader-module.md"))
 
 
-;; Creates a shader module create info structure
-(defun create-shader-module-create-info (spv-file)
-  (multiple-value-bind (code-ptr code-size) (create-spv-code spv-file)
-    (let ((shader-module-info-ptr (alloc-vulkan-object '(:struct VkShaderModuleCreateInfo))))
-      (cffi:with-foreign-slots ((sType codeSize pCode) shader-module-info-ptr (:struct VkShaderModuleCreateInfo))
-        (setf sType    VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO
-              codeSize code-size
-              pCode    code-ptr))
-      (values shader-module-info-ptr))))
-
-;; Destroys a shader module create info structure
-(defun destroy-shader-module-create-info (shader-info-ptr)
-  (destroy-spv-code (cffi:foreign-slot-value shader-info-ptr '(:struct VkShaderModuleCreateInfo) 'pCode))
-  (free-vulkan-object shader-info-ptr))
-
-;; With shader module create info macro
-(defwith with-shader-module-create-info
-         create-shader-module-create-info
-         destroy-shader-module-create-info)
+  (mcffi:doc-header "Shader module" doc-file)
 
 
-;;; -------------------------
-;;; ---- Public functions ---
-;;; -------------------------
+  (mcffi:doc-subheader "Structs" doc-file)
 
-;; Creates a shader module
-(defun create-shader-module (device spv-file)
-  (with-shader-module-create-info shader-module-info (spv-file)
-    (cffi:with-foreign-object (shader-module-ptr 'VkShaderModule)
-      (check-vk-result (vkCreateShaderModule device shader-module-info (cffi:null-pointer) shader-module-ptr))
-      (values (cffi:mem-ref shader-module-ptr 'VkShaderModule) device))))
 
-;; Destroys a shader module
-(defun destroy-shader-module (shader-module device)
-  (vkDestroyShaderModule device shader-module (cffi:null-pointer)))
+  (mcffi:def-foreign-struct "VkShaderModuleCreateInfo" shader-module-create-info doc-file
+      (:enable-default-create :enable-default-get :enable-default-set)
+    (sType :name "sType" :type "VkStructureType" :init-form "VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO")
+    (pNext :name "pNext" :type "Vulkan object" :init-form nil
+	   :create ((pNext-arg)
+		    (setf pNext (or pNext-arg (cffi:null-pointer))))
+	   :get (() (if (cffi:null-pointer-p pNext)
+			nil
+			pNext))
+	   :set ((new-value)
+		 (setf pNext (or new-value (cffi:null-pointer)))))
+    (flags :type "VkShaderModuleCreateFlags")
+    (codeSize :name "codeSize" :type size)
+    (pCode :name "pCode" :type "spv code"))
 
-;; With shader module macro
-(defwith with-shader-module
-         create-shader-module
-         destroy-shader-module
-         :destructor-arity 2)
+
+
+  (mcffi:doc-subheader "Functions" doc-file)
+
+
+  (mcffi:doc-subsubheader "vkCreateShaderModule" doc-file)
+
+  (mcffi:def-foreign-function create-shader-module doc-file (device pCreateInfo pAllocator)
+    (declare-types ("VkDevice" device) ("VkShaderModuleCreateInfo" "pCreateInfo") ("VkAllocationCallbacks" "pAllocator")
+		   :return ("VkShaderModule" "pShaderModule") ("VkResult" result))
+    (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
+      (cffi:with-foreign-object (pShaderModule 'VkShaderModule)
+	(let ((result (vkCreateShaderModule device pCreateInfo pAllocator-c pShaderModule)))
+	  (values (cffi:mem-ref pShaderModule 'VkShaderModule) result device pAllocator)))))
+
+
+
+  (mcffi:doc-subsubheader "vkDestroyShaderModule" doc-file)
+
+  (mcffi:def-foreign-function destroy-shader-module doc-file (device shaderModule pAllocator)
+    (declare-types ("VkDevice" device) ("VkShaderModule" "shaderModule") ("VkAllocationCallbacks" "pAllocator"))
+    (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
+      (vkDestroyShaderModule device shaderModule pAllocator-c)))
+
+
+
+  (mcffi:doc-subsubheader "with-shader-module" doc-file)
+
+  (mcffi:defwith with-shader-module doc-file
+    create-shader-module
+    destroy-shader-module
+    :destructor-arguments (2 0 3)))

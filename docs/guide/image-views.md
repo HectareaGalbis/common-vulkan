@@ -88,5 +88,5 @@ We need another loop inside `cleanup` to destroy each image view.
 
 * [main.lisp](https://github.com/Hectarea1996/common-vulkan-guide/blob/main/code-guide/image-views.lisp)
 
-* **Next**: [Graphics pipeline introduction](https://hectarea1996.github.io/common-vulkan/guide/graphics-pipeline-introduction.html)
+* **Next**: [Shader modules](https://hectarea1996.github.io/common-vulkan/guide/shader-modules.html)
 * **Previous**: [Swap chain](https://hectarea1996.github.io/common-vulkan/guide/swap-chain.html)

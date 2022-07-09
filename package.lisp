@@ -374,6 +374,31 @@
    #:create-image-view
    #:destroy-image-view
    #:with-image-view
+
+   ;; Shader module
+   #:create-shader-module-create-info
+   #:destroy-shader-module-create-info
+   #:with-shader-module-create-info
+   #:shader-module-create-info-sType
+   #:shader-module-create-info-pNext
+   #:shader-module-create-info-flags
+   #:shader-module-create-info-codeSize
+   #:shader-module-create-info-pCode
+   #:create-shader-module
+   #:destroy-shader-module
+   #:with-shader-module
+
+   ;; Pipeline
+   #:create-pipeline-shader-stage-create-info
+   #:destroy-pipeline-shader-stage-create-info
+   #:with-pipeline-shader-stage-create-info
+   #:pipeline-shader-stage-create-info-sType
+   #:pipeline-shader-stage-create-info-pNext
+   #:pipeline-shader-stage-create-info-flags
+   #:pipeline-shader-stage-create-info-stage
+   #:pipeline-shader-stage-create-info-module
+   #:pipeline-shader-stage-create-info-pName
+   #:pipeline-shader-stage-create-info-pSpecializationInfo
    
    ;; Miscellanea
    #:create-extent-2d
@@ -396,6 +421,22 @@
    #:image-subresource-range-levelCount
    #:image-subresource-range-baseArrayLayer
    #:image-subresource-range-layerCount
+   #:create-specialization-map-entry
+   #:destroy-specialization-map-entry
+   #:with-specialization-map-entry
+   #:specialization-map-entry-constantID
+   #:specialization-map-entry-offset
+   #:specialization-map-entry-size
+   #:create-specialization-info
+   #:destroy-specialization-info
+   #:with-specialization-info
+   #:specialization-info-mapEntryCount
+   #:specialization-info-pMapEntries
+   #:specialization-info-dataSize
+   #:specialization-info-pData
+   #:create-spv-code
+   #:destroy-spv-code
+   #:with-spv-code
    
    ;; Constants
    #:VK_TRUE
