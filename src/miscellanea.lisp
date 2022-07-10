@@ -11,11 +11,38 @@
   (mcffi:doc-subheader "Structs" doc-file)
 
 
+
+  (mcffi:def-foreign-struct "VkOffset2D" offset-2d doc-file
+      (:enable-default-create :enable-default-get :enable-default-set)
+    (x :type int32)
+    (y :type int32))
+
+  
+
   (mcffi:def-foreign-struct "VkExtent2D" extent-2d doc-file
       (:enable-default-create :enable-default-get :enable-default-set)
     (width :type uint32)
     (height :type uint32))
 
+
+
+  (mcffi:def-foreign-struct "VkRect2D" rect-2d doc-file
+      (:enable-default-create :enable-default-get :enable-default-set)
+    (offset :pointer t :type "VkOffset2D"
+	    :create ((offset-arg)
+		     (setf (offset-2d-x offset) (offset-2d-x offset-arg)
+			   (offset-2d-y offset) (offset-2d-y offset-arg)))
+	    :set ((new-value)
+		  (setf (offset-2d-x offset) (offset-2d-x new-value)
+			(offset-2d-y offset) (offset-2d-y new-value))))
+    (extent :pointer t :type "VkExtent2D"
+	    :create ((extent-arg)
+		     (setf (extent-2d-width extent) (extent-2d-width extent-arg)
+			   (extent-2d-height extent) (extent-2d-height extent-arg)))
+	    :set ((new-value)
+		  (setf (extent-2d-width extent) (extent-2d-width new-value)
+			(extent-2d-height extent) (extent-2d-height new-value)))))
+  
 
 
   (mcffi:def-foreign-struct "VkComponentMapping" component-mapping doc-file
@@ -58,6 +85,25 @@
 		       (setf pMapEntries (or new-value (cffi:null-pointer)))))
     (dataSize :name "dataSize" :type size)
     (pData :name "pData" :type void*)) ; Sin tratar de momento
+
+
+
+  (mcffi:def-foreign-struct "VkViewport" viewport doc-file
+      (:enable-default-create :enable-default-get :enable-default-set)
+    (x :type float)
+    (y :type float)
+    (width :type float)
+    (height :type float)
+    (minDepth :name "minDepth" :type float)
+    (maxDepth :name "maxDepth" :type float))
+
+
+
+  (mcffi:def-foreign-struct "VkPushConstantRange" push-constant-range doc-file
+      (:enable-default-create :enable-default-get :enable-default-set)
+    (stageFlags :name "stageFlags" :type "VkShaderStageFlags")
+    (offset :type uint32)
+    (size :type uint32))
 
 
 
