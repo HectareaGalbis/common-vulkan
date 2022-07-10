@@ -193,16 +193,7 @@
 		 (setf pNext (or new-value (cffi:null-pointer)))))
     (flags :type "VkPipelineInputAssemblyStateCreateFlags")
     (topology :type "VkPrimitiveTopology")
-    (primitiveRestartEnable :name "primitiveRestartEnable" :type boolean
-			    :create ((primitiveRestartEnable-arg)
-				     (setf primitiveRestartEnable (if primitiveRestartEnable-arg
-								      VK_TRUE
-								      VK_FALSE)))
-			    :get (() (equal primitiveRestartEnable VK_TRUE))
-			    :set ((new-value)
-				  (setf primitiveRestartEnable (if new-value
-								   VK_TRUE
-								   VK_FALSE)))))
+    (primitiveRestartEnable :name "primitiveRestartEnable" :type "VkBool32"))
 
 
 
