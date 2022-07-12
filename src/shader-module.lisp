@@ -12,7 +12,7 @@
 
 
   (mcffi:def-foreign-struct "VkShaderModuleCreateInfo" shader-module-create-info doc-file
-      (:enable-default-create :enable-default-get :enable-default-set)
+      (:default-create :default-get :default-set)
     (sType :name "sType" :type "VkStructureType" :init-form "VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO")
     (pNext :name "pNext" :type "Vulkan object" :init-form nil
 	   :create ((pNext-arg)

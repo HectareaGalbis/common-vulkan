@@ -12,7 +12,7 @@
 
 
   (mcffi:def-foreign-struct "VkPipelineShaderStageCreateInfo" pipeline-shader-stage-create-info doc-file
-      (:enable-default-create :enable-default-get :enable-default-set)
+      (:default-create :default-get :default-set)
     (sType :name "sType" :type "VkStructureType" :init-form VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO)
     (pNext :name "pNext" :type "Vulkan object" :init-form nil
 	   :create ((pNext-arg)
@@ -54,7 +54,7 @@
 
 
   (mcffi:def-foreign-struct "VkPipelineDynamicStateCreateInfo" pipeline-dynamic-state-create-info doc-file
-      (:enable-default-create :enable-default-get :enable-default-set)
+      (:default-create :default-get :default-set)
     (sType :name "sType" :type "VkStructureType" :init-form VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO)
     (pNext :name "pNext" :type "Vulkan object" :init-form nil
 	   :create ((pNext-arg)
@@ -93,7 +93,7 @@
 
 
   (mcffi:def-foreign-struct "VkVertexInputBindingDescription" vertex-input-binding-description doc-file
-      (:enable-default-create :enable-default-get :enable-default-set)
+      (:default-create :default-get :default-set)
     (binding :type uint32)
     (stride :type uint32)
     (inputRate :name "inputRate" :type "VkVertexInputRate"))
@@ -101,7 +101,7 @@
 
 
   (mcffi:def-foreign-struct "VkVertexInputAttributeDescription" vertex-input-attribute-description doc-file
-      (:enable-default-create :enable-default-get :enable-default-set)
+      (:default-create :default-get :default-set)
     (location :type uint32)
     (binding :type uint32)
     (format :type "VkFormat")
@@ -110,7 +110,7 @@
 
 
   (mcffi:def-foreign-struct "VkPipelineVertexInputStateCreateInfo" pipeline-vertex-input-state-create-info doc-file
-      (:enable-default-create :enable-default-get :enable-default-set)
+      (:default-create :default-get :default-set)
     (sType :name "sType" :type "VkStructureType" :init-form VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO)
     (pNext :name "pNext" :type "Vulkan object" :init-form nil
 	   :create ((pNext-arg)
@@ -181,7 +181,7 @@
 
 
   (mcffi:def-foreign-struct "VkPipelineInputAssemblyStateCreateInfo" pipeline-input-assembly-state-create-info doc-file
-      (:enable-default-create :enable-default-get :enable-default-set)
+      (:default-create :default-get :default-set)
     (sType :name "sType" :type "VkStructureType" :init-form VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO)
     (pNext :name "pNext" :type "Vulkan object" :init-form nil
 	   :create ((pNext-arg)
@@ -198,7 +198,7 @@
 
 
   (mcffi:def-foreign-struct "VkPipelineViewportStateCreateInfo" pipeline-viewport-state-create-info doc-file
-      (:enable-default-create :enable-default-get :enable-default-set)
+      (:default-create :default-get :default-set)
     (sType :name "sType" :type "VkStructureType" :init-form VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO)
     (pNext :name "pNext" :type "Vulkan object" :init-form nil
 	   :create ((pNext-arg)
@@ -259,7 +259,7 @@
 
 
   (mcffi:def-foreign-struct "VkPipelineRasterizationStateCreateInfo" pipeline-rasterization-state-create-info doc-file
-      (:enable-default-create :enable-default-get :enable-default-set)
+      (:default-create :default-get :default-set)
     (sType :name "sType" :type "VkStructureType" :init-form VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO)
     (pNext :name "pNext" :type "Vulkan object" :init-form nil
 	   :create ((pNext-arg)
@@ -284,7 +284,7 @@
 
 
   (mcffi:def-foreign-struct "VkPipelineMultisampleStateCreateInfo" pipeline-multisample-state-create-info doc-file
-      (:enable-default-create :enable-default-get :enable-default-set)
+      (:default-create :default-get :default-set)
     (sType :name "sType" :type "VkStructureType" :init-form VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO)
     (pNext :name "pNext" :type "Vulkan object" :init-form nil
 	   :create ((pNext-arg)
@@ -325,7 +325,7 @@
 
 
   (mcffi:def-foreign-struct "VkPipelineColorBlendAttachmentState" pipeline-color-blend-attachment-state doc-file
-      (:enable-default-create :enable-default-get :enable-default-set)
+      (:default-create :default-get :default-set)
     (blendEnable :name "blendEnable" :type "VkBool32")
     (srcColorBlendFactor :name "srcColorBlendFactor" :type "VkBlendFactor")
     (dstColorBlendFactor :name "dstColorBlendFactor" :type "VkBlendFactor")
@@ -338,7 +338,7 @@
 
 
   (mcffi:def-foreign-struct "VkPipelineColorBlendStateCreateInfo" pipeline-color-blend-state-create-info doc-file
-      (:enable-default-create :enable-default-get :enable-default-set)
+      (:default-create :default-get :default-set)
     (sType :name "sType" :type "VkStructureType" :init-form VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO)
     (pNext :name "pNext" :type "Vulkan object" :init-form nil
 	   :create ((pNext-arg)
@@ -356,7 +356,9 @@
 		  :create ((pAttachments-arg)
 			  (setf pAttachments (if pAttachments-arg
 						 (cffi:foreign-alloc '(:struct VkPipelineColorBlendAttachmentState)
-								     :initial-contents pAttachments-arg)
+								     :initial-contents
+								     (iter (for attachment in pAttachments-arg)
+								       (cffi:mem-ref attachment '(:struct VkPipelineColorBlendAttachmentState))))
 						(cffi:null-pointer))))
 		 :destroy (when (not (cffi:null-pointer-p pAttachments))
 			    (cffi:foreign-free pAttachments))
@@ -392,7 +394,7 @@
 
 
   (mcffi:def-foreign-struct "VkPipelineLayoutCreateInfo" pipeline-layout-create-info doc-file
-      (:enable-default-create :enable-default-get :enable-default-set)
+      (:default-create :default-get :default-set)
     (sType :name "sType" :type "VkStructureType" :init-form VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO)
     (pNext :name "pNext" :type "Vulkan object" :init-form nil
 	   :create ((pNext-arg)

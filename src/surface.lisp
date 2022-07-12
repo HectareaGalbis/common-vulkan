@@ -12,7 +12,7 @@
 
 
   (mcffi:def-foreign-struct "VkSurfaceCapabilitiesKHR" surface-capabilities doc-file
-      (:no-constructor :no-destructor :enable-default-get)
+      (:no-constructor :no-destructor :default-get)
     (minImageCount :name "minImageCount" :type uint32)
     (maxImageCount :name "maxImageCount" :type uint32)
     (currentExtent :pointer t :name "currentExtent" :type "VkExtent2D")
@@ -27,7 +27,7 @@
 
 
   (mcffi:def-foreign-struct "VkSurfaceFormatKHR" surface-format doc-file
-      (:no-constructor :no-destructor :enable-default-get)
+      (:no-constructor :no-destructor :default-get)
     (format :type "VkFormat")
     (colorSpace :name "colorSpace" :type "VkColorSpaceKHR"))
   

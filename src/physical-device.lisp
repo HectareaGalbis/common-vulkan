@@ -12,7 +12,7 @@
 
   
   (mcffi:def-foreign-struct "VkPhysicalDeviceProperties" physical-device-properties doc-file
-      (:no-constructor :no-destructor :enable-default-get)
+      (:no-constructor :no-destructor :default-get)
     (apiVersion :name "apiVersion" :type uint32)
     (driverVersion :name "driverVersion" :type uint32)
     (vendorID :name "vendorID" :type uint32)
@@ -32,7 +32,7 @@
 
   
   (mcffi:def-foreign-struct "VkPhysicalDeviceLimits" physical-device-limits doc-file
-      (:no-constructor :no-destructor :enable-default-get)
+      (:no-constructor :no-destructor :default-get)
     (maxImageDimension1D :name "maxImageDimension1D" :type uint32)
     (maxImageDimension2D :name "maxImageDimension2D" :type uint32)
     (maxImageDimension3D :name "maxImageDimension3D" :type uint32)
@@ -172,7 +172,7 @@
 
 
   (mcffi:def-foreign-struct "VkPhysicalDeviceSparseProperties" physical-device-sparse-properties doc-file
-      (:no-constructor :no-destructor :enable-default-get)
+      (:no-constructor :no-destructor :default-get)
     (residencyStandard2DBlockShape :name "residencyStandard2DBlockShape" :type "VkBool32")
     (residencyStandard2DMultisampleBlockShape :name "residencyStandard2DMultisampleBlockShape" :type "VkBool32")
     (residencyStandard3DBlockShape :name "residencyStandard3DBlockShape" :type "VkBool32")
@@ -182,7 +182,7 @@
 
 
   (mcffi:def-foreign-struct "VkPhysicalDeviceFeatures" physical-device-features doc-file 
-      (:enable-default-create :enable-default-get)
+      (:default-create :default-get)
     (robustBufferAccess :name "robustBufferAccess" :type "VkBool32")
     (fullDrawIndexUint32 :name "fullDrawIndexUint32" :type "VkBool32")
     (imageCubeArray :name "imageCubeArray" :type "VkBool32")
@@ -242,7 +242,7 @@
 
 
   (mcffi:def-foreign-struct "VkQueueFamilyProperties" queue-family-properties doc-file 
-      (:no-constructor :no-destructor :enable-default-get)
+      (:no-constructor :no-destructor :default-get)
     (queueFlags :name "queueFlags" :type "VkQueueFlags")
     (queueCount :name "queueCount" :type uint32)
     (timestampValidBits :name "timestampValidBits" :type uint32)

@@ -12,7 +12,7 @@
 
 
   (mcffi:def-foreign-struct "VkDeviceQueueCreateInfo" device-queue-create-info doc-file
-      (:enable-default-create :enable-default-get :enable-default-set)
+      (:default-create :default-get :default-set)
     (sType :name "sType" :type "VkStrutureType" :init-form VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO)
     (pNext :name "pNext" :type pointer :init-form nil
 	   :create ((pNext-arg)
@@ -52,7 +52,7 @@
 
   ;; Functions for VkDeviceCreateInfo
   (mcffi:def-foreign-struct "VkDeviceCreateInfo" device-create-info doc-file
-      (:enable-default-create :enable-default-get :enable-default-set)
+      (:default-create :default-get :default-set)
     (sType :name "sType" :type "VkStructureType" :init-form VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO)
     (pNext :name "pNext" :type pointer :init-form nil
 	   :create ((pNext-arg)

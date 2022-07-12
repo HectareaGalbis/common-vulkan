@@ -17,7 +17,7 @@
 
   
   (mcffi:def-foreign-struct "VkDebugUtilsMessengerCreateInfoEXT" debug-utils-messenger-create-info doc-file
-      (:enable-default-create :enable-default-get :enable-default-set)
+      (:default-create :default-get :default-set)
     (sType :name "sType" :type "VkStructureType"
 	   :init-form VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT)
     (pNext :name "pNext" :type pointer :init-form nil
@@ -64,7 +64,7 @@
   
 
   (mcffi:def-foreign-struct "VkDebugUtilsMessengerCallbackDataEXT" debug-utils-messenger-callback-data doc-file
-      (:no-constructor :no-destructor :enable-default-get)
+      (:no-constructor :no-destructor :default-get)
     (sType :name "sType" :type "VkStructureType")
     (pNext :name "pNext" :type "pointer")
     (flags :type "VkDebugUtilsMessengerCallbackDataFlagsEXT")
@@ -101,7 +101,7 @@
 
   
   (mcffi:def-foreign-struct "VkDebugUtilsLabelEXT" debug-utils-label doc-file
-      (:no-constructor :no-destructor :enable-default-get)
+      (:no-constructor :no-destructor :default-get)
     (sType :name "sType" :type "VkStructureType")
     (pNext :name "pNext" :type pointer)
     (pLabelName :name "pLabelName" :type string
@@ -116,7 +116,7 @@
 
 
   (mcffi:def-foreign-struct "VkDebugUtilsObjectNameInfoEXT" debug-utils-object-name-info doc-file
-      (:no-constructor :no-destructor :enable-default-get)
+      (:no-constructor :no-destructor :default-get)
     (sType :name "sType" :type "VkStructureType")
     (pNext :name "pNext" :type pointer)
     (objectType :name "objectType" :type "VkObjectType")

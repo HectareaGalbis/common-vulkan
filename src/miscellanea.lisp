@@ -13,21 +13,21 @@
 
 
   (mcffi:def-foreign-struct "VkOffset2D" offset-2d doc-file
-      (:enable-default-create :enable-default-get :enable-default-set)
+      (:default-create :default-get :default-set)
     (x :type int32)
     (y :type int32))
 
   
 
   (mcffi:def-foreign-struct "VkExtent2D" extent-2d doc-file
-      (:enable-default-create :enable-default-get :enable-default-set)
+      (:default-create :default-get :default-set)
     (width :type uint32)
     (height :type uint32))
 
 
 
   (mcffi:def-foreign-struct "VkRect2D" rect-2d doc-file
-      (:enable-default-create :enable-default-get :enable-default-set)
+      (:default-create :default-get :default-set)
     (offset :pointer t :type "VkOffset2D"
 	    :create ((offset-arg)
 		     (setf (offset-2d-x offset) (offset-2d-x offset-arg)
@@ -46,7 +46,7 @@
 
 
   (mcffi:def-foreign-struct "VkComponentMapping" component-mapping doc-file
-      (:enable-default-create :enable-default-get :enable-default-set)
+      (:default-create :default-get :default-set)
     (r :type "VkComponentSwizzle")
     (g :type "VkComponentSwizzle")
     (b :type "VkComponentSwizzle")
@@ -55,7 +55,7 @@
 
 
   (mcffi:def-foreign-struct "VkImageSubresourceRange" image-subresource-range doc-file
-      (:enable-default-create :enable-default-get :enable-default-set)
+      (:default-create :default-get :default-set)
     (aspectMask :name "aspectMask" :type "VkImageAspectFlags")
     (baseMipLevel :name "baseMipLevel" :type uint32)
     (levelCount :name "levelCount" :type uint32)
@@ -65,7 +65,7 @@
 
 
   (mcffi:def-foreign-struct "VkSpecializationMapEntry" specialization-map-entry doc-file
-      (:enable-default-create :enable-default-get :enable-default-set)
+      (:default-create :default-get :default-set)
     (constantID :name "constantID" :type uint32)
     (offset :type uint32)
     (size :type size))
@@ -73,7 +73,7 @@
   
 
   (mcffi:def-foreign-struct "VkSpecializationInfo" specialization-info doc-file
-      (:enable-default-create :enable-default-get :enable-default-set)
+      (:default-create :default-get :default-set)
     (mapEntryCount :name "mapEntryCount" :type uint32)
     (pMapEntries :name "pMapEntries" :type "VkSpecializationMapEntry" :init-form nil
 		 :create ((pMapEntries-arg)
@@ -89,10 +89,14 @@
 
 
   (mcffi:def-foreign-struct "VkViewport" viewport doc-file
-      (:enable-default-create :enable-default-get :enable-default-set)
+      (:default-create :default-get :default-set)
     (x :type float)
     (y :type float)
-    (width :type float)
+    (width :type float
+	   :create ((width-arg)
+		    (setf width (float width-arg)))
+	   :set ((new-value)
+		 (setf width (float new-value))))
     (height :type float)
     (minDepth :name "minDepth" :type float)
     (maxDepth :name "maxDepth" :type float))
@@ -100,7 +104,7 @@
 
 
   (mcffi:def-foreign-struct "VkPushConstantRange" push-constant-range doc-file
-      (:enable-default-create :enable-default-get :enable-default-set)
+      (:default-create :default-get :default-set)
     (stageFlags :name "stageFlags" :type "VkShaderStageFlags")
     (offset :type uint32)
     (size :type uint32))

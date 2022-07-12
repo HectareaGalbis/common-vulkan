@@ -12,7 +12,7 @@
 
 
   (mcffi:def-foreign-struct "VkImageViewCreateInfo" image-view-create-info doc-file
-      (:enable-default-create :enable-default-get :enable-default-set)
+      (:default-create :default-get :default-set)
     (sType :name "sType" :type "VkStructureType" :init-form VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO)
     (pNext :name "pNext" :type pointer :init-form nil
 	   :create ((pNext-arg)

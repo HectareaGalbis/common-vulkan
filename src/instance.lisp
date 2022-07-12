@@ -11,7 +11,7 @@
 
   
   (mcffi:def-foreign-struct "VkApplicationInfo" application-info doc-file
-      (:enable-default-create :enable-default-get :enable-default-set)
+      (:default-create :default-get :default-set)
     (sType              :name "sType" :type "VkStructureType" :init-form VK_STRUCTURE_TYPE_APPLICATION_INFO)
     (pNext              :name "pNext" :type "pointer" :init-form nil
 	                :create ((pNext-arg)
@@ -52,7 +52,7 @@
 
   
   (mcffi:def-foreign-struct "VkInstanceCreateInfo" instance-create-info doc-file 
-      (:enable-default-create :enable-default-get :enable-default-set)
+      (:default-create :default-get :default-set)
     (sType                   :name "sType" :type "VkStructureType"
 			     :init-form VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO)
     (pNext                   :name "pNext" :type pointer :init-form nil
@@ -139,14 +139,14 @@
   
 
   (mcffi:def-foreign-struct "VkExtensionProperties" extension-properties doc-file 
-      (:no-constructor :no-destructor :enable-default-get)
+      (:no-constructor :no-destructor :default-get)
     (extensionName :name "extensionName" :type string
 		   :get (() (cffi:foreign-string-to-lisp extensionName)))
     (specVersion   :name "specVersion" :type uint32))
 
   
   (mcffi:def-foreign-struct "VkLayerProperties" layer-properties doc-file 
-      (:no-constructor :no-destructor :enable-default-get)
+      (:no-constructor :no-destructor :default-get)
     (layerName             :name "layerName" :type string
 	                   :get (() (cffi:foreign-string-to-lisp layerName)))
     (specVersion           :name "specVersion" :type uint32)

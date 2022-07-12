@@ -12,7 +12,7 @@
 
 
   (mcffi:def-foreign-struct "VkSwapchainCreateInfoKHR" swapchain-create-info doc-file
-      (:enable-default-create :enable-default-get :enable-default-set)
+      (:default-create :default-get :default-set)
     (sType :name "sType" :type "VkStructureType" :init-form VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR)
     (pNext :name "pNext" :type pointer :init-form nil
 	   :create ((pNext-arg)
