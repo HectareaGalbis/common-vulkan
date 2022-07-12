@@ -97,7 +97,11 @@
 		    (setf width (float width-arg)))
 	   :set ((new-value)
 		 (setf width (float new-value))))
-    (height :type float)
+    (height :type float
+	    :create ((height-arg)
+		    (setf height (float height-arg)))
+	   :set ((new-value)
+		 (setf height (float new-value))))
     (minDepth :name "minDepth" :type float)
     (maxDepth :name "maxDepth" :type float))
 
