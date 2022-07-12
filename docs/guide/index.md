@@ -25,3 +25,10 @@ I think I'm not missing anything so..., let's code!
   * [Window surface](https://hectarea1996.github.io/common-vulkan/guide/window-surface.html)
   * [Swap chain](https://hectarea1996.github.io/common-vulkan/guide/swap-chain.html)
   * [Image views](https://hectarea1996.github.io/common-vulkan/guide/image-views.html)
+
+* **Graphics pipeline basics**
+  * [Shader modules](https://hectarea1996.github.io/common-vulkan/guide/shader-modules.html)
+  * [Fixed functions](https://hectarea1996.github.io/common-vulkan/guide/fixed-functions.html)
+  * [Render passes](https://hectarea1996.github.io/common-vulkan/guide/render-passes.html)
+  * [Conclusion](https://hectarea1996.github.io/common-vulkan/guide/conclusion.html)
+  
