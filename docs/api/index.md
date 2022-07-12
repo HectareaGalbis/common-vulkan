@@ -5,19 +5,11 @@ Welcome the Common Vulkan Api Reference!
 
 ## What is this?
 
-I have to advise you that this reference will not teach you what the Vulkan functions do. Here you will see how the functions are in Common Lisp and the types of the arguments and returned values. Like the Vulkan Guide, this is complementary material. Your main source of information should be the official Vulkan Specifications. 
+This reference will not teach you what the Vulkan functions do. Here you will see how the functions are in Common Lisp and the types of the arguments and returned values. Like the Vulkan Guide, this is complementary material. Your main source of information should be the official Vulkan Specifications. 
 
-## How the names work?
+## How this works?
 
-Vulkan names have a common structure. They all start with the *vk* prefix followed by words in *Camel case*. Also, some of them end with a suffix like *KHR* or *EXT*. Depending on what we are deling with, the names are obtained in a different way.
-
-### Function names
-
-To turn a vulkan function name into a common lisp name you need to remove the prefix and its suffix (if it has), separate the words by hyphens and make the words lowercase. Examples: `vkCreateSwapchainKHR` -> `create-swapchain`, `vkEnumerateInstanceExtensionProperties` -> `enumerate-instance-extension-properties`.
-
-### Structures
-
-In common lisp we don't need types, but we need a way to create and destroy the structures, and also a way to access its members. How we obtain these names are similar to how we did with function names. Remove any prefix or suffix from the structure type, separate words by hyphens and make the words lowercase. Now, depending on what we add to this name we get a function or another. Adding the prefixes `create-` or `destroy-` we get the functions to create and destroy the structure. If we add the name of a slot member as a suffix, we get a getter. Example: `VkInstanceCreateInfo` -> `create-instance-create-info`, `destroy-create-info`, `with-instance-create-info` (with macro), `instance-create-info-sType`, `instance-create-info-pNext`, `instance-create-info-ppEnabledLayerNames`, etc.
+Given a function or structure from vulkan, search it in this reference. You will see then the Common Lisp side of these names.  
 
 ## The reference sections
 
