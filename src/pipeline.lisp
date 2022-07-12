@@ -453,6 +453,132 @@
 
 
 
+  (mcffi:def-foreign-struct "VkGraphicsPipelineCreateInfo" graphics-pipeline-create-info doc-file
+      (:default-create :default-get :default-set)
+    (sType :name "sType" :type "VkStructureType" :init-form VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO)
+    (pNext :name "pNext" :type "Vulkan object" :init-form nil
+	   :create ((pNext-arg)
+		    (setf pNext (or pNext-arg (cffi:null-pointer))))
+	   :get (() (if (cffi:null-pointer-p pNext)
+			nil
+			pNext))
+	   :set ((new-value)
+		 (setf pNext (or new-value (cffi:null-pointer)))))
+    (flags :type "VkPipelineCreateFlags")
+    (stageCount :name "stageCount" :type uint32)
+    (pStages :name "pStages" :type (list "VkPipelineShaderStageCreateInfo") :init-form nil
+	     :create ((pStages-arg)
+		      (setf pStages (if pStages-arg
+					(cffi:foreign-alloc '(:struct VkPipelineShaderStageCreateInfo)
+							    :initial-contents
+							    (iter (for stage in pStages-arg)
+							      (collect (cffi:mem-ref stage '(:struct VkPipelineShaderStageCreateInfo)))))
+					(cffi:null-pointer))))
+	     :destroy (when (not (cffi:null-pointer-p pStages))
+			(cffi:foreign-free pStages))
+	     :get ((&optional (index nil))
+		   (if index
+		       (cffi:mem-aref pStages '(:struct VkPipelineShaderStageCreateInfo) index)
+		       (if (cffi:null-pointer-p pStages)
+			   nil
+			   (iter (for i from 0 below stageCount)
+			     (collect (cffi:mem-aref pStages '(:struct VkPipelineShaderStageCreateInfo) i))))))
+	     :set ((new-value &optional (index nil))
+		   (if index
+		       (setf (cffi:mem-aref pStages '(:struct VkPipelineShaderStageCreateInfo) index) new-value)
+		       (progn
+			 (when (not (cffi:null-pointer-p pStages))
+			   (cffi:foreign-free pStages))
+			 (setf pStages (if new-value
+					   (cffi:foreign-alloc '(:struct VkPipelineShaderStageCreateInfo) :initial-contents new-value)
+					   (cffi:null-pointer)))))))
+    (pVertexInputState :name "pVertexInputState" :type "VkPipelineVertexInputStateCreateInfo" :init-form nil
+		       :create ((pVertexInputState-arg)
+				(setf pVertexInputState (or pVertexInputState-arg (cffi:null-pointer))))
+		       :get (() (if (cffi:null-pointer-p pVertexInputState)
+				    nil
+				    pVertexInputState))
+		       :set ((new-value)
+			     (setf pVertexInputState (or new-value (cffi:null-pointer)))))
+    (pInputAssemblyState :name "pInputAssemblyState" :type "VkPipelineInputAssemblyStateCreateInfo" :init-form nil
+			 :create ((pInputAssemblyState-arg)
+				  (setf pInputAssemblyState (or pInputAssemblyState-arg (cffi:null-pointer))))
+			 :get (() (if (cffi:null-pointer-p pInputAssemblyState)
+				      nil
+				      pInputAssemblyState))
+			 :set ((new-value)
+			       (setf pInputAssemblyState (or new-value (cffi:null-pointer)))))
+    (pTessellationState :name "pTessellationState" :type "VkPipelineTessellationStateCreateInfo" :init-form nil
+			:create ((pTessellationState-arg)
+				 (setf pTessellationState (or pTessellationState-arg (cffi:null-pointer))))
+			:get (() (if (cffi:null-pointer-p pTessellationState)
+				     nil
+				     pTessellationState))
+			:set ((new-value)
+			      (setf pTessellationState (or new-value (cffi:null-pointer)))))
+    (pViewportState :name "pViewportState" :type "VkPipelineViewportStateCreateInfo" :init-form nil
+		    :create ((pViewportState-arg)
+			     (setf pViewportState (or pViewportState-arg (cffi:null-pointer))))
+		    :get (() (if (cffi:null-pointer-p pViewportState)
+				 nil
+				 pViewportState))
+		    :set ((new-value)
+			  (setf pViewportState (or new-value (cffi:null-pointer)))))
+    (pRasterizationState :name "pRasterizationState" :type "VkPipelineRasterizationStateCreateInfo" :init-form nil
+			 :create ((pRasterizationState-arg)
+				  (setf pRasterizationState (or pRasterizationState-arg (cffi:null-pointer))))
+			 :get (() (if (cffi:null-pointer-p pRasterizationState)
+				      nil
+				      pRasterizationState))
+			 :set ((new-value)
+			       (setf pRasterizationState (or new-value (cffi:null-pointer)))))
+    (pMultisampleState :name "pMultisampleState" :type "VkPipelineMultisampleStateCreateInfo" :init-form nil
+		       :create ((pMultisampleState-arg)
+				(setf pMultisampleState (or pMultisampleState-arg (cffi:null-pointer))))
+		       :get (() (if (cffi:null-pointer-p pMultisampleState)
+				    nil
+				    pMultisampleState))
+		       :set ((new-value)
+			     (setf pMultisampleState (or new-value (cffi:null-pointer)))))
+    (pDepthStencilState :name "pDepthStencilState" :type "VkPipelineDepthStencilStateCreateInfo" :init-form nil
+			:create ((pDepthStencilState-arg)
+				 (setf pDepthStencilState (or pDepthStencilState-arg (cffi:null-pointer))))
+			:get (() (if (cffi:null-pointer-p pDepthStencilState)
+				     nil
+				     pDepthStencilState))
+			:set ((new-value)
+			      (setf pDepthStencilState (or new-value (cffi:null-pointer)))))
+    (pColorBlendState :name "pColorBlendState" :type "VkPipelineColorBlendStateCreateInfo" :init-form nil
+		      :create ((pColorBlendState-arg)
+			       (setf pColorBlendState (or pColorBlendState-arg (cffi:null-pointer))))
+		      :get (() (if (cffi:null-pointer-p pColorBlendState)
+				   nil
+				   pColorBlendState))
+		      :set ((new-value)
+			    (setf pColorBlendState (or new-value (cffi:null-pointer)))))
+    (pDynamicState :name "pDynamicState" :type "VkPipelineDynamicStateCreateInfo" :init-form nil
+		   :create ((pDynamicState-arg)
+			    (setf pDynamicState (or pDynamicState-arg (cffi:null-pointer))))
+		   :get (() (if (cffi:null-pointer-p pDynamicState)
+				nil
+				pDynamicState))
+		   :set ((new-value)
+			 (setf pDynamicState (or new-value (cffi:null-pointer)))))
+    (layout :type "VkPipelineLayout")
+    (renderPass :name "renderPass" :type "VkRenderPass")
+    (subpass :type uint32)
+    (basePipelineHandle :name "basePipelineHandle" :type "VkPipeline"
+			:create ((basePipelineHandle-arg)
+				 (setf basePipelineHandle (or basePipelineHandle-arg (cffi:null-pointer))))
+			:get (() (if (cffi:null-pointer-p basePipelineHandle)
+				     nil
+				     basePipelineHandle))
+			:set ((new-value)
+			      (setf basePipelineHandle (or new-value (cffi:null-pointer)))))
+    (basePipelineIndex :name "basePipelineIndex" :type int32))
+
+
+
   (mcffi:doc-subheader "Functions" doc-file)
 
 
@@ -482,4 +608,46 @@
   (mcffi:defwith with-pipeline-layout doc-file
     create-pipeline-layout
     destroy-pipeline-layout
+    :destructor-arguments (2 0 3))
+
+
+
+  (mcffi:doc-subsubheader "vkCreateGraphicsPipelines" doc-file)
+
+  (mcffi:def-foreign-function create-graphics-pipelines doc-file (device pipelineCache pCreateInfos pAllocator)
+    (declare-types ("VkDevice" device) ("VkPipelineCache" pipelineCache) ((list "VkGraphicsPipelineCreateInfo") pCreateInfos)
+		   ("VkAllocationCallbacks" pAllocator) :return ((list "VkPipeline") pPipelines) ("VkResult" result))
+    (let ((pipelineCache-c (or pipelineCache (cffi:null-pointer)))
+	  (pAllocator-c (or pAllocator (cffi:null-pointer)))
+	  (pCreateInfos-c (cffi:foreign-alloc '(:struct VkGraphicsPipelineCreateInfo) :initial-contents
+					      (iter (for create-info in pCreateInfos)
+						(collect (cffi:mem-ref create-info '(:struct VkGraphicsPipelineCreateInfo))))))
+	  (createInfoCount (length pCreateInfos)))
+      (cffi:with-foreign-object (pPipelines '(:struct VkAllocationCallbacks) createInfoCount)
+	(let ((result (vkCreateGraphicsPipelines device pipelineCache-c createInfoCount pCreateInfos-c pAllocator-c pPipelines)))
+	  (values (iter (for i from 0 below createInfoCount)
+		    (collect (cffi:mem-aptr pPipelines '(:struct VkAllocationCallbacks) i)))
+		  result device pAllocator)))))
+
+
+
+  (mcffi:doc-subsubheader "vkDestroyPipeline" doc-file)
+
+  (mcffi:def-foreign-function destroy-graphics-pipeline doc-file (device pipeline pAllocator)
+    (declare-types ("VkDevice" device) ("VkPipeline" pipeline) ("VkAllocationCallbacks" pAllocator))
+    (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
+      (vkDestroyPipeline device pipeline pALlocator-c)))
+
+
+
+  (mcffi:doc-subsubheader "with-graphics-pipelines" doc-file)
+
+  (defun destroy-graphics-pipelines (device pipelines pAllocator)
+    (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
+      (iter (for pipeline in pipelines)
+	(vkDestroyPipeline device pipeline pALlocator-c))))
+
+  (mcffi:defwith with-graphics-pipelines doc-file
+    create-graphics-pipelines
+    destroy-graphics-pipelines
     :destructor-arguments (2 0 3)))

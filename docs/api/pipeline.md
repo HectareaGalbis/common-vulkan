@@ -577,6 +577,90 @@ Wrap the body expressions with `create-pipeline-layout-create-info` and `destroy
 (pipeline-layout-create-info-pPushConstantRanges obj &optional (index nil)) ; setf-able
 ```
 
+---
+
+### VkGraphicsPipelineCreateInfo
+
+**Members**
+* *sType*: `VkStructureType`
+* *pNext*: `Vulkan object`
+* *flags*: `VkPipelineCreateFlags`
+* *stageCount*: `uint32`
+* *pStages*: `(list VkPipelineShaderStageCreateInfo)`
+* *pVertexInputState*: `VkPipelineVertexInputStateCreateInfo`
+* *pInputAssemblyState*: `VkPipelineInputAssemblyStateCreateInfo`
+* *pTessellationState*: `VkPipelineTessellationStateCreateInfo`
+* *pViewportState*: `VkPipelineViewportStateCreateInfo`
+* *pRasterizationState*: `VkPipelineRasterizationStateCreateInfo`
+* *pMultisampleState*: `VkPipelineMultisampleStateCreateInfo`
+* *pDepthStencilState*: `VkPipelineDepthStencilStateCreateInfo`
+* *pColorBlendState*: `VkPipelineColorBlendStateCreateInfo`
+* *pDynamicState*: `VkPipelineDynamicStateCreateInfo`
+* *layout*: `VkPipelineLayout`
+* *renderPass*: `VkRenderPass`
+* *subpass*: `uint32`
+* *basePipelineHandle*: `VkPipeline`
+* *basePipelineIndex*: `int32`
+
+**create-graphics-pipeline-create-info**
+```lisp
+(create-graphics-pipeline-create-info &key
+                                        (sType VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO)
+                                        (pNext NIL)
+                                        (flags 0)
+                                        (stageCount 0)
+                                        (pStages NIL)
+                                        (pVertexInputState NIL)
+                                        (pInputAssemblyState NIL)
+                                        (pTessellationState NIL)
+                                        (pViewportState NIL)
+                                        (pRasterizationState NIL)
+                                        (pMultisampleState NIL)
+                                        (pDepthStencilState NIL)
+                                        (pColorBlendState NIL)
+                                        (pDynamicState NIL)
+                                        (layout 0)
+                                        (renderPass 0)
+                                        (subpass 0)
+                                        (basePipelineHandle 0)
+                                        (basePipelineIndex 0))
+```
+
+**destroy-graphics-pipeline-create-info**
+```lisp
+(destroy-graphics-pipeline-create-info obj)
+```
+
+**with-graphics-pipeline-create-info**
+```lisp
+(with-graphics-pipeline-create-info var (&rest args)
+  &body body)
+```
+Wrap the body expressions with `create-graphics-pipeline-create-info` and `destroy-graphics-pipeline-create-info`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
+
+**Accessors**
+```lisp
+(graphics-pipeline-create-info-sType obj) ; setf-able
+(graphics-pipeline-create-info-pNext obj) ; setf-able
+(graphics-pipeline-create-info-flags obj) ; setf-able
+(graphics-pipeline-create-info-stageCount obj) ; setf-able
+(graphics-pipeline-create-info-pStages obj &optional (index nil)) ; setf-able
+(graphics-pipeline-create-info-pVertexInputState obj) ; setf-able
+(graphics-pipeline-create-info-pInputAssemblyState obj) ; setf-able
+(graphics-pipeline-create-info-pTessellationState obj) ; setf-able
+(graphics-pipeline-create-info-pViewportState obj) ; setf-able
+(graphics-pipeline-create-info-pRasterizationState obj) ; setf-able
+(graphics-pipeline-create-info-pMultisampleState obj) ; setf-able
+(graphics-pipeline-create-info-pDepthStencilState obj) ; setf-able
+(graphics-pipeline-create-info-pColorBlendState obj) ; setf-able
+(graphics-pipeline-create-info-pDynamicState obj) ; setf-able
+(graphics-pipeline-create-info-layout obj) ; setf-able
+(graphics-pipeline-create-info-renderPass obj) ; setf-able
+(graphics-pipeline-create-info-subpass obj) ; setf-able
+(graphics-pipeline-create-info-basePipelineHandle obj) ; setf-able
+(graphics-pipeline-create-info-basePipelineIndex obj) ; setf-able
+```
+
 ## Functions
 
 ---
@@ -621,4 +705,48 @@ Wrap the body expressions with `create-pipeline-layout-create-info` and `destroy
   &body body)
 ```
 Wrap the body expressions with `create-pipeline-layout` and `destroy-pipeline-layout`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
+
+---
+
+### vkCreateGraphicsPipelines
+
+**create-graphics-pipelines**
+```lisp
+(create-graphics-pipelines device pipelinecache pcreateinfos pallocator) => (values ppipelines result)
+```
+
+* *Parameters*:
+  * *device*: `VkDevice`
+  * *pipelinecache*: `VkPipelineCache`
+  * *pcreateinfos*: `(list VkGraphicsPipelineCreateInfo)`
+  * *pallocator*: `VkAllocationCallbacks`
+
+* *Return:*
+  * *ppipelines*: `(list VkPipeline)`
+  * *result*: `VkResult`
+
+---
+
+### vkDestroyPipeline
+
+**destroy-graphics-pipeline**
+```lisp
+(destroy-graphics-pipeline device pipeline pallocator)
+```
+
+* *Parameters*:
+  * *device*: `VkDevice`
+  * *pipeline*: `VkPipeline`
+  * *pallocator*: `VkAllocationCallbacks`
+
+---
+
+### with-graphics-pipelines
+
+**with-graphics-pipelines**
+```lisp
+(with-graphics-pipelines var (&rest args)
+  &body body)
+```
+Wrap the body expressions with `create-graphics-pipelines` and `destroy-graphics-pipelines`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
