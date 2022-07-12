@@ -1,7 +1,7 @@
 
 # Common Vulkan Guide
 
-Welcome! This guide is based on the official [Vulkna Tutorial]. However, this guide will not teach Vulkan like the tutorial does. This guide will show you
+Welcome! This guide is based on the official [Vulkna Tutorial](https://vulkan-tutorial.com/Introduction). However, this guide will not teach Vulkan like the tutorial does. This guide will show you
 how the code you see in the Vulkan Tutorial should be using Common Lisp. I'm sure that most of the users that come here have already done at least once
 the tutorial, that's why this will be just a guide. 
 
