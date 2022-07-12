@@ -633,7 +633,7 @@
 
   (mcffi:doc-subsubheader "vkDestroyPipeline" doc-file)
 
-  (mcffi:def-foreign-function destroy-graphics-pipeline doc-file (device pipeline pAllocator)
+  (mcffi:def-foreign-function destroy-pipeline doc-file (device pipeline pAllocator)
     (declare-types ("VkDevice" device) ("VkPipeline" pipeline) ("VkAllocationCallbacks" pAllocator))
     (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
       (vkDestroyPipeline device pipeline pALlocator-c)))
