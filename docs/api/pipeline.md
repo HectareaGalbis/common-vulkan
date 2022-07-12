@@ -226,7 +226,7 @@ Wrap the body expressions with `create-pipeline-vertex-input-state-create-info` 
 * *pNext*: `Vulkan object`
 * *flags*: `VkPipelineInputAssemblyStateCreateFlags`
 * *topology*: `VkPrimitiveTopology`
-* *primitiveRestartEnable*: `boolean`
+* *primitiveRestartEnable*: `VkBool32`
 
 **create-pipeline-input-assembly-state-create-info**
 ```lisp

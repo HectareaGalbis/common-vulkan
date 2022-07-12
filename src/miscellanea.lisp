@@ -111,6 +111,161 @@
 
 
 
+  (mcffi:def-foreign-struct "VkAttachmentDescription" attachment-description doc-file
+      (:default-create :default-get :default-set)
+    (flags :type "VkAttachmentDescriptionFlags")
+    (format :type "VkFormat")
+    (samples :type "VkSampleCountFlagBits")
+    (loadOp :name "loadOp" :type "VkAttachmentLoadOp")
+    (storeOp :name "storeOp" :type "VkAttachmentStoreOp")
+    (stencilLoadOp :name "stencilLoadOp" :type "VkAttachmentLoadOp")
+    (stencilStoreOp :name "stencilStoreOp" :type "VkAttachmentStoreOp")
+    (initialLayout :name "initialLayout" :type "VkImageLayout")
+    (finalLayout :name "finalLayout" :type "VkImageLayout"))
+
+
+
+  (mcffi:def-foreign-struct "VkAttachmentReference" attachment-reference doc-file
+      (:default-create :default-get :default-set)
+    (attachment :type uint32)
+    (layout :type "VkImageLayout"))
+
+
+
+  (mcffi:def-foreign-struct "VkSubpassDescription" subpass-description doc-file
+      (:default-create :default-get :default-set)
+    (flags :type "VkSubpassDescriptionFlags")
+    (pipelineBindPoint :name "pipelineBindPoint" :type "VkPipelineBindPoint")
+    (inputAttachmentCount :name "inputAttachmentCount" :type uint32)
+    (pInputAttachments :name "pInputAttachments" :type (list "VkAttachmentReference") :init-form nil
+		       :create ((pInputAttachments-arg)
+				(setf pInputAttachments (if pInputAttachments-arg
+							    (cffi:foreign-alloc '(:struct VkAttachmentReference)
+										:initial-contents
+										(iter (for attachment in pInputAttachments-arg)
+										  (collect (cffi:mem-ref attachment '(:struct VkAttachmentReference)))))
+							    (cffi:null-pointer))))
+		       :destroy (when (not (cffi:null-pointer-p pInputAttachments))
+				  (cffi:foreign-free pInputAttachments))
+		       :get ((&optional (index nil))
+			     (if index
+				 (cffi:mem-aref pInputAttachments '(:struct VkAttachmentReference) index)
+				 (if (not (cffi:null-pointer-p pInputAttachments))
+				     (iter (for i from 0 below inputAttachmentCount)
+				       (collect (cffi:mem-aref pInputAttachments '(:struct VkAttachmentReference) i)))
+				     nil)))
+		       :set ((new-value)
+			     (when (not (cffi:null-pointer-p pInputAttachments))
+			       (cffi:foreign-free pInputAttachments))
+			     (setf pInputAttachments (if new-value
+							 (cffi:foreign-alloc '(:struct VkAttachmentReference)
+									     :initial-contents
+									     (iter (for attachment in new-value)
+									       (collect (cffi:mem-ref attachment '(:struct VkAttachmentReference)))))
+							 (cffi:null-pointer)))))
+    (colorAttachmentCount :name "colorAttachmentCount" :type uint32)
+    (pColorAttachments :name "pColorAttachments" :type (list "VkAttachmentReference") :init-form nil
+		       :create ((pColorAttachments-arg)
+				(setf pColorAttachments (if pColorAttachments-arg
+							    (cffi:foreign-alloc '(:struct VkAttachmentReference)
+										:initial-contents
+										(iter (for attachment in pColorAttachments-arg)
+										  (collect (cffi:mem-ref attachment '(:struct VkAttachmentReference)))))
+							    (cffi:null-pointer))))
+		       :destroy (when (not (cffi:null-pointer-p pColorAttachments))
+				  (cffi:foreign-free pColorAttachments))
+		       :get ((&optional (index nil))
+			     (if index
+				 (cffi:mem-aref pColorAttachments '(:struct VkAttachmentReference) index)
+				 (if (not (cffi:null-pointer-p pColorAttachments))
+				     (iter (for i from 0 below colorAttachmentCount)
+				       (collect (cffi:mem-aref pColorAttachments '(:struct VkAttachmentReference) i)))
+				     nil)))
+		       :set ((new-value)
+			     (when (not (cffi:null-pointer-p pColorAttachments))
+			       (cffi:foreign-free pColorAttachments))
+			     (setf pColorAttachments (if new-value
+							 (cffi:foreign-alloc '(:struct VkAttachmentReference)
+									     :initial-contents
+									     (iter (for attachment in new-value)
+									       (collect (cffi:mem-ref attachment '(:struct VkAttachmentReference)))))
+							 (cffi:null-pointer)))))
+    (pResolveAttachments :name "pResolveAttachments" :type (list "VkAttachmentReference") :init-form nil
+			 :create ((pResolveAttachments-arg)
+				  (setf pResolveAttachments (if pResolveAttachments-arg
+								(cffi:foreign-alloc '(:struct VkAttachmentReference)
+										    :initial-contents
+										    (iter (for attachment in pResolveAttachments-arg)
+										      (collect (cffi:mem-ref attachment '(:struct VkAttachmentReference)))))
+								(cffi:null-pointer))))
+			 :destroy (when (not (cffi:null-pointer-p pResolveAttachments))
+				    (cffi:foreign-free pResolveAttachments))
+			 :get ((&optional (index nil))
+			       (if index
+				   (cffi:mem-aref pResolveAttachments '(:struct VkAttachmentReference) index)
+				   (if (not (cffi:null-pointer-p pResolveAttachments))
+				       (iter (for i from 0 below colorAttachmentCount)
+					 (collect (cffi:mem-aref pResolveAttachments '(:struct VkAttachmentReference) i)))
+				       nil)))
+			 :set ((new-value)
+			       (when (not (cffi:null-pointer-p pResolveAttachments))
+				 (cffi:foreign-free pResolveAttachments))
+			       (setf pResolveAttachments (if new-value
+							     (cffi:foreign-alloc '(:struct VkAttachmentReference)
+										 :initial-contents
+										 (iter (for attachment in new-value)
+										   (collect (cffi:mem-ref attachment '(:struct VkAttachmentReference)))))
+							     (cffi:null-pointer)))))
+    (pDepthStencilAttachment :name pDepthStencilAttachment :type "VkAttachmentReference" :init-form nil
+			     :create ((pDepthStencilAttachment-arg)
+				      (setf pDepthStencilAttachment (or pDepthStencilAttachment-arg (cffi:null-pointer))))
+			     :get (() (if (cffi:null-pointer-p pDepthStencilAttachment)
+					  nil
+					  pDepthStencilAttachment))
+			     :set ((new-value)
+				   (setf pDepthStencilAttachment (or new-value (cffi:null-pointer)))))
+    (preserveAttachmentCount :name "preserveAttachmentCount" :type uint32)
+    (pPreserveAttachments :name "pPreserveAttachments" :type (list "VkAttachmentReference") :init-form nil
+			  :create ((pPreserveAttachments-arg)
+				   (setf pPreserveAttachments (if pPreserveAttachments-arg
+								  (cffi:foreign-alloc '(:struct VkAttachmentReference)
+										      :initial-contents
+										      (iter (for attachment in pPreserveAttachments-arg)
+											(collect (cffi:mem-ref attachment '(:struct VkAttachmentReference)))))
+								  (cffi:null-pointer))))
+			  :destroy (when (not (cffi:null-pointer-p pPreserveAttachments))
+				     (cffi:foreign-free pPreserveAttachments))
+			  :get ((&optional (index nil))
+				(if index
+				    (cffi:mem-aref pPreserveAttachments '(:struct VkAttachmentReference) index)
+				    (if (not (cffi:null-pointer-p pPreserveAttachments))
+					(iter (for i from 0 below preserveAttachmentCount)
+					  (collect (cffi:mem-aref pPreserveAttachments '(:struct VkAttachmentReference) i)))
+					nil)))
+			  :set ((new-value)
+				(when (not (cffi:null-pointer-p pPreserveAttachments))
+				  (cffi:foreign-free pPreserveAttachments))
+				(setf pPreserveAttachments (if new-value
+							       (cffi:foreign-alloc '(:struct VkAttachmentReference)
+										   :initial-contents
+										   (iter (for attachment in new-value)
+										     (collect (cffi:mem-ref attachment '(:struct VkAttachmentReference)))))
+							       (cffi:null-pointer))))))
+
+
+
+  (mcffi:def-foreign-struct "VkSubpassDependency" subpass-dependency doc-file
+      (:default-create :default-get :default-set)
+    (srcSubpass :name "srcSubpass" :type uint32)
+    (dstSubpass :name "dstSubpass" :type uint32)
+    (srcStageMask :name "srcStageMask" :type "VkPipelineStageFlags")
+    (dstStageMask :name "dstStageMask" :type "VkPipelineStageFlags")
+    (srcAccessMask :name "srcAccessMask" :type "VkAccessFlags")
+    (dstAccessMask :name "dstAccessMask" :type "VkAccessFlags")
+    (dependencyFlags :name "dependencyFlags" :type "VkDependencyFlags"))
+
+
+
   (mcffi:doc-subheader "Functions" doc-file)
 
 

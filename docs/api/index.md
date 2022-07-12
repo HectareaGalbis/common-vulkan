@@ -22,4 +22,5 @@ Given a function or structure from vulkan, search it in this reference. You will
 7. [Image view](https://hectarea1996.github.io/common-vulkan/api/image-view.html)
 8. [Shader module](https://hectarea1996.github.io/common-vulkan/api/image-view.html)
 9. [Pipeline](https://hectarea1996.github.io/common-vulkan/api/pipeline.html)
-10. [Miscellanea](https://hectarea1996.github.io/common-vulkan/api/miscellanea.html)
+10. [Render pass](https://hectarea1996.github.io/common-vulkan/api/render-pass.html)
+11. [Miscellanea](https://hectarea1996.github.io/common-vulkan/api/miscellanea.html)

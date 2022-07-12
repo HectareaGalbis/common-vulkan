@@ -22,17 +22,6 @@
 		(:file "src/swapchain")
 		(:file "src/image-view")
 		(:file "src/shader-module")
-		(:file "src/pipeline")))
-		;; (:file "src/image")
-                ;; (:file "src/window")
-                ;; (:file "src/queue-family")
-                ;; (:file "src/semaphore")
-                ;; (:file "src/fence")
-                ;; (:file "src/command-pool")
-                ;; (:file "src/command-buffer")
-                ;; (:file "src/queue")
-                ;; (:file "src/shader-module")
-                ;; (:file "src/render-pass")))
-
-
-
+		(:file "src/pipeline")
+		(:file "src/render-pass")))
+		

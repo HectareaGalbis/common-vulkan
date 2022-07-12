@@ -338,6 +338,198 @@ Wrap the body expressions with `create-push-constant-range` and `destroy-push-co
 (push-constant-range-size obj) ; setf-able
 ```
 
+---
+
+### VkAttachmentDescription
+
+**Members**
+* *flags*: `VkAttachmentDescriptionFlags`
+* *format*: `VkFormat`
+* *samples*: `VkSampleCountFlagBits`
+* *loadOp*: `VkAttachmentLoadOp`
+* *storeOp*: `VkAttachmentStoreOp`
+* *stencilLoadOp*: `VkAttachmentLoadOp`
+* *stencilStoreOp*: `VkAttachmentStoreOp`
+* *initialLayout*: `VkImageLayout`
+* *finalLayout*: `VkImageLayout`
+
+**create-attachment-description**
+```lisp
+(create-attachment-description &key
+                                 (flags 0)
+                                 (format 0)
+                                 (samples 0)
+                                 (loadOp 0)
+                                 (storeOp 0)
+                                 (stencilLoadOp 0)
+                                 (stencilStoreOp 0)
+                                 (initialLayout 0)
+                                 (finalLayout 0))
+```
+
+**destroy-attachment-description**
+```lisp
+(destroy-attachment-description obj)
+```
+
+**with-attachment-description**
+```lisp
+(with-attachment-description var (&rest args)
+  &body body)
+```
+Wrap the body expressions with `create-attachment-description` and `destroy-attachment-description`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
+
+**Accessors**
+```lisp
+(attachment-description-flags obj) ; setf-able
+(attachment-description-format obj) ; setf-able
+(attachment-description-samples obj) ; setf-able
+(attachment-description-loadOp obj) ; setf-able
+(attachment-description-storeOp obj) ; setf-able
+(attachment-description-stencilLoadOp obj) ; setf-able
+(attachment-description-stencilStoreOp obj) ; setf-able
+(attachment-description-initialLayout obj) ; setf-able
+(attachment-description-finalLayout obj) ; setf-able
+```
+
+---
+
+### VkAttachmentReference
+
+**Members**
+* *attachment*: `uint32`
+* *layout*: `VkImageLayout`
+
+**create-attachment-reference**
+```lisp
+(create-attachment-reference &key
+                               (attachment 0)
+                               (layout 0))
+```
+
+**destroy-attachment-reference**
+```lisp
+(destroy-attachment-reference obj)
+```
+
+**with-attachment-reference**
+```lisp
+(with-attachment-reference var (&rest args)
+  &body body)
+```
+Wrap the body expressions with `create-attachment-reference` and `destroy-attachment-reference`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
+
+**Accessors**
+```lisp
+(attachment-reference-attachment obj) ; setf-able
+(attachment-reference-layout obj) ; setf-able
+```
+
+---
+
+### VkSubpassDescription
+
+**Members**
+* *flags*: `VkSubpassDescriptionFlags`
+* *pipelineBindPoint*: `VkPipelineBindPoint`
+* *inputAttachmentCount*: `uint32`
+* *pInputAttachments*: `(list VkAttachmentReference)`
+* *colorAttachmentCount*: `uint32`
+* *pColorAttachments*: `(list VkAttachmentReference)`
+* *pResolveAttachments*: `(list VkAttachmentReference)`
+* *pdepthstencilattachment*: `VkAttachmentReference`
+* *preserveAttachmentCount*: `uint32`
+* *pPreserveAttachments*: `(list VkAttachmentReference)`
+
+**create-subpass-description**
+```lisp
+(create-subpass-description &key
+                              (flags 0)
+                              (pipelineBindPoint 0)
+                              (inputAttachmentCount 0)
+                              (pInputAttachments NIL)
+                              (colorAttachmentCount 0)
+                              (pColorAttachments NIL)
+                              (pResolveAttachments NIL)
+                              (pdepthstencilattachment NIL)
+                              (preserveAttachmentCount 0)
+                              (pPreserveAttachments NIL))
+```
+
+**destroy-subpass-description**
+```lisp
+(destroy-subpass-description obj)
+```
+
+**with-subpass-description**
+```lisp
+(with-subpass-description var (&rest args)
+  &body body)
+```
+Wrap the body expressions with `create-subpass-description` and `destroy-subpass-description`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
+
+**Accessors**
+```lisp
+(subpass-description-flags obj) ; setf-able
+(subpass-description-pipelineBindPoint obj) ; setf-able
+(subpass-description-inputAttachmentCount obj) ; setf-able
+(subpass-description-pInputAttachments obj &optional (index nil)) ; setf-able
+(subpass-description-colorAttachmentCount obj) ; setf-able
+(subpass-description-pColorAttachments obj &optional (index nil)) ; setf-able
+(subpass-description-pResolveAttachments obj &optional (index nil)) ; setf-able
+(subpass-description-pdepthstencilattachment obj) ; setf-able
+(subpass-description-preserveAttachmentCount obj) ; setf-able
+(subpass-description-pPreserveAttachments obj &optional (index nil)) ; setf-able
+```
+
+---
+
+### VkSubpassDependency
+
+**Members**
+* *srcSubpass*: `uint32`
+* *dstSubpass*: `uint32`
+* *srcStageMask*: `VkPipelineStageFlags`
+* *dstStageMask*: `VkPipelineStageFlags`
+* *srcAccessMask*: `VkAccessFlags`
+* *dstAccessMask*: `VkAccessFlags`
+* *dependencyFlags*: `VkDependencyFlags`
+
+**create-subpass-dependency**
+```lisp
+(create-subpass-dependency &key
+                             (srcSubpass 0)
+                             (dstSubpass 0)
+                             (srcStageMask 0)
+                             (dstStageMask 0)
+                             (srcAccessMask 0)
+                             (dstAccessMask 0)
+                             (dependencyFlags 0))
+```
+
+**destroy-subpass-dependency**
+```lisp
+(destroy-subpass-dependency obj)
+```
+
+**with-subpass-dependency**
+```lisp
+(with-subpass-dependency var (&rest args)
+  &body body)
+```
+Wrap the body expressions with `create-subpass-dependency` and `destroy-subpass-dependency`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
+
+**Accessors**
+```lisp
+(subpass-dependency-srcSubpass obj) ; setf-able
+(subpass-dependency-dstSubpass obj) ; setf-able
+(subpass-dependency-srcStageMask obj) ; setf-able
+(subpass-dependency-dstStageMask obj) ; setf-able
+(subpass-dependency-srcAccessMask obj) ; setf-able
+(subpass-dependency-dstAccessMask obj) ; setf-able
+(subpass-dependency-dependencyFlags obj) ; setf-able
+```
+
 ## Functions
 
 ---
