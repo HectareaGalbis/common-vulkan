@@ -358,7 +358,7 @@
 						 (cffi:foreign-alloc '(:struct VkPipelineColorBlendAttachmentState)
 								     :initial-contents
 								     (iter (for attachment in pAttachments-arg)
-								       (cffi:mem-ref attachment '(:struct VkPipelineColorBlendAttachmentState))))
+								       (collect (cffi:mem-ref attachment '(:struct VkPipelineColorBlendAttachmentState)))))
 						(cffi:null-pointer))))
 		 :destroy (when (not (cffi:null-pointer-p pAttachments))
 			    (cffi:foreign-free pAttachments))
@@ -616,17 +616,17 @@
 
   (mcffi:def-foreign-function create-graphics-pipelines doc-file (device pipelineCache pCreateInfos pAllocator)
     (declare-types ("VkDevice" device) ("VkPipelineCache" pipelineCache) ((list "VkGraphicsPipelineCreateInfo") pCreateInfos)
-		   ("VkAllocationCallbacks" pAllocator) :return ((list "VkPipeline") pPipelines) ("VkResult" result))
+		   ("VkAllocationCallbacks" pAllocator) :return ((list "VkPipeline") pPipelines) ("VkResult" result)) 
     (let ((pipelineCache-c (or pipelineCache (cffi:null-pointer)))
 	  (pAllocator-c (or pAllocator (cffi:null-pointer)))
 	  (pCreateInfos-c (cffi:foreign-alloc '(:struct VkGraphicsPipelineCreateInfo) :initial-contents
 					      (iter (for create-info in pCreateInfos)
 						(collect (cffi:mem-ref create-info '(:struct VkGraphicsPipelineCreateInfo))))))
 	  (createInfoCount (length pCreateInfos)))
-      (cffi:with-foreign-object (pPipelines '(:struct VkAllocationCallbacks) createInfoCount)
+      (cffi:with-foreign-object (pPipelines 'VkPipeline createInfoCount)
 	(let ((result (vkCreateGraphicsPipelines device pipelineCache-c createInfoCount pCreateInfos-c pAllocator-c pPipelines)))
 	  (values (iter (for i from 0 below createInfoCount)
-		    (collect (cffi:mem-aptr pPipelines '(:struct VkAllocationCallbacks) i)))
+		    (collect (cffi:mem-aref pPipelines 'VkPipeline i)))
 		  result device pAllocator)))))
 
 
