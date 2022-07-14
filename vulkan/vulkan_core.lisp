@@ -1,11 +1,11 @@
 
 (in-package :cvk)
 
-(defconstant VK_VERSION_1_0 1)
+
 
 (cffi:defctype handle :pointer)
 
-(cffi:defctype null-handle (cffi:null-pointer))
+(defconstant null-handle (cffi:null-pointer))
 
 (if (= 8 (cffi:foreign-type-size :pointer))
     (cffi:defctype non-dispatchable-handle :pointer)
@@ -13,15 +13,6 @@
 
 (defmacro make-api-version (variant major minor patch)
   `(logior (ash ,variant 29) (ash ,major 22) (ash ,minor 12) ,patch))
-
-;; Vulkan 1.0 version number
-(defconstant VK_API_VERSION_1_0 (make-api-version 0 1 0 0))
-
-;; Version of this file
-(defconstant VK_HEADER_VERSION 216)
-
-;; Complete version of this file
-(defconstant VK_HEADER_VERSION_COMPLETE (make-api-version 0 1 3 VK_HEADER_VERSION))
 
 (defmacro api-version-variant (version)
   `(ash ,version 29))
@@ -66,23 +57,23 @@
 (cffi:defctype VkFramebuffer non_dispatchable_handle)
 (cffi:defctype VkCommandPool non_dispatchable_handle)
 
-(defconstant UINT64_MAX #.(1- (expt 2 64)))
-(defconstant UINT32_MAX #.(1- (expt 2 32)))
-(defconstant VK_ATTACHMENT_UNUSED              UINT32_MAX)
-(defconstant VK_FALSE                          0)
-(defconstant VK_LOD_CLAMP_NONE                 1000.0)
-(defconstant VK_QUEUE_FAMILY_IGNORED           UINT32_MAX)
-(defconstant VK_REMAINING_ARRAY_LAYERS         UINT32_MAX)
-(defconstant VK_REMAINING_MIP_LEVELS           UINT32_MAX)
-(defconstant VK_SUBPASS_EXTERNAL               UINT32_MAX)
-(defconstant VK_TRUE                           1)
-(defconstant VK_WHOLE_SIZE                     UINT64_MAX)
-(defconstant VK_MAX_MEMORY_TYPES               32)
-(defconstant VK_MAX_PHYSICAL_DEVICE_NAME_SIZE  256)
-(defconstant VK_UUID_SIZE                      16)
-(defconstant VK_MAX_EXTENSION_NAME_SIZE        256)
-(defconstant VK_MAX_DESCRIPTION_SIZE           256)
-(defconstant VK_MAX_MEMORY_HEAPS               16)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 (cffi:defctype VkAccessFlags VkFlags)
 
