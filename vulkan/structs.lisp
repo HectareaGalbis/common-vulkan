@@ -1,4 +1,6 @@
 
+(in-package :cvk)
+
 (cffi:defcstruct vkextent2d
   (width :uint32)
   (height :uint32))

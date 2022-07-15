@@ -1,4 +1,6 @@
 
+(in-package :cvk)
+
 (defun make-api-version (variant major minor patch)
   (logior (ash variant 29) (ash major 22) (ash minor 12) patch))
 
