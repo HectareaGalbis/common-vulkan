@@ -84,18 +84,6 @@
       (ppcre:scan "^#ifdef" line)
       (ppcre:scan "^//" line)))
 
-;; Pretty print struct code.
-(defun pretty-print-struct (struct ofile)
-  (format ofile "  (~s ~s ~s ~s~%      ~s~{~%    ~s~})"
-	  (car struct) (cadr struct) (caddr struct) (cadddr struct) (cadddr (cdr struct))
-	  (cddddr (cdr struct))))
-
-;; Pretty print function code.
-(defun pretty-print-function (function ofile)
-  (format ofile "  (~s ~s ~s~%      ~s ~s~{~%    ~s~})"
-	  (car function) (cadr function) (caddr function) (cadddr function) (cadddr (cdr function))
-	  (cddddr (cdr function))))
-
 ;; --------------------------
 ;; ----- Read functions -----
 ;; --------------------------
@@ -430,116 +418,6 @@
   (prin1 '(in-package :cvk)
 	 more-struct-file)
   (format more-struct-file "~%~%")
-  (prin1 '(defmacro create-pointer (slot slot-arg)
-	   `(setf ,slot (or ,slot-arg (cffi:null-pointer))))
-	 more-struct-file)
-  (format more-struct-file "~%~%")
-  (prin1 '(defmacro get-pointer (slot)
-	   `(if (cffi:null-pointer-p ,slot) nil ,slot))
-	 more-struct-file)
-  (format more-struct-file "~%~%")
-  (prin1 '(defmacro set-pointer (slot new-value)
-	   `(setf ,slot (or ,new-value (cffi:null-pointer))))
-	 more-struct-file)
-  (format more-struct-file "~%~%")
-  (prin1 '(defmacro create-string (slot slot-arg)
-	   `(setf ,slot (if ,slot-arg (cffi:foreign-string-alloc ,slot-arg) (cffi:null-pointer))))
-	 more-struct-file)
-  (format more-struct-file "~%~%")
-  (prin1 '(defmacro destroy-string (slot)
-	   `(when (not (cffi:null-pointer-p ,slot)) (cffi:foreign-string-free ,slot)))
-	 more-struct-file)
-  (format more-struct-file "~%~%")
-  (prin1 '(defmacro get-string (slot)
-	   `(cffi:foreign-string-to-lisp ,slot))
-	 more-struct-file)
-  (format more-struct-file "~%~%")
-  (prin1 '(defmacro set-string (slot new-value)
-	   `(progn (destroy-string ,slot)
-		   (create-string ,slot ,new-value)))
-	 more-struct-file)
-  (format more-struct-file "~%~%")
-  (prin1 '(defmacro create-array (type slot slot-arg &key (dynamic nil) (pointers nil))
-	   `(progn
-	      ,@(when dynamic
-		  `((setf ,slot (if ,slot-arg
-				    (cffi:foreign-alloc ',type :count (length ,slot-arg))
-				    (cffi:null-pointer)))))
-	      ,(let ((i (gensym)))
-		 `(iter (for ,i from 0 below (length ,slot-arg))
-		    ,(if pointers
-			 `(mcffi:copy (cffi:mem-aptr ,slot ,i) (aref ,slot-arg ,i) ',type)
-			 `(setf (cffi:mem-aref ,slot ',type ,i) (aref ,slot-arg ,i)))))))
-	 more-struct-file)
-  (format more-struct-file "~%~%")
-  (prin1 '(defmacro destroy-array (slot)
-	   `(when (not (cffi:null-pointer-p ,slot)) (cffi:foreign-free ,slot)))
-	 more-struct-file)
-  (format more-struct-file "~%~%")
-  (prin1 '(defmacro get-array (type slot index count &key (pointers nil))
-	   `(if (cffi:null-pointer-p ,slot)
-		nil
-		(if ,index
-		    ,(if pointers
-			 `(cffi:mem-aptr ,slot ',type ,index)
-			 `(cffi:mem-aref ,slot ',type ,index))
-		    ,(let ((i (gensym)))
-		       `(iter (for ,i from 0 below ,count)
-			  (collect ,(if pointers
-					`(cffi:mem-aptr ,slot ',type ,i)
-					`(cffi:mem-aref ,slot ',type ,i))))))))
-	 more-struct-file)
-  (format more-struct-file "~%~%")
-  (prin1 '(defmacro set-array (type slot new-value index &key (dynamic nil) (pointers nil))
-	   `(if ,index
-		,(if pointers
-		     `(mcffi:copy (cffi:mem-aptr ,slot ',type ,index) ,new-value ',type)
-		     `(setf (cffi:mem-aref ,slot ',type ,index) ,new-value))
-		(progn
-		  (destroy-array ,slot)
-		  (create-array ,type ,slot ,new-value :dynamic ,dynamic :pointers ,pointers))))
-	 more-struct-file)
-  (format more-struct-file "~%~%")
-  (prin1 '(defmacro create-array-strings (slot slot-arg &key (dynamic nil))
-	   `(progn
-	      ,@(when dynamic
-		  `((setf ,slot (if ,slot-arg
-				    (cffi:foreign-alloc :pointer :count (length ,slot-arg))
-				    (cffi:null-pointer)))))
-	      ,(let ((i (gensym)))
-		 `(iter (for ,i from 0 below (length ,slot-arg))
-		    (setf (cffi:mem-aref ,slot :pointer ,i) (cffi:foreign-string-alloc (aref ,slot-arg ,i)))))))
-	 more-struct-file)
-  (format more-struct-file "~%~%")
-  (prin1 '(defmacro destroy-array-strings (slot count &key dynamic)
-	   `(when (not (cffi:null-pointer-p ,slot))
-	      ,(let ((i (gensym)))
-		 `(iter (for ,i from 0 below ,count)
-		    (cffi:foreign-string-free (cffi:mem-aref ,slot :pointer ,i))))
-	      ,(when dynamic
-		 `(cffi:foreign-free ,slot))))
-	 more-struct-file)
-  (format more-struct-file "~%~%")
-  (prin1 '(defmacro get-array-strings (slot index count)
-	   `(if (cffi:null-pointer-p ,slot)
-		nil
-		(if ,index
-		    (cffi:foreign-string-to-lisp (cffi:mem-aref ,slot :pointer ,index))
-		    ,(let ((i (gensym)))
-		       `(iter (for ,i from 0 below ,count)
-			  (collect (cffi:foreign-string-to-lisp (cffi:mem-aref ,slot :pointer ,i))))))))
-	 more-struct-file)
-  (format more-struct-file "~%~%")
-  (prin1 '(defmacro set-array-strings (slot new-value index count &key (dynamic nil))
-	   `(if ,index
-		(progn
-		  (cffi:foreign-string-free (cffi:mem-aref ,slot :pointer ,index))
-		  (setf (cffi:mem-aref ,slot :pointer ,index) ,new-value))
-		(progn
-		  (destroy-array-strings ,slot ,count :dynamic ,dynamic)
-		  (create-array-strings ,slot ,new-value :dynamic ,dynamic))))
-	 more-struct-file)
-  (format more-struct-file "~%~%")
   (format more-struct-file "~%(mcffi:with-doc-file (doc-file (asdf:system-relative-pathname \"common-vulkan\" \"docs/api/structs.md\"))~%")
   (iter (for code in more-struct-code)
     (format more-struct-file "~%~%")
@@ -568,194 +446,94 @@
   (format more-function-file ")"))
 
 ;; Write the final struct definitions.
-(defun write-final-more-struct (old-struct-code old-more-struct-code new-struct-code new-more-struct-code
-				final-more-struct-file)
-  (format final-more-struct-file "~%")
-  (prin1 '(in-package :cvk)
-	 final-more-struct-file)
-  (format final-more-struct-file "~%~%")
-  (prin1 '(defmacro create-pointer (slot slot-arg)
-	   `(setf ,slot (or ,slot-arg (cffi:null-pointer))))
-	 final-more-struct-file)
-  (format final-more-struct-file "~%~%")
-  (prin1 '(defmacro get-pointer (slot)
-	   `(if (cffi:null-pointer-p ,slot) nil ,slot))
-	 final-more-struct-file)
-  (format final-more-struct-file "~%~%")
-  (prin1 '(defmacro set-pointer (slot new-value)
-	   `(setf ,slot (or ,new-value (cffi:null-pointer))))
-	 final-more-struct-file)
-  (format final-more-struct-file "~%~%")
-  (prin1 '(defmacro create-string (slot slot-arg)
-	   `(setf ,slot (if ,slot-arg (cffi:foreign-string-alloc ,slot-arg) (cffi:null-pointer))))
-	 final-more-struct-file)
-  (format final-more-struct-file "~%~%")
-  (prin1 '(defmacro destroy-string (slot)
-	   `(when (not (cffi:null-pointer-p ,slot)) (cffi:foreign-string-free ,slot)))
-	 final-more-struct-file)
-  (format final-more-struct-file "~%~%")
-  (prin1 '(defmacro get-string (slot)
-	   `(cffi:foreign-string-to-lisp ,slot))
-	 final-more-struct-file)
-  (format final-more-struct-file "~%~%")
-  (prin1 '(defmacro set-string (slot new-value)
-	   `(progn (destroy-string ,slot)
-		   (create-string ,slot ,new-value)))
-	 final-more-struct-file)
-  (format final-more-struct-file "~%~%")
-  (prin1 '(defmacro create-array (type slot slot-arg &key (dynamic nil) (pointers nil))
-	   `(progn
-	      ,@(when dynamic
-		  `((setf ,slot (if ,slot-arg
-				    (cffi:foreign-alloc ',type :count (length ,slot-arg))
-				    (cffi:null-pointer)))))
-	      ,(let ((i (gensym)))
-		 `(iter (for ,i from 0 below (length ,slot-arg))
-		    ,(if pointers
-			 `(mcffi:copy (cffi:mem-aptr ,slot ,i) (aref ,slot-arg ,i) ',type)
-			 `(setf (cffi:mem-aref ,slot ',type ,i) (aref ,slot-arg ,i)))))))
-	 final-more-struct-file)
-  (format final-more-struct-file "~%~%")
-  (prin1 '(defmacro destroy-array (slot)
-	   `(when (not (cffi:null-pointer-p ,slot)) (cffi:foreign-free ,slot)))
-	 final-more-struct-file)
-  (format final-more-struct-file "~%~%")
-  (prin1 '(defmacro get-array (type slot index count &key (pointers nil))
-	   `(if (cffi:null-pointer-p ,slot)
-		nil
-		(if ,index
-		    ,(if pointers
-			 `(cffi:mem-aptr ,slot ',type ,index)
-			 `(cffi:mem-aref ,slot ',type ,index))
-		    ,(let ((i (gensym)))
-		       `(iter (for ,i from 0 below ,count)
-			  (collect ,(if pointers
-					`(cffi:mem-aptr ,slot ',type ,i)
-					`(cffi:mem-aref ,slot ',type ,i))))))))
-	 final-more-struct-file)
-  (format final-more-struct-file "~%~%")
-  (prin1 '(defmacro set-array (type slot new-value index &key (dynamic nil) (pointers nil))
-	   `(if ,index
-		,(if pointers
-		     `(mcffi:copy (cffi:mem-aptr ,slot ',type ,index) ,new-value ',type)
-		     `(setf (cffi:mem-aref ,slot ',type ,index) ,new-value))
-		(progn
-		  (destroy-array ,slot)
-		  (create-array ,type ,slot ,new-value :dynamic ,dynamic :pointers ,pointers))))
-	 final-more-struct-file)
-  (format final-more-struct-file "~%~%")
-  (prin1 '(defmacro create-array-strings (slot slot-arg &key (dynamic nil))
-	   `(progn
-	      ,@(when dynamic
-		  `((setf ,slot (if ,slot-arg
-				    (cffi:foreign-alloc :pointer :count (length ,slot-arg))
-				    (cffi:null-pointer)))))
-	      ,(let ((i (gensym)))
-		 `(iter (for ,i from 0 below (length ,slot-arg))
-		    (setf (cffi:mem-aref ,slot :pointer ,i) (cffi:foreign-string-alloc (aref ,slot-arg ,i)))))))
-	 final-more-struct-file)
-  (format final-more-struct-file "~%~%")
-  (prin1 '(defmacro destroy-array-strings (slot count &key dynamic)
-	   `(when (not (cffi:null-pointer-p ,slot))
-	      ,(let ((i (gensym)))
-		 `(iter (for ,i from 0 below ,count)
-		    (cffi:foreign-string-free (cffi:mem-aref ,slot :pointer ,i))))
-	      ,(when dynamic
-		 `(cffi:foreign-free ,slot))))
-	 final-more-struct-file)
-  (format final-more-struct-file "~%~%")
-  (prin1 '(defmacro get-array-strings (slot index count)
-	   `(if (cffi:null-pointer-p ,slot)
-		nil
-		(if ,index
-		    (cffi:foreign-string-to-lisp (cffi:mem-aref ,slot :pointer ,index))
-		    ,(let ((i (gensym)))
-		       `(iter (for ,i from 0 below ,count)
-			  (collect (cffi:foreign-string-to-lisp (cffi:mem-aref ,slot :pointer ,i))))))))
-	 final-more-struct-file)
-  (format final-more-struct-file "~%~%")
-  (prin1 '(defmacro set-array-strings (slot new-value index count &key (dynamic nil))
-	   `(if ,index
-		(progn
-		  (cffi:foreign-string-free (cffi:mem-aref ,slot :pointer ,index))
-		  (setf (cffi:mem-aref ,slot :pointer ,index) ,new-value))
-		(progn
-		  (destroy-array-strings ,slot ,count :dynamic ,dynamic)
-		  (create-array-strings ,slot ,new-value :dynamic ,dynamic))))
-	 final-more-struct-file)
-  (format final-more-struct-file "~%~%")
-  (format final-more-struct-file "~%(mcffi:with-doc-file (doc-file (asdf:system-relative-pathname \"common-vulkan\" \"docs/api/structs.md\"))~%")
-  (iter (for new-more-struct in new-more-struct-code)
-    (let* ((struct-name (caddr new-more-struct))
-	   (old-more-struct-list (and old-more-struct-code
-				      (iter (for substruct in (member struct-name old-more-struct-code :key (lambda (x) (caddr x))
-												       :test #'string=))
-					(count (eq (car substruct) 'mcffi:def-foreign-struct) into def-struct-count)
-					(while (<= def-struct-count 1))
-					(collect substruct)))))
-      (if old-more-struct-list
-	  (progn
-	    (iter (for old-more-struct in old-more-struct-list)
-	      (format final-more-struct-file "~%~%")
-	      (if (eq (car old-more-struct) 'mcffi:def-foreign-struct)
-		  (pretty-print-struct old-more-struct final-more-struct-file)
-		  (prin1 old-more-struct final-more-struct-file)))
-	    (let* ((old-struct (and old-struct-code
-				    (car (member (fix-name struct-name) old-struct-code :key (lambda (x) (cadr x))))))
-		   (new-struct (car (member (fix-name struct-name) new-struct-code :key (lambda (x) (cadr x)))))
-		   (old-infixes (cadddr (car old-more-struct-list)))
-		   (new-infixes (cadddr new-more-struct)))
-	      (when (or (not (equal old-struct new-struct))
-			(not (equal old-infixes new-infixes)))
-		(format final-more-struct-file "~%~%")
-		(prin1 `(mcffi:doc-note doc-file "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
-		       final-more-struct-file))))
-	  (progn
-	    (format final-more-struct-file "~%~%")
-	    (pretty-print-struct new-more-struct final-more-struct-file)
-	    (format final-more-struct-file "~%~%")
-	    (prin1 `(mcffi:doc-note doc-file "This struct needs to be revised. Please, post an issue to request it.")
-		   final-more-struct-file)))))
-  (format final-more-struct-file ")"))
+(defun write-final-more-struct (old-struct-code new-struct-code revised-structs-code new-more-struct-code
+				structs-to-revise-list structs-to-revise-file final-more-struct-file)
+  (iter (for revised-code in revised-structs-code)
+    (until (eq (car revised-code) 'mcffi:with-doc-file))
+    (format final-more-struct-file "~%~%")
+    (prin1 revised-code final-more-struct-file)
+    (finally (format final-more-struct-file "~%~%")
+	     (format final-more-struct-file "(~s ~s"
+		     'mcffi:with-doc-file (cadr revised-code))
+	     (iter (for new-more-struct in new-more-struct-code)
+	       (let* ((revised-structs (cddr revised-code))
+		      (struct-name (caddr new-more-struct))
+		      (revised-struct-list (and revised-structs
+						(iter (for substruct in (member struct-name revised-structs :key (lambda (x) (caddr x))
+													    :test #'string=))
+						  (count (eq (car substruct) 'mcffi:def-foreign-struct) into def-struct-count)
+						  (while (<= def-struct-count 1))
+						  (collect substruct)))))
+		 (if revised-struct-list
+		     (progn
+		       (iter (for revised-struct in revised-struct-list)
+			 (format final-more-struct-file "~%~%  ")
+			 (prin1 revised-struct final-more-struct-file))
+		       (let* ((old-struct (and old-struct-code
+					       (car (member (fix-name struct-name) old-struct-code :key (lambda (x) (cadr x))))))
+			      (new-struct (car (member (fix-name struct-name) new-struct-code :key (lambda (x) (cadr x)))))
+			      (revised-infixes (cadddr (car revised-struct-list)))
+			      (new-infixes (cadddr new-more-struct)))
+			 (when (or (not (equal old-struct new-struct))
+				   (not (equal revised-infixes new-infixes))
+				   (member struct-name structs-to-revise :test #'string=))
+			   (format final-more-struct-file "~%~%  ")
+			   (prin1 `(mcffi:doc-note doc-file "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
+				  final-more-struct-file)
+			   (accumulate struct-name by (lambda (x y) (adjoin x y :test #'string=))
+				       initial-value structs-to-revise-list into structs-to-revise))))
+		     (progn
+		       (format final-more-struct-file "~%~%  ")
+		       (prin1 new-more-struct final-more-struct-file)
+		       (format final-more-struct-file "~%~%  ")
+		       (prin1 `(mcffi:doc-note doc-file "This struct needs to be revised. Please, post an issue to request it.")
+			      final-more-struct-file))))
+	       (finally (prin1 structs-to-revise structs-to-revise-file)))
+	     (format final-more-struct-file ")"))))
 
 ;; Write the final function definitions.
-(defun write-final-more-function (old-function-code old-more-function-code new-function-code new-more-function-code
-			    final-more-function-file)
-  (format final-more-function-file "~%")
-  (prin1 '(in-package :cvk) final-more-function-file)
-  (format final-more-function-file "~%~%")
-  (format final-more-function-file "~%(mcffi:with-doc-file (doc-file (asdf:system-relative-pathname \"common-vulkan\" \"docs/api/functions.md\"))~%")
-  (iter (for new-more-function in new-more-function-code)
-    (let* ((func-name (caddr new-more-function))
-	   (old-more-function-list (and old-more-function-code
-					(iter (for subfunc in (member func-name old-more-function-code :key (lambda (x) (caddr x))
-												       :test #'string=))
-					  (count (and (eq (car subfunc) 'mcffi:def-foreign-function)
-						      (not (null (caddr subfunc))))
-						 into def-function-count)
-					  (while (<= def-function-count 1))
-					  (collect subfunc)))))
-      (if old-more-function-list
-	  (progn
-	    (iter (for old-more-function in old-more-function-list)
-	      (format final-more-function-file "~%~%")
-	      (if (eq (car old-more-function) 'mcffi:def-foreign-function)
-		  (pretty-print-function old-more-function final-more-function-file)
-		  (prin1 old-more-function final-more-function-file)))
-	    (let ((old-function (and old-function-code
-				     (car (member (fix-name func-name) old-function-code :key (lambda (x) (caadr x))))))
-		  (new-function (car (member (fix-name func-name) new-function-code :key (lambda (x) (caadr x))))))
-	      (when (not (equal old-function new-function))
-		(format final-more-function-file "~%~%")
-		(prin1 `(mcffi:doc-note doc-file "The C code has been changed since last update. Please, post an issue to make the maintainer revise this function.")
-		       final-more-function-file))))
-	  (progn
-	    (format final-more-function-file "~%~%")
-	    (pretty-print-function new-more-function final-more-function-file)
-	    (format final-more-function-file "~%~%")
-	    (prin1 `(mcffi:doc-note doc-file "This function needs to be revised. Please, post an issue to request it.")
-		   final-more-function-file)))))
-  (format final-more-function-file ")"))
+(defun write-final-more-function (old-function-code new-function-code revised-function-code new-more-function-code
+				  functions-to-revise-list functions-to-revise-file final-more-function-file)
+  (iter (for revised-code in revised-function-code)
+    (until (eq (car revised-code) 'mcffi:with-doc-file))
+    (prin1 revised-code final-more-function-file)
+    (finally (format final-more-function-file "~%~%")
+	     (format final-more-function-file "(~s ~s"
+		     'mcffi:with-doc-file (cadr revised-code))
+	     (iter (for new-more-function in new-more-function-code)
+	       (let* ((revised-functions (cddr revised-code))
+		      (func-name (caddr new-more-function))
+		      (revised-function-list (and revised-functions
+						  (iter (for subfunc in (member func-name revised-functions :key (lambda (x) (caddr x))
+													    :test #'string=))
+						    (count (and (eq (car subfunc) 'mcffi:def-foreign-function)
+								(not (null (caddr subfunc))))
+							   into def-function-count)
+						    (while (<= def-function-count 1))
+						    (collect subfunc)))))
+		 (if revised-function-list
+		     (progn
+		       (iter (for revised-function in revised-function-list)
+			 (format final-more-function-file "~%~%  ")
+			 (prin1 revised-function final-more-function-file))
+		       (let ((old-function (and old-function-code
+						(car (member (fix-name func-name) old-function-code :key (lambda (x) (caadr x))))))
+			     (new-function (car (member (fix-name func-name) new-function-code :key (lambda (x) (caadr x))))))
+			 (when (or (not (equal old-function new-function))
+				   (member func-name functions-to-revise :test #'string=))
+			   (format final-more-function-file "~%~%  ")
+			   (prin1 `(mcffi:doc-note doc-file "The C code has been changed since last update. Please, post an issue to make the maintainer revise this function.")
+				  final-more-function-file)
+			   (accumulate func-name by (lambda (x y) (adjoin x y :test #'string=))
+				       initial-value functions-to-revise-list into functions-to-revise))))
+		     (progn
+		       (format final-more-function-file "~%~%  ")
+		       (prin1 new-more-function final-more-function-file)
+		       (format final-more-function-file "~%~%  ")
+		       (prin1 `(mcffi:doc-note doc-file "This function needs to be revised. Please, post an issue to request it.")
+			      final-more-function-file))))
+	       (finally (prin1 functions-to-revise functions-to-revise-file)))
+	     (format final-more-function-file ")"))))
 
 
 ;; -----------------------------
@@ -837,13 +615,13 @@
 
 ;; Uses the code from previous versions of files to keep the changes made by hand.
 ;; If some unexpected change occurs in the C code, a message is put in the final files.
-(defun remember-old-bindings (old-struct-code old-function-code old-more-struct-code old-more-function-code
-			      new-struct-code new-function-code new-more-struct-code new-more-function-code
-			      final-more-struct-file final-more-function-file)
-  (write-final-more-struct old-struct-code old-more-struct-code new-struct-code new-more-struct-code
-			   final-more-struct-file)
-  (write-final-more-function old-function-code old-more-function-code new-function-code new-more-function-code
-			     final-more-function-file))
+(defun revise-bindings (old-struct-code new-struct-code new-more-struct-code revised-structs-code structs-to-revise-list
+			old-function-code new-function-code new-more-function-code revised-functions-code functions-to-revise-list
+			structs-to-revise-file functions-to-revise-file final-more-struct-file final-more-function-file)
+  (write-final-more-struct old-struct-code new-struct-code revised-structs-code new-more-struct-code
+			   structs-to-revise-list structs-to-revise-file final-more-struct-file)
+  (write-final-more-function old-function-code new-function-code revised-functions-code new-more-function-code
+			     functions-to-revise-list functions-to-revise-file final-more-function-file))
 
 
 ;; ---------------------------
@@ -854,43 +632,31 @@
 ;; 2. Generate the bindings.
 ;; 3. Uses the old data to generate the final definitions.
 (let ((*print-case* :downcase)
-      old-struct-code old-function-code old-more-struct-code old-more-function-code)
-  (with-open-file  (old-type-file (asdf:system-relative-pathname "common-vulkan" "generation/ctypes.lisp")
+      old-struct-code old-function-code)
+  (with-open-file  (old-type-file (asdf:system-relative-pathname "common-vulkan" "vulkan/ctypes.lisp")
 				  :direction :input :if-does-not-exist nil)
-    (with-open-file  (old-function-file (asdf:system-relative-pathname "common-vulkan" "generation/cfunctions.lisp")
+    (with-open-file  (old-function-file (asdf:system-relative-pathname "common-vulkan" "vulkan/cfunctions.lisp")
 					:direction :input :if-does-not-exist nil)
-      (with-open-file  (old-more-struct-file (asdf:system-relative-pathname "common-vulkan" "src/structs.lisp")
-					     :direction :input :if-does-not-exist nil)
-	(with-open-file  (old-more-function-file (asdf:system-relative-pathname "common-vulkan" "src/functions.lisp")
-						 :direction :input :if-does-not-exist nil)
-	  (setf old-struct-code (and old-type-file
-				     (iter (for code = (read old-type-file nil))
-				       (while code)
-				       (when (or (eq (car code) 'cffi:defcstruct)
-						 (eq (car code) 'cffi:defcunion))
-					 (collect code))))
-		old-function-code (and old-function-file
-				       (iter (for code = (read old-function-file nil))
-					 (while code)
-					 (when (eq (car code) 'cffi:defcfun)
-					   (collect code))))
-		old-more-struct-code (and old-more-struct-file
-					  (iter (for code = (read old-more-struct-file nil))
-					    (until (eq (car code) 'mcffi:with-doc-file))
-					    (finally (return (cddr code)))))
-		old-more-function-code (and old-more-function-file
-					    (iter (for code = (read old-more-function-file nil))
-					      (until (eq (car code) 'mcffi:with-doc-file))
-					      (finally (return (cddr code))))))))))
+      (setf old-struct-code (and old-type-file
+				 (iter (for code = (read old-type-file nil))
+				   (while code)
+				   (when (or (eq (car code) 'cffi:defcstruct)
+					     (eq (car code) 'cffi:defcunion))
+				     (collect code))))
+	    old-function-code (and old-function-file
+				   (iter (for code = (read old-function-file nil))
+				     (while code)
+				     (when (eq (car code) 'cffi:defcfun)
+				       (collect code)))))))
   (with-open-file  (vulkan-file (asdf:system-relative-pathname "common-vulkan" "generation/vulkan_core_tail.h")
 				:direction :input :if-does-not-exist :error)
-    (with-open-file  (type-file (asdf:system-relative-pathname "common-vulkan" "generation/ctypes.lisp")
+    (with-open-file  (type-file (asdf:system-relative-pathname "common-vulkan" "vulkan/ctypes.lisp")
 				:direction :output :if-exists :supersede :if-does-not-exist :create)
-      (with-open-file  (function-file (asdf:system-relative-pathname "common-vulkan" "generation/cfunctions.lisp")
+      (with-open-file  (function-file (asdf:system-relative-pathname "common-vulkan" "vulkan/cfunctions.lisp")
 				      :direction :output :if-exists :supersede :if-does-not-exist :create)
-	(with-open-file  (more-constant-file (asdf:system-relative-pathname "common-vulkan" "generation/constants.lisp")
+	(with-open-file  (more-constant-file (asdf:system-relative-pathname "common-vulkan" "src/constants.lisp")
 					     :direction :output :if-exists :supersede :if-does-not-exist :create)
-	  (with-open-file  (more-enum-file (asdf:system-relative-pathname "common-vulkan" "generation/enums.lisp")
+	  (with-open-file  (more-enum-file (asdf:system-relative-pathname "common-vulkan" "src/enums.lisp")
 					   :direction :output :if-exists :supersede :if-does-not-exist :create)
 	    (with-open-file  (more-struct-file (asdf:system-relative-pathname "common-vulkan" "generation/pre-structs.lisp")
 					       :direction :output :if-exists :supersede :if-does-not-exist :create)
@@ -898,34 +664,59 @@
 						   :direction :output :if-exists :supersede :if-does-not-exist :create)
 		(generate-bindings vulkan-file type-file function-file
 				   more-constant-file more-enum-file more-struct-file more-function-file))))))))
-  (let (new-struct-code new-function-code new-more-struct-code new-more-function-code)
-    (with-open-file  (new-type-file (asdf:system-relative-pathname "common-vulkan" "generation/ctypes.lisp")
+  (let (new-struct-code new-function-code new-more-struct-code new-more-function-code
+	revised-structs-code revised-functions-code structs-to-revise-list functions-to-revise-list)
+    (with-open-file  (new-type-file (asdf:system-relative-pathname "common-vulkan" "vulkan/ctypes.lisp")
 				    :direction :input :if-does-not-exist nil)
-      (with-open-file  (new-function-file (asdf:system-relative-pathname "common-vulkan" "generation/cfunctions.lisp")
+      (with-open-file  (new-function-file (asdf:system-relative-pathname "common-vulkan" "vulkan/cfunctions.lisp")
 					  :direction :input :if-does-not-exist nil)
 	(with-open-file  (new-more-struct-file (asdf:system-relative-pathname "common-vulkan" "generation/pre-structs.lisp")
 					       :direction :input :if-does-not-exist nil)
 	  (with-open-file  (new-more-function-file (asdf:system-relative-pathname "common-vulkan" "generation/pre-functions.lisp")
 						   :direction :input :if-does-not-exist nil)
-	    (setf new-struct-code (iter (for code = (read new-type-file nil))
-				    (while code)
-				    (when (or (eq (car code) 'cffi:defcstruct)
-					      (eq (car code) 'cffi:defcunion))
-				      (collect code)))
-		  new-function-code (iter (for code = (read new-function-file nil))
-				      (while code)
-				      (when (eq (car code) 'cffi:defcfun)
-					(collect code)))
-		  new-more-struct-code (iter (for code = (read new-more-struct-file nil))
-					 (until (eq (car code) 'mcffi:with-doc-file))
-					 (finally (return (cddr code))))
-		  new-more-function-code (iter (for code = (read new-more-function-file nil))
-					   (until (eq (car code) 'mcffi:with-doc-file))
-					   (finally (return (cddr code)))))))))
-    (with-open-file  (final-more-struct-file (asdf:system-relative-pathname "common-vulkan" "generation/structs.lisp")
+	    (with-open-file  (revised-struct-file (asdf:system-relative-pathname "common-vulkan" "generation/revised-structs.lisp")
+						  :direction :input :if-does-not-exist nil)
+	      (with-open-file  (revised-function-file (asdf:system-relative-pathname "common-vulkan" "generation/revised-functions.lisp")
+						      :direction :input :if-does-not-exist nil)
+		(with-open-file (structs-to-revise-file (asdf:system-relative-pathname "common-vulkan" "generation/structs-to-revise.lisp")
+							:direction :input :if-does-not-exist nil)
+		  (with-open-file (functions-to-revise-file (asdf:system-relative-pathname "common-vulkan" "generation/functions-to-revise.lisp")
+							    :direction :input :if-does-not-exist nil)
+		    (setf new-struct-code (iter (for code = (read new-type-file nil))
+					    (while code)
+					    (when (or (eq (car code) 'cffi:defcstruct)
+						      (eq (car code) 'cffi:defcunion))
+					      (collect code)))
+			  new-function-code (iter (for code = (read new-function-file nil))
+					      (while code)
+					      (when (eq (car code) 'cffi:defcfun)
+						(collect code)))
+			  new-more-struct-code (iter (for code = (read new-more-struct-file nil))
+						 (until (eq (car code) 'mcffi:with-doc-file))
+						 (finally (return (cddr code))))
+			  new-more-function-code (iter (for code = (read new-more-function-file nil))
+						   (until (eq (car code) 'mcffi:with-doc-file))
+						   (finally (return (cddr code))))
+			  revised-structs-code (and revised-struct-file
+						    (iter (for code = (read revised-struct-file nil))
+						      (while code)
+						      (collect code)))
+			  revised-functions-code (and revised-function-file
+						      (iter (for code = (read revised-function-file nil))
+							(while code)
+							(collect code)))
+			  structs-to-revise-list (and structs-to-revise-file
+						      (read structs-to-revise-file nil))
+			  functions-to-revise-list (and functions-to-revise-file
+							(read functions-to-revise-file nil)))))))))))
+    (with-open-file  (final-more-struct-file (asdf:system-relative-pathname "common-vulkan" "src/structs.lisp")
 					     :direction :output :if-exists :supersede :if-does-not-exist :create)
-      (with-open-file  (final-more-function-file (asdf:system-relative-pathname "common-vulkan" "generation/functions.lisp")
+      (with-open-file  (final-more-function-file (asdf:system-relative-pathname "common-vulkan" "src/functions.lisp")
 						 :direction :output :if-exists :supersede :if-does-not-exist :create)
-	(remember-old-bindings old-struct-code old-function-code old-more-struct-code old-more-function-code
-			       new-struct-code new-function-code new-more-struct-code new-more-function-code
-			       final-more-struct-file final-more-function-file)))))
+	(with-open-file (structs-to-revise-file (asdf:system-relative-pathname "common-vulkan" "generation/structs-to-revise.lisp")
+						:direction :output :if-exists :supersede :if-does-not-exist :create)
+	  (with-open-file (functions-to-revise-file (asdf:system-relative-pathname "common-vulkan" "generation/functions-to-revise.lisp")
+						    :direction :output :if-exists :supersede :if-does-not-exist :create)
+	    (revise-bindings old-struct-code new-struct-code new-more-struct-code revised-structs-code structs-to-revise-list
+			     old-function-code new-function-code new-more-function-code revised-functions-code functions-to-revise-list
+			     structs-to-revise-file functions-to-revise-file final-more-struct-file final-more-function-file)))))))

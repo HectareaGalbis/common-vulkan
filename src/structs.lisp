@@ -1,4 +1,5 @@
 
+
 (in-package :cvk)
 
 (defmacro create-pointer (slot slot-arg)
@@ -114,45 +115,55 @@
         (destroy-array-strings ,slot ,count :dynamic ,dynamic)
         (create-array-strings ,slot ,new-value :dynamic ,dynamic))))
 
+(more-cffi:with-doc-file (doc-file
+                          (asdf/system:system-relative-pathname "common-vulkan"
+                                                                "docs/api/structs.md"))
 
-(mcffi:with-doc-file (doc-file (asdf:system-relative-pathname "common-vulkan" "docs/api/structs.md"))
-
-
-  (more-cffi:def-foreign-struct doc-file "VkExtent2D" (extent-2d)
+  (more-cffi:def-foreign-struct doc-file
+      "VkExtent2D"
+      (extent-2d)
       (:default-create :default-get :default-set)
     (width :name width :type uint32)
     (height :name height :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
-  (more-cffi:def-foreign-struct doc-file "VkExtent3D" (extent-3d)
+  (more-cffi:def-foreign-struct doc-file
+      "VkExtent3D"
+      (extent-3d)
       (:default-create :default-get :default-set)
     (width :name width :type uint32)
     (height :name height :type uint32)
     (depth :name depth :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkOffset2D" (offset-2d)
+  (more-cffi:def-foreign-struct doc-file
+      "VkOffset2D"
+      (offset-2d)
       (:default-create :default-get :default-set)
     (x :name x :type int32)
     (y :name y :type int32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkOffset3D" (offset-3d)
+  (more-cffi:def-foreign-struct doc-file
+      "VkOffset3D"
+      (offset-3d)
       (:default-create :default-get :default-set)
     (x :name x :type int32)
     (y :name y :type int32)
     (z :name z :type int32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkRect2D" (rect-2d)
+  (more-cffi:def-foreign-struct doc-file
+      "VkRect2D"
+      (rect-2d)
       (:default-create :default-get :default-set)
     (offset :pointer t :name offset :type "VkOffset2D" :create
      ((offset-arg) (more-cffi:copy offset offset-arg '(:struct vkoffset2d)))
@@ -163,30 +174,38 @@
      :set
      ((extent-arg) (more-cffi:copy extent extent-arg '(:struct vkextent2d)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkBaseInStructure" (base-in-structure)
+  (more-cffi:def-foreign-struct doc-file
+      "VkBaseInStructure"
+      (base-in-structure)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type "VkBaseInStructure" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
-     (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg))))
+     (nil (get-pointer pnext)) :set
+     ((pnext-arg) (set-pointer pnext pnext-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkBaseOutStructure" (base-out-structure)
+  (more-cffi:def-foreign-struct doc-file
+      "VkBaseOutStructure"
+      (base-out-structure)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type "VkBaseOutStructure" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
-     (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg))))
+     (nil (get-pointer pnext)) :set
+     ((pnext-arg) (set-pointer pnext pnext-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkBufferMemoryBarrier" (buffer-memory-barrier)
+  (more-cffi:def-foreign-struct doc-file
+      "VkBufferMemoryBarrier"
+      (buffer-memory-barrier)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -203,19 +222,23 @@
     (offset :name offset :type "VkDeviceSize")
     (size :name size :type "VkDeviceSize"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDispatchIndirectCommand" (dispatch-indirect-command)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDispatchIndirectCommand"
+      (dispatch-indirect-command)
       (:default-create :default-get :default-set)
     (x :name x :type uint32)
     (y :name y :type uint32)
     (z :name z :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDrawIndexedIndirectCommand" (draw-indexed-indirect-command)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDrawIndexedIndirectCommand"
+      (draw-indexed-indirect-command)
       (:default-create :default-get :default-set)
     (indexcount :name "indexCount" :type uint32)
     (instancecount :name "instanceCount" :type uint32)
@@ -223,20 +246,24 @@
     (vertexoffset :name "vertexOffset" :type int32)
     (firstinstance :name "firstInstance" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDrawIndirectCommand" (draw-indirect-command)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDrawIndirectCommand"
+      (draw-indirect-command)
       (:default-create :default-get :default-set)
     (vertexcount :name "vertexCount" :type uint32)
     (instancecount :name "instanceCount" :type uint32)
     (firstvertex :name "firstVertex" :type uint32)
     (firstinstance :name "firstInstance" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImageSubresourceRange" (image-subresource-range)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImageSubresourceRange"
+      (image-subresource-range)
       (:default-create :default-get :default-set)
     (aspectmask :name "aspectMask" :type "VkImageAspectFlags")
     (basemiplevel :name "baseMipLevel" :type uint32)
@@ -244,10 +271,12 @@
     (basearraylayer :name "baseArrayLayer" :type uint32)
     (layercount :name "layerCount" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImageMemoryBarrier" (image-memory-barrier)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImageMemoryBarrier"
+      (image-memory-barrier)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -272,10 +301,12 @@
       (more-cffi:copy subresourcerange subresourcerange-arg
                       '(:struct vkimagesubresourcerange)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkMemoryBarrier" (memory-barrier)
+  (more-cffi:def-foreign-struct doc-file
+      "VkMemoryBarrier"
+      (memory-barrier)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -284,10 +315,12 @@
     (srcaccessmask :name "srcAccessMask" :type "VkAccessFlags")
     (dstaccessmask :name "dstAccessMask" :type "VkAccessFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineCacheHeaderVersionOne" (pipeline-cache-header-version-one)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineCacheHeaderVersionOne"
+      (pipeline-cache-header-version-one)
       (:default-create :default-get :default-set)
     (headersize :name "headerSize" :type uint32)
     (headerversion :name "headerVersion" :type "VkPipelineCacheHeaderVersion")
@@ -295,10 +328,12 @@
     (deviceid :name "deviceID" :type uint32)
     (pipelinecacheuuid :name "pipelineCacheUUID" :type uint8))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkAllocationCallbacks" (allocation-callbacks)
+  (more-cffi:def-foreign-struct doc-file
+      "VkAllocationCallbacks"
+      (allocation-callbacks)
       (:default-create :default-get :default-set)
     (puserdata :name "pUserData" :type void :init-form nil :create
      ((puserdata-arg) (create-pointer puserdata puserdata-arg)) :get
@@ -312,10 +347,12 @@
     (pfninternalfree :name "pfnInternalFree" :type
      "PFN_vkInternalFreeNotification"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkApplicationInfo" (application-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkApplicationInfo"
+      (application-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -337,10 +374,12 @@
     (engineversion :name "engineVersion" :type uint32)
     (apiversion :name "apiVersion" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkFormatProperties" (format-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkFormatProperties"
+      (format-properties)
       (:default-create :default-get :default-set)
     (lineartilingfeatures :name "linearTilingFeatures" :type
      "VkFormatFeatureFlags")
@@ -348,10 +387,12 @@
      "VkFormatFeatureFlags")
     (bufferfeatures :name "bufferFeatures" :type "VkFormatFeatureFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImageFormatProperties" (image-format-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImageFormatProperties"
+      (image-format-properties)
       (:default-create :default-get :default-set)
     (maxextent :pointer t :name "maxExtent" :type "VkExtent3D" :create
      ((maxextent-arg)
@@ -364,10 +405,12 @@
     (samplecounts :name "sampleCounts" :type "VkSampleCountFlags")
     (maxresourcesize :name "maxResourceSize" :type "VkDeviceSize"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkInstanceCreateInfo" (instance-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkInstanceCreateInfo"
+      (instance-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -415,26 +458,32 @@
       (set-array-strings ppenabledextensionnames ppenabledextensionnames-arg
        ppenabledextensionnames-index enabledextensioncount :dynamic t))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkMemoryHeap" (memory-heap)
+  (more-cffi:def-foreign-struct doc-file
+      "VkMemoryHeap"
+      (memory-heap)
       (:default-create :default-get :default-set)
     (size :name size :type "VkDeviceSize")
     (flags :name flags :type "VkMemoryHeapFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkMemoryType" (memory-type)
+  (more-cffi:def-foreign-struct doc-file
+      "VkMemoryType"
+      (memory-type)
       (:default-create :default-get :default-set)
     (propertyflags :name "propertyFlags" :type "VkMemoryPropertyFlags")
     (heapindex :name "heapIndex" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceFeatures" (physical-device-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceFeatures"
+      (physical-device-features)
       (:default-create :default-get :default-set)
     (robustbufferaccess :name "robustBufferAccess" :type "VkBool32")
     (fulldrawindexuint32 :name "fullDrawIndexUint32" :type "VkBool32")
@@ -505,10 +554,12 @@
     (variablemultisamplerate :name "variableMultisampleRate" :type "VkBool32")
     (inheritedqueries :name "inheritedQueries" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceLimits" (physical-device-limits)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceLimits"
+      (physical-device-limits)
       (:default-create :default-get :default-set)
     (maximagedimension1d :name "maxImageDimension1D" :type uint32)
     (maximagedimension2d :name "maxImageDimension2D" :type uint32)
@@ -729,10 +780,12 @@
      "optimalBufferCopyRowPitchAlignment" :type "VkDeviceSize")
     (noncoherentatomsize :name "nonCoherentAtomSize" :type "VkDeviceSize"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceMemoryProperties" (physical-device-memory-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceMemoryProperties"
+      (physical-device-memory-properties)
       (:default-create :default-get :default-set)
     (memorytypecount :name "memoryTypeCount" :type uint32)
     (memorytypes :pointer t :name "memoryTypes" :type "VkMemoryType" :create
@@ -749,10 +802,12 @@
      ((memoryheaps-arg)
       (more-cffi:copy memoryheaps memoryheaps-arg '(:struct vkmemoryheap)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceSparseProperties" (physical-device-sparse-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceSparseProperties"
+      (physical-device-sparse-properties)
       (:default-create :default-get :default-set)
     (residencystandard2dblockshape :name "residencyStandard2DBlockShape" :type
      "VkBool32")
@@ -764,10 +819,12 @@
     (residencynonresidentstrict :name "residencyNonResidentStrict" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceProperties" (physical-device-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceProperties"
+      (physical-device-properties)
       (:default-create :default-get :default-set)
     (apiversion :name "apiVersion" :type uint32)
     (driverversion :name "driverVersion" :type uint32)
@@ -792,10 +849,12 @@
       (more-cffi:copy sparseproperties sparseproperties-arg
                       '(:struct vkphysicaldevicesparseproperties)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkQueueFamilyProperties" (queue-family-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkQueueFamilyProperties"
+      (queue-family-properties)
       (:default-create :default-get :default-set)
     (queueflags :name "queueFlags" :type "VkQueueFlags")
     (queuecount :name "queueCount" :type uint32)
@@ -810,10 +869,12 @@
       (more-cffi:copy minimagetransfergranularity
                       minimagetransfergranularity-arg '(:struct vkextent3d)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDeviceQueueCreateInfo" (device-queue-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDeviceQueueCreateInfo"
+      (device-queue-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -836,10 +897,12 @@
       (set-array :float pqueuepriorities pqueuepriorities-arg
        pqueuepriorities-index :dynamic t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDeviceCreateInfo" (device-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDeviceCreateInfo"
+      (device-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -903,28 +966,34 @@
      ((penabledfeatures-arg)
       (set-pointer penabledfeatures penabledfeatures-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkExtensionProperties" (extension-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkExtensionProperties"
+      (extension-properties)
       (:default-create :default-get :default-set)
     (extensionname :name "extensionName" :type char)
     (specversion :name "specVersion" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkLayerProperties" (layer-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkLayerProperties"
+      (layer-properties)
       (:default-create :default-get :default-set)
     (layername :name "layerName" :type char)
     (specversion :name "specVersion" :type uint32)
     (implementationversion :name "implementationVersion" :type uint32)
     (description :name description :type char))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSubmitInfo" (submit-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSubmitInfo"
+      (submit-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -980,10 +1049,12 @@
       (set-array vksemaphore psignalsemaphores psignalsemaphores-arg
        psignalsemaphores-index :dynamic t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkMappedMemoryRange" (mapped-memory-range)
+  (more-cffi:def-foreign-struct doc-file
+      "VkMappedMemoryRange"
+      (mapped-memory-range)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -996,10 +1067,12 @@
     (offset :name offset :type "VkDeviceSize")
     (size :name size :type "VkDeviceSize"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkMemoryAllocateInfo" (memory-allocate-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkMemoryAllocateInfo"
+      (memory-allocate-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -1008,19 +1081,23 @@
     (allocationsize :name "allocationSize" :type "VkDeviceSize")
     (memorytypeindex :name "memoryTypeIndex" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkMemoryRequirements" (memory-requirements)
+  (more-cffi:def-foreign-struct doc-file
+      "VkMemoryRequirements"
+      (memory-requirements)
       (:default-create :default-get :default-set)
     (size :name size :type "VkDeviceSize")
     (alignment :name alignment :type "VkDeviceSize")
     (memorytypebits :name "memoryTypeBits" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSparseMemoryBind" (sparse-memory-bind)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSparseMemoryBind"
+      (sparse-memory-bind)
       (:default-create :default-get :default-set)
     (resourceoffset :name "resourceOffset" :type "VkDeviceSize")
     (size :name size :type "VkDeviceSize")
@@ -1031,10 +1108,12 @@
     (memoryoffset :name "memoryOffset" :type "VkDeviceSize")
     (flags :name flags :type "VkSparseMemoryBindFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSparseBufferMemoryBindInfo" (sparse-buffer-memory-bind-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSparseBufferMemoryBindInfo"
+      (sparse-buffer-memory-bind-info)
       (:default-create :default-get :default-set)
     (buffer :name buffer :type "VkBuffer" :create
      ((buffer-arg) (create-pointer buffer buffer-arg)) :get
@@ -1054,10 +1133,12 @@
       (set-array (:struct vksparsememorybind) pbinds pbinds-arg pbinds-index
        :dynamic t :pointers ("VkSparseMemoryBind")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSparseImageOpaqueMemoryBindInfo" (sparse-image-opaque-memory-bind-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSparseImageOpaqueMemoryBindInfo"
+      (sparse-image-opaque-memory-bind-info)
       (:default-create :default-get :default-set)
     (image :name image :type "VkImage" :create
      ((image-arg) (create-pointer image image-arg)) :get
@@ -1076,19 +1157,23 @@
       (set-array (:struct vksparsememorybind) pbinds pbinds-arg pbinds-index
        :dynamic t :pointers ("VkSparseMemoryBind")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImageSubresource" (image-subresource)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImageSubresource"
+      (image-subresource)
       (:default-create :default-get :default-set)
     (aspectmask :name "aspectMask" :type "VkImageAspectFlags")
     (miplevel :name "mipLevel" :type uint32)
     (arraylayer :name "arrayLayer" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSparseImageMemoryBind" (sparse-image-memory-bind)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSparseImageMemoryBind"
+      (sparse-image-memory-bind)
       (:default-create :default-get :default-set)
     (subresource :pointer t :name subresource :type "VkImageSubresource"
      :create
@@ -1114,10 +1199,12 @@
     (memoryoffset :name "memoryOffset" :type "VkDeviceSize")
     (flags :name flags :type "VkSparseMemoryBindFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSparseImageMemoryBindInfo" (sparse-image-memory-bind-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSparseImageMemoryBindInfo"
+      (sparse-image-memory-bind-info)
       (:default-create :default-get :default-set)
     (image :name image :type "VkImage" :create
      ((image-arg) (create-pointer image image-arg)) :get
@@ -1137,10 +1224,12 @@
       (set-array (:struct vksparseimagememorybind) pbinds pbinds-arg
        pbinds-index :dynamic t :pointers ("VkSparseImageMemoryBind")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkBindSparseInfo" (bind-sparse-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkBindSparseInfo"
+      (bind-sparse-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -1224,10 +1313,12 @@
       (set-array vksemaphore psignalsemaphores psignalsemaphores-arg
        psignalsemaphores-index :dynamic t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSparseImageFormatProperties" (sparse-image-format-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSparseImageFormatProperties"
+      (sparse-image-format-properties)
       (:default-create :default-get :default-set)
     (aspectmask :name "aspectMask" :type "VkImageAspectFlags")
     (imagegranularity :pointer t :name "imageGranularity" :type "VkExtent3D"
@@ -1241,10 +1332,12 @@
                       '(:struct vkextent3d))))
     (flags :name flags :type "VkSparseImageFormatFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSparseImageMemoryRequirements" (sparse-image-memory-requirements)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSparseImageMemoryRequirements"
+      (sparse-image-memory-requirements)
       (:default-create :default-get :default-set)
     (formatproperties :pointer t :name "formatProperties" :type
      "VkSparseImageFormatProperties" :create
@@ -1260,10 +1353,12 @@
     (imagemiptailoffset :name "imageMipTailOffset" :type "VkDeviceSize")
     (imagemiptailstride :name "imageMipTailStride" :type "VkDeviceSize"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkFenceCreateInfo" (fence-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkFenceCreateInfo"
+      (fence-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -1271,10 +1366,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkFenceCreateFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSemaphoreCreateInfo" (semaphore-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSemaphoreCreateInfo"
+      (semaphore-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -1282,10 +1379,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkSemaphoreCreateFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkEventCreateInfo" (event-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkEventCreateInfo"
+      (event-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -1293,10 +1392,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkEventCreateFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkQueryPoolCreateInfo" (query-pool-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkQueryPoolCreateInfo"
+      (query-pool-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -1308,10 +1409,12 @@
     (pipelinestatistics :name "pipelineStatistics" :type
      "VkQueryPipelineStatisticFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkBufferCreateInfo" (buffer-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkBufferCreateInfo"
+      (buffer-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -1336,10 +1439,12 @@
       (set-array :uint32 pqueuefamilyindices pqueuefamilyindices-arg
        pqueuefamilyindices-index :dynamic t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkBufferViewCreateInfo" (buffer-view-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkBufferViewCreateInfo"
+      (buffer-view-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -1354,10 +1459,12 @@
     (offset :name offset :type "VkDeviceSize")
     (range :name range :type "VkDeviceSize"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImageCreateInfo" (image-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImageCreateInfo"
+      (image-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -1392,10 +1499,12 @@
        pqueuefamilyindices-index :dynamic t :pointers nil)))
     (initiallayout :name "initialLayout" :type "VkImageLayout"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSubresourceLayout" (subresource-layout)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSubresourceLayout"
+      (subresource-layout)
       (:default-create :default-get :default-set)
     (offset :name offset :type "VkDeviceSize")
     (size :name size :type "VkDeviceSize")
@@ -1403,20 +1512,24 @@
     (arraypitch :name "arrayPitch" :type "VkDeviceSize")
     (depthpitch :name "depthPitch" :type "VkDeviceSize"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkComponentMapping" (component-mapping)
+  (more-cffi:def-foreign-struct doc-file
+      "VkComponentMapping"
+      (component-mapping)
       (:default-create :default-get :default-set)
     (r :name r :type "VkComponentSwizzle")
     (g :name g :type "VkComponentSwizzle")
     (b :name b :type "VkComponentSwizzle")
     (a :name a :type "VkComponentSwizzle"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImageViewCreateInfo" (image-view-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImageViewCreateInfo"
+      (image-view-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -1444,10 +1557,12 @@
       (more-cffi:copy subresourcerange subresourcerange-arg
                       '(:struct vkimagesubresourcerange)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkShaderModuleCreateInfo" (shader-module-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkShaderModuleCreateInfo"
+      (shader-module-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -1457,12 +1572,15 @@
     (codesize :name "codeSize" :type size)
     (pcode :name "pCode" :type uint32 :init-form nil :create
      ((pcode-arg) (create-pointer pcode pcode-arg)) :get
-     (nil (get-pointer pcode)) :set ((pcode-arg) (set-pointer pcode pcode-arg))))
+     (nil (get-pointer pcode)) :set
+     ((pcode-arg) (set-pointer pcode pcode-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineCacheCreateInfo" (pipeline-cache-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineCacheCreateInfo"
+      (pipeline-cache-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -1475,19 +1593,23 @@
      (nil (get-pointer pinitialdata)) :set
      ((pinitialdata-arg) (set-pointer pinitialdata pinitialdata-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSpecializationMapEntry" (specialization-map-entry)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSpecializationMapEntry"
+      (specialization-map-entry)
       (:default-create :default-get :default-set)
     (antid :name "antID" :type uint32)
     (offset :name offset :type uint32)
     (size :name size :type size))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSpecializationInfo" (specialization-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSpecializationInfo"
+      (specialization-info)
       (:default-create :default-get :default-set)
     (mapentrycount :name "mapEntryCount" :type uint32)
     (pmapentries :name "pMapEntries" :type "VkSpecializationMapEntry"
@@ -1506,12 +1628,15 @@
     (datasize :name "dataSize" :type size)
     (pdata :name "pData" :type void :init-form nil :create
      ((pdata-arg) (create-pointer pdata pdata-arg)) :get
-     (nil (get-pointer pdata)) :set ((pdata-arg) (set-pointer pdata pdata-arg))))
+     (nil (get-pointer pdata)) :set
+     ((pdata-arg) (set-pointer pdata pdata-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineShaderStageCreateInfo" (pipeline-shader-stage-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineShaderStageCreateInfo"
+      (pipeline-shader-stage-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -1535,10 +1660,12 @@
      ((pspecializationinfo-arg)
       (set-pointer pspecializationinfo pspecializationinfo-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkComputePipelineCreateInfo" (compute-pipeline-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkComputePipelineCreateInfo"
+      (compute-pipeline-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -1566,29 +1693,35 @@
       (set-pointer basepipelinehandle basepipelinehandle-arg)))
     (basepipelineindex :name "basePipelineIndex" :type int32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkVertexInputBindingDescription" (vertex-input-binding-description)
+  (more-cffi:def-foreign-struct doc-file
+      "VkVertexInputBindingDescription"
+      (vertex-input-binding-description)
       (:default-create :default-get :default-set)
     (binding :name binding :type uint32)
     (stride :name stride :type uint32)
     (inputrate :name "inputRate" :type "VkVertexInputRate"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkVertexInputAttributeDescription" (vertex-input-attribute-description)
+  (more-cffi:def-foreign-struct doc-file
+      "VkVertexInputAttributeDescription"
+      (vertex-input-attribute-description)
       (:default-create :default-get :default-set)
     (location :name location :type uint32)
     (binding :name binding :type uint32)
     (format :name format :type "VkFormat")
     (offset :name offset :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineVertexInputStateCreateInfo" (pipeline-vertex-input-state-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineVertexInputStateCreateInfo"
+      (pipeline-vertex-input-state-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -1638,10 +1771,12 @@
        pvertexattributedescriptions-index :dynamic t :pointers
        ("VkVertexInputAttributeDescription")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineInputAssemblyStateCreateInfo" (pipeline-input-assembly-state-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineInputAssemblyStateCreateInfo"
+      (pipeline-input-assembly-state-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -1651,10 +1786,12 @@
     (topology :name topology :type "VkPrimitiveTopology")
     (primitiverestartenable :name "primitiveRestartEnable" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineTessellationStateCreateInfo" (pipeline-tessellation-state-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineTessellationStateCreateInfo"
+      (pipeline-tessellation-state-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -1663,10 +1800,12 @@
     (flags :name flags :type "VkPipelineTessellationStateCreateFlags")
     (patchcontrolpoints :name "patchControlPoints" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkViewport" (viewport)
+  (more-cffi:def-foreign-struct doc-file
+      "VkViewport"
+      (viewport)
       (:default-create :default-get :default-set)
     (x :name x :type float)
     (y :name y :type float)
@@ -1675,10 +1814,12 @@
     (mindepth :name "minDepth" :type float)
     (maxdepth :name "maxDepth" :type float))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineViewportStateCreateInfo" (pipeline-viewport-state-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineViewportStateCreateInfo"
+      (pipeline-viewport-state-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -1712,10 +1853,12 @@
       (set-array (:struct vkrect2d) pscissors pscissors-arg pscissors-index
        :dynamic t :pointers ("VkRect2D")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineRasterizationStateCreateInfo" (pipeline-rasterization-state-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineRasterizationStateCreateInfo"
+      (pipeline-rasterization-state-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -1733,10 +1876,12 @@
     (depthbiasslopefactor :name "depthBiasSlopeFactor" :type float)
     (linewidth :name "lineWidth" :type float))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineMultisampleStateCreateInfo" (pipeline-multisample-state-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineMultisampleStateCreateInfo"
+      (pipeline-multisample-state-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -1754,10 +1899,12 @@
     (alphatocoverageenable :name "alphaToCoverageEnable" :type "VkBool32")
     (alphatooneenable :name "alphaToOneEnable" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkStencilOpState" (stencil-op-state)
+  (more-cffi:def-foreign-struct doc-file
+      "VkStencilOpState"
+      (stencil-op-state)
       (:default-create :default-get :default-set)
     (failop :name "failOp" :type "VkStencilOp")
     (passop :name "passOp" :type "VkStencilOp")
@@ -1767,10 +1914,12 @@
     (writemask :name "writeMask" :type uint32)
     (reference :name reference :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineDepthStencilStateCreateInfo" (pipeline-depth-stencil-state-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineDepthStencilStateCreateInfo"
+      (pipeline-depth-stencil-state-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -1793,10 +1942,12 @@
     (mindepthbounds :name "minDepthBounds" :type float)
     (maxdepthbounds :name "maxDepthBounds" :type float))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineColorBlendAttachmentState" (pipeline-color-blend-attachment-state)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineColorBlendAttachmentState"
+      (pipeline-color-blend-attachment-state)
       (:default-create :default-get :default-set)
     (blendenable :name "blendEnable" :type "VkBool32")
     (srccolorblendfactor :name "srcColorBlendFactor" :type "VkBlendFactor")
@@ -1807,10 +1958,12 @@
     (alphablendop :name "alphaBlendOp" :type "VkBlendOp")
     (colorwritemask :name "colorWriteMask" :type "VkColorComponentFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineColorBlendStateCreateInfo" (pipeline-color-blend-state-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineColorBlendStateCreateInfo"
+      (pipeline-color-blend-state-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -1848,10 +2001,12 @@
       (set-array :float blendconstants blendconstants-arg blendconstants-index
        :dynamic nil :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineDynamicStateCreateInfo" (pipeline-dynamic-state-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineDynamicStateCreateInfo"
+      (pipeline-dynamic-state-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -1873,10 +2028,12 @@
       (set-array vkdynamicstate pdynamicstates pdynamicstates-arg
        pdynamicstates-index :dynamic t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkGraphicsPipelineCreateInfo" (graphics-pipeline-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkGraphicsPipelineCreateInfo"
+      (graphics-pipeline-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -1973,19 +2130,23 @@
       (set-pointer basepipelinehandle basepipelinehandle-arg)))
     (basepipelineindex :name "basePipelineIndex" :type int32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPushConstantRange" (push-constant-range)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPushConstantRange"
+      (push-constant-range)
       (:default-create :default-get :default-set)
     (stageflags :name "stageFlags" :type "VkShaderStageFlags")
     (offset :name offset :type uint32)
     (size :name size :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineLayoutCreateInfo" (pipeline-layout-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineLayoutCreateInfo"
+      (pipeline-layout-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -2023,10 +2184,12 @@
        ppushconstantranges-arg ppushconstantranges-index :dynamic t :pointers
        ("VkPushConstantRange")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSamplerCreateInfo" (sampler-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSamplerCreateInfo"
+      (sampler-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -2049,10 +2212,12 @@
     (bordercolor :name "borderColor" :type "VkBorderColor")
     (unnormalizedcoordinates :name "unnormalizedCoordinates" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkCopyDescriptorSet" (copy-descriptor-set)
+  (more-cffi:def-foreign-struct doc-file
+      "VkCopyDescriptorSet"
+      (copy-descriptor-set)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -2072,10 +2237,12 @@
     (dstarrayelement :name "dstArrayElement" :type uint32)
     (descriptorcount :name "descriptorCount" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDescriptorBufferInfo" (descriptor-buffer-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDescriptorBufferInfo"
+      (descriptor-buffer-info)
       (:default-create :default-get :default-set)
     (buffer :name buffer :type "VkBuffer" :create
      ((buffer-arg) (create-pointer buffer buffer-arg)) :get
@@ -2084,10 +2251,12 @@
     (offset :name offset :type "VkDeviceSize")
     (range :name range :type "VkDeviceSize"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDescriptorImageInfo" (descriptor-image-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDescriptorImageInfo"
+      (descriptor-image-info)
       (:default-create :default-get :default-set)
     (sampler :name sampler :type "VkSampler" :create
      ((sampler-arg) (create-pointer sampler sampler-arg)) :get
@@ -2099,18 +2268,22 @@
      ((imageview-arg) (set-pointer imageview imageview-arg)))
     (imagelayout :name "imageLayout" :type "VkImageLayout"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDescriptorPoolSize" (descriptor-pool-size)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDescriptorPoolSize"
+      (descriptor-pool-size)
       (:default-create :default-get :default-set)
     (type :name type :type "VkDescriptorType")
     (descriptorcount :name "descriptorCount" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDescriptorPoolCreateInfo" (descriptor-pool-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDescriptorPoolCreateInfo"
+      (descriptor-pool-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -2133,10 +2306,12 @@
       (set-array (:struct vkdescriptorpoolsize) ppoolsizes ppoolsizes-arg
        ppoolsizes-index :dynamic t :pointers ("VkDescriptorPoolSize")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDescriptorSetAllocateInfo" (descriptor-set-allocate-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDescriptorSetAllocateInfo"
+      (descriptor-set-allocate-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -2161,10 +2336,12 @@
       (set-array vkdescriptorsetlayout psetlayouts psetlayouts-arg
        psetlayouts-index :dynamic t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDescriptorSetLayoutBinding" (descriptor-set-layout-binding)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDescriptorSetLayoutBinding"
+      (descriptor-set-layout-binding)
       (:default-create :default-get :default-set)
     (binding :name binding :type uint32)
     (descriptortype :name "descriptorType" :type "VkDescriptorType")
@@ -2178,10 +2355,12 @@
      ((pimmutablesamplers-arg)
       (set-pointer pimmutablesamplers pimmutablesamplers-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDescriptorSetLayoutCreateInfo" (descriptor-set-layout-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDescriptorSetLayoutCreateInfo"
+      (descriptor-set-layout-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -2204,10 +2383,12 @@
       (set-array (:struct vkdescriptorsetlayoutbinding) pbindings pbindings-arg
        pbindings-index :dynamic t :pointers ("VkDescriptorSetLayoutBinding")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkWriteDescriptorSet" (write-descriptor-set)
+  (more-cffi:def-foreign-struct doc-file
+      "VkWriteDescriptorSet"
+      (write-descriptor-set)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -2238,10 +2419,12 @@
      ((ptexelbufferview-arg)
       (set-pointer ptexelbufferview ptexelbufferview-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkAttachmentDescription" (attachment-description)
+  (more-cffi:def-foreign-struct doc-file
+      "VkAttachmentDescription"
+      (attachment-description)
       (:default-create :default-get :default-set)
     (flags :name flags :type "VkAttachmentDescriptionFlags")
     (format :name format :type "VkFormat")
@@ -2253,18 +2436,22 @@
     (initiallayout :name "initialLayout" :type "VkImageLayout")
     (finallayout :name "finalLayout" :type "VkImageLayout"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkAttachmentReference" (attachment-reference)
+  (more-cffi:def-foreign-struct doc-file
+      "VkAttachmentReference"
+      (attachment-reference)
       (:default-create :default-get :default-set)
     (attachment :name attachment :type uint32)
     (layout :name layout :type "VkImageLayout"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkFramebufferCreateInfo" (framebuffer-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkFramebufferCreateInfo"
+      (framebuffer-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -2293,10 +2480,12 @@
     (height :name height :type uint32)
     (layers :name layers :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSubpassDescription" (subpass-description)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSubpassDescription"
+      (subpass-description)
       (:default-create :default-get :default-set)
     (flags :name flags :type "VkSubpassDescriptionFlags")
     (pipelinebindpoint :name "pipelineBindPoint" :type "VkPipelineBindPoint")
@@ -2361,10 +2550,12 @@
       (set-array :uint32 ppreserveattachments ppreserveattachments-arg
        ppreserveattachments-index :dynamic t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSubpassDependency" (subpass-dependency)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSubpassDependency"
+      (subpass-dependency)
       (:default-create :default-get :default-set)
     (srcsubpass :name "srcSubpass" :type uint32)
     (dstsubpass :name "dstSubpass" :type uint32)
@@ -2374,10 +2565,12 @@
     (dstaccessmask :name "dstAccessMask" :type "VkAccessFlags")
     (dependencyflags :name "dependencyFlags" :type "VkDependencyFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkRenderPassCreateInfo" (render-pass-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkRenderPassCreateInfo"
+      (render-pass-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -2429,10 +2622,12 @@
       (set-array (:struct vksubpassdependency) pdependencies pdependencies-arg
        pdependencies-index :dynamic t :pointers ("VkSubpassDependency")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkCommandPoolCreateInfo" (command-pool-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkCommandPoolCreateInfo"
+      (command-pool-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -2441,10 +2636,12 @@
     (flags :name flags :type "VkCommandPoolCreateFlags")
     (queuefamilyindex :name "queueFamilyIndex" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkCommandBufferAllocateInfo" (command-buffer-allocate-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkCommandBufferAllocateInfo"
+      (command-buffer-allocate-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -2457,10 +2654,12 @@
     (level :name level :type "VkCommandBufferLevel")
     (commandbuffercount :name "commandBufferCount" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkCommandBufferInheritanceInfo" (command-buffer-inheritance-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkCommandBufferInheritanceInfo"
+      (command-buffer-inheritance-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -2480,10 +2679,12 @@
     (pipelinestatistics :name "pipelineStatistics" :type
      "VkQueryPipelineStatisticFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkCommandBufferBeginInfo" (command-buffer-begin-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkCommandBufferBeginInfo"
+      (command-buffer-begin-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -2498,29 +2699,35 @@
      ((pinheritanceinfo-arg)
       (set-pointer pinheritanceinfo pinheritanceinfo-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkBufferCopy" (buffer-copy)
+  (more-cffi:def-foreign-struct doc-file
+      "VkBufferCopy"
+      (buffer-copy)
       (:default-create :default-get :default-set)
     (srcoffset :name "srcOffset" :type "VkDeviceSize")
     (dstoffset :name "dstOffset" :type "VkDeviceSize")
     (size :name size :type "VkDeviceSize"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImageSubresourceLayers" (image-subresource-layers)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImageSubresourceLayers"
+      (image-subresource-layers)
       (:default-create :default-get :default-set)
     (aspectmask :name "aspectMask" :type "VkImageAspectFlags")
     (miplevel :name "mipLevel" :type uint32)
     (basearraylayer :name "baseArrayLayer" :type uint32)
     (layercount :name "layerCount" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkBufferImageCopy" (buffer-image-copy)
+  (more-cffi:def-foreign-struct doc-file
+      "VkBufferImageCopy"
+      (buffer-image-copy)
       (:default-create :default-get :default-set)
     (bufferoffset :name "bufferOffset" :type "VkDeviceSize")
     (bufferrowlength :name "bufferRowLength" :type uint32)
@@ -2547,10 +2754,12 @@
      ((imageextent-arg)
       (more-cffi:copy imageextent imageextent-arg '(:struct vkextent3d)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-union doc-file "VkClearColorValue" (clear-color-value)
+  (more-cffi:def-foreign-union doc-file
+      "VkClearColorValue"
+      (clear-color-value)
       (:default-create :default-get :default-set)
     (float32 :name float32 :type float :create
      ((float32-arg)
@@ -2583,18 +2792,22 @@
       (set-array :uint32 uint32 uint32-arg uint32-index :dynamic nil :pointers
        nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkClearDepthStencilValue" (clear-depth-stencil-value)
+  (more-cffi:def-foreign-struct doc-file
+      "VkClearDepthStencilValue"
+      (clear-depth-stencil-value)
       (:default-create :default-get :default-set)
     (depth :name depth :type float)
     (stencil :name stencil :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-union doc-file "VkClearValue" (clear-value)
+  (more-cffi:def-foreign-union doc-file
+      "VkClearValue"
+      (clear-value)
       (:default-create :default-get :default-set)
     (color :pointer t :name color :type "VkClearColorValue" :create
      ((color-arg) (more-cffi:copy color color-arg '(:union vkclearcolorvalue)))
@@ -2610,10 +2823,12 @@
       (more-cffi:copy depthstencil depthstencil-arg
                       '(:struct vkcleardepthstencilvalue)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkClearAttachment" (clear-attachment)
+  (more-cffi:def-foreign-struct doc-file
+      "VkClearAttachment"
+      (clear-attachment)
       (:default-create :default-get :default-set)
     (aspectmask :name "aspectMask" :type "VkImageAspectFlags")
     (colorattachment :name "colorAttachment" :type uint32)
@@ -2624,10 +2839,12 @@
      ((clearvalue-arg)
       (more-cffi:copy clearvalue clearvalue-arg '(:union vkclearvalue)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkClearRect" (clear-rect)
+  (more-cffi:def-foreign-struct doc-file
+      "VkClearRect"
+      (clear-rect)
       (:default-create :default-get :default-set)
     (rect :pointer t :name rect :type "VkRect2D" :create
      ((rect-arg) (more-cffi:copy rect rect-arg '(:struct vkrect2d))) :set
@@ -2635,10 +2852,12 @@
     (basearraylayer :name "baseArrayLayer" :type uint32)
     (layercount :name "layerCount" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImageBlit" (image-blit)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImageBlit"
+      (image-blit)
       (:default-create :default-get :default-set)
     (srcsubresource :pointer t :name "srcSubresource" :type
      "VkImageSubresourceLayers" :create
@@ -2683,10 +2902,12 @@
       (set-array (:struct vkoffset3d) dstoffsets dstoffsets-arg
        dstoffsets-index :dynamic nil :pointers ("VkOffset3D")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImageCopy" (image-copy)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImageCopy"
+      (image-copy)
       (:default-create :default-get :default-set)
     (srcsubresource :pointer t :name "srcSubresource" :type
      "VkImageSubresourceLayers" :create
@@ -2723,10 +2944,12 @@
      :set
      ((extent-arg) (more-cffi:copy extent extent-arg '(:struct vkextent3d)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImageResolve" (image-resolve)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImageResolve"
+      (image-resolve)
       (:default-create :default-get :default-set)
     (srcsubresource :pointer t :name "srcSubresource" :type
      "VkImageSubresourceLayers" :create
@@ -2763,10 +2986,12 @@
      :set
      ((extent-arg) (more-cffi:copy extent extent-arg '(:struct vkextent3d)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkRenderPassBeginInfo" (render-pass-begin-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkRenderPassBeginInfo"
+      (render-pass-begin-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -2801,10 +3026,12 @@
       (set-array (:union vkclearvalue) pclearvalues pclearvalues-arg
        pclearvalues-index :dynamic t :pointers ("VkClearValue")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceSubgroupProperties" (physical-device-subgroup-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceSubgroupProperties"
+      (physical-device-subgroup-properties)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -2817,11 +3044,12 @@
     (quadoperationsinallstages :name "quadOperationsInAllStages" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkBindBufferMemoryInfo" (bind-buffer-memory-info-khr
-                                                                   bind-buffer-memory-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkBindBufferMemoryInfo"
+      (bind-buffer-memory-info-khr bind-buffer-memory-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -2837,11 +3065,12 @@
      ((memory-arg) (set-pointer memory memory-arg)))
     (memoryoffset :name "memoryOffset" :type "VkDeviceSize"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkBindImageMemoryInfo" (bind-image-memory-info-khr
-                                                                  bind-image-memory-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkBindImageMemoryInfo"
+      (bind-image-memory-info-khr bind-image-memory-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -2856,11 +3085,13 @@
      ((memory-arg) (set-pointer memory memory-arg)))
     (memoryoffset :name "memoryOffset" :type "VkDeviceSize"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDevice16BitStorageFeatures" (physical-device-1-6-bit-storage-features-khr
-                                                                                 physical-device-1-6-bit-storage-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDevice16BitStorageFeatures"
+      (physical-device-1-6-bit-storage-features-khr
+       physical-device-1-6-bit-storage-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -2872,11 +3103,12 @@
     (storagepushconstant16 :name "storagePushConstant16" :type "VkBool32")
     (storageinputoutput16 :name "storageInputOutput16" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkMemoryDedicatedRequirements" (memory-dedicated-requirements-khr
-                                                                          memory-dedicated-requirements)
+  (more-cffi:def-foreign-struct doc-file
+      "VkMemoryDedicatedRequirements"
+      (memory-dedicated-requirements-khr memory-dedicated-requirements)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -2887,11 +3119,12 @@
     (requiresdedicatedallocation :name "requiresDedicatedAllocation" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkMemoryDedicatedAllocateInfo" (memory-dedicated-allocate-info-khr
-                                                                          memory-dedicated-allocate-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkMemoryDedicatedAllocateInfo"
+      (memory-dedicated-allocate-info-khr memory-dedicated-allocate-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -2905,11 +3138,12 @@
      (nil (get-pointer buffer)) :set
      ((buffer-arg) (set-pointer buffer buffer-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkMemoryAllocateFlagsInfo" (memory-allocate-flags-info-khr
-                                                                      memory-allocate-flags-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkMemoryAllocateFlagsInfo"
+      (memory-allocate-flags-info-khr memory-allocate-flags-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -2918,11 +3152,13 @@
     (flags :name flags :type "VkMemoryAllocateFlags")
     (devicemask :name "deviceMask" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDeviceGroupRenderPassBeginInfo" (device-group-render-pass-begin-info-khr
-                                                                             device-group-render-pass-begin-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDeviceGroupRenderPassBeginInfo"
+      (device-group-render-pass-begin-info-khr
+       device-group-render-pass-begin-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -2944,11 +3180,13 @@
       (set-array (:struct vkrect2d) pdevicerenderareas pdevicerenderareas-arg
        pdevicerenderareas-index :dynamic t :pointers ("VkRect2D")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDeviceGroupCommandBufferBeginInfo" (device-group-command-buffer-begin-info-khr
-                                                                                device-group-command-buffer-begin-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDeviceGroupCommandBufferBeginInfo"
+      (device-group-command-buffer-begin-info-khr
+       device-group-command-buffer-begin-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -2956,11 +3194,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (devicemask :name "deviceMask" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDeviceGroupSubmitInfo" (device-group-submit-info-khr
-                                                                    device-group-submit-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDeviceGroupSubmitInfo"
+      (device-group-submit-info-khr device-group-submit-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3014,11 +3253,12 @@
        psignalsemaphoredeviceindices-arg psignalsemaphoredeviceindices-index
        :dynamic t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDeviceGroupBindSparseInfo" (device-group-bind-sparse-info-khr
-                                                                        device-group-bind-sparse-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDeviceGroupBindSparseInfo"
+      (device-group-bind-sparse-info-khr device-group-bind-sparse-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3027,11 +3267,13 @@
     (resourcedeviceindex :name "resourceDeviceIndex" :type uint32)
     (memorydeviceindex :name "memoryDeviceIndex" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkBindBufferMemoryDeviceGroupInfo" (bind-buffer-memory-device-group-info-khr
-                                                                              bind-buffer-memory-device-group-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkBindBufferMemoryDeviceGroupInfo"
+      (bind-buffer-memory-device-group-info-khr
+       bind-buffer-memory-device-group-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3051,11 +3293,13 @@
       (set-array :uint32 pdeviceindices pdeviceindices-arg pdeviceindices-index
        :dynamic t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkBindImageMemoryDeviceGroupInfo" (bind-image-memory-device-group-info-khr
-                                                                             bind-image-memory-device-group-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkBindImageMemoryDeviceGroupInfo"
+      (bind-image-memory-device-group-info-khr
+       bind-image-memory-device-group-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3092,11 +3336,12 @@
        psplitinstancebindregions-arg psplitinstancebindregions-index :dynamic t
        :pointers ("VkRect2D")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceGroupProperties" (physical-device-group-properties-khr
-                                                                            physical-device-group-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceGroupProperties"
+      (physical-device-group-properties-khr physical-device-group-properties)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3110,11 +3355,12 @@
      ((physicaldevices-arg) (set-pointer physicaldevices physicaldevices-arg)))
     (subsetallocation :name "subsetAllocation" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDeviceGroupDeviceCreateInfo" (device-group-device-create-info-khr
-                                                                          device-group-device-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDeviceGroupDeviceCreateInfo"
+      (device-group-device-create-info-khr device-group-device-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3135,11 +3381,12 @@
       (set-array vkphysicaldevice pphysicaldevices pphysicaldevices-arg
        pphysicaldevices-index :dynamic t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkBufferMemoryRequirementsInfo2" (buffer-memory-requirements-info-2-khr
-                                                                            buffer-memory-requirements-info-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkBufferMemoryRequirementsInfo2"
+      (buffer-memory-requirements-info-2-khr buffer-memory-requirements-info-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3150,11 +3397,12 @@
      (nil (get-pointer buffer)) :set
      ((buffer-arg) (set-pointer buffer buffer-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImageMemoryRequirementsInfo2" (image-memory-requirements-info-2-khr
-                                                                           image-memory-requirements-info-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImageMemoryRequirementsInfo2"
+      (image-memory-requirements-info-2-khr image-memory-requirements-info-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3162,13 +3410,16 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (image :name image :type "VkImage" :create
      ((image-arg) (create-pointer image image-arg)) :get
-     (nil (get-pointer image)) :set ((image-arg) (set-pointer image image-arg))))
+     (nil (get-pointer image)) :set
+     ((image-arg) (set-pointer image image-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImageSparseMemoryRequirementsInfo2" (image-sparse-memory-requirements-info-2-khr
-                                                                                 image-sparse-memory-requirements-info-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImageSparseMemoryRequirementsInfo2"
+      (image-sparse-memory-requirements-info-2-khr
+       image-sparse-memory-requirements-info-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3176,13 +3427,15 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (image :name image :type "VkImage" :create
      ((image-arg) (create-pointer image image-arg)) :get
-     (nil (get-pointer image)) :set ((image-arg) (set-pointer image image-arg))))
+     (nil (get-pointer image)) :set
+     ((image-arg) (set-pointer image image-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkMemoryRequirements2" (memory-requirements-2-khr
-                                                                  memory-requirements-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkMemoryRequirements2"
+      (memory-requirements-2-khr memory-requirements-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3198,11 +3451,13 @@
       (more-cffi:copy memoryrequirements memoryrequirements-arg
                       '(:struct vkmemoryrequirements)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSparseImageMemoryRequirements2" (sparse-image-memory-requirements-2-khr
-                                                                             sparse-image-memory-requirements-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSparseImageMemoryRequirements2"
+      (sparse-image-memory-requirements-2-khr
+       sparse-image-memory-requirements-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3218,11 +3473,12 @@
       (more-cffi:copy memoryrequirements memoryrequirements-arg
                       '(:struct vksparseimagememoryrequirements)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceFeatures2" (physical-device-features-2-khr
-                                                                      physical-device-features-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceFeatures2"
+      (physical-device-features-2-khr physical-device-features-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3238,11 +3494,12 @@
       (more-cffi:copy features features-arg
                       '(:struct vkphysicaldevicefeatures)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceProperties2" (physical-device-properties-2-khr
-                                                                        physical-device-properties-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceProperties2"
+      (physical-device-properties-2-khr physical-device-properties-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3258,11 +3515,12 @@
       (more-cffi:copy properties properties-arg
                       '(:struct vkphysicaldeviceproperties)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkFormatProperties2" (format-properties-2-khr
-                                                                format-properties-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkFormatProperties2"
+      (format-properties-2-khr format-properties-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3278,11 +3536,12 @@
       (more-cffi:copy formatproperties formatproperties-arg
                       '(:struct vkformatproperties)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImageFormatProperties2" (image-format-properties-2-khr
-                                                                     image-format-properties-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImageFormatProperties2"
+      (image-format-properties-2-khr image-format-properties-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3298,11 +3557,13 @@
       (more-cffi:copy imageformatproperties imageformatproperties-arg
                       '(:struct vkimageformatproperties)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceImageFormatInfo2" (physical-device-image-format-info-2-khr
-                                                                             physical-device-image-format-info-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceImageFormatInfo2"
+      (physical-device-image-format-info-2-khr
+       physical-device-image-format-info-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3314,11 +3575,12 @@
     (usage :name usage :type "VkImageUsageFlags")
     (flags :name flags :type "VkImageCreateFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkQueueFamilyProperties2" (queue-family-properties-2-khr
-                                                                     queue-family-properties-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkQueueFamilyProperties2"
+      (queue-family-properties-2-khr queue-family-properties-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3334,11 +3596,13 @@
       (more-cffi:copy queuefamilyproperties queuefamilyproperties-arg
                       '(:struct vkqueuefamilyproperties)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceMemoryProperties2" (physical-device-memory-properties-2-khr
-                                                                              physical-device-memory-properties-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceMemoryProperties2"
+      (physical-device-memory-properties-2-khr
+       physical-device-memory-properties-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3354,11 +3618,12 @@
       (more-cffi:copy memoryproperties memoryproperties-arg
                       '(:struct vkphysicaldevicememoryproperties)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSparseImageFormatProperties2" (sparse-image-format-properties-2-khr
-                                                                           sparse-image-format-properties-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSparseImageFormatProperties2"
+      (sparse-image-format-properties-2-khr sparse-image-format-properties-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3374,11 +3639,13 @@
       (more-cffi:copy properties properties-arg
                       '(:struct vksparseimageformatproperties)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceSparseImageFormatInfo2" (physical-device-sparse-image-format-info-2-khr
-                                                                                   physical-device-sparse-image-format-info-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceSparseImageFormatInfo2"
+      (physical-device-sparse-image-format-info-2-khr
+       physical-device-sparse-image-format-info-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3390,11 +3657,13 @@
     (usage :name usage :type "VkImageUsageFlags")
     (tiling :name tiling :type "VkImageTiling"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDevicePointClippingProperties" (physical-device-point-clipping-properties-khr
-                                                                                    physical-device-point-clipping-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDevicePointClippingProperties"
+      (physical-device-point-clipping-properties-khr
+       physical-device-point-clipping-properties)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3403,21 +3672,24 @@
     (pointclippingbehavior :name "pointClippingBehavior" :type
      "VkPointClippingBehavior"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkInputAttachmentAspectReference" (input-attachment-aspect-reference-khr
-                                                                             input-attachment-aspect-reference)
+  (more-cffi:def-foreign-struct doc-file
+      "VkInputAttachmentAspectReference"
+      (input-attachment-aspect-reference-khr input-attachment-aspect-reference)
       (:default-create :default-get :default-set)
     (subpass :name subpass :type uint32)
     (inputattachmentindex :name "inputAttachmentIndex" :type uint32)
     (aspectmask :name "aspectMask" :type "VkImageAspectFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkRenderPassInputAttachmentAspectCreateInfo" (render-pass-input-attachment-aspect-create-info-khr
-                                                                                        render-pass-input-attachment-aspect-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkRenderPassInputAttachmentAspectCreateInfo"
+      (render-pass-input-attachment-aspect-create-info-khr
+       render-pass-input-attachment-aspect-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3441,11 +3713,12 @@
        paspectreferences-arg paspectreferences-index :dynamic t :pointers
        ("VkInputAttachmentAspectReference")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImageViewUsageCreateInfo" (image-view-usage-create-info-khr
-                                                                       image-view-usage-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImageViewUsageCreateInfo"
+      (image-view-usage-create-info-khr image-view-usage-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3453,11 +3726,13 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (usage :name usage :type "VkImageUsageFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineTessellationDomainOriginStateCreateInfo" (pipeline-tessellation-domain-origin-state-create-info-khr
-                                                                                              pipeline-tessellation-domain-origin-state-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineTessellationDomainOriginStateCreateInfo"
+      (pipeline-tessellation-domain-origin-state-create-info-khr
+       pipeline-tessellation-domain-origin-state-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3465,11 +3740,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (domainorigin :name "domainOrigin" :type "VkTessellationDomainOrigin"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkRenderPassMultiviewCreateInfo" (render-pass-multiview-create-info-khr
-                                                                            render-pass-multiview-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkRenderPassMultiviewCreateInfo"
+      (render-pass-multiview-create-info-khr render-pass-multiview-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3516,11 +3792,13 @@
       (set-array :uint32 pcorrelationmasks pcorrelationmasks-arg
        pcorrelationmasks-index :dynamic t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceMultiviewFeatures" (physical-device-multiview-features-khr
-                                                                              physical-device-multiview-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceMultiviewFeatures"
+      (physical-device-multiview-features-khr
+       physical-device-multiview-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3531,11 +3809,13 @@
     (multiviewtessellationshader :name "multiviewTessellationShader" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceMultiviewProperties" (physical-device-multiview-properties-khr
-                                                                                physical-device-multiview-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceMultiviewProperties"
+      (physical-device-multiview-properties-khr
+       physical-device-multiview-properties)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3544,13 +3824,15 @@
     (maxmultiviewviewcount :name "maxMultiviewViewCount" :type uint32)
     (maxmultiviewinstanceindex :name "maxMultiviewInstanceIndex" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceVariablePointersFeatures" (physical-device-variable-pointers-features-khr
-                                                                                     physical-device-variable-pointer-features-khr
-                                                                                     physical-device-variable-pointer-features
-                                                                                     physical-device-variable-pointers-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceVariablePointersFeatures"
+      (physical-device-variable-pointers-features-khr
+       physical-device-variable-pointer-features-khr
+       physical-device-variable-pointer-features
+       physical-device-variable-pointers-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3560,10 +3842,12 @@
      "VkBool32")
     (variablepointers :name "variablePointers" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceProtectedMemoryFeatures" (physical-device-protected-memory-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceProtectedMemoryFeatures"
+      (physical-device-protected-memory-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3571,10 +3855,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (protectedmemory :name "protectedMemory" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceProtectedMemoryProperties" (physical-device-protected-memory-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceProtectedMemoryProperties"
+      (physical-device-protected-memory-properties)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3582,10 +3868,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (protectednofault :name "protectedNoFault" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDeviceQueueInfo2" (device-queue-info-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDeviceQueueInfo2"
+      (device-queue-info-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3595,10 +3883,12 @@
     (queuefamilyindex :name "queueFamilyIndex" :type uint32)
     (queueindex :name "queueIndex" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkProtectedSubmitInfo" (protected-submit-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkProtectedSubmitInfo"
+      (protected-submit-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3606,11 +3896,13 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (protectedsubmit :name "protectedSubmit" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSamplerYcbcrConversionCreateInfo" (sampler-ycbcr-conversion-create-info-khr
-                                                                               sampler-ycbcr-conversion-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSamplerYcbcrConversionCreateInfo"
+      (sampler-ycbcr-conversion-create-info-khr
+       sampler-ycbcr-conversion-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3631,11 +3923,12 @@
     (forceexplicitreconstruction :name "forceExplicitReconstruction" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSamplerYcbcrConversionInfo" (sampler-ycbcr-conversion-info-khr
-                                                                         sampler-ycbcr-conversion-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSamplerYcbcrConversionInfo"
+      (sampler-ycbcr-conversion-info-khr sampler-ycbcr-conversion-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3646,11 +3939,12 @@
      (nil (get-pointer conversion)) :set
      ((conversion-arg) (set-pointer conversion conversion-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkBindImagePlaneMemoryInfo" (bind-image-plane-memory-info-khr
-                                                                       bind-image-plane-memory-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkBindImagePlaneMemoryInfo"
+      (bind-image-plane-memory-info-khr bind-image-plane-memory-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3658,11 +3952,13 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (planeaspect :name "planeAspect" :type "VkImageAspectFlagBits"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImagePlaneMemoryRequirementsInfo" (image-plane-memory-requirements-info-khr
-                                                                               image-plane-memory-requirements-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImagePlaneMemoryRequirementsInfo"
+      (image-plane-memory-requirements-info-khr
+       image-plane-memory-requirements-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3670,11 +3966,13 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (planeaspect :name "planeAspect" :type "VkImageAspectFlagBits"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceSamplerYcbcrConversionFeatures" (physical-device-sampler-ycbcr-conversion-features-khr
-                                                                                           physical-device-sampler-ycbcr-conversion-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceSamplerYcbcrConversionFeatures"
+      (physical-device-sampler-ycbcr-conversion-features-khr
+       physical-device-sampler-ycbcr-conversion-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3682,11 +3980,13 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (samplerycbcrconversion :name "samplerYcbcrConversion" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSamplerYcbcrConversionImageFormatProperties" (sampler-ycbcr-conversion-image-format-properties-khr
-                                                                                          sampler-ycbcr-conversion-image-format-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSamplerYcbcrConversionImageFormatProperties"
+      (sampler-ycbcr-conversion-image-format-properties-khr
+       sampler-ycbcr-conversion-image-format-properties)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3695,11 +3995,12 @@
     (combinedimagesamplerdescriptorcount :name
      "combinedImageSamplerDescriptorCount" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDescriptorUpdateTemplateEntry" (descriptor-update-template-entry-khr
-                                                                            descriptor-update-template-entry)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDescriptorUpdateTemplateEntry"
+      (descriptor-update-template-entry-khr descriptor-update-template-entry)
       (:default-create :default-get :default-set)
     (dstbinding :name "dstBinding" :type uint32)
     (dstarrayelement :name "dstArrayElement" :type uint32)
@@ -3708,11 +4009,13 @@
     (offset :name offset :type size)
     (stride :name stride :type size))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDescriptorUpdateTemplateCreateInfo" (descriptor-update-template-create-info-khr
-                                                                                 descriptor-update-template-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDescriptorUpdateTemplateCreateInfo"
+      (descriptor-update-template-create-info-khr
+       descriptor-update-template-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3753,11 +4056,12 @@
      ((pipelinelayout-arg) (set-pointer pipelinelayout pipelinelayout-arg)))
     (set :name set :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkExternalMemoryProperties" (external-memory-properties-khr
-                                                                       external-memory-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkExternalMemoryProperties"
+      (external-memory-properties-khr external-memory-properties)
       (:default-create :default-get :default-set)
     (externalmemoryfeatures :name "externalMemoryFeatures" :type
      "VkExternalMemoryFeatureFlags")
@@ -3766,11 +4070,13 @@
     (compatiblehandletypes :name "compatibleHandleTypes" :type
      "VkExternalMemoryHandleTypeFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceExternalImageFormatInfo" (physical-device-external-image-format-info-khr
-                                                                                    physical-device-external-image-format-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceExternalImageFormatInfo"
+      (physical-device-external-image-format-info-khr
+       physical-device-external-image-format-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3778,11 +4084,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (handletype :name "handleType" :type "VkExternalMemoryHandleTypeFlagBits"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkExternalImageFormatProperties" (external-image-format-properties-khr
-                                                                            external-image-format-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkExternalImageFormatProperties"
+      (external-image-format-properties-khr external-image-format-properties)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3798,11 +4105,13 @@
       (more-cffi:copy externalmemoryproperties externalmemoryproperties-arg
                       '(:struct vkexternalmemoryproperties)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceExternalBufferInfo" (physical-device-external-buffer-info-khr
-                                                                               physical-device-external-buffer-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceExternalBufferInfo"
+      (physical-device-external-buffer-info-khr
+       physical-device-external-buffer-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3812,11 +4121,12 @@
     (usage :name usage :type "VkBufferUsageFlags")
     (handletype :name "handleType" :type "VkExternalMemoryHandleTypeFlagBits"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkExternalBufferProperties" (external-buffer-properties-khr
-                                                                       external-buffer-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkExternalBufferProperties"
+      (external-buffer-properties-khr external-buffer-properties)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3832,11 +4142,12 @@
       (more-cffi:copy externalmemoryproperties externalmemoryproperties-arg
                       '(:struct vkexternalmemoryproperties)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceIDProperties" (physical-device-i-d-properties-khr
-                                                                         physical-device-i-d-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceIDProperties"
+      (physical-device-i-d-properties-khr physical-device-i-d-properties)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3848,11 +4159,12 @@
     (devicenodemask :name "deviceNodeMask" :type uint32)
     (deviceluidvalid :name "deviceLUIDValid" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkExternalMemoryImageCreateInfo" (external-memory-image-create-info-khr
-                                                                            external-memory-image-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkExternalMemoryImageCreateInfo"
+      (external-memory-image-create-info-khr external-memory-image-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3860,11 +4172,13 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (handletypes :name "handleTypes" :type "VkExternalMemoryHandleTypeFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkExternalMemoryBufferCreateInfo" (external-memory-buffer-create-info-khr
-                                                                             external-memory-buffer-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkExternalMemoryBufferCreateInfo"
+      (external-memory-buffer-create-info-khr
+       external-memory-buffer-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3872,11 +4186,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (handletypes :name "handleTypes" :type "VkExternalMemoryHandleTypeFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkExportMemoryAllocateInfo" (export-memory-allocate-info-khr
-                                                                       export-memory-allocate-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkExportMemoryAllocateInfo"
+      (export-memory-allocate-info-khr export-memory-allocate-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3884,11 +4199,13 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (handletypes :name "handleTypes" :type "VkExternalMemoryHandleTypeFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceExternalFenceInfo" (physical-device-external-fence-info-khr
-                                                                              physical-device-external-fence-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceExternalFenceInfo"
+      (physical-device-external-fence-info-khr
+       physical-device-external-fence-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3896,11 +4213,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (handletype :name "handleType" :type "VkExternalFenceHandleTypeFlagBits"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkExternalFenceProperties" (external-fence-properties-khr
-                                                                      external-fence-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkExternalFenceProperties"
+      (external-fence-properties-khr external-fence-properties)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3913,11 +4231,12 @@
     (externalfencefeatures :name "externalFenceFeatures" :type
      "VkExternalFenceFeatureFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkExportFenceCreateInfo" (export-fence-create-info-khr
-                                                                    export-fence-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkExportFenceCreateInfo"
+      (export-fence-create-info-khr export-fence-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3925,23 +4244,27 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (handletypes :name "handleTypes" :type "VkExternalFenceHandleTypeFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkExportSemaphoreCreateInfo" (export-semaphore-create-info-khr
-                                                                        export-semaphore-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkExportSemaphoreCreateInfo"
+      (export-semaphore-create-info-khr export-semaphore-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
-    (handletypes :name "handleTypes" :type "VkExternalSemaphoreHandleTypeFlags"))
+    (handletypes :name "handleTypes" :type
+     "VkExternalSemaphoreHandleTypeFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceExternalSemaphoreInfo" (physical-device-external-semaphore-info-khr
-                                                                                  physical-device-external-semaphore-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceExternalSemaphoreInfo"
+      (physical-device-external-semaphore-info-khr
+       physical-device-external-semaphore-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3950,11 +4273,12 @@
     (handletype :name "handleType" :type
      "VkExternalSemaphoreHandleTypeFlagBits"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkExternalSemaphoreProperties" (external-semaphore-properties-khr
-                                                                          external-semaphore-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkExternalSemaphoreProperties"
+      (external-semaphore-properties-khr external-semaphore-properties)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3967,11 +4291,13 @@
     (externalsemaphorefeatures :name "externalSemaphoreFeatures" :type
      "VkExternalSemaphoreFeatureFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceMaintenance3Properties" (physical-device-maintenance-3-properties-khr
-                                                                                   physical-device-maintenance-3-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceMaintenance3Properties"
+      (physical-device-maintenance-3-properties-khr
+       physical-device-maintenance-3-properties)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3981,11 +4307,12 @@
     (maxmemoryallocationsize :name "maxMemoryAllocationSize" :type
      "VkDeviceSize"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDescriptorSetLayoutSupport" (descriptor-set-layout-support-khr
-                                                                         descriptor-set-layout-support)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDescriptorSetLayoutSupport"
+      (descriptor-set-layout-support-khr descriptor-set-layout-support)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -3993,11 +4320,13 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (supported :name supported :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceShaderDrawParametersFeatures" (physical-device-shader-draw-parameter-features
-                                                                                         physical-device-shader-draw-parameters-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceShaderDrawParametersFeatures"
+      (physical-device-shader-draw-parameter-features
+       physical-device-shader-draw-parameters-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -4005,10 +4334,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (shaderdrawparameters :name "shaderDrawParameters" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceVulkan11Features" (physical-device-vulkan-1-1-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceVulkan11Features"
+      (physical-device-vulkan-1-1-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -4030,10 +4361,12 @@
     (samplerycbcrconversion :name "samplerYcbcrConversion" :type "VkBool32")
     (shaderdrawparameters :name "shaderDrawParameters" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceVulkan11Properties" (physical-device-vulkan-1-1-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceVulkan11Properties"
+      (physical-device-vulkan-1-1-properties)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -4060,10 +4393,12 @@
     (maxmemoryallocationsize :name "maxMemoryAllocationSize" :type
      "VkDeviceSize"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceVulkan12Features" (physical-device-vulkan-1-2-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceVulkan12Features"
+      (physical-device-vulkan-1-2-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -4146,21 +4481,24 @@
     (subgroupbroadcastdynamicid :name "subgroupBroadcastDynamicId" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkConformanceVersion" (conformance-version-khr
-                                                                 conformance-version)
+  (more-cffi:def-foreign-struct doc-file
+      "VkConformanceVersion"
+      (conformance-version-khr conformance-version)
       (:default-create :default-get :default-set)
     (major :name major :type uint8)
     (minor :name minor :type uint8)
     (subminor :name subminor :type uint8)
     (patch :name patch :type uint8))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceVulkan12Properties" (physical-device-vulkan-1-2-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceVulkan12Properties"
+      (physical-device-vulkan-1-2-properties)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -4272,11 +4610,12 @@
     (framebufferintegercolorsamplecounts :name
      "framebufferIntegerColorSampleCounts" :type "VkSampleCountFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImageFormatListCreateInfo" (image-format-list-create-info-khr
-                                                                        image-format-list-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImageFormatListCreateInfo"
+      (image-format-list-create-info-khr image-format-list-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -4296,11 +4635,12 @@
       (set-array vkformat pviewformats pviewformats-arg pviewformats-index
        :dynamic t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkAttachmentDescription2" (attachment-description-2-khr
-                                                                     attachment-description-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkAttachmentDescription2"
+      (attachment-description-2-khr attachment-description-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -4316,11 +4656,12 @@
     (initiallayout :name "initialLayout" :type "VkImageLayout")
     (finallayout :name "finalLayout" :type "VkImageLayout"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkAttachmentReference2" (attachment-reference-2-khr
-                                                                   attachment-reference-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkAttachmentReference2"
+      (attachment-reference-2-khr attachment-reference-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -4330,11 +4671,12 @@
     (layout :name layout :type "VkImageLayout")
     (aspectmask :name "aspectMask" :type "VkImageAspectFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSubpassDescription2" (subpass-description-2-khr
-                                                                  subpass-description-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSubpassDescription2"
+      (subpass-description-2-khr subpass-description-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -4404,11 +4746,12 @@
       (set-array :uint32 ppreserveattachments ppreserveattachments-arg
        ppreserveattachments-index :dynamic t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSubpassDependency2" (subpass-dependency-2-khr
-                                                                 subpass-dependency-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSubpassDependency2"
+      (subpass-dependency-2-khr subpass-dependency-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -4423,11 +4766,12 @@
     (dependencyflags :name "dependencyFlags" :type "VkDependencyFlags")
     (viewoffset :name "viewOffset" :type int32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkRenderPassCreateInfo2" (render-pass-create-info-2-khr
-                                                                    render-pass-create-info-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkRenderPassCreateInfo2"
+      (render-pass-create-info-2-khr render-pass-create-info-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -4493,11 +4837,12 @@
       (set-array :uint32 pcorrelatedviewmasks pcorrelatedviewmasks-arg
        pcorrelatedviewmasks-index :dynamic t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSubpassBeginInfo" (subpass-begin-info-khr
-                                                               subpass-begin-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSubpassBeginInfo"
+      (subpass-begin-info-khr subpass-begin-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -4505,22 +4850,26 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (contents :name contents :type "VkSubpassContents"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSubpassEndInfo" (subpass-end-info-khr
-                                                             subpass-end-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSubpassEndInfo"
+      (subpass-end-info-khr subpass-end-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
-     (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg))))
+     (nil (get-pointer pnext)) :set
+     ((pnext-arg) (set-pointer pnext pnext-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDevice8BitStorageFeatures" (physical-device-8-bit-storage-features-khr
-                                                                                physical-device-8-bit-storage-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDevice8BitStorageFeatures"
+      (physical-device-8-bit-storage-features-khr
+       physical-device-8-bit-storage-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -4531,11 +4880,12 @@
      "uniformAndStorageBuffer8BitAccess" :type "VkBool32")
     (storagepushconstant8 :name "storagePushConstant8" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceDriverProperties" (physical-device-driver-properties-khr
-                                                                             physical-device-driver-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceDriverProperties"
+      (physical-device-driver-properties-khr physical-device-driver-properties)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -4554,25 +4904,30 @@
       (more-cffi:copy conformanceversion conformanceversion-arg
                       '(:struct vkconformanceversion)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceShaderAtomicInt64Features" (physical-device-shader-atomic-int-6-4-features-khr
-                                                                                      physical-device-shader-atomic-int-6-4-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceShaderAtomicInt64Features"
+      (physical-device-shader-atomic-int-6-4-features-khr
+       physical-device-shader-atomic-int-6-4-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (shaderbufferint64atomics :name "shaderBufferInt64Atomics" :type "VkBool32")
-    (shadersharedint64atomics :name "shaderSharedInt64Atomics" :type "VkBool32"))
+    (shadersharedint64atomics :name "shaderSharedInt64Atomics" :type
+     "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceShaderFloat16Int8Features" (physical-device-float-1-6-int-8-features-khr
-                                                                                      physical-device-shader-float-1-6-int-8-features-khr
-                                                                                      physical-device-shader-float-1-6-int-8-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceShaderFloat16Int8Features"
+      (physical-device-float-1-6-int-8-features-khr
+       physical-device-shader-float-1-6-int-8-features-khr
+       physical-device-shader-float-1-6-int-8-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -4581,11 +4936,13 @@
     (shaderfloat16 :name "shaderFloat16" :type "VkBool32")
     (shaderint8 :name "shaderInt8" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceFloatControlsProperties" (physical-device-float-controls-properties-khr
-                                                                                    physical-device-float-controls-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceFloatControlsProperties"
+      (physical-device-float-controls-properties-khr
+       physical-device-float-controls-properties)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -4626,11 +4983,13 @@
     (shaderroundingmodertzfloat64 :name "shaderRoundingModeRTZFloat64" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDescriptorSetLayoutBindingFlagsCreateInfo" (descriptor-set-layout-binding-flags-create-info-ext
-                                                                                        descriptor-set-layout-binding-flags-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDescriptorSetLayoutBindingFlagsCreateInfo"
+      (descriptor-set-layout-binding-flags-create-info-ext
+       descriptor-set-layout-binding-flags-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -4651,11 +5010,13 @@
       (set-array vkdescriptorbindingflags pbindingflags pbindingflags-arg
        pbindingflags-index :dynamic t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceDescriptorIndexingFeatures" (physical-device-descriptor-indexing-features-ext
-                                                                                       physical-device-descriptor-indexing-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceDescriptorIndexingFeatures"
+      (physical-device-descriptor-indexing-features-ext
+       physical-device-descriptor-indexing-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -4701,11 +5062,13 @@
      "descriptorBindingVariableDescriptorCount" :type "VkBool32")
     (runtimedescriptorarray :name "runtimeDescriptorArray" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceDescriptorIndexingProperties" (physical-device-descriptor-indexing-properties-ext
-                                                                                         physical-device-descriptor-indexing-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceDescriptorIndexingProperties"
+      (physical-device-descriptor-indexing-properties-ext
+       physical-device-descriptor-indexing-properties)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -4757,11 +5120,13 @@
     (maxdescriptorsetupdateafterbindinputattachments :name
      "maxDescriptorSetUpdateAfterBindInputAttachments" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDescriptorSetVariableDescriptorCountAllocateInfo" (descriptor-set-variable-descriptor-count-allocate-info-ext
-                                                                                               descriptor-set-variable-descriptor-count-allocate-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDescriptorSetVariableDescriptorCountAllocateInfo"
+      (descriptor-set-variable-descriptor-count-allocate-info-ext
+       descriptor-set-variable-descriptor-count-allocate-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -4782,23 +5147,28 @@
       (set-array :uint32 pdescriptorcounts pdescriptorcounts-arg
        pdescriptorcounts-index :dynamic t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDescriptorSetVariableDescriptorCountLayoutSupport" (descriptor-set-variable-descriptor-count-layout-support-ext
-                                                                                                descriptor-set-variable-descriptor-count-layout-support)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDescriptorSetVariableDescriptorCountLayoutSupport"
+      (descriptor-set-variable-descriptor-count-layout-support-ext
+       descriptor-set-variable-descriptor-count-layout-support)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
-    (maxvariabledescriptorcount :name "maxVariableDescriptorCount" :type uint32))
+    (maxvariabledescriptorcount :name "maxVariableDescriptorCount" :type
+     uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSubpassDescriptionDepthStencilResolve" (subpass-description-depth-stencil-resolve-khr
-                                                                                    subpass-description-depth-stencil-resolve)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSubpassDescriptionDepthStencilResolve"
+      (subpass-description-depth-stencil-resolve-khr
+       subpass-description-depth-stencil-resolve)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -4817,11 +5187,13 @@
       (set-pointer pdepthstencilresolveattachment
        pdepthstencilresolveattachment-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceDepthStencilResolveProperties" (physical-device-depth-stencil-resolve-properties-khr
-                                                                                          physical-device-depth-stencil-resolve-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceDepthStencilResolveProperties"
+      (physical-device-depth-stencil-resolve-properties-khr
+       physical-device-depth-stencil-resolve-properties)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -4834,11 +5206,13 @@
     (independentresolvenone :name "independentResolveNone" :type "VkBool32")
     (independentresolve :name "independentResolve" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceScalarBlockLayoutFeatures" (physical-device-scalar-block-layout-features-ext
-                                                                                      physical-device-scalar-block-layout-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceScalarBlockLayoutFeatures"
+      (physical-device-scalar-block-layout-features-ext
+       physical-device-scalar-block-layout-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -4846,11 +5220,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (scalarblocklayout :name "scalarBlockLayout" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImageStencilUsageCreateInfo" (image-stencil-usage-create-info-ext
-                                                                          image-stencil-usage-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImageStencilUsageCreateInfo"
+      (image-stencil-usage-create-info-ext image-stencil-usage-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -4858,11 +5233,13 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (stencilusage :name "stencilUsage" :type "VkImageUsageFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSamplerReductionModeCreateInfo" (sampler-reduction-mode-create-info-ext
-                                                                             sampler-reduction-mode-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSamplerReductionModeCreateInfo"
+      (sampler-reduction-mode-create-info-ext
+       sampler-reduction-mode-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -4870,11 +5247,13 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (reductionmode :name "reductionMode" :type "VkSamplerReductionMode"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceSamplerFilterMinmaxProperties" (physical-device-sampler-filter-minmax-properties-ext
-                                                                                          physical-device-sampler-filter-minmax-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceSamplerFilterMinmaxProperties"
+      (physical-device-sampler-filter-minmax-properties-ext
+       physical-device-sampler-filter-minmax-properties)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -4885,11 +5264,13 @@
     (filterminmaximagecomponentmapping :name
      "filterMinmaxImageComponentMapping" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceVulkanMemoryModelFeatures" (physical-device-vulkan-memory-model-features-khr
-                                                                                      physical-device-vulkan-memory-model-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceVulkanMemoryModelFeatures"
+      (physical-device-vulkan-memory-model-features-khr
+       physical-device-vulkan-memory-model-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -4901,11 +5282,13 @@
     (vulkanmemorymodelavailabilityvisibilitychains :name
      "vulkanMemoryModelAvailabilityVisibilityChains" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceImagelessFramebufferFeatures" (physical-device-imageless-framebuffer-features-khr
-                                                                                         physical-device-imageless-framebuffer-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceImagelessFramebufferFeatures"
+      (physical-device-imageless-framebuffer-features-khr
+       physical-device-imageless-framebuffer-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -4913,11 +5296,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (imagelessframebuffer :name "imagelessFramebuffer" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkFramebufferAttachmentImageInfo" (framebuffer-attachment-image-info-khr
-                                                                             framebuffer-attachment-image-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkFramebufferAttachmentImageInfo"
+      (framebuffer-attachment-image-info-khr framebuffer-attachment-image-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -4942,11 +5326,13 @@
       (set-array vkformat pviewformats pviewformats-arg pviewformats-index
        :dynamic t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkFramebufferAttachmentsCreateInfo" (framebuffer-attachments-create-info-khr
-                                                                               framebuffer-attachments-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkFramebufferAttachmentsCreateInfo"
+      (framebuffer-attachments-create-info-khr
+       framebuffer-attachments-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -4972,11 +5358,12 @@
        pattachmentimageinfos-index :dynamic t :pointers
        ("VkFramebufferAttachmentImageInfo")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkRenderPassAttachmentBeginInfo" (render-pass-attachment-begin-info-khr
-                                                                            render-pass-attachment-begin-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkRenderPassAttachmentBeginInfo"
+      (render-pass-attachment-begin-info-khr render-pass-attachment-begin-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -4997,11 +5384,13 @@
       (set-array vkimageview pattachments pattachments-arg pattachments-index
        :dynamic t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceUniformBufferStandardLayoutFeatures" (physical-device-uniform-buffer-standard-layout-features-khr
-                                                                                                physical-device-uniform-buffer-standard-layout-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceUniformBufferStandardLayoutFeatures"
+      (physical-device-uniform-buffer-standard-layout-features-khr
+       physical-device-uniform-buffer-standard-layout-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5010,11 +5399,13 @@
     (uniformbufferstandardlayout :name "uniformBufferStandardLayout" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures" (physical-device-shader-subgroup-extended-types-features-khr
-                                                                                                physical-device-shader-subgroup-extended-types-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures"
+      (physical-device-shader-subgroup-extended-types-features-khr
+       physical-device-shader-subgroup-extended-types-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5023,11 +5414,13 @@
     (shadersubgroupextendedtypes :name "shaderSubgroupExtendedTypes" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures" (physical-device-separate-depth-stencil-layouts-features-khr
-                                                                                                physical-device-separate-depth-stencil-layouts-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures"
+      (physical-device-separate-depth-stencil-layouts-features-khr
+       physical-device-separate-depth-stencil-layouts-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5036,11 +5429,13 @@
     (separatedepthstencillayouts :name "separateDepthStencilLayouts" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkAttachmentReferenceStencilLayout" (attachment-reference-stencil-layout-khr
-                                                                               attachment-reference-stencil-layout)
+  (more-cffi:def-foreign-struct doc-file
+      "VkAttachmentReferenceStencilLayout"
+      (attachment-reference-stencil-layout-khr
+       attachment-reference-stencil-layout)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5048,11 +5443,13 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (stencillayout :name "stencilLayout" :type "VkImageLayout"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkAttachmentDescriptionStencilLayout" (attachment-description-stencil-layout-khr
-                                                                                 attachment-description-stencil-layout)
+  (more-cffi:def-foreign-struct doc-file
+      "VkAttachmentDescriptionStencilLayout"
+      (attachment-description-stencil-layout-khr
+       attachment-description-stencil-layout)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5061,11 +5458,13 @@
     (stencilinitiallayout :name "stencilInitialLayout" :type "VkImageLayout")
     (stencilfinallayout :name "stencilFinalLayout" :type "VkImageLayout"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceHostQueryResetFeatures" (physical-device-host-query-reset-features-ext
-                                                                                   physical-device-host-query-reset-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceHostQueryResetFeatures"
+      (physical-device-host-query-reset-features-ext
+       physical-device-host-query-reset-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5073,11 +5472,13 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (hostqueryreset :name "hostQueryReset" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceTimelineSemaphoreFeatures" (physical-device-timeline-semaphore-features-khr
-                                                                                      physical-device-timeline-semaphore-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceTimelineSemaphoreFeatures"
+      (physical-device-timeline-semaphore-features-khr
+       physical-device-timeline-semaphore-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5085,11 +5486,13 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (timelinesemaphore :name "timelineSemaphore" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceTimelineSemaphoreProperties" (physical-device-timeline-semaphore-properties-khr
-                                                                                        physical-device-timeline-semaphore-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceTimelineSemaphoreProperties"
+      (physical-device-timeline-semaphore-properties-khr
+       physical-device-timeline-semaphore-properties)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5098,11 +5501,12 @@
     (maxtimelinesemaphorevaluedifference :name
      "maxTimelineSemaphoreValueDifference" :type uint64))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSemaphoreTypeCreateInfo" (semaphore-type-create-info-khr
-                                                                      semaphore-type-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSemaphoreTypeCreateInfo"
+      (semaphore-type-create-info-khr semaphore-type-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5111,11 +5515,12 @@
     (semaphoretype :name "semaphoreType" :type "VkSemaphoreType")
     (initialvalue :name "initialValue" :type uint64))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkTimelineSemaphoreSubmitInfo" (timeline-semaphore-submit-info-khr
-                                                                          timeline-semaphore-submit-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkTimelineSemaphoreSubmitInfo"
+      (timeline-semaphore-submit-info-khr timeline-semaphore-submit-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5150,11 +5555,12 @@
       (set-array :uint64 psignalsemaphorevalues psignalsemaphorevalues-arg
        psignalsemaphorevalues-index :dynamic t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSemaphoreWaitInfo" (semaphore-wait-info-khr
-                                                                semaphore-wait-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSemaphoreWaitInfo"
+      (semaphore-wait-info-khr semaphore-wait-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5179,11 +5585,12 @@
      (nil (get-pointer pvalues)) :set
      ((pvalues-arg) (set-pointer pvalues pvalues-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSemaphoreSignalInfo" (semaphore-signal-info-khr
-                                                                  semaphore-signal-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSemaphoreSignalInfo"
+      (semaphore-signal-info-khr semaphore-signal-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5195,11 +5602,13 @@
      ((semaphore-arg) (set-pointer semaphore semaphore-arg)))
     (value :name value :type uint64))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceBufferDeviceAddressFeatures" (physical-device-buffer-device-address-features-khr
-                                                                                        physical-device-buffer-device-address-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceBufferDeviceAddressFeatures"
+      (physical-device-buffer-device-address-features-khr
+       physical-device-buffer-device-address-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5211,12 +5620,13 @@
     (bufferdeviceaddressmultidevice :name "bufferDeviceAddressMultiDevice"
      :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkBufferDeviceAddressInfo" (buffer-device-address-info-ext
-                                                                      buffer-device-address-info-khr
-                                                                      buffer-device-address-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkBufferDeviceAddressInfo"
+      (buffer-device-address-info-ext buffer-device-address-info-khr
+       buffer-device-address-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5227,11 +5637,13 @@
      (nil (get-pointer buffer)) :set
      ((buffer-arg) (set-pointer buffer buffer-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkBufferOpaqueCaptureAddressCreateInfo" (buffer-opaque-capture-address-create-info-khr
-                                                                                   buffer-opaque-capture-address-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkBufferOpaqueCaptureAddressCreateInfo"
+      (buffer-opaque-capture-address-create-info-khr
+       buffer-opaque-capture-address-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5239,11 +5651,13 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (opaquecaptureaddress :name "opaqueCaptureAddress" :type uint64))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkMemoryOpaqueCaptureAddressAllocateInfo" (memory-opaque-capture-address-allocate-info-khr
-                                                                                     memory-opaque-capture-address-allocate-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkMemoryOpaqueCaptureAddressAllocateInfo"
+      (memory-opaque-capture-address-allocate-info-khr
+       memory-opaque-capture-address-allocate-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5251,11 +5665,13 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (opaquecaptureaddress :name "opaqueCaptureAddress" :type uint64))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDeviceMemoryOpaqueCaptureAddressInfo" (device-memory-opaque-capture-address-info-khr
-                                                                                   device-memory-opaque-capture-address-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDeviceMemoryOpaqueCaptureAddressInfo"
+      (device-memory-opaque-capture-address-info-khr
+       device-memory-opaque-capture-address-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5266,10 +5682,12 @@
      (nil (get-pointer memory)) :set
      ((memory-arg) (set-pointer memory memory-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceVulkan13Features" (physical-device-vulkan-1-3-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceVulkan13Features"
+      (physical-device-vulkan-1-3-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5297,10 +5715,12 @@
     (shaderintegerdotproduct :name "shaderIntegerDotProduct" :type "VkBool32")
     (maintenance4 :name maintenance4 :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceVulkan13Properties" (physical-device-vulkan-1-3-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceVulkan13Properties"
+      (physical-device-vulkan-1-3-properties)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5413,20 +5833,23 @@
      "uniformTexelBufferOffsetSingleTexelAlignment" :type "VkBool32")
     (maxbuffersize :name "maxBufferSize" :type "VkDeviceSize"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineCreationFeedback" (pipeline-creation-feedback-ext
-                                                                       pipeline-creation-feedback)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineCreationFeedback"
+      (pipeline-creation-feedback-ext pipeline-creation-feedback)
       (:default-create :default-get :default-set)
     (flags :name flags :type "VkPipelineCreationFeedbackFlags")
     (duration :name duration :type uint64))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineCreationFeedbackCreateInfo" (pipeline-creation-feedback-create-info-ext
-                                                                                 pipeline-creation-feedback-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineCreationFeedbackCreateInfo"
+      (pipeline-creation-feedback-create-info-ext
+       pipeline-creation-feedback-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5461,11 +5884,13 @@
        ppipelinestagecreationfeedbacks-index :dynamic t :pointers
        ("VkPipelineCreationFeedback")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceShaderTerminateInvocationFeatures" (physical-device-shader-terminate-invocation-features-khr
-                                                                                              physical-device-shader-terminate-invocation-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceShaderTerminateInvocationFeatures"
+      (physical-device-shader-terminate-invocation-features-khr
+       physical-device-shader-terminate-invocation-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5474,11 +5899,12 @@
     (shaderterminateinvocation :name "shaderTerminateInvocation" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceToolProperties" (physical-device-tool-properties-ext
-                                                                           physical-device-tool-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceToolProperties"
+      (physical-device-tool-properties-ext physical-device-tool-properties)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5490,11 +5916,13 @@
     (description :name description :type char)
     (layer :name layer :type char))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures" (physical-device-shader-demote-to-helper-invocation-features-ext
-                                                                                                   physical-device-shader-demote-to-helper-invocation-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures"
+      (physical-device-shader-demote-to-helper-invocation-features-ext
+       physical-device-shader-demote-to-helper-invocation-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5503,11 +5931,13 @@
     (shaderdemotetohelperinvocation :name "shaderDemoteToHelperInvocation"
      :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDevicePrivateDataFeatures" (physical-device-private-data-features-ext
-                                                                                physical-device-private-data-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDevicePrivateDataFeatures"
+      (physical-device-private-data-features-ext
+       physical-device-private-data-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5515,11 +5945,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (privatedata :name "privateData" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDevicePrivateDataCreateInfo" (device-private-data-create-info-ext
-                                                                          device-private-data-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDevicePrivateDataCreateInfo"
+      (device-private-data-create-info-ext device-private-data-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5528,11 +5959,12 @@
     (privatedataslotrequestcount :name "privateDataSlotRequestCount" :type
      uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPrivateDataSlotCreateInfo" (private-data-slot-create-info-ext
-                                                                        private-data-slot-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPrivateDataSlotCreateInfo"
+      (private-data-slot-create-info-ext private-data-slot-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5540,11 +5972,13 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkPrivateDataSlotCreateFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDevicePipelineCreationCacheControlFeatures" (physical-device-pipeline-creation-cache-control-features-ext
-                                                                                                 physical-device-pipeline-creation-cache-control-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDevicePipelineCreationCacheControlFeatures"
+      (physical-device-pipeline-creation-cache-control-features-ext
+       physical-device-pipeline-creation-cache-control-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5553,11 +5987,12 @@
     (pipelinecreationcachecontrol :name "pipelineCreationCacheControl" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkMemoryBarrier2" (memory-barrier-2-khr
-                                                             memory-barrier-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkMemoryBarrier2"
+      (memory-barrier-2-khr memory-barrier-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5568,11 +6003,12 @@
     (dststagemask :name "dstStageMask" :type "VkPipelineStageFlags2")
     (dstaccessmask :name "dstAccessMask" :type "VkAccessFlags2"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkBufferMemoryBarrier2" (buffer-memory-barrier-2-khr
-                                                                   buffer-memory-barrier-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkBufferMemoryBarrier2"
+      (buffer-memory-barrier-2-khr buffer-memory-barrier-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5591,11 +6027,12 @@
     (offset :name offset :type "VkDeviceSize")
     (size :name size :type "VkDeviceSize"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImageMemoryBarrier2" (image-memory-barrier-2-khr
-                                                                  image-memory-barrier-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImageMemoryBarrier2"
+      (image-memory-barrier-2-khr image-memory-barrier-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5622,11 +6059,12 @@
       (more-cffi:copy subresourcerange subresourcerange-arg
                       '(:struct vkimagesubresourcerange)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDependencyInfo" (dependency-info-khr
-                                                             dependency-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDependencyInfo"
+      (dependency-info-khr dependency-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5683,11 +6121,12 @@
        pimagememorybarriers-arg pimagememorybarriers-index :dynamic t :pointers
        ("VkImageMemoryBarrier2")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSemaphoreSubmitInfo" (semaphore-submit-info-khr
-                                                                  semaphore-submit-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSemaphoreSubmitInfo"
+      (semaphore-submit-info-khr semaphore-submit-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5701,11 +6140,12 @@
     (stagemask :name "stageMask" :type "VkPipelineStageFlags2")
     (deviceindex :name "deviceIndex" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkCommandBufferSubmitInfo" (command-buffer-submit-info-khr
-                                                                      command-buffer-submit-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkCommandBufferSubmitInfo"
+      (command-buffer-submit-info-khr command-buffer-submit-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5717,11 +6157,12 @@
      ((commandbuffer-arg) (set-pointer commandbuffer commandbuffer-arg)))
     (devicemask :name "deviceMask" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSubmitInfo2" (submit-info-2-khr
-                                                          submit-info-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSubmitInfo2"
+      (submit-info-2-khr submit-info-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5779,11 +6220,13 @@
        psignalsemaphoreinfos-arg psignalsemaphoreinfos-index :dynamic t
        :pointers ("VkSemaphoreSubmitInfo")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceSynchronization2Features" (physical-device-synchronization-2-features-khr
-                                                                                     physical-device-synchronization-2-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceSynchronization2Features"
+      (physical-device-synchronization-2-features-khr
+       physical-device-synchronization-2-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5791,11 +6234,13 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (synchronization2 :name synchronization2 :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures" (physical-device-zero-initialize-workgroup-memory-features-khr
-                                                                                                  physical-device-zero-initialize-workgroup-memory-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures"
+      (physical-device-zero-initialize-workgroup-memory-features-khr
+       physical-device-zero-initialize-workgroup-memory-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5804,11 +6249,13 @@
     (shaderzeroinitializeworkgroupmemory :name
      "shaderZeroInitializeWorkgroupMemory" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceImageRobustnessFeatures" (physical-device-image-robustness-features-ext
-                                                                                    physical-device-image-robustness-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceImageRobustnessFeatures"
+      (physical-device-image-robustness-features-ext
+       physical-device-image-robustness-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5816,11 +6263,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (robustimageaccess :name "robustImageAccess" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkBufferCopy2" (buffer-copy-2-khr
-                                                          buffer-copy-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkBufferCopy2"
+      (buffer-copy-2-khr buffer-copy-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5830,11 +6278,12 @@
     (dstoffset :name "dstOffset" :type "VkDeviceSize")
     (size :name size :type "VkDeviceSize"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkCopyBufferInfo2" (copy-buffer-info-2-khr
-                                                              copy-buffer-info-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkCopyBufferInfo2"
+      (copy-buffer-info-2-khr copy-buffer-info-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5862,11 +6311,12 @@
       (set-array (:struct vkbuffercopy2) pregions pregions-arg pregions-index
        :dynamic t :pointers ("VkBufferCopy2")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImageCopy2" (image-copy-2-khr
-                                                         image-copy-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImageCopy2"
+      (image-copy-2-khr image-copy-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5907,11 +6357,12 @@
      :set
      ((extent-arg) (more-cffi:copy extent extent-arg '(:struct vkextent3d)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkCopyImageInfo2" (copy-image-info-2-khr
-                                                             copy-image-info-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkCopyImageInfo2"
+      (copy-image-info-2-khr copy-image-info-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5941,11 +6392,12 @@
       (set-array (:struct vkimagecopy2) pregions pregions-arg pregions-index
        :dynamic t :pointers ("VkImageCopy2")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkBufferImageCopy2" (buffer-image-copy-2-khr
-                                                               buffer-image-copy-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkBufferImageCopy2"
+      (buffer-image-copy-2-khr buffer-image-copy-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -5976,11 +6428,12 @@
      ((imageextent-arg)
       (more-cffi:copy imageextent imageextent-arg '(:struct vkextent3d)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkCopyBufferToImageInfo2" (copy-buffer-to-image-info-2-khr
-                                                                     copy-buffer-to-image-info-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkCopyBufferToImageInfo2"
+      (copy-buffer-to-image-info-2-khr copy-buffer-to-image-info-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6010,11 +6463,12 @@
       (set-array (:struct vkbufferimagecopy2) pregions pregions-arg
        pregions-index :dynamic t :pointers ("VkBufferImageCopy2")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkCopyImageToBufferInfo2" (copy-image-to-buffer-info-2-khr
-                                                                     copy-image-to-buffer-info-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkCopyImageToBufferInfo2"
+      (copy-image-to-buffer-info-2-khr copy-image-to-buffer-info-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6044,11 +6498,12 @@
       (set-array (:struct vkbufferimagecopy2) pregions pregions-arg
        pregions-index :dynamic t :pointers ("VkBufferImageCopy2")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImageBlit2" (image-blit-2-khr
-                                                         image-blit-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImageBlit2"
+      (image-blit-2-khr image-blit-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6097,11 +6552,12 @@
       (set-array (:struct vkoffset3d) dstoffsets dstoffsets-arg
        dstoffsets-index :dynamic nil :pointers ("VkOffset3D")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkBlitImageInfo2" (blit-image-info-2-khr
-                                                             blit-image-info-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkBlitImageInfo2"
+      (blit-image-info-2-khr blit-image-info-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6132,11 +6588,12 @@
        :dynamic t :pointers ("VkImageBlit2"))))
     (filter :name filter :type "VkFilter"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImageResolve2" (image-resolve-2-khr
-                                                            image-resolve-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImageResolve2"
+      (image-resolve-2-khr image-resolve-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6177,11 +6634,12 @@
      :set
      ((extent-arg) (more-cffi:copy extent extent-arg '(:struct vkextent3d)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkResolveImageInfo2" (resolve-image-info-2-khr
-                                                                resolve-image-info-2)
+  (more-cffi:def-foreign-struct doc-file
+      "VkResolveImageInfo2"
+      (resolve-image-info-2-khr resolve-image-info-2)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6211,11 +6669,13 @@
       (set-array (:struct vkimageresolve2) pregions pregions-arg pregions-index
        :dynamic t :pointers ("VkImageResolve2")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceSubgroupSizeControlFeatures" (physical-device-subgroup-size-control-features-ext
-                                                                                        physical-device-subgroup-size-control-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceSubgroupSizeControlFeatures"
+      (physical-device-subgroup-size-control-features-ext
+       physical-device-subgroup-size-control-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6224,11 +6684,13 @@
     (subgroupsizecontrol :name "subgroupSizeControl" :type "VkBool32")
     (computefullsubgroups :name "computeFullSubgroups" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceSubgroupSizeControlProperties" (physical-device-subgroup-size-control-properties-ext
-                                                                                          physical-device-subgroup-size-control-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceSubgroupSizeControlProperties"
+      (physical-device-subgroup-size-control-properties-ext
+       physical-device-subgroup-size-control-properties)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6241,11 +6703,13 @@
     (requiredsubgroupsizestages :name "requiredSubgroupSizeStages" :type
      "VkShaderStageFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineShaderStageRequiredSubgroupSizeCreateInfo" (pipeline-shader-stage-required-subgroup-size-create-info-ext
-                                                                                                pipeline-shader-stage-required-subgroup-size-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineShaderStageRequiredSubgroupSizeCreateInfo"
+      (pipeline-shader-stage-required-subgroup-size-create-info-ext
+       pipeline-shader-stage-required-subgroup-size-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6253,11 +6717,13 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (requiredsubgroupsize :name "requiredSubgroupSize" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceInlineUniformBlockFeatures" (physical-device-inline-uniform-block-features-ext
-                                                                                       physical-device-inline-uniform-block-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceInlineUniformBlockFeatures"
+      (physical-device-inline-uniform-block-features-ext
+       physical-device-inline-uniform-block-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6267,11 +6733,13 @@
     (descriptorbindinginlineuniformblockupdateafterbind :name
      "descriptorBindingInlineUniformBlockUpdateAfterBind" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceInlineUniformBlockProperties" (physical-device-inline-uniform-block-properties-ext
-                                                                                         physical-device-inline-uniform-block-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceInlineUniformBlockProperties"
+      (physical-device-inline-uniform-block-properties-ext
+       physical-device-inline-uniform-block-properties)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6287,11 +6755,13 @@
     (maxdescriptorsetupdateafterbindinlineuniformblocks :name
      "maxDescriptorSetUpdateAfterBindInlineUniformBlocks" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkWriteDescriptorSetInlineUniformBlock" (write-descriptor-set-inline-uniform-block-ext
-                                                                                   write-descriptor-set-inline-uniform-block)
+  (more-cffi:def-foreign-struct doc-file
+      "VkWriteDescriptorSetInlineUniformBlock"
+      (write-descriptor-set-inline-uniform-block-ext
+       write-descriptor-set-inline-uniform-block)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6300,13 +6770,16 @@
     (datasize :name "dataSize" :type uint32)
     (pdata :name "pData" :type void :init-form nil :create
      ((pdata-arg) (create-pointer pdata pdata-arg)) :get
-     (nil (get-pointer pdata)) :set ((pdata-arg) (set-pointer pdata pdata-arg))))
+     (nil (get-pointer pdata)) :set
+     ((pdata-arg) (set-pointer pdata pdata-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDescriptorPoolInlineUniformBlockCreateInfo" (descriptor-pool-inline-uniform-block-create-info-ext
-                                                                                         descriptor-pool-inline-uniform-block-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDescriptorPoolInlineUniformBlockCreateInfo"
+      (descriptor-pool-inline-uniform-block-create-info-ext
+       descriptor-pool-inline-uniform-block-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6315,11 +6788,13 @@
     (maxinlineuniformblockbindings :name "maxInlineUniformBlockBindings" :type
      uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceTextureCompressionASTCHDRFeatures" (physical-device-texture-compression-a-s-t-c-h-d-r-features-ext
-                                                                                              physical-device-texture-compression-a-s-t-c-h-d-r-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceTextureCompressionASTCHDRFeatures"
+      (physical-device-texture-compression-a-s-t-c-h-d-r-features-ext
+       physical-device-texture-compression-a-s-t-c-h-d-r-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6328,11 +6803,12 @@
     (texturecompressionastc_hdr :name "textureCompressionASTC_HDR" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkRenderingAttachmentInfo" (rendering-attachment-info-khr
-                                                                      rendering-attachment-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkRenderingAttachmentInfo"
+      (rendering-attachment-info-khr rendering-attachment-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6360,11 +6836,12 @@
      ((clearvalue-arg)
       (more-cffi:copy clearvalue clearvalue-arg '(:union vkclearvalue)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkRenderingInfo" (rendering-info-khr
-                                                            rendering-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkRenderingInfo"
+      (rendering-info-khr rendering-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6411,11 +6888,12 @@
      ((pstencilattachment-arg)
       (set-pointer pstencilattachment pstencilattachment-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineRenderingCreateInfo" (pipeline-rendering-create-info-khr
-                                                                          pipeline-rendering-create-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineRenderingCreateInfo"
+      (pipeline-rendering-create-info-khr pipeline-rendering-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6439,11 +6917,13 @@
     (depthattachmentformat :name "depthAttachmentFormat" :type "VkFormat")
     (stencilattachmentformat :name "stencilAttachmentFormat" :type "VkFormat"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceDynamicRenderingFeatures" (physical-device-dynamic-rendering-features-khr
-                                                                                     physical-device-dynamic-rendering-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceDynamicRenderingFeatures"
+      (physical-device-dynamic-rendering-features-khr
+       physical-device-dynamic-rendering-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6451,11 +6931,13 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (dynamicrendering :name "dynamicRendering" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkCommandBufferInheritanceRenderingInfo" (command-buffer-inheritance-rendering-info-khr
-                                                                                    command-buffer-inheritance-rendering-info)
+  (more-cffi:def-foreign-struct doc-file
+      "VkCommandBufferInheritanceRenderingInfo"
+      (command-buffer-inheritance-rendering-info-khr
+       command-buffer-inheritance-rendering-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6482,11 +6964,13 @@
     (rasterizationsamples :name "rasterizationSamples" :type
      "VkSampleCountFlagBits"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceShaderIntegerDotProductFeatures" (physical-device-shader-integer-dot-product-features-khr
-                                                                                            physical-device-shader-integer-dot-product-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceShaderIntegerDotProductFeatures"
+      (physical-device-shader-integer-dot-product-features-khr
+       physical-device-shader-integer-dot-product-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6494,11 +6978,13 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (shaderintegerdotproduct :name "shaderIntegerDotProduct" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceShaderIntegerDotProductProperties" (physical-device-shader-integer-dot-product-properties-khr
-                                                                                              physical-device-shader-integer-dot-product-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceShaderIntegerDotProductProperties"
+      (physical-device-shader-integer-dot-product-properties-khr
+       physical-device-shader-integer-dot-product-properties)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6586,11 +7072,13 @@
      "integerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated"
      :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceTexelBufferAlignmentProperties" (physical-device-texel-buffer-alignment-properties-ext
-                                                                                           physical-device-texel-buffer-alignment-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceTexelBufferAlignmentProperties"
+      (physical-device-texel-buffer-alignment-properties-ext
+       physical-device-texel-buffer-alignment-properties)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6605,11 +7093,12 @@
     (uniformtexelbufferoffsetsingletexelalignment :name
      "uniformTexelBufferOffsetSingleTexelAlignment" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkFormatProperties3" (format-properties-3-khr
-                                                                format-properties-3)
+  (more-cffi:def-foreign-struct doc-file
+      "VkFormatProperties3"
+      (format-properties-3-khr format-properties-3)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6621,11 +7110,13 @@
      "VkFormatFeatureFlags2")
     (bufferfeatures :name "bufferFeatures" :type "VkFormatFeatureFlags2"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceMaintenance4Features" (physical-device-maintenance-4-features-khr
-                                                                                 physical-device-maintenance-4-features)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceMaintenance4Features"
+      (physical-device-maintenance-4-features-khr
+       physical-device-maintenance-4-features)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6633,11 +7124,13 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (maintenance4 :name maintenance4 :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceMaintenance4Properties" (physical-device-maintenance-4-properties-khr
-                                                                                   physical-device-maintenance-4-properties)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceMaintenance4Properties"
+      (physical-device-maintenance-4-properties-khr
+       physical-device-maintenance-4-properties)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6645,11 +7138,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (maxbuffersize :name "maxBufferSize" :type "VkDeviceSize"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDeviceBufferMemoryRequirements" (device-buffer-memory-requirements-khr
-                                                                             device-buffer-memory-requirements)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDeviceBufferMemoryRequirements"
+      (device-buffer-memory-requirements-khr device-buffer-memory-requirements)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6660,11 +7154,12 @@
      :get (nil (get-pointer pcreateinfo)) :set
      ((pcreateinfo-arg) (set-pointer pcreateinfo pcreateinfo-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDeviceImageMemoryRequirements" (device-image-memory-requirements-khr
-                                                                            device-image-memory-requirements)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDeviceImageMemoryRequirements"
+      (device-image-memory-requirements-khr device-image-memory-requirements)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6676,10 +7171,12 @@
      ((pcreateinfo-arg) (set-pointer pcreateinfo pcreateinfo-arg)))
     (planeaspect :name "planeAspect" :type "VkImageAspectFlagBits"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSurfaceCapabilitiesKHR" (surface-capabilities-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSurfaceCapabilitiesKHR"
+      (surface-capabilities-khr)
       (:default-create :default-get :default-set)
     (minimagecount :name "minImageCount" :type uint32)
     (maximagecount :name "maxImageCount" :type uint32)
@@ -6712,18 +7209,22 @@
      "VkCompositeAlphaFlagsKHR")
     (supportedusageflags :name "supportedUsageFlags" :type "VkImageUsageFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSurfaceFormatKHR" (surface-format-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSurfaceFormatKHR"
+      (surface-format-khr)
       (:default-create :default-get :default-set)
     (format :name format :type "VkFormat")
     (colorspace :name "colorSpace" :type "VkColorSpaceKHR"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSwapchainCreateInfoKHR" (swapchain-create-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSwapchainCreateInfoKHR"
+      (swapchain-create-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6769,10 +7270,12 @@
      (nil (get-pointer oldswapchain)) :set
      ((oldswapchain-arg) (set-pointer oldswapchain oldswapchain-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPresentInfoKHR" (present-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPresentInfoKHR"
+      (present-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6815,10 +7318,12 @@
      (nil (get-pointer presults)) :set
      ((presults-arg) (set-pointer presults presults-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImageSwapchainCreateInfoKHR" (image-swapchain-create-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImageSwapchainCreateInfoKHR"
+      (image-swapchain-create-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6829,10 +7334,12 @@
      (nil (get-pointer swapchain)) :set
      ((swapchain-arg) (set-pointer swapchain swapchain-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkBindImageMemorySwapchainInfoKHR" (bind-image-memory-swapchain-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkBindImageMemorySwapchainInfoKHR"
+      (bind-image-memory-swapchain-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6844,10 +7351,12 @@
      ((swapchain-arg) (set-pointer swapchain swapchain-arg)))
     (imageindex :name "imageIndex" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkAcquireNextImageInfoKHR" (acquire-next-image-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkAcquireNextImageInfoKHR"
+      (acquire-next-image-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6867,10 +7376,12 @@
      (nil (get-pointer fence)) :set ((fence-arg) (set-pointer fence fence-arg)))
     (devicemask :name "deviceMask" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDeviceGroupPresentCapabilitiesKHR" (device-group-present-capabilities-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDeviceGroupPresentCapabilitiesKHR"
+      (device-group-present-capabilities-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6879,10 +7390,12 @@
     (presentmask :name "presentMask" :type uint32)
     (modes :name modes :type "VkDeviceGroupPresentModeFlagsKHR"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDeviceGroupPresentInfoKHR" (device-group-present-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDeviceGroupPresentInfoKHR"
+      (device-group-present-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6903,10 +7416,12 @@
        :dynamic t :pointers nil)))
     (mode :name mode :type "VkDeviceGroupPresentModeFlagBitsKHR"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDeviceGroupSwapchainCreateInfoKHR" (device-group-swapchain-create-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDeviceGroupSwapchainCreateInfoKHR"
+      (device-group-swapchain-create-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6914,10 +7429,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (modes :name modes :type "VkDeviceGroupPresentModeFlagsKHR"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDisplayModeParametersKHR" (display-mode-parameters-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDisplayModeParametersKHR"
+      (display-mode-parameters-khr)
       (:default-create :default-get :default-set)
     (visibleregion :pointer t :name "visibleRegion" :type "VkExtent2D" :create
      ((visibleregion-arg)
@@ -6927,10 +7444,12 @@
       (more-cffi:copy visibleregion visibleregion-arg '(:struct vkextent2d))))
     (refreshrate :name "refreshRate" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDisplayModeCreateInfoKHR" (display-mode-create-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDisplayModeCreateInfoKHR"
+      (display-mode-create-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -6947,10 +7466,12 @@
       (more-cffi:copy parameters parameters-arg
                       '(:struct vkdisplaymodeparameterskhr)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDisplayModePropertiesKHR" (display-mode-properties-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDisplayModePropertiesKHR"
+      (display-mode-properties-khr)
       (:default-create :default-get :default-set)
     (displaymode :name "displayMode" :type "VkDisplayModeKHR" :create
      ((displaymode-arg) (create-pointer displaymode displaymode-arg)) :get
@@ -6966,10 +7487,12 @@
       (more-cffi:copy parameters parameters-arg
                       '(:struct vkdisplaymodeparameterskhr)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDisplayPlaneCapabilitiesKHR" (display-plane-capabilities-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDisplayPlaneCapabilitiesKHR"
+      (display-plane-capabilities-khr)
       (:default-create :default-get :default-set)
     (supportedalpha :name "supportedAlpha" :type "VkDisplayPlaneAlphaFlagsKHR")
     (minsrcposition :pointer t :name "minSrcPosition" :type "VkOffset2D"
@@ -7025,10 +7548,12 @@
      ((maxdstextent-arg)
       (more-cffi:copy maxdstextent maxdstextent-arg '(:struct vkextent2d)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDisplayPlanePropertiesKHR" (display-plane-properties-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDisplayPlanePropertiesKHR"
+      (display-plane-properties-khr)
       (:default-create :default-get :default-set)
     (currentdisplay :name "currentDisplay" :type "VkDisplayKHR" :create
      ((currentdisplay-arg) (create-pointer currentdisplay currentdisplay-arg))
@@ -7036,10 +7561,12 @@
      ((currentdisplay-arg) (set-pointer currentdisplay currentdisplay-arg)))
     (currentstackindex :name "currentStackIndex" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDisplayPropertiesKHR" (display-properties-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDisplayPropertiesKHR"
+      (display-properties-khr)
       (:default-create :default-get :default-set)
     (display :name display :type "VkDisplayKHR" :create
      ((display-arg) (create-pointer display display-arg)) :get
@@ -7072,10 +7599,12 @@
     (planereorderpossible :name "planeReorderPossible" :type "VkBool32")
     (persistentcontent :name "persistentContent" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDisplaySurfaceCreateInfoKHR" (display-surface-create-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDisplaySurfaceCreateInfoKHR"
+      (display-surface-create-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7098,10 +7627,12 @@
      ((imageextent-arg)
       (more-cffi:copy imageextent imageextent-arg '(:struct vkextent2d)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDisplayPresentInfoKHR" (display-present-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDisplayPresentInfoKHR"
+      (display-present-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7117,10 +7648,12 @@
      ((dstrect-arg) (more-cffi:copy dstrect dstrect-arg '(:struct vkrect2d))))
     (persistent :name persistent :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkRenderingFragmentShadingRateAttachmentInfoKHR" (rendering-fragment-shading-rate-attachment-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkRenderingFragmentShadingRateAttachmentInfoKHR"
+      (rendering-fragment-shading-rate-attachment-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7143,10 +7676,12 @@
                       shadingrateattachmenttexelsize-arg
                       '(:struct vkextent2d)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkRenderingFragmentDensityMapAttachmentInfoEXT" (rendering-fragment-density-map-attachment-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkRenderingFragmentDensityMapAttachmentInfoEXT"
+      (rendering-fragment-density-map-attachment-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7158,11 +7693,12 @@
      ((imageview-arg) (set-pointer imageview imageview-arg)))
     (imagelayout :name "imageLayout" :type "VkImageLayout"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkAttachmentSampleCountInfoAMD" (attachment-sample-count-info-nv
-                                                                           attachment-sample-count-info-amd)
+  (more-cffi:def-foreign-struct doc-file
+      "VkAttachmentSampleCountInfoAMD"
+      (attachment-sample-count-info-nv attachment-sample-count-info-amd)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7186,10 +7722,12 @@
     (depthstencilattachmentsamples :name "depthStencilAttachmentSamples" :type
      "VkSampleCountFlagBits"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkMultiviewPerViewAttributesInfoNVX" (multiview-per-view-attributes-info-nvx)
+  (more-cffi:def-foreign-struct doc-file
+      "VkMultiviewPerViewAttributesInfoNVX"
+      (multiview-per-view-attributes-info-nvx)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7199,10 +7737,12 @@
     (perviewattributespositionxonly :name "perViewAttributesPositionXOnly"
      :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImportMemoryFdInfoKHR" (import-memory-fd-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImportMemoryFdInfoKHR"
+      (import-memory-fd-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7211,10 +7751,12 @@
     (handletype :name "handleType" :type "VkExternalMemoryHandleTypeFlagBits")
     (fd :name fd :type int))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkMemoryFdPropertiesKHR" (memory-fd-properties-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkMemoryFdPropertiesKHR"
+      (memory-fd-properties-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7222,10 +7764,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (memorytypebits :name "memoryTypeBits" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkMemoryGetFdInfoKHR" (memory-get-fd-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkMemoryGetFdInfoKHR"
+      (memory-get-fd-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7237,10 +7781,12 @@
      ((memory-arg) (set-pointer memory memory-arg)))
     (handletype :name "handleType" :type "VkExternalMemoryHandleTypeFlagBits"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImportSemaphoreFdInfoKHR" (import-semaphore-fd-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImportSemaphoreFdInfoKHR"
+      (import-semaphore-fd-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7255,10 +7801,12 @@
      "VkExternalSemaphoreHandleTypeFlagBits")
     (fd :name fd :type int))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSemaphoreGetFdInfoKHR" (semaphore-get-fd-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSemaphoreGetFdInfoKHR"
+      (semaphore-get-fd-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7271,10 +7819,12 @@
     (handletype :name "handleType" :type
      "VkExternalSemaphoreHandleTypeFlagBits"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDevicePushDescriptorPropertiesKHR" (physical-device-push-descriptor-properties-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDevicePushDescriptorPropertiesKHR"
+      (physical-device-push-descriptor-properties-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7282,10 +7832,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (maxpushdescriptors :name "maxPushDescriptors" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkRectLayerKHR" (rect-layer-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkRectLayerKHR"
+      (rect-layer-khr)
       (:default-create :default-get :default-set)
     (offset :pointer t :name offset :type "VkOffset2D" :create
      ((offset-arg) (more-cffi:copy offset offset-arg '(:struct vkoffset2d)))
@@ -7297,10 +7849,12 @@
      ((extent-arg) (more-cffi:copy extent extent-arg '(:struct vkextent2d))))
     (layer :name layer :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPresentRegionKHR" (present-region-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPresentRegionKHR"
+      (present-region-khr)
       (:default-create :default-get :default-set)
     (rectanglecount :name "rectangleCount" :type uint32)
     (prectangles :name "pRectangles" :type "VkRectLayerKHR" :init-form nil
@@ -7317,10 +7871,12 @@
       (set-array (:struct vkrectlayerkhr) prectangles prectangles-arg
        prectangles-index :dynamic t :pointers ("VkRectLayerKHR")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPresentRegionsKHR" (present-regions-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPresentRegionsKHR"
+      (present-regions-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7341,10 +7897,12 @@
       (set-array (:struct vkpresentregionkhr) pregions pregions-arg
        pregions-index :dynamic t :pointers ("VkPresentRegionKHR")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSharedPresentSurfaceCapabilitiesKHR" (shared-present-surface-capabilities-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSharedPresentSurfaceCapabilitiesKHR"
+      (shared-present-surface-capabilities-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7353,10 +7911,12 @@
     (sharedpresentsupportedusageflags :name "sharedPresentSupportedUsageFlags"
      :type "VkImageUsageFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImportFenceFdInfoKHR" (import-fence-fd-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImportFenceFdInfoKHR"
+      (import-fence-fd-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7369,10 +7929,12 @@
     (handletype :name "handleType" :type "VkExternalFenceHandleTypeFlagBits")
     (fd :name fd :type int))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkFenceGetFdInfoKHR" (fence-get-fd-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkFenceGetFdInfoKHR"
+      (fence-get-fd-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7383,10 +7945,12 @@
      (nil (get-pointer fence)) :set ((fence-arg) (set-pointer fence fence-arg)))
     (handletype :name "handleType" :type "VkExternalFenceHandleTypeFlagBits"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDevicePerformanceQueryFeaturesKHR" (physical-device-performance-query-features-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDevicePerformanceQueryFeaturesKHR"
+      (physical-device-performance-query-features-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7397,10 +7961,12 @@
     (performancecountermultiplequerypools :name
      "performanceCounterMultipleQueryPools" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDevicePerformanceQueryPropertiesKHR" (physical-device-performance-query-properties-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDevicePerformanceQueryPropertiesKHR"
+      (physical-device-performance-query-properties-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7409,10 +7975,12 @@
     (allowcommandbufferquerycopies :name "allowCommandBufferQueryCopies" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPerformanceCounterKHR" (performance-counter-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPerformanceCounterKHR"
+      (performance-counter-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7423,10 +7991,12 @@
     (storage :name storage :type "VkPerformanceCounterStorageKHR")
     (uuid :name uuid :type uint8))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPerformanceCounterDescriptionKHR" (performance-counter-description-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPerformanceCounterDescriptionKHR"
+      (performance-counter-description-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7437,10 +8007,12 @@
     (category :name category :type char)
     (description :name description :type char))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkQueryPoolPerformanceCreateInfoKHR" (query-pool-performance-create-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkQueryPoolPerformanceCreateInfoKHR"
+      (query-pool-performance-create-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7462,10 +8034,12 @@
       (set-array :uint32 pcounterindices pcounterindices-arg
        pcounterindices-index :dynamic t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-union doc-file "VkPerformanceCounterResultKHR" (performance-counter-result-khr)
+  (more-cffi:def-foreign-union doc-file
+      "VkPerformanceCounterResultKHR"
+      (performance-counter-result-khr)
       (:default-create :default-get :default-set)
     (int32 :name int32 :type int32)
     (int64 :name int64 :type int64)
@@ -7474,10 +8048,12 @@
     (float32 :name float32 :type float)
     (float64 :name float64 :type double))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkAcquireProfilingLockInfoKHR" (acquire-profiling-lock-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkAcquireProfilingLockInfoKHR"
+      (acquire-profiling-lock-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7486,10 +8062,12 @@
     (flags :name flags :type "VkAcquireProfilingLockFlagsKHR")
     (timeout :name timeout :type uint64))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPerformanceQuerySubmitInfoKHR" (performance-query-submit-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPerformanceQuerySubmitInfoKHR"
+      (performance-query-submit-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7497,10 +8075,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (counterpassindex :name "counterPassIndex" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceSurfaceInfo2KHR" (physical-device-surface-info-2-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceSurfaceInfo2KHR"
+      (physical-device-surface-info-2-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7511,10 +8091,12 @@
      (nil (get-pointer surface)) :set
      ((surface-arg) (set-pointer surface surface-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSurfaceCapabilities2KHR" (surface-capabilities-2-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSurfaceCapabilities2KHR"
+      (surface-capabilities-2-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7530,10 +8112,12 @@
       (more-cffi:copy surfacecapabilities surfacecapabilities-arg
                       '(:struct vksurfacecapabilitieskhr)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSurfaceFormat2KHR" (surface-format-2-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSurfaceFormat2KHR"
+      (surface-format-2-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7549,10 +8133,12 @@
       (more-cffi:copy surfaceformat surfaceformat-arg
                       '(:struct vksurfaceformatkhr)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDisplayProperties2KHR" (display-properties-2-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDisplayProperties2KHR"
+      (display-properties-2-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7568,10 +8154,12 @@
       (more-cffi:copy displayproperties displayproperties-arg
                       '(:struct vkdisplaypropertieskhr)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDisplayPlaneProperties2KHR" (display-plane-properties-2-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDisplayPlaneProperties2KHR"
+      (display-plane-properties-2-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7587,10 +8175,12 @@
       (more-cffi:copy displayplaneproperties displayplaneproperties-arg
                       '(:struct vkdisplayplanepropertieskhr)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDisplayModeProperties2KHR" (display-mode-properties-2-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDisplayModeProperties2KHR"
+      (display-mode-properties-2-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7606,10 +8196,12 @@
       (more-cffi:copy displaymodeproperties displaymodeproperties-arg
                       '(:struct vkdisplaymodepropertieskhr)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDisplayPlaneInfo2KHR" (display-plane-info-2-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDisplayPlaneInfo2KHR"
+      (display-plane-info-2-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7620,10 +8212,12 @@
      :set ((mode-arg) (set-pointer mode mode-arg)))
     (planeindex :name "planeIndex" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDisplayPlaneCapabilities2KHR" (display-plane-capabilities-2-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDisplayPlaneCapabilities2KHR"
+      (display-plane-capabilities-2-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7639,10 +8233,12 @@
       (more-cffi:copy capabilities capabilities-arg
                       '(:struct vkdisplayplanecapabilitieskhr)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceShaderClockFeaturesKHR" (physical-device-shader-clock-features-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceShaderClockFeaturesKHR"
+      (physical-device-shader-clock-features-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7651,11 +8247,13 @@
     (shadersubgroupclock :name "shaderSubgroupClock" :type "VkBool32")
     (shaderdeviceclock :name "shaderDeviceClock" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDeviceQueueGlobalPriorityCreateInfoKHR" (device-queue-global-priority-create-info-ext
-                                                                                     device-queue-global-priority-create-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDeviceQueueGlobalPriorityCreateInfoKHR"
+      (device-queue-global-priority-create-info-ext
+       device-queue-global-priority-create-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7663,11 +8261,13 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (globalpriority :name "globalPriority" :type "VkQueueGlobalPriorityKHR"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR" (physical-device-global-priority-query-features-ext
-                                                                                           physical-device-global-priority-query-features-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR"
+      (physical-device-global-priority-query-features-ext
+       physical-device-global-priority-query-features-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7675,11 +8275,13 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (globalpriorityquery :name "globalPriorityQuery" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkQueueFamilyGlobalPriorityPropertiesKHR" (queue-family-global-priority-properties-ext
-                                                                                     queue-family-global-priority-properties-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkQueueFamilyGlobalPriorityPropertiesKHR"
+      (queue-family-global-priority-properties-ext
+       queue-family-global-priority-properties-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7688,10 +8290,12 @@
     (prioritycount :name "priorityCount" :type uint32)
     (priorities :name priorities :type "VkQueueGlobalPriorityKHR"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkFragmentShadingRateAttachmentInfoKHR" (fragment-shading-rate-attachment-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkFragmentShadingRateAttachmentInfoKHR"
+      (fragment-shading-rate-attachment-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7718,10 +8322,12 @@
                       shadingrateattachmenttexelsize-arg
                       '(:struct vkextent2d)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineFragmentShadingRateStateCreateInfoKHR" (pipeline-fragment-shading-rate-state-create-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineFragmentShadingRateStateCreateInfoKHR"
+      (pipeline-fragment-shading-rate-state-create-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7747,10 +8353,12 @@
       (set-array vkfragmentshadingratecombineropkhr combinerops combinerops-arg
        combinerops-index :dynamic nil :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceFragmentShadingRateFeaturesKHR" (physical-device-fragment-shading-rate-features-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceFragmentShadingRateFeaturesKHR"
+      (physical-device-fragment-shading-rate-features-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7763,10 +8371,12 @@
     (attachmentfragmentshadingrate :name "attachmentFragmentShadingRate" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceFragmentShadingRatePropertiesKHR" (physical-device-fragment-shading-rate-properties-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceFragmentShadingRatePropertiesKHR"
+      (physical-device-fragment-shading-rate-properties-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7831,10 +8441,12 @@
     (fragmentshadingratestrictmultiplycombiner :name
      "fragmentShadingRateStrictMultiplyCombiner" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceFragmentShadingRateKHR" (physical-device-fragment-shading-rate-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceFragmentShadingRateKHR"
+      (physical-device-fragment-shading-rate-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7848,10 +8460,12 @@
      ((fragmentsize-arg)
       (more-cffi:copy fragmentsize fragmentsize-arg '(:struct vkextent2d)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSurfaceProtectedCapabilitiesKHR" (surface-protected-capabilities-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSurfaceProtectedCapabilitiesKHR"
+      (surface-protected-capabilities-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7859,10 +8473,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (supportsprotected :name "supportsProtected" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDevicePresentWaitFeaturesKHR" (physical-device-present-wait-features-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDevicePresentWaitFeaturesKHR"
+      (physical-device-present-wait-features-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7870,10 +8486,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (presentwait :name "presentWait" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR" (physical-device-pipeline-executable-properties-features-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR"
+      (physical-device-pipeline-executable-properties-features-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7881,11 +8499,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (pipelineexecutableinfo :name "pipelineExecutableInfo" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineInfoKHR" (pipeline-info-ext
-                                                              pipeline-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineInfoKHR"
+      (pipeline-info-ext pipeline-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7896,10 +8515,12 @@
      (nil (get-pointer pipeline)) :set
      ((pipeline-arg) (set-pointer pipeline pipeline-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineExecutablePropertiesKHR" (pipeline-executable-properties-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineExecutablePropertiesKHR"
+      (pipeline-executable-properties-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7910,10 +8531,12 @@
     (description :name description :type char)
     (subgroupsize :name "subgroupSize" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineExecutableInfoKHR" (pipeline-executable-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineExecutableInfoKHR"
+      (pipeline-executable-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7925,20 +8548,24 @@
      ((pipeline-arg) (set-pointer pipeline pipeline-arg)))
     (executableindex :name "executableIndex" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-union doc-file "VkPipelineExecutableStatisticValueKHR" (pipeline-executable-statistic-value-khr)
+  (more-cffi:def-foreign-union doc-file
+      "VkPipelineExecutableStatisticValueKHR"
+      (pipeline-executable-statistic-value-khr)
       (:default-create :default-get :default-set)
     (b32 :name b32 :type "VkBool32")
     (i64 :name i64 :type int64)
     (u64 :name u64 :type uint64)
     (f64 :name f64 :type double))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineExecutableStatisticKHR" (pipeline-executable-statistic-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineExecutableStatisticKHR"
+      (pipeline-executable-statistic-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7957,10 +8584,12 @@
       (more-cffi:copy value value-arg
                       '(:union vkpipelineexecutablestatisticvaluekhr)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineExecutableInternalRepresentationKHR" (pipeline-executable-internal-representation-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineExecutableInternalRepresentationKHR"
+      (pipeline-executable-internal-representation-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7972,12 +8601,15 @@
     (datasize :name "dataSize" :type size)
     (pdata :name "pData" :type void :init-form nil :create
      ((pdata-arg) (create-pointer pdata pdata-arg)) :get
-     (nil (get-pointer pdata)) :set ((pdata-arg) (set-pointer pdata pdata-arg))))
+     (nil (get-pointer pdata)) :set
+     ((pdata-arg) (set-pointer pdata pdata-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineLibraryCreateInfoKHR" (pipeline-library-create-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineLibraryCreateInfoKHR"
+      (pipeline-library-create-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -7997,10 +8629,12 @@
       (set-array vkpipeline plibraries plibraries-arg plibraries-index :dynamic
        t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPresentIdKHR" (present-id-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPresentIdKHR"
+      (present-id-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8020,10 +8654,12 @@
       (set-array :uint64 ppresentids ppresentids-arg ppresentids-index :dynamic
        t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDevicePresentIdFeaturesKHR" (physical-device-present-id-features-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDevicePresentIdFeaturesKHR"
+      (physical-device-present-id-features-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8031,10 +8667,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (presentid :name "presentId" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkQueueFamilyCheckpointProperties2NV" (queue-family-checkpoint-properties-2-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkQueueFamilyCheckpointProperties2NV"
+      (queue-family-checkpoint-properties-2-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8043,10 +8681,12 @@
     (checkpointexecutionstagemask :name "checkpointExecutionStageMask" :type
      "VkPipelineStageFlags2"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkCheckpointData2NV" (checkpoint-data-2-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkCheckpointData2NV"
+      (checkpoint-data-2-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8061,11 +8701,13 @@
      ((pcheckpointmarker-arg)
       (set-pointer pcheckpointmarker pcheckpointmarker-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR" (physical-device-fragment-shader-barycentric-features-nv
-                                                                                                 physical-device-fragment-shader-barycentric-features-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR"
+      (physical-device-fragment-shader-barycentric-features-nv
+       physical-device-fragment-shader-barycentric-features-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8074,10 +8716,12 @@
     (fragmentshaderbarycentric :name "fragmentShaderBarycentric" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR" (physical-device-fragment-shader-barycentric-properties-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR"
+      (physical-device-fragment-shader-barycentric-properties-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8086,10 +8730,12 @@
     (tristripvertexorderindependentofprovokingvertex :name
      "triStripVertexOrderIndependentOfProvokingVertex" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR" (physical-device-shader-subgroup-uniform-control-flow-features-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR"
+      (physical-device-shader-subgroup-uniform-control-flow-features-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8098,10 +8744,12 @@
     (shadersubgroupuniformcontrolflow :name "shaderSubgroupUniformControlFlow"
      :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR" (physical-device-workgroup-memory-explicit-layout-features-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR"
+      (physical-device-workgroup-memory-explicit-layout-features-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8116,10 +8764,12 @@
     (workgroupmemoryexplicitlayout16bitaccess :name
      "workgroupMemoryExplicitLayout16BitAccess" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR" (physical-device-ray-tracing-maintenance-1-features-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR"
+      (physical-device-ray-tracing-maintenance-1-features-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8129,10 +8779,12 @@
     (raytracingpipelinetraceraysindirect2 :name
      "rayTracingPipelineTraceRaysIndirect2" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkTraceRaysIndirectCommand2KHR" (trace-rays-indirect-command-2-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkTraceRaysIndirectCommand2KHR"
+      (trace-rays-indirect-command-2-khr)
       (:default-create :default-get :default-set)
     (raygenshaderrecordaddress :name "raygenShaderRecordAddress" :type
      "VkDeviceAddress")
@@ -8159,10 +8811,12 @@
     (height :name height :type uint32)
     (depth :name depth :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDebugReportCallbackCreateInfoEXT" (debug-report-callback-create-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDebugReportCallbackCreateInfoEXT"
+      (debug-report-callback-create-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8175,10 +8829,12 @@
      (nil (get-pointer puserdata)) :set
      ((puserdata-arg) (set-pointer puserdata puserdata-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineRasterizationStateRasterizationOrderAMD" (pipeline-rasterization-state-rasterization-order-amd)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineRasterizationStateRasterizationOrderAMD"
+      (pipeline-rasterization-state-rasterization-order-amd)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8187,10 +8843,12 @@
     (rasterizationorder :name "rasterizationOrder" :type
      "VkRasterizationOrderAMD"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDebugMarkerObjectNameInfoEXT" (debug-marker-object-name-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDebugMarkerObjectNameInfoEXT"
+      (debug-marker-object-name-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8203,10 +8861,12 @@
      (destroy-string pobjectname) :get (nil (get-string pobjectname)) :set
      ((pobjectname-arg) (set-string pobjectname pobjectname-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDebugMarkerObjectTagInfoEXT" (debug-marker-object-tag-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDebugMarkerObjectTagInfoEXT"
+      (debug-marker-object-tag-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8220,10 +8880,12 @@
      ((ptag-arg) (create-pointer ptag ptag-arg)) :get (nil (get-pointer ptag))
      :set ((ptag-arg) (set-pointer ptag ptag-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDebugMarkerMarkerInfoEXT" (debug-marker-marker-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDebugMarkerMarkerInfoEXT"
+      (debug-marker-marker-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8244,10 +8906,12 @@
       (set-array :float color color-arg color-index :dynamic nil :pointers
        nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDedicatedAllocationImageCreateInfoNV" (dedicated-allocation-image-create-info-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDedicatedAllocationImageCreateInfoNV"
+      (dedicated-allocation-image-create-info-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8255,10 +8919,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (dedicatedallocation :name "dedicatedAllocation" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDedicatedAllocationBufferCreateInfoNV" (dedicated-allocation-buffer-create-info-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDedicatedAllocationBufferCreateInfoNV"
+      (dedicated-allocation-buffer-create-info-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8266,10 +8932,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (dedicatedallocation :name "dedicatedAllocation" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDedicatedAllocationMemoryAllocateInfoNV" (dedicated-allocation-memory-allocate-info-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDedicatedAllocationMemoryAllocateInfoNV"
+      (dedicated-allocation-memory-allocate-info-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8283,10 +8951,12 @@
      (nil (get-pointer buffer)) :set
      ((buffer-arg) (set-pointer buffer buffer-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceTransformFeedbackFeaturesEXT" (physical-device-transform-feedback-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceTransformFeedbackFeaturesEXT"
+      (physical-device-transform-feedback-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8295,10 +8965,12 @@
     (transformfeedback :name "transformFeedback" :type "VkBool32")
     (geometrystreams :name "geometryStreams" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceTransformFeedbackPropertiesEXT" (physical-device-transform-feedback-properties-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceTransformFeedbackPropertiesEXT"
+      (physical-device-transform-feedback-properties-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8323,10 +8995,12 @@
      "transformFeedbackRasterizationStreamSelect" :type "VkBool32")
     (transformfeedbackdraw :name "transformFeedbackDraw" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineRasterizationStateStreamCreateInfoEXT" (pipeline-rasterization-state-stream-create-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineRasterizationStateStreamCreateInfoEXT"
+      (pipeline-rasterization-state-stream-create-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8335,10 +9009,12 @@
     (flags :name flags :type "VkPipelineRasterizationStateStreamCreateFlagsEXT")
     (rasterizationstream :name "rasterizationStream" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkCuModuleCreateInfoNVX" (cu-module-create-info-nvx)
+  (more-cffi:def-foreign-struct doc-file
+      "VkCuModuleCreateInfoNVX"
+      (cu-module-create-info-nvx)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8347,12 +9023,15 @@
     (datasize :name "dataSize" :type size)
     (pdata :name "pData" :type void :init-form nil :create
      ((pdata-arg) (create-pointer pdata pdata-arg)) :get
-     (nil (get-pointer pdata)) :set ((pdata-arg) (set-pointer pdata pdata-arg))))
+     (nil (get-pointer pdata)) :set
+     ((pdata-arg) (set-pointer pdata pdata-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkCuFunctionCreateInfoNVX" (cu-function-create-info-nvx)
+  (more-cffi:def-foreign-struct doc-file
+      "VkCuFunctionCreateInfoNVX"
+      (cu-function-create-info-nvx)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8367,10 +9046,12 @@
      (destroy-string pname) :get (nil (get-string pname)) :set
      ((pname-arg) (set-string pname pname-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkCuLaunchInfoNVX" (cu-launch-info-nvx)
+  (more-cffi:def-foreign-struct doc-file
+      "VkCuLaunchInfoNVX"
+      (cu-launch-info-nvx)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8398,10 +9079,12 @@
      (nil (get-pointer pextras)) :set
      ((pextras-arg) (set-pointer pextras pextras-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImageViewHandleInfoNVX" (image-view-handle-info-nvx)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImageViewHandleInfoNVX"
+      (image-view-handle-info-nvx)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8417,10 +9100,12 @@
      (nil (get-pointer sampler)) :set
      ((sampler-arg) (set-pointer sampler sampler-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImageViewAddressPropertiesNVX" (image-view-address-properties-nvx)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImageViewAddressPropertiesNVX"
+      (image-view-address-properties-nvx)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8429,10 +9114,12 @@
     (deviceaddress :name "deviceAddress" :type "VkDeviceAddress")
     (size :name size :type "VkDeviceSize"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkTextureLODGatherFormatPropertiesAMD" (texture-l-o-d-gather-format-properties-amd)
+  (more-cffi:def-foreign-struct doc-file
+      "VkTextureLODGatherFormatPropertiesAMD"
+      (texture-l-o-d-gather-format-properties-amd)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8441,10 +9128,12 @@
     (supportstexturegatherlodbiasamd :name "supportsTextureGatherLODBiasAMD"
      :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkShaderResourceUsageAMD" (shader-resource-usage-amd)
+  (more-cffi:def-foreign-struct doc-file
+      "VkShaderResourceUsageAMD"
+      (shader-resource-usage-amd)
       (:default-create :default-get :default-set)
     (numusedvgprs :name "numUsedVgprs" :type uint32)
     (numusedsgprs :name "numUsedSgprs" :type uint32)
@@ -8452,10 +9141,12 @@
     (ldsusagesizeinbytes :name "ldsUsageSizeInBytes" :type size)
     (scratchmemusageinbytes :name "scratchMemUsageInBytes" :type size))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkShaderStatisticsInfoAMD" (shader-statistics-info-amd)
+  (more-cffi:def-foreign-struct doc-file
+      "VkShaderStatisticsInfoAMD"
+      (shader-statistics-info-amd)
       (:default-create :default-get :default-set)
     (shaderstagemask :name "shaderStageMask" :type "VkShaderStageFlags")
     (resourceusage :pointer t :name "resourceUsage" :type
@@ -8484,10 +9175,12 @@
       (set-array :uint32 computeworkgroupsize computeworkgroupsize-arg
        computeworkgroupsize-index :dynamic nil :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceCornerSampledImageFeaturesNV" (physical-device-corner-sampled-image-features-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceCornerSampledImageFeaturesNV"
+      (physical-device-corner-sampled-image-features-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8495,10 +9188,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (cornersampledimage :name "cornerSampledImage" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkExternalImageFormatPropertiesNV" (external-image-format-properties-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkExternalImageFormatPropertiesNV"
+      (external-image-format-properties-nv)
       (:default-create :default-get :default-set)
     (imageformatproperties :pointer t :name "imageFormatProperties" :type
      "VkImageFormatProperties" :create
@@ -8516,10 +9211,12 @@
     (compatiblehandletypes :name "compatibleHandleTypes" :type
      "VkExternalMemoryHandleTypeFlagsNV"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkExternalMemoryImageCreateInfoNV" (external-memory-image-create-info-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkExternalMemoryImageCreateInfoNV"
+      (external-memory-image-create-info-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8527,10 +9224,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (handletypes :name "handleTypes" :type "VkExternalMemoryHandleTypeFlagsNV"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkExportMemoryAllocateInfoNV" (export-memory-allocate-info-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkExportMemoryAllocateInfoNV"
+      (export-memory-allocate-info-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8538,10 +9237,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (handletypes :name "handleTypes" :type "VkExternalMemoryHandleTypeFlagsNV"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkValidationFlagsEXT" (validation-flags-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkValidationFlagsEXT"
+      (validation-flags-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8565,10 +9266,12 @@
        pdisabledvalidationchecks-arg pdisabledvalidationchecks-index :dynamic t
        :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImageViewASTCDecodeModeEXT" (image-view-a-s-t-c-decode-mode-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImageViewASTCDecodeModeEXT"
+      (image-view-a-s-t-c-decode-mode-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8576,21 +9279,26 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (decodemode :name "decodeMode" :type "VkFormat"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceASTCDecodeFeaturesEXT" (physical-device-a-s-t-c-decode-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceASTCDecodeFeaturesEXT"
+      (physical-device-a-s-t-c-decode-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
-    (decodemodesharedexponent :name "decodeModeSharedExponent" :type "VkBool32"))
+    (decodemodesharedexponent :name "decodeModeSharedExponent" :type
+     "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkConditionalRenderingBeginInfoEXT" (conditional-rendering-begin-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkConditionalRenderingBeginInfoEXT"
+      (conditional-rendering-begin-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8603,10 +9311,12 @@
     (offset :name offset :type "VkDeviceSize")
     (flags :name flags :type "VkConditionalRenderingFlagsEXT"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceConditionalRenderingFeaturesEXT" (physical-device-conditional-rendering-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceConditionalRenderingFeaturesEXT"
+      (physical-device-conditional-rendering-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8616,10 +9326,12 @@
     (inheritedconditionalrendering :name "inheritedConditionalRendering" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkCommandBufferInheritanceConditionalRenderingInfoEXT" (command-buffer-inheritance-conditional-rendering-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkCommandBufferInheritanceConditionalRenderingInfoEXT"
+      (command-buffer-inheritance-conditional-rendering-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8628,18 +9340,22 @@
     (conditionalrenderingenable :name "conditionalRenderingEnable" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkViewportWScalingNV" (viewport-w-scaling-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkViewportWScalingNV"
+      (viewport-w-scaling-nv)
       (:default-create :default-get :default-set)
     (xcoeff :name xcoeff :type float)
     (ycoeff :name ycoeff :type float))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineViewportWScalingStateCreateInfoNV" (pipeline-viewport-w-scaling-state-create-info-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineViewportWScalingStateCreateInfoNV"
+      (pipeline-viewport-w-scaling-state-create-info-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8663,10 +9379,12 @@
        pviewportwscalings-arg pviewportwscalings-index :dynamic t :pointers
        ("VkViewportWScalingNV")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSurfaceCapabilities2EXT" (surface-capabilities-2-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSurfaceCapabilities2EXT"
+      (surface-capabilities-2-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8705,10 +9423,12 @@
     (supportedsurfacecounters :name "supportedSurfaceCounters" :type
      "VkSurfaceCounterFlagsEXT"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDisplayPowerInfoEXT" (display-power-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDisplayPowerInfoEXT"
+      (display-power-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8716,10 +9436,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (powerstate :name "powerState" :type "VkDisplayPowerStateEXT"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDeviceEventInfoEXT" (device-event-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDeviceEventInfoEXT"
+      (device-event-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8727,10 +9449,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (deviceevent :name "deviceEvent" :type "VkDeviceEventTypeEXT"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDisplayEventInfoEXT" (display-event-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDisplayEventInfoEXT"
+      (display-event-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8738,10 +9462,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (displayevent :name "displayEvent" :type "VkDisplayEventTypeEXT"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSwapchainCounterCreateInfoEXT" (swapchain-counter-create-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSwapchainCounterCreateInfoEXT"
+      (swapchain-counter-create-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8749,17 +9475,21 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (surfacecounters :name "surfaceCounters" :type "VkSurfaceCounterFlagsEXT"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkRefreshCycleDurationGOOGLE" (refresh-cycle-duration-google)
+  (more-cffi:def-foreign-struct doc-file
+      "VkRefreshCycleDurationGOOGLE"
+      (refresh-cycle-duration-google)
       (:default-create :default-get :default-set)
     (refreshduration :name "refreshDuration" :type uint64))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPastPresentationTimingGOOGLE" (past-presentation-timing-google)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPastPresentationTimingGOOGLE"
+      (past-presentation-timing-google)
       (:default-create :default-get :default-set)
     (presentid :name "presentID" :type uint32)
     (desiredpresenttime :name "desiredPresentTime" :type uint64)
@@ -8767,18 +9497,22 @@
     (earliestpresenttime :name "earliestPresentTime" :type uint64)
     (presentmargin :name "presentMargin" :type uint64))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPresentTimeGOOGLE" (present-time-google)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPresentTimeGOOGLE"
+      (present-time-google)
       (:default-create :default-get :default-set)
     (presentid :name "presentID" :type uint32)
     (desiredpresenttime :name "desiredPresentTime" :type uint64))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPresentTimesInfoGOOGLE" (present-times-info-google)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPresentTimesInfoGOOGLE"
+      (present-times-info-google)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8798,10 +9532,12 @@
       (set-array (:struct vkpresenttimegoogle) ptimes ptimes-arg ptimes-index
        :dynamic t :pointers ("VkPresentTimeGOOGLE")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX" (physical-device-multiview-per-view-attributes-properties-nvx)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX"
+      (physical-device-multiview-per-view-attributes-properties-nvx)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8810,20 +9546,24 @@
     (perviewpositionallcomponents :name "perViewPositionAllComponents" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkViewportSwizzleNV" (viewport-swizzle-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkViewportSwizzleNV"
+      (viewport-swizzle-nv)
       (:default-create :default-get :default-set)
     (x :name x :type "VkViewportCoordinateSwizzleNV")
     (y :name y :type "VkViewportCoordinateSwizzleNV")
     (z :name z :type "VkViewportCoordinateSwizzleNV")
     (w :name w :type "VkViewportCoordinateSwizzleNV"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineViewportSwizzleStateCreateInfoNV" (pipeline-viewport-swizzle-state-create-info-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineViewportSwizzleStateCreateInfoNV"
+      (pipeline-viewport-swizzle-state-create-info-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8847,10 +9587,12 @@
        pviewportswizzles-arg pviewportswizzles-index :dynamic t :pointers
        ("VkViewportSwizzleNV")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceDiscardRectanglePropertiesEXT" (physical-device-discard-rectangle-properties-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceDiscardRectanglePropertiesEXT"
+      (physical-device-discard-rectangle-properties-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8858,10 +9600,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (maxdiscardrectangles :name "maxDiscardRectangles" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineDiscardRectangleStateCreateInfoEXT" (pipeline-discard-rectangle-state-create-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineDiscardRectangleStateCreateInfoEXT"
+      (pipeline-discard-rectangle-state-create-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8885,10 +9629,12 @@
       (set-array (:struct vkrect2d) pdiscardrectangles pdiscardrectangles-arg
        pdiscardrectangles-index :dynamic t :pointers ("VkRect2D")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceConservativeRasterizationPropertiesEXT" (physical-device-conservative-rasterization-properties-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceConservativeRasterizationPropertiesEXT"
+      (physical-device-conservative-rasterization-properties-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8912,10 +9658,12 @@
     (conservativerasterizationpostdepthcoverage :name
      "conservativeRasterizationPostDepthCoverage" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineRasterizationConservativeStateCreateInfoEXT" (pipeline-rasterization-conservative-state-create-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineRasterizationConservativeStateCreateInfoEXT"
+      (pipeline-rasterization-conservative-state-create-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8928,10 +9676,12 @@
     (extraprimitiveoverestimationsize :name "extraPrimitiveOverestimationSize"
      :type float))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceDepthClipEnableFeaturesEXT" (physical-device-depth-clip-enable-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceDepthClipEnableFeaturesEXT"
+      (physical-device-depth-clip-enable-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8939,10 +9689,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (depthclipenable :name "depthClipEnable" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineRasterizationDepthClipStateCreateInfoEXT" (pipeline-rasterization-depth-clip-state-create-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineRasterizationDepthClipStateCreateInfoEXT"
+      (pipeline-rasterization-depth-clip-state-create-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -8952,18 +9704,22 @@
      "VkPipelineRasterizationDepthClipStateCreateFlagsEXT")
     (depthclipenable :name "depthClipEnable" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkXYColorEXT" (x-y-color-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkXYColorEXT"
+      (x-y-color-ext)
       (:default-create :default-get :default-set)
     (x :name x :type float)
     (y :name y :type float))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkHdrMetadataEXT" (hdr-metadata-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkHdrMetadataEXT"
+      (hdr-metadata-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9007,10 +9763,12 @@
     (maxcontentlightlevel :name "maxContentLightLevel" :type float)
     (maxframeaveragelightlevel :name "maxFrameAverageLightLevel" :type float))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDebugUtilsLabelEXT" (debug-utils-label-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDebugUtilsLabelEXT"
+      (debug-utils-label-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9031,10 +9789,12 @@
       (set-array :float color color-arg color-index :dynamic nil :pointers
        nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDebugUtilsObjectNameInfoEXT" (debug-utils-object-name-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDebugUtilsObjectNameInfoEXT"
+      (debug-utils-object-name-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9047,10 +9807,12 @@
      (destroy-string pobjectname) :get (nil (get-string pobjectname)) :set
      ((pobjectname-arg) (set-string pobjectname pobjectname-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDebugUtilsMessengerCallbackDataEXT" (debug-utils-messenger-callback-data-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDebugUtilsMessengerCallbackDataEXT"
+      (debug-utils-messenger-callback-data-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9111,10 +9873,12 @@
       (set-array (:struct vkdebugutilsobjectnameinfoext) pobjects pobjects-arg
        pobjects-index :dynamic t :pointers ("VkDebugUtilsObjectNameInfoEXT")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDebugUtilsMessengerCreateInfoEXT" (debug-utils-messenger-create-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDebugUtilsMessengerCreateInfoEXT"
+      (debug-utils-messenger-create-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9131,10 +9895,12 @@
      (nil (get-pointer puserdata)) :set
      ((puserdata-arg) (set-pointer puserdata puserdata-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDebugUtilsObjectTagInfoEXT" (debug-utils-object-tag-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDebugUtilsObjectTagInfoEXT"
+      (debug-utils-object-tag-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9148,18 +9914,22 @@
      ((ptag-arg) (create-pointer ptag ptag-arg)) :get (nil (get-pointer ptag))
      :set ((ptag-arg) (set-pointer ptag ptag-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSampleLocationEXT" (sample-location-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSampleLocationEXT"
+      (sample-location-ext)
       (:default-create :default-get :default-set)
     (x :name x :type float)
     (y :name y :type float))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSampleLocationsInfoEXT" (sample-locations-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSampleLocationsInfoEXT"
+      (sample-locations-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9193,10 +9963,12 @@
        psamplelocations-arg psamplelocations-index :dynamic t :pointers
        ("VkSampleLocationEXT")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkAttachmentSampleLocationsEXT" (attachment-sample-locations-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkAttachmentSampleLocationsEXT"
+      (attachment-sample-locations-ext)
       (:default-create :default-get :default-set)
     (attachmentindex :name "attachmentIndex" :type uint32)
     (samplelocationsinfo :pointer t :name "sampleLocationsInfo" :type
@@ -9209,10 +9981,12 @@
       (more-cffi:copy samplelocationsinfo samplelocationsinfo-arg
                       '(:struct vksamplelocationsinfoext)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSubpassSampleLocationsEXT" (subpass-sample-locations-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSubpassSampleLocationsEXT"
+      (subpass-sample-locations-ext)
       (:default-create :default-get :default-set)
     (subpassindex :name "subpassIndex" :type uint32)
     (samplelocationsinfo :pointer t :name "sampleLocationsInfo" :type
@@ -9225,10 +9999,12 @@
       (more-cffi:copy samplelocationsinfo samplelocationsinfo-arg
                       '(:struct vksamplelocationsinfoext)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkRenderPassSampleLocationsBeginInfoEXT" (render-pass-sample-locations-begin-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkRenderPassSampleLocationsBeginInfoEXT"
+      (render-pass-sample-locations-begin-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9279,10 +10055,12 @@
        ppostsubpasssamplelocations-index :dynamic t :pointers
        ("VkSubpassSampleLocationsEXT")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineSampleLocationsStateCreateInfoEXT" (pipeline-sample-locations-state-create-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineSampleLocationsStateCreateInfoEXT"
+      (pipeline-sample-locations-state-create-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9299,10 +10077,12 @@
       (more-cffi:copy samplelocationsinfo samplelocationsinfo-arg
                       '(:struct vksamplelocationsinfoext)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceSampleLocationsPropertiesEXT" (physical-device-sample-locations-properties-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceSampleLocationsPropertiesEXT"
+      (physical-device-sample-locations-properties-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9337,10 +10117,12 @@
     (samplelocationsubpixelbits :name "sampleLocationSubPixelBits" :type uint32)
     (variablesamplelocations :name "variableSampleLocations" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkMultisamplePropertiesEXT" (multisample-properties-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkMultisamplePropertiesEXT"
+      (multisample-properties-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9356,10 +10138,12 @@
       (more-cffi:copy maxsamplelocationgridsize maxsamplelocationgridsize-arg
                       '(:struct vkextent2d)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT" (physical-device-blend-operation-advanced-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT"
+      (physical-device-blend-operation-advanced-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9368,10 +10152,12 @@
     (advancedblendcoherentoperations :name "advancedBlendCoherentOperations"
      :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT" (physical-device-blend-operation-advanced-properties-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT"
+      (physical-device-blend-operation-advanced-properties-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9390,10 +10176,12 @@
     (advancedblendalloperations :name "advancedBlendAllOperations" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineColorBlendAdvancedStateCreateInfoEXT" (pipeline-color-blend-advanced-state-create-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineColorBlendAdvancedStateCreateInfoEXT"
+      (pipeline-color-blend-advanced-state-create-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9403,10 +10191,12 @@
     (dstpremultiplied :name "dstPremultiplied" :type "VkBool32")
     (blendoverlap :name "blendOverlap" :type "VkBlendOverlapEXT"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineCoverageToColorStateCreateInfoNV" (pipeline-coverage-to-color-state-create-info-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineCoverageToColorStateCreateInfoNV"
+      (pipeline-coverage-to-color-state-create-info-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9416,10 +10206,12 @@
     (coveragetocolorenable :name "coverageToColorEnable" :type "VkBool32")
     (coveragetocolorlocation :name "coverageToColorLocation" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineCoverageModulationStateCreateInfoNV" (pipeline-coverage-modulation-state-create-info-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineCoverageModulationStateCreateInfoNV"
+      (pipeline-coverage-modulation-state-create-info-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9446,10 +10238,12 @@
       (set-array :float pcoveragemodulationtable pcoveragemodulationtable-arg
        pcoveragemodulationtable-index :dynamic t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceShaderSMBuiltinsPropertiesNV" (physical-device-shader-s-m-builtins-properties-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceShaderSMBuiltinsPropertiesNV"
+      (physical-device-shader-s-m-builtins-properties-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9458,10 +10252,12 @@
     (shadersmcount :name "shaderSMCount" :type uint32)
     (shaderwarpspersm :name "shaderWarpsPerSM" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceShaderSMBuiltinsFeaturesNV" (physical-device-shader-s-m-builtins-features-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceShaderSMBuiltinsFeaturesNV"
+      (physical-device-shader-s-m-builtins-features-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9469,10 +10265,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (shadersmbuiltins :name "shaderSMBuiltins" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDrmFormatModifierPropertiesEXT" (drm-format-modifier-properties-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDrmFormatModifierPropertiesEXT"
+      (drm-format-modifier-properties-ext)
       (:default-create :default-get :default-set)
     (drmformatmodifier :name "drmFormatModifier" :type uint64)
     (drmformatmodifierplanecount :name "drmFormatModifierPlaneCount" :type
@@ -9480,10 +10278,12 @@
     (drmformatmodifiertilingfeatures :name "drmFormatModifierTilingFeatures"
      :type "VkFormatFeatureFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDrmFormatModifierPropertiesListEXT" (drm-format-modifier-properties-list-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDrmFormatModifierPropertiesListEXT"
+      (drm-format-modifier-properties-list-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9509,10 +10309,12 @@
        pdrmformatmodifierproperties-index :dynamic t :pointers
        ("VkDrmFormatModifierPropertiesEXT")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceImageDrmFormatModifierInfoEXT" (physical-device-image-drm-format-modifier-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceImageDrmFormatModifierInfoEXT"
+      (physical-device-image-drm-format-modifier-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9535,10 +10337,12 @@
       (set-array :uint32 pqueuefamilyindices pqueuefamilyindices-arg
        pqueuefamilyindices-index :dynamic t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImageDrmFormatModifierListCreateInfoEXT" (image-drm-format-modifier-list-create-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImageDrmFormatModifierListCreateInfoEXT"
+      (image-drm-format-modifier-list-create-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9559,10 +10363,12 @@
       (set-array :uint64 pdrmformatmodifiers pdrmformatmodifiers-arg
        pdrmformatmodifiers-index :dynamic t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImageDrmFormatModifierExplicitCreateInfoEXT" (image-drm-format-modifier-explicit-create-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImageDrmFormatModifierExplicitCreateInfoEXT"
+      (image-drm-format-modifier-explicit-create-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9586,10 +10392,12 @@
       (set-array (:struct vksubresourcelayout) pplanelayouts pplanelayouts-arg
        pplanelayouts-index :dynamic t :pointers ("VkSubresourceLayout")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImageDrmFormatModifierPropertiesEXT" (image-drm-format-modifier-properties-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImageDrmFormatModifierPropertiesEXT"
+      (image-drm-format-modifier-properties-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9597,10 +10405,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (drmformatmodifier :name "drmFormatModifier" :type uint64))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDrmFormatModifierProperties2EXT" (drm-format-modifier-properties-2-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDrmFormatModifierProperties2EXT"
+      (drm-format-modifier-properties-2-ext)
       (:default-create :default-get :default-set)
     (drmformatmodifier :name "drmFormatModifier" :type uint64)
     (drmformatmodifierplanecount :name "drmFormatModifierPlaneCount" :type
@@ -9608,10 +10418,12 @@
     (drmformatmodifiertilingfeatures :name "drmFormatModifierTilingFeatures"
      :type "VkFormatFeatureFlags2"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDrmFormatModifierPropertiesList2EXT" (drm-format-modifier-properties-list-2-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDrmFormatModifierPropertiesList2EXT"
+      (drm-format-modifier-properties-list-2-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9637,10 +10449,12 @@
        pdrmformatmodifierproperties-index :dynamic t :pointers
        ("VkDrmFormatModifierProperties2EXT")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkValidationCacheCreateInfoEXT" (validation-cache-create-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkValidationCacheCreateInfoEXT"
+      (validation-cache-create-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9653,10 +10467,12 @@
      (nil (get-pointer pinitialdata)) :set
      ((pinitialdata-arg) (set-pointer pinitialdata pinitialdata-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkShaderModuleValidationCacheCreateInfoEXT" (shader-module-validation-cache-create-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkShaderModuleValidationCacheCreateInfoEXT"
+      (shader-module-validation-cache-create-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9669,10 +10485,12 @@
      :get (nil (get-pointer validationcache)) :set
      ((validationcache-arg) (set-pointer validationcache validationcache-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkShadingRatePaletteNV" (shading-rate-palette-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkShadingRatePaletteNV"
+      (shading-rate-palette-nv)
       (:default-create :default-get :default-set)
     (shadingratepaletteentrycount :name "shadingRatePaletteEntryCount" :type
      uint32)
@@ -9693,10 +10511,12 @@
        pshadingratepaletteentries-arg pshadingratepaletteentries-index :dynamic
        t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineViewportShadingRateImageStateCreateInfoNV" (pipeline-viewport-shading-rate-image-state-create-info-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineViewportShadingRateImageStateCreateInfoNV"
+      (pipeline-viewport-shading-rate-image-state-create-info-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9721,10 +10541,12 @@
        pshadingratepalettes-arg pshadingratepalettes-index :dynamic t :pointers
        ("VkShadingRatePaletteNV")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceShadingRateImageFeaturesNV" (physical-device-shading-rate-image-features-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceShadingRateImageFeaturesNV"
+      (physical-device-shading-rate-image-features-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9734,10 +10556,12 @@
     (shadingratecoarsesampleorder :name "shadingRateCoarseSampleOrder" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceShadingRateImagePropertiesNV" (physical-device-shading-rate-image-properties-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceShadingRateImagePropertiesNV"
+      (physical-device-shading-rate-image-properties-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9756,19 +10580,23 @@
     (shadingratemaxcoarsesamples :name "shadingRateMaxCoarseSamples" :type
      uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkCoarseSampleLocationNV" (coarse-sample-location-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkCoarseSampleLocationNV"
+      (coarse-sample-location-nv)
       (:default-create :default-get :default-set)
     (pixelx :name "pixelX" :type uint32)
     (pixely :name "pixelY" :type uint32)
     (sample :name sample :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkCoarseSampleOrderCustomNV" (coarse-sample-order-custom-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkCoarseSampleOrderCustomNV"
+      (coarse-sample-order-custom-nv)
       (:default-create :default-get :default-set)
     (shadingrate :name "shadingRate" :type "VkShadingRatePaletteEntryNV")
     (samplecount :name "sampleCount" :type uint32)
@@ -9789,10 +10617,12 @@
        psamplelocations-arg psamplelocations-index :dynamic t :pointers
        ("VkCoarseSampleLocationNV")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineViewportCoarseSampleOrderStateCreateInfoNV" (pipeline-viewport-coarse-sample-order-state-create-info-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineViewportCoarseSampleOrderStateCreateInfoNV"
+      (pipeline-viewport-coarse-sample-order-state-create-info-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9817,10 +10647,12 @@
        pcustomsampleorders-arg pcustomsampleorders-index :dynamic t :pointers
        ("VkCoarseSampleOrderCustomNV")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkRayTracingShaderGroupCreateInfoNV" (ray-tracing-shader-group-create-info-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkRayTracingShaderGroupCreateInfoNV"
+      (ray-tracing-shader-group-create-info-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9832,10 +10664,12 @@
     (anyhitshader :name "anyHitShader" :type uint32)
     (intersectionshader :name "intersectionShader" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkRayTracingPipelineCreateInfoNV" (ray-tracing-pipeline-create-info-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkRayTracingPipelineCreateInfoNV"
+      (ray-tracing-pipeline-create-info-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9886,10 +10720,12 @@
       (set-pointer basepipelinehandle basepipelinehandle-arg)))
     (basepipelineindex :name "basePipelineIndex" :type int32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkGeometryTrianglesNV" (geometry-triangles-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkGeometryTrianglesNV"
+      (geometry-triangles-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9916,10 +10752,12 @@
      ((transformdata-arg) (set-pointer transformdata transformdata-arg)))
     (transformoffset :name "transformOffset" :type "VkDeviceSize"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkGeometryAABBNV" (geometry-a-a-b-b-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkGeometryAABBNV"
+      (geometry-a-a-b-b-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9933,10 +10771,12 @@
     (stride :name stride :type uint32)
     (offset :name offset :type "VkDeviceSize"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkGeometryDataNV" (geometry-data-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkGeometryDataNV"
+      (geometry-data-nv)
       (:default-create :default-get :default-set)
     (triangles :pointer t :name triangles :type "VkGeometryTrianglesNV" :create
      ((triangles-arg)
@@ -9949,12 +10789,15 @@
     (aabbs :pointer t :name aabbs :type "VkGeometryAABBNV" :create
      ((aabbs-arg) (more-cffi:copy aabbs aabbs-arg '(:struct vkgeometryaabbnv)))
      :set
-     ((aabbs-arg) (more-cffi:copy aabbs aabbs-arg '(:struct vkgeometryaabbnv)))))
+     ((aabbs-arg)
+      (more-cffi:copy aabbs aabbs-arg '(:struct vkgeometryaabbnv)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkGeometryNV" (geometry-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkGeometryNV"
+      (geometry-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9969,10 +10812,12 @@
       (more-cffi:copy geometry geometry-arg '(:struct vkgeometrydatanv))))
     (flags :name flags :type "VkGeometryFlagsKHR"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkAccelerationStructureInfoNV" (acceleration-structure-info-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkAccelerationStructureInfoNV"
+      (acceleration-structure-info-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -9996,10 +10841,12 @@
       (set-array (:struct vkgeometrynv) pgeometries pgeometries-arg
        pgeometries-index :dynamic t :pointers ("VkGeometryNV")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkAccelerationStructureCreateInfoNV" (acceleration-structure-create-info-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkAccelerationStructureCreateInfoNV"
+      (acceleration-structure-create-info-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10013,10 +10860,12 @@
      ((info-arg)
       (more-cffi:copy info info-arg '(:struct vkaccelerationstructureinfonv)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkBindAccelerationStructureMemoryInfoNV" (bind-acceleration-structure-memory-info-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkBindAccelerationStructureMemoryInfoNV"
+      (bind-acceleration-structure-memory-info-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10048,10 +10897,12 @@
       (set-array :uint32 pdeviceindices pdeviceindices-arg pdeviceindices-index
        :dynamic t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkWriteDescriptorSetAccelerationStructureNV" (write-descriptor-set-acceleration-structure-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkWriteDescriptorSetAccelerationStructureNV"
+      (write-descriptor-set-acceleration-structure-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10073,10 +10924,12 @@
        paccelerationstructures-arg paccelerationstructures-index :dynamic t
        :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkAccelerationStructureMemoryRequirementsInfoNV" (acceleration-structure-memory-requirements-info-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkAccelerationStructureMemoryRequirementsInfoNV"
+      (acceleration-structure-memory-requirements-info-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10091,10 +10944,12 @@
      ((accelerationstructure-arg)
       (set-pointer accelerationstructure accelerationstructure-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceRayTracingPropertiesNV" (physical-device-ray-tracing-properties-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceRayTracingPropertiesNV"
+      (physical-device-ray-tracing-properties-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10110,11 +10965,12 @@
     (maxdescriptorsetaccelerationstructures :name
      "maxDescriptorSetAccelerationStructures" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkTransformMatrixKHR" (transform-matrix-nv
-                                                                 transform-matrix-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkTransformMatrixKHR"
+      (transform-matrix-nv transform-matrix-khr)
       (:default-create :default-get :default-set)
     (matrix :name matrix :type float :create
      ((matrix-arg)
@@ -10127,11 +10983,12 @@
       (set-array :float matrix matrix-arg matrix-index :dynamic nil :pointers
        nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkAabbPositionsKHR" (aabb-positions-nv
-                                                               aabb-positions-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkAabbPositionsKHR"
+      (aabb-positions-nv aabb-positions-khr)
       (:default-create :default-get :default-set)
     (minx :name "minX" :type float)
     (miny :name "minY" :type float)
@@ -10140,11 +10997,12 @@
     (maxy :name "maxY" :type float)
     (maxz :name "maxZ" :type float))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkAccelerationStructureInstanceKHR" (acceleration-structure-instance-nv
-                                                                               acceleration-structure-instance-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkAccelerationStructureInstanceKHR"
+      (acceleration-structure-instance-nv acceleration-structure-instance-khr)
       (:default-create :default-get :default-set)
     (transform :pointer t :name transform :type "VkTransformMatrixKHR" :create
      ((transform-arg)
@@ -10158,10 +11016,12 @@
     (accelerationstructurereference :name "accelerationStructureReference"
      :type uint64))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV" (physical-device-representative-fragment-test-features-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV"
+      (physical-device-representative-fragment-test-features-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10170,10 +11030,12 @@
     (representativefragmenttest :name "representativeFragmentTest" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineRepresentativeFragmentTestStateCreateInfoNV" (pipeline-representative-fragment-test-state-create-info-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineRepresentativeFragmentTestStateCreateInfoNV"
+      (pipeline-representative-fragment-test-state-create-info-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10182,10 +11044,12 @@
     (representativefragmenttestenable :name "representativeFragmentTestEnable"
      :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceImageViewImageFormatInfoEXT" (physical-device-image-view-image-format-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceImageViewImageFormatInfoEXT"
+      (physical-device-image-view-image-format-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10193,10 +11057,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (imageviewtype :name "imageViewType" :type "VkImageViewType"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkFilterCubicImageViewImageFormatPropertiesEXT" (filter-cubic-image-view-image-format-properties-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkFilterCubicImageViewImageFormatPropertiesEXT"
+      (filter-cubic-image-view-image-format-properties-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10205,10 +11071,12 @@
     (filtercubic :name "filterCubic" :type "VkBool32")
     (filtercubicminmax :name "filterCubicMinmax" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImportMemoryHostPointerInfoEXT" (import-memory-host-pointer-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImportMemoryHostPointerInfoEXT"
+      (import-memory-host-pointer-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10220,10 +11088,12 @@
      (nil (get-pointer phostpointer)) :set
      ((phostpointer-arg) (set-pointer phostpointer phostpointer-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkMemoryHostPointerPropertiesEXT" (memory-host-pointer-properties-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkMemoryHostPointerPropertiesEXT"
+      (memory-host-pointer-properties-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10231,10 +11101,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (memorytypebits :name "memoryTypeBits" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceExternalMemoryHostPropertiesEXT" (physical-device-external-memory-host-properties-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceExternalMemoryHostPropertiesEXT"
+      (physical-device-external-memory-host-properties-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10243,10 +11115,12 @@
     (minimportedhostpointeralignment :name "minImportedHostPointerAlignment"
      :type "VkDeviceSize"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineCompilerControlCreateInfoAMD" (pipeline-compiler-control-create-info-amd)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineCompilerControlCreateInfoAMD"
+      (pipeline-compiler-control-create-info-amd)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10255,10 +11129,12 @@
     (compilercontrolflags :name "compilerControlFlags" :type
      "VkPipelineCompilerControlFlagsAMD"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkCalibratedTimestampInfoEXT" (calibrated-timestamp-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkCalibratedTimestampInfoEXT"
+      (calibrated-timestamp-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10266,10 +11142,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (timedomain :name "timeDomain" :type "VkTimeDomainEXT"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceShaderCorePropertiesAMD" (physical-device-shader-core-properties-amd)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceShaderCorePropertiesAMD"
+      (physical-device-shader-core-properties-amd)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10290,10 +11168,12 @@
     (maxvgprallocation :name "maxVgprAllocation" :type uint32)
     (vgprallocationgranularity :name "vgprAllocationGranularity" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDeviceMemoryOverallocationCreateInfoAMD" (device-memory-overallocation-create-info-amd)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDeviceMemoryOverallocationCreateInfoAMD"
+      (device-memory-overallocation-create-info-amd)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10302,10 +11182,12 @@
     (overallocationbehavior :name "overallocationBehavior" :type
      "VkMemoryOverallocationBehaviorAMD"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT" (physical-device-vertex-attribute-divisor-properties-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT"
+      (physical-device-vertex-attribute-divisor-properties-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10313,18 +11195,22 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (maxvertexattribdivisor :name "maxVertexAttribDivisor" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkVertexInputBindingDivisorDescriptionEXT" (vertex-input-binding-divisor-description-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkVertexInputBindingDivisorDescriptionEXT"
+      (vertex-input-binding-divisor-description-ext)
       (:default-create :default-get :default-set)
     (binding :name binding :type uint32)
     (divisor :name divisor :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineVertexInputDivisorStateCreateInfoEXT" (pipeline-vertex-input-divisor-state-create-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineVertexInputDivisorStateCreateInfoEXT"
+      (pipeline-vertex-input-divisor-state-create-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10350,10 +11236,12 @@
        pvertexbindingdivisors-index :dynamic t :pointers
        ("VkVertexInputBindingDivisorDescriptionEXT")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT" (physical-device-vertex-attribute-divisor-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT"
+      (physical-device-vertex-attribute-divisor-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10364,10 +11252,12 @@
     (vertexattributeinstanceratezerodivisor :name
      "vertexAttributeInstanceRateZeroDivisor" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceComputeShaderDerivativesFeaturesNV" (physical-device-compute-shader-derivatives-features-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceComputeShaderDerivativesFeaturesNV"
+      (physical-device-compute-shader-derivatives-features-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10378,10 +11268,12 @@
     (computederivativegrouplinear :name "computeDerivativeGroupLinear" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceMeshShaderFeaturesNV" (physical-device-mesh-shader-features-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceMeshShaderFeaturesNV"
+      (physical-device-mesh-shader-features-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10390,10 +11282,12 @@
     (taskshader :name "taskShader" :type "VkBool32")
     (meshshader :name "meshShader" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceMeshShaderPropertiesNV" (physical-device-mesh-shader-properties-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceMeshShaderPropertiesNV"
+      (physical-device-mesh-shader-properties-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10439,18 +11333,22 @@
     (meshoutputperprimitivegranularity :name
      "meshOutputPerPrimitiveGranularity" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDrawMeshTasksIndirectCommandNV" (draw-mesh-tasks-indirect-command-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDrawMeshTasksIndirectCommandNV"
+      (draw-mesh-tasks-indirect-command-nv)
       (:default-create :default-get :default-set)
     (taskcount :name "taskCount" :type uint32)
     (firsttask :name "firstTask" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceShaderImageFootprintFeaturesNV" (physical-device-shader-image-footprint-features-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceShaderImageFootprintFeaturesNV"
+      (physical-device-shader-image-footprint-features-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10458,10 +11356,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (imagefootprint :name "imageFootprint" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineViewportExclusiveScissorStateCreateInfoNV" (pipeline-viewport-exclusive-scissor-state-create-info-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineViewportExclusiveScissorStateCreateInfoNV"
+      (pipeline-viewport-exclusive-scissor-state-create-info-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10482,10 +11382,12 @@
       (set-array (:struct vkrect2d) pexclusivescissors pexclusivescissors-arg
        pexclusivescissors-index :dynamic t :pointers ("VkRect2D")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceExclusiveScissorFeaturesNV" (physical-device-exclusive-scissor-features-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceExclusiveScissorFeaturesNV"
+      (physical-device-exclusive-scissor-features-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10493,10 +11395,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (exclusivescissor :name "exclusiveScissor" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkQueueFamilyCheckpointPropertiesNV" (queue-family-checkpoint-properties-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkQueueFamilyCheckpointPropertiesNV"
+      (queue-family-checkpoint-properties-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10505,10 +11409,12 @@
     (checkpointexecutionstagemask :name "checkpointExecutionStageMask" :type
      "VkPipelineStageFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkCheckpointDataNV" (checkpoint-data-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkCheckpointDataNV"
+      (checkpoint-data-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10523,10 +11429,12 @@
      ((pcheckpointmarker-arg)
       (set-pointer pcheckpointmarker pcheckpointmarker-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL" (physical-device-shader-integer-functions-2-features-intel)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL"
+      (physical-device-shader-integer-functions-2-features-intel)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10534,10 +11442,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (shaderintegerfunctions2 :name "shaderIntegerFunctions2" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-union doc-file "VkPerformanceValueDataINTEL" (performance-value-data-intel)
+  (more-cffi:def-foreign-union doc-file
+      "VkPerformanceValueDataINTEL"
+      (performance-value-data-intel)
       (:default-create :default-get :default-set)
     (value32 :name value32 :type uint32)
     (value64 :name value64 :type uint64)
@@ -10548,10 +11458,12 @@
      (destroy-string valuestring) :get (nil (get-string valuestring)) :set
      ((valuestring-arg) (set-string valuestring valuestring-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPerformanceValueINTEL" (performance-value-intel)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPerformanceValueINTEL"
+      (performance-value-intel)
       (:default-create :default-get :default-set)
     (type :name type :type "VkPerformanceValueTypeINTEL")
     (data :pointer t :name data :type "VkPerformanceValueDataINTEL" :create
@@ -10561,10 +11473,12 @@
      ((data-arg)
       (more-cffi:copy data data-arg '(:union vkperformancevaluedataintel)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkInitializePerformanceApiInfoINTEL" (initialize-performance-api-info-intel)
+  (more-cffi:def-foreign-struct doc-file
+      "VkInitializePerformanceApiInfoINTEL"
+      (initialize-performance-api-info-intel)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10575,11 +11489,13 @@
      (nil (get-pointer puserdata)) :set
      ((puserdata-arg) (set-pointer puserdata puserdata-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkQueryPoolPerformanceQueryCreateInfoINTEL" (query-pool-create-info-intel
-                                                                                       query-pool-performance-query-create-info-intel)
+  (more-cffi:def-foreign-struct doc-file
+      "VkQueryPoolPerformanceQueryCreateInfoINTEL"
+      (query-pool-create-info-intel
+       query-pool-performance-query-create-info-intel)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10588,10 +11504,12 @@
     (performancecounterssampling :name "performanceCountersSampling" :type
      "VkQueryPoolSamplingModeINTEL"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPerformanceMarkerInfoINTEL" (performance-marker-info-intel)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPerformanceMarkerInfoINTEL"
+      (performance-marker-info-intel)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10599,10 +11517,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (marker :name marker :type uint64))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPerformanceStreamMarkerInfoINTEL" (performance-stream-marker-info-intel)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPerformanceStreamMarkerInfoINTEL"
+      (performance-stream-marker-info-intel)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10610,10 +11530,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (marker :name marker :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPerformanceOverrideInfoINTEL" (performance-override-info-intel)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPerformanceOverrideInfoINTEL"
+      (performance-override-info-intel)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10623,10 +11545,12 @@
     (enable :name enable :type "VkBool32")
     (parameter :name parameter :type uint64))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPerformanceConfigurationAcquireInfoINTEL" (performance-configuration-acquire-info-intel)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPerformanceConfigurationAcquireInfoINTEL"
+      (performance-configuration-acquire-info-intel)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10634,10 +11558,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (type :name type :type "VkPerformanceConfigurationTypeINTEL"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDevicePCIBusInfoPropertiesEXT" (physical-device-p-c-i-bus-info-properties-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDevicePCIBusInfoPropertiesEXT"
+      (physical-device-p-c-i-bus-info-properties-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10648,10 +11574,12 @@
     (pcidevice :name "pciDevice" :type uint32)
     (pcifunction :name "pciFunction" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDisplayNativeHdrSurfaceCapabilitiesAMD" (display-native-hdr-surface-capabilities-amd)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDisplayNativeHdrSurfaceCapabilitiesAMD"
+      (display-native-hdr-surface-capabilities-amd)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10659,10 +11587,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (localdimmingsupport :name "localDimmingSupport" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSwapchainDisplayNativeHdrCreateInfoAMD" (swapchain-display-native-hdr-create-info-amd)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSwapchainDisplayNativeHdrCreateInfoAMD"
+      (swapchain-display-native-hdr-create-info-amd)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10670,10 +11600,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (localdimmingenable :name "localDimmingEnable" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceFragmentDensityMapFeaturesEXT" (physical-device-fragment-density-map-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceFragmentDensityMapFeaturesEXT"
+      (physical-device-fragment-density-map-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10685,10 +11617,12 @@
     (fragmentdensitymapnonsubsampledimages :name
      "fragmentDensityMapNonSubsampledImages" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceFragmentDensityMapPropertiesEXT" (physical-device-fragment-density-map-properties-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceFragmentDensityMapPropertiesEXT"
+      (physical-device-fragment-density-map-properties-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10715,10 +11649,12 @@
     (fragmentdensityinvocations :name "fragmentDensityInvocations" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkRenderPassFragmentDensityMapCreateInfoEXT" (render-pass-fragment-density-map-create-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkRenderPassFragmentDensityMapCreateInfoEXT"
+      (render-pass-fragment-density-map-create-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10736,10 +11672,12 @@
                       fragmentdensitymapattachment-arg
                       '(:struct vkattachmentreference)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceShaderCoreProperties2AMD" (physical-device-shader-core-properties-2-amd)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceShaderCoreProperties2AMD"
+      (physical-device-shader-core-properties-2-amd)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10749,10 +11687,12 @@
      "VkShaderCorePropertiesFlagsAMD")
     (activecomputeunitcount :name "activeComputeUnitCount" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceCoherentMemoryFeaturesAMD" (physical-device-coherent-memory-features-amd)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceCoherentMemoryFeaturesAMD"
+      (physical-device-coherent-memory-features-amd)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10760,10 +11700,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (devicecoherentmemory :name "deviceCoherentMemory" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT" (physical-device-shader-image-atomic-int-6-4-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT"
+      (physical-device-shader-image-atomic-int-6-4-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10772,10 +11714,12 @@
     (shaderimageint64atomics :name "shaderImageInt64Atomics" :type "VkBool32")
     (sparseimageint64atomics :name "sparseImageInt64Atomics" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceMemoryBudgetPropertiesEXT" (physical-device-memory-budget-properties-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceMemoryBudgetPropertiesEXT"
+      (physical-device-memory-budget-properties-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10784,10 +11728,12 @@
     (heapbudget :name "heapBudget" :type "VkDeviceSize")
     (heapusage :name "heapUsage" :type "VkDeviceSize"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceMemoryPriorityFeaturesEXT" (physical-device-memory-priority-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceMemoryPriorityFeaturesEXT"
+      (physical-device-memory-priority-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10795,10 +11741,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (memorypriority :name "memoryPriority" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkMemoryPriorityAllocateInfoEXT" (memory-priority-allocate-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkMemoryPriorityAllocateInfoEXT"
+      (memory-priority-allocate-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10806,10 +11754,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (priority :name priority :type float))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV" (physical-device-dedicated-allocation-image-aliasing-features-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV"
+      (physical-device-dedicated-allocation-image-aliasing-features-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10818,11 +11768,13 @@
     (dedicatedallocationimagealiasing :name "dedicatedAllocationImageAliasing"
      :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceBufferDeviceAddressFeaturesEXT" (physical-device-buffer-address-features-ext
-                                                                                           physical-device-buffer-device-address-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceBufferDeviceAddressFeaturesEXT"
+      (physical-device-buffer-address-features-ext
+       physical-device-buffer-device-address-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10834,10 +11786,12 @@
     (bufferdeviceaddressmultidevice :name "bufferDeviceAddressMultiDevice"
      :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkBufferDeviceAddressCreateInfoEXT" (buffer-device-address-create-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkBufferDeviceAddressCreateInfoEXT"
+      (buffer-device-address-create-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10845,10 +11799,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (deviceaddress :name "deviceAddress" :type "VkDeviceAddress"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkValidationFeaturesEXT" (validation-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkValidationFeaturesEXT"
+      (validation-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10891,10 +11847,12 @@
        pdisabledvalidationfeatures-arg pdisabledvalidationfeatures-index
        :dynamic t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkCooperativeMatrixPropertiesNV" (cooperative-matrix-properties-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkCooperativeMatrixPropertiesNV"
+      (cooperative-matrix-properties-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10909,10 +11867,12 @@
     (dtype :name "DType" :type "VkComponentTypeNV")
     (scope :name scope :type "VkScopeNV"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceCooperativeMatrixFeaturesNV" (physical-device-cooperative-matrix-features-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceCooperativeMatrixFeaturesNV"
+      (physical-device-cooperative-matrix-features-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10922,10 +11882,12 @@
     (cooperativematrixrobustbufferaccess :name
      "cooperativeMatrixRobustBufferAccess" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceCooperativeMatrixPropertiesNV" (physical-device-cooperative-matrix-properties-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceCooperativeMatrixPropertiesNV"
+      (physical-device-cooperative-matrix-properties-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10934,10 +11896,12 @@
     (cooperativematrixsupportedstages :name "cooperativeMatrixSupportedStages"
      :type "VkShaderStageFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceCoverageReductionModeFeaturesNV" (physical-device-coverage-reduction-mode-features-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceCoverageReductionModeFeaturesNV"
+      (physical-device-coverage-reduction-mode-features-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10945,10 +11909,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (coveragereductionmode :name "coverageReductionMode" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineCoverageReductionStateCreateInfoNV" (pipeline-coverage-reduction-state-create-info-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineCoverageReductionStateCreateInfoNV"
+      (pipeline-coverage-reduction-state-create-info-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10958,10 +11924,12 @@
     (coveragereductionmode :name "coverageReductionMode" :type
      "VkCoverageReductionModeNV"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkFramebufferMixedSamplesCombinationNV" (framebuffer-mixed-samples-combination-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkFramebufferMixedSamplesCombinationNV"
+      (framebuffer-mixed-samples-combination-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10974,10 +11942,12 @@
     (depthstencilsamples :name "depthStencilSamples" :type "VkSampleCountFlags")
     (colorsamples :name "colorSamples" :type "VkSampleCountFlags"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT" (physical-device-fragment-shader-interlock-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT"
+      (physical-device-fragment-shader-interlock-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -10990,10 +11960,12 @@
     (fragmentshadershadingrateinterlock :name
      "fragmentShaderShadingRateInterlock" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceYcbcrImageArraysFeaturesEXT" (physical-device-ycbcr-image-arrays-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceYcbcrImageArraysFeaturesEXT"
+      (physical-device-ycbcr-image-arrays-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11001,10 +11973,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (ycbcrimagearrays :name "ycbcrImageArrays" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceProvokingVertexFeaturesEXT" (physical-device-provoking-vertex-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceProvokingVertexFeaturesEXT"
+      (physical-device-provoking-vertex-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11014,10 +11988,12 @@
     (transformfeedbackpreservesprovokingvertex :name
      "transformFeedbackPreservesProvokingVertex" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceProvokingVertexPropertiesEXT" (physical-device-provoking-vertex-properties-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceProvokingVertexPropertiesEXT"
+      (physical-device-provoking-vertex-properties-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11028,10 +12004,12 @@
     (transformfeedbackpreservestrianglefanprovokingvertex :name
      "transformFeedbackPreservesTriangleFanProvokingVertex" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineRasterizationProvokingVertexStateCreateInfoEXT" (pipeline-rasterization-provoking-vertex-state-create-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineRasterizationProvokingVertexStateCreateInfoEXT"
+      (pipeline-rasterization-provoking-vertex-state-create-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11040,10 +12018,12 @@
     (provokingvertexmode :name "provokingVertexMode" :type
      "VkProvokingVertexModeEXT"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkHeadlessSurfaceCreateInfoEXT" (headless-surface-create-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkHeadlessSurfaceCreateInfoEXT"
+      (headless-surface-create-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11051,10 +12031,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkHeadlessSurfaceCreateFlagsEXT"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceLineRasterizationFeaturesEXT" (physical-device-line-rasterization-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceLineRasterizationFeaturesEXT"
+      (physical-device-line-rasterization-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11067,10 +12049,12 @@
     (stippledbresenhamlines :name "stippledBresenhamLines" :type "VkBool32")
     (stippledsmoothlines :name "stippledSmoothLines" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceLineRasterizationPropertiesEXT" (physical-device-line-rasterization-properties-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceLineRasterizationPropertiesEXT"
+      (physical-device-line-rasterization-properties-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11078,10 +12062,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (linesubpixelprecisionbits :name "lineSubPixelPrecisionBits" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineRasterizationLineStateCreateInfoEXT" (pipeline-rasterization-line-state-create-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineRasterizationLineStateCreateInfoEXT"
+      (pipeline-rasterization-line-state-create-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11093,10 +12079,12 @@
     (linestipplefactor :name "lineStippleFactor" :type uint32)
     (linestipplepattern :name "lineStipplePattern" :type uint16))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceShaderAtomicFloatFeaturesEXT" (physical-device-shader-atomic-float-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceShaderAtomicFloatFeaturesEXT"
+      (physical-device-shader-atomic-float-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11127,10 +12115,12 @@
     (sparseimagefloat32atomicadd :name "sparseImageFloat32AtomicAdd" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceIndexTypeUint8FeaturesEXT" (physical-device-index-type-uint-8-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceIndexTypeUint8FeaturesEXT"
+      (physical-device-index-type-uint-8-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11138,10 +12128,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (indextypeuint8 :name "indexTypeUint8" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceExtendedDynamicStateFeaturesEXT" (physical-device-extended-dynamic-state-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceExtendedDynamicStateFeaturesEXT"
+      (physical-device-extended-dynamic-state-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11149,10 +12141,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (extendeddynamicstate :name "extendedDynamicState" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT" (physical-device-shader-atomic-float-2-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT"
+      (physical-device-shader-atomic-float-2-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11183,10 +12177,12 @@
     (sparseimagefloat32atomicminmax :name "sparseImageFloat32AtomicMinMax"
      :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV" (physical-device-device-generated-commands-properties-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV"
+      (physical-device-device-generated-commands-properties-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11210,10 +12206,12 @@
     (minindirectcommandsbufferoffsetalignment :name
      "minIndirectCommandsBufferOffsetAlignment" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV" (physical-device-device-generated-commands-features-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV"
+      (physical-device-device-generated-commands-features-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11221,10 +12219,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (devicegeneratedcommands :name "deviceGeneratedCommands" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkGraphicsShaderGroupCreateInfoNV" (graphics-shader-group-create-info-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkGraphicsShaderGroupCreateInfoNV"
+      (graphics-shader-group-create-info-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11259,10 +12259,12 @@
      ((ptessellationstate-arg)
       (set-pointer ptessellationstate ptessellationstate-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkGraphicsPipelineShaderGroupsCreateInfoNV" (graphics-pipeline-shader-groups-create-info-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkGraphicsPipelineShaderGroupsCreateInfoNV"
+      (graphics-pipeline-shader-groups-create-info-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11298,42 +12300,52 @@
       (set-array vkpipeline ppipelines ppipelines-arg ppipelines-index :dynamic
        t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkBindShaderGroupIndirectCommandNV" (bind-shader-group-indirect-command-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkBindShaderGroupIndirectCommandNV"
+      (bind-shader-group-indirect-command-nv)
       (:default-create :default-get :default-set)
     (groupindex :name "groupIndex" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkBindIndexBufferIndirectCommandNV" (bind-index-buffer-indirect-command-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkBindIndexBufferIndirectCommandNV"
+      (bind-index-buffer-indirect-command-nv)
       (:default-create :default-get :default-set)
     (bufferaddress :name "bufferAddress" :type "VkDeviceAddress")
     (size :name size :type uint32)
     (indextype :name "indexType" :type "VkIndexType"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkBindVertexBufferIndirectCommandNV" (bind-vertex-buffer-indirect-command-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkBindVertexBufferIndirectCommandNV"
+      (bind-vertex-buffer-indirect-command-nv)
       (:default-create :default-get :default-set)
     (bufferaddress :name "bufferAddress" :type "VkDeviceAddress")
     (size :name size :type uint32)
     (stride :name stride :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSetStateFlagsIndirectCommandNV" (set-state-flags-indirect-command-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSetStateFlagsIndirectCommandNV"
+      (set-state-flags-indirect-command-nv)
       (:default-create :default-get :default-set)
     (data :name data :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkIndirectCommandsStreamNV" (indirect-commands-stream-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkIndirectCommandsStreamNV"
+      (indirect-commands-stream-nv)
       (:default-create :default-get :default-set)
     (buffer :name buffer :type "VkBuffer" :create
      ((buffer-arg) (create-pointer buffer buffer-arg)) :get
@@ -11341,10 +12353,12 @@
      ((buffer-arg) (set-pointer buffer buffer-arg)))
     (offset :name offset :type "VkDeviceSize"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkIndirectCommandsLayoutTokenNV" (indirect-commands-layout-token-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkIndirectCommandsLayoutTokenNV"
+      (indirect-commands-layout-token-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11390,10 +12404,12 @@
      ((pindextypevalues-arg)
       (set-pointer pindextypevalues pindextypevalues-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkIndirectCommandsLayoutCreateInfoNV" (indirect-commands-layout-create-info-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkIndirectCommandsLayoutCreateInfoNV"
+      (indirect-commands-layout-create-info-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11429,10 +12445,12 @@
       (set-array :uint32 pstreamstrides pstreamstrides-arg pstreamstrides-index
        :dynamic t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkGeneratedCommandsInfoNV" (generated-commands-info-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkGeneratedCommandsInfoNV"
+      (generated-commands-info-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11488,10 +12506,12 @@
       (set-pointer sequencesindexbuffer sequencesindexbuffer-arg)))
     (sequencesindexoffset :name "sequencesIndexOffset" :type "VkDeviceSize"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkGeneratedCommandsMemoryRequirementsInfoNV" (generated-commands-memory-requirements-info-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkGeneratedCommandsMemoryRequirementsInfoNV"
+      (generated-commands-memory-requirements-info-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11511,10 +12531,12 @@
       (set-pointer indirectcommandslayout indirectcommandslayout-arg)))
     (maxsequencescount :name "maxSequencesCount" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceInheritedViewportScissorFeaturesNV" (physical-device-inherited-viewport-scissor-features-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceInheritedViewportScissorFeaturesNV"
+      (physical-device-inherited-viewport-scissor-features-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11523,10 +12545,12 @@
     (inheritedviewportscissor2d :name "inheritedViewportScissor2D" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkCommandBufferInheritanceViewportScissorInfoNV" (command-buffer-inheritance-viewport-scissor-info-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkCommandBufferInheritanceViewportScissorInfoNV"
+      (command-buffer-inheritance-viewport-scissor-info-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11548,10 +12572,12 @@
       (set-array (:struct vkviewport) pviewportdepths pviewportdepths-arg
        pviewportdepths-index :dynamic t :pointers ("VkViewport")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT" (physical-device-texel-buffer-alignment-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT"
+      (physical-device-texel-buffer-alignment-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11559,10 +12585,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (texelbufferalignment :name "texelBufferAlignment" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkRenderPassTransformBeginInfoQCOM" (render-pass-transform-begin-info-q-c-o-m)
+  (more-cffi:def-foreign-struct doc-file
+      "VkRenderPassTransformBeginInfoQCOM"
+      (render-pass-transform-begin-info-q-c-o-m)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11570,10 +12598,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (transform :name transform :type "VkSurfaceTransformFlagBitsKHR"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkCommandBufferInheritanceRenderPassTransformInfoQCOM" (command-buffer-inheritance-render-pass-transform-info-q-c-o-m)
+  (more-cffi:def-foreign-struct doc-file
+      "VkCommandBufferInheritanceRenderPassTransformInfoQCOM"
+      (command-buffer-inheritance-render-pass-transform-info-q-c-o-m)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11587,10 +12617,12 @@
      ((renderarea-arg)
       (more-cffi:copy renderarea renderarea-arg '(:struct vkrect2d)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceDeviceMemoryReportFeaturesEXT" (physical-device-device-memory-report-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceDeviceMemoryReportFeaturesEXT"
+      (physical-device-device-memory-report-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11598,10 +12630,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (devicememoryreport :name "deviceMemoryReport" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDeviceMemoryReportCallbackDataEXT" (device-memory-report-callback-data-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDeviceMemoryReportCallbackDataEXT"
+      (device-memory-report-callback-data-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11615,10 +12649,12 @@
     (objecthandle :name "objectHandle" :type uint64)
     (heapindex :name "heapIndex" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDeviceDeviceMemoryReportCreateInfoEXT" (device-device-memory-report-create-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDeviceDeviceMemoryReportCreateInfoEXT"
+      (device-device-memory-report-create-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11632,10 +12668,12 @@
      (nil (get-pointer puserdata)) :set
      ((puserdata-arg) (set-pointer puserdata puserdata-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceRobustness2FeaturesEXT" (physical-device-robustness-2-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceRobustness2FeaturesEXT"
+      (physical-device-robustness-2-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11645,10 +12683,12 @@
     (robustimageaccess2 :name "robustImageAccess2" :type "VkBool32")
     (nulldescriptor :name "nullDescriptor" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceRobustness2PropertiesEXT" (physical-device-robustness-2-properties-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceRobustness2PropertiesEXT"
+      (physical-device-robustness-2-properties-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11659,10 +12699,12 @@
     (robustuniformbufferaccesssizealignment :name
      "robustUniformBufferAccessSizeAlignment" :type "VkDeviceSize"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSamplerCustomBorderColorCreateInfoEXT" (sampler-custom-border-color-create-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSamplerCustomBorderColorCreateInfoEXT"
+      (sampler-custom-border-color-create-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11679,10 +12721,12 @@
                       '(:union vkclearcolorvalue))))
     (format :name format :type "VkFormat"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceCustomBorderColorPropertiesEXT" (physical-device-custom-border-color-properties-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceCustomBorderColorPropertiesEXT"
+      (physical-device-custom-border-color-properties-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11691,10 +12735,12 @@
     (maxcustombordercolorsamplers :name "maxCustomBorderColorSamplers" :type
      uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceCustomBorderColorFeaturesEXT" (physical-device-custom-border-color-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceCustomBorderColorFeaturesEXT"
+      (physical-device-custom-border-color-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11704,10 +12750,12 @@
     (custombordercolorwithoutformat :name "customBorderColorWithoutFormat"
      :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceDiagnosticsConfigFeaturesNV" (physical-device-diagnostics-config-features-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceDiagnosticsConfigFeaturesNV"
+      (physical-device-diagnostics-config-features-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11715,10 +12763,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (diagnosticsconfig :name "diagnosticsConfig" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDeviceDiagnosticsConfigCreateInfoNV" (device-diagnostics-config-create-info-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDeviceDiagnosticsConfigCreateInfoNV"
+      (device-diagnostics-config-create-info-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11726,10 +12776,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkDeviceDiagnosticsConfigFlagsNV"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT" (physical-device-graphics-pipeline-library-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT"
+      (physical-device-graphics-pipeline-library-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11737,10 +12789,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (graphicspipelinelibrary :name "graphicsPipelineLibrary" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT" (physical-device-graphics-pipeline-library-properties-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT"
+      (physical-device-graphics-pipeline-library-properties-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11752,10 +12806,12 @@
      "graphicsPipelineLibraryIndependentInterpolationDecoration" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkGraphicsPipelineLibraryCreateInfoEXT" (graphics-pipeline-library-create-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkGraphicsPipelineLibraryCreateInfoEXT"
+      (graphics-pipeline-library-create-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11763,10 +12819,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkGraphicsPipelineLibraryFlagsEXT"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD" (physical-device-shader-early-and-late-fragment-tests-features-amd)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD"
+      (physical-device-shader-early-and-late-fragment-tests-features-amd)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11775,10 +12833,12 @@
     (shaderearlyandlatefragmenttests :name "shaderEarlyAndLateFragmentTests"
      :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV" (physical-device-fragment-shading-rate-enums-features-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV"
+      (physical-device-fragment-shading-rate-enums-features-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11790,10 +12850,12 @@
     (noinvocationfragmentshadingrates :name "noInvocationFragmentShadingRates"
      :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV" (physical-device-fragment-shading-rate-enums-properties-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV"
+      (physical-device-fragment-shading-rate-enums-properties-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11802,10 +12864,12 @@
     (maxfragmentshadingrateinvocationcount :name
      "maxFragmentShadingRateInvocationCount" :type "VkSampleCountFlagBits"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineFragmentShadingRateEnumStateCreateInfoNV" (pipeline-fragment-shading-rate-enum-state-create-info-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineFragmentShadingRateEnumStateCreateInfoNV"
+      (pipeline-fragment-shading-rate-enum-state-create-info-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11828,10 +12892,12 @@
       (set-array vkfragmentshadingratecombineropkhr combinerops combinerops-arg
        combinerops-index :dynamic nil :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-union doc-file "VkDeviceOrHostAddressConstKHR" (device-or-host-address-const-khr)
+  (more-cffi:def-foreign-union doc-file
+      "VkDeviceOrHostAddressConstKHR"
+      (device-or-host-address-const-khr)
       (:default-create :default-get :default-set)
     (deviceaddress :name "deviceAddress" :type "VkDeviceAddress")
     (hostaddress :name "hostAddress" :type void :init-form nil :create
@@ -11839,10 +12905,12 @@
      (nil (get-pointer hostaddress)) :set
      ((hostaddress-arg) (set-pointer hostaddress hostaddress-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkAccelerationStructureGeometryMotionTrianglesDataNV" (acceleration-structure-geometry-motion-triangles-data-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkAccelerationStructureGeometryMotionTrianglesDataNV"
+      (acceleration-structure-geometry-motion-triangles-data-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11858,10 +12926,12 @@
       (more-cffi:copy vertexdata vertexdata-arg
                       '(:union vkdeviceorhostaddressconstkhr)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkAccelerationStructureMotionInfoNV" (acceleration-structure-motion-info-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkAccelerationStructureMotionInfoNV"
+      (acceleration-structure-motion-info-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -11870,10 +12940,12 @@
     (maxinstances :name "maxInstances" :type uint32)
     (flags :name flags :type "VkAccelerationStructureMotionInfoFlagsNV"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkAccelerationStructureMatrixMotionInstanceNV" (acceleration-structure-matrix-motion-instance-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkAccelerationStructureMatrixMotionInstanceNV"
+      (acceleration-structure-matrix-motion-instance-nv)
       (:default-create :default-get :default-set)
     (transformt0 :pointer t :name "transformT0" :type "VkTransformMatrixKHR"
      :create
@@ -11899,10 +12971,12 @@
     (accelerationstructurereference :name "accelerationStructureReference"
      :type uint64))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSRTDataNV" (s-r-t-data-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSRTDataNV"
+      (s-r-t-data-nv)
       (:default-create :default-get :default-set)
     (sx :name sx :type float)
     (a :name a :type float)
@@ -11921,10 +12995,12 @@
     (ty :name ty :type float)
     (tz :name tz :type float))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkAccelerationStructureSRTMotionInstanceNV" (acceleration-structure-s-r-t-motion-instance-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkAccelerationStructureSRTMotionInstanceNV"
+      (acceleration-structure-s-r-t-motion-instance-nv)
       (:default-create :default-get :default-set)
     (transformt0 :pointer t :name "transformT0" :type "VkSRTDataNV" :create
      ((transformt0-arg)
@@ -11944,10 +13020,12 @@
     (accelerationstructurereference :name "accelerationStructureReference"
      :type uint64))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-union doc-file "VkAccelerationStructureMotionInstanceDataNV" (acceleration-structure-motion-instance-data-nv)
+  (more-cffi:def-foreign-union doc-file
+      "VkAccelerationStructureMotionInstanceDataNV"
+      (acceleration-structure-motion-instance-data-nv)
       (:default-create :default-get :default-set)
     (staticinstance :pointer t :name "staticInstance" :type
      "VkAccelerationStructureInstanceKHR" :create
@@ -11979,10 +13057,12 @@
       (more-cffi:copy srtmotioninstance srtmotioninstance-arg
                       '(:struct vkaccelerationstructuresrtmotioninstancenv)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkAccelerationStructureMotionInstanceNV" (acceleration-structure-motion-instance-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkAccelerationStructureMotionInstanceNV"
+      (acceleration-structure-motion-instance-nv)
       (:default-create :default-get :default-set)
     (type :name type :type "VkAccelerationStructureMotionInstanceTypeNV")
     (flags :name flags :type "VkAccelerationStructureMotionInstanceFlagsNV")
@@ -11996,10 +13076,12 @@
       (more-cffi:copy data data-arg
                       '(:union vkaccelerationstructuremotioninstancedatanv)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceRayTracingMotionBlurFeaturesNV" (physical-device-ray-tracing-motion-blur-features-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceRayTracingMotionBlurFeaturesNV"
+      (physical-device-ray-tracing-motion-blur-features-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12009,10 +13091,12 @@
     (raytracingmotionblurpipelinetraceraysindirect :name
      "rayTracingMotionBlurPipelineTraceRaysIndirect" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT" (physical-device-ycbcr-2-plane-4-4-4-formats-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT"
+      (physical-device-ycbcr-2-plane-4-4-4-formats-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12020,10 +13104,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (ycbcr2plane444formats :name "ycbcr2plane444Formats" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceFragmentDensityMap2FeaturesEXT" (physical-device-fragment-density-map-2-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceFragmentDensityMap2FeaturesEXT"
+      (physical-device-fragment-density-map-2-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12032,10 +13118,12 @@
     (fragmentdensitymapdeferred :name "fragmentDensityMapDeferred" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceFragmentDensityMap2PropertiesEXT" (physical-device-fragment-density-map-2-properties-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceFragmentDensityMap2PropertiesEXT"
+      (physical-device-fragment-density-map-2-properties-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12048,10 +13136,12 @@
     (maxdescriptorsetsubsampledsamplers :name
      "maxDescriptorSetSubsampledSamplers" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkCopyCommandTransformInfoQCOM" (copy-command-transform-info-q-c-o-m)
+  (more-cffi:def-foreign-struct doc-file
+      "VkCopyCommandTransformInfoQCOM"
+      (copy-command-transform-info-q-c-o-m)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12059,10 +13149,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (transform :name transform :type "VkSurfaceTransformFlagBitsKHR"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceImageCompressionControlFeaturesEXT" (physical-device-image-compression-control-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceImageCompressionControlFeaturesEXT"
+      (physical-device-image-compression-control-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12070,10 +13162,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (imagecompressioncontrol :name "imageCompressionControl" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImageCompressionControlEXT" (image-compression-control-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImageCompressionControlEXT"
+      (image-compression-control-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12096,10 +13190,12 @@
       (set-array vkimagecompressionfixedrateflagsext pfixedrateflags
        pfixedrateflags-arg pfixedrateflags-index :dynamic t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSubresourceLayout2EXT" (subresource-layout-2-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSubresourceLayout2EXT"
+      (subresource-layout-2-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12115,10 +13211,12 @@
       (more-cffi:copy subresourcelayout subresourcelayout-arg
                       '(:struct vksubresourcelayout)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImageSubresource2EXT" (image-subresource-2-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImageSubresource2EXT"
+      (image-subresource-2-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12134,10 +13232,12 @@
       (more-cffi:copy imagesubresource imagesubresource-arg
                       '(:struct vkimagesubresource)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImageCompressionPropertiesEXT" (image-compression-properties-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImageCompressionPropertiesEXT"
+      (image-compression-properties-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12148,10 +13248,12 @@
     (imagecompressionfixedrateflags :name "imageCompressionFixedRateFlags"
      :type "VkImageCompressionFixedRateFlagsEXT"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDevice4444FormatsFeaturesEXT" (physical-device-4-4-4-4-formats-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDevice4444FormatsFeaturesEXT"
+      (physical-device-4-4-4-4-formats-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12160,10 +13262,12 @@
     (formata4r4g4b4 :name "formatA4R4G4B4" :type "VkBool32")
     (formata4b4g4r4 :name "formatA4B4G4R4" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM" (physical-device-rasterization-order-attachment-access-features-a-r-m)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM"
+      (physical-device-rasterization-order-attachment-access-features-a-r-m)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12176,10 +13280,12 @@
     (rasterizationorderstencilattachmentaccess :name
      "rasterizationOrderStencilAttachmentAccess" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT" (physical-device-r-g-b-a-1-0-x-6-formats-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT"
+      (physical-device-r-g-b-a-1-0-x-6-formats-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12188,10 +13294,12 @@
     (formatrgba10x6withoutycbcrsampler :name
      "formatRgba10x6WithoutYCbCrSampler" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE" (physical-device-mutable-descriptor-type-features-valve)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE"
+      (physical-device-mutable-descriptor-type-features-valve)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12199,10 +13307,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (mutabledescriptortype :name "mutableDescriptorType" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkMutableDescriptorTypeListVALVE" (mutable-descriptor-type-list-valve)
+  (more-cffi:def-foreign-struct doc-file
+      "VkMutableDescriptorTypeListVALVE"
+      (mutable-descriptor-type-list-valve)
       (:default-create :default-get :default-set)
     (descriptortypecount :name "descriptorTypeCount" :type uint32)
     (pdescriptortypes :name "pDescriptorTypes" :type "VkDescriptorType"
@@ -12219,10 +13329,12 @@
       (set-array vkdescriptortype pdescriptortypes pdescriptortypes-arg
        pdescriptortypes-index :dynamic t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkMutableDescriptorTypeCreateInfoVALVE" (mutable-descriptor-type-create-info-valve)
+  (more-cffi:def-foreign-struct doc-file
+      "VkMutableDescriptorTypeCreateInfoVALVE"
+      (mutable-descriptor-type-create-info-valve)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12250,10 +13362,12 @@
        pmutabledescriptortypelists-index :dynamic t :pointers
        ("VkMutableDescriptorTypeListVALVE")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT" (physical-device-vertex-input-dynamic-state-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT"
+      (physical-device-vertex-input-dynamic-state-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12261,10 +13375,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (vertexinputdynamicstate :name "vertexInputDynamicState" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkVertexInputBindingDescription2EXT" (vertex-input-binding-description-2-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkVertexInputBindingDescription2EXT"
+      (vertex-input-binding-description-2-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12275,10 +13391,12 @@
     (inputrate :name "inputRate" :type "VkVertexInputRate")
     (divisor :name divisor :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkVertexInputAttributeDescription2EXT" (vertex-input-attribute-description-2-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkVertexInputAttributeDescription2EXT"
+      (vertex-input-attribute-description-2-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12289,10 +13407,12 @@
     (format :name format :type "VkFormat")
     (offset :name offset :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceDrmPropertiesEXT" (physical-device-drm-properties-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceDrmPropertiesEXT"
+      (physical-device-drm-properties-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12305,10 +13425,12 @@
     (rendermajor :name "renderMajor" :type int64)
     (renderminor :name "renderMinor" :type int64))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceDepthClipControlFeaturesEXT" (physical-device-depth-clip-control-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceDepthClipControlFeaturesEXT"
+      (physical-device-depth-clip-control-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12316,10 +13438,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (depthclipcontrol :name "depthClipControl" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineViewportDepthClipControlCreateInfoEXT" (pipeline-viewport-depth-clip-control-create-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineViewportDepthClipControlCreateInfoEXT"
+      (pipeline-viewport-depth-clip-control-create-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12327,10 +13451,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (negativeonetoone :name "negativeOneToOne" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT" (physical-device-primitive-topology-list-restart-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT"
+      (physical-device-primitive-topology-list-restart-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12341,10 +13467,12 @@
     (primitivetopologypatchlistrestart :name
      "primitiveTopologyPatchListRestart" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSubpassShadingPipelineCreateInfoHUAWEI" (subpass-shading-pipeline-create-info-huawei)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSubpassShadingPipelineCreateInfoHUAWEI"
+      (subpass-shading-pipeline-create-info-huawei)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12356,10 +13484,12 @@
      ((renderpass-arg) (set-pointer renderpass renderpass-arg)))
     (subpass :name subpass :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceSubpassShadingFeaturesHUAWEI" (physical-device-subpass-shading-features-huawei)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceSubpassShadingFeaturesHUAWEI"
+      (physical-device-subpass-shading-features-huawei)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12367,10 +13497,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (subpassshading :name "subpassShading" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceSubpassShadingPropertiesHUAWEI" (physical-device-subpass-shading-properties-huawei)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceSubpassShadingPropertiesHUAWEI"
+      (physical-device-subpass-shading-properties-huawei)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12379,10 +13511,12 @@
     (maxsubpassshadingworkgroupsizeaspectratio :name
      "maxSubpassShadingWorkgroupSizeAspectRatio" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceInvocationMaskFeaturesHUAWEI" (physical-device-invocation-mask-features-huawei)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceInvocationMaskFeaturesHUAWEI"
+      (physical-device-invocation-mask-features-huawei)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12390,10 +13524,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (invocationmask :name "invocationMask" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkMemoryGetRemoteAddressInfoNV" (memory-get-remote-address-info-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkMemoryGetRemoteAddressInfoNV"
+      (memory-get-remote-address-info-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12405,10 +13541,12 @@
      ((memory-arg) (set-pointer memory memory-arg)))
     (handletype :name "handleType" :type "VkExternalMemoryHandleTypeFlagBits"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceExternalMemoryRDMAFeaturesNV" (physical-device-external-memory-r-d-m-a-features-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceExternalMemoryRDMAFeaturesNV"
+      (physical-device-external-memory-r-d-m-a-features-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12416,10 +13554,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (externalmemoryrdma :name "externalMemoryRDMA" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelinePropertiesIdentifierEXT" (pipeline-properties-identifier-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelinePropertiesIdentifierEXT"
+      (pipeline-properties-identifier-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12427,10 +13567,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (pipelineidentifier :name "pipelineIdentifier" :type uint8))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDevicePipelinePropertiesFeaturesEXT" (physical-device-pipeline-properties-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDevicePipelinePropertiesFeaturesEXT"
+      (physical-device-pipeline-properties-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12439,10 +13581,12 @@
     (pipelinepropertiesidentifier :name "pipelinePropertiesIdentifier" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceExtendedDynamicState2FeaturesEXT" (physical-device-extended-dynamic-state-2-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceExtendedDynamicState2FeaturesEXT"
+      (physical-device-extended-dynamic-state-2-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12454,10 +13598,12 @@
     (extendeddynamicstate2patchcontrolpoints :name
      "extendedDynamicState2PatchControlPoints" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceColorWriteEnableFeaturesEXT" (physical-device-color-write-enable-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceColorWriteEnableFeaturesEXT"
+      (physical-device-color-write-enable-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12465,10 +13611,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (colorwriteenable :name "colorWriteEnable" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPipelineColorWriteCreateInfoEXT" (pipeline-color-write-create-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPipelineColorWriteCreateInfoEXT"
+      (pipeline-color-write-create-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12489,10 +13637,12 @@
       (set-array vkbool32 pcolorwriteenables pcolorwriteenables-arg
        pcolorwriteenables-index :dynamic t :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT" (physical-device-primitives-generated-query-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT"
+      (physical-device-primitives-generated-query-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12504,10 +13654,12 @@
     (primitivesgeneratedquerywithnonzerostreams :name
      "primitivesGeneratedQueryWithNonZeroStreams" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceImageViewMinLodFeaturesEXT" (physical-device-image-view-min-lod-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceImageViewMinLodFeaturesEXT"
+      (physical-device-image-view-min-lod-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12515,10 +13667,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (minlod :name "minLod" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkImageViewMinLodCreateInfoEXT" (image-view-min-lod-create-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkImageViewMinLodCreateInfoEXT"
+      (image-view-min-lod-create-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12526,10 +13680,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (minlod :name "minLod" :type float))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceMultiDrawFeaturesEXT" (physical-device-multi-draw-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceMultiDrawFeaturesEXT"
+      (physical-device-multi-draw-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12537,10 +13693,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (multidraw :name "multiDraw" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceMultiDrawPropertiesEXT" (physical-device-multi-draw-properties-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceMultiDrawPropertiesEXT"
+      (physical-device-multi-draw-properties-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12548,27 +13706,33 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (maxmultidrawcount :name "maxMultiDrawCount" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkMultiDrawInfoEXT" (multi-draw-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkMultiDrawInfoEXT"
+      (multi-draw-info-ext)
       (:default-create :default-get :default-set)
     (firstvertex :name "firstVertex" :type uint32)
     (vertexcount :name "vertexCount" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkMultiDrawIndexedInfoEXT" (multi-draw-indexed-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkMultiDrawIndexedInfoEXT"
+      (multi-draw-indexed-info-ext)
       (:default-create :default-get :default-set)
     (firstindex :name "firstIndex" :type uint32)
     (indexcount :name "indexCount" :type uint32)
     (vertexoffset :name "vertexOffset" :type int32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceImage2DViewOf3DFeaturesEXT" (physical-device-image-2d-view-of-3d-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceImage2DViewOf3DFeaturesEXT"
+      (physical-device-image-2d-view-of-3d-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12577,10 +13741,12 @@
     (image2dviewof3d :name "image2DViewOf3D" :type "VkBool32")
     (sampler2dviewof3d :name "sampler2DViewOf3D" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceBorderColorSwizzleFeaturesEXT" (physical-device-border-color-swizzle-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceBorderColorSwizzleFeaturesEXT"
+      (physical-device-border-color-swizzle-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12590,10 +13756,12 @@
     (bordercolorswizzlefromimage :name "borderColorSwizzleFromImage" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSamplerBorderColorComponentMappingCreateInfoEXT" (sampler-border-color-component-mapping-create-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSamplerBorderColorComponentMappingCreateInfoEXT"
+      (sampler-border-color-component-mapping-create-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12607,10 +13775,12 @@
       (more-cffi:copy components components-arg '(:struct vkcomponentmapping))))
     (srgb :name srgb :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT" (physical-device-pageable-device-local-memory-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT"
+      (physical-device-pageable-device-local-memory-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12619,21 +13789,26 @@
     (pageabledevicelocalmemory :name "pageableDeviceLocalMemory" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE" (physical-device-descriptor-set-host-mapping-features-valve)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE"
+      (physical-device-descriptor-set-host-mapping-features-valve)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
-    (descriptorsethostmapping :name "descriptorSetHostMapping" :type "VkBool32"))
+    (descriptorsethostmapping :name "descriptorSetHostMapping" :type
+     "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDescriptorSetBindingReferenceVALVE" (descriptor-set-binding-reference-valve)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDescriptorSetBindingReferenceVALVE"
+      (descriptor-set-binding-reference-valve)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12648,10 +13823,12 @@
       (set-pointer descriptorsetlayout descriptorsetlayout-arg)))
     (binding :name binding :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkDescriptorSetLayoutHostMappingInfoVALVE" (descriptor-set-layout-host-mapping-info-valve)
+  (more-cffi:def-foreign-struct doc-file
+      "VkDescriptorSetLayoutHostMappingInfoVALVE"
+      (descriptor-set-layout-host-mapping-info-valve)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12660,21 +13837,26 @@
     (descriptoroffset :name "descriptorOffset" :type size)
     (descriptorsize :name "descriptorSize" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM" (physical-device-fragment-density-map-offset-features-q-c-o-m)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM"
+      (physical-device-fragment-density-map-offset-features-q-c-o-m)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
-    (fragmentdensitymapoffset :name "fragmentDensityMapOffset" :type "VkBool32"))
+    (fragmentdensitymapoffset :name "fragmentDensityMapOffset" :type
+     "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM" (physical-device-fragment-density-map-offset-properties-q-c-o-m)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM"
+      (physical-device-fragment-density-map-offset-properties-q-c-o-m)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12692,10 +13874,12 @@
                       fragmentdensityoffsetgranularity-arg
                       '(:struct vkextent2d)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkSubpassFragmentDensityMapOffsetEndInfoQCOM" (subpass-fragment-density-map-offset-end-info-q-c-o-m)
+  (more-cffi:def-foreign-struct doc-file
+      "VkSubpassFragmentDensityMapOffsetEndInfoQCOM"
+      (subpass-fragment-density-map-offset-end-info-q-c-o-m)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12718,10 +13902,12 @@
        pfragmentdensityoffsets-arg pfragmentdensityoffsets-index :dynamic t
        :pointers ("VkOffset2D")))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceLinearColorAttachmentFeaturesNV" (physical-device-linear-color-attachment-features-nv)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceLinearColorAttachmentFeaturesNV"
+      (physical-device-linear-color-attachment-features-nv)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12729,10 +13915,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (linearcolorattachment :name "linearColorAttachment" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT" (physical-device-image-compression-control-swapchain-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT"
+      (physical-device-image-compression-control-swapchain-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12741,10 +13929,12 @@
     (imagecompressioncontrolswapchain :name "imageCompressionControlSwapchain"
      :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT" (physical-device-subpass-merge-feedback-features-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT"
+      (physical-device-subpass-merge-feedback-features-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12752,10 +13942,12 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (subpassmergefeedback :name "subpassMergeFeedback" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkRenderPassCreationControlEXT" (render-pass-creation-control-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkRenderPassCreationControlEXT"
+      (render-pass-creation-control-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12763,17 +13955,21 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (disallowmerging :name "disallowMerging" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkRenderPassCreationFeedbackInfoEXT" (render-pass-creation-feedback-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkRenderPassCreationFeedbackInfoEXT"
+      (render-pass-creation-feedback-info-ext)
       (:default-create :default-get :default-set)
     (postmergesubpasscount :name "postMergeSubpassCount" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkRenderPassCreationFeedbackCreateInfoEXT" (render-pass-creation-feedback-create-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkRenderPassCreationFeedbackCreateInfoEXT"
+      (render-pass-creation-feedback-create-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12787,20 +13983,24 @@
      ((prenderpassfeedback-arg)
       (set-pointer prenderpassfeedback prenderpassfeedback-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkRenderPassSubpassFeedbackInfoEXT" (render-pass-subpass-feedback-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkRenderPassSubpassFeedbackInfoEXT"
+      (render-pass-subpass-feedback-info-ext)
       (:default-create :default-get :default-set)
     (subpassmergestatus :name "subpassMergeStatus" :type
      "VkSubpassMergeStatusEXT")
     (description :name description :type char)
     (postmergeindex :name "postMergeIndex" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkRenderPassSubpassFeedbackCreateInfoEXT" (render-pass-subpass-feedback-create-info-ext)
+  (more-cffi:def-foreign-struct doc-file
+      "VkRenderPassSubpassFeedbackCreateInfoEXT"
+      (render-pass-subpass-feedback-create-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12814,10 +14014,12 @@
      ((psubpassfeedback-arg)
       (set-pointer psubpassfeedback psubpassfeedback-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-union doc-file "VkDeviceOrHostAddressKHR" (device-or-host-address-khr)
+  (more-cffi:def-foreign-union doc-file
+      "VkDeviceOrHostAddressKHR"
+      (device-or-host-address-khr)
       (:default-create :default-get :default-set)
     (deviceaddress :name "deviceAddress" :type "VkDeviceAddress")
     (hostaddress :name "hostAddress" :type void :init-form nil :create
@@ -12825,20 +14027,24 @@
      (nil (get-pointer hostaddress)) :set
      ((hostaddress-arg) (set-pointer hostaddress hostaddress-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkAccelerationStructureBuildRangeInfoKHR" (acceleration-structure-build-range-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkAccelerationStructureBuildRangeInfoKHR"
+      (acceleration-structure-build-range-info-khr)
       (:default-create :default-get :default-set)
     (primitivecount :name "primitiveCount" :type uint32)
     (primitiveoffset :name "primitiveOffset" :type uint32)
     (firstvertex :name "firstVertex" :type uint32)
     (transformoffset :name "transformOffset" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkAccelerationStructureGeometryTrianglesDataKHR" (acceleration-structure-geometry-triangles-data-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkAccelerationStructureGeometryTrianglesDataKHR"
+      (acceleration-structure-geometry-triangles-data-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12876,10 +14082,12 @@
       (more-cffi:copy transformdata transformdata-arg
                       '(:union vkdeviceorhostaddressconstkhr)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkAccelerationStructureGeometryAabbsDataKHR" (acceleration-structure-geometry-aabbs-data-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkAccelerationStructureGeometryAabbsDataKHR"
+      (acceleration-structure-geometry-aabbs-data-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12893,10 +14101,12 @@
       (more-cffi:copy data data-arg '(:union vkdeviceorhostaddressconstkhr))))
     (stride :name stride :type "VkDeviceSize"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkAccelerationStructureGeometryInstancesDataKHR" (acceleration-structure-geometry-instances-data-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkAccelerationStructureGeometryInstancesDataKHR"
+      (acceleration-structure-geometry-instances-data-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12910,10 +14120,12 @@
      ((data-arg)
       (more-cffi:copy data data-arg '(:union vkdeviceorhostaddressconstkhr)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-union doc-file "VkAccelerationStructureGeometryDataKHR" (acceleration-structure-geometry-data-khr)
+  (more-cffi:def-foreign-union doc-file
+      "VkAccelerationStructureGeometryDataKHR"
+      (acceleration-structure-geometry-data-khr)
       (:default-create :default-get :default-set)
     (triangles :pointer t :name triangles :type
      "VkAccelerationStructureGeometryTrianglesDataKHR" :create
@@ -12947,10 +14159,12 @@
                       '(:struct
                         vkaccelerationstructuregeometryinstancesdatakhr)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkAccelerationStructureGeometryKHR" (acceleration-structure-geometry-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkAccelerationStructureGeometryKHR"
+      (acceleration-structure-geometry-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -12968,10 +14182,12 @@
                       '(:union vkaccelerationstructuregeometrydatakhr))))
     (flags :name flags :type "VkGeometryFlagsKHR"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkAccelerationStructureBuildGeometryInfoKHR" (acceleration-structure-build-geometry-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkAccelerationStructureBuildGeometryInfoKHR"
+      (acceleration-structure-build-geometry-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -13026,10 +14242,12 @@
       (more-cffi:copy scratchdata scratchdata-arg
                       '(:union vkdeviceorhostaddresskhr)))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkAccelerationStructureCreateInfoKHR" (acceleration-structure-create-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkAccelerationStructureCreateInfoKHR"
+      (acceleration-structure-create-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -13046,10 +14264,12 @@
     (type :name type :type "VkAccelerationStructureTypeKHR")
     (deviceaddress :name "deviceAddress" :type "VkDeviceAddress"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkWriteDescriptorSetAccelerationStructureKHR" (write-descriptor-set-acceleration-structure-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkWriteDescriptorSetAccelerationStructureKHR"
+      (write-descriptor-set-acceleration-structure-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -13071,10 +14291,12 @@
        paccelerationstructures-arg paccelerationstructures-index :dynamic t
        :pointers nil))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceAccelerationStructureFeaturesKHR" (physical-device-acceleration-structure-features-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceAccelerationStructureFeaturesKHR"
+      (physical-device-acceleration-structure-features-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -13090,10 +14312,12 @@
     (descriptorbindingaccelerationstructureupdateafterbind :name
      "descriptorBindingAccelerationStructureUpdateAfterBind" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceAccelerationStructurePropertiesKHR" (physical-device-acceleration-structure-properties-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceAccelerationStructurePropertiesKHR"
+      (physical-device-acceleration-structure-properties-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -13113,10 +14337,12 @@
     (minaccelerationstructurescratchoffsetalignment :name
      "minAccelerationStructureScratchOffsetAlignment" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkAccelerationStructureDeviceAddressInfoKHR" (acceleration-structure-device-address-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkAccelerationStructureDeviceAddressInfoKHR"
+      (acceleration-structure-device-address-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -13130,10 +14356,12 @@
      ((accelerationstructure-arg)
       (set-pointer accelerationstructure accelerationstructure-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkAccelerationStructureVersionInfoKHR" (acceleration-structure-version-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkAccelerationStructureVersionInfoKHR"
+      (acceleration-structure-version-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -13144,10 +14372,12 @@
      (nil (get-pointer pversiondata)) :set
      ((pversiondata-arg) (set-pointer pversiondata pversiondata-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkCopyAccelerationStructureToMemoryInfoKHR" (copy-acceleration-structure-to-memory-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkCopyAccelerationStructureToMemoryInfoKHR"
+      (copy-acceleration-structure-to-memory-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -13164,10 +14394,12 @@
       (more-cffi:copy dst dst-arg '(:union vkdeviceorhostaddresskhr))))
     (mode :name mode :type "VkCopyAccelerationStructureModeKHR"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkCopyMemoryToAccelerationStructureInfoKHR" (copy-memory-to-acceleration-structure-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkCopyMemoryToAccelerationStructureInfoKHR"
+      (copy-memory-to-acceleration-structure-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -13184,10 +14416,12 @@
      ((dst-arg) (set-pointer dst dst-arg)))
     (mode :name mode :type "VkCopyAccelerationStructureModeKHR"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkCopyAccelerationStructureInfoKHR" (copy-acceleration-structure-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkCopyAccelerationStructureInfoKHR"
+      (copy-acceleration-structure-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -13201,10 +14435,12 @@
      ((dst-arg) (set-pointer dst dst-arg)))
     (mode :name mode :type "VkCopyAccelerationStructureModeKHR"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkAccelerationStructureBuildSizesInfoKHR" (acceleration-structure-build-sizes-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkAccelerationStructureBuildSizesInfoKHR"
+      (acceleration-structure-build-sizes-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -13215,10 +14451,12 @@
     (updatescratchsize :name "updateScratchSize" :type "VkDeviceSize")
     (buildscratchsize :name "buildScratchSize" :type "VkDeviceSize"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkRayTracingShaderGroupCreateInfoKHR" (ray-tracing-shader-group-create-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkRayTracingShaderGroupCreateInfoKHR"
+      (ray-tracing-shader-group-create-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -13239,10 +14477,12 @@
       (set-pointer pshadergroupcapturereplayhandle
        pshadergroupcapturereplayhandle-arg))))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkRayTracingPipelineInterfaceCreateInfoKHR" (ray-tracing-pipeline-interface-create-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkRayTracingPipelineInterfaceCreateInfoKHR"
+      (ray-tracing-pipeline-interface-create-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -13252,10 +14492,12 @@
     (maxpipelinerayhitattributesize :name "maxPipelineRayHitAttributeSize"
      :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkRayTracingPipelineCreateInfoKHR" (ray-tracing-pipeline-create-info-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkRayTracingPipelineCreateInfoKHR"
+      (ray-tracing-pipeline-create-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -13324,10 +14566,12 @@
       (set-pointer basepipelinehandle basepipelinehandle-arg)))
     (basepipelineindex :name "basePipelineIndex" :type int32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceRayTracingPipelineFeaturesKHR" (physical-device-ray-tracing-pipeline-features-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceRayTracingPipelineFeaturesKHR"
+      (physical-device-ray-tracing-pipeline-features-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -13343,10 +14587,12 @@
     (raytraversalprimitiveculling :name "rayTraversalPrimitiveCulling" :type
      "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceRayTracingPipelinePropertiesKHR" (physical-device-ray-tracing-pipeline-properties-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceRayTracingPipelinePropertiesKHR"
+      (physical-device-ray-tracing-pipeline-properties-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -13363,28 +14609,34 @@
     (shadergrouphandlealignment :name "shaderGroupHandleAlignment" :type uint32)
     (maxrayhitattributesize :name "maxRayHitAttributeSize" :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkStridedDeviceAddressRegionKHR" (strided-device-address-region-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkStridedDeviceAddressRegionKHR"
+      (strided-device-address-region-khr)
       (:default-create :default-get :default-set)
     (deviceaddress :name "deviceAddress" :type "VkDeviceAddress")
     (stride :name stride :type "VkDeviceSize")
     (size :name size :type "VkDeviceSize"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkTraceRaysIndirectCommandKHR" (trace-rays-indirect-command-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkTraceRaysIndirectCommandKHR"
+      (trace-rays-indirect-command-khr)
       (:default-create :default-get :default-set)
     (width :name width :type uint32)
     (height :name height :type uint32)
     (depth :name depth :type uint32))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it.")
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it.")
 
-  (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceRayQueryFeaturesKHR" (physical-device-ray-query-features-khr)
+  (more-cffi:def-foreign-struct doc-file
+      "VkPhysicalDeviceRayQueryFeaturesKHR"
+      (physical-device-ray-query-features-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
     (pnext :name "pNext" :type void :init-form nil :create
@@ -13392,5 +14644,5 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (rayquery :name "rayQuery" :type "VkBool32"))
 
-(more-cffi:doc-note doc-file
-                    "This struct needs to be revised. Please, post an issue to request it."))
+  (more-cffi:doc-note doc-file
+                      "This struct needs to be revised. Please, post an issue to request it."))
