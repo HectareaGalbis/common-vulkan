@@ -24,11 +24,15 @@
       destroy-instance
       (instance pallocator)
     (declare-types ("VkInstance" instance)
-     ("VkAllocationCallbacks" "pAllocator") :return ("void" return-value))
-    (vkdestroyinstance instance pallocator))
+     ("VkAllocationCallbacks" "pAllocator"))
+    (let ((pallocator-c (or pallocator (cffi-sys:null-pointer))))
+      (vkdestroyinstance instance pallocator-c)))
 
-  (more-cffi:doc-note doc-file
-                      "This function needs to be revised. Please, post an issue to request it.")
+  (more-cffi:defwith doc-file with-instance create-instance destroy-instance
+                     :destructor-arguments (0 2))
+
+  (more-cffi:doc-note
+   "The allocator is passed to both constructor and destructor." doc-file)
 
   (more-cffi:def-foreign-function doc-file
       "vkEnumeratePhysicalDevices"
@@ -164,15 +168,39 @@
 
   (more-cffi:def-foreign-function doc-file
       "vkEnumerateInstanceExtensionProperties"
-      enumerate-instance-extension-properties
-      (playername ppropertycount pproperties)
-    (declare-types (char "pLayerName") (uint32 "pPropertyCount")
-     ("VkExtensionProperties" "pProperties") :return ("VkResult" return-value))
-    (vkenumerateinstanceextensionproperties playername ppropertycount
-     pproperties))
+      create-enumerate-instance-extension-properties
+      (playername)
+    (declare-types (string "pLayerName") :return
+     ((list "VkExtensionProperties") extension-props))
+    (let ((playername-c
+           (if playername
+               (cffi:foreign-string-alloc playername)
+               (cffi-sys:null-pointer))))
+      (cffi:with-foreign-object (ppropertycount :uint32)
+        (vkenumerateinstanceextensionproperties playername-c ppropertycount
+         (cffi-sys:null-pointer))
+        (let* ((property-count (cffi:mem-ref ppropertycount :uint32))
+               (pproperties
+                (cffi:foreign-alloc '(:struct vkextensionproperties) :count
+                                    property-count)))
+          (vkenumerateinstanceextensionproperties playername-c ppropertycount
+           pproperties)
+          (iter
+            (for i from 0 below property-count)
+            (collect
+             (cffi:mem-aptr pproperties '(:struct vkextensionproperties)
+                            i)))))))
 
-  (more-cffi:doc-note doc-file
-                      "This function needs to be revised. Please, post an issue to request it.")
+  (more-cffi:def-foreign-function doc-file
+      nil
+      destroy-enumerate-instance-extension-properties
+      (extension-props)
+    (declare-types ("(list VkExtensionProperties)" extension-props))
+    (cffi-sys:foreign-free (car extension-props)))
+
+  (more-cffi:defwith doc-file with-enumerate-instance-extension-properties
+                     create-enumerate-instance-extension-properties
+                     destroy-enumerate-instance-extension-properties)
 
   (more-cffi:def-foreign-function doc-file
       "vkEnumerateDeviceExtensionProperties"
@@ -189,14 +217,32 @@
 
   (more-cffi:def-foreign-function doc-file
       "vkEnumerateInstanceLayerProperties"
-      enumerate-instance-layer-properties
-      (ppropertycount pproperties)
-    (declare-types (uint32 "pPropertyCount")
-     ("VkLayerProperties" "pProperties") :return ("VkResult" return-value))
-    (vkenumerateinstancelayerproperties ppropertycount pproperties))
+      create-enumerate-instance-layer-properties
+      nil
+    (declare-types :return ((list "VkLayerProperties") layer-props))
+    (cffi:with-foreign-object (ppropertycount :uint32)
+      (vkenumerateinstancelayerproperties ppropertycount
+       (cffi-sys:null-pointer))
+      (let* ((property-count (cffi:mem-ref ppropertycount :uint32))
+             (pproperties
+              (cffi:foreign-alloc '(:struct vklayerproperties) :count
+                                  property-count)))
+        (vkenumerateinstancelayerproperties ppropertycount pproperties)
+        (iter
+          (for i from 0 below property-count)
+          (collect
+           (cffi:mem-aptr pproperties '(:struct vklayerproperties) i))))))
 
-  (more-cffi:doc-note doc-file
-                      "This function needs to be revised. Please, post an issue to request it.")
+  (more-cffi:def-foreign-function doc-file
+      nil
+      destroy-enumerate-instance-layer-properties
+      (layer-props)
+    (declare-types ((list "VkLayerProperties") layer-props))
+    (cffi-sys:foreign-free (car layer-props)))
+
+  (more-cffi:defwith doc-file with-enumerate-instance-layer-properties
+                     create-enumerate-instance-layer-properties
+                     destroy-enumerate-instance-layer-properties)
 
   (more-cffi:def-foreign-function doc-file
       "vkEnumerateDeviceLayerProperties"

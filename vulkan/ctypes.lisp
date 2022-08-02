@@ -273,7 +273,7 @@
   (headerversion vkpipelinecacheheaderversion)
   (vendorid :uint32)
   (deviceid :uint32)
-  (pipelinecacheuuid :uint8))
+  (pipelinecacheuuid :uint8 :count (apply #'* (list vk_uuid_size))))
 
 (cffi:defctype pfn_vkallocationfunction :pointer)
 
@@ -444,9 +444,9 @@
   (maxfragmentdualsrcattachments :uint32)
   (maxfragmentcombinedoutputresources :uint32)
   (maxcomputesharedmemorysize :uint32)
-  (maxcomputeworkgroupcount :uint32 :count 3)
+  (maxcomputeworkgroupcount :uint32 :count (apply #'* (list 3)))
   (maxcomputeworkgroupinvocations :uint32)
-  (maxcomputeworkgroupsize :uint32 :count 3)
+  (maxcomputeworkgroupsize :uint32 :count (apply #'* (list 3)))
   (subpixelprecisionbits :uint32)
   (subtexelprecisionbits :uint32)
   (mipmapprecisionbits :uint32)
@@ -455,8 +455,8 @@
   (maxsamplerlodbias :float)
   (maxsampleranisotropy :float)
   (maxviewports :uint32)
-  (maxviewportdimensions :uint32 :count 2)
-  (viewportboundsrange :float :count 2)
+  (maxviewportdimensions :uint32 :count (apply #'* (list 2)))
+  (viewportboundsrange :float :count (apply #'* (list 2)))
   (viewportsubpixelbits :uint32)
   (minmemorymapalignment :size)
   (mintexelbufferoffsetalignment vkdevicesize)
@@ -489,8 +489,8 @@
   (maxculldistances :uint32)
   (maxcombinedclipandculldistances :uint32)
   (discretequeuepriorities :uint32)
-  (pointsizerange :float :count 2)
-  (linewidthrange :float :count 2)
+  (pointsizerange :float :count (apply #'* (list 2)))
+  (linewidthrange :float :count (apply #'* (list 2)))
   (pointsizegranularity :float)
   (linewidthgranularity :float)
   (strictlines vkbool32)
@@ -501,9 +501,11 @@
 
 (cffi:defcstruct vkphysicaldevicememoryproperties
   (memorytypecount :uint32)
-  (memorytypes (:struct vkmemorytype))
+  (memorytypes (:struct vkmemorytype) :count
+   (apply #'* (list vk_max_memory_types)))
   (memoryheapcount :uint32)
-  (memoryheaps (:struct vkmemoryheap)))
+  (memoryheaps (:struct vkmemoryheap) :count
+   (apply #'* (list vk_max_memory_heaps))))
 
 (cffi:defcstruct vkphysicaldevicesparseproperties
   (residencystandard2dblockshape vkbool32)
@@ -518,8 +520,8 @@
   (vendorid :uint32)
   (deviceid :uint32)
   (devicetype vkphysicaldevicetype)
-  (devicename :char)
-  (pipelinecacheuuid :uint8)
+  (devicename :char :count (apply #'* (list vk_max_physical_device_name_size)))
+  (pipelinecacheuuid :uint8 :count (apply #'* (list vk_uuid_size)))
   (limits (:struct vkphysicaldevicelimits))
   (sparseproperties (:struct vkphysicaldevicesparseproperties)))
 
@@ -550,14 +552,14 @@
   (penabledfeatures :pointer))
 
 (cffi:defcstruct vkextensionproperties
-  (extensionname :char)
+  (extensionname :char :count (apply #'* (list vk_max_extension_name_size)))
   (specversion :uint32))
 
 (cffi:defcstruct vklayerproperties
-  (layername :char)
+  (layername :char :count (apply #'* (list vk_max_extension_name_size)))
   (specversion :uint32)
   (implementationversion :uint32)
-  (description :char))
+  (description :char :count (apply #'* (list vk_max_description_size))))
 
 (cffi:defcstruct vksubmitinfo
   (stype vkstructuretype)
@@ -891,7 +893,7 @@
   (logicop vklogicop)
   (attachmentcount :uint32)
   (pattachments :pointer)
-  (blendconstants :float :count 4))
+  (blendconstants :float :count (apply #'* (list 4))))
 
 (cffi:defcstruct vkpipelinedynamicstatecreateinfo
   (stype vkstructuretype)
@@ -1128,9 +1130,9 @@
   (imageextent (:struct vkextent3d)))
 
 (cffi:defcunion vkclearcolorvalue
-  (float32 :float :count 4)
-  (int32 :int32 :count 4)
-  (uint32 :uint32 :count 4))
+  (float32 :float :count (apply #'* (list 4)))
+  (int32 :int32 :count (apply #'* (list 4)))
+  (uint32 :uint32 :count (apply #'* (list 4))))
 
 (cffi:defcstruct vkcleardepthstencilvalue
   (depth :float)
@@ -1152,9 +1154,9 @@
 
 (cffi:defcstruct vkimageblit
   (srcsubresource (:struct vkimagesubresourcelayers))
-  (srcoffsets (:struct vkoffset3d) :count 2)
+  (srcoffsets (:struct vkoffset3d) :count (apply #'* (list 2)))
   (dstsubresource (:struct vkimagesubresourcelayers))
-  (dstoffsets (:struct vkoffset3d) :count 2))
+  (dstoffsets (:struct vkoffset3d) :count (apply #'* (list 2))))
 
 (cffi:defcstruct vkimagecopy
   (srcsubresource (:struct vkimagesubresourcelayers))
@@ -1577,7 +1579,8 @@
   (stype vkstructuretype)
   (pnext :pointer)
   (physicaldevicecount :uint32)
-  (physicaldevices vkphysicaldevice)
+  (physicaldevices vkphysicaldevice :count
+   (apply #'* (list vk_max_device_group_size)))
   (subsetallocation vkbool32))
 
 (cffi:defcstruct vkdevicegroupdevicecreateinfo
@@ -1831,9 +1834,9 @@
 (cffi:defcstruct vkphysicaldeviceidproperties
   (stype vkstructuretype)
   (pnext :pointer)
-  (deviceuuid :uint8)
-  (driveruuid :uint8)
-  (deviceluid :uint8)
+  (deviceuuid :uint8 :count (apply #'* (list vk_uuid_size)))
+  (driveruuid :uint8 :count (apply #'* (list vk_uuid_size)))
+  (deviceluid :uint8 :count (apply #'* (list vk_luid_size)))
   (devicenodemask :uint32)
   (deviceluidvalid vkbool32))
 
@@ -1986,9 +1989,9 @@
 (cffi:defcstruct vkphysicaldevicevulkan11properties
   (stype vkstructuretype)
   (pnext :pointer)
-  (deviceuuid :uint8)
-  (driveruuid :uint8)
-  (deviceluid :uint8)
+  (deviceuuid :uint8 :count (apply #'* (list vk_uuid_size)))
+  (driveruuid :uint8 :count (apply #'* (list vk_uuid_size)))
+  (deviceluid :uint8 :count (apply #'* (list vk_luid_size)))
   (devicenodemask :uint32)
   (deviceluidvalid vkbool32)
   (subgroupsize :uint32)
@@ -2063,8 +2066,8 @@
   (stype vkstructuretype)
   (pnext :pointer)
   (driverid vkdriverid)
-  (drivername :char)
-  (driverinfo :char)
+  (drivername :char :count (apply #'* (list vk_max_driver_name_size)))
+  (driverinfo :char :count (apply #'* (list vk_max_driver_info_size)))
   (conformanceversion (:struct vkconformanceversion))
   (denormbehaviorindependence vkshaderfloatcontrolsindependence)
   (roundingmodeindependence vkshaderfloatcontrolsindependence)
@@ -2201,8 +2204,8 @@
   (stype vkstructuretype)
   (pnext :pointer)
   (driverid vkdriverid)
-  (drivername :char)
-  (driverinfo :char)
+  (drivername :char :count (apply #'* (list vk_max_driver_name_size)))
+  (driverinfo :char :count (apply #'* (list vk_max_driver_info_size)))
   (conformanceversion (:struct vkconformanceversion)))
 
 (cffi:defcstruct vkphysicaldeviceshaderatomicint64features
@@ -2619,11 +2622,11 @@
 (cffi:defcstruct vkphysicaldevicetoolproperties
   (stype vkstructuretype)
   (pnext :pointer)
-  (name :char)
-  (version :char)
+  (name :char :count (apply #'* (list vk_max_extension_name_size)))
+  (version :char :count (apply #'* (list vk_max_extension_name_size)))
   (purposes vktoolpurposeflags)
-  (description :char)
-  (layer :char))
+  (description :char :count (apply #'* (list vk_max_description_size)))
+  (layer :char :count (apply #'* (list vk_max_extension_name_size))))
 
 (cffi:defcstruct vkphysicaldeviceshaderdemotetohelperinvocationfeatures
   (stype vkstructuretype)
@@ -2802,9 +2805,9 @@
   (stype vkstructuretype)
   (pnext :pointer)
   (srcsubresource (:struct vkimagesubresourcelayers))
-  (srcoffsets (:struct vkoffset3d) :count 2)
+  (srcoffsets (:struct vkoffset3d) :count (apply #'* (list 2)))
   (dstsubresource (:struct vkimagesubresourcelayers))
-  (dstoffsets (:struct vkoffset3d) :count 2))
+  (dstoffsets (:struct vkoffset3d) :count (apply #'* (list 2))))
 
 (cffi:defcstruct vkblitimageinfo2
   (stype vkstructuretype)
@@ -3182,7 +3185,7 @@
 (cffi:defcstruct vkdevicegrouppresentcapabilitieskhr
   (stype vkstructuretype)
   (pnext :pointer)
-  (presentmask :uint32)
+  (presentmask :uint32 :count (apply #'* (list vk_max_device_group_size)))
   (modes vkdevicegrouppresentmodeflagskhr))
 
 (cffi:defcstruct vkdevicegrouppresentinfokhr
@@ -3699,15 +3702,15 @@
   (unit vkperformancecounterunitkhr)
   (scope vkperformancecounterscopekhr)
   (storage vkperformancecounterstoragekhr)
-  (uuid :uint8))
+  (uuid :uint8 :count (apply #'* (list vk_uuid_size))))
 
 (cffi:defcstruct vkperformancecounterdescriptionkhr
   (stype vkstructuretype)
   (pnext :pointer)
   (flags vkperformancecounterdescriptionflagskhr)
-  (name :char)
-  (category :char)
-  (description :char))
+  (name :char :count (apply #'* (list vk_max_description_size)))
+  (category :char :count (apply #'* (list vk_max_description_size)))
+  (description :char :count (apply #'* (list vk_max_description_size))))
 
 (cffi:defcstruct vkquerypoolperformancecreateinfokhr
   (stype vkstructuretype)
@@ -3931,7 +3934,8 @@
   (stype vkstructuretype)
   (pnext :pointer)
   (prioritycount :uint32)
-  (priorities vkqueueglobalprioritykhr))
+  (priorities vkqueueglobalprioritykhr :count
+   (apply #'* (list vk_max_global_priority_size_khr))))
 
 (cffi:defctype vkdriveridkhr vkdriverid)
 
@@ -3999,7 +4003,7 @@
   (stype vkstructuretype)
   (pnext :pointer)
   (fragmentsize (:struct vkextent2d))
-  (combinerops vkfragmentshadingratecombineropkhr :count 2))
+  (combinerops vkfragmentshadingratecombineropkhr :count (apply #'* (list 2))))
 
 (cffi:defcstruct vkphysicaldevicefragmentshadingratefeatureskhr
   (stype vkstructuretype)
@@ -4109,8 +4113,8 @@
   (stype vkstructuretype)
   (pnext :pointer)
   (stages vkshaderstageflags)
-  (name :char)
-  (description :char)
+  (name :char :count (apply #'* (list vk_max_description_size)))
+  (description :char :count (apply #'* (list vk_max_description_size)))
   (subgroupsize :uint32))
 
 (cffi:defcstruct vkpipelineexecutableinfokhr
@@ -4128,16 +4132,16 @@
 (cffi:defcstruct vkpipelineexecutablestatistickhr
   (stype vkstructuretype)
   (pnext :pointer)
-  (name :char)
-  (description :char)
+  (name :char :count (apply #'* (list vk_max_description_size)))
+  (description :char :count (apply #'* (list vk_max_description_size)))
   (format vkpipelineexecutablestatisticformatkhr)
   (value (:union vkpipelineexecutablestatisticvaluekhr)))
 
 (cffi:defcstruct vkpipelineexecutableinternalrepresentationkhr
   (stype vkstructuretype)
   (pnext :pointer)
-  (name :char)
-  (description :char)
+  (name :char :count (apply #'* (list vk_max_description_size)))
+  (description :char :count (apply #'* (list vk_max_description_size)))
   (istext vkbool32)
   (datasize :size)
   (pdata :pointer))
@@ -4379,7 +4383,7 @@
   (stype vkstructuretype)
   (pnext :pointer)
   (pmarkername :pointer)
-  (color :float :count 4))
+  (color :float :count (apply #'* (list 4))))
 
 (cffi:defctype pfn_vkdebugmarkersetobjecttagext :pointer)
 
@@ -4529,7 +4533,7 @@
   (numphysicalsgprs :uint32)
   (numavailablevgprs :uint32)
   (numavailablesgprs :uint32)
-  (computeworkgroupsize :uint32 :count 3))
+  (computeworkgroupsize :uint32 :count (apply #'* (list 3))))
 
 (cffi:defctype pfn_vkgetshaderinfoamd :pointer)
 
@@ -4793,7 +4797,7 @@
   (stype vkstructuretype)
   (pnext :pointer)
   (plabelname :pointer)
-  (color :float :count 4))
+  (color :float :count (apply #'* (list 4))))
 
 (cffi:defcstruct vkdebugutilsobjectnameinfoext
   (stype vkstructuretype)
@@ -4917,7 +4921,7 @@
   (pnext :pointer)
   (samplelocationsamplecounts vksamplecountflags)
   (maxsamplelocationgridsize (:struct vkextent2d))
-  (samplelocationcoordinaterange :float :count 2)
+  (samplelocationcoordinaterange :float :count (apply #'* (list 2)))
   (samplelocationsubpixelbits :uint32)
   (variablesamplelocations vkbool32))
 
@@ -5260,7 +5264,7 @@
   (maxdescriptorsetaccelerationstructures :uint32))
 
 (cffi:defcstruct vktransformmatrixkhr
-  (matrix :float :count 12))
+  (matrix :float :count (apply #'* (list 3 4))))
 
 (cffi:defctype vktransformmatrixnv (:struct vktransformmatrixkhr))
 
@@ -5444,11 +5448,11 @@
   (pnext :pointer)
   (maxdrawmeshtaskscount :uint32)
   (maxtaskworkgroupinvocations :uint32)
-  (maxtaskworkgroupsize :uint32 :count 3)
+  (maxtaskworkgroupsize :uint32 :count (apply #'* (list 3)))
   (maxtasktotalmemorysize :uint32)
   (maxtaskoutputcount :uint32)
   (maxmeshworkgroupinvocations :uint32)
-  (maxmeshworkgroupsize :uint32 :count 3)
+  (maxmeshworkgroupsize :uint32 :count (apply #'* (list 3)))
   (maxmeshtotalmemorysize :uint32)
   (maxmeshoutputvertices :uint32)
   (maxmeshoutputprimitives :uint32)
@@ -5646,8 +5650,8 @@
 (cffi:defcstruct vkphysicaldevicememorybudgetpropertiesext
   (stype vkstructuretype)
   (pnext :pointer)
-  (heapbudget vkdevicesize)
-  (heapusage vkdevicesize))
+  (heapbudget vkdevicesize :count (apply #'* (list vk_max_memory_heaps)))
+  (heapusage vkdevicesize :count (apply #'* (list vk_max_memory_heaps))))
 
 (cffi:defcstruct vkphysicaldevicememorypriorityfeaturesext
   (stype vkstructuretype)
@@ -6181,7 +6185,7 @@
   (pnext :pointer)
   (shadingratetype vkfragmentshadingratetypenv)
   (shadingrate vkfragmentshadingratenv)
-  (combinerops vkfragmentshadingratecombineropkhr :count 2))
+  (combinerops vkfragmentshadingratecombineropkhr :count (apply #'* (list 2))))
 
 (cffi:defctype pfn_vkcmdsetfragmentshadingrateenumnv :pointer)
 
@@ -6445,7 +6449,7 @@
 (cffi:defcstruct vkpipelinepropertiesidentifierext
   (stype vkstructuretype)
   (pnext :pointer)
-  (pipelineidentifier :uint8))
+  (pipelineidentifier :uint8 :count (apply #'* (list vk_uuid_size))))
 
 (cffi:defcstruct vkphysicaldevicepipelinepropertiesfeaturesext
   (stype vkstructuretype)
@@ -6622,7 +6626,7 @@
 
 (cffi:defcstruct vkrenderpasssubpassfeedbackinfoext
   (subpassmergestatus vksubpassmergestatusext)
-  (description :char)
+  (description :char :count (apply #'* (list vk_max_description_size)))
   (postmergeindex :uint32))
 
 (cffi:defcstruct vkrenderpasssubpassfeedbackcreateinfoext

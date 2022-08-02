@@ -97,7 +97,7 @@
 
 (more-cffi:def-foreign-constant doc-file "VK_API_VERSION_1_1"
                                 vk_api_version_1_1
-                                "VK_MAKE_API_VERSION(0, 1, 1, 0)")
+                                |VK_MAKE_API_VERSION(0, 1, 1, 0)|)
 
 (more-cffi:def-foreign-constant doc-file "VK_MAX_DEVICE_GROUP_SIZE"
                                 vk_max_device_group_size 32)
@@ -111,7 +111,7 @@
 
 (more-cffi:def-foreign-constant doc-file "VK_API_VERSION_1_2"
                                 vk_api_version_1_2
-                                "VK_MAKE_API_VERSION(0, 1, 2, 0)")
+                                |VK_MAKE_API_VERSION(0, 1, 2, 0)|)
 
 (more-cffi:def-foreign-constant doc-file "VK_MAX_DRIVER_NAME_SIZE"
                                 vk_max_driver_name_size 256)
@@ -123,7 +123,7 @@
 
 (more-cffi:def-foreign-constant doc-file "VK_API_VERSION_1_3"
                                 vk_api_version_1_3
-                                "VK_MAKE_API_VERSION(0, 1, 3, 0)")
+                                |VK_MAKE_API_VERSION(0, 1, 3, 0)|)
 
 (more-cffi:def-foreign-constant doc-file "VK_PIPELINE_STAGE_2_NONE"
                                 vk_pipeline_stage_2_none 0)
@@ -1058,11 +1058,11 @@
 
 (more-cffi:def-foreign-constant doc-file "VK_KHR_MAINTENANCE1_SPEC_VERSION"
                                 vk_khr_maintenance1_spec_version
-                                "VK_KHR_MAINTENANCE_1_SPEC_VERSION")
+                                vk_khr_maintenance_1_spec_version)
 
 (more-cffi:def-foreign-constant doc-file "VK_KHR_MAINTENANCE1_EXTENSION_NAME"
                                 vk_khr_maintenance1_extension_name
-                                "VK_KHR_MAINTENANCE_1_EXTENSION_NAME")
+                                vk_khr_maintenance_1_extension_name)
 
 (more-cffi:def-foreign-constant doc-file "VK_KHR_device_group_creation"
                                 vk_khr_device_group_creation 1)
@@ -1078,7 +1078,7 @@
 
 (more-cffi:def-foreign-constant doc-file "VK_MAX_DEVICE_GROUP_SIZE_KHR"
                                 vk_max_device_group_size_khr
-                                "VK_MAX_DEVICE_GROUP_SIZE")
+                                vk_max_device_group_size)
 
 (more-cffi:def-foreign-constant doc-file "VK_KHR_external_memory_capabilities"
                                 vk_khr_external_memory_capabilities 1)
@@ -1094,7 +1094,7 @@
                                 "VK_KHR_external_memory_capabilities")
 
 (more-cffi:def-foreign-constant doc-file "VK_LUID_SIZE_KHR" vk_luid_size_khr
-                                "VK_LUID_SIZE")
+                                vk_luid_size)
 
 (more-cffi:def-foreign-constant doc-file "VK_KHR_external_memory"
                                 vk_khr_external_memory 1)
@@ -1109,7 +1109,7 @@
 
 (more-cffi:def-foreign-constant doc-file "VK_QUEUE_FAMILY_EXTERNAL_KHR"
                                 vk_queue_family_external_khr
-                                "VK_QUEUE_FAMILY_EXTERNAL")
+                                vk_queue_family_external)
 
 (more-cffi:def-foreign-constant doc-file "VK_KHR_external_memory_fd"
                                 vk_khr_external_memory_fd 1)
@@ -1314,11 +1314,11 @@
 
 (more-cffi:def-foreign-constant doc-file "VK_KHR_MAINTENANCE2_SPEC_VERSION"
                                 vk_khr_maintenance2_spec_version
-                                "VK_KHR_MAINTENANCE_2_SPEC_VERSION")
+                                vk_khr_maintenance_2_spec_version)
 
 (more-cffi:def-foreign-constant doc-file "VK_KHR_MAINTENANCE2_EXTENSION_NAME"
                                 vk_khr_maintenance2_extension_name
-                                "VK_KHR_MAINTENANCE_2_EXTENSION_NAME")
+                                vk_khr_maintenance_2_extension_name)
 
 (more-cffi:def-foreign-constant doc-file "VK_KHR_get_surface_capabilities2"
                                 vk_khr_get_surface_capabilities2 1)
@@ -1452,11 +1452,11 @@
 
 (more-cffi:def-foreign-constant doc-file "VK_KHR_MAINTENANCE3_SPEC_VERSION"
                                 vk_khr_maintenance3_spec_version
-                                "VK_KHR_MAINTENANCE_3_SPEC_VERSION")
+                                vk_khr_maintenance_3_spec_version)
 
 (more-cffi:def-foreign-constant doc-file "VK_KHR_MAINTENANCE3_EXTENSION_NAME"
                                 vk_khr_maintenance3_extension_name
-                                "VK_KHR_MAINTENANCE_3_EXTENSION_NAME")
+                                vk_khr_maintenance_3_extension_name)
 
 (more-cffi:def-foreign-constant doc-file "VK_KHR_draw_indirect_count"
                                 vk_khr_draw_indirect_count 1)
@@ -1544,11 +1544,11 @@
 
 (more-cffi:def-foreign-constant doc-file "VK_MAX_DRIVER_NAME_SIZE_KHR"
                                 vk_max_driver_name_size_khr
-                                "VK_MAX_DRIVER_NAME_SIZE")
+                                vk_max_driver_name_size)
 
 (more-cffi:def-foreign-constant doc-file "VK_MAX_DRIVER_INFO_SIZE_KHR"
                                 vk_max_driver_info_size_khr
-                                "VK_MAX_DRIVER_INFO_SIZE")
+                                vk_max_driver_info_size)
 
 (more-cffi:def-foreign-constant doc-file "VK_KHR_shader_float_controls"
                                 vk_khr_shader_float_controls 1)
@@ -2345,11 +2345,11 @@
 
 (more-cffi:def-foreign-constant doc-file "VK_NV_VIEWPORT_ARRAY2_SPEC_VERSION"
                                 vk_nv_viewport_array2_spec_version
-                                "VK_NV_VIEWPORT_ARRAY_2_SPEC_VERSION")
+                                vk_nv_viewport_array_2_spec_version)
 
 (more-cffi:def-foreign-constant doc-file "VK_NV_VIEWPORT_ARRAY2_EXTENSION_NAME"
                                 vk_nv_viewport_array2_extension_name
-                                "VK_NV_VIEWPORT_ARRAY_2_EXTENSION_NAME")
+                                vk_nv_viewport_array_2_extension_name)
 
 (more-cffi:def-foreign-constant doc-file "VK_NVX_multiview_per_view_attributes"
                                 vk_nvx_multiview_per_view_attributes 1)
@@ -2697,7 +2697,7 @@
                                 vk_shader_unused_khr (- uint32_max 0))
 
 (more-cffi:def-foreign-constant doc-file "VK_SHADER_UNUSED_NV"
-                                vk_shader_unused_nv "VK_SHADER_UNUSED_KHR")
+                                vk_shader_unused_nv vk_shader_unused_khr)
 
 (more-cffi:def-foreign-constant doc-file "VK_NV_representative_fragment_test"
                                 vk_nv_representative_fragment_test 1)
@@ -3013,12 +3013,12 @@
 (more-cffi:def-foreign-constant doc-file
                                 "VK_GOOGLE_HLSL_FUNCTIONALITY1_SPEC_VERSION"
                                 vk_google_hlsl_functionality1_spec_version
-                                "VK_GOOGLE_HLSL_FUNCTIONALITY_1_SPEC_VERSION")
+                                vk_google_hlsl_functionality_1_spec_version)
 
 (more-cffi:def-foreign-constant doc-file
                                 "VK_GOOGLE_HLSL_FUNCTIONALITY1_EXTENSION_NAME"
                                 vk_google_hlsl_functionality1_extension_name
-                                "VK_GOOGLE_HLSL_FUNCTIONALITY_1_EXTENSION_NAME")
+                                vk_google_hlsl_functionality_1_extension_name)
 
 (more-cffi:def-foreign-constant doc-file "VK_GOOGLE_decorate_string"
                                 vk_google_decorate_string 1)
@@ -3786,7 +3786,7 @@
 
 (more-cffi:def-foreign-constant doc-file "VK_MAX_GLOBAL_PRIORITY_SIZE_EXT"
                                 vk_max_global_priority_size_ext
-                                "VK_MAX_GLOBAL_PRIORITY_SIZE_KHR")
+                                vk_max_global_priority_size_khr)
 
 (more-cffi:def-foreign-constant doc-file "VK_EXT_image_view_min_lod"
                                 vk_ext_image_view_min_lod 1)

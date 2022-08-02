@@ -50,19 +50,22 @@
 ;; Also return the base and if it is needed to print the radix.
 (defun fix-value (value-str)
   (multiple-value-bind (numberp num-regs) (ppcre:scan-to-strings "^(?:(\\(\\~)*)(?:(0x)*)([\\-\\d\\.]+)([ULF]*)" value-str)
-    (if numberp
-	(let* ((notopp  (aref num-regs 0))
-	       (hexp    (aref num-regs 1))
-	       (num-str (aref num-regs 2))
-	       (suffix  (aref num-regs 3))
-	       (num     (read-from-string num-str)))
-	  (cond
-	    (notopp (values `(- ,(if (string= suffix "U") 'UINT32_MAX 'UINT64_MAX)
-				,num)
-			    nil nil))
-	    (hexp (values num 16 t))
-	    (t (values num nil nil))))
-	value-str)))
+    (cond
+      (numberp
+       (let* ((notopp  (aref num-regs 0))
+	      (hexp    (aref num-regs 1))
+	      (num-str (aref num-regs 2))
+	      (suffix  (aref num-regs 3))
+	      (num     (read-from-string num-str)))
+	 (cond
+	   (notopp (values `(- ,(if (string= suffix "U") 'UINT32_MAX 'UINT64_MAX)
+			       ,num)
+			   nil nil))
+	   (hexp (values num 16 t))
+	   (t (values num nil nil)))))
+      ((equal (aref value-str 0) #\")
+       (subseq value-str 1 (1- (length value-str))))
+      (t (intern (string-upcase value-str))))))
 
 ;; Given a string designating a type or a name, return its MCFFI equivalent.
 (defun fix-more-name (name)
@@ -161,14 +164,20 @@
 		     (bitfields       (aref reg-mem 4))
 		     (pointerp (ppcre:scan "\\*" post-qualifiers))
 		     (double-pointerp (>= (ppcre:count-matches "\\*" post-qualifiers)))
-		     (bracketsp (ppcre:all-matches-as-strings "\\d+" brackets))
+		     (bracketsp (iter (for str in (ppcre:all-matches-as-strings "\\w+" brackets))
+				  (collect (if (ppcre:scan "^\\d+" str)
+					       (parse-integer str)
+					       (fix-name str)))))
 		     (bitfieldsp (not (zerop (length bitfields))))
 		     (previous-countp (and previous-slot-name (ppcre:scan "Count" previous-slot-name)))
-		     (stringp (and pointerp (string= type "char"))))
+		     (stringp (and (string= type "char") (or pointerp bracketsp)))
+		     (func-pointerp (ppcre:scan "^PFN_" type)))
+		(when func-pointerp
+		  (collect type into function-pointers))
 		(collect `(,(fix-name name)
 			   ,(if pointerp :pointer (fix-type type :structs structs :unions unions))
 			   ,@(if bracketsp
-				 `(:count ,(apply #'* (mapcar #'parse-integer bracketsp)))
+				 `(:count (apply #'* (list ,@bracketsp)))
 				 nil))
 		  into members)
 		(collect `(,(fix-name name)
@@ -180,18 +189,26 @@
 			   :type ,(fix-more-name type)
 			   ,@(if pointerp `(:init-form nil) nil)
 			   ,@(cond
-			       ((and stringp (or (and double-pointerp previous-countp) bracketsp))
+			       ((and stringp (or (and double-pointerp previous-countp) (and pointerp bracketsp)))
 				(let* ((name-name (fix-name name))
 				       (name-arg (fix-name (concatenate 'string name "-arg")))
 				       (previous-name (fix-name previous-slot-name))
 				       (index-name (fix-name (concatenate 'string name "-index")))
 				       (count (if bracketsp
-						  (apply #'* (mapcar #'parse-integer bracketsp))
+						  `(apply #'* (list ,@bracketsp))
 						  (fix-name previous-slot-name))))
 				  `(:create ((,name-arg) (create-array-strings ,name-name ,name-arg :dynamic ,(not bracketsp)))
 				    :destroy (destroy-array-strings ,name-name ,previous-name :dynamic ,(not bracketsp))
 				    :get ((&optional ,index-name) (get-array-strings ,name-name ,index-name ,count))
 				    :set ((,name-arg &optional ,index-name) (set-array-strings ,name-name ,name-arg ,index-name ,count :dynamic ,(not bracketsp))))))
+			       (stringp
+				(let* ((name-name (fix-name name))
+				       (name-arg (fix-name (concatenate 'string name "-arg"))))
+				  `(:create ((,name-arg) (create-string ,name-name ,name-arg :dynamic ,(not bracketsp)))
+					    ,@(when (not bracketsp)
+						`(:destroy (destroy-string ,name-name)))
+					    :get (() (get-string  ,name-name))
+					    :set ((,name-arg) (set-string ,name-name ,name-arg :dynamic ,(not bracketsp))))))
 			       ((and (not (string= type "void"))
 				     (or (and pointerp previous-countp) bracketsp))
 				(let* ((type-name (fix-type type :structs structs :unions unions))
@@ -201,7 +218,7 @@
 				       (index-name (fix-name (concatenate 'string name "-index")))
 				       (arg-pointersp (and (string= (subseq type 0 2) "Vk") (or (struct-or-union-p type structs) (struct-or-union-p type unions))))
 				       (count (if bracketsp
-						  (apply #'* (mapcar #'parse-integer bracketsp))
+						  `(apply #'* (list ,@bracketsp))
 						  previous-name)))
 				  `(:create ((,name-arg)
 					     (create-array ,type-name ,name-name ,name-arg :dynamic ,(not bracketsp) :pointers ,arg-pointersp))
@@ -211,13 +228,6 @@
 					  (get-array ,type-name ,name-name ,index-name ,count :pointers ,arg-pointersp))
 				    :set ((,name-arg &optional ,index-name)
 					  (set-array ,type-name ,name-name ,name-arg ,index-name :dynamic ,(not bracketsp) :pointers ,arg-pointersp)))))
-			       (stringp
-				(let* ((name-name (fix-name name))
-				       (name-arg (fix-name (concatenate 'string name "-arg"))))
-				  `(:create ((,name-arg) (create-string ,name-name ,name-arg))
-				    :destroy (destroy-string ,name-name)
-				    :get (() (get-string  ,name-name))
-				    :set ((,name-arg) (set-string ,name-name ,name-arg)))))
 			       ((or pointerp
 				    (member type pointer-types :test #'string=))
 				(let* ((name-name (fix-name name))
@@ -239,6 +249,7 @@
 		  (read-line ifile nil))))
 	    (finally (return (values struct-or-union
 				     type-str
+				     function-pointers
 				     `(,(intern (string-upcase (concatenate 'string "defc" struct-or-union)) "CFFI")
 				       ,(fix-name type-str) ,@members)
 				     `(,(if (string= struct-or-union "struct")
@@ -256,7 +267,7 @@
 ;; Check if a line is a define macro.
 ;; In that case, write the MCFFI definition
 (defun read-define (line)
-  (multiple-value-bind (match regs) (ppcre:scan-to-strings "#define (\\w+)\\s+\"?([\\-\\~\\w\\s\\d\\.,\\(\\)ULF]+)\"?" line)
+  (multiple-value-bind (match regs) (ppcre:scan-to-strings "#define (\\w+)\\s+(\"?[\\-\\~\\w\\s\\d\\.,\\(\\)ULF]+\"?)" line)
     (if match
 	(let ((name (aref regs 0))
 	      (value (aref regs 1)))
@@ -266,7 +277,7 @@
 ;; Check if a line is a static const value.
 ;; In that case, write the MCFFI definition.
 (defun read-static-const (line)
-  (multiple-value-bind (match regs) (ppcre:scan-to-strings "static const \\w+ (\\w+) = \"?([\\-\\~\\w\\s\\d\\.,\\(\\)ULF]+)\"?" line)
+  (multiple-value-bind (match regs) (ppcre:scan-to-strings "static const \\w+ (\\w+) = (\"?[\\-\\~\\w\\s\\d\\.,\\(\\)ULF]+\"?)" line)
     (if match
 	(let ((name (aref regs 0))
 	      (value (aref regs 1)))
@@ -283,7 +294,7 @@
 	    (let* ((member-line (read-line ifile nil))
 		   (endp (ppcre:scan "^\\}" member-line)))
 	      (until endp)
-	      (multiple-value-bind (match-mem regs-mem) (ppcre:scan-to-strings "\\s*(\\w+)\\s*=\\s*\"?([\\-\\~\\w\\s\\d\\.\\(\\)ULF]+)\"?" member-line)
+	      (multiple-value-bind (match-mem regs-mem) (ppcre:scan-to-strings "\\s*(\\w+)\\s*=\\s*(\"?[\\-\\~\\w\\s\\d\\.\\(\\)ULF]+\"?)" member-line)
 		(when match-mem
 		  (let ((name (aref regs-mem 0))
 			(value (aref regs-mem 1)))
@@ -308,7 +319,10 @@
 		(let* ((arg-type            (aref regs-arg 0))
 		       (post-arg-qualifiers (aref regs-arg 1))
 		       (arg-name            (aref regs-arg 2))
-		       (pointerp (ppcre:scan "\\*" post-arg-qualifiers)))
+		       (pointerp (ppcre:scan "\\*" post-arg-qualifiers))
+		       (function-pointerp (ppcre:scan "^PFN_" arg-type)))
+		  (when function-pointerp
+		    (collect arg-type into function-pointers))
 		  (collect `(,(fix-name arg-name) ,(if pointerp :pointer (fix-type arg-type :structs structs :unions unions)))
 		    into arg-slots)
 		  (collect (fix-name arg-name)
@@ -317,14 +331,15 @@
 				 (fix-more-name arg-name))
 		    into more-type-declarations)
 		  (until endp))))
-	    (finally (return (values `(cffi:defcfun (,func-name ,(fix-name func-name)) ,(fix-type return-type)
+	    (finally (return (values function-pointers
+				     `(cffi:defcfun (,func-name ,(fix-name func-name)) ,(fix-type return-type)
 					,@arg-slots)
 				     `(mcffi:def-foreign-function doc-file ,func-name
-					  ,(fix-name (subseq (string-downcase (string (cffi:translate-camelcase-name func-name
-														     :special-words
-														     '("2D" "3D" "KHR" "EXT" "VALVE" "GOOGLE" "AMD" "INTEL" "NVX" "NV" "HUAWEI"))))
-							     3))
-					  ,more-arg-names
+					,(fix-name (subseq (string-downcase (string (cffi:translate-camelcase-name func-name
+														   :special-words
+														   '("2D" "3D" "KHR" "EXT" "VALVE" "GOOGLE" "AMD" "INTEL" "NVX" "NV" "HUAWEI"))))
+							   3))
+					,more-arg-names
 					(declare-types ,@more-type-declarations :return (,return-type return-value))
 					(,(fix-name func-name) ,@more-arg-names)))))))
 	nil)))
@@ -445,6 +460,24 @@
     (prin1 code more-function-file))
   (format more-function-file ")"))
 
+;; Write the callback definitions.
+(defun write-more-callback (function-pointers more-callback-file)
+  (format more-callback-file "~%")
+  (prin1 '(in-package :cvk) more-callback-file)
+  (format more-callback-file "~%~%")
+  (format more-callback-file "~%(mcffi:with-doc-file (doc-file (asdf:system-relative-pathname \"common-vulkan\" \"docs/api/callbacks.md\"))~%")
+  (iter (for function-pointer in function-pointers)
+    (format more-callback-file "~%~%")
+    (prin1 `(mcffi:def-foreign-callback-definer doc-file ,function-pointer
+		,(fix-name (string-downcase (concatenate 'string
+							 "def-"
+							 (string (cffi:translate-camelcase-name (subseq function-pointer 6)
+												:special-words
+												'("2D" "3D" "KHR" "EXT" "VALVE" "GOOGLE" "AMD" "INTEL" "NVX" "NV" "HUAWEI")))
+							 "-callback"))))
+	   more-callback-file))
+  (format more-callback-file ")"))
+
 ;; Write the final struct definitions.
 (defun write-final-more-struct (old-struct-code new-struct-code revised-structs-code new-more-struct-code
 				structs-to-revise-list structs-to-revise-file final-more-struct-file)
@@ -472,7 +505,10 @@
 		       (let* ((old-struct (and old-struct-code
 					       (car (member (fix-name struct-name) old-struct-code :key (lambda (x) (cadr x))))))
 			      (new-struct (car (member (fix-name struct-name) new-struct-code :key (lambda (x) (cadr x)))))
-			      (revised-infixes (cadddr (car revised-struct-list)))
+			      (revised-infixes (let ((infixes (cadddr (car revised-struct-list))))
+						 (if (listp infixes)
+						     infixes
+						     (list infixes))))
 			      (new-infixes (cadddr new-more-struct)))
 			 (when (or (not (equal old-struct new-struct))
 				   (not (equal revised-infixes new-infixes))
@@ -512,20 +548,25 @@
 						    (while (<= def-function-count 1))
 						    (collect subfunc)))))
 		 (if revised-function-list
-		     (progn
+		     (let* ((old-function (and old-function-code
+					       (car (member func-name old-function-code :key (lambda (x) (caadr x))
+											:test #'string=))))
+			    (new-function (car (member func-name new-function-code :key (lambda (x) (caadr x))
+										   :test #'string=)))
+			    (code-changed (or (not (equal old-function new-function))
+					      (member func-name functions-to-revise :test #'string=))))
 		       (iter (for revised-function in revised-function-list)
 			 (format final-more-function-file "~%~%  ")
-			 (prin1 revised-function final-more-function-file))
-		       (let ((old-function (and old-function-code
-						(car (member (fix-name func-name) old-function-code :key (lambda (x) (caadr x))))))
-			     (new-function (car (member (fix-name func-name) new-function-code :key (lambda (x) (caadr x))))))
-			 (when (or (not (equal old-function new-function))
-				   (member func-name functions-to-revise :test #'string=))
+			 (prin1 revised-function final-more-function-file)
+			 (when (and code-changed
+				    (or (eq (car revised-function) 'mcffi:def-foreign-function)
+					(eq (car revised-function) 'mcffi:defwith)))
 			   (format final-more-function-file "~%~%  ")
 			   (prin1 `(mcffi:doc-note doc-file "The C code has been changed since last update. Please, post an issue to make the maintainer revise this function.")
-				  final-more-function-file)
-			   (accumulate func-name by (lambda (x y) (adjoin x y :test #'string=))
-				       initial-value functions-to-revise-list into functions-to-revise))))
+				  final-more-function-file)))
+		       (when code-changed
+			 (accumulate func-name by (lambda (x y) (adjoin x y :test #'string=))
+				     initial-value functions-to-revise-list into functions-to-revise)))
 		     (progn
 		       (format final-more-function-file "~%~%  ")
 		       (prin1 new-more-function final-more-function-file)
@@ -535,6 +576,35 @@
 	       (finally (prin1 functions-to-revise functions-to-revise-file)))
 	     (format final-more-function-file ")"))))
 
+;; Write the final callback definitions.
+(defun write-final-more-callback (revised-callback-code new-more-callback-code final-more-callback-file)
+  (iter (for revised-code in revised-callback-code)
+    (until (eq (car revised-code) 'mcffi:with-doc-file))
+    (prin1 revised-code final-more-callback-file)
+    (finally (format final-more-callback-file "~%~%")
+	     (format final-more-callback-file "(~s ~s"
+		     'mcffi:with-doc-file (cadr revised-code))
+	     (iter (for new-more-callback in new-more-callback-code)
+	       (let* ((revised-callbacks (cddr revised-code))
+		      (foreign-type (caddr new-more-callback))
+		      (revised-callback-list (and revised-callbacks
+						  (iter (for subcallback in (member foreign-type revised-callbacks :key (lambda (x) (caddr x))
+													    :test #'string=))
+						    (count (eq (car subcallback) 'mcffi:def-foreign-callback-definer)
+							   into def-callback-count)
+						    (while (<= def-callback-count 1))
+						    (collect subcallback)))))
+		 (if revised-callback-list
+		     (iter (for revised-callback in revised-callback-list)
+		       (format final-more-callback-file "~%~%  ")
+		       (prin1 revised-callback final-more-callback-file))
+		     (progn
+		       (format final-more-callback-file "~%~%  ")
+		       (prin1 new-more-callback final-more-callback-file)
+		       (format final-more-callback-file "~%~%  ")
+		       (prin1 `(mcffi:doc-note doc-file "This callback definer needs to be revised. Please, post an issue to request it.")
+			      final-more-callback-file))))))))
+
 
 ;; -----------------------------
 ;; ----- Generate bindings -----
@@ -542,7 +612,7 @@
 
 ;; Generate the files with vulkan bindings.
 (defun generate-bindings (vulkan-file type-file function-file
-			  more-constant-file more-enum-file more-struct-file more-function-file)
+			  more-constant-file more-enum-file more-struct-file more-function-file more-callback-file)
   (let ((structs (make-hash-table))
 	(unions (make-hash-table)))
     (iter
@@ -573,12 +643,13 @@
 		  (when pointerp
 		    (collect new-type into pointer-types)))
 	      struct-or-union)
-	    (multiple-value-bind (struct-or-union type struct-union-code more-struct-union-code) (read-struct-union line structs unions pointer-types vulkan-file)
+	    (multiple-value-bind (struct-or-union type function-pointers-list struct-union-code more-struct-union-code) (read-struct-union line structs unions pointer-types vulkan-file)
 	      (when struct-or-union
 		  (or (and (string= struct-or-union "struct")
 			   (add-struct-or-union type structs))
 		      (and (string= struct-or-union "union")
 			   (add-struct-or-union type unions)))
+		  (unioning function-pointers-list into function-pointers)
 		  (collect struct-union-code into type-code)
 		  (collect more-struct-union-code into more-struct-code))
 	      struct-or-union)
@@ -594,8 +665,9 @@
 	      (when enum-code
 		(collect enum-code into more-enum-code))
 	      enum-code)
-	    (multiple-value-bind (func-code more-func-code) (read-function line structs unions vulkan-file)
+	    (multiple-value-bind (function-pointers-list func-code more-func-code) (read-function line structs unions vulkan-file)
 	      (when func-code
+		(unioning function-pointers-list into function-pointers)
 		(collect func-code into function-code)
 		(collect more-func-code into more-function-code))
 	      func-code)
@@ -606,22 +678,25 @@
 	       (write-more-constant more-constant-code more-constant-file)
 	       (write-more-enum more-enum-code more-enum-file)
 	       (write-more-struct more-struct-code structs unions more-struct-file)
-	       (write-more-function more-function-code more-function-file)))))
+	       (write-more-function more-function-code more-function-file)
+	       (write-more-callback function-pointers more-callback-file)))))
 
 
-;; ---------------------------------
-;; ----- Remember old bindings -----
-;; ---------------------------------
+;; ---------------------------
+;; ----- Revise bindings -----
+;; ---------------------------
 
-;; Uses the code from previous versions of files to keep the changes made by hand.
+;; Uses the code from revised versions of structs and functions to keep the changes made by hand.
 ;; If some unexpected change occurs in the C code, a message is put in the final files.
 (defun revise-bindings (old-struct-code new-struct-code new-more-struct-code revised-structs-code structs-to-revise-list
 			old-function-code new-function-code new-more-function-code revised-functions-code functions-to-revise-list
-			structs-to-revise-file functions-to-revise-file final-more-struct-file final-more-function-file)
+			structs-to-revise-file functions-to-revise-file final-more-struct-file final-more-function-file
+			revised-callback-code new-more-callback-code final-more-callback-file)
   (write-final-more-struct old-struct-code new-struct-code revised-structs-code new-more-struct-code
 			   structs-to-revise-list structs-to-revise-file final-more-struct-file)
   (write-final-more-function old-function-code new-function-code revised-functions-code new-more-function-code
-			     functions-to-revise-list functions-to-revise-file final-more-function-file))
+			     functions-to-revise-list functions-to-revise-file final-more-function-file)
+  (write-final-more-callback revised-callback-code new-more-callback-code final-more-callback-file))
 
 
 ;; ---------------------------
@@ -630,7 +705,7 @@
 
 ;; 1. Collect data from old files.
 ;; 2. Generate the bindings.
-;; 3. Uses the old data to generate the final definitions.
+;; 3. Uses the old and revised data to generate the final definitions.
 (let ((*print-case* :downcase)
       old-struct-code old-function-code)
   (with-open-file  (old-type-file (asdf:system-relative-pathname "common-vulkan" "vulkan/ctypes.lisp")
@@ -648,75 +723,92 @@
 				     (while code)
 				     (when (eq (car code) 'cffi:defcfun)
 				       (collect code)))))))
-  (with-open-file  (vulkan-file (asdf:system-relative-pathname "common-vulkan" "generation/vulkan_core_tail.h")
+  (with-open-file (vulkan-file (asdf:system-relative-pathname "common-vulkan" "generation/vulkan_core_tail.h")
 				:direction :input :if-does-not-exist :error)
-    (with-open-file  (type-file (asdf:system-relative-pathname "common-vulkan" "vulkan/ctypes.lisp")
+    (with-open-file (type-file (asdf:system-relative-pathname "common-vulkan" "vulkan/ctypes.lisp")
 				:direction :output :if-exists :supersede :if-does-not-exist :create)
-      (with-open-file  (function-file (asdf:system-relative-pathname "common-vulkan" "vulkan/cfunctions.lisp")
+      (with-open-file (function-file (asdf:system-relative-pathname "common-vulkan" "vulkan/cfunctions.lisp")
 				      :direction :output :if-exists :supersede :if-does-not-exist :create)
-	(with-open-file  (more-constant-file (asdf:system-relative-pathname "common-vulkan" "src/constants.lisp")
+	(with-open-file (more-constant-file (asdf:system-relative-pathname "common-vulkan" "src/constants.lisp")
 					     :direction :output :if-exists :supersede :if-does-not-exist :create)
-	  (with-open-file  (more-enum-file (asdf:system-relative-pathname "common-vulkan" "src/enums.lisp")
+	  (with-open-file (more-enum-file (asdf:system-relative-pathname "common-vulkan" "src/enums.lisp")
 					   :direction :output :if-exists :supersede :if-does-not-exist :create)
-	    (with-open-file  (more-struct-file (asdf:system-relative-pathname "common-vulkan" "generation/pre-structs.lisp")
+	    (with-open-file (more-struct-file (asdf:system-relative-pathname "common-vulkan" "generation/pre-structs.lisp")
 					       :direction :output :if-exists :supersede :if-does-not-exist :create)
-	      (with-open-file  (more-function-file (asdf:system-relative-pathname "common-vulkan" "generation/pre-functions.lisp")
+	      (with-open-file (more-function-file (asdf:system-relative-pathname "common-vulkan" "generation/pre-functions.lisp")
 						   :direction :output :if-exists :supersede :if-does-not-exist :create)
-		(generate-bindings vulkan-file type-file function-file
-				   more-constant-file more-enum-file more-struct-file more-function-file))))))))
-  (let (new-struct-code new-function-code new-more-struct-code new-more-function-code
-	revised-structs-code revised-functions-code structs-to-revise-list functions-to-revise-list)
-    (with-open-file  (new-type-file (asdf:system-relative-pathname "common-vulkan" "vulkan/ctypes.lisp")
-				    :direction :input :if-does-not-exist nil)
-      (with-open-file  (new-function-file (asdf:system-relative-pathname "common-vulkan" "vulkan/cfunctions.lisp")
-					  :direction :input :if-does-not-exist nil)
-	(with-open-file  (new-more-struct-file (asdf:system-relative-pathname "common-vulkan" "generation/pre-structs.lisp")
-					       :direction :input :if-does-not-exist nil)
-	  (with-open-file  (new-more-function-file (asdf:system-relative-pathname "common-vulkan" "generation/pre-functions.lisp")
-						   :direction :input :if-does-not-exist nil)
-	    (with-open-file  (revised-struct-file (asdf:system-relative-pathname "common-vulkan" "generation/revised-structs.lisp")
-						  :direction :input :if-does-not-exist nil)
-	      (with-open-file  (revised-function-file (asdf:system-relative-pathname "common-vulkan" "generation/revised-functions.lisp")
-						      :direction :input :if-does-not-exist nil)
-		(with-open-file (structs-to-revise-file (asdf:system-relative-pathname "common-vulkan" "generation/structs-to-revise.lisp")
-							:direction :input :if-does-not-exist nil)
-		  (with-open-file (functions-to-revise-file (asdf:system-relative-pathname "common-vulkan" "generation/functions-to-revise.lisp")
-							    :direction :input :if-does-not-exist nil)
-		    (setf new-struct-code (iter (for code = (read new-type-file nil))
-					    (while code)
-					    (when (or (eq (car code) 'cffi:defcstruct)
-						      (eq (car code) 'cffi:defcunion))
-					      (collect code)))
-			  new-function-code (iter (for code = (read new-function-file nil))
-					      (while code)
-					      (when (eq (car code) 'cffi:defcfun)
-						(collect code)))
-			  new-more-struct-code (iter (for code = (read new-more-struct-file nil))
-						 (until (eq (car code) 'mcffi:with-doc-file))
-						 (finally (return (cddr code))))
-			  new-more-function-code (iter (for code = (read new-more-function-file nil))
-						   (until (eq (car code) 'mcffi:with-doc-file))
-						   (finally (return (cddr code))))
-			  revised-structs-code (and revised-struct-file
-						    (iter (for code = (read revised-struct-file nil))
-						      (while code)
-						      (collect code)))
-			  revised-functions-code (and revised-function-file
-						      (iter (for code = (read revised-function-file nil))
-							(while code)
-							(collect code)))
-			  structs-to-revise-list (and structs-to-revise-file
-						      (read structs-to-revise-file nil))
-			  functions-to-revise-list (and functions-to-revise-file
-							(read functions-to-revise-file nil)))))))))))
-    (with-open-file  (final-more-struct-file (asdf:system-relative-pathname "common-vulkan" "src/structs.lisp")
-					     :direction :output :if-exists :supersede :if-does-not-exist :create)
-      (with-open-file  (final-more-function-file (asdf:system-relative-pathname "common-vulkan" "src/functions.lisp")
-						 :direction :output :if-exists :supersede :if-does-not-exist :create)
-	(with-open-file (structs-to-revise-file (asdf:system-relative-pathname "common-vulkan" "generation/structs-to-revise.lisp")
-						:direction :output :if-exists :supersede :if-does-not-exist :create)
-	  (with-open-file (functions-to-revise-file (asdf:system-relative-pathname "common-vulkan" "generation/functions-to-revise.lisp")
+		(with-open-file (more-callback-file (asdf:system-relative-pathname "common-vulkan" "generation/pre-callbacks.lisp")
 						    :direction :output :if-exists :supersede :if-does-not-exist :create)
-	    (revise-bindings old-struct-code new-struct-code new-more-struct-code revised-structs-code structs-to-revise-list
-			     old-function-code new-function-code new-more-function-code revised-functions-code functions-to-revise-list
-			     structs-to-revise-file functions-to-revise-file final-more-struct-file final-more-function-file)))))))
+		  (generate-bindings vulkan-file type-file function-file
+				     more-constant-file more-enum-file more-struct-file more-function-file more-callback-file)))))))))
+  (let (new-struct-code new-function-code new-more-struct-code new-more-function-code new-more-callback-code
+	revised-structs-code revised-functions-code revised-callback-code
+	structs-to-revise-list functions-to-revise-list)
+    (with-open-file (new-type-file (asdf:system-relative-pathname "common-vulkan" "vulkan/ctypes.lisp")
+				    :direction :input :if-does-not-exist nil)
+      (with-open-file (new-function-file (asdf:system-relative-pathname "common-vulkan" "vulkan/cfunctions.lisp")
+					  :direction :input :if-does-not-exist nil)
+	(with-open-file (new-more-struct-file (asdf:system-relative-pathname "common-vulkan" "generation/pre-structs.lisp")
+					       :direction :input :if-does-not-exist nil)
+	  (with-open-file (new-more-function-file (asdf:system-relative-pathname "common-vulkan" "generation/pre-functions.lisp")
+						   :direction :input :if-does-not-exist nil)
+	    (with-open-file (new-more-callback-file (asdf:system-relative-pathname "common-vulkan" "generation/pre-callbacks.lisp")
+						    :direction :input :if-does-not-exist nil)
+	      (with-open-file (revised-struct-file (asdf:system-relative-pathname "common-vulkan" "generation/revised-structs.lisp")
+						    :direction :input :if-does-not-exist nil)
+		(with-open-file (revised-function-file (asdf:system-relative-pathname "common-vulkan" "generation/revised-functions.lisp")
+							:direction :input :if-does-not-exist nil)
+		  (with-open-file (revised-callback-file (asdf:system-relative-pathname "common-vulkan" "generation/revised-callbacks.lisp")
+							 :direction :input :if-does-not-exist nil)
+		    (with-open-file (structs-to-revise-file (asdf:system-relative-pathname "common-vulkan" "generation/structs-to-revise.lisp")
+							    :direction :input :if-does-not-exist nil)
+		      (with-open-file (functions-to-revise-file (asdf:system-relative-pathname "common-vulkan" "generation/functions-to-revise.lisp")
+								:direction :input :if-does-not-exist nil)
+			(setf new-struct-code (iter (for code = (read new-type-file nil))
+						(while code)
+						(when (or (eq (car code) 'cffi:defcstruct)
+							  (eq (car code) 'cffi:defcunion))
+						  (collect code)))
+			      new-function-code (iter (for code = (read new-function-file nil))
+						  (while code)
+						  (when (eq (car code) 'cffi:defcfun)
+						    (collect code)))
+			      new-more-struct-code (iter (for code = (read new-more-struct-file nil))
+						     (until (eq (car code) 'mcffi:with-doc-file))
+						     (finally (return (cddr code))))
+			      new-more-function-code (iter (for code = (read new-more-function-file nil))
+						       (until (eq (car code) 'mcffi:with-doc-file))
+						       (finally (return (cddr code))))
+			      new-more-callback-code (iter (for code = (read new-more-callback-file nil))
+						       (until (eq (car code) 'mcffi:with-doc-file))
+						       (finally (return (cddr code))))
+			      revised-structs-code (and revised-struct-file
+							(iter (for code = (read revised-struct-file nil))
+							  (while code)
+							  (collect code)))
+			      revised-functions-code (and revised-function-file
+							  (iter (for code = (read revised-function-file nil))
+							    (while code)
+							    (collect code)))
+			      revised-callback-code (and revised-callback-file
+							 (iter (for code = (read revised-callback-file nil))
+							   (while code)
+							   (collect code)))
+			      structs-to-revise-list (and structs-to-revise-file
+							  (read structs-to-revise-file nil))
+			      functions-to-revise-list (and functions-to-revise-file
+							    (read functions-to-revise-file nil)))))))))))))
+    (with-open-file (final-more-struct-file (asdf:system-relative-pathname "common-vulkan" "src/structs.lisp")
+					    :direction :output :if-exists :supersede :if-does-not-exist :create)
+      (with-open-file (final-more-function-file (asdf:system-relative-pathname "common-vulkan" "src/functions.lisp")
+						:direction :output :if-exists :supersede :if-does-not-exist :create)
+	(with-open-file (final-more-callback-file (asdf:system-relative-pathname "common-vulkan" "src/callbacks.lisp")
+						  :direction :output :if-exists :supersede :if-does-not-exist :create)
+	  (with-open-file (structs-to-revise-file (asdf:system-relative-pathname "common-vulkan" "generation/structs-to-revise.lisp")
+						  :direction :output :if-exists :supersede :if-does-not-exist :create)
+	    (with-open-file (functions-to-revise-file (asdf:system-relative-pathname "common-vulkan" "generation/functions-to-revise.lisp")
+						      :direction :output :if-exists :supersede :if-does-not-exist :create)
+	      (revise-bindings old-struct-code new-struct-code new-more-struct-code revised-structs-code structs-to-revise-list
+			       old-function-code new-function-code new-more-function-code revised-functions-code functions-to-revise-list
+			       structs-to-revise-file functions-to-revise-file final-more-struct-file final-more-function-file
+			       revised-callback-code new-more-callback-code final-more-callback-file))))))))

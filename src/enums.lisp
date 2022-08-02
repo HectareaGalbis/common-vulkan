@@ -46,21 +46,21 @@
                             ("VK_OPERATION_NOT_DEFERRED_KHR" 1000268003)
                             ("VK_ERROR_COMPRESSION_EXHAUSTED_EXT" -1000338000)
                             ("VK_ERROR_OUT_OF_POOL_MEMORY_KHR"
-                             "VK_ERROR_OUT_OF_POOL_MEMORY")
+                             vk_error_out_of_pool_memory)
                             ("VK_ERROR_INVALID_EXTERNAL_HANDLE_KHR"
-                             "VK_ERROR_INVALID_EXTERNAL_HANDLE")
+                             vk_error_invalid_external_handle)
                             ("VK_ERROR_FRAGMENTATION_EXT"
-                             "VK_ERROR_FRAGMENTATION")
+                             vk_error_fragmentation)
                             ("VK_ERROR_NOT_PERMITTED_EXT"
-                             "VK_ERROR_NOT_PERMITTED_KHR")
+                             vk_error_not_permitted_khr)
                             ("VK_ERROR_INVALID_DEVICE_ADDRESS_EXT"
-                             "VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS")
+                             vk_error_invalid_opaque_capture_address)
                             ("VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS_KHR"
-                             "VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS")
+                             vk_error_invalid_opaque_capture_address)
                             ("VK_PIPELINE_COMPILE_REQUIRED_EXT"
-                             "VK_PIPELINE_COMPILE_REQUIRED")
+                             vk_pipeline_compile_required)
                             ("VK_ERROR_PIPELINE_COMPILE_REQUIRED_EXT"
-                             "VK_PIPELINE_COMPILE_REQUIRED")
+                             vk_pipeline_compile_required)
                             ("VK_RESULT_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkStructureType"
@@ -1312,345 +1312,345 @@
                             ("VK_STRUCTURE_TYPE_RENDER_PASS_SUBPASS_FEEDBACK_CREATE_INFO_EXT"
                              1000458003)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES")
+                             vk_structure_type_physical_device_variable_pointers_features)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES")
+                             vk_structure_type_physical_device_shader_draw_parameters_features)
                             ("VK_STRUCTURE_TYPE_DEBUG_REPORT_CREATE_INFO_EXT"
-                             "VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT")
+                             vk_structure_type_debug_report_callback_create_info_ext)
                             ("VK_STRUCTURE_TYPE_RENDERING_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_RENDERING_INFO")
+                             vk_structure_type_rendering_info)
                             ("VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_INFO")
+                             vk_structure_type_rendering_attachment_info)
                             ("VK_STRUCTURE_TYPE_PIPELINE_RENDERING_CREATE_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_PIPELINE_RENDERING_CREATE_INFO")
+                             vk_structure_type_pipeline_rendering_create_info)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_FEATURES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_FEATURES")
+                             vk_structure_type_physical_device_dynamic_rendering_features)
                             ("VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO")
+                             vk_structure_type_command_buffer_inheritance_rendering_info)
                             ("VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_NV"
-                             "VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD")
+                             vk_structure_type_attachment_sample_count_info_amd)
                             ("VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO")
+                             vk_structure_type_render_pass_multiview_create_info)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES")
+                             vk_structure_type_physical_device_multiview_features)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES")
+                             vk_structure_type_physical_device_multiview_properties)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2")
+                             vk_structure_type_physical_device_features_2)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2")
+                             vk_structure_type_physical_device_properties_2)
                             ("VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2_KHR"
-                             "VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2")
+                             vk_structure_type_format_properties_2)
                             ("VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2_KHR"
-                             "VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2")
+                             vk_structure_type_image_format_properties_2)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2")
+                             vk_structure_type_physical_device_image_format_info_2)
                             ("VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2_KHR"
-                             "VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2")
+                             vk_structure_type_queue_family_properties_2)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2")
+                             vk_structure_type_physical_device_memory_properties_2)
                             ("VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2_KHR"
-                             "VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2")
+                             vk_structure_type_sparse_image_format_properties_2)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2")
+                             vk_structure_type_physical_device_sparse_image_format_info_2)
                             ("VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO")
+                             vk_structure_type_memory_allocate_flags_info)
                             ("VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO")
+                             vk_structure_type_device_group_render_pass_begin_info)
                             ("VK_STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO")
+                             vk_structure_type_device_group_command_buffer_begin_info)
                             ("VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO")
+                             vk_structure_type_device_group_submit_info)
                             ("VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO")
+                             vk_structure_type_device_group_bind_sparse_info)
                             ("VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO")
+                             vk_structure_type_bind_buffer_memory_device_group_info)
                             ("VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO")
+                             vk_structure_type_bind_image_memory_device_group_info)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES_EXT"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES")
+                             vk_structure_type_physical_device_texture_compression_astc_hdr_features)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES")
+                             vk_structure_type_physical_device_group_properties)
                             ("VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO")
+                             vk_structure_type_device_group_device_create_info)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO")
+                             vk_structure_type_physical_device_external_image_format_info)
                             ("VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES_KHR"
-                             "VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES")
+                             vk_structure_type_external_image_format_properties)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO")
+                             vk_structure_type_physical_device_external_buffer_info)
                             ("VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES_KHR"
-                             "VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES")
+                             vk_structure_type_external_buffer_properties)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES")
+                             vk_structure_type_physical_device_id_properties)
                             ("VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO")
+                             vk_structure_type_external_memory_buffer_create_info)
                             ("VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO")
+                             vk_structure_type_external_memory_image_create_info)
                             ("VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO")
+                             vk_structure_type_export_memory_allocate_info)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO")
+                             vk_structure_type_physical_device_external_semaphore_info)
                             ("VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES_KHR"
-                             "VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES")
+                             vk_structure_type_external_semaphore_properties)
                             ("VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO")
+                             vk_structure_type_export_semaphore_create_info)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES")
+                             vk_structure_type_physical_device_shader_float16_int8_features)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT16_INT8_FEATURES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES")
+                             vk_structure_type_physical_device_shader_float16_int8_features)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES")
+                             vk_structure_type_physical_device_16bit_storage_features)
                             ("VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO")
+                             vk_structure_type_descriptor_update_template_create_info)
                             ("VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES2_EXT"
-                             "VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_EXT")
+                             vk_structure_type_surface_capabilities_2_ext)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES")
+                             vk_structure_type_physical_device_imageless_framebuffer_features)
                             ("VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO")
+                             vk_structure_type_framebuffer_attachments_create_info)
                             ("VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO")
+                             vk_structure_type_framebuffer_attachment_image_info)
                             ("VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO")
+                             vk_structure_type_render_pass_attachment_begin_info)
                             ("VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2_KHR"
-                             "VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2")
+                             vk_structure_type_attachment_description_2)
                             ("VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2_KHR"
-                             "VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2")
+                             vk_structure_type_attachment_reference_2)
                             ("VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_2_KHR"
-                             "VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_2")
+                             vk_structure_type_subpass_description_2)
                             ("VK_STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2_KHR"
-                             "VK_STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2")
+                             vk_structure_type_subpass_dependency_2)
                             ("VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2_KHR"
-                             "VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2")
+                             vk_structure_type_render_pass_create_info_2)
                             ("VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO")
+                             vk_structure_type_subpass_begin_info)
                             ("VK_STRUCTURE_TYPE_SUBPASS_END_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_SUBPASS_END_INFO")
+                             vk_structure_type_subpass_end_info)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO")
+                             vk_structure_type_physical_device_external_fence_info)
                             ("VK_STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES_KHR"
-                             "VK_STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES")
+                             vk_structure_type_external_fence_properties)
                             ("VK_STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO")
+                             vk_structure_type_export_fence_create_info)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES")
+                             vk_structure_type_physical_device_point_clipping_properties)
                             ("VK_STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO")
+                             vk_structure_type_render_pass_input_attachment_aspect_create_info)
                             ("VK_STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO")
+                             vk_structure_type_image_view_usage_create_info)
                             ("VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO")
+                             vk_structure_type_pipeline_tessellation_domain_origin_state_create_info)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES")
+                             vk_structure_type_physical_device_variable_pointers_features)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES_KHR")
+                             vk_structure_type_physical_device_variable_pointers_features_khr)
                             ("VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS_KHR"
-                             "VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS")
+                             vk_structure_type_memory_dedicated_requirements)
                             ("VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO")
+                             vk_structure_type_memory_dedicated_allocate_info)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES")
+                             vk_structure_type_physical_device_sampler_filter_minmax_properties)
                             ("VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO_EXT"
-                             "VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO")
+                             vk_structure_type_sampler_reduction_mode_create_info)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES")
+                             vk_structure_type_physical_device_inline_uniform_block_features)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES")
+                             vk_structure_type_physical_device_inline_uniform_block_properties)
                             ("VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT"
-                             "VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK")
+                             vk_structure_type_write_descriptor_set_inline_uniform_block)
                             ("VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO_EXT"
-                             "VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO")
+                             vk_structure_type_descriptor_pool_inline_uniform_block_create_info)
                             ("VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2_KHR"
-                             "VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2")
+                             vk_structure_type_buffer_memory_requirements_info_2)
                             ("VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2_KHR"
-                             "VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2")
+                             vk_structure_type_image_memory_requirements_info_2)
                             ("VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2_KHR"
-                             "VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2")
+                             vk_structure_type_image_sparse_memory_requirements_info_2)
                             ("VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2_KHR"
-                             "VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2")
+                             vk_structure_type_memory_requirements_2)
                             ("VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2_KHR"
-                             "VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2")
+                             vk_structure_type_sparse_image_memory_requirements_2)
                             ("VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO")
+                             vk_structure_type_image_format_list_create_info)
                             ("VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO")
+                             vk_structure_type_sampler_ycbcr_conversion_create_info)
                             ("VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO")
+                             vk_structure_type_sampler_ycbcr_conversion_info)
                             ("VK_STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO")
+                             vk_structure_type_bind_image_plane_memory_info)
                             ("VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO")
+                             vk_structure_type_image_plane_memory_requirements_info)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES")
+                             vk_structure_type_physical_device_sampler_ycbcr_conversion_features)
                             ("VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES_KHR"
-                             "VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES")
+                             vk_structure_type_sampler_ycbcr_conversion_image_format_properties)
                             ("VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO")
+                             vk_structure_type_bind_buffer_memory_info)
                             ("VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO")
+                             vk_structure_type_bind_image_memory_info)
                             ("VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO_EXT"
-                             "VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO")
+                             vk_structure_type_descriptor_set_layout_binding_flags_create_info)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES_EXT"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES")
+                             vk_structure_type_physical_device_descriptor_indexing_features)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES_EXT"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES")
+                             vk_structure_type_physical_device_descriptor_indexing_properties)
                             ("VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO_EXT"
-                             "VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO")
+                             vk_structure_type_descriptor_set_variable_descriptor_count_allocate_info)
                             ("VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT_EXT"
-                             "VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT")
+                             vk_structure_type_descriptor_set_variable_descriptor_count_layout_support)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES")
+                             vk_structure_type_physical_device_maintenance_3_properties)
                             ("VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT_KHR"
-                             "VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT")
+                             vk_structure_type_descriptor_set_layout_support)
                             ("VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_EXT"
-                             "VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_KHR")
+                             vk_structure_type_device_queue_global_priority_create_info_khr)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES")
+                             vk_structure_type_physical_device_shader_subgroup_extended_types_features)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES")
+                             vk_structure_type_physical_device_8bit_storage_features)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES")
+                             vk_structure_type_physical_device_shader_atomic_int64_features)
                             ("VK_STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO_EXT"
-                             "VK_STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO")
+                             vk_structure_type_pipeline_creation_feedback_create_info)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES")
+                             vk_structure_type_physical_device_driver_properties)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES")
+                             vk_structure_type_physical_device_float_controls_properties)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES")
+                             vk_structure_type_physical_device_depth_stencil_resolve_properties)
                             ("VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE_KHR"
-                             "VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE")
+                             vk_structure_type_subpass_description_depth_stencil_resolve)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_BARYCENTRIC_FEATURES_NV"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_BARYCENTRIC_FEATURES_KHR")
+                             vk_structure_type_physical_device_fragment_shader_barycentric_features_khr)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES")
+                             vk_structure_type_physical_device_timeline_semaphore_features)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES")
+                             vk_structure_type_physical_device_timeline_semaphore_properties)
                             ("VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO")
+                             vk_structure_type_semaphore_type_create_info)
                             ("VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO")
+                             vk_structure_type_timeline_semaphore_submit_info)
                             ("VK_STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO")
+                             vk_structure_type_semaphore_wait_info)
                             ("VK_STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO")
+                             vk_structure_type_semaphore_signal_info)
                             ("VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO_INTEL"
-                             "VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL")
+                             vk_structure_type_query_pool_performance_query_create_info_intel)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES")
+                             vk_structure_type_physical_device_vulkan_memory_model_features)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES")
+                             vk_structure_type_physical_device_shader_terminate_invocation_features)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES_EXT"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES")
+                             vk_structure_type_physical_device_scalar_block_layout_features)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES_EXT"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES")
+                             vk_structure_type_physical_device_subgroup_size_control_properties)
                             ("VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT"
-                             "VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO")
+                             vk_structure_type_pipeline_shader_stage_required_subgroup_size_create_info)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES")
+                             vk_structure_type_physical_device_subgroup_size_control_features)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES")
+                             vk_structure_type_physical_device_separate_depth_stencil_layouts_features)
                             ("VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT_KHR"
-                             "VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT")
+                             vk_structure_type_attachment_reference_stencil_layout)
                             ("VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_STENCIL_LAYOUT_KHR"
-                             "VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_STENCIL_LAYOUT")
+                             vk_structure_type_attachment_description_stencil_layout)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_ADDRESS_FEATURES_EXT"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_EXT")
+                             vk_structure_type_physical_device_buffer_device_address_features_ext)
                             ("VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO_EXT"
-                             "VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO")
+                             vk_structure_type_buffer_device_address_info)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES_EXT"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES")
+                             vk_structure_type_physical_device_tool_properties)
                             ("VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO_EXT"
-                             "VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO")
+                             vk_structure_type_image_stencil_usage_create_info)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES")
+                             vk_structure_type_physical_device_uniform_buffer_standard_layout_features)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES")
+                             vk_structure_type_physical_device_buffer_device_address_features)
                             ("VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO")
+                             vk_structure_type_buffer_device_address_info)
                             ("VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO")
+                             vk_structure_type_buffer_opaque_capture_address_create_info)
                             ("VK_STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO")
+                             vk_structure_type_memory_opaque_capture_address_allocate_info)
                             ("VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO")
+                             vk_structure_type_device_memory_opaque_capture_address_info)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES_EXT"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES")
+                             vk_structure_type_physical_device_host_query_reset_features)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES")
+                             vk_structure_type_physical_device_shader_demote_to_helper_invocation_features)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES")
+                             vk_structure_type_physical_device_shader_integer_dot_product_features)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES")
+                             vk_structure_type_physical_device_shader_integer_dot_product_properties)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES_EXT"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES")
+                             vk_structure_type_physical_device_texel_buffer_alignment_properties)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES_EXT"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES")
+                             vk_structure_type_physical_device_private_data_features)
                             ("VK_STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO_EXT"
-                             "VK_STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO")
+                             vk_structure_type_device_private_data_create_info)
                             ("VK_STRUCTURE_TYPE_PRIVATE_DATA_SLOT_CREATE_INFO_EXT"
-                             "VK_STRUCTURE_TYPE_PRIVATE_DATA_SLOT_CREATE_INFO")
+                             vk_structure_type_private_data_slot_create_info)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES_EXT"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES")
+                             vk_structure_type_physical_device_pipeline_creation_cache_control_features)
                             ("VK_STRUCTURE_TYPE_MEMORY_BARRIER_2_KHR"
-                             "VK_STRUCTURE_TYPE_MEMORY_BARRIER_2")
+                             vk_structure_type_memory_barrier_2)
                             ("VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2_KHR"
-                             "VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2")
+                             vk_structure_type_buffer_memory_barrier_2)
                             ("VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER_2_KHR"
-                             "VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER_2")
+                             vk_structure_type_image_memory_barrier_2)
                             ("VK_STRUCTURE_TYPE_DEPENDENCY_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_DEPENDENCY_INFO")
+                             vk_structure_type_dependency_info)
                             ("VK_STRUCTURE_TYPE_SUBMIT_INFO_2_KHR"
-                             "VK_STRUCTURE_TYPE_SUBMIT_INFO_2")
+                             vk_structure_type_submit_info_2)
                             ("VK_STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO")
+                             vk_structure_type_semaphore_submit_info)
                             ("VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO_KHR"
-                             "VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO")
+                             vk_structure_type_command_buffer_submit_info)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES")
+                             vk_structure_type_physical_device_synchronization_2_features)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES")
+                             vk_structure_type_physical_device_zero_initialize_workgroup_memory_features)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES_EXT"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES")
+                             vk_structure_type_physical_device_image_robustness_features)
                             ("VK_STRUCTURE_TYPE_COPY_BUFFER_INFO_2_KHR"
-                             "VK_STRUCTURE_TYPE_COPY_BUFFER_INFO_2")
+                             vk_structure_type_copy_buffer_info_2)
                             ("VK_STRUCTURE_TYPE_COPY_IMAGE_INFO_2_KHR"
-                             "VK_STRUCTURE_TYPE_COPY_IMAGE_INFO_2")
+                             vk_structure_type_copy_image_info_2)
                             ("VK_STRUCTURE_TYPE_COPY_BUFFER_TO_IMAGE_INFO_2_KHR"
-                             "VK_STRUCTURE_TYPE_COPY_BUFFER_TO_IMAGE_INFO_2")
+                             vk_structure_type_copy_buffer_to_image_info_2)
                             ("VK_STRUCTURE_TYPE_COPY_IMAGE_TO_BUFFER_INFO_2_KHR"
-                             "VK_STRUCTURE_TYPE_COPY_IMAGE_TO_BUFFER_INFO_2")
+                             vk_structure_type_copy_image_to_buffer_info_2)
                             ("VK_STRUCTURE_TYPE_BLIT_IMAGE_INFO_2_KHR"
-                             "VK_STRUCTURE_TYPE_BLIT_IMAGE_INFO_2")
+                             vk_structure_type_blit_image_info_2)
                             ("VK_STRUCTURE_TYPE_RESOLVE_IMAGE_INFO_2_KHR"
-                             "VK_STRUCTURE_TYPE_RESOLVE_IMAGE_INFO_2")
+                             vk_structure_type_resolve_image_info_2)
                             ("VK_STRUCTURE_TYPE_BUFFER_COPY_2_KHR"
-                             "VK_STRUCTURE_TYPE_BUFFER_COPY_2")
+                             vk_structure_type_buffer_copy_2)
                             ("VK_STRUCTURE_TYPE_IMAGE_COPY_2_KHR"
-                             "VK_STRUCTURE_TYPE_IMAGE_COPY_2")
+                             vk_structure_type_image_copy_2)
                             ("VK_STRUCTURE_TYPE_IMAGE_BLIT_2_KHR"
-                             "VK_STRUCTURE_TYPE_IMAGE_BLIT_2")
+                             vk_structure_type_image_blit_2)
                             ("VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2_KHR"
-                             "VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2")
+                             vk_structure_type_buffer_image_copy_2)
                             ("VK_STRUCTURE_TYPE_IMAGE_RESOLVE_2_KHR"
-                             "VK_STRUCTURE_TYPE_IMAGE_RESOLVE_2")
+                             vk_structure_type_image_resolve_2)
                             ("VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_3_KHR"
-                             "VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_3")
+                             vk_structure_type_format_properties_3)
                             ("VK_STRUCTURE_TYPE_PIPELINE_INFO_EXT"
-                             "VK_STRUCTURE_TYPE_PIPELINE_INFO_KHR")
+                             vk_structure_type_pipeline_info_khr)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_KHR")
+                             vk_structure_type_physical_device_global_priority_query_features_khr)
                             ("VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT"
-                             "VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_KHR")
+                             vk_structure_type_queue_family_global_priority_properties_khr)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES")
+                             vk_structure_type_physical_device_maintenance_4_features)
                             ("VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES_KHR"
-                             "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES")
+                             vk_structure_type_physical_device_maintenance_4_properties)
                             ("VK_STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS_KHR"
-                             "VK_STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS")
+                             vk_structure_type_device_buffer_memory_requirements)
                             ("VK_STRUCTURE_TYPE_DEVICE_IMAGE_MEMORY_REQUIREMENTS_KHR"
-                             "VK_STRUCTURE_TYPE_DEVICE_IMAGE_MEMORY_REQUIREMENTS")
+                             vk_structure_type_device_image_memory_requirements)
                             ("VK_STRUCTURE_TYPE_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkPipelineCacheHeaderVersion"
@@ -1696,23 +1696,23 @@
                             ("VK_IMAGE_LAYOUT_VIDEO_ENCODE_SRC_KHR" 1000299001)
                             ("VK_IMAGE_LAYOUT_VIDEO_ENCODE_DPB_KHR" 1000299002)
                             ("VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL_KHR"
-                             "VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL")
+                             vk_image_layout_depth_read_only_stencil_attachment_optimal)
                             ("VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL_KHR"
-                             "VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL")
+                             vk_image_layout_depth_attachment_stencil_read_only_optimal)
                             ("VK_IMAGE_LAYOUT_SHADING_RATE_OPTIMAL_NV"
-                             "VK_IMAGE_LAYOUT_FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR")
+                             vk_image_layout_fragment_shading_rate_attachment_optimal_khr)
                             ("VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR"
-                             "VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL")
+                             vk_image_layout_depth_attachment_optimal)
                             ("VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR"
-                             "VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL")
+                             vk_image_layout_depth_read_only_optimal)
                             ("VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL_KHR"
-                             "VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL")
+                             vk_image_layout_stencil_attachment_optimal)
                             ("VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL_KHR"
-                             "VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL")
+                             vk_image_layout_stencil_read_only_optimal)
                             ("VK_IMAGE_LAYOUT_READ_ONLY_OPTIMAL_KHR"
-                             "VK_IMAGE_LAYOUT_READ_ONLY_OPTIMAL")
+                             vk_image_layout_read_only_optimal)
                             ("VK_IMAGE_LAYOUT_ATTACHMENT_OPTIMAL_KHR"
-                             "VK_IMAGE_LAYOUT_ATTACHMENT_OPTIMAL")
+                             vk_image_layout_attachment_optimal)
                             ("VK_IMAGE_LAYOUT_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkObjectType"
@@ -1774,11 +1774,11 @@
                             ("VK_OBJECT_TYPE_BUFFER_COLLECTION_FUCHSIA"
                              1000366000)
                             ("VK_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR"
-                             "VK_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE")
+                             vk_object_type_descriptor_update_template)
                             ("VK_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_KHR"
-                             "VK_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION")
+                             vk_object_type_sampler_ycbcr_conversion)
                             ("VK_OBJECT_TYPE_PRIVATE_DATA_SLOT_EXT"
-                             "VK_OBJECT_TYPE_PRIVATE_DATA_SLOT")
+                             vk_object_type_private_data_slot)
                             ("VK_OBJECT_TYPE_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkVendorId" ("VK_VENDOR_ID_VIV" 10001)
@@ -2073,113 +2073,113 @@
                             ("VK_FORMAT_PVRTC2_2BPP_SRGB_BLOCK_IMG" 1000054006)
                             ("VK_FORMAT_PVRTC2_4BPP_SRGB_BLOCK_IMG" 1000054007)
                             ("VK_FORMAT_ASTC_4x4_SFLOAT_BLOCK_EXT"
-                             "VK_FORMAT_ASTC_4x4_SFLOAT_BLOCK")
+                             vk_format_astc_4x4_sfloat_block)
                             ("VK_FORMAT_ASTC_5x4_SFLOAT_BLOCK_EXT"
-                             "VK_FORMAT_ASTC_5x4_SFLOAT_BLOCK")
+                             vk_format_astc_5x4_sfloat_block)
                             ("VK_FORMAT_ASTC_5x5_SFLOAT_BLOCK_EXT"
-                             "VK_FORMAT_ASTC_5x5_SFLOAT_BLOCK")
+                             vk_format_astc_5x5_sfloat_block)
                             ("VK_FORMAT_ASTC_6x5_SFLOAT_BLOCK_EXT"
-                             "VK_FORMAT_ASTC_6x5_SFLOAT_BLOCK")
+                             vk_format_astc_6x5_sfloat_block)
                             ("VK_FORMAT_ASTC_6x6_SFLOAT_BLOCK_EXT"
-                             "VK_FORMAT_ASTC_6x6_SFLOAT_BLOCK")
+                             vk_format_astc_6x6_sfloat_block)
                             ("VK_FORMAT_ASTC_8x5_SFLOAT_BLOCK_EXT"
-                             "VK_FORMAT_ASTC_8x5_SFLOAT_BLOCK")
+                             vk_format_astc_8x5_sfloat_block)
                             ("VK_FORMAT_ASTC_8x6_SFLOAT_BLOCK_EXT"
-                             "VK_FORMAT_ASTC_8x6_SFLOAT_BLOCK")
+                             vk_format_astc_8x6_sfloat_block)
                             ("VK_FORMAT_ASTC_8x8_SFLOAT_BLOCK_EXT"
-                             "VK_FORMAT_ASTC_8x8_SFLOAT_BLOCK")
+                             vk_format_astc_8x8_sfloat_block)
                             ("VK_FORMAT_ASTC_10x5_SFLOAT_BLOCK_EXT"
-                             "VK_FORMAT_ASTC_10x5_SFLOAT_BLOCK")
+                             vk_format_astc_10x5_sfloat_block)
                             ("VK_FORMAT_ASTC_10x6_SFLOAT_BLOCK_EXT"
-                             "VK_FORMAT_ASTC_10x6_SFLOAT_BLOCK")
+                             vk_format_astc_10x6_sfloat_block)
                             ("VK_FORMAT_ASTC_10x8_SFLOAT_BLOCK_EXT"
-                             "VK_FORMAT_ASTC_10x8_SFLOAT_BLOCK")
+                             vk_format_astc_10x8_sfloat_block)
                             ("VK_FORMAT_ASTC_10x10_SFLOAT_BLOCK_EXT"
-                             "VK_FORMAT_ASTC_10x10_SFLOAT_BLOCK")
+                             vk_format_astc_10x10_sfloat_block)
                             ("VK_FORMAT_ASTC_12x10_SFLOAT_BLOCK_EXT"
-                             "VK_FORMAT_ASTC_12x10_SFLOAT_BLOCK")
+                             vk_format_astc_12x10_sfloat_block)
                             ("VK_FORMAT_ASTC_12x12_SFLOAT_BLOCK_EXT"
-                             "VK_FORMAT_ASTC_12x12_SFLOAT_BLOCK")
+                             vk_format_astc_12x12_sfloat_block)
                             ("VK_FORMAT_G8B8G8R8_422_UNORM_KHR"
-                             "VK_FORMAT_G8B8G8R8_422_UNORM")
+                             vk_format_g8b8g8r8_422_unorm)
                             ("VK_FORMAT_B8G8R8G8_422_UNORM_KHR"
-                             "VK_FORMAT_B8G8R8G8_422_UNORM")
+                             vk_format_b8g8r8g8_422_unorm)
                             ("VK_FORMAT_G8_B8_R8_3PLANE_420_UNORM_KHR"
-                             "VK_FORMAT_G8_B8_R8_3PLANE_420_UNORM")
+                             vk_format_g8_b8_r8_3plane_420_unorm)
                             ("VK_FORMAT_G8_B8R8_2PLANE_420_UNORM_KHR"
-                             "VK_FORMAT_G8_B8R8_2PLANE_420_UNORM")
+                             vk_format_g8_b8r8_2plane_420_unorm)
                             ("VK_FORMAT_G8_B8_R8_3PLANE_422_UNORM_KHR"
-                             "VK_FORMAT_G8_B8_R8_3PLANE_422_UNORM")
+                             vk_format_g8_b8_r8_3plane_422_unorm)
                             ("VK_FORMAT_G8_B8R8_2PLANE_422_UNORM_KHR"
-                             "VK_FORMAT_G8_B8R8_2PLANE_422_UNORM")
+                             vk_format_g8_b8r8_2plane_422_unorm)
                             ("VK_FORMAT_G8_B8_R8_3PLANE_444_UNORM_KHR"
-                             "VK_FORMAT_G8_B8_R8_3PLANE_444_UNORM")
+                             vk_format_g8_b8_r8_3plane_444_unorm)
                             ("VK_FORMAT_R10X6_UNORM_PACK16_KHR"
-                             "VK_FORMAT_R10X6_UNORM_PACK16")
+                             vk_format_r10x6_unorm_pack16)
                             ("VK_FORMAT_R10X6G10X6_UNORM_2PACK16_KHR"
-                             "VK_FORMAT_R10X6G10X6_UNORM_2PACK16")
+                             vk_format_r10x6g10x6_unorm_2pack16)
                             ("VK_FORMAT_R10X6G10X6B10X6A10X6_UNORM_4PACK16_KHR"
-                             "VK_FORMAT_R10X6G10X6B10X6A10X6_UNORM_4PACK16")
+                             vk_format_r10x6g10x6b10x6a10x6_unorm_4pack16)
                             ("VK_FORMAT_G10X6B10X6G10X6R10X6_422_UNORM_4PACK16_KHR"
-                             "VK_FORMAT_G10X6B10X6G10X6R10X6_422_UNORM_4PACK16")
+                             vk_format_g10x6b10x6g10x6r10x6_422_unorm_4pack16)
                             ("VK_FORMAT_B10X6G10X6R10X6G10X6_422_UNORM_4PACK16_KHR"
-                             "VK_FORMAT_B10X6G10X6R10X6G10X6_422_UNORM_4PACK16")
+                             vk_format_b10x6g10x6r10x6g10x6_422_unorm_4pack16)
                             ("VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_420_UNORM_3PACK16_KHR"
-                             "VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_420_UNORM_3PACK16")
+                             vk_format_g10x6_b10x6_r10x6_3plane_420_unorm_3pack16)
                             ("VK_FORMAT_G10X6_B10X6R10X6_2PLANE_420_UNORM_3PACK16_KHR"
-                             "VK_FORMAT_G10X6_B10X6R10X6_2PLANE_420_UNORM_3PACK16")
+                             vk_format_g10x6_b10x6r10x6_2plane_420_unorm_3pack16)
                             ("VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_422_UNORM_3PACK16_KHR"
-                             "VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_422_UNORM_3PACK16")
+                             vk_format_g10x6_b10x6_r10x6_3plane_422_unorm_3pack16)
                             ("VK_FORMAT_G10X6_B10X6R10X6_2PLANE_422_UNORM_3PACK16_KHR"
-                             "VK_FORMAT_G10X6_B10X6R10X6_2PLANE_422_UNORM_3PACK16")
+                             vk_format_g10x6_b10x6r10x6_2plane_422_unorm_3pack16)
                             ("VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_444_UNORM_3PACK16_KHR"
-                             "VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_444_UNORM_3PACK16")
+                             vk_format_g10x6_b10x6_r10x6_3plane_444_unorm_3pack16)
                             ("VK_FORMAT_R12X4_UNORM_PACK16_KHR"
-                             "VK_FORMAT_R12X4_UNORM_PACK16")
+                             vk_format_r12x4_unorm_pack16)
                             ("VK_FORMAT_R12X4G12X4_UNORM_2PACK16_KHR"
-                             "VK_FORMAT_R12X4G12X4_UNORM_2PACK16")
+                             vk_format_r12x4g12x4_unorm_2pack16)
                             ("VK_FORMAT_R12X4G12X4B12X4A12X4_UNORM_4PACK16_KHR"
-                             "VK_FORMAT_R12X4G12X4B12X4A12X4_UNORM_4PACK16")
+                             vk_format_r12x4g12x4b12x4a12x4_unorm_4pack16)
                             ("VK_FORMAT_G12X4B12X4G12X4R12X4_422_UNORM_4PACK16_KHR"
-                             "VK_FORMAT_G12X4B12X4G12X4R12X4_422_UNORM_4PACK16")
+                             vk_format_g12x4b12x4g12x4r12x4_422_unorm_4pack16)
                             ("VK_FORMAT_B12X4G12X4R12X4G12X4_422_UNORM_4PACK16_KHR"
-                             "VK_FORMAT_B12X4G12X4R12X4G12X4_422_UNORM_4PACK16")
+                             vk_format_b12x4g12x4r12x4g12x4_422_unorm_4pack16)
                             ("VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_420_UNORM_3PACK16_KHR"
-                             "VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_420_UNORM_3PACK16")
+                             vk_format_g12x4_b12x4_r12x4_3plane_420_unorm_3pack16)
                             ("VK_FORMAT_G12X4_B12X4R12X4_2PLANE_420_UNORM_3PACK16_KHR"
-                             "VK_FORMAT_G12X4_B12X4R12X4_2PLANE_420_UNORM_3PACK16")
+                             vk_format_g12x4_b12x4r12x4_2plane_420_unorm_3pack16)
                             ("VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_422_UNORM_3PACK16_KHR"
-                             "VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_422_UNORM_3PACK16")
+                             vk_format_g12x4_b12x4_r12x4_3plane_422_unorm_3pack16)
                             ("VK_FORMAT_G12X4_B12X4R12X4_2PLANE_422_UNORM_3PACK16_KHR"
-                             "VK_FORMAT_G12X4_B12X4R12X4_2PLANE_422_UNORM_3PACK16")
+                             vk_format_g12x4_b12x4r12x4_2plane_422_unorm_3pack16)
                             ("VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_444_UNORM_3PACK16_KHR"
-                             "VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_444_UNORM_3PACK16")
+                             vk_format_g12x4_b12x4_r12x4_3plane_444_unorm_3pack16)
                             ("VK_FORMAT_G16B16G16R16_422_UNORM_KHR"
-                             "VK_FORMAT_G16B16G16R16_422_UNORM")
+                             vk_format_g16b16g16r16_422_unorm)
                             ("VK_FORMAT_B16G16R16G16_422_UNORM_KHR"
-                             "VK_FORMAT_B16G16R16G16_422_UNORM")
+                             vk_format_b16g16r16g16_422_unorm)
                             ("VK_FORMAT_G16_B16_R16_3PLANE_420_UNORM_KHR"
-                             "VK_FORMAT_G16_B16_R16_3PLANE_420_UNORM")
+                             vk_format_g16_b16_r16_3plane_420_unorm)
                             ("VK_FORMAT_G16_B16R16_2PLANE_420_UNORM_KHR"
-                             "VK_FORMAT_G16_B16R16_2PLANE_420_UNORM")
+                             vk_format_g16_b16r16_2plane_420_unorm)
                             ("VK_FORMAT_G16_B16_R16_3PLANE_422_UNORM_KHR"
-                             "VK_FORMAT_G16_B16_R16_3PLANE_422_UNORM")
+                             vk_format_g16_b16_r16_3plane_422_unorm)
                             ("VK_FORMAT_G16_B16R16_2PLANE_422_UNORM_KHR"
-                             "VK_FORMAT_G16_B16R16_2PLANE_422_UNORM")
+                             vk_format_g16_b16r16_2plane_422_unorm)
                             ("VK_FORMAT_G16_B16_R16_3PLANE_444_UNORM_KHR"
-                             "VK_FORMAT_G16_B16_R16_3PLANE_444_UNORM")
+                             vk_format_g16_b16_r16_3plane_444_unorm)
                             ("VK_FORMAT_G8_B8R8_2PLANE_444_UNORM_EXT"
-                             "VK_FORMAT_G8_B8R8_2PLANE_444_UNORM")
+                             vk_format_g8_b8r8_2plane_444_unorm)
                             ("VK_FORMAT_G10X6_B10X6R10X6_2PLANE_444_UNORM_3PACK16_EXT"
-                             "VK_FORMAT_G10X6_B10X6R10X6_2PLANE_444_UNORM_3PACK16")
+                             vk_format_g10x6_b10x6r10x6_2plane_444_unorm_3pack16)
                             ("VK_FORMAT_G12X4_B12X4R12X4_2PLANE_444_UNORM_3PACK16_EXT"
-                             "VK_FORMAT_G12X4_B12X4R12X4_2PLANE_444_UNORM_3PACK16")
+                             vk_format_g12x4_b12x4r12x4_2plane_444_unorm_3pack16)
                             ("VK_FORMAT_G16_B16R16_2PLANE_444_UNORM_EXT"
-                             "VK_FORMAT_G16_B16R16_2PLANE_444_UNORM")
+                             vk_format_g16_b16r16_2plane_444_unorm)
                             ("VK_FORMAT_A4R4G4B4_UNORM_PACK16_EXT"
-                             "VK_FORMAT_A4R4G4B4_UNORM_PACK16")
+                             vk_format_a4r4g4b4_unorm_pack16)
                             ("VK_FORMAT_A4B4G4R4_UNORM_PACK16_EXT"
-                             "VK_FORMAT_A4B4G4R4_UNORM_PACK16")
+                             vk_format_a4b4g4r4_unorm_pack16)
                             ("VK_FORMAT_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkImageTiling"
@@ -2387,35 +2387,35 @@
                             ("VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT"
                              1000381000)
                             ("VK_DYNAMIC_STATE_CULL_MODE_EXT"
-                             "VK_DYNAMIC_STATE_CULL_MODE")
+                             vk_dynamic_state_cull_mode)
                             ("VK_DYNAMIC_STATE_FRONT_FACE_EXT"
-                             "VK_DYNAMIC_STATE_FRONT_FACE")
+                             vk_dynamic_state_front_face)
                             ("VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT"
-                             "VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY")
+                             vk_dynamic_state_primitive_topology)
                             ("VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT"
-                             "VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT")
+                             vk_dynamic_state_viewport_with_count)
                             ("VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT"
-                             "VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT")
+                             vk_dynamic_state_scissor_with_count)
                             ("VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT"
-                             "VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE")
+                             vk_dynamic_state_vertex_input_binding_stride)
                             ("VK_DYNAMIC_STATE_DEPTH_TEST_ENABLE_EXT"
-                             "VK_DYNAMIC_STATE_DEPTH_TEST_ENABLE")
+                             vk_dynamic_state_depth_test_enable)
                             ("VK_DYNAMIC_STATE_DEPTH_WRITE_ENABLE_EXT"
-                             "VK_DYNAMIC_STATE_DEPTH_WRITE_ENABLE")
+                             vk_dynamic_state_depth_write_enable)
                             ("VK_DYNAMIC_STATE_DEPTH_COMPARE_OP_EXT"
-                             "VK_DYNAMIC_STATE_DEPTH_COMPARE_OP")
+                             vk_dynamic_state_depth_compare_op)
                             ("VK_DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE_EXT"
-                             "VK_DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE")
+                             vk_dynamic_state_depth_bounds_test_enable)
                             ("VK_DYNAMIC_STATE_STENCIL_TEST_ENABLE_EXT"
-                             "VK_DYNAMIC_STATE_STENCIL_TEST_ENABLE")
+                             vk_dynamic_state_stencil_test_enable)
                             ("VK_DYNAMIC_STATE_STENCIL_OP_EXT"
-                             "VK_DYNAMIC_STATE_STENCIL_OP")
+                             vk_dynamic_state_stencil_op)
                             ("VK_DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE_EXT"
-                             "VK_DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE")
+                             vk_dynamic_state_rasterizer_discard_enable)
                             ("VK_DYNAMIC_STATE_DEPTH_BIAS_ENABLE_EXT"
-                             "VK_DYNAMIC_STATE_DEPTH_BIAS_ENABLE")
+                             vk_dynamic_state_depth_bias_enable)
                             ("VK_DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE_EXT"
-                             "VK_DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE")
+                             vk_dynamic_state_primitive_restart_enable)
                             ("VK_DYNAMIC_STATE_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkFrontFace"
@@ -2490,7 +2490,7 @@
 (more-cffi:def-foreign-enum doc-file "VkFilter" ("VK_FILTER_NEAREST" 0)
                             ("VK_FILTER_LINEAR" 1)
                             ("VK_FILTER_CUBIC_IMG" 1000015000)
-                            ("VK_FILTER_CUBIC_EXT" "VK_FILTER_CUBIC_IMG")
+                            ("VK_FILTER_CUBIC_EXT" vk_filter_cubic_img)
                             ("VK_FILTER_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkSamplerAddressMode"
@@ -2500,7 +2500,7 @@
                             ("VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER" 3)
                             ("VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE" 4)
                             ("VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE_KHR"
-                             "VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE")
+                             vk_sampler_address_mode_mirror_clamp_to_edge)
                             ("VK_SAMPLER_ADDRESS_MODE_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkSamplerMipmapMode"
@@ -2528,7 +2528,7 @@
                              1000165000)
                             ("VK_DESCRIPTOR_TYPE_MUTABLE_VALVE" 1000351000)
                             ("VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT"
-                             "VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK")
+                             vk_descriptor_type_inline_uniform_block)
                             ("VK_DESCRIPTOR_TYPE_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkAttachmentLoadOp"
@@ -2543,11 +2543,11 @@
                             ("VK_ATTACHMENT_STORE_OP_DONT_CARE" 1)
                             ("VK_ATTACHMENT_STORE_OP_NONE" 1000301000)
                             ("VK_ATTACHMENT_STORE_OP_NONE_KHR"
-                             "VK_ATTACHMENT_STORE_OP_NONE")
+                             vk_attachment_store_op_none)
                             ("VK_ATTACHMENT_STORE_OP_NONE_QCOM"
-                             "VK_ATTACHMENT_STORE_OP_NONE")
+                             vk_attachment_store_op_none)
                             ("VK_ATTACHMENT_STORE_OP_NONE_EXT"
-                             "VK_ATTACHMENT_STORE_OP_NONE")
+                             vk_attachment_store_op_none)
                             ("VK_ATTACHMENT_STORE_OP_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkPipelineBindPoint"
@@ -2558,7 +2558,7 @@
                             ("VK_PIPELINE_BIND_POINT_SUBPASS_SHADING_HUAWEI"
                              1000369003)
                             ("VK_PIPELINE_BIND_POINT_RAY_TRACING_NV"
-                             "VK_PIPELINE_BIND_POINT_RAY_TRACING_KHR")
+                             vk_pipeline_bind_point_ray_tracing_khr)
                             ("VK_PIPELINE_BIND_POINT_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkCommandBufferLevel"
@@ -2570,7 +2570,7 @@
                             ("VK_INDEX_TYPE_UINT32" 1)
                             ("VK_INDEX_TYPE_NONE_KHR" 1000165000)
                             ("VK_INDEX_TYPE_UINT8_EXT" 1000265000)
-                            ("VK_INDEX_TYPE_NONE_NV" "VK_INDEX_TYPE_NONE_KHR")
+                            ("VK_INDEX_TYPE_NONE_NV" vk_index_type_none_khr)
                             ("VK_INDEX_TYPE_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkSubpassContents"
@@ -2619,12 +2619,12 @@
                             ("VK_ACCESS_COMMAND_PREPROCESS_READ_BIT_NV" 20000)
                             ("VK_ACCESS_COMMAND_PREPROCESS_WRITE_BIT_NV" 40000)
                             ("VK_ACCESS_SHADING_RATE_IMAGE_READ_BIT_NV"
-                             "VK_ACCESS_FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT_KHR")
+                             vk_access_fragment_shading_rate_attachment_read_bit_khr)
                             ("VK_ACCESS_ACCELERATION_STRUCTURE_READ_BIT_NV"
-                             "VK_ACCESS_ACCELERATION_STRUCTURE_READ_BIT_KHR")
+                             vk_access_acceleration_structure_read_bit_khr)
                             ("VK_ACCESS_ACCELERATION_STRUCTURE_WRITE_BIT_NV"
-                             "VK_ACCESS_ACCELERATION_STRUCTURE_WRITE_BIT_KHR")
-                            ("VK_ACCESS_NONE_KHR" "VK_ACCESS_NONE")
+                             vk_access_acceleration_structure_write_bit_khr)
+                            ("VK_ACCESS_NONE_KHR" vk_access_none)
                             ("VK_ACCESS_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkImageAspectFlagBits"
@@ -2641,12 +2641,12 @@
                             ("VK_IMAGE_ASPECT_MEMORY_PLANE_2_BIT_EXT" 200)
                             ("VK_IMAGE_ASPECT_MEMORY_PLANE_3_BIT_EXT" 400)
                             ("VK_IMAGE_ASPECT_PLANE_0_BIT_KHR"
-                             "VK_IMAGE_ASPECT_PLANE_0_BIT")
+                             vk_image_aspect_plane_0_bit)
                             ("VK_IMAGE_ASPECT_PLANE_1_BIT_KHR"
-                             "VK_IMAGE_ASPECT_PLANE_1_BIT")
+                             vk_image_aspect_plane_1_bit)
                             ("VK_IMAGE_ASPECT_PLANE_2_BIT_KHR"
-                             "VK_IMAGE_ASPECT_PLANE_2_BIT")
-                            ("VK_IMAGE_ASPECT_NONE_KHR" "VK_IMAGE_ASPECT_NONE")
+                             vk_image_aspect_plane_2_bit)
+                            ("VK_IMAGE_ASPECT_NONE_KHR" vk_image_aspect_none)
                             ("VK_IMAGE_ASPECT_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkFormatFeatureFlagBits"
@@ -2701,27 +2701,27 @@
                             ("VK_FORMAT_FEATURE_VIDEO_ENCODE_DPB_BIT_KHR"
                              10000000)
                             ("VK_FORMAT_FEATURE_TRANSFER_SRC_BIT_KHR"
-                             "VK_FORMAT_FEATURE_TRANSFER_SRC_BIT")
+                             vk_format_feature_transfer_src_bit)
                             ("VK_FORMAT_FEATURE_TRANSFER_DST_BIT_KHR"
-                             "VK_FORMAT_FEATURE_TRANSFER_DST_BIT")
+                             vk_format_feature_transfer_dst_bit)
                             ("VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT_EXT"
-                             "VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT")
+                             vk_format_feature_sampled_image_filter_minmax_bit)
                             ("VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT_KHR"
-                             "VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT")
+                             vk_format_feature_midpoint_chroma_samples_bit)
                             ("VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT_KHR"
-                             "VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT")
+                             vk_format_feature_sampled_image_ycbcr_conversion_linear_filter_bit)
                             ("VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT_KHR"
-                             "VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT")
+                             vk_format_feature_sampled_image_ycbcr_conversion_separate_reconstruction_filter_bit)
                             ("VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT_KHR"
-                             "VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT")
+                             vk_format_feature_sampled_image_ycbcr_conversion_chroma_reconstruction_explicit_bit)
                             ("VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT_KHR"
-                             "VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT")
+                             vk_format_feature_sampled_image_ycbcr_conversion_chroma_reconstruction_explicit_forceable_bit)
                             ("VK_FORMAT_FEATURE_DISJOINT_BIT_KHR"
-                             "VK_FORMAT_FEATURE_DISJOINT_BIT")
+                             vk_format_feature_disjoint_bit)
                             ("VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT_KHR"
-                             "VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT")
+                             vk_format_feature_cosited_chroma_samples_bit)
                             ("VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT"
-                             "VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG")
+                             vk_format_feature_sampled_image_filter_cubic_bit_img)
                             ("VK_FORMAT_FEATURE_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkImageCreateFlagBits"
@@ -2748,17 +2748,17 @@
                             ("VK_IMAGE_CREATE_FRAGMENT_DENSITY_MAP_OFFSET_BIT_QCOM"
                              8000)
                             ("VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR"
-                             "VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT")
+                             vk_image_create_split_instance_bind_regions_bit)
                             ("VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT_KHR"
-                             "VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT")
+                             vk_image_create_2d_array_compatible_bit)
                             ("VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT_KHR"
-                             "VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT")
+                             vk_image_create_block_texel_view_compatible_bit)
                             ("VK_IMAGE_CREATE_EXTENDED_USAGE_BIT_KHR"
-                             "VK_IMAGE_CREATE_EXTENDED_USAGE_BIT")
+                             vk_image_create_extended_usage_bit)
                             ("VK_IMAGE_CREATE_DISJOINT_BIT_KHR"
-                             "VK_IMAGE_CREATE_DISJOINT_BIT")
+                             vk_image_create_disjoint_bit)
                             ("VK_IMAGE_CREATE_ALIAS_BIT_KHR"
-                             "VK_IMAGE_CREATE_ALIAS_BIT")
+                             vk_image_create_alias_bit)
                             ("VK_IMAGE_CREATE_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkSampleCountFlagBits"
@@ -2791,7 +2791,7 @@
                             ("VK_IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR" 8000)
                             ("VK_IMAGE_USAGE_INVOCATION_MASK_BIT_HUAWEI" 40000)
                             ("VK_IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV"
-                             "VK_IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR")
+                             vk_image_usage_fragment_shading_rate_attachment_bit_khr)
                             ("VK_IMAGE_USAGE_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkInstanceCreateFlagBits"
@@ -2803,7 +2803,7 @@
                             ("VK_MEMORY_HEAP_DEVICE_LOCAL_BIT" 1)
                             ("VK_MEMORY_HEAP_MULTI_INSTANCE_BIT" 2)
                             ("VK_MEMORY_HEAP_MULTI_INSTANCE_BIT_KHR"
-                             "VK_MEMORY_HEAP_MULTI_INSTANCE_BIT")
+                             vk_memory_heap_multi_instance_bit)
                             ("VK_MEMORY_HEAP_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkMemoryPropertyFlagBits"
@@ -2871,13 +2871,13 @@
                             ("VK_PIPELINE_STAGE_COMMAND_PREPROCESS_BIT_NV"
                              20000)
                             ("VK_PIPELINE_STAGE_SHADING_RATE_IMAGE_BIT_NV"
-                             "VK_PIPELINE_STAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR")
+                             vk_pipeline_stage_fragment_shading_rate_attachment_bit_khr)
                             ("VK_PIPELINE_STAGE_RAY_TRACING_SHADER_BIT_NV"
-                             "VK_PIPELINE_STAGE_RAY_TRACING_SHADER_BIT_KHR")
+                             vk_pipeline_stage_ray_tracing_shader_bit_khr)
                             ("VK_PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_NV"
-                             "VK_PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR")
+                             vk_pipeline_stage_acceleration_structure_build_bit_khr)
                             ("VK_PIPELINE_STAGE_NONE_KHR"
-                             "VK_PIPELINE_STAGE_NONE")
+                             vk_pipeline_stage_none)
                             ("VK_PIPELINE_STAGE_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkSparseMemoryBindFlagBits"
@@ -2898,7 +2898,7 @@
 (more-cffi:def-foreign-enum doc-file "VkEventCreateFlagBits"
                             ("VK_EVENT_CREATE_DEVICE_ONLY_BIT" 1)
                             ("VK_EVENT_CREATE_DEVICE_ONLY_BIT_KHR"
-                             "VK_EVENT_CREATE_DEVICE_ONLY_BIT")
+                             vk_event_create_device_only_bit)
                             ("VK_EVENT_CREATE_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkQueryPipelineStatisticFlagBits"
@@ -2943,9 +2943,9 @@
                             ("VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT"
                              10)
                             ("VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT"
-                             "VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT")
+                             vk_buffer_create_device_address_capture_replay_bit)
                             ("VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR"
-                             "VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT")
+                             vk_buffer_create_device_address_capture_replay_bit)
                             ("VK_BUFFER_CREATE_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkBufferUsageFlagBits"
@@ -2976,11 +2976,11 @@
                             ("VK_BUFFER_USAGE_VIDEO_ENCODE_DST_BIT_KHR" 8000)
                             ("VK_BUFFER_USAGE_VIDEO_ENCODE_SRC_BIT_KHR" 10000)
                             ("VK_BUFFER_USAGE_RAY_TRACING_BIT_NV"
-                             "VK_BUFFER_USAGE_SHADER_BINDING_TABLE_BIT_KHR")
+                             vk_buffer_usage_shader_binding_table_bit_khr)
                             ("VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_EXT"
-                             "VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT")
+                             vk_buffer_usage_shader_device_address_bit)
                             ("VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_KHR"
-                             "VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT")
+                             vk_buffer_usage_shader_device_address_bit)
                             ("VK_BUFFER_USAGE_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkImageViewCreateFlagBits"
@@ -2994,7 +2994,7 @@
                             ("VK_PIPELINE_CACHE_CREATE_EXTERNALLY_SYNCHRONIZED_BIT"
                              1)
                             ("VK_PIPELINE_CACHE_CREATE_EXTERNALLY_SYNCHRONIZED_BIT_EXT"
-                             "VK_PIPELINE_CACHE_CREATE_EXTERNALLY_SYNCHRONIZED_BIT")
+                             vk_pipeline_cache_create_externally_synchronized_bit)
                             ("VK_PIPELINE_CACHE_CREATE_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkColorComponentFlagBits"
@@ -3048,19 +3048,19 @@
                             ("VK_PIPELINE_CREATE_RAY_TRACING_ALLOW_MOTION_BIT_NV"
                              100000)
                             ("VK_PIPELINE_CREATE_DISPATCH_BASE"
-                             "VK_PIPELINE_CREATE_DISPATCH_BASE_BIT")
+                             vk_pipeline_create_dispatch_base_bit)
                             ("VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR"
-                             "VK_PIPELINE_CREATE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR")
+                             vk_pipeline_create_rendering_fragment_shading_rate_attachment_bit_khr)
                             ("VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT"
-                             "VK_PIPELINE_CREATE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT")
+                             vk_pipeline_create_rendering_fragment_density_map_attachment_bit_ext)
                             ("VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT_KHR"
-                             "VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT")
+                             vk_pipeline_create_view_index_from_device_index_bit)
                             ("VK_PIPELINE_CREATE_DISPATCH_BASE_KHR"
-                             "VK_PIPELINE_CREATE_DISPATCH_BASE")
+                             vk_pipeline_create_dispatch_base)
                             ("VK_PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT_EXT"
-                             "VK_PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT")
+                             vk_pipeline_create_fail_on_pipeline_compile_required_bit)
                             ("VK_PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT_EXT"
-                             "VK_PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT")
+                             vk_pipeline_create_early_return_on_failure_bit)
                             ("VK_PIPELINE_CREATE_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkPipelineShaderStageCreateFlagBits"
@@ -3069,9 +3069,9 @@
                             ("VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT"
                              2)
                             ("VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT"
-                             "VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT")
+                             vk_pipeline_shader_stage_create_allow_varying_subgroup_size_bit)
                             ("VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT"
-                             "VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT")
+                             vk_pipeline_shader_stage_create_require_full_subgroups_bit)
                             ("VK_PIPELINE_SHADER_STAGE_CREATE_FLAG_BITS_MAX_ENUM"
                              7))
 
@@ -3094,17 +3094,17 @@
                             ("VK_SHADER_STAGE_MESH_BIT_NV" 80)
                             ("VK_SHADER_STAGE_SUBPASS_SHADING_BIT_HUAWEI" 4000)
                             ("VK_SHADER_STAGE_RAYGEN_BIT_NV"
-                             "VK_SHADER_STAGE_RAYGEN_BIT_KHR")
+                             vk_shader_stage_raygen_bit_khr)
                             ("VK_SHADER_STAGE_ANY_HIT_BIT_NV"
-                             "VK_SHADER_STAGE_ANY_HIT_BIT_KHR")
+                             vk_shader_stage_any_hit_bit_khr)
                             ("VK_SHADER_STAGE_CLOSEST_HIT_BIT_NV"
-                             "VK_SHADER_STAGE_CLOSEST_HIT_BIT_KHR")
+                             vk_shader_stage_closest_hit_bit_khr)
                             ("VK_SHADER_STAGE_MISS_BIT_NV"
-                             "VK_SHADER_STAGE_MISS_BIT_KHR")
+                             vk_shader_stage_miss_bit_khr)
                             ("VK_SHADER_STAGE_INTERSECTION_BIT_NV"
-                             "VK_SHADER_STAGE_INTERSECTION_BIT_KHR")
+                             vk_shader_stage_intersection_bit_khr)
                             ("VK_SHADER_STAGE_CALLABLE_BIT_NV"
-                             "VK_SHADER_STAGE_CALLABLE_BIT_KHR")
+                             vk_shader_stage_callable_bit_khr)
                             ("VK_SHADER_STAGE_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkCullModeFlagBits"
@@ -3147,7 +3147,7 @@
                              2)
                             ("VK_DESCRIPTOR_POOL_CREATE_HOST_ONLY_BIT_VALVE" 4)
                             ("VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT_EXT"
-                             "VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT")
+                             vk_descriptor_pool_create_update_after_bind_bit)
                             ("VK_DESCRIPTOR_POOL_CREATE_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkDescriptorSetLayoutCreateFlagBits"
@@ -3158,7 +3158,7 @@
                             ("VK_DESCRIPTOR_SET_LAYOUT_CREATE_HOST_ONLY_POOL_BIT_VALVE"
                              4)
                             ("VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT"
-                             "VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT")
+                             vk_descriptor_set_layout_create_update_after_bind_pool_bit)
                             ("VK_DESCRIPTOR_SET_LAYOUT_CREATE_FLAG_BITS_MAX_ENUM"
                              7))
 
@@ -3171,15 +3171,15 @@
                             ("VK_DEPENDENCY_DEVICE_GROUP_BIT" 4)
                             ("VK_DEPENDENCY_VIEW_LOCAL_BIT" 2)
                             ("VK_DEPENDENCY_VIEW_LOCAL_BIT_KHR"
-                             "VK_DEPENDENCY_VIEW_LOCAL_BIT")
+                             vk_dependency_view_local_bit)
                             ("VK_DEPENDENCY_DEVICE_GROUP_BIT_KHR"
-                             "VK_DEPENDENCY_DEVICE_GROUP_BIT")
+                             vk_dependency_device_group_bit)
                             ("VK_DEPENDENCY_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkFramebufferCreateFlagBits"
                             ("VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT" 1)
                             ("VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR"
-                             "VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT")
+                             vk_framebuffer_create_imageless_bit)
                             ("VK_FRAMEBUFFER_CREATE_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkRenderPassCreateFlagBits"
@@ -3234,7 +3234,7 @@
                             ("VK_STENCIL_FACE_BACK_BIT" 2)
                             ("VK_STENCIL_FACE_FRONT_AND_BACK" 3)
                             ("VK_STENCIL_FRONT_AND_BACK"
-                             "VK_STENCIL_FACE_FRONT_AND_BACK")
+                             vk_stencil_face_front_and_back)
                             ("VK_STENCIL_FACE_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkPointClippingBehavior"
@@ -3242,18 +3242,18 @@
                             ("VK_POINT_CLIPPING_BEHAVIOR_USER_CLIP_PLANES_ONLY"
                              1)
                             ("VK_POINT_CLIPPING_BEHAVIOR_ALL_CLIP_PLANES_KHR"
-                             "VK_POINT_CLIPPING_BEHAVIOR_ALL_CLIP_PLANES")
+                             vk_point_clipping_behavior_all_clip_planes)
                             ("VK_POINT_CLIPPING_BEHAVIOR_USER_CLIP_PLANES_ONLY_KHR"
-                             "VK_POINT_CLIPPING_BEHAVIOR_USER_CLIP_PLANES_ONLY")
+                             vk_point_clipping_behavior_user_clip_planes_only)
                             ("VK_POINT_CLIPPING_BEHAVIOR_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkTessellationDomainOrigin"
                             ("VK_TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT" 0)
                             ("VK_TESSELLATION_DOMAIN_ORIGIN_LOWER_LEFT" 1)
                             ("VK_TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT_KHR"
-                             "VK_TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT")
+                             vk_tessellation_domain_origin_upper_left)
                             ("VK_TESSELLATION_DOMAIN_ORIGIN_LOWER_LEFT_KHR"
-                             "VK_TESSELLATION_DOMAIN_ORIGIN_LOWER_LEFT")
+                             vk_tessellation_domain_origin_lower_left)
                             ("VK_TESSELLATION_DOMAIN_ORIGIN_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkSamplerYcbcrModelConversion"
@@ -3265,33 +3265,33 @@
                             ("VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601" 3)
                             ("VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020" 4)
                             ("VK_SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY_KHR"
-                             "VK_SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY")
+                             vk_sampler_ycbcr_model_conversion_rgb_identity)
                             ("VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_IDENTITY_KHR"
-                             "VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_IDENTITY")
+                             vk_sampler_ycbcr_model_conversion_ycbcr_identity)
                             ("VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_709_KHR"
-                             "VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_709")
+                             vk_sampler_ycbcr_model_conversion_ycbcr_709)
                             ("VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601_KHR"
-                             "VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601")
+                             vk_sampler_ycbcr_model_conversion_ycbcr_601)
                             ("VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020_KHR"
-                             "VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020")
+                             vk_sampler_ycbcr_model_conversion_ycbcr_2020)
                             ("VK_SAMPLER_YCBCR_MODEL_CONVERSION_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkSamplerYcbcrRange"
                             ("VK_SAMPLER_YCBCR_RANGE_ITU_FULL" 0)
                             ("VK_SAMPLER_YCBCR_RANGE_ITU_NARROW" 1)
                             ("VK_SAMPLER_YCBCR_RANGE_ITU_FULL_KHR"
-                             "VK_SAMPLER_YCBCR_RANGE_ITU_FULL")
+                             vk_sampler_ycbcr_range_itu_full)
                             ("VK_SAMPLER_YCBCR_RANGE_ITU_NARROW_KHR"
-                             "VK_SAMPLER_YCBCR_RANGE_ITU_NARROW")
+                             vk_sampler_ycbcr_range_itu_narrow)
                             ("VK_SAMPLER_YCBCR_RANGE_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkChromaLocation"
                             ("VK_CHROMA_LOCATION_COSITED_EVEN" 0)
                             ("VK_CHROMA_LOCATION_MIDPOINT" 1)
                             ("VK_CHROMA_LOCATION_COSITED_EVEN_KHR"
-                             "VK_CHROMA_LOCATION_COSITED_EVEN")
+                             vk_chroma_location_cosited_even)
                             ("VK_CHROMA_LOCATION_MIDPOINT_KHR"
-                             "VK_CHROMA_LOCATION_MIDPOINT")
+                             vk_chroma_location_midpoint)
                             ("VK_CHROMA_LOCATION_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkDescriptorUpdateTemplateType"
@@ -3300,7 +3300,7 @@
                             ("VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR"
                              1)
                             ("VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET_KHR"
-                             "VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET")
+                             vk_descriptor_update_template_type_descriptor_set)
                             ("VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkSubgroupFeatureFlagBits"
@@ -3321,13 +3321,13 @@
                             ("VK_PEER_MEMORY_FEATURE_GENERIC_SRC_BIT" 4)
                             ("VK_PEER_MEMORY_FEATURE_GENERIC_DST_BIT" 8)
                             ("VK_PEER_MEMORY_FEATURE_COPY_SRC_BIT_KHR"
-                             "VK_PEER_MEMORY_FEATURE_COPY_SRC_BIT")
+                             vk_peer_memory_feature_copy_src_bit)
                             ("VK_PEER_MEMORY_FEATURE_COPY_DST_BIT_KHR"
-                             "VK_PEER_MEMORY_FEATURE_COPY_DST_BIT")
+                             vk_peer_memory_feature_copy_dst_bit)
                             ("VK_PEER_MEMORY_FEATURE_GENERIC_SRC_BIT_KHR"
-                             "VK_PEER_MEMORY_FEATURE_GENERIC_SRC_BIT")
+                             vk_peer_memory_feature_generic_src_bit)
                             ("VK_PEER_MEMORY_FEATURE_GENERIC_DST_BIT_KHR"
-                             "VK_PEER_MEMORY_FEATURE_GENERIC_DST_BIT")
+                             vk_peer_memory_feature_generic_dst_bit)
                             ("VK_PEER_MEMORY_FEATURE_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkMemoryAllocateFlagBits"
@@ -3336,11 +3336,11 @@
                             ("VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT"
                              4)
                             ("VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT_KHR"
-                             "VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT")
+                             vk_memory_allocate_device_mask_bit)
                             ("VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT_KHR"
-                             "VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT")
+                             vk_memory_allocate_device_address_bit)
                             ("VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR"
-                             "VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT")
+                             vk_memory_allocate_device_address_capture_replay_bit)
                             ("VK_MEMORY_ALLOCATE_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkExternalMemoryHandleTypeFlagBits"
@@ -3370,19 +3370,19 @@
                             ("VK_EXTERNAL_MEMORY_HANDLE_TYPE_RDMA_ADDRESS_BIT_NV"
                              1000)
                             ("VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHR"
-                             "VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT")
+                             vk_external_memory_handle_type_opaque_fd_bit)
                             ("VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR"
-                             "VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT")
+                             vk_external_memory_handle_type_opaque_win32_bit)
                             ("VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR"
-                             "VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT")
+                             vk_external_memory_handle_type_opaque_win32_kmt_bit)
                             ("VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT_KHR"
-                             "VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT")
+                             vk_external_memory_handle_type_d3d11_texture_bit)
                             ("VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT_KHR"
-                             "VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT")
+                             vk_external_memory_handle_type_d3d11_texture_kmt_bit)
                             ("VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT_KHR"
-                             "VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT")
+                             vk_external_memory_handle_type_d3d12_heap_bit)
                             ("VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT_KHR"
-                             "VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT")
+                             vk_external_memory_handle_type_d3d12_resource_bit)
                             ("VK_EXTERNAL_MEMORY_HANDLE_TYPE_FLAG_BITS_MAX_ENUM"
                              7))
 
@@ -3391,11 +3391,11 @@
                             ("VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT" 2)
                             ("VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT" 4)
                             ("VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_KHR"
-                             "VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT")
+                             vk_external_memory_feature_dedicated_only_bit)
                             ("VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_KHR"
-                             "VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT")
+                             vk_external_memory_feature_exportable_bit)
                             ("VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_KHR"
-                             "VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT")
+                             vk_external_memory_feature_importable_bit)
                             ("VK_EXTERNAL_MEMORY_FEATURE_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkExternalFenceHandleTypeFlagBits"
@@ -3406,13 +3406,13 @@
                              4)
                             ("VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT" 8)
                             ("VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR"
-                             "VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT")
+                             vk_external_fence_handle_type_opaque_fd_bit)
                             ("VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR"
-                             "VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT")
+                             vk_external_fence_handle_type_opaque_win32_bit)
                             ("VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR"
-                             "VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT")
+                             vk_external_fence_handle_type_opaque_win32_kmt_bit)
                             ("VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT_KHR"
-                             "VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT")
+                             vk_external_fence_handle_type_sync_fd_bit)
                             ("VK_EXTERNAL_FENCE_HANDLE_TYPE_FLAG_BITS_MAX_ENUM"
                              7))
 
@@ -3420,21 +3420,21 @@
                             ("VK_EXTERNAL_FENCE_FEATURE_EXPORTABLE_BIT" 1)
                             ("VK_EXTERNAL_FENCE_FEATURE_IMPORTABLE_BIT" 2)
                             ("VK_EXTERNAL_FENCE_FEATURE_EXPORTABLE_BIT_KHR"
-                             "VK_EXTERNAL_FENCE_FEATURE_EXPORTABLE_BIT")
+                             vk_external_fence_feature_exportable_bit)
                             ("VK_EXTERNAL_FENCE_FEATURE_IMPORTABLE_BIT_KHR"
-                             "VK_EXTERNAL_FENCE_FEATURE_IMPORTABLE_BIT")
+                             vk_external_fence_feature_importable_bit)
                             ("VK_EXTERNAL_FENCE_FEATURE_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkFenceImportFlagBits"
                             ("VK_FENCE_IMPORT_TEMPORARY_BIT" 1)
                             ("VK_FENCE_IMPORT_TEMPORARY_BIT_KHR"
-                             "VK_FENCE_IMPORT_TEMPORARY_BIT")
+                             vk_fence_import_temporary_bit)
                             ("VK_FENCE_IMPORT_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkSemaphoreImportFlagBits"
                             ("VK_SEMAPHORE_IMPORT_TEMPORARY_BIT" 1)
                             ("VK_SEMAPHORE_IMPORT_TEMPORARY_BIT_KHR"
-                             "VK_SEMAPHORE_IMPORT_TEMPORARY_BIT")
+                             vk_semaphore_import_temporary_bit)
                             ("VK_SEMAPHORE_IMPORT_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkExternalSemaphoreHandleTypeFlagBits"
@@ -3451,17 +3451,17 @@
                             ("VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_ZIRCON_EVENT_BIT_FUCHSIA"
                              80)
                             ("VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_FENCE_BIT"
-                             "VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT")
+                             vk_external_semaphore_handle_type_d3d12_fence_bit)
                             ("VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR"
-                             "VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT")
+                             vk_external_semaphore_handle_type_opaque_fd_bit)
                             ("VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR"
-                             "VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT")
+                             vk_external_semaphore_handle_type_opaque_win32_bit)
                             ("VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR"
-                             "VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT")
+                             vk_external_semaphore_handle_type_opaque_win32_kmt_bit)
                             ("VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT_KHR"
-                             "VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT")
+                             vk_external_semaphore_handle_type_d3d12_fence_bit)
                             ("VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT_KHR"
-                             "VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT")
+                             vk_external_semaphore_handle_type_sync_fd_bit)
                             ("VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_FLAG_BITS_MAX_ENUM"
                              7))
 
@@ -3469,9 +3469,9 @@
                             ("VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT" 1)
                             ("VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT" 2)
                             ("VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT_KHR"
-                             "VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT")
+                             vk_external_semaphore_feature_exportable_bit)
                             ("VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT_KHR"
-                             "VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT")
+                             vk_external_semaphore_feature_importable_bit)
                             ("VK_EXTERNAL_SEMAPHORE_FEATURE_FLAG_BITS_MAX_ENUM"
                              7))
 
@@ -3499,29 +3499,29 @@
                             ("VK_DRIVER_ID_SAMSUNG_PROPRIETARY" 21)
                             ("VK_DRIVER_ID_MESA_VENUS" 22)
                             ("VK_DRIVER_ID_AMD_PROPRIETARY_KHR"
-                             "VK_DRIVER_ID_AMD_PROPRIETARY")
+                             vk_driver_id_amd_proprietary)
                             ("VK_DRIVER_ID_AMD_OPEN_SOURCE_KHR"
-                             "VK_DRIVER_ID_AMD_OPEN_SOURCE")
+                             vk_driver_id_amd_open_source)
                             ("VK_DRIVER_ID_MESA_RADV_KHR"
-                             "VK_DRIVER_ID_MESA_RADV")
+                             vk_driver_id_mesa_radv)
                             ("VK_DRIVER_ID_NVIDIA_PROPRIETARY_KHR"
-                             "VK_DRIVER_ID_NVIDIA_PROPRIETARY")
+                             vk_driver_id_nvidia_proprietary)
                             ("VK_DRIVER_ID_INTEL_PROPRIETARY_WINDOWS_KHR"
-                             "VK_DRIVER_ID_INTEL_PROPRIETARY_WINDOWS")
+                             vk_driver_id_intel_proprietary_windows)
                             ("VK_DRIVER_ID_INTEL_OPEN_SOURCE_MESA_KHR"
-                             "VK_DRIVER_ID_INTEL_OPEN_SOURCE_MESA")
+                             vk_driver_id_intel_open_source_mesa)
                             ("VK_DRIVER_ID_IMAGINATION_PROPRIETARY_KHR"
-                             "VK_DRIVER_ID_IMAGINATION_PROPRIETARY")
+                             vk_driver_id_imagination_proprietary)
                             ("VK_DRIVER_ID_QUALCOMM_PROPRIETARY_KHR"
-                             "VK_DRIVER_ID_QUALCOMM_PROPRIETARY")
+                             vk_driver_id_qualcomm_proprietary)
                             ("VK_DRIVER_ID_ARM_PROPRIETARY_KHR"
-                             "VK_DRIVER_ID_ARM_PROPRIETARY")
+                             vk_driver_id_arm_proprietary)
                             ("VK_DRIVER_ID_GOOGLE_SWIFTSHADER_KHR"
-                             "VK_DRIVER_ID_GOOGLE_SWIFTSHADER")
+                             vk_driver_id_google_swiftshader)
                             ("VK_DRIVER_ID_GGP_PROPRIETARY_KHR"
-                             "VK_DRIVER_ID_GGP_PROPRIETARY")
+                             vk_driver_id_ggp_proprietary)
                             ("VK_DRIVER_ID_BROADCOM_PROPRIETARY_KHR"
-                             "VK_DRIVER_ID_BROADCOM_PROPRIETARY")
+                             vk_driver_id_broadcom_proprietary)
                             ("VK_DRIVER_ID_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkShaderFloatControlsIndependence"
@@ -3530,11 +3530,11 @@
                             ("VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_ALL" 1)
                             ("VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_NONE" 2)
                             ("VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY_KHR"
-                             "VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY")
+                             vk_shader_float_controls_independence_32_bit_only)
                             ("VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_ALL_KHR"
-                             "VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_ALL")
+                             vk_shader_float_controls_independence_all)
                             ("VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_NONE_KHR"
-                             "VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_NONE")
+                             vk_shader_float_controls_independence_none)
                             ("VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_MAX_ENUM"
                              7))
 
@@ -3543,20 +3543,20 @@
                             ("VK_SAMPLER_REDUCTION_MODE_MIN" 1)
                             ("VK_SAMPLER_REDUCTION_MODE_MAX" 2)
                             ("VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_EXT"
-                             "VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE")
+                             vk_sampler_reduction_mode_weighted_average)
                             ("VK_SAMPLER_REDUCTION_MODE_MIN_EXT"
-                             "VK_SAMPLER_REDUCTION_MODE_MIN")
+                             vk_sampler_reduction_mode_min)
                             ("VK_SAMPLER_REDUCTION_MODE_MAX_EXT"
-                             "VK_SAMPLER_REDUCTION_MODE_MAX")
+                             vk_sampler_reduction_mode_max)
                             ("VK_SAMPLER_REDUCTION_MODE_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkSemaphoreType"
                             ("VK_SEMAPHORE_TYPE_BINARY" 0)
                             ("VK_SEMAPHORE_TYPE_TIMELINE" 1)
                             ("VK_SEMAPHORE_TYPE_BINARY_KHR"
-                             "VK_SEMAPHORE_TYPE_BINARY")
+                             vk_semaphore_type_binary)
                             ("VK_SEMAPHORE_TYPE_TIMELINE_KHR"
-                             "VK_SEMAPHORE_TYPE_TIMELINE")
+                             vk_semaphore_type_timeline)
                             ("VK_SEMAPHORE_TYPE_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkResolveModeFlagBits"
@@ -3565,15 +3565,15 @@
                             ("VK_RESOLVE_MODE_AVERAGE_BIT" 2)
                             ("VK_RESOLVE_MODE_MIN_BIT" 4)
                             ("VK_RESOLVE_MODE_MAX_BIT" 8)
-                            ("VK_RESOLVE_MODE_NONE_KHR" "VK_RESOLVE_MODE_NONE")
+                            ("VK_RESOLVE_MODE_NONE_KHR" vk_resolve_mode_none)
                             ("VK_RESOLVE_MODE_SAMPLE_ZERO_BIT_KHR"
-                             "VK_RESOLVE_MODE_SAMPLE_ZERO_BIT")
+                             vk_resolve_mode_sample_zero_bit)
                             ("VK_RESOLVE_MODE_AVERAGE_BIT_KHR"
-                             "VK_RESOLVE_MODE_AVERAGE_BIT")
+                             vk_resolve_mode_average_bit)
                             ("VK_RESOLVE_MODE_MIN_BIT_KHR"
-                             "VK_RESOLVE_MODE_MIN_BIT")
+                             vk_resolve_mode_min_bit)
                             ("VK_RESOLVE_MODE_MAX_BIT_KHR"
-                             "VK_RESOLVE_MODE_MAX_BIT")
+                             vk_resolve_mode_max_bit)
                             ("VK_RESOLVE_MODE_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkDescriptorBindingFlagBits"
@@ -3584,19 +3584,19 @@
                             ("VK_DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT"
                              8)
                             ("VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT"
-                             "VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT")
+                             vk_descriptor_binding_update_after_bind_bit)
                             ("VK_DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT_EXT"
-                             "VK_DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT")
+                             vk_descriptor_binding_update_unused_while_pending_bit)
                             ("VK_DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT_EXT"
-                             "VK_DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT")
+                             vk_descriptor_binding_partially_bound_bit)
                             ("VK_DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT_EXT"
-                             "VK_DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT")
+                             vk_descriptor_binding_variable_descriptor_count_bit)
                             ("VK_DESCRIPTOR_BINDING_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkSemaphoreWaitFlagBits"
                             ("VK_SEMAPHORE_WAIT_ANY_BIT" 1)
                             ("VK_SEMAPHORE_WAIT_ANY_BIT_KHR"
-                             "VK_SEMAPHORE_WAIT_ANY_BIT")
+                             vk_semaphore_wait_any_bit)
                             ("VK_SEMAPHORE_WAIT_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkPipelineCreationFeedbackFlagBits"
@@ -3606,11 +3606,11 @@
                             ("VK_PIPELINE_CREATION_FEEDBACK_BASE_PIPELINE_ACCELERATION_BIT"
                              4)
                             ("VK_PIPELINE_CREATION_FEEDBACK_VALID_BIT_EXT"
-                             "VK_PIPELINE_CREATION_FEEDBACK_VALID_BIT")
+                             vk_pipeline_creation_feedback_valid_bit)
                             ("VK_PIPELINE_CREATION_FEEDBACK_APPLICATION_PIPELINE_CACHE_HIT_BIT_EXT"
-                             "VK_PIPELINE_CREATION_FEEDBACK_APPLICATION_PIPELINE_CACHE_HIT_BIT")
+                             vk_pipeline_creation_feedback_application_pipeline_cache_hit_bit)
                             ("VK_PIPELINE_CREATION_FEEDBACK_BASE_PIPELINE_ACCELERATION_BIT_EXT"
-                             "VK_PIPELINE_CREATION_FEEDBACK_BASE_PIPELINE_ACCELERATION_BIT")
+                             vk_pipeline_creation_feedback_base_pipeline_acceleration_bit)
                             ("VK_PIPELINE_CREATION_FEEDBACK_FLAG_BITS_MAX_ENUM"
                              7))
 
@@ -3623,21 +3623,21 @@
                             ("VK_TOOL_PURPOSE_DEBUG_REPORTING_BIT_EXT" 20)
                             ("VK_TOOL_PURPOSE_DEBUG_MARKERS_BIT_EXT" 40)
                             ("VK_TOOL_PURPOSE_VALIDATION_BIT_EXT"
-                             "VK_TOOL_PURPOSE_VALIDATION_BIT")
+                             vk_tool_purpose_validation_bit)
                             ("VK_TOOL_PURPOSE_PROFILING_BIT_EXT"
-                             "VK_TOOL_PURPOSE_PROFILING_BIT")
+                             vk_tool_purpose_profiling_bit)
                             ("VK_TOOL_PURPOSE_TRACING_BIT_EXT"
-                             "VK_TOOL_PURPOSE_TRACING_BIT")
+                             vk_tool_purpose_tracing_bit)
                             ("VK_TOOL_PURPOSE_ADDITIONAL_FEATURES_BIT_EXT"
-                             "VK_TOOL_PURPOSE_ADDITIONAL_FEATURES_BIT")
+                             vk_tool_purpose_additional_features_bit)
                             ("VK_TOOL_PURPOSE_MODIFYING_FEATURES_BIT_EXT"
-                             "VK_TOOL_PURPOSE_MODIFYING_FEATURES_BIT")
+                             vk_tool_purpose_modifying_features_bit)
                             ("VK_TOOL_PURPOSE_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkSubmitFlagBits"
                             ("VK_SUBMIT_PROTECTED_BIT" 1)
                             ("VK_SUBMIT_PROTECTED_BIT_KHR"
-                             "VK_SUBMIT_PROTECTED_BIT")
+                             vk_submit_protected_bit)
                             ("VK_SUBMIT_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkRenderingFlagBits"
@@ -3646,11 +3646,11 @@
                             ("VK_RENDERING_SUSPENDING_BIT" 2)
                             ("VK_RENDERING_RESUMING_BIT" 4)
                             ("VK_RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT_KHR"
-                             "VK_RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT")
+                             vk_rendering_contents_secondary_command_buffers_bit)
                             ("VK_RENDERING_SUSPENDING_BIT_KHR"
-                             "VK_RENDERING_SUSPENDING_BIT")
+                             vk_rendering_suspending_bit)
                             ("VK_RENDERING_RESUMING_BIT_KHR"
-                             "VK_RENDERING_RESUMING_BIT")
+                             vk_rendering_resuming_bit)
                             ("VK_RENDERING_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkPresentModeKHR"
@@ -3686,9 +3686,9 @@
                              1000104014)
                             ("VK_COLOR_SPACE_DISPLAY_NATIVE_AMD" 1000213000)
                             ("VK_COLORSPACE_SRGB_NONLINEAR_KHR"
-                             "VK_COLOR_SPACE_SRGB_NONLINEAR_KHR")
+                             vk_color_space_srgb_nonlinear_khr)
                             ("VK_COLOR_SPACE_DCI_P3_LINEAR_EXT"
-                             "VK_COLOR_SPACE_DISPLAY_P3_LINEAR_EXT")
+                             vk_color_space_display_p3_linear_ext)
                             ("VK_COLOR_SPACE_MAX_ENUM_KHR" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkSurfaceTransformFlagBitsKHR"
@@ -3759,11 +3759,11 @@
                             ("VK_PERFORMANCE_COUNTER_SCOPE_RENDER_PASS_KHR" 1)
                             ("VK_PERFORMANCE_COUNTER_SCOPE_COMMAND_KHR" 2)
                             ("VK_QUERY_SCOPE_COMMAND_BUFFER_KHR"
-                             "VK_PERFORMANCE_COUNTER_SCOPE_COMMAND_BUFFER_KHR")
+                             vk_performance_counter_scope_command_buffer_khr)
                             ("VK_QUERY_SCOPE_RENDER_PASS_KHR"
-                             "VK_PERFORMANCE_COUNTER_SCOPE_RENDER_PASS_KHR")
+                             vk_performance_counter_scope_render_pass_khr)
                             ("VK_QUERY_SCOPE_COMMAND_KHR"
-                             "VK_PERFORMANCE_COUNTER_SCOPE_COMMAND_KHR")
+                             vk_performance_counter_scope_command_khr)
                             ("VK_PERFORMANCE_COUNTER_SCOPE_MAX_ENUM_KHR" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkPerformanceCounterStorageKHR"
@@ -3782,9 +3782,9 @@
                             ("VK_PERFORMANCE_COUNTER_DESCRIPTION_CONCURRENTLY_IMPACTED_BIT_KHR"
                              2)
                             ("VK_PERFORMANCE_COUNTER_DESCRIPTION_PERFORMANCE_IMPACTING_KHR"
-                             "VK_PERFORMANCE_COUNTER_DESCRIPTION_PERFORMANCE_IMPACTING_BIT_KHR")
+                             vk_performance_counter_description_performance_impacting_bit_khr)
                             ("VK_PERFORMANCE_COUNTER_DESCRIPTION_CONCURRENTLY_IMPACTED_KHR"
-                             "VK_PERFORMANCE_COUNTER_DESCRIPTION_CONCURRENTLY_IMPACTED_BIT_KHR")
+                             vk_performance_counter_description_concurrently_impacted_bit_khr)
                             ("VK_PERFORMANCE_COUNTER_DESCRIPTION_FLAG_BITS_MAX_ENUM_KHR"
                              7))
 
@@ -3798,13 +3798,13 @@
                             ("VK_QUEUE_GLOBAL_PRIORITY_HIGH_KHR" 512)
                             ("VK_QUEUE_GLOBAL_PRIORITY_REALTIME_KHR" 1024)
                             ("VK_QUEUE_GLOBAL_PRIORITY_LOW_EXT"
-                             "VK_QUEUE_GLOBAL_PRIORITY_LOW_KHR")
+                             vk_queue_global_priority_low_khr)
                             ("VK_QUEUE_GLOBAL_PRIORITY_MEDIUM_EXT"
-                             "VK_QUEUE_GLOBAL_PRIORITY_MEDIUM_KHR")
+                             vk_queue_global_priority_medium_khr)
                             ("VK_QUEUE_GLOBAL_PRIORITY_HIGH_EXT"
-                             "VK_QUEUE_GLOBAL_PRIORITY_HIGH_KHR")
+                             vk_queue_global_priority_high_khr)
                             ("VK_QUEUE_GLOBAL_PRIORITY_REALTIME_EXT"
-                             "VK_QUEUE_GLOBAL_PRIORITY_REALTIME_KHR")
+                             vk_queue_global_priority_realtime_khr)
                             ("VK_QUEUE_GLOBAL_PRIORITY_MAX_ENUM_KHR" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkFragmentShadingRateCombinerOpKHR"
@@ -3889,13 +3889,13 @@
                             ("VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_COLLECTION_FUCHSIA_EXT"
                              1000366000)
                             ("VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT"
-                             "VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT")
+                             vk_debug_report_object_type_debug_report_callback_ext_ext)
                             ("VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT"
-                             "VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT_EXT")
+                             vk_debug_report_object_type_validation_cache_ext_ext)
                             ("VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR_EXT"
-                             "VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_EXT")
+                             vk_debug_report_object_type_descriptor_update_template_ext)
                             ("VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_KHR_EXT"
-                             "VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_EXT")
+                             vk_debug_report_object_type_sampler_ycbcr_conversion_ext)
                             ("VK_DEBUG_REPORT_OBJECT_TYPE_MAX_ENUM_EXT" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkDebugReportFlagBitsEXT"
@@ -3950,7 +3950,7 @@
 (more-cffi:def-foreign-enum doc-file "VkSurfaceCounterFlagBitsEXT"
                             ("VK_SURFACE_COUNTER_VBLANK_BIT_EXT" 1)
                             ("VK_SURFACE_COUNTER_VBLANK_EXT"
-                             "VK_SURFACE_COUNTER_VBLANK_BIT_EXT")
+                             vk_surface_counter_vblank_bit_ext)
                             ("VK_SURFACE_COUNTER_FLAG_BITS_MAX_ENUM_EXT" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkDisplayPowerStateEXT"
@@ -4072,11 +4072,11 @@
                             ("VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR"
                              2)
                             ("VK_RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_NV"
-                             "VK_RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_KHR")
+                             vk_ray_tracing_shader_group_type_general_khr)
                             ("VK_RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_NV"
-                             "VK_RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_KHR")
+                             vk_ray_tracing_shader_group_type_triangles_hit_group_khr)
                             ("VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_NV"
-                             "VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR")
+                             vk_ray_tracing_shader_group_type_procedural_hit_group_khr)
                             ("VK_RAY_TRACING_SHADER_GROUP_TYPE_MAX_ENUM_KHR" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkGeometryTypeKHR"
@@ -4084,9 +4084,9 @@
                             ("VK_GEOMETRY_TYPE_AABBS_KHR" 1)
                             ("VK_GEOMETRY_TYPE_INSTANCES_KHR" 2)
                             ("VK_GEOMETRY_TYPE_TRIANGLES_NV"
-                             "VK_GEOMETRY_TYPE_TRIANGLES_KHR")
+                             vk_geometry_type_triangles_khr)
                             ("VK_GEOMETRY_TYPE_AABBS_NV"
-                             "VK_GEOMETRY_TYPE_AABBS_KHR")
+                             vk_geometry_type_aabbs_khr)
                             ("VK_GEOMETRY_TYPE_MAX_ENUM_KHR" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkAccelerationStructureTypeKHR"
@@ -4095,9 +4095,9 @@
                              1)
                             ("VK_ACCELERATION_STRUCTURE_TYPE_GENERIC_KHR" 2)
                             ("VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NV"
-                             "VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR")
+                             vk_acceleration_structure_type_top_level_khr)
                             ("VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NV"
-                             "VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_KHR")
+                             vk_acceleration_structure_type_bottom_level_khr)
                             ("VK_ACCELERATION_STRUCTURE_TYPE_MAX_ENUM_KHR" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkCopyAccelerationStructureModeKHR"
@@ -4109,9 +4109,9 @@
                             ("VK_COPY_ACCELERATION_STRUCTURE_MODE_DESERIALIZE_KHR"
                              3)
                             ("VK_COPY_ACCELERATION_STRUCTURE_MODE_CLONE_NV"
-                             "VK_COPY_ACCELERATION_STRUCTURE_MODE_CLONE_KHR")
+                             vk_copy_acceleration_structure_mode_clone_khr)
                             ("VK_COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_NV"
-                             "VK_COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_KHR")
+                             vk_copy_acceleration_structure_mode_compact_khr)
                             ("VK_COPY_ACCELERATION_STRUCTURE_MODE_MAX_ENUM_KHR"
                              7))
 
@@ -4131,9 +4131,9 @@
                             ("VK_GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_KHR"
                              2)
                             ("VK_GEOMETRY_OPAQUE_BIT_NV"
-                             "VK_GEOMETRY_OPAQUE_BIT_KHR")
+                             vk_geometry_opaque_bit_khr)
                             ("VK_GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_NV"
-                             "VK_GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_KHR")
+                             vk_geometry_no_duplicate_any_hit_invocation_bit_khr)
                             ("VK_GEOMETRY_FLAG_BITS_MAX_ENUM_KHR" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkGeometryInstanceFlagBitsKHR"
@@ -4144,15 +4144,15 @@
                             ("VK_GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_KHR" 4)
                             ("VK_GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_KHR" 8)
                             ("VK_GEOMETRY_INSTANCE_TRIANGLE_FRONT_COUNTERCLOCKWISE_BIT_KHR"
-                             "VK_GEOMETRY_INSTANCE_TRIANGLE_FLIP_FACING_BIT_KHR")
+                             vk_geometry_instance_triangle_flip_facing_bit_khr)
                             ("VK_GEOMETRY_INSTANCE_TRIANGLE_CULL_DISABLE_BIT_NV"
-                             "VK_GEOMETRY_INSTANCE_TRIANGLE_FACING_CULL_DISABLE_BIT_KHR")
+                             vk_geometry_instance_triangle_facing_cull_disable_bit_khr)
                             ("VK_GEOMETRY_INSTANCE_TRIANGLE_FRONT_COUNTERCLOCKWISE_BIT_NV"
-                             "VK_GEOMETRY_INSTANCE_TRIANGLE_FRONT_COUNTERCLOCKWISE_BIT_KHR")
+                             vk_geometry_instance_triangle_front_counterclockwise_bit_khr)
                             ("VK_GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_NV"
-                             "VK_GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_KHR")
+                             vk_geometry_instance_force_opaque_bit_khr)
                             ("VK_GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_NV"
-                             "VK_GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_KHR")
+                             vk_geometry_instance_force_no_opaque_bit_khr)
                             ("VK_GEOMETRY_INSTANCE_FLAG_BITS_MAX_ENUM_KHR" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkBuildAccelerationStructureFlagBitsKHR"
@@ -4169,15 +4169,15 @@
                             ("VK_BUILD_ACCELERATION_STRUCTURE_MOTION_BIT_NV"
                              20)
                             ("VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_NV"
-                             "VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR")
+                             vk_build_acceleration_structure_allow_update_bit_khr)
                             ("VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_NV"
-                             "VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR")
+                             vk_build_acceleration_structure_allow_compaction_bit_khr)
                             ("VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_NV"
-                             "VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_KHR")
+                             vk_build_acceleration_structure_prefer_fast_trace_bit_khr)
                             ("VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_NV"
-                             "VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_KHR")
+                             vk_build_acceleration_structure_prefer_fast_build_bit_khr)
                             ("VK_BUILD_ACCELERATION_STRUCTURE_LOW_MEMORY_BIT_NV"
-                             "VK_BUILD_ACCELERATION_STRUCTURE_LOW_MEMORY_BIT_KHR")
+                             vk_build_acceleration_structure_low_memory_bit_khr)
                             ("VK_BUILD_ACCELERATION_STRUCTURE_FLAG_BITS_MAX_ENUM_KHR"
                              7))
 

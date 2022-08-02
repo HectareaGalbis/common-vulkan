@@ -12,20 +12,28 @@
 (defmacro set-pointer (slot new-value)
   `(setf ,slot (or ,new-value (cffi-sys:null-pointer))))
 
-(defmacro create-string (slot slot-arg)
-  `(setf ,slot
+(defmacro create-string (slot slot-arg &key (dynamic nil))
+  (when dynamic
+    `(setf ,slot
            (if ,slot-arg
                (cffi:foreign-string-alloc ,slot-arg)
-               (cffi-sys:null-pointer))))
+               (cffi-sys:null-pointer)))
+    (let ((str-sym (gensym)))
+      `(cffi:with-foreign-string (,str-sym ,slot-arg)
+	 (mcffi:copy ,slot ,str-sym (length ,slot-arg))))))
 
 (defmacro destroy-string (slot)
   `(when (not (cffi-sys:null-pointer-p ,slot))
      (cffi:foreign-string-free ,slot)))
 
-(defmacro get-string (slot) `(cffi:foreign-string-to-lisp ,slot))
+(defmacro get-string (slot)
+  `(cffi:foreign-string-to-lisp ,slot))
 
-(defmacro set-string (slot new-value)
-  `(progn (destroy-string ,slot) (create-string ,slot ,new-value)))
+(defmacro set-string (slot new-value &key (dynamic nil))
+  `(progn
+     ,(when dynamic
+	`(destroy-string ,slot))
+     (create-string ,slot ,new-value)))
 
 (defmacro create-array (type slot slot-arg &key (dynamic nil) (pointers nil))
   `(progn
@@ -118,9 +126,97 @@
 (mcffi:with-doc-file (doc-file (asdf:system-relative-pathname "common-vulkan" "docs/api/structs.md"))
 
   
-  (more-cffi:def-foreign-struct doc-file "VkExtent2D" (extent-2d)
+  (mcffi:def-foreign-struct doc-file "VkApplicationInfo" application-info
       (:default-create :default-get :default-set)
-    (width :name width :type uint32)
-    (height :name height :type uint32)))
+    (sType              :name "sType" :type "VkStructureType" :init-form VK_STRUCTURE_TYPE_APPLICATION_INFO)
+    (pNext              :name "pNext" :type "pointer" :init-form nil
+	                :create ((pNext-arg)
+				 (create-pointer pNext pNext-arg))
+			:get (() (get-pointer pNext))
+			:set ((pNext-arg)
+			      (set-pointer pNext pNext-arg)))
+    (pApplicationName   :name "pApplicationName" :type string :init-form nil
+		        :create ((pApplicationName-arg)
+				 (create-string pApplicationName pApplicationName-arg))
+		        :destroy (destroy-string pApplicationName)
+		        :get (() (get-string pApplicationName))
+		        :set ((pApplicationName-arg)
+			      (set-string pApplicationName pApplicationName-arg)))
+    (applicationVersion :name "applicationVersion" :type uint32 :init-form 0)
+    (pEngineName        :name "pEngineName" :type string :init-form nil
+		        :create ((pEngineName-arg)
+				 (create-string pEngineName pEngineName-arg))
+		        :destroy (destroy-string pEngineName)
+		        :get (() (get-string pEngineName))
+		        :set ((pEngineName-arg)
+			      (set-string pEngineName pEngineName-arg)))
+    (engineVersion      :name "engineVersion" :type uint32 :init-form 0)
+    (apiVersion         :name "apiVersion" :type uint32 :init-form 0))
+
+
+  (mcffi:def-foreign-struct doc-file "VkInstanceCreateInfo" instance-create-info 
+      (:default-create :default-get :default-set)
+    (sType                   :name "sType" :type "VkStructureType"
+			     :init-form VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO)
+    (pNext                   :name "pNext" :type pointer :init-form nil
+	                     :create ((pNext-arg)
+				      (create-pointer pNext pNext-arg))
+			     :get (() (get-pointer pNext))
+			     :set ((pNext-arg)
+				   (set-pointer pNext pNext-arg)))
+    (flags                   :type "VkInstanceCreateFlags")
+    (pApplicationInfo        :name "pApplicationInfo" :type "VkApplicationInfo" :init-form nil
+		             :create ((pApplicationInfo-arg)
+				      (create-pointer pApplicationInfo pApplicationInfo-arg))
+			     :get (() (get-pointer pApplicationInfo))
+			     :set ((pApplicationInfo-arg)
+				   (set-pointer pApplicationInfo pApplicationInfo-arg)))
+    (enabledLayerCount       :name "enabledLayerCount" :type uint32)
+    (ppEnabledLayerNames     :name "ppEnabledLayerNames" :type (list string) :init-form nil
+			     :create ((ppEnabledLayerNames-arg)
+				      (create-array-strings ppEnabledLayerNames ppEnabledLayerNames-arg :dynamic t))
+			     :destroy (destroy-array-strings ppEnabledLayerNames enableLayerCount :dynamic t)
+			     :get ((&optional (index nil))
+				   (get-array-strings ppEnabledLayerNames index enabledLayerCount))
+			     :set ((ppEnabledLayerNames-arg &optional (index nil))
+				   (set-array-strings ppEnabledLayerNames ppEnabledLayerNames-arg index enabledLayerCount :dynamic t)))
+    (enabledExtensionCount   :name "enabledExtensionCount" :type uint32)
+    (ppEnabledExtensionNames :name "ppEnabledExtensionNames" :type (list string) :init-form nil
+			     :create ((ppEnabledExtensionNames-arg)
+				      (create-array-strings ppEnabledExtensionNames ppEnabledExtensionNames-arg :dynamic t))
+			     :destroy (destroy-array-strings ppEnabledExtensionNames enableLayerCount :dynamic t)
+			     :get ((&optional (index nil))
+				   (get-array-strings ppEnabledExtensionNames index enabledExtensionCount))
+			     :set ((ppEnabledExtensionNames-arg &optional (index nil))
+				   (set-array-strings ppEnabledExtensionNames ppEnabledExtensionNames-arg index enabledExtensionCount :dynamic t))))
+
+
+  (mcffi:def-foreign-struct doc-file "VkExtensionProperties" extension-properties 
+      (:default-create :default-get :default-set)
+    (extensionName :name "extensionName" :type string :init-value nil
+		   :create ((extensionName-arg)
+			    (create-string extensionName extensionName-arg :dynamic nil))
+		   :get (() (get-string extensionName))
+		   :set ((extensionName-arg)
+			 (set-string extensionName extensionName-arg :dynamic nil)))
+    (specVersion   :name "specVersion" :type uint32))
+
+
+  (mcffi:def-foreign-struct doc-file "VkLayerProperties" layer-properties  
+      (:default-create :default-destroy :default-get)
+    (layerName             :name "layerName" :type string :init-value nil
+	                   :create ((layerName-arg)
+				    (create-string layerName layerName-arg :dynamic nil))
+			   :get (() (get-string layerName))
+			   :set ((layerName-arg)
+			 (set-string layerName layerName-arg :dynamic nil)))
+    (specVersion           :name "specVersion" :type uint32)
+    (implementationVersion :name "implementationVersion" :type uint32)
+    (description           :type string :init-value nil
+		           :create ((description-arg)
+				    (create-string description description-arg :dynamic nil))
+			   :get (() (get-string description))
+			   :set ((description-arg)
+			 (set-string description description-arg :dynamic nil)))))
 
 

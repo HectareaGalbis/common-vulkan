@@ -13,11 +13,15 @@
 (defmacro set-pointer (slot new-value)
   `(setf ,slot (or ,new-value (cffi-sys:null-pointer))))
 
-(defmacro create-string (slot slot-arg)
-  `(setf ,slot
-           (if ,slot-arg
-               (cffi:foreign-string-alloc ,slot-arg)
-               (cffi-sys:null-pointer))))
+(defmacro create-string (slot slot-arg &key (dynamic nil))
+  (when dynamic
+    `(setf ,slot
+             (if ,slot-arg
+                 (cffi:foreign-string-alloc ,slot-arg)
+                 (cffi-sys:null-pointer)))
+    (let ((str-sym (gensym)))
+      `(cffi:with-foreign-string (,str-sym ,slot-arg)
+         (more-cffi:copy ,slot ,str-sym (length ,slot-arg))))))
 
 (defmacro destroy-string (slot)
   `(when (not (cffi-sys:null-pointer-p ,slot))
@@ -25,8 +29,10 @@
 
 (defmacro get-string (slot) `(cffi:foreign-string-to-lisp ,slot))
 
-(defmacro set-string (slot new-value)
-  `(progn (destroy-string ,slot) (create-string ,slot ,new-value)))
+(defmacro set-string (slot new-value &key (dynamic nil))
+  `(progn
+    ,(when dynamic `(destroy-string ,slot))
+    (create-string ,slot ,new-value)))
 
 (defmacro create-array (type slot slot-arg &key (dynamic nil) (pointers nil))
   `(progn
@@ -125,9 +131,6 @@
       (:default-create :default-get :default-set)
     (width :name width :type uint32)
     (height :name height :type uint32))
-
-  (more-cffi:doc-note doc-file
-                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkExtent3D"
@@ -326,7 +329,18 @@
     (headerversion :name "headerVersion" :type "VkPipelineCacheHeaderVersion")
     (vendorid :name "vendorID" :type uint32)
     (deviceid :name "deviceID" :type uint32)
-    (pipelinecacheuuid :name "pipelineCacheUUID" :type uint8))
+    (pipelinecacheuuid :name "pipelineCacheUUID" :type uint8 :create
+     ((pipelinecacheuuid-arg)
+      (create-array :uint8 pipelinecacheuuid pipelinecacheuuid-arg :dynamic nil
+       :pointers nil))
+     :get
+     ((&optional pipelinecacheuuid-index)
+      (get-array :uint8 pipelinecacheuuid pipelinecacheuuid-index
+       (apply #'* (list vk_uuid_size)) :pointers nil))
+     :set
+     ((pipelinecacheuuid-arg &optional pipelinecacheuuid-index)
+      (set-array :uint8 pipelinecacheuuid pipelinecacheuuid-arg
+       pipelinecacheuuid-index :dynamic nil :pointers nil))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -352,13 +366,14 @@
 
   (more-cffi:def-foreign-struct doc-file
       "VkApplicationInfo"
-      (application-info)
+      application-info
       (:default-create :default-get :default-set)
-    (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (stype :name "sType" :type "VkStructureType" :init-form
+     vk_structure_type_application_info)
+    (pnext :name "pNext" :type "pointer" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
-    (papplicationname :name "pApplicationName" :type char :init-form nil
+    (papplicationname :name "pApplicationName" :type string :init-form nil
      :create
      ((papplicationname-arg)
       (create-string papplicationname papplicationname-arg))
@@ -366,16 +381,13 @@
      (nil (get-string papplicationname)) :set
      ((papplicationname-arg)
       (set-string papplicationname papplicationname-arg)))
-    (applicationversion :name "applicationVersion" :type uint32)
-    (penginename :name "pEngineName" :type char :init-form nil :create
+    (applicationversion :name "applicationVersion" :type uint32 :init-form 0)
+    (penginename :name "pEngineName" :type string :init-form nil :create
      ((penginename-arg) (create-string penginename penginename-arg)) :destroy
      (destroy-string penginename) :get (nil (get-string penginename)) :set
      ((penginename-arg) (set-string penginename penginename-arg)))
-    (engineversion :name "engineVersion" :type uint32)
-    (apiversion :name "apiVersion" :type uint32))
-
-  (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+    (engineversion :name "engineVersion" :type uint32 :init-form 0)
+    (apiversion :name "apiVersion" :type uint32 :init-form 0))
 
   (more-cffi:def-foreign-struct doc-file
       "VkFormatProperties"
@@ -410,13 +422,14 @@
 
   (more-cffi:def-foreign-struct doc-file
       "VkInstanceCreateInfo"
-      (instance-create-info)
+      instance-create-info
       (:default-create :default-get :default-set)
-    (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (stype :name "sType" :type "VkStructureType" :init-form
+     vk_structure_type_instance_create_info)
+    (pnext :name "pNext" :type pointer :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
-    (flags :name flags :type "VkInstanceCreateFlags")
+    (flags :type "VkInstanceCreateFlags")
     (papplicationinfo :name "pApplicationInfo" :type "VkApplicationInfo"
      :init-form nil :create
      ((papplicationinfo-arg)
@@ -425,41 +438,36 @@
      ((papplicationinfo-arg)
       (set-pointer papplicationinfo papplicationinfo-arg)))
     (enabledlayercount :name "enabledLayerCount" :type uint32)
-    (ppenabledlayernames :name "ppEnabledLayerNames" :type char :init-form nil
-     :create
+    (ppenabledlayernames :name "ppEnabledLayerNames" :type (list string)
+     :init-form nil :create
      ((ppenabledlayernames-arg)
       (create-array-strings ppenabledlayernames ppenabledlayernames-arg
        :dynamic t))
      :destroy
-     (destroy-array-strings ppenabledlayernames enabledlayercount :dynamic t)
+     (destroy-array-strings ppenabledlayernames enablelayercount :dynamic t)
      :get
-     ((&optional ppenabledlayernames-index)
-      (get-array-strings ppenabledlayernames ppenabledlayernames-index
-       enabledlayercount))
+     ((&optional (index nil))
+      (get-array-strings ppenabledlayernames index enabledlayercount))
      :set
-     ((ppenabledlayernames-arg &optional ppenabledlayernames-index)
-      (set-array-strings ppenabledlayernames ppenabledlayernames-arg
-       ppenabledlayernames-index enabledlayercount :dynamic t)))
+     ((ppenabledlayernames-arg &optional (index nil))
+      (set-array-strings ppenabledlayernames ppenabledlayernames-arg index
+       enabledlayercount :dynamic t)))
     (enabledextensioncount :name "enabledExtensionCount" :type uint32)
-    (ppenabledextensionnames :name "ppEnabledExtensionNames" :type char
-     :init-form nil :create
+    (ppenabledextensionnames :name "ppEnabledExtensionNames" :type
+     (list string) :init-form nil :create
      ((ppenabledextensionnames-arg)
       (create-array-strings ppenabledextensionnames ppenabledextensionnames-arg
        :dynamic t))
      :destroy
-     (destroy-array-strings ppenabledextensionnames enabledextensioncount
-      :dynamic t)
+     (destroy-array-strings ppenabledextensionnames enablelayercount :dynamic
+      t)
      :get
-     ((&optional ppenabledextensionnames-index)
-      (get-array-strings ppenabledextensionnames ppenabledextensionnames-index
-       enabledextensioncount))
+     ((&optional (index nil))
+      (get-array-strings ppenabledextensionnames index enabledextensioncount))
      :set
-     ((ppenabledextensionnames-arg &optional ppenabledextensionnames-index)
+     ((ppenabledextensionnames-arg &optional (index nil))
       (set-array-strings ppenabledextensionnames ppenabledextensionnames-arg
-       ppenabledextensionnames-index enabledextensioncount :dynamic t))))
-
-  (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+       index enabledextensioncount :dynamic t))))
 
   (more-cffi:def-foreign-struct doc-file
       "VkMemoryHeap"
@@ -649,7 +657,7 @@
      :get
      ((&optional maxcomputeworkgroupcount-index)
       (get-array :uint32 maxcomputeworkgroupcount
-       maxcomputeworkgroupcount-index 3 :pointers nil))
+       maxcomputeworkgroupcount-index (apply #'* (list 3)) :pointers nil))
      :set
      ((maxcomputeworkgroupcount-arg &optional maxcomputeworkgroupcount-index)
       (set-array :uint32 maxcomputeworkgroupcount maxcomputeworkgroupcount-arg
@@ -664,7 +672,7 @@
      :get
      ((&optional maxcomputeworkgroupsize-index)
       (get-array :uint32 maxcomputeworkgroupsize maxcomputeworkgroupsize-index
-       3 :pointers nil))
+       (apply #'* (list 3)) :pointers nil))
      :set
      ((maxcomputeworkgroupsize-arg &optional maxcomputeworkgroupsize-index)
       (set-array :uint32 maxcomputeworkgroupsize maxcomputeworkgroupsize-arg
@@ -683,8 +691,8 @@
        :dynamic nil :pointers nil))
      :get
      ((&optional maxviewportdimensions-index)
-      (get-array :uint32 maxviewportdimensions maxviewportdimensions-index 2
-       :pointers nil))
+      (get-array :uint32 maxviewportdimensions maxviewportdimensions-index
+       (apply #'* (list 2)) :pointers nil))
      :set
      ((maxviewportdimensions-arg &optional maxviewportdimensions-index)
       (set-array :uint32 maxviewportdimensions maxviewportdimensions-arg
@@ -695,8 +703,8 @@
        nil :pointers nil))
      :get
      ((&optional viewportboundsrange-index)
-      (get-array :float viewportboundsrange viewportboundsrange-index 2
-       :pointers nil))
+      (get-array :float viewportboundsrange viewportboundsrange-index
+       (apply #'* (list 2)) :pointers nil))
      :set
      ((viewportboundsrange-arg &optional viewportboundsrange-index)
       (set-array :float viewportboundsrange viewportboundsrange-arg
@@ -754,7 +762,8 @@
        :pointers nil))
      :get
      ((&optional pointsizerange-index)
-      (get-array :float pointsizerange pointsizerange-index 2 :pointers nil))
+      (get-array :float pointsizerange pointsizerange-index
+       (apply #'* (list 2)) :pointers nil))
      :set
      ((pointsizerange-arg &optional pointsizerange-index)
       (set-array :float pointsizerange pointsizerange-arg pointsizerange-index
@@ -765,7 +774,8 @@
        :pointers nil))
      :get
      ((&optional linewidthrange-index)
-      (get-array :float linewidthrange linewidthrange-index 2 :pointers nil))
+      (get-array :float linewidthrange linewidthrange-index
+       (apply #'* (list 2)) :pointers nil))
      :set
      ((linewidthrange-arg &optional linewidthrange-index)
       (set-array :float linewidthrange linewidthrange-arg linewidthrange-index
@@ -790,17 +800,29 @@
     (memorytypecount :name "memoryTypeCount" :type uint32)
     (memorytypes :pointer t :name "memoryTypes" :type "VkMemoryType" :create
      ((memorytypes-arg)
-      (more-cffi:copy memorytypes memorytypes-arg '(:struct vkmemorytype)))
+      (create-array (:struct vkmemorytype) memorytypes memorytypes-arg :dynamic
+       nil :pointers ("VkMemoryType")))
+     :get
+     ((&optional memorytypes-index)
+      (get-array (:struct vkmemorytype) memorytypes memorytypes-index
+       (apply #'* (list vk_max_memory_types)) :pointers ("VkMemoryType")))
      :set
-     ((memorytypes-arg)
-      (more-cffi:copy memorytypes memorytypes-arg '(:struct vkmemorytype))))
+     ((memorytypes-arg &optional memorytypes-index)
+      (set-array (:struct vkmemorytype) memorytypes memorytypes-arg
+       memorytypes-index :dynamic nil :pointers ("VkMemoryType"))))
     (memoryheapcount :name "memoryHeapCount" :type uint32)
     (memoryheaps :pointer t :name "memoryHeaps" :type "VkMemoryHeap" :create
      ((memoryheaps-arg)
-      (more-cffi:copy memoryheaps memoryheaps-arg '(:struct vkmemoryheap)))
+      (create-array (:struct vkmemoryheap) memoryheaps memoryheaps-arg :dynamic
+       nil :pointers ("VkMemoryHeap")))
+     :get
+     ((&optional memoryheaps-index)
+      (get-array (:struct vkmemoryheap) memoryheaps memoryheaps-index
+       (apply #'* (list vk_max_memory_heaps)) :pointers ("VkMemoryHeap")))
      :set
-     ((memoryheaps-arg)
-      (more-cffi:copy memoryheaps memoryheaps-arg '(:struct vkmemoryheap)))))
+     ((memoryheaps-arg &optional memoryheaps-index)
+      (set-array (:struct vkmemoryheap) memoryheaps memoryheaps-arg
+       memoryheaps-index :dynamic nil :pointers ("VkMemoryHeap")))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -831,8 +853,22 @@
     (vendorid :name "vendorID" :type uint32)
     (deviceid :name "deviceID" :type uint32)
     (devicetype :name "deviceType" :type "VkPhysicalDeviceType")
-    (devicename :name "deviceName" :type char)
-    (pipelinecacheuuid :name "pipelineCacheUUID" :type uint8)
+    (devicename :name "deviceName" :type char :create
+     ((devicename-arg) (create-string devicename devicename-arg :dynamic nil))
+     :get (nil (get-string devicename)) :set
+     ((devicename-arg) (set-string devicename devicename-arg :dynamic nil)))
+    (pipelinecacheuuid :name "pipelineCacheUUID" :type uint8 :create
+     ((pipelinecacheuuid-arg)
+      (create-array :uint8 pipelinecacheuuid pipelinecacheuuid-arg :dynamic nil
+       :pointers nil))
+     :get
+     ((&optional pipelinecacheuuid-index)
+      (get-array :uint8 pipelinecacheuuid pipelinecacheuuid-index
+       (apply #'* (list vk_uuid_size)) :pointers nil))
+     :set
+     ((pipelinecacheuuid-arg &optional pipelinecacheuuid-index)
+      (set-array :uint8 pipelinecacheuuid pipelinecacheuuid-arg
+       pipelinecacheuuid-index :dynamic nil :pointers nil)))
     (limits :pointer t :name limits :type "VkPhysicalDeviceLimits" :create
      ((limits-arg)
       (more-cffi:copy limits limits-arg '(:struct vkphysicaldevicelimits)))
@@ -971,25 +1007,31 @@
 
   (more-cffi:def-foreign-struct doc-file
       "VkExtensionProperties"
-      (extension-properties)
+      extension-properties
       (:default-create :default-get :default-set)
-    (extensionname :name "extensionName" :type char)
+    (extensionname :name "extensionName" :type string :init-value nil :create
+     ((extensionname-arg)
+      (create-string extensionname extensionname-arg :dynamic nil))
+     :get (nil (get-string extensionname)) :set
+     ((extensionname-arg)
+      (set-string extensionname extensionname-arg :dynamic nil)))
     (specversion :name "specVersion" :type uint32))
-
-  (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkLayerProperties"
-      (layer-properties)
-      (:default-create :default-get :default-set)
-    (layername :name "layerName" :type char)
+      layer-properties
+      (:default-create :default-destroy :default-get)
+    (layername :name "layerName" :type string :init-value nil :create
+     ((layername-arg) (create-string layername layername-arg :dynamic nil))
+     :get (nil (get-string layername)) :set
+     ((layername-arg) (set-string layername layername-arg :dynamic nil)))
     (specversion :name "specVersion" :type uint32)
     (implementationversion :name "implementationVersion" :type uint32)
-    (description :name description :type char))
-
-  (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+    (description :type string :init-value nil :create
+     ((description-arg)
+      (create-string description description-arg :dynamic nil))
+     :get (nil (get-string description)) :set
+     ((description-arg) (set-string description description-arg :dynamic nil))))
 
   (more-cffi:def-foreign-struct doc-file
       "VkSubmitInfo"
@@ -1649,9 +1691,9 @@
      (nil (get-pointer module)) :set
      ((module-arg) (set-pointer module module-arg)))
     (pname :name "pName" :type char :init-form nil :create
-     ((pname-arg) (create-string pname pname-arg)) :destroy
+     ((pname-arg) (create-string pname pname-arg :dynamic t)) :destroy
      (destroy-string pname) :get (nil (get-string pname)) :set
-     ((pname-arg) (set-string pname pname-arg)))
+     ((pname-arg) (set-string pname pname-arg :dynamic t)))
     (pspecializationinfo :name "pSpecializationInfo" :type
      "VkSpecializationInfo" :init-form nil :create
      ((pspecializationinfo-arg)
@@ -1995,7 +2037,8 @@
        :pointers nil))
      :get
      ((&optional blendconstants-index)
-      (get-array :float blendconstants blendconstants-index 4 :pointers nil))
+      (get-array :float blendconstants blendconstants-index
+       (apply #'* (list 4)) :pointers nil))
      :set
      ((blendconstants-arg &optional blendconstants-index)
       (set-array :float blendconstants blendconstants-arg blendconstants-index
@@ -2766,7 +2809,8 @@
       (create-array :float float32 float32-arg :dynamic nil :pointers nil))
      :get
      ((&optional float32-index)
-      (get-array :float float32 float32-index 4 :pointers nil))
+      (get-array :float float32 float32-index (apply #'* (list 4)) :pointers
+       nil))
      :set
      ((float32-arg &optional float32-index)
       (set-array :float float32 float32-arg float32-index :dynamic nil
@@ -2776,7 +2820,7 @@
       (create-array :int32 int32 int32-arg :dynamic nil :pointers nil))
      :get
      ((&optional int32-index)
-      (get-array :int32 int32 int32-index 4 :pointers nil))
+      (get-array :int32 int32 int32-index (apply #'* (list 4)) :pointers nil))
      :set
      ((int32-arg &optional int32-index)
       (set-array :int32 int32 int32-arg int32-index :dynamic nil :pointers
@@ -2786,7 +2830,8 @@
       (create-array :uint32 uint32 uint32-arg :dynamic nil :pointers nil))
      :get
      ((&optional uint32-index)
-      (get-array :uint32 uint32 uint32-index 4 :pointers nil))
+      (get-array :uint32 uint32 uint32-index (apply #'* (list 4)) :pointers
+       nil))
      :set
      ((uint32-arg &optional uint32-index)
       (set-array :uint32 uint32 uint32-arg uint32-index :dynamic nil :pointers
@@ -2874,8 +2919,8 @@
        :pointers ("VkOffset3D")))
      :get
      ((&optional srcoffsets-index)
-      (get-array (:struct vkoffset3d) srcoffsets srcoffsets-index 2 :pointers
-       ("VkOffset3D")))
+      (get-array (:struct vkoffset3d) srcoffsets srcoffsets-index
+       (apply #'* (list 2)) :pointers ("VkOffset3D")))
      :set
      ((srcoffsets-arg &optional srcoffsets-index)
       (set-array (:struct vkoffset3d) srcoffsets srcoffsets-arg
@@ -2895,8 +2940,8 @@
        :pointers ("VkOffset3D")))
      :get
      ((&optional dstoffsets-index)
-      (get-array (:struct vkoffset3d) dstoffsets dstoffsets-index 2 :pointers
-       ("VkOffset3D")))
+      (get-array (:struct vkoffset3d) dstoffsets dstoffsets-index
+       (apply #'* (list 2)) :pointers ("VkOffset3D")))
      :set
      ((dstoffsets-arg &optional dstoffsets-index)
       (set-array (:struct vkoffset3d) dstoffsets dstoffsets-arg
@@ -3350,9 +3395,16 @@
     (physicaldevicecount :name "physicalDeviceCount" :type uint32)
     (physicaldevices :name "physicalDevices" :type "VkPhysicalDevice" :create
      ((physicaldevices-arg)
-      (create-pointer physicaldevices physicaldevices-arg))
-     :get (nil (get-pointer physicaldevices)) :set
-     ((physicaldevices-arg) (set-pointer physicaldevices physicaldevices-arg)))
+      (create-array vkphysicaldevice physicaldevices physicaldevices-arg
+       :dynamic nil :pointers nil))
+     :get
+     ((&optional physicaldevices-index)
+      (get-array vkphysicaldevice physicaldevices physicaldevices-index
+       (apply #'* (list vk_max_device_group_size)) :pointers nil))
+     :set
+     ((physicaldevices-arg &optional physicaldevices-index)
+      (set-array vkphysicaldevice physicaldevices physicaldevices-arg
+       physicaldevices-index :dynamic nil :pointers nil)))
     (subsetallocation :name "subsetAllocation" :type "VkBool32"))
 
   (more-cffi:doc-note doc-file
@@ -4153,9 +4205,42 @@
     (pnext :name "pNext" :type void :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
-    (deviceuuid :name "deviceUUID" :type uint8)
-    (driveruuid :name "driverUUID" :type uint8)
-    (deviceluid :name "deviceLUID" :type uint8)
+    (deviceuuid :name "deviceUUID" :type uint8 :create
+     ((deviceuuid-arg)
+      (create-array :uint8 deviceuuid deviceuuid-arg :dynamic nil :pointers
+       nil))
+     :get
+     ((&optional deviceuuid-index)
+      (get-array :uint8 deviceuuid deviceuuid-index
+       (apply #'* (list vk_uuid_size)) :pointers nil))
+     :set
+     ((deviceuuid-arg &optional deviceuuid-index)
+      (set-array :uint8 deviceuuid deviceuuid-arg deviceuuid-index :dynamic nil
+       :pointers nil)))
+    (driveruuid :name "driverUUID" :type uint8 :create
+     ((driveruuid-arg)
+      (create-array :uint8 driveruuid driveruuid-arg :dynamic nil :pointers
+       nil))
+     :get
+     ((&optional driveruuid-index)
+      (get-array :uint8 driveruuid driveruuid-index
+       (apply #'* (list vk_uuid_size)) :pointers nil))
+     :set
+     ((driveruuid-arg &optional driveruuid-index)
+      (set-array :uint8 driveruuid driveruuid-arg driveruuid-index :dynamic nil
+       :pointers nil)))
+    (deviceluid :name "deviceLUID" :type uint8 :create
+     ((deviceluid-arg)
+      (create-array :uint8 deviceluid deviceluid-arg :dynamic nil :pointers
+       nil))
+     :get
+     ((&optional deviceluid-index)
+      (get-array :uint8 deviceluid deviceluid-index
+       (apply #'* (list vk_luid_size)) :pointers nil))
+     :set
+     ((deviceluid-arg &optional deviceluid-index)
+      (set-array :uint8 deviceluid deviceluid-arg deviceluid-index :dynamic nil
+       :pointers nil)))
     (devicenodemask :name "deviceNodeMask" :type uint32)
     (deviceluidvalid :name "deviceLUIDValid" :type "VkBool32"))
 
@@ -4372,9 +4457,42 @@
     (pnext :name "pNext" :type void :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
-    (deviceuuid :name "deviceUUID" :type uint8)
-    (driveruuid :name "driverUUID" :type uint8)
-    (deviceluid :name "deviceLUID" :type uint8)
+    (deviceuuid :name "deviceUUID" :type uint8 :create
+     ((deviceuuid-arg)
+      (create-array :uint8 deviceuuid deviceuuid-arg :dynamic nil :pointers
+       nil))
+     :get
+     ((&optional deviceuuid-index)
+      (get-array :uint8 deviceuuid deviceuuid-index
+       (apply #'* (list vk_uuid_size)) :pointers nil))
+     :set
+     ((deviceuuid-arg &optional deviceuuid-index)
+      (set-array :uint8 deviceuuid deviceuuid-arg deviceuuid-index :dynamic nil
+       :pointers nil)))
+    (driveruuid :name "driverUUID" :type uint8 :create
+     ((driveruuid-arg)
+      (create-array :uint8 driveruuid driveruuid-arg :dynamic nil :pointers
+       nil))
+     :get
+     ((&optional driveruuid-index)
+      (get-array :uint8 driveruuid driveruuid-index
+       (apply #'* (list vk_uuid_size)) :pointers nil))
+     :set
+     ((driveruuid-arg &optional driveruuid-index)
+      (set-array :uint8 driveruuid driveruuid-arg driveruuid-index :dynamic nil
+       :pointers nil)))
+    (deviceluid :name "deviceLUID" :type uint8 :create
+     ((deviceluid-arg)
+      (create-array :uint8 deviceluid deviceluid-arg :dynamic nil :pointers
+       nil))
+     :get
+     ((&optional deviceluid-index)
+      (get-array :uint8 deviceluid deviceluid-index
+       (apply #'* (list vk_luid_size)) :pointers nil))
+     :set
+     ((deviceluid-arg &optional deviceluid-index)
+      (set-array :uint8 deviceluid deviceluid-arg deviceluid-index :dynamic nil
+       :pointers nil)))
     (devicenodemask :name "deviceNodeMask" :type uint32)
     (deviceluidvalid :name "deviceLUIDValid" :type "VkBool32")
     (subgroupsize :name "subgroupSize" :type uint32)
@@ -4505,8 +4623,14 @@
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (driverid :name "driverID" :type "VkDriverId")
-    (drivername :name "driverName" :type char)
-    (driverinfo :name "driverInfo" :type char)
+    (drivername :name "driverName" :type char :create
+     ((drivername-arg) (create-string drivername drivername-arg :dynamic nil))
+     :get (nil (get-string drivername)) :set
+     ((drivername-arg) (set-string drivername drivername-arg :dynamic nil)))
+    (driverinfo :name "driverInfo" :type char :create
+     ((driverinfo-arg) (create-string driverinfo driverinfo-arg :dynamic nil))
+     :get (nil (get-string driverinfo)) :set
+     ((driverinfo-arg) (set-string driverinfo driverinfo-arg :dynamic nil)))
     (conformanceversion :pointer t :name "conformanceVersion" :type
      "VkConformanceVersion" :create
      ((conformanceversion-arg)
@@ -4892,8 +5016,14 @@
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (driverid :name "driverID" :type "VkDriverId")
-    (drivername :name "driverName" :type char)
-    (driverinfo :name "driverInfo" :type char)
+    (drivername :name "driverName" :type char :create
+     ((drivername-arg) (create-string drivername drivername-arg :dynamic nil))
+     :get (nil (get-string drivername)) :set
+     ((drivername-arg) (set-string drivername drivername-arg :dynamic nil)))
+    (driverinfo :name "driverInfo" :type char :create
+     ((driverinfo-arg) (create-string driverinfo driverinfo-arg :dynamic nil))
+     :get (nil (get-string driverinfo)) :set
+     ((driverinfo-arg) (set-string driverinfo driverinfo-arg :dynamic nil)))
     (conformanceversion :pointer t :name "conformanceVersion" :type
      "VkConformanceVersion" :create
      ((conformanceversion-arg)
@@ -5910,11 +6040,24 @@
     (pnext :name "pNext" :type void :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
-    (name :name name :type char)
-    (version :name version :type char)
+    (name :name name :type char :create
+     ((name-arg) (create-string name name-arg :dynamic nil)) :get
+     (nil (get-string name)) :set
+     ((name-arg) (set-string name name-arg :dynamic nil)))
+    (version :name version :type char :create
+     ((version-arg) (create-string version version-arg :dynamic nil)) :get
+     (nil (get-string version)) :set
+     ((version-arg) (set-string version version-arg :dynamic nil)))
     (purposes :name purposes :type "VkToolPurposeFlags")
-    (description :name description :type char)
-    (layer :name layer :type char))
+    (description :name description :type char :create
+     ((description-arg)
+      (create-string description description-arg :dynamic nil))
+     :get (nil (get-string description)) :set
+     ((description-arg) (set-string description description-arg :dynamic nil)))
+    (layer :name layer :type char :create
+     ((layer-arg) (create-string layer layer-arg :dynamic nil)) :get
+     (nil (get-string layer)) :set
+     ((layer-arg) (set-string layer layer-arg :dynamic nil))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -6524,8 +6667,8 @@
        :pointers ("VkOffset3D")))
      :get
      ((&optional srcoffsets-index)
-      (get-array (:struct vkoffset3d) srcoffsets srcoffsets-index 2 :pointers
-       ("VkOffset3D")))
+      (get-array (:struct vkoffset3d) srcoffsets srcoffsets-index
+       (apply #'* (list 2)) :pointers ("VkOffset3D")))
      :set
      ((srcoffsets-arg &optional srcoffsets-index)
       (set-array (:struct vkoffset3d) srcoffsets srcoffsets-arg
@@ -6545,8 +6688,8 @@
        :pointers ("VkOffset3D")))
      :get
      ((&optional dstoffsets-index)
-      (get-array (:struct vkoffset3d) dstoffsets dstoffsets-index 2 :pointers
-       ("VkOffset3D")))
+      (get-array (:struct vkoffset3d) dstoffsets dstoffsets-index
+       (apply #'* (list 2)) :pointers ("VkOffset3D")))
      :set
      ((dstoffsets-arg &optional dstoffsets-index)
       (set-array (:struct vkoffset3d) dstoffsets dstoffsets-arg
@@ -7387,7 +7530,18 @@
     (pnext :name "pNext" :type void :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
-    (presentmask :name "presentMask" :type uint32)
+    (presentmask :name "presentMask" :type uint32 :create
+     ((presentmask-arg)
+      (create-array :uint32 presentmask presentmask-arg :dynamic nil :pointers
+       nil))
+     :get
+     ((&optional presentmask-index)
+      (get-array :uint32 presentmask presentmask-index
+       (apply #'* (list vk_max_device_group_size)) :pointers nil))
+     :set
+     ((presentmask-arg &optional presentmask-index)
+      (set-array :uint32 presentmask presentmask-arg presentmask-index :dynamic
+       nil :pointers nil)))
     (modes :name modes :type "VkDeviceGroupPresentModeFlagsKHR"))
 
   (more-cffi:doc-note doc-file
@@ -7573,9 +7727,10 @@
      (nil (get-pointer display)) :set
      ((display-arg) (set-pointer display display-arg)))
     (displayname :name "displayName" :type char :init-form nil :create
-     ((displayname-arg) (create-string displayname displayname-arg)) :destroy
-     (destroy-string displayname) :get (nil (get-string displayname)) :set
-     ((displayname-arg) (set-string displayname displayname-arg)))
+     ((displayname-arg) (create-string displayname displayname-arg :dynamic t))
+     :destroy (destroy-string displayname) :get (nil (get-string displayname))
+     :set
+     ((displayname-arg) (set-string displayname displayname-arg :dynamic t)))
     (physicaldimensions :pointer t :name "physicalDimensions" :type
      "VkExtent2D" :create
      ((physicaldimensions-arg)
@@ -7989,7 +8144,16 @@
     (unit :name unit :type "VkPerformanceCounterUnitKHR")
     (scope :name scope :type "VkPerformanceCounterScopeKHR")
     (storage :name storage :type "VkPerformanceCounterStorageKHR")
-    (uuid :name uuid :type uint8))
+    (uuid :name uuid :type uint8 :create
+     ((uuid-arg)
+      (create-array :uint8 uuid uuid-arg :dynamic nil :pointers nil))
+     :get
+     ((&optional uuid-index)
+      (get-array :uint8 uuid uuid-index (apply #'* (list vk_uuid_size))
+       :pointers nil))
+     :set
+     ((uuid-arg &optional uuid-index)
+      (set-array :uint8 uuid uuid-arg uuid-index :dynamic nil :pointers nil))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -8003,9 +8167,19 @@
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkPerformanceCounterDescriptionFlagsKHR")
-    (name :name name :type char)
-    (category :name category :type char)
-    (description :name description :type char))
+    (name :name name :type char :create
+     ((name-arg) (create-string name name-arg :dynamic nil)) :get
+     (nil (get-string name)) :set
+     ((name-arg) (set-string name name-arg :dynamic nil)))
+    (category :name category :type char :create
+     ((category-arg) (create-string category category-arg :dynamic nil)) :get
+     (nil (get-string category)) :set
+     ((category-arg) (set-string category category-arg :dynamic nil)))
+    (description :name description :type char :create
+     ((description-arg)
+      (create-string description description-arg :dynamic nil))
+     :get (nil (get-string description)) :set
+     ((description-arg) (set-string description description-arg :dynamic nil))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -8288,7 +8462,18 @@
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (prioritycount :name "priorityCount" :type uint32)
-    (priorities :name priorities :type "VkQueueGlobalPriorityKHR"))
+    (priorities :name priorities :type "VkQueueGlobalPriorityKHR" :create
+     ((priorities-arg)
+      (create-array vkqueueglobalprioritykhr priorities priorities-arg :dynamic
+       nil :pointers nil))
+     :get
+     ((&optional priorities-index)
+      (get-array vkqueueglobalprioritykhr priorities priorities-index
+       (apply #'* (list vk_max_global_priority_size_khr)) :pointers nil))
+     :set
+     ((priorities-arg &optional priorities-index)
+      (set-array vkqueueglobalprioritykhr priorities priorities-arg
+       priorities-index :dynamic nil :pointers nil))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -8347,7 +8532,7 @@
      :get
      ((&optional combinerops-index)
       (get-array vkfragmentshadingratecombineropkhr combinerops
-       combinerops-index 2 :pointers nil))
+       combinerops-index (apply #'* (list 2)) :pointers nil))
      :set
      ((combinerops-arg &optional combinerops-index)
       (set-array vkfragmentshadingratecombineropkhr combinerops combinerops-arg
@@ -8527,8 +8712,15 @@
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (stages :name stages :type "VkShaderStageFlags")
-    (name :name name :type char)
-    (description :name description :type char)
+    (name :name name :type char :create
+     ((name-arg) (create-string name name-arg :dynamic nil)) :get
+     (nil (get-string name)) :set
+     ((name-arg) (set-string name name-arg :dynamic nil)))
+    (description :name description :type char :create
+     ((description-arg)
+      (create-string description description-arg :dynamic nil))
+     :get (nil (get-string description)) :set
+     ((description-arg) (set-string description description-arg :dynamic nil)))
     (subgroupsize :name "subgroupSize" :type uint32))
 
   (more-cffi:doc-note doc-file
@@ -8571,8 +8763,15 @@
     (pnext :name "pNext" :type void :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
-    (name :name name :type char)
-    (description :name description :type char)
+    (name :name name :type char :create
+     ((name-arg) (create-string name name-arg :dynamic nil)) :get
+     (nil (get-string name)) :set
+     ((name-arg) (set-string name name-arg :dynamic nil)))
+    (description :name description :type char :create
+     ((description-arg)
+      (create-string description description-arg :dynamic nil))
+     :get (nil (get-string description)) :set
+     ((description-arg) (set-string description description-arg :dynamic nil)))
     (format :name format :type "VkPipelineExecutableStatisticFormatKHR")
     (value :pointer t :name value :type "VkPipelineExecutableStatisticValueKHR"
      :create
@@ -8595,8 +8794,15 @@
     (pnext :name "pNext" :type void :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
-    (name :name name :type char)
-    (description :name description :type char)
+    (name :name name :type char :create
+     ((name-arg) (create-string name name-arg :dynamic nil)) :get
+     (nil (get-string name)) :set
+     ((name-arg) (set-string name name-arg :dynamic nil)))
+    (description :name description :type char :create
+     ((description-arg)
+      (create-string description description-arg :dynamic nil))
+     :get (nil (get-string description)) :set
+     ((description-arg) (set-string description description-arg :dynamic nil)))
     (istext :name "isText" :type "VkBool32")
     (datasize :name "dataSize" :type size)
     (pdata :name "pData" :type void :init-form nil :create
@@ -8857,9 +9063,10 @@
     (objecttype :name "objectType" :type "VkDebugReportObjectTypeEXT")
     (object :name object :type uint64)
     (pobjectname :name "pObjectName" :type char :init-form nil :create
-     ((pobjectname-arg) (create-string pobjectname pobjectname-arg)) :destroy
-     (destroy-string pobjectname) :get (nil (get-string pobjectname)) :set
-     ((pobjectname-arg) (set-string pobjectname pobjectname-arg))))
+     ((pobjectname-arg) (create-string pobjectname pobjectname-arg :dynamic t))
+     :destroy (destroy-string pobjectname) :get (nil (get-string pobjectname))
+     :set
+     ((pobjectname-arg) (set-string pobjectname pobjectname-arg :dynamic t))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -8892,15 +9099,16 @@
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (pmarkername :name "pMarkerName" :type char :init-form nil :create
-     ((pmarkername-arg) (create-string pmarkername pmarkername-arg)) :destroy
-     (destroy-string pmarkername) :get (nil (get-string pmarkername)) :set
-     ((pmarkername-arg) (set-string pmarkername pmarkername-arg)))
+     ((pmarkername-arg) (create-string pmarkername pmarkername-arg :dynamic t))
+     :destroy (destroy-string pmarkername) :get (nil (get-string pmarkername))
+     :set
+     ((pmarkername-arg) (set-string pmarkername pmarkername-arg :dynamic t)))
     (color :name color :type float :create
      ((color-arg)
       (create-array :float color color-arg :dynamic nil :pointers nil))
      :get
      ((&optional color-index)
-      (get-array :float color color-index 4 :pointers nil))
+      (get-array :float color color-index (apply #'* (list 4)) :pointers nil))
      :set
      ((color-arg &optional color-index)
       (set-array :float color color-arg color-index :dynamic nil :pointers
@@ -9042,9 +9250,9 @@
      (nil (get-pointer module)) :set
      ((module-arg) (set-pointer module module-arg)))
     (pname :name "pName" :type char :init-form nil :create
-     ((pname-arg) (create-string pname pname-arg)) :destroy
+     ((pname-arg) (create-string pname pname-arg :dynamic t)) :destroy
      (destroy-string pname) :get (nil (get-string pname)) :set
-     ((pname-arg) (set-string pname pname-arg))))
+     ((pname-arg) (set-string pname pname-arg :dynamic t))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -9168,8 +9376,8 @@
        :dynamic nil :pointers nil))
      :get
      ((&optional computeworkgroupsize-index)
-      (get-array :uint32 computeworkgroupsize computeworkgroupsize-index 3
-       :pointers nil))
+      (get-array :uint32 computeworkgroupsize computeworkgroupsize-index
+       (apply #'* (list 3)) :pointers nil))
      :set
      ((computeworkgroupsize-arg &optional computeworkgroupsize-index)
       (set-array :uint32 computeworkgroupsize computeworkgroupsize-arg
@@ -9775,15 +9983,15 @@
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (plabelname :name "pLabelName" :type char :init-form nil :create
-     ((plabelname-arg) (create-string plabelname plabelname-arg)) :destroy
-     (destroy-string plabelname) :get (nil (get-string plabelname)) :set
-     ((plabelname-arg) (set-string plabelname plabelname-arg)))
+     ((plabelname-arg) (create-string plabelname plabelname-arg :dynamic t))
+     :destroy (destroy-string plabelname) :get (nil (get-string plabelname))
+     :set ((plabelname-arg) (set-string plabelname plabelname-arg :dynamic t)))
     (color :name color :type float :create
      ((color-arg)
       (create-array :float color color-arg :dynamic nil :pointers nil))
      :get
      ((&optional color-index)
-      (get-array :float color color-index 4 :pointers nil))
+      (get-array :float color color-index (apply #'* (list 4)) :pointers nil))
      :set
      ((color-arg &optional color-index)
       (set-array :float color color-arg color-index :dynamic nil :pointers
@@ -9803,9 +10011,10 @@
     (objecttype :name "objectType" :type "VkObjectType")
     (objecthandle :name "objectHandle" :type uint64)
     (pobjectname :name "pObjectName" :type char :init-form nil :create
-     ((pobjectname-arg) (create-string pobjectname pobjectname-arg)) :destroy
-     (destroy-string pobjectname) :get (nil (get-string pobjectname)) :set
-     ((pobjectname-arg) (set-string pobjectname pobjectname-arg))))
+     ((pobjectname-arg) (create-string pobjectname pobjectname-arg :dynamic t))
+     :destroy (destroy-string pobjectname) :get (nil (get-string pobjectname))
+     :set
+     ((pobjectname-arg) (set-string pobjectname pobjectname-arg :dynamic t))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -9820,15 +10029,17 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkDebugUtilsMessengerCallbackDataFlagsEXT")
     (pmessageidname :name "pMessageIdName" :type char :init-form nil :create
-     ((pmessageidname-arg) (create-string pmessageidname pmessageidname-arg))
+     ((pmessageidname-arg)
+      (create-string pmessageidname pmessageidname-arg :dynamic t))
      :destroy (destroy-string pmessageidname) :get
      (nil (get-string pmessageidname)) :set
-     ((pmessageidname-arg) (set-string pmessageidname pmessageidname-arg)))
+     ((pmessageidname-arg)
+      (set-string pmessageidname pmessageidname-arg :dynamic t)))
     (messageidnumber :name "messageIdNumber" :type int32)
     (pmessage :name "pMessage" :type char :init-form nil :create
-     ((pmessage-arg) (create-string pmessage pmessage-arg)) :destroy
+     ((pmessage-arg) (create-string pmessage pmessage-arg :dynamic t)) :destroy
      (destroy-string pmessage) :get (nil (get-string pmessage)) :set
-     ((pmessage-arg) (set-string pmessage pmessage-arg)))
+     ((pmessage-arg) (set-string pmessage pmessage-arg :dynamic t)))
     (queuelabelcount :name "queueLabelCount" :type uint32)
     (pqueuelabels :name "pQueueLabels" :type "VkDebugUtilsLabelEXT" :init-form
      nil :create
@@ -10107,7 +10318,7 @@
      :get
      ((&optional samplelocationcoordinaterange-index)
       (get-array :float samplelocationcoordinaterange
-       samplelocationcoordinaterange-index 2 :pointers nil))
+       samplelocationcoordinaterange-index (apply #'* (list 2)) :pointers nil))
      :set
      ((samplelocationcoordinaterange-arg &optional
        samplelocationcoordinaterange-index)
@@ -10977,7 +11188,8 @@
       (create-array :float matrix matrix-arg :dynamic nil :pointers nil))
      :get
      ((&optional matrix-index)
-      (get-array :float matrix matrix-index 12 :pointers nil))
+      (get-array :float matrix matrix-index (apply #'* (list 3 4)) :pointers
+       nil))
      :set
      ((matrix-arg &optional matrix-index)
       (set-array :float matrix matrix-arg matrix-index :dynamic nil :pointers
@@ -11302,8 +11514,8 @@
        :dynamic nil :pointers nil))
      :get
      ((&optional maxtaskworkgroupsize-index)
-      (get-array :uint32 maxtaskworkgroupsize maxtaskworkgroupsize-index 3
-       :pointers nil))
+      (get-array :uint32 maxtaskworkgroupsize maxtaskworkgroupsize-index
+       (apply #'* (list 3)) :pointers nil))
      :set
      ((maxtaskworkgroupsize-arg &optional maxtaskworkgroupsize-index)
       (set-array :uint32 maxtaskworkgroupsize maxtaskworkgroupsize-arg
@@ -11318,8 +11530,8 @@
        :dynamic nil :pointers nil))
      :get
      ((&optional maxmeshworkgroupsize-index)
-      (get-array :uint32 maxmeshworkgroupsize maxmeshworkgroupsize-index 3
-       :pointers nil))
+      (get-array :uint32 maxmeshworkgroupsize maxmeshworkgroupsize-index
+       (apply #'* (list 3)) :pointers nil))
      :set
      ((maxmeshworkgroupsize-arg &optional maxmeshworkgroupsize-index)
       (set-array :uint32 maxmeshworkgroupsize maxmeshworkgroupsize-arg
@@ -11454,9 +11666,10 @@
     (valuefloat :name "valueFloat" :type float)
     (valuebool :name "valueBool" :type "VkBool32")
     (valuestring :name "valueString" :type char :init-form nil :create
-     ((valuestring-arg) (create-string valuestring valuestring-arg)) :destroy
-     (destroy-string valuestring) :get (nil (get-string valuestring)) :set
-     ((valuestring-arg) (set-string valuestring valuestring-arg))))
+     ((valuestring-arg) (create-string valuestring valuestring-arg :dynamic t))
+     :destroy (destroy-string valuestring) :get (nil (get-string valuestring))
+     :set
+     ((valuestring-arg) (set-string valuestring valuestring-arg :dynamic t))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -11725,8 +11938,30 @@
     (pnext :name "pNext" :type void :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
-    (heapbudget :name "heapBudget" :type "VkDeviceSize")
-    (heapusage :name "heapUsage" :type "VkDeviceSize"))
+    (heapbudget :name "heapBudget" :type "VkDeviceSize" :create
+     ((heapbudget-arg)
+      (create-array vkdevicesize heapbudget heapbudget-arg :dynamic nil
+       :pointers nil))
+     :get
+     ((&optional heapbudget-index)
+      (get-array vkdevicesize heapbudget heapbudget-index
+       (apply #'* (list vk_max_memory_heaps)) :pointers nil))
+     :set
+     ((heapbudget-arg &optional heapbudget-index)
+      (set-array vkdevicesize heapbudget heapbudget-arg heapbudget-index
+       :dynamic nil :pointers nil)))
+    (heapusage :name "heapUsage" :type "VkDeviceSize" :create
+     ((heapusage-arg)
+      (create-array vkdevicesize heapusage heapusage-arg :dynamic nil :pointers
+       nil))
+     :get
+     ((&optional heapusage-index)
+      (get-array vkdevicesize heapusage heapusage-index
+       (apply #'* (list vk_max_memory_heaps)) :pointers nil))
+     :set
+     ((heapusage-arg &optional heapusage-index)
+      (set-array vkdevicesize heapusage heapusage-arg heapusage-index :dynamic
+       nil :pointers nil))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -12886,7 +13121,7 @@
      :get
      ((&optional combinerops-index)
       (get-array vkfragmentshadingratecombineropkhr combinerops
-       combinerops-index 2 :pointers nil))
+       combinerops-index (apply #'* (list 2)) :pointers nil))
      :set
      ((combinerops-arg &optional combinerops-index)
       (set-array vkfragmentshadingratecombineropkhr combinerops combinerops-arg
@@ -13565,7 +13800,18 @@
     (pnext :name "pNext" :type void :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
-    (pipelineidentifier :name "pipelineIdentifier" :type uint8))
+    (pipelineidentifier :name "pipelineIdentifier" :type uint8 :create
+     ((pipelineidentifier-arg)
+      (create-array :uint8 pipelineidentifier pipelineidentifier-arg :dynamic
+       nil :pointers nil))
+     :get
+     ((&optional pipelineidentifier-index)
+      (get-array :uint8 pipelineidentifier pipelineidentifier-index
+       (apply #'* (list vk_uuid_size)) :pointers nil))
+     :set
+     ((pipelineidentifier-arg &optional pipelineidentifier-index)
+      (set-array :uint8 pipelineidentifier pipelineidentifier-arg
+       pipelineidentifier-index :dynamic nil :pointers nil))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -13992,7 +14238,11 @@
       (:default-create :default-get :default-set)
     (subpassmergestatus :name "subpassMergeStatus" :type
      "VkSubpassMergeStatusEXT")
-    (description :name description :type char)
+    (description :name description :type char :create
+     ((description-arg)
+      (create-string description description-arg :dynamic nil))
+     :get (nil (get-string description)) :set
+     ((description-arg) (set-string description description-arg :dynamic nil)))
     (postmergeindex :name "postMergeIndex" :type uint32))
 
   (more-cffi:doc-note doc-file
