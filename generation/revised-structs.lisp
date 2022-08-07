@@ -621,6 +621,154 @@
 				 :create ((minimagetransfergranularity-arg)
 					  (more-cffi:copy minimagetransfergranularity minimagetransfergranularity-arg '(:struct vkextent3d)))
 				 :set ((minimagetransfergranularity-arg)
-				       (more-cffi:copy minimagetransfergranularity minimagetransfergranularity-arg '(:struct vkextent3d))))))
+				       (more-cffi:copy minimagetransfergranularity minimagetransfergranularity-arg '(:struct vkextent3d)))))
+
+
+  (more-cffi:def-foreign-struct doc-file "VkDeviceQueueCreateInfo" (device-queue-create-info)
+      (:default-create :default-get :default-set)
+    (stype :name "sType" :type "VkStructureType")
+    (pnext :name "pNext" :type void :init-form nil
+	   :create ((pnext-arg)
+		    (create-pointer pnext pnext-arg))
+	   :get (nil (get-pointer pnext))
+	   :set ((pnext-arg)
+		 (set-pointer pnext pnext-arg)))
+    (flags :name flags :type "VkDeviceQueueCreateFlags")
+    (queuefamilyindex :name "queueFamilyIndex" :type uint32)
+    (queuecount :name "queueCount" :type uint32)
+    (pqueuepriorities :name "pQueuePriorities" :type (list float) :init-form nil
+		      :create ((pqueuepriorities-arg)
+			       (create-array :float pqueuepriorities pqueuepriorities-arg :dynamic t :pointers nil))
+		      :destroy (destroy-array pqueuepriorities)
+		      :get ((&optional pqueuepriorities-index)
+			    (get-array :float pqueuepriorities pqueuepriorities-index queuecount :pointers nil))
+		      :set ((pqueuepriorities-arg &optional pqueuepriorities-index)
+			    (set-array :float pqueuepriorities pqueuepriorities-arg pqueuepriorities-index :dynamic t :pointers nil))))
+
+
+  (more-cffi:def-foreign-struct doc-file "VkDeviceCreateInfo" (device-create-info)
+      (:default-create :default-get :default-set)
+    (stype :name "sType" :type "VkStructureType")
+    (pnext :name "pNext" :type "vulkan object" :init-form nil
+	   :create ((pnext-arg)
+		    (create-pointer pnext pnext-arg))
+	   :get (nil (get-pointer pnext))
+	   :set ((pnext-arg)
+		 (set-pointer pnext pnext-arg)))
+    (flags :name flags :type "VkDeviceCreateFlags")
+    (queuecreateinfocount :name "queueCreateInfoCount" :type uint32)
+    (pqueuecreateinfos :name "pQueueCreateInfos" :type (list "VkDeviceQueueCreateInfo") :init-form nil
+		       :create ((pqueuecreateinfos-arg)
+				(create-array (:struct vkdevicequeuecreateinfo) pqueuecreateinfos pqueuecreateinfos-arg :dynamic t :pointers t))
+		       :destroy (destroy-array pqueuecreateinfos)
+		       :get ((&optional pqueuecreateinfos-index)
+			     (get-array (:struct vkdevicequeuecreateinfo) pqueuecreateinfos pqueuecreateinfos-index queuecreateinfocount :pointers t))
+		       :set ((pqueuecreateinfos-arg &optional pqueuecreateinfos-index)
+			     (set-array (:struct vkdevicequeuecreateinfo) pqueuecreateinfos pqueuecreateinfos-arg pqueuecreateinfos-index :dynamic t :pointers t)))
+    (enabledlayercount :name "enabledLayerCount" :type uint32)
+    (ppenabledlayernames :name "ppEnabledLayerNames" :type (list string) :init-form nil
+			 :create ((ppenabledlayernames-arg)
+				  (create-array-strings ppenabledlayernames ppenabledlayernames-arg :dynamic t))
+			 :destroy (destroy-array-strings ppenabledlayernames enabledlayercount :dynamic t)
+			 :get ((&optional ppenabledlayernames-index)
+			       (get-array-strings ppenabledlayernames ppenabledlayernames-index enabledlayercount))
+			 :set ((ppenabledlayernames-arg &optional ppenabledlayernames-index)
+			       (set-array-strings ppenabledlayernames ppenabledlayernames-arg ppenabledlayernames-index enabledlayercount :dynamic t)))
+    (enabledextensioncount :name "enabledExtensionCount" :type uint32)
+    (ppenabledextensionnames :name "ppEnabledExtensionNames" :type (list string) :init-form nil
+			     :create ((ppenabledextensionnames-arg)
+				      (create-array-strings ppenabledextensionnames ppenabledextensionnames-arg :dynamic t))
+			     :destroy (destroy-array-strings ppenabledextensionnames enabledextensioncount :dynamic t)
+			     :get ((&optional ppenabledextensionnames-index)
+				   (get-array-strings ppenabledextensionnames ppenabledextensionnames-index enabledextensioncount))
+			     :set ((ppenabledextensionnames-arg &optional ppenabledextensionnames-index)
+				   (set-array-strings ppenabledextensionnames ppenabledextensionnames-arg ppenabledextensionnames-index enabledextensioncount :dynamic t)))
+    (penabledfeatures :name "pEnabledFeatures" :type "VkPhysicalDeviceFeatures" :init-form nil
+		      :create ((penabledfeatures-arg)
+			       (create-pointer penabledfeatures penabledfeatures-arg))
+		      :get (nil (get-pointer penabledfeatures))
+		      :set ((penabledfeatures-arg)
+			    (set-pointer penabledfeatures penabledfeatures-arg))))
+
+
+  (more-cffi:def-foreign-struct doc-file "VkSurfaceCapabilitiesKHR" (surface-capabilities-khr)
+      (:default-create :default-get :default-set)
+    (minimagecount :name "minImageCount" :type uint32)
+    (maximagecount :name "maxImageCount" :type uint32)
+    (currentextent :pointer t :name "currentExtent" :type "VkExtent2D"
+		   :create ((currentextent-arg)
+			    (more-cffi:copy currentextent currentextent-arg '(:struct vkextent2d)))
+		   :set ((currentextent-arg)
+			 (more-cffi:copy currentextent currentextent-arg '(:struct vkextent2d))))
+    (minimageextent :pointer t :name "minImageExtent" :type "VkExtent2D"
+		    :create ((minimageextent-arg)
+			     (more-cffi:copy minimageextent minimageextent-arg '(:struct vkextent2d)))
+		    :set ((minimageextent-arg)
+			  (more-cffi:copy minimageextent minimageextent-arg '(:struct vkextent2d))))
+    (maximageextent :pointer t :name "maxImageExtent" :type "VkExtent2D"
+		    :create ((maximageextent-arg)
+			     (more-cffi:copy maximageextent maximageextent-arg '(:struct vkextent2d)))
+		    :set ((maximageextent-arg)
+			  (more-cffi:copy maximageextent maximageextent-arg '(:struct vkextent2d))))
+    (maximagearraylayers :name "maxImageArrayLayers" :type uint32)
+    (supportedtransforms :name "supportedTransforms" :type "VkSurfaceTransformFlagsKHR")
+    (currenttransform :name "currentTransform" :type "VkSurfaceTransformFlagBitsKHR")
+    (supportedcompositealpha :name "supportedCompositeAlpha" :type "VkCompositeAlphaFlagsKHR")
+    (supportedusageflags :name "supportedUsageFlags" :type "VkImageUsageFlags"))
+
+
+  (more-cffi:def-foreign-struct doc-file "VkSurfaceFormatKHR" (surface-format-khr)
+      (:default-create :default-get :default-set)
+    (format :name format :type "VkFormat")
+    (colorspace :name "colorSpace" :type "VkColorSpaceKHR"))
+
+
+  (more-cffi:def-foreign-struct doc-file "VkShaderModuleCreateInfo" (shader-module-create-info)
+      (:default-create :default-get :default-set)
+    (stype :name "sType" :type "VkStructureType")
+    (pnext :name "pNext" :type void :init-form nil
+	   :create ((pnext-arg)
+		    (create-pointer pnext pnext-arg))
+	   :get (nil (get-pointer pnext))
+	   :set ((pnext-arg)
+		 (set-pointer pnext pnext-arg)))
+    (flags :name flags :type "VkShaderModuleCreateFlags")
+    (codesize :name "codeSize" :type size)
+    (pcode :name "pCode" :type uint32 :init-form nil
+	   :create ((pcode-arg)
+		    (create-pointer pcode pcode-arg))
+	   :get (nil (get-pointer pcode))
+	   :set ((pcode-arg)
+		 (set-pointer pcode pcode-arg))))
+
+
+  (more-cffi:def-foreign-struct doc-file "VkImageViewCreateInfo" (image-view-create-info)
+      (:default-create :default-get :default-set)
+    (stype :name "sType" :type "VkStructureType")
+    (pnext :name "pNext" :type void :init-form nil
+	   :create ((pnext-arg)
+		    (create-pointer pnext pnext-arg))
+	   :get (nil (get-pointer pnext))
+	   :set ((pnext-arg)
+		 (set-pointer pnext pnext-arg)))
+    (flags :name flags :type "VkImageViewCreateFlags")
+    (image :name image :type "VkImage"
+	   :create ((image-arg)
+		    (create-pointer image image-arg))
+	   :get (nil (get-pointer image))
+	   :set ((image-arg)
+		 (set-pointer image image-arg)))
+    (viewtype :name "viewType" :type "VkImageViewType")
+    (format :name format :type "VkFormat")
+    (components :pointer t :name components :type "VkComponentMapping"
+		:create ((components-arg)
+			 (more-cffi:copy components components-arg '(:struct vkcomponentmapping)))
+		:set ((components-arg)
+		      (more-cffi:copy components components-arg '(:struct vkcomponentmapping))))
+    (subresourcerange :pointer t :name "subresourceRange" :type "VkImageSubresourceRange"
+		      :create ((subresourcerange-arg)
+			       (more-cffi:copy subresourcerange subresourcerange-arg '(:struct vkimagesubresourcerange)))
+		      :set ((subresourcerange-arg)
+			    (more-cffi:copy subresourcerange subresourcerange-arg '(:struct vkimagesubresourcerange))))))
 
 
