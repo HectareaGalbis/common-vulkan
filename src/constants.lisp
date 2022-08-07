@@ -97,7 +97,7 @@
 
 (more-cffi:def-foreign-constant doc-file "VK_API_VERSION_1_1"
                                 vk_api_version_1_1
-                                |VK_MAKE_API_VERSION(0, 1, 1, 0)|)
+                                (vk_make_api_version . "(0  1  1  0)"))
 
 (more-cffi:def-foreign-constant doc-file "VK_MAX_DEVICE_GROUP_SIZE"
                                 vk_max_device_group_size 32)
@@ -111,7 +111,7 @@
 
 (more-cffi:def-foreign-constant doc-file "VK_API_VERSION_1_2"
                                 vk_api_version_1_2
-                                |VK_MAKE_API_VERSION(0, 1, 2, 0)|)
+                                (vk_make_api_version . "(0  1  2  0)"))
 
 (more-cffi:def-foreign-constant doc-file "VK_MAX_DRIVER_NAME_SIZE"
                                 vk_max_driver_name_size 256)
@@ -123,7 +123,7 @@
 
 (more-cffi:def-foreign-constant doc-file "VK_API_VERSION_1_3"
                                 vk_api_version_1_3
-                                |VK_MAKE_API_VERSION(0, 1, 3, 0)|)
+                                (vk_make_api_version . "(0  1  3  0)"))
 
 (more-cffi:def-foreign-constant doc-file "VK_PIPELINE_STAGE_2_NONE"
                                 vk_pipeline_stage_2_none 0)

@@ -50,22 +50,27 @@
 ;; Also return the base and if it is needed to print the radix.
 (defun fix-value (value-str)
   (multiple-value-bind (numberp num-regs) (ppcre:scan-to-strings "^(?:(\\(\\~)*)(?:(0x)*)([\\-\\d\\.]+)([ULF]*)" value-str)
-    (cond
-      (numberp
-       (let* ((notopp  (aref num-regs 0))
-	      (hexp    (aref num-regs 1))
-	      (num-str (aref num-regs 2))
-	      (suffix  (aref num-regs 3))
-	      (num     (read-from-string num-str)))
-	 (cond
-	   (notopp (values `(- ,(if (string= suffix "U") 'UINT32_MAX 'UINT64_MAX)
-			       ,num)
-			   nil nil))
-	   (hexp (values num 16 t))
-	   (t (values num nil nil)))))
-      ((equal (aref value-str 0) #\")
-       (subseq value-str 1 (1- (length value-str))))
-      (t (intern (string-upcase value-str))))))
+    (multiple-value-bind (macro-func-p func-regs) (ppcre:scan-to-strings "^(\\w+)(\\((?:\\s*\\d+\\s*,)*\\s*\\d+\\s*\\))" value-str)
+      (cond
+	(numberp
+	 (let* ((notopp  (aref num-regs 0))
+		(hexp    (aref num-regs 1))
+		(num-str (aref num-regs 2))
+		(suffix  (aref num-regs 3))
+		(num     (read-from-string num-str)))
+	   (cond
+	     (notopp (values `(- ,(if (string= suffix "U") 'UINT32_MAX 'UINT64_MAX)
+				 ,num)
+			     nil nil))
+	     (hexp (values num 16 t))
+	     (t (values num nil nil)))))
+	(macro-func-p
+	 (let ((args (ppcre:regex-replace-all "," (aref func-regs 1) " ")))
+	   (cons (intern (string-upcase (aref func-regs 0))) args)))
+	((equal (aref value-str 0) #\")
+	 (subseq value-str 1 (1- (length value-str))))
+	((ppcre:scan "^VK_API" value-str))
+	(t (intern (string-upcase value-str)))))))
 
 ;; Given a string designating a type or a name, return its MCFFI equivalent.
 (defun fix-more-name (name)

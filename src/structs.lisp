@@ -132,6 +132,9 @@
     (width :name width :type uint32)
     (height :name height :type uint32))
 
+  (more-cffi:doc-note doc-file
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
+
   (more-cffi:def-foreign-struct doc-file
       "VkExtent3D"
       (extent-3d)
@@ -151,7 +154,7 @@
     (y :name y :type int32))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkOffset3D"
@@ -178,7 +181,7 @@
      ((extent-arg) (more-cffi:copy extent extent-arg '(:struct vkextent2d)))))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkBaseInStructure"
@@ -275,7 +278,7 @@
     (layercount :name "layerCount" :type uint32))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkImageMemoryBarrier"
@@ -370,7 +373,7 @@
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType" :init-form
      vk_structure_type_application_info)
-    (pnext :name "pNext" :type "pointer" :init-form nil :create
+    (pnext :name "pNext" :type "vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (papplicationname :name "pApplicationName" :type string :init-form nil
@@ -388,6 +391,9 @@
      ((penginename-arg) (set-string penginename penginename-arg)))
     (engineversion :name "engineVersion" :type uint32 :init-form 0)
     (apiversion :name "apiVersion" :type uint32 :init-form 0))
+
+  (more-cffi:doc-note doc-file
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkFormatProperties"
@@ -426,7 +432,7 @@
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType" :init-form
      vk_structure_type_instance_create_info)
-    (pnext :name "pNext" :type pointer :init-form nil :create
+    (pnext :name "pNext" :type "vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :type "VkInstanceCreateFlags")
@@ -468,6 +474,9 @@
      ((ppenabledextensionnames-arg &optional (index nil))
       (set-array-strings ppenabledextensionnames ppenabledextensionnames-arg
        index enabledextensioncount :dynamic t))))
+
+  (more-cffi:doc-note doc-file
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkMemoryHeap"
@@ -563,7 +572,7 @@
     (inheritedqueries :name "inheritedQueries" :type "VkBool32"))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkPhysicalDeviceLimits"
@@ -657,7 +666,7 @@
      :get
      ((&optional maxcomputeworkgroupcount-index)
       (get-array :uint32 maxcomputeworkgroupcount
-       maxcomputeworkgroupcount-index (apply #'* (list 3)) :pointers nil))
+       maxcomputeworkgroupcount-index 3 :pointers nil))
      :set
      ((maxcomputeworkgroupcount-arg &optional maxcomputeworkgroupcount-index)
       (set-array :uint32 maxcomputeworkgroupcount maxcomputeworkgroupcount-arg
@@ -672,7 +681,7 @@
      :get
      ((&optional maxcomputeworkgroupsize-index)
       (get-array :uint32 maxcomputeworkgroupsize maxcomputeworkgroupsize-index
-       (apply #'* (list 3)) :pointers nil))
+       3 :pointers nil))
      :set
      ((maxcomputeworkgroupsize-arg &optional maxcomputeworkgroupsize-index)
       (set-array :uint32 maxcomputeworkgroupsize maxcomputeworkgroupsize-arg
@@ -691,8 +700,8 @@
        :dynamic nil :pointers nil))
      :get
      ((&optional maxviewportdimensions-index)
-      (get-array :uint32 maxviewportdimensions maxviewportdimensions-index
-       (apply #'* (list 2)) :pointers nil))
+      (get-array :uint32 maxviewportdimensions maxviewportdimensions-index 2
+       :pointers nil))
      :set
      ((maxviewportdimensions-arg &optional maxviewportdimensions-index)
       (set-array :uint32 maxviewportdimensions maxviewportdimensions-arg
@@ -703,8 +712,8 @@
        nil :pointers nil))
      :get
      ((&optional viewportboundsrange-index)
-      (get-array :float viewportboundsrange viewportboundsrange-index
-       (apply #'* (list 2)) :pointers nil))
+      (get-array :float viewportboundsrange viewportboundsrange-index 2
+       :pointers nil))
      :set
      ((viewportboundsrange-arg &optional viewportboundsrange-index)
       (set-array :float viewportboundsrange viewportboundsrange-arg
@@ -762,8 +771,7 @@
        :pointers nil))
      :get
      ((&optional pointsizerange-index)
-      (get-array :float pointsizerange pointsizerange-index
-       (apply #'* (list 2)) :pointers nil))
+      (get-array :float pointsizerange pointsizerange-index 2 :pointers nil))
      :set
      ((pointsizerange-arg &optional pointsizerange-index)
       (set-array :float pointsizerange pointsizerange-arg pointsizerange-index
@@ -774,8 +782,7 @@
        :pointers nil))
      :get
      ((&optional linewidthrange-index)
-      (get-array :float linewidthrange linewidthrange-index
-       (apply #'* (list 2)) :pointers nil))
+      (get-array :float linewidthrange linewidthrange-index 2 :pointers nil))
      :set
      ((linewidthrange-arg &optional linewidthrange-index)
       (set-array :float linewidthrange linewidthrange-arg linewidthrange-index
@@ -791,7 +798,7 @@
     (noncoherentatomsize :name "nonCoherentAtomSize" :type "VkDeviceSize"))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkPhysicalDeviceMemoryProperties"
@@ -842,7 +849,7 @@
      "VkBool32"))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkPhysicalDeviceProperties"
@@ -853,18 +860,18 @@
     (vendorid :name "vendorID" :type uint32)
     (deviceid :name "deviceID" :type uint32)
     (devicetype :name "deviceType" :type "VkPhysicalDeviceType")
-    (devicename :name "deviceName" :type char :create
+    (devicename :name "deviceName" :type string :create
      ((devicename-arg) (create-string devicename devicename-arg :dynamic nil))
      :get (nil (get-string devicename)) :set
      ((devicename-arg) (set-string devicename devicename-arg :dynamic nil)))
-    (pipelinecacheuuid :name "pipelineCacheUUID" :type uint8 :create
+    (pipelinecacheuuid :name "pipelineCacheUUID" :type (list uint8) :create
      ((pipelinecacheuuid-arg)
       (create-array :uint8 pipelinecacheuuid pipelinecacheuuid-arg :dynamic nil
        :pointers nil))
      :get
      ((&optional pipelinecacheuuid-index)
-      (get-array :uint8 pipelinecacheuuid pipelinecacheuuid-index
-       (apply #'* (list vk_uuid_size)) :pointers nil))
+      (get-array :uint8 pipelinecacheuuid pipelinecacheuuid-index vk_uuid_size
+       :pointers nil))
      :set
      ((pipelinecacheuuid-arg &optional pipelinecacheuuid-index)
       (set-array :uint8 pipelinecacheuuid pipelinecacheuuid-arg
@@ -886,7 +893,7 @@
                       '(:struct vkphysicaldevicesparseproperties)))))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkQueueFamilyProperties"
@@ -906,7 +913,7 @@
                       minimagetransfergranularity-arg '(:struct vkextent3d)))))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkDeviceQueueCreateInfo"
@@ -919,8 +926,8 @@
     (flags :name flags :type "VkDeviceQueueCreateFlags")
     (queuefamilyindex :name "queueFamilyIndex" :type uint32)
     (queuecount :name "queueCount" :type uint32)
-    (pqueuepriorities :name "pQueuePriorities" :type float :init-form nil
-     :create
+    (pqueuepriorities :name "pQueuePriorities" :type (list float) :init-form
+     nil :create
      ((pqueuepriorities-arg)
       (create-array :float pqueuepriorities pqueuepriorities-arg :dynamic t
        :pointers nil))
@@ -934,36 +941,34 @@
        pqueuepriorities-index :dynamic t :pointers nil))))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkDeviceCreateInfo"
       (device-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkDeviceCreateFlags")
     (queuecreateinfocount :name "queueCreateInfoCount" :type uint32)
     (pqueuecreateinfos :name "pQueueCreateInfos" :type
-     "VkDeviceQueueCreateInfo" :init-form nil :create
+     (list "VkDeviceQueueCreateInfo") :init-form nil :create
      ((pqueuecreateinfos-arg)
       (create-array (:struct vkdevicequeuecreateinfo) pqueuecreateinfos
-       pqueuecreateinfos-arg :dynamic t :pointers ("VkDeviceQueueCreateInfo")))
+       pqueuecreateinfos-arg :dynamic t :pointers t))
      :destroy (destroy-array pqueuecreateinfos) :get
      ((&optional pqueuecreateinfos-index)
       (get-array (:struct vkdevicequeuecreateinfo) pqueuecreateinfos
-       pqueuecreateinfos-index queuecreateinfocount :pointers
-       ("VkDeviceQueueCreateInfo")))
+       pqueuecreateinfos-index queuecreateinfocount :pointers t))
      :set
      ((pqueuecreateinfos-arg &optional pqueuecreateinfos-index)
       (set-array (:struct vkdevicequeuecreateinfo) pqueuecreateinfos
-       pqueuecreateinfos-arg pqueuecreateinfos-index :dynamic t :pointers
-       ("VkDeviceQueueCreateInfo"))))
+       pqueuecreateinfos-arg pqueuecreateinfos-index :dynamic t :pointers t)))
     (enabledlayercount :name "enabledLayerCount" :type uint32)
-    (ppenabledlayernames :name "ppEnabledLayerNames" :type char :init-form nil
-     :create
+    (ppenabledlayernames :name "ppEnabledLayerNames" :type (list string)
+     :init-form nil :create
      ((ppenabledlayernames-arg)
       (create-array-strings ppenabledlayernames ppenabledlayernames-arg
        :dynamic t))
@@ -978,8 +983,8 @@
       (set-array-strings ppenabledlayernames ppenabledlayernames-arg
        ppenabledlayernames-index enabledlayercount :dynamic t)))
     (enabledextensioncount :name "enabledExtensionCount" :type uint32)
-    (ppenabledextensionnames :name "ppEnabledExtensionNames" :type char
-     :init-form nil :create
+    (ppenabledextensionnames :name "ppEnabledExtensionNames" :type
+     (list string) :init-form nil :create
      ((ppenabledextensionnames-arg)
       (create-array-strings ppenabledextensionnames ppenabledextensionnames-arg
        :dynamic t))
@@ -1003,7 +1008,7 @@
       (set-pointer penabledfeatures penabledfeatures-arg))))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkExtensionProperties"
@@ -1016,6 +1021,9 @@
      ((extensionname-arg)
       (set-string extensionname extensionname-arg :dynamic nil)))
     (specversion :name "specVersion" :type uint32))
+
+  (more-cffi:doc-note doc-file
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkLayerProperties"
@@ -1032,6 +1040,9 @@
       (create-string description description-arg :dynamic nil))
      :get (nil (get-string description)) :set
      ((description-arg) (set-string description description-arg :dynamic nil))))
+
+  (more-cffi:doc-note doc-file
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkSubmitInfo"
@@ -1567,7 +1578,7 @@
     (a :name a :type "VkComponentSwizzle"))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkImageViewCreateInfo"
@@ -1600,7 +1611,7 @@
                       '(:struct vkimagesubresourcerange)))))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkShaderModuleCreateInfo"
@@ -1618,7 +1629,7 @@
      ((pcode-arg) (set-pointer pcode pcode-arg))))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkPipelineCacheCreateInfo"
@@ -1647,7 +1658,7 @@
     (size :name size :type size))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkSpecializationInfo"
@@ -1658,15 +1669,15 @@
      :init-form nil :create
      ((pmapentries-arg)
       (create-array (:struct vkspecializationmapentry) pmapentries
-       pmapentries-arg :dynamic t :pointers ("VkSpecializationMapEntry")))
+       pmapentries-arg :dynamic t :pointers t))
      :destroy (destroy-array pmapentries) :get
      ((&optional pmapentries-index)
       (get-array (:struct vkspecializationmapentry) pmapentries
-       pmapentries-index mapentrycount :pointers ("VkSpecializationMapEntry")))
+       pmapentries-index mapentrycount :pointers t))
      :set
      ((pmapentries-arg &optional pmapentries-index)
       (set-array (:struct vkspecializationmapentry) pmapentries pmapentries-arg
-       pmapentries-index :dynamic t :pointers ("VkSpecializationMapEntry"))))
+       pmapentries-index :dynamic t :pointers t)))
     (datasize :name "dataSize" :type size)
     (pdata :name "pData" :type void :init-form nil :create
      ((pdata-arg) (create-pointer pdata pdata-arg)) :get
@@ -1674,7 +1685,7 @@
      ((pdata-arg) (set-pointer pdata pdata-arg))))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkPipelineShaderStageCreateInfo"
@@ -1686,11 +1697,11 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkPipelineShaderStageCreateFlags")
     (stage :name stage :type "VkShaderStageFlagBits")
-    (module :name module :type "VkShaderModule" :create
+    (module :name module :type "VkShaderModule" :init-form nil :create
      ((module-arg) (create-pointer module module-arg)) :get
      (nil (get-pointer module)) :set
      ((module-arg) (set-pointer module module-arg)))
-    (pname :name "pName" :type char :init-form nil :create
+    (pname :name "pName" :type string :init-form nil :create
      ((pname-arg) (create-string pname pname-arg :dynamic t)) :destroy
      (destroy-string pname) :get (nil (get-string pname)) :set
      ((pname-arg) (set-string pname pname-arg :dynamic t)))
@@ -1703,7 +1714,7 @@
       (set-pointer pspecializationinfo pspecializationinfo-arg))))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkComputePipelineCreateInfo"
@@ -1747,7 +1758,7 @@
     (inputrate :name "inputRate" :type "VkVertexInputRate"))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkVertexInputAttributeDescription"
@@ -1759,7 +1770,7 @@
     (offset :name offset :type uint32))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkPipelineVertexInputStateCreateInfo"
@@ -1773,48 +1784,44 @@
     (vertexbindingdescriptioncount :name "vertexBindingDescriptionCount" :type
      uint32)
     (pvertexbindingdescriptions :name "pVertexBindingDescriptions" :type
-     "VkVertexInputBindingDescription" :init-form nil :create
+     (list "VkVertexInputBindingDescription") :init-form nil :create
      ((pvertexbindingdescriptions-arg)
       (create-array (:struct vkvertexinputbindingdescription)
        pvertexbindingdescriptions pvertexbindingdescriptions-arg :dynamic t
-       :pointers ("VkVertexInputBindingDescription")))
+       :pointers t))
      :destroy (destroy-array pvertexbindingdescriptions) :get
      ((&optional pvertexbindingdescriptions-index)
       (get-array (:struct vkvertexinputbindingdescription)
        pvertexbindingdescriptions pvertexbindingdescriptions-index
-       vertexbindingdescriptioncount :pointers
-       ("VkVertexInputBindingDescription")))
+       vertexbindingdescriptioncount :pointers t))
      :set
      ((pvertexbindingdescriptions-arg &optional
        pvertexbindingdescriptions-index)
       (set-array (:struct vkvertexinputbindingdescription)
        pvertexbindingdescriptions pvertexbindingdescriptions-arg
-       pvertexbindingdescriptions-index :dynamic t :pointers
-       ("VkVertexInputBindingDescription"))))
+       pvertexbindingdescriptions-index :dynamic t :pointers t)))
     (vertexattributedescriptioncount :name "vertexAttributeDescriptionCount"
      :type uint32)
     (pvertexattributedescriptions :name "pVertexAttributeDescriptions" :type
-     "VkVertexInputAttributeDescription" :init-form nil :create
+     (list "VkVertexInputAttributeDescription") :init-form nil :create
      ((pvertexattributedescriptions-arg)
       (create-array (:struct vkvertexinputattributedescription)
        pvertexattributedescriptions pvertexattributedescriptions-arg :dynamic t
-       :pointers ("VkVertexInputAttributeDescription")))
+       :pointers t))
      :destroy (destroy-array pvertexattributedescriptions) :get
      ((&optional pvertexattributedescriptions-index)
       (get-array (:struct vkvertexinputattributedescription)
        pvertexattributedescriptions pvertexattributedescriptions-index
-       vertexattributedescriptioncount :pointers
-       ("VkVertexInputAttributeDescription")))
+       vertexattributedescriptioncount :pointers t))
      :set
      ((pvertexattributedescriptions-arg &optional
        pvertexattributedescriptions-index)
       (set-array (:struct vkvertexinputattributedescription)
        pvertexattributedescriptions pvertexattributedescriptions-arg
-       pvertexattributedescriptions-index :dynamic t :pointers
-       ("VkVertexInputAttributeDescription")))))
+       pvertexattributedescriptions-index :dynamic t :pointers t))))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkPipelineInputAssemblyStateCreateInfo"
@@ -1829,7 +1836,7 @@
     (primitiverestartenable :name "primitiveRestartEnable" :type "VkBool32"))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkPipelineTessellationStateCreateInfo"
@@ -1857,7 +1864,7 @@
     (maxdepth :name "maxDepth" :type float))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkPipelineViewportStateCreateInfo"
@@ -1869,34 +1876,35 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkPipelineViewportStateCreateFlags")
     (viewportcount :name "viewportCount" :type uint32)
-    (pviewports :name "pViewports" :type "VkViewport" :init-form nil :create
+    (pviewports :name "pViewports" :type (list "VkViewport") :init-form nil
+     :create
      ((pviewports-arg)
       (create-array (:struct vkviewport) pviewports pviewports-arg :dynamic t
-       :pointers ("VkViewport")))
+       :pointers t))
      :destroy (destroy-array pviewports) :get
      ((&optional pviewports-index)
       (get-array (:struct vkviewport) pviewports pviewports-index viewportcount
-       :pointers ("VkViewport")))
+       :pointers t))
      :set
      ((pviewports-arg &optional pviewports-index)
       (set-array (:struct vkviewport) pviewports pviewports-arg
-       pviewports-index :dynamic t :pointers ("VkViewport"))))
+       pviewports-index :dynamic t :pointers t)))
     (scissorcount :name "scissorCount" :type uint32)
-    (pscissors :name "pScissors" :type "VkRect2D" :init-form nil :create
+    (pscissors :name "pScissors" :type (list "VkRect2D") :init-form nil :create
      ((pscissors-arg)
       (create-array (:struct vkrect2d) pscissors pscissors-arg :dynamic t
-       :pointers ("VkRect2D")))
+       :pointers t))
      :destroy (destroy-array pscissors) :get
      ((&optional pscissors-index)
       (get-array (:struct vkrect2d) pscissors pscissors-index scissorcount
-       :pointers ("VkRect2D")))
+       :pointers t))
      :set
      ((pscissors-arg &optional pscissors-index)
       (set-array (:struct vkrect2d) pscissors pscissors-arg pscissors-index
-       :dynamic t :pointers ("VkRect2D")))))
+       :dynamic t :pointers t))))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkPipelineRasterizationStateCreateInfo"
@@ -1919,7 +1927,7 @@
     (linewidth :name "lineWidth" :type float))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkPipelineMultisampleStateCreateInfo"
@@ -1942,7 +1950,7 @@
     (alphatooneenable :name "alphaToOneEnable" :type "VkBool32"))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkStencilOpState"
@@ -2001,7 +2009,7 @@
     (colorwritemask :name "colorWriteMask" :type "VkColorComponentFlags"))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkPipelineColorBlendStateCreateInfo"
@@ -2016,36 +2024,32 @@
     (logicop :name "logicOp" :type "VkLogicOp")
     (attachmentcount :name "attachmentCount" :type uint32)
     (pattachments :name "pAttachments" :type
-     "VkPipelineColorBlendAttachmentState" :init-form nil :create
+     (list "VkPipelineColorBlendAttachmentState") :init-form nil :create
      ((pattachments-arg)
       (create-array (:struct vkpipelinecolorblendattachmentstate) pattachments
-       pattachments-arg :dynamic t :pointers
-       ("VkPipelineColorBlendAttachmentState")))
+       pattachments-arg :dynamic t :pointers t))
      :destroy (destroy-array pattachments) :get
      ((&optional pattachments-index)
       (get-array (:struct vkpipelinecolorblendattachmentstate) pattachments
-       pattachments-index attachmentcount :pointers
-       ("VkPipelineColorBlendAttachmentState")))
+       pattachments-index attachmentcount :pointers t))
      :set
      ((pattachments-arg &optional pattachments-index)
       (set-array (:struct vkpipelinecolorblendattachmentstate) pattachments
-       pattachments-arg pattachments-index :dynamic t :pointers
-       ("VkPipelineColorBlendAttachmentState"))))
-    (blendconstants :name "blendConstants" :type float :create
+       pattachments-arg pattachments-index :dynamic t :pointers t)))
+    (blendconstants :name "blendConstants" :type (list float) :create
      ((blendconstants-arg)
       (create-array :float blendconstants blendconstants-arg :dynamic nil
        :pointers nil))
      :get
      ((&optional blendconstants-index)
-      (get-array :float blendconstants blendconstants-index
-       (apply #'* (list 4)) :pointers nil))
+      (get-array :float blendconstants blendconstants-index 4 :pointers nil))
      :set
      ((blendconstants-arg &optional blendconstants-index)
       (set-array :float blendconstants blendconstants-arg blendconstants-index
        :dynamic nil :pointers nil))))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkPipelineDynamicStateCreateInfo"
@@ -2057,8 +2061,8 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkPipelineDynamicStateCreateFlags")
     (dynamicstatecount :name "dynamicStateCount" :type uint32)
-    (pdynamicstates :name "pDynamicStates" :type "VkDynamicState" :init-form
-     nil :create
+    (pdynamicstates :name "pDynamicStates" :type (list "VkDynamicState")
+     :init-form nil :create
      ((pdynamicstates-arg)
       (create-array vkdynamicstate pdynamicstates pdynamicstates-arg :dynamic t
        :pointers nil))
@@ -2072,7 +2076,7 @@
        pdynamicstates-index :dynamic t :pointers nil))))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkGraphicsPipelineCreateInfo"
@@ -2084,19 +2088,19 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkPipelineCreateFlags")
     (stagecount :name "stageCount" :type uint32)
-    (pstages :name "pStages" :type "VkPipelineShaderStageCreateInfo" :init-form
-     nil :create
+    (pstages :name "pStages" :type (list "VkPipelineShaderStageCreateInfo")
+     :init-form nil :create
      ((pstages-arg)
       (create-array (:struct vkpipelineshaderstagecreateinfo) pstages
-       pstages-arg :dynamic t :pointers ("VkPipelineShaderStageCreateInfo")))
+       pstages-arg :dynamic t :pointers t))
      :destroy (destroy-array pstages) :get
      ((&optional pstages-index)
       (get-array (:struct vkpipelineshaderstagecreateinfo) pstages
-       pstages-index stagecount :pointers ("VkPipelineShaderStageCreateInfo")))
+       pstages-index stagecount :pointers t))
      :set
      ((pstages-arg &optional pstages-index)
       (set-array (:struct vkpipelineshaderstagecreateinfo) pstages pstages-arg
-       pstages-index :dynamic t :pointers ("VkPipelineShaderStageCreateInfo"))))
+       pstages-index :dynamic t :pointers t)))
     (pvertexinputstate :name "pVertexInputState" :type
      "VkPipelineVertexInputStateCreateInfo" :init-form nil :create
      ((pvertexinputstate-arg)
@@ -2156,16 +2160,17 @@
      ((pdynamicstate-arg) (create-pointer pdynamicstate pdynamicstate-arg))
      :get (nil (get-pointer pdynamicstate)) :set
      ((pdynamicstate-arg) (set-pointer pdynamicstate pdynamicstate-arg)))
-    (layout :name layout :type "VkPipelineLayout" :create
+    (layout :name layout :type "VkPipelineLayout" :init-form nil :create
      ((layout-arg) (create-pointer layout layout-arg)) :get
      (nil (get-pointer layout)) :set
      ((layout-arg) (set-pointer layout layout-arg)))
-    (renderpass :name "renderPass" :type "VkRenderPass" :create
+    (renderpass :name "renderPass" :type "VkRenderPass" :init-form nil :create
      ((renderpass-arg) (create-pointer renderpass renderpass-arg)) :get
      (nil (get-pointer renderpass)) :set
      ((renderpass-arg) (set-pointer renderpass renderpass-arg)))
     (subpass :name subpass :type uint32)
-    (basepipelinehandle :name "basePipelineHandle" :type "VkPipeline" :create
+    (basepipelinehandle :name "basePipelineHandle" :type "VkPipeline"
+     :init-form nil :create
      ((basepipelinehandle-arg)
       (create-pointer basepipelinehandle basepipelinehandle-arg))
      :get (nil (get-pointer basepipelinehandle)) :set
@@ -2174,7 +2179,7 @@
     (basepipelineindex :name "basePipelineIndex" :type int32))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkPushConstantRange"
@@ -2185,7 +2190,7 @@
     (size :name size :type uint32))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkPipelineLayoutCreateInfo"
@@ -2197,8 +2202,8 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkPipelineLayoutCreateFlags")
     (setlayoutcount :name "setLayoutCount" :type uint32)
-    (psetlayouts :name "pSetLayouts" :type "VkDescriptorSetLayout" :init-form
-     nil :create
+    (psetlayouts :name "pSetLayouts" :type (list "VkDescriptorSetLayout")
+     :init-form nil :create
      ((psetlayouts-arg)
       (create-array vkdescriptorsetlayout psetlayouts psetlayouts-arg :dynamic
        t :pointers nil))
@@ -2212,23 +2217,22 @@
        psetlayouts-index :dynamic t :pointers nil)))
     (pushconstantrangecount :name "pushConstantRangeCount" :type uint32)
     (ppushconstantranges :name "pPushConstantRanges" :type
-     "VkPushConstantRange" :init-form nil :create
+     (list "VkPushConstantRange") :init-form nil :create
      ((ppushconstantranges-arg)
       (create-array (:struct vkpushconstantrange) ppushconstantranges
-       ppushconstantranges-arg :dynamic t :pointers ("VkPushConstantRange")))
+       ppushconstantranges-arg :dynamic t :pointers t))
      :destroy (destroy-array ppushconstantranges) :get
      ((&optional ppushconstantranges-index)
       (get-array (:struct vkpushconstantrange) ppushconstantranges
-       ppushconstantranges-index pushconstantrangecount :pointers
-       ("VkPushConstantRange")))
+       ppushconstantranges-index pushconstantrangecount :pointers t))
      :set
      ((ppushconstantranges-arg &optional ppushconstantranges-index)
       (set-array (:struct vkpushconstantrange) ppushconstantranges
        ppushconstantranges-arg ppushconstantranges-index :dynamic t :pointers
-       ("VkPushConstantRange")))))
+       t))))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkSamplerCreateInfo"
@@ -2480,7 +2484,7 @@
     (finallayout :name "finalLayout" :type "VkImageLayout"))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkAttachmentReference"
@@ -2490,7 +2494,7 @@
     (layout :name layout :type "VkImageLayout"))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkFramebufferCreateInfo"
@@ -2533,44 +2537,47 @@
     (flags :name flags :type "VkSubpassDescriptionFlags")
     (pipelinebindpoint :name "pipelineBindPoint" :type "VkPipelineBindPoint")
     (inputattachmentcount :name "inputAttachmentCount" :type uint32)
-    (pinputattachments :name "pInputAttachments" :type "VkAttachmentReference"
-     :init-form nil :create
+    (pinputattachments :name "pInputAttachments" :type
+     (list "VkAttachmentReference") :init-form nil :create
      ((pinputattachments-arg)
       (create-array (:struct vkattachmentreference) pinputattachments
-       pinputattachments-arg :dynamic t :pointers ("VkAttachmentReference")))
+       pinputattachments-arg :dynamic t :pointers t))
      :destroy (destroy-array pinputattachments) :get
      ((&optional pinputattachments-index)
       (get-array (:struct vkattachmentreference) pinputattachments
-       pinputattachments-index inputattachmentcount :pointers
-       ("VkAttachmentReference")))
+       pinputattachments-index inputattachmentcount :pointers t))
      :set
      ((pinputattachments-arg &optional pinputattachments-index)
       (set-array (:struct vkattachmentreference) pinputattachments
-       pinputattachments-arg pinputattachments-index :dynamic t :pointers
-       ("VkAttachmentReference"))))
+       pinputattachments-arg pinputattachments-index :dynamic t :pointers t)))
     (colorattachmentcount :name "colorAttachmentCount" :type uint32)
-    (pcolorattachments :name "pColorAttachments" :type "VkAttachmentReference"
-     :init-form nil :create
+    (pcolorattachments :name "pColorAttachments" :type
+     (list "VkAttachmentReference") :init-form nil :create
      ((pcolorattachments-arg)
       (create-array (:struct vkattachmentreference) pcolorattachments
-       pcolorattachments-arg :dynamic t :pointers ("VkAttachmentReference")))
+       pcolorattachments-arg :dynamic t :pointers t))
      :destroy (destroy-array pcolorattachments) :get
      ((&optional pcolorattachments-index)
       (get-array (:struct vkattachmentreference) pcolorattachments
-       pcolorattachments-index colorattachmentcount :pointers
-       ("VkAttachmentReference")))
+       pcolorattachments-index colorattachmentcount :pointers t))
      :set
      ((pcolorattachments-arg &optional pcolorattachments-index)
       (set-array (:struct vkattachmentreference) pcolorattachments
-       pcolorattachments-arg pcolorattachments-index :dynamic t :pointers
-       ("VkAttachmentReference"))))
+       pcolorattachments-arg pcolorattachments-index :dynamic t :pointers t)))
     (presolveattachments :name "pResolveAttachments" :type
      "VkAttachmentReference" :init-form nil :create
      ((presolveattachments-arg)
-      (create-pointer presolveattachments presolveattachments-arg))
-     :get (nil (get-pointer presolveattachments)) :set
-     ((presolveattachments-arg)
-      (set-pointer presolveattachments presolveattachments-arg)))
+      (create-array (:struct vkattachmentreference) presolveattachments
+       presolveattachments-arg :dynamic t :pointers t))
+     :destroy (destroy-array presolveattachments) :get
+     ((&optional presolveattachments-index)
+      (get-array (:struct vkattachmentreference) presolveattachments
+       presolveattachments-index colorattachmentcount :pointers t))
+     :set
+     ((presolveattachments-arg &optional presolveattachments-index)
+      (set-array (:struct vkattachmentreference) presolveattachments
+       presolveattachments-arg presolveattachments-index :dynamic t :pointers
+       t)))
     (pdepthstencilattachment :name "pDepthStencilAttachment" :type
      "VkAttachmentReference" :init-form nil :create
      ((pdepthstencilattachment-arg)
@@ -2594,7 +2601,7 @@
        ppreserveattachments-index :dynamic t :pointers nil))))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkSubpassDependency"
@@ -2609,7 +2616,7 @@
     (dependencyflags :name "dependencyFlags" :type "VkDependencyFlags"))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkRenderPassCreateInfo"
@@ -2621,52 +2628,50 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkRenderPassCreateFlags")
     (attachmentcount :name "attachmentCount" :type uint32)
-    (pattachments :name "pAttachments" :type "VkAttachmentDescription"
+    (pattachments :name "pAttachments" :type (list "VkAttachmentDescription")
      :init-form nil :create
      ((pattachments-arg)
       (create-array (:struct vkattachmentdescription) pattachments
-       pattachments-arg :dynamic t :pointers ("VkAttachmentDescription")))
+       pattachments-arg :dynamic t :pointers t))
      :destroy (destroy-array pattachments) :get
      ((&optional pattachments-index)
       (get-array (:struct vkattachmentdescription) pattachments
-       pattachments-index attachmentcount :pointers
-       ("VkAttachmentDescription")))
+       pattachments-index attachmentcount :pointers t))
      :set
      ((pattachments-arg &optional pattachments-index)
       (set-array (:struct vkattachmentdescription) pattachments
-       pattachments-arg pattachments-index :dynamic t :pointers
-       ("VkAttachmentDescription"))))
+       pattachments-arg pattachments-index :dynamic t :pointers t)))
     (subpasscount :name "subpassCount" :type uint32)
-    (psubpasses :name "pSubpasses" :type "VkSubpassDescription" :init-form nil
-     :create
+    (psubpasses :name "pSubpasses" :type (list "VkSubpassDescription")
+     :init-form nil :create
      ((psubpasses-arg)
       (create-array (:struct vksubpassdescription) psubpasses psubpasses-arg
-       :dynamic t :pointers ("VkSubpassDescription")))
+       :dynamic t :pointers t))
      :destroy (destroy-array psubpasses) :get
      ((&optional psubpasses-index)
       (get-array (:struct vksubpassdescription) psubpasses psubpasses-index
-       subpasscount :pointers ("VkSubpassDescription")))
+       subpasscount :pointers t))
      :set
      ((psubpasses-arg &optional psubpasses-index)
       (set-array (:struct vksubpassdescription) psubpasses psubpasses-arg
-       psubpasses-index :dynamic t :pointers ("VkSubpassDescription"))))
+       psubpasses-index :dynamic t :pointers t)))
     (dependencycount :name "dependencyCount" :type uint32)
-    (pdependencies :name "pDependencies" :type "VkSubpassDependency" :init-form
-     nil :create
+    (pdependencies :name "pDependencies" :type (list "VkSubpassDependency")
+     :init-form nil :create
      ((pdependencies-arg)
       (create-array (:struct vksubpassdependency) pdependencies
-       pdependencies-arg :dynamic t :pointers ("VkSubpassDependency")))
+       pdependencies-arg :dynamic t :pointers t))
      :destroy (destroy-array pdependencies) :get
      ((&optional pdependencies-index)
       (get-array (:struct vksubpassdependency) pdependencies
-       pdependencies-index dependencycount :pointers ("VkSubpassDependency")))
+       pdependencies-index dependencycount :pointers t))
      :set
      ((pdependencies-arg &optional pdependencies-index)
       (set-array (:struct vksubpassdependency) pdependencies pdependencies-arg
-       pdependencies-index :dynamic t :pointers ("VkSubpassDependency")))))
+       pdependencies-index :dynamic t :pointers t))))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkCommandPoolCreateInfo"
@@ -7353,7 +7358,7 @@
     (supportedusageflags :name "supportedUsageFlags" :type "VkImageUsageFlags"))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkSurfaceFormatKHR"
@@ -7363,7 +7368,7 @@
     (colorspace :name "colorSpace" :type "VkColorSpaceKHR"))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkSwapchainCreateInfoKHR"
@@ -7391,8 +7396,8 @@
     (imageusage :name "imageUsage" :type "VkImageUsageFlags")
     (imagesharingmode :name "imageSharingMode" :type "VkSharingMode")
     (queuefamilyindexcount :name "queueFamilyIndexCount" :type uint32)
-    (pqueuefamilyindices :name "pQueueFamilyIndices" :type uint32 :init-form
-     nil :create
+    (pqueuefamilyindices :name "pQueueFamilyIndices" :type (list uint32)
+     :init-form nil :create
      ((pqueuefamilyindices-arg)
       (create-array :uint32 pqueuefamilyindices pqueuefamilyindices-arg
        :dynamic t :pointers nil))
@@ -7414,7 +7419,7 @@
      ((oldswapchain-arg) (set-pointer oldswapchain oldswapchain-arg))))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkPresentInfoKHR"
@@ -9982,23 +9987,23 @@
     (pnext :name "pNext" :type void :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
-    (plabelname :name "pLabelName" :type char :init-form nil :create
+    (plabelname :name "pLabelName" :type string :init-form nil :create
      ((plabelname-arg) (create-string plabelname plabelname-arg :dynamic t))
      :destroy (destroy-string plabelname) :get (nil (get-string plabelname))
      :set ((plabelname-arg) (set-string plabelname plabelname-arg :dynamic t)))
-    (color :name color :type float :create
+    (color :name color :type (list float) :init-form '(0.0 0.0 0.0 0.0) :create
      ((color-arg)
       (create-array :float color color-arg :dynamic nil :pointers nil))
      :get
      ((&optional color-index)
-      (get-array :float color color-index (apply #'* (list 4)) :pointers nil))
+      (get-array :float color color-index 4 :pointers nil))
      :set
      ((color-arg &optional color-index)
       (set-array :float color color-arg color-index :dynamic nil :pointers
        nil))))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkDebugUtilsObjectNameInfoEXT"
@@ -10010,25 +10015,25 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (objecttype :name "objectType" :type "VkObjectType")
     (objecthandle :name "objectHandle" :type uint64)
-    (pobjectname :name "pObjectName" :type char :init-form nil :create
+    (pobjectname :name "pObjectName" :type string :init-form nil :create
      ((pobjectname-arg) (create-string pobjectname pobjectname-arg :dynamic t))
      :destroy (destroy-string pobjectname) :get (nil (get-string pobjectname))
      :set
      ((pobjectname-arg) (set-string pobjectname pobjectname-arg :dynamic t))))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkDebugUtilsMessengerCallbackDataEXT"
       (debug-utils-messenger-callback-data-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkDebugUtilsMessengerCallbackDataFlagsEXT")
-    (pmessageidname :name "pMessageIdName" :type char :init-form nil :create
+    (pmessageidname :name "pMessageIdName" :type string :init-form nil :create
      ((pmessageidname-arg)
       (create-string pmessageidname pmessageidname-arg :dynamic t))
      :destroy (destroy-string pmessageidname) :get
@@ -10036,78 +10041,127 @@
      ((pmessageidname-arg)
       (set-string pmessageidname pmessageidname-arg :dynamic t)))
     (messageidnumber :name "messageIdNumber" :type int32)
-    (pmessage :name "pMessage" :type char :init-form nil :create
+    (pmessage :name "pMessage" :type string :init-form nil :create
      ((pmessage-arg) (create-string pmessage pmessage-arg :dynamic t)) :destroy
      (destroy-string pmessage) :get (nil (get-string pmessage)) :set
      ((pmessage-arg) (set-string pmessage pmessage-arg :dynamic t)))
     (queuelabelcount :name "queueLabelCount" :type uint32)
-    (pqueuelabels :name "pQueueLabels" :type "VkDebugUtilsLabelEXT" :init-form
-     nil :create
+    (pqueuelabels :name "pQueueLabels" :type (list "VkDebugUtilsLabelEXT")
+     :init-form nil :create
      ((pqueuelabels-arg)
       (create-array (:struct vkdebugutilslabelext) pqueuelabels
-       pqueuelabels-arg :dynamic t :pointers ("VkDebugUtilsLabelEXT")))
+       pqueuelabels-arg :dynamic t :pointers t))
      :destroy (destroy-array pqueuelabels) :get
      ((&optional pqueuelabels-index)
       (get-array (:struct vkdebugutilslabelext) pqueuelabels pqueuelabels-index
-       queuelabelcount :pointers ("VkDebugUtilsLabelEXT")))
+       queuelabelcount :pointers t))
      :set
      ((pqueuelabels-arg &optional pqueuelabels-index)
       (set-array (:struct vkdebugutilslabelext) pqueuelabels pqueuelabels-arg
-       pqueuelabels-index :dynamic t :pointers ("VkDebugUtilsLabelEXT"))))
+       pqueuelabels-index :dynamic t :pointers t)))
     (cmdbuflabelcount :name "cmdBufLabelCount" :type uint32)
-    (pcmdbuflabels :name "pCmdBufLabels" :type "VkDebugUtilsLabelEXT"
+    (pcmdbuflabels :name "pCmdBufLabels" :type (list "VkDebugUtilsLabelEXT")
      :init-form nil :create
      ((pcmdbuflabels-arg)
       (create-array (:struct vkdebugutilslabelext) pcmdbuflabels
-       pcmdbuflabels-arg :dynamic t :pointers ("VkDebugUtilsLabelEXT")))
+       pcmdbuflabels-arg :dynamic t :pointers t))
      :destroy (destroy-array pcmdbuflabels) :get
      ((&optional pcmdbuflabels-index)
       (get-array (:struct vkdebugutilslabelext) pcmdbuflabels
-       pcmdbuflabels-index cmdbuflabelcount :pointers
-       ("VkDebugUtilsLabelEXT")))
+       pcmdbuflabels-index cmdbuflabelcount :pointers t))
      :set
      ((pcmdbuflabels-arg &optional pcmdbuflabels-index)
       (set-array (:struct vkdebugutilslabelext) pcmdbuflabels pcmdbuflabels-arg
-       pcmdbuflabels-index :dynamic t :pointers ("VkDebugUtilsLabelEXT"))))
+       pcmdbuflabels-index :dynamic t :pointers t)))
     (objectcount :name "objectCount" :type uint32)
-    (pobjects :name "pObjects" :type "VkDebugUtilsObjectNameInfoEXT" :init-form
-     nil :create
+    (pobjects :name "pObjects" :type (list "VkDebugUtilsObjectNameInfoEXT")
+     :init-form nil :create
      ((pobjects-arg)
       (create-array (:struct vkdebugutilsobjectnameinfoext) pobjects
-       pobjects-arg :dynamic t :pointers ("VkDebugUtilsObjectNameInfoEXT")))
+       pobjects-arg :dynamic t :pointers t))
      :destroy (destroy-array pobjects) :get
      ((&optional pobjects-index)
       (get-array (:struct vkdebugutilsobjectnameinfoext) pobjects
-       pobjects-index objectcount :pointers ("VkDebugUtilsObjectNameInfoEXT")))
+       pobjects-index objectcount :pointers t))
      :set
      ((pobjects-arg &optional pobjects-index)
       (set-array (:struct vkdebugutilsobjectnameinfoext) pobjects pobjects-arg
-       pobjects-index :dynamic t :pointers ("VkDebugUtilsObjectNameInfoEXT")))))
+       pobjects-index :dynamic t :pointers t))))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkDebugUtilsMessengerCreateInfoEXT"
       (debug-utils-messenger-create-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkDebugUtilsMessengerCreateFlagsEXT")
     (messageseverity :name "messageSeverity" :type
      "VkDebugUtilsMessageSeverityFlagsEXT")
     (messagetype :name "messageType" :type "VkDebugUtilsMessageTypeFlagsEXT")
-    (pfnusercallback :name "pfnUserCallback" :type
-     "PFN_vkDebugUtilsMessengerCallbackEXT")
-    (puserdata :name "pUserData" :type void :init-form nil :create
-     ((puserdata-arg) (create-pointer puserdata puserdata-arg)) :get
-     (nil (get-pointer puserdata)) :set
-     ((puserdata-arg) (set-pointer puserdata puserdata-arg))))
+    (pfnusercallback :name "pfnUserCallback" :type callback :init-form nil
+     :create
+     ((pfnusercallback-arg)
+      (setf pfnusercallback
+              (if pfnusercallback-arg
+                  (if (symbolp pfnusercallback-arg)
+                      (cffi:get-callback pfnusercallback-arg)
+                      pfnusercallback-arg)
+                  (cffi-sys:null-pointer))))
+     :set
+     ((new-value)
+      (if new-value
+          (if (symbolp new-value)
+              (setf pfnusercallback (cffi:get-callback new-value))
+              (setf pfnusercallback new-value))
+          (setf pfnusercallback (cffi-sys:null-pointer)))))
+    (puserdata :name "pUserData" :type "lisp object" :init-form nil :create
+     ((puserdata-arg)
+      (setf puserdata
+              (if puserdata-arg
+                  (prog2
+                      (setf (gethash
+                             *debug-utils-messenger-callback-next-address*
+                             *debug-utils-messenger-callback-user-data*)
+                              puserdata-arg)
+                      (cffi-sys:make-pointer
+                       *debug-utils-messenger-callback-next-address*)
+                    (setf *debug-utils-messenger-callback-next-address*
+                            (1+
+                             *debug-utils-messenger-callback-next-address*)))
+                  (cffi-sys:null-pointer))))
+     :get
+     (nil
+      (gethash (cffi-sys:pointer-address puserdata)
+               *debug-utils-messenger-callback-user-data*))
+     :set
+     ((new-value)
+      (if (cffi-sys:null-pointer-p puserdata)
+          (if new-value
+              (progn
+               (setf (gethash *debug-utils-messenger-callback-next-address*
+                              *debug-utils-messenger-callback-user-data*)
+                       new-value)
+               (setf puserdata
+                       (cffi-sys:make-pointer
+                        *debug-utils-messenger-callback-next-address*))
+               (setf *debug-utils-messenger-callback-next-address*
+                       (1+ *debug-utils-messenger-callback-next-address*))))
+          (if new-value
+              (setf (gethash (cffi-sys:pointer-address puserdata)
+                             *debug-utils-messenger-callback-user-data*)
+                      new-value)
+              (progn
+               (remhash (cffi-sys:pointer-address puserdata)
+                        *debug-utils-messenger-callback-user-data*)
+               (setf puserdata (cffi-sys:null-pointer))))))))
 
   (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+                      "The C code has been changed since last update. Please, post an issue to make the maintainer revise this struct.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkDebugUtilsObjectTagInfoEXT"
@@ -14892,7 +14946,4 @@
     (pnext :name "pNext" :type void :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
-    (rayquery :name "rayQuery" :type "VkBool32"))
-
-  (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it."))
+    (ra
