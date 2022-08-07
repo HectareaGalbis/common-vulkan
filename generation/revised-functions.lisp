@@ -72,33 +72,47 @@
     create-enumerate-instance-layer-properties
     destroy-enumerate-instance-layer-properties)
 
+  
+  (more-cffi:def-foreign-function doc-file "vkEnumeratePhysicalDevices" enumerate-physical-devices (instance pphysicaldevicecount)
+    (declare-types ("VkInstance" instance) (uint32 "pPhysicalDeviceCount")
+		   :return ((list "VkPhysicalDevice") "pPhysicalDevices") ("VkResult" return-value))
+    (cffi:with-foreign-object (pPhysicalDeviceCount :uint32)
+      (vkEnumeratePhysicalDevices instance pPhysicalDeviceCount (cffi:null-pointer))
+      (let ((physical-device-count (cffi:mem-ref pPhysicalDeviceCount :uint32)))
+	(cffi:with-foreign-object (pPhysicalDevices 'VKPhysicalDevice physical-device-count) 
+	  (vkEnumeratePhysicalDevices instance pPhysicalDeviceCount pPhysicalDevices)
+	  (loop for i from 0 below physical-device-count
+		collect (cffi:mem-aref pPhysicalDevices 'VKPhysicalDevice i))))))
 
-  ;; (mcffi:def-foreign-function get-instance-proc-addr doc-file (instance pName)
-  ;;   (declare-types ("VkInstance" instance) (string "pName")
-  ;; 		   :return (function proc))
-  ;;   (cffi:with-foreign-string (pName-c pName)
-  ;;     (let ((func-c (vkGetInstanceProcAddr instance pName-c)))
-  ;; 	(cond
-  ;; 	  ;; Creates a debug utils messenger
-  ;;         ((string= pName "vkCreateDebugUtilsMessengerEXT")
-  ;; 	   (lambda (instance pCreateInfo-c _pAllocator)
-  ;; 	     (let ((pAllocator-c (or _pAllocator (cffi:null-pointer))))
-  ;; 	       (cffi:with-foreign-object (pMessenger-c 'VkDebugUtilsMessengerEXT)
-  ;; 		 (let ((result (cffi:foreign-funcall-pointer func-c ()
-  ;; 	  						     VkInstance instance
-  ;; 							     :pointer pCreateInfo-c
-  ;; 							     :pointer pAllocator-c
-  ;; 							     VkDebugUtilsMessengerEXT pMessenger-c
-  ;; 							     VkResult)))
-  ;; 	           (values (cffi:mem-ref pMessenger-c 'VkDebugUtilsMessengerEXT) result))))))
-  ;; 	  ;; Destroys a debug utils messenger
-  ;; 	  ((string= pName "vkDestroyDebugUtilsMessengerEXT")
-  ;; 	   (lambda (instance messenger-c _pAllocator)
-  ;; 	     (let ((pAllocator-c (or _pAllocator (cffi:null-pointer))))
-  ;; 	       (cffi:foreign-funcall-pointer func-c ()
-  ;; 					     VkInstance instance
-  ;; 					     VkDebugUtilsMessengerEXT messenger-c
-  ;; 					     :pointer pAllocator-c
-  ;; 					     :void))))
-  ;; 	  (t (warn "get-instance-proc-addr: invalid function name!"))))))
-  )
+
+  (more-cffi:def-foreign-function doc-file "vkGetPhysicalDeviceProperties" get-physical-device-properties (physicaldevice)
+    (declare-types ("VkPhysicalDevice" "physicalDevice")
+		   :return ("VkPhysicalDeviceProperties" "pProperties"))
+    (let ((pProperties (cffi:foreign-alloc '(:struct VkPhysicalDeviceProperties))))
+      (vkGetPhysicalDeviceProperties physicalDevice pProperties)
+      (values pProperties)))
+
+  (mcffi:def-foreign-function doc-file nil destroy-get-physical-device-properties (pProperties)
+    (declare-types ("VkPhysicalDeviceProperties" "pProperties"))
+    (cffi:foreign-free pProperties))
+
+  
+  (mcffi:defwith doc-file with-get-physical-device-properties 
+    create-get-physical-device-properties
+    destroy-get-physical-device-properties)
+
+
+  (more-cffi:def-foreign-function doc-file "vkGetPhysicalDeviceFeatures" get-physical-device-features (physicaldevice)
+    (declare-types ("VkPhysicalDevice" "physicalDevice") :return ("VkPhysicalDeviceFeatures" pFeatures))
+    (let ((pFeatures (cffi:foreign-alloc '(:struct VkPhysicalDeviceFeatures))))
+      (vkGetPhysicalDeviceFeatures physicalDevice pFeatures)
+      (values pFeatures)))
+
+  (mcffi:def-foreign-function doc-file nil destroy-get-physical-device-features (pFeatures)
+    (declare-types ("VkPhysicalDeviceFeatures" "pFeatures"))
+    (cffi:foreign-free pFeatures))
+
+  
+  (mcffi:defwith doc-file with-get-physical-device-features 
+    create-get-physical-device-features
+    destroy-get-physical-device-features))

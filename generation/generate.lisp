@@ -703,11 +703,14 @@
 ;; ----- The script code -----
 ;; ---------------------------
 
-;; 1. Collect data from old files.
-;; 2. Generate the bindings.
-;; 3. Uses the old and revised data to generate the final definitions.
+;; 1. Copy the initial-parameters file.
+;; 2. Collect data from old files.
+;; 3. Generate the bindings.
+;; 4. Uses the revised data to generate the final definitions.
 (let ((*print-case* :downcase)
       old-struct-code old-function-code)
+  (uiop:copy-file (asdf:system-relative-pathname "common-vulkan" "generation/initial-parameters.lisp")
+		  (asdf:system-relative-pathname "common-vulkan" "src/initial-parameters.lisp"))
   (with-open-file  (old-type-file (asdf:system-relative-pathname "common-vulkan" "vulkan/ctypes.lisp")
 				  :direction :input :if-does-not-exist nil)
     (with-open-file  (old-function-file (asdf:system-relative-pathname "common-vulkan" "vulkan/cfunctions.lisp")
