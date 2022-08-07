@@ -72,6 +72,27 @@
     create-enumerate-instance-layer-properties
     destroy-enumerate-instance-layer-properties)
 
+
+  (more-cffi:def-foreign-function doc-file "vkCreateDebugUtilsMessengerEXT" create-debug-utils-messenger-ext (instance pcreateinfo pallocator)
+    (declare-types ("VkInstance" instance) ("VkDebugUtilsMessengerCreateInfoEXT" "pCreateInfo") ("VkAllocationCallbacks" "pAllocator")
+		   :return ("VkDebugUtilsMessengerEXT" "pMessenger") ("VkResult" result))
+    (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
+      (cffi:with-foreign-object (pDebugMessenger 'VkDebugUtilsMessengerEXT)
+	(let ((result (vkCreateDebugUtilsMessengerEXT instance pCreateInfo pAllocator-c pDebugMessenger)))
+	  (values (cffi:mem-ref pDebugMessenger 'VkDebugUtilsMessengerEXT) result instance pAllocator)))))
+
+
+  (more-cffi:def-foreign-function doc-file "vkDestroyDebugUtilsMessengerEXT" destroy-debug-utils-messenger-ext (instance messenger pallocator)
+    (declare-types ("VkInstance" instance) ("VkDebugUtilsMessengerEXT" messenger) ("VkAllocationCallbacks" "pAllocator"))
+    (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
+      (vkDestroyDebugUtilsMessengerEXT instance messenger pAllocator)))
+
+
+  (mcffi:defwith doc-file with-debug-utils-messenger-ext
+    create-debug-utils-messenger-ext
+    destroy-debug-utils-messenger-ext
+    :destructor-arguments (2 0 3))
+  
   
   (more-cffi:def-foreign-function doc-file "vkEnumeratePhysicalDevices" enumerate-physical-devices (instance pphysicaldevicecount)
     (declare-types ("VkInstance" instance) (uint32 "pPhysicalDeviceCount")
@@ -158,7 +179,7 @@
 	       (pProperties (cffi:foreign-alloc '(:struct VkExtensionProperties) :count property-count)))
 	  (let ((result (vkEnumerateDeviceExtensionProperties physicalDevice pLayerName-c pPropertyCount pProperties))
 		(properties (iter (for i from 0 below property-count)
-				  (collect (cffi:mem-aptr pProperties '(:struct VkExtensionProperties) i)))))
+			      (collect (cffi:mem-aptr pProperties '(:struct VkExtensionProperties) i)))))
 	    (values properties result))))))
 
   (mcffi:def-foreign-function doc-file nil destroy-enumerate-device-extension-properties (pProperties)
@@ -197,7 +218,7 @@
 	     (pSurfaceFormats (cffi:foreign-alloc '(:struct VkSurfaceFormatKHR) :count surface-format-count))
 	     (result (vkGetPhysicalDeviceSurfaceFormatsKHR physicalDevice surface pSurfaceFormatCount pSurfaceFormats))
 	     (surface-formats (iter (for i from 0 below surface-format-count)
-				    (collect (cffi:mem-aptr pSurfaceFormats '(:struct VkSurfaceFormatKHR) i)))))
+				(collect (cffi:mem-aptr pSurfaceFormats '(:struct VkSurfaceFormatKHR) i)))))
 	(values surface-formats result))))
 
   (mcffi:def-foreign-function doc-file nil destroy-get-physical-device-surface-formats (pSurfaceFormats)
@@ -219,7 +240,7 @@
 	(cffi:with-foreign-object (pPresentModes 'VkPresentModeKHR present-mode-count)
 	  (let ((result (vkGetPhysicalDeviceSurfacePresentModesKHR physicalDevice surface pPresentModeCount pPresentModes))
 		(present-modes (iter (for i from 0 below present-mode-count)
-				     (collect (cffi:mem-aref pPresentModes 'VkPresentModeKHR i)))))
+				 (collect (cffi:mem-aref pPresentModes 'VkPresentModeKHR i)))))
 	    (values present-modes result))))))
 
 
@@ -296,4 +317,113 @@
   (mcffi:defwith doc-file with-image-view
     create-image-view
     destroy-image-view
+    :destructor-arguments (2 0 3))
+
+
+  (more-cffi:def-foreign-function doc-file "vkCreateSwapchainKHR" create-swapchain-khr (device pcreateinfo pallocator)
+    (declare-types ("VkDevice" device) ("VkSwapchainCreateInfoKHR" "pCreateInfo") ("VkAllocationCallbacks" "pAllocator")
+		   :return ("VkSwapchainKHR" "pSwapchain") ("VkResult" result))
+    (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
+      (cffi:with-foreign-object (pSwapchain 'VkSwapchainKHR)
+	(let ((result (vkCreateSwapchainKHR device pCreateInfo pAllocator-c pSwapchain)))
+	  (values (cffi:mem-ref pSwapchain 'VkSwapchainKHR) result device pAllocator)))))
+
+
+  (more-cffi:def-foreign-function doc-file "vkDestroySwapchainKHR" destroy-swapchain-khr (device swapchain pallocator)
+    (declare-types ("VkDevice" device) ("VkSwapchainKHR" swapchain) ("VkAllocationCallbacks" "pAllocator"))
+    (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
+      (vkDestroySwapchainKHR device swapchain pAllocator-c)))
+
+
+  (mcffi:defwith doc-file with-swapchain 
+    create-swapchain
+    destroy-swapchain
+    :destructor-arguments (2 0 3))
+
+
+  (more-cffi:def-foreign-function doc-file "vkGetSwapchainImagesKHR" get-swapchain-images-khr (device swapchain)
+    (declare-types ("VkDevice" device) ("VkSwapchainKHR" swapchain)
+		   :return ("VkImage" "pSwapchainImages") ("VkResult" result))
+    (cffi:with-foreign-object (pSwapchainImageCount :uint32)
+      (vkGetSwapchainImagesKHR device swapchain pSwapchainImageCount (cffi:null-pointer))
+      (let* ((swapchain-image-count (cffi:mem-ref pSwapchainImageCount :uint32)))
+	(cffi:with-foreign-object (pSwapchainImages 'VkImage swapchain-image-count)
+	  (let ((result (vkGetSwapchainImagesKHR device swapchain pSwapchainImageCount pSwapchainImages))
+		(swapchain-images (iter (for i from 0 below swapchain-image-count)
+				    (collect (cffi:mem-aref pSwapchainImages 'VkImage i)))))
+	    (values swapchain-images result))))))
+
+
+  (more-cffi:def-foreign-function doc-file "vkCreateRenderPass" create-render-pass (device pcreateinfo pallocator)
+    (declare-types ("VkDevice" device) ("VkRenderPassCreateInfo" "pCreateInfo") ("VkAllocationCallbacks" "pAllocator") 
+		   :return ("VkRenderPass" "pRenderPass") ("VkResult" result))
+    (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
+      (cffi:with-foreign-object (pRenderPass 'VkRenderPass)
+	(let ((result (vkCreateRenderPass device pCreateInfo pAllocator-c pRenderPass)))
+	  (values (cffi:mem-ref pRenderPass 'VkRenderPass) result device pAllocator)))))
+
+
+  (more-cffi:def-foreign-function doc-file "vkDestroyRenderPass" destroy-render-pass (device renderpass pallocator)
+    (declare-types ("VkDevice" device) ("VkRenderPass" "renderPass") ("VkAllocationCallbacks" "pAllocator"))
+    (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
+      (vkDestroyRenderPass device renderPass pAllocator-c)))
+
+
+  (mcffi:defwith doc-file with-render-pass 
+    create-render-pass
+    destroy-render-pass
+    :destructor-arguments (2 0 3))
+
+
+  (more-cffi:def-foreign-function doc-file "vkCreatePipelineLayout" create-pipeline-layout (device pcreateinfo pallocator)
+    (declare-types ("VkDevice" device) ("VkPipelineLayoutCreateInfo" "pCreateInfo") ("VkAllocationCallbacks" "pAllocator")
+		   :return ("VkPipelineLayout" "pPipelineLayout") ("VkResult" result))
+    (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
+      (cffi:with-foreign-object (pPipelineLayout 'VkPipelineLayout)
+	(let ((result (vkCreatePipelineLayout device pCreateInfo pAllocator-c pPipelineLayout)))
+	  (values (cffi:mem-ref pPipelineLayout 'VkPipelineLayout) result device pAllocator)))))
+
+
+  (more-cffi:def-foreign-function doc-file "vkDestroyPipelineLayout" destroy-pipeline-layout (device pipelinelayout pallocator)
+    (declare-types ("VkDevice" device) ("VkPipelineLayout" "pipelineLayout") ("VkAllocationCallbacks" "pAllocator"))
+    (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
+      (vkDestroyPipelineLayout device pipelineLayout pAllocator-c)))
+
+
+  (mcffi:defwith doc-file with-pipeline-layout 
+    create-pipeline-layout
+    destroy-pipeline-layout
+    :destructor-arguments (2 0 3))
+
+
+  (more-cffi:def-foreign-function doc-file "vkCreateGraphicsPipelines" create-graphics-pipelines (device pipelinecache pcreateinfos pallocator)
+    (declare-types ("VkDevice" device) ("VkPipelineCache" "pipelineCache") ("VkGraphicsPipelineCreateInfo" "pCreateInfos") ("VkAllocationCallbacks" "pAllocator")
+		   :return ("VkPipeline" "pPipelines") ("VkResult" result))
+    (let ((pipelineCache-c (or pipelineCache (cffi:null-pointer)))
+	  (pAllocator-c (or pAllocator (cffi:null-pointer)))
+	  (pCreateInfos-c (cffi:foreign-alloc '(:struct VkGraphicsPipelineCreateInfo) :initial-contents
+					      (iter (for create-info in pCreateInfos)
+						(collect (cffi:mem-ref create-info '(:struct VkGraphicsPipelineCreateInfo))))))
+	  (createInfoCount (length pCreateInfos)))
+      (cffi:with-foreign-object (pPipelines 'VkPipeline createInfoCount)
+	(let ((result (vkCreateGraphicsPipelines device pipelineCache-c createInfoCount pCreateInfos-c pAllocator-c pPipelines)))
+	  (values (iter (for i from 0 below createInfoCount)
+		    (collect (cffi:mem-aref pPipelines 'VkPipeline i)))
+		  result device pAllocator)))))
+
+
+  (more-cffi:def-foreign-function doc-file "vkDestroyPipeline" destroy-pipeline (device pipeline pallocator)
+    (declare-types ("VkDevice" device) ("VkPipeline" pipeline) ("VkAllocationCallbacks" "pAllocator"))
+    (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
+      (vkDestroyPipeline device pipeline pAllocator-c)))
+
+  
+  (defun destroy-graphics-pipelines (device pipelines pAllocator)
+    (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
+      (iter (for pipeline in pipelines)
+	(vkDestroyPipeline device pipeline pALlocator-c))))
+
+  (mcffi:defwith doc-file with-graphics-pipelines
+    create-graphics-pipelines
+    destroy-graphics-pipelines
     :destructor-arguments (2 0 3)))

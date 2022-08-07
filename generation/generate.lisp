@@ -709,6 +709,8 @@
 ;; 4. Uses the revised data to generate the final definitions.
 (let ((*print-case* :downcase)
       old-struct-code old-function-code)
+  (uiop:copy-file (asdf:system-relative-pathname "common-vulkan" "generation/helper-functions.lisp")
+		  (asdf:system-relative-pathname "common-vulkan" "src/helper-functions.lisp"))
   (uiop:copy-file (asdf:system-relative-pathname "common-vulkan" "generation/initial-parameters.lisp")
 		  (asdf:system-relative-pathname "common-vulkan" "src/initial-parameters.lisp"))
   (with-open-file  (old-type-file (asdf:system-relative-pathname "common-vulkan" "vulkan/ctypes.lisp")
