@@ -27,6 +27,14 @@
   (let ((type-sym (intern type-str)))
     (gethash type-sym structs-or-unions)))
 
+;; Add a constant and its value to the constant table.
+(defun add-constant (constant-str value constant-table)
+  (setf (gethash constant-str constant-table) value))
+
+;; Return the associated value of a constant.
+(defun get-constant-value (constant-str constant-table)
+  (gethash constant-str constant-table))
+
 ;; Given a read type, return its CFFI equivalent.
 (defun fix-type (type-str &key (structs nil) (unions nil))
   (multiple-value-bind (match regs) (ppcre:scan-to-strings "(\\w+)_t" type-str)
@@ -66,7 +74,7 @@
 	     (t (values num nil nil)))))
 	(macro-func-p
 	 (let ((args (ppcre:regex-replace-all "," (aref func-regs 1) " ")))
-	   (cons (intern (string-upcase (aref func-regs 0))) args)))
+	   (cons (intern (string-upcase (aref func-regs 0))) (read-from-string args)))) ; TODO: VK_MAKE.. -> make-api...
 	((equal (aref value-str 0) #\")
 	 (subseq value-str 1 (1- (length value-str))))
 	((ppcre:scan "^VK_API" value-str))
@@ -150,7 +158,7 @@
 ;; Check if a line is a struct or union definition.
 ;; If that is the case, write the CFFI and MCFFI definitions.
 ;; Also, return if the type is a struct or union, and the new-type.
-(defun read-struct-union (line structs unions pointer-types ifile)
+(defun read-struct-union (line structs unions pointer-types constant-table ifile)
   (multiple-value-bind (match regs) (ppcre:scan-to-strings "typedef\\s+(struct|union)\\s(Vk\\w+)\\s*\\{" line)
     (if match
 	(let ((struct-or-union (aref regs 0))
@@ -172,7 +180,7 @@
 		     (bracketsp (iter (for str in (ppcre:all-matches-as-strings "\\w+" brackets))
 				  (collect (if (ppcre:scan "^\\d+" str)
 					       (parse-integer str)
-					       (fix-name str)))))
+					       (get-constant-value str constant-table)))))
 		     (bitfieldsp (not (zerop (length bitfields))))
 		     (previous-countp (and previous-slot-name (ppcre:scan "Count" previous-slot-name)))
 		     (stringp (and (string= type "char") (or pointerp bracketsp)))
@@ -182,7 +190,7 @@
 		(collect `(,(fix-name name)
 			   ,(if pointerp :pointer (fix-type type :structs structs :unions unions))
 			   ,@(if bracketsp
-				 `(:count (apply #'* (list ,@bracketsp)))
+				 `(:count ,(apply #'* bracketsp))
 				 nil))
 		  into members)
 		(collect `(,(fix-name name)
@@ -200,7 +208,7 @@
 				       (previous-name (fix-name previous-slot-name))
 				       (index-name (fix-name (concatenate 'string name "-index")))
 				       (count (if bracketsp
-						  `(apply #'* (list ,@bracketsp))
+						  (apply #'* bracketsp)
 						  (fix-name previous-slot-name))))
 				  `(:create ((,name-arg) (create-array-strings ,name-name ,name-arg :dynamic ,(not bracketsp)))
 				    :destroy (destroy-array-strings ,name-name ,previous-name :dynamic ,(not bracketsp))
@@ -223,7 +231,7 @@
 				       (index-name (fix-name (concatenate 'string name "-index")))
 				       (arg-pointersp (and (string= (subseq type 0 2) "Vk") (or (struct-or-union-p type structs) (struct-or-union-p type unions))))
 				       (count (if bracketsp
-						  `(apply #'* (list ,@bracketsp))
+						  (apply #'* bracketsp)
 						  previous-name)))
 				  `(:create ((,name-arg)
 					     (create-array ,type-name ,name-name ,name-arg :dynamic ,(not bracketsp) :pointers ,arg-pointersp))
@@ -276,7 +284,9 @@
     (if match
 	(let ((name (aref regs 0))
 	      (value (aref regs 1)))
-	  `(mcffi:def-foreign-constant doc-file ,name ,(fix-name name) ,(fix-value value)))
+	  (values name
+		  (fix-value value)
+		  `(mcffi:def-foreign-constant doc-file ,name ,(fix-name name) ,(fix-value value))))
 	nil)))
 
 ;; Check if a line is a static const value.
@@ -286,7 +296,10 @@
     (if match
 	(let ((name (aref regs 0))
 	      (value (aref regs 1)))
-	  `(mcffi:def-foreign-constant doc-file ,name ,(fix-name name) ,(fix-value value)))
+	  
+	  (values name
+		  (fix-value value)
+		  `(mcffi:def-foreign-constant doc-file ,name ,(fix-name name) ,(fix-value value))))
 	nil)))
 
 ;; Check if a line is an enum.
@@ -385,24 +398,24 @@
   (prin1 '(in-package :cvk) more-constant-file)
   (format more-constant-file "~%~%")
   (format more-constant-file "(mcffi:with-doc-file (doc-file (asdf:system-relative-pathname \"common-vulkan\" \"docs/api/constants.md\"))~%~%")
-  (prin1 '(mcffi:def-foreign-constant-function doc-file "VK_MAKE_API_VERSION" make-api-version (variant major minor patch)
-	   `(logior (ash ,variant 29) (ash ,major 22) (ash ,minor 12) ,patch))
+  (prin1 '(mcffi:def-foreign-constant-function doc-file "VK_MAKE_API_VERSION" VK_MAKE_API_VERSION (variant major minor patch)
+	   (logior (ash variant 29) (ash major 22) (ash minor 12) patch))
 	 more-constant-file)
   (format more-constant-file "~%~%")
-  (prin1 '(mcffi:def-foreign-constant-function doc-file "VK_API_VERSION_VARIANT" api-version-variant (version)
-	   `(ash ,version 29))
+  (prin1 '(mcffi:def-foreign-constant-function doc-file "VK_API_VERSION_VARIANT" VK_API_VERSION_VARIANT (version)
+	   (ash version 29))
 	 more-constant-file)
   (format more-constant-file "~%~%")
-  (prin1 '(mcffi:def-foreign-constant-function doc-file "VK_API_VERSION_MAJOR" api-version-major (version)
-	   `(logand (ash ,version 22) #x7F))
+  (prin1 '(mcffi:def-foreign-constant-function doc-file "VK_API_VERSION_MAJOR" VK_API_VERSION_MAJOR (version)
+	   (logand (ash version 22) #x7F))
 	 more-constant-file)
   (format more-constant-file "~%~%")
-  (prin1 '(mcffi:def-foreign-constant-function doc-file "VK_API_VERSION_MINOR" api-version-minor (version)
-	   `(logand (ash ,version 12) #x3FF))
+  (prin1 '(mcffi:def-foreign-constant-function doc-file "VK_API_VERSION_MINOR" VK_API_VERSION_MINOR (version)
+	   (logand (ash version 12) #x3FF))
 	 more-constant-file)
   (format more-constant-file "~%~%")
-  (prin1 '(mcffi:def-foreign-constant-function doc-file "VK_API_VERSION_PATCH" api-version-patch (version)
-	   `(logand (ash ,version) #xFFF))
+  (prin1 '(mcffi:def-foreign-constant-function doc-file "VK_API_VERSION_PATCH" VK_API_VERSION_PATCH (version)
+	   (logand version #xFFF))
 	 more-constant-file)
   (format more-constant-file "~%~%")
   (prin1 '(mcffi:def-foreign-constant doc-file "UINT64_MAX" UINT64_MAX (1- (expt 2 64))) more-constant-file)
@@ -411,11 +424,11 @@
   (format more-constant-file "~%~%")
   (prin1 '(mcffi:def-foreign-constant doc-file "VK_NULL_HANDLE" vk_null_handle (cffi:null-pointer)) more-constant-file)
   (format more-constant-file "~%~%")
-  (prin1 '(mcffi:def-foreign-constant doc-file "VK_API_VERSION_1_0" vk_api_version_1_0 (make-api-version 0 1 0 0)) more-constant-file)
+  (prin1 '(mcffi:def-foreign-constant doc-file "VK_API_VERSION_1_0" vk_api_version_1_0 (vk_make_api_version 0 1 0 0)) more-constant-file)
   (format more-constant-file "~%~%")
   (prin1 '(mcffi:def-foreign-constant doc-file "VK_HEADER_VERSION" vk_header_version 216) more-constant-file)
   (format more-constant-file "~%~%")
-  (prin1 '(mcffi:def-foreign-constant doc-file "VK_HEADER_VERSION_COMPLETE" vk_header_version_complete (make-api-version 0 1 3 vk_header_version)) more-constant-file)
+  (prin1 '(mcffi:def-foreign-constant doc-file "VK_HEADER_VERSION_COMPLETE" vk_header_version_complete (vk_make_api_version 0 1 3 vk_header_version)) more-constant-file)
   (iter (for code in more-constant-code)
     (format more-constant-file "~%~%")
     (prin1 code more-constant-file))
@@ -498,7 +511,8 @@
 		      (struct-name (caddr new-more-struct))
 		      (revised-struct-list (and revised-structs
 						(iter (for substruct in (member struct-name revised-structs :key (lambda (x) (caddr x))
-													    :test #'string=))
+													    :test (lambda (x y)
+														    (and (stringp y) (string= x y)))))
 						  (count (eq (car substruct) 'mcffi:def-foreign-struct) into def-struct-count)
 						  (while (<= def-struct-count 1))
 						  (collect substruct)))))
@@ -546,7 +560,8 @@
 		      (func-name (caddr new-more-function))
 		      (revised-function-list (and revised-functions
 						  (iter (for subfunc in (member func-name revised-functions :key (lambda (x) (caddr x))
-													    :test #'string=))
+													    :test (lambda (x y)
+														    (and (stringp y) (string= x y)))))
 						    (count (and (eq (car subfunc) 'mcffi:def-foreign-function)
 								(not (null (caddr subfunc))))
 							   into def-function-count)
@@ -619,7 +634,8 @@
 (defun generate-bindings (vulkan-file type-file function-file
 			  more-constant-file more-enum-file more-struct-file more-function-file more-callback-file)
   (let ((structs (make-hash-table))
-	(unions (make-hash-table)))
+	(unions (make-hash-table))
+	(constant-table (make-hash-table :test #'equal)))
     (iter
       (let ((line (read-line vulkan-file nil)))
 	(while line)
@@ -648,7 +664,7 @@
 		  (when pointerp
 		    (collect new-type into pointer-types)))
 	      struct-or-union)
-	    (multiple-value-bind (struct-or-union type function-pointers-list struct-union-code more-struct-union-code) (read-struct-union line structs unions pointer-types vulkan-file)
+	    (multiple-value-bind (struct-or-union type function-pointers-list struct-union-code more-struct-union-code) (read-struct-union line structs unions pointer-types constant-table vulkan-file)
 	      (when struct-or-union
 		  (or (and (string= struct-or-union "struct")
 			   (add-struct-or-union type structs))
@@ -658,12 +674,14 @@
 		  (collect struct-union-code into type-code)
 		  (collect more-struct-union-code into more-struct-code))
 	      struct-or-union)
-	    (let ((def-code (read-define line)))
+	    (multiple-value-bind (const-name const-value def-code) (read-define line)
 	      (when def-code
+		(add-constant const-name const-value constant-table)
 		(collect def-code into more-constant-code))
 	      def-code)
-	    (let ((static-const-code (read-static-const line)))
+	    (multiple-value-bind (const-name const-value static-const-code) (read-static-const line)
 	      (when static-const-code
+		(add-constant const-name const-value constant-table)
 		(collect static-const-code into more-constant-code))
 	      static-const-code)
 	    (let ((enum-code (read-enum line vulkan-file)))

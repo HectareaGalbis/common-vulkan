@@ -9,6 +9,7 @@
                 (:file "vulkan/cfunctions")
 
 		;; Common Vulkan
+		(:file "src/initial-parameters")
 		(:file "src/constants")
                 (:file "src/enums")
                 (:file "src/structs")

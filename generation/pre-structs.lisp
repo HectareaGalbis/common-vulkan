@@ -172,8 +172,8 @@
      :pointers nil))
    :get
    ((&optional pipelinecacheuuid-index)
-    (get-array :uint8 pipelinecacheuuid pipelinecacheuuid-index
-     (apply #'* (list vk_uuid_size)) :pointers nil))
+    (get-array :uint8 pipelinecacheuuid pipelinecacheuuid-index 16 :pointers
+     nil))
    :set
    ((pipelinecacheuuid-arg &optional pipelinecacheuuid-index)
     (set-array :uint8 pipelinecacheuuid pipelinecacheuuid-arg
@@ -467,7 +467,7 @@
    :get
    ((&optional maxcomputeworkgroupcount-index)
     (get-array :uint32 maxcomputeworkgroupcount maxcomputeworkgroupcount-index
-     (apply #'* (list 3)) :pointers nil))
+     3 :pointers nil))
    :set
    ((maxcomputeworkgroupcount-arg &optional maxcomputeworkgroupcount-index)
     (set-array :uint32 maxcomputeworkgroupcount maxcomputeworkgroupcount-arg
@@ -480,8 +480,8 @@
      :dynamic nil :pointers nil))
    :get
    ((&optional maxcomputeworkgroupsize-index)
-    (get-array :uint32 maxcomputeworkgroupsize maxcomputeworkgroupsize-index
-     (apply #'* (list 3)) :pointers nil))
+    (get-array :uint32 maxcomputeworkgroupsize maxcomputeworkgroupsize-index 3
+     :pointers nil))
    :set
    ((maxcomputeworkgroupsize-arg &optional maxcomputeworkgroupsize-index)
     (set-array :uint32 maxcomputeworkgroupsize maxcomputeworkgroupsize-arg
@@ -500,8 +500,8 @@
      :dynamic nil :pointers nil))
    :get
    ((&optional maxviewportdimensions-index)
-    (get-array :uint32 maxviewportdimensions maxviewportdimensions-index
-     (apply #'* (list 2)) :pointers nil))
+    (get-array :uint32 maxviewportdimensions maxviewportdimensions-index 2
+     :pointers nil))
    :set
    ((maxviewportdimensions-arg &optional maxviewportdimensions-index)
     (set-array :uint32 maxviewportdimensions maxviewportdimensions-arg
@@ -512,8 +512,8 @@
      nil :pointers nil))
    :get
    ((&optional viewportboundsrange-index)
-    (get-array :float viewportboundsrange viewportboundsrange-index
-     (apply #'* (list 2)) :pointers nil))
+    (get-array :float viewportboundsrange viewportboundsrange-index 2 :pointers
+     nil))
    :set
    ((viewportboundsrange-arg &optional viewportboundsrange-index)
     (set-array :float viewportboundsrange viewportboundsrange-arg
@@ -571,8 +571,7 @@
      :pointers nil))
    :get
    ((&optional pointsizerange-index)
-    (get-array :float pointsizerange pointsizerange-index (apply #'* (list 2))
-     :pointers nil))
+    (get-array :float pointsizerange pointsizerange-index 2 :pointers nil))
    :set
    ((pointsizerange-arg &optional pointsizerange-index)
     (set-array :float pointsizerange pointsizerange-arg pointsizerange-index
@@ -583,8 +582,7 @@
      :pointers nil))
    :get
    ((&optional linewidthrange-index)
-    (get-array :float linewidthrange linewidthrange-index (apply #'* (list 2))
-     :pointers nil))
+    (get-array :float linewidthrange linewidthrange-index 2 :pointers nil))
    :set
    ((linewidthrange-arg &optional linewidthrange-index)
     (set-array :float linewidthrange linewidthrange-arg linewidthrange-index
@@ -610,8 +608,8 @@
      nil :pointers ("VkMemoryType")))
    :get
    ((&optional memorytypes-index)
-    (get-array (:struct vkmemorytype) memorytypes memorytypes-index
-     (apply #'* (list vk_max_memory_types)) :pointers ("VkMemoryType")))
+    (get-array (:struct vkmemorytype) memorytypes memorytypes-index 32
+     :pointers ("VkMemoryType")))
    :set
    ((memorytypes-arg &optional memorytypes-index)
     (set-array (:struct vkmemorytype) memorytypes memorytypes-arg
@@ -623,8 +621,8 @@
      nil :pointers ("VkMemoryHeap")))
    :get
    ((&optional memoryheaps-index)
-    (get-array (:struct vkmemoryheap) memoryheaps memoryheaps-index
-     (apply #'* (list vk_max_memory_heaps)) :pointers ("VkMemoryHeap")))
+    (get-array (:struct vkmemoryheap) memoryheaps memoryheaps-index 16
+     :pointers ("VkMemoryHeap")))
    :set
    ((memoryheaps-arg &optional memoryheaps-index)
     (set-array (:struct vkmemoryheap) memoryheaps memoryheaps-arg
@@ -663,8 +661,8 @@
      :pointers nil))
    :get
    ((&optional pipelinecacheuuid-index)
-    (get-array :uint8 pipelinecacheuuid pipelinecacheuuid-index
-     (apply #'* (list vk_uuid_size)) :pointers nil))
+    (get-array :uint8 pipelinecacheuuid pipelinecacheuuid-index 16 :pointers
+     nil))
    :set
    ((pipelinecacheuuid-arg &optional pipelinecacheuuid-index)
     (set-array :uint8 pipelinecacheuuid pipelinecacheuuid-arg
@@ -1688,8 +1686,7 @@
      :pointers nil))
    :get
    ((&optional blendconstants-index)
-    (get-array :float blendconstants blendconstants-index (apply #'* (list 4))
-     :pointers nil))
+    (get-array :float blendconstants blendconstants-index 4 :pointers nil))
    :set
    ((blendconstants-arg &optional blendconstants-index)
     (set-array :float blendconstants blendconstants-arg blendconstants-index
@@ -2370,8 +2367,7 @@
     (create-array :float float32 float32-arg :dynamic nil :pointers nil))
    :get
    ((&optional float32-index)
-    (get-array :float float32 float32-index (apply #'* (list 4)) :pointers
-     nil))
+    (get-array :float float32 float32-index 4 :pointers nil))
    :set
    ((float32-arg &optional float32-index)
     (set-array :float float32 float32-arg float32-index :dynamic nil :pointers
@@ -2381,7 +2377,7 @@
     (create-array :int32 int32 int32-arg :dynamic nil :pointers nil))
    :get
    ((&optional int32-index)
-    (get-array :int32 int32 int32-index (apply #'* (list 4)) :pointers nil))
+    (get-array :int32 int32 int32-index 4 :pointers nil))
    :set
    ((int32-arg &optional int32-index)
     (set-array :int32 int32 int32-arg int32-index :dynamic nil :pointers nil)))
@@ -2390,7 +2386,7 @@
     (create-array :uint32 uint32 uint32-arg :dynamic nil :pointers nil))
    :get
    ((&optional uint32-index)
-    (get-array :uint32 uint32 uint32-index (apply #'* (list 4)) :pointers nil))
+    (get-array :uint32 uint32 uint32-index 4 :pointers nil))
    :set
    ((uint32-arg &optional uint32-index)
     (set-array :uint32 uint32 uint32-arg uint32-index :dynamic nil :pointers
@@ -2463,8 +2459,8 @@
      :pointers ("VkOffset3D")))
    :get
    ((&optional srcoffsets-index)
-    (get-array (:struct vkoffset3d) srcoffsets srcoffsets-index
-     (apply #'* (list 2)) :pointers ("VkOffset3D")))
+    (get-array (:struct vkoffset3d) srcoffsets srcoffsets-index 2 :pointers
+     ("VkOffset3D")))
    :set
    ((srcoffsets-arg &optional srcoffsets-index)
     (set-array (:struct vkoffset3d) srcoffsets srcoffsets-arg srcoffsets-index
@@ -2484,8 +2480,8 @@
      :pointers ("VkOffset3D")))
    :get
    ((&optional dstoffsets-index)
-    (get-array (:struct vkoffset3d) dstoffsets dstoffsets-index
-     (apply #'* (list 2)) :pointers ("VkOffset3D")))
+    (get-array (:struct vkoffset3d) dstoffsets dstoffsets-index 2 :pointers
+     ("VkOffset3D")))
    :set
    ((dstoffsets-arg &optional dstoffsets-index)
     (set-array (:struct vkoffset3d) dstoffsets dstoffsets-arg dstoffsets-index
@@ -2889,8 +2885,8 @@
      nil :pointers nil))
    :get
    ((&optional physicaldevices-index)
-    (get-array vkphysicaldevice physicaldevices physicaldevices-index
-     (apply #'* (list vk_max_device_group_size)) :pointers nil))
+    (get-array vkphysicaldevice physicaldevices physicaldevices-index 32
+     :pointers nil))
    :set
    ((physicaldevices-arg &optional physicaldevices-index)
     (set-array vkphysicaldevice physicaldevices physicaldevices-arg
@@ -3565,8 +3561,7 @@
     (create-array :uint8 deviceuuid deviceuuid-arg :dynamic nil :pointers nil))
    :get
    ((&optional deviceuuid-index)
-    (get-array :uint8 deviceuuid deviceuuid-index
-     (apply #'* (list vk_uuid_size)) :pointers nil))
+    (get-array :uint8 deviceuuid deviceuuid-index 16 :pointers nil))
    :set
    ((deviceuuid-arg &optional deviceuuid-index)
     (set-array :uint8 deviceuuid deviceuuid-arg deviceuuid-index :dynamic nil
@@ -3576,8 +3571,7 @@
     (create-array :uint8 driveruuid driveruuid-arg :dynamic nil :pointers nil))
    :get
    ((&optional driveruuid-index)
-    (get-array :uint8 driveruuid driveruuid-index
-     (apply #'* (list vk_uuid_size)) :pointers nil))
+    (get-array :uint8 driveruuid driveruuid-index 16 :pointers nil))
    :set
    ((driveruuid-arg &optional driveruuid-index)
     (set-array :uint8 driveruuid driveruuid-arg driveruuid-index :dynamic nil
@@ -3587,8 +3581,7 @@
     (create-array :uint8 deviceluid deviceluid-arg :dynamic nil :pointers nil))
    :get
    ((&optional deviceluid-index)
-    (get-array :uint8 deviceluid deviceluid-index
-     (apply #'* (list vk_luid_size)) :pointers nil))
+    (get-array :uint8 deviceluid deviceluid-index 8 :pointers nil))
    :set
    ((deviceluid-arg &optional deviceluid-index)
     (set-array :uint8 deviceluid deviceluid-arg deviceluid-index :dynamic nil
@@ -3769,8 +3762,7 @@
     (create-array :uint8 deviceuuid deviceuuid-arg :dynamic nil :pointers nil))
    :get
    ((&optional deviceuuid-index)
-    (get-array :uint8 deviceuuid deviceuuid-index
-     (apply #'* (list vk_uuid_size)) :pointers nil))
+    (get-array :uint8 deviceuuid deviceuuid-index 16 :pointers nil))
    :set
    ((deviceuuid-arg &optional deviceuuid-index)
     (set-array :uint8 deviceuuid deviceuuid-arg deviceuuid-index :dynamic nil
@@ -3780,8 +3772,7 @@
     (create-array :uint8 driveruuid driveruuid-arg :dynamic nil :pointers nil))
    :get
    ((&optional driveruuid-index)
-    (get-array :uint8 driveruuid driveruuid-index
-     (apply #'* (list vk_uuid_size)) :pointers nil))
+    (get-array :uint8 driveruuid driveruuid-index 16 :pointers nil))
    :set
    ((driveruuid-arg &optional driveruuid-index)
     (set-array :uint8 driveruuid driveruuid-arg driveruuid-index :dynamic nil
@@ -3791,8 +3782,7 @@
     (create-array :uint8 deviceluid deviceluid-arg :dynamic nil :pointers nil))
    :get
    ((&optional deviceluid-index)
-    (get-array :uint8 deviceluid deviceluid-index
-     (apply #'* (list vk_luid_size)) :pointers nil))
+    (get-array :uint8 deviceluid deviceluid-index 8 :pointers nil))
    :set
    ((deviceluid-arg &optional deviceluid-index)
     (set-array :uint8 deviceluid deviceluid-arg deviceluid-index :dynamic nil
@@ -5714,8 +5704,8 @@
      :pointers ("VkOffset3D")))
    :get
    ((&optional srcoffsets-index)
-    (get-array (:struct vkoffset3d) srcoffsets srcoffsets-index
-     (apply #'* (list 2)) :pointers ("VkOffset3D")))
+    (get-array (:struct vkoffset3d) srcoffsets srcoffsets-index 2 :pointers
+     ("VkOffset3D")))
    :set
    ((srcoffsets-arg &optional srcoffsets-index)
     (set-array (:struct vkoffset3d) srcoffsets srcoffsets-arg srcoffsets-index
@@ -5735,8 +5725,8 @@
      :pointers ("VkOffset3D")))
    :get
    ((&optional dstoffsets-index)
-    (get-array (:struct vkoffset3d) dstoffsets dstoffsets-index
-     (apply #'* (list 2)) :pointers ("VkOffset3D")))
+    (get-array (:struct vkoffset3d) dstoffsets dstoffsets-index 2 :pointers
+     ("VkOffset3D")))
    :set
    ((dstoffsets-arg &optional dstoffsets-index)
     (set-array (:struct vkoffset3d) dstoffsets dstoffsets-arg dstoffsets-index
@@ -6475,8 +6465,7 @@
      nil))
    :get
    ((&optional presentmask-index)
-    (get-array :uint32 presentmask presentmask-index
-     (apply #'* (list vk_max_device_group_size)) :pointers nil))
+    (get-array :uint32 presentmask presentmask-index 32 :pointers nil))
    :set
    ((presentmask-arg &optional presentmask-index)
     (set-array :uint32 presentmask presentmask-arg presentmask-index :dynamic
@@ -6987,9 +6976,7 @@
   (uuid :name uuid :type uint8 :create
    ((uuid-arg) (create-array :uint8 uuid uuid-arg :dynamic nil :pointers nil))
    :get
-   ((&optional uuid-index)
-    (get-array :uint8 uuid uuid-index (apply #'* (list vk_uuid_size)) :pointers
-     nil))
+   ((&optional uuid-index) (get-array :uint8 uuid uuid-index 16 :pointers nil))
    :set
    ((uuid-arg &optional uuid-index)
     (set-array :uint8 uuid uuid-arg uuid-index :dynamic nil :pointers nil))))
@@ -7254,8 +7241,8 @@
      nil :pointers nil))
    :get
    ((&optional priorities-index)
-    (get-array vkqueueglobalprioritykhr priorities priorities-index
-     (apply #'* (list vk_max_global_priority_size_khr)) :pointers nil))
+    (get-array vkqueueglobalprioritykhr priorities priorities-index 16
+     :pointers nil))
    :set
    ((priorities-arg &optional priorities-index)
     (set-array vkqueueglobalprioritykhr priorities priorities-arg
@@ -7310,7 +7297,7 @@
    :get
    ((&optional combinerops-index)
     (get-array vkfragmentshadingratecombineropkhr combinerops combinerops-index
-     (apply #'* (list 2)) :pointers nil))
+     2 :pointers nil))
    :set
    ((combinerops-arg &optional combinerops-index)
     (set-array vkfragmentshadingratecombineropkhr combinerops combinerops-arg
@@ -7795,7 +7782,7 @@
     (create-array :float color color-arg :dynamic nil :pointers nil))
    :get
    ((&optional color-index)
-    (get-array :float color color-index (apply #'* (list 4)) :pointers nil))
+    (get-array :float color color-index 4 :pointers nil))
    :set
    ((color-arg &optional color-index)
     (set-array :float color color-arg color-index :dynamic nil :pointers nil))))
@@ -8017,8 +8004,8 @@
      :dynamic nil :pointers nil))
    :get
    ((&optional computeworkgroupsize-index)
-    (get-array :uint32 computeworkgroupsize computeworkgroupsize-index
-     (apply #'* (list 3)) :pointers nil))
+    (get-array :uint32 computeworkgroupsize computeworkgroupsize-index 3
+     :pointers nil))
    :set
    ((computeworkgroupsize-arg &optional computeworkgroupsize-index)
     (set-array :uint32 computeworkgroupsize computeworkgroupsize-arg
@@ -8527,7 +8514,7 @@
     (create-array :float color color-arg :dynamic nil :pointers nil))
    :get
    ((&optional color-index)
-    (get-array :float color color-index (apply #'* (list 4)) :pointers nil))
+    (get-array :float color color-index 4 :pointers nil))
    :set
    ((color-arg &optional color-index)
     (set-array :float color color-arg color-index :dynamic nil :pointers nil))))
@@ -8817,7 +8804,7 @@
    :get
    ((&optional samplelocationcoordinaterange-index)
     (get-array :float samplelocationcoordinaterange
-     samplelocationcoordinaterange-index (apply #'* (list 2)) :pointers nil))
+     samplelocationcoordinaterange-index 2 :pointers nil))
    :set
    ((samplelocationcoordinaterange-arg &optional
      samplelocationcoordinaterange-index)
@@ -9560,8 +9547,7 @@
     (create-array :float matrix matrix-arg :dynamic nil :pointers nil))
    :get
    ((&optional matrix-index)
-    (get-array :float matrix matrix-index (apply #'* (list 3 4)) :pointers
-     nil))
+    (get-array :float matrix matrix-index 12 :pointers nil))
    :set
    ((matrix-arg &optional matrix-index)
     (set-array :float matrix matrix-arg matrix-index :dynamic nil :pointers
@@ -9825,8 +9811,8 @@
      :dynamic nil :pointers nil))
    :get
    ((&optional maxtaskworkgroupsize-index)
-    (get-array :uint32 maxtaskworkgroupsize maxtaskworkgroupsize-index
-     (apply #'* (list 3)) :pointers nil))
+    (get-array :uint32 maxtaskworkgroupsize maxtaskworkgroupsize-index 3
+     :pointers nil))
    :set
    ((maxtaskworkgroupsize-arg &optional maxtaskworkgroupsize-index)
     (set-array :uint32 maxtaskworkgroupsize maxtaskworkgroupsize-arg
@@ -9840,8 +9826,8 @@
      :dynamic nil :pointers nil))
    :get
    ((&optional maxmeshworkgroupsize-index)
-    (get-array :uint32 maxmeshworkgroupsize maxmeshworkgroupsize-index
-     (apply #'* (list 3)) :pointers nil))
+    (get-array :uint32 maxmeshworkgroupsize maxmeshworkgroupsize-index 3
+     :pointers nil))
    :set
    ((maxmeshworkgroupsize-arg &optional maxmeshworkgroupsize-index)
     (set-array :uint32 maxmeshworkgroupsize maxmeshworkgroupsize-arg
@@ -10178,8 +10164,7 @@
      nil))
    :get
    ((&optional heapbudget-index)
-    (get-array vkdevicesize heapbudget heapbudget-index
-     (apply #'* (list vk_max_memory_heaps)) :pointers nil))
+    (get-array vkdevicesize heapbudget heapbudget-index 16 :pointers nil))
    :set
    ((heapbudget-arg &optional heapbudget-index)
     (set-array vkdevicesize heapbudget heapbudget-arg heapbudget-index :dynamic
@@ -10190,8 +10175,7 @@
      nil))
    :get
    ((&optional heapusage-index)
-    (get-array vkdevicesize heapusage heapusage-index
-     (apply #'* (list vk_max_memory_heaps)) :pointers nil))
+    (get-array vkdevicesize heapusage heapusage-index 16 :pointers nil))
    :set
    ((heapusage-arg &optional heapusage-index)
     (set-array vkdevicesize heapusage heapusage-arg heapusage-index :dynamic
@@ -11165,7 +11149,7 @@
    :get
    ((&optional combinerops-index)
     (get-array vkfragmentshadingratecombineropkhr combinerops combinerops-index
-     (apply #'* (list 2)) :pointers nil))
+     2 :pointers nil))
    :set
    ((combinerops-arg &optional combinerops-index)
     (set-array vkfragmentshadingratecombineropkhr combinerops combinerops-arg
@@ -11734,8 +11718,8 @@
      :pointers nil))
    :get
    ((&optional pipelineidentifier-index)
-    (get-array :uint8 pipelineidentifier pipelineidentifier-index
-     (apply #'* (list vk_uuid_size)) :pointers nil))
+    (get-array :uint8 pipelineidentifier pipelineidentifier-index 16 :pointers
+     nil))
    :set
    ((pipelineidentifier-arg &optional pipelineidentifier-index)
     (set-array :uint8 pipelineidentifier pipelineidentifier-arg

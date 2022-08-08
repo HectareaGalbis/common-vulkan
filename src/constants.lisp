@@ -4,33 +4,33 @@
 
 (more-cffi:def-foreign-constant-function doc-file
     "VK_MAKE_API_VERSION"
-    make-api-version
+    vk_make_api_version
     (variant major minor patch)
-  `(logior (ash ,variant 29) (ash ,major 22) (ash ,minor 12) ,patch))
+  (logior (ash variant 29) (ash major 22) (ash minor 12) patch))
 
 (more-cffi:def-foreign-constant-function doc-file
     "VK_API_VERSION_VARIANT"
-    api-version-variant
+    vk_api_version_variant
     (version)
-  `(ash ,version 29))
+  (ash version 29))
 
 (more-cffi:def-foreign-constant-function doc-file
     "VK_API_VERSION_MAJOR"
-    api-version-major
+    vk_api_version_major
     (version)
-  `(logand (ash ,version 22) 127))
+  (logand (ash version 22) 127))
 
 (more-cffi:def-foreign-constant-function doc-file
     "VK_API_VERSION_MINOR"
-    api-version-minor
+    vk_api_version_minor
     (version)
-  `(logand (ash ,version 12) 1023))
+  (logand (ash version 12) 1023))
 
 (more-cffi:def-foreign-constant-function doc-file
     "VK_API_VERSION_PATCH"
-    api-version-patch
+    vk_api_version_patch
     (version)
-  `(logand (ash ,version) 4095))
+  (logand version 4095))
 
 (more-cffi:def-foreign-constant doc-file "UINT64_MAX" uint64_max
                                 (1- (expt 2 64)))
@@ -42,14 +42,15 @@
                                 (cffi-sys:null-pointer))
 
 (more-cffi:def-foreign-constant doc-file "VK_API_VERSION_1_0"
-                                vk_api_version_1_0 (make-api-version 0 1 0 0))
+                                vk_api_version_1_0
+                                (vk_make_api_version 0 1 0 0))
 
 (more-cffi:def-foreign-constant doc-file "VK_HEADER_VERSION" vk_header_version
                                 216)
 
 (more-cffi:def-foreign-constant doc-file "VK_HEADER_VERSION_COMPLETE"
                                 vk_header_version_complete
-                                (make-api-version 0 1 3 vk_header_version))
+                                (vk_make_api_version 0 1 3 vk_header_version))
 
 (more-cffi:def-foreign-constant doc-file "VK_ATTACHMENT_UNUSED"
                                 vk_attachment_unused (- uint32_max 0))
@@ -97,7 +98,7 @@
 
 (more-cffi:def-foreign-constant doc-file "VK_API_VERSION_1_1"
                                 vk_api_version_1_1
-                                (vk_make_api_version . "(0  1  1  0)"))
+                                (vk_make_api_version 0 1 1 0))
 
 (more-cffi:def-foreign-constant doc-file "VK_MAX_DEVICE_GROUP_SIZE"
                                 vk_max_device_group_size 32)
@@ -111,7 +112,7 @@
 
 (more-cffi:def-foreign-constant doc-file "VK_API_VERSION_1_2"
                                 vk_api_version_1_2
-                                (vk_make_api_version . "(0  1  2  0)"))
+                                (vk_make_api_version 0 1 2 0))
 
 (more-cffi:def-foreign-constant doc-file "VK_MAX_DRIVER_NAME_SIZE"
                                 vk_max_driver_name_size 256)
@@ -123,7 +124,7 @@
 
 (more-cffi:def-foreign-constant doc-file "VK_API_VERSION_1_3"
                                 vk_api_version_1_3
-                                (vk_make_api_version . "(0  1  3  0)"))
+                                (vk_make_api_version 0 1 3 0))
 
 (more-cffi:def-foreign-constant doc-file "VK_PIPELINE_STAGE_2_NONE"
                                 vk_pipeline_stage_2_none 0)

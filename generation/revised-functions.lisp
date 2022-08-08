@@ -85,7 +85,7 @@
   (more-cffi:def-foreign-function doc-file "vkDestroyDebugUtilsMessengerEXT" destroy-debug-utils-messenger-ext (instance messenger pallocator)
     (declare-types ("VkInstance" instance) ("VkDebugUtilsMessengerEXT" messenger) ("VkAllocationCallbacks" "pAllocator"))
     (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
-      (vkDestroyDebugUtilsMessengerEXT instance messenger pAllocator)))
+      (vkDestroyDebugUtilsMessengerEXT instance messenger pAllocator-c)))
 
 
   (mcffi:defwith doc-file with-debug-utils-messenger-ext
@@ -94,8 +94,8 @@
     :destructor-arguments (2 0 3))
   
   
-  (more-cffi:def-foreign-function doc-file "vkEnumeratePhysicalDevices" enumerate-physical-devices (instance pphysicaldevicecount)
-    (declare-types ("VkInstance" instance) (uint32 "pPhysicalDeviceCount")
+  (more-cffi:def-foreign-function doc-file "vkEnumeratePhysicalDevices" enumerate-physical-devices (instance)
+    (declare-types ("VkInstance" instance)
 		   :return ((list "VkPhysicalDevice") "pPhysicalDevices") ("VkResult" result))
     (cffi:with-foreign-object (pPhysicalDeviceCount :uint32)
       (vkEnumeratePhysicalDevices instance pPhysicalDeviceCount (cffi:null-pointer))

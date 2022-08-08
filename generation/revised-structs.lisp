@@ -13,14 +13,14 @@
   `(setf ,slot (or ,new-value (cffi-sys:null-pointer))))
 
 (defmacro create-string (slot slot-arg &key (dynamic nil))
-  (when dynamic
-    `(setf ,slot
-           (if ,slot-arg
-               (cffi:foreign-string-alloc ,slot-arg)
-               (cffi-sys:null-pointer)))
-    (let ((str-sym (gensym)))
-      `(cffi:with-foreign-string (,str-sym ,slot-arg)
-	 (mcffi:copy ,slot ,str-sym (length ,slot-arg))))))
+  (if dynamic
+      `(setf ,slot
+             (if ,slot-arg
+		 (cffi:foreign-string-alloc ,slot-arg)
+		 (cffi-sys:null-pointer)))
+      (let ((str-sym (gensym)))
+	`(cffi:with-foreign-string (,str-sym ,slot-arg)
+	   (mcffi:copy ,slot ,str-sym (length ,slot-arg))))))
 
 (defmacro destroy-string (slot)
   `(when (not (cffi-sys:null-pointer-p ,slot))
@@ -339,7 +339,7 @@
     (ppEnabledLayerNames     :name "ppEnabledLayerNames" :type (list string) :init-form nil
 			     :create ((ppEnabledLayerNames-arg)
 				      (create-array-strings ppEnabledLayerNames ppEnabledLayerNames-arg :dynamic t))
-			     :destroy (destroy-array-strings ppEnabledLayerNames enableLayerCount :dynamic t)
+			     :destroy (destroy-array-strings ppEnabledLayerNames enabledLayerCount :dynamic t)
 			     :get ((&optional (index nil))
 				   (get-array-strings ppEnabledLayerNames index enabledLayerCount))
 			     :set ((ppEnabledLayerNames-arg &optional (index nil))
@@ -348,7 +348,7 @@
     (ppEnabledExtensionNames :name "ppEnabledExtensionNames" :type (list string) :init-form nil
 			     :create ((ppEnabledExtensionNames-arg)
 				      (create-array-strings ppEnabledExtensionNames ppEnabledExtensionNames-arg :dynamic t))
-			     :destroy (destroy-array-strings ppEnabledExtensionNames enableLayerCount :dynamic t)
+			     :destroy (destroy-array-strings ppEnabledExtensionNames enabledLayerCount :dynamic t)
 			     :get ((&optional (index nil))
 				   (get-array-strings ppEnabledExtensionNames index enabledExtensionCount))
 			     :set ((ppEnabledExtensionNames-arg &optional (index nil))
@@ -357,7 +357,7 @@
 
   (mcffi:def-foreign-struct doc-file "VkExtensionProperties" extension-properties 
       (:default-create :default-get :default-set)
-    (extensionName :name "extensionName" :type string :init-value nil
+    (extensionName :name "extensionName" :type string :init-form nil
 		   :create ((extensionName-arg)
 			    (create-string extensionName extensionName-arg :dynamic nil))
 		   :get (() (get-string extensionName))
@@ -367,8 +367,8 @@
 
 
   (mcffi:def-foreign-struct doc-file "VkLayerProperties" layer-properties  
-      (:default-create :default-destroy :default-get)
-    (layerName             :name "layerName" :type string :init-value nil
+      (:default-create :default-get :default-set)
+    (layerName             :name "layerName" :type string :init-form nil
 	                   :create ((layerName-arg)
 				    (create-string layerName layerName-arg :dynamic nil))
 			   :get (() (get-string layerName))
@@ -376,7 +376,7 @@
 				 (set-string layerName layerName-arg :dynamic nil)))
     (specVersion           :name "specVersion" :type uint32)
     (implementationVersion :name "implementationVersion" :type uint32)
-    (description           :type string :init-value nil
+    (description           :type string :init-form nil
 		           :create ((description-arg)
 				    (create-string description description-arg :dynamic nil))
 			   :get (() (get-string description))
