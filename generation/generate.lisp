@@ -623,7 +623,8 @@
 		       (prin1 new-more-callback final-more-callback-file)
 		       (format final-more-callback-file "~%~%  ")
 		       (prin1 `(mcffi:doc-note doc-file "This callback definer needs to be revised. Please, post an issue to request it.")
-			      final-more-callback-file))))))))
+			      final-more-callback-file)))))
+	     (format final-more-callback-file ")"))))
 
 
 ;; -----------------------------

@@ -4,7 +4,7 @@
 
 (mcffi:with-doc-file (doc-file (asdf:system-relative-pathname "common-vulkan" "docs/api/callbacks.md"))
 
-  (mcffi:def-foreign-callback-definer def-debug-utils-messenger-callback doc-file 
+  (mcffi:def-foreign-callback-definer doc-file "PFN_vkDebugUtilsMessengerCallbackEXT" def-debug-utils-messenger-callback-ext-callback 
     ("messageSeverity" :type "VkDebugUtilsMessageSeverityFlagBitsEXT"
 		       :foreign-type VkDebugUtilsMessageSeverityFlagBitsEXT)
     ("messageTypes" :type VkDebugUtilsMessageTypeFlagsEXT

@@ -13,5 +13,6 @@
 		(:file "src/constants")
                 (:file "src/enums")
                 (:file "src/structs")
-		(:file "src/functions")))
+		(:file "src/functions")
+		(:file "src/callbacks")))
 		

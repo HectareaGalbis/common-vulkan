@@ -20,7 +20,7 @@
 		 (cffi-sys:null-pointer)))
       (let ((str-sym (gensym)))
 	`(cffi:with-foreign-string (,str-sym ,slot-arg)
-	   (mcffi:copy ,slot ,str-sym (length ,slot-arg))))))
+	   (mcffi:copy ,slot ,str-sym :char (1+ (length ,slot-arg)))))))
 
 (defmacro destroy-string (slot)
   `(when (not (cffi-sys:null-pointer-p ,slot))
@@ -87,11 +87,13 @@
                   (if ,slot-arg
                       (cffi:foreign-alloc :pointer :count (length ,slot-arg))
                       (cffi-sys:null-pointer)))))
-    ,(let ((i (gensym)))
+    ,(let ((i (gensym))
+	   (elem (gensym)))
        `(iter
           (for ,i from 0 below (length ,slot-arg))
+	  (for ,elem in ,slot-arg)
           (setf (cffi:mem-aref ,slot :pointer ,i)
-                  (cffi:foreign-string-alloc (aref ,slot-arg ,i)))))))
+                (cffi:foreign-string-alloc ,elem))))))
 
 (defmacro destroy-array-strings (slot count &key dynamic)
   `(when (not (cffi-sys:null-pointer-p ,slot))
@@ -301,19 +303,19 @@
 			      (set-pointer pNext pNext-arg)))
     (pApplicationName   :name "pApplicationName" :type string :init-form nil
 		        :create ((pApplicationName-arg)
-				 (create-string pApplicationName pApplicationName-arg))
+				 (create-string pApplicationName pApplicationName-arg :dynamic t))
 		        :destroy (destroy-string pApplicationName)
 		        :get (() (get-string pApplicationName))
 		        :set ((pApplicationName-arg)
-			      (set-string pApplicationName pApplicationName-arg)))
+			      (set-string pApplicationName pApplicationName-arg :dynamic t)))
     (applicationVersion :name "applicationVersion" :type uint32 :init-form 0)
     (pEngineName        :name "pEngineName" :type string :init-form nil
 		        :create ((pEngineName-arg)
-				 (create-string pEngineName pEngineName-arg))
+				 (create-string pEngineName pEngineName-arg :dynamic t))
 		        :destroy (destroy-string pEngineName)
 		        :get (() (get-string pEngineName))
 		        :set ((pEngineName-arg)
-			      (set-string pEngineName pEngineName-arg)))
+			      (set-string pEngineName pEngineName-arg :dynamic t)))
     (engineVersion      :name "engineVersion" :type uint32 :init-form 0)
     (apiVersion         :name "apiVersion" :type uint32 :init-form 0))
 

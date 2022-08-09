@@ -21,7 +21,7 @@
                    (cffi-sys:null-pointer)))
       (let ((str-sym (gensym)))
         `(cffi:with-foreign-string (,str-sym ,slot-arg)
-           (more-cffi:copy ,slot ,str-sym (length ,slot-arg))))))
+           (more-cffi:copy ,slot ,str-sym :char (1+ (length ,slot-arg)))))))
 
 (defmacro destroy-string (slot)
   `(when (not (cffi-sys:null-pointer-p ,slot))
@@ -86,11 +86,12 @@
                   (if ,slot-arg
                       (cffi:foreign-alloc :pointer :count (length ,slot-arg))
                       (cffi-sys:null-pointer)))))
-    ,(let ((i (gensym)))
+    ,(let ((i (gensym)) (elem (gensym)))
        `(iter
           (for ,i from 0 below (length ,slot-arg))
+          (for ,elem in ,slot-arg)
           (setf (cffi:mem-aref ,slot :pointer ,i)
-                  (cffi:foreign-string-alloc (aref ,slot-arg ,i)))))))
+                  (cffi:foreign-string-alloc ,elem))))))
 
 (defmacro destroy-array-strings (slot count &key dynamic)
   `(when (not (cffi-sys:null-pointer-p ,slot))
@@ -367,16 +368,17 @@
     (papplicationname :name "pApplicationName" :type string :init-form nil
      :create
      ((papplicationname-arg)
-      (create-string papplicationname papplicationname-arg))
+      (create-string papplicationname papplicationname-arg :dynamic t))
      :destroy (destroy-string papplicationname) :get
      (nil (get-string papplicationname)) :set
      ((papplicationname-arg)
-      (set-string papplicationname papplicationname-arg)))
+      (set-string papplicationname papplicationname-arg :dynamic t)))
     (applicationversion :name "applicationVersion" :type uint32 :init-form 0)
     (penginename :name "pEngineName" :type string :init-form nil :create
-     ((penginename-arg) (create-string penginename penginename-arg)) :destroy
-     (destroy-string penginename) :get (nil (get-string penginename)) :set
-     ((penginename-arg) (set-string penginename penginename-arg)))
+     ((penginename-arg) (create-string penginename penginename-arg :dynamic t))
+     :destroy (destroy-string penginename) :get (nil (get-string penginename))
+     :set
+     ((penginename-arg) (set-string penginename penginename-arg :dynamic t)))
     (engineversion :name "engineVersion" :type uint32 :init-form 0)
     (apiversion :name "apiVersion" :type uint32 :init-form 0))
 
