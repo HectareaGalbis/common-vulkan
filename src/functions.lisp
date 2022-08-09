@@ -31,8 +31,8 @@
   (more-cffi:defwith doc-file with-instance create-instance destroy-instance
                      :destructor-arguments (0 2))
 
-  (more-cffi:doc-note
-   "The allocator is passed to both constructor and destructor." doc-file)
+  (more-cffi:doc-note doc-file
+                      "The allocator is passed to both constructor and destructor.")
 
   (more-cffi:def-foreign-function doc-file
       "vkEnumeratePhysicalDevices"

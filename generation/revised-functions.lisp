@@ -27,7 +27,7 @@
     destroy-instance
     :destructor-arguments (0 2))
 
-  (mcffi:doc-note "The allocator is passed to both constructor and destructor." doc-file)
+  (mcffi:doc-note doc-file "The allocator is passed to both constructor and destructor.")
 
 
   (mcffi:def-foreign-function doc-file "vkEnumerateInstanceExtensionProperties" create-enumerate-instance-extension-properties (pLayerName)
