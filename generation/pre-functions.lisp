@@ -6,8 +6,7 @@
 
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateInstance"
-    create-instance
+    ("vkCreateInstance" create-instance funcall-create-instance)
     (pcreateinfo pallocator pinstance)
   (declare-types ("VkInstanceCreateInfo" "pCreateInfo")
    ("VkAllocationCallbacks" "pAllocator") ("VkInstance" "pInstance") :return
@@ -15,40 +14,41 @@
   (vkcreateinstance pcreateinfo pallocator pinstance))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroyInstance"
-    destroy-instance
+    ("vkDestroyInstance" destroy-instance funcall-destroy-instance)
     (instance pallocator)
   (declare-types ("VkInstance" instance) ("VkAllocationCallbacks" "pAllocator")
    :return ("void" return-value))
   (vkdestroyinstance instance pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkEnumeratePhysicalDevices"
-    enumerate-physical-devices
+    ("vkEnumeratePhysicalDevices" enumerate-physical-devices
+     funcall-enumerate-physical-devices)
     (instance pphysicaldevicecount pphysicaldevices)
   (declare-types ("VkInstance" instance) (uint32 "pPhysicalDeviceCount")
    ("VkPhysicalDevice" "pPhysicalDevices") :return ("VkResult" return-value))
   (vkenumeratephysicaldevices instance pphysicaldevicecount pphysicaldevices))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceFeatures"
-    get-physical-device-features
+    ("vkGetPhysicalDeviceFeatures" get-physical-device-features
+     funcall-get-physical-device-features)
     (physicaldevice pfeatures)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    ("VkPhysicalDeviceFeatures" "pFeatures") :return ("void" return-value))
   (vkgetphysicaldevicefeatures physicaldevice pfeatures))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceFormatProperties"
-    get-physical-device-format-properties
+    ("vkGetPhysicalDeviceFormatProperties"
+     get-physical-device-format-properties
+     funcall-get-physical-device-format-properties)
     (physicaldevice format pformatproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice") ("VkFormat" format)
    ("VkFormatProperties" "pFormatProperties") :return ("void" return-value))
   (vkgetphysicaldeviceformatproperties physicaldevice format pformatproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceImageFormatProperties"
-    get-physical-device-image-format-properties
+    ("vkGetPhysicalDeviceImageFormatProperties"
+     get-physical-device-image-format-properties
+     funcall-get-physical-device-image-format-properties)
     (physicaldevice format type tiling usage flags pimageformatproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice") ("VkFormat" format)
    ("VkImageType" type) ("VkImageTiling" tiling) ("VkImageUsageFlags" usage)
@@ -59,16 +59,17 @@
    usage flags pimageformatproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceProperties"
-    get-physical-device-properties
+    ("vkGetPhysicalDeviceProperties" get-physical-device-properties
+     funcall-get-physical-device-properties)
     (physicaldevice pproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    ("VkPhysicalDeviceProperties" "pProperties") :return ("void" return-value))
   (vkgetphysicaldeviceproperties physicaldevice pproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceQueueFamilyProperties"
-    get-physical-device-queue-family-properties
+    ("vkGetPhysicalDeviceQueueFamilyProperties"
+     get-physical-device-queue-family-properties
+     funcall-get-physical-device-queue-family-properties)
     (physicaldevice pqueuefamilypropertycount pqueuefamilyproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    (uint32 "pQueueFamilyPropertyCount")
@@ -78,8 +79,9 @@
    pqueuefamilypropertycount pqueuefamilyproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceMemoryProperties"
-    get-physical-device-memory-properties
+    ("vkGetPhysicalDeviceMemoryProperties"
+     get-physical-device-memory-properties
+     funcall-get-physical-device-memory-properties)
     (physicaldevice pmemoryproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    ("VkPhysicalDeviceMemoryProperties" "pMemoryProperties") :return
@@ -87,24 +89,22 @@
   (vkgetphysicaldevicememoryproperties physicaldevice pmemoryproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetInstanceProcAddr"
-    get-instance-proc-addr
+    ("vkGetInstanceProcAddr" get-instance-proc-addr
+     funcall-get-instance-proc-addr)
     (instance pname)
   (declare-types ("VkInstance" instance) (char "pName") :return
    ("PFN_vkVoidFunction" return-value))
   (vkgetinstanceprocaddr instance pname))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetDeviceProcAddr"
-    get-device-proc-addr
+    ("vkGetDeviceProcAddr" get-device-proc-addr funcall-get-device-proc-addr)
     (device pname)
   (declare-types ("VkDevice" device) (char "pName") :return
    ("PFN_vkVoidFunction" return-value))
   (vkgetdeviceprocaddr device pname))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateDevice"
-    create-device
+    ("vkCreateDevice" create-device funcall-create-device)
     (physicaldevice pcreateinfo pallocator pdevice)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    ("VkDeviceCreateInfo" "pCreateInfo") ("VkAllocationCallbacks" "pAllocator")
@@ -112,16 +112,16 @@
   (vkcreatedevice physicaldevice pcreateinfo pallocator pdevice))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroyDevice"
-    destroy-device
+    ("vkDestroyDevice" destroy-device funcall-destroy-device)
     (device pallocator)
   (declare-types ("VkDevice" device) ("VkAllocationCallbacks" "pAllocator")
    :return ("void" return-value))
   (vkdestroydevice device pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkEnumerateInstanceExtensionProperties"
-    enumerate-instance-extension-properties
+    ("vkEnumerateInstanceExtensionProperties"
+     enumerate-instance-extension-properties
+     funcall-enumerate-instance-extension-properties)
     (playername ppropertycount pproperties)
   (declare-types (char "pLayerName") (uint32 "pPropertyCount")
    ("VkExtensionProperties" "pProperties") :return ("VkResult" return-value))
@@ -129,8 +129,9 @@
    pproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkEnumerateDeviceExtensionProperties"
-    enumerate-device-extension-properties
+    ("vkEnumerateDeviceExtensionProperties"
+     enumerate-device-extension-properties
+     funcall-enumerate-device-extension-properties)
     (physicaldevice playername ppropertycount pproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice") (char "pLayerName")
    (uint32 "pPropertyCount") ("VkExtensionProperties" "pProperties") :return
@@ -139,16 +140,16 @@
    ppropertycount pproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkEnumerateInstanceLayerProperties"
-    enumerate-instance-layer-properties
+    ("vkEnumerateInstanceLayerProperties" enumerate-instance-layer-properties
+     funcall-enumerate-instance-layer-properties)
     (ppropertycount pproperties)
   (declare-types (uint32 "pPropertyCount") ("VkLayerProperties" "pProperties")
    :return ("VkResult" return-value))
   (vkenumerateinstancelayerproperties ppropertycount pproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkEnumerateDeviceLayerProperties"
-    enumerate-device-layer-properties
+    ("vkEnumerateDeviceLayerProperties" enumerate-device-layer-properties
+     funcall-enumerate-device-layer-properties)
     (physicaldevice ppropertycount pproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    (uint32 "pPropertyCount") ("VkLayerProperties" "pProperties") :return
@@ -156,16 +157,14 @@
   (vkenumeratedevicelayerproperties physicaldevice ppropertycount pproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetDeviceQueue"
-    get-device-queue
+    ("vkGetDeviceQueue" get-device-queue funcall-get-device-queue)
     (device queuefamilyindex queueindex pqueue)
   (declare-types ("VkDevice" device) (uint32 "queueFamilyIndex")
    (uint32 "queueIndex") ("VkQueue" "pQueue") :return ("void" return-value))
   (vkgetdevicequeue device queuefamilyindex queueindex pqueue))
 
 (more-cffi:def-foreign-function doc-file
-    "vkQueueSubmit"
-    queue-submit
+    ("vkQueueSubmit" queue-submit funcall-queue-submit)
     (queue submitcount psubmits fence)
   (declare-types ("VkQueue" queue) (uint32 "submitCount")
    ("VkSubmitInfo" "pSubmits") ("VkFence" fence) :return
@@ -173,22 +172,19 @@
   (vkqueuesubmit queue submitcount psubmits fence))
 
 (more-cffi:def-foreign-function doc-file
-    "vkQueueWaitIdle"
-    queue-wait-idle
+    ("vkQueueWaitIdle" queue-wait-idle funcall-queue-wait-idle)
     (queue)
   (declare-types ("VkQueue" queue) :return ("VkResult" return-value))
   (vkqueuewaitidle queue))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDeviceWaitIdle"
-    device-wait-idle
+    ("vkDeviceWaitIdle" device-wait-idle funcall-device-wait-idle)
     (device)
   (declare-types ("VkDevice" device) :return ("VkResult" return-value))
   (vkdevicewaitidle device))
 
 (more-cffi:def-foreign-function doc-file
-    "vkAllocateMemory"
-    allocate-memory
+    ("vkAllocateMemory" allocate-memory funcall-allocate-memory)
     (device pallocateinfo pallocator pmemory)
   (declare-types ("VkDevice" device) ("VkMemoryAllocateInfo" "pAllocateInfo")
    ("VkAllocationCallbacks" "pAllocator") ("VkDeviceMemory" "pMemory") :return
@@ -196,16 +192,14 @@
   (vkallocatememory device pallocateinfo pallocator pmemory))
 
 (more-cffi:def-foreign-function doc-file
-    "vkFreeMemory"
-    free-memory
+    ("vkFreeMemory" free-memory funcall-free-memory)
     (device memory pallocator)
   (declare-types ("VkDevice" device) ("VkDeviceMemory" memory)
    ("VkAllocationCallbacks" "pAllocator") :return ("void" return-value))
   (vkfreememory device memory pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkMapMemory"
-    map-memory
+    ("vkMapMemory" map-memory funcall-map-memory)
     (device memory offset size flags ppdata)
   (declare-types ("VkDevice" device) ("VkDeviceMemory" memory)
    ("VkDeviceSize" offset) ("VkDeviceSize" size) ("VkMemoryMapFlags" flags)
@@ -213,40 +207,38 @@
   (vkmapmemory device memory offset size flags ppdata))
 
 (more-cffi:def-foreign-function doc-file
-    "vkUnmapMemory"
-    unmap-memory
+    ("vkUnmapMemory" unmap-memory funcall-unmap-memory)
     (device memory)
   (declare-types ("VkDevice" device) ("VkDeviceMemory" memory) :return
    ("void" return-value))
   (vkunmapmemory device memory))
 
 (more-cffi:def-foreign-function doc-file
-    "vkFlushMappedMemoryRanges"
-    flush-mapped-memory-ranges
+    ("vkFlushMappedMemoryRanges" flush-mapped-memory-ranges
+     funcall-flush-mapped-memory-ranges)
     (device memoryrangecount pmemoryranges)
   (declare-types ("VkDevice" device) (uint32 "memoryRangeCount")
    ("VkMappedMemoryRange" "pMemoryRanges") :return ("VkResult" return-value))
   (vkflushmappedmemoryranges device memoryrangecount pmemoryranges))
 
 (more-cffi:def-foreign-function doc-file
-    "vkInvalidateMappedMemoryRanges"
-    invalidate-mapped-memory-ranges
+    ("vkInvalidateMappedMemoryRanges" invalidate-mapped-memory-ranges
+     funcall-invalidate-mapped-memory-ranges)
     (device memoryrangecount pmemoryranges)
   (declare-types ("VkDevice" device) (uint32 "memoryRangeCount")
    ("VkMappedMemoryRange" "pMemoryRanges") :return ("VkResult" return-value))
   (vkinvalidatemappedmemoryranges device memoryrangecount pmemoryranges))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetDeviceMemoryCommitment"
-    get-device-memory-commitment
+    ("vkGetDeviceMemoryCommitment" get-device-memory-commitment
+     funcall-get-device-memory-commitment)
     (device memory pcommittedmemoryinbytes)
   (declare-types ("VkDevice" device) ("VkDeviceMemory" memory)
    ("VkDeviceSize" "pCommittedMemoryInBytes") :return ("void" return-value))
   (vkgetdevicememorycommitment device memory pcommittedmemoryinbytes))
 
 (more-cffi:def-foreign-function doc-file
-    "vkBindBufferMemory"
-    bind-buffer-memory
+    ("vkBindBufferMemory" bind-buffer-memory funcall-bind-buffer-memory)
     (device buffer memory memoryoffset)
   (declare-types ("VkDevice" device) ("VkBuffer" buffer)
    ("VkDeviceMemory" memory) ("VkDeviceSize" "memoryOffset") :return
@@ -254,8 +246,7 @@
   (vkbindbuffermemory device buffer memory memoryoffset))
 
 (more-cffi:def-foreign-function doc-file
-    "vkBindImageMemory"
-    bind-image-memory
+    ("vkBindImageMemory" bind-image-memory funcall-bind-image-memory)
     (device image memory memoryoffset)
   (declare-types ("VkDevice" device) ("VkImage" image)
    ("VkDeviceMemory" memory) ("VkDeviceSize" "memoryOffset") :return
@@ -263,24 +254,24 @@
   (vkbindimagememory device image memory memoryoffset))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetBufferMemoryRequirements"
-    get-buffer-memory-requirements
+    ("vkGetBufferMemoryRequirements" get-buffer-memory-requirements
+     funcall-get-buffer-memory-requirements)
     (device buffer pmemoryrequirements)
   (declare-types ("VkDevice" device) ("VkBuffer" buffer)
    ("VkMemoryRequirements" "pMemoryRequirements") :return ("void" return-value))
   (vkgetbuffermemoryrequirements device buffer pmemoryrequirements))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetImageMemoryRequirements"
-    get-image-memory-requirements
+    ("vkGetImageMemoryRequirements" get-image-memory-requirements
+     funcall-get-image-memory-requirements)
     (device image pmemoryrequirements)
   (declare-types ("VkDevice" device) ("VkImage" image)
    ("VkMemoryRequirements" "pMemoryRequirements") :return ("void" return-value))
   (vkgetimagememoryrequirements device image pmemoryrequirements))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetImageSparseMemoryRequirements"
-    get-image-sparse-memory-requirements
+    ("vkGetImageSparseMemoryRequirements" get-image-sparse-memory-requirements
+     funcall-get-image-sparse-memory-requirements)
     (device image psparsememoryrequirementcount psparsememoryrequirements)
   (declare-types ("VkDevice" device) ("VkImage" image)
    (uint32 "pSparseMemoryRequirementCount")
@@ -290,8 +281,9 @@
    psparsememoryrequirementcount psparsememoryrequirements))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceSparseImageFormatProperties"
-    get-physical-device-sparse-image-format-properties
+    ("vkGetPhysicalDeviceSparseImageFormatProperties"
+     get-physical-device-sparse-image-format-properties
+     funcall-get-physical-device-sparse-image-format-properties)
     (physicaldevice format type samples usage tiling ppropertycount pproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice") ("VkFormat" format)
    ("VkImageType" type) ("VkSampleCountFlagBits" samples)
@@ -302,8 +294,7 @@
    samples usage tiling ppropertycount pproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkQueueBindSparse"
-    queue-bind-sparse
+    ("vkQueueBindSparse" queue-bind-sparse funcall-queue-bind-sparse)
     (queue bindinfocount pbindinfo fence)
   (declare-types ("VkQueue" queue) (uint32 "bindInfoCount")
    ("VkBindSparseInfo" "pBindInfo") ("VkFence" fence) :return
@@ -311,8 +302,7 @@
   (vkqueuebindsparse queue bindinfocount pbindinfo fence))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateFence"
-    create-fence
+    ("vkCreateFence" create-fence funcall-create-fence)
     (device pcreateinfo pallocator pfence)
   (declare-types ("VkDevice" device) ("VkFenceCreateInfo" "pCreateInfo")
    ("VkAllocationCallbacks" "pAllocator") ("VkFence" "pFence") :return
@@ -320,32 +310,28 @@
   (vkcreatefence device pcreateinfo pallocator pfence))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroyFence"
-    destroy-fence
+    ("vkDestroyFence" destroy-fence funcall-destroy-fence)
     (device fence pallocator)
   (declare-types ("VkDevice" device) ("VkFence" fence)
    ("VkAllocationCallbacks" "pAllocator") :return ("void" return-value))
   (vkdestroyfence device fence pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkResetFences"
-    reset-fences
+    ("vkResetFences" reset-fences funcall-reset-fences)
     (device fencecount pfences)
   (declare-types ("VkDevice" device) (uint32 "fenceCount")
    ("VkFence" "pFences") :return ("VkResult" return-value))
   (vkresetfences device fencecount pfences))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetFenceStatus"
-    get-fence-status
+    ("vkGetFenceStatus" get-fence-status funcall-get-fence-status)
     (device fence)
   (declare-types ("VkDevice" device) ("VkFence" fence) :return
    ("VkResult" return-value))
   (vkgetfencestatus device fence))
 
 (more-cffi:def-foreign-function doc-file
-    "vkWaitForFences"
-    wait-for-fences
+    ("vkWaitForFences" wait-for-fences funcall-wait-for-fences)
     (device fencecount pfences waitall timeout)
   (declare-types ("VkDevice" device) (uint32 "fenceCount")
    ("VkFence" "pFences") ("VkBool32" "waitAll") (uint64 timeout) :return
@@ -353,8 +339,7 @@
   (vkwaitforfences device fencecount pfences waitall timeout))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateSemaphore"
-    create-semaphore
+    ("vkCreateSemaphore" create-semaphore funcall-create-semaphore)
     (device pcreateinfo pallocator psemaphore)
   (declare-types ("VkDevice" device) ("VkSemaphoreCreateInfo" "pCreateInfo")
    ("VkAllocationCallbacks" "pAllocator") ("VkSemaphore" "pSemaphore") :return
@@ -362,16 +347,14 @@
   (vkcreatesemaphore device pcreateinfo pallocator psemaphore))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroySemaphore"
-    destroy-semaphore
+    ("vkDestroySemaphore" destroy-semaphore funcall-destroy-semaphore)
     (device semaphore pallocator)
   (declare-types ("VkDevice" device) ("VkSemaphore" semaphore)
    ("VkAllocationCallbacks" "pAllocator") :return ("void" return-value))
   (vkdestroysemaphore device semaphore pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateEvent"
-    create-event
+    ("vkCreateEvent" create-event funcall-create-event)
     (device pcreateinfo pallocator pevent)
   (declare-types ("VkDevice" device) ("VkEventCreateInfo" "pCreateInfo")
    ("VkAllocationCallbacks" "pAllocator") ("VkEvent" "pEvent") :return
@@ -379,40 +362,35 @@
   (vkcreateevent device pcreateinfo pallocator pevent))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroyEvent"
-    destroy-event
+    ("vkDestroyEvent" destroy-event funcall-destroy-event)
     (device event pallocator)
   (declare-types ("VkDevice" device) ("VkEvent" event)
    ("VkAllocationCallbacks" "pAllocator") :return ("void" return-value))
   (vkdestroyevent device event pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetEventStatus"
-    get-event-status
+    ("vkGetEventStatus" get-event-status funcall-get-event-status)
     (device event)
   (declare-types ("VkDevice" device) ("VkEvent" event) :return
    ("VkResult" return-value))
   (vkgeteventstatus device event))
 
 (more-cffi:def-foreign-function doc-file
-    "vkSetEvent"
-    set-event
+    ("vkSetEvent" set-event funcall-set-event)
     (device event)
   (declare-types ("VkDevice" device) ("VkEvent" event) :return
    ("VkResult" return-value))
   (vksetevent device event))
 
 (more-cffi:def-foreign-function doc-file
-    "vkResetEvent"
-    reset-event
+    ("vkResetEvent" reset-event funcall-reset-event)
     (device event)
   (declare-types ("VkDevice" device) ("VkEvent" event) :return
    ("VkResult" return-value))
   (vkresetevent device event))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateQueryPool"
-    create-query-pool
+    ("vkCreateQueryPool" create-query-pool funcall-create-query-pool)
     (device pcreateinfo pallocator pquerypool)
   (declare-types ("VkDevice" device) ("VkQueryPoolCreateInfo" "pCreateInfo")
    ("VkAllocationCallbacks" "pAllocator") ("VkQueryPool" "pQueryPool") :return
@@ -420,16 +398,15 @@
   (vkcreatequerypool device pcreateinfo pallocator pquerypool))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroyQueryPool"
-    destroy-query-pool
+    ("vkDestroyQueryPool" destroy-query-pool funcall-destroy-query-pool)
     (device querypool pallocator)
   (declare-types ("VkDevice" device) ("VkQueryPool" "queryPool")
    ("VkAllocationCallbacks" "pAllocator") :return ("void" return-value))
   (vkdestroyquerypool device querypool pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetQueryPoolResults"
-    get-query-pool-results
+    ("vkGetQueryPoolResults" get-query-pool-results
+     funcall-get-query-pool-results)
     (device querypool firstquery querycount datasize pdata stride flags)
   (declare-types ("VkDevice" device) ("VkQueryPool" "queryPool")
    (uint32 "firstQuery") (uint32 "queryCount") (size "dataSize") (void "pData")
@@ -439,8 +416,7 @@
    stride flags))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateBuffer"
-    create-buffer
+    ("vkCreateBuffer" create-buffer funcall-create-buffer)
     (device pcreateinfo pallocator pbuffer)
   (declare-types ("VkDevice" device) ("VkBufferCreateInfo" "pCreateInfo")
    ("VkAllocationCallbacks" "pAllocator") ("VkBuffer" "pBuffer") :return
@@ -448,16 +424,14 @@
   (vkcreatebuffer device pcreateinfo pallocator pbuffer))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroyBuffer"
-    destroy-buffer
+    ("vkDestroyBuffer" destroy-buffer funcall-destroy-buffer)
     (device buffer pallocator)
   (declare-types ("VkDevice" device) ("VkBuffer" buffer)
    ("VkAllocationCallbacks" "pAllocator") :return ("void" return-value))
   (vkdestroybuffer device buffer pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateBufferView"
-    create-buffer-view
+    ("vkCreateBufferView" create-buffer-view funcall-create-buffer-view)
     (device pcreateinfo pallocator pview)
   (declare-types ("VkDevice" device) ("VkBufferViewCreateInfo" "pCreateInfo")
    ("VkAllocationCallbacks" "pAllocator") ("VkBufferView" "pView") :return
@@ -465,16 +439,14 @@
   (vkcreatebufferview device pcreateinfo pallocator pview))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroyBufferView"
-    destroy-buffer-view
+    ("vkDestroyBufferView" destroy-buffer-view funcall-destroy-buffer-view)
     (device bufferview pallocator)
   (declare-types ("VkDevice" device) ("VkBufferView" "bufferView")
    ("VkAllocationCallbacks" "pAllocator") :return ("void" return-value))
   (vkdestroybufferview device bufferview pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateImage"
-    create-image
+    ("vkCreateImage" create-image funcall-create-image)
     (device pcreateinfo pallocator pimage)
   (declare-types ("VkDevice" device) ("VkImageCreateInfo" "pCreateInfo")
    ("VkAllocationCallbacks" "pAllocator") ("VkImage" "pImage") :return
@@ -482,16 +454,15 @@
   (vkcreateimage device pcreateinfo pallocator pimage))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroyImage"
-    destroy-image
+    ("vkDestroyImage" destroy-image funcall-destroy-image)
     (device image pallocator)
   (declare-types ("VkDevice" device) ("VkImage" image)
    ("VkAllocationCallbacks" "pAllocator") :return ("void" return-value))
   (vkdestroyimage device image pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetImageSubresourceLayout"
-    get-image-subresource-layout
+    ("vkGetImageSubresourceLayout" get-image-subresource-layout
+     funcall-get-image-subresource-layout)
     (device image psubresource playout)
   (declare-types ("VkDevice" device) ("VkImage" image)
    ("VkImageSubresource" "pSubresource") ("VkSubresourceLayout" "pLayout")
@@ -499,8 +470,7 @@
   (vkgetimagesubresourcelayout device image psubresource playout))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateImageView"
-    create-image-view
+    ("vkCreateImageView" create-image-view funcall-create-image-view)
     (device pcreateinfo pallocator pview)
   (declare-types ("VkDevice" device) ("VkImageViewCreateInfo" "pCreateInfo")
    ("VkAllocationCallbacks" "pAllocator") ("VkImageView" "pView") :return
@@ -508,16 +478,14 @@
   (vkcreateimageview device pcreateinfo pallocator pview))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroyImageView"
-    destroy-image-view
+    ("vkDestroyImageView" destroy-image-view funcall-destroy-image-view)
     (device imageview pallocator)
   (declare-types ("VkDevice" device) ("VkImageView" "imageView")
    ("VkAllocationCallbacks" "pAllocator") :return ("void" return-value))
   (vkdestroyimageview device imageview pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateShaderModule"
-    create-shader-module
+    ("vkCreateShaderModule" create-shader-module funcall-create-shader-module)
     (device pcreateinfo pallocator pshadermodule)
   (declare-types ("VkDevice" device) ("VkShaderModuleCreateInfo" "pCreateInfo")
    ("VkAllocationCallbacks" "pAllocator") ("VkShaderModule" "pShaderModule")
@@ -525,16 +493,16 @@
   (vkcreateshadermodule device pcreateinfo pallocator pshadermodule))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroyShaderModule"
-    destroy-shader-module
+    ("vkDestroyShaderModule" destroy-shader-module
+     funcall-destroy-shader-module)
     (device shadermodule pallocator)
   (declare-types ("VkDevice" device) ("VkShaderModule" "shaderModule")
    ("VkAllocationCallbacks" "pAllocator") :return ("void" return-value))
   (vkdestroyshadermodule device shadermodule pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreatePipelineCache"
-    create-pipeline-cache
+    ("vkCreatePipelineCache" create-pipeline-cache
+     funcall-create-pipeline-cache)
     (device pcreateinfo pallocator ppipelinecache)
   (declare-types ("VkDevice" device)
    ("VkPipelineCacheCreateInfo" "pCreateInfo")
@@ -543,24 +511,24 @@
   (vkcreatepipelinecache device pcreateinfo pallocator ppipelinecache))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroyPipelineCache"
-    destroy-pipeline-cache
+    ("vkDestroyPipelineCache" destroy-pipeline-cache
+     funcall-destroy-pipeline-cache)
     (device pipelinecache pallocator)
   (declare-types ("VkDevice" device) ("VkPipelineCache" "pipelineCache")
    ("VkAllocationCallbacks" "pAllocator") :return ("void" return-value))
   (vkdestroypipelinecache device pipelinecache pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPipelineCacheData"
-    get-pipeline-cache-data
+    ("vkGetPipelineCacheData" get-pipeline-cache-data
+     funcall-get-pipeline-cache-data)
     (device pipelinecache pdatasize pdata)
   (declare-types ("VkDevice" device) ("VkPipelineCache" "pipelineCache")
    (size "pDataSize") (void "pData") :return ("VkResult" return-value))
   (vkgetpipelinecachedata device pipelinecache pdatasize pdata))
 
 (more-cffi:def-foreign-function doc-file
-    "vkMergePipelineCaches"
-    merge-pipeline-caches
+    ("vkMergePipelineCaches" merge-pipeline-caches
+     funcall-merge-pipeline-caches)
     (device dstcache srccachecount psrccaches)
   (declare-types ("VkDevice" device) ("VkPipelineCache" "dstCache")
    (uint32 "srcCacheCount") ("VkPipelineCache" "pSrcCaches") :return
@@ -568,8 +536,8 @@
   (vkmergepipelinecaches device dstcache srccachecount psrccaches))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateGraphicsPipelines"
-    create-graphics-pipelines
+    ("vkCreateGraphicsPipelines" create-graphics-pipelines
+     funcall-create-graphics-pipelines)
     (device pipelinecache createinfocount pcreateinfos pallocator ppipelines)
   (declare-types ("VkDevice" device) ("VkPipelineCache" "pipelineCache")
    (uint32 "createInfoCount") ("VkGraphicsPipelineCreateInfo" "pCreateInfos")
@@ -579,8 +547,8 @@
    pallocator ppipelines))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateComputePipelines"
-    create-compute-pipelines
+    ("vkCreateComputePipelines" create-compute-pipelines
+     funcall-create-compute-pipelines)
     (device pipelinecache createinfocount pcreateinfos pallocator ppipelines)
   (declare-types ("VkDevice" device) ("VkPipelineCache" "pipelineCache")
    (uint32 "createInfoCount") ("VkComputePipelineCreateInfo" "pCreateInfos")
@@ -590,16 +558,15 @@
    pallocator ppipelines))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroyPipeline"
-    destroy-pipeline
+    ("vkDestroyPipeline" destroy-pipeline funcall-destroy-pipeline)
     (device pipeline pallocator)
   (declare-types ("VkDevice" device) ("VkPipeline" pipeline)
    ("VkAllocationCallbacks" "pAllocator") :return ("void" return-value))
   (vkdestroypipeline device pipeline pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreatePipelineLayout"
-    create-pipeline-layout
+    ("vkCreatePipelineLayout" create-pipeline-layout
+     funcall-create-pipeline-layout)
     (device pcreateinfo pallocator ppipelinelayout)
   (declare-types ("VkDevice" device)
    ("VkPipelineLayoutCreateInfo" "pCreateInfo")
@@ -608,16 +575,15 @@
   (vkcreatepipelinelayout device pcreateinfo pallocator ppipelinelayout))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroyPipelineLayout"
-    destroy-pipeline-layout
+    ("vkDestroyPipelineLayout" destroy-pipeline-layout
+     funcall-destroy-pipeline-layout)
     (device pipelinelayout pallocator)
   (declare-types ("VkDevice" device) ("VkPipelineLayout" "pipelineLayout")
    ("VkAllocationCallbacks" "pAllocator") :return ("void" return-value))
   (vkdestroypipelinelayout device pipelinelayout pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateSampler"
-    create-sampler
+    ("vkCreateSampler" create-sampler funcall-create-sampler)
     (device pcreateinfo pallocator psampler)
   (declare-types ("VkDevice" device) ("VkSamplerCreateInfo" "pCreateInfo")
    ("VkAllocationCallbacks" "pAllocator") ("VkSampler" "pSampler") :return
@@ -625,16 +591,15 @@
   (vkcreatesampler device pcreateinfo pallocator psampler))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroySampler"
-    destroy-sampler
+    ("vkDestroySampler" destroy-sampler funcall-destroy-sampler)
     (device sampler pallocator)
   (declare-types ("VkDevice" device) ("VkSampler" sampler)
    ("VkAllocationCallbacks" "pAllocator") :return ("void" return-value))
   (vkdestroysampler device sampler pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateDescriptorSetLayout"
-    create-descriptor-set-layout
+    ("vkCreateDescriptorSetLayout" create-descriptor-set-layout
+     funcall-create-descriptor-set-layout)
     (device pcreateinfo pallocator psetlayout)
   (declare-types ("VkDevice" device)
    ("VkDescriptorSetLayoutCreateInfo" "pCreateInfo")
@@ -643,8 +608,8 @@
   (vkcreatedescriptorsetlayout device pcreateinfo pallocator psetlayout))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroyDescriptorSetLayout"
-    destroy-descriptor-set-layout
+    ("vkDestroyDescriptorSetLayout" destroy-descriptor-set-layout
+     funcall-destroy-descriptor-set-layout)
     (device descriptorsetlayout pallocator)
   (declare-types ("VkDevice" device)
    ("VkDescriptorSetLayout" "descriptorSetLayout")
@@ -652,8 +617,8 @@
   (vkdestroydescriptorsetlayout device descriptorsetlayout pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateDescriptorPool"
-    create-descriptor-pool
+    ("vkCreateDescriptorPool" create-descriptor-pool
+     funcall-create-descriptor-pool)
     (device pcreateinfo pallocator pdescriptorpool)
   (declare-types ("VkDevice" device)
    ("VkDescriptorPoolCreateInfo" "pCreateInfo")
@@ -662,24 +627,24 @@
   (vkcreatedescriptorpool device pcreateinfo pallocator pdescriptorpool))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroyDescriptorPool"
-    destroy-descriptor-pool
+    ("vkDestroyDescriptorPool" destroy-descriptor-pool
+     funcall-destroy-descriptor-pool)
     (device descriptorpool pallocator)
   (declare-types ("VkDevice" device) ("VkDescriptorPool" "descriptorPool")
    ("VkAllocationCallbacks" "pAllocator") :return ("void" return-value))
   (vkdestroydescriptorpool device descriptorpool pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkResetDescriptorPool"
-    reset-descriptor-pool
+    ("vkResetDescriptorPool" reset-descriptor-pool
+     funcall-reset-descriptor-pool)
     (device descriptorpool flags)
   (declare-types ("VkDevice" device) ("VkDescriptorPool" "descriptorPool")
    ("VkDescriptorPoolResetFlags" flags) :return ("VkResult" return-value))
   (vkresetdescriptorpool device descriptorpool flags))
 
 (more-cffi:def-foreign-function doc-file
-    "vkAllocateDescriptorSets"
-    allocate-descriptor-sets
+    ("vkAllocateDescriptorSets" allocate-descriptor-sets
+     funcall-allocate-descriptor-sets)
     (device pallocateinfo pdescriptorsets)
   (declare-types ("VkDevice" device)
    ("VkDescriptorSetAllocateInfo" "pAllocateInfo")
@@ -687,8 +652,7 @@
   (vkallocatedescriptorsets device pallocateinfo pdescriptorsets))
 
 (more-cffi:def-foreign-function doc-file
-    "vkFreeDescriptorSets"
-    free-descriptor-sets
+    ("vkFreeDescriptorSets" free-descriptor-sets funcall-free-descriptor-sets)
     (device descriptorpool descriptorsetcount pdescriptorsets)
   (declare-types ("VkDevice" device) ("VkDescriptorPool" "descriptorPool")
    (uint32 "descriptorSetCount") ("VkDescriptorSet" "pDescriptorSets") :return
@@ -697,8 +661,8 @@
    pdescriptorsets))
 
 (more-cffi:def-foreign-function doc-file
-    "vkUpdateDescriptorSets"
-    update-descriptor-sets
+    ("vkUpdateDescriptorSets" update-descriptor-sets
+     funcall-update-descriptor-sets)
     (device descriptorwritecount pdescriptorwrites descriptorcopycount
      pdescriptorcopies)
   (declare-types ("VkDevice" device) (uint32 "descriptorWriteCount")
@@ -708,8 +672,7 @@
    descriptorcopycount pdescriptorcopies))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateFramebuffer"
-    create-framebuffer
+    ("vkCreateFramebuffer" create-framebuffer funcall-create-framebuffer)
     (device pcreateinfo pallocator pframebuffer)
   (declare-types ("VkDevice" device) ("VkFramebufferCreateInfo" "pCreateInfo")
    ("VkAllocationCallbacks" "pAllocator") ("VkFramebuffer" "pFramebuffer")
@@ -717,16 +680,14 @@
   (vkcreateframebuffer device pcreateinfo pallocator pframebuffer))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroyFramebuffer"
-    destroy-framebuffer
+    ("vkDestroyFramebuffer" destroy-framebuffer funcall-destroy-framebuffer)
     (device framebuffer pallocator)
   (declare-types ("VkDevice" device) ("VkFramebuffer" framebuffer)
    ("VkAllocationCallbacks" "pAllocator") :return ("void" return-value))
   (vkdestroyframebuffer device framebuffer pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateRenderPass"
-    create-render-pass
+    ("vkCreateRenderPass" create-render-pass funcall-create-render-pass)
     (device pcreateinfo pallocator prenderpass)
   (declare-types ("VkDevice" device) ("VkRenderPassCreateInfo" "pCreateInfo")
    ("VkAllocationCallbacks" "pAllocator") ("VkRenderPass" "pRenderPass")
@@ -734,24 +695,22 @@
   (vkcreaterenderpass device pcreateinfo pallocator prenderpass))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroyRenderPass"
-    destroy-render-pass
+    ("vkDestroyRenderPass" destroy-render-pass funcall-destroy-render-pass)
     (device renderpass pallocator)
   (declare-types ("VkDevice" device) ("VkRenderPass" "renderPass")
    ("VkAllocationCallbacks" "pAllocator") :return ("void" return-value))
   (vkdestroyrenderpass device renderpass pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetRenderAreaGranularity"
-    get-render-area-granularity
+    ("vkGetRenderAreaGranularity" get-render-area-granularity
+     funcall-get-render-area-granularity)
     (device renderpass pgranularity)
   (declare-types ("VkDevice" device) ("VkRenderPass" "renderPass")
    ("VkExtent2D" "pGranularity") :return ("void" return-value))
   (vkgetrenderareagranularity device renderpass pgranularity))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateCommandPool"
-    create-command-pool
+    ("vkCreateCommandPool" create-command-pool funcall-create-command-pool)
     (device pcreateinfo pallocator pcommandpool)
   (declare-types ("VkDevice" device) ("VkCommandPoolCreateInfo" "pCreateInfo")
    ("VkAllocationCallbacks" "pAllocator") ("VkCommandPool" "pCommandPool")
@@ -759,24 +718,22 @@
   (vkcreatecommandpool device pcreateinfo pallocator pcommandpool))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroyCommandPool"
-    destroy-command-pool
+    ("vkDestroyCommandPool" destroy-command-pool funcall-destroy-command-pool)
     (device commandpool pallocator)
   (declare-types ("VkDevice" device) ("VkCommandPool" "commandPool")
    ("VkAllocationCallbacks" "pAllocator") :return ("void" return-value))
   (vkdestroycommandpool device commandpool pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkResetCommandPool"
-    reset-command-pool
+    ("vkResetCommandPool" reset-command-pool funcall-reset-command-pool)
     (device commandpool flags)
   (declare-types ("VkDevice" device) ("VkCommandPool" "commandPool")
    ("VkCommandPoolResetFlags" flags) :return ("VkResult" return-value))
   (vkresetcommandpool device commandpool flags))
 
 (more-cffi:def-foreign-function doc-file
-    "vkAllocateCommandBuffers"
-    allocate-command-buffers
+    ("vkAllocateCommandBuffers" allocate-command-buffers
+     funcall-allocate-command-buffers)
     (device pallocateinfo pcommandbuffers)
   (declare-types ("VkDevice" device)
    ("VkCommandBufferAllocateInfo" "pAllocateInfo")
@@ -784,8 +741,7 @@
   (vkallocatecommandbuffers device pallocateinfo pcommandbuffers))
 
 (more-cffi:def-foreign-function doc-file
-    "vkFreeCommandBuffers"
-    free-command-buffers
+    ("vkFreeCommandBuffers" free-command-buffers funcall-free-command-buffers)
     (device commandpool commandbuffercount pcommandbuffers)
   (declare-types ("VkDevice" device) ("VkCommandPool" "commandPool")
    (uint32 "commandBufferCount") ("VkCommandBuffer" "pCommandBuffers") :return
@@ -793,32 +749,28 @@
   (vkfreecommandbuffers device commandpool commandbuffercount pcommandbuffers))
 
 (more-cffi:def-foreign-function doc-file
-    "vkBeginCommandBuffer"
-    begin-command-buffer
+    ("vkBeginCommandBuffer" begin-command-buffer funcall-begin-command-buffer)
     (commandbuffer pbegininfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkCommandBufferBeginInfo" "pBeginInfo") :return ("VkResult" return-value))
   (vkbegincommandbuffer commandbuffer pbegininfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkEndCommandBuffer"
-    end-command-buffer
+    ("vkEndCommandBuffer" end-command-buffer funcall-end-command-buffer)
     (commandbuffer)
   (declare-types ("VkCommandBuffer" "commandBuffer") :return
    ("VkResult" return-value))
   (vkendcommandbuffer commandbuffer))
 
 (more-cffi:def-foreign-function doc-file
-    "vkResetCommandBuffer"
-    reset-command-buffer
+    ("vkResetCommandBuffer" reset-command-buffer funcall-reset-command-buffer)
     (commandbuffer flags)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkCommandBufferResetFlags" flags) :return ("VkResult" return-value))
   (vkresetcommandbuffer commandbuffer flags))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdBindPipeline"
-    cmd-bind-pipeline
+    ("vkCmdBindPipeline" cmd-bind-pipeline funcall-cmd-bind-pipeline)
     (commandbuffer pipelinebindpoint pipeline)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkPipelineBindPoint" "pipelineBindPoint") ("VkPipeline" pipeline) :return
@@ -826,8 +778,7 @@
   (vkcmdbindpipeline commandbuffer pipelinebindpoint pipeline))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetViewport"
-    cmd-set-viewport
+    ("vkCmdSetViewport" cmd-set-viewport funcall-cmd-set-viewport)
     (commandbuffer firstviewport viewportcount pviewports)
   (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "firstViewport")
    (uint32 "viewportCount") ("VkViewport" "pViewports") :return
@@ -835,8 +786,7 @@
   (vkcmdsetviewport commandbuffer firstviewport viewportcount pviewports))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetScissor"
-    cmd-set-scissor
+    ("vkCmdSetScissor" cmd-set-scissor funcall-cmd-set-scissor)
     (commandbuffer firstscissor scissorcount pscissors)
   (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "firstScissor")
    (uint32 "scissorCount") ("VkRect2D" "pScissors") :return
@@ -844,16 +794,14 @@
   (vkcmdsetscissor commandbuffer firstscissor scissorcount pscissors))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetLineWidth"
-    cmd-set-line-width
+    ("vkCmdSetLineWidth" cmd-set-line-width funcall-cmd-set-line-width)
     (commandbuffer linewidth)
   (declare-types ("VkCommandBuffer" "commandBuffer") (float "lineWidth")
    :return ("void" return-value))
   (vkcmdsetlinewidth commandbuffer linewidth))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetDepthBias"
-    cmd-set-depth-bias
+    ("vkCmdSetDepthBias" cmd-set-depth-bias funcall-cmd-set-depth-bias)
     (commandbuffer depthbiasconstantfactor depthbiasclamp depthbiasslopefactor)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    (float "depthBiasConstantFactor") (float "depthBiasClamp")
@@ -862,24 +810,23 @@
    depthbiasslopefactor))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetBlendConstants"
-    cmd-set-blend-constants
+    ("vkCmdSetBlendConstants" cmd-set-blend-constants
+     funcall-cmd-set-blend-constants)
     (commandbuffer blendconstants)
   (declare-types ("VkCommandBuffer" "commandBuffer") (float "blendConstants")
    :return ("void" return-value))
   (vkcmdsetblendconstants commandbuffer blendconstants))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetDepthBounds"
-    cmd-set-depth-bounds
+    ("vkCmdSetDepthBounds" cmd-set-depth-bounds funcall-cmd-set-depth-bounds)
     (commandbuffer mindepthbounds maxdepthbounds)
   (declare-types ("VkCommandBuffer" "commandBuffer") (float "minDepthBounds")
    (float "maxDepthBounds") :return ("void" return-value))
   (vkcmdsetdepthbounds commandbuffer mindepthbounds maxdepthbounds))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetStencilCompareMask"
-    cmd-set-stencil-compare-mask
+    ("vkCmdSetStencilCompareMask" cmd-set-stencil-compare-mask
+     funcall-cmd-set-stencil-compare-mask)
     (commandbuffer facemask comparemask)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkStencilFaceFlags" "faceMask") (uint32 "compareMask") :return
@@ -887,8 +834,8 @@
   (vkcmdsetstencilcomparemask commandbuffer facemask comparemask))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetStencilWriteMask"
-    cmd-set-stencil-write-mask
+    ("vkCmdSetStencilWriteMask" cmd-set-stencil-write-mask
+     funcall-cmd-set-stencil-write-mask)
     (commandbuffer facemask writemask)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkStencilFaceFlags" "faceMask") (uint32 "writeMask") :return
@@ -896,8 +843,8 @@
   (vkcmdsetstencilwritemask commandbuffer facemask writemask))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetStencilReference"
-    cmd-set-stencil-reference
+    ("vkCmdSetStencilReference" cmd-set-stencil-reference
+     funcall-cmd-set-stencil-reference)
     (commandbuffer facemask reference)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkStencilFaceFlags" "faceMask") (uint32 reference) :return
@@ -905,8 +852,8 @@
   (vkcmdsetstencilreference commandbuffer facemask reference))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdBindDescriptorSets"
-    cmd-bind-descriptor-sets
+    ("vkCmdBindDescriptorSets" cmd-bind-descriptor-sets
+     funcall-cmd-bind-descriptor-sets)
     (commandbuffer pipelinebindpoint layout firstset descriptorsetcount
      pdescriptorsets dynamicoffsetcount pdynamicoffsets)
   (declare-types ("VkCommandBuffer" "commandBuffer")
@@ -918,8 +865,7 @@
    descriptorsetcount pdescriptorsets dynamicoffsetcount pdynamicoffsets))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdBindIndexBuffer"
-    cmd-bind-index-buffer
+    ("vkCmdBindIndexBuffer" cmd-bind-index-buffer funcall-cmd-bind-index-buffer)
     (commandbuffer buffer offset indextype)
   (declare-types ("VkCommandBuffer" "commandBuffer") ("VkBuffer" buffer)
    ("VkDeviceSize" offset) ("VkIndexType" "indexType") :return
@@ -927,8 +873,8 @@
   (vkcmdbindindexbuffer commandbuffer buffer offset indextype))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdBindVertexBuffers"
-    cmd-bind-vertex-buffers
+    ("vkCmdBindVertexBuffers" cmd-bind-vertex-buffers
+     funcall-cmd-bind-vertex-buffers)
     (commandbuffer firstbinding bindingcount pbuffers poffsets)
   (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "firstBinding")
    (uint32 "bindingCount") ("VkBuffer" "pBuffers") ("VkDeviceSize" "pOffsets")
@@ -937,8 +883,7 @@
    poffsets))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdDraw"
-    cmd-draw
+    ("vkCmdDraw" cmd-draw funcall-cmd-draw)
     (commandbuffer vertexcount instancecount firstvertex firstinstance)
   (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "vertexCount")
    (uint32 "instanceCount") (uint32 "firstVertex") (uint32 "firstInstance")
@@ -946,8 +891,7 @@
   (vkcmddraw commandbuffer vertexcount instancecount firstvertex firstinstance))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdDrawIndexed"
-    cmd-draw-indexed
+    ("vkCmdDrawIndexed" cmd-draw-indexed funcall-cmd-draw-indexed)
     (commandbuffer indexcount instancecount firstindex vertexoffset
      firstinstance)
   (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "indexCount")
@@ -957,8 +901,7 @@
    vertexoffset firstinstance))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdDrawIndirect"
-    cmd-draw-indirect
+    ("vkCmdDrawIndirect" cmd-draw-indirect funcall-cmd-draw-indirect)
     (commandbuffer buffer offset drawcount stride)
   (declare-types ("VkCommandBuffer" "commandBuffer") ("VkBuffer" buffer)
    ("VkDeviceSize" offset) (uint32 "drawCount") (uint32 stride) :return
@@ -966,8 +909,8 @@
   (vkcmddrawindirect commandbuffer buffer offset drawcount stride))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdDrawIndexedIndirect"
-    cmd-draw-indexed-indirect
+    ("vkCmdDrawIndexedIndirect" cmd-draw-indexed-indirect
+     funcall-cmd-draw-indexed-indirect)
     (commandbuffer buffer offset drawcount stride)
   (declare-types ("VkCommandBuffer" "commandBuffer") ("VkBuffer" buffer)
    ("VkDeviceSize" offset) (uint32 "drawCount") (uint32 stride) :return
@@ -975,24 +918,22 @@
   (vkcmddrawindexedindirect commandbuffer buffer offset drawcount stride))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdDispatch"
-    cmd-dispatch
+    ("vkCmdDispatch" cmd-dispatch funcall-cmd-dispatch)
     (commandbuffer groupcountx groupcounty groupcountz)
   (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "groupCountX")
    (uint32 "groupCountY") (uint32 "groupCountZ") :return ("void" return-value))
   (vkcmddispatch commandbuffer groupcountx groupcounty groupcountz))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdDispatchIndirect"
-    cmd-dispatch-indirect
+    ("vkCmdDispatchIndirect" cmd-dispatch-indirect
+     funcall-cmd-dispatch-indirect)
     (commandbuffer buffer offset)
   (declare-types ("VkCommandBuffer" "commandBuffer") ("VkBuffer" buffer)
    ("VkDeviceSize" offset) :return ("void" return-value))
   (vkcmddispatchindirect commandbuffer buffer offset))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdCopyBuffer"
-    cmd-copy-buffer
+    ("vkCmdCopyBuffer" cmd-copy-buffer funcall-cmd-copy-buffer)
     (commandbuffer srcbuffer dstbuffer regioncount pregions)
   (declare-types ("VkCommandBuffer" "commandBuffer") ("VkBuffer" "srcBuffer")
    ("VkBuffer" "dstBuffer") (uint32 "regionCount") ("VkBufferCopy" "pRegions")
@@ -1000,8 +941,7 @@
   (vkcmdcopybuffer commandbuffer srcbuffer dstbuffer regioncount pregions))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdCopyImage"
-    cmd-copy-image
+    ("vkCmdCopyImage" cmd-copy-image funcall-cmd-copy-image)
     (commandbuffer srcimage srcimagelayout dstimage dstimagelayout regioncount
      pregions)
   (declare-types ("VkCommandBuffer" "commandBuffer") ("VkImage" "srcImage")
@@ -1012,8 +952,7 @@
    regioncount pregions))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdBlitImage"
-    cmd-blit-image
+    ("vkCmdBlitImage" cmd-blit-image funcall-cmd-blit-image)
     (commandbuffer srcimage srcimagelayout dstimage dstimagelayout regioncount
      pregions filter)
   (declare-types ("VkCommandBuffer" "commandBuffer") ("VkImage" "srcImage")
@@ -1024,8 +963,8 @@
    regioncount pregions filter))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdCopyBufferToImage"
-    cmd-copy-buffer-to-image
+    ("vkCmdCopyBufferToImage" cmd-copy-buffer-to-image
+     funcall-cmd-copy-buffer-to-image)
     (commandbuffer srcbuffer dstimage dstimagelayout regioncount pregions)
   (declare-types ("VkCommandBuffer" "commandBuffer") ("VkBuffer" "srcBuffer")
    ("VkImage" "dstImage") ("VkImageLayout" "dstImageLayout")
@@ -1035,8 +974,8 @@
    regioncount pregions))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdCopyImageToBuffer"
-    cmd-copy-image-to-buffer
+    ("vkCmdCopyImageToBuffer" cmd-copy-image-to-buffer
+     funcall-cmd-copy-image-to-buffer)
     (commandbuffer srcimage srcimagelayout dstbuffer regioncount pregions)
   (declare-types ("VkCommandBuffer" "commandBuffer") ("VkImage" "srcImage")
    ("VkImageLayout" "srcImageLayout") ("VkBuffer" "dstBuffer")
@@ -1046,8 +985,7 @@
    regioncount pregions))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdUpdateBuffer"
-    cmd-update-buffer
+    ("vkCmdUpdateBuffer" cmd-update-buffer funcall-cmd-update-buffer)
     (commandbuffer dstbuffer dstoffset datasize pdata)
   (declare-types ("VkCommandBuffer" "commandBuffer") ("VkBuffer" "dstBuffer")
    ("VkDeviceSize" "dstOffset") ("VkDeviceSize" "dataSize") (void "pData")
@@ -1055,8 +993,7 @@
   (vkcmdupdatebuffer commandbuffer dstbuffer dstoffset datasize pdata))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdFillBuffer"
-    cmd-fill-buffer
+    ("vkCmdFillBuffer" cmd-fill-buffer funcall-cmd-fill-buffer)
     (commandbuffer dstbuffer dstoffset size data)
   (declare-types ("VkCommandBuffer" "commandBuffer") ("VkBuffer" "dstBuffer")
    ("VkDeviceSize" "dstOffset") ("VkDeviceSize" size) (uint32 data) :return
@@ -1064,8 +1001,7 @@
   (vkcmdfillbuffer commandbuffer dstbuffer dstoffset size data))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdClearColorImage"
-    cmd-clear-color-image
+    ("vkCmdClearColorImage" cmd-clear-color-image funcall-cmd-clear-color-image)
     (commandbuffer image imagelayout pcolor rangecount pranges)
   (declare-types ("VkCommandBuffer" "commandBuffer") ("VkImage" image)
    ("VkImageLayout" "imageLayout") ("VkClearColorValue" "pColor")
@@ -1075,8 +1011,8 @@
    pranges))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdClearDepthStencilImage"
-    cmd-clear-depth-stencil-image
+    ("vkCmdClearDepthStencilImage" cmd-clear-depth-stencil-image
+     funcall-cmd-clear-depth-stencil-image)
     (commandbuffer image imagelayout pdepthstencil rangecount pranges)
   (declare-types ("VkCommandBuffer" "commandBuffer") ("VkImage" image)
    ("VkImageLayout" "imageLayout") ("VkClearDepthStencilValue" "pDepthStencil")
@@ -1086,8 +1022,8 @@
    rangecount pranges))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdClearAttachments"
-    cmd-clear-attachments
+    ("vkCmdClearAttachments" cmd-clear-attachments
+     funcall-cmd-clear-attachments)
     (commandbuffer attachmentcount pattachments rectcount prects)
   (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "attachmentCount")
    ("VkClearAttachment" "pAttachments") (uint32 "rectCount")
@@ -1096,8 +1032,7 @@
    prects))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdResolveImage"
-    cmd-resolve-image
+    ("vkCmdResolveImage" cmd-resolve-image funcall-cmd-resolve-image)
     (commandbuffer srcimage srcimagelayout dstimage dstimagelayout regioncount
      pregions)
   (declare-types ("VkCommandBuffer" "commandBuffer") ("VkImage" "srcImage")
@@ -1108,24 +1043,21 @@
    dstimagelayout regioncount pregions))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetEvent"
-    cmd-set-event
+    ("vkCmdSetEvent" cmd-set-event funcall-cmd-set-event)
     (commandbuffer event stagemask)
   (declare-types ("VkCommandBuffer" "commandBuffer") ("VkEvent" event)
    ("VkPipelineStageFlags" "stageMask") :return ("void" return-value))
   (vkcmdsetevent commandbuffer event stagemask))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdResetEvent"
-    cmd-reset-event
+    ("vkCmdResetEvent" cmd-reset-event funcall-cmd-reset-event)
     (commandbuffer event stagemask)
   (declare-types ("VkCommandBuffer" "commandBuffer") ("VkEvent" event)
    ("VkPipelineStageFlags" "stageMask") :return ("void" return-value))
   (vkcmdresetevent commandbuffer event stagemask))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdWaitEvents"
-    cmd-wait-events
+    ("vkCmdWaitEvents" cmd-wait-events funcall-cmd-wait-events)
     (commandbuffer eventcount pevents srcstagemask dststagemask
      memorybarriercount pmemorybarriers buffermemorybarriercount
      pbuffermemorybarriers imagememorybarriercount pimagememorybarriers)
@@ -1142,8 +1074,7 @@
    pbuffermemorybarriers imagememorybarriercount pimagememorybarriers))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdPipelineBarrier"
-    cmd-pipeline-barrier
+    ("vkCmdPipelineBarrier" cmd-pipeline-barrier funcall-cmd-pipeline-barrier)
     (commandbuffer srcstagemask dststagemask dependencyflags memorybarriercount
      pmemorybarriers buffermemorybarriercount pbuffermemorybarriers
      imagememorybarriercount pimagememorybarriers)
@@ -1161,8 +1092,7 @@
    pbuffermemorybarriers imagememorybarriercount pimagememorybarriers))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdBeginQuery"
-    cmd-begin-query
+    ("vkCmdBeginQuery" cmd-begin-query funcall-cmd-begin-query)
     (commandbuffer querypool query flags)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkQueryPool" "queryPool") (uint32 query) ("VkQueryControlFlags" flags)
@@ -1170,16 +1100,14 @@
   (vkcmdbeginquery commandbuffer querypool query flags))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdEndQuery"
-    cmd-end-query
+    ("vkCmdEndQuery" cmd-end-query funcall-cmd-end-query)
     (commandbuffer querypool query)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkQueryPool" "queryPool") (uint32 query) :return ("void" return-value))
   (vkcmdendquery commandbuffer querypool query))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdResetQueryPool"
-    cmd-reset-query-pool
+    ("vkCmdResetQueryPool" cmd-reset-query-pool funcall-cmd-reset-query-pool)
     (commandbuffer querypool firstquery querycount)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkQueryPool" "queryPool") (uint32 "firstQuery") (uint32 "queryCount")
@@ -1187,8 +1115,7 @@
   (vkcmdresetquerypool commandbuffer querypool firstquery querycount))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdWriteTimestamp"
-    cmd-write-timestamp
+    ("vkCmdWriteTimestamp" cmd-write-timestamp funcall-cmd-write-timestamp)
     (commandbuffer pipelinestage querypool query)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkPipelineStageFlagBits" "pipelineStage") ("VkQueryPool" "queryPool")
@@ -1196,8 +1123,8 @@
   (vkcmdwritetimestamp commandbuffer pipelinestage querypool query))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdCopyQueryPoolResults"
-    cmd-copy-query-pool-results
+    ("vkCmdCopyQueryPoolResults" cmd-copy-query-pool-results
+     funcall-cmd-copy-query-pool-results)
     (commandbuffer querypool firstquery querycount dstbuffer dstoffset stride
      flags)
   (declare-types ("VkCommandBuffer" "commandBuffer")
@@ -1209,8 +1136,7 @@
    dstbuffer dstoffset stride flags))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdPushConstants"
-    cmd-push-constants
+    ("vkCmdPushConstants" cmd-push-constants funcall-cmd-push-constants)
     (commandbuffer layout stageflags offset size pvalues)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkPipelineLayout" layout) ("VkShaderStageFlags" "stageFlags")
@@ -1218,8 +1144,7 @@
   (vkcmdpushconstants commandbuffer layout stageflags offset size pvalues))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdBeginRenderPass"
-    cmd-begin-render-pass
+    ("vkCmdBeginRenderPass" cmd-begin-render-pass funcall-cmd-begin-render-pass)
     (commandbuffer prenderpassbegin contents)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkRenderPassBeginInfo" "pRenderPassBegin") ("VkSubpassContents" contents)
@@ -1227,24 +1152,21 @@
   (vkcmdbeginrenderpass commandbuffer prenderpassbegin contents))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdNextSubpass"
-    cmd-next-subpass
+    ("vkCmdNextSubpass" cmd-next-subpass funcall-cmd-next-subpass)
     (commandbuffer contents)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkSubpassContents" contents) :return ("void" return-value))
   (vkcmdnextsubpass commandbuffer contents))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdEndRenderPass"
-    cmd-end-render-pass
+    ("vkCmdEndRenderPass" cmd-end-render-pass funcall-cmd-end-render-pass)
     (commandbuffer)
   (declare-types ("VkCommandBuffer" "commandBuffer") :return
    ("void" return-value))
   (vkcmdendrenderpass commandbuffer))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdExecuteCommands"
-    cmd-execute-commands
+    ("vkCmdExecuteCommands" cmd-execute-commands funcall-cmd-execute-commands)
     (commandbuffer commandbuffercount pcommandbuffers)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    (uint32 "commandBufferCount") ("VkCommandBuffer" "pCommandBuffers") :return
@@ -1252,31 +1174,29 @@
   (vkcmdexecutecommands commandbuffer commandbuffercount pcommandbuffers))
 
 (more-cffi:def-foreign-function doc-file
-    "vkEnumerateInstanceVersion"
-    enumerate-instance-version
+    ("vkEnumerateInstanceVersion" enumerate-instance-version
+     funcall-enumerate-instance-version)
     (papiversion)
   (declare-types (uint32 "pApiVersion") :return ("VkResult" return-value))
   (vkenumerateinstanceversion papiversion))
 
 (more-cffi:def-foreign-function doc-file
-    "vkBindBufferMemory2"
-    bind-buffer-memory-2
+    ("vkBindBufferMemory2" bind-buffer-memory-2 funcall-bind-buffer-memory-2)
     (device bindinfocount pbindinfos)
   (declare-types ("VkDevice" device) (uint32 "bindInfoCount")
    ("VkBindBufferMemoryInfo" "pBindInfos") :return ("VkResult" return-value))
   (vkbindbuffermemory2 device bindinfocount pbindinfos))
 
 (more-cffi:def-foreign-function doc-file
-    "vkBindImageMemory2"
-    bind-image-memory-2
+    ("vkBindImageMemory2" bind-image-memory-2 funcall-bind-image-memory-2)
     (device bindinfocount pbindinfos)
   (declare-types ("VkDevice" device) (uint32 "bindInfoCount")
    ("VkBindImageMemoryInfo" "pBindInfos") :return ("VkResult" return-value))
   (vkbindimagememory2 device bindinfocount pbindinfos))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetDeviceGroupPeerMemoryFeatures"
-    get-device-group-peer-memory-features
+    ("vkGetDeviceGroupPeerMemoryFeatures" get-device-group-peer-memory-features
+     funcall-get-device-group-peer-memory-features)
     (device heapindex localdeviceindex remotedeviceindex ppeermemoryfeatures)
   (declare-types ("VkDevice" device) (uint32 "heapIndex")
    (uint32 "localDeviceIndex") (uint32 "remoteDeviceIndex")
@@ -1286,16 +1206,14 @@
    remotedeviceindex ppeermemoryfeatures))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetDeviceMask"
-    cmd-set-device-mask
+    ("vkCmdSetDeviceMask" cmd-set-device-mask funcall-cmd-set-device-mask)
     (commandbuffer devicemask)
   (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "deviceMask")
    :return ("void" return-value))
   (vkcmdsetdevicemask commandbuffer devicemask))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdDispatchBase"
-    cmd-dispatch-base
+    ("vkCmdDispatchBase" cmd-dispatch-base funcall-cmd-dispatch-base)
     (commandbuffer basegroupx basegroupy basegroupz groupcountx groupcounty
      groupcountz)
   (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "baseGroupX")
@@ -1305,8 +1223,8 @@
    groupcounty groupcountz))
 
 (more-cffi:def-foreign-function doc-file
-    "vkEnumeratePhysicalDeviceGroups"
-    enumerate-physical-device-groups
+    ("vkEnumeratePhysicalDeviceGroups" enumerate-physical-device-groups
+     funcall-enumerate-physical-device-groups)
     (instance pphysicaldevicegroupcount pphysicaldevicegroupproperties)
   (declare-types ("VkInstance" instance) (uint32 "pPhysicalDeviceGroupCount")
    ("VkPhysicalDeviceGroupProperties" "pPhysicalDeviceGroupProperties") :return
@@ -1315,8 +1233,8 @@
    pphysicaldevicegroupproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetImageMemoryRequirements2"
-    get-image-memory-requirements-2
+    ("vkGetImageMemoryRequirements2" get-image-memory-requirements-2
+     funcall-get-image-memory-requirements-2)
     (device pinfo pmemoryrequirements)
   (declare-types ("VkDevice" device) ("VkImageMemoryRequirementsInfo2" "pInfo")
    ("VkMemoryRequirements2" "pMemoryRequirements") :return
@@ -1324,8 +1242,8 @@
   (vkgetimagememoryrequirements2 device pinfo pmemoryrequirements))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetBufferMemoryRequirements2"
-    get-buffer-memory-requirements-2
+    ("vkGetBufferMemoryRequirements2" get-buffer-memory-requirements-2
+     funcall-get-buffer-memory-requirements-2)
     (device pinfo pmemoryrequirements)
   (declare-types ("VkDevice" device)
    ("VkBufferMemoryRequirementsInfo2" "pInfo")
@@ -1334,8 +1252,9 @@
   (vkgetbuffermemoryrequirements2 device pinfo pmemoryrequirements))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetImageSparseMemoryRequirements2"
-    get-image-sparse-memory-requirements-2
+    ("vkGetImageSparseMemoryRequirements2"
+     get-image-sparse-memory-requirements-2
+     funcall-get-image-sparse-memory-requirements-2)
     (device pinfo psparsememoryrequirementcount psparsememoryrequirements)
   (declare-types ("VkDevice" device)
    ("VkImageSparseMemoryRequirementsInfo2" "pInfo")
@@ -1346,24 +1265,25 @@
    psparsememoryrequirementcount psparsememoryrequirements))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceFeatures2"
-    get-physical-device-features-2
+    ("vkGetPhysicalDeviceFeatures2" get-physical-device-features-2
+     funcall-get-physical-device-features-2)
     (physicaldevice pfeatures)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    ("VkPhysicalDeviceFeatures2" "pFeatures") :return ("void" return-value))
   (vkgetphysicaldevicefeatures2 physicaldevice pfeatures))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceProperties2"
-    get-physical-device-properties-2
+    ("vkGetPhysicalDeviceProperties2" get-physical-device-properties-2
+     funcall-get-physical-device-properties-2)
     (physicaldevice pproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    ("VkPhysicalDeviceProperties2" "pProperties") :return ("void" return-value))
   (vkgetphysicaldeviceproperties2 physicaldevice pproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceFormatProperties2"
-    get-physical-device-format-properties-2
+    ("vkGetPhysicalDeviceFormatProperties2"
+     get-physical-device-format-properties-2
+     funcall-get-physical-device-format-properties-2)
     (physicaldevice format pformatproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice") ("VkFormat" format)
    ("VkFormatProperties2" "pFormatProperties") :return ("void" return-value))
@@ -1371,8 +1291,9 @@
    pformatproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceImageFormatProperties2"
-    get-physical-device-image-format-properties-2
+    ("vkGetPhysicalDeviceImageFormatProperties2"
+     get-physical-device-image-format-properties-2
+     funcall-get-physical-device-image-format-properties-2)
     (physicaldevice pimageformatinfo pimageformatproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    ("VkPhysicalDeviceImageFormatInfo2" "pImageFormatInfo")
@@ -1382,8 +1303,9 @@
    pimageformatproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceQueueFamilyProperties2"
-    get-physical-device-queue-family-properties-2
+    ("vkGetPhysicalDeviceQueueFamilyProperties2"
+     get-physical-device-queue-family-properties-2
+     funcall-get-physical-device-queue-family-properties-2)
     (physicaldevice pqueuefamilypropertycount pqueuefamilyproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    (uint32 "pQueueFamilyPropertyCount")
@@ -1393,8 +1315,9 @@
    pqueuefamilypropertycount pqueuefamilyproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceMemoryProperties2"
-    get-physical-device-memory-properties-2
+    ("vkGetPhysicalDeviceMemoryProperties2"
+     get-physical-device-memory-properties-2
+     funcall-get-physical-device-memory-properties-2)
     (physicaldevice pmemoryproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    ("VkPhysicalDeviceMemoryProperties2" "pMemoryProperties") :return
@@ -1402,8 +1325,9 @@
   (vkgetphysicaldevicememoryproperties2 physicaldevice pmemoryproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceSparseImageFormatProperties2"
-    get-physical-device-sparse-image-format-properties-2
+    ("vkGetPhysicalDeviceSparseImageFormatProperties2"
+     get-physical-device-sparse-image-format-properties-2
+     funcall-get-physical-device-sparse-image-format-properties-2)
     (physicaldevice pformatinfo ppropertycount pproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    ("VkPhysicalDeviceSparseImageFormatInfo2" "pFormatInfo")
@@ -1413,24 +1337,22 @@
    ppropertycount pproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkTrimCommandPool"
-    trim-command-pool
+    ("vkTrimCommandPool" trim-command-pool funcall-trim-command-pool)
     (device commandpool flags)
   (declare-types ("VkDevice" device) ("VkCommandPool" "commandPool")
    ("VkCommandPoolTrimFlags" flags) :return ("void" return-value))
   (vktrimcommandpool device commandpool flags))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetDeviceQueue2"
-    get-device-queue-2
+    ("vkGetDeviceQueue2" get-device-queue-2 funcall-get-device-queue-2)
     (device pqueueinfo pqueue)
   (declare-types ("VkDevice" device) ("VkDeviceQueueInfo2" "pQueueInfo")
    ("VkQueue" "pQueue") :return ("void" return-value))
   (vkgetdevicequeue2 device pqueueinfo pqueue))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateSamplerYcbcrConversion"
-    create-sampler-ycbcr-conversion
+    ("vkCreateSamplerYcbcrConversion" create-sampler-ycbcr-conversion
+     funcall-create-sampler-ycbcr-conversion)
     (device pcreateinfo pallocator pycbcrconversion)
   (declare-types ("VkDevice" device)
    ("VkSamplerYcbcrConversionCreateInfo" "pCreateInfo")
@@ -1441,8 +1363,8 @@
    pycbcrconversion))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroySamplerYcbcrConversion"
-    destroy-sampler-ycbcr-conversion
+    ("vkDestroySamplerYcbcrConversion" destroy-sampler-ycbcr-conversion
+     funcall-destroy-sampler-ycbcr-conversion)
     (device ycbcrconversion pallocator)
   (declare-types ("VkDevice" device)
    ("VkSamplerYcbcrConversion" "ycbcrConversion")
@@ -1450,8 +1372,8 @@
   (vkdestroysamplerycbcrconversion device ycbcrconversion pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateDescriptorUpdateTemplate"
-    create-descriptor-update-template
+    ("vkCreateDescriptorUpdateTemplate" create-descriptor-update-template
+     funcall-create-descriptor-update-template)
     (device pcreateinfo pallocator pdescriptorupdatetemplate)
   (declare-types ("VkDevice" device)
    ("VkDescriptorUpdateTemplateCreateInfo" "pCreateInfo")
@@ -1462,8 +1384,8 @@
    pdescriptorupdatetemplate))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroyDescriptorUpdateTemplate"
-    destroy-descriptor-update-template
+    ("vkDestroyDescriptorUpdateTemplate" destroy-descriptor-update-template
+     funcall-destroy-descriptor-update-template)
     (device descriptorupdatetemplate pallocator)
   (declare-types ("VkDevice" device)
    ("VkDescriptorUpdateTemplate" "descriptorUpdateTemplate")
@@ -1472,8 +1394,8 @@
    pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkUpdateDescriptorSetWithTemplate"
-    update-descriptor-set-with-template
+    ("vkUpdateDescriptorSetWithTemplate" update-descriptor-set-with-template
+     funcall-update-descriptor-set-with-template)
     (device descriptorset descriptorupdatetemplate pdata)
   (declare-types ("VkDevice" device) ("VkDescriptorSet" "descriptorSet")
    ("VkDescriptorUpdateTemplate" "descriptorUpdateTemplate") (void "pData")
@@ -1482,8 +1404,9 @@
    descriptorupdatetemplate pdata))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceExternalBufferProperties"
-    get-physical-device-external-buffer-properties
+    ("vkGetPhysicalDeviceExternalBufferProperties"
+     get-physical-device-external-buffer-properties
+     funcall-get-physical-device-external-buffer-properties)
     (physicaldevice pexternalbufferinfo pexternalbufferproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    ("VkPhysicalDeviceExternalBufferInfo" "pExternalBufferInfo")
@@ -1493,8 +1416,9 @@
    pexternalbufferinfo pexternalbufferproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceExternalFenceProperties"
-    get-physical-device-external-fence-properties
+    ("vkGetPhysicalDeviceExternalFenceProperties"
+     get-physical-device-external-fence-properties
+     funcall-get-physical-device-external-fence-properties)
     (physicaldevice pexternalfenceinfo pexternalfenceproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    ("VkPhysicalDeviceExternalFenceInfo" "pExternalFenceInfo")
@@ -1504,8 +1428,9 @@
    pexternalfenceproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceExternalSemaphoreProperties"
-    get-physical-device-external-semaphore-properties
+    ("vkGetPhysicalDeviceExternalSemaphoreProperties"
+     get-physical-device-external-semaphore-properties
+     funcall-get-physical-device-external-semaphore-properties)
     (physicaldevice pexternalsemaphoreinfo pexternalsemaphoreproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    ("VkPhysicalDeviceExternalSemaphoreInfo" "pExternalSemaphoreInfo")
@@ -1515,8 +1440,8 @@
    pexternalsemaphoreinfo pexternalsemaphoreproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetDescriptorSetLayoutSupport"
-    get-descriptor-set-layout-support
+    ("vkGetDescriptorSetLayoutSupport" get-descriptor-set-layout-support
+     funcall-get-descriptor-set-layout-support)
     (device pcreateinfo psupport)
   (declare-types ("VkDevice" device)
    ("VkDescriptorSetLayoutCreateInfo" "pCreateInfo")
@@ -1524,8 +1449,8 @@
   (vkgetdescriptorsetlayoutsupport device pcreateinfo psupport))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdDrawIndirectCount"
-    cmd-draw-indirect-count
+    ("vkCmdDrawIndirectCount" cmd-draw-indirect-count
+     funcall-cmd-draw-indirect-count)
     (commandbuffer buffer offset countbuffer countbufferoffset maxdrawcount
      stride)
   (declare-types ("VkCommandBuffer" "commandBuffer") ("VkBuffer" buffer)
@@ -1536,8 +1461,8 @@
    countbufferoffset maxdrawcount stride))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdDrawIndexedIndirectCount"
-    cmd-draw-indexed-indirect-count
+    ("vkCmdDrawIndexedIndirectCount" cmd-draw-indexed-indirect-count
+     funcall-cmd-draw-indexed-indirect-count)
     (commandbuffer buffer offset countbuffer countbufferoffset maxdrawcount
      stride)
   (declare-types ("VkCommandBuffer" "commandBuffer") ("VkBuffer" buffer)
@@ -1548,8 +1473,7 @@
    countbufferoffset maxdrawcount stride))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateRenderPass2"
-    create-render-pass-2
+    ("vkCreateRenderPass2" create-render-pass-2 funcall-create-render-pass-2)
     (device pcreateinfo pallocator prenderpass)
   (declare-types ("VkDevice" device) ("VkRenderPassCreateInfo2" "pCreateInfo")
    ("VkAllocationCallbacks" "pAllocator") ("VkRenderPass" "pRenderPass")
@@ -1557,8 +1481,8 @@
   (vkcreaterenderpass2 device pcreateinfo pallocator prenderpass))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdBeginRenderPass2"
-    cmd-begin-render-pass-2
+    ("vkCmdBeginRenderPass2" cmd-begin-render-pass-2
+     funcall-cmd-begin-render-pass-2)
     (commandbuffer prenderpassbegin psubpassbegininfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkRenderPassBeginInfo" "pRenderPassBegin")
@@ -1566,8 +1490,7 @@
   (vkcmdbeginrenderpass2 commandbuffer prenderpassbegin psubpassbegininfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdNextSubpass2"
-    cmd-next-subpass-2
+    ("vkCmdNextSubpass2" cmd-next-subpass-2 funcall-cmd-next-subpass-2)
     (commandbuffer psubpassbegininfo psubpassendinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkSubpassBeginInfo" "pSubpassBeginInfo")
@@ -1575,64 +1498,61 @@
   (vkcmdnextsubpass2 commandbuffer psubpassbegininfo psubpassendinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdEndRenderPass2"
-    cmd-end-render-pass-2
+    ("vkCmdEndRenderPass2" cmd-end-render-pass-2 funcall-cmd-end-render-pass-2)
     (commandbuffer psubpassendinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkSubpassEndInfo" "pSubpassEndInfo") :return ("void" return-value))
   (vkcmdendrenderpass2 commandbuffer psubpassendinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkResetQueryPool"
-    reset-query-pool
+    ("vkResetQueryPool" reset-query-pool funcall-reset-query-pool)
     (device querypool firstquery querycount)
   (declare-types ("VkDevice" device) ("VkQueryPool" "queryPool")
    (uint32 "firstQuery") (uint32 "queryCount") :return ("void" return-value))
   (vkresetquerypool device querypool firstquery querycount))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetSemaphoreCounterValue"
-    get-semaphore-counter-value
+    ("vkGetSemaphoreCounterValue" get-semaphore-counter-value
+     funcall-get-semaphore-counter-value)
     (device semaphore pvalue)
   (declare-types ("VkDevice" device) ("VkSemaphore" semaphore)
    (uint64 "pValue") :return ("VkResult" return-value))
   (vkgetsemaphorecountervalue device semaphore pvalue))
 
 (more-cffi:def-foreign-function doc-file
-    "vkWaitSemaphores"
-    wait-semaphores
+    ("vkWaitSemaphores" wait-semaphores funcall-wait-semaphores)
     (device pwaitinfo timeout)
   (declare-types ("VkDevice" device) ("VkSemaphoreWaitInfo" "pWaitInfo")
    (uint64 timeout) :return ("VkResult" return-value))
   (vkwaitsemaphores device pwaitinfo timeout))
 
 (more-cffi:def-foreign-function doc-file
-    "vkSignalSemaphore"
-    signal-semaphore
+    ("vkSignalSemaphore" signal-semaphore funcall-signal-semaphore)
     (device psignalinfo)
   (declare-types ("VkDevice" device) ("VkSemaphoreSignalInfo" "pSignalInfo")
    :return ("VkResult" return-value))
   (vksignalsemaphore device psignalinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetBufferDeviceAddress"
-    get-buffer-device-address
+    ("vkGetBufferDeviceAddress" get-buffer-device-address
+     funcall-get-buffer-device-address)
     (device pinfo)
   (declare-types ("VkDevice" device) ("VkBufferDeviceAddressInfo" "pInfo")
    :return ("VkDeviceAddress" return-value))
   (vkgetbufferdeviceaddress device pinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetBufferOpaqueCaptureAddress"
-    get-buffer-opaque-capture-address
+    ("vkGetBufferOpaqueCaptureAddress" get-buffer-opaque-capture-address
+     funcall-get-buffer-opaque-capture-address)
     (device pinfo)
   (declare-types ("VkDevice" device) ("VkBufferDeviceAddressInfo" "pInfo")
    :return ("uint64_t" return-value))
   (vkgetbufferopaquecaptureaddress device pinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetDeviceMemoryOpaqueCaptureAddress"
-    get-device-memory-opaque-capture-address
+    ("vkGetDeviceMemoryOpaqueCaptureAddress"
+     get-device-memory-opaque-capture-address
+     funcall-get-device-memory-opaque-capture-address)
     (device pinfo)
   (declare-types ("VkDevice" device)
    ("VkDeviceMemoryOpaqueCaptureAddressInfo" "pInfo") :return
@@ -1640,8 +1560,8 @@
   (vkgetdevicememoryopaquecaptureaddress device pinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceToolProperties"
-    get-physical-device-tool-properties
+    ("vkGetPhysicalDeviceToolProperties" get-physical-device-tool-properties
+     funcall-get-physical-device-tool-properties)
     (physicaldevice ptoolcount ptoolproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice") (uint32 "pToolCount")
    ("VkPhysicalDeviceToolProperties" "pToolProperties") :return
@@ -1649,8 +1569,8 @@
   (vkgetphysicaldevicetoolproperties physicaldevice ptoolcount ptoolproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreatePrivateDataSlot"
-    create-private-data-slot
+    ("vkCreatePrivateDataSlot" create-private-data-slot
+     funcall-create-private-data-slot)
     (device pcreateinfo pallocator pprivatedataslot)
   (declare-types ("VkDevice" device)
    ("VkPrivateDataSlotCreateInfo" "pCreateInfo")
@@ -1659,16 +1579,15 @@
   (vkcreateprivatedataslot device pcreateinfo pallocator pprivatedataslot))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroyPrivateDataSlot"
-    destroy-private-data-slot
+    ("vkDestroyPrivateDataSlot" destroy-private-data-slot
+     funcall-destroy-private-data-slot)
     (device privatedataslot pallocator)
   (declare-types ("VkDevice" device) ("VkPrivateDataSlot" "privateDataSlot")
    ("VkAllocationCallbacks" "pAllocator") :return ("void" return-value))
   (vkdestroyprivatedataslot device privatedataslot pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkSetPrivateData"
-    set-private-data
+    ("vkSetPrivateData" set-private-data funcall-set-private-data)
     (device objecttype objecthandle privatedataslot data)
   (declare-types ("VkDevice" device) ("VkObjectType" "objectType")
    (uint64 "objectHandle") ("VkPrivateDataSlot" "privateDataSlot")
@@ -1676,8 +1595,7 @@
   (vksetprivatedata device objecttype objecthandle privatedataslot data))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPrivateData"
-    get-private-data
+    ("vkGetPrivateData" get-private-data funcall-get-private-data)
     (device objecttype objecthandle privatedataslot pdata)
   (declare-types ("VkDevice" device) ("VkObjectType" "objectType")
    (uint64 "objectHandle") ("VkPrivateDataSlot" "privateDataSlot")
@@ -1685,24 +1603,21 @@
   (vkgetprivatedata device objecttype objecthandle privatedataslot pdata))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetEvent2"
-    cmd-set-event-2
+    ("vkCmdSetEvent2" cmd-set-event-2 funcall-cmd-set-event-2)
     (commandbuffer event pdependencyinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer") ("VkEvent" event)
    ("VkDependencyInfo" "pDependencyInfo") :return ("void" return-value))
   (vkcmdsetevent2 commandbuffer event pdependencyinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdResetEvent2"
-    cmd-reset-event-2
+    ("vkCmdResetEvent2" cmd-reset-event-2 funcall-cmd-reset-event-2)
     (commandbuffer event stagemask)
   (declare-types ("VkCommandBuffer" "commandBuffer") ("VkEvent" event)
    ("VkPipelineStageFlags2" "stageMask") :return ("void" return-value))
   (vkcmdresetevent2 commandbuffer event stagemask))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdWaitEvents2"
-    cmd-wait-events-2
+    ("vkCmdWaitEvents2" cmd-wait-events-2 funcall-cmd-wait-events-2)
     (commandbuffer eventcount pevents pdependencyinfos)
   (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "eventCount")
    ("VkEvent" "pEvents") ("VkDependencyInfo" "pDependencyInfos") :return
@@ -1710,16 +1625,15 @@
   (vkcmdwaitevents2 commandbuffer eventcount pevents pdependencyinfos))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdPipelineBarrier2"
-    cmd-pipeline-barrier-2
+    ("vkCmdPipelineBarrier2" cmd-pipeline-barrier-2
+     funcall-cmd-pipeline-barrier-2)
     (commandbuffer pdependencyinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkDependencyInfo" "pDependencyInfo") :return ("void" return-value))
   (vkcmdpipelinebarrier2 commandbuffer pdependencyinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdWriteTimestamp2"
-    cmd-write-timestamp-2
+    ("vkCmdWriteTimestamp2" cmd-write-timestamp-2 funcall-cmd-write-timestamp-2)
     (commandbuffer stage querypool query)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkPipelineStageFlags2" stage) ("VkQueryPool" "queryPool") (uint32 query)
@@ -1727,8 +1641,7 @@
   (vkcmdwritetimestamp2 commandbuffer stage querypool query))
 
 (more-cffi:def-foreign-function doc-file
-    "vkQueueSubmit2"
-    queue-submit-2
+    ("vkQueueSubmit2" queue-submit-2 funcall-queue-submit-2)
     (queue submitcount psubmits fence)
   (declare-types ("VkQueue" queue) (uint32 "submitCount")
    ("VkSubmitInfo2" "pSubmits") ("VkFence" fence) :return
@@ -1736,24 +1649,22 @@
   (vkqueuesubmit2 queue submitcount psubmits fence))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdCopyBuffer2"
-    cmd-copy-buffer-2
+    ("vkCmdCopyBuffer2" cmd-copy-buffer-2 funcall-cmd-copy-buffer-2)
     (commandbuffer pcopybufferinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkCopyBufferInfo2" "pCopyBufferInfo") :return ("void" return-value))
   (vkcmdcopybuffer2 commandbuffer pcopybufferinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdCopyImage2"
-    cmd-copy-image-2
+    ("vkCmdCopyImage2" cmd-copy-image-2 funcall-cmd-copy-image-2)
     (commandbuffer pcopyimageinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkCopyImageInfo2" "pCopyImageInfo") :return ("void" return-value))
   (vkcmdcopyimage2 commandbuffer pcopyimageinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdCopyBufferToImage2"
-    cmd-copy-buffer-to-image-2
+    ("vkCmdCopyBufferToImage2" cmd-copy-buffer-to-image-2
+     funcall-cmd-copy-buffer-to-image-2)
     (commandbuffer pcopybuffertoimageinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkCopyBufferToImageInfo2" "pCopyBufferToImageInfo") :return
@@ -1761,8 +1672,8 @@
   (vkcmdcopybuffertoimage2 commandbuffer pcopybuffertoimageinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdCopyImageToBuffer2"
-    cmd-copy-image-to-buffer-2
+    ("vkCmdCopyImageToBuffer2" cmd-copy-image-to-buffer-2
+     funcall-cmd-copy-image-to-buffer-2)
     (commandbuffer pcopyimagetobufferinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkCopyImageToBufferInfo2" "pCopyImageToBufferInfo") :return
@@ -1770,80 +1681,74 @@
   (vkcmdcopyimagetobuffer2 commandbuffer pcopyimagetobufferinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdBlitImage2"
-    cmd-blit-image-2
+    ("vkCmdBlitImage2" cmd-blit-image-2 funcall-cmd-blit-image-2)
     (commandbuffer pblitimageinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkBlitImageInfo2" "pBlitImageInfo") :return ("void" return-value))
   (vkcmdblitimage2 commandbuffer pblitimageinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdResolveImage2"
-    cmd-resolve-image-2
+    ("vkCmdResolveImage2" cmd-resolve-image-2 funcall-cmd-resolve-image-2)
     (commandbuffer presolveimageinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkResolveImageInfo2" "pResolveImageInfo") :return ("void" return-value))
   (vkcmdresolveimage2 commandbuffer presolveimageinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdBeginRendering"
-    cmd-begin-rendering
+    ("vkCmdBeginRendering" cmd-begin-rendering funcall-cmd-begin-rendering)
     (commandbuffer prenderinginfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkRenderingInfo" "pRenderingInfo") :return ("void" return-value))
   (vkcmdbeginrendering commandbuffer prenderinginfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdEndRendering"
-    cmd-end-rendering
+    ("vkCmdEndRendering" cmd-end-rendering funcall-cmd-end-rendering)
     (commandbuffer)
   (declare-types ("VkCommandBuffer" "commandBuffer") :return
    ("void" return-value))
   (vkcmdendrendering commandbuffer))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetCullMode"
-    cmd-set-cull-mode
+    ("vkCmdSetCullMode" cmd-set-cull-mode funcall-cmd-set-cull-mode)
     (commandbuffer cullmode)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkCullModeFlags" "cullMode") :return ("void" return-value))
   (vkcmdsetcullmode commandbuffer cullmode))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetFrontFace"
-    cmd-set-front-face
+    ("vkCmdSetFrontFace" cmd-set-front-face funcall-cmd-set-front-face)
     (commandbuffer frontface)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkFrontFace" "frontFace") :return ("void" return-value))
   (vkcmdsetfrontface commandbuffer frontface))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetPrimitiveTopology"
-    cmd-set-primitive-topology
+    ("vkCmdSetPrimitiveTopology" cmd-set-primitive-topology
+     funcall-cmd-set-primitive-topology)
     (commandbuffer primitivetopology)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkPrimitiveTopology" "primitiveTopology") :return ("void" return-value))
   (vkcmdsetprimitivetopology commandbuffer primitivetopology))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetViewportWithCount"
-    cmd-set-viewport-with-count
+    ("vkCmdSetViewportWithCount" cmd-set-viewport-with-count
+     funcall-cmd-set-viewport-with-count)
     (commandbuffer viewportcount pviewports)
   (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "viewportCount")
    ("VkViewport" "pViewports") :return ("void" return-value))
   (vkcmdsetviewportwithcount commandbuffer viewportcount pviewports))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetScissorWithCount"
-    cmd-set-scissor-with-count
+    ("vkCmdSetScissorWithCount" cmd-set-scissor-with-count
+     funcall-cmd-set-scissor-with-count)
     (commandbuffer scissorcount pscissors)
   (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "scissorCount")
    ("VkRect2D" "pScissors") :return ("void" return-value))
   (vkcmdsetscissorwithcount commandbuffer scissorcount pscissors))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdBindVertexBuffers2"
-    cmd-bind-vertex-buffers-2
+    ("vkCmdBindVertexBuffers2" cmd-bind-vertex-buffers-2
+     funcall-cmd-bind-vertex-buffers-2)
     (commandbuffer firstbinding bindingcount pbuffers poffsets psizes pstrides)
   (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "firstBinding")
    (uint32 "bindingCount") ("VkBuffer" "pBuffers") ("VkDeviceSize" "pOffsets")
@@ -1853,48 +1758,47 @@
    poffsets psizes pstrides))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetDepthTestEnable"
-    cmd-set-depth-test-enable
+    ("vkCmdSetDepthTestEnable" cmd-set-depth-test-enable
+     funcall-cmd-set-depth-test-enable)
     (commandbuffer depthtestenable)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkBool32" "depthTestEnable") :return ("void" return-value))
   (vkcmdsetdepthtestenable commandbuffer depthtestenable))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetDepthWriteEnable"
-    cmd-set-depth-write-enable
+    ("vkCmdSetDepthWriteEnable" cmd-set-depth-write-enable
+     funcall-cmd-set-depth-write-enable)
     (commandbuffer depthwriteenable)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkBool32" "depthWriteEnable") :return ("void" return-value))
   (vkcmdsetdepthwriteenable commandbuffer depthwriteenable))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetDepthCompareOp"
-    cmd-set-depth-compare-op
+    ("vkCmdSetDepthCompareOp" cmd-set-depth-compare-op
+     funcall-cmd-set-depth-compare-op)
     (commandbuffer depthcompareop)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkCompareOp" "depthCompareOp") :return ("void" return-value))
   (vkcmdsetdepthcompareop commandbuffer depthcompareop))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetDepthBoundsTestEnable"
-    cmd-set-depth-bounds-test-enable
+    ("vkCmdSetDepthBoundsTestEnable" cmd-set-depth-bounds-test-enable
+     funcall-cmd-set-depth-bounds-test-enable)
     (commandbuffer depthboundstestenable)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkBool32" "depthBoundsTestEnable") :return ("void" return-value))
   (vkcmdsetdepthboundstestenable commandbuffer depthboundstestenable))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetStencilTestEnable"
-    cmd-set-stencil-test-enable
+    ("vkCmdSetStencilTestEnable" cmd-set-stencil-test-enable
+     funcall-cmd-set-stencil-test-enable)
     (commandbuffer stenciltestenable)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkBool32" "stencilTestEnable") :return ("void" return-value))
   (vkcmdsetstenciltestenable commandbuffer stenciltestenable))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetStencilOp"
-    cmd-set-stencil-op
+    ("vkCmdSetStencilOp" cmd-set-stencil-op funcall-cmd-set-stencil-op)
     (commandbuffer facemask failop passop depthfailop compareop)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkStencilFaceFlags" "faceMask") ("VkStencilOp" "failOp")
@@ -1904,32 +1808,33 @@
    compareop))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetRasterizerDiscardEnable"
-    cmd-set-rasterizer-discard-enable
+    ("vkCmdSetRasterizerDiscardEnable" cmd-set-rasterizer-discard-enable
+     funcall-cmd-set-rasterizer-discard-enable)
     (commandbuffer rasterizerdiscardenable)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkBool32" "rasterizerDiscardEnable") :return ("void" return-value))
   (vkcmdsetrasterizerdiscardenable commandbuffer rasterizerdiscardenable))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetDepthBiasEnable"
-    cmd-set-depth-bias-enable
+    ("vkCmdSetDepthBiasEnable" cmd-set-depth-bias-enable
+     funcall-cmd-set-depth-bias-enable)
     (commandbuffer depthbiasenable)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkBool32" "depthBiasEnable") :return ("void" return-value))
   (vkcmdsetdepthbiasenable commandbuffer depthbiasenable))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetPrimitiveRestartEnable"
-    cmd-set-primitive-restart-enable
+    ("vkCmdSetPrimitiveRestartEnable" cmd-set-primitive-restart-enable
+     funcall-cmd-set-primitive-restart-enable)
     (commandbuffer primitiverestartenable)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkBool32" "primitiveRestartEnable") :return ("void" return-value))
   (vkcmdsetprimitiverestartenable commandbuffer primitiverestartenable))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetDeviceBufferMemoryRequirements"
-    get-device-buffer-memory-requirements
+    ("vkGetDeviceBufferMemoryRequirements"
+     get-device-buffer-memory-requirements
+     funcall-get-device-buffer-memory-requirements)
     (device pinfo pmemoryrequirements)
   (declare-types ("VkDevice" device)
    ("VkDeviceBufferMemoryRequirements" "pInfo")
@@ -1938,8 +1843,8 @@
   (vkgetdevicebuffermemoryrequirements device pinfo pmemoryrequirements))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetDeviceImageMemoryRequirements"
-    get-device-image-memory-requirements
+    ("vkGetDeviceImageMemoryRequirements" get-device-image-memory-requirements
+     funcall-get-device-image-memory-requirements)
     (device pinfo pmemoryrequirements)
   (declare-types ("VkDevice" device)
    ("VkDeviceImageMemoryRequirements" "pInfo")
@@ -1948,8 +1853,9 @@
   (vkgetdeviceimagememoryrequirements device pinfo pmemoryrequirements))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetDeviceImageSparseMemoryRequirements"
-    get-device-image-sparse-memory-requirements
+    ("vkGetDeviceImageSparseMemoryRequirements"
+     get-device-image-sparse-memory-requirements
+     funcall-get-device-image-sparse-memory-requirements)
     (device pinfo psparsememoryrequirementcount psparsememoryrequirements)
   (declare-types ("VkDevice" device)
    ("VkDeviceImageMemoryRequirements" "pInfo")
@@ -1960,16 +1866,16 @@
    psparsememoryrequirementcount psparsememoryrequirements))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroySurfaceKHR"
-    destroy-surface-khr
+    ("vkDestroySurfaceKHR" destroy-surface-khr funcall-destroy-surface-khr)
     (instance surface pallocator)
   (declare-types ("VkInstance" instance) ("VkSurfaceKHR" surface)
    ("VkAllocationCallbacks" "pAllocator") :return ("void" return-value))
   (vkdestroysurfacekhr instance surface pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceSurfaceSupportKHR"
-    get-physical-device-surface-support-khr
+    ("vkGetPhysicalDeviceSurfaceSupportKHR"
+     get-physical-device-surface-support-khr
+     funcall-get-physical-device-surface-support-khr)
     (physicaldevice queuefamilyindex surface psupported)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    (uint32 "queueFamilyIndex") ("VkSurfaceKHR" surface)
@@ -1978,8 +1884,9 @@
    psupported))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceSurfaceCapabilitiesKHR"
-    get-physical-device-surface-capabilities-khr
+    ("vkGetPhysicalDeviceSurfaceCapabilitiesKHR"
+     get-physical-device-surface-capabilities-khr
+     funcall-get-physical-device-surface-capabilities-khr)
     (physicaldevice surface psurfacecapabilities)
   (declare-types ("VkPhysicalDevice" "physicalDevice") ("VkSurfaceKHR" surface)
    ("VkSurfaceCapabilitiesKHR" "pSurfaceCapabilities") :return
@@ -1988,8 +1895,9 @@
    psurfacecapabilities))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceSurfaceFormatsKHR"
-    get-physical-device-surface-formats-khr
+    ("vkGetPhysicalDeviceSurfaceFormatsKHR"
+     get-physical-device-surface-formats-khr
+     funcall-get-physical-device-surface-formats-khr)
     (physicaldevice surface psurfaceformatcount psurfaceformats)
   (declare-types ("VkPhysicalDevice" "physicalDevice") ("VkSurfaceKHR" surface)
    (uint32 "pSurfaceFormatCount") ("VkSurfaceFormatKHR" "pSurfaceFormats")
@@ -1998,8 +1906,9 @@
    psurfaceformatcount psurfaceformats))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceSurfacePresentModesKHR"
-    get-physical-device-surface-present-modes-khr
+    ("vkGetPhysicalDeviceSurfacePresentModesKHR"
+     get-physical-device-surface-present-modes-khr
+     funcall-get-physical-device-surface-present-modes-khr)
     (physicaldevice surface ppresentmodecount ppresentmodes)
   (declare-types ("VkPhysicalDevice" "physicalDevice") ("VkSurfaceKHR" surface)
    (uint32 "pPresentModeCount") ("VkPresentModeKHR" "pPresentModes") :return
@@ -2008,8 +1917,7 @@
    ppresentmodecount ppresentmodes))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateSwapchainKHR"
-    create-swapchain-khr
+    ("vkCreateSwapchainKHR" create-swapchain-khr funcall-create-swapchain-khr)
     (device pcreateinfo pallocator pswapchain)
   (declare-types ("VkDevice" device) ("VkSwapchainCreateInfoKHR" "pCreateInfo")
    ("VkAllocationCallbacks" "pAllocator") ("VkSwapchainKHR" "pSwapchain")
@@ -2017,16 +1925,16 @@
   (vkcreateswapchainkhr device pcreateinfo pallocator pswapchain))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroySwapchainKHR"
-    destroy-swapchain-khr
+    ("vkDestroySwapchainKHR" destroy-swapchain-khr
+     funcall-destroy-swapchain-khr)
     (device swapchain pallocator)
   (declare-types ("VkDevice" device) ("VkSwapchainKHR" swapchain)
    ("VkAllocationCallbacks" "pAllocator") :return ("void" return-value))
   (vkdestroyswapchainkhr device swapchain pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetSwapchainImagesKHR"
-    get-swapchain-images-khr
+    ("vkGetSwapchainImagesKHR" get-swapchain-images-khr
+     funcall-get-swapchain-images-khr)
     (device swapchain pswapchainimagecount pswapchainimages)
   (declare-types ("VkDevice" device) ("VkSwapchainKHR" swapchain)
    (uint32 "pSwapchainImageCount") ("VkImage" "pSwapchainImages") :return
@@ -2035,8 +1943,8 @@
    pswapchainimages))
 
 (more-cffi:def-foreign-function doc-file
-    "vkAcquireNextImageKHR"
-    acquire-next-image-khr
+    ("vkAcquireNextImageKHR" acquire-next-image-khr
+     funcall-acquire-next-image-khr)
     (device swapchain timeout semaphore fence pimageindex)
   (declare-types ("VkDevice" device) ("VkSwapchainKHR" swapchain)
    (uint64 timeout) ("VkSemaphore" semaphore) ("VkFence" fence)
@@ -2044,16 +1952,16 @@
   (vkacquirenextimagekhr device swapchain timeout semaphore fence pimageindex))
 
 (more-cffi:def-foreign-function doc-file
-    "vkQueuePresentKHR"
-    queue-present-khr
+    ("vkQueuePresentKHR" queue-present-khr funcall-queue-present-khr)
     (queue ppresentinfo)
   (declare-types ("VkQueue" queue) ("VkPresentInfoKHR" "pPresentInfo") :return
    ("VkResult" return-value))
   (vkqueuepresentkhr queue ppresentinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetDeviceGroupPresentCapabilitiesKHR"
-    get-device-group-present-capabilities-khr
+    ("vkGetDeviceGroupPresentCapabilitiesKHR"
+     get-device-group-present-capabilities-khr
+     funcall-get-device-group-present-capabilities-khr)
     (device pdevicegrouppresentcapabilities)
   (declare-types ("VkDevice" device)
    ("VkDeviceGroupPresentCapabilitiesKHR" "pDeviceGroupPresentCapabilities")
@@ -2062,8 +1970,9 @@
    pdevicegrouppresentcapabilities))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetDeviceGroupSurfacePresentModesKHR"
-    get-device-group-surface-present-modes-khr
+    ("vkGetDeviceGroupSurfacePresentModesKHR"
+     get-device-group-surface-present-modes-khr
+     funcall-get-device-group-surface-present-modes-khr)
     (device surface pmodes)
   (declare-types ("VkDevice" device) ("VkSurfaceKHR" surface)
    ("VkDeviceGroupPresentModeFlagsKHR" "pModes") :return
@@ -2071,8 +1980,9 @@
   (vkgetdevicegroupsurfacepresentmodeskhr device surface pmodes))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDevicePresentRectanglesKHR"
-    get-physical-device-present-rectangles-khr
+    ("vkGetPhysicalDevicePresentRectanglesKHR"
+     get-physical-device-present-rectangles-khr
+     funcall-get-physical-device-present-rectangles-khr)
     (physicaldevice surface prectcount prects)
   (declare-types ("VkPhysicalDevice" "physicalDevice") ("VkSurfaceKHR" surface)
    (uint32 "pRectCount") ("VkRect2D" "pRects") :return
@@ -2081,8 +1991,8 @@
    prects))
 
 (more-cffi:def-foreign-function doc-file
-    "vkAcquireNextImage2KHR"
-    acquire-next-image-2-khr
+    ("vkAcquireNextImage2KHR" acquire-next-image-2-khr
+     funcall-acquire-next-image-2-khr)
     (device pacquireinfo pimageindex)
   (declare-types ("VkDevice" device)
    ("VkAcquireNextImageInfoKHR" "pAcquireInfo") (uint32 "pImageIndex") :return
@@ -2090,8 +2000,9 @@
   (vkacquirenextimage2khr device pacquireinfo pimageindex))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceDisplayPropertiesKHR"
-    get-physical-device-display-properties-khr
+    ("vkGetPhysicalDeviceDisplayPropertiesKHR"
+     get-physical-device-display-properties-khr
+     funcall-get-physical-device-display-properties-khr)
     (physicaldevice ppropertycount pproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    (uint32 "pPropertyCount") ("VkDisplayPropertiesKHR" "pProperties") :return
@@ -2100,8 +2011,9 @@
    pproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceDisplayPlanePropertiesKHR"
-    get-physical-device-display-plane-properties-khr
+    ("vkGetPhysicalDeviceDisplayPlanePropertiesKHR"
+     get-physical-device-display-plane-properties-khr
+     funcall-get-physical-device-display-plane-properties-khr)
     (physicaldevice ppropertycount pproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    (uint32 "pPropertyCount") ("VkDisplayPlanePropertiesKHR" "pProperties")
@@ -2110,8 +2022,9 @@
    pproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetDisplayPlaneSupportedDisplaysKHR"
-    get-display-plane-supported-displays-khr
+    ("vkGetDisplayPlaneSupportedDisplaysKHR"
+     get-display-plane-supported-displays-khr
+     funcall-get-display-plane-supported-displays-khr)
     (physicaldevice planeindex pdisplaycount pdisplays)
   (declare-types ("VkPhysicalDevice" "physicalDevice") (uint32 "planeIndex")
    (uint32 "pDisplayCount") ("VkDisplayKHR" "pDisplays") :return
@@ -2120,8 +2033,8 @@
    pdisplaycount pdisplays))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetDisplayModePropertiesKHR"
-    get-display-mode-properties-khr
+    ("vkGetDisplayModePropertiesKHR" get-display-mode-properties-khr
+     funcall-get-display-mode-properties-khr)
     (physicaldevice display ppropertycount pproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice") ("VkDisplayKHR" display)
    (uint32 "pPropertyCount") ("VkDisplayModePropertiesKHR" "pProperties")
@@ -2130,8 +2043,8 @@
    pproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateDisplayModeKHR"
-    create-display-mode-khr
+    ("vkCreateDisplayModeKHR" create-display-mode-khr
+     funcall-create-display-mode-khr)
     (physicaldevice display pcreateinfo pallocator pmode)
   (declare-types ("VkPhysicalDevice" "physicalDevice") ("VkDisplayKHR" display)
    ("VkDisplayModeCreateInfoKHR" "pCreateInfo")
@@ -2140,8 +2053,8 @@
   (vkcreatedisplaymodekhr physicaldevice display pcreateinfo pallocator pmode))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetDisplayPlaneCapabilitiesKHR"
-    get-display-plane-capabilities-khr
+    ("vkGetDisplayPlaneCapabilitiesKHR" get-display-plane-capabilities-khr
+     funcall-get-display-plane-capabilities-khr)
     (physicaldevice mode planeindex pcapabilities)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    ("VkDisplayModeKHR" mode) (uint32 "planeIndex")
@@ -2151,8 +2064,8 @@
    pcapabilities))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateDisplayPlaneSurfaceKHR"
-    create-display-plane-surface-khr
+    ("vkCreateDisplayPlaneSurfaceKHR" create-display-plane-surface-khr
+     funcall-create-display-plane-surface-khr)
     (instance pcreateinfo pallocator psurface)
   (declare-types ("VkInstance" instance)
    ("VkDisplaySurfaceCreateInfoKHR" "pCreateInfo")
@@ -2161,8 +2074,8 @@
   (vkcreatedisplayplanesurfacekhr instance pcreateinfo pallocator psurface))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateSharedSwapchainsKHR"
-    create-shared-swapchains-khr
+    ("vkCreateSharedSwapchainsKHR" create-shared-swapchains-khr
+     funcall-create-shared-swapchains-khr)
     (device swapchaincount pcreateinfos pallocator pswapchains)
   (declare-types ("VkDevice" device) (uint32 "swapchainCount")
    ("VkSwapchainCreateInfoKHR" "pCreateInfos")
@@ -2172,40 +2085,40 @@
    pswapchains))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdBeginRenderingKHR"
-    cmd-begin-rendering-khr
+    ("vkCmdBeginRenderingKHR" cmd-begin-rendering-khr
+     funcall-cmd-begin-rendering-khr)
     (commandbuffer prenderinginfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkRenderingInfo" "pRenderingInfo") :return ("void" return-value))
   (vkcmdbeginrenderingkhr commandbuffer prenderinginfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdEndRenderingKHR"
-    cmd-end-rendering-khr
+    ("vkCmdEndRenderingKHR" cmd-end-rendering-khr funcall-cmd-end-rendering-khr)
     (commandbuffer)
   (declare-types ("VkCommandBuffer" "commandBuffer") :return
    ("void" return-value))
   (vkcmdendrenderingkhr commandbuffer))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceFeatures2KHR"
-    get-physical-device-features-2-khr
+    ("vkGetPhysicalDeviceFeatures2KHR" get-physical-device-features-2-khr
+     funcall-get-physical-device-features-2-khr)
     (physicaldevice pfeatures)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    ("VkPhysicalDeviceFeatures2" "pFeatures") :return ("void" return-value))
   (vkgetphysicaldevicefeatures2khr physicaldevice pfeatures))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceProperties2KHR"
-    get-physical-device-properties-2-khr
+    ("vkGetPhysicalDeviceProperties2KHR" get-physical-device-properties-2-khr
+     funcall-get-physical-device-properties-2-khr)
     (physicaldevice pproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    ("VkPhysicalDeviceProperties2" "pProperties") :return ("void" return-value))
   (vkgetphysicaldeviceproperties2khr physicaldevice pproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceFormatProperties2KHR"
-    get-physical-device-format-properties-2-khr
+    ("vkGetPhysicalDeviceFormatProperties2KHR"
+     get-physical-device-format-properties-2-khr
+     funcall-get-physical-device-format-properties-2-khr)
     (physicaldevice format pformatproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice") ("VkFormat" format)
    ("VkFormatProperties2" "pFormatProperties") :return ("void" return-value))
@@ -2213,8 +2126,9 @@
    pformatproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceImageFormatProperties2KHR"
-    get-physical-device-image-format-properties-2-khr
+    ("vkGetPhysicalDeviceImageFormatProperties2KHR"
+     get-physical-device-image-format-properties-2-khr
+     funcall-get-physical-device-image-format-properties-2-khr)
     (physicaldevice pimageformatinfo pimageformatproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    ("VkPhysicalDeviceImageFormatInfo2" "pImageFormatInfo")
@@ -2224,8 +2138,9 @@
    pimageformatproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceQueueFamilyProperties2KHR"
-    get-physical-device-queue-family-properties-2-khr
+    ("vkGetPhysicalDeviceQueueFamilyProperties2KHR"
+     get-physical-device-queue-family-properties-2-khr
+     funcall-get-physical-device-queue-family-properties-2-khr)
     (physicaldevice pqueuefamilypropertycount pqueuefamilyproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    (uint32 "pQueueFamilyPropertyCount")
@@ -2235,8 +2150,9 @@
    pqueuefamilypropertycount pqueuefamilyproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceMemoryProperties2KHR"
-    get-physical-device-memory-properties-2-khr
+    ("vkGetPhysicalDeviceMemoryProperties2KHR"
+     get-physical-device-memory-properties-2-khr
+     funcall-get-physical-device-memory-properties-2-khr)
     (physicaldevice pmemoryproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    ("VkPhysicalDeviceMemoryProperties2" "pMemoryProperties") :return
@@ -2244,8 +2160,9 @@
   (vkgetphysicaldevicememoryproperties2khr physicaldevice pmemoryproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceSparseImageFormatProperties2KHR"
-    get-physical-device-sparse-image-format-properties-2-khr
+    ("vkGetPhysicalDeviceSparseImageFormatProperties2KHR"
+     get-physical-device-sparse-image-format-properties-2-khr
+     funcall-get-physical-device-sparse-image-format-properties-2-khr)
     (physicaldevice pformatinfo ppropertycount pproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    ("VkPhysicalDeviceSparseImageFormatInfo2" "pFormatInfo")
@@ -2255,8 +2172,9 @@
    pformatinfo ppropertycount pproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetDeviceGroupPeerMemoryFeaturesKHR"
-    get-device-group-peer-memory-features-khr
+    ("vkGetDeviceGroupPeerMemoryFeaturesKHR"
+     get-device-group-peer-memory-features-khr
+     funcall-get-device-group-peer-memory-features-khr)
     (device heapindex localdeviceindex remotedeviceindex ppeermemoryfeatures)
   (declare-types ("VkDevice" device) (uint32 "heapIndex")
    (uint32 "localDeviceIndex") (uint32 "remoteDeviceIndex")
@@ -2266,16 +2184,15 @@
    remotedeviceindex ppeermemoryfeatures))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetDeviceMaskKHR"
-    cmd-set-device-mask-khr
+    ("vkCmdSetDeviceMaskKHR" cmd-set-device-mask-khr
+     funcall-cmd-set-device-mask-khr)
     (commandbuffer devicemask)
   (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "deviceMask")
    :return ("void" return-value))
   (vkcmdsetdevicemaskkhr commandbuffer devicemask))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdDispatchBaseKHR"
-    cmd-dispatch-base-khr
+    ("vkCmdDispatchBaseKHR" cmd-dispatch-base-khr funcall-cmd-dispatch-base-khr)
     (commandbuffer basegroupx basegroupy basegroupz groupcountx groupcounty
      groupcountz)
   (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "baseGroupX")
@@ -2285,16 +2202,15 @@
    groupcountx groupcounty groupcountz))
 
 (more-cffi:def-foreign-function doc-file
-    "vkTrimCommandPoolKHR"
-    trim-command-pool-khr
+    ("vkTrimCommandPoolKHR" trim-command-pool-khr funcall-trim-command-pool-khr)
     (device commandpool flags)
   (declare-types ("VkDevice" device) ("VkCommandPool" "commandPool")
    ("VkCommandPoolTrimFlags" flags) :return ("void" return-value))
   (vktrimcommandpoolkhr device commandpool flags))
 
 (more-cffi:def-foreign-function doc-file
-    "vkEnumeratePhysicalDeviceGroupsKHR"
-    enumerate-physical-device-groups-khr
+    ("vkEnumeratePhysicalDeviceGroupsKHR" enumerate-physical-device-groups-khr
+     funcall-enumerate-physical-device-groups-khr)
     (instance pphysicaldevicegroupcount pphysicaldevicegroupproperties)
   (declare-types ("VkInstance" instance) (uint32 "pPhysicalDeviceGroupCount")
    ("VkPhysicalDeviceGroupProperties" "pPhysicalDeviceGroupProperties") :return
@@ -2303,8 +2219,9 @@
    pphysicaldevicegroupproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceExternalBufferPropertiesKHR"
-    get-physical-device-external-buffer-properties-khr
+    ("vkGetPhysicalDeviceExternalBufferPropertiesKHR"
+     get-physical-device-external-buffer-properties-khr
+     funcall-get-physical-device-external-buffer-properties-khr)
     (physicaldevice pexternalbufferinfo pexternalbufferproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    ("VkPhysicalDeviceExternalBufferInfo" "pExternalBufferInfo")
@@ -2314,16 +2231,15 @@
    pexternalbufferinfo pexternalbufferproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetMemoryFdKHR"
-    get-memory-fd-khr
+    ("vkGetMemoryFdKHR" get-memory-fd-khr funcall-get-memory-fd-khr)
     (device pgetfdinfo pfd)
   (declare-types ("VkDevice" device) ("VkMemoryGetFdInfoKHR" "pGetFdInfo")
    (int "pFd") :return ("VkResult" return-value))
   (vkgetmemoryfdkhr device pgetfdinfo pfd))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetMemoryFdPropertiesKHR"
-    get-memory-fd-properties-khr
+    ("vkGetMemoryFdPropertiesKHR" get-memory-fd-properties-khr
+     funcall-get-memory-fd-properties-khr)
     (device handletype fd pmemoryfdproperties)
   (declare-types ("VkDevice" device)
    ("VkExternalMemoryHandleTypeFlagBits" "handleType") (int fd)
@@ -2332,8 +2248,9 @@
   (vkgetmemoryfdpropertieskhr device handletype fd pmemoryfdproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceExternalSemaphorePropertiesKHR"
-    get-physical-device-external-semaphore-properties-khr
+    ("vkGetPhysicalDeviceExternalSemaphorePropertiesKHR"
+     get-physical-device-external-semaphore-properties-khr
+     funcall-get-physical-device-external-semaphore-properties-khr)
     (physicaldevice pexternalsemaphoreinfo pexternalsemaphoreproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    ("VkPhysicalDeviceExternalSemaphoreInfo" "pExternalSemaphoreInfo")
@@ -2343,8 +2260,8 @@
    pexternalsemaphoreinfo pexternalsemaphoreproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkImportSemaphoreFdKHR"
-    import-semaphore-fd-khr
+    ("vkImportSemaphoreFdKHR" import-semaphore-fd-khr
+     funcall-import-semaphore-fd-khr)
     (device pimportsemaphorefdinfo)
   (declare-types ("VkDevice" device)
    ("VkImportSemaphoreFdInfoKHR" "pImportSemaphoreFdInfo") :return
@@ -2352,16 +2269,15 @@
   (vkimportsemaphorefdkhr device pimportsemaphorefdinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetSemaphoreFdKHR"
-    get-semaphore-fd-khr
+    ("vkGetSemaphoreFdKHR" get-semaphore-fd-khr funcall-get-semaphore-fd-khr)
     (device pgetfdinfo pfd)
   (declare-types ("VkDevice" device) ("VkSemaphoreGetFdInfoKHR" "pGetFdInfo")
    (int "pFd") :return ("VkResult" return-value))
   (vkgetsemaphorefdkhr device pgetfdinfo pfd))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdPushDescriptorSetKHR"
-    cmd-push-descriptor-set-khr
+    ("vkCmdPushDescriptorSetKHR" cmd-push-descriptor-set-khr
+     funcall-cmd-push-descriptor-set-khr)
     (commandbuffer pipelinebindpoint layout set descriptorwritecount
      pdescriptorwrites)
   (declare-types ("VkCommandBuffer" "commandBuffer")
@@ -2372,8 +2288,9 @@
    descriptorwritecount pdescriptorwrites))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdPushDescriptorSetWithTemplateKHR"
-    cmd-push-descriptor-set-with-template-khr
+    ("vkCmdPushDescriptorSetWithTemplateKHR"
+     cmd-push-descriptor-set-with-template-khr
+     funcall-cmd-push-descriptor-set-with-template-khr)
     (commandbuffer descriptorupdatetemplate layout set pdata)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkDescriptorUpdateTemplate" "descriptorUpdateTemplate")
@@ -2383,8 +2300,9 @@
    layout set pdata))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateDescriptorUpdateTemplateKHR"
-    create-descriptor-update-template-khr
+    ("vkCreateDescriptorUpdateTemplateKHR"
+     create-descriptor-update-template-khr
+     funcall-create-descriptor-update-template-khr)
     (device pcreateinfo pallocator pdescriptorupdatetemplate)
   (declare-types ("VkDevice" device)
    ("VkDescriptorUpdateTemplateCreateInfo" "pCreateInfo")
@@ -2395,8 +2313,9 @@
    pdescriptorupdatetemplate))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroyDescriptorUpdateTemplateKHR"
-    destroy-descriptor-update-template-khr
+    ("vkDestroyDescriptorUpdateTemplateKHR"
+     destroy-descriptor-update-template-khr
+     funcall-destroy-descriptor-update-template-khr)
     (device descriptorupdatetemplate pallocator)
   (declare-types ("VkDevice" device)
    ("VkDescriptorUpdateTemplate" "descriptorUpdateTemplate")
@@ -2405,8 +2324,9 @@
    pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkUpdateDescriptorSetWithTemplateKHR"
-    update-descriptor-set-with-template-khr
+    ("vkUpdateDescriptorSetWithTemplateKHR"
+     update-descriptor-set-with-template-khr
+     funcall-update-descriptor-set-with-template-khr)
     (device descriptorset descriptorupdatetemplate pdata)
   (declare-types ("VkDevice" device) ("VkDescriptorSet" "descriptorSet")
    ("VkDescriptorUpdateTemplate" "descriptorUpdateTemplate") (void "pData")
@@ -2415,8 +2335,8 @@
    descriptorupdatetemplate pdata))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateRenderPass2KHR"
-    create-render-pass-2-khr
+    ("vkCreateRenderPass2KHR" create-render-pass-2-khr
+     funcall-create-render-pass-2-khr)
     (device pcreateinfo pallocator prenderpass)
   (declare-types ("VkDevice" device) ("VkRenderPassCreateInfo2" "pCreateInfo")
    ("VkAllocationCallbacks" "pAllocator") ("VkRenderPass" "pRenderPass")
@@ -2424,8 +2344,8 @@
   (vkcreaterenderpass2khr device pcreateinfo pallocator prenderpass))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdBeginRenderPass2KHR"
-    cmd-begin-render-pass-2-khr
+    ("vkCmdBeginRenderPass2KHR" cmd-begin-render-pass-2-khr
+     funcall-cmd-begin-render-pass-2-khr)
     (commandbuffer prenderpassbegin psubpassbegininfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkRenderPassBeginInfo" "pRenderPassBegin")
@@ -2433,8 +2353,8 @@
   (vkcmdbeginrenderpass2khr commandbuffer prenderpassbegin psubpassbegininfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdNextSubpass2KHR"
-    cmd-next-subpass-2-khr
+    ("vkCmdNextSubpass2KHR" cmd-next-subpass-2-khr
+     funcall-cmd-next-subpass-2-khr)
     (commandbuffer psubpassbegininfo psubpassendinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkSubpassBeginInfo" "pSubpassBeginInfo")
@@ -2442,24 +2362,25 @@
   (vkcmdnextsubpass2khr commandbuffer psubpassbegininfo psubpassendinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdEndRenderPass2KHR"
-    cmd-end-render-pass-2-khr
+    ("vkCmdEndRenderPass2KHR" cmd-end-render-pass-2-khr
+     funcall-cmd-end-render-pass-2-khr)
     (commandbuffer psubpassendinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkSubpassEndInfo" "pSubpassEndInfo") :return ("void" return-value))
   (vkcmdendrenderpass2khr commandbuffer psubpassendinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetSwapchainStatusKHR"
-    get-swapchain-status-khr
+    ("vkGetSwapchainStatusKHR" get-swapchain-status-khr
+     funcall-get-swapchain-status-khr)
     (device swapchain)
   (declare-types ("VkDevice" device) ("VkSwapchainKHR" swapchain) :return
    ("VkResult" return-value))
   (vkgetswapchainstatuskhr device swapchain))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceExternalFencePropertiesKHR"
-    get-physical-device-external-fence-properties-khr
+    ("vkGetPhysicalDeviceExternalFencePropertiesKHR"
+     get-physical-device-external-fence-properties-khr
+     funcall-get-physical-device-external-fence-properties-khr)
     (physicaldevice pexternalfenceinfo pexternalfenceproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    ("VkPhysicalDeviceExternalFenceInfo" "pExternalFenceInfo")
@@ -2469,8 +2390,7 @@
    pexternalfenceinfo pexternalfenceproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkImportFenceFdKHR"
-    import-fence-fd-khr
+    ("vkImportFenceFdKHR" import-fence-fd-khr funcall-import-fence-fd-khr)
     (device pimportfencefdinfo)
   (declare-types ("VkDevice" device)
    ("VkImportFenceFdInfoKHR" "pImportFenceFdInfo") :return
@@ -2478,16 +2398,16 @@
   (vkimportfencefdkhr device pimportfencefdinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetFenceFdKHR"
-    get-fence-fd-khr
+    ("vkGetFenceFdKHR" get-fence-fd-khr funcall-get-fence-fd-khr)
     (device pgetfdinfo pfd)
   (declare-types ("VkDevice" device) ("VkFenceGetFdInfoKHR" "pGetFdInfo")
    (int "pFd") :return ("VkResult" return-value))
   (vkgetfencefdkhr device pgetfdinfo pfd))
 
 (more-cffi:def-foreign-function doc-file
-    "vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR"
-    enumerate-physical-device-queue-family-performance-query-counters-khr
+    ("vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR"
+     enumerate-physical-device-queue-family-performance-query-counters-khr
+     funcall-enumerate-physical-device-queue-family-performance-query-counters-khr)
     (physicaldevice queuefamilyindex pcountercount pcounters
      pcounterdescriptions)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
@@ -2500,8 +2420,9 @@
    pcounterdescriptions))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR"
-    get-physical-device-queue-family-performance-query-passes-khr
+    ("vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR"
+     get-physical-device-queue-family-performance-query-passes-khr
+     funcall-get-physical-device-queue-family-performance-query-passes-khr)
     (physicaldevice pperformancequerycreateinfo pnumpasses)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    ("VkQueryPoolPerformanceCreateInfoKHR" "pPerformanceQueryCreateInfo")
@@ -2510,23 +2431,24 @@
    pperformancequerycreateinfo pnumpasses))
 
 (more-cffi:def-foreign-function doc-file
-    "vkAcquireProfilingLockKHR"
-    acquire-profiling-lock-khr
+    ("vkAcquireProfilingLockKHR" acquire-profiling-lock-khr
+     funcall-acquire-profiling-lock-khr)
     (device pinfo)
   (declare-types ("VkDevice" device) ("VkAcquireProfilingLockInfoKHR" "pInfo")
    :return ("VkResult" return-value))
   (vkacquireprofilinglockkhr device pinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkReleaseProfilingLockKHR"
-    release-profiling-lock-khr
+    ("vkReleaseProfilingLockKHR" release-profiling-lock-khr
+     funcall-release-profiling-lock-khr)
     (device)
   (declare-types ("VkDevice" device) :return ("void" return-value))
   (vkreleaseprofilinglockkhr device))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceSurfaceCapabilities2KHR"
-    get-physical-device-surface-capabilities-2-khr
+    ("vkGetPhysicalDeviceSurfaceCapabilities2KHR"
+     get-physical-device-surface-capabilities-2-khr
+     funcall-get-physical-device-surface-capabilities-2-khr)
     (physicaldevice psurfaceinfo psurfacecapabilities)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    ("VkPhysicalDeviceSurfaceInfo2KHR" "pSurfaceInfo")
@@ -2536,8 +2458,9 @@
    psurfacecapabilities))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceSurfaceFormats2KHR"
-    get-physical-device-surface-formats-2-khr
+    ("vkGetPhysicalDeviceSurfaceFormats2KHR"
+     get-physical-device-surface-formats-2-khr
+     funcall-get-physical-device-surface-formats-2-khr)
     (physicaldevice psurfaceinfo psurfaceformatcount psurfaceformats)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    ("VkPhysicalDeviceSurfaceInfo2KHR" "pSurfaceInfo")
@@ -2547,8 +2470,9 @@
    psurfaceformatcount psurfaceformats))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceDisplayProperties2KHR"
-    get-physical-device-display-properties-2-khr
+    ("vkGetPhysicalDeviceDisplayProperties2KHR"
+     get-physical-device-display-properties-2-khr
+     funcall-get-physical-device-display-properties-2-khr)
     (physicaldevice ppropertycount pproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    (uint32 "pPropertyCount") ("VkDisplayProperties2KHR" "pProperties") :return
@@ -2557,8 +2481,9 @@
    pproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceDisplayPlaneProperties2KHR"
-    get-physical-device-display-plane-properties-2-khr
+    ("vkGetPhysicalDeviceDisplayPlaneProperties2KHR"
+     get-physical-device-display-plane-properties-2-khr
+     funcall-get-physical-device-display-plane-properties-2-khr)
     (physicaldevice ppropertycount pproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    (uint32 "pPropertyCount") ("VkDisplayPlaneProperties2KHR" "pProperties")
@@ -2567,8 +2492,8 @@
    pproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetDisplayModeProperties2KHR"
-    get-display-mode-properties-2-khr
+    ("vkGetDisplayModeProperties2KHR" get-display-mode-properties-2-khr
+     funcall-get-display-mode-properties-2-khr)
     (physicaldevice display ppropertycount pproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice") ("VkDisplayKHR" display)
    (uint32 "pPropertyCount") ("VkDisplayModeProperties2KHR" "pProperties")
@@ -2577,8 +2502,8 @@
    pproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetDisplayPlaneCapabilities2KHR"
-    get-display-plane-capabilities-2-khr
+    ("vkGetDisplayPlaneCapabilities2KHR" get-display-plane-capabilities-2-khr
+     funcall-get-display-plane-capabilities-2-khr)
     (physicaldevice pdisplayplaneinfo pcapabilities)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    ("VkDisplayPlaneInfo2KHR" "pDisplayPlaneInfo")
@@ -2588,8 +2513,8 @@
    pcapabilities))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetImageMemoryRequirements2KHR"
-    get-image-memory-requirements-2-khr
+    ("vkGetImageMemoryRequirements2KHR" get-image-memory-requirements-2-khr
+     funcall-get-image-memory-requirements-2-khr)
     (device pinfo pmemoryrequirements)
   (declare-types ("VkDevice" device) ("VkImageMemoryRequirementsInfo2" "pInfo")
    ("VkMemoryRequirements2" "pMemoryRequirements") :return
@@ -2597,8 +2522,8 @@
   (vkgetimagememoryrequirements2khr device pinfo pmemoryrequirements))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetBufferMemoryRequirements2KHR"
-    get-buffer-memory-requirements-2-khr
+    ("vkGetBufferMemoryRequirements2KHR" get-buffer-memory-requirements-2-khr
+     funcall-get-buffer-memory-requirements-2-khr)
     (device pinfo pmemoryrequirements)
   (declare-types ("VkDevice" device)
    ("VkBufferMemoryRequirementsInfo2" "pInfo")
@@ -2607,8 +2532,9 @@
   (vkgetbuffermemoryrequirements2khr device pinfo pmemoryrequirements))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetImageSparseMemoryRequirements2KHR"
-    get-image-sparse-memory-requirements-2-khr
+    ("vkGetImageSparseMemoryRequirements2KHR"
+     get-image-sparse-memory-requirements-2-khr
+     funcall-get-image-sparse-memory-requirements-2-khr)
     (device pinfo psparsememoryrequirementcount psparsememoryrequirements)
   (declare-types ("VkDevice" device)
    ("VkImageSparseMemoryRequirementsInfo2" "pInfo")
@@ -2619,8 +2545,8 @@
    psparsememoryrequirementcount psparsememoryrequirements))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateSamplerYcbcrConversionKHR"
-    create-sampler-ycbcr-conversion-khr
+    ("vkCreateSamplerYcbcrConversionKHR" create-sampler-ycbcr-conversion-khr
+     funcall-create-sampler-ycbcr-conversion-khr)
     (device pcreateinfo pallocator pycbcrconversion)
   (declare-types ("VkDevice" device)
    ("VkSamplerYcbcrConversionCreateInfo" "pCreateInfo")
@@ -2631,8 +2557,8 @@
    pycbcrconversion))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroySamplerYcbcrConversionKHR"
-    destroy-sampler-ycbcr-conversion-khr
+    ("vkDestroySamplerYcbcrConversionKHR" destroy-sampler-ycbcr-conversion-khr
+     funcall-destroy-sampler-ycbcr-conversion-khr)
     (device ycbcrconversion pallocator)
   (declare-types ("VkDevice" device)
    ("VkSamplerYcbcrConversion" "ycbcrConversion")
@@ -2640,24 +2566,24 @@
   (vkdestroysamplerycbcrconversionkhr device ycbcrconversion pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkBindBufferMemory2KHR"
-    bind-buffer-memory-2-khr
+    ("vkBindBufferMemory2KHR" bind-buffer-memory-2-khr
+     funcall-bind-buffer-memory-2-khr)
     (device bindinfocount pbindinfos)
   (declare-types ("VkDevice" device) (uint32 "bindInfoCount")
    ("VkBindBufferMemoryInfo" "pBindInfos") :return ("VkResult" return-value))
   (vkbindbuffermemory2khr device bindinfocount pbindinfos))
 
 (more-cffi:def-foreign-function doc-file
-    "vkBindImageMemory2KHR"
-    bind-image-memory-2-khr
+    ("vkBindImageMemory2KHR" bind-image-memory-2-khr
+     funcall-bind-image-memory-2-khr)
     (device bindinfocount pbindinfos)
   (declare-types ("VkDevice" device) (uint32 "bindInfoCount")
    ("VkBindImageMemoryInfo" "pBindInfos") :return ("VkResult" return-value))
   (vkbindimagememory2khr device bindinfocount pbindinfos))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetDescriptorSetLayoutSupportKHR"
-    get-descriptor-set-layout-support-khr
+    ("vkGetDescriptorSetLayoutSupportKHR" get-descriptor-set-layout-support-khr
+     funcall-get-descriptor-set-layout-support-khr)
     (device pcreateinfo psupport)
   (declare-types ("VkDevice" device)
    ("VkDescriptorSetLayoutCreateInfo" "pCreateInfo")
@@ -2665,8 +2591,8 @@
   (vkgetdescriptorsetlayoutsupportkhr device pcreateinfo psupport))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdDrawIndirectCountKHR"
-    cmd-draw-indirect-count-khr
+    ("vkCmdDrawIndirectCountKHR" cmd-draw-indirect-count-khr
+     funcall-cmd-draw-indirect-count-khr)
     (commandbuffer buffer offset countbuffer countbufferoffset maxdrawcount
      stride)
   (declare-types ("VkCommandBuffer" "commandBuffer") ("VkBuffer" buffer)
@@ -2677,8 +2603,8 @@
    countbufferoffset maxdrawcount stride))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdDrawIndexedIndirectCountKHR"
-    cmd-draw-indexed-indirect-count-khr
+    ("vkCmdDrawIndexedIndirectCountKHR" cmd-draw-indexed-indirect-count-khr
+     funcall-cmd-draw-indexed-indirect-count-khr)
     (commandbuffer buffer offset countbuffer countbufferoffset maxdrawcount
      stride)
   (declare-types ("VkCommandBuffer" "commandBuffer") ("VkBuffer" buffer)
@@ -2689,32 +2615,31 @@
    countbufferoffset maxdrawcount stride))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetSemaphoreCounterValueKHR"
-    get-semaphore-counter-value-khr
+    ("vkGetSemaphoreCounterValueKHR" get-semaphore-counter-value-khr
+     funcall-get-semaphore-counter-value-khr)
     (device semaphore pvalue)
   (declare-types ("VkDevice" device) ("VkSemaphore" semaphore)
    (uint64 "pValue") :return ("VkResult" return-value))
   (vkgetsemaphorecountervaluekhr device semaphore pvalue))
 
 (more-cffi:def-foreign-function doc-file
-    "vkWaitSemaphoresKHR"
-    wait-semaphores-khr
+    ("vkWaitSemaphoresKHR" wait-semaphores-khr funcall-wait-semaphores-khr)
     (device pwaitinfo timeout)
   (declare-types ("VkDevice" device) ("VkSemaphoreWaitInfo" "pWaitInfo")
    (uint64 timeout) :return ("VkResult" return-value))
   (vkwaitsemaphoreskhr device pwaitinfo timeout))
 
 (more-cffi:def-foreign-function doc-file
-    "vkSignalSemaphoreKHR"
-    signal-semaphore-khr
+    ("vkSignalSemaphoreKHR" signal-semaphore-khr funcall-signal-semaphore-khr)
     (device psignalinfo)
   (declare-types ("VkDevice" device) ("VkSemaphoreSignalInfo" "pSignalInfo")
    :return ("VkResult" return-value))
   (vksignalsemaphorekhr device psignalinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceFragmentShadingRatesKHR"
-    get-physical-device-fragment-shading-rates-khr
+    ("vkGetPhysicalDeviceFragmentShadingRatesKHR"
+     get-physical-device-fragment-shading-rates-khr
+     funcall-get-physical-device-fragment-shading-rates-khr)
     (physicaldevice pfragmentshadingratecount pfragmentshadingrates)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    (uint32 "pFragmentShadingRateCount")
@@ -2724,8 +2649,8 @@
    pfragmentshadingratecount pfragmentshadingrates))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetFragmentShadingRateKHR"
-    cmd-set-fragment-shading-rate-khr
+    ("vkCmdSetFragmentShadingRateKHR" cmd-set-fragment-shading-rate-khr
+     funcall-cmd-set-fragment-shading-rate-khr)
     (commandbuffer pfragmentsize combinerops)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkExtent2D" "pFragmentSize")
@@ -2734,32 +2659,32 @@
   (vkcmdsetfragmentshadingratekhr commandbuffer pfragmentsize combinerops))
 
 (more-cffi:def-foreign-function doc-file
-    "vkWaitForPresentKHR"
-    wait-for-present-khr
+    ("vkWaitForPresentKHR" wait-for-present-khr funcall-wait-for-present-khr)
     (device swapchain presentid timeout)
   (declare-types ("VkDevice" device) ("VkSwapchainKHR" swapchain)
    (uint64 "presentId") (uint64 timeout) :return ("VkResult" return-value))
   (vkwaitforpresentkhr device swapchain presentid timeout))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetBufferDeviceAddressKHR"
-    get-buffer-device-address-khr
+    ("vkGetBufferDeviceAddressKHR" get-buffer-device-address-khr
+     funcall-get-buffer-device-address-khr)
     (device pinfo)
   (declare-types ("VkDevice" device) ("VkBufferDeviceAddressInfo" "pInfo")
    :return ("VkDeviceAddress" return-value))
   (vkgetbufferdeviceaddresskhr device pinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetBufferOpaqueCaptureAddressKHR"
-    get-buffer-opaque-capture-address-khr
+    ("vkGetBufferOpaqueCaptureAddressKHR" get-buffer-opaque-capture-address-khr
+     funcall-get-buffer-opaque-capture-address-khr)
     (device pinfo)
   (declare-types ("VkDevice" device) ("VkBufferDeviceAddressInfo" "pInfo")
    :return ("uint64_t" return-value))
   (vkgetbufferopaquecaptureaddresskhr device pinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetDeviceMemoryOpaqueCaptureAddressKHR"
-    get-device-memory-opaque-capture-address-khr
+    ("vkGetDeviceMemoryOpaqueCaptureAddressKHR"
+     get-device-memory-opaque-capture-address-khr
+     funcall-get-device-memory-opaque-capture-address-khr)
     (device pinfo)
   (declare-types ("VkDevice" device)
    ("VkDeviceMemoryOpaqueCaptureAddressInfo" "pInfo") :return
@@ -2767,8 +2692,8 @@
   (vkgetdevicememoryopaquecaptureaddresskhr device pinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateDeferredOperationKHR"
-    create-deferred-operation-khr
+    ("vkCreateDeferredOperationKHR" create-deferred-operation-khr
+     funcall-create-deferred-operation-khr)
     (device pallocator pdeferredoperation)
   (declare-types ("VkDevice" device) ("VkAllocationCallbacks" "pAllocator")
    ("VkDeferredOperationKHR" "pDeferredOperation") :return
@@ -2776,40 +2701,42 @@
   (vkcreatedeferredoperationkhr device pallocator pdeferredoperation))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroyDeferredOperationKHR"
-    destroy-deferred-operation-khr
+    ("vkDestroyDeferredOperationKHR" destroy-deferred-operation-khr
+     funcall-destroy-deferred-operation-khr)
     (device operation pallocator)
   (declare-types ("VkDevice" device) ("VkDeferredOperationKHR" operation)
    ("VkAllocationCallbacks" "pAllocator") :return ("void" return-value))
   (vkdestroydeferredoperationkhr device operation pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetDeferredOperationMaxConcurrencyKHR"
-    get-deferred-operation-max-concurrency-khr
+    ("vkGetDeferredOperationMaxConcurrencyKHR"
+     get-deferred-operation-max-concurrency-khr
+     funcall-get-deferred-operation-max-concurrency-khr)
     (device operation)
   (declare-types ("VkDevice" device) ("VkDeferredOperationKHR" operation)
    :return ("uint32_t" return-value))
   (vkgetdeferredoperationmaxconcurrencykhr device operation))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetDeferredOperationResultKHR"
-    get-deferred-operation-result-khr
+    ("vkGetDeferredOperationResultKHR" get-deferred-operation-result-khr
+     funcall-get-deferred-operation-result-khr)
     (device operation)
   (declare-types ("VkDevice" device) ("VkDeferredOperationKHR" operation)
    :return ("VkResult" return-value))
   (vkgetdeferredoperationresultkhr device operation))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDeferredOperationJoinKHR"
-    deferred-operation-join-khr
+    ("vkDeferredOperationJoinKHR" deferred-operation-join-khr
+     funcall-deferred-operation-join-khr)
     (device operation)
   (declare-types ("VkDevice" device) ("VkDeferredOperationKHR" operation)
    :return ("VkResult" return-value))
   (vkdeferredoperationjoinkhr device operation))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPipelineExecutablePropertiesKHR"
-    get-pipeline-executable-properties-khr
+    ("vkGetPipelineExecutablePropertiesKHR"
+     get-pipeline-executable-properties-khr
+     funcall-get-pipeline-executable-properties-khr)
     (device ppipelineinfo pexecutablecount pproperties)
   (declare-types ("VkDevice" device) ("VkPipelineInfoKHR" "pPipelineInfo")
    (uint32 "pExecutableCount")
@@ -2819,8 +2746,9 @@
    pproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPipelineExecutableStatisticsKHR"
-    get-pipeline-executable-statistics-khr
+    ("vkGetPipelineExecutableStatisticsKHR"
+     get-pipeline-executable-statistics-khr
+     funcall-get-pipeline-executable-statistics-khr)
     (device pexecutableinfo pstatisticcount pstatistics)
   (declare-types ("VkDevice" device)
    ("VkPipelineExecutableInfoKHR" "pExecutableInfo") (uint32 "pStatisticCount")
@@ -2830,8 +2758,9 @@
    pstatistics))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPipelineExecutableInternalRepresentationsKHR"
-    get-pipeline-executable-internal-representations-khr
+    ("vkGetPipelineExecutableInternalRepresentationsKHR"
+     get-pipeline-executable-internal-representations-khr
+     funcall-get-pipeline-executable-internal-representations-khr)
     (device pexecutableinfo pinternalrepresentationcount
      pinternalrepresentations)
   (declare-types ("VkDevice" device)
@@ -2843,24 +2772,21 @@
    pinternalrepresentationcount pinternalrepresentations))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetEvent2KHR"
-    cmd-set-event-2-khr
+    ("vkCmdSetEvent2KHR" cmd-set-event-2-khr funcall-cmd-set-event-2-khr)
     (commandbuffer event pdependencyinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer") ("VkEvent" event)
    ("VkDependencyInfo" "pDependencyInfo") :return ("void" return-value))
   (vkcmdsetevent2khr commandbuffer event pdependencyinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdResetEvent2KHR"
-    cmd-reset-event-2-khr
+    ("vkCmdResetEvent2KHR" cmd-reset-event-2-khr funcall-cmd-reset-event-2-khr)
     (commandbuffer event stagemask)
   (declare-types ("VkCommandBuffer" "commandBuffer") ("VkEvent" event)
    ("VkPipelineStageFlags2" "stageMask") :return ("void" return-value))
   (vkcmdresetevent2khr commandbuffer event stagemask))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdWaitEvents2KHR"
-    cmd-wait-events-2-khr
+    ("vkCmdWaitEvents2KHR" cmd-wait-events-2-khr funcall-cmd-wait-events-2-khr)
     (commandbuffer eventcount pevents pdependencyinfos)
   (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "eventCount")
    ("VkEvent" "pEvents") ("VkDependencyInfo" "pDependencyInfos") :return
@@ -2868,16 +2794,16 @@
   (vkcmdwaitevents2khr commandbuffer eventcount pevents pdependencyinfos))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdPipelineBarrier2KHR"
-    cmd-pipeline-barrier-2-khr
+    ("vkCmdPipelineBarrier2KHR" cmd-pipeline-barrier-2-khr
+     funcall-cmd-pipeline-barrier-2-khr)
     (commandbuffer pdependencyinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkDependencyInfo" "pDependencyInfo") :return ("void" return-value))
   (vkcmdpipelinebarrier2khr commandbuffer pdependencyinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdWriteTimestamp2KHR"
-    cmd-write-timestamp-2-khr
+    ("vkCmdWriteTimestamp2KHR" cmd-write-timestamp-2-khr
+     funcall-cmd-write-timestamp-2-khr)
     (commandbuffer stage querypool query)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkPipelineStageFlags2" stage) ("VkQueryPool" "queryPool") (uint32 query)
@@ -2885,8 +2811,7 @@
   (vkcmdwritetimestamp2khr commandbuffer stage querypool query))
 
 (more-cffi:def-foreign-function doc-file
-    "vkQueueSubmit2KHR"
-    queue-submit-2-khr
+    ("vkQueueSubmit2KHR" queue-submit-2-khr funcall-queue-submit-2-khr)
     (queue submitcount psubmits fence)
   (declare-types ("VkQueue" queue) (uint32 "submitCount")
    ("VkSubmitInfo2" "pSubmits") ("VkFence" fence) :return
@@ -2894,8 +2819,8 @@
   (vkqueuesubmit2khr queue submitcount psubmits fence))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdWriteBufferMarker2AMD"
-    cmd-write-buffer-marker-2-amd
+    ("vkCmdWriteBufferMarker2AMD" cmd-write-buffer-marker-2-amd
+     funcall-cmd-write-buffer-marker-2-amd)
     (commandbuffer stage dstbuffer dstoffset marker)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkPipelineStageFlags2" stage) ("VkBuffer" "dstBuffer")
@@ -2903,32 +2828,30 @@
   (vkcmdwritebuffermarker2amd commandbuffer stage dstbuffer dstoffset marker))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetQueueCheckpointData2NV"
-    get-queue-checkpoint-data-2-nv
+    ("vkGetQueueCheckpointData2NV" get-queue-checkpoint-data-2-nv
+     funcall-get-queue-checkpoint-data-2-nv)
     (queue pcheckpointdatacount pcheckpointdata)
   (declare-types ("VkQueue" queue) (uint32 "pCheckpointDataCount")
    ("VkCheckpointData2NV" "pCheckpointData") :return ("void" return-value))
   (vkgetqueuecheckpointdata2nv queue pcheckpointdatacount pcheckpointdata))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdCopyBuffer2KHR"
-    cmd-copy-buffer-2-khr
+    ("vkCmdCopyBuffer2KHR" cmd-copy-buffer-2-khr funcall-cmd-copy-buffer-2-khr)
     (commandbuffer pcopybufferinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkCopyBufferInfo2" "pCopyBufferInfo") :return ("void" return-value))
   (vkcmdcopybuffer2khr commandbuffer pcopybufferinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdCopyImage2KHR"
-    cmd-copy-image-2-khr
+    ("vkCmdCopyImage2KHR" cmd-copy-image-2-khr funcall-cmd-copy-image-2-khr)
     (commandbuffer pcopyimageinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkCopyImageInfo2" "pCopyImageInfo") :return ("void" return-value))
   (vkcmdcopyimage2khr commandbuffer pcopyimageinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdCopyBufferToImage2KHR"
-    cmd-copy-buffer-to-image-2-khr
+    ("vkCmdCopyBufferToImage2KHR" cmd-copy-buffer-to-image-2-khr
+     funcall-cmd-copy-buffer-to-image-2-khr)
     (commandbuffer pcopybuffertoimageinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkCopyBufferToImageInfo2" "pCopyBufferToImageInfo") :return
@@ -2936,8 +2859,8 @@
   (vkcmdcopybuffertoimage2khr commandbuffer pcopybuffertoimageinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdCopyImageToBuffer2KHR"
-    cmd-copy-image-to-buffer-2-khr
+    ("vkCmdCopyImageToBuffer2KHR" cmd-copy-image-to-buffer-2-khr
+     funcall-cmd-copy-image-to-buffer-2-khr)
     (commandbuffer pcopyimagetobufferinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkCopyImageToBufferInfo2" "pCopyImageToBufferInfo") :return
@@ -2945,32 +2868,32 @@
   (vkcmdcopyimagetobuffer2khr commandbuffer pcopyimagetobufferinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdBlitImage2KHR"
-    cmd-blit-image-2-khr
+    ("vkCmdBlitImage2KHR" cmd-blit-image-2-khr funcall-cmd-blit-image-2-khr)
     (commandbuffer pblitimageinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkBlitImageInfo2" "pBlitImageInfo") :return ("void" return-value))
   (vkcmdblitimage2khr commandbuffer pblitimageinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdResolveImage2KHR"
-    cmd-resolve-image-2-khr
+    ("vkCmdResolveImage2KHR" cmd-resolve-image-2-khr
+     funcall-cmd-resolve-image-2-khr)
     (commandbuffer presolveimageinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkResolveImageInfo2" "pResolveImageInfo") :return ("void" return-value))
   (vkcmdresolveimage2khr commandbuffer presolveimageinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdTraceRaysIndirect2KHR"
-    cmd-trace-rays-indirect-2-khr
+    ("vkCmdTraceRaysIndirect2KHR" cmd-trace-rays-indirect-2-khr
+     funcall-cmd-trace-rays-indirect-2-khr)
     (commandbuffer indirectdeviceaddress)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkDeviceAddress" "indirectDeviceAddress") :return ("void" return-value))
   (vkcmdtraceraysindirect2khr commandbuffer indirectdeviceaddress))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetDeviceBufferMemoryRequirementsKHR"
-    get-device-buffer-memory-requirements-khr
+    ("vkGetDeviceBufferMemoryRequirementsKHR"
+     get-device-buffer-memory-requirements-khr
+     funcall-get-device-buffer-memory-requirements-khr)
     (device pinfo pmemoryrequirements)
   (declare-types ("VkDevice" device)
    ("VkDeviceBufferMemoryRequirements" "pInfo")
@@ -2979,8 +2902,9 @@
   (vkgetdevicebuffermemoryrequirementskhr device pinfo pmemoryrequirements))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetDeviceImageMemoryRequirementsKHR"
-    get-device-image-memory-requirements-khr
+    ("vkGetDeviceImageMemoryRequirementsKHR"
+     get-device-image-memory-requirements-khr
+     funcall-get-device-image-memory-requirements-khr)
     (device pinfo pmemoryrequirements)
   (declare-types ("VkDevice" device)
    ("VkDeviceImageMemoryRequirements" "pInfo")
@@ -2989,8 +2913,9 @@
   (vkgetdeviceimagememoryrequirementskhr device pinfo pmemoryrequirements))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetDeviceImageSparseMemoryRequirementsKHR"
-    get-device-image-sparse-memory-requirements-khr
+    ("vkGetDeviceImageSparseMemoryRequirementsKHR"
+     get-device-image-sparse-memory-requirements-khr
+     funcall-get-device-image-sparse-memory-requirements-khr)
     (device pinfo psparsememoryrequirementcount psparsememoryrequirements)
   (declare-types ("VkDevice" device)
    ("VkDeviceImageMemoryRequirements" "pInfo")
@@ -3001,8 +2926,8 @@
    psparsememoryrequirementcount psparsememoryrequirements))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateDebugReportCallbackEXT"
-    create-debug-report-callback-ext
+    ("vkCreateDebugReportCallbackEXT" create-debug-report-callback-ext
+     funcall-create-debug-report-callback-ext)
     (instance pcreateinfo pallocator pcallback)
   (declare-types ("VkInstance" instance)
    ("VkDebugReportCallbackCreateInfoEXT" "pCreateInfo")
@@ -3011,16 +2936,16 @@
   (vkcreatedebugreportcallbackext instance pcreateinfo pallocator pcallback))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroyDebugReportCallbackEXT"
-    destroy-debug-report-callback-ext
+    ("vkDestroyDebugReportCallbackEXT" destroy-debug-report-callback-ext
+     funcall-destroy-debug-report-callback-ext)
     (instance callback pallocator)
   (declare-types ("VkInstance" instance) ("VkDebugReportCallbackEXT" callback)
    ("VkAllocationCallbacks" "pAllocator") :return ("void" return-value))
   (vkdestroydebugreportcallbackext instance callback pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDebugReportMessageEXT"
-    debug-report-message-ext
+    ("vkDebugReportMessageEXT" debug-report-message-ext
+     funcall-debug-report-message-ext)
     (instance flags objecttype object location messagecode playerprefix
      pmessage)
   (declare-types ("VkInstance" instance) ("VkDebugReportFlagsEXT" flags)
@@ -3031,8 +2956,8 @@
    messagecode playerprefix pmessage))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDebugMarkerSetObjectTagEXT"
-    debug-marker-set-object-tag-ext
+    ("vkDebugMarkerSetObjectTagEXT" debug-marker-set-object-tag-ext
+     funcall-debug-marker-set-object-tag-ext)
     (device ptaginfo)
   (declare-types ("VkDevice" device)
    ("VkDebugMarkerObjectTagInfoEXT" "pTagInfo") :return
@@ -3040,8 +2965,8 @@
   (vkdebugmarkersetobjecttagext device ptaginfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDebugMarkerSetObjectNameEXT"
-    debug-marker-set-object-name-ext
+    ("vkDebugMarkerSetObjectNameEXT" debug-marker-set-object-name-ext
+     funcall-debug-marker-set-object-name-ext)
     (device pnameinfo)
   (declare-types ("VkDevice" device)
    ("VkDebugMarkerObjectNameInfoEXT" "pNameInfo") :return
@@ -3049,32 +2974,33 @@
   (vkdebugmarkersetobjectnameext device pnameinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdDebugMarkerBeginEXT"
-    cmd-debug-marker-begin-ext
+    ("vkCmdDebugMarkerBeginEXT" cmd-debug-marker-begin-ext
+     funcall-cmd-debug-marker-begin-ext)
     (commandbuffer pmarkerinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkDebugMarkerMarkerInfoEXT" "pMarkerInfo") :return ("void" return-value))
   (vkcmddebugmarkerbeginext commandbuffer pmarkerinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdDebugMarkerEndEXT"
-    cmd-debug-marker-end-ext
+    ("vkCmdDebugMarkerEndEXT" cmd-debug-marker-end-ext
+     funcall-cmd-debug-marker-end-ext)
     (commandbuffer)
   (declare-types ("VkCommandBuffer" "commandBuffer") :return
    ("void" return-value))
   (vkcmddebugmarkerendext commandbuffer))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdDebugMarkerInsertEXT"
-    cmd-debug-marker-insert-ext
+    ("vkCmdDebugMarkerInsertEXT" cmd-debug-marker-insert-ext
+     funcall-cmd-debug-marker-insert-ext)
     (commandbuffer pmarkerinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkDebugMarkerMarkerInfoEXT" "pMarkerInfo") :return ("void" return-value))
   (vkcmddebugmarkerinsertext commandbuffer pmarkerinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdBindTransformFeedbackBuffersEXT"
-    cmd-bind-transform-feedback-buffers-ext
+    ("vkCmdBindTransformFeedbackBuffersEXT"
+     cmd-bind-transform-feedback-buffers-ext
+     funcall-cmd-bind-transform-feedback-buffers-ext)
     (commandbuffer firstbinding bindingcount pbuffers poffsets psizes)
   (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "firstBinding")
    (uint32 "bindingCount") ("VkBuffer" "pBuffers") ("VkDeviceSize" "pOffsets")
@@ -3083,8 +3009,8 @@
    pbuffers poffsets psizes))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdBeginTransformFeedbackEXT"
-    cmd-begin-transform-feedback-ext
+    ("vkCmdBeginTransformFeedbackEXT" cmd-begin-transform-feedback-ext
+     funcall-cmd-begin-transform-feedback-ext)
     (commandbuffer firstcounterbuffer counterbuffercount pcounterbuffers
      pcounterbufferoffsets)
   (declare-types ("VkCommandBuffer" "commandBuffer")
@@ -3095,8 +3021,8 @@
    counterbuffercount pcounterbuffers pcounterbufferoffsets))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdEndTransformFeedbackEXT"
-    cmd-end-transform-feedback-ext
+    ("vkCmdEndTransformFeedbackEXT" cmd-end-transform-feedback-ext
+     funcall-cmd-end-transform-feedback-ext)
     (commandbuffer firstcounterbuffer counterbuffercount pcounterbuffers
      pcounterbufferoffsets)
   (declare-types ("VkCommandBuffer" "commandBuffer")
@@ -3107,8 +3033,8 @@
    counterbuffercount pcounterbuffers pcounterbufferoffsets))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdBeginQueryIndexedEXT"
-    cmd-begin-query-indexed-ext
+    ("vkCmdBeginQueryIndexedEXT" cmd-begin-query-indexed-ext
+     funcall-cmd-begin-query-indexed-ext)
     (commandbuffer querypool query flags index)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkQueryPool" "queryPool") (uint32 query) ("VkQueryControlFlags" flags)
@@ -3116,8 +3042,8 @@
   (vkcmdbeginqueryindexedext commandbuffer querypool query flags index))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdEndQueryIndexedEXT"
-    cmd-end-query-indexed-ext
+    ("vkCmdEndQueryIndexedEXT" cmd-end-query-indexed-ext
+     funcall-cmd-end-query-indexed-ext)
     (commandbuffer querypool query index)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkQueryPool" "queryPool") (uint32 query) (uint32 index) :return
@@ -3125,8 +3051,8 @@
   (vkcmdendqueryindexedext commandbuffer querypool query index))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdDrawIndirectByteCountEXT"
-    cmd-draw-indirect-byte-count-ext
+    ("vkCmdDrawIndirectByteCountEXT" cmd-draw-indirect-byte-count-ext
+     funcall-cmd-draw-indirect-byte-count-ext)
     (commandbuffer instancecount firstinstance counterbuffer
      counterbufferoffset counteroffset vertexstride)
   (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "instanceCount")
@@ -3137,8 +3063,7 @@
    counterbuffer counterbufferoffset counteroffset vertexstride))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateCuModuleNVX"
-    create-cu-module-nvx
+    ("vkCreateCuModuleNVX" create-cu-module-nvx funcall-create-cu-module-nvx)
     (device pcreateinfo pallocator pmodule)
   (declare-types ("VkDevice" device) ("VkCuModuleCreateInfoNVX" "pCreateInfo")
    ("VkAllocationCallbacks" "pAllocator") ("VkCuModuleNVX" "pModule") :return
@@ -3146,8 +3071,8 @@
   (vkcreatecumodulenvx device pcreateinfo pallocator pmodule))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateCuFunctionNVX"
-    create-cu-function-nvx
+    ("vkCreateCuFunctionNVX" create-cu-function-nvx
+     funcall-create-cu-function-nvx)
     (device pcreateinfo pallocator pfunction)
   (declare-types ("VkDevice" device)
    ("VkCuFunctionCreateInfoNVX" "pCreateInfo")
@@ -3156,40 +3081,39 @@
   (vkcreatecufunctionnvx device pcreateinfo pallocator pfunction))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroyCuModuleNVX"
-    destroy-cu-module-nvx
+    ("vkDestroyCuModuleNVX" destroy-cu-module-nvx funcall-destroy-cu-module-nvx)
     (device module pallocator)
   (declare-types ("VkDevice" device) ("VkCuModuleNVX" module)
    ("VkAllocationCallbacks" "pAllocator") :return ("void" return-value))
   (vkdestroycumodulenvx device module pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroyCuFunctionNVX"
-    destroy-cu-function-nvx
+    ("vkDestroyCuFunctionNVX" destroy-cu-function-nvx
+     funcall-destroy-cu-function-nvx)
     (device function pallocator)
   (declare-types ("VkDevice" device) ("VkCuFunctionNVX" function)
    ("VkAllocationCallbacks" "pAllocator") :return ("void" return-value))
   (vkdestroycufunctionnvx device function pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdCuLaunchKernelNVX"
-    cmd-cu-launch-kernel-nvx
+    ("vkCmdCuLaunchKernelNVX" cmd-cu-launch-kernel-nvx
+     funcall-cmd-cu-launch-kernel-nvx)
     (commandbuffer plaunchinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkCuLaunchInfoNVX" "pLaunchInfo") :return ("void" return-value))
   (vkcmdculaunchkernelnvx commandbuffer plaunchinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetImageViewHandleNVX"
-    get-image-view-handle-nvx
+    ("vkGetImageViewHandleNVX" get-image-view-handle-nvx
+     funcall-get-image-view-handle-nvx)
     (device pinfo)
   (declare-types ("VkDevice" device) ("VkImageViewHandleInfoNVX" "pInfo")
    :return ("uint32_t" return-value))
   (vkgetimageviewhandlenvx device pinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetImageViewAddressNVX"
-    get-image-view-address-nvx
+    ("vkGetImageViewAddressNVX" get-image-view-address-nvx
+     funcall-get-image-view-address-nvx)
     (device imageview pproperties)
   (declare-types ("VkDevice" device) ("VkImageView" "imageView")
    ("VkImageViewAddressPropertiesNVX" "pProperties") :return
@@ -3197,8 +3121,8 @@
   (vkgetimageviewaddressnvx device imageview pproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdDrawIndirectCountAMD"
-    cmd-draw-indirect-count-amd
+    ("vkCmdDrawIndirectCountAMD" cmd-draw-indirect-count-amd
+     funcall-cmd-draw-indirect-count-amd)
     (commandbuffer buffer offset countbuffer countbufferoffset maxdrawcount
      stride)
   (declare-types ("VkCommandBuffer" "commandBuffer") ("VkBuffer" buffer)
@@ -3209,8 +3133,8 @@
    countbufferoffset maxdrawcount stride))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdDrawIndexedIndirectCountAMD"
-    cmd-draw-indexed-indirect-count-amd
+    ("vkCmdDrawIndexedIndirectCountAMD" cmd-draw-indexed-indirect-count-amd
+     funcall-cmd-draw-indexed-indirect-count-amd)
     (commandbuffer buffer offset countbuffer countbufferoffset maxdrawcount
      stride)
   (declare-types ("VkCommandBuffer" "commandBuffer") ("VkBuffer" buffer)
@@ -3221,8 +3145,7 @@
    countbufferoffset maxdrawcount stride))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetShaderInfoAMD"
-    get-shader-info-amd
+    ("vkGetShaderInfoAMD" get-shader-info-amd funcall-get-shader-info-amd)
     (device pipeline shaderstage infotype pinfosize pinfo)
   (declare-types ("VkDevice" device) ("VkPipeline" pipeline)
    ("VkShaderStageFlagBits" "shaderStage") ("VkShaderInfoTypeAMD" "infoType")
@@ -3230,8 +3153,9 @@
   (vkgetshaderinfoamd device pipeline shaderstage infotype pinfosize pinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceExternalImageFormatPropertiesNV"
-    get-physical-device-external-image-format-properties-nv
+    ("vkGetPhysicalDeviceExternalImageFormatPropertiesNV"
+     get-physical-device-external-image-format-properties-nv
+     funcall-get-physical-device-external-image-format-properties-nv)
     (physicaldevice format type tiling usage flags externalhandletype
      pexternalimageformatproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice") ("VkFormat" format)
@@ -3244,8 +3168,8 @@
    type tiling usage flags externalhandletype pexternalimageformatproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdBeginConditionalRenderingEXT"
-    cmd-begin-conditional-rendering-ext
+    ("vkCmdBeginConditionalRenderingEXT" cmd-begin-conditional-rendering-ext
+     funcall-cmd-begin-conditional-rendering-ext)
     (commandbuffer pconditionalrenderingbegin)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkConditionalRenderingBeginInfoEXT" "pConditionalRenderingBegin") :return
@@ -3253,16 +3177,16 @@
   (vkcmdbeginconditionalrenderingext commandbuffer pconditionalrenderingbegin))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdEndConditionalRenderingEXT"
-    cmd-end-conditional-rendering-ext
+    ("vkCmdEndConditionalRenderingEXT" cmd-end-conditional-rendering-ext
+     funcall-cmd-end-conditional-rendering-ext)
     (commandbuffer)
   (declare-types ("VkCommandBuffer" "commandBuffer") :return
    ("void" return-value))
   (vkcmdendconditionalrenderingext commandbuffer))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetViewportWScalingNV"
-    cmd-set-viewport-w-scaling-nv
+    ("vkCmdSetViewportWScalingNV" cmd-set-viewport-w-scaling-nv
+     funcall-cmd-set-viewport-w-scaling-nv)
     (commandbuffer firstviewport viewportcount pviewportwscalings)
   (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "firstViewport")
    (uint32 "viewportCount") ("VkViewportWScalingNV" "pViewportWScalings")
@@ -3271,16 +3195,16 @@
    pviewportwscalings))
 
 (more-cffi:def-foreign-function doc-file
-    "vkReleaseDisplayEXT"
-    release-display-ext
+    ("vkReleaseDisplayEXT" release-display-ext funcall-release-display-ext)
     (physicaldevice display)
   (declare-types ("VkPhysicalDevice" "physicalDevice") ("VkDisplayKHR" display)
    :return ("VkResult" return-value))
   (vkreleasedisplayext physicaldevice display))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceSurfaceCapabilities2EXT"
-    get-physical-device-surface-capabilities-2-ext
+    ("vkGetPhysicalDeviceSurfaceCapabilities2EXT"
+     get-physical-device-surface-capabilities-2-ext
+     funcall-get-physical-device-surface-capabilities-2-ext)
     (physicaldevice surface psurfacecapabilities)
   (declare-types ("VkPhysicalDevice" "physicalDevice") ("VkSurfaceKHR" surface)
    ("VkSurfaceCapabilities2EXT" "pSurfaceCapabilities") :return
@@ -3289,8 +3213,8 @@
    psurfacecapabilities))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDisplayPowerControlEXT"
-    display-power-control-ext
+    ("vkDisplayPowerControlEXT" display-power-control-ext
+     funcall-display-power-control-ext)
     (device display pdisplaypowerinfo)
   (declare-types ("VkDevice" device) ("VkDisplayKHR" display)
    ("VkDisplayPowerInfoEXT" "pDisplayPowerInfo") :return
@@ -3298,8 +3222,8 @@
   (vkdisplaypowercontrolext device display pdisplaypowerinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkRegisterDeviceEventEXT"
-    register-device-event-ext
+    ("vkRegisterDeviceEventEXT" register-device-event-ext
+     funcall-register-device-event-ext)
     (device pdeviceeventinfo pallocator pfence)
   (declare-types ("VkDevice" device)
    ("VkDeviceEventInfoEXT" "pDeviceEventInfo")
@@ -3308,8 +3232,8 @@
   (vkregisterdeviceeventext device pdeviceeventinfo pallocator pfence))
 
 (more-cffi:def-foreign-function doc-file
-    "vkRegisterDisplayEventEXT"
-    register-display-event-ext
+    ("vkRegisterDisplayEventEXT" register-display-event-ext
+     funcall-register-display-event-ext)
     (device display pdisplayeventinfo pallocator pfence)
   (declare-types ("VkDevice" device) ("VkDisplayKHR" display)
    ("VkDisplayEventInfoEXT" "pDisplayEventInfo")
@@ -3319,8 +3243,8 @@
    pfence))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetSwapchainCounterEXT"
-    get-swapchain-counter-ext
+    ("vkGetSwapchainCounterEXT" get-swapchain-counter-ext
+     funcall-get-swapchain-counter-ext)
     (device swapchain counter pcountervalue)
   (declare-types ("VkDevice" device) ("VkSwapchainKHR" swapchain)
    ("VkSurfaceCounterFlagBitsEXT" counter) (uint64 "pCounterValue") :return
@@ -3328,8 +3252,8 @@
   (vkgetswapchaincounterext device swapchain counter pcountervalue))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetRefreshCycleDurationGOOGLE"
-    get-refresh-cycle-duration-google
+    ("vkGetRefreshCycleDurationGOOGLE" get-refresh-cycle-duration-google
+     funcall-get-refresh-cycle-duration-google)
     (device swapchain pdisplaytimingproperties)
   (declare-types ("VkDevice" device) ("VkSwapchainKHR" swapchain)
    ("VkRefreshCycleDurationGOOGLE" "pDisplayTimingProperties") :return
@@ -3337,8 +3261,8 @@
   (vkgetrefreshcycledurationgoogle device swapchain pdisplaytimingproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPastPresentationTimingGOOGLE"
-    get-past-presentation-timing-google
+    ("vkGetPastPresentationTimingGOOGLE" get-past-presentation-timing-google
+     funcall-get-past-presentation-timing-google)
     (device swapchain ppresentationtimingcount ppresentationtimings)
   (declare-types ("VkDevice" device) ("VkSwapchainKHR" swapchain)
    (uint32 "pPresentationTimingCount")
@@ -3348,8 +3272,8 @@
    ppresentationtimings))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetDiscardRectangleEXT"
-    cmd-set-discard-rectangle-ext
+    ("vkCmdSetDiscardRectangleEXT" cmd-set-discard-rectangle-ext
+     funcall-cmd-set-discard-rectangle-ext)
     (commandbuffer firstdiscardrectangle discardrectanglecount
      pdiscardrectangles)
   (declare-types ("VkCommandBuffer" "commandBuffer")
@@ -3359,8 +3283,7 @@
    discardrectanglecount pdiscardrectangles))
 
 (more-cffi:def-foreign-function doc-file
-    "vkSetHdrMetadataEXT"
-    set-hdr-metadata-ext
+    ("vkSetHdrMetadataEXT" set-hdr-metadata-ext funcall-set-hdr-metadata-ext)
     (device swapchaincount pswapchains pmetadata)
   (declare-types ("VkDevice" device) (uint32 "swapchainCount")
    ("VkSwapchainKHR" "pSwapchains") ("VkHdrMetadataEXT" "pMetadata") :return
@@ -3368,8 +3291,8 @@
   (vksethdrmetadataext device swapchaincount pswapchains pmetadata))
 
 (more-cffi:def-foreign-function doc-file
-    "vkSetDebugUtilsObjectNameEXT"
-    set-debug-utils-object-name-ext
+    ("vkSetDebugUtilsObjectNameEXT" set-debug-utils-object-name-ext
+     funcall-set-debug-utils-object-name-ext)
     (device pnameinfo)
   (declare-types ("VkDevice" device)
    ("VkDebugUtilsObjectNameInfoEXT" "pNameInfo") :return
@@ -3377,8 +3300,8 @@
   (vksetdebugutilsobjectnameext device pnameinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkSetDebugUtilsObjectTagEXT"
-    set-debug-utils-object-tag-ext
+    ("vkSetDebugUtilsObjectTagEXT" set-debug-utils-object-tag-ext
+     funcall-set-debug-utils-object-tag-ext)
     (device ptaginfo)
   (declare-types ("VkDevice" device)
    ("VkDebugUtilsObjectTagInfoEXT" "pTagInfo") :return
@@ -3386,55 +3309,55 @@
   (vksetdebugutilsobjecttagext device ptaginfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkQueueBeginDebugUtilsLabelEXT"
-    queue-begin-debug-utils-label-ext
+    ("vkQueueBeginDebugUtilsLabelEXT" queue-begin-debug-utils-label-ext
+     funcall-queue-begin-debug-utils-label-ext)
     (queue plabelinfo)
   (declare-types ("VkQueue" queue) ("VkDebugUtilsLabelEXT" "pLabelInfo")
    :return ("void" return-value))
   (vkqueuebegindebugutilslabelext queue plabelinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkQueueEndDebugUtilsLabelEXT"
-    queue-end-debug-utils-label-ext
+    ("vkQueueEndDebugUtilsLabelEXT" queue-end-debug-utils-label-ext
+     funcall-queue-end-debug-utils-label-ext)
     (queue)
   (declare-types ("VkQueue" queue) :return ("void" return-value))
   (vkqueueenddebugutilslabelext queue))
 
 (more-cffi:def-foreign-function doc-file
-    "vkQueueInsertDebugUtilsLabelEXT"
-    queue-insert-debug-utils-label-ext
+    ("vkQueueInsertDebugUtilsLabelEXT" queue-insert-debug-utils-label-ext
+     funcall-queue-insert-debug-utils-label-ext)
     (queue plabelinfo)
   (declare-types ("VkQueue" queue) ("VkDebugUtilsLabelEXT" "pLabelInfo")
    :return ("void" return-value))
   (vkqueueinsertdebugutilslabelext queue plabelinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdBeginDebugUtilsLabelEXT"
-    cmd-begin-debug-utils-label-ext
+    ("vkCmdBeginDebugUtilsLabelEXT" cmd-begin-debug-utils-label-ext
+     funcall-cmd-begin-debug-utils-label-ext)
     (commandbuffer plabelinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkDebugUtilsLabelEXT" "pLabelInfo") :return ("void" return-value))
   (vkcmdbegindebugutilslabelext commandbuffer plabelinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdEndDebugUtilsLabelEXT"
-    cmd-end-debug-utils-label-ext
+    ("vkCmdEndDebugUtilsLabelEXT" cmd-end-debug-utils-label-ext
+     funcall-cmd-end-debug-utils-label-ext)
     (commandbuffer)
   (declare-types ("VkCommandBuffer" "commandBuffer") :return
    ("void" return-value))
   (vkcmdenddebugutilslabelext commandbuffer))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdInsertDebugUtilsLabelEXT"
-    cmd-insert-debug-utils-label-ext
+    ("vkCmdInsertDebugUtilsLabelEXT" cmd-insert-debug-utils-label-ext
+     funcall-cmd-insert-debug-utils-label-ext)
     (commandbuffer plabelinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkDebugUtilsLabelEXT" "pLabelInfo") :return ("void" return-value))
   (vkcmdinsertdebugutilslabelext commandbuffer plabelinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateDebugUtilsMessengerEXT"
-    create-debug-utils-messenger-ext
+    ("vkCreateDebugUtilsMessengerEXT" create-debug-utils-messenger-ext
+     funcall-create-debug-utils-messenger-ext)
     (instance pcreateinfo pallocator pmessenger)
   (declare-types ("VkInstance" instance)
    ("VkDebugUtilsMessengerCreateInfoEXT" "pCreateInfo")
@@ -3443,16 +3366,16 @@
   (vkcreatedebugutilsmessengerext instance pcreateinfo pallocator pmessenger))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroyDebugUtilsMessengerEXT"
-    destroy-debug-utils-messenger-ext
+    ("vkDestroyDebugUtilsMessengerEXT" destroy-debug-utils-messenger-ext
+     funcall-destroy-debug-utils-messenger-ext)
     (instance messenger pallocator)
   (declare-types ("VkInstance" instance) ("VkDebugUtilsMessengerEXT" messenger)
    ("VkAllocationCallbacks" "pAllocator") :return ("void" return-value))
   (vkdestroydebugutilsmessengerext instance messenger pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkSubmitDebugUtilsMessageEXT"
-    submit-debug-utils-message-ext
+    ("vkSubmitDebugUtilsMessageEXT" submit-debug-utils-message-ext
+     funcall-submit-debug-utils-message-ext)
     (instance messageseverity messagetypes pcallbackdata)
   (declare-types ("VkInstance" instance)
    ("VkDebugUtilsMessageSeverityFlagBitsEXT" "messageSeverity")
@@ -3463,8 +3386,8 @@
    pcallbackdata))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetSampleLocationsEXT"
-    cmd-set-sample-locations-ext
+    ("vkCmdSetSampleLocationsEXT" cmd-set-sample-locations-ext
+     funcall-cmd-set-sample-locations-ext)
     (commandbuffer psamplelocationsinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkSampleLocationsInfoEXT" "pSampleLocationsInfo") :return
@@ -3472,8 +3395,9 @@
   (vkcmdsetsamplelocationsext commandbuffer psamplelocationsinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceMultisamplePropertiesEXT"
-    get-physical-device-multisample-properties-ext
+    ("vkGetPhysicalDeviceMultisamplePropertiesEXT"
+     get-physical-device-multisample-properties-ext
+     funcall-get-physical-device-multisample-properties-ext)
     (physicaldevice samples pmultisampleproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    ("VkSampleCountFlagBits" samples)
@@ -3483,8 +3407,9 @@
    pmultisampleproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetImageDrmFormatModifierPropertiesEXT"
-    get-image-drm-format-modifier-properties-ext
+    ("vkGetImageDrmFormatModifierPropertiesEXT"
+     get-image-drm-format-modifier-properties-ext
+     funcall-get-image-drm-format-modifier-properties-ext)
     (device image pproperties)
   (declare-types ("VkDevice" device) ("VkImage" image)
    ("VkImageDrmFormatModifierPropertiesEXT" "pProperties") :return
@@ -3492,8 +3417,8 @@
   (vkgetimagedrmformatmodifierpropertiesext device image pproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateValidationCacheEXT"
-    create-validation-cache-ext
+    ("vkCreateValidationCacheEXT" create-validation-cache-ext
+     funcall-create-validation-cache-ext)
     (device pcreateinfo pallocator pvalidationcache)
   (declare-types ("VkDevice" device)
    ("VkValidationCacheCreateInfoEXT" "pCreateInfo")
@@ -3503,16 +3428,16 @@
   (vkcreatevalidationcacheext device pcreateinfo pallocator pvalidationcache))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroyValidationCacheEXT"
-    destroy-validation-cache-ext
+    ("vkDestroyValidationCacheEXT" destroy-validation-cache-ext
+     funcall-destroy-validation-cache-ext)
     (device validationcache pallocator)
   (declare-types ("VkDevice" device) ("VkValidationCacheEXT" "validationCache")
    ("VkAllocationCallbacks" "pAllocator") :return ("void" return-value))
   (vkdestroyvalidationcacheext device validationcache pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkMergeValidationCachesEXT"
-    merge-validation-caches-ext
+    ("vkMergeValidationCachesEXT" merge-validation-caches-ext
+     funcall-merge-validation-caches-ext)
     (device dstcache srccachecount psrccaches)
   (declare-types ("VkDevice" device) ("VkValidationCacheEXT" "dstCache")
    (uint32 "srcCacheCount") ("VkValidationCacheEXT" "pSrcCaches") :return
@@ -3520,16 +3445,16 @@
   (vkmergevalidationcachesext device dstcache srccachecount psrccaches))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetValidationCacheDataEXT"
-    get-validation-cache-data-ext
+    ("vkGetValidationCacheDataEXT" get-validation-cache-data-ext
+     funcall-get-validation-cache-data-ext)
     (device validationcache pdatasize pdata)
   (declare-types ("VkDevice" device) ("VkValidationCacheEXT" "validationCache")
    (size "pDataSize") (void "pData") :return ("VkResult" return-value))
   (vkgetvalidationcachedataext device validationcache pdatasize pdata))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdBindShadingRateImageNV"
-    cmd-bind-shading-rate-image-nv
+    ("vkCmdBindShadingRateImageNV" cmd-bind-shading-rate-image-nv
+     funcall-cmd-bind-shading-rate-image-nv)
     (commandbuffer imageview imagelayout)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkImageView" "imageView") ("VkImageLayout" "imageLayout") :return
@@ -3537,8 +3462,9 @@
   (vkcmdbindshadingrateimagenv commandbuffer imageview imagelayout))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetViewportShadingRatePaletteNV"
-    cmd-set-viewport-shading-rate-palette-nv
+    ("vkCmdSetViewportShadingRatePaletteNV"
+     cmd-set-viewport-shading-rate-palette-nv
+     funcall-cmd-set-viewport-shading-rate-palette-nv)
     (commandbuffer firstviewport viewportcount pshadingratepalettes)
   (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "firstViewport")
    (uint32 "viewportCount") ("VkShadingRatePaletteNV" "pShadingRatePalettes")
@@ -3547,8 +3473,8 @@
    viewportcount pshadingratepalettes))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetCoarseSampleOrderNV"
-    cmd-set-coarse-sample-order-nv
+    ("vkCmdSetCoarseSampleOrderNV" cmd-set-coarse-sample-order-nv
+     funcall-cmd-set-coarse-sample-order-nv)
     (commandbuffer sampleordertype customsampleordercount pcustomsampleorders)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkCoarseSampleOrderTypeNV" "sampleOrderType")
@@ -3559,8 +3485,8 @@
    customsampleordercount pcustomsampleorders))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateAccelerationStructureNV"
-    create-acceleration-structure-nv
+    ("vkCreateAccelerationStructureNV" create-acceleration-structure-nv
+     funcall-create-acceleration-structure-nv)
     (device pcreateinfo pallocator paccelerationstructure)
   (declare-types ("VkDevice" device)
    ("VkAccelerationStructureCreateInfoNV" "pCreateInfo")
@@ -3571,8 +3497,8 @@
    paccelerationstructure))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroyAccelerationStructureNV"
-    destroy-acceleration-structure-nv
+    ("vkDestroyAccelerationStructureNV" destroy-acceleration-structure-nv
+     funcall-destroy-acceleration-structure-nv)
     (device accelerationstructure pallocator)
   (declare-types ("VkDevice" device)
    ("VkAccelerationStructureNV" "accelerationStructure")
@@ -3580,8 +3506,9 @@
   (vkdestroyaccelerationstructurenv device accelerationstructure pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetAccelerationStructureMemoryRequirementsNV"
-    get-acceleration-structure-memory-requirements-nv
+    ("vkGetAccelerationStructureMemoryRequirementsNV"
+     get-acceleration-structure-memory-requirements-nv
+     funcall-get-acceleration-structure-memory-requirements-nv)
     (device pinfo pmemoryrequirements)
   (declare-types ("VkDevice" device)
    ("VkAccelerationStructureMemoryRequirementsInfoNV" "pInfo")
@@ -3591,8 +3518,9 @@
    pmemoryrequirements))
 
 (more-cffi:def-foreign-function doc-file
-    "vkBindAccelerationStructureMemoryNV"
-    bind-acceleration-structure-memory-nv
+    ("vkBindAccelerationStructureMemoryNV"
+     bind-acceleration-structure-memory-nv
+     funcall-bind-acceleration-structure-memory-nv)
     (device bindinfocount pbindinfos)
   (declare-types ("VkDevice" device) (uint32 "bindInfoCount")
    ("VkBindAccelerationStructureMemoryInfoNV" "pBindInfos") :return
@@ -3600,8 +3528,8 @@
   (vkbindaccelerationstructurememorynv device bindinfocount pbindinfos))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdBuildAccelerationStructureNV"
-    cmd-build-acceleration-structure-nv
+    ("vkCmdBuildAccelerationStructureNV" cmd-build-acceleration-structure-nv
+     funcall-cmd-build-acceleration-structure-nv)
     (commandbuffer pinfo instancedata instanceoffset update dst src scratch
      scratchoffset)
   (declare-types ("VkCommandBuffer" "commandBuffer")
@@ -3614,8 +3542,8 @@
    instanceoffset update dst src scratch scratchoffset))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdCopyAccelerationStructureNV"
-    cmd-copy-acceleration-structure-nv
+    ("vkCmdCopyAccelerationStructureNV" cmd-copy-acceleration-structure-nv
+     funcall-cmd-copy-acceleration-structure-nv)
     (commandbuffer dst src mode)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkAccelerationStructureNV" dst) ("VkAccelerationStructureNV" src)
@@ -3623,8 +3551,7 @@
   (vkcmdcopyaccelerationstructurenv commandbuffer dst src mode))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdTraceRaysNV"
-    cmd-trace-rays-nv
+    ("vkCmdTraceRaysNV" cmd-trace-rays-nv funcall-cmd-trace-rays-nv)
     (commandbuffer raygenshaderbindingtablebuffer raygenshaderbindingoffset
      missshaderbindingtablebuffer missshaderbindingoffset
      missshaderbindingstride hitshaderbindingtablebuffer hitshaderbindingoffset
@@ -3651,8 +3578,8 @@
    callableshaderbindingstride width height depth))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateRayTracingPipelinesNV"
-    create-ray-tracing-pipelines-nv
+    ("vkCreateRayTracingPipelinesNV" create-ray-tracing-pipelines-nv
+     funcall-create-ray-tracing-pipelines-nv)
     (device pipelinecache createinfocount pcreateinfos pallocator ppipelines)
   (declare-types ("VkDevice" device) ("VkPipelineCache" "pipelineCache")
    (uint32 "createInfoCount")
@@ -3663,8 +3590,9 @@
    pcreateinfos pallocator ppipelines))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetRayTracingShaderGroupHandlesKHR"
-    get-ray-tracing-shader-group-handles-khr
+    ("vkGetRayTracingShaderGroupHandlesKHR"
+     get-ray-tracing-shader-group-handles-khr
+     funcall-get-ray-tracing-shader-group-handles-khr)
     (device pipeline firstgroup groupcount datasize pdata)
   (declare-types ("VkDevice" device) ("VkPipeline" pipeline)
    (uint32 "firstGroup") (uint32 "groupCount") (size "dataSize") (void "pData")
@@ -3673,8 +3601,9 @@
    datasize pdata))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetRayTracingShaderGroupHandlesNV"
-    get-ray-tracing-shader-group-handles-nv
+    ("vkGetRayTracingShaderGroupHandlesNV"
+     get-ray-tracing-shader-group-handles-nv
+     funcall-get-ray-tracing-shader-group-handles-nv)
     (device pipeline firstgroup groupcount datasize pdata)
   (declare-types ("VkDevice" device) ("VkPipeline" pipeline)
    (uint32 "firstGroup") (uint32 "groupCount") (size "dataSize") (void "pData")
@@ -3683,8 +3612,8 @@
    datasize pdata))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetAccelerationStructureHandleNV"
-    get-acceleration-structure-handle-nv
+    ("vkGetAccelerationStructureHandleNV" get-acceleration-structure-handle-nv
+     funcall-get-acceleration-structure-handle-nv)
     (device accelerationstructure datasize pdata)
   (declare-types ("VkDevice" device)
    ("VkAccelerationStructureNV" "accelerationStructure") (size "dataSize")
@@ -3693,8 +3622,9 @@
    pdata))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdWriteAccelerationStructuresPropertiesNV"
-    cmd-write-acceleration-structures-properties-nv
+    ("vkCmdWriteAccelerationStructuresPropertiesNV"
+     cmd-write-acceleration-structures-properties-nv
+     funcall-cmd-write-acceleration-structures-properties-nv)
     (commandbuffer accelerationstructurecount paccelerationstructures querytype
      querypool firstquery)
   (declare-types ("VkCommandBuffer" "commandBuffer")
@@ -3707,16 +3637,16 @@
    firstquery))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCompileDeferredNV"
-    compile-deferred-nv
+    ("vkCompileDeferredNV" compile-deferred-nv funcall-compile-deferred-nv)
     (device pipeline shader)
   (declare-types ("VkDevice" device) ("VkPipeline" pipeline) (uint32 shader)
    :return ("VkResult" return-value))
   (vkcompiledeferrednv device pipeline shader))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetMemoryHostPointerPropertiesEXT"
-    get-memory-host-pointer-properties-ext
+    ("vkGetMemoryHostPointerPropertiesEXT"
+     get-memory-host-pointer-properties-ext
+     funcall-get-memory-host-pointer-properties-ext)
     (device handletype phostpointer pmemoryhostpointerproperties)
   (declare-types ("VkDevice" device)
    ("VkExternalMemoryHandleTypeFlagBits" "handleType") (void "pHostPointer")
@@ -3726,8 +3656,8 @@
    pmemoryhostpointerproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdWriteBufferMarkerAMD"
-    cmd-write-buffer-marker-amd
+    ("vkCmdWriteBufferMarkerAMD" cmd-write-buffer-marker-amd
+     funcall-cmd-write-buffer-marker-amd)
     (commandbuffer pipelinestage dstbuffer dstoffset marker)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkPipelineStageFlagBits" "pipelineStage") ("VkBuffer" "dstBuffer")
@@ -3736,8 +3666,9 @@
    marker))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceCalibrateableTimeDomainsEXT"
-    get-physical-device-calibrateable-time-domains-ext
+    ("vkGetPhysicalDeviceCalibrateableTimeDomainsEXT"
+     get-physical-device-calibrateable-time-domains-ext
+     funcall-get-physical-device-calibrateable-time-domains-ext)
     (physicaldevice ptimedomaincount ptimedomains)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    (uint32 "pTimeDomainCount") ("VkTimeDomainEXT" "pTimeDomains") :return
@@ -3746,8 +3677,8 @@
    ptimedomaincount ptimedomains))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetCalibratedTimestampsEXT"
-    get-calibrated-timestamps-ext
+    ("vkGetCalibratedTimestampsEXT" get-calibrated-timestamps-ext
+     funcall-get-calibrated-timestamps-ext)
     (device timestampcount ptimestampinfos ptimestamps pmaxdeviation)
   (declare-types ("VkDevice" device) (uint32 "timestampCount")
    ("VkCalibratedTimestampInfoEXT" "pTimestampInfos") (uint64 "pTimestamps")
@@ -3756,16 +3687,16 @@
    ptimestamps pmaxdeviation))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdDrawMeshTasksNV"
-    cmd-draw-mesh-tasks-nv
+    ("vkCmdDrawMeshTasksNV" cmd-draw-mesh-tasks-nv
+     funcall-cmd-draw-mesh-tasks-nv)
     (commandbuffer taskcount firsttask)
   (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "taskCount")
    (uint32 "firstTask") :return ("void" return-value))
   (vkcmddrawmeshtasksnv commandbuffer taskcount firsttask))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdDrawMeshTasksIndirectNV"
-    cmd-draw-mesh-tasks-indirect-nv
+    ("vkCmdDrawMeshTasksIndirectNV" cmd-draw-mesh-tasks-indirect-nv
+     funcall-cmd-draw-mesh-tasks-indirect-nv)
     (commandbuffer buffer offset drawcount stride)
   (declare-types ("VkCommandBuffer" "commandBuffer") ("VkBuffer" buffer)
    ("VkDeviceSize" offset) (uint32 "drawCount") (uint32 stride) :return
@@ -3773,8 +3704,8 @@
   (vkcmddrawmeshtasksindirectnv commandbuffer buffer offset drawcount stride))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdDrawMeshTasksIndirectCountNV"
-    cmd-draw-mesh-tasks-indirect-count-nv
+    ("vkCmdDrawMeshTasksIndirectCountNV" cmd-draw-mesh-tasks-indirect-count-nv
+     funcall-cmd-draw-mesh-tasks-indirect-count-nv)
     (commandbuffer buffer offset countbuffer countbufferoffset maxdrawcount
      stride)
   (declare-types ("VkCommandBuffer" "commandBuffer") ("VkBuffer" buffer)
@@ -3785,8 +3716,8 @@
    countbufferoffset maxdrawcount stride))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetExclusiveScissorNV"
-    cmd-set-exclusive-scissor-nv
+    ("vkCmdSetExclusiveScissorNV" cmd-set-exclusive-scissor-nv
+     funcall-cmd-set-exclusive-scissor-nv)
     (commandbuffer firstexclusivescissor exclusivescissorcount
      pexclusivescissors)
   (declare-types ("VkCommandBuffer" "commandBuffer")
@@ -3796,24 +3727,23 @@
    exclusivescissorcount pexclusivescissors))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetCheckpointNV"
-    cmd-set-checkpoint-nv
+    ("vkCmdSetCheckpointNV" cmd-set-checkpoint-nv funcall-cmd-set-checkpoint-nv)
     (commandbuffer pcheckpointmarker)
   (declare-types ("VkCommandBuffer" "commandBuffer") (void "pCheckpointMarker")
    :return ("void" return-value))
   (vkcmdsetcheckpointnv commandbuffer pcheckpointmarker))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetQueueCheckpointDataNV"
-    get-queue-checkpoint-data-nv
+    ("vkGetQueueCheckpointDataNV" get-queue-checkpoint-data-nv
+     funcall-get-queue-checkpoint-data-nv)
     (queue pcheckpointdatacount pcheckpointdata)
   (declare-types ("VkQueue" queue) (uint32 "pCheckpointDataCount")
    ("VkCheckpointDataNV" "pCheckpointData") :return ("void" return-value))
   (vkgetqueuecheckpointdatanv queue pcheckpointdatacount pcheckpointdata))
 
 (more-cffi:def-foreign-function doc-file
-    "vkInitializePerformanceApiINTEL"
-    initialize-performance-api-intel
+    ("vkInitializePerformanceApiINTEL" initialize-performance-api-intel
+     funcall-initialize-performance-api-intel)
     (device pinitializeinfo)
   (declare-types ("VkDevice" device)
    ("VkInitializePerformanceApiInfoINTEL" "pInitializeInfo") :return
@@ -3821,15 +3751,15 @@
   (vkinitializeperformanceapiintel device pinitializeinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkUninitializePerformanceApiINTEL"
-    uninitialize-performance-api-intel
+    ("vkUninitializePerformanceApiINTEL" uninitialize-performance-api-intel
+     funcall-uninitialize-performance-api-intel)
     (device)
   (declare-types ("VkDevice" device) :return ("void" return-value))
   (vkuninitializeperformanceapiintel device))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetPerformanceMarkerINTEL"
-    cmd-set-performance-marker-intel
+    ("vkCmdSetPerformanceMarkerINTEL" cmd-set-performance-marker-intel
+     funcall-cmd-set-performance-marker-intel)
     (commandbuffer pmarkerinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkPerformanceMarkerInfoINTEL" "pMarkerInfo") :return
@@ -3837,8 +3767,9 @@
   (vkcmdsetperformancemarkerintel commandbuffer pmarkerinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetPerformanceStreamMarkerINTEL"
-    cmd-set-performance-stream-marker-intel
+    ("vkCmdSetPerformanceStreamMarkerINTEL"
+     cmd-set-performance-stream-marker-intel
+     funcall-cmd-set-performance-stream-marker-intel)
     (commandbuffer pmarkerinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkPerformanceStreamMarkerInfoINTEL" "pMarkerInfo") :return
@@ -3846,8 +3777,8 @@
   (vkcmdsetperformancestreammarkerintel commandbuffer pmarkerinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetPerformanceOverrideINTEL"
-    cmd-set-performance-override-intel
+    ("vkCmdSetPerformanceOverrideINTEL" cmd-set-performance-override-intel
+     funcall-cmd-set-performance-override-intel)
     (commandbuffer poverrideinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkPerformanceOverrideInfoINTEL" "pOverrideInfo") :return
@@ -3855,8 +3786,9 @@
   (vkcmdsetperformanceoverrideintel commandbuffer poverrideinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkAcquirePerformanceConfigurationINTEL"
-    acquire-performance-configuration-intel
+    ("vkAcquirePerformanceConfigurationINTEL"
+     acquire-performance-configuration-intel
+     funcall-acquire-performance-configuration-intel)
     (device pacquireinfo pconfiguration)
   (declare-types ("VkDevice" device)
    ("VkPerformanceConfigurationAcquireInfoINTEL" "pAcquireInfo")
@@ -3865,8 +3797,9 @@
   (vkacquireperformanceconfigurationintel device pacquireinfo pconfiguration))
 
 (more-cffi:def-foreign-function doc-file
-    "vkReleasePerformanceConfigurationINTEL"
-    release-performance-configuration-intel
+    ("vkReleasePerformanceConfigurationINTEL"
+     release-performance-configuration-intel
+     funcall-release-performance-configuration-intel)
     (device configuration)
   (declare-types ("VkDevice" device)
    ("VkPerformanceConfigurationINTEL" configuration) :return
@@ -3874,8 +3807,9 @@
   (vkreleaseperformanceconfigurationintel device configuration))
 
 (more-cffi:def-foreign-function doc-file
-    "vkQueueSetPerformanceConfigurationINTEL"
-    queue-set-performance-configuration-intel
+    ("vkQueueSetPerformanceConfigurationINTEL"
+     queue-set-performance-configuration-intel
+     funcall-queue-set-performance-configuration-intel)
     (queue configuration)
   (declare-types ("VkQueue" queue)
    ("VkPerformanceConfigurationINTEL" configuration) :return
@@ -3883,8 +3817,8 @@
   (vkqueuesetperformanceconfigurationintel queue configuration))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPerformanceParameterINTEL"
-    get-performance-parameter-intel
+    ("vkGetPerformanceParameterINTEL" get-performance-parameter-intel
+     funcall-get-performance-parameter-intel)
     (device parameter pvalue)
   (declare-types ("VkDevice" device)
    ("VkPerformanceParameterTypeINTEL" parameter)
@@ -3892,24 +3826,24 @@
   (vkgetperformanceparameterintel device parameter pvalue))
 
 (more-cffi:def-foreign-function doc-file
-    "vkSetLocalDimmingAMD"
-    set-local-dimming-amd
+    ("vkSetLocalDimmingAMD" set-local-dimming-amd funcall-set-local-dimming-amd)
     (device swapchain localdimmingenable)
   (declare-types ("VkDevice" device) ("VkSwapchainKHR" "swapChain")
    ("VkBool32" "localDimmingEnable") :return ("void" return-value))
   (vksetlocaldimmingamd device swapchain localdimmingenable))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetBufferDeviceAddressEXT"
-    get-buffer-device-address-ext
+    ("vkGetBufferDeviceAddressEXT" get-buffer-device-address-ext
+     funcall-get-buffer-device-address-ext)
     (device pinfo)
   (declare-types ("VkDevice" device) ("VkBufferDeviceAddressInfo" "pInfo")
    :return ("VkDeviceAddress" return-value))
   (vkgetbufferdeviceaddressext device pinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceToolPropertiesEXT"
-    get-physical-device-tool-properties-ext
+    ("vkGetPhysicalDeviceToolPropertiesEXT"
+     get-physical-device-tool-properties-ext
+     funcall-get-physical-device-tool-properties-ext)
     (physicaldevice ptoolcount ptoolproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice") (uint32 "pToolCount")
    ("VkPhysicalDeviceToolProperties" "pToolProperties") :return
@@ -3918,8 +3852,9 @@
    ptoolproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceCooperativeMatrixPropertiesNV"
-    get-physical-device-cooperative-matrix-properties-nv
+    ("vkGetPhysicalDeviceCooperativeMatrixPropertiesNV"
+     get-physical-device-cooperative-matrix-properties-nv
+     funcall-get-physical-device-cooperative-matrix-properties-nv)
     (physicaldevice ppropertycount pproperties)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    (uint32 "pPropertyCount") ("VkCooperativeMatrixPropertiesNV" "pProperties")
@@ -3928,8 +3863,9 @@
    ppropertycount pproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV"
-    get-physical-device-supported-framebuffer-mixed-samples-combinations-nv
+    ("vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV"
+     get-physical-device-supported-framebuffer-mixed-samples-combinations-nv
+     funcall-get-physical-device-supported-framebuffer-mixed-samples-combinations-nv)
     (physicaldevice pcombinationcount pcombinations)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    (uint32 "pCombinationCount")
@@ -3939,8 +3875,8 @@
    physicaldevice pcombinationcount pcombinations))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateHeadlessSurfaceEXT"
-    create-headless-surface-ext
+    ("vkCreateHeadlessSurfaceEXT" create-headless-surface-ext
+     funcall-create-headless-surface-ext)
     (instance pcreateinfo pallocator psurface)
   (declare-types ("VkInstance" instance)
    ("VkHeadlessSurfaceCreateInfoEXT" "pCreateInfo")
@@ -3949,8 +3885,8 @@
   (vkcreateheadlesssurfaceext instance pcreateinfo pallocator psurface))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetLineStippleEXT"
-    cmd-set-line-stipple-ext
+    ("vkCmdSetLineStippleEXT" cmd-set-line-stipple-ext
+     funcall-cmd-set-line-stipple-ext)
     (commandbuffer linestipplefactor linestipplepattern)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    (uint32 "lineStippleFactor") (uint16 "lineStipplePattern") :return
@@ -3958,56 +3894,54 @@
   (vkcmdsetlinestippleext commandbuffer linestipplefactor linestipplepattern))
 
 (more-cffi:def-foreign-function doc-file
-    "vkResetQueryPoolEXT"
-    reset-query-pool-ext
+    ("vkResetQueryPoolEXT" reset-query-pool-ext funcall-reset-query-pool-ext)
     (device querypool firstquery querycount)
   (declare-types ("VkDevice" device) ("VkQueryPool" "queryPool")
    (uint32 "firstQuery") (uint32 "queryCount") :return ("void" return-value))
   (vkresetquerypoolext device querypool firstquery querycount))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetCullModeEXT"
-    cmd-set-cull-mode-ext
+    ("vkCmdSetCullModeEXT" cmd-set-cull-mode-ext funcall-cmd-set-cull-mode-ext)
     (commandbuffer cullmode)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkCullModeFlags" "cullMode") :return ("void" return-value))
   (vkcmdsetcullmodeext commandbuffer cullmode))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetFrontFaceEXT"
-    cmd-set-front-face-ext
+    ("vkCmdSetFrontFaceEXT" cmd-set-front-face-ext
+     funcall-cmd-set-front-face-ext)
     (commandbuffer frontface)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkFrontFace" "frontFace") :return ("void" return-value))
   (vkcmdsetfrontfaceext commandbuffer frontface))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetPrimitiveTopologyEXT"
-    cmd-set-primitive-topology-ext
+    ("vkCmdSetPrimitiveTopologyEXT" cmd-set-primitive-topology-ext
+     funcall-cmd-set-primitive-topology-ext)
     (commandbuffer primitivetopology)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkPrimitiveTopology" "primitiveTopology") :return ("void" return-value))
   (vkcmdsetprimitivetopologyext commandbuffer primitivetopology))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetViewportWithCountEXT"
-    cmd-set-viewport-with-count-ext
+    ("vkCmdSetViewportWithCountEXT" cmd-set-viewport-with-count-ext
+     funcall-cmd-set-viewport-with-count-ext)
     (commandbuffer viewportcount pviewports)
   (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "viewportCount")
    ("VkViewport" "pViewports") :return ("void" return-value))
   (vkcmdsetviewportwithcountext commandbuffer viewportcount pviewports))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetScissorWithCountEXT"
-    cmd-set-scissor-with-count-ext
+    ("vkCmdSetScissorWithCountEXT" cmd-set-scissor-with-count-ext
+     funcall-cmd-set-scissor-with-count-ext)
     (commandbuffer scissorcount pscissors)
   (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "scissorCount")
    ("VkRect2D" "pScissors") :return ("void" return-value))
   (vkcmdsetscissorwithcountext commandbuffer scissorcount pscissors))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdBindVertexBuffers2EXT"
-    cmd-bind-vertex-buffers-2-ext
+    ("vkCmdBindVertexBuffers2EXT" cmd-bind-vertex-buffers-2-ext
+     funcall-cmd-bind-vertex-buffers-2-ext)
     (commandbuffer firstbinding bindingcount pbuffers poffsets psizes pstrides)
   (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "firstBinding")
    (uint32 "bindingCount") ("VkBuffer" "pBuffers") ("VkDeviceSize" "pOffsets")
@@ -4017,48 +3951,48 @@
    poffsets psizes pstrides))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetDepthTestEnableEXT"
-    cmd-set-depth-test-enable-ext
+    ("vkCmdSetDepthTestEnableEXT" cmd-set-depth-test-enable-ext
+     funcall-cmd-set-depth-test-enable-ext)
     (commandbuffer depthtestenable)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkBool32" "depthTestEnable") :return ("void" return-value))
   (vkcmdsetdepthtestenableext commandbuffer depthtestenable))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetDepthWriteEnableEXT"
-    cmd-set-depth-write-enable-ext
+    ("vkCmdSetDepthWriteEnableEXT" cmd-set-depth-write-enable-ext
+     funcall-cmd-set-depth-write-enable-ext)
     (commandbuffer depthwriteenable)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkBool32" "depthWriteEnable") :return ("void" return-value))
   (vkcmdsetdepthwriteenableext commandbuffer depthwriteenable))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetDepthCompareOpEXT"
-    cmd-set-depth-compare-op-ext
+    ("vkCmdSetDepthCompareOpEXT" cmd-set-depth-compare-op-ext
+     funcall-cmd-set-depth-compare-op-ext)
     (commandbuffer depthcompareop)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkCompareOp" "depthCompareOp") :return ("void" return-value))
   (vkcmdsetdepthcompareopext commandbuffer depthcompareop))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetDepthBoundsTestEnableEXT"
-    cmd-set-depth-bounds-test-enable-ext
+    ("vkCmdSetDepthBoundsTestEnableEXT" cmd-set-depth-bounds-test-enable-ext
+     funcall-cmd-set-depth-bounds-test-enable-ext)
     (commandbuffer depthboundstestenable)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkBool32" "depthBoundsTestEnable") :return ("void" return-value))
   (vkcmdsetdepthboundstestenableext commandbuffer depthboundstestenable))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetStencilTestEnableEXT"
-    cmd-set-stencil-test-enable-ext
+    ("vkCmdSetStencilTestEnableEXT" cmd-set-stencil-test-enable-ext
+     funcall-cmd-set-stencil-test-enable-ext)
     (commandbuffer stenciltestenable)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkBool32" "stencilTestEnable") :return ("void" return-value))
   (vkcmdsetstenciltestenableext commandbuffer stenciltestenable))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetStencilOpEXT"
-    cmd-set-stencil-op-ext
+    ("vkCmdSetStencilOpEXT" cmd-set-stencil-op-ext
+     funcall-cmd-set-stencil-op-ext)
     (commandbuffer facemask failop passop depthfailop compareop)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkStencilFaceFlags" "faceMask") ("VkStencilOp" "failOp")
@@ -4068,8 +4002,9 @@
    compareop))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetGeneratedCommandsMemoryRequirementsNV"
-    get-generated-commands-memory-requirements-nv
+    ("vkGetGeneratedCommandsMemoryRequirementsNV"
+     get-generated-commands-memory-requirements-nv
+     funcall-get-generated-commands-memory-requirements-nv)
     (device pinfo pmemoryrequirements)
   (declare-types ("VkDevice" device)
    ("VkGeneratedCommandsMemoryRequirementsInfoNV" "pInfo")
@@ -4078,8 +4013,8 @@
   (vkgetgeneratedcommandsmemoryrequirementsnv device pinfo pmemoryrequirements))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdPreprocessGeneratedCommandsNV"
-    cmd-preprocess-generated-commands-nv
+    ("vkCmdPreprocessGeneratedCommandsNV" cmd-preprocess-generated-commands-nv
+     funcall-cmd-preprocess-generated-commands-nv)
     (commandbuffer pgeneratedcommandsinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkGeneratedCommandsInfoNV" "pGeneratedCommandsInfo") :return
@@ -4087,8 +4022,8 @@
   (vkcmdpreprocessgeneratedcommandsnv commandbuffer pgeneratedcommandsinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdExecuteGeneratedCommandsNV"
-    cmd-execute-generated-commands-nv
+    ("vkCmdExecuteGeneratedCommandsNV" cmd-execute-generated-commands-nv
+     funcall-cmd-execute-generated-commands-nv)
     (commandbuffer ispreprocessed pgeneratedcommandsinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkBool32" "isPreprocessed")
@@ -4098,8 +4033,8 @@
    pgeneratedcommandsinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdBindPipelineShaderGroupNV"
-    cmd-bind-pipeline-shader-group-nv
+    ("vkCmdBindPipelineShaderGroupNV" cmd-bind-pipeline-shader-group-nv
+     funcall-cmd-bind-pipeline-shader-group-nv)
     (commandbuffer pipelinebindpoint pipeline groupindex)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkPipelineBindPoint" "pipelineBindPoint") ("VkPipeline" pipeline)
@@ -4108,8 +4043,8 @@
    groupindex))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateIndirectCommandsLayoutNV"
-    create-indirect-commands-layout-nv
+    ("vkCreateIndirectCommandsLayoutNV" create-indirect-commands-layout-nv
+     funcall-create-indirect-commands-layout-nv)
     (device pcreateinfo pallocator pindirectcommandslayout)
   (declare-types ("VkDevice" device)
    ("VkIndirectCommandsLayoutCreateInfoNV" "pCreateInfo")
@@ -4120,8 +4055,8 @@
    pindirectcommandslayout))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroyIndirectCommandsLayoutNV"
-    destroy-indirect-commands-layout-nv
+    ("vkDestroyIndirectCommandsLayoutNV" destroy-indirect-commands-layout-nv
+     funcall-destroy-indirect-commands-layout-nv)
     (device indirectcommandslayout pallocator)
   (declare-types ("VkDevice" device)
    ("VkIndirectCommandsLayoutNV" "indirectCommandsLayout")
@@ -4129,16 +4064,15 @@
   (vkdestroyindirectcommandslayoutnv device indirectcommandslayout pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkAcquireDrmDisplayEXT"
-    acquire-drm-display-ext
+    ("vkAcquireDrmDisplayEXT" acquire-drm-display-ext
+     funcall-acquire-drm-display-ext)
     (physicaldevice drmfd display)
   (declare-types ("VkPhysicalDevice" "physicalDevice") (int32 "drmFd")
    ("VkDisplayKHR" display) :return ("VkResult" return-value))
   (vkacquiredrmdisplayext physicaldevice drmfd display))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetDrmDisplayEXT"
-    get-drm-display-ext
+    ("vkGetDrmDisplayEXT" get-drm-display-ext funcall-get-drm-display-ext)
     (physicaldevice drmfd connectorid display)
   (declare-types ("VkPhysicalDevice" "physicalDevice") (int32 "drmFd")
    (uint32 "connectorId") ("VkDisplayKHR" display) :return
@@ -4146,8 +4080,8 @@
   (vkgetdrmdisplayext physicaldevice drmfd connectorid display))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreatePrivateDataSlotEXT"
-    create-private-data-slot-ext
+    ("vkCreatePrivateDataSlotEXT" create-private-data-slot-ext
+     funcall-create-private-data-slot-ext)
     (device pcreateinfo pallocator pprivatedataslot)
   (declare-types ("VkDevice" device)
    ("VkPrivateDataSlotCreateInfo" "pCreateInfo")
@@ -4156,16 +4090,15 @@
   (vkcreateprivatedataslotext device pcreateinfo pallocator pprivatedataslot))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroyPrivateDataSlotEXT"
-    destroy-private-data-slot-ext
+    ("vkDestroyPrivateDataSlotEXT" destroy-private-data-slot-ext
+     funcall-destroy-private-data-slot-ext)
     (device privatedataslot pallocator)
   (declare-types ("VkDevice" device) ("VkPrivateDataSlot" "privateDataSlot")
    ("VkAllocationCallbacks" "pAllocator") :return ("void" return-value))
   (vkdestroyprivatedataslotext device privatedataslot pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkSetPrivateDataEXT"
-    set-private-data-ext
+    ("vkSetPrivateDataEXT" set-private-data-ext funcall-set-private-data-ext)
     (device objecttype objecthandle privatedataslot data)
   (declare-types ("VkDevice" device) ("VkObjectType" "objectType")
    (uint64 "objectHandle") ("VkPrivateDataSlot" "privateDataSlot")
@@ -4173,8 +4106,7 @@
   (vksetprivatedataext device objecttype objecthandle privatedataslot data))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPrivateDataEXT"
-    get-private-data-ext
+    ("vkGetPrivateDataEXT" get-private-data-ext funcall-get-private-data-ext)
     (device objecttype objecthandle privatedataslot pdata)
   (declare-types ("VkDevice" device) ("VkObjectType" "objectType")
    (uint64 "objectHandle") ("VkPrivateDataSlot" "privateDataSlot")
@@ -4182,8 +4114,8 @@
   (vkgetprivatedataext device objecttype objecthandle privatedataslot pdata))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetFragmentShadingRateEnumNV"
-    cmd-set-fragment-shading-rate-enum-nv
+    ("vkCmdSetFragmentShadingRateEnumNV" cmd-set-fragment-shading-rate-enum-nv
+     funcall-cmd-set-fragment-shading-rate-enum-nv)
     (commandbuffer shadingrate combinerops)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkFragmentShadingRateNV" "shadingRate")
@@ -4192,8 +4124,8 @@
   (vkcmdsetfragmentshadingrateenumnv commandbuffer shadingrate combinerops))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetImageSubresourceLayout2EXT"
-    get-image-subresource-layout-2-ext
+    ("vkGetImageSubresourceLayout2EXT" get-image-subresource-layout-2-ext
+     funcall-get-image-subresource-layout-2-ext)
     (device image psubresource playout)
   (declare-types ("VkDevice" device) ("VkImage" image)
    ("VkImageSubresource2EXT" "pSubresource")
@@ -4201,16 +4133,15 @@
   (vkgetimagesubresourcelayout2ext device image psubresource playout))
 
 (more-cffi:def-foreign-function doc-file
-    "vkAcquireWinrtDisplayNV"
-    acquire-winrt-display-nv
+    ("vkAcquireWinrtDisplayNV" acquire-winrt-display-nv
+     funcall-acquire-winrt-display-nv)
     (physicaldevice display)
   (declare-types ("VkPhysicalDevice" "physicalDevice") ("VkDisplayKHR" display)
    :return ("VkResult" return-value))
   (vkacquirewinrtdisplaynv physicaldevice display))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetWinrtDisplayNV"
-    get-winrt-display-nv
+    ("vkGetWinrtDisplayNV" get-winrt-display-nv funcall-get-winrt-display-nv)
     (physicaldevice devicerelativeid pdisplay)
   (declare-types ("VkPhysicalDevice" "physicalDevice")
    (uint32 "deviceRelativeId") ("VkDisplayKHR" "pDisplay") :return
@@ -4218,8 +4149,8 @@
   (vkgetwinrtdisplaynv physicaldevice devicerelativeid pdisplay))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetVertexInputEXT"
-    cmd-set-vertex-input-ext
+    ("vkCmdSetVertexInputEXT" cmd-set-vertex-input-ext
+     funcall-cmd-set-vertex-input-ext)
     (commandbuffer vertexbindingdescriptioncount pvertexbindingdescriptions
      vertexattributedescriptioncount pvertexattributedescriptions)
   (declare-types ("VkCommandBuffer" "commandBuffer")
@@ -4233,8 +4164,9 @@
    pvertexattributedescriptions))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI"
-    get-device-subpass-shading-max-workgroup-size-huawei
+    ("vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI"
+     get-device-subpass-shading-max-workgroup-size-huawei
+     funcall-get-device-subpass-shading-max-workgroup-size-huawei)
     (device renderpass pmaxworkgroupsize)
   (declare-types ("VkDevice" device) ("VkRenderPass" renderpass)
    ("VkExtent2D" "pMaxWorkgroupSize") :return ("VkResult" return-value))
@@ -4242,16 +4174,16 @@
    pmaxworkgroupsize))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSubpassShadingHUAWEI"
-    cmd-subpass-shading-huawei
+    ("vkCmdSubpassShadingHUAWEI" cmd-subpass-shading-huawei
+     funcall-cmd-subpass-shading-huawei)
     (commandbuffer)
   (declare-types ("VkCommandBuffer" "commandBuffer") :return
    ("void" return-value))
   (vkcmdsubpassshadinghuawei commandbuffer))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdBindInvocationMaskHUAWEI"
-    cmd-bind-invocation-mask-huawei
+    ("vkCmdBindInvocationMaskHUAWEI" cmd-bind-invocation-mask-huawei
+     funcall-cmd-bind-invocation-mask-huawei)
     (commandbuffer imageview imagelayout)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkImageView" "imageView") ("VkImageLayout" "imageLayout") :return
@@ -4259,8 +4191,8 @@
   (vkcmdbindinvocationmaskhuawei commandbuffer imageview imagelayout))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetMemoryRemoteAddressNV"
-    get-memory-remote-address-nv
+    ("vkGetMemoryRemoteAddressNV" get-memory-remote-address-nv
+     funcall-get-memory-remote-address-nv)
     (device pmemorygetremoteaddressinfo paddress)
   (declare-types ("VkDevice" device)
    ("VkMemoryGetRemoteAddressInfoNV" "pMemoryGetRemoteAddressInfo")
@@ -4268,8 +4200,8 @@
   (vkgetmemoryremoteaddressnv device pmemorygetremoteaddressinfo paddress))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetPipelinePropertiesEXT"
-    get-pipeline-properties-ext
+    ("vkGetPipelinePropertiesEXT" get-pipeline-properties-ext
+     funcall-get-pipeline-properties-ext)
     (device ppipelineinfo ppipelineproperties)
   (declare-types ("VkDevice" device) ("VkPipelineInfoEXT" "pPipelineInfo")
    ("VkBaseOutStructure" "pPipelineProperties") :return
@@ -4277,48 +4209,47 @@
   (vkgetpipelinepropertiesext device ppipelineinfo ppipelineproperties))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetPatchControlPointsEXT"
-    cmd-set-patch-control-points-ext
+    ("vkCmdSetPatchControlPointsEXT" cmd-set-patch-control-points-ext
+     funcall-cmd-set-patch-control-points-ext)
     (commandbuffer patchcontrolpoints)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    (uint32 "patchControlPoints") :return ("void" return-value))
   (vkcmdsetpatchcontrolpointsext commandbuffer patchcontrolpoints))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetRasterizerDiscardEnableEXT"
-    cmd-set-rasterizer-discard-enable-ext
+    ("vkCmdSetRasterizerDiscardEnableEXT" cmd-set-rasterizer-discard-enable-ext
+     funcall-cmd-set-rasterizer-discard-enable-ext)
     (commandbuffer rasterizerdiscardenable)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkBool32" "rasterizerDiscardEnable") :return ("void" return-value))
   (vkcmdsetrasterizerdiscardenableext commandbuffer rasterizerdiscardenable))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetDepthBiasEnableEXT"
-    cmd-set-depth-bias-enable-ext
+    ("vkCmdSetDepthBiasEnableEXT" cmd-set-depth-bias-enable-ext
+     funcall-cmd-set-depth-bias-enable-ext)
     (commandbuffer depthbiasenable)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkBool32" "depthBiasEnable") :return ("void" return-value))
   (vkcmdsetdepthbiasenableext commandbuffer depthbiasenable))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetLogicOpEXT"
-    cmd-set-logic-op-ext
+    ("vkCmdSetLogicOpEXT" cmd-set-logic-op-ext funcall-cmd-set-logic-op-ext)
     (commandbuffer logicop)
   (declare-types ("VkCommandBuffer" "commandBuffer") ("VkLogicOp" "logicOp")
    :return ("void" return-value))
   (vkcmdsetlogicopext commandbuffer logicop))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetPrimitiveRestartEnableEXT"
-    cmd-set-primitive-restart-enable-ext
+    ("vkCmdSetPrimitiveRestartEnableEXT" cmd-set-primitive-restart-enable-ext
+     funcall-cmd-set-primitive-restart-enable-ext)
     (commandbuffer primitiverestartenable)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkBool32" "primitiveRestartEnable") :return ("void" return-value))
   (vkcmdsetprimitiverestartenableext commandbuffer primitiverestartenable))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetColorWriteEnableEXT"
-    cmd-set-color-write-enable-ext
+    ("vkCmdSetColorWriteEnableEXT" cmd-set-color-write-enable-ext
+     funcall-cmd-set-color-write-enable-ext)
     (commandbuffer attachmentcount pcolorwriteenables)
   (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "attachmentCount")
    ("VkBool32" "pColorWriteEnables") :return ("void" return-value))
@@ -4326,8 +4257,7 @@
    pcolorwriteenables))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdDrawMultiEXT"
-    cmd-draw-multi-ext
+    ("vkCmdDrawMultiEXT" cmd-draw-multi-ext funcall-cmd-draw-multi-ext)
     (commandbuffer drawcount pvertexinfo instancecount firstinstance stride)
   (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "drawCount")
    ("VkMultiDrawInfoEXT" "pVertexInfo") (uint32 "instanceCount")
@@ -4336,8 +4266,8 @@
    firstinstance stride))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdDrawMultiIndexedEXT"
-    cmd-draw-multi-indexed-ext
+    ("vkCmdDrawMultiIndexedEXT" cmd-draw-multi-indexed-ext
+     funcall-cmd-draw-multi-indexed-ext)
     (commandbuffer drawcount pindexinfo instancecount firstinstance stride
      pvertexoffset)
   (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "drawCount")
@@ -4348,16 +4278,17 @@
    firstinstance stride pvertexoffset))
 
 (more-cffi:def-foreign-function doc-file
-    "vkSetDeviceMemoryPriorityEXT"
-    set-device-memory-priority-ext
+    ("vkSetDeviceMemoryPriorityEXT" set-device-memory-priority-ext
+     funcall-set-device-memory-priority-ext)
     (device memory priority)
   (declare-types ("VkDevice" device) ("VkDeviceMemory" memory) (float priority)
    :return ("void" return-value))
   (vksetdevicememorypriorityext device memory priority))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetDescriptorSetLayoutHostMappingInfoVALVE"
-    get-descriptor-set-layout-host-mapping-info-valve
+    ("vkGetDescriptorSetLayoutHostMappingInfoVALVE"
+     get-descriptor-set-layout-host-mapping-info-valve
+     funcall-get-descriptor-set-layout-host-mapping-info-valve)
     (device pbindingreference phostmapping)
   (declare-types ("VkDevice" device)
    ("VkDescriptorSetBindingReferenceVALVE" "pBindingReference")
@@ -4367,16 +4298,16 @@
    phostmapping))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetDescriptorSetHostMappingVALVE"
-    get-descriptor-set-host-mapping-valve
+    ("vkGetDescriptorSetHostMappingVALVE" get-descriptor-set-host-mapping-valve
+     funcall-get-descriptor-set-host-mapping-valve)
     (device descriptorset ppdata)
   (declare-types ("VkDevice" device) ("VkDescriptorSet" "descriptorSet")
    (void "ppData") :return ("void" return-value))
   (vkgetdescriptorsethostmappingvalve device descriptorset ppdata))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateAccelerationStructureKHR"
-    create-acceleration-structure-khr
+    ("vkCreateAccelerationStructureKHR" create-acceleration-structure-khr
+     funcall-create-acceleration-structure-khr)
     (device pcreateinfo pallocator paccelerationstructure)
   (declare-types ("VkDevice" device)
    ("VkAccelerationStructureCreateInfoKHR" "pCreateInfo")
@@ -4387,8 +4318,8 @@
    paccelerationstructure))
 
 (more-cffi:def-foreign-function doc-file
-    "vkDestroyAccelerationStructureKHR"
-    destroy-acceleration-structure-khr
+    ("vkDestroyAccelerationStructureKHR" destroy-acceleration-structure-khr
+     funcall-destroy-acceleration-structure-khr)
     (device accelerationstructure pallocator)
   (declare-types ("VkDevice" device)
    ("VkAccelerationStructureKHR" "accelerationStructure")
@@ -4396,8 +4327,9 @@
   (vkdestroyaccelerationstructurekhr device accelerationstructure pallocator))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdBuildAccelerationStructuresKHR"
-    cmd-build-acceleration-structures-khr
+    ("vkCmdBuildAccelerationStructuresKHR"
+     cmd-build-acceleration-structures-khr
+     funcall-cmd-build-acceleration-structures-khr)
     (commandbuffer infocount pinfos ppbuildrangeinfos)
   (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "infoCount")
    ("VkAccelerationStructureBuildGeometryInfoKHR" "pInfos")
@@ -4407,8 +4339,9 @@
    ppbuildrangeinfos))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdBuildAccelerationStructuresIndirectKHR"
-    cmd-build-acceleration-structures-indirect-khr
+    ("vkCmdBuildAccelerationStructuresIndirectKHR"
+     cmd-build-acceleration-structures-indirect-khr
+     funcall-cmd-build-acceleration-structures-indirect-khr)
     (commandbuffer infocount pinfos pindirectdeviceaddresses pindirectstrides
      ppmaxprimitivecounts)
   (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "infoCount")
@@ -4419,8 +4352,8 @@
    pindirectdeviceaddresses pindirectstrides ppmaxprimitivecounts))
 
 (more-cffi:def-foreign-function doc-file
-    "vkBuildAccelerationStructuresKHR"
-    build-acceleration-structures-khr
+    ("vkBuildAccelerationStructuresKHR" build-acceleration-structures-khr
+     funcall-build-acceleration-structures-khr)
     (device deferredoperation infocount pinfos ppbuildrangeinfos)
   (declare-types ("VkDevice" device)
    ("VkDeferredOperationKHR" "deferredOperation") (uint32 "infoCount")
@@ -4431,8 +4364,8 @@
    ppbuildrangeinfos))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCopyAccelerationStructureKHR"
-    copy-acceleration-structure-khr
+    ("vkCopyAccelerationStructureKHR" copy-acceleration-structure-khr
+     funcall-copy-acceleration-structure-khr)
     (device deferredoperation pinfo)
   (declare-types ("VkDevice" device)
    ("VkDeferredOperationKHR" "deferredOperation")
@@ -4441,8 +4374,9 @@
   (vkcopyaccelerationstructurekhr device deferredoperation pinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCopyAccelerationStructureToMemoryKHR"
-    copy-acceleration-structure-to-memory-khr
+    ("vkCopyAccelerationStructureToMemoryKHR"
+     copy-acceleration-structure-to-memory-khr
+     funcall-copy-acceleration-structure-to-memory-khr)
     (device deferredoperation pinfo)
   (declare-types ("VkDevice" device)
    ("VkDeferredOperationKHR" "deferredOperation")
@@ -4451,8 +4385,9 @@
   (vkcopyaccelerationstructuretomemorykhr device deferredoperation pinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCopyMemoryToAccelerationStructureKHR"
-    copy-memory-to-acceleration-structure-khr
+    ("vkCopyMemoryToAccelerationStructureKHR"
+     copy-memory-to-acceleration-structure-khr
+     funcall-copy-memory-to-acceleration-structure-khr)
     (device deferredoperation pinfo)
   (declare-types ("VkDevice" device)
    ("VkDeferredOperationKHR" "deferredOperation")
@@ -4461,8 +4396,9 @@
   (vkcopymemorytoaccelerationstructurekhr device deferredoperation pinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkWriteAccelerationStructuresPropertiesKHR"
-    write-acceleration-structures-properties-khr
+    ("vkWriteAccelerationStructuresPropertiesKHR"
+     write-acceleration-structures-properties-khr
+     funcall-write-acceleration-structures-properties-khr)
     (device accelerationstructurecount paccelerationstructures querytype
      datasize pdata stride)
   (declare-types ("VkDevice" device) (uint32 "accelerationStructureCount")
@@ -4473,16 +4409,17 @@
    paccelerationstructures querytype datasize pdata stride))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdCopyAccelerationStructureKHR"
-    cmd-copy-acceleration-structure-khr
+    ("vkCmdCopyAccelerationStructureKHR" cmd-copy-acceleration-structure-khr
+     funcall-cmd-copy-acceleration-structure-khr)
     (commandbuffer pinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkCopyAccelerationStructureInfoKHR" "pInfo") :return ("void" return-value))
   (vkcmdcopyaccelerationstructurekhr commandbuffer pinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdCopyAccelerationStructureToMemoryKHR"
-    cmd-copy-acceleration-structure-to-memory-khr
+    ("vkCmdCopyAccelerationStructureToMemoryKHR"
+     cmd-copy-acceleration-structure-to-memory-khr
+     funcall-cmd-copy-acceleration-structure-to-memory-khr)
     (commandbuffer pinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkCopyAccelerationStructureToMemoryInfoKHR" "pInfo") :return
@@ -4490,8 +4427,9 @@
   (vkcmdcopyaccelerationstructuretomemorykhr commandbuffer pinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdCopyMemoryToAccelerationStructureKHR"
-    cmd-copy-memory-to-acceleration-structure-khr
+    ("vkCmdCopyMemoryToAccelerationStructureKHR"
+     cmd-copy-memory-to-acceleration-structure-khr
+     funcall-cmd-copy-memory-to-acceleration-structure-khr)
     (commandbuffer pinfo)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    ("VkCopyMemoryToAccelerationStructureInfoKHR" "pInfo") :return
@@ -4499,8 +4437,9 @@
   (vkcmdcopymemorytoaccelerationstructurekhr commandbuffer pinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetAccelerationStructureDeviceAddressKHR"
-    get-acceleration-structure-device-address-khr
+    ("vkGetAccelerationStructureDeviceAddressKHR"
+     get-acceleration-structure-device-address-khr
+     funcall-get-acceleration-structure-device-address-khr)
     (device pinfo)
   (declare-types ("VkDevice" device)
    ("VkAccelerationStructureDeviceAddressInfoKHR" "pInfo") :return
@@ -4508,8 +4447,9 @@
   (vkgetaccelerationstructuredeviceaddresskhr device pinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdWriteAccelerationStructuresPropertiesKHR"
-    cmd-write-acceleration-structures-properties-khr
+    ("vkCmdWriteAccelerationStructuresPropertiesKHR"
+     cmd-write-acceleration-structures-properties-khr
+     funcall-cmd-write-acceleration-structures-properties-khr)
     (commandbuffer accelerationstructurecount paccelerationstructures querytype
      querypool firstquery)
   (declare-types ("VkCommandBuffer" "commandBuffer")
@@ -4522,8 +4462,9 @@
    firstquery))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetDeviceAccelerationStructureCompatibilityKHR"
-    get-device-acceleration-structure-compatibility-khr
+    ("vkGetDeviceAccelerationStructureCompatibilityKHR"
+     get-device-acceleration-structure-compatibility-khr
+     funcall-get-device-acceleration-structure-compatibility-khr)
     (device pversioninfo pcompatibility)
   (declare-types ("VkDevice" device)
    ("VkAccelerationStructureVersionInfoKHR" "pVersionInfo")
@@ -4533,8 +4474,9 @@
    pcompatibility))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetAccelerationStructureBuildSizesKHR"
-    get-acceleration-structure-build-sizes-khr
+    ("vkGetAccelerationStructureBuildSizesKHR"
+     get-acceleration-structure-build-sizes-khr
+     funcall-get-acceleration-structure-build-sizes-khr)
     (device buildtype pbuildinfo pmaxprimitivecounts psizeinfo)
   (declare-types ("VkDevice" device)
    ("VkAccelerationStructureBuildTypeKHR" "buildType")
@@ -4546,8 +4488,7 @@
    pmaxprimitivecounts psizeinfo))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdTraceRaysKHR"
-    cmd-trace-rays-khr
+    ("vkCmdTraceRaysKHR" cmd-trace-rays-khr funcall-cmd-trace-rays-khr)
     (commandbuffer praygenshaderbindingtable pmissshaderbindingtable
      phitshaderbindingtable pcallableshaderbindingtable width height depth)
   (declare-types ("VkCommandBuffer" "commandBuffer")
@@ -4561,8 +4502,8 @@
    width height depth))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCreateRayTracingPipelinesKHR"
-    create-ray-tracing-pipelines-khr
+    ("vkCreateRayTracingPipelinesKHR" create-ray-tracing-pipelines-khr
+     funcall-create-ray-tracing-pipelines-khr)
     (device deferredoperation pipelinecache createinfocount pcreateinfos
      pallocator ppipelines)
   (declare-types ("VkDevice" device)
@@ -4575,8 +4516,9 @@
    createinfocount pcreateinfos pallocator ppipelines))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetRayTracingCaptureReplayShaderGroupHandlesKHR"
-    get-ray-tracing-capture-replay-shader-group-handles-khr
+    ("vkGetRayTracingCaptureReplayShaderGroupHandlesKHR"
+     get-ray-tracing-capture-replay-shader-group-handles-khr
+     funcall-get-ray-tracing-capture-replay-shader-group-handles-khr)
     (device pipeline firstgroup groupcount datasize pdata)
   (declare-types ("VkDevice" device) ("VkPipeline" pipeline)
    (uint32 "firstGroup") (uint32 "groupCount") (size "dataSize") (void "pData")
@@ -4585,8 +4527,8 @@
    groupcount datasize pdata))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdTraceRaysIndirectKHR"
-    cmd-trace-rays-indirect-khr
+    ("vkCmdTraceRaysIndirectKHR" cmd-trace-rays-indirect-khr
+     funcall-cmd-trace-rays-indirect-khr)
     (commandbuffer praygenshaderbindingtable pmissshaderbindingtable
      phitshaderbindingtable pcallableshaderbindingtable indirectdeviceaddress)
   (declare-types ("VkCommandBuffer" "commandBuffer")
@@ -4600,8 +4542,9 @@
    indirectdeviceaddress))
 
 (more-cffi:def-foreign-function doc-file
-    "vkGetRayTracingShaderGroupStackSizeKHR"
-    get-ray-tracing-shader-group-stack-size-khr
+    ("vkGetRayTracingShaderGroupStackSizeKHR"
+     get-ray-tracing-shader-group-stack-size-khr
+     funcall-get-ray-tracing-shader-group-stack-size-khr)
     (device pipeline group groupshader)
   (declare-types ("VkDevice" device) ("VkPipeline" pipeline) (uint32 group)
    ("VkShaderGroupShaderKHR" "groupShader") :return
@@ -4609,8 +4552,9 @@
   (vkgetraytracingshadergroupstacksizekhr device pipeline group groupshader))
 
 (more-cffi:def-foreign-function doc-file
-    "vkCmdSetRayTracingPipelineStackSizeKHR"
-    cmd-set-ray-tracing-pipeline-stack-size-khr
+    ("vkCmdSetRayTracingPipelineStackSizeKHR"
+     cmd-set-ray-tracing-pipeline-stack-size-khr
+     funcall-cmd-set-ray-tracing-pipeline-stack-size-khr)
     (commandbuffer pipelinestacksize)
   (declare-types ("VkCommandBuffer" "commandBuffer")
    (uint32 "pipelineStackSize") :return ("void" return-value))

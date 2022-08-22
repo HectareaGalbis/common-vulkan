@@ -2,37 +2,43 @@
 (in-package :cvk)
 
 
-(cffi:defcfun ("vkCreateInstance" vkcreateinstance)
+(more-cffi:defcfun ("vkCreateInstance" vkcreateinstance
+                    funcall-vkcreateinstance)
     vkresult
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (pinstance :pointer))
 
-(cffi:defcfun ("vkDestroyInstance" vkdestroyinstance)
+(more-cffi:defcfun ("vkDestroyInstance" vkdestroyinstance
+                    funcall-vkdestroyinstance)
     :void
   (instance vkinstance)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkEnumeratePhysicalDevices" vkenumeratephysicaldevices)
+(more-cffi:defcfun ("vkEnumeratePhysicalDevices" vkenumeratephysicaldevices
+                    funcall-vkenumeratephysicaldevices)
     vkresult
   (instance vkinstance)
   (pphysicaldevicecount :pointer)
   (pphysicaldevices :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceFeatures" vkgetphysicaldevicefeatures)
+(more-cffi:defcfun ("vkGetPhysicalDeviceFeatures" vkgetphysicaldevicefeatures
+                    funcall-vkgetphysicaldevicefeatures)
     :void
   (physicaldevice vkphysicaldevice)
   (pfeatures :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceFormatProperties"
-               vkgetphysicaldeviceformatproperties)
+(more-cffi:defcfun ("vkGetPhysicalDeviceFormatProperties"
+                    vkgetphysicaldeviceformatproperties
+                    funcall-vkgetphysicaldeviceformatproperties)
     :void
   (physicaldevice vkphysicaldevice)
   (format vkformat)
   (pformatproperties :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceImageFormatProperties"
-               vkgetphysicaldeviceimageformatproperties)
+(more-cffi:defcfun ("vkGetPhysicalDeviceImageFormatProperties"
+                    vkgetphysicaldeviceimageformatproperties
+                    funcall-vkgetphysicaldeviceimageformatproperties)
     vkresult
   (physicaldevice vkphysicaldevice)
   (format vkformat)
@@ -42,110 +48,123 @@
   (flags vkimagecreateflags)
   (pimageformatproperties :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceProperties" vkgetphysicaldeviceproperties)
+(more-cffi:defcfun ("vkGetPhysicalDeviceProperties"
+                    vkgetphysicaldeviceproperties
+                    funcall-vkgetphysicaldeviceproperties)
     :void
   (physicaldevice vkphysicaldevice)
   (pproperties :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceQueueFamilyProperties"
-               vkgetphysicaldevicequeuefamilyproperties)
+(more-cffi:defcfun ("vkGetPhysicalDeviceQueueFamilyProperties"
+                    vkgetphysicaldevicequeuefamilyproperties
+                    funcall-vkgetphysicaldevicequeuefamilyproperties)
     :void
   (physicaldevice vkphysicaldevice)
   (pqueuefamilypropertycount :pointer)
   (pqueuefamilyproperties :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceMemoryProperties"
-               vkgetphysicaldevicememoryproperties)
+(more-cffi:defcfun ("vkGetPhysicalDeviceMemoryProperties"
+                    vkgetphysicaldevicememoryproperties
+                    funcall-vkgetphysicaldevicememoryproperties)
     :void
   (physicaldevice vkphysicaldevice)
   (pmemoryproperties :pointer))
 
-(cffi:defcfun ("vkGetInstanceProcAddr" vkgetinstanceprocaddr)
+(more-cffi:defcfun ("vkGetInstanceProcAddr" vkgetinstanceprocaddr
+                    funcall-vkgetinstanceprocaddr)
     pfn_vkvoidfunction
   (instance vkinstance)
   (pname :pointer))
 
-(cffi:defcfun ("vkGetDeviceProcAddr" vkgetdeviceprocaddr)
+(more-cffi:defcfun ("vkGetDeviceProcAddr" vkgetdeviceprocaddr
+                    funcall-vkgetdeviceprocaddr)
     pfn_vkvoidfunction
   (device vkdevice)
   (pname :pointer))
 
-(cffi:defcfun ("vkCreateDevice" vkcreatedevice)
+(more-cffi:defcfun ("vkCreateDevice" vkcreatedevice funcall-vkcreatedevice)
     vkresult
   (physicaldevice vkphysicaldevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (pdevice :pointer))
 
-(cffi:defcfun ("vkDestroyDevice" vkdestroydevice)
+(more-cffi:defcfun ("vkDestroyDevice" vkdestroydevice funcall-vkdestroydevice)
     :void
   (device vkdevice)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkEnumerateInstanceExtensionProperties"
-               vkenumerateinstanceextensionproperties)
+(more-cffi:defcfun ("vkEnumerateInstanceExtensionProperties"
+                    vkenumerateinstanceextensionproperties
+                    funcall-vkenumerateinstanceextensionproperties)
     vkresult
   (playername :pointer)
   (ppropertycount :pointer)
   (pproperties :pointer))
 
-(cffi:defcfun ("vkEnumerateDeviceExtensionProperties"
-               vkenumeratedeviceextensionproperties)
+(more-cffi:defcfun ("vkEnumerateDeviceExtensionProperties"
+                    vkenumeratedeviceextensionproperties
+                    funcall-vkenumeratedeviceextensionproperties)
     vkresult
   (physicaldevice vkphysicaldevice)
   (playername :pointer)
   (ppropertycount :pointer)
   (pproperties :pointer))
 
-(cffi:defcfun ("vkEnumerateInstanceLayerProperties"
-               vkenumerateinstancelayerproperties)
+(more-cffi:defcfun ("vkEnumerateInstanceLayerProperties"
+                    vkenumerateinstancelayerproperties
+                    funcall-vkenumerateinstancelayerproperties)
     vkresult
   (ppropertycount :pointer)
   (pproperties :pointer))
 
-(cffi:defcfun ("vkEnumerateDeviceLayerProperties"
-               vkenumeratedevicelayerproperties)
+(more-cffi:defcfun ("vkEnumerateDeviceLayerProperties"
+                    vkenumeratedevicelayerproperties
+                    funcall-vkenumeratedevicelayerproperties)
     vkresult
   (physicaldevice vkphysicaldevice)
   (ppropertycount :pointer)
   (pproperties :pointer))
 
-(cffi:defcfun ("vkGetDeviceQueue" vkgetdevicequeue)
+(more-cffi:defcfun ("vkGetDeviceQueue" vkgetdevicequeue
+                    funcall-vkgetdevicequeue)
     :void
   (device vkdevice)
   (queuefamilyindex :uint32)
   (queueindex :uint32)
   (pqueue :pointer))
 
-(cffi:defcfun ("vkQueueSubmit" vkqueuesubmit)
+(more-cffi:defcfun ("vkQueueSubmit" vkqueuesubmit funcall-vkqueuesubmit)
     vkresult
   (queue vkqueue)
   (submitcount :uint32)
   (psubmits :pointer)
   (fence vkfence))
 
-(cffi:defcfun ("vkQueueWaitIdle" vkqueuewaitidle)
+(more-cffi:defcfun ("vkQueueWaitIdle" vkqueuewaitidle funcall-vkqueuewaitidle)
     vkresult
   (queue vkqueue))
 
-(cffi:defcfun ("vkDeviceWaitIdle" vkdevicewaitidle)
+(more-cffi:defcfun ("vkDeviceWaitIdle" vkdevicewaitidle
+                    funcall-vkdevicewaitidle)
     vkresult
   (device vkdevice))
 
-(cffi:defcfun ("vkAllocateMemory" vkallocatememory)
+(more-cffi:defcfun ("vkAllocateMemory" vkallocatememory
+                    funcall-vkallocatememory)
     vkresult
   (device vkdevice)
   (pallocateinfo :pointer)
   (pallocator :pointer)
   (pmemory :pointer))
 
-(cffi:defcfun ("vkFreeMemory" vkfreememory)
+(more-cffi:defcfun ("vkFreeMemory" vkfreememory funcall-vkfreememory)
     :void
   (device vkdevice)
   (memory vkdevicememory)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkMapMemory" vkmapmemory)
+(more-cffi:defcfun ("vkMapMemory" vkmapmemory funcall-vkmapmemory)
     vkresult
   (device vkdevice)
   (memory vkdevicememory)
@@ -154,65 +173,76 @@
   (flags vkmemorymapflags)
   (ppdata :pointer))
 
-(cffi:defcfun ("vkUnmapMemory" vkunmapmemory)
+(more-cffi:defcfun ("vkUnmapMemory" vkunmapmemory funcall-vkunmapmemory)
     :void
   (device vkdevice)
   (memory vkdevicememory))
 
-(cffi:defcfun ("vkFlushMappedMemoryRanges" vkflushmappedmemoryranges)
+(more-cffi:defcfun ("vkFlushMappedMemoryRanges" vkflushmappedmemoryranges
+                    funcall-vkflushmappedmemoryranges)
     vkresult
   (device vkdevice)
   (memoryrangecount :uint32)
   (pmemoryranges :pointer))
 
-(cffi:defcfun ("vkInvalidateMappedMemoryRanges" vkinvalidatemappedmemoryranges)
+(more-cffi:defcfun ("vkInvalidateMappedMemoryRanges"
+                    vkinvalidatemappedmemoryranges
+                    funcall-vkinvalidatemappedmemoryranges)
     vkresult
   (device vkdevice)
   (memoryrangecount :uint32)
   (pmemoryranges :pointer))
 
-(cffi:defcfun ("vkGetDeviceMemoryCommitment" vkgetdevicememorycommitment)
+(more-cffi:defcfun ("vkGetDeviceMemoryCommitment" vkgetdevicememorycommitment
+                    funcall-vkgetdevicememorycommitment)
     :void
   (device vkdevice)
   (memory vkdevicememory)
   (pcommittedmemoryinbytes :pointer))
 
-(cffi:defcfun ("vkBindBufferMemory" vkbindbuffermemory)
+(more-cffi:defcfun ("vkBindBufferMemory" vkbindbuffermemory
+                    funcall-vkbindbuffermemory)
     vkresult
   (device vkdevice)
   (buffer vkbuffer)
   (memory vkdevicememory)
   (memoryoffset vkdevicesize))
 
-(cffi:defcfun ("vkBindImageMemory" vkbindimagememory)
+(more-cffi:defcfun ("vkBindImageMemory" vkbindimagememory
+                    funcall-vkbindimagememory)
     vkresult
   (device vkdevice)
   (image vkimage)
   (memory vkdevicememory)
   (memoryoffset vkdevicesize))
 
-(cffi:defcfun ("vkGetBufferMemoryRequirements" vkgetbuffermemoryrequirements)
+(more-cffi:defcfun ("vkGetBufferMemoryRequirements"
+                    vkgetbuffermemoryrequirements
+                    funcall-vkgetbuffermemoryrequirements)
     :void
   (device vkdevice)
   (buffer vkbuffer)
   (pmemoryrequirements :pointer))
 
-(cffi:defcfun ("vkGetImageMemoryRequirements" vkgetimagememoryrequirements)
+(more-cffi:defcfun ("vkGetImageMemoryRequirements" vkgetimagememoryrequirements
+                    funcall-vkgetimagememoryrequirements)
     :void
   (device vkdevice)
   (image vkimage)
   (pmemoryrequirements :pointer))
 
-(cffi:defcfun ("vkGetImageSparseMemoryRequirements"
-               vkgetimagesparsememoryrequirements)
+(more-cffi:defcfun ("vkGetImageSparseMemoryRequirements"
+                    vkgetimagesparsememoryrequirements
+                    funcall-vkgetimagesparsememoryrequirements)
     :void
   (device vkdevice)
   (image vkimage)
   (psparsememoryrequirementcount :pointer)
   (psparsememoryrequirements :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceSparseImageFormatProperties"
-               vkgetphysicaldevicesparseimageformatproperties)
+(more-cffi:defcfun ("vkGetPhysicalDeviceSparseImageFormatProperties"
+                    vkgetphysicaldevicesparseimageformatproperties
+                    funcall-vkgetphysicaldevicesparseimageformatproperties)
     :void
   (physicaldevice vkphysicaldevice)
   (format vkformat)
@@ -223,38 +253,40 @@
   (ppropertycount :pointer)
   (pproperties :pointer))
 
-(cffi:defcfun ("vkQueueBindSparse" vkqueuebindsparse)
+(more-cffi:defcfun ("vkQueueBindSparse" vkqueuebindsparse
+                    funcall-vkqueuebindsparse)
     vkresult
   (queue vkqueue)
   (bindinfocount :uint32)
   (pbindinfo :pointer)
   (fence vkfence))
 
-(cffi:defcfun ("vkCreateFence" vkcreatefence)
+(more-cffi:defcfun ("vkCreateFence" vkcreatefence funcall-vkcreatefence)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (pfence :pointer))
 
-(cffi:defcfun ("vkDestroyFence" vkdestroyfence)
+(more-cffi:defcfun ("vkDestroyFence" vkdestroyfence funcall-vkdestroyfence)
     :void
   (device vkdevice)
   (fence vkfence)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkResetFences" vkresetfences)
+(more-cffi:defcfun ("vkResetFences" vkresetfences funcall-vkresetfences)
     vkresult
   (device vkdevice)
   (fencecount :uint32)
   (pfences :pointer))
 
-(cffi:defcfun ("vkGetFenceStatus" vkgetfencestatus)
+(more-cffi:defcfun ("vkGetFenceStatus" vkgetfencestatus
+                    funcall-vkgetfencestatus)
     vkresult
   (device vkdevice)
   (fence vkfence))
 
-(cffi:defcfun ("vkWaitForFences" vkwaitforfences)
+(more-cffi:defcfun ("vkWaitForFences" vkwaitforfences funcall-vkwaitforfences)
     vkresult
   (device vkdevice)
   (fencecount :uint32)
@@ -262,61 +294,67 @@
   (waitall vkbool32)
   (timeout :uint64))
 
-(cffi:defcfun ("vkCreateSemaphore" vkcreatesemaphore)
+(more-cffi:defcfun ("vkCreateSemaphore" vkcreatesemaphore
+                    funcall-vkcreatesemaphore)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (psemaphore :pointer))
 
-(cffi:defcfun ("vkDestroySemaphore" vkdestroysemaphore)
+(more-cffi:defcfun ("vkDestroySemaphore" vkdestroysemaphore
+                    funcall-vkdestroysemaphore)
     :void
   (device vkdevice)
   (semaphore vksemaphore)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkCreateEvent" vkcreateevent)
+(more-cffi:defcfun ("vkCreateEvent" vkcreateevent funcall-vkcreateevent)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (pevent :pointer))
 
-(cffi:defcfun ("vkDestroyEvent" vkdestroyevent)
+(more-cffi:defcfun ("vkDestroyEvent" vkdestroyevent funcall-vkdestroyevent)
     :void
   (device vkdevice)
   (event vkevent)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkGetEventStatus" vkgeteventstatus)
+(more-cffi:defcfun ("vkGetEventStatus" vkgeteventstatus
+                    funcall-vkgeteventstatus)
     vkresult
   (device vkdevice)
   (event vkevent))
 
-(cffi:defcfun ("vkSetEvent" vksetevent)
+(more-cffi:defcfun ("vkSetEvent" vksetevent funcall-vksetevent)
     vkresult
   (device vkdevice)
   (event vkevent))
 
-(cffi:defcfun ("vkResetEvent" vkresetevent)
+(more-cffi:defcfun ("vkResetEvent" vkresetevent funcall-vkresetevent)
     vkresult
   (device vkdevice)
   (event vkevent))
 
-(cffi:defcfun ("vkCreateQueryPool" vkcreatequerypool)
+(more-cffi:defcfun ("vkCreateQueryPool" vkcreatequerypool
+                    funcall-vkcreatequerypool)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (pquerypool :pointer))
 
-(cffi:defcfun ("vkDestroyQueryPool" vkdestroyquerypool)
+(more-cffi:defcfun ("vkDestroyQueryPool" vkdestroyquerypool
+                    funcall-vkdestroyquerypool)
     :void
   (device vkdevice)
   (querypool vkquerypool)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkGetQueryPoolResults" vkgetquerypoolresults)
+(more-cffi:defcfun ("vkGetQueryPoolResults" vkgetquerypoolresults
+                    funcall-vkgetquerypoolresults)
     vkresult
   (device vkdevice)
   (querypool vkquerypool)
@@ -327,106 +365,118 @@
   (stride vkdevicesize)
   (flags vkqueryresultflags))
 
-(cffi:defcfun ("vkCreateBuffer" vkcreatebuffer)
+(more-cffi:defcfun ("vkCreateBuffer" vkcreatebuffer funcall-vkcreatebuffer)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (pbuffer :pointer))
 
-(cffi:defcfun ("vkDestroyBuffer" vkdestroybuffer)
+(more-cffi:defcfun ("vkDestroyBuffer" vkdestroybuffer funcall-vkdestroybuffer)
     :void
   (device vkdevice)
   (buffer vkbuffer)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkCreateBufferView" vkcreatebufferview)
+(more-cffi:defcfun ("vkCreateBufferView" vkcreatebufferview
+                    funcall-vkcreatebufferview)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (pview :pointer))
 
-(cffi:defcfun ("vkDestroyBufferView" vkdestroybufferview)
+(more-cffi:defcfun ("vkDestroyBufferView" vkdestroybufferview
+                    funcall-vkdestroybufferview)
     :void
   (device vkdevice)
   (bufferview vkbufferview)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkCreateImage" vkcreateimage)
+(more-cffi:defcfun ("vkCreateImage" vkcreateimage funcall-vkcreateimage)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (pimage :pointer))
 
-(cffi:defcfun ("vkDestroyImage" vkdestroyimage)
+(more-cffi:defcfun ("vkDestroyImage" vkdestroyimage funcall-vkdestroyimage)
     :void
   (device vkdevice)
   (image vkimage)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkGetImageSubresourceLayout" vkgetimagesubresourcelayout)
+(more-cffi:defcfun ("vkGetImageSubresourceLayout" vkgetimagesubresourcelayout
+                    funcall-vkgetimagesubresourcelayout)
     :void
   (device vkdevice)
   (image vkimage)
   (psubresource :pointer)
   (playout :pointer))
 
-(cffi:defcfun ("vkCreateImageView" vkcreateimageview)
+(more-cffi:defcfun ("vkCreateImageView" vkcreateimageview
+                    funcall-vkcreateimageview)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (pview :pointer))
 
-(cffi:defcfun ("vkDestroyImageView" vkdestroyimageview)
+(more-cffi:defcfun ("vkDestroyImageView" vkdestroyimageview
+                    funcall-vkdestroyimageview)
     :void
   (device vkdevice)
   (imageview vkimageview)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkCreateShaderModule" vkcreateshadermodule)
+(more-cffi:defcfun ("vkCreateShaderModule" vkcreateshadermodule
+                    funcall-vkcreateshadermodule)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (pshadermodule :pointer))
 
-(cffi:defcfun ("vkDestroyShaderModule" vkdestroyshadermodule)
+(more-cffi:defcfun ("vkDestroyShaderModule" vkdestroyshadermodule
+                    funcall-vkdestroyshadermodule)
     :void
   (device vkdevice)
   (shadermodule vkshadermodule)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkCreatePipelineCache" vkcreatepipelinecache)
+(more-cffi:defcfun ("vkCreatePipelineCache" vkcreatepipelinecache
+                    funcall-vkcreatepipelinecache)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (ppipelinecache :pointer))
 
-(cffi:defcfun ("vkDestroyPipelineCache" vkdestroypipelinecache)
+(more-cffi:defcfun ("vkDestroyPipelineCache" vkdestroypipelinecache
+                    funcall-vkdestroypipelinecache)
     :void
   (device vkdevice)
   (pipelinecache vkpipelinecache)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkGetPipelineCacheData" vkgetpipelinecachedata)
+(more-cffi:defcfun ("vkGetPipelineCacheData" vkgetpipelinecachedata
+                    funcall-vkgetpipelinecachedata)
     vkresult
   (device vkdevice)
   (pipelinecache vkpipelinecache)
   (pdatasize :pointer)
   (pdata :pointer))
 
-(cffi:defcfun ("vkMergePipelineCaches" vkmergepipelinecaches)
+(more-cffi:defcfun ("vkMergePipelineCaches" vkmergepipelinecaches
+                    funcall-vkmergepipelinecaches)
     vkresult
   (device vkdevice)
   (dstcache vkpipelinecache)
   (srccachecount :uint32)
   (psrccaches :pointer))
 
-(cffi:defcfun ("vkCreateGraphicsPipelines" vkcreategraphicspipelines)
+(more-cffi:defcfun ("vkCreateGraphicsPipelines" vkcreategraphicspipelines
+                    funcall-vkcreategraphicspipelines)
     vkresult
   (device vkdevice)
   (pipelinecache vkpipelinecache)
@@ -435,7 +485,8 @@
   (pallocator :pointer)
   (ppipelines :pointer))
 
-(cffi:defcfun ("vkCreateComputePipelines" vkcreatecomputepipelines)
+(more-cffi:defcfun ("vkCreateComputePipelines" vkcreatecomputepipelines
+                    funcall-vkcreatecomputepipelines)
     vkresult
   (device vkdevice)
   (pipelinecache vkpipelinecache)
@@ -444,84 +495,96 @@
   (pallocator :pointer)
   (ppipelines :pointer))
 
-(cffi:defcfun ("vkDestroyPipeline" vkdestroypipeline)
+(more-cffi:defcfun ("vkDestroyPipeline" vkdestroypipeline
+                    funcall-vkdestroypipeline)
     :void
   (device vkdevice)
   (pipeline vkpipeline)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkCreatePipelineLayout" vkcreatepipelinelayout)
+(more-cffi:defcfun ("vkCreatePipelineLayout" vkcreatepipelinelayout
+                    funcall-vkcreatepipelinelayout)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (ppipelinelayout :pointer))
 
-(cffi:defcfun ("vkDestroyPipelineLayout" vkdestroypipelinelayout)
+(more-cffi:defcfun ("vkDestroyPipelineLayout" vkdestroypipelinelayout
+                    funcall-vkdestroypipelinelayout)
     :void
   (device vkdevice)
   (pipelinelayout vkpipelinelayout)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkCreateSampler" vkcreatesampler)
+(more-cffi:defcfun ("vkCreateSampler" vkcreatesampler funcall-vkcreatesampler)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (psampler :pointer))
 
-(cffi:defcfun ("vkDestroySampler" vkdestroysampler)
+(more-cffi:defcfun ("vkDestroySampler" vkdestroysampler
+                    funcall-vkdestroysampler)
     :void
   (device vkdevice)
   (sampler vksampler)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkCreateDescriptorSetLayout" vkcreatedescriptorsetlayout)
+(more-cffi:defcfun ("vkCreateDescriptorSetLayout" vkcreatedescriptorsetlayout
+                    funcall-vkcreatedescriptorsetlayout)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (psetlayout :pointer))
 
-(cffi:defcfun ("vkDestroyDescriptorSetLayout" vkdestroydescriptorsetlayout)
+(more-cffi:defcfun ("vkDestroyDescriptorSetLayout" vkdestroydescriptorsetlayout
+                    funcall-vkdestroydescriptorsetlayout)
     :void
   (device vkdevice)
   (descriptorsetlayout vkdescriptorsetlayout)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkCreateDescriptorPool" vkcreatedescriptorpool)
+(more-cffi:defcfun ("vkCreateDescriptorPool" vkcreatedescriptorpool
+                    funcall-vkcreatedescriptorpool)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (pdescriptorpool :pointer))
 
-(cffi:defcfun ("vkDestroyDescriptorPool" vkdestroydescriptorpool)
+(more-cffi:defcfun ("vkDestroyDescriptorPool" vkdestroydescriptorpool
+                    funcall-vkdestroydescriptorpool)
     :void
   (device vkdevice)
   (descriptorpool vkdescriptorpool)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkResetDescriptorPool" vkresetdescriptorpool)
+(more-cffi:defcfun ("vkResetDescriptorPool" vkresetdescriptorpool
+                    funcall-vkresetdescriptorpool)
     vkresult
   (device vkdevice)
   (descriptorpool vkdescriptorpool)
   (flags vkdescriptorpoolresetflags))
 
-(cffi:defcfun ("vkAllocateDescriptorSets" vkallocatedescriptorsets)
+(more-cffi:defcfun ("vkAllocateDescriptorSets" vkallocatedescriptorsets
+                    funcall-vkallocatedescriptorsets)
     vkresult
   (device vkdevice)
   (pallocateinfo :pointer)
   (pdescriptorsets :pointer))
 
-(cffi:defcfun ("vkFreeDescriptorSets" vkfreedescriptorsets)
+(more-cffi:defcfun ("vkFreeDescriptorSets" vkfreedescriptorsets
+                    funcall-vkfreedescriptorsets)
     vkresult
   (device vkdevice)
   (descriptorpool vkdescriptorpool)
   (descriptorsetcount :uint32)
   (pdescriptorsets :pointer))
 
-(cffi:defcfun ("vkUpdateDescriptorSets" vkupdatedescriptorsets)
+(more-cffi:defcfun ("vkUpdateDescriptorSets" vkupdatedescriptorsets
+                    funcall-vkupdatedescriptorsets)
     :void
   (device vkdevice)
   (descriptorwritecount :uint32)
@@ -529,146 +592,169 @@
   (descriptorcopycount :uint32)
   (pdescriptorcopies :pointer))
 
-(cffi:defcfun ("vkCreateFramebuffer" vkcreateframebuffer)
+(more-cffi:defcfun ("vkCreateFramebuffer" vkcreateframebuffer
+                    funcall-vkcreateframebuffer)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (pframebuffer :pointer))
 
-(cffi:defcfun ("vkDestroyFramebuffer" vkdestroyframebuffer)
+(more-cffi:defcfun ("vkDestroyFramebuffer" vkdestroyframebuffer
+                    funcall-vkdestroyframebuffer)
     :void
   (device vkdevice)
   (framebuffer vkframebuffer)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkCreateRenderPass" vkcreaterenderpass)
+(more-cffi:defcfun ("vkCreateRenderPass" vkcreaterenderpass
+                    funcall-vkcreaterenderpass)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (prenderpass :pointer))
 
-(cffi:defcfun ("vkDestroyRenderPass" vkdestroyrenderpass)
+(more-cffi:defcfun ("vkDestroyRenderPass" vkdestroyrenderpass
+                    funcall-vkdestroyrenderpass)
     :void
   (device vkdevice)
   (renderpass vkrenderpass)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkGetRenderAreaGranularity" vkgetrenderareagranularity)
+(more-cffi:defcfun ("vkGetRenderAreaGranularity" vkgetrenderareagranularity
+                    funcall-vkgetrenderareagranularity)
     :void
   (device vkdevice)
   (renderpass vkrenderpass)
   (pgranularity :pointer))
 
-(cffi:defcfun ("vkCreateCommandPool" vkcreatecommandpool)
+(more-cffi:defcfun ("vkCreateCommandPool" vkcreatecommandpool
+                    funcall-vkcreatecommandpool)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (pcommandpool :pointer))
 
-(cffi:defcfun ("vkDestroyCommandPool" vkdestroycommandpool)
+(more-cffi:defcfun ("vkDestroyCommandPool" vkdestroycommandpool
+                    funcall-vkdestroycommandpool)
     :void
   (device vkdevice)
   (commandpool vkcommandpool)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkResetCommandPool" vkresetcommandpool)
+(more-cffi:defcfun ("vkResetCommandPool" vkresetcommandpool
+                    funcall-vkresetcommandpool)
     vkresult
   (device vkdevice)
   (commandpool vkcommandpool)
   (flags vkcommandpoolresetflags))
 
-(cffi:defcfun ("vkAllocateCommandBuffers" vkallocatecommandbuffers)
+(more-cffi:defcfun ("vkAllocateCommandBuffers" vkallocatecommandbuffers
+                    funcall-vkallocatecommandbuffers)
     vkresult
   (device vkdevice)
   (pallocateinfo :pointer)
   (pcommandbuffers :pointer))
 
-(cffi:defcfun ("vkFreeCommandBuffers" vkfreecommandbuffers)
+(more-cffi:defcfun ("vkFreeCommandBuffers" vkfreecommandbuffers
+                    funcall-vkfreecommandbuffers)
     :void
   (device vkdevice)
   (commandpool vkcommandpool)
   (commandbuffercount :uint32)
   (pcommandbuffers :pointer))
 
-(cffi:defcfun ("vkBeginCommandBuffer" vkbegincommandbuffer)
+(more-cffi:defcfun ("vkBeginCommandBuffer" vkbegincommandbuffer
+                    funcall-vkbegincommandbuffer)
     vkresult
   (commandbuffer vkcommandbuffer)
   (pbegininfo :pointer))
 
-(cffi:defcfun ("vkEndCommandBuffer" vkendcommandbuffer)
+(more-cffi:defcfun ("vkEndCommandBuffer" vkendcommandbuffer
+                    funcall-vkendcommandbuffer)
     vkresult
   (commandbuffer vkcommandbuffer))
 
-(cffi:defcfun ("vkResetCommandBuffer" vkresetcommandbuffer)
+(more-cffi:defcfun ("vkResetCommandBuffer" vkresetcommandbuffer
+                    funcall-vkresetcommandbuffer)
     vkresult
   (commandbuffer vkcommandbuffer)
   (flags vkcommandbufferresetflags))
 
-(cffi:defcfun ("vkCmdBindPipeline" vkcmdbindpipeline)
+(more-cffi:defcfun ("vkCmdBindPipeline" vkcmdbindpipeline
+                    funcall-vkcmdbindpipeline)
     :void
   (commandbuffer vkcommandbuffer)
   (pipelinebindpoint vkpipelinebindpoint)
   (pipeline vkpipeline))
 
-(cffi:defcfun ("vkCmdSetViewport" vkcmdsetviewport)
+(more-cffi:defcfun ("vkCmdSetViewport" vkcmdsetviewport
+                    funcall-vkcmdsetviewport)
     :void
   (commandbuffer vkcommandbuffer)
   (firstviewport :uint32)
   (viewportcount :uint32)
   (pviewports :pointer))
 
-(cffi:defcfun ("vkCmdSetScissor" vkcmdsetscissor)
+(more-cffi:defcfun ("vkCmdSetScissor" vkcmdsetscissor funcall-vkcmdsetscissor)
     :void
   (commandbuffer vkcommandbuffer)
   (firstscissor :uint32)
   (scissorcount :uint32)
   (pscissors :pointer))
 
-(cffi:defcfun ("vkCmdSetLineWidth" vkcmdsetlinewidth)
+(more-cffi:defcfun ("vkCmdSetLineWidth" vkcmdsetlinewidth
+                    funcall-vkcmdsetlinewidth)
     :void
   (commandbuffer vkcommandbuffer)
   (linewidth :float))
 
-(cffi:defcfun ("vkCmdSetDepthBias" vkcmdsetdepthbias)
+(more-cffi:defcfun ("vkCmdSetDepthBias" vkcmdsetdepthbias
+                    funcall-vkcmdsetdepthbias)
     :void
   (commandbuffer vkcommandbuffer)
   (depthbiasconstantfactor :float)
   (depthbiasclamp :float)
   (depthbiasslopefactor :float))
 
-(cffi:defcfun ("vkCmdSetBlendConstants" vkcmdsetblendconstants)
+(more-cffi:defcfun ("vkCmdSetBlendConstants" vkcmdsetblendconstants
+                    funcall-vkcmdsetblendconstants)
     :void
   (commandbuffer vkcommandbuffer)
   (blendconstants :float))
 
-(cffi:defcfun ("vkCmdSetDepthBounds" vkcmdsetdepthbounds)
+(more-cffi:defcfun ("vkCmdSetDepthBounds" vkcmdsetdepthbounds
+                    funcall-vkcmdsetdepthbounds)
     :void
   (commandbuffer vkcommandbuffer)
   (mindepthbounds :float)
   (maxdepthbounds :float))
 
-(cffi:defcfun ("vkCmdSetStencilCompareMask" vkcmdsetstencilcomparemask)
+(more-cffi:defcfun ("vkCmdSetStencilCompareMask" vkcmdsetstencilcomparemask
+                    funcall-vkcmdsetstencilcomparemask)
     :void
   (commandbuffer vkcommandbuffer)
   (facemask vkstencilfaceflags)
   (comparemask :uint32))
 
-(cffi:defcfun ("vkCmdSetStencilWriteMask" vkcmdsetstencilwritemask)
+(more-cffi:defcfun ("vkCmdSetStencilWriteMask" vkcmdsetstencilwritemask
+                    funcall-vkcmdsetstencilwritemask)
     :void
   (commandbuffer vkcommandbuffer)
   (facemask vkstencilfaceflags)
   (writemask :uint32))
 
-(cffi:defcfun ("vkCmdSetStencilReference" vkcmdsetstencilreference)
+(more-cffi:defcfun ("vkCmdSetStencilReference" vkcmdsetstencilreference
+                    funcall-vkcmdsetstencilreference)
     :void
   (commandbuffer vkcommandbuffer)
   (facemask vkstencilfaceflags)
   (reference :uint32))
 
-(cffi:defcfun ("vkCmdBindDescriptorSets" vkcmdbinddescriptorsets)
+(more-cffi:defcfun ("vkCmdBindDescriptorSets" vkcmdbinddescriptorsets
+                    funcall-vkcmdbinddescriptorsets)
     :void
   (commandbuffer vkcommandbuffer)
   (pipelinebindpoint vkpipelinebindpoint)
@@ -679,14 +765,16 @@
   (dynamicoffsetcount :uint32)
   (pdynamicoffsets :pointer))
 
-(cffi:defcfun ("vkCmdBindIndexBuffer" vkcmdbindindexbuffer)
+(more-cffi:defcfun ("vkCmdBindIndexBuffer" vkcmdbindindexbuffer
+                    funcall-vkcmdbindindexbuffer)
     :void
   (commandbuffer vkcommandbuffer)
   (buffer vkbuffer)
   (offset vkdevicesize)
   (indextype vkindextype))
 
-(cffi:defcfun ("vkCmdBindVertexBuffers" vkcmdbindvertexbuffers)
+(more-cffi:defcfun ("vkCmdBindVertexBuffers" vkcmdbindvertexbuffers
+                    funcall-vkcmdbindvertexbuffers)
     :void
   (commandbuffer vkcommandbuffer)
   (firstbinding :uint32)
@@ -694,7 +782,7 @@
   (pbuffers :pointer)
   (poffsets :pointer))
 
-(cffi:defcfun ("vkCmdDraw" vkcmddraw)
+(more-cffi:defcfun ("vkCmdDraw" vkcmddraw funcall-vkcmddraw)
     :void
   (commandbuffer vkcommandbuffer)
   (vertexcount :uint32)
@@ -702,7 +790,8 @@
   (firstvertex :uint32)
   (firstinstance :uint32))
 
-(cffi:defcfun ("vkCmdDrawIndexed" vkcmddrawindexed)
+(more-cffi:defcfun ("vkCmdDrawIndexed" vkcmddrawindexed
+                    funcall-vkcmddrawindexed)
     :void
   (commandbuffer vkcommandbuffer)
   (indexcount :uint32)
@@ -711,7 +800,8 @@
   (vertexoffset :int32)
   (firstinstance :uint32))
 
-(cffi:defcfun ("vkCmdDrawIndirect" vkcmddrawindirect)
+(more-cffi:defcfun ("vkCmdDrawIndirect" vkcmddrawindirect
+                    funcall-vkcmddrawindirect)
     :void
   (commandbuffer vkcommandbuffer)
   (buffer vkbuffer)
@@ -719,7 +809,8 @@
   (drawcount :uint32)
   (stride :uint32))
 
-(cffi:defcfun ("vkCmdDrawIndexedIndirect" vkcmddrawindexedindirect)
+(more-cffi:defcfun ("vkCmdDrawIndexedIndirect" vkcmddrawindexedindirect
+                    funcall-vkcmddrawindexedindirect)
     :void
   (commandbuffer vkcommandbuffer)
   (buffer vkbuffer)
@@ -727,20 +818,21 @@
   (drawcount :uint32)
   (stride :uint32))
 
-(cffi:defcfun ("vkCmdDispatch" vkcmddispatch)
+(more-cffi:defcfun ("vkCmdDispatch" vkcmddispatch funcall-vkcmddispatch)
     :void
   (commandbuffer vkcommandbuffer)
   (groupcountx :uint32)
   (groupcounty :uint32)
   (groupcountz :uint32))
 
-(cffi:defcfun ("vkCmdDispatchIndirect" vkcmddispatchindirect)
+(more-cffi:defcfun ("vkCmdDispatchIndirect" vkcmddispatchindirect
+                    funcall-vkcmddispatchindirect)
     :void
   (commandbuffer vkcommandbuffer)
   (buffer vkbuffer)
   (offset vkdevicesize))
 
-(cffi:defcfun ("vkCmdCopyBuffer" vkcmdcopybuffer)
+(more-cffi:defcfun ("vkCmdCopyBuffer" vkcmdcopybuffer funcall-vkcmdcopybuffer)
     :void
   (commandbuffer vkcommandbuffer)
   (srcbuffer vkbuffer)
@@ -748,7 +840,7 @@
   (regioncount :uint32)
   (pregions :pointer))
 
-(cffi:defcfun ("vkCmdCopyImage" vkcmdcopyimage)
+(more-cffi:defcfun ("vkCmdCopyImage" vkcmdcopyimage funcall-vkcmdcopyimage)
     :void
   (commandbuffer vkcommandbuffer)
   (srcimage vkimage)
@@ -758,7 +850,7 @@
   (regioncount :uint32)
   (pregions :pointer))
 
-(cffi:defcfun ("vkCmdBlitImage" vkcmdblitimage)
+(more-cffi:defcfun ("vkCmdBlitImage" vkcmdblitimage funcall-vkcmdblitimage)
     :void
   (commandbuffer vkcommandbuffer)
   (srcimage vkimage)
@@ -769,7 +861,8 @@
   (pregions :pointer)
   (filter vkfilter))
 
-(cffi:defcfun ("vkCmdCopyBufferToImage" vkcmdcopybuffertoimage)
+(more-cffi:defcfun ("vkCmdCopyBufferToImage" vkcmdcopybuffertoimage
+                    funcall-vkcmdcopybuffertoimage)
     :void
   (commandbuffer vkcommandbuffer)
   (srcbuffer vkbuffer)
@@ -778,7 +871,8 @@
   (regioncount :uint32)
   (pregions :pointer))
 
-(cffi:defcfun ("vkCmdCopyImageToBuffer" vkcmdcopyimagetobuffer)
+(more-cffi:defcfun ("vkCmdCopyImageToBuffer" vkcmdcopyimagetobuffer
+                    funcall-vkcmdcopyimagetobuffer)
     :void
   (commandbuffer vkcommandbuffer)
   (srcimage vkimage)
@@ -787,7 +881,8 @@
   (regioncount :uint32)
   (pregions :pointer))
 
-(cffi:defcfun ("vkCmdUpdateBuffer" vkcmdupdatebuffer)
+(more-cffi:defcfun ("vkCmdUpdateBuffer" vkcmdupdatebuffer
+                    funcall-vkcmdupdatebuffer)
     :void
   (commandbuffer vkcommandbuffer)
   (dstbuffer vkbuffer)
@@ -795,7 +890,7 @@
   (datasize vkdevicesize)
   (pdata :pointer))
 
-(cffi:defcfun ("vkCmdFillBuffer" vkcmdfillbuffer)
+(more-cffi:defcfun ("vkCmdFillBuffer" vkcmdfillbuffer funcall-vkcmdfillbuffer)
     :void
   (commandbuffer vkcommandbuffer)
   (dstbuffer vkbuffer)
@@ -803,7 +898,8 @@
   (size vkdevicesize)
   (data :uint32))
 
-(cffi:defcfun ("vkCmdClearColorImage" vkcmdclearcolorimage)
+(more-cffi:defcfun ("vkCmdClearColorImage" vkcmdclearcolorimage
+                    funcall-vkcmdclearcolorimage)
     :void
   (commandbuffer vkcommandbuffer)
   (image vkimage)
@@ -812,7 +908,8 @@
   (rangecount :uint32)
   (pranges :pointer))
 
-(cffi:defcfun ("vkCmdClearDepthStencilImage" vkcmdcleardepthstencilimage)
+(more-cffi:defcfun ("vkCmdClearDepthStencilImage" vkcmdcleardepthstencilimage
+                    funcall-vkcmdcleardepthstencilimage)
     :void
   (commandbuffer vkcommandbuffer)
   (image vkimage)
@@ -821,7 +918,8 @@
   (rangecount :uint32)
   (pranges :pointer))
 
-(cffi:defcfun ("vkCmdClearAttachments" vkcmdclearattachments)
+(more-cffi:defcfun ("vkCmdClearAttachments" vkcmdclearattachments
+                    funcall-vkcmdclearattachments)
     :void
   (commandbuffer vkcommandbuffer)
   (attachmentcount :uint32)
@@ -829,7 +927,8 @@
   (rectcount :uint32)
   (prects :pointer))
 
-(cffi:defcfun ("vkCmdResolveImage" vkcmdresolveimage)
+(more-cffi:defcfun ("vkCmdResolveImage" vkcmdresolveimage
+                    funcall-vkcmdresolveimage)
     :void
   (commandbuffer vkcommandbuffer)
   (srcimage vkimage)
@@ -839,19 +938,19 @@
   (regioncount :uint32)
   (pregions :pointer))
 
-(cffi:defcfun ("vkCmdSetEvent" vkcmdsetevent)
+(more-cffi:defcfun ("vkCmdSetEvent" vkcmdsetevent funcall-vkcmdsetevent)
     :void
   (commandbuffer vkcommandbuffer)
   (event vkevent)
   (stagemask vkpipelinestageflags))
 
-(cffi:defcfun ("vkCmdResetEvent" vkcmdresetevent)
+(more-cffi:defcfun ("vkCmdResetEvent" vkcmdresetevent funcall-vkcmdresetevent)
     :void
   (commandbuffer vkcommandbuffer)
   (event vkevent)
   (stagemask vkpipelinestageflags))
 
-(cffi:defcfun ("vkCmdWaitEvents" vkcmdwaitevents)
+(more-cffi:defcfun ("vkCmdWaitEvents" vkcmdwaitevents funcall-vkcmdwaitevents)
     :void
   (commandbuffer vkcommandbuffer)
   (eventcount :uint32)
@@ -865,7 +964,8 @@
   (imagememorybarriercount :uint32)
   (pimagememorybarriers :pointer))
 
-(cffi:defcfun ("vkCmdPipelineBarrier" vkcmdpipelinebarrier)
+(more-cffi:defcfun ("vkCmdPipelineBarrier" vkcmdpipelinebarrier
+                    funcall-vkcmdpipelinebarrier)
     :void
   (commandbuffer vkcommandbuffer)
   (srcstagemask vkpipelinestageflags)
@@ -878,34 +978,37 @@
   (imagememorybarriercount :uint32)
   (pimagememorybarriers :pointer))
 
-(cffi:defcfun ("vkCmdBeginQuery" vkcmdbeginquery)
+(more-cffi:defcfun ("vkCmdBeginQuery" vkcmdbeginquery funcall-vkcmdbeginquery)
     :void
   (commandbuffer vkcommandbuffer)
   (querypool vkquerypool)
   (query :uint32)
   (flags vkquerycontrolflags))
 
-(cffi:defcfun ("vkCmdEndQuery" vkcmdendquery)
+(more-cffi:defcfun ("vkCmdEndQuery" vkcmdendquery funcall-vkcmdendquery)
     :void
   (commandbuffer vkcommandbuffer)
   (querypool vkquerypool)
   (query :uint32))
 
-(cffi:defcfun ("vkCmdResetQueryPool" vkcmdresetquerypool)
+(more-cffi:defcfun ("vkCmdResetQueryPool" vkcmdresetquerypool
+                    funcall-vkcmdresetquerypool)
     :void
   (commandbuffer vkcommandbuffer)
   (querypool vkquerypool)
   (firstquery :uint32)
   (querycount :uint32))
 
-(cffi:defcfun ("vkCmdWriteTimestamp" vkcmdwritetimestamp)
+(more-cffi:defcfun ("vkCmdWriteTimestamp" vkcmdwritetimestamp
+                    funcall-vkcmdwritetimestamp)
     :void
   (commandbuffer vkcommandbuffer)
   (pipelinestage vkpipelinestageflagbits)
   (querypool vkquerypool)
   (query :uint32))
 
-(cffi:defcfun ("vkCmdCopyQueryPoolResults" vkcmdcopyquerypoolresults)
+(more-cffi:defcfun ("vkCmdCopyQueryPoolResults" vkcmdcopyquerypoolresults
+                    funcall-vkcmdcopyquerypoolresults)
     :void
   (commandbuffer vkcommandbuffer)
   (querypool vkquerypool)
@@ -916,7 +1019,8 @@
   (stride vkdevicesize)
   (flags vkqueryresultflags))
 
-(cffi:defcfun ("vkCmdPushConstants" vkcmdpushconstants)
+(more-cffi:defcfun ("vkCmdPushConstants" vkcmdpushconstants
+                    funcall-vkcmdpushconstants)
     :void
   (commandbuffer vkcommandbuffer)
   (layout vkpipelinelayout)
@@ -925,45 +1029,53 @@
   (size :uint32)
   (pvalues :pointer))
 
-(cffi:defcfun ("vkCmdBeginRenderPass" vkcmdbeginrenderpass)
+(more-cffi:defcfun ("vkCmdBeginRenderPass" vkcmdbeginrenderpass
+                    funcall-vkcmdbeginrenderpass)
     :void
   (commandbuffer vkcommandbuffer)
   (prenderpassbegin :pointer)
   (contents vksubpasscontents))
 
-(cffi:defcfun ("vkCmdNextSubpass" vkcmdnextsubpass)
+(more-cffi:defcfun ("vkCmdNextSubpass" vkcmdnextsubpass
+                    funcall-vkcmdnextsubpass)
     :void
   (commandbuffer vkcommandbuffer)
   (contents vksubpasscontents))
 
-(cffi:defcfun ("vkCmdEndRenderPass" vkcmdendrenderpass)
+(more-cffi:defcfun ("vkCmdEndRenderPass" vkcmdendrenderpass
+                    funcall-vkcmdendrenderpass)
     :void
   (commandbuffer vkcommandbuffer))
 
-(cffi:defcfun ("vkCmdExecuteCommands" vkcmdexecutecommands)
+(more-cffi:defcfun ("vkCmdExecuteCommands" vkcmdexecutecommands
+                    funcall-vkcmdexecutecommands)
     :void
   (commandbuffer vkcommandbuffer)
   (commandbuffercount :uint32)
   (pcommandbuffers :pointer))
 
-(cffi:defcfun ("vkEnumerateInstanceVersion" vkenumerateinstanceversion)
+(more-cffi:defcfun ("vkEnumerateInstanceVersion" vkenumerateinstanceversion
+                    funcall-vkenumerateinstanceversion)
     vkresult
   (papiversion :pointer))
 
-(cffi:defcfun ("vkBindBufferMemory2" vkbindbuffermemory2)
+(more-cffi:defcfun ("vkBindBufferMemory2" vkbindbuffermemory2
+                    funcall-vkbindbuffermemory2)
     vkresult
   (device vkdevice)
   (bindinfocount :uint32)
   (pbindinfos :pointer))
 
-(cffi:defcfun ("vkBindImageMemory2" vkbindimagememory2)
+(more-cffi:defcfun ("vkBindImageMemory2" vkbindimagememory2
+                    funcall-vkbindimagememory2)
     vkresult
   (device vkdevice)
   (bindinfocount :uint32)
   (pbindinfos :pointer))
 
-(cffi:defcfun ("vkGetDeviceGroupPeerMemoryFeatures"
-               vkgetdevicegrouppeermemoryfeatures)
+(more-cffi:defcfun ("vkGetDeviceGroupPeerMemoryFeatures"
+                    vkgetdevicegrouppeermemoryfeatures
+                    funcall-vkgetdevicegrouppeermemoryfeatures)
     :void
   (device vkdevice)
   (heapindex :uint32)
@@ -971,12 +1083,14 @@
   (remotedeviceindex :uint32)
   (ppeermemoryfeatures :pointer))
 
-(cffi:defcfun ("vkCmdSetDeviceMask" vkcmdsetdevicemask)
+(more-cffi:defcfun ("vkCmdSetDeviceMask" vkcmdsetdevicemask
+                    funcall-vkcmdsetdevicemask)
     :void
   (commandbuffer vkcommandbuffer)
   (devicemask :uint32))
 
-(cffi:defcfun ("vkCmdDispatchBase" vkcmddispatchbase)
+(more-cffi:defcfun ("vkCmdDispatchBase" vkcmddispatchbase
+                    funcall-vkcmddispatchbase)
     :void
   (commandbuffer vkcommandbuffer)
   (basegroupx :uint32)
@@ -986,156 +1100,183 @@
   (groupcounty :uint32)
   (groupcountz :uint32))
 
-(cffi:defcfun ("vkEnumeratePhysicalDeviceGroups"
-               vkenumeratephysicaldevicegroups)
+(more-cffi:defcfun ("vkEnumeratePhysicalDeviceGroups"
+                    vkenumeratephysicaldevicegroups
+                    funcall-vkenumeratephysicaldevicegroups)
     vkresult
   (instance vkinstance)
   (pphysicaldevicegroupcount :pointer)
   (pphysicaldevicegroupproperties :pointer))
 
-(cffi:defcfun ("vkGetImageMemoryRequirements2" vkgetimagememoryrequirements2)
+(more-cffi:defcfun ("vkGetImageMemoryRequirements2"
+                    vkgetimagememoryrequirements2
+                    funcall-vkgetimagememoryrequirements2)
     :void
   (device vkdevice)
   (pinfo :pointer)
   (pmemoryrequirements :pointer))
 
-(cffi:defcfun ("vkGetBufferMemoryRequirements2" vkgetbuffermemoryrequirements2)
+(more-cffi:defcfun ("vkGetBufferMemoryRequirements2"
+                    vkgetbuffermemoryrequirements2
+                    funcall-vkgetbuffermemoryrequirements2)
     :void
   (device vkdevice)
   (pinfo :pointer)
   (pmemoryrequirements :pointer))
 
-(cffi:defcfun ("vkGetImageSparseMemoryRequirements2"
-               vkgetimagesparsememoryrequirements2)
+(more-cffi:defcfun ("vkGetImageSparseMemoryRequirements2"
+                    vkgetimagesparsememoryrequirements2
+                    funcall-vkgetimagesparsememoryrequirements2)
     :void
   (device vkdevice)
   (pinfo :pointer)
   (psparsememoryrequirementcount :pointer)
   (psparsememoryrequirements :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceFeatures2" vkgetphysicaldevicefeatures2)
+(more-cffi:defcfun ("vkGetPhysicalDeviceFeatures2" vkgetphysicaldevicefeatures2
+                    funcall-vkgetphysicaldevicefeatures2)
     :void
   (physicaldevice vkphysicaldevice)
   (pfeatures :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceProperties2" vkgetphysicaldeviceproperties2)
+(more-cffi:defcfun ("vkGetPhysicalDeviceProperties2"
+                    vkgetphysicaldeviceproperties2
+                    funcall-vkgetphysicaldeviceproperties2)
     :void
   (physicaldevice vkphysicaldevice)
   (pproperties :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceFormatProperties2"
-               vkgetphysicaldeviceformatproperties2)
+(more-cffi:defcfun ("vkGetPhysicalDeviceFormatProperties2"
+                    vkgetphysicaldeviceformatproperties2
+                    funcall-vkgetphysicaldeviceformatproperties2)
     :void
   (physicaldevice vkphysicaldevice)
   (format vkformat)
   (pformatproperties :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceImageFormatProperties2"
-               vkgetphysicaldeviceimageformatproperties2)
+(more-cffi:defcfun ("vkGetPhysicalDeviceImageFormatProperties2"
+                    vkgetphysicaldeviceimageformatproperties2
+                    funcall-vkgetphysicaldeviceimageformatproperties2)
     vkresult
   (physicaldevice vkphysicaldevice)
   (pimageformatinfo :pointer)
   (pimageformatproperties :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceQueueFamilyProperties2"
-               vkgetphysicaldevicequeuefamilyproperties2)
+(more-cffi:defcfun ("vkGetPhysicalDeviceQueueFamilyProperties2"
+                    vkgetphysicaldevicequeuefamilyproperties2
+                    funcall-vkgetphysicaldevicequeuefamilyproperties2)
     :void
   (physicaldevice vkphysicaldevice)
   (pqueuefamilypropertycount :pointer)
   (pqueuefamilyproperties :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceMemoryProperties2"
-               vkgetphysicaldevicememoryproperties2)
+(more-cffi:defcfun ("vkGetPhysicalDeviceMemoryProperties2"
+                    vkgetphysicaldevicememoryproperties2
+                    funcall-vkgetphysicaldevicememoryproperties2)
     :void
   (physicaldevice vkphysicaldevice)
   (pmemoryproperties :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceSparseImageFormatProperties2"
-               vkgetphysicaldevicesparseimageformatproperties2)
+(more-cffi:defcfun ("vkGetPhysicalDeviceSparseImageFormatProperties2"
+                    vkgetphysicaldevicesparseimageformatproperties2
+                    funcall-vkgetphysicaldevicesparseimageformatproperties2)
     :void
   (physicaldevice vkphysicaldevice)
   (pformatinfo :pointer)
   (ppropertycount :pointer)
   (pproperties :pointer))
 
-(cffi:defcfun ("vkTrimCommandPool" vktrimcommandpool)
+(more-cffi:defcfun ("vkTrimCommandPool" vktrimcommandpool
+                    funcall-vktrimcommandpool)
     :void
   (device vkdevice)
   (commandpool vkcommandpool)
   (flags vkcommandpooltrimflags))
 
-(cffi:defcfun ("vkGetDeviceQueue2" vkgetdevicequeue2)
+(more-cffi:defcfun ("vkGetDeviceQueue2" vkgetdevicequeue2
+                    funcall-vkgetdevicequeue2)
     :void
   (device vkdevice)
   (pqueueinfo :pointer)
   (pqueue :pointer))
 
-(cffi:defcfun ("vkCreateSamplerYcbcrConversion" vkcreatesamplerycbcrconversion)
+(more-cffi:defcfun ("vkCreateSamplerYcbcrConversion"
+                    vkcreatesamplerycbcrconversion
+                    funcall-vkcreatesamplerycbcrconversion)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (pycbcrconversion :pointer))
 
-(cffi:defcfun ("vkDestroySamplerYcbcrConversion"
-               vkdestroysamplerycbcrconversion)
+(more-cffi:defcfun ("vkDestroySamplerYcbcrConversion"
+                    vkdestroysamplerycbcrconversion
+                    funcall-vkdestroysamplerycbcrconversion)
     :void
   (device vkdevice)
   (ycbcrconversion vksamplerycbcrconversion)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkCreateDescriptorUpdateTemplate"
-               vkcreatedescriptorupdatetemplate)
+(more-cffi:defcfun ("vkCreateDescriptorUpdateTemplate"
+                    vkcreatedescriptorupdatetemplate
+                    funcall-vkcreatedescriptorupdatetemplate)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (pdescriptorupdatetemplate :pointer))
 
-(cffi:defcfun ("vkDestroyDescriptorUpdateTemplate"
-               vkdestroydescriptorupdatetemplate)
+(more-cffi:defcfun ("vkDestroyDescriptorUpdateTemplate"
+                    vkdestroydescriptorupdatetemplate
+                    funcall-vkdestroydescriptorupdatetemplate)
     :void
   (device vkdevice)
   (descriptorupdatetemplate vkdescriptorupdatetemplate)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkUpdateDescriptorSetWithTemplate"
-               vkupdatedescriptorsetwithtemplate)
+(more-cffi:defcfun ("vkUpdateDescriptorSetWithTemplate"
+                    vkupdatedescriptorsetwithtemplate
+                    funcall-vkupdatedescriptorsetwithtemplate)
     :void
   (device vkdevice)
   (descriptorset vkdescriptorset)
   (descriptorupdatetemplate vkdescriptorupdatetemplate)
   (pdata :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceExternalBufferProperties"
-               vkgetphysicaldeviceexternalbufferproperties)
+(more-cffi:defcfun ("vkGetPhysicalDeviceExternalBufferProperties"
+                    vkgetphysicaldeviceexternalbufferproperties
+                    funcall-vkgetphysicaldeviceexternalbufferproperties)
     :void
   (physicaldevice vkphysicaldevice)
   (pexternalbufferinfo :pointer)
   (pexternalbufferproperties :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceExternalFenceProperties"
-               vkgetphysicaldeviceexternalfenceproperties)
+(more-cffi:defcfun ("vkGetPhysicalDeviceExternalFenceProperties"
+                    vkgetphysicaldeviceexternalfenceproperties
+                    funcall-vkgetphysicaldeviceexternalfenceproperties)
     :void
   (physicaldevice vkphysicaldevice)
   (pexternalfenceinfo :pointer)
   (pexternalfenceproperties :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceExternalSemaphoreProperties"
-               vkgetphysicaldeviceexternalsemaphoreproperties)
+(more-cffi:defcfun ("vkGetPhysicalDeviceExternalSemaphoreProperties"
+                    vkgetphysicaldeviceexternalsemaphoreproperties
+                    funcall-vkgetphysicaldeviceexternalsemaphoreproperties)
     :void
   (physicaldevice vkphysicaldevice)
   (pexternalsemaphoreinfo :pointer)
   (pexternalsemaphoreproperties :pointer))
 
-(cffi:defcfun ("vkGetDescriptorSetLayoutSupport"
-               vkgetdescriptorsetlayoutsupport)
+(more-cffi:defcfun ("vkGetDescriptorSetLayoutSupport"
+                    vkgetdescriptorsetlayoutsupport
+                    funcall-vkgetdescriptorsetlayoutsupport)
     :void
   (device vkdevice)
   (pcreateinfo :pointer)
   (psupport :pointer))
 
-(cffi:defcfun ("vkCmdDrawIndirectCount" vkcmddrawindirectcount)
+(more-cffi:defcfun ("vkCmdDrawIndirectCount" vkcmddrawindirectcount
+                    funcall-vkcmddrawindirectcount)
     :void
   (commandbuffer vkcommandbuffer)
   (buffer vkbuffer)
@@ -1145,7 +1286,9 @@
   (maxdrawcount :uint32)
   (stride :uint32))
 
-(cffi:defcfun ("vkCmdDrawIndexedIndirectCount" vkcmddrawindexedindirectcount)
+(more-cffi:defcfun ("vkCmdDrawIndexedIndirectCount"
+                    vkcmddrawindexedindirectcount
+                    funcall-vkcmddrawindexedindirectcount)
     :void
   (commandbuffer vkcommandbuffer)
   (buffer vkbuffer)
@@ -1155,92 +1298,107 @@
   (maxdrawcount :uint32)
   (stride :uint32))
 
-(cffi:defcfun ("vkCreateRenderPass2" vkcreaterenderpass2)
+(more-cffi:defcfun ("vkCreateRenderPass2" vkcreaterenderpass2
+                    funcall-vkcreaterenderpass2)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (prenderpass :pointer))
 
-(cffi:defcfun ("vkCmdBeginRenderPass2" vkcmdbeginrenderpass2)
+(more-cffi:defcfun ("vkCmdBeginRenderPass2" vkcmdbeginrenderpass2
+                    funcall-vkcmdbeginrenderpass2)
     :void
   (commandbuffer vkcommandbuffer)
   (prenderpassbegin :pointer)
   (psubpassbegininfo :pointer))
 
-(cffi:defcfun ("vkCmdNextSubpass2" vkcmdnextsubpass2)
+(more-cffi:defcfun ("vkCmdNextSubpass2" vkcmdnextsubpass2
+                    funcall-vkcmdnextsubpass2)
     :void
   (commandbuffer vkcommandbuffer)
   (psubpassbegininfo :pointer)
   (psubpassendinfo :pointer))
 
-(cffi:defcfun ("vkCmdEndRenderPass2" vkcmdendrenderpass2)
+(more-cffi:defcfun ("vkCmdEndRenderPass2" vkcmdendrenderpass2
+                    funcall-vkcmdendrenderpass2)
     :void
   (commandbuffer vkcommandbuffer)
   (psubpassendinfo :pointer))
 
-(cffi:defcfun ("vkResetQueryPool" vkresetquerypool)
+(more-cffi:defcfun ("vkResetQueryPool" vkresetquerypool
+                    funcall-vkresetquerypool)
     :void
   (device vkdevice)
   (querypool vkquerypool)
   (firstquery :uint32)
   (querycount :uint32))
 
-(cffi:defcfun ("vkGetSemaphoreCounterValue" vkgetsemaphorecountervalue)
+(more-cffi:defcfun ("vkGetSemaphoreCounterValue" vkgetsemaphorecountervalue
+                    funcall-vkgetsemaphorecountervalue)
     vkresult
   (device vkdevice)
   (semaphore vksemaphore)
   (pvalue :pointer))
 
-(cffi:defcfun ("vkWaitSemaphores" vkwaitsemaphores)
+(more-cffi:defcfun ("vkWaitSemaphores" vkwaitsemaphores
+                    funcall-vkwaitsemaphores)
     vkresult
   (device vkdevice)
   (pwaitinfo :pointer)
   (timeout :uint64))
 
-(cffi:defcfun ("vkSignalSemaphore" vksignalsemaphore)
+(more-cffi:defcfun ("vkSignalSemaphore" vksignalsemaphore
+                    funcall-vksignalsemaphore)
     vkresult
   (device vkdevice)
   (psignalinfo :pointer))
 
-(cffi:defcfun ("vkGetBufferDeviceAddress" vkgetbufferdeviceaddress)
+(more-cffi:defcfun ("vkGetBufferDeviceAddress" vkgetbufferdeviceaddress
+                    funcall-vkgetbufferdeviceaddress)
     vkdeviceaddress
   (device vkdevice)
   (pinfo :pointer))
 
-(cffi:defcfun ("vkGetBufferOpaqueCaptureAddress"
-               vkgetbufferopaquecaptureaddress)
+(more-cffi:defcfun ("vkGetBufferOpaqueCaptureAddress"
+                    vkgetbufferopaquecaptureaddress
+                    funcall-vkgetbufferopaquecaptureaddress)
     :uint64
   (device vkdevice)
   (pinfo :pointer))
 
-(cffi:defcfun ("vkGetDeviceMemoryOpaqueCaptureAddress"
-               vkgetdevicememoryopaquecaptureaddress)
+(more-cffi:defcfun ("vkGetDeviceMemoryOpaqueCaptureAddress"
+                    vkgetdevicememoryopaquecaptureaddress
+                    funcall-vkgetdevicememoryopaquecaptureaddress)
     :uint64
   (device vkdevice)
   (pinfo :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceToolProperties"
-               vkgetphysicaldevicetoolproperties)
+(more-cffi:defcfun ("vkGetPhysicalDeviceToolProperties"
+                    vkgetphysicaldevicetoolproperties
+                    funcall-vkgetphysicaldevicetoolproperties)
     vkresult
   (physicaldevice vkphysicaldevice)
   (ptoolcount :pointer)
   (ptoolproperties :pointer))
 
-(cffi:defcfun ("vkCreatePrivateDataSlot" vkcreateprivatedataslot)
+(more-cffi:defcfun ("vkCreatePrivateDataSlot" vkcreateprivatedataslot
+                    funcall-vkcreateprivatedataslot)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (pprivatedataslot :pointer))
 
-(cffi:defcfun ("vkDestroyPrivateDataSlot" vkdestroyprivatedataslot)
+(more-cffi:defcfun ("vkDestroyPrivateDataSlot" vkdestroyprivatedataslot
+                    funcall-vkdestroyprivatedataslot)
     :void
   (device vkdevice)
   (privatedataslot vkprivatedataslot)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkSetPrivateData" vksetprivatedata)
+(more-cffi:defcfun ("vkSetPrivateData" vksetprivatedata
+                    funcall-vksetprivatedata)
     vkresult
   (device vkdevice)
   (objecttype vkobjecttype)
@@ -1248,7 +1406,8 @@
   (privatedataslot vkprivatedataslot)
   (data :uint64))
 
-(cffi:defcfun ("vkGetPrivateData" vkgetprivatedata)
+(more-cffi:defcfun ("vkGetPrivateData" vkgetprivatedata
+                    funcall-vkgetprivatedata)
     :void
   (device vkdevice)
   (objecttype vkobjecttype)
@@ -1256,111 +1415,127 @@
   (privatedataslot vkprivatedataslot)
   (pdata :pointer))
 
-(cffi:defcfun ("vkCmdSetEvent2" vkcmdsetevent2)
+(more-cffi:defcfun ("vkCmdSetEvent2" vkcmdsetevent2 funcall-vkcmdsetevent2)
     :void
   (commandbuffer vkcommandbuffer)
   (event vkevent)
   (pdependencyinfo :pointer))
 
-(cffi:defcfun ("vkCmdResetEvent2" vkcmdresetevent2)
+(more-cffi:defcfun ("vkCmdResetEvent2" vkcmdresetevent2
+                    funcall-vkcmdresetevent2)
     :void
   (commandbuffer vkcommandbuffer)
   (event vkevent)
   (stagemask vkpipelinestageflags2))
 
-(cffi:defcfun ("vkCmdWaitEvents2" vkcmdwaitevents2)
+(more-cffi:defcfun ("vkCmdWaitEvents2" vkcmdwaitevents2
+                    funcall-vkcmdwaitevents2)
     :void
   (commandbuffer vkcommandbuffer)
   (eventcount :uint32)
   (pevents :pointer)
   (pdependencyinfos :pointer))
 
-(cffi:defcfun ("vkCmdPipelineBarrier2" vkcmdpipelinebarrier2)
+(more-cffi:defcfun ("vkCmdPipelineBarrier2" vkcmdpipelinebarrier2
+                    funcall-vkcmdpipelinebarrier2)
     :void
   (commandbuffer vkcommandbuffer)
   (pdependencyinfo :pointer))
 
-(cffi:defcfun ("vkCmdWriteTimestamp2" vkcmdwritetimestamp2)
+(more-cffi:defcfun ("vkCmdWriteTimestamp2" vkcmdwritetimestamp2
+                    funcall-vkcmdwritetimestamp2)
     :void
   (commandbuffer vkcommandbuffer)
   (stage vkpipelinestageflags2)
   (querypool vkquerypool)
   (query :uint32))
 
-(cffi:defcfun ("vkQueueSubmit2" vkqueuesubmit2)
+(more-cffi:defcfun ("vkQueueSubmit2" vkqueuesubmit2 funcall-vkqueuesubmit2)
     vkresult
   (queue vkqueue)
   (submitcount :uint32)
   (psubmits :pointer)
   (fence vkfence))
 
-(cffi:defcfun ("vkCmdCopyBuffer2" vkcmdcopybuffer2)
+(more-cffi:defcfun ("vkCmdCopyBuffer2" vkcmdcopybuffer2
+                    funcall-vkcmdcopybuffer2)
     :void
   (commandbuffer vkcommandbuffer)
   (pcopybufferinfo :pointer))
 
-(cffi:defcfun ("vkCmdCopyImage2" vkcmdcopyimage2)
+(more-cffi:defcfun ("vkCmdCopyImage2" vkcmdcopyimage2 funcall-vkcmdcopyimage2)
     :void
   (commandbuffer vkcommandbuffer)
   (pcopyimageinfo :pointer))
 
-(cffi:defcfun ("vkCmdCopyBufferToImage2" vkcmdcopybuffertoimage2)
+(more-cffi:defcfun ("vkCmdCopyBufferToImage2" vkcmdcopybuffertoimage2
+                    funcall-vkcmdcopybuffertoimage2)
     :void
   (commandbuffer vkcommandbuffer)
   (pcopybuffertoimageinfo :pointer))
 
-(cffi:defcfun ("vkCmdCopyImageToBuffer2" vkcmdcopyimagetobuffer2)
+(more-cffi:defcfun ("vkCmdCopyImageToBuffer2" vkcmdcopyimagetobuffer2
+                    funcall-vkcmdcopyimagetobuffer2)
     :void
   (commandbuffer vkcommandbuffer)
   (pcopyimagetobufferinfo :pointer))
 
-(cffi:defcfun ("vkCmdBlitImage2" vkcmdblitimage2)
+(more-cffi:defcfun ("vkCmdBlitImage2" vkcmdblitimage2 funcall-vkcmdblitimage2)
     :void
   (commandbuffer vkcommandbuffer)
   (pblitimageinfo :pointer))
 
-(cffi:defcfun ("vkCmdResolveImage2" vkcmdresolveimage2)
+(more-cffi:defcfun ("vkCmdResolveImage2" vkcmdresolveimage2
+                    funcall-vkcmdresolveimage2)
     :void
   (commandbuffer vkcommandbuffer)
   (presolveimageinfo :pointer))
 
-(cffi:defcfun ("vkCmdBeginRendering" vkcmdbeginrendering)
+(more-cffi:defcfun ("vkCmdBeginRendering" vkcmdbeginrendering
+                    funcall-vkcmdbeginrendering)
     :void
   (commandbuffer vkcommandbuffer)
   (prenderinginfo :pointer))
 
-(cffi:defcfun ("vkCmdEndRendering" vkcmdendrendering)
+(more-cffi:defcfun ("vkCmdEndRendering" vkcmdendrendering
+                    funcall-vkcmdendrendering)
     :void
   (commandbuffer vkcommandbuffer))
 
-(cffi:defcfun ("vkCmdSetCullMode" vkcmdsetcullmode)
+(more-cffi:defcfun ("vkCmdSetCullMode" vkcmdsetcullmode
+                    funcall-vkcmdsetcullmode)
     :void
   (commandbuffer vkcommandbuffer)
   (cullmode vkcullmodeflags))
 
-(cffi:defcfun ("vkCmdSetFrontFace" vkcmdsetfrontface)
+(more-cffi:defcfun ("vkCmdSetFrontFace" vkcmdsetfrontface
+                    funcall-vkcmdsetfrontface)
     :void
   (commandbuffer vkcommandbuffer)
   (frontface vkfrontface))
 
-(cffi:defcfun ("vkCmdSetPrimitiveTopology" vkcmdsetprimitivetopology)
+(more-cffi:defcfun ("vkCmdSetPrimitiveTopology" vkcmdsetprimitivetopology
+                    funcall-vkcmdsetprimitivetopology)
     :void
   (commandbuffer vkcommandbuffer)
   (primitivetopology vkprimitivetopology))
 
-(cffi:defcfun ("vkCmdSetViewportWithCount" vkcmdsetviewportwithcount)
+(more-cffi:defcfun ("vkCmdSetViewportWithCount" vkcmdsetviewportwithcount
+                    funcall-vkcmdsetviewportwithcount)
     :void
   (commandbuffer vkcommandbuffer)
   (viewportcount :uint32)
   (pviewports :pointer))
 
-(cffi:defcfun ("vkCmdSetScissorWithCount" vkcmdsetscissorwithcount)
+(more-cffi:defcfun ("vkCmdSetScissorWithCount" vkcmdsetscissorwithcount
+                    funcall-vkcmdsetscissorwithcount)
     :void
   (commandbuffer vkcommandbuffer)
   (scissorcount :uint32)
   (pscissors :pointer))
 
-(cffi:defcfun ("vkCmdBindVertexBuffers2" vkcmdbindvertexbuffers2)
+(more-cffi:defcfun ("vkCmdBindVertexBuffers2" vkcmdbindvertexbuffers2
+                    funcall-vkcmdbindvertexbuffers2)
     :void
   (commandbuffer vkcommandbuffer)
   (firstbinding :uint32)
@@ -1370,32 +1545,39 @@
   (psizes :pointer)
   (pstrides :pointer))
 
-(cffi:defcfun ("vkCmdSetDepthTestEnable" vkcmdsetdepthtestenable)
+(more-cffi:defcfun ("vkCmdSetDepthTestEnable" vkcmdsetdepthtestenable
+                    funcall-vkcmdsetdepthtestenable)
     :void
   (commandbuffer vkcommandbuffer)
   (depthtestenable vkbool32))
 
-(cffi:defcfun ("vkCmdSetDepthWriteEnable" vkcmdsetdepthwriteenable)
+(more-cffi:defcfun ("vkCmdSetDepthWriteEnable" vkcmdsetdepthwriteenable
+                    funcall-vkcmdsetdepthwriteenable)
     :void
   (commandbuffer vkcommandbuffer)
   (depthwriteenable vkbool32))
 
-(cffi:defcfun ("vkCmdSetDepthCompareOp" vkcmdsetdepthcompareop)
+(more-cffi:defcfun ("vkCmdSetDepthCompareOp" vkcmdsetdepthcompareop
+                    funcall-vkcmdsetdepthcompareop)
     :void
   (commandbuffer vkcommandbuffer)
   (depthcompareop vkcompareop))
 
-(cffi:defcfun ("vkCmdSetDepthBoundsTestEnable" vkcmdsetdepthboundstestenable)
+(more-cffi:defcfun ("vkCmdSetDepthBoundsTestEnable"
+                    vkcmdsetdepthboundstestenable
+                    funcall-vkcmdsetdepthboundstestenable)
     :void
   (commandbuffer vkcommandbuffer)
   (depthboundstestenable vkbool32))
 
-(cffi:defcfun ("vkCmdSetStencilTestEnable" vkcmdsetstenciltestenable)
+(more-cffi:defcfun ("vkCmdSetStencilTestEnable" vkcmdsetstenciltestenable
+                    funcall-vkcmdsetstenciltestenable)
     :void
   (commandbuffer vkcommandbuffer)
   (stenciltestenable vkbool32))
 
-(cffi:defcfun ("vkCmdSetStencilOp" vkcmdsetstencilop)
+(more-cffi:defcfun ("vkCmdSetStencilOp" vkcmdsetstencilop
+                    funcall-vkcmdsetstencilop)
     :void
   (commandbuffer vkcommandbuffer)
   (facemask vkstencilfaceflags)
@@ -1404,102 +1586,118 @@
   (depthfailop vkstencilop)
   (compareop vkcompareop))
 
-(cffi:defcfun ("vkCmdSetRasterizerDiscardEnable"
-               vkcmdsetrasterizerdiscardenable)
+(more-cffi:defcfun ("vkCmdSetRasterizerDiscardEnable"
+                    vkcmdsetrasterizerdiscardenable
+                    funcall-vkcmdsetrasterizerdiscardenable)
     :void
   (commandbuffer vkcommandbuffer)
   (rasterizerdiscardenable vkbool32))
 
-(cffi:defcfun ("vkCmdSetDepthBiasEnable" vkcmdsetdepthbiasenable)
+(more-cffi:defcfun ("vkCmdSetDepthBiasEnable" vkcmdsetdepthbiasenable
+                    funcall-vkcmdsetdepthbiasenable)
     :void
   (commandbuffer vkcommandbuffer)
   (depthbiasenable vkbool32))
 
-(cffi:defcfun ("vkCmdSetPrimitiveRestartEnable" vkcmdsetprimitiverestartenable)
+(more-cffi:defcfun ("vkCmdSetPrimitiveRestartEnable"
+                    vkcmdsetprimitiverestartenable
+                    funcall-vkcmdsetprimitiverestartenable)
     :void
   (commandbuffer vkcommandbuffer)
   (primitiverestartenable vkbool32))
 
-(cffi:defcfun ("vkGetDeviceBufferMemoryRequirements"
-               vkgetdevicebuffermemoryrequirements)
+(more-cffi:defcfun ("vkGetDeviceBufferMemoryRequirements"
+                    vkgetdevicebuffermemoryrequirements
+                    funcall-vkgetdevicebuffermemoryrequirements)
     :void
   (device vkdevice)
   (pinfo :pointer)
   (pmemoryrequirements :pointer))
 
-(cffi:defcfun ("vkGetDeviceImageMemoryRequirements"
-               vkgetdeviceimagememoryrequirements)
+(more-cffi:defcfun ("vkGetDeviceImageMemoryRequirements"
+                    vkgetdeviceimagememoryrequirements
+                    funcall-vkgetdeviceimagememoryrequirements)
     :void
   (device vkdevice)
   (pinfo :pointer)
   (pmemoryrequirements :pointer))
 
-(cffi:defcfun ("vkGetDeviceImageSparseMemoryRequirements"
-               vkgetdeviceimagesparsememoryrequirements)
+(more-cffi:defcfun ("vkGetDeviceImageSparseMemoryRequirements"
+                    vkgetdeviceimagesparsememoryrequirements
+                    funcall-vkgetdeviceimagesparsememoryrequirements)
     :void
   (device vkdevice)
   (pinfo :pointer)
   (psparsememoryrequirementcount :pointer)
   (psparsememoryrequirements :pointer))
 
-(cffi:defcfun ("vkDestroySurfaceKHR" vkdestroysurfacekhr)
+(more-cffi:defcfun ("vkDestroySurfaceKHR" vkdestroysurfacekhr
+                    funcall-vkdestroysurfacekhr)
     :void
   (instance vkinstance)
   (surface vksurfacekhr)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceSurfaceSupportKHR"
-               vkgetphysicaldevicesurfacesupportkhr)
+(more-cffi:defcfun ("vkGetPhysicalDeviceSurfaceSupportKHR"
+                    vkgetphysicaldevicesurfacesupportkhr
+                    funcall-vkgetphysicaldevicesurfacesupportkhr)
     vkresult
   (physicaldevice vkphysicaldevice)
   (queuefamilyindex :uint32)
   (surface vksurfacekhr)
   (psupported :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceSurfaceCapabilitiesKHR"
-               vkgetphysicaldevicesurfacecapabilitieskhr)
+(more-cffi:defcfun ("vkGetPhysicalDeviceSurfaceCapabilitiesKHR"
+                    vkgetphysicaldevicesurfacecapabilitieskhr
+                    funcall-vkgetphysicaldevicesurfacecapabilitieskhr)
     vkresult
   (physicaldevice vkphysicaldevice)
   (surface vksurfacekhr)
   (psurfacecapabilities :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceSurfaceFormatsKHR"
-               vkgetphysicaldevicesurfaceformatskhr)
+(more-cffi:defcfun ("vkGetPhysicalDeviceSurfaceFormatsKHR"
+                    vkgetphysicaldevicesurfaceformatskhr
+                    funcall-vkgetphysicaldevicesurfaceformatskhr)
     vkresult
   (physicaldevice vkphysicaldevice)
   (surface vksurfacekhr)
   (psurfaceformatcount :pointer)
   (psurfaceformats :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceSurfacePresentModesKHR"
-               vkgetphysicaldevicesurfacepresentmodeskhr)
+(more-cffi:defcfun ("vkGetPhysicalDeviceSurfacePresentModesKHR"
+                    vkgetphysicaldevicesurfacepresentmodeskhr
+                    funcall-vkgetphysicaldevicesurfacepresentmodeskhr)
     vkresult
   (physicaldevice vkphysicaldevice)
   (surface vksurfacekhr)
   (ppresentmodecount :pointer)
   (ppresentmodes :pointer))
 
-(cffi:defcfun ("vkCreateSwapchainKHR" vkcreateswapchainkhr)
+(more-cffi:defcfun ("vkCreateSwapchainKHR" vkcreateswapchainkhr
+                    funcall-vkcreateswapchainkhr)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (pswapchain :pointer))
 
-(cffi:defcfun ("vkDestroySwapchainKHR" vkdestroyswapchainkhr)
+(more-cffi:defcfun ("vkDestroySwapchainKHR" vkdestroyswapchainkhr
+                    funcall-vkdestroyswapchainkhr)
     :void
   (device vkdevice)
   (swapchain vkswapchainkhr)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkGetSwapchainImagesKHR" vkgetswapchainimageskhr)
+(more-cffi:defcfun ("vkGetSwapchainImagesKHR" vkgetswapchainimageskhr
+                    funcall-vkgetswapchainimageskhr)
     vkresult
   (device vkdevice)
   (swapchain vkswapchainkhr)
   (pswapchainimagecount :pointer)
   (pswapchainimages :pointer))
 
-(cffi:defcfun ("vkAcquireNextImageKHR" vkacquirenextimagekhr)
+(more-cffi:defcfun ("vkAcquireNextImageKHR" vkacquirenextimagekhr
+                    funcall-vkacquirenextimagekhr)
     vkresult
   (device vkdevice)
   (swapchain vkswapchainkhr)
@@ -1508,68 +1706,79 @@
   (fence vkfence)
   (pimageindex :pointer))
 
-(cffi:defcfun ("vkQueuePresentKHR" vkqueuepresentkhr)
+(more-cffi:defcfun ("vkQueuePresentKHR" vkqueuepresentkhr
+                    funcall-vkqueuepresentkhr)
     vkresult
   (queue vkqueue)
   (ppresentinfo :pointer))
 
-(cffi:defcfun ("vkGetDeviceGroupPresentCapabilitiesKHR"
-               vkgetdevicegrouppresentcapabilitieskhr)
+(more-cffi:defcfun ("vkGetDeviceGroupPresentCapabilitiesKHR"
+                    vkgetdevicegrouppresentcapabilitieskhr
+                    funcall-vkgetdevicegrouppresentcapabilitieskhr)
     vkresult
   (device vkdevice)
   (pdevicegrouppresentcapabilities :pointer))
 
-(cffi:defcfun ("vkGetDeviceGroupSurfacePresentModesKHR"
-               vkgetdevicegroupsurfacepresentmodeskhr)
+(more-cffi:defcfun ("vkGetDeviceGroupSurfacePresentModesKHR"
+                    vkgetdevicegroupsurfacepresentmodeskhr
+                    funcall-vkgetdevicegroupsurfacepresentmodeskhr)
     vkresult
   (device vkdevice)
   (surface vksurfacekhr)
   (pmodes :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDevicePresentRectanglesKHR"
-               vkgetphysicaldevicepresentrectangleskhr)
+(more-cffi:defcfun ("vkGetPhysicalDevicePresentRectanglesKHR"
+                    vkgetphysicaldevicepresentrectangleskhr
+                    funcall-vkgetphysicaldevicepresentrectangleskhr)
     vkresult
   (physicaldevice vkphysicaldevice)
   (surface vksurfacekhr)
   (prectcount :pointer)
   (prects :pointer))
 
-(cffi:defcfun ("vkAcquireNextImage2KHR" vkacquirenextimage2khr)
+(more-cffi:defcfun ("vkAcquireNextImage2KHR" vkacquirenextimage2khr
+                    funcall-vkacquirenextimage2khr)
     vkresult
   (device vkdevice)
   (pacquireinfo :pointer)
   (pimageindex :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceDisplayPropertiesKHR"
-               vkgetphysicaldevicedisplaypropertieskhr)
+(more-cffi:defcfun ("vkGetPhysicalDeviceDisplayPropertiesKHR"
+                    vkgetphysicaldevicedisplaypropertieskhr
+                    funcall-vkgetphysicaldevicedisplaypropertieskhr)
     vkresult
   (physicaldevice vkphysicaldevice)
   (ppropertycount :pointer)
   (pproperties :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceDisplayPlanePropertiesKHR"
-               vkgetphysicaldevicedisplayplanepropertieskhr)
+(more-cffi:defcfun ("vkGetPhysicalDeviceDisplayPlanePropertiesKHR"
+                    vkgetphysicaldevicedisplayplanepropertieskhr
+                    funcall-vkgetphysicaldevicedisplayplanepropertieskhr)
     vkresult
   (physicaldevice vkphysicaldevice)
   (ppropertycount :pointer)
   (pproperties :pointer))
 
-(cffi:defcfun ("vkGetDisplayPlaneSupportedDisplaysKHR"
-               vkgetdisplayplanesupporteddisplayskhr)
+(more-cffi:defcfun ("vkGetDisplayPlaneSupportedDisplaysKHR"
+                    vkgetdisplayplanesupporteddisplayskhr
+                    funcall-vkgetdisplayplanesupporteddisplayskhr)
     vkresult
   (physicaldevice vkphysicaldevice)
   (planeindex :uint32)
   (pdisplaycount :pointer)
   (pdisplays :pointer))
 
-(cffi:defcfun ("vkGetDisplayModePropertiesKHR" vkgetdisplaymodepropertieskhr)
+(more-cffi:defcfun ("vkGetDisplayModePropertiesKHR"
+                    vkgetdisplaymodepropertieskhr
+                    funcall-vkgetdisplaymodepropertieskhr)
     vkresult
   (physicaldevice vkphysicaldevice)
   (display vkdisplaykhr)
   (ppropertycount :pointer)
   (pproperties :pointer))
 
-(cffi:defcfun ("vkCreateDisplayModeKHR" vkcreatedisplaymodekhr)
+(more-cffi:defcfun ("vkCreateDisplayModeKHR" vkcreatedisplaymodekhr
+                    funcall-vkcreatedisplaymodekhr)
     vkresult
   (physicaldevice vkphysicaldevice)
   (display vkdisplaykhr)
@@ -1577,22 +1786,26 @@
   (pallocator :pointer)
   (pmode :pointer))
 
-(cffi:defcfun ("vkGetDisplayPlaneCapabilitiesKHR"
-               vkgetdisplayplanecapabilitieskhr)
+(more-cffi:defcfun ("vkGetDisplayPlaneCapabilitiesKHR"
+                    vkgetdisplayplanecapabilitieskhr
+                    funcall-vkgetdisplayplanecapabilitieskhr)
     vkresult
   (physicaldevice vkphysicaldevice)
   (mode vkdisplaymodekhr)
   (planeindex :uint32)
   (pcapabilities :pointer))
 
-(cffi:defcfun ("vkCreateDisplayPlaneSurfaceKHR" vkcreatedisplayplanesurfacekhr)
+(more-cffi:defcfun ("vkCreateDisplayPlaneSurfaceKHR"
+                    vkcreatedisplayplanesurfacekhr
+                    funcall-vkcreatedisplayplanesurfacekhr)
     vkresult
   (instance vkinstance)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (psurface :pointer))
 
-(cffi:defcfun ("vkCreateSharedSwapchainsKHR" vkcreatesharedswapchainskhr)
+(more-cffi:defcfun ("vkCreateSharedSwapchainsKHR" vkcreatesharedswapchainskhr
+                    funcall-vkcreatesharedswapchainskhr)
     vkresult
   (device vkdevice)
   (swapchaincount :uint32)
@@ -1600,64 +1813,74 @@
   (pallocator :pointer)
   (pswapchains :pointer))
 
-(cffi:defcfun ("vkCmdBeginRenderingKHR" vkcmdbeginrenderingkhr)
+(more-cffi:defcfun ("vkCmdBeginRenderingKHR" vkcmdbeginrenderingkhr
+                    funcall-vkcmdbeginrenderingkhr)
     :void
   (commandbuffer vkcommandbuffer)
   (prenderinginfo :pointer))
 
-(cffi:defcfun ("vkCmdEndRenderingKHR" vkcmdendrenderingkhr)
+(more-cffi:defcfun ("vkCmdEndRenderingKHR" vkcmdendrenderingkhr
+                    funcall-vkcmdendrenderingkhr)
     :void
   (commandbuffer vkcommandbuffer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceFeatures2KHR"
-               vkgetphysicaldevicefeatures2khr)
+(more-cffi:defcfun ("vkGetPhysicalDeviceFeatures2KHR"
+                    vkgetphysicaldevicefeatures2khr
+                    funcall-vkgetphysicaldevicefeatures2khr)
     :void
   (physicaldevice vkphysicaldevice)
   (pfeatures :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceProperties2KHR"
-               vkgetphysicaldeviceproperties2khr)
+(more-cffi:defcfun ("vkGetPhysicalDeviceProperties2KHR"
+                    vkgetphysicaldeviceproperties2khr
+                    funcall-vkgetphysicaldeviceproperties2khr)
     :void
   (physicaldevice vkphysicaldevice)
   (pproperties :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceFormatProperties2KHR"
-               vkgetphysicaldeviceformatproperties2khr)
+(more-cffi:defcfun ("vkGetPhysicalDeviceFormatProperties2KHR"
+                    vkgetphysicaldeviceformatproperties2khr
+                    funcall-vkgetphysicaldeviceformatproperties2khr)
     :void
   (physicaldevice vkphysicaldevice)
   (format vkformat)
   (pformatproperties :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceImageFormatProperties2KHR"
-               vkgetphysicaldeviceimageformatproperties2khr)
+(more-cffi:defcfun ("vkGetPhysicalDeviceImageFormatProperties2KHR"
+                    vkgetphysicaldeviceimageformatproperties2khr
+                    funcall-vkgetphysicaldeviceimageformatproperties2khr)
     vkresult
   (physicaldevice vkphysicaldevice)
   (pimageformatinfo :pointer)
   (pimageformatproperties :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceQueueFamilyProperties2KHR"
-               vkgetphysicaldevicequeuefamilyproperties2khr)
+(more-cffi:defcfun ("vkGetPhysicalDeviceQueueFamilyProperties2KHR"
+                    vkgetphysicaldevicequeuefamilyproperties2khr
+                    funcall-vkgetphysicaldevicequeuefamilyproperties2khr)
     :void
   (physicaldevice vkphysicaldevice)
   (pqueuefamilypropertycount :pointer)
   (pqueuefamilyproperties :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceMemoryProperties2KHR"
-               vkgetphysicaldevicememoryproperties2khr)
+(more-cffi:defcfun ("vkGetPhysicalDeviceMemoryProperties2KHR"
+                    vkgetphysicaldevicememoryproperties2khr
+                    funcall-vkgetphysicaldevicememoryproperties2khr)
     :void
   (physicaldevice vkphysicaldevice)
   (pmemoryproperties :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceSparseImageFormatProperties2KHR"
-               vkgetphysicaldevicesparseimageformatproperties2khr)
+(more-cffi:defcfun ("vkGetPhysicalDeviceSparseImageFormatProperties2KHR"
+                    vkgetphysicaldevicesparseimageformatproperties2khr
+                    funcall-vkgetphysicaldevicesparseimageformatproperties2khr)
     :void
   (physicaldevice vkphysicaldevice)
   (pformatinfo :pointer)
   (ppropertycount :pointer)
   (pproperties :pointer))
 
-(cffi:defcfun ("vkGetDeviceGroupPeerMemoryFeaturesKHR"
-               vkgetdevicegrouppeermemoryfeatureskhr)
+(more-cffi:defcfun ("vkGetDeviceGroupPeerMemoryFeaturesKHR"
+                    vkgetdevicegrouppeermemoryfeatureskhr
+                    funcall-vkgetdevicegrouppeermemoryfeatureskhr)
     :void
   (device vkdevice)
   (heapindex :uint32)
@@ -1665,12 +1888,14 @@
   (remotedeviceindex :uint32)
   (ppeermemoryfeatures :pointer))
 
-(cffi:defcfun ("vkCmdSetDeviceMaskKHR" vkcmdsetdevicemaskkhr)
+(more-cffi:defcfun ("vkCmdSetDeviceMaskKHR" vkcmdsetdevicemaskkhr
+                    funcall-vkcmdsetdevicemaskkhr)
     :void
   (commandbuffer vkcommandbuffer)
   (devicemask :uint32))
 
-(cffi:defcfun ("vkCmdDispatchBaseKHR" vkcmddispatchbasekhr)
+(more-cffi:defcfun ("vkCmdDispatchBaseKHR" vkcmddispatchbasekhr
+                    funcall-vkcmddispatchbasekhr)
     :void
   (commandbuffer vkcommandbuffer)
   (basegroupx :uint32)
@@ -1680,58 +1905,67 @@
   (groupcounty :uint32)
   (groupcountz :uint32))
 
-(cffi:defcfun ("vkTrimCommandPoolKHR" vktrimcommandpoolkhr)
+(more-cffi:defcfun ("vkTrimCommandPoolKHR" vktrimcommandpoolkhr
+                    funcall-vktrimcommandpoolkhr)
     :void
   (device vkdevice)
   (commandpool vkcommandpool)
   (flags vkcommandpooltrimflags))
 
-(cffi:defcfun ("vkEnumeratePhysicalDeviceGroupsKHR"
-               vkenumeratephysicaldevicegroupskhr)
+(more-cffi:defcfun ("vkEnumeratePhysicalDeviceGroupsKHR"
+                    vkenumeratephysicaldevicegroupskhr
+                    funcall-vkenumeratephysicaldevicegroupskhr)
     vkresult
   (instance vkinstance)
   (pphysicaldevicegroupcount :pointer)
   (pphysicaldevicegroupproperties :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceExternalBufferPropertiesKHR"
-               vkgetphysicaldeviceexternalbufferpropertieskhr)
+(more-cffi:defcfun ("vkGetPhysicalDeviceExternalBufferPropertiesKHR"
+                    vkgetphysicaldeviceexternalbufferpropertieskhr
+                    funcall-vkgetphysicaldeviceexternalbufferpropertieskhr)
     :void
   (physicaldevice vkphysicaldevice)
   (pexternalbufferinfo :pointer)
   (pexternalbufferproperties :pointer))
 
-(cffi:defcfun ("vkGetMemoryFdKHR" vkgetmemoryfdkhr)
+(more-cffi:defcfun ("vkGetMemoryFdKHR" vkgetmemoryfdkhr
+                    funcall-vkgetmemoryfdkhr)
     vkresult
   (device vkdevice)
   (pgetfdinfo :pointer)
   (pfd :pointer))
 
-(cffi:defcfun ("vkGetMemoryFdPropertiesKHR" vkgetmemoryfdpropertieskhr)
+(more-cffi:defcfun ("vkGetMemoryFdPropertiesKHR" vkgetmemoryfdpropertieskhr
+                    funcall-vkgetmemoryfdpropertieskhr)
     vkresult
   (device vkdevice)
   (handletype vkexternalmemoryhandletypeflagbits)
   (fd :int)
   (pmemoryfdproperties :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceExternalSemaphorePropertiesKHR"
-               vkgetphysicaldeviceexternalsemaphorepropertieskhr)
+(more-cffi:defcfun ("vkGetPhysicalDeviceExternalSemaphorePropertiesKHR"
+                    vkgetphysicaldeviceexternalsemaphorepropertieskhr
+                    funcall-vkgetphysicaldeviceexternalsemaphorepropertieskhr)
     :void
   (physicaldevice vkphysicaldevice)
   (pexternalsemaphoreinfo :pointer)
   (pexternalsemaphoreproperties :pointer))
 
-(cffi:defcfun ("vkImportSemaphoreFdKHR" vkimportsemaphorefdkhr)
+(more-cffi:defcfun ("vkImportSemaphoreFdKHR" vkimportsemaphorefdkhr
+                    funcall-vkimportsemaphorefdkhr)
     vkresult
   (device vkdevice)
   (pimportsemaphorefdinfo :pointer))
 
-(cffi:defcfun ("vkGetSemaphoreFdKHR" vkgetsemaphorefdkhr)
+(more-cffi:defcfun ("vkGetSemaphoreFdKHR" vkgetsemaphorefdkhr
+                    funcall-vkgetsemaphorefdkhr)
     vkresult
   (device vkdevice)
   (pgetfdinfo :pointer)
   (pfd :pointer))
 
-(cffi:defcfun ("vkCmdPushDescriptorSetKHR" vkcmdpushdescriptorsetkhr)
+(more-cffi:defcfun ("vkCmdPushDescriptorSetKHR" vkcmdpushdescriptorsetkhr
+                    funcall-vkcmdpushdescriptorsetkhr)
     :void
   (commandbuffer vkcommandbuffer)
   (pipelinebindpoint vkpipelinebindpoint)
@@ -1740,8 +1974,9 @@
   (descriptorwritecount :uint32)
   (pdescriptorwrites :pointer))
 
-(cffi:defcfun ("vkCmdPushDescriptorSetWithTemplateKHR"
-               vkcmdpushdescriptorsetwithtemplatekhr)
+(more-cffi:defcfun ("vkCmdPushDescriptorSetWithTemplateKHR"
+                    vkcmdpushdescriptorsetwithtemplatekhr
+                    funcall-vkcmdpushdescriptorsetwithtemplatekhr)
     :void
   (commandbuffer vkcommandbuffer)
   (descriptorupdatetemplate vkdescriptorupdatetemplate)
@@ -1749,78 +1984,89 @@
   (set :uint32)
   (pdata :pointer))
 
-(cffi:defcfun ("vkCreateDescriptorUpdateTemplateKHR"
-               vkcreatedescriptorupdatetemplatekhr)
+(more-cffi:defcfun ("vkCreateDescriptorUpdateTemplateKHR"
+                    vkcreatedescriptorupdatetemplatekhr
+                    funcall-vkcreatedescriptorupdatetemplatekhr)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (pdescriptorupdatetemplate :pointer))
 
-(cffi:defcfun ("vkDestroyDescriptorUpdateTemplateKHR"
-               vkdestroydescriptorupdatetemplatekhr)
+(more-cffi:defcfun ("vkDestroyDescriptorUpdateTemplateKHR"
+                    vkdestroydescriptorupdatetemplatekhr
+                    funcall-vkdestroydescriptorupdatetemplatekhr)
     :void
   (device vkdevice)
   (descriptorupdatetemplate vkdescriptorupdatetemplate)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkUpdateDescriptorSetWithTemplateKHR"
-               vkupdatedescriptorsetwithtemplatekhr)
+(more-cffi:defcfun ("vkUpdateDescriptorSetWithTemplateKHR"
+                    vkupdatedescriptorsetwithtemplatekhr
+                    funcall-vkupdatedescriptorsetwithtemplatekhr)
     :void
   (device vkdevice)
   (descriptorset vkdescriptorset)
   (descriptorupdatetemplate vkdescriptorupdatetemplate)
   (pdata :pointer))
 
-(cffi:defcfun ("vkCreateRenderPass2KHR" vkcreaterenderpass2khr)
+(more-cffi:defcfun ("vkCreateRenderPass2KHR" vkcreaterenderpass2khr
+                    funcall-vkcreaterenderpass2khr)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (prenderpass :pointer))
 
-(cffi:defcfun ("vkCmdBeginRenderPass2KHR" vkcmdbeginrenderpass2khr)
+(more-cffi:defcfun ("vkCmdBeginRenderPass2KHR" vkcmdbeginrenderpass2khr
+                    funcall-vkcmdbeginrenderpass2khr)
     :void
   (commandbuffer vkcommandbuffer)
   (prenderpassbegin :pointer)
   (psubpassbegininfo :pointer))
 
-(cffi:defcfun ("vkCmdNextSubpass2KHR" vkcmdnextsubpass2khr)
+(more-cffi:defcfun ("vkCmdNextSubpass2KHR" vkcmdnextsubpass2khr
+                    funcall-vkcmdnextsubpass2khr)
     :void
   (commandbuffer vkcommandbuffer)
   (psubpassbegininfo :pointer)
   (psubpassendinfo :pointer))
 
-(cffi:defcfun ("vkCmdEndRenderPass2KHR" vkcmdendrenderpass2khr)
+(more-cffi:defcfun ("vkCmdEndRenderPass2KHR" vkcmdendrenderpass2khr
+                    funcall-vkcmdendrenderpass2khr)
     :void
   (commandbuffer vkcommandbuffer)
   (psubpassendinfo :pointer))
 
-(cffi:defcfun ("vkGetSwapchainStatusKHR" vkgetswapchainstatuskhr)
+(more-cffi:defcfun ("vkGetSwapchainStatusKHR" vkgetswapchainstatuskhr
+                    funcall-vkgetswapchainstatuskhr)
     vkresult
   (device vkdevice)
   (swapchain vkswapchainkhr))
 
-(cffi:defcfun ("vkGetPhysicalDeviceExternalFencePropertiesKHR"
-               vkgetphysicaldeviceexternalfencepropertieskhr)
+(more-cffi:defcfun ("vkGetPhysicalDeviceExternalFencePropertiesKHR"
+                    vkgetphysicaldeviceexternalfencepropertieskhr
+                    funcall-vkgetphysicaldeviceexternalfencepropertieskhr)
     :void
   (physicaldevice vkphysicaldevice)
   (pexternalfenceinfo :pointer)
   (pexternalfenceproperties :pointer))
 
-(cffi:defcfun ("vkImportFenceFdKHR" vkimportfencefdkhr)
+(more-cffi:defcfun ("vkImportFenceFdKHR" vkimportfencefdkhr
+                    funcall-vkimportfencefdkhr)
     vkresult
   (device vkdevice)
   (pimportfencefdinfo :pointer))
 
-(cffi:defcfun ("vkGetFenceFdKHR" vkgetfencefdkhr)
+(more-cffi:defcfun ("vkGetFenceFdKHR" vkgetfencefdkhr funcall-vkgetfencefdkhr)
     vkresult
   (device vkdevice)
   (pgetfdinfo :pointer)
   (pfd :pointer))
 
-(cffi:defcfun ("vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR"
-               vkenumeratephysicaldevicequeuefamilyperformancequerycounterskhr)
+(more-cffi:defcfun ("vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR"
+                    vkenumeratephysicaldevicequeuefamilyperformancequerycounterskhr
+                    funcall-vkenumeratephysicaldevicequeuefamilyperformancequerycounterskhr)
     vkresult
   (physicaldevice vkphysicaldevice)
   (queuefamilyindex :uint32)
@@ -1828,122 +2074,141 @@
   (pcounters :pointer)
   (pcounterdescriptions :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR"
-               vkgetphysicaldevicequeuefamilyperformancequerypasseskhr)
+(more-cffi:defcfun ("vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR"
+                    vkgetphysicaldevicequeuefamilyperformancequerypasseskhr
+                    funcall-vkgetphysicaldevicequeuefamilyperformancequerypasseskhr)
     :void
   (physicaldevice vkphysicaldevice)
   (pperformancequerycreateinfo :pointer)
   (pnumpasses :pointer))
 
-(cffi:defcfun ("vkAcquireProfilingLockKHR" vkacquireprofilinglockkhr)
+(more-cffi:defcfun ("vkAcquireProfilingLockKHR" vkacquireprofilinglockkhr
+                    funcall-vkacquireprofilinglockkhr)
     vkresult
   (device vkdevice)
   (pinfo :pointer))
 
-(cffi:defcfun ("vkReleaseProfilingLockKHR" vkreleaseprofilinglockkhr)
+(more-cffi:defcfun ("vkReleaseProfilingLockKHR" vkreleaseprofilinglockkhr
+                    funcall-vkreleaseprofilinglockkhr)
     :void
   (device vkdevice))
 
-(cffi:defcfun ("vkGetPhysicalDeviceSurfaceCapabilities2KHR"
-               vkgetphysicaldevicesurfacecapabilities2khr)
+(more-cffi:defcfun ("vkGetPhysicalDeviceSurfaceCapabilities2KHR"
+                    vkgetphysicaldevicesurfacecapabilities2khr
+                    funcall-vkgetphysicaldevicesurfacecapabilities2khr)
     vkresult
   (physicaldevice vkphysicaldevice)
   (psurfaceinfo :pointer)
   (psurfacecapabilities :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceSurfaceFormats2KHR"
-               vkgetphysicaldevicesurfaceformats2khr)
+(more-cffi:defcfun ("vkGetPhysicalDeviceSurfaceFormats2KHR"
+                    vkgetphysicaldevicesurfaceformats2khr
+                    funcall-vkgetphysicaldevicesurfaceformats2khr)
     vkresult
   (physicaldevice vkphysicaldevice)
   (psurfaceinfo :pointer)
   (psurfaceformatcount :pointer)
   (psurfaceformats :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceDisplayProperties2KHR"
-               vkgetphysicaldevicedisplayproperties2khr)
+(more-cffi:defcfun ("vkGetPhysicalDeviceDisplayProperties2KHR"
+                    vkgetphysicaldevicedisplayproperties2khr
+                    funcall-vkgetphysicaldevicedisplayproperties2khr)
     vkresult
   (physicaldevice vkphysicaldevice)
   (ppropertycount :pointer)
   (pproperties :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceDisplayPlaneProperties2KHR"
-               vkgetphysicaldevicedisplayplaneproperties2khr)
+(more-cffi:defcfun ("vkGetPhysicalDeviceDisplayPlaneProperties2KHR"
+                    vkgetphysicaldevicedisplayplaneproperties2khr
+                    funcall-vkgetphysicaldevicedisplayplaneproperties2khr)
     vkresult
   (physicaldevice vkphysicaldevice)
   (ppropertycount :pointer)
   (pproperties :pointer))
 
-(cffi:defcfun ("vkGetDisplayModeProperties2KHR" vkgetdisplaymodeproperties2khr)
+(more-cffi:defcfun ("vkGetDisplayModeProperties2KHR"
+                    vkgetdisplaymodeproperties2khr
+                    funcall-vkgetdisplaymodeproperties2khr)
     vkresult
   (physicaldevice vkphysicaldevice)
   (display vkdisplaykhr)
   (ppropertycount :pointer)
   (pproperties :pointer))
 
-(cffi:defcfun ("vkGetDisplayPlaneCapabilities2KHR"
-               vkgetdisplayplanecapabilities2khr)
+(more-cffi:defcfun ("vkGetDisplayPlaneCapabilities2KHR"
+                    vkgetdisplayplanecapabilities2khr
+                    funcall-vkgetdisplayplanecapabilities2khr)
     vkresult
   (physicaldevice vkphysicaldevice)
   (pdisplayplaneinfo :pointer)
   (pcapabilities :pointer))
 
-(cffi:defcfun ("vkGetImageMemoryRequirements2KHR"
-               vkgetimagememoryrequirements2khr)
+(more-cffi:defcfun ("vkGetImageMemoryRequirements2KHR"
+                    vkgetimagememoryrequirements2khr
+                    funcall-vkgetimagememoryrequirements2khr)
     :void
   (device vkdevice)
   (pinfo :pointer)
   (pmemoryrequirements :pointer))
 
-(cffi:defcfun ("vkGetBufferMemoryRequirements2KHR"
-               vkgetbuffermemoryrequirements2khr)
+(more-cffi:defcfun ("vkGetBufferMemoryRequirements2KHR"
+                    vkgetbuffermemoryrequirements2khr
+                    funcall-vkgetbuffermemoryrequirements2khr)
     :void
   (device vkdevice)
   (pinfo :pointer)
   (pmemoryrequirements :pointer))
 
-(cffi:defcfun ("vkGetImageSparseMemoryRequirements2KHR"
-               vkgetimagesparsememoryrequirements2khr)
+(more-cffi:defcfun ("vkGetImageSparseMemoryRequirements2KHR"
+                    vkgetimagesparsememoryrequirements2khr
+                    funcall-vkgetimagesparsememoryrequirements2khr)
     :void
   (device vkdevice)
   (pinfo :pointer)
   (psparsememoryrequirementcount :pointer)
   (psparsememoryrequirements :pointer))
 
-(cffi:defcfun ("vkCreateSamplerYcbcrConversionKHR"
-               vkcreatesamplerycbcrconversionkhr)
+(more-cffi:defcfun ("vkCreateSamplerYcbcrConversionKHR"
+                    vkcreatesamplerycbcrconversionkhr
+                    funcall-vkcreatesamplerycbcrconversionkhr)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (pycbcrconversion :pointer))
 
-(cffi:defcfun ("vkDestroySamplerYcbcrConversionKHR"
-               vkdestroysamplerycbcrconversionkhr)
+(more-cffi:defcfun ("vkDestroySamplerYcbcrConversionKHR"
+                    vkdestroysamplerycbcrconversionkhr
+                    funcall-vkdestroysamplerycbcrconversionkhr)
     :void
   (device vkdevice)
   (ycbcrconversion vksamplerycbcrconversion)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkBindBufferMemory2KHR" vkbindbuffermemory2khr)
+(more-cffi:defcfun ("vkBindBufferMemory2KHR" vkbindbuffermemory2khr
+                    funcall-vkbindbuffermemory2khr)
     vkresult
   (device vkdevice)
   (bindinfocount :uint32)
   (pbindinfos :pointer))
 
-(cffi:defcfun ("vkBindImageMemory2KHR" vkbindimagememory2khr)
+(more-cffi:defcfun ("vkBindImageMemory2KHR" vkbindimagememory2khr
+                    funcall-vkbindimagememory2khr)
     vkresult
   (device vkdevice)
   (bindinfocount :uint32)
   (pbindinfos :pointer))
 
-(cffi:defcfun ("vkGetDescriptorSetLayoutSupportKHR"
-               vkgetdescriptorsetlayoutsupportkhr)
+(more-cffi:defcfun ("vkGetDescriptorSetLayoutSupportKHR"
+                    vkgetdescriptorsetlayoutsupportkhr
+                    funcall-vkgetdescriptorsetlayoutsupportkhr)
     :void
   (device vkdevice)
   (pcreateinfo :pointer)
   (psupport :pointer))
 
-(cffi:defcfun ("vkCmdDrawIndirectCountKHR" vkcmddrawindirectcountkhr)
+(more-cffi:defcfun ("vkCmdDrawIndirectCountKHR" vkcmddrawindirectcountkhr
+                    funcall-vkcmddrawindirectcountkhr)
     :void
   (commandbuffer vkcommandbuffer)
   (buffer vkbuffer)
@@ -1953,8 +2218,9 @@
   (maxdrawcount :uint32)
   (stride :uint32))
 
-(cffi:defcfun ("vkCmdDrawIndexedIndirectCountKHR"
-               vkcmddrawindexedindirectcountkhr)
+(more-cffi:defcfun ("vkCmdDrawIndexedIndirectCountKHR"
+                    vkcmddrawindexedindirectcountkhr
+                    funcall-vkcmddrawindexedindirectcountkhr)
     :void
   (commandbuffer vkcommandbuffer)
   (buffer vkbuffer)
@@ -1964,152 +2230,179 @@
   (maxdrawcount :uint32)
   (stride :uint32))
 
-(cffi:defcfun ("vkGetSemaphoreCounterValueKHR" vkgetsemaphorecountervaluekhr)
+(more-cffi:defcfun ("vkGetSemaphoreCounterValueKHR"
+                    vkgetsemaphorecountervaluekhr
+                    funcall-vkgetsemaphorecountervaluekhr)
     vkresult
   (device vkdevice)
   (semaphore vksemaphore)
   (pvalue :pointer))
 
-(cffi:defcfun ("vkWaitSemaphoresKHR" vkwaitsemaphoreskhr)
+(more-cffi:defcfun ("vkWaitSemaphoresKHR" vkwaitsemaphoreskhr
+                    funcall-vkwaitsemaphoreskhr)
     vkresult
   (device vkdevice)
   (pwaitinfo :pointer)
   (timeout :uint64))
 
-(cffi:defcfun ("vkSignalSemaphoreKHR" vksignalsemaphorekhr)
+(more-cffi:defcfun ("vkSignalSemaphoreKHR" vksignalsemaphorekhr
+                    funcall-vksignalsemaphorekhr)
     vkresult
   (device vkdevice)
   (psignalinfo :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceFragmentShadingRatesKHR"
-               vkgetphysicaldevicefragmentshadingrateskhr)
+(more-cffi:defcfun ("vkGetPhysicalDeviceFragmentShadingRatesKHR"
+                    vkgetphysicaldevicefragmentshadingrateskhr
+                    funcall-vkgetphysicaldevicefragmentshadingrateskhr)
     vkresult
   (physicaldevice vkphysicaldevice)
   (pfragmentshadingratecount :pointer)
   (pfragmentshadingrates :pointer))
 
-(cffi:defcfun ("vkCmdSetFragmentShadingRateKHR" vkcmdsetfragmentshadingratekhr)
+(more-cffi:defcfun ("vkCmdSetFragmentShadingRateKHR"
+                    vkcmdsetfragmentshadingratekhr
+                    funcall-vkcmdsetfragmentshadingratekhr)
     :void
   (commandbuffer vkcommandbuffer)
   (pfragmentsize :pointer)
   (combinerops vkfragmentshadingratecombineropkhr))
 
-(cffi:defcfun ("vkWaitForPresentKHR" vkwaitforpresentkhr)
+(more-cffi:defcfun ("vkWaitForPresentKHR" vkwaitforpresentkhr
+                    funcall-vkwaitforpresentkhr)
     vkresult
   (device vkdevice)
   (swapchain vkswapchainkhr)
   (presentid :uint64)
   (timeout :uint64))
 
-(cffi:defcfun ("vkGetBufferDeviceAddressKHR" vkgetbufferdeviceaddresskhr)
+(more-cffi:defcfun ("vkGetBufferDeviceAddressKHR" vkgetbufferdeviceaddresskhr
+                    funcall-vkgetbufferdeviceaddresskhr)
     vkdeviceaddress
   (device vkdevice)
   (pinfo :pointer))
 
-(cffi:defcfun ("vkGetBufferOpaqueCaptureAddressKHR"
-               vkgetbufferopaquecaptureaddresskhr)
+(more-cffi:defcfun ("vkGetBufferOpaqueCaptureAddressKHR"
+                    vkgetbufferopaquecaptureaddresskhr
+                    funcall-vkgetbufferopaquecaptureaddresskhr)
     :uint64
   (device vkdevice)
   (pinfo :pointer))
 
-(cffi:defcfun ("vkGetDeviceMemoryOpaqueCaptureAddressKHR"
-               vkgetdevicememoryopaquecaptureaddresskhr)
+(more-cffi:defcfun ("vkGetDeviceMemoryOpaqueCaptureAddressKHR"
+                    vkgetdevicememoryopaquecaptureaddresskhr
+                    funcall-vkgetdevicememoryopaquecaptureaddresskhr)
     :uint64
   (device vkdevice)
   (pinfo :pointer))
 
-(cffi:defcfun ("vkCreateDeferredOperationKHR" vkcreatedeferredoperationkhr)
+(more-cffi:defcfun ("vkCreateDeferredOperationKHR" vkcreatedeferredoperationkhr
+                    funcall-vkcreatedeferredoperationkhr)
     vkresult
   (device vkdevice)
   (pallocator :pointer)
   (pdeferredoperation :pointer))
 
-(cffi:defcfun ("vkDestroyDeferredOperationKHR" vkdestroydeferredoperationkhr)
+(more-cffi:defcfun ("vkDestroyDeferredOperationKHR"
+                    vkdestroydeferredoperationkhr
+                    funcall-vkdestroydeferredoperationkhr)
     :void
   (device vkdevice)
   (operation vkdeferredoperationkhr)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkGetDeferredOperationMaxConcurrencyKHR"
-               vkgetdeferredoperationmaxconcurrencykhr)
+(more-cffi:defcfun ("vkGetDeferredOperationMaxConcurrencyKHR"
+                    vkgetdeferredoperationmaxconcurrencykhr
+                    funcall-vkgetdeferredoperationmaxconcurrencykhr)
     :uint32
   (device vkdevice)
   (operation vkdeferredoperationkhr))
 
-(cffi:defcfun ("vkGetDeferredOperationResultKHR"
-               vkgetdeferredoperationresultkhr)
+(more-cffi:defcfun ("vkGetDeferredOperationResultKHR"
+                    vkgetdeferredoperationresultkhr
+                    funcall-vkgetdeferredoperationresultkhr)
     vkresult
   (device vkdevice)
   (operation vkdeferredoperationkhr))
 
-(cffi:defcfun ("vkDeferredOperationJoinKHR" vkdeferredoperationjoinkhr)
+(more-cffi:defcfun ("vkDeferredOperationJoinKHR" vkdeferredoperationjoinkhr
+                    funcall-vkdeferredoperationjoinkhr)
     vkresult
   (device vkdevice)
   (operation vkdeferredoperationkhr))
 
-(cffi:defcfun ("vkGetPipelineExecutablePropertiesKHR"
-               vkgetpipelineexecutablepropertieskhr)
+(more-cffi:defcfun ("vkGetPipelineExecutablePropertiesKHR"
+                    vkgetpipelineexecutablepropertieskhr
+                    funcall-vkgetpipelineexecutablepropertieskhr)
     vkresult
   (device vkdevice)
   (ppipelineinfo :pointer)
   (pexecutablecount :pointer)
   (pproperties :pointer))
 
-(cffi:defcfun ("vkGetPipelineExecutableStatisticsKHR"
-               vkgetpipelineexecutablestatisticskhr)
+(more-cffi:defcfun ("vkGetPipelineExecutableStatisticsKHR"
+                    vkgetpipelineexecutablestatisticskhr
+                    funcall-vkgetpipelineexecutablestatisticskhr)
     vkresult
   (device vkdevice)
   (pexecutableinfo :pointer)
   (pstatisticcount :pointer)
   (pstatistics :pointer))
 
-(cffi:defcfun ("vkGetPipelineExecutableInternalRepresentationsKHR"
-               vkgetpipelineexecutableinternalrepresentationskhr)
+(more-cffi:defcfun ("vkGetPipelineExecutableInternalRepresentationsKHR"
+                    vkgetpipelineexecutableinternalrepresentationskhr
+                    funcall-vkgetpipelineexecutableinternalrepresentationskhr)
     vkresult
   (device vkdevice)
   (pexecutableinfo :pointer)
   (pinternalrepresentationcount :pointer)
   (pinternalrepresentations :pointer))
 
-(cffi:defcfun ("vkCmdSetEvent2KHR" vkcmdsetevent2khr)
+(more-cffi:defcfun ("vkCmdSetEvent2KHR" vkcmdsetevent2khr
+                    funcall-vkcmdsetevent2khr)
     :void
   (commandbuffer vkcommandbuffer)
   (event vkevent)
   (pdependencyinfo :pointer))
 
-(cffi:defcfun ("vkCmdResetEvent2KHR" vkcmdresetevent2khr)
+(more-cffi:defcfun ("vkCmdResetEvent2KHR" vkcmdresetevent2khr
+                    funcall-vkcmdresetevent2khr)
     :void
   (commandbuffer vkcommandbuffer)
   (event vkevent)
   (stagemask vkpipelinestageflags2))
 
-(cffi:defcfun ("vkCmdWaitEvents2KHR" vkcmdwaitevents2khr)
+(more-cffi:defcfun ("vkCmdWaitEvents2KHR" vkcmdwaitevents2khr
+                    funcall-vkcmdwaitevents2khr)
     :void
   (commandbuffer vkcommandbuffer)
   (eventcount :uint32)
   (pevents :pointer)
   (pdependencyinfos :pointer))
 
-(cffi:defcfun ("vkCmdPipelineBarrier2KHR" vkcmdpipelinebarrier2khr)
+(more-cffi:defcfun ("vkCmdPipelineBarrier2KHR" vkcmdpipelinebarrier2khr
+                    funcall-vkcmdpipelinebarrier2khr)
     :void
   (commandbuffer vkcommandbuffer)
   (pdependencyinfo :pointer))
 
-(cffi:defcfun ("vkCmdWriteTimestamp2KHR" vkcmdwritetimestamp2khr)
+(more-cffi:defcfun ("vkCmdWriteTimestamp2KHR" vkcmdwritetimestamp2khr
+                    funcall-vkcmdwritetimestamp2khr)
     :void
   (commandbuffer vkcommandbuffer)
   (stage vkpipelinestageflags2)
   (querypool vkquerypool)
   (query :uint32))
 
-(cffi:defcfun ("vkQueueSubmit2KHR" vkqueuesubmit2khr)
+(more-cffi:defcfun ("vkQueueSubmit2KHR" vkqueuesubmit2khr
+                    funcall-vkqueuesubmit2khr)
     vkresult
   (queue vkqueue)
   (submitcount :uint32)
   (psubmits :pointer)
   (fence vkfence))
 
-(cffi:defcfun ("vkCmdWriteBufferMarker2AMD" vkcmdwritebuffermarker2amd)
+(more-cffi:defcfun ("vkCmdWriteBufferMarker2AMD" vkcmdwritebuffermarker2amd
+                    funcall-vkcmdwritebuffermarker2amd)
     :void
   (commandbuffer vkcommandbuffer)
   (stage vkpipelinestageflags2)
@@ -2117,84 +2410,99 @@
   (dstoffset vkdevicesize)
   (marker :uint32))
 
-(cffi:defcfun ("vkGetQueueCheckpointData2NV" vkgetqueuecheckpointdata2nv)
+(more-cffi:defcfun ("vkGetQueueCheckpointData2NV" vkgetqueuecheckpointdata2nv
+                    funcall-vkgetqueuecheckpointdata2nv)
     :void
   (queue vkqueue)
   (pcheckpointdatacount :pointer)
   (pcheckpointdata :pointer))
 
-(cffi:defcfun ("vkCmdCopyBuffer2KHR" vkcmdcopybuffer2khr)
+(more-cffi:defcfun ("vkCmdCopyBuffer2KHR" vkcmdcopybuffer2khr
+                    funcall-vkcmdcopybuffer2khr)
     :void
   (commandbuffer vkcommandbuffer)
   (pcopybufferinfo :pointer))
 
-(cffi:defcfun ("vkCmdCopyImage2KHR" vkcmdcopyimage2khr)
+(more-cffi:defcfun ("vkCmdCopyImage2KHR" vkcmdcopyimage2khr
+                    funcall-vkcmdcopyimage2khr)
     :void
   (commandbuffer vkcommandbuffer)
   (pcopyimageinfo :pointer))
 
-(cffi:defcfun ("vkCmdCopyBufferToImage2KHR" vkcmdcopybuffertoimage2khr)
+(more-cffi:defcfun ("vkCmdCopyBufferToImage2KHR" vkcmdcopybuffertoimage2khr
+                    funcall-vkcmdcopybuffertoimage2khr)
     :void
   (commandbuffer vkcommandbuffer)
   (pcopybuffertoimageinfo :pointer))
 
-(cffi:defcfun ("vkCmdCopyImageToBuffer2KHR" vkcmdcopyimagetobuffer2khr)
+(more-cffi:defcfun ("vkCmdCopyImageToBuffer2KHR" vkcmdcopyimagetobuffer2khr
+                    funcall-vkcmdcopyimagetobuffer2khr)
     :void
   (commandbuffer vkcommandbuffer)
   (pcopyimagetobufferinfo :pointer))
 
-(cffi:defcfun ("vkCmdBlitImage2KHR" vkcmdblitimage2khr)
+(more-cffi:defcfun ("vkCmdBlitImage2KHR" vkcmdblitimage2khr
+                    funcall-vkcmdblitimage2khr)
     :void
   (commandbuffer vkcommandbuffer)
   (pblitimageinfo :pointer))
 
-(cffi:defcfun ("vkCmdResolveImage2KHR" vkcmdresolveimage2khr)
+(more-cffi:defcfun ("vkCmdResolveImage2KHR" vkcmdresolveimage2khr
+                    funcall-vkcmdresolveimage2khr)
     :void
   (commandbuffer vkcommandbuffer)
   (presolveimageinfo :pointer))
 
-(cffi:defcfun ("vkCmdTraceRaysIndirect2KHR" vkcmdtraceraysindirect2khr)
+(more-cffi:defcfun ("vkCmdTraceRaysIndirect2KHR" vkcmdtraceraysindirect2khr
+                    funcall-vkcmdtraceraysindirect2khr)
     :void
   (commandbuffer vkcommandbuffer)
   (indirectdeviceaddress vkdeviceaddress))
 
-(cffi:defcfun ("vkGetDeviceBufferMemoryRequirementsKHR"
-               vkgetdevicebuffermemoryrequirementskhr)
+(more-cffi:defcfun ("vkGetDeviceBufferMemoryRequirementsKHR"
+                    vkgetdevicebuffermemoryrequirementskhr
+                    funcall-vkgetdevicebuffermemoryrequirementskhr)
     :void
   (device vkdevice)
   (pinfo :pointer)
   (pmemoryrequirements :pointer))
 
-(cffi:defcfun ("vkGetDeviceImageMemoryRequirementsKHR"
-               vkgetdeviceimagememoryrequirementskhr)
+(more-cffi:defcfun ("vkGetDeviceImageMemoryRequirementsKHR"
+                    vkgetdeviceimagememoryrequirementskhr
+                    funcall-vkgetdeviceimagememoryrequirementskhr)
     :void
   (device vkdevice)
   (pinfo :pointer)
   (pmemoryrequirements :pointer))
 
-(cffi:defcfun ("vkGetDeviceImageSparseMemoryRequirementsKHR"
-               vkgetdeviceimagesparsememoryrequirementskhr)
+(more-cffi:defcfun ("vkGetDeviceImageSparseMemoryRequirementsKHR"
+                    vkgetdeviceimagesparsememoryrequirementskhr
+                    funcall-vkgetdeviceimagesparsememoryrequirementskhr)
     :void
   (device vkdevice)
   (pinfo :pointer)
   (psparsememoryrequirementcount :pointer)
   (psparsememoryrequirements :pointer))
 
-(cffi:defcfun ("vkCreateDebugReportCallbackEXT" vkcreatedebugreportcallbackext)
+(more-cffi:defcfun ("vkCreateDebugReportCallbackEXT"
+                    vkcreatedebugreportcallbackext
+                    funcall-vkcreatedebugreportcallbackext)
     vkresult
   (instance vkinstance)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (pcallback :pointer))
 
-(cffi:defcfun ("vkDestroyDebugReportCallbackEXT"
-               vkdestroydebugreportcallbackext)
+(more-cffi:defcfun ("vkDestroyDebugReportCallbackEXT"
+                    vkdestroydebugreportcallbackext
+                    funcall-vkdestroydebugreportcallbackext)
     :void
   (instance vkinstance)
   (callback vkdebugreportcallbackext)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkDebugReportMessageEXT" vkdebugreportmessageext)
+(more-cffi:defcfun ("vkDebugReportMessageEXT" vkdebugreportmessageext
+                    funcall-vkdebugreportmessageext)
     :void
   (instance vkinstance)
   (flags vkdebugreportflagsext)
@@ -2205,32 +2513,39 @@
   (playerprefix :pointer)
   (pmessage :pointer))
 
-(cffi:defcfun ("vkDebugMarkerSetObjectTagEXT" vkdebugmarkersetobjecttagext)
+(more-cffi:defcfun ("vkDebugMarkerSetObjectTagEXT" vkdebugmarkersetobjecttagext
+                    funcall-vkdebugmarkersetobjecttagext)
     vkresult
   (device vkdevice)
   (ptaginfo :pointer))
 
-(cffi:defcfun ("vkDebugMarkerSetObjectNameEXT" vkdebugmarkersetobjectnameext)
+(more-cffi:defcfun ("vkDebugMarkerSetObjectNameEXT"
+                    vkdebugmarkersetobjectnameext
+                    funcall-vkdebugmarkersetobjectnameext)
     vkresult
   (device vkdevice)
   (pnameinfo :pointer))
 
-(cffi:defcfun ("vkCmdDebugMarkerBeginEXT" vkcmddebugmarkerbeginext)
+(more-cffi:defcfun ("vkCmdDebugMarkerBeginEXT" vkcmddebugmarkerbeginext
+                    funcall-vkcmddebugmarkerbeginext)
     :void
   (commandbuffer vkcommandbuffer)
   (pmarkerinfo :pointer))
 
-(cffi:defcfun ("vkCmdDebugMarkerEndEXT" vkcmddebugmarkerendext)
+(more-cffi:defcfun ("vkCmdDebugMarkerEndEXT" vkcmddebugmarkerendext
+                    funcall-vkcmddebugmarkerendext)
     :void
   (commandbuffer vkcommandbuffer))
 
-(cffi:defcfun ("vkCmdDebugMarkerInsertEXT" vkcmddebugmarkerinsertext)
+(more-cffi:defcfun ("vkCmdDebugMarkerInsertEXT" vkcmddebugmarkerinsertext
+                    funcall-vkcmddebugmarkerinsertext)
     :void
   (commandbuffer vkcommandbuffer)
   (pmarkerinfo :pointer))
 
-(cffi:defcfun ("vkCmdBindTransformFeedbackBuffersEXT"
-               vkcmdbindtransformfeedbackbuffersext)
+(more-cffi:defcfun ("vkCmdBindTransformFeedbackBuffersEXT"
+                    vkcmdbindtransformfeedbackbuffersext
+                    funcall-vkcmdbindtransformfeedbackbuffersext)
     :void
   (commandbuffer vkcommandbuffer)
   (firstbinding :uint32)
@@ -2239,7 +2554,9 @@
   (poffsets :pointer)
   (psizes :pointer))
 
-(cffi:defcfun ("vkCmdBeginTransformFeedbackEXT" vkcmdbegintransformfeedbackext)
+(more-cffi:defcfun ("vkCmdBeginTransformFeedbackEXT"
+                    vkcmdbegintransformfeedbackext
+                    funcall-vkcmdbegintransformfeedbackext)
     :void
   (commandbuffer vkcommandbuffer)
   (firstcounterbuffer :uint32)
@@ -2247,7 +2564,8 @@
   (pcounterbuffers :pointer)
   (pcounterbufferoffsets :pointer))
 
-(cffi:defcfun ("vkCmdEndTransformFeedbackEXT" vkcmdendtransformfeedbackext)
+(more-cffi:defcfun ("vkCmdEndTransformFeedbackEXT" vkcmdendtransformfeedbackext
+                    funcall-vkcmdendtransformfeedbackext)
     :void
   (commandbuffer vkcommandbuffer)
   (firstcounterbuffer :uint32)
@@ -2255,7 +2573,8 @@
   (pcounterbuffers :pointer)
   (pcounterbufferoffsets :pointer))
 
-(cffi:defcfun ("vkCmdBeginQueryIndexedEXT" vkcmdbeginqueryindexedext)
+(more-cffi:defcfun ("vkCmdBeginQueryIndexedEXT" vkcmdbeginqueryindexedext
+                    funcall-vkcmdbeginqueryindexedext)
     :void
   (commandbuffer vkcommandbuffer)
   (querypool vkquerypool)
@@ -2263,14 +2582,17 @@
   (flags vkquerycontrolflags)
   (index :uint32))
 
-(cffi:defcfun ("vkCmdEndQueryIndexedEXT" vkcmdendqueryindexedext)
+(more-cffi:defcfun ("vkCmdEndQueryIndexedEXT" vkcmdendqueryindexedext
+                    funcall-vkcmdendqueryindexedext)
     :void
   (commandbuffer vkcommandbuffer)
   (querypool vkquerypool)
   (query :uint32)
   (index :uint32))
 
-(cffi:defcfun ("vkCmdDrawIndirectByteCountEXT" vkcmddrawindirectbytecountext)
+(more-cffi:defcfun ("vkCmdDrawIndirectByteCountEXT"
+                    vkcmddrawindirectbytecountext
+                    funcall-vkcmddrawindirectbytecountext)
     :void
   (commandbuffer vkcommandbuffer)
   (instancecount :uint32)
@@ -2280,49 +2602,57 @@
   (counteroffset :uint32)
   (vertexstride :uint32))
 
-(cffi:defcfun ("vkCreateCuModuleNVX" vkcreatecumodulenvx)
+(more-cffi:defcfun ("vkCreateCuModuleNVX" vkcreatecumodulenvx
+                    funcall-vkcreatecumodulenvx)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (pmodule :pointer))
 
-(cffi:defcfun ("vkCreateCuFunctionNVX" vkcreatecufunctionnvx)
+(more-cffi:defcfun ("vkCreateCuFunctionNVX" vkcreatecufunctionnvx
+                    funcall-vkcreatecufunctionnvx)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (pfunction :pointer))
 
-(cffi:defcfun ("vkDestroyCuModuleNVX" vkdestroycumodulenvx)
+(more-cffi:defcfun ("vkDestroyCuModuleNVX" vkdestroycumodulenvx
+                    funcall-vkdestroycumodulenvx)
     :void
   (device vkdevice)
   (module vkcumodulenvx)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkDestroyCuFunctionNVX" vkdestroycufunctionnvx)
+(more-cffi:defcfun ("vkDestroyCuFunctionNVX" vkdestroycufunctionnvx
+                    funcall-vkdestroycufunctionnvx)
     :void
   (device vkdevice)
   #'vkcufunctionnvx
   (pallocator :pointer))
 
-(cffi:defcfun ("vkCmdCuLaunchKernelNVX" vkcmdculaunchkernelnvx)
+(more-cffi:defcfun ("vkCmdCuLaunchKernelNVX" vkcmdculaunchkernelnvx
+                    funcall-vkcmdculaunchkernelnvx)
     :void
   (commandbuffer vkcommandbuffer)
   (plaunchinfo :pointer))
 
-(cffi:defcfun ("vkGetImageViewHandleNVX" vkgetimageviewhandlenvx)
+(more-cffi:defcfun ("vkGetImageViewHandleNVX" vkgetimageviewhandlenvx
+                    funcall-vkgetimageviewhandlenvx)
     :uint32
   (device vkdevice)
   (pinfo :pointer))
 
-(cffi:defcfun ("vkGetImageViewAddressNVX" vkgetimageviewaddressnvx)
+(more-cffi:defcfun ("vkGetImageViewAddressNVX" vkgetimageviewaddressnvx
+                    funcall-vkgetimageviewaddressnvx)
     vkresult
   (device vkdevice)
   (imageview vkimageview)
   (pproperties :pointer))
 
-(cffi:defcfun ("vkCmdDrawIndirectCountAMD" vkcmddrawindirectcountamd)
+(more-cffi:defcfun ("vkCmdDrawIndirectCountAMD" vkcmddrawindirectcountamd
+                    funcall-vkcmddrawindirectcountamd)
     :void
   (commandbuffer vkcommandbuffer)
   (buffer vkbuffer)
@@ -2332,8 +2662,9 @@
   (maxdrawcount :uint32)
   (stride :uint32))
 
-(cffi:defcfun ("vkCmdDrawIndexedIndirectCountAMD"
-               vkcmddrawindexedindirectcountamd)
+(more-cffi:defcfun ("vkCmdDrawIndexedIndirectCountAMD"
+                    vkcmddrawindexedindirectcountamd
+                    funcall-vkcmddrawindexedindirectcountamd)
     :void
   (commandbuffer vkcommandbuffer)
   (buffer vkbuffer)
@@ -2343,7 +2674,8 @@
   (maxdrawcount :uint32)
   (stride :uint32))
 
-(cffi:defcfun ("vkGetShaderInfoAMD" vkgetshaderinfoamd)
+(more-cffi:defcfun ("vkGetShaderInfoAMD" vkgetshaderinfoamd
+                    funcall-vkgetshaderinfoamd)
     vkresult
   (device vkdevice)
   (pipeline vkpipeline)
@@ -2352,8 +2684,9 @@
   (pinfosize :pointer)
   (pinfo :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceExternalImageFormatPropertiesNV"
-               vkgetphysicaldeviceexternalimageformatpropertiesnv)
+(more-cffi:defcfun ("vkGetPhysicalDeviceExternalImageFormatPropertiesNV"
+                    vkgetphysicaldeviceexternalimageformatpropertiesnv
+                    funcall-vkgetphysicaldeviceexternalimageformatpropertiesnv)
     vkresult
   (physicaldevice vkphysicaldevice)
   (format vkformat)
@@ -2364,50 +2697,58 @@
   (externalhandletype vkexternalmemoryhandletypeflagsnv)
   (pexternalimageformatproperties :pointer))
 
-(cffi:defcfun ("vkCmdBeginConditionalRenderingEXT"
-               vkcmdbeginconditionalrenderingext)
+(more-cffi:defcfun ("vkCmdBeginConditionalRenderingEXT"
+                    vkcmdbeginconditionalrenderingext
+                    funcall-vkcmdbeginconditionalrenderingext)
     :void
   (commandbuffer vkcommandbuffer)
   (pconditionalrenderingbegin :pointer))
 
-(cffi:defcfun ("vkCmdEndConditionalRenderingEXT"
-               vkcmdendconditionalrenderingext)
+(more-cffi:defcfun ("vkCmdEndConditionalRenderingEXT"
+                    vkcmdendconditionalrenderingext
+                    funcall-vkcmdendconditionalrenderingext)
     :void
   (commandbuffer vkcommandbuffer))
 
-(cffi:defcfun ("vkCmdSetViewportWScalingNV" vkcmdsetviewportwscalingnv)
+(more-cffi:defcfun ("vkCmdSetViewportWScalingNV" vkcmdsetviewportwscalingnv
+                    funcall-vkcmdsetviewportwscalingnv)
     :void
   (commandbuffer vkcommandbuffer)
   (firstviewport :uint32)
   (viewportcount :uint32)
   (pviewportwscalings :pointer))
 
-(cffi:defcfun ("vkReleaseDisplayEXT" vkreleasedisplayext)
+(more-cffi:defcfun ("vkReleaseDisplayEXT" vkreleasedisplayext
+                    funcall-vkreleasedisplayext)
     vkresult
   (physicaldevice vkphysicaldevice)
   (display vkdisplaykhr))
 
-(cffi:defcfun ("vkGetPhysicalDeviceSurfaceCapabilities2EXT"
-               vkgetphysicaldevicesurfacecapabilities2ext)
+(more-cffi:defcfun ("vkGetPhysicalDeviceSurfaceCapabilities2EXT"
+                    vkgetphysicaldevicesurfacecapabilities2ext
+                    funcall-vkgetphysicaldevicesurfacecapabilities2ext)
     vkresult
   (physicaldevice vkphysicaldevice)
   (surface vksurfacekhr)
   (psurfacecapabilities :pointer))
 
-(cffi:defcfun ("vkDisplayPowerControlEXT" vkdisplaypowercontrolext)
+(more-cffi:defcfun ("vkDisplayPowerControlEXT" vkdisplaypowercontrolext
+                    funcall-vkdisplaypowercontrolext)
     vkresult
   (device vkdevice)
   (display vkdisplaykhr)
   (pdisplaypowerinfo :pointer))
 
-(cffi:defcfun ("vkRegisterDeviceEventEXT" vkregisterdeviceeventext)
+(more-cffi:defcfun ("vkRegisterDeviceEventEXT" vkregisterdeviceeventext
+                    funcall-vkregisterdeviceeventext)
     vkresult
   (device vkdevice)
   (pdeviceeventinfo :pointer)
   (pallocator :pointer)
   (pfence :pointer))
 
-(cffi:defcfun ("vkRegisterDisplayEventEXT" vkregisterdisplayeventext)
+(more-cffi:defcfun ("vkRegisterDisplayEventEXT" vkregisterdisplayeventext
+                    funcall-vkregisterdisplayeventext)
     vkresult
   (device vkdevice)
   (display vkdisplaykhr)
@@ -2415,200 +2756,234 @@
   (pallocator :pointer)
   (pfence :pointer))
 
-(cffi:defcfun ("vkGetSwapchainCounterEXT" vkgetswapchaincounterext)
+(more-cffi:defcfun ("vkGetSwapchainCounterEXT" vkgetswapchaincounterext
+                    funcall-vkgetswapchaincounterext)
     vkresult
   (device vkdevice)
   (swapchain vkswapchainkhr)
   (counter vksurfacecounterflagbitsext)
   (pcountervalue :pointer))
 
-(cffi:defcfun ("vkGetRefreshCycleDurationGOOGLE"
-               vkgetrefreshcycledurationgoogle)
+(more-cffi:defcfun ("vkGetRefreshCycleDurationGOOGLE"
+                    vkgetrefreshcycledurationgoogle
+                    funcall-vkgetrefreshcycledurationgoogle)
     vkresult
   (device vkdevice)
   (swapchain vkswapchainkhr)
   (pdisplaytimingproperties :pointer))
 
-(cffi:defcfun ("vkGetPastPresentationTimingGOOGLE"
-               vkgetpastpresentationtiminggoogle)
+(more-cffi:defcfun ("vkGetPastPresentationTimingGOOGLE"
+                    vkgetpastpresentationtiminggoogle
+                    funcall-vkgetpastpresentationtiminggoogle)
     vkresult
   (device vkdevice)
   (swapchain vkswapchainkhr)
   (ppresentationtimingcount :pointer)
   (ppresentationtimings :pointer))
 
-(cffi:defcfun ("vkCmdSetDiscardRectangleEXT" vkcmdsetdiscardrectangleext)
+(more-cffi:defcfun ("vkCmdSetDiscardRectangleEXT" vkcmdsetdiscardrectangleext
+                    funcall-vkcmdsetdiscardrectangleext)
     :void
   (commandbuffer vkcommandbuffer)
   (firstdiscardrectangle :uint32)
   (discardrectanglecount :uint32)
   (pdiscardrectangles :pointer))
 
-(cffi:defcfun ("vkSetHdrMetadataEXT" vksethdrmetadataext)
+(more-cffi:defcfun ("vkSetHdrMetadataEXT" vksethdrmetadataext
+                    funcall-vksethdrmetadataext)
     :void
   (device vkdevice)
   (swapchaincount :uint32)
   (pswapchains :pointer)
   (pmetadata :pointer))
 
-(cffi:defcfun ("vkSetDebugUtilsObjectNameEXT" vksetdebugutilsobjectnameext)
+(more-cffi:defcfun ("vkSetDebugUtilsObjectNameEXT" vksetdebugutilsobjectnameext
+                    funcall-vksetdebugutilsobjectnameext)
     vkresult
   (device vkdevice)
   (pnameinfo :pointer))
 
-(cffi:defcfun ("vkSetDebugUtilsObjectTagEXT" vksetdebugutilsobjecttagext)
+(more-cffi:defcfun ("vkSetDebugUtilsObjectTagEXT" vksetdebugutilsobjecttagext
+                    funcall-vksetdebugutilsobjecttagext)
     vkresult
   (device vkdevice)
   (ptaginfo :pointer))
 
-(cffi:defcfun ("vkQueueBeginDebugUtilsLabelEXT" vkqueuebegindebugutilslabelext)
+(more-cffi:defcfun ("vkQueueBeginDebugUtilsLabelEXT"
+                    vkqueuebegindebugutilslabelext
+                    funcall-vkqueuebegindebugutilslabelext)
     :void
   (queue vkqueue)
   (plabelinfo :pointer))
 
-(cffi:defcfun ("vkQueueEndDebugUtilsLabelEXT" vkqueueenddebugutilslabelext)
+(more-cffi:defcfun ("vkQueueEndDebugUtilsLabelEXT" vkqueueenddebugutilslabelext
+                    funcall-vkqueueenddebugutilslabelext)
     :void
   (queue vkqueue))
 
-(cffi:defcfun ("vkQueueInsertDebugUtilsLabelEXT"
-               vkqueueinsertdebugutilslabelext)
+(more-cffi:defcfun ("vkQueueInsertDebugUtilsLabelEXT"
+                    vkqueueinsertdebugutilslabelext
+                    funcall-vkqueueinsertdebugutilslabelext)
     :void
   (queue vkqueue)
   (plabelinfo :pointer))
 
-(cffi:defcfun ("vkCmdBeginDebugUtilsLabelEXT" vkcmdbegindebugutilslabelext)
+(more-cffi:defcfun ("vkCmdBeginDebugUtilsLabelEXT" vkcmdbegindebugutilslabelext
+                    funcall-vkcmdbegindebugutilslabelext)
     :void
   (commandbuffer vkcommandbuffer)
   (plabelinfo :pointer))
 
-(cffi:defcfun ("vkCmdEndDebugUtilsLabelEXT" vkcmdenddebugutilslabelext)
+(more-cffi:defcfun ("vkCmdEndDebugUtilsLabelEXT" vkcmdenddebugutilslabelext
+                    funcall-vkcmdenddebugutilslabelext)
     :void
   (commandbuffer vkcommandbuffer))
 
-(cffi:defcfun ("vkCmdInsertDebugUtilsLabelEXT" vkcmdinsertdebugutilslabelext)
+(more-cffi:defcfun ("vkCmdInsertDebugUtilsLabelEXT"
+                    vkcmdinsertdebugutilslabelext
+                    funcall-vkcmdinsertdebugutilslabelext)
     :void
   (commandbuffer vkcommandbuffer)
   (plabelinfo :pointer))
 
-(cffi:defcfun ("vkCreateDebugUtilsMessengerEXT" vkcreatedebugutilsmessengerext)
+(more-cffi:defcfun ("vkCreateDebugUtilsMessengerEXT"
+                    vkcreatedebugutilsmessengerext
+                    funcall-vkcreatedebugutilsmessengerext)
     vkresult
   (instance vkinstance)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (pmessenger :pointer))
 
-(cffi:defcfun ("vkDestroyDebugUtilsMessengerEXT"
-               vkdestroydebugutilsmessengerext)
+(more-cffi:defcfun ("vkDestroyDebugUtilsMessengerEXT"
+                    vkdestroydebugutilsmessengerext
+                    funcall-vkdestroydebugutilsmessengerext)
     :void
   (instance vkinstance)
   (messenger vkdebugutilsmessengerext)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkSubmitDebugUtilsMessageEXT" vksubmitdebugutilsmessageext)
+(more-cffi:defcfun ("vkSubmitDebugUtilsMessageEXT" vksubmitdebugutilsmessageext
+                    funcall-vksubmitdebugutilsmessageext)
     :void
   (instance vkinstance)
   (messageseverity vkdebugutilsmessageseverityflagbitsext)
   (messagetypes vkdebugutilsmessagetypeflagsext)
   (pcallbackdata :pointer))
 
-(cffi:defcfun ("vkCmdSetSampleLocationsEXT" vkcmdsetsamplelocationsext)
+(more-cffi:defcfun ("vkCmdSetSampleLocationsEXT" vkcmdsetsamplelocationsext
+                    funcall-vkcmdsetsamplelocationsext)
     :void
   (commandbuffer vkcommandbuffer)
   (psamplelocationsinfo :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceMultisamplePropertiesEXT"
-               vkgetphysicaldevicemultisamplepropertiesext)
+(more-cffi:defcfun ("vkGetPhysicalDeviceMultisamplePropertiesEXT"
+                    vkgetphysicaldevicemultisamplepropertiesext
+                    funcall-vkgetphysicaldevicemultisamplepropertiesext)
     :void
   (physicaldevice vkphysicaldevice)
   (samples vksamplecountflagbits)
   (pmultisampleproperties :pointer))
 
-(cffi:defcfun ("vkGetImageDrmFormatModifierPropertiesEXT"
-               vkgetimagedrmformatmodifierpropertiesext)
+(more-cffi:defcfun ("vkGetImageDrmFormatModifierPropertiesEXT"
+                    vkgetimagedrmformatmodifierpropertiesext
+                    funcall-vkgetimagedrmformatmodifierpropertiesext)
     vkresult
   (device vkdevice)
   (image vkimage)
   (pproperties :pointer))
 
-(cffi:defcfun ("vkCreateValidationCacheEXT" vkcreatevalidationcacheext)
+(more-cffi:defcfun ("vkCreateValidationCacheEXT" vkcreatevalidationcacheext
+                    funcall-vkcreatevalidationcacheext)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (pvalidationcache :pointer))
 
-(cffi:defcfun ("vkDestroyValidationCacheEXT" vkdestroyvalidationcacheext)
+(more-cffi:defcfun ("vkDestroyValidationCacheEXT" vkdestroyvalidationcacheext
+                    funcall-vkdestroyvalidationcacheext)
     :void
   (device vkdevice)
   (validationcache vkvalidationcacheext)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkMergeValidationCachesEXT" vkmergevalidationcachesext)
+(more-cffi:defcfun ("vkMergeValidationCachesEXT" vkmergevalidationcachesext
+                    funcall-vkmergevalidationcachesext)
     vkresult
   (device vkdevice)
   (dstcache vkvalidationcacheext)
   (srccachecount :uint32)
   (psrccaches :pointer))
 
-(cffi:defcfun ("vkGetValidationCacheDataEXT" vkgetvalidationcachedataext)
+(more-cffi:defcfun ("vkGetValidationCacheDataEXT" vkgetvalidationcachedataext
+                    funcall-vkgetvalidationcachedataext)
     vkresult
   (device vkdevice)
   (validationcache vkvalidationcacheext)
   (pdatasize :pointer)
   (pdata :pointer))
 
-(cffi:defcfun ("vkCmdBindShadingRateImageNV" vkcmdbindshadingrateimagenv)
+(more-cffi:defcfun ("vkCmdBindShadingRateImageNV" vkcmdbindshadingrateimagenv
+                    funcall-vkcmdbindshadingrateimagenv)
     :void
   (commandbuffer vkcommandbuffer)
   (imageview vkimageview)
   (imagelayout vkimagelayout))
 
-(cffi:defcfun ("vkCmdSetViewportShadingRatePaletteNV"
-               vkcmdsetviewportshadingratepalettenv)
+(more-cffi:defcfun ("vkCmdSetViewportShadingRatePaletteNV"
+                    vkcmdsetviewportshadingratepalettenv
+                    funcall-vkcmdsetviewportshadingratepalettenv)
     :void
   (commandbuffer vkcommandbuffer)
   (firstviewport :uint32)
   (viewportcount :uint32)
   (pshadingratepalettes :pointer))
 
-(cffi:defcfun ("vkCmdSetCoarseSampleOrderNV" vkcmdsetcoarsesampleordernv)
+(more-cffi:defcfun ("vkCmdSetCoarseSampleOrderNV" vkcmdsetcoarsesampleordernv
+                    funcall-vkcmdsetcoarsesampleordernv)
     :void
   (commandbuffer vkcommandbuffer)
   (sampleordertype vkcoarsesampleordertypenv)
   (customsampleordercount :uint32)
   (pcustomsampleorders :pointer))
 
-(cffi:defcfun ("vkCreateAccelerationStructureNV"
-               vkcreateaccelerationstructurenv)
+(more-cffi:defcfun ("vkCreateAccelerationStructureNV"
+                    vkcreateaccelerationstructurenv
+                    funcall-vkcreateaccelerationstructurenv)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (paccelerationstructure :pointer))
 
-(cffi:defcfun ("vkDestroyAccelerationStructureNV"
-               vkdestroyaccelerationstructurenv)
+(more-cffi:defcfun ("vkDestroyAccelerationStructureNV"
+                    vkdestroyaccelerationstructurenv
+                    funcall-vkdestroyaccelerationstructurenv)
     :void
   (device vkdevice)
   (accelerationstructure vkaccelerationstructurenv)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkGetAccelerationStructureMemoryRequirementsNV"
-               vkgetaccelerationstructurememoryrequirementsnv)
+(more-cffi:defcfun ("vkGetAccelerationStructureMemoryRequirementsNV"
+                    vkgetaccelerationstructurememoryrequirementsnv
+                    funcall-vkgetaccelerationstructurememoryrequirementsnv)
     :void
   (device vkdevice)
   (pinfo :pointer)
   (pmemoryrequirements :pointer))
 
-(cffi:defcfun ("vkBindAccelerationStructureMemoryNV"
-               vkbindaccelerationstructurememorynv)
+(more-cffi:defcfun ("vkBindAccelerationStructureMemoryNV"
+                    vkbindaccelerationstructurememorynv
+                    funcall-vkbindaccelerationstructurememorynv)
     vkresult
   (device vkdevice)
   (bindinfocount :uint32)
   (pbindinfos :pointer))
 
-(cffi:defcfun ("vkCmdBuildAccelerationStructureNV"
-               vkcmdbuildaccelerationstructurenv)
+(more-cffi:defcfun ("vkCmdBuildAccelerationStructureNV"
+                    vkcmdbuildaccelerationstructurenv
+                    funcall-vkcmdbuildaccelerationstructurenv)
     :void
   (commandbuffer vkcommandbuffer)
   (pinfo :pointer)
@@ -2620,15 +2995,17 @@
   (scratch vkbuffer)
   (scratchoffset vkdevicesize))
 
-(cffi:defcfun ("vkCmdCopyAccelerationStructureNV"
-               vkcmdcopyaccelerationstructurenv)
+(more-cffi:defcfun ("vkCmdCopyAccelerationStructureNV"
+                    vkcmdcopyaccelerationstructurenv
+                    funcall-vkcmdcopyaccelerationstructurenv)
     :void
   (commandbuffer vkcommandbuffer)
   (dst vkaccelerationstructurenv)
   (src vkaccelerationstructurenv)
   (mode vkcopyaccelerationstructuremodekhr))
 
-(cffi:defcfun ("vkCmdTraceRaysNV" vkcmdtraceraysnv)
+(more-cffi:defcfun ("vkCmdTraceRaysNV" vkcmdtraceraysnv
+                    funcall-vkcmdtraceraysnv)
     :void
   (commandbuffer vkcommandbuffer)
   (raygenshaderbindingtablebuffer vkbuffer)
@@ -2646,7 +3023,9 @@
   (height :uint32)
   (depth :uint32))
 
-(cffi:defcfun ("vkCreateRayTracingPipelinesNV" vkcreateraytracingpipelinesnv)
+(more-cffi:defcfun ("vkCreateRayTracingPipelinesNV"
+                    vkcreateraytracingpipelinesnv
+                    funcall-vkcreateraytracingpipelinesnv)
     vkresult
   (device vkdevice)
   (pipelinecache vkpipelinecache)
@@ -2655,8 +3034,9 @@
   (pallocator :pointer)
   (ppipelines :pointer))
 
-(cffi:defcfun ("vkGetRayTracingShaderGroupHandlesKHR"
-               vkgetraytracingshadergrouphandleskhr)
+(more-cffi:defcfun ("vkGetRayTracingShaderGroupHandlesKHR"
+                    vkgetraytracingshadergrouphandleskhr
+                    funcall-vkgetraytracingshadergrouphandleskhr)
     vkresult
   (device vkdevice)
   (pipeline vkpipeline)
@@ -2665,8 +3045,9 @@
   (datasize :size)
   (pdata :pointer))
 
-(cffi:defcfun ("vkGetRayTracingShaderGroupHandlesNV"
-               vkgetraytracingshadergrouphandlesnv)
+(more-cffi:defcfun ("vkGetRayTracingShaderGroupHandlesNV"
+                    vkgetraytracingshadergrouphandlesnv
+                    funcall-vkgetraytracingshadergrouphandlesnv)
     vkresult
   (device vkdevice)
   (pipeline vkpipeline)
@@ -2675,16 +3056,18 @@
   (datasize :size)
   (pdata :pointer))
 
-(cffi:defcfun ("vkGetAccelerationStructureHandleNV"
-               vkgetaccelerationstructurehandlenv)
+(more-cffi:defcfun ("vkGetAccelerationStructureHandleNV"
+                    vkgetaccelerationstructurehandlenv
+                    funcall-vkgetaccelerationstructurehandlenv)
     vkresult
   (device vkdevice)
   (accelerationstructure vkaccelerationstructurenv)
   (datasize :size)
   (pdata :pointer))
 
-(cffi:defcfun ("vkCmdWriteAccelerationStructuresPropertiesNV"
-               vkcmdwriteaccelerationstructurespropertiesnv)
+(more-cffi:defcfun ("vkCmdWriteAccelerationStructuresPropertiesNV"
+                    vkcmdwriteaccelerationstructurespropertiesnv
+                    funcall-vkcmdwriteaccelerationstructurespropertiesnv)
     :void
   (commandbuffer vkcommandbuffer)
   (accelerationstructurecount :uint32)
@@ -2693,21 +3076,24 @@
   (querypool vkquerypool)
   (firstquery :uint32))
 
-(cffi:defcfun ("vkCompileDeferredNV" vkcompiledeferrednv)
+(more-cffi:defcfun ("vkCompileDeferredNV" vkcompiledeferrednv
+                    funcall-vkcompiledeferrednv)
     vkresult
   (device vkdevice)
   (pipeline vkpipeline)
   (shader :uint32))
 
-(cffi:defcfun ("vkGetMemoryHostPointerPropertiesEXT"
-               vkgetmemoryhostpointerpropertiesext)
+(more-cffi:defcfun ("vkGetMemoryHostPointerPropertiesEXT"
+                    vkgetmemoryhostpointerpropertiesext
+                    funcall-vkgetmemoryhostpointerpropertiesext)
     vkresult
   (device vkdevice)
   (handletype vkexternalmemoryhandletypeflagbits)
   (phostpointer :pointer)
   (pmemoryhostpointerproperties :pointer))
 
-(cffi:defcfun ("vkCmdWriteBufferMarkerAMD" vkcmdwritebuffermarkeramd)
+(more-cffi:defcfun ("vkCmdWriteBufferMarkerAMD" vkcmdwritebuffermarkeramd
+                    funcall-vkcmdwritebuffermarkeramd)
     :void
   (commandbuffer vkcommandbuffer)
   (pipelinestage vkpipelinestageflagbits)
@@ -2715,14 +3101,16 @@
   (dstoffset vkdevicesize)
   (marker :uint32))
 
-(cffi:defcfun ("vkGetPhysicalDeviceCalibrateableTimeDomainsEXT"
-               vkgetphysicaldevicecalibrateabletimedomainsext)
+(more-cffi:defcfun ("vkGetPhysicalDeviceCalibrateableTimeDomainsEXT"
+                    vkgetphysicaldevicecalibrateabletimedomainsext
+                    funcall-vkgetphysicaldevicecalibrateabletimedomainsext)
     vkresult
   (physicaldevice vkphysicaldevice)
   (ptimedomaincount :pointer)
   (ptimedomains :pointer))
 
-(cffi:defcfun ("vkGetCalibratedTimestampsEXT" vkgetcalibratedtimestampsext)
+(more-cffi:defcfun ("vkGetCalibratedTimestampsEXT" vkgetcalibratedtimestampsext
+                    funcall-vkgetcalibratedtimestampsext)
     vkresult
   (device vkdevice)
   (timestampcount :uint32)
@@ -2730,13 +3118,15 @@
   (ptimestamps :pointer)
   (pmaxdeviation :pointer))
 
-(cffi:defcfun ("vkCmdDrawMeshTasksNV" vkcmddrawmeshtasksnv)
+(more-cffi:defcfun ("vkCmdDrawMeshTasksNV" vkcmddrawmeshtasksnv
+                    funcall-vkcmddrawmeshtasksnv)
     :void
   (commandbuffer vkcommandbuffer)
   (taskcount :uint32)
   (firsttask :uint32))
 
-(cffi:defcfun ("vkCmdDrawMeshTasksIndirectNV" vkcmddrawmeshtasksindirectnv)
+(more-cffi:defcfun ("vkCmdDrawMeshTasksIndirectNV" vkcmddrawmeshtasksindirectnv
+                    funcall-vkcmddrawmeshtasksindirectnv)
     :void
   (commandbuffer vkcommandbuffer)
   (buffer vkbuffer)
@@ -2744,8 +3134,9 @@
   (drawcount :uint32)
   (stride :uint32))
 
-(cffi:defcfun ("vkCmdDrawMeshTasksIndirectCountNV"
-               vkcmddrawmeshtasksindirectcountnv)
+(more-cffi:defcfun ("vkCmdDrawMeshTasksIndirectCountNV"
+                    vkcmddrawmeshtasksindirectcountnv
+                    funcall-vkcmddrawmeshtasksindirectcountnv)
     :void
   (commandbuffer vkcommandbuffer)
   (buffer vkbuffer)
@@ -2755,157 +3146,185 @@
   (maxdrawcount :uint32)
   (stride :uint32))
 
-(cffi:defcfun ("vkCmdSetExclusiveScissorNV" vkcmdsetexclusivescissornv)
+(more-cffi:defcfun ("vkCmdSetExclusiveScissorNV" vkcmdsetexclusivescissornv
+                    funcall-vkcmdsetexclusivescissornv)
     :void
   (commandbuffer vkcommandbuffer)
   (firstexclusivescissor :uint32)
   (exclusivescissorcount :uint32)
   (pexclusivescissors :pointer))
 
-(cffi:defcfun ("vkCmdSetCheckpointNV" vkcmdsetcheckpointnv)
+(more-cffi:defcfun ("vkCmdSetCheckpointNV" vkcmdsetcheckpointnv
+                    funcall-vkcmdsetcheckpointnv)
     :void
   (commandbuffer vkcommandbuffer)
   (pcheckpointmarker :pointer))
 
-(cffi:defcfun ("vkGetQueueCheckpointDataNV" vkgetqueuecheckpointdatanv)
+(more-cffi:defcfun ("vkGetQueueCheckpointDataNV" vkgetqueuecheckpointdatanv
+                    funcall-vkgetqueuecheckpointdatanv)
     :void
   (queue vkqueue)
   (pcheckpointdatacount :pointer)
   (pcheckpointdata :pointer))
 
-(cffi:defcfun ("vkInitializePerformanceApiINTEL"
-               vkinitializeperformanceapiintel)
+(more-cffi:defcfun ("vkInitializePerformanceApiINTEL"
+                    vkinitializeperformanceapiintel
+                    funcall-vkinitializeperformanceapiintel)
     vkresult
   (device vkdevice)
   (pinitializeinfo :pointer))
 
-(cffi:defcfun ("vkUninitializePerformanceApiINTEL"
-               vkuninitializeperformanceapiintel)
+(more-cffi:defcfun ("vkUninitializePerformanceApiINTEL"
+                    vkuninitializeperformanceapiintel
+                    funcall-vkuninitializeperformanceapiintel)
     :void
   (device vkdevice))
 
-(cffi:defcfun ("vkCmdSetPerformanceMarkerINTEL" vkcmdsetperformancemarkerintel)
+(more-cffi:defcfun ("vkCmdSetPerformanceMarkerINTEL"
+                    vkcmdsetperformancemarkerintel
+                    funcall-vkcmdsetperformancemarkerintel)
     vkresult
   (commandbuffer vkcommandbuffer)
   (pmarkerinfo :pointer))
 
-(cffi:defcfun ("vkCmdSetPerformanceStreamMarkerINTEL"
-               vkcmdsetperformancestreammarkerintel)
+(more-cffi:defcfun ("vkCmdSetPerformanceStreamMarkerINTEL"
+                    vkcmdsetperformancestreammarkerintel
+                    funcall-vkcmdsetperformancestreammarkerintel)
     vkresult
   (commandbuffer vkcommandbuffer)
   (pmarkerinfo :pointer))
 
-(cffi:defcfun ("vkCmdSetPerformanceOverrideINTEL"
-               vkcmdsetperformanceoverrideintel)
+(more-cffi:defcfun ("vkCmdSetPerformanceOverrideINTEL"
+                    vkcmdsetperformanceoverrideintel
+                    funcall-vkcmdsetperformanceoverrideintel)
     vkresult
   (commandbuffer vkcommandbuffer)
   (poverrideinfo :pointer))
 
-(cffi:defcfun ("vkAcquirePerformanceConfigurationINTEL"
-               vkacquireperformanceconfigurationintel)
+(more-cffi:defcfun ("vkAcquirePerformanceConfigurationINTEL"
+                    vkacquireperformanceconfigurationintel
+                    funcall-vkacquireperformanceconfigurationintel)
     vkresult
   (device vkdevice)
   (pacquireinfo :pointer)
   (pconfiguration :pointer))
 
-(cffi:defcfun ("vkReleasePerformanceConfigurationINTEL"
-               vkreleaseperformanceconfigurationintel)
+(more-cffi:defcfun ("vkReleasePerformanceConfigurationINTEL"
+                    vkreleaseperformanceconfigurationintel
+                    funcall-vkreleaseperformanceconfigurationintel)
     vkresult
   (device vkdevice)
   (configuration vkperformanceconfigurationintel))
 
-(cffi:defcfun ("vkQueueSetPerformanceConfigurationINTEL"
-               vkqueuesetperformanceconfigurationintel)
+(more-cffi:defcfun ("vkQueueSetPerformanceConfigurationINTEL"
+                    vkqueuesetperformanceconfigurationintel
+                    funcall-vkqueuesetperformanceconfigurationintel)
     vkresult
   (queue vkqueue)
   (configuration vkperformanceconfigurationintel))
 
-(cffi:defcfun ("vkGetPerformanceParameterINTEL" vkgetperformanceparameterintel)
+(more-cffi:defcfun ("vkGetPerformanceParameterINTEL"
+                    vkgetperformanceparameterintel
+                    funcall-vkgetperformanceparameterintel)
     vkresult
   (device vkdevice)
   (parameter vkperformanceparametertypeintel)
   (pvalue :pointer))
 
-(cffi:defcfun ("vkSetLocalDimmingAMD" vksetlocaldimmingamd)
+(more-cffi:defcfun ("vkSetLocalDimmingAMD" vksetlocaldimmingamd
+                    funcall-vksetlocaldimmingamd)
     :void
   (device vkdevice)
   (swapchain vkswapchainkhr)
   (localdimmingenable vkbool32))
 
-(cffi:defcfun ("vkGetBufferDeviceAddressEXT" vkgetbufferdeviceaddressext)
+(more-cffi:defcfun ("vkGetBufferDeviceAddressEXT" vkgetbufferdeviceaddressext
+                    funcall-vkgetbufferdeviceaddressext)
     vkdeviceaddress
   (device vkdevice)
   (pinfo :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceToolPropertiesEXT"
-               vkgetphysicaldevicetoolpropertiesext)
+(more-cffi:defcfun ("vkGetPhysicalDeviceToolPropertiesEXT"
+                    vkgetphysicaldevicetoolpropertiesext
+                    funcall-vkgetphysicaldevicetoolpropertiesext)
     vkresult
   (physicaldevice vkphysicaldevice)
   (ptoolcount :pointer)
   (ptoolproperties :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceCooperativeMatrixPropertiesNV"
-               vkgetphysicaldevicecooperativematrixpropertiesnv)
+(more-cffi:defcfun ("vkGetPhysicalDeviceCooperativeMatrixPropertiesNV"
+                    vkgetphysicaldevicecooperativematrixpropertiesnv
+                    funcall-vkgetphysicaldevicecooperativematrixpropertiesnv)
     vkresult
   (physicaldevice vkphysicaldevice)
   (ppropertycount :pointer)
   (pproperties :pointer))
 
-(cffi:defcfun ("vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV"
-               vkgetphysicaldevicesupportedframebuffermixedsamplescombinationsnv)
+(more-cffi:defcfun ("vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV"
+                    vkgetphysicaldevicesupportedframebuffermixedsamplescombinationsnv
+                    funcall-vkgetphysicaldevicesupportedframebuffermixedsamplescombinationsnv)
     vkresult
   (physicaldevice vkphysicaldevice)
   (pcombinationcount :pointer)
   (pcombinations :pointer))
 
-(cffi:defcfun ("vkCreateHeadlessSurfaceEXT" vkcreateheadlesssurfaceext)
+(more-cffi:defcfun ("vkCreateHeadlessSurfaceEXT" vkcreateheadlesssurfaceext
+                    funcall-vkcreateheadlesssurfaceext)
     vkresult
   (instance vkinstance)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (psurface :pointer))
 
-(cffi:defcfun ("vkCmdSetLineStippleEXT" vkcmdsetlinestippleext)
+(more-cffi:defcfun ("vkCmdSetLineStippleEXT" vkcmdsetlinestippleext
+                    funcall-vkcmdsetlinestippleext)
     :void
   (commandbuffer vkcommandbuffer)
   (linestipplefactor :uint32)
   (linestipplepattern :uint16))
 
-(cffi:defcfun ("vkResetQueryPoolEXT" vkresetquerypoolext)
+(more-cffi:defcfun ("vkResetQueryPoolEXT" vkresetquerypoolext
+                    funcall-vkresetquerypoolext)
     :void
   (device vkdevice)
   (querypool vkquerypool)
   (firstquery :uint32)
   (querycount :uint32))
 
-(cffi:defcfun ("vkCmdSetCullModeEXT" vkcmdsetcullmodeext)
+(more-cffi:defcfun ("vkCmdSetCullModeEXT" vkcmdsetcullmodeext
+                    funcall-vkcmdsetcullmodeext)
     :void
   (commandbuffer vkcommandbuffer)
   (cullmode vkcullmodeflags))
 
-(cffi:defcfun ("vkCmdSetFrontFaceEXT" vkcmdsetfrontfaceext)
+(more-cffi:defcfun ("vkCmdSetFrontFaceEXT" vkcmdsetfrontfaceext
+                    funcall-vkcmdsetfrontfaceext)
     :void
   (commandbuffer vkcommandbuffer)
   (frontface vkfrontface))
 
-(cffi:defcfun ("vkCmdSetPrimitiveTopologyEXT" vkcmdsetprimitivetopologyext)
+(more-cffi:defcfun ("vkCmdSetPrimitiveTopologyEXT" vkcmdsetprimitivetopologyext
+                    funcall-vkcmdsetprimitivetopologyext)
     :void
   (commandbuffer vkcommandbuffer)
   (primitivetopology vkprimitivetopology))
 
-(cffi:defcfun ("vkCmdSetViewportWithCountEXT" vkcmdsetviewportwithcountext)
+(more-cffi:defcfun ("vkCmdSetViewportWithCountEXT" vkcmdsetviewportwithcountext
+                    funcall-vkcmdsetviewportwithcountext)
     :void
   (commandbuffer vkcommandbuffer)
   (viewportcount :uint32)
   (pviewports :pointer))
 
-(cffi:defcfun ("vkCmdSetScissorWithCountEXT" vkcmdsetscissorwithcountext)
+(more-cffi:defcfun ("vkCmdSetScissorWithCountEXT" vkcmdsetscissorwithcountext
+                    funcall-vkcmdsetscissorwithcountext)
     :void
   (commandbuffer vkcommandbuffer)
   (scissorcount :uint32)
   (pscissors :pointer))
 
-(cffi:defcfun ("vkCmdBindVertexBuffers2EXT" vkcmdbindvertexbuffers2ext)
+(more-cffi:defcfun ("vkCmdBindVertexBuffers2EXT" vkcmdbindvertexbuffers2ext
+                    funcall-vkcmdbindvertexbuffers2ext)
     :void
   (commandbuffer vkcommandbuffer)
   (firstbinding :uint32)
@@ -2915,33 +3334,39 @@
   (psizes :pointer)
   (pstrides :pointer))
 
-(cffi:defcfun ("vkCmdSetDepthTestEnableEXT" vkcmdsetdepthtestenableext)
+(more-cffi:defcfun ("vkCmdSetDepthTestEnableEXT" vkcmdsetdepthtestenableext
+                    funcall-vkcmdsetdepthtestenableext)
     :void
   (commandbuffer vkcommandbuffer)
   (depthtestenable vkbool32))
 
-(cffi:defcfun ("vkCmdSetDepthWriteEnableEXT" vkcmdsetdepthwriteenableext)
+(more-cffi:defcfun ("vkCmdSetDepthWriteEnableEXT" vkcmdsetdepthwriteenableext
+                    funcall-vkcmdsetdepthwriteenableext)
     :void
   (commandbuffer vkcommandbuffer)
   (depthwriteenable vkbool32))
 
-(cffi:defcfun ("vkCmdSetDepthCompareOpEXT" vkcmdsetdepthcompareopext)
+(more-cffi:defcfun ("vkCmdSetDepthCompareOpEXT" vkcmdsetdepthcompareopext
+                    funcall-vkcmdsetdepthcompareopext)
     :void
   (commandbuffer vkcommandbuffer)
   (depthcompareop vkcompareop))
 
-(cffi:defcfun ("vkCmdSetDepthBoundsTestEnableEXT"
-               vkcmdsetdepthboundstestenableext)
+(more-cffi:defcfun ("vkCmdSetDepthBoundsTestEnableEXT"
+                    vkcmdsetdepthboundstestenableext
+                    funcall-vkcmdsetdepthboundstestenableext)
     :void
   (commandbuffer vkcommandbuffer)
   (depthboundstestenable vkbool32))
 
-(cffi:defcfun ("vkCmdSetStencilTestEnableEXT" vkcmdsetstenciltestenableext)
+(more-cffi:defcfun ("vkCmdSetStencilTestEnableEXT" vkcmdsetstenciltestenableext
+                    funcall-vkcmdsetstenciltestenableext)
     :void
   (commandbuffer vkcommandbuffer)
   (stenciltestenable vkbool32))
 
-(cffi:defcfun ("vkCmdSetStencilOpEXT" vkcmdsetstencilopext)
+(more-cffi:defcfun ("vkCmdSetStencilOpEXT" vkcmdsetstencilopext
+                    funcall-vkcmdsetstencilopext)
     :void
   (commandbuffer vkcommandbuffer)
   (facemask vkstencilfaceflags)
@@ -2950,75 +3375,87 @@
   (depthfailop vkstencilop)
   (compareop vkcompareop))
 
-(cffi:defcfun ("vkGetGeneratedCommandsMemoryRequirementsNV"
-               vkgetgeneratedcommandsmemoryrequirementsnv)
+(more-cffi:defcfun ("vkGetGeneratedCommandsMemoryRequirementsNV"
+                    vkgetgeneratedcommandsmemoryrequirementsnv
+                    funcall-vkgetgeneratedcommandsmemoryrequirementsnv)
     :void
   (device vkdevice)
   (pinfo :pointer)
   (pmemoryrequirements :pointer))
 
-(cffi:defcfun ("vkCmdPreprocessGeneratedCommandsNV"
-               vkcmdpreprocessgeneratedcommandsnv)
+(more-cffi:defcfun ("vkCmdPreprocessGeneratedCommandsNV"
+                    vkcmdpreprocessgeneratedcommandsnv
+                    funcall-vkcmdpreprocessgeneratedcommandsnv)
     :void
   (commandbuffer vkcommandbuffer)
   (pgeneratedcommandsinfo :pointer))
 
-(cffi:defcfun ("vkCmdExecuteGeneratedCommandsNV"
-               vkcmdexecutegeneratedcommandsnv)
+(more-cffi:defcfun ("vkCmdExecuteGeneratedCommandsNV"
+                    vkcmdexecutegeneratedcommandsnv
+                    funcall-vkcmdexecutegeneratedcommandsnv)
     :void
   (commandbuffer vkcommandbuffer)
   (ispreprocessed vkbool32)
   (pgeneratedcommandsinfo :pointer))
 
-(cffi:defcfun ("vkCmdBindPipelineShaderGroupNV" vkcmdbindpipelineshadergroupnv)
+(more-cffi:defcfun ("vkCmdBindPipelineShaderGroupNV"
+                    vkcmdbindpipelineshadergroupnv
+                    funcall-vkcmdbindpipelineshadergroupnv)
     :void
   (commandbuffer vkcommandbuffer)
   (pipelinebindpoint vkpipelinebindpoint)
   (pipeline vkpipeline)
   (groupindex :uint32))
 
-(cffi:defcfun ("vkCreateIndirectCommandsLayoutNV"
-               vkcreateindirectcommandslayoutnv)
+(more-cffi:defcfun ("vkCreateIndirectCommandsLayoutNV"
+                    vkcreateindirectcommandslayoutnv
+                    funcall-vkcreateindirectcommandslayoutnv)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (pindirectcommandslayout :pointer))
 
-(cffi:defcfun ("vkDestroyIndirectCommandsLayoutNV"
-               vkdestroyindirectcommandslayoutnv)
+(more-cffi:defcfun ("vkDestroyIndirectCommandsLayoutNV"
+                    vkdestroyindirectcommandslayoutnv
+                    funcall-vkdestroyindirectcommandslayoutnv)
     :void
   (device vkdevice)
   (indirectcommandslayout vkindirectcommandslayoutnv)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkAcquireDrmDisplayEXT" vkacquiredrmdisplayext)
+(more-cffi:defcfun ("vkAcquireDrmDisplayEXT" vkacquiredrmdisplayext
+                    funcall-vkacquiredrmdisplayext)
     vkresult
   (physicaldevice vkphysicaldevice)
   (drmfd :int32)
   (display vkdisplaykhr))
 
-(cffi:defcfun ("vkGetDrmDisplayEXT" vkgetdrmdisplayext)
+(more-cffi:defcfun ("vkGetDrmDisplayEXT" vkgetdrmdisplayext
+                    funcall-vkgetdrmdisplayext)
     vkresult
   (physicaldevice vkphysicaldevice)
   (drmfd :int32)
   (connectorid :uint32)
   (display :pointer))
 
-(cffi:defcfun ("vkCreatePrivateDataSlotEXT" vkcreateprivatedataslotext)
+(more-cffi:defcfun ("vkCreatePrivateDataSlotEXT" vkcreateprivatedataslotext
+                    funcall-vkcreateprivatedataslotext)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (pprivatedataslot :pointer))
 
-(cffi:defcfun ("vkDestroyPrivateDataSlotEXT" vkdestroyprivatedataslotext)
+(more-cffi:defcfun ("vkDestroyPrivateDataSlotEXT" vkdestroyprivatedataslotext
+                    funcall-vkdestroyprivatedataslotext)
     :void
   (device vkdevice)
   (privatedataslot vkprivatedataslot)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkSetPrivateDataEXT" vksetprivatedataext)
+(more-cffi:defcfun ("vkSetPrivateDataEXT" vksetprivatedataext
+                    funcall-vksetprivatedataext)
     vkresult
   (device vkdevice)
   (objecttype vkobjecttype)
@@ -3026,7 +3463,8 @@
   (privatedataslot vkprivatedataslot)
   (data :uint64))
 
-(cffi:defcfun ("vkGetPrivateDataEXT" vkgetprivatedataext)
+(more-cffi:defcfun ("vkGetPrivateDataEXT" vkgetprivatedataext
+                    funcall-vkgetprivatedataext)
     :void
   (device vkdevice)
   (objecttype vkobjecttype)
@@ -3034,33 +3472,38 @@
   (privatedataslot vkprivatedataslot)
   (pdata :pointer))
 
-(cffi:defcfun ("vkCmdSetFragmentShadingRateEnumNV"
-               vkcmdsetfragmentshadingrateenumnv)
+(more-cffi:defcfun ("vkCmdSetFragmentShadingRateEnumNV"
+                    vkcmdsetfragmentshadingrateenumnv
+                    funcall-vkcmdsetfragmentshadingrateenumnv)
     :void
   (commandbuffer vkcommandbuffer)
   (shadingrate vkfragmentshadingratenv)
   (combinerops vkfragmentshadingratecombineropkhr))
 
-(cffi:defcfun ("vkGetImageSubresourceLayout2EXT"
-               vkgetimagesubresourcelayout2ext)
+(more-cffi:defcfun ("vkGetImageSubresourceLayout2EXT"
+                    vkgetimagesubresourcelayout2ext
+                    funcall-vkgetimagesubresourcelayout2ext)
     :void
   (device vkdevice)
   (image vkimage)
   (psubresource :pointer)
   (playout :pointer))
 
-(cffi:defcfun ("vkAcquireWinrtDisplayNV" vkacquirewinrtdisplaynv)
+(more-cffi:defcfun ("vkAcquireWinrtDisplayNV" vkacquirewinrtdisplaynv
+                    funcall-vkacquirewinrtdisplaynv)
     vkresult
   (physicaldevice vkphysicaldevice)
   (display vkdisplaykhr))
 
-(cffi:defcfun ("vkGetWinrtDisplayNV" vkgetwinrtdisplaynv)
+(more-cffi:defcfun ("vkGetWinrtDisplayNV" vkgetwinrtdisplaynv
+                    funcall-vkgetwinrtdisplaynv)
     vkresult
   (physicaldevice vkphysicaldevice)
   (devicerelativeid :uint32)
   (pdisplay :pointer))
 
-(cffi:defcfun ("vkCmdSetVertexInputEXT" vkcmdsetvertexinputext)
+(more-cffi:defcfun ("vkCmdSetVertexInputEXT" vkcmdsetvertexinputext
+                    funcall-vkcmdsetvertexinputext)
     :void
   (commandbuffer vkcommandbuffer)
   (vertexbindingdescriptioncount :uint32)
@@ -3068,69 +3511,83 @@
   (vertexattributedescriptioncount :uint32)
   (pvertexattributedescriptions :pointer))
 
-(cffi:defcfun ("vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI"
-               vkgetdevicesubpassshadingmaxworkgroupsizehuawei)
+(more-cffi:defcfun ("vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI"
+                    vkgetdevicesubpassshadingmaxworkgroupsizehuawei
+                    funcall-vkgetdevicesubpassshadingmaxworkgroupsizehuawei)
     vkresult
   (device vkdevice)
   (renderpass vkrenderpass)
   (pmaxworkgroupsize :pointer))
 
-(cffi:defcfun ("vkCmdSubpassShadingHUAWEI" vkcmdsubpassshadinghuawei)
+(more-cffi:defcfun ("vkCmdSubpassShadingHUAWEI" vkcmdsubpassshadinghuawei
+                    funcall-vkcmdsubpassshadinghuawei)
     :void
   (commandbuffer vkcommandbuffer))
 
-(cffi:defcfun ("vkCmdBindInvocationMaskHUAWEI" vkcmdbindinvocationmaskhuawei)
+(more-cffi:defcfun ("vkCmdBindInvocationMaskHUAWEI"
+                    vkcmdbindinvocationmaskhuawei
+                    funcall-vkcmdbindinvocationmaskhuawei)
     :void
   (commandbuffer vkcommandbuffer)
   (imageview vkimageview)
   (imagelayout vkimagelayout))
 
-(cffi:defcfun ("vkGetMemoryRemoteAddressNV" vkgetmemoryremoteaddressnv)
+(more-cffi:defcfun ("vkGetMemoryRemoteAddressNV" vkgetmemoryremoteaddressnv
+                    funcall-vkgetmemoryremoteaddressnv)
     vkresult
   (device vkdevice)
   (pmemorygetremoteaddressinfo :pointer)
   (paddress :pointer))
 
-(cffi:defcfun ("vkGetPipelinePropertiesEXT" vkgetpipelinepropertiesext)
+(more-cffi:defcfun ("vkGetPipelinePropertiesEXT" vkgetpipelinepropertiesext
+                    funcall-vkgetpipelinepropertiesext)
     vkresult
   (device vkdevice)
   (ppipelineinfo :pointer)
   (ppipelineproperties :pointer))
 
-(cffi:defcfun ("vkCmdSetPatchControlPointsEXT" vkcmdsetpatchcontrolpointsext)
+(more-cffi:defcfun ("vkCmdSetPatchControlPointsEXT"
+                    vkcmdsetpatchcontrolpointsext
+                    funcall-vkcmdsetpatchcontrolpointsext)
     :void
   (commandbuffer vkcommandbuffer)
   (patchcontrolpoints :uint32))
 
-(cffi:defcfun ("vkCmdSetRasterizerDiscardEnableEXT"
-               vkcmdsetrasterizerdiscardenableext)
+(more-cffi:defcfun ("vkCmdSetRasterizerDiscardEnableEXT"
+                    vkcmdsetrasterizerdiscardenableext
+                    funcall-vkcmdsetrasterizerdiscardenableext)
     :void
   (commandbuffer vkcommandbuffer)
   (rasterizerdiscardenable vkbool32))
 
-(cffi:defcfun ("vkCmdSetDepthBiasEnableEXT" vkcmdsetdepthbiasenableext)
+(more-cffi:defcfun ("vkCmdSetDepthBiasEnableEXT" vkcmdsetdepthbiasenableext
+                    funcall-vkcmdsetdepthbiasenableext)
     :void
   (commandbuffer vkcommandbuffer)
   (depthbiasenable vkbool32))
 
-(cffi:defcfun ("vkCmdSetLogicOpEXT" vkcmdsetlogicopext)
+(more-cffi:defcfun ("vkCmdSetLogicOpEXT" vkcmdsetlogicopext
+                    funcall-vkcmdsetlogicopext)
     :void
   (commandbuffer vkcommandbuffer)
   (logicop vklogicop))
 
-(cffi:defcfun ("vkCmdSetPrimitiveRestartEnableEXT"
-               vkcmdsetprimitiverestartenableext)
+(more-cffi:defcfun ("vkCmdSetPrimitiveRestartEnableEXT"
+                    vkcmdsetprimitiverestartenableext
+                    funcall-vkcmdsetprimitiverestartenableext)
     :void
   (commandbuffer vkcommandbuffer)
   (primitiverestartenable vkbool32))
 
-(cffi:defcfun ("vkCmdSetColorWriteEnableEXT" vkcmdsetcolorwriteenableext)
+(more-cffi:defcfun ("vkCmdSetColorWriteEnableEXT" vkcmdsetcolorwriteenableext
+                    funcall-vkcmdsetcolorwriteenableext)
     :void
   (commandbuffer vkcommandbuffer)
   (attachmentcount :uint32)
   (pcolorwriteenables :pointer))
 
-(cffi:defcfun ("vkCmdDrawMultiEXT" vkcmddrawmultiext)
+(more-cffi:defcfun ("vkCmdDrawMultiEXT" vkcmddrawmultiext
+                    funcall-vkcmddrawmultiext)
     :void
   (commandbuffer vkcommandbuffer)
   (drawcount :uint32)
@@ -3139,7 +3596,8 @@
   (firstinstance :uint32)
   (stride :uint32))
 
-(cffi:defcfun ("vkCmdDrawMultiIndexedEXT" vkcmddrawmultiindexedext)
+(more-cffi:defcfun ("vkCmdDrawMultiIndexedEXT" vkcmddrawmultiindexedext
+                    funcall-vkcmddrawmultiindexedext)
     :void
   (commandbuffer vkcommandbuffer)
   (drawcount :uint32)
@@ -3149,51 +3607,58 @@
   (stride :uint32)
   (pvertexoffset :pointer))
 
-(cffi:defcfun ("vkSetDeviceMemoryPriorityEXT" vksetdevicememorypriorityext)
+(more-cffi:defcfun ("vkSetDeviceMemoryPriorityEXT" vksetdevicememorypriorityext
+                    funcall-vksetdevicememorypriorityext)
     :void
   (device vkdevice)
   (memory vkdevicememory)
   (priority :float))
 
-(cffi:defcfun ("vkGetDescriptorSetLayoutHostMappingInfoVALVE"
-               vkgetdescriptorsetlayouthostmappinginfovalve)
+(more-cffi:defcfun ("vkGetDescriptorSetLayoutHostMappingInfoVALVE"
+                    vkgetdescriptorsetlayouthostmappinginfovalve
+                    funcall-vkgetdescriptorsetlayouthostmappinginfovalve)
     :void
   (device vkdevice)
   (pbindingreference :pointer)
   (phostmapping :pointer))
 
-(cffi:defcfun ("vkGetDescriptorSetHostMappingVALVE"
-               vkgetdescriptorsethostmappingvalve)
+(more-cffi:defcfun ("vkGetDescriptorSetHostMappingVALVE"
+                    vkgetdescriptorsethostmappingvalve
+                    funcall-vkgetdescriptorsethostmappingvalve)
     :void
   (device vkdevice)
   (descriptorset vkdescriptorset)
   (ppdata :pointer))
 
-(cffi:defcfun ("vkCreateAccelerationStructureKHR"
-               vkcreateaccelerationstructurekhr)
+(more-cffi:defcfun ("vkCreateAccelerationStructureKHR"
+                    vkcreateaccelerationstructurekhr
+                    funcall-vkcreateaccelerationstructurekhr)
     vkresult
   (device vkdevice)
   (pcreateinfo :pointer)
   (pallocator :pointer)
   (paccelerationstructure :pointer))
 
-(cffi:defcfun ("vkDestroyAccelerationStructureKHR"
-               vkdestroyaccelerationstructurekhr)
+(more-cffi:defcfun ("vkDestroyAccelerationStructureKHR"
+                    vkdestroyaccelerationstructurekhr
+                    funcall-vkdestroyaccelerationstructurekhr)
     :void
   (device vkdevice)
   (accelerationstructure vkaccelerationstructurekhr)
   (pallocator :pointer))
 
-(cffi:defcfun ("vkCmdBuildAccelerationStructuresKHR"
-               vkcmdbuildaccelerationstructureskhr)
+(more-cffi:defcfun ("vkCmdBuildAccelerationStructuresKHR"
+                    vkcmdbuildaccelerationstructureskhr
+                    funcall-vkcmdbuildaccelerationstructureskhr)
     :void
   (commandbuffer vkcommandbuffer)
   (infocount :uint32)
   (pinfos :pointer)
   (ppbuildrangeinfos :pointer))
 
-(cffi:defcfun ("vkCmdBuildAccelerationStructuresIndirectKHR"
-               vkcmdbuildaccelerationstructuresindirectkhr)
+(more-cffi:defcfun ("vkCmdBuildAccelerationStructuresIndirectKHR"
+                    vkcmdbuildaccelerationstructuresindirectkhr
+                    funcall-vkcmdbuildaccelerationstructuresindirectkhr)
     :void
   (commandbuffer vkcommandbuffer)
   (infocount :uint32)
@@ -3202,8 +3667,9 @@
   (pindirectstrides :pointer)
   (ppmaxprimitivecounts :pointer))
 
-(cffi:defcfun ("vkBuildAccelerationStructuresKHR"
-               vkbuildaccelerationstructureskhr)
+(more-cffi:defcfun ("vkBuildAccelerationStructuresKHR"
+                    vkbuildaccelerationstructureskhr
+                    funcall-vkbuildaccelerationstructureskhr)
     vkresult
   (device vkdevice)
   (deferredoperation vkdeferredoperationkhr)
@@ -3211,28 +3677,33 @@
   (pinfos :pointer)
   (ppbuildrangeinfos :pointer))
 
-(cffi:defcfun ("vkCopyAccelerationStructureKHR" vkcopyaccelerationstructurekhr)
+(more-cffi:defcfun ("vkCopyAccelerationStructureKHR"
+                    vkcopyaccelerationstructurekhr
+                    funcall-vkcopyaccelerationstructurekhr)
     vkresult
   (device vkdevice)
   (deferredoperation vkdeferredoperationkhr)
   (pinfo :pointer))
 
-(cffi:defcfun ("vkCopyAccelerationStructureToMemoryKHR"
-               vkcopyaccelerationstructuretomemorykhr)
+(more-cffi:defcfun ("vkCopyAccelerationStructureToMemoryKHR"
+                    vkcopyaccelerationstructuretomemorykhr
+                    funcall-vkcopyaccelerationstructuretomemorykhr)
     vkresult
   (device vkdevice)
   (deferredoperation vkdeferredoperationkhr)
   (pinfo :pointer))
 
-(cffi:defcfun ("vkCopyMemoryToAccelerationStructureKHR"
-               vkcopymemorytoaccelerationstructurekhr)
+(more-cffi:defcfun ("vkCopyMemoryToAccelerationStructureKHR"
+                    vkcopymemorytoaccelerationstructurekhr
+                    funcall-vkcopymemorytoaccelerationstructurekhr)
     vkresult
   (device vkdevice)
   (deferredoperation vkdeferredoperationkhr)
   (pinfo :pointer))
 
-(cffi:defcfun ("vkWriteAccelerationStructuresPropertiesKHR"
-               vkwriteaccelerationstructurespropertieskhr)
+(more-cffi:defcfun ("vkWriteAccelerationStructuresPropertiesKHR"
+                    vkwriteaccelerationstructurespropertieskhr
+                    funcall-vkwriteaccelerationstructurespropertieskhr)
     vkresult
   (device vkdevice)
   (accelerationstructurecount :uint32)
@@ -3242,32 +3713,37 @@
   (pdata :pointer)
   (stride :size))
 
-(cffi:defcfun ("vkCmdCopyAccelerationStructureKHR"
-               vkcmdcopyaccelerationstructurekhr)
+(more-cffi:defcfun ("vkCmdCopyAccelerationStructureKHR"
+                    vkcmdcopyaccelerationstructurekhr
+                    funcall-vkcmdcopyaccelerationstructurekhr)
     :void
   (commandbuffer vkcommandbuffer)
   (pinfo :pointer))
 
-(cffi:defcfun ("vkCmdCopyAccelerationStructureToMemoryKHR"
-               vkcmdcopyaccelerationstructuretomemorykhr)
+(more-cffi:defcfun ("vkCmdCopyAccelerationStructureToMemoryKHR"
+                    vkcmdcopyaccelerationstructuretomemorykhr
+                    funcall-vkcmdcopyaccelerationstructuretomemorykhr)
     :void
   (commandbuffer vkcommandbuffer)
   (pinfo :pointer))
 
-(cffi:defcfun ("vkCmdCopyMemoryToAccelerationStructureKHR"
-               vkcmdcopymemorytoaccelerationstructurekhr)
+(more-cffi:defcfun ("vkCmdCopyMemoryToAccelerationStructureKHR"
+                    vkcmdcopymemorytoaccelerationstructurekhr
+                    funcall-vkcmdcopymemorytoaccelerationstructurekhr)
     :void
   (commandbuffer vkcommandbuffer)
   (pinfo :pointer))
 
-(cffi:defcfun ("vkGetAccelerationStructureDeviceAddressKHR"
-               vkgetaccelerationstructuredeviceaddresskhr)
+(more-cffi:defcfun ("vkGetAccelerationStructureDeviceAddressKHR"
+                    vkgetaccelerationstructuredeviceaddresskhr
+                    funcall-vkgetaccelerationstructuredeviceaddresskhr)
     vkdeviceaddress
   (device vkdevice)
   (pinfo :pointer))
 
-(cffi:defcfun ("vkCmdWriteAccelerationStructuresPropertiesKHR"
-               vkcmdwriteaccelerationstructurespropertieskhr)
+(more-cffi:defcfun ("vkCmdWriteAccelerationStructuresPropertiesKHR"
+                    vkcmdwriteaccelerationstructurespropertieskhr
+                    funcall-vkcmdwriteaccelerationstructurespropertieskhr)
     :void
   (commandbuffer vkcommandbuffer)
   (accelerationstructurecount :uint32)
@@ -3276,15 +3752,17 @@
   (querypool vkquerypool)
   (firstquery :uint32))
 
-(cffi:defcfun ("vkGetDeviceAccelerationStructureCompatibilityKHR"
-               vkgetdeviceaccelerationstructurecompatibilitykhr)
+(more-cffi:defcfun ("vkGetDeviceAccelerationStructureCompatibilityKHR"
+                    vkgetdeviceaccelerationstructurecompatibilitykhr
+                    funcall-vkgetdeviceaccelerationstructurecompatibilitykhr)
     :void
   (device vkdevice)
   (pversioninfo :pointer)
   (pcompatibility :pointer))
 
-(cffi:defcfun ("vkGetAccelerationStructureBuildSizesKHR"
-               vkgetaccelerationstructurebuildsizeskhr)
+(more-cffi:defcfun ("vkGetAccelerationStructureBuildSizesKHR"
+                    vkgetaccelerationstructurebuildsizeskhr
+                    funcall-vkgetaccelerationstructurebuildsizeskhr)
     :void
   (device vkdevice)
   (buildtype vkaccelerationstructurebuildtypekhr)
@@ -3292,7 +3770,8 @@
   (pmaxprimitivecounts :pointer)
   (psizeinfo :pointer))
 
-(cffi:defcfun ("vkCmdTraceRaysKHR" vkcmdtracerayskhr)
+(more-cffi:defcfun ("vkCmdTraceRaysKHR" vkcmdtracerayskhr
+                    funcall-vkcmdtracerayskhr)
     :void
   (commandbuffer vkcommandbuffer)
   (praygenshaderbindingtable :pointer)
@@ -3303,7 +3782,9 @@
   (height :uint32)
   (depth :uint32))
 
-(cffi:defcfun ("vkCreateRayTracingPipelinesKHR" vkcreateraytracingpipelineskhr)
+(more-cffi:defcfun ("vkCreateRayTracingPipelinesKHR"
+                    vkcreateraytracingpipelineskhr
+                    funcall-vkcreateraytracingpipelineskhr)
     vkresult
   (device vkdevice)
   (deferredoperation vkdeferredoperationkhr)
@@ -3313,8 +3794,9 @@
   (pallocator :pointer)
   (ppipelines :pointer))
 
-(cffi:defcfun ("vkGetRayTracingCaptureReplayShaderGroupHandlesKHR"
-               vkgetraytracingcapturereplayshadergrouphandleskhr)
+(more-cffi:defcfun ("vkGetRayTracingCaptureReplayShaderGroupHandlesKHR"
+                    vkgetraytracingcapturereplayshadergrouphandleskhr
+                    funcall-vkgetraytracingcapturereplayshadergrouphandleskhr)
     vkresult
   (device vkdevice)
   (pipeline vkpipeline)
@@ -3323,7 +3805,8 @@
   (datasize :size)
   (pdata :pointer))
 
-(cffi:defcfun ("vkCmdTraceRaysIndirectKHR" vkcmdtraceraysindirectkhr)
+(more-cffi:defcfun ("vkCmdTraceRaysIndirectKHR" vkcmdtraceraysindirectkhr
+                    funcall-vkcmdtraceraysindirectkhr)
     :void
   (commandbuffer vkcommandbuffer)
   (praygenshaderbindingtable :pointer)
@@ -3332,16 +3815,18 @@
   (pcallableshaderbindingtable :pointer)
   (indirectdeviceaddress vkdeviceaddress))
 
-(cffi:defcfun ("vkGetRayTracingShaderGroupStackSizeKHR"
-               vkgetraytracingshadergroupstacksizekhr)
+(more-cffi:defcfun ("vkGetRayTracingShaderGroupStackSizeKHR"
+                    vkgetraytracingshadergroupstacksizekhr
+                    funcall-vkgetraytracingshadergroupstacksizekhr)
     vkdevicesize
   (device vkdevice)
   (pipeline vkpipeline)
   (group :uint32)
   (groupshader vkshadergroupshaderkhr))
 
-(cffi:defcfun ("vkCmdSetRayTracingPipelineStackSizeKHR"
-               vkcmdsetraytracingpipelinestacksizekhr)
+(more-cffi:defcfun ("vkCmdSetRayTracingPipelineStackSizeKHR"
+                    vkcmdsetraytracingpipelinestacksizekhr
+                    funcall-vkcmdsetraytracingpipelinestacksizekhr)
     :void
   (commandbuffer vkcommandbuffer)
   (pipelinestacksize :uint32))

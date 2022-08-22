@@ -42,7 +42,7 @@ Make sure that the surface is destroyed before the instance.
 ```lisp
 (defun cleanup (app)
   ...
-  (cvk:destroy-surface (instance app) (surface app) nil)
+  (cvk:destroy-surface-khr (instance app) (surface app) nil)
   (cvk:destroy-instance (instance app) nil)
   ...
 ```
@@ -67,7 +67,7 @@ Now modify the `find-queue-families` function to look for a queue family with pr
 (loop for queue-family in queue-families
       for i from 0
       ...
-      if (cvk:get-physical-device-surface-support device i (surface app))
+      if (cvk:get-physical-device-surface-support-khr device i (surface app))
         do (setf (queue-family-indices-present-family indices) i)
       if (is-queue-family-indices-complete indices)
         return nil)

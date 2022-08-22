@@ -76,7 +76,7 @@ We start with the surface capabilities.
 
 ```lisp
 (defun create-query-swap-chain-support (app device)
-  (let ((capabilities (cvk:create-get-physical-device-surface-capabilities device (surface app)))
+  (let ((capabilities (cvk:create-get-physical-device-surface-capabilities-khr device (surface app)))
     )))
 ```
 
@@ -84,8 +84,8 @@ Next, the surface formats.
 
 ```lisp
 (defun create-query-swap-chain-support (app device)
-  (let ((capabilities (cvk:create-get-physical-device-surface-capabilities device (surface app)))
-	(formats (cvk:create-get-physical-device-surface-formats device (surface app)))
+  (let ((capabilities (cvk:create-get-physical-device-surface-capabilities-khr device (surface app)))
+	(formats (cvk:create-get-physical-device-surface-formats-khr device (surface app)))
     )))
 ```
 
@@ -95,7 +95,7 @@ And finally, the presentation modes.
 (defun create-query-swap-chain-support (app device)
   (let ((capabilities (cvk:create-get-physical-device-surface-capabilities device (surface app)))
 	(formats (cvk:create-get-physical-device-surface-formats device (surface app)))
-	(present-modes (cvk:get-physical-device-surface-present-modes device (surface app))))
+	(present-modes (cvk:get-physical-device-surface-present-modes-khr device (surface app))))
     ))
 ```
 
@@ -103,9 +103,9 @@ Now we can create `swap-chain-support-details` object.
 
 ```lisp
 (defun create-query-swap-chain-support (app device)
-  (let ((capabilities (cvk:create-get-physical-device-surface-capabilities device (surface app)))
-	(formats (cvk:create-get-physical-device-surface-formats device (surface app)))
-	(present-modes (cvk:get-physical-device-surface-present-modes device (surface app))))
+  (let ((capabilities (cvk:create-get-physical-device-surface-capabilities-khr device (surface app)))
+	(formats (cvk:create-get-physical-device-surface-formats-khr device (surface app)))
+	(present-modes (cvk:get-physical-device-surface-present-modes-khr device (surface app))))
     (make-swap-chain-support-details :capabilities capabilities
 				     :formats formats
 				     :present-modes present-modes)))
@@ -115,8 +115,8 @@ Note that we have used two `create-` functions. Fill the `destroy-query-swap-cha
 
 ```lisp
 (defun destroy-query-swap-chain-support (query-details)
-  (cvk:destroy-get-physical-device-surface-capabilities (swap-chain-support-details-capabilities query-details))
-  (cvk:destroy-get-physical-device-surface-formats (swap-chain-support-details-formats query-details)))
+  (cvk:destroy-get-physical-device-surface-capabilities-khr (swap-chain-support-details-capabilities query-details))
+  (cvk:destroy-get-physical-device-surface-formats-khr (swap-chain-support-details-formats query-details)))
 ```
 
 All the details are in the struct. We can use them in the `is-device-suitable` function.
@@ -157,9 +157,9 @@ Let's loop over the list and see if the preferred combination is available. If t
 
 ```lisp
 (let ((chosen-format (loop for available-format in available-formats
-			   if (and (equal (cvk:surface-format-format available-format)
+			   if (and (equal (cvk:surface-format-khr-format available-format)
 			                  cvk:VK_FORMAT_B8G8R8A8_SRGB)
-				   (equal (cvk:surface-format-colorSpace available-format)
+				   (equal (cvk:surface-format-khr-colorSpace available-format)
 				          cvk:VK_COLOR_SPACE_SRGB_NONLINEAR_KHR))
 			     return available-format)))
   (or chosen-format (car available-formats)))
@@ -184,13 +184,13 @@ The last property is the extent. We will add one last function. This function wi
 
 ```lisp
 (defun create-choose-swap-extent (app capabilities)
-  (if (not (equal (cvk:extent-2d-width (cvk:surface-capabilities-currentExtent capabilities)) UINT32_MAX))
-      (let ((current-extent (cvk:surface-capabilities-currentExtent capabilities)))
+  (if (not (equal (cvk:extent-2d-width (cvk:surface-capabilities-khr-currentExtent capabilities)) UINT32_MAX))
+      (let ((current-extent (cvk:surface-capabilities-khr-currentExtent capabilities)))
 	(cvk:create-extent-2d :width (cvk:extent-2d-width current-extent)
 			      :height (cvk:extent-2d-height current-extent)))
       (multiple-value-bind (frame-width frame-height) (glfw:get-framebuffer-size (window app))
-	(let* ((min-image-extent (cvk:surface-capabilities-minImageExtent capabilities))
-	       (max-image-extent (cvk:surface-capabilities-maxImageExtent capabilities))
+	(let* ((min-image-extent (cvk:surface-capabilities-khr-minImageExtent capabilities))
+	       (max-image-extent (cvk:surface-capabilities-khr-maxImageExtent capabilities))
 	       (min-width (cvk:extent-2d-width min-image-extent))
 	       (min-height (cvk:extent-2d-height min-image-extent))
 	       (max-width (cvk:extent-2d-width max-image-extent))
@@ -240,11 +240,11 @@ We need to indicate the number of images we want in the swap chain.
 ```lisp
 (defun create-swap-chain (app)
   (let* (...
-         (image-count (if (and (> (cvk:surface-capabilities-maxImageCount (swap-chain-support-details-capabilities swap-chain-support)) 0)
-			       (> (1+ (cvk:surface-capabilities-minImageCount (swap-chain-support-details-capabilities swap-chain-support)))
-				  (cvk:surface-capabilities-maxImageCount (swap-chain-support-details-capabilities swap-chain-support))))
-			  (cvk:surface-capabilities-maxImageCount (swap-chain-support-details-capabilities swap-chain-support))
-			  (1+ (cvk:surface-capabilities-minImageCount (swap-chain-support-details-capabilities swap-chain-support)))))
+         (image-count (if (and (> (cvk:surface-capabilities-khr-maxImageCount (swap-chain-support-details-capabilities swap-chain-support)) 0)
+			       (> (1+ (cvk:surface-capabilities-khr-minImageCount (swap-chain-support-details-capabilities swap-chain-support)))
+				  (cvk:surface-capabilities-khr-maxImageCount (swap-chain-support-details-capabilities swap-chain-support))))
+			  (cvk:surface-capabilities-khr-maxImageCount (swap-chain-support-details-capabilities swap-chain-support))
+			  (1+ (cvk:surface-capabilities-khr-minImageCount (swap-chain-support-details-capabilities swap-chain-support)))))
   ...
   )))
 ```
@@ -282,7 +282,7 @@ We specify that we want the current transformation.
 ```lisp
 (defun create-swap-chain (app)
   (let* (...
-         (pre-transform (cvk:surface-capabilities-currentTransform (swap-chain-support-details-capabilities swap-chain-support)))
+         (pre-transform (cvk:surface-capabilities-khr-currentTransform (swap-chain-support-details-capabilities swap-chain-support)))
   ...
   )))
 ```
@@ -292,22 +292,22 @@ There are more values we need to use in the creation of the swap chain, but we c
 ```lisp
 (defun create-swap-chain (app)
   (let* (...)
-    (cvk:with-swapchain-create-info create-info (:sType cvk:VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR
-						 :surface (surface app)
-						 :minImageCount image-count
-						 :imageFormat (cvk:surface-format-format surface-format)
-						 :imageColorSpace (cvk:surface-format-colorSpace surface-format)
-						 :imageExtent extent
-						 :imageArrayLayers 1
-						 :imageUsage cvk:VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT
-						 :imageSharingMode sharing-mode
-						 :queueFamilyIndexCount queue-family-index-count
-						 :pQueueFamilyIndices family-indices
-						 :preTransform pre-transform
-						 :compositeAlpha cvk:VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR
-						 :presentMode present-mode
-						 :clipped cvk:VK_TRUE
-						 :oldSwapchain nil)
+    (cvk:with-swapchain-create-info-khr create-info (:sType cvk:VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR
+    						     :surface (surface app)
+						     :minImageCount image-count
+						     :imageFormat (cvk:surface-format-format surface-format)
+						     :imageColorSpace (cvk:surface-format-colorSpace surface-format)
+						     :imageExtent extent
+						     :imageArrayLayers 1
+						     :imageUsage cvk:VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT
+						     :imageSharingMode sharing-mode
+						     :queueFamilyIndexCount queue-family-index-count
+						     :pQueueFamilyIndices family-indices
+						     :preTransform pre-transform
+						     :compositeAlpha cvk:VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR
+						     :presentMode present-mode
+						     :clipped cvk:VK_TRUE
+						     :oldSwapchain nil)
       ...
       )))
 ```
@@ -323,7 +323,7 @@ Add a new member class to store the swap chain.
 Back to `create-swap-chain`, create the swapchain using the `create-swapchain` function.
 
 ```lisp
-(cvk:with-swapchain-create-info create-info (...)
+(cvk:with-swapchain-create-info-khr create-info (...)
   (when (not (equal result cvk:VK_SUCCESS))
     (error "failed to create swap chain!"))
   (setf (swap-chain app) swap-chain)
@@ -336,7 +336,7 @@ Remember to destroy the swap chain in the `cleanup` function.
 
 ```lisp
 (defun cleanup (app)
-  (cvk:destroy-swapchain (device app) (swap-chain app) nil)
+  (cvk:destroy-swapchain-khr (device app) (swap-chain app) nil)
   ...
   )
 ```
@@ -357,11 +357,11 @@ After creating the swap chain, we can retrieve its images using `get-swapchain-i
 ```lisp
 (defun create-swap-chain (app)
   (let* (...)
-    (cvk:with-swapchain-create-info create-info (...)
-      (multiple-value-bind (swap-chain result) (cvk:create-swapchain (device app) create-info nil)
+    (cvk:with-swapchain-create-info-khr create-info (...)
+      (multiple-value-bind (swap-chain result) (cvk:create-swapchain-khr (device app) create-info nil)
 	...
 	(setf (swap-chain app) swap-chain)
-	(setf (swap-chain-images app) (cvk:get-swapchain-images (device app) (swap-chain app)))
+	(setf (swap-chain-images app) (cvk:get-swapchain-images-khr (device app) (swap-chain app)))
 	(destroy-query-swap-chain-support swap-chain-support)))))
 ```
 
@@ -382,8 +382,8 @@ One last thing, store the format and extent we have chosen for the swap chain im
       (multiple-value-bind (swap-chain result) (cvk:create-swapchain (device app) create-info nil)
 	...
 	(setf (swap-chain app) swap-chain)
-	(setf (swap-chain-images app) (cvk:get-swapchain-images (device app) (swap-chain app)))
-        (setf (swap-chain-image-format app) (cvk:surface-format-format surface-format))
+	(setf (swap-chain-images app) (cvk:get-swapchain-images-khr (device app) (swap-chain app)))
+        (setf (swap-chain-image-format app) (cvk:surface-format-khr-format surface-format))
         (setf (swap-chain-extent app) extent)
 	(destroy-query-swap-chain-support swap-chain-support)))))
 ```
@@ -392,7 +392,7 @@ Remember that the extent was created with the `create-choose-swap-extent` functi
 
 ```lisp
 (defun cleanup (app)
-  (cvk:destroy-swapchain (device app) (swap-chain app) nil)
+  (cvk:destroy-swapchain-khr (device app) (swap-chain app) nil)
   (destroy-choose-swap-extent app (swap-chain-extent app))
   ...
   )

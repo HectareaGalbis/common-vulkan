@@ -41,13 +41,13 @@
                   (if ,slot-arg
                       (cffi:foreign-alloc ',type :count (length ,slot-arg))
                       (cffi-sys:null-pointer)))))
-    ,(let ((i (gensym)))
+    ,(let ((i (gensym)) (elem (gensym)))
        `(iter
           (for ,i from 0 below (length ,slot-arg))
+          (for ,elem in ,slot-arg)
           ,(if pointers
-               `(more-cffi:copy (cffi:mem-aptr ,slot ,i) (aref ,slot-arg ,i)
-                                ',type)
-               `(setf (cffi:mem-aref ,slot ',type ,i) (aref ,slot-arg ,i)))))))
+               `(more-cffi:copy (cffi:mem-aptr ,slot ',type ,i) ,elem ',type)
+               `(setf (cffi:mem-aref ,slot ',type ,i) ,elem))))))
 
 (defmacro destroy-array (slot)
   `(when (not (cffi-sys:null-pointer-p ,slot)) (cffi-sys:foreign-free ,slot)))

@@ -350,16 +350,19 @@
 		    into more-type-declarations)
 		  (until endp))))
 	    (finally (return (values function-pointers
-				     `(cffi:defcfun (,func-name ,(fix-name func-name)) ,(fix-type return-type)
+				     `(mcffi:defcfun (,func-name ,(fix-name func-name) ,(fix-name (concatenate 'string "FUNCALL-" func-name))) ,(fix-type return-type)
 					,@arg-slots)
-				     `(mcffi:def-foreign-function doc-file ,func-name
-					,(fix-name (subseq (string-downcase (string (cffi:translate-camelcase-name func-name
-														   :special-words
-														   '("2D" "3D" "KHR" "EXT" "VALVE" "GOOGLE" "AMD" "INTEL" "NVX" "NV" "HUAWEI"))))
-							   3))
-					,more-arg-names
-					(declare-types ,@more-type-declarations :return (,return-type return-value))
-					(,(fix-name func-name) ,@more-arg-names)))))))
+				     (let* ((lisp-func-name (subseq (string-downcase (string (cffi:translate-camelcase-name func-name
+															    :special-words
+															    '("2D" "3D" "KHR" "EXT" "VALVE" "GOOGLE" "AMD" "INTEL" "NVX" "NV" "HUAWEI"))))
+								    3))
+					    (lisp-funcall-name (concatenate 'string "FUNCALL-" lisp-func-name)))
+				       `(mcffi:def-foreign-function doc-file (,func-name
+									      ,(fix-name lisp-func-name)
+									      ,(fix-name lisp-funcall-name))
+								    ,more-arg-names
+					  (declare-types ,@more-type-declarations :return (,return-type return-value))
+					  (,(fix-name func-name) ,@more-arg-names))))))))
 	nil)))
 
 
@@ -557,13 +560,14 @@
 		     'mcffi:with-doc-file (cadr revised-code))
 	     (iter (for new-more-function in new-more-function-code)
 	       (let* ((revised-functions (cddr revised-code))
-		      (func-name (caddr new-more-function))
+		      (func-name (caaddr new-more-function))
 		      (revised-function-list (and revised-functions
-						  (iter (for subfunc in (member func-name revised-functions :key (lambda (x) (caddr x))
+						  (iter (for subfunc in (member func-name revised-functions :key (lambda (x) (and (eq (car x) 'mcffi:def-foreign-function)
+																  (caaddr x)))
 													    :test (lambda (x y)
 														    (and (stringp y) (string= x y)))))
 						    (count (and (eq (car subfunc) 'mcffi:def-foreign-function)
-								(not (null (caddr subfunc))))
+								(not (null (caaddr subfunc))))
 							   into def-function-count)
 						    (while (<= def-function-count 1))
 						    (collect subfunc)))))

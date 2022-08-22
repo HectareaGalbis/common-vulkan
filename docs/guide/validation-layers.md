@@ -104,10 +104,9 @@ We can now use this function in `create-instance`:
 We define now a debug callback. Unlike in C or C++, we need here specific macros for doing this. In this case we use `def-debug-utils-messenger-callback`.
 
 ```lisp
-(cvk:def-debug-utils-messenger-callback debug-callback (message-severity message-type callback-data user-data)
+(cvk:def-debug-utils-messenger-callback-ext-callback debug-callback (message-severity message-type callback-data user-data)
   (declare (ignore message-severity message-type user-data))
-  (warn "validation layer: ~S" (cvk:debug-utils-messenger-callback-data-pMessage callback-data))
-
+  (warn "validation layer: ~S" (cvk:debug-utils-messenger-callback-data-ext-pMessage callback-data))
   cvk:VK_FALSE)
 ```
 
@@ -142,7 +141,7 @@ Like the creation of every object in Vulkan, we need first to fill a create info
 (defun setup-debug-messenger (app)
   (if *enable-validation-layers*
       
-      (cvk:with-debug-utils-messenger-create-info create-info
+      (cvk:with-debug-utils-messenger-create-info-ext create-info
 	(:sType cvk:VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT
 	 :messageSeverity (logior cvk:VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT
 				  cvk:VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT
@@ -210,7 +209,7 @@ To debug the creation and destruction of the vulkan instance we need to pass to 
 		             (get-validation-layers)
 			     nil)))
 
-  (cvk:with-debug-utils-messenger-create-info debug-info
+  (cvk:with-debug-utils-messenger-create-info-ext debug-info
       (:sType cvk:VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT
        :messageSeverity (logior cvk:VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT
 				cvk:VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT
