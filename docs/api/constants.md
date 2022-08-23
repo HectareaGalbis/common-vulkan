@@ -284,355 +284,355 @@
 ## VK_PIPELINE_STAGE_2_TESSELLATION_CONTROL_SHADER_BIT
 
 ```lisp
-(defconstant vk_pipeline_stage_2_tessellation_control_shader_bit 10)
+(defconstant vk_pipeline_stage_2_tessellation_control_shader_bit 16)
 ```
 
 ## VK_PIPELINE_STAGE_2_TESSELLATION_CONTROL_SHADER_BIT_KHR
 
 ```lisp
-(defconstant vk_pipeline_stage_2_tessellation_control_shader_bit_khr 10)
+(defconstant vk_pipeline_stage_2_tessellation_control_shader_bit_khr 16)
 ```
 
 ## VK_PIPELINE_STAGE_2_TESSELLATION_EVALUATION_SHADER_BIT
 
 ```lisp
-(defconstant vk_pipeline_stage_2_tessellation_evaluation_shader_bit 20)
+(defconstant vk_pipeline_stage_2_tessellation_evaluation_shader_bit 32)
 ```
 
 ## VK_PIPELINE_STAGE_2_TESSELLATION_EVALUATION_SHADER_BIT_KHR
 
 ```lisp
-(defconstant vk_pipeline_stage_2_tessellation_evaluation_shader_bit_khr 20)
+(defconstant vk_pipeline_stage_2_tessellation_evaluation_shader_bit_khr 32)
 ```
 
 ## VK_PIPELINE_STAGE_2_GEOMETRY_SHADER_BIT
 
 ```lisp
-(defconstant vk_pipeline_stage_2_geometry_shader_bit 40)
+(defconstant vk_pipeline_stage_2_geometry_shader_bit 64)
 ```
 
 ## VK_PIPELINE_STAGE_2_GEOMETRY_SHADER_BIT_KHR
 
 ```lisp
-(defconstant vk_pipeline_stage_2_geometry_shader_bit_khr 40)
+(defconstant vk_pipeline_stage_2_geometry_shader_bit_khr 64)
 ```
 
 ## VK_PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT
 
 ```lisp
-(defconstant vk_pipeline_stage_2_fragment_shader_bit 80)
+(defconstant vk_pipeline_stage_2_fragment_shader_bit 128)
 ```
 
 ## VK_PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT_KHR
 
 ```lisp
-(defconstant vk_pipeline_stage_2_fragment_shader_bit_khr 80)
+(defconstant vk_pipeline_stage_2_fragment_shader_bit_khr 128)
 ```
 
 ## VK_PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT
 
 ```lisp
-(defconstant vk_pipeline_stage_2_early_fragment_tests_bit 100)
+(defconstant vk_pipeline_stage_2_early_fragment_tests_bit 256)
 ```
 
 ## VK_PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT_KHR
 
 ```lisp
-(defconstant vk_pipeline_stage_2_early_fragment_tests_bit_khr 100)
+(defconstant vk_pipeline_stage_2_early_fragment_tests_bit_khr 256)
 ```
 
 ## VK_PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT
 
 ```lisp
-(defconstant vk_pipeline_stage_2_late_fragment_tests_bit 200)
+(defconstant vk_pipeline_stage_2_late_fragment_tests_bit 512)
 ```
 
 ## VK_PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT_KHR
 
 ```lisp
-(defconstant vk_pipeline_stage_2_late_fragment_tests_bit_khr 200)
+(defconstant vk_pipeline_stage_2_late_fragment_tests_bit_khr 512)
 ```
 
 ## VK_PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT
 
 ```lisp
-(defconstant vk_pipeline_stage_2_color_attachment_output_bit 400)
+(defconstant vk_pipeline_stage_2_color_attachment_output_bit 1024)
 ```
 
 ## VK_PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT_KHR
 
 ```lisp
-(defconstant vk_pipeline_stage_2_color_attachment_output_bit_khr 400)
+(defconstant vk_pipeline_stage_2_color_attachment_output_bit_khr 1024)
 ```
 
 ## VK_PIPELINE_STAGE_2_COMPUTE_SHADER_BIT
 
 ```lisp
-(defconstant vk_pipeline_stage_2_compute_shader_bit 800)
+(defconstant vk_pipeline_stage_2_compute_shader_bit 2048)
 ```
 
 ## VK_PIPELINE_STAGE_2_COMPUTE_SHADER_BIT_KHR
 
 ```lisp
-(defconstant vk_pipeline_stage_2_compute_shader_bit_khr 800)
+(defconstant vk_pipeline_stage_2_compute_shader_bit_khr 2048)
 ```
 
 ## VK_PIPELINE_STAGE_2_ALL_TRANSFER_BIT
 
 ```lisp
-(defconstant vk_pipeline_stage_2_all_transfer_bit 1000)
+(defconstant vk_pipeline_stage_2_all_transfer_bit 4096)
 ```
 
 ## VK_PIPELINE_STAGE_2_ALL_TRANSFER_BIT_KHR
 
 ```lisp
-(defconstant vk_pipeline_stage_2_all_transfer_bit_khr 1000)
+(defconstant vk_pipeline_stage_2_all_transfer_bit_khr 4096)
 ```
 
 ## VK_PIPELINE_STAGE_2_TRANSFER_BIT
 
 ```lisp
-(defconstant vk_pipeline_stage_2_transfer_bit 1000)
+(defconstant vk_pipeline_stage_2_transfer_bit 4096)
 ```
 
 ## VK_PIPELINE_STAGE_2_TRANSFER_BIT_KHR
 
 ```lisp
-(defconstant vk_pipeline_stage_2_transfer_bit_khr 1000)
+(defconstant vk_pipeline_stage_2_transfer_bit_khr 4096)
 ```
 
 ## VK_PIPELINE_STAGE_2_BOTTOM_OF_PIPE_BIT
 
 ```lisp
-(defconstant vk_pipeline_stage_2_bottom_of_pipe_bit 2000)
+(defconstant vk_pipeline_stage_2_bottom_of_pipe_bit 8192)
 ```
 
 ## VK_PIPELINE_STAGE_2_BOTTOM_OF_PIPE_BIT_KHR
 
 ```lisp
-(defconstant vk_pipeline_stage_2_bottom_of_pipe_bit_khr 2000)
+(defconstant vk_pipeline_stage_2_bottom_of_pipe_bit_khr 8192)
 ```
 
 ## VK_PIPELINE_STAGE_2_HOST_BIT
 
 ```lisp
-(defconstant vk_pipeline_stage_2_host_bit 4000)
+(defconstant vk_pipeline_stage_2_host_bit 16384)
 ```
 
 ## VK_PIPELINE_STAGE_2_HOST_BIT_KHR
 
 ```lisp
-(defconstant vk_pipeline_stage_2_host_bit_khr 4000)
+(defconstant vk_pipeline_stage_2_host_bit_khr 16384)
 ```
 
 ## VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT
 
 ```lisp
-(defconstant vk_pipeline_stage_2_all_graphics_bit 8000)
+(defconstant vk_pipeline_stage_2_all_graphics_bit 32768)
 ```
 
 ## VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT_KHR
 
 ```lisp
-(defconstant vk_pipeline_stage_2_all_graphics_bit_khr 8000)
+(defconstant vk_pipeline_stage_2_all_graphics_bit_khr 32768)
 ```
 
 ## VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT
 
 ```lisp
-(defconstant vk_pipeline_stage_2_all_commands_bit 10000)
+(defconstant vk_pipeline_stage_2_all_commands_bit 65536)
 ```
 
 ## VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR
 
 ```lisp
-(defconstant vk_pipeline_stage_2_all_commands_bit_khr 10000)
+(defconstant vk_pipeline_stage_2_all_commands_bit_khr 65536)
 ```
 
 ## VK_PIPELINE_STAGE_2_COPY_BIT
 
 ```lisp
-(defconstant vk_pipeline_stage_2_copy_bit 100000000)
+(defconstant vk_pipeline_stage_2_copy_bit 4294967296)
 ```
 
 ## VK_PIPELINE_STAGE_2_COPY_BIT_KHR
 
 ```lisp
-(defconstant vk_pipeline_stage_2_copy_bit_khr 100000000)
+(defconstant vk_pipeline_stage_2_copy_bit_khr 4294967296)
 ```
 
 ## VK_PIPELINE_STAGE_2_RESOLVE_BIT
 
 ```lisp
-(defconstant vk_pipeline_stage_2_resolve_bit 200000000)
+(defconstant vk_pipeline_stage_2_resolve_bit 8589934592)
 ```
 
 ## VK_PIPELINE_STAGE_2_RESOLVE_BIT_KHR
 
 ```lisp
-(defconstant vk_pipeline_stage_2_resolve_bit_khr 200000000)
+(defconstant vk_pipeline_stage_2_resolve_bit_khr 8589934592)
 ```
 
 ## VK_PIPELINE_STAGE_2_BLIT_BIT
 
 ```lisp
-(defconstant vk_pipeline_stage_2_blit_bit 400000000)
+(defconstant vk_pipeline_stage_2_blit_bit 17179869184)
 ```
 
 ## VK_PIPELINE_STAGE_2_BLIT_BIT_KHR
 
 ```lisp
-(defconstant vk_pipeline_stage_2_blit_bit_khr 400000000)
+(defconstant vk_pipeline_stage_2_blit_bit_khr 17179869184)
 ```
 
 ## VK_PIPELINE_STAGE_2_CLEAR_BIT
 
 ```lisp
-(defconstant vk_pipeline_stage_2_clear_bit 800000000)
+(defconstant vk_pipeline_stage_2_clear_bit 34359738368)
 ```
 
 ## VK_PIPELINE_STAGE_2_CLEAR_BIT_KHR
 
 ```lisp
-(defconstant vk_pipeline_stage_2_clear_bit_khr 800000000)
+(defconstant vk_pipeline_stage_2_clear_bit_khr 34359738368)
 ```
 
 ## VK_PIPELINE_STAGE_2_INDEX_INPUT_BIT
 
 ```lisp
-(defconstant vk_pipeline_stage_2_index_input_bit 1000000000)
+(defconstant vk_pipeline_stage_2_index_input_bit 68719476736)
 ```
 
 ## VK_PIPELINE_STAGE_2_INDEX_INPUT_BIT_KHR
 
 ```lisp
-(defconstant vk_pipeline_stage_2_index_input_bit_khr 1000000000)
+(defconstant vk_pipeline_stage_2_index_input_bit_khr 68719476736)
 ```
 
 ## VK_PIPELINE_STAGE_2_VERTEX_ATTRIBUTE_INPUT_BIT
 
 ```lisp
-(defconstant vk_pipeline_stage_2_vertex_attribute_input_bit 2000000000)
+(defconstant vk_pipeline_stage_2_vertex_attribute_input_bit 137438953472)
 ```
 
 ## VK_PIPELINE_STAGE_2_VERTEX_ATTRIBUTE_INPUT_BIT_KHR
 
 ```lisp
-(defconstant vk_pipeline_stage_2_vertex_attribute_input_bit_khr 2000000000)
+(defconstant vk_pipeline_stage_2_vertex_attribute_input_bit_khr 137438953472)
 ```
 
 ## VK_PIPELINE_STAGE_2_PRE_RASTERIZATION_SHADERS_BIT
 
 ```lisp
-(defconstant vk_pipeline_stage_2_pre_rasterization_shaders_bit 4000000000)
+(defconstant vk_pipeline_stage_2_pre_rasterization_shaders_bit 274877906944)
 ```
 
 ## VK_PIPELINE_STAGE_2_PRE_RASTERIZATION_SHADERS_BIT_KHR
 
 ```lisp
-(defconstant vk_pipeline_stage_2_pre_rasterization_shaders_bit_khr 4000000000)
+(defconstant vk_pipeline_stage_2_pre_rasterization_shaders_bit_khr 274877906944)
 ```
 
 ## VK_PIPELINE_STAGE_2_VIDEO_DECODE_BIT_KHR
 
 ```lisp
-(defconstant vk_pipeline_stage_2_video_decode_bit_khr 4000000)
+(defconstant vk_pipeline_stage_2_video_decode_bit_khr 67108864)
 ```
 
 ## VK_PIPELINE_STAGE_2_VIDEO_ENCODE_BIT_KHR
 
 ```lisp
-(defconstant vk_pipeline_stage_2_video_encode_bit_khr 8000000)
+(defconstant vk_pipeline_stage_2_video_encode_bit_khr 134217728)
 ```
 
 ## VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT
 
 ```lisp
-(defconstant vk_pipeline_stage_2_transform_feedback_bit_ext 1000000)
+(defconstant vk_pipeline_stage_2_transform_feedback_bit_ext 16777216)
 ```
 
 ## VK_PIPELINE_STAGE_2_CONDITIONAL_RENDERING_BIT_EXT
 
 ```lisp
-(defconstant vk_pipeline_stage_2_conditional_rendering_bit_ext 40000)
+(defconstant vk_pipeline_stage_2_conditional_rendering_bit_ext 262144)
 ```
 
 ## VK_PIPELINE_STAGE_2_COMMAND_PREPROCESS_BIT_NV
 
 ```lisp
-(defconstant vk_pipeline_stage_2_command_preprocess_bit_nv 20000)
+(defconstant vk_pipeline_stage_2_command_preprocess_bit_nv 131072)
 ```
 
 ## VK_PIPELINE_STAGE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR
 
 ```lisp
-(defconstant vk_pipeline_stage_2_fragment_shading_rate_attachment_bit_khr 400000)
+(defconstant vk_pipeline_stage_2_fragment_shading_rate_attachment_bit_khr 4194304)
 ```
 
 ## VK_PIPELINE_STAGE_2_SHADING_RATE_IMAGE_BIT_NV
 
 ```lisp
-(defconstant vk_pipeline_stage_2_shading_rate_image_bit_nv 400000)
+(defconstant vk_pipeline_stage_2_shading_rate_image_bit_nv 4194304)
 ```
 
 ## VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR
 
 ```lisp
-(defconstant vk_pipeline_stage_2_acceleration_structure_build_bit_khr 2000000)
+(defconstant vk_pipeline_stage_2_acceleration_structure_build_bit_khr 33554432)
 ```
 
 ## VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR
 
 ```lisp
-(defconstant vk_pipeline_stage_2_ray_tracing_shader_bit_khr 200000)
+(defconstant vk_pipeline_stage_2_ray_tracing_shader_bit_khr 2097152)
 ```
 
 ## VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_NV
 
 ```lisp
-(defconstant vk_pipeline_stage_2_ray_tracing_shader_bit_nv 200000)
+(defconstant vk_pipeline_stage_2_ray_tracing_shader_bit_nv 2097152)
 ```
 
 ## VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_NV
 
 ```lisp
-(defconstant vk_pipeline_stage_2_acceleration_structure_build_bit_nv 2000000)
+(defconstant vk_pipeline_stage_2_acceleration_structure_build_bit_nv 33554432)
 ```
 
 ## VK_PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_BIT_EXT
 
 ```lisp
-(defconstant vk_pipeline_stage_2_fragment_density_process_bit_ext 800000)
+(defconstant vk_pipeline_stage_2_fragment_density_process_bit_ext 8388608)
 ```
 
 ## VK_PIPELINE_STAGE_2_TASK_SHADER_BIT_NV
 
 ```lisp
-(defconstant vk_pipeline_stage_2_task_shader_bit_nv 80000)
+(defconstant vk_pipeline_stage_2_task_shader_bit_nv 524288)
 ```
 
 ## VK_PIPELINE_STAGE_2_MESH_SHADER_BIT_NV
 
 ```lisp
-(defconstant vk_pipeline_stage_2_mesh_shader_bit_nv 100000)
+(defconstant vk_pipeline_stage_2_mesh_shader_bit_nv 1048576)
 ```
 
 ## VK_PIPELINE_STAGE_2_SUBPASS_SHADING_BIT_HUAWEI
 
 ```lisp
-(defconstant vk_pipeline_stage_2_subpass_shading_bit_huawei 8000000000)
+(defconstant vk_pipeline_stage_2_subpass_shading_bit_huawei 549755813888)
 ```
 
 ## VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI
 
 ```lisp
-(defconstant vk_pipeline_stage_2_invocation_mask_bit_huawei 10000000000)
+(defconstant vk_pipeline_stage_2_invocation_mask_bit_huawei 1099511627776)
 ```
 
 ## VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_COPY_BIT_KHR
 
 ```lisp
-(defconstant vk_pipeline_stage_2_acceleration_structure_copy_bit_khr 10000000)
+(defconstant vk_pipeline_stage_2_acceleration_structure_copy_bit_khr 268435456)
 ```
 
 ## VK_ACCESS_2_NONE
@@ -698,313 +698,313 @@
 ## VK_ACCESS_2_INPUT_ATTACHMENT_READ_BIT
 
 ```lisp
-(defconstant vk_access_2_input_attachment_read_bit 10)
+(defconstant vk_access_2_input_attachment_read_bit 16)
 ```
 
 ## VK_ACCESS_2_INPUT_ATTACHMENT_READ_BIT_KHR
 
 ```lisp
-(defconstant vk_access_2_input_attachment_read_bit_khr 10)
+(defconstant vk_access_2_input_attachment_read_bit_khr 16)
 ```
 
 ## VK_ACCESS_2_SHADER_READ_BIT
 
 ```lisp
-(defconstant vk_access_2_shader_read_bit 20)
+(defconstant vk_access_2_shader_read_bit 32)
 ```
 
 ## VK_ACCESS_2_SHADER_READ_BIT_KHR
 
 ```lisp
-(defconstant vk_access_2_shader_read_bit_khr 20)
+(defconstant vk_access_2_shader_read_bit_khr 32)
 ```
 
 ## VK_ACCESS_2_SHADER_WRITE_BIT
 
 ```lisp
-(defconstant vk_access_2_shader_write_bit 40)
+(defconstant vk_access_2_shader_write_bit 64)
 ```
 
 ## VK_ACCESS_2_SHADER_WRITE_BIT_KHR
 
 ```lisp
-(defconstant vk_access_2_shader_write_bit_khr 40)
+(defconstant vk_access_2_shader_write_bit_khr 64)
 ```
 
 ## VK_ACCESS_2_COLOR_ATTACHMENT_READ_BIT
 
 ```lisp
-(defconstant vk_access_2_color_attachment_read_bit 80)
+(defconstant vk_access_2_color_attachment_read_bit 128)
 ```
 
 ## VK_ACCESS_2_COLOR_ATTACHMENT_READ_BIT_KHR
 
 ```lisp
-(defconstant vk_access_2_color_attachment_read_bit_khr 80)
+(defconstant vk_access_2_color_attachment_read_bit_khr 128)
 ```
 
 ## VK_ACCESS_2_COLOR_ATTACHMENT_WRITE_BIT
 
 ```lisp
-(defconstant vk_access_2_color_attachment_write_bit 100)
+(defconstant vk_access_2_color_attachment_write_bit 256)
 ```
 
 ## VK_ACCESS_2_COLOR_ATTACHMENT_WRITE_BIT_KHR
 
 ```lisp
-(defconstant vk_access_2_color_attachment_write_bit_khr 100)
+(defconstant vk_access_2_color_attachment_write_bit_khr 256)
 ```
 
 ## VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_READ_BIT
 
 ```lisp
-(defconstant vk_access_2_depth_stencil_attachment_read_bit 200)
+(defconstant vk_access_2_depth_stencil_attachment_read_bit 512)
 ```
 
 ## VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_READ_BIT_KHR
 
 ```lisp
-(defconstant vk_access_2_depth_stencil_attachment_read_bit_khr 200)
+(defconstant vk_access_2_depth_stencil_attachment_read_bit_khr 512)
 ```
 
 ## VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT
 
 ```lisp
-(defconstant vk_access_2_depth_stencil_attachment_write_bit 400)
+(defconstant vk_access_2_depth_stencil_attachment_write_bit 1024)
 ```
 
 ## VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT_KHR
 
 ```lisp
-(defconstant vk_access_2_depth_stencil_attachment_write_bit_khr 400)
+(defconstant vk_access_2_depth_stencil_attachment_write_bit_khr 1024)
 ```
 
 ## VK_ACCESS_2_TRANSFER_READ_BIT
 
 ```lisp
-(defconstant vk_access_2_transfer_read_bit 800)
+(defconstant vk_access_2_transfer_read_bit 2048)
 ```
 
 ## VK_ACCESS_2_TRANSFER_READ_BIT_KHR
 
 ```lisp
-(defconstant vk_access_2_transfer_read_bit_khr 800)
+(defconstant vk_access_2_transfer_read_bit_khr 2048)
 ```
 
 ## VK_ACCESS_2_TRANSFER_WRITE_BIT
 
 ```lisp
-(defconstant vk_access_2_transfer_write_bit 1000)
+(defconstant vk_access_2_transfer_write_bit 4096)
 ```
 
 ## VK_ACCESS_2_TRANSFER_WRITE_BIT_KHR
 
 ```lisp
-(defconstant vk_access_2_transfer_write_bit_khr 1000)
+(defconstant vk_access_2_transfer_write_bit_khr 4096)
 ```
 
 ## VK_ACCESS_2_HOST_READ_BIT
 
 ```lisp
-(defconstant vk_access_2_host_read_bit 2000)
+(defconstant vk_access_2_host_read_bit 8192)
 ```
 
 ## VK_ACCESS_2_HOST_READ_BIT_KHR
 
 ```lisp
-(defconstant vk_access_2_host_read_bit_khr 2000)
+(defconstant vk_access_2_host_read_bit_khr 8192)
 ```
 
 ## VK_ACCESS_2_HOST_WRITE_BIT
 
 ```lisp
-(defconstant vk_access_2_host_write_bit 4000)
+(defconstant vk_access_2_host_write_bit 16384)
 ```
 
 ## VK_ACCESS_2_HOST_WRITE_BIT_KHR
 
 ```lisp
-(defconstant vk_access_2_host_write_bit_khr 4000)
+(defconstant vk_access_2_host_write_bit_khr 16384)
 ```
 
 ## VK_ACCESS_2_MEMORY_READ_BIT
 
 ```lisp
-(defconstant vk_access_2_memory_read_bit 8000)
+(defconstant vk_access_2_memory_read_bit 32768)
 ```
 
 ## VK_ACCESS_2_MEMORY_READ_BIT_KHR
 
 ```lisp
-(defconstant vk_access_2_memory_read_bit_khr 8000)
+(defconstant vk_access_2_memory_read_bit_khr 32768)
 ```
 
 ## VK_ACCESS_2_MEMORY_WRITE_BIT
 
 ```lisp
-(defconstant vk_access_2_memory_write_bit 10000)
+(defconstant vk_access_2_memory_write_bit 65536)
 ```
 
 ## VK_ACCESS_2_MEMORY_WRITE_BIT_KHR
 
 ```lisp
-(defconstant vk_access_2_memory_write_bit_khr 10000)
+(defconstant vk_access_2_memory_write_bit_khr 65536)
 ```
 
 ## VK_ACCESS_2_SHADER_SAMPLED_READ_BIT
 
 ```lisp
-(defconstant vk_access_2_shader_sampled_read_bit 100000000)
+(defconstant vk_access_2_shader_sampled_read_bit 4294967296)
 ```
 
 ## VK_ACCESS_2_SHADER_SAMPLED_READ_BIT_KHR
 
 ```lisp
-(defconstant vk_access_2_shader_sampled_read_bit_khr 100000000)
+(defconstant vk_access_2_shader_sampled_read_bit_khr 4294967296)
 ```
 
 ## VK_ACCESS_2_SHADER_STORAGE_READ_BIT
 
 ```lisp
-(defconstant vk_access_2_shader_storage_read_bit 200000000)
+(defconstant vk_access_2_shader_storage_read_bit 8589934592)
 ```
 
 ## VK_ACCESS_2_SHADER_STORAGE_READ_BIT_KHR
 
 ```lisp
-(defconstant vk_access_2_shader_storage_read_bit_khr 200000000)
+(defconstant vk_access_2_shader_storage_read_bit_khr 8589934592)
 ```
 
 ## VK_ACCESS_2_SHADER_STORAGE_WRITE_BIT
 
 ```lisp
-(defconstant vk_access_2_shader_storage_write_bit 400000000)
+(defconstant vk_access_2_shader_storage_write_bit 17179869184)
 ```
 
 ## VK_ACCESS_2_SHADER_STORAGE_WRITE_BIT_KHR
 
 ```lisp
-(defconstant vk_access_2_shader_storage_write_bit_khr 400000000)
+(defconstant vk_access_2_shader_storage_write_bit_khr 17179869184)
 ```
 
 ## VK_ACCESS_2_VIDEO_DECODE_READ_BIT_KHR
 
 ```lisp
-(defconstant vk_access_2_video_decode_read_bit_khr 800000000)
+(defconstant vk_access_2_video_decode_read_bit_khr 34359738368)
 ```
 
 ## VK_ACCESS_2_VIDEO_DECODE_WRITE_BIT_KHR
 
 ```lisp
-(defconstant vk_access_2_video_decode_write_bit_khr 1000000000)
+(defconstant vk_access_2_video_decode_write_bit_khr 68719476736)
 ```
 
 ## VK_ACCESS_2_VIDEO_ENCODE_READ_BIT_KHR
 
 ```lisp
-(defconstant vk_access_2_video_encode_read_bit_khr 2000000000)
+(defconstant vk_access_2_video_encode_read_bit_khr 137438953472)
 ```
 
 ## VK_ACCESS_2_VIDEO_ENCODE_WRITE_BIT_KHR
 
 ```lisp
-(defconstant vk_access_2_video_encode_write_bit_khr 4000000000)
+(defconstant vk_access_2_video_encode_write_bit_khr 274877906944)
 ```
 
 ## VK_ACCESS_2_TRANSFORM_FEEDBACK_WRITE_BIT_EXT
 
 ```lisp
-(defconstant vk_access_2_transform_feedback_write_bit_ext 2000000)
+(defconstant vk_access_2_transform_feedback_write_bit_ext 33554432)
 ```
 
 ## VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT
 
 ```lisp
-(defconstant vk_access_2_transform_feedback_counter_read_bit_ext 4000000)
+(defconstant vk_access_2_transform_feedback_counter_read_bit_ext 67108864)
 ```
 
 ## VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_WRITE_BIT_EXT
 
 ```lisp
-(defconstant vk_access_2_transform_feedback_counter_write_bit_ext 8000000)
+(defconstant vk_access_2_transform_feedback_counter_write_bit_ext 134217728)
 ```
 
 ## VK_ACCESS_2_CONDITIONAL_RENDERING_READ_BIT_EXT
 
 ```lisp
-(defconstant vk_access_2_conditional_rendering_read_bit_ext 100000)
+(defconstant vk_access_2_conditional_rendering_read_bit_ext 1048576)
 ```
 
 ## VK_ACCESS_2_COMMAND_PREPROCESS_READ_BIT_NV
 
 ```lisp
-(defconstant vk_access_2_command_preprocess_read_bit_nv 20000)
+(defconstant vk_access_2_command_preprocess_read_bit_nv 131072)
 ```
 
 ## VK_ACCESS_2_COMMAND_PREPROCESS_WRITE_BIT_NV
 
 ```lisp
-(defconstant vk_access_2_command_preprocess_write_bit_nv 40000)
+(defconstant vk_access_2_command_preprocess_write_bit_nv 262144)
 ```
 
 ## VK_ACCESS_2_FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT_KHR
 
 ```lisp
-(defconstant vk_access_2_fragment_shading_rate_attachment_read_bit_khr 800000)
+(defconstant vk_access_2_fragment_shading_rate_attachment_read_bit_khr 8388608)
 ```
 
 ## VK_ACCESS_2_SHADING_RATE_IMAGE_READ_BIT_NV
 
 ```lisp
-(defconstant vk_access_2_shading_rate_image_read_bit_nv 800000)
+(defconstant vk_access_2_shading_rate_image_read_bit_nv 8388608)
 ```
 
 ## VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR
 
 ```lisp
-(defconstant vk_access_2_acceleration_structure_read_bit_khr 200000)
+(defconstant vk_access_2_acceleration_structure_read_bit_khr 2097152)
 ```
 
 ## VK_ACCESS_2_ACCELERATION_STRUCTURE_WRITE_BIT_KHR
 
 ```lisp
-(defconstant vk_access_2_acceleration_structure_write_bit_khr 400000)
+(defconstant vk_access_2_acceleration_structure_write_bit_khr 4194304)
 ```
 
 ## VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_NV
 
 ```lisp
-(defconstant vk_access_2_acceleration_structure_read_bit_nv 200000)
+(defconstant vk_access_2_acceleration_structure_read_bit_nv 2097152)
 ```
 
 ## VK_ACCESS_2_ACCELERATION_STRUCTURE_WRITE_BIT_NV
 
 ```lisp
-(defconstant vk_access_2_acceleration_structure_write_bit_nv 400000)
+(defconstant vk_access_2_acceleration_structure_write_bit_nv 4194304)
 ```
 
 ## VK_ACCESS_2_FRAGMENT_DENSITY_MAP_READ_BIT_EXT
 
 ```lisp
-(defconstant vk_access_2_fragment_density_map_read_bit_ext 1000000)
+(defconstant vk_access_2_fragment_density_map_read_bit_ext 16777216)
 ```
 
 ## VK_ACCESS_2_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT
 
 ```lisp
-(defconstant vk_access_2_color_attachment_read_noncoherent_bit_ext 80000)
+(defconstant vk_access_2_color_attachment_read_noncoherent_bit_ext 524288)
 ```
 
 ## VK_ACCESS_2_INVOCATION_MASK_READ_BIT_HUAWEI
 
 ```lisp
-(defconstant vk_access_2_invocation_mask_read_bit_huawei 8000000000)
+(defconstant vk_access_2_invocation_mask_read_bit_huawei 549755813888)
 ```
 
 ## VK_ACCESS_2_SHADER_BINDING_TABLE_READ_BIT_KHR
 
 ```lisp
-(defconstant vk_access_2_shader_binding_table_read_bit_khr 10000000000)
+(defconstant vk_access_2_shader_binding_table_read_bit_khr 1099511627776)
 ```
 
 ## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_BIT
@@ -1058,325 +1058,325 @@
 ## VK_FORMAT_FEATURE_2_STORAGE_TEXEL_BUFFER_BIT
 
 ```lisp
-(defconstant vk_format_feature_2_storage_texel_buffer_bit 10)
+(defconstant vk_format_feature_2_storage_texel_buffer_bit 16)
 ```
 
 ## VK_FORMAT_FEATURE_2_STORAGE_TEXEL_BUFFER_BIT_KHR
 
 ```lisp
-(defconstant vk_format_feature_2_storage_texel_buffer_bit_khr 10)
+(defconstant vk_format_feature_2_storage_texel_buffer_bit_khr 16)
 ```
 
 ## VK_FORMAT_FEATURE_2_STORAGE_TEXEL_BUFFER_ATOMIC_BIT
 
 ```lisp
-(defconstant vk_format_feature_2_storage_texel_buffer_atomic_bit 20)
+(defconstant vk_format_feature_2_storage_texel_buffer_atomic_bit 32)
 ```
 
 ## VK_FORMAT_FEATURE_2_STORAGE_TEXEL_BUFFER_ATOMIC_BIT_KHR
 
 ```lisp
-(defconstant vk_format_feature_2_storage_texel_buffer_atomic_bit_khr 20)
+(defconstant vk_format_feature_2_storage_texel_buffer_atomic_bit_khr 32)
 ```
 
 ## VK_FORMAT_FEATURE_2_VERTEX_BUFFER_BIT
 
 ```lisp
-(defconstant vk_format_feature_2_vertex_buffer_bit 40)
+(defconstant vk_format_feature_2_vertex_buffer_bit 64)
 ```
 
 ## VK_FORMAT_FEATURE_2_VERTEX_BUFFER_BIT_KHR
 
 ```lisp
-(defconstant vk_format_feature_2_vertex_buffer_bit_khr 40)
+(defconstant vk_format_feature_2_vertex_buffer_bit_khr 64)
 ```
 
 ## VK_FORMAT_FEATURE_2_COLOR_ATTACHMENT_BIT
 
 ```lisp
-(defconstant vk_format_feature_2_color_attachment_bit 80)
+(defconstant vk_format_feature_2_color_attachment_bit 128)
 ```
 
 ## VK_FORMAT_FEATURE_2_COLOR_ATTACHMENT_BIT_KHR
 
 ```lisp
-(defconstant vk_format_feature_2_color_attachment_bit_khr 80)
+(defconstant vk_format_feature_2_color_attachment_bit_khr 128)
 ```
 
 ## VK_FORMAT_FEATURE_2_COLOR_ATTACHMENT_BLEND_BIT
 
 ```lisp
-(defconstant vk_format_feature_2_color_attachment_blend_bit 100)
+(defconstant vk_format_feature_2_color_attachment_blend_bit 256)
 ```
 
 ## VK_FORMAT_FEATURE_2_COLOR_ATTACHMENT_BLEND_BIT_KHR
 
 ```lisp
-(defconstant vk_format_feature_2_color_attachment_blend_bit_khr 100)
+(defconstant vk_format_feature_2_color_attachment_blend_bit_khr 256)
 ```
 
 ## VK_FORMAT_FEATURE_2_DEPTH_STENCIL_ATTACHMENT_BIT
 
 ```lisp
-(defconstant vk_format_feature_2_depth_stencil_attachment_bit 200)
+(defconstant vk_format_feature_2_depth_stencil_attachment_bit 512)
 ```
 
 ## VK_FORMAT_FEATURE_2_DEPTH_STENCIL_ATTACHMENT_BIT_KHR
 
 ```lisp
-(defconstant vk_format_feature_2_depth_stencil_attachment_bit_khr 200)
+(defconstant vk_format_feature_2_depth_stencil_attachment_bit_khr 512)
 ```
 
 ## VK_FORMAT_FEATURE_2_BLIT_SRC_BIT
 
 ```lisp
-(defconstant vk_format_feature_2_blit_src_bit 400)
+(defconstant vk_format_feature_2_blit_src_bit 1024)
 ```
 
 ## VK_FORMAT_FEATURE_2_BLIT_SRC_BIT_KHR
 
 ```lisp
-(defconstant vk_format_feature_2_blit_src_bit_khr 400)
+(defconstant vk_format_feature_2_blit_src_bit_khr 1024)
 ```
 
 ## VK_FORMAT_FEATURE_2_BLIT_DST_BIT
 
 ```lisp
-(defconstant vk_format_feature_2_blit_dst_bit 800)
+(defconstant vk_format_feature_2_blit_dst_bit 2048)
 ```
 
 ## VK_FORMAT_FEATURE_2_BLIT_DST_BIT_KHR
 
 ```lisp
-(defconstant vk_format_feature_2_blit_dst_bit_khr 800)
+(defconstant vk_format_feature_2_blit_dst_bit_khr 2048)
 ```
 
 ## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_FILTER_LINEAR_BIT
 
 ```lisp
-(defconstant vk_format_feature_2_sampled_image_filter_linear_bit 1000)
+(defconstant vk_format_feature_2_sampled_image_filter_linear_bit 4096)
 ```
 
 ## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_FILTER_LINEAR_BIT_KHR
 
 ```lisp
-(defconstant vk_format_feature_2_sampled_image_filter_linear_bit_khr 1000)
+(defconstant vk_format_feature_2_sampled_image_filter_linear_bit_khr 4096)
 ```
 
 ## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_FILTER_CUBIC_BIT
 
 ```lisp
-(defconstant vk_format_feature_2_sampled_image_filter_cubic_bit 2000)
+(defconstant vk_format_feature_2_sampled_image_filter_cubic_bit 8192)
 ```
 
 ## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT
 
 ```lisp
-(defconstant vk_format_feature_2_sampled_image_filter_cubic_bit_ext 2000)
+(defconstant vk_format_feature_2_sampled_image_filter_cubic_bit_ext 8192)
 ```
 
 ## VK_FORMAT_FEATURE_2_TRANSFER_SRC_BIT
 
 ```lisp
-(defconstant vk_format_feature_2_transfer_src_bit 4000)
+(defconstant vk_format_feature_2_transfer_src_bit 16384)
 ```
 
 ## VK_FORMAT_FEATURE_2_TRANSFER_SRC_BIT_KHR
 
 ```lisp
-(defconstant vk_format_feature_2_transfer_src_bit_khr 4000)
+(defconstant vk_format_feature_2_transfer_src_bit_khr 16384)
 ```
 
 ## VK_FORMAT_FEATURE_2_TRANSFER_DST_BIT
 
 ```lisp
-(defconstant vk_format_feature_2_transfer_dst_bit 8000)
+(defconstant vk_format_feature_2_transfer_dst_bit 32768)
 ```
 
 ## VK_FORMAT_FEATURE_2_TRANSFER_DST_BIT_KHR
 
 ```lisp
-(defconstant vk_format_feature_2_transfer_dst_bit_khr 8000)
+(defconstant vk_format_feature_2_transfer_dst_bit_khr 32768)
 ```
 
 ## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_FILTER_MINMAX_BIT
 
 ```lisp
-(defconstant vk_format_feature_2_sampled_image_filter_minmax_bit 10000)
+(defconstant vk_format_feature_2_sampled_image_filter_minmax_bit 65536)
 ```
 
 ## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_FILTER_MINMAX_BIT_KHR
 
 ```lisp
-(defconstant vk_format_feature_2_sampled_image_filter_minmax_bit_khr 10000)
+(defconstant vk_format_feature_2_sampled_image_filter_minmax_bit_khr 65536)
 ```
 
 ## VK_FORMAT_FEATURE_2_MIDPOINT_CHROMA_SAMPLES_BIT
 
 ```lisp
-(defconstant vk_format_feature_2_midpoint_chroma_samples_bit 20000)
+(defconstant vk_format_feature_2_midpoint_chroma_samples_bit 131072)
 ```
 
 ## VK_FORMAT_FEATURE_2_MIDPOINT_CHROMA_SAMPLES_BIT_KHR
 
 ```lisp
-(defconstant vk_format_feature_2_midpoint_chroma_samples_bit_khr 20000)
+(defconstant vk_format_feature_2_midpoint_chroma_samples_bit_khr 131072)
 ```
 
 ## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT
 
 ```lisp
-(defconstant vk_format_feature_2_sampled_image_ycbcr_conversion_linear_filter_bit 40000)
+(defconstant vk_format_feature_2_sampled_image_ycbcr_conversion_linear_filter_bit 262144)
 ```
 
 ## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT_KHR
 
 ```lisp
-(defconstant vk_format_feature_2_sampled_image_ycbcr_conversion_linear_filter_bit_khr 40000)
+(defconstant vk_format_feature_2_sampled_image_ycbcr_conversion_linear_filter_bit_khr 262144)
 ```
 
 ## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT
 
 ```lisp
-(defconstant vk_format_feature_2_sampled_image_ycbcr_conversion_separate_reconstruction_filter_bit 80000)
+(defconstant vk_format_feature_2_sampled_image_ycbcr_conversion_separate_reconstruction_filter_bit 524288)
 ```
 
 ## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT_KHR
 
 ```lisp
-(defconstant vk_format_feature_2_sampled_image_ycbcr_conversion_separate_reconstruction_filter_bit_khr 80000)
+(defconstant vk_format_feature_2_sampled_image_ycbcr_conversion_separate_reconstruction_filter_bit_khr 524288)
 ```
 
 ## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT
 
 ```lisp
-(defconstant vk_format_feature_2_sampled_image_ycbcr_conversion_chroma_reconstruction_explicit_bit 100000)
+(defconstant vk_format_feature_2_sampled_image_ycbcr_conversion_chroma_reconstruction_explicit_bit 1048576)
 ```
 
 ## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT_KHR
 
 ```lisp
-(defconstant vk_format_feature_2_sampled_image_ycbcr_conversion_chroma_reconstruction_explicit_bit_khr 100000)
+(defconstant vk_format_feature_2_sampled_image_ycbcr_conversion_chroma_reconstruction_explicit_bit_khr 1048576)
 ```
 
 ## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT
 
 ```lisp
-(defconstant vk_format_feature_2_sampled_image_ycbcr_conversion_chroma_reconstruction_explicit_forceable_bit 200000)
+(defconstant vk_format_feature_2_sampled_image_ycbcr_conversion_chroma_reconstruction_explicit_forceable_bit 2097152)
 ```
 
 ## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT_KHR
 
 ```lisp
-(defconstant vk_format_feature_2_sampled_image_ycbcr_conversion_chroma_reconstruction_explicit_forceable_bit_khr 200000)
+(defconstant vk_format_feature_2_sampled_image_ycbcr_conversion_chroma_reconstruction_explicit_forceable_bit_khr 2097152)
 ```
 
 ## VK_FORMAT_FEATURE_2_DISJOINT_BIT
 
 ```lisp
-(defconstant vk_format_feature_2_disjoint_bit 400000)
+(defconstant vk_format_feature_2_disjoint_bit 4194304)
 ```
 
 ## VK_FORMAT_FEATURE_2_DISJOINT_BIT_KHR
 
 ```lisp
-(defconstant vk_format_feature_2_disjoint_bit_khr 400000)
+(defconstant vk_format_feature_2_disjoint_bit_khr 4194304)
 ```
 
 ## VK_FORMAT_FEATURE_2_COSITED_CHROMA_SAMPLES_BIT
 
 ```lisp
-(defconstant vk_format_feature_2_cosited_chroma_samples_bit 800000)
+(defconstant vk_format_feature_2_cosited_chroma_samples_bit 8388608)
 ```
 
 ## VK_FORMAT_FEATURE_2_COSITED_CHROMA_SAMPLES_BIT_KHR
 
 ```lisp
-(defconstant vk_format_feature_2_cosited_chroma_samples_bit_khr 800000)
+(defconstant vk_format_feature_2_cosited_chroma_samples_bit_khr 8388608)
 ```
 
 ## VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT
 
 ```lisp
-(defconstant vk_format_feature_2_storage_read_without_format_bit 80000000)
+(defconstant vk_format_feature_2_storage_read_without_format_bit 2147483648)
 ```
 
 ## VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR
 
 ```lisp
-(defconstant vk_format_feature_2_storage_read_without_format_bit_khr 80000000)
+(defconstant vk_format_feature_2_storage_read_without_format_bit_khr 2147483648)
 ```
 
 ## VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT
 
 ```lisp
-(defconstant vk_format_feature_2_storage_write_without_format_bit 100000000)
+(defconstant vk_format_feature_2_storage_write_without_format_bit 4294967296)
 ```
 
 ## VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR
 
 ```lisp
-(defconstant vk_format_feature_2_storage_write_without_format_bit_khr 100000000)
+(defconstant vk_format_feature_2_storage_write_without_format_bit_khr 4294967296)
 ```
 
 ## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_DEPTH_COMPARISON_BIT
 
 ```lisp
-(defconstant vk_format_feature_2_sampled_image_depth_comparison_bit 200000000)
+(defconstant vk_format_feature_2_sampled_image_depth_comparison_bit 8589934592)
 ```
 
 ## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_DEPTH_COMPARISON_BIT_KHR
 
 ```lisp
-(defconstant vk_format_feature_2_sampled_image_depth_comparison_bit_khr 200000000)
+(defconstant vk_format_feature_2_sampled_image_depth_comparison_bit_khr 8589934592)
 ```
 
 ## VK_FORMAT_FEATURE_2_VIDEO_DECODE_OUTPUT_BIT_KHR
 
 ```lisp
-(defconstant vk_format_feature_2_video_decode_output_bit_khr 2000000)
+(defconstant vk_format_feature_2_video_decode_output_bit_khr 33554432)
 ```
 
 ## VK_FORMAT_FEATURE_2_VIDEO_DECODE_DPB_BIT_KHR
 
 ```lisp
-(defconstant vk_format_feature_2_video_decode_dpb_bit_khr 4000000)
+(defconstant vk_format_feature_2_video_decode_dpb_bit_khr 67108864)
 ```
 
 ## VK_FORMAT_FEATURE_2_ACCELERATION_STRUCTURE_VERTEX_BUFFER_BIT_KHR
 
 ```lisp
-(defconstant vk_format_feature_2_acceleration_structure_vertex_buffer_bit_khr 20000000)
+(defconstant vk_format_feature_2_acceleration_structure_vertex_buffer_bit_khr 536870912)
 ```
 
 ## VK_FORMAT_FEATURE_2_FRAGMENT_DENSITY_MAP_BIT_EXT
 
 ```lisp
-(defconstant vk_format_feature_2_fragment_density_map_bit_ext 1000000)
+(defconstant vk_format_feature_2_fragment_density_map_bit_ext 16777216)
 ```
 
 ## VK_FORMAT_FEATURE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR
 
 ```lisp
-(defconstant vk_format_feature_2_fragment_shading_rate_attachment_bit_khr 40000000)
+(defconstant vk_format_feature_2_fragment_shading_rate_attachment_bit_khr 1073741824)
 ```
 
 ## VK_FORMAT_FEATURE_2_VIDEO_ENCODE_INPUT_BIT_KHR
 
 ```lisp
-(defconstant vk_format_feature_2_video_encode_input_bit_khr 8000000)
+(defconstant vk_format_feature_2_video_encode_input_bit_khr 134217728)
 ```
 
 ## VK_FORMAT_FEATURE_2_VIDEO_ENCODE_DPB_BIT_KHR
 
 ```lisp
-(defconstant vk_format_feature_2_video_encode_dpb_bit_khr 10000000)
+(defconstant vk_format_feature_2_video_encode_dpb_bit_khr 268435456)
 ```
 
 ## VK_FORMAT_FEATURE_2_LINEAR_COLOR_ATTACHMENT_BIT_NV
 
 ```lisp
-(defconstant vk_format_feature_2_linear_color_attachment_bit_nv 4000000000)
+(defconstant vk_format_feature_2_linear_color_attachment_bit_nv 274877906944)
 ```
 
 ## VK_KHR_surface

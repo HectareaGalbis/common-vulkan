@@ -49,9 +49,9 @@ Wrap the body expressions with `create-instance` and `destroy-instance`. The new
 
 ## vkGetPhysicalDeviceFeatures
 
-**get-physical-device-features**
+**create-get-physical-device-features**
 ```lisp
-(get-physical-device-features physicalDevice) => pfeatures
+(create-get-physical-device-features physicalDevice) => pfeatures
 ```
 
 * *Parameters*:
@@ -115,9 +115,9 @@ Wrap the body expressions with `create-get-physical-device-features` and `destro
 
 ## vkGetPhysicalDeviceProperties
 
-**get-physical-device-properties**
+**create-get-physical-device-properties**
 ```lisp
-(get-physical-device-properties physicalDevice) => pProperties
+(create-get-physical-device-properties physicalDevice) => pProperties
 ```
 
 * *Parameters*:
@@ -143,9 +143,9 @@ Wrap the body expressions with `create-get-physical-device-properties` and `dest
 
 ## vkGetPhysicalDeviceQueueFamilyProperties
 
-**get-physical-device-queue-family-properties**
+**create-get-physical-device-queue-family-properties**
 ```lisp
-(get-physical-device-queue-family-properties physicalDevice) => pQueueFamilyProperties
+(create-get-physical-device-queue-family-properties physicalDevice) => pQueueFamilyProperties
 ```
 
 * *Parameters*:
@@ -189,17 +189,15 @@ Wrap the body expressions with `create-get-physical-device-queue-family-properti
 
 **get-instance-proc-addr**
 ```lisp
-(get-instance-proc-addr instance pName) => return-value
+(get-instance-proc-addr instance pName) => result
 ```
 
 * *Parameters*:
   * *instance*: `VkInstance`
-  * *pName*: `char`
+  * *pName*: `string`
 
 * *Return:*
-  * *return-value*: `PFN_vkVoidFunction`
-
-* **Note**: This function needs to be revised. Please, post an issue to request it.
+  * *result*: `function`
 
 ## vkGetDeviceProcAddr
 
@@ -281,9 +279,9 @@ Wrap the body expressions with `create-enumerate-instance-extension-properties` 
 
 ## vkEnumerateDeviceExtensionProperties
 
-**enumerate-device-extension-properties**
+**create-enumerate-device-extension-properties**
 ```lisp
-(enumerate-device-extension-properties physicalDevice pLayerName) => (values pProperties result)
+(create-enumerate-device-extension-properties physicalDevice pLayerName) => (values pProperties result)
 ```
 
 * *Parameters*:
@@ -3862,9 +3860,9 @@ Wrap the body expressions with `create-render-pass` and `destroy-render-pass`. T
 
 ## vkGetPhysicalDeviceSurfaceCapabilitiesKHR
 
-**get-physical-device-surface-capabilities-khr**
+**create-get-physical-device-surface-capabilities-khr**
 ```lisp
-(get-physical-device-surface-capabilities-khr physicalDevice surface) => (values pSurfaceCapabilities result)
+(create-get-physical-device-surface-capabilities-khr physicalDevice surface) => (values pSurfaceCapabilities result)
 ```
 
 * *Parameters*:
@@ -3875,26 +3873,26 @@ Wrap the body expressions with `create-render-pass` and `destroy-render-pass`. T
   * *pSurfaceCapabilities*: `VkSurfaceCapabilitiesKHR`
   * *result*: `VkResult`
 
-**destroy-get-physical-device-surface-capabilities**
+**destroy-get-physical-device-surface-capabilities-khr**
 ```lisp
-(destroy-get-physical-device-surface-capabilities pSurfaceCapabilities)
+(destroy-get-physical-device-surface-capabilities-khr pSurfaceCapabilities)
 ```
 
 * *Parameters*:
   * *pSurfaceCapabilities*: `VkSurfaceCapabilitiesKHR`
 
-**with-get-physical-device-surface-capabilities**
+**with-get-physical-device-surface-capabilities-khr**
 ```lisp
-(with-get-physical-device-surface-capabilities var (&rest args)
+(with-get-physical-device-surface-capabilities-khr var (&rest args)
   &body body)
 ```
 Wrap the body expressions with `create-get-physical-device-surface-capabilities` and `destroy-get-physical-device-surface-capabilities`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
 ## vkGetPhysicalDeviceSurfaceFormatsKHR
 
-**get-physical-device-surface-formats-khr**
+**create-get-physical-device-surface-formats-khr**
 ```lisp
-(get-physical-device-surface-formats-khr physicalDevice surface) => (values pSurfaceFormats result)
+(create-get-physical-device-surface-formats-khr physicalDevice surface) => (values pSurfaceFormats result)
 ```
 
 * *Parameters*:
@@ -3905,17 +3903,17 @@ Wrap the body expressions with `create-get-physical-device-surface-capabilities`
   * *pSurfaceFormats*: `VkSurfaceFormatKHR`
   * *result*: `VkResult`
 
-**destroy-get-physical-device-surface-formats**
+**destroy-get-physical-device-surface-formats-khr**
 ```lisp
-(destroy-get-physical-device-surface-formats pSurfaceFormats)
+(destroy-get-physical-device-surface-formats-khr pSurfaceFormats)
 ```
 
 * *Parameters*:
   * *pSurfaceFormats*: `(list VkSurfaceFormatKHR)`
 
-**with-get-physical-device-surface-formats**
+**with-get-physical-device-surface-formats-khr**
 ```lisp
-(with-get-physical-device-surface-formats var (&rest args)
+(with-get-physical-device-surface-formats-khr var (&rest args)
   &body body)
 ```
 Wrap the body expressions with `create-get-physical-device-surface-formats` and `destroy-get-physical-device-surface-formats`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
