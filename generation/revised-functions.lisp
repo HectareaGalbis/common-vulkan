@@ -187,7 +187,7 @@
 
   (more-cffi:def-foreign-function doc-file ("vkEnumerateDeviceExtensionProperties" create-enumerate-device-extension-properties funcall-enumerate-device-extension-properties) (physicaldevice playername)
     (declare-types ("VkPhysicalDevice" "physicalDevice") (string "pLayerName")
-		   :return ("VkExtensionProperties" "pProperties") ("VkResult" result))
+		   :return ((list "VkExtensionProperties") "pProperties") ("VkResult" result))
     (let ((pLayerName-c (or pLayerName (cffi:null-pointer))))
       (cffi:with-foreign-object (pPropertyCount :uint32)
 	(vkEnumerateDeviceExtensionProperties physicalDevice pLayerName-c pPropertyCount (cffi:null-pointer))
