@@ -1375,6 +1375,36 @@
 			:get (nil (get-pointer basepipelinehandle))
 			:set ((basepipelinehandle-arg)
 			      (set-pointer basepipelinehandle basepipelinehandle-arg)))
-    (basepipelineindex :name "basePipelineIndex" :type int32)))
+    (basepipelineindex :name "basePipelineIndex" :type int32))
+
+
+  (more-cffi:def-foreign-struct doc-file "VkFramebufferCreateInfo" (framebuffer-create-info)
+      (:default-create :default-get :default-set)
+    (stype :name "sType" :type "VkStructureType")
+    (pnext :name "pNext" :type void :init-form nil
+	   :create ((pnext-arg)
+		    (create-pointer pnext pnext-arg))
+	   :get (nil (get-pointer pnext))
+	   :set ((pnext-arg)
+		 (set-pointer pnext pnext-arg)))
+    (flags :name flags :type "VkFramebufferCreateFlags")
+    (renderpass :name "renderPass" :type "VkRenderPass"
+		:create ((renderpass-arg)
+			 (create-pointer renderpass renderpass-arg))
+		:get (nil (get-pointer renderpass))
+		:set ((renderpass-arg)
+		      (set-pointer renderpass renderpass-arg)))
+    (attachmentcount :name "attachmentCount" :type uint32)
+    (pattachments :name "pAttachments" :type (list "VkImageView") :init-form nil
+		  :create ((pattachments-arg)
+			   (create-array vkimageview pattachments pattachments-arg :dynamic t :pointers nil))
+		  :destroy (destroy-array pattachments)
+		  :get ((&optional pattachments-index)
+			(get-array vkimageview pattachments pattachments-index attachmentcount :pointers nil))
+		  :set ((pattachments-arg &optional pattachments-index)
+			(set-array vkimageview pattachments pattachments-arg pattachments-index :dynamic t :pointers nil)))
+    (width :name width :type uint32)
+    (height :name height :type uint32)
+    (layers :name layers :type uint32)))
 
 

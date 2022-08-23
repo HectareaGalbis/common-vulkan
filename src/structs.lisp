@@ -2401,8 +2401,8 @@
      (nil (get-pointer renderpass)) :set
      ((renderpass-arg) (set-pointer renderpass renderpass-arg)))
     (attachmentcount :name "attachmentCount" :type uint32)
-    (pattachments :name "pAttachments" :type "VkImageView" :init-form nil
-     :create
+    (pattachments :name "pAttachments" :type (list "VkImageView") :init-form
+     nil :create
      ((pattachments-arg)
       (create-array vkimageview pattachments pattachments-arg :dynamic t
        :pointers nil))
@@ -2417,9 +2417,6 @@
     (width :name width :type uint32)
     (height :name height :type uint32)
     (layers :name layers :type uint32))
-
-  (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkSubpassDescription"

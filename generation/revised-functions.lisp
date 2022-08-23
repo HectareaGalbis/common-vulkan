@@ -442,4 +442,27 @@
   (mcffi:defwith doc-file with-graphics-pipelines
     create-graphics-pipelines
     destroy-graphics-pipelines
-    :destructor-arguments (2 0 3)))
+    :destructor-arguments (2 0 3))
+
+
+  (more-cffi:def-foreign-function doc-file ("vkCreateFramebuffer" create-framebuffer funcall-create-framebuffer) (device pcreateinfo pallocator)
+    (declare-types ("VkDevice" device) ("VkFramebufferCreateInfo" "pCreateInfo") ("VkAllocationCallbacks" "pAllocator")
+		   :return ("VkFramebuffer" "pFramebuffer") ("VkResult" result))
+    (let* ((pAllocator-c (or pAllocator (cffi:null-pointer))))
+      (cffi:with-foreign-object (pFramebuffer 'VkFramebuffer)
+	(let ((result (vkcreateframebuffer device pcreateinfo pallocator-c pframebuffer)))
+	  (values (cffi:mem-ref pFramebuffer 'VkFramebuffer) result device pAllocator)))))
+
+
+  (more-cffi:def-foreign-function doc-file ("vkDestroyFramebuffer" destroy-framebuffer funcall-destroy-framebuffer) (device framebuffer pallocator)
+    (declare-types ("VkDevice" device) ("VkFramebuffer" framebuffer) ("VkAllocationCallbacks" "pAllocator"))
+    (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
+      (vkdestroyframebuffer device framebuffer pallocator-c)))
+
+
+  (mcffi:defwith doc-file with-framebuffer
+    create-framebuffer
+    destroy-framebuffer
+    :destructor-arguments (2 0 3))
+
+  (mcffi:doc-note doc-file "The allocator is passed to both the constructor and destructor."))

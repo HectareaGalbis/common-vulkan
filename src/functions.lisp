@@ -273,7 +273,7 @@
        funcall-enumerate-device-extension-properties)
       (physicaldevice playername)
     (declare-types ("VkPhysicalDevice" "physicalDevice") (string "pLayerName")
-     :return ("VkExtensionProperties" "pProperties") ("VkResult" result))
+     :return ((list "VkExtensionProperties") "pProperties") ("VkResult" result))
     (let ((playername-c (or playername (cffi-sys:null-pointer))))
       (cffi:with-foreign-object (ppropertycount :uint32)
         (vkenumeratedeviceextensionproperties physicaldevice playername-c
@@ -1092,25 +1092,32 @@
 
   (more-cffi:def-foreign-function doc-file
       ("vkCreateFramebuffer" create-framebuffer funcall-create-framebuffer)
-      (device pcreateinfo pallocator pframebuffer)
+      (device pcreateinfo pallocator)
     (declare-types ("VkDevice" device)
      ("VkFramebufferCreateInfo" "pCreateInfo")
-     ("VkAllocationCallbacks" "pAllocator") ("VkFramebuffer" "pFramebuffer")
-     :return ("VkResult" return-value))
-    (vkcreateframebuffer device pcreateinfo pallocator pframebuffer))
-
-  (more-cffi:doc-note doc-file
-                      "This function needs to be revised. Please, post an issue to request it.")
+     ("VkAllocationCallbacks" "pAllocator") :return
+     ("VkFramebuffer" "pFramebuffer") ("VkResult" result))
+    (let* ((pallocator-c (or pallocator (cffi-sys:null-pointer))))
+      (cffi:with-foreign-object (pframebuffer 'vkframebuffer)
+        (let ((result
+               (vkcreateframebuffer device pcreateinfo pallocator-c
+                pframebuffer)))
+          (values (cffi:mem-ref pframebuffer 'vkframebuffer) result device
+                  pallocator)))))
 
   (more-cffi:def-foreign-function doc-file
       ("vkDestroyFramebuffer" destroy-framebuffer funcall-destroy-framebuffer)
       (device framebuffer pallocator)
     (declare-types ("VkDevice" device) ("VkFramebuffer" framebuffer)
-     ("VkAllocationCallbacks" "pAllocator") :return ("void" return-value))
-    (vkdestroyframebuffer device framebuffer pallocator))
+     ("VkAllocationCallbacks" "pAllocator"))
+    (let ((pallocator-c (or pallocator (cffi-sys:null-pointer))))
+      (vkdestroyframebuffer device framebuffer pallocator-c)))
+
+  (more-cffi:defwith doc-file with-framebuffer create-framebuffer
+                     destroy-framebuffer :destructor-arguments (2 0 3))
 
   (more-cffi:doc-note doc-file
-                      "This function needs to be revised. Please, post an issue to request it.")
+                      "The allocator is passed to both the constructor and destructor.")
 
   (more-cffi:def-foreign-function doc-file
       ("vkCreateRenderPass" create-render-pass funcall-create-render-pass)
