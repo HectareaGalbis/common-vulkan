@@ -10,6 +10,7 @@
 
 		;; Common Vulkan
 		(:file "src/initial-parameters")
+		(:file "src/helper-functions")
 		(:file "src/constants")
                 (:file "src/enums")
                 (:file "src/structs")

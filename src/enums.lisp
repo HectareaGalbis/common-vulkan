@@ -1781,12 +1781,12 @@
                              vk_object_type_private_data_slot)
                             ("VK_OBJECT_TYPE_MAX_ENUM" 7))
 
-(more-cffi:def-foreign-enum doc-file "VkVendorId" ("VK_VENDOR_ID_VIV" 10001)
-                            ("VK_VENDOR_ID_VSI" 10002)
-                            ("VK_VENDOR_ID_KAZAN" 10003)
-                            ("VK_VENDOR_ID_CODEPLAY" 10004)
-                            ("VK_VENDOR_ID_MESA" 10005)
-                            ("VK_VENDOR_ID_POCL" 10006)
+(more-cffi:def-foreign-enum doc-file "VkVendorId" ("VK_VENDOR_ID_VIV" 65537)
+                            ("VK_VENDOR_ID_VSI" 65538)
+                            ("VK_VENDOR_ID_KAZAN" 65539)
+                            ("VK_VENDOR_ID_CODEPLAY" 65540)
+                            ("VK_VENDOR_ID_MESA" 65541)
+                            ("VK_VENDOR_ID_POCL" 65542)
                             ("VK_VENDOR_ID_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkSystemAllocationScope"
@@ -2583,41 +2583,42 @@
                             ("VK_ACCESS_INDEX_READ_BIT" 2)
                             ("VK_ACCESS_VERTEX_ATTRIBUTE_READ_BIT" 4)
                             ("VK_ACCESS_UNIFORM_READ_BIT" 8)
-                            ("VK_ACCESS_INPUT_ATTACHMENT_READ_BIT" 10)
-                            ("VK_ACCESS_SHADER_READ_BIT" 20)
-                            ("VK_ACCESS_SHADER_WRITE_BIT" 40)
-                            ("VK_ACCESS_COLOR_ATTACHMENT_READ_BIT" 80)
-                            ("VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT" 100)
-                            ("VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT" 200)
+                            ("VK_ACCESS_INPUT_ATTACHMENT_READ_BIT" 16)
+                            ("VK_ACCESS_SHADER_READ_BIT" 32)
+                            ("VK_ACCESS_SHADER_WRITE_BIT" 64)
+                            ("VK_ACCESS_COLOR_ATTACHMENT_READ_BIT" 128)
+                            ("VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT" 256)
+                            ("VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT" 512)
                             ("VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT"
-                             400)
-                            ("VK_ACCESS_TRANSFER_READ_BIT" 800)
-                            ("VK_ACCESS_TRANSFER_WRITE_BIT" 1000)
-                            ("VK_ACCESS_HOST_READ_BIT" 2000)
-                            ("VK_ACCESS_HOST_WRITE_BIT" 4000)
-                            ("VK_ACCESS_MEMORY_READ_BIT" 8000)
-                            ("VK_ACCESS_MEMORY_WRITE_BIT" 10000)
+                             1024)
+                            ("VK_ACCESS_TRANSFER_READ_BIT" 2048)
+                            ("VK_ACCESS_TRANSFER_WRITE_BIT" 4096)
+                            ("VK_ACCESS_HOST_READ_BIT" 8192)
+                            ("VK_ACCESS_HOST_WRITE_BIT" 16384)
+                            ("VK_ACCESS_MEMORY_READ_BIT" 32768)
+                            ("VK_ACCESS_MEMORY_WRITE_BIT" 65536)
                             ("VK_ACCESS_NONE" 0)
                             ("VK_ACCESS_TRANSFORM_FEEDBACK_WRITE_BIT_EXT"
-                             2000000)
+                             33554432)
                             ("VK_ACCESS_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT"
-                             4000000)
+                             67108864)
                             ("VK_ACCESS_TRANSFORM_FEEDBACK_COUNTER_WRITE_BIT_EXT"
-                             8000000)
+                             134217728)
                             ("VK_ACCESS_CONDITIONAL_RENDERING_READ_BIT_EXT"
-                             100000)
+                             1048576)
                             ("VK_ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT"
-                             80000)
+                             524288)
                             ("VK_ACCESS_ACCELERATION_STRUCTURE_READ_BIT_KHR"
-                             200000)
+                             2097152)
                             ("VK_ACCESS_ACCELERATION_STRUCTURE_WRITE_BIT_KHR"
-                             400000)
+                             4194304)
                             ("VK_ACCESS_FRAGMENT_DENSITY_MAP_READ_BIT_EXT"
-                             1000000)
+                             16777216)
                             ("VK_ACCESS_FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT_KHR"
-                             800000)
-                            ("VK_ACCESS_COMMAND_PREPROCESS_READ_BIT_NV" 20000)
-                            ("VK_ACCESS_COMMAND_PREPROCESS_WRITE_BIT_NV" 40000)
+                             8388608)
+                            ("VK_ACCESS_COMMAND_PREPROCESS_READ_BIT_NV" 131072)
+                            ("VK_ACCESS_COMMAND_PREPROCESS_WRITE_BIT_NV"
+                             262144)
                             ("VK_ACCESS_SHADING_RATE_IMAGE_READ_BIT_NV"
                              vk_access_fragment_shading_rate_attachment_read_bit_khr)
                             ("VK_ACCESS_ACCELERATION_STRUCTURE_READ_BIT_NV"
@@ -2632,14 +2633,14 @@
                             ("VK_IMAGE_ASPECT_DEPTH_BIT" 2)
                             ("VK_IMAGE_ASPECT_STENCIL_BIT" 4)
                             ("VK_IMAGE_ASPECT_METADATA_BIT" 8)
-                            ("VK_IMAGE_ASPECT_PLANE_0_BIT" 10)
-                            ("VK_IMAGE_ASPECT_PLANE_1_BIT" 20)
-                            ("VK_IMAGE_ASPECT_PLANE_2_BIT" 40)
+                            ("VK_IMAGE_ASPECT_PLANE_0_BIT" 16)
+                            ("VK_IMAGE_ASPECT_PLANE_1_BIT" 32)
+                            ("VK_IMAGE_ASPECT_PLANE_2_BIT" 64)
                             ("VK_IMAGE_ASPECT_NONE" 0)
-                            ("VK_IMAGE_ASPECT_MEMORY_PLANE_0_BIT_EXT" 80)
-                            ("VK_IMAGE_ASPECT_MEMORY_PLANE_1_BIT_EXT" 100)
-                            ("VK_IMAGE_ASPECT_MEMORY_PLANE_2_BIT_EXT" 200)
-                            ("VK_IMAGE_ASPECT_MEMORY_PLANE_3_BIT_EXT" 400)
+                            ("VK_IMAGE_ASPECT_MEMORY_PLANE_0_BIT_EXT" 128)
+                            ("VK_IMAGE_ASPECT_MEMORY_PLANE_1_BIT_EXT" 256)
+                            ("VK_IMAGE_ASPECT_MEMORY_PLANE_2_BIT_EXT" 512)
+                            ("VK_IMAGE_ASPECT_MEMORY_PLANE_3_BIT_EXT" 1024)
                             ("VK_IMAGE_ASPECT_PLANE_0_BIT_KHR"
                              vk_image_aspect_plane_0_bit)
                             ("VK_IMAGE_ASPECT_PLANE_1_BIT_KHR"
@@ -2654,52 +2655,52 @@
                             ("VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT" 2)
                             ("VK_FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT" 4)
                             ("VK_FORMAT_FEATURE_UNIFORM_TEXEL_BUFFER_BIT" 8)
-                            ("VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_BIT" 10)
+                            ("VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_BIT" 16)
                             ("VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_ATOMIC_BIT"
-                             20)
-                            ("VK_FORMAT_FEATURE_VERTEX_BUFFER_BIT" 40)
-                            ("VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT" 80)
+                             32)
+                            ("VK_FORMAT_FEATURE_VERTEX_BUFFER_BIT" 64)
+                            ("VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT" 128)
                             ("VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT"
-                             100)
+                             256)
                             ("VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT"
-                             200)
-                            ("VK_FORMAT_FEATURE_BLIT_SRC_BIT" 400)
-                            ("VK_FORMAT_FEATURE_BLIT_DST_BIT" 800)
+                             512)
+                            ("VK_FORMAT_FEATURE_BLIT_SRC_BIT" 1024)
+                            ("VK_FORMAT_FEATURE_BLIT_DST_BIT" 2048)
                             ("VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT"
-                             1000)
-                            ("VK_FORMAT_FEATURE_TRANSFER_SRC_BIT" 4000)
-                            ("VK_FORMAT_FEATURE_TRANSFER_DST_BIT" 8000)
+                             4096)
+                            ("VK_FORMAT_FEATURE_TRANSFER_SRC_BIT" 16384)
+                            ("VK_FORMAT_FEATURE_TRANSFER_DST_BIT" 32768)
                             ("VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT"
-                             20000)
+                             131072)
                             ("VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT"
-                             40000)
+                             262144)
                             ("VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT"
-                             80000)
+                             524288)
                             ("VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT"
-                             100000)
+                             1048576)
                             ("VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT"
-                             200000)
-                            ("VK_FORMAT_FEATURE_DISJOINT_BIT" 400000)
+                             2097152)
+                            ("VK_FORMAT_FEATURE_DISJOINT_BIT" 4194304)
                             ("VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT"
-                             800000)
+                             8388608)
                             ("VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT"
-                             10000)
+                             65536)
                             ("VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG"
-                             2000)
+                             8192)
                             ("VK_FORMAT_FEATURE_VIDEO_DECODE_OUTPUT_BIT_KHR"
-                             2000000)
+                             33554432)
                             ("VK_FORMAT_FEATURE_VIDEO_DECODE_DPB_BIT_KHR"
-                             4000000)
+                             67108864)
                             ("VK_FORMAT_FEATURE_ACCELERATION_STRUCTURE_VERTEX_BUFFER_BIT_KHR"
-                             20000000)
+                             536870912)
                             ("VK_FORMAT_FEATURE_FRAGMENT_DENSITY_MAP_BIT_EXT"
-                             1000000)
+                             16777216)
                             ("VK_FORMAT_FEATURE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR"
-                             40000000)
+                             1073741824)
                             ("VK_FORMAT_FEATURE_VIDEO_ENCODE_INPUT_BIT_KHR"
-                             8000000)
+                             134217728)
                             ("VK_FORMAT_FEATURE_VIDEO_ENCODE_DPB_BIT_KHR"
-                             10000000)
+                             268435456)
                             ("VK_FORMAT_FEATURE_TRANSFER_SRC_BIT_KHR"
                              vk_format_feature_transfer_src_bit)
                             ("VK_FORMAT_FEATURE_TRANSFER_DST_BIT_KHR"
@@ -2729,24 +2730,24 @@
                             ("VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT" 2)
                             ("VK_IMAGE_CREATE_SPARSE_ALIASED_BIT" 4)
                             ("VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT" 8)
-                            ("VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT" 10)
-                            ("VK_IMAGE_CREATE_ALIAS_BIT" 400)
+                            ("VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT" 16)
+                            ("VK_IMAGE_CREATE_ALIAS_BIT" 1024)
                             ("VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT"
-                             40)
-                            ("VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT" 20)
+                             64)
+                            ("VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT" 32)
                             ("VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT"
-                             80)
-                            ("VK_IMAGE_CREATE_EXTENDED_USAGE_BIT" 100)
-                            ("VK_IMAGE_CREATE_PROTECTED_BIT" 800)
-                            ("VK_IMAGE_CREATE_DISJOINT_BIT" 200)
-                            ("VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV" 2000)
+                             128)
+                            ("VK_IMAGE_CREATE_EXTENDED_USAGE_BIT" 256)
+                            ("VK_IMAGE_CREATE_PROTECTED_BIT" 2048)
+                            ("VK_IMAGE_CREATE_DISJOINT_BIT" 512)
+                            ("VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV" 8192)
                             ("VK_IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT"
-                             1000)
-                            ("VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT" 4000)
+                             4096)
+                            ("VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT" 16384)
                             ("VK_IMAGE_CREATE_2D_VIEW_COMPATIBLE_BIT_EXT"
-                             20000)
+                             131072)
                             ("VK_IMAGE_CREATE_FRAGMENT_DENSITY_MAP_OFFSET_BIT_QCOM"
-                             8000)
+                             32768)
                             ("VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR"
                              vk_image_create_split_instance_bind_regions_bit)
                             ("VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT_KHR"
@@ -2766,9 +2767,9 @@
                             ("VK_SAMPLE_COUNT_2_BIT" 2)
                             ("VK_SAMPLE_COUNT_4_BIT" 4)
                             ("VK_SAMPLE_COUNT_8_BIT" 8)
-                            ("VK_SAMPLE_COUNT_16_BIT" 10)
-                            ("VK_SAMPLE_COUNT_32_BIT" 20)
-                            ("VK_SAMPLE_COUNT_64_BIT" 40)
+                            ("VK_SAMPLE_COUNT_16_BIT" 16)
+                            ("VK_SAMPLE_COUNT_32_BIT" 32)
+                            ("VK_SAMPLE_COUNT_64_BIT" 64)
                             ("VK_SAMPLE_COUNT_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkImageUsageFlagBits"
@@ -2776,20 +2777,21 @@
                             ("VK_IMAGE_USAGE_TRANSFER_DST_BIT" 2)
                             ("VK_IMAGE_USAGE_SAMPLED_BIT" 4)
                             ("VK_IMAGE_USAGE_STORAGE_BIT" 8)
-                            ("VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT" 10)
-                            ("VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT" 20)
-                            ("VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT" 40)
-                            ("VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT" 80)
-                            ("VK_IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR" 400)
-                            ("VK_IMAGE_USAGE_VIDEO_DECODE_SRC_BIT_KHR" 800)
-                            ("VK_IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR" 1000)
-                            ("VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT" 200)
+                            ("VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT" 16)
+                            ("VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT" 32)
+                            ("VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT" 64)
+                            ("VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT" 128)
+                            ("VK_IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR" 1024)
+                            ("VK_IMAGE_USAGE_VIDEO_DECODE_SRC_BIT_KHR" 2048)
+                            ("VK_IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR" 4096)
+                            ("VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT" 512)
                             ("VK_IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR"
-                             100)
-                            ("VK_IMAGE_USAGE_VIDEO_ENCODE_DST_BIT_KHR" 2000)
-                            ("VK_IMAGE_USAGE_VIDEO_ENCODE_SRC_BIT_KHR" 4000)
-                            ("VK_IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR" 8000)
-                            ("VK_IMAGE_USAGE_INVOCATION_MASK_BIT_HUAWEI" 40000)
+                             256)
+                            ("VK_IMAGE_USAGE_VIDEO_ENCODE_DST_BIT_KHR" 8192)
+                            ("VK_IMAGE_USAGE_VIDEO_ENCODE_SRC_BIT_KHR" 16384)
+                            ("VK_IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR" 32768)
+                            ("VK_IMAGE_USAGE_INVOCATION_MASK_BIT_HUAWEI"
+                             262144)
                             ("VK_IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV"
                              vk_image_usage_fragment_shading_rate_attachment_bit_khr)
                             ("VK_IMAGE_USAGE_FLAG_BITS_MAX_ENUM" 7))
@@ -2811,11 +2813,11 @@
                             ("VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT" 2)
                             ("VK_MEMORY_PROPERTY_HOST_COHERENT_BIT" 4)
                             ("VK_MEMORY_PROPERTY_HOST_CACHED_BIT" 8)
-                            ("VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT" 10)
-                            ("VK_MEMORY_PROPERTY_PROTECTED_BIT" 20)
-                            ("VK_MEMORY_PROPERTY_DEVICE_COHERENT_BIT_AMD" 40)
-                            ("VK_MEMORY_PROPERTY_DEVICE_UNCACHED_BIT_AMD" 80)
-                            ("VK_MEMORY_PROPERTY_RDMA_CAPABLE_BIT_NV" 100)
+                            ("VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT" 16)
+                            ("VK_MEMORY_PROPERTY_PROTECTED_BIT" 32)
+                            ("VK_MEMORY_PROPERTY_DEVICE_COHERENT_BIT_AMD" 64)
+                            ("VK_MEMORY_PROPERTY_DEVICE_UNCACHED_BIT_AMD" 128)
+                            ("VK_MEMORY_PROPERTY_RDMA_CAPABLE_BIT_NV" 256)
                             ("VK_MEMORY_PROPERTY_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkQueueFlagBits"
@@ -2823,9 +2825,9 @@
                             ("VK_QUEUE_COMPUTE_BIT" 2)
                             ("VK_QUEUE_TRANSFER_BIT" 4)
                             ("VK_QUEUE_SPARSE_BINDING_BIT" 8)
-                            ("VK_QUEUE_PROTECTED_BIT" 10)
-                            ("VK_QUEUE_VIDEO_DECODE_BIT_KHR" 20)
-                            ("VK_QUEUE_VIDEO_ENCODE_BIT_KHR" 40)
+                            ("VK_QUEUE_PROTECTED_BIT" 16)
+                            ("VK_QUEUE_VIDEO_DECODE_BIT_KHR" 32)
+                            ("VK_QUEUE_VIDEO_ENCODE_BIT_KHR" 64)
                             ("VK_QUEUE_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkDeviceQueueCreateFlagBits"
@@ -2838,38 +2840,38 @@
                             ("VK_PIPELINE_STAGE_VERTEX_INPUT_BIT" 4)
                             ("VK_PIPELINE_STAGE_VERTEX_SHADER_BIT" 8)
                             ("VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT"
-                             10)
+                             16)
                             ("VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT"
-                             20)
-                            ("VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT" 40)
-                            ("VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT" 80)
-                            ("VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT" 100)
-                            ("VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT" 200)
+                             32)
+                            ("VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT" 64)
+                            ("VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT" 128)
+                            ("VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT" 256)
+                            ("VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT" 512)
                             ("VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT"
-                             400)
-                            ("VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT" 800)
-                            ("VK_PIPELINE_STAGE_TRANSFER_BIT" 1000)
-                            ("VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT" 2000)
-                            ("VK_PIPELINE_STAGE_HOST_BIT" 4000)
-                            ("VK_PIPELINE_STAGE_ALL_GRAPHICS_BIT" 8000)
-                            ("VK_PIPELINE_STAGE_ALL_COMMANDS_BIT" 10000)
+                             1024)
+                            ("VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT" 2048)
+                            ("VK_PIPELINE_STAGE_TRANSFER_BIT" 4096)
+                            ("VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT" 8192)
+                            ("VK_PIPELINE_STAGE_HOST_BIT" 16384)
+                            ("VK_PIPELINE_STAGE_ALL_GRAPHICS_BIT" 32768)
+                            ("VK_PIPELINE_STAGE_ALL_COMMANDS_BIT" 65536)
                             ("VK_PIPELINE_STAGE_NONE" 0)
                             ("VK_PIPELINE_STAGE_TRANSFORM_FEEDBACK_BIT_EXT"
-                             1000000)
+                             16777216)
                             ("VK_PIPELINE_STAGE_CONDITIONAL_RENDERING_BIT_EXT"
-                             40000)
+                             262144)
                             ("VK_PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR"
-                             2000000)
+                             33554432)
                             ("VK_PIPELINE_STAGE_RAY_TRACING_SHADER_BIT_KHR"
-                             200000)
-                            ("VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV" 80000)
-                            ("VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV" 100000)
+                             2097152)
+                            ("VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV" 524288)
+                            ("VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV" 1048576)
                             ("VK_PIPELINE_STAGE_FRAGMENT_DENSITY_PROCESS_BIT_EXT"
-                             800000)
+                             8388608)
                             ("VK_PIPELINE_STAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR"
-                             400000)
+                             4194304)
                             ("VK_PIPELINE_STAGE_COMMAND_PREPROCESS_BIT_NV"
-                             20000)
+                             131072)
                             ("VK_PIPELINE_STAGE_SHADING_RATE_IMAGE_BIT_NV"
                              vk_pipeline_stage_fragment_shading_rate_attachment_bit_khr)
                             ("VK_PIPELINE_STAGE_RAY_TRACING_SHADER_BIT_NV"
@@ -2911,19 +2913,19 @@
                             ("VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_INVOCATIONS_BIT"
                              8)
                             ("VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_PRIMITIVES_BIT"
-                             10)
+                             16)
                             ("VK_QUERY_PIPELINE_STATISTIC_CLIPPING_INVOCATIONS_BIT"
-                             20)
+                             32)
                             ("VK_QUERY_PIPELINE_STATISTIC_CLIPPING_PRIMITIVES_BIT"
-                             40)
+                             64)
                             ("VK_QUERY_PIPELINE_STATISTIC_FRAGMENT_SHADER_INVOCATIONS_BIT"
-                             80)
+                             128)
                             ("VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_CONTROL_SHADER_PATCHES_BIT"
-                             100)
+                             256)
                             ("VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT"
-                             200)
+                             512)
                             ("VK_QUERY_PIPELINE_STATISTIC_COMPUTE_SHADER_INVOCATIONS_BIT"
-                             400)
+                             1024)
                             ("VK_QUERY_PIPELINE_STATISTIC_FLAG_BITS_MAX_ENUM"
                              7))
 
@@ -2932,7 +2934,7 @@
                             ("VK_QUERY_RESULT_WAIT_BIT" 2)
                             ("VK_QUERY_RESULT_WITH_AVAILABILITY_BIT" 4)
                             ("VK_QUERY_RESULT_PARTIAL_BIT" 8)
-                            ("VK_QUERY_RESULT_WITH_STATUS_BIT_KHR" 10)
+                            ("VK_QUERY_RESULT_WITH_STATUS_BIT_KHR" 16)
                             ("VK_QUERY_RESULT_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkBufferCreateFlagBits"
@@ -2941,7 +2943,7 @@
                             ("VK_BUFFER_CREATE_SPARSE_ALIASED_BIT" 4)
                             ("VK_BUFFER_CREATE_PROTECTED_BIT" 8)
                             ("VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT"
-                             10)
+                             16)
                             ("VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT"
                              vk_buffer_create_device_address_capture_replay_bit)
                             ("VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR"
@@ -2953,28 +2955,29 @@
                             ("VK_BUFFER_USAGE_TRANSFER_DST_BIT" 2)
                             ("VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT" 4)
                             ("VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT" 8)
-                            ("VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT" 10)
-                            ("VK_BUFFER_USAGE_STORAGE_BUFFER_BIT" 20)
-                            ("VK_BUFFER_USAGE_INDEX_BUFFER_BIT" 40)
-                            ("VK_BUFFER_USAGE_VERTEX_BUFFER_BIT" 80)
-                            ("VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT" 100)
-                            ("VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT" 20000)
-                            ("VK_BUFFER_USAGE_VIDEO_DECODE_SRC_BIT_KHR" 2000)
-                            ("VK_BUFFER_USAGE_VIDEO_DECODE_DST_BIT_KHR" 4000)
+                            ("VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT" 16)
+                            ("VK_BUFFER_USAGE_STORAGE_BUFFER_BIT" 32)
+                            ("VK_BUFFER_USAGE_INDEX_BUFFER_BIT" 64)
+                            ("VK_BUFFER_USAGE_VERTEX_BUFFER_BIT" 128)
+                            ("VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT" 256)
+                            ("VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT"
+                             131072)
+                            ("VK_BUFFER_USAGE_VIDEO_DECODE_SRC_BIT_KHR" 8192)
+                            ("VK_BUFFER_USAGE_VIDEO_DECODE_DST_BIT_KHR" 16384)
                             ("VK_BUFFER_USAGE_TRANSFORM_FEEDBACK_BUFFER_BIT_EXT"
-                             800)
+                             2048)
                             ("VK_BUFFER_USAGE_TRANSFORM_FEEDBACK_COUNTER_BUFFER_BIT_EXT"
-                             1000)
+                             4096)
                             ("VK_BUFFER_USAGE_CONDITIONAL_RENDERING_BIT_EXT"
-                             200)
+                             512)
                             ("VK_BUFFER_USAGE_ACCELERATION_STRUCTURE_BUILD_INPUT_READ_ONLY_BIT_KHR"
-                             80000)
+                             524288)
                             ("VK_BUFFER_USAGE_ACCELERATION_STRUCTURE_STORAGE_BIT_KHR"
-                             100000)
+                             1048576)
                             ("VK_BUFFER_USAGE_SHADER_BINDING_TABLE_BIT_KHR"
-                             400)
-                            ("VK_BUFFER_USAGE_VIDEO_ENCODE_DST_BIT_KHR" 8000)
-                            ("VK_BUFFER_USAGE_VIDEO_ENCODE_SRC_BIT_KHR" 10000)
+                             1024)
+                            ("VK_BUFFER_USAGE_VIDEO_ENCODE_DST_BIT_KHR" 32768)
+                            ("VK_BUFFER_USAGE_VIDEO_ENCODE_SRC_BIT_KHR" 65536)
                             ("VK_BUFFER_USAGE_RAY_TRACING_BIT_NV"
                              vk_buffer_usage_shader_binding_table_bit_khr)
                             ("VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_EXT"
@@ -3010,43 +3013,43 @@
                             ("VK_PIPELINE_CREATE_DERIVATIVE_BIT" 4)
                             ("VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT"
                              8)
-                            ("VK_PIPELINE_CREATE_DISPATCH_BASE_BIT" 10)
+                            ("VK_PIPELINE_CREATE_DISPATCH_BASE_BIT" 16)
                             ("VK_PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT"
-                             100)
+                             256)
                             ("VK_PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT"
-                             200)
+                             512)
                             ("VK_PIPELINE_CREATE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR"
-                             200000)
+                             2097152)
                             ("VK_PIPELINE_CREATE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT"
-                             400000)
+                             4194304)
                             ("VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_ANY_HIT_SHADERS_BIT_KHR"
-                             4000)
+                             16384)
                             ("VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_CLOSEST_HIT_SHADERS_BIT_KHR"
-                             8000)
+                             32768)
                             ("VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_MISS_SHADERS_BIT_KHR"
-                             10000)
+                             65536)
                             ("VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_INTERSECTION_SHADERS_BIT_KHR"
-                             20000)
+                             131072)
                             ("VK_PIPELINE_CREATE_RAY_TRACING_SKIP_TRIANGLES_BIT_KHR"
-                             1000)
+                             4096)
                             ("VK_PIPELINE_CREATE_RAY_TRACING_SKIP_AABBS_BIT_KHR"
-                             2000)
+                             8192)
                             ("VK_PIPELINE_CREATE_RAY_TRACING_SHADER_GROUP_HANDLE_CAPTURE_REPLAY_BIT_KHR"
-                             80000)
-                            ("VK_PIPELINE_CREATE_DEFER_COMPILE_BIT_NV" 20)
+                             524288)
+                            ("VK_PIPELINE_CREATE_DEFER_COMPILE_BIT_NV" 32)
                             ("VK_PIPELINE_CREATE_CAPTURE_STATISTICS_BIT_KHR"
-                             40)
+                             64)
                             ("VK_PIPELINE_CREATE_CAPTURE_INTERNAL_REPRESENTATIONS_BIT_KHR"
-                             80)
+                             128)
                             ("VK_PIPELINE_CREATE_INDIRECT_BINDABLE_BIT_NV"
-                             40000)
-                            ("VK_PIPELINE_CREATE_LIBRARY_BIT_KHR" 800)
+                             262144)
+                            ("VK_PIPELINE_CREATE_LIBRARY_BIT_KHR" 2048)
                             ("VK_PIPELINE_CREATE_RETAIN_LINK_TIME_OPTIMIZATION_INFO_BIT_EXT"
-                             800000)
+                             8388608)
                             ("VK_PIPELINE_CREATE_LINK_TIME_OPTIMIZATION_BIT_EXT"
-                             400)
+                             1024)
                             ("VK_PIPELINE_CREATE_RAY_TRACING_ALLOW_MOTION_BIT_NV"
-                             100000)
+                             1048576)
                             ("VK_PIPELINE_CREATE_DISPATCH_BASE"
                              vk_pipeline_create_dispatch_base_bit)
                             ("VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR"
@@ -3080,19 +3083,20 @@
                             ("VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT" 2)
                             ("VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT" 4)
                             ("VK_SHADER_STAGE_GEOMETRY_BIT" 8)
-                            ("VK_SHADER_STAGE_FRAGMENT_BIT" 10)
-                            ("VK_SHADER_STAGE_COMPUTE_BIT" 20)
+                            ("VK_SHADER_STAGE_FRAGMENT_BIT" 16)
+                            ("VK_SHADER_STAGE_COMPUTE_BIT" 32)
                             ("VK_SHADER_STAGE_ALL_GRAPHICS" 1)
                             ("VK_SHADER_STAGE_ALL" 7)
-                            ("VK_SHADER_STAGE_RAYGEN_BIT_KHR" 100)
-                            ("VK_SHADER_STAGE_ANY_HIT_BIT_KHR" 200)
-                            ("VK_SHADER_STAGE_CLOSEST_HIT_BIT_KHR" 400)
-                            ("VK_SHADER_STAGE_MISS_BIT_KHR" 800)
-                            ("VK_SHADER_STAGE_INTERSECTION_BIT_KHR" 1000)
-                            ("VK_SHADER_STAGE_CALLABLE_BIT_KHR" 2000)
-                            ("VK_SHADER_STAGE_TASK_BIT_NV" 40)
-                            ("VK_SHADER_STAGE_MESH_BIT_NV" 80)
-                            ("VK_SHADER_STAGE_SUBPASS_SHADING_BIT_HUAWEI" 4000)
+                            ("VK_SHADER_STAGE_RAYGEN_BIT_KHR" 256)
+                            ("VK_SHADER_STAGE_ANY_HIT_BIT_KHR" 512)
+                            ("VK_SHADER_STAGE_CLOSEST_HIT_BIT_KHR" 1024)
+                            ("VK_SHADER_STAGE_MISS_BIT_KHR" 2048)
+                            ("VK_SHADER_STAGE_INTERSECTION_BIT_KHR" 4096)
+                            ("VK_SHADER_STAGE_CALLABLE_BIT_KHR" 8192)
+                            ("VK_SHADER_STAGE_TASK_BIT_NV" 64)
+                            ("VK_SHADER_STAGE_MESH_BIT_NV" 128)
+                            ("VK_SHADER_STAGE_SUBPASS_SHADING_BIT_HUAWEI"
+                             16384)
                             ("VK_SHADER_STAGE_RAYGEN_BIT_NV"
                              vk_shader_stage_raygen_bit_khr)
                             ("VK_SHADER_STAGE_ANY_HIT_BIT_NV"
@@ -3196,11 +3200,11 @@
                             ("VK_SUBPASS_DESCRIPTION_SHADER_RESOLVE_BIT_QCOM"
                              8)
                             ("VK_SUBPASS_DESCRIPTION_RASTERIZATION_ORDER_ATTACHMENT_COLOR_ACCESS_BIT_ARM"
-                             10)
+                             16)
                             ("VK_SUBPASS_DESCRIPTION_RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_BIT_ARM"
-                             20)
+                             32)
                             ("VK_SUBPASS_DESCRIPTION_RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_ARM"
-                             40)
+                             64)
                             ("VK_SUBPASS_DESCRIPTION_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkCommandPoolCreateFlagBits"
@@ -3308,11 +3312,11 @@
                             ("VK_SUBGROUP_FEATURE_VOTE_BIT" 2)
                             ("VK_SUBGROUP_FEATURE_ARITHMETIC_BIT" 4)
                             ("VK_SUBGROUP_FEATURE_BALLOT_BIT" 8)
-                            ("VK_SUBGROUP_FEATURE_SHUFFLE_BIT" 10)
-                            ("VK_SUBGROUP_FEATURE_SHUFFLE_RELATIVE_BIT" 20)
-                            ("VK_SUBGROUP_FEATURE_CLUSTERED_BIT" 40)
-                            ("VK_SUBGROUP_FEATURE_QUAD_BIT" 80)
-                            ("VK_SUBGROUP_FEATURE_PARTITIONED_BIT_NV" 100)
+                            ("VK_SUBGROUP_FEATURE_SHUFFLE_BIT" 16)
+                            ("VK_SUBGROUP_FEATURE_SHUFFLE_RELATIVE_BIT" 32)
+                            ("VK_SUBGROUP_FEATURE_CLUSTERED_BIT" 64)
+                            ("VK_SUBGROUP_FEATURE_QUAD_BIT" 128)
+                            ("VK_SUBGROUP_FEATURE_PARTITIONED_BIT_NV" 256)
                             ("VK_SUBGROUP_FEATURE_FLAG_BITS_MAX_ENUM" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkPeerMemoryFeatureFlagBits"
@@ -3352,23 +3356,23 @@
                             ("VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT"
                              8)
                             ("VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT"
-                             10)
+                             16)
                             ("VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT"
-                             20)
+                             32)
                             ("VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT"
-                             40)
+                             64)
                             ("VK_EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT"
-                             200)
+                             512)
                             ("VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID"
-                             400)
+                             1024)
                             ("VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT"
-                             80)
+                             128)
                             ("VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT"
-                             100)
+                             256)
                             ("VK_EXTERNAL_MEMORY_HANDLE_TYPE_ZIRCON_VMO_BIT_FUCHSIA"
-                             800)
+                             2048)
                             ("VK_EXTERNAL_MEMORY_HANDLE_TYPE_RDMA_ADDRESS_BIT_NV"
-                             1000)
+                             4096)
                             ("VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHR"
                              vk_external_memory_handle_type_opaque_fd_bit)
                             ("VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR"
@@ -3447,9 +3451,9 @@
                             ("VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT"
                              8)
                             ("VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT"
-                             10)
+                             16)
                             ("VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_ZIRCON_EVENT_BIT_FUCHSIA"
-                             80)
+                             128)
                             ("VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_FENCE_BIT"
                              vk_external_semaphore_handle_type_d3d12_fence_bit)
                             ("VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR"
@@ -3619,9 +3623,9 @@
                             ("VK_TOOL_PURPOSE_PROFILING_BIT" 2)
                             ("VK_TOOL_PURPOSE_TRACING_BIT" 4)
                             ("VK_TOOL_PURPOSE_ADDITIONAL_FEATURES_BIT" 8)
-                            ("VK_TOOL_PURPOSE_MODIFYING_FEATURES_BIT" 10)
-                            ("VK_TOOL_PURPOSE_DEBUG_REPORTING_BIT_EXT" 20)
-                            ("VK_TOOL_PURPOSE_DEBUG_MARKERS_BIT_EXT" 40)
+                            ("VK_TOOL_PURPOSE_MODIFYING_FEATURES_BIT" 16)
+                            ("VK_TOOL_PURPOSE_DEBUG_REPORTING_BIT_EXT" 32)
+                            ("VK_TOOL_PURPOSE_DEBUG_MARKERS_BIT_EXT" 64)
                             ("VK_TOOL_PURPOSE_VALIDATION_BIT_EXT"
                              vk_tool_purpose_validation_bit)
                             ("VK_TOOL_PURPOSE_PROFILING_BIT_EXT"
@@ -3697,14 +3701,14 @@
                             ("VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR" 4)
                             ("VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR" 8)
                             ("VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_BIT_KHR"
-                             10)
+                             16)
                             ("VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR"
-                             20)
+                             32)
                             ("VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR"
-                             40)
+                             64)
                             ("VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR"
-                             80)
-                            ("VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR" 100)
+                             128)
+                            ("VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR" 256)
                             ("VK_SURFACE_TRANSFORM_FLAG_BITS_MAX_ENUM_KHR" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkCompositeAlphaFlagBitsKHR"
@@ -3903,7 +3907,7 @@
                             ("VK_DEBUG_REPORT_WARNING_BIT_EXT" 2)
                             ("VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT" 4)
                             ("VK_DEBUG_REPORT_ERROR_BIT_EXT" 8)
-                            ("VK_DEBUG_REPORT_DEBUG_BIT_EXT" 10)
+                            ("VK_DEBUG_REPORT_DEBUG_BIT_EXT" 16)
                             ("VK_DEBUG_REPORT_FLAG_BITS_MAX_ENUM_EXT" 7))
 
 (more-cffi:def-foreign-enum doc-file "VkRasterizationOrderAMD"
@@ -3996,11 +4000,11 @@
 (more-cffi:def-foreign-enum doc-file "VkDebugUtilsMessageSeverityFlagBitsEXT"
                             ("VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT"
                              1)
-                            ("VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT" 10)
+                            ("VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT" 16)
                             ("VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT"
-                             100)
+                             256)
                             ("VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT"
-                             1000)
+                             4096)
                             ("VK_DEBUG_UTILS_MESSAGE_SEVERITY_FLAG_BITS_MAX_ENUM_EXT"
                              7))
 
@@ -4165,9 +4169,9 @@
                             ("VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_KHR"
                              8)
                             ("VK_BUILD_ACCELERATION_STRUCTURE_LOW_MEMORY_BIT_KHR"
-                             10)
+                             16)
                             ("VK_BUILD_ACCELERATION_STRUCTURE_MOTION_BIT_NV"
-                             20)
+                             32)
                             ("VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_NV"
                              vk_build_acceleration_structure_allow_update_bit_khr)
                             ("VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_NV"
@@ -4424,42 +4428,43 @@
                             ("VK_IMAGE_COMPRESSION_FIXED_RATE_2BPC_BIT_EXT" 2)
                             ("VK_IMAGE_COMPRESSION_FIXED_RATE_3BPC_BIT_EXT" 4)
                             ("VK_IMAGE_COMPRESSION_FIXED_RATE_4BPC_BIT_EXT" 8)
-                            ("VK_IMAGE_COMPRESSION_FIXED_RATE_5BPC_BIT_EXT" 10)
-                            ("VK_IMAGE_COMPRESSION_FIXED_RATE_6BPC_BIT_EXT" 20)
-                            ("VK_IMAGE_COMPRESSION_FIXED_RATE_7BPC_BIT_EXT" 40)
-                            ("VK_IMAGE_COMPRESSION_FIXED_RATE_8BPC_BIT_EXT" 80)
+                            ("VK_IMAGE_COMPRESSION_FIXED_RATE_5BPC_BIT_EXT" 16)
+                            ("VK_IMAGE_COMPRESSION_FIXED_RATE_6BPC_BIT_EXT" 32)
+                            ("VK_IMAGE_COMPRESSION_FIXED_RATE_7BPC_BIT_EXT" 64)
+                            ("VK_IMAGE_COMPRESSION_FIXED_RATE_8BPC_BIT_EXT"
+                             128)
                             ("VK_IMAGE_COMPRESSION_FIXED_RATE_9BPC_BIT_EXT"
-                             100)
+                             256)
                             ("VK_IMAGE_COMPRESSION_FIXED_RATE_10BPC_BIT_EXT"
-                             200)
+                             512)
                             ("VK_IMAGE_COMPRESSION_FIXED_RATE_11BPC_BIT_EXT"
-                             400)
+                             1024)
                             ("VK_IMAGE_COMPRESSION_FIXED_RATE_12BPC_BIT_EXT"
-                             800)
+                             2048)
                             ("VK_IMAGE_COMPRESSION_FIXED_RATE_13BPC_BIT_EXT"
-                             1000)
+                             4096)
                             ("VK_IMAGE_COMPRESSION_FIXED_RATE_14BPC_BIT_EXT"
-                             2000)
+                             8192)
                             ("VK_IMAGE_COMPRESSION_FIXED_RATE_15BPC_BIT_EXT"
-                             4000)
+                             16384)
                             ("VK_IMAGE_COMPRESSION_FIXED_RATE_16BPC_BIT_EXT"
-                             8000)
+                             32768)
                             ("VK_IMAGE_COMPRESSION_FIXED_RATE_17BPC_BIT_EXT"
-                             10000)
+                             65536)
                             ("VK_IMAGE_COMPRESSION_FIXED_RATE_18BPC_BIT_EXT"
-                             20000)
+                             131072)
                             ("VK_IMAGE_COMPRESSION_FIXED_RATE_19BPC_BIT_EXT"
-                             40000)
+                             262144)
                             ("VK_IMAGE_COMPRESSION_FIXED_RATE_20BPC_BIT_EXT"
-                             80000)
+                             524288)
                             ("VK_IMAGE_COMPRESSION_FIXED_RATE_21BPC_BIT_EXT"
-                             100000)
+                             1048576)
                             ("VK_IMAGE_COMPRESSION_FIXED_RATE_22BPC_BIT_EXT"
-                             200000)
+                             2097152)
                             ("VK_IMAGE_COMPRESSION_FIXED_RATE_23BPC_BIT_EXT"
-                             400000)
+                             4194304)
                             ("VK_IMAGE_COMPRESSION_FIXED_RATE_24BPC_BIT_EXT"
-                             800000)
+                             8388608)
                             ("VK_IMAGE_COMPRESSION_FIXED_RATE_FLAG_BITS_MAX_ENUM_EXT"
                              7))
 

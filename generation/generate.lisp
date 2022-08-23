@@ -55,7 +55,6 @@
   (intern (string-upcase name)))
 
 ;; Given a read value, return its common lisp equivalent.
-;; Also return the base and if it is needed to print the radix.
 (defun fix-value (value-str)
   (multiple-value-bind (numberp num-regs) (ppcre:scan-to-strings "^(?:(\\(\\~)*)(?:(0x)*)([\\-\\d\\.]+)([ULF]*)" value-str)
     (multiple-value-bind (macro-func-p func-regs) (ppcre:scan-to-strings "^(\\w+)(\\((?:\\s*\\d+\\s*,)*\\s*\\d+\\s*\\))" value-str)
@@ -64,14 +63,12 @@
 	 (let* ((notopp  (aref num-regs 0))
 		(hexp    (aref num-regs 1))
 		(num-str (aref num-regs 2))
-		(suffix  (aref num-regs 3))
-		(num     (read-from-string num-str)))
+		(suffix  (aref num-regs 3)))
 	   (cond
-	     (notopp (values `(- ,(if (string= suffix "U") 'UINT32_MAX 'UINT64_MAX)
-				 ,num)
-			     nil nil))
-	     (hexp (values num 16 t))
-	     (t (values num nil nil)))))
+	     (notopp `(- ,(if (string= suffix "U") 'UINT32_MAX 'UINT64_MAX)
+			 ,(read-from-string num-str)))
+	     (hexp (parse-integer num-str :radix 16))
+	     (t (read-from-string num-str)))))
 	(macro-func-p
 	 (let ((args (ppcre:regex-replace-all "," (aref func-regs 1) " ")))
 	   (cons (intern (string-upcase (aref func-regs 0))) (read-from-string args)))) ; TODO: VK_MAKE.. -> make-api...

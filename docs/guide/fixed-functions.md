@@ -83,8 +83,8 @@ This code is exactly the same as the one we had. But now the indentation is cont
     ...
     (cvk:with-viewport viewport (:x 0.0
 				 :y 0.0
-				 :width (cvk:extent-2d-width (swap-chain-extent app))
-				 :height (cvk:extent-2d-height (swap-chain-extent app))
+				 :width (float (cvk:extent-2d-width (swap-chain-extent app)))
+				 :height (float (cvk:extent-2d-height (swap-chain-extent app)))
 				 :minDepth 0.0
 				 :maxDepth 1.0))
     (cvk:with-offset-2d scissor-offset (:x 0
