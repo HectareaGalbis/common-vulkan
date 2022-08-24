@@ -1006,12 +1006,12 @@
       (submit-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "Vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (waitsemaphorecount :name "waitSemaphoreCount" :type uint32)
-    (pwaitsemaphores :name "pWaitSemaphores" :type "VkSemaphore" :init-form nil
-     :create
+    (pwaitsemaphores :name "pWaitSemaphores" :type (list "VkSemaphore")
+     :init-form nil :create
      ((pwaitsemaphores-arg)
       (create-array vksemaphore pwaitsemaphores pwaitsemaphores-arg :dynamic t
        :pointers nil))
@@ -1023,16 +1023,22 @@
      ((pwaitsemaphores-arg &optional pwaitsemaphores-index)
       (set-array vksemaphore pwaitsemaphores pwaitsemaphores-arg
        pwaitsemaphores-index :dynamic t :pointers nil)))
-    (pwaitdststagemask :name "pWaitDstStageMask" :type "VkPipelineStageFlags"
-     :init-form nil :create
+    (pwaitdststagemask :name "pWaitDstStageMask" :type
+     (list "VkPipelineStageFlags") :init-form nil :create
      ((pwaitdststagemask-arg)
-      (create-pointer pwaitdststagemask pwaitdststagemask-arg))
-     :get (nil (get-pointer pwaitdststagemask)) :set
-     ((pwaitdststagemask-arg)
-      (set-pointer pwaitdststagemask pwaitdststagemask-arg)))
+      (create-array vksemaphore pwaitdststagemask pwaitdststagemask-arg
+       :dynamic t :pointers nil))
+     :destroy (destroy-array pwaitdststagemask) :get
+     ((&optional pwaitdststagemask-index)
+      (get-array vksemaphore pwaitdststagemask pwaitdststagemask-index
+       waitsemaphorecount :pointers nil))
+     :set
+     ((pwaitdststagemask-arg &optional pwaitdststagemask-index)
+      (set-array vksemaphore pwaitdststagemask pwaitdststagemask-arg
+       pwaitdststagemask-index :dynamic t :pointers nil)))
     (commandbuffercount :name "commandBufferCount" :type uint32)
-    (pcommandbuffers :name "pCommandBuffers" :type "VkCommandBuffer" :init-form
-     nil :create
+    (pcommandbuffers :name "pCommandBuffers" :type (list "VkCommandBuffer")
+     :init-form nil :create
      ((pcommandbuffers-arg)
       (create-array vkcommandbuffer pcommandbuffers pcommandbuffers-arg
        :dynamic t :pointers nil))
@@ -1045,8 +1051,8 @@
       (set-array vkcommandbuffer pcommandbuffers pcommandbuffers-arg
        pcommandbuffers-index :dynamic t :pointers nil)))
     (signalsemaphorecount :name "signalSemaphoreCount" :type uint32)
-    (psignalsemaphores :name "pSignalSemaphores" :type "VkSemaphore" :init-form
-     nil :create
+    (psignalsemaphores :name "pSignalSemaphores" :type (list "VkSemaphore")
+     :init-form nil :create
      ((psignalsemaphores-arg)
       (create-array vksemaphore psignalsemaphores psignalsemaphores-arg
        :dynamic t :pointers nil))
@@ -1058,9 +1064,6 @@
      ((psignalsemaphores-arg &optional psignalsemaphores-index)
       (set-array vksemaphore psignalsemaphores psignalsemaphores-arg
        psignalsemaphores-index :dynamic t :pointers nil))))
-
-  (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkMappedMemoryRange"
@@ -1384,13 +1387,10 @@
       (semaphore-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "Vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkSemaphoreCreateFlags"))
-
-  (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkEventCreateInfo"
@@ -4179,13 +4179,10 @@
       (export-fence-create-info-khr export-fence-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "Vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (handletypes :name "handleTypes" :type "VkExternalFenceHandleTypeFlags"))
-
-  (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkExportSemaphoreCreateInfo"
@@ -7264,12 +7261,12 @@
       (present-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "Vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (waitsemaphorecount :name "waitSemaphoreCount" :type uint32)
-    (pwaitsemaphores :name "pWaitSemaphores" :type "VkSemaphore" :init-form nil
-     :create
+    (pwaitsemaphores :name "pWaitSemaphores" :type (list "VkSemaphore")
+     :init-form nil :create
      ((pwaitsemaphores-arg)
       (create-array vksemaphore pwaitsemaphores pwaitsemaphores-arg :dynamic t
        :pointers nil))
@@ -7282,8 +7279,8 @@
       (set-array vksemaphore pwaitsemaphores pwaitsemaphores-arg
        pwaitsemaphores-index :dynamic t :pointers nil)))
     (swapchaincount :name "swapchainCount" :type uint32)
-    (pswapchains :name "pSwapchains" :type "VkSwapchainKHR" :init-form nil
-     :create
+    (pswapchains :name "pSwapchains" :type (list "VkSwapchainKHR") :init-form
+     nil :create
      ((pswapchains-arg)
       (create-array vkswapchainkhr pswapchains pswapchains-arg :dynamic t
        :pointers nil))
@@ -7295,17 +7292,31 @@
      ((pswapchains-arg &optional pswapchains-index)
       (set-array vkswapchainkhr pswapchains pswapchains-arg pswapchains-index
        :dynamic t :pointers nil)))
-    (pimageindices :name "pImageIndices" :type uint32 :init-form nil :create
-     ((pimageindices-arg) (create-pointer pimageindices pimageindices-arg))
-     :get (nil (get-pointer pimageindices)) :set
-     ((pimageindices-arg) (set-pointer pimageindices pimageindices-arg)))
+    (pimageindices :name "pImageIndices" :type (list uint32) :init-form nil
+     :create
+     ((pimageindices-arg)
+      (create-array vkswapchainkhr pimageindices pimageindices-arg :dynamic t
+       :pointers nil))
+     :destroy (destroy-array pimageindices) :get
+     ((&optional pimageindices-index)
+      (get-array vkswapchainkhr pimageindices pimageindices-index
+       swapchaincount :pointers nil))
+     :set
+     ((pimageindices-arg &optional pimageindices-index)
+      (set-array vkswapchainkhr pimageindices pimageindices-arg
+       pimageindices-index :dynamic t :pointers nil)))
     (presults :name "pResults" :type "VkResult" :init-form nil :create
-     ((presults-arg) (create-pointer presults presults-arg)) :get
-     (nil (get-pointer presults)) :set
-     ((presults-arg) (set-pointer presults presults-arg))))
-
-  (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+     ((presults-arg)
+      (create-array vkswapchainkhr presults presults-arg :dynamic t :pointers
+       nil))
+     :destroy (destroy-array presults) :get
+     ((&optional presults-index)
+      (get-array vkswapchainkhr presults presults-index swapchaincount
+       :pointers nil))
+     :set
+     ((presults-arg &optional presults-index)
+      (set-array vkswapchainkhr presults presults-arg presults-index :dynamic t
+       :pointers nil))))
 
   (more-cffi:def-foreign-struct doc-file
       "VkImageSwapchainCreateInfoKHR"

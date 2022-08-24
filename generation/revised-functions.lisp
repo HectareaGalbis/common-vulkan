@@ -528,6 +528,12 @@
     (vkendcommandbuffer commandbuffer))
 
 
+  (more-cffi:def-foreign-function doc-file ("vkResetCommandBuffer" reset-command-buffer funcall-reset-command-buffer) (commandbuffer flags)
+    (declare-types ("VkCommandBuffer" "commandBuffer") ("VkCommandBufferResetFlags" flags)
+		   :return ("VkResult" result))
+    (vkresetcommandbuffer commandbuffer flags))
+
+
   (more-cffi:def-foreign-function doc-file ("vkCmdBeginRenderPass" cmd-begin-render-pass funcall-cmd-begin-render-pass) (commandbuffer prenderpassbegin contents)
     (declare-types ("VkCommandBuffer" "commandBuffer") ("VkRenderPassBeginInfo" "pRenderPassBegin") ("VkSubpassContents" contents))
     (vkcmdbeginrenderpass commandbuffer prenderpassbegin contents))
@@ -565,4 +571,89 @@
 
   (more-cffi:def-foreign-function doc-file ("vkCmdDraw" cmd-draw funcall-cmd-draw) (commandbuffer vertexcount instancecount firstvertex firstinstance)
     (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "vertexCount") (uint32 "instanceCount") (uint32 "firstVertex") (uint32 "firstInstance"))
-    (vkcmddraw commandbuffer vertexcount instancecount firstvertex firstinstance)))
+    (vkcmddraw commandbuffer vertexcount instancecount firstvertex firstinstance))
+
+
+  (more-cffi:def-foreign-function doc-file ("vkCreateSemaphore" create-semaphore funcall-create-semaphore) (device pcreateinfo pallocator)
+    (declare-types ("VkDevice" device) ("VkSemaphoreCreateInfo" "pCreateInfo") ("VkAllocationCallbacks" "pAllocator")
+		   :return ("VkSemaphore" "pSemaphore") ("VkResult" result))
+    (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
+      (cffi:with-foreign-object (pSemaphore 'VkSemaphore)
+	(let ((result (vkcreatesemaphore device pcreateinfo pallocator-c pSemaphore)))
+	  (values (cffi:mem-ref pSemaphore 'VkSemaphore) result device pAllocator)))))
+
+
+  (more-cffi:def-foreign-function doc-file ("vkDestroySemaphore" destroy-semaphore funcall-destroy-semaphore) (device semaphore pallocator)
+    (declare-types ("VkDevice" device) ("VkSemaphore" semaphore) ("VkAllocationCallbacks" "pAllocator"))
+    (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
+      (vkdestroysemaphore device semaphore pallocator-c)))
+
+
+  (mcffi:defwith doc-file with-semaphore
+    create-semaphore
+    destroy-semaphore
+    :destructor-arguments (2 0 3))
+
+
+  (more-cffi:def-foreign-function doc-file ("vkCreateFence" create-fence funcall-create-fence) (device pcreateinfo pallocator)
+    (declare-types ("VkDevice" device) ("VkFenceCreateInfo" "pCreateInfo") ("VkAllocationCallbacks" "pAllocator")
+		   :return ("VkFence" "pFence") ("VkResult" result))
+    (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
+      (cffi:with-foreign-object (pFence 'VkFence)
+	(let ((result (vkcreatefence device pcreateinfo pallocator-c pfence)))
+	  (values (cffi:mem-ref pFence 'VkFence) result device pAllocator)))))
+
+
+  (more-cffi:def-foreign-function doc-file ("vkDestroyFence" destroy-fence funcall-destroy-fence) (device fence pallocator)
+    (declare-types ("VkDevice" device) ("VkFence" fence) ("VkAllocationCallbacks" "pAllocator"))
+    (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
+      (vkdestroyfence device fence pallocator-c)))
+
+
+  (mcffi:defwith doc-file with-fence
+    create-fence
+    destroy-fence
+    :destructor-arguments (2 0 3))
+
+
+  (more-cffi:def-foreign-function doc-file ("vkWaitForFences" wait-for-fences funcall-wait-for-fences) (device pfences waitall timeout)
+    (declare-types ("VkDevice" device) ((list "VkFence") "pFences") ("VkBool32" "waitAll") (uint64 timeout)
+		   :return ("VkResult" result))
+    (let ((fenceCount (length pFences))
+	  (pFences-c (cffi:foreign-alloc 'VkFence :initial-contents pFences)))
+      (let ((result (vkwaitforfences device fenceCount pFences-c waitall timeout)))
+	(cffi:foreign-free pFences-c)
+	(values result))))
+
+
+  (more-cffi:def-foreign-function doc-file ("vkResetFences" reset-fences funcall-reset-fences) (device pfences)
+    (declare-types ("VkDevice" device) ((list "VkFence") "pFences")
+		   :return ("VkResult" result))
+    (let ((fenceCount (length pFences))
+	  (pFences-c (cffi:foreign-alloc 'VkFence :initial-contents pFences)))
+      (let ((result (vkresetfences device fencecount pfences-c)))
+	(cffi:foreign-free pFences-c)
+	(values result))))
+
+
+  (more-cffi:def-foreign-function doc-file ("vkAcquireNextImageKHR" acquire-next-image-khr funcall-acquire-next-image-khr) (device swapchain timeout semaphore fence)
+    (declare-types ("VkDevice" device) ("VkSwapchainKHR" swapchain) (uint64 timeout) ("VkSemaphore" semaphore) ("VkFence" fence) :return (uint32 "pImageIndex") ("VkResult" return-value))
+    (cffi:with-foreign-object (pImageIndex :uint32)
+      (let ((result (vkacquirenextimagekhr device swapchain timeout semaphore fence pImageIndex)))
+	(values pImageIndex result))))
+
+
+  (more-cffi:def-foreign-function doc-file ("vkQueueSubmit" queue-submit funcall-queue-submit) (queue psubmits fence)
+    (declare-types ("VkQueue" queue) ("VkSubmitInfo" "pSubmits") ("VkFence" fence)
+		   :return ("VkResult" result))
+    (let ((submitCount (length pSubmits))
+	  (pSubmits-c (cffi:foreign-alloc '(:struct VkSubmitInfo) :initial-contents pSubmits)))
+      (let ((result (vkqueuesubmit queue submitCount pSubmits-c fence)))
+	(cffi:foreign-free pSubmits-c)
+	(values result))))
+
+
+  (more-cffi:def-foreign-function doc-file ("vkQueuePresentKHR" queue-present-khr funcall-queue-present-khr) (queue ppresentinfo)
+    (declare-types ("VkQueue" queue) ("VkPresentInfoKHR" "pPresentInfo")
+		   :return ("VkResult" result))
+    (vkqueuepresentkhr queue ppresentinfo)))
