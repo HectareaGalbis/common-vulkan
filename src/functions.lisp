@@ -1157,25 +1157,29 @@
 
   (more-cffi:def-foreign-function doc-file
       ("vkCreateCommandPool" create-command-pool funcall-create-command-pool)
-      (device pcreateinfo pallocator pcommandpool)
+      (device pcreateinfo pallocator)
     (declare-types ("VkDevice" device)
      ("VkCommandPoolCreateInfo" "pCreateInfo")
-     ("VkAllocationCallbacks" "pAllocator") ("VkCommandPool" "pCommandPool")
-     :return ("VkResult" return-value))
-    (vkcreatecommandpool device pcreateinfo pallocator pcommandpool))
-
-  (more-cffi:doc-note doc-file
-                      "This function needs to be revised. Please, post an issue to request it.")
+     ("VkAllocationCallbacks" "pAllocator") :return
+     ("VkCommandPool" "pCommandPool") ("VkResult" result))
+    (let ((pallocator-c (or pallocator (cffi-sys:null-pointer))))
+      (cffi:with-foreign-object (pcommandpool 'vkcommandpool)
+        (let ((result
+               (vkcreatecommandpool device pcreateinfo pallocator-c
+                pcommandpool)))
+          (values (cffi:mem-ref pcommandpool 'vkcommandpool) result device
+                  pallocator)))))
 
   (more-cffi:def-foreign-function doc-file
       ("vkDestroyCommandPool" destroy-command-pool funcall-destroy-command-pool)
       (device commandpool pallocator)
     (declare-types ("VkDevice" device) ("VkCommandPool" "commandPool")
-     ("VkAllocationCallbacks" "pAllocator") :return ("void" return-value))
-    (vkdestroycommandpool device commandpool pallocator))
+     ("VkAllocationCallbacks" "pAllocator"))
+    (let ((pallocator-c (or pallocator (cffi-sys:null-pointer))))
+      (vkdestroycommandpool device commandpool pallocator-c)))
 
-  (more-cffi:doc-note doc-file
-                      "This function needs to be revised. Please, post an issue to request it.")
+  (more-cffi:defwith doc-file with-command-pool create-command-pool
+                     destroy-command-pool :destructor-arguments (2 0 3))
 
   (more-cffi:def-foreign-function doc-file
       ("vkResetCommandPool" reset-command-pool funcall-reset-command-pool)
@@ -1190,37 +1194,45 @@
   (more-cffi:def-foreign-function doc-file
       ("vkAllocateCommandBuffers" allocate-command-buffers
        funcall-allocate-command-buffers)
-      (device pallocateinfo pcommandbuffers)
+      (device pallocateinfo)
     (declare-types ("VkDevice" device)
-     ("VkCommandBufferAllocateInfo" "pAllocateInfo")
-     ("VkCommandBuffer" "pCommandBuffers") :return ("VkResult" return-value))
-    (vkallocatecommandbuffers device pallocateinfo pcommandbuffers))
-
-  (more-cffi:doc-note doc-file
-                      "This function needs to be revised. Please, post an issue to request it.")
+     ("VkCommandBufferAllocateInfo" "pAllocateInfo") :return
+     ((list "VkCommandBuffer") "pCommandBuffers") ("VkResult" result))
+    (let ((command-buffers-count
+           (command-buffer-allocate-info-commandbuffercount pallocateinfo)))
+      (cffi:with-foreign-object (pcommandbuffers 'vkcommandbuffer
+                                 command-buffers-count)
+        (let ((result
+               (vkallocatecommandbuffers device pallocateinfo pcommandbuffers)))
+          (values
+           (iter
+             (for i from 0 below command-buffers-count)
+             (collect (cffi:mem-aref pcommandbuffers 'vkcommandbuffer i)))
+           result device
+           (command-buffer-allocate-info-commandpool pallocateinfo))))))
 
   (more-cffi:def-foreign-function doc-file
       ("vkFreeCommandBuffers" free-command-buffers funcall-free-command-buffers)
-      (device commandpool commandbuffercount pcommandbuffers)
+      (device commandpool pcommandbuffers)
     (declare-types ("VkDevice" device) ("VkCommandPool" "commandPool")
-     (uint32 "commandBufferCount") ("VkCommandBuffer" "pCommandBuffers")
-     :return ("void" return-value))
-    (vkfreecommandbuffers device commandpool commandbuffercount
-     pcommandbuffers))
+     ((list "VkCommandBuffer") "pCommandBuffers"))
+    (let ((commandbuffercount (length pcommandbuffers))
+          (pcommandbuffers-c
+           (cffi:foreign-alloc 'vkcommandbuffer :initial-contents
+                               pcommandbuffers)))
+      (vkfreecommandbuffers device commandpool commandbuffercount
+       pcommandbuffers-c)
+      (cffi-sys:foreign-free pcommandbuffers-c)))
 
-  (more-cffi:doc-note doc-file
-                      "This function needs to be revised. Please, post an issue to request it.")
+  (more-cffi:defwith doc-file with-command-buffers allocate-command-buffers
+                     free-command-buffers :destructor-arguments (2 3 0))
 
   (more-cffi:def-foreign-function doc-file
       ("vkBeginCommandBuffer" begin-command-buffer funcall-begin-command-buffer)
       (commandbuffer pbegininfo)
     (declare-types ("VkCommandBuffer" "commandBuffer")
-     ("VkCommandBufferBeginInfo" "pBeginInfo") :return
-     ("VkResult" return-value))
+     ("VkCommandBufferBeginInfo" "pBeginInfo") :return ("VkResult" result))
     (vkbegincommandbuffer commandbuffer pbegininfo))
-
-  (more-cffi:doc-note doc-file
-                      "This function needs to be revised. Please, post an issue to request it.")
 
   (more-cffi:def-foreign-function doc-file
       ("vkEndCommandBuffer" end-command-buffer funcall-end-command-buffer)
@@ -1228,9 +1240,6 @@
     (declare-types ("VkCommandBuffer" "commandBuffer") :return
      ("VkResult" return-value))
     (vkendcommandbuffer commandbuffer))
-
-  (more-cffi:doc-note doc-file
-                      "This function needs to be revised. Please, post an issue to request it.")
 
   (more-cffi:def-foreign-function doc-file
       ("vkResetCommandBuffer" reset-command-buffer funcall-reset-command-buffer)
@@ -1246,34 +1255,42 @@
       ("vkCmdBindPipeline" cmd-bind-pipeline funcall-cmd-bind-pipeline)
       (commandbuffer pipelinebindpoint pipeline)
     (declare-types ("VkCommandBuffer" "commandBuffer")
-     ("VkPipelineBindPoint" "pipelineBindPoint") ("VkPipeline" pipeline)
-     :return ("void" return-value))
+     ("VkPipelineBindPoint" "pipelineBindPoint") ("VkPipeline" pipeline))
     (vkcmdbindpipeline commandbuffer pipelinebindpoint pipeline))
-
-  (more-cffi:doc-note doc-file
-                      "This function needs to be revised. Please, post an issue to request it.")
 
   (more-cffi:def-foreign-function doc-file
       ("vkCmdSetViewport" cmd-set-viewport funcall-cmd-set-viewport)
       (commandbuffer firstviewport viewportcount pviewports)
     (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "firstViewport")
-     (uint32 "viewportCount") ("VkViewport" "pViewports") :return
-     ("void" return-value))
-    (vkcmdsetviewport commandbuffer firstviewport viewportcount pviewports))
-
-  (more-cffi:doc-note doc-file
-                      "This function needs to be revised. Please, post an issue to request it.")
+     (uint32 "viewportCount") ((list "VkViewport") "pViewports"))
+    (let ((pviewports-c
+           (cffi:foreign-alloc '(:struct vkviewport) :initial-contents
+                               (iter
+                                 (for viewport in
+                                  (subseq pviewports firstviewport
+                                          (+ firstviewport viewportcount)))
+                                 (collect
+                                  (cffi:mem-ref viewport
+                                                '(:struct vkviewport)))))))
+      (vkcmdsetviewport commandbuffer firstviewport viewportcount pviewports-c)
+      (cffi-sys:foreign-free pviewports-c)))
 
   (more-cffi:def-foreign-function doc-file
       ("vkCmdSetScissor" cmd-set-scissor funcall-cmd-set-scissor)
       (commandbuffer firstscissor scissorcount pscissors)
     (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "firstScissor")
-     (uint32 "scissorCount") ("VkRect2D" "pScissors") :return
-     ("void" return-value))
-    (vkcmdsetscissor commandbuffer firstscissor scissorcount pscissors))
-
-  (more-cffi:doc-note doc-file
-                      "This function needs to be revised. Please, post an issue to request it.")
+     (uint32 "scissorCount") ("VkRect2D" "pScissors"))
+    (let ((pscissors-c
+           (cffi:foreign-alloc '(:struct vkrect2d) :initial-contents
+                               (iter
+                                 (for scissor in
+                                  (subseq pscissors firstscissor
+                                          (+ firstscissor scissorcount)))
+                                 (collect
+                                  (cffi:mem-ref scissor
+                                                '(:struct vkrect2d)))))))
+      (vkcmdsetscissor commandbuffer firstscissor scissorcount pscissors-c)
+      (cffi-sys:foreign-free pscissors-c)))
 
   (more-cffi:def-foreign-function doc-file
       ("vkCmdSetLineWidth" cmd-set-line-width funcall-cmd-set-line-width)
@@ -1400,13 +1417,9 @@
       ("vkCmdDraw" cmd-draw funcall-cmd-draw)
       (commandbuffer vertexcount instancecount firstvertex firstinstance)
     (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "vertexCount")
-     (uint32 "instanceCount") (uint32 "firstVertex") (uint32 "firstInstance")
-     :return ("void" return-value))
+     (uint32 "instanceCount") (uint32 "firstVertex") (uint32 "firstInstance"))
     (vkcmddraw commandbuffer vertexcount instancecount firstvertex
      firstinstance))
-
-  (more-cffi:doc-note doc-file
-                      "This function needs to be revised. Please, post an issue to request it.")
 
   (more-cffi:def-foreign-function doc-file
       ("vkCmdDrawIndexed" cmd-draw-indexed funcall-cmd-draw-indexed)
@@ -1751,11 +1764,8 @@
       (commandbuffer prenderpassbegin contents)
     (declare-types ("VkCommandBuffer" "commandBuffer")
      ("VkRenderPassBeginInfo" "pRenderPassBegin")
-     ("VkSubpassContents" contents) :return ("void" return-value))
+     ("VkSubpassContents" contents))
     (vkcmdbeginrenderpass commandbuffer prenderpassbegin contents))
-
-  (more-cffi:doc-note doc-file
-                      "This function needs to be revised. Please, post an issue to request it.")
 
   (more-cffi:def-foreign-function doc-file
       ("vkCmdNextSubpass" cmd-next-subpass funcall-cmd-next-subpass)
@@ -1770,12 +1780,8 @@
   (more-cffi:def-foreign-function doc-file
       ("vkCmdEndRenderPass" cmd-end-render-pass funcall-cmd-end-render-pass)
       (commandbuffer)
-    (declare-types ("VkCommandBuffer" "commandBuffer") :return
-     ("void" return-value))
+    (declare-types ("VkCommandBuffer" "commandBuffer"))
     (vkcmdendrenderpass commandbuffer))
-
-  (more-cffi:doc-note doc-file
-                      "This function needs to be revised. Please, post an issue to request it.")
 
   (more-cffi:def-foreign-function doc-file
       ("vkCmdExecuteCommands" cmd-execute-commands funcall-cmd-execute-commands)

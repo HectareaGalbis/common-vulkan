@@ -889,7 +889,7 @@
       (device-queue-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "Vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkDeviceQueueCreateFlags")
@@ -1539,7 +1539,7 @@
       (image-view-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "Vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkImageViewCreateFlags")
@@ -1569,7 +1569,7 @@
       (shader-module-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "Vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkShaderModuleCreateFlags")
@@ -1634,7 +1634,7 @@
       (pipeline-shader-stage-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "Vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkPipelineShaderStageCreateFlags")
@@ -1710,7 +1710,7 @@
       (pipeline-vertex-input-state-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "Vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkPipelineVertexInputStateCreateFlags")
@@ -1758,7 +1758,7 @@
       (pipeline-input-assembly-state-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "Vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkPipelineInputAssemblyStateCreateFlags")
@@ -1795,7 +1795,7 @@
       (pipeline-viewport-state-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "Vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkPipelineViewportStateCreateFlags")
@@ -1832,7 +1832,7 @@
       (pipeline-rasterization-state-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "Vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkPipelineRasterizationStateCreateFlags")
@@ -1852,7 +1852,7 @@
       (pipeline-multisample-state-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "Vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkPipelineMultisampleStateCreateFlags")
@@ -1928,7 +1928,7 @@
       (pipeline-color-blend-state-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "Vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkPipelineColorBlendStateCreateFlags")
@@ -1965,7 +1965,7 @@
       (pipeline-dynamic-state-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "Vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkPipelineDynamicStateCreateFlags")
@@ -1989,7 +1989,7 @@
       (graphics-pipeline-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "Vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkPipelineCreateFlags")
@@ -2097,7 +2097,7 @@
       (pipeline-layout-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "Vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkPipelineLayoutCreateFlags")
@@ -2392,7 +2392,7 @@
       (framebuffer-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "Vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkFramebufferCreateFlags")
@@ -2505,7 +2505,7 @@
       (render-pass-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "Vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkRenderPassCreateFlags")
@@ -2557,21 +2557,18 @@
       (command-pool-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "Vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkCommandPoolCreateFlags")
     (queuefamilyindex :name "queueFamilyIndex" :type uint32))
-
-  (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkCommandBufferAllocateInfo"
       (command-buffer-allocate-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "Vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (commandpool :name "commandPool" :type "VkCommandPool" :create
@@ -2581,15 +2578,12 @@
     (level :name level :type "VkCommandBufferLevel")
     (commandbuffercount :name "commandBufferCount" :type uint32))
 
-  (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
-
   (more-cffi:def-foreign-struct doc-file
       "VkCommandBufferInheritanceInfo"
       (command-buffer-inheritance-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "Vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (renderpass :name "renderPass" :type "VkRenderPass" :create
@@ -2606,15 +2600,12 @@
     (pipelinestatistics :name "pipelineStatistics" :type
      "VkQueryPipelineStatisticFlags"))
 
-  (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
-
   (more-cffi:def-foreign-struct doc-file
       "VkCommandBufferBeginInfo"
       (command-buffer-begin-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "Vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkCommandBufferUsageFlags")
@@ -2625,9 +2616,6 @@
      :get (nil (get-pointer pinheritanceinfo)) :set
      ((pinheritanceinfo-arg)
       (set-pointer pinheritanceinfo pinheritanceinfo-arg))))
-
-  (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkBufferCopy"
@@ -2688,7 +2676,7 @@
       "VkClearColorValue"
       (clear-color-value)
       (:default-create :default-get :default-set)
-    (float32 :name float32 :type float :create
+    (float32 :name float32 :type (list float) :create
      ((float32-arg)
       (create-array :float float32 float32-arg :dynamic nil :pointers nil))
      :get
@@ -2698,7 +2686,7 @@
      ((float32-arg &optional float32-index)
       (set-array :float float32 float32-arg float32-index :dynamic nil
        :pointers nil)))
-    (int32 :name int32 :type int32 :create
+    (int32 :name int32 :type (list int32) :create
      ((int32-arg)
       (create-array :int32 int32 int32-arg :dynamic nil :pointers nil))
      :get
@@ -2708,7 +2696,7 @@
      ((int32-arg &optional int32-index)
       (set-array :int32 int32 int32-arg int32-index :dynamic nil :pointers
        nil)))
-    (uint32 :name uint32 :type uint32 :create
+    (uint32 :name uint32 :type (list uint32) :create
      ((uint32-arg)
       (create-array :uint32 uint32 uint32-arg :dynamic nil :pointers nil))
      :get
@@ -2719,18 +2707,12 @@
       (set-array :uint32 uint32 uint32-arg uint32-index :dynamic nil :pointers
        nil))))
 
-  (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
-
   (more-cffi:def-foreign-struct doc-file
       "VkClearDepthStencilValue"
       (clear-depth-stencil-value)
       (:default-create :default-get :default-set)
     (depth :name depth :type float)
     (stencil :name stencil :type uint32))
-
-  (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
 
   (more-cffi:def-foreign-union doc-file
       "VkClearValue"
@@ -2749,9 +2731,6 @@
      ((depthstencil-arg)
       (more-cffi:copy depthstencil depthstencil-arg
                       '(:struct vkcleardepthstencilvalue)))))
-
-  (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkClearAttachment"
@@ -2921,7 +2900,7 @@
       (render-pass-begin-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "Vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (renderpass :name "renderPass" :type "VkRenderPass" :create
@@ -2939,8 +2918,8 @@
      ((renderarea-arg)
       (more-cffi:copy renderarea renderarea-arg '(:struct vkrect2d))))
     (clearvaluecount :name "clearValueCount" :type uint32)
-    (pclearvalues :name "pClearValues" :type "VkClearValue" :init-form nil
-     :create
+    (pclearvalues :name "pClearValues" :type (list "VkClearValue") :init-form
+     nil :create
      ((pclearvalues-arg)
       (create-array (:union vkclearvalue) pclearvalues pclearvalues-arg
        :dynamic t :pointers ("VkClearValue")))
@@ -2952,9 +2931,6 @@
      ((pclearvalues-arg &optional pclearvalues-index)
       (set-array (:union vkclearvalue) pclearvalues pclearvalues-arg
        pclearvalues-index :dynamic t :pointers ("VkClearValue")))))
-
-  (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkPhysicalDeviceSubgroupProperties"
@@ -7240,7 +7216,7 @@
       (swapchain-create-info-khr)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "Vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkSwapchainCreateFlagsKHR")
@@ -9844,7 +9820,7 @@
       (debug-utils-label-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "Vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (plabelname :name "pLabelName" :type string :init-form nil :create
@@ -9867,7 +9843,7 @@
       (debug-utils-object-name-info-ext)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "Vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (objecttype :name "objectType" :type "VkObjectType")

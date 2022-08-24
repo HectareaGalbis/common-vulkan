@@ -514,6 +514,7 @@
 													    :test (lambda (x y)
 														    (and (stringp y) (string= x y)))))
 						  (count (eq (car substruct) 'mcffi:def-foreign-struct) into def-struct-count)
+						  (count (eq (car substruct) 'mcffi:def-foreign-union) into def-struct-count)
 						  (while (<= def-struct-count 1))
 						  (collect substruct)))))
 		 (if revised-struct-list

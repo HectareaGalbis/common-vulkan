@@ -465,4 +465,104 @@
     destroy-framebuffer
     :destructor-arguments (2 0 3))
 
-  (mcffi:doc-note doc-file "The allocator is passed to both the constructor and destructor."))
+  (mcffi:doc-note doc-file "The allocator is passed to both the constructor and destructor.")
+
+
+  (more-cffi:def-foreign-function doc-file ("vkCreateCommandPool" create-command-pool funcall-create-command-pool) (device pcreateinfo pallocator)
+    (declare-types ("VkDevice" device) ("VkCommandPoolCreateInfo" "pCreateInfo") ("VkAllocationCallbacks" "pAllocator")
+		   :return ("VkCommandPool" "pCommandPool") ("VkResult" result))
+    (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
+      (cffi:with-foreign-object (pCommandPool 'VkCommandPool)
+	(let ((result (vkcreatecommandpool device pcreateinfo pAllocator-c pCommandPool)))
+	  (values (cffi:mem-ref pCommandPool 'VkCommandPool) result device pAllocator)))))
+
+
+  (more-cffi:def-foreign-function doc-file ("vkDestroyCommandPool" destroy-command-pool funcall-destroy-command-pool) (device commandpool pallocator)
+    (declare-types ("VkDevice" device) ("VkCommandPool" "commandPool") ("VkAllocationCallbacks" "pAllocator"))
+    (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
+      (vkdestroycommandpool device commandpool pallocator-c)))
+
+
+  (mcffi:defwith doc-file with-command-pool
+    create-command-pool
+    destroy-command-pool
+    :destructor-arguments (2 0 3))
+
+
+  (more-cffi:def-foreign-function doc-file ("vkAllocateCommandBuffers" allocate-command-buffers funcall-allocate-command-buffers) (device pallocateinfo)
+    (declare-types ("VkDevice" device) ("VkCommandBufferAllocateInfo" "pAllocateInfo")
+		   :return ((list "VkCommandBuffer") "pCommandBuffers") ("VkResult" result))
+    (let ((command-buffers-count (command-buffer-allocate-info-commandBufferCount pAllocateInfo)))
+      (cffi:with-foreign-object (pCommandBuffers 'VkCommandBuffer command-buffers-count)
+	(let ((result (vkallocatecommandbuffers device pallocateinfo pCommandBuffers)))
+	  (values (iter (for i from 0 below command-buffers-count)
+		    (collect (cffi:mem-aref pCommandBuffers 'VkCommandBuffer i)))
+		  result
+		  device
+		  (command-buffer-allocate-info-commandPool pAllocateInfo))))))
+
+
+  (more-cffi:def-foreign-function doc-file ("vkFreeCommandBuffers" free-command-buffers funcall-free-command-buffers) (device commandpool pcommandbuffers)
+    (declare-types ("VkDevice" device) ("VkCommandPool" "commandPool") ((list "VkCommandBuffer") "pCommandBuffers"))
+    (let ((commandBufferCount (length pCommandBuffers))
+	  (pCommandBuffers-c (cffi:foreign-alloc 'VkCommandBuffer :initial-contents pCommandBuffers)))
+      (vkfreecommandbuffers device commandpool commandBufferCount pCommandBuffers-c)
+      (cffi:foreign-free pCommandBuffers-c)))
+
+
+  (mcffi:defwith doc-file with-command-buffers
+    allocate-command-buffers
+    free-command-buffers
+    :destructor-arguments (2 3 0))
+
+
+  (more-cffi:def-foreign-function doc-file ("vkBeginCommandBuffer" begin-command-buffer funcall-begin-command-buffer) (commandbuffer pbegininfo)
+    (declare-types ("VkCommandBuffer" "commandBuffer") ("VkCommandBufferBeginInfo" "pBeginInfo")
+		   :return ("VkResult" result))
+    (vkbegincommandbuffer commandbuffer pbegininfo))
+
+
+  (more-cffi:def-foreign-function doc-file ("vkEndCommandBuffer" end-command-buffer funcall-end-command-buffer) (commandbuffer)
+    (declare-types ("VkCommandBuffer" "commandBuffer")
+		   :return ("VkResult" return-value))
+    (vkendcommandbuffer commandbuffer))
+
+
+  (more-cffi:def-foreign-function doc-file ("vkCmdBeginRenderPass" cmd-begin-render-pass funcall-cmd-begin-render-pass) (commandbuffer prenderpassbegin contents)
+    (declare-types ("VkCommandBuffer" "commandBuffer") ("VkRenderPassBeginInfo" "pRenderPassBegin") ("VkSubpassContents" contents))
+    (vkcmdbeginrenderpass commandbuffer prenderpassbegin contents))
+
+
+  (more-cffi:def-foreign-function doc-file ("vkCmdEndRenderPass" cmd-end-render-pass funcall-cmd-end-render-pass) (commandbuffer)
+    (declare-types ("VkCommandBuffer" "commandBuffer"))
+    (vkcmdendrenderpass commandbuffer))
+
+
+  (more-cffi:def-foreign-function doc-file ("vkCmdBindPipeline" cmd-bind-pipeline funcall-cmd-bind-pipeline) (commandbuffer pipelinebindpoint pipeline)
+    (declare-types ("VkCommandBuffer" "commandBuffer") ("VkPipelineBindPoint" "pipelineBindPoint") ("VkPipeline" pipeline))
+    (vkcmdbindpipeline commandbuffer pipelinebindpoint pipeline))
+
+
+  (more-cffi:def-foreign-function doc-file ("vkCmdSetViewport" cmd-set-viewport funcall-cmd-set-viewport) (commandbuffer firstviewport viewportcount pviewports)
+    (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "firstViewport") (uint32 "viewportCount") ((list "VkViewport") "pViewports"))
+    (let ((pViewports-c (cffi:foreign-alloc '(:struct VkViewport)
+					    :initial-contents
+					    (iter (for viewport in (subseq pViewports firstViewport (+ firstViewport viewportCount)))
+										      (collect (cffi:mem-ref viewport '(:struct VkViewport)))))))
+      (vkcmdsetviewport commandbuffer firstviewport viewportcount pviewports-c)
+      (cffi:foreign-free pViewports-c)))
+
+
+  (more-cffi:def-foreign-function doc-file ("vkCmdSetScissor" cmd-set-scissor funcall-cmd-set-scissor) (commandbuffer firstscissor scissorcount pscissors)
+    (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "firstScissor") (uint32 "scissorCount") ("VkRect2D" "pScissors"))
+  (let ((pScissors-c (cffi:foreign-alloc '(:struct VkRect2D)
+					    :initial-contents
+					    (iter (for scissor in (subseq pScissors firstScissor (+ firstScissor scissorCount)))
+										      (collect (cffi:mem-ref scissor '(:struct VkRect2D)))))))
+      (vkcmdsetscissor commandbuffer firstscissor scissorcount pscissors-c)
+    (cffi:foreign-free pScissors-c)))
+
+
+  (more-cffi:def-foreign-function doc-file ("vkCmdDraw" cmd-draw funcall-cmd-draw) (commandbuffer vertexcount instancecount firstvertex firstinstance)
+    (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "vertexCount") (uint32 "instanceCount") (uint32 "firstVertex") (uint32 "firstInstance"))
+    (vkcmddraw commandbuffer vertexcount instancecount firstvertex firstinstance)))
