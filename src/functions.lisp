@@ -364,7 +364,11 @@
     (let ((submitcount (length psubmits))
           (psubmits-c
            (cffi:foreign-alloc '(:struct vksubmitinfo) :initial-contents
-                               psubmits)))
+                               (iter
+                                 (for submit in psubmits)
+                                 (collect
+                                  (cffi:mem-ref submit
+                                                '(:struct vksubmitinfo)))))))
       (let ((result (vkqueuesubmit queue submitcount psubmits-c fence)))
         (cffi-sys:foreign-free psubmits-c)
         (values result))))
@@ -2905,7 +2909,7 @@
       (let ((result
              (vkacquirenextimagekhr device swapchain timeout semaphore fence
               pimageindex)))
-        (values pimageindex result))))
+        (values (cffi:mem-ref pimageindex :uint32) result))))
 
   (more-cffi:def-foreign-function doc-file
       ("vkQueuePresentKHR" queue-present-khr funcall-queue-present-khr)

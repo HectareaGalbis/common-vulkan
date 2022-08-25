@@ -1026,15 +1026,15 @@
     (pwaitdststagemask :name "pWaitDstStageMask" :type
      (list "VkPipelineStageFlags") :init-form nil :create
      ((pwaitdststagemask-arg)
-      (create-array vksemaphore pwaitdststagemask pwaitdststagemask-arg
-       :dynamic t :pointers nil))
+      (create-array vkpipelinestageflags pwaitdststagemask
+       pwaitdststagemask-arg :dynamic t :pointers nil))
      :destroy (destroy-array pwaitdststagemask) :get
      ((&optional pwaitdststagemask-index)
-      (get-array vksemaphore pwaitdststagemask pwaitdststagemask-index
+      (get-array vkpipelinestageflags pwaitdststagemask pwaitdststagemask-index
        waitsemaphorecount :pointers nil))
      :set
      ((pwaitdststagemask-arg &optional pwaitdststagemask-index)
-      (set-array vksemaphore pwaitdststagemask pwaitdststagemask-arg
+      (set-array vkpipelinestageflags pwaitdststagemask pwaitdststagemask-arg
        pwaitdststagemask-index :dynamic t :pointers nil)))
     (commandbuffercount :name "commandBufferCount" :type uint32)
     (pcommandbuffers :name "pCommandBuffers" :type (list "VkCommandBuffer")
@@ -7295,27 +7295,26 @@
     (pimageindices :name "pImageIndices" :type (list uint32) :init-form nil
      :create
      ((pimageindices-arg)
-      (create-array vkswapchainkhr pimageindices pimageindices-arg :dynamic t
+      (create-array :uint32 pimageindices pimageindices-arg :dynamic t
        :pointers nil))
      :destroy (destroy-array pimageindices) :get
      ((&optional pimageindices-index)
-      (get-array vkswapchainkhr pimageindices pimageindices-index
-       swapchaincount :pointers nil))
-     :set
-     ((pimageindices-arg &optional pimageindices-index)
-      (set-array vkswapchainkhr pimageindices pimageindices-arg
-       pimageindices-index :dynamic t :pointers nil)))
-    (presults :name "pResults" :type "VkResult" :init-form nil :create
-     ((presults-arg)
-      (create-array vkswapchainkhr presults presults-arg :dynamic t :pointers
-       nil))
-     :destroy (destroy-array presults) :get
-     ((&optional presults-index)
-      (get-array vkswapchainkhr presults presults-index swapchaincount
+      (get-array :uint32 pimageindices pimageindices-index swapchaincount
        :pointers nil))
      :set
+     ((pimageindices-arg &optional pimageindices-index)
+      (set-array :uint32 pimageindices pimageindices-arg pimageindices-index
+       :dynamic t :pointers nil)))
+    (presults :name "pResults" :type "VkResult" :init-form nil :create
+     ((presults-arg)
+      (create-array vkresult presults presults-arg :dynamic t :pointers nil))
+     :destroy (destroy-array presults) :get
+     ((&optional presults-index)
+      (get-array vkresult presults presults-index swapchaincount :pointers
+       nil))
+     :set
      ((presults-arg &optional presults-index)
-      (set-array vkswapchainkhr presults presults-arg presults-index :dynamic t
+      (set-array vkresult presults presults-arg presults-index :dynamic t
        :pointers nil))))
 
   (more-cffi:def-foreign-struct doc-file

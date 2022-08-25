@@ -640,14 +640,15 @@
     (declare-types ("VkDevice" device) ("VkSwapchainKHR" swapchain) (uint64 timeout) ("VkSemaphore" semaphore) ("VkFence" fence) :return (uint32 "pImageIndex") ("VkResult" return-value))
     (cffi:with-foreign-object (pImageIndex :uint32)
       (let ((result (vkacquirenextimagekhr device swapchain timeout semaphore fence pImageIndex)))
-	(values pImageIndex result))))
+	(values (cffi:mem-ref pImageIndex :uint32) result))))
 
 
   (more-cffi:def-foreign-function doc-file ("vkQueueSubmit" queue-submit funcall-queue-submit) (queue psubmits fence)
     (declare-types ("VkQueue" queue) ("VkSubmitInfo" "pSubmits") ("VkFence" fence)
 		   :return ("VkResult" result))
     (let ((submitCount (length pSubmits))
-	  (pSubmits-c (cffi:foreign-alloc '(:struct VkSubmitInfo) :initial-contents pSubmits)))
+	  (pSubmits-c (cffi:foreign-alloc '(:struct VkSubmitInfo) :initial-contents (iter (for submit in pSubmits)
+										      (collect (cffi:mem-ref submit '(:struct VkSubmitInfo)))))))
       (let ((result (vkqueuesubmit queue submitCount pSubmits-c fence)))
 	(cffi:foreign-free pSubmits-c)
 	(values result))))
