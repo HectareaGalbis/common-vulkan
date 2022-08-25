@@ -1625,7 +1625,7 @@ Wrap the body expressions with `create-queue-family-properties` and `destroy-que
 
 **Members**
 * *sType*: `VkStructureType`
-* *pNext*: `void`
+* *pNext*: `Vulkan object`
 * *flags*: `VkDeviceQueueCreateFlags`
 * *queueFamilyIndex*: `uint32`
 * *queueCount*: `uint32`
@@ -1799,14 +1799,14 @@ Wrap the body expressions with `create-layer-properties` and `destroy-layer-prop
 
 **Members**
 * *sType*: `VkStructureType`
-* *pNext*: `void`
+* *pNext*: `Vulkan object`
 * *waitSemaphoreCount*: `uint32`
-* *pWaitSemaphores*: `VkSemaphore`
-* *pWaitDstStageMask*: `VkPipelineStageFlags`
+* *pWaitSemaphores*: `(list VkSemaphore)`
+* *pWaitDstStageMask*: `(list VkPipelineStageFlags)`
 * *commandBufferCount*: `uint32`
-* *pCommandBuffers*: `VkCommandBuffer`
+* *pCommandBuffers*: `(list VkCommandBuffer)`
 * *signalSemaphoreCount*: `uint32`
-* *pSignalSemaphores*: `VkSemaphore`
+* *pSignalSemaphores*: `(list VkSemaphore)`
 
 **create-submit-info**
 ```lisp
@@ -1840,14 +1840,12 @@ Wrap the body expressions with `create-submit-info` and `destroy-submit-info`. T
 (submit-info-pNext obj) ; setf-able
 (submit-info-waitSemaphoreCount obj) ; setf-able
 (submit-info-pWaitSemaphores obj &optional pwaitsemaphores-index) ; setf-able
-(submit-info-pWaitDstStageMask obj) ; setf-able
+(submit-info-pWaitDstStageMask obj &optional pwaitdststagemask-index) ; setf-able
 (submit-info-commandBufferCount obj) ; setf-able
 (submit-info-pCommandBuffers obj &optional pcommandbuffers-index) ; setf-able
 (submit-info-signalSemaphoreCount obj) ; setf-able
 (submit-info-pSignalSemaphores obj &optional psignalsemaphores-index) ; setf-able
 ```
-
-* **Note**: This struct needs to be revised. Please, post an issue to request it.
 
 ---
 
@@ -2406,7 +2404,7 @@ Wrap the body expressions with `create-fence-create-info` and `destroy-fence-cre
 
 **Members**
 * *sType*: `VkStructureType`
-* *pNext*: `void`
+* *pNext*: `Vulkan object`
 * *flags*: `VkSemaphoreCreateFlags`
 
 **create-semaphore-create-info**
@@ -2435,8 +2433,6 @@ Wrap the body expressions with `create-semaphore-create-info` and `destroy-semap
 (semaphore-create-info-pNext obj) ; setf-able
 (semaphore-create-info-flags obj) ; setf-able
 ```
-
-* **Note**: This struct needs to be revised. Please, post an issue to request it.
 
 ---
 
@@ -2789,7 +2785,7 @@ Wrap the body expressions with `create-component-mapping` and `destroy-component
 
 **Members**
 * *sType*: `VkStructureType`
-* *pNext*: `void`
+* *pNext*: `Vulkan object`
 * *flags*: `VkImageViewCreateFlags`
 * *image*: `VkImage`
 * *viewType*: `VkImageViewType`
@@ -2840,7 +2836,7 @@ Wrap the body expressions with `create-image-view-create-info` and `destroy-imag
 
 **Members**
 * *sType*: `VkStructureType`
-* *pNext*: `void`
+* *pNext*: `Vulkan object`
 * *flags*: `VkShaderModuleCreateFlags`
 * *codeSize*: `size`
 * *pCode*: `uint32`
@@ -3001,7 +2997,7 @@ Wrap the body expressions with `create-specialization-info` and `destroy-special
 
 **Members**
 * *sType*: `VkStructureType`
-* *pNext*: `void`
+* *pNext*: `Vulkan object`
 * *flags*: `VkPipelineShaderStageCreateFlags`
 * *stage*: `VkShaderStageFlagBits`
 * *module*: `VkShaderModule`
@@ -3174,7 +3170,7 @@ Wrap the body expressions with `create-vertex-input-attribute-description` and `
 
 **Members**
 * *sType*: `VkStructureType`
-* *pNext*: `void`
+* *pNext*: `Vulkan object`
 * *flags*: `VkPipelineVertexInputStateCreateFlags`
 * *vertexBindingDescriptionCount*: `uint32`
 * *pVertexBindingDescriptions*: `(list VkVertexInputBindingDescription)`
@@ -3222,7 +3218,7 @@ Wrap the body expressions with `create-pipeline-vertex-input-state-create-info` 
 
 **Members**
 * *sType*: `VkStructureType`
-* *pNext*: `void`
+* *pNext*: `Vulkan object`
 * *flags*: `VkPipelineInputAssemblyStateCreateFlags`
 * *topology*: `VkPrimitiveTopology`
 * *primitiveRestartEnable*: `VkBool32`
@@ -3350,7 +3346,7 @@ Wrap the body expressions with `create-viewport` and `destroy-viewport`. The new
 
 **Members**
 * *sType*: `VkStructureType`
-* *pNext*: `void`
+* *pNext*: `Vulkan object`
 * *flags*: `VkPipelineViewportStateCreateFlags`
 * *viewportCount*: `uint32`
 * *pViewports*: `(list VkViewport)`
@@ -3398,7 +3394,7 @@ Wrap the body expressions with `create-pipeline-viewport-state-create-info` and 
 
 **Members**
 * *sType*: `VkStructureType`
-* *pNext*: `void`
+* *pNext*: `Vulkan object`
 * *flags*: `VkPipelineRasterizationStateCreateFlags`
 * *depthClampEnable*: `VkBool32`
 * *rasterizerDiscardEnable*: `VkBool32`
@@ -3464,7 +3460,7 @@ Wrap the body expressions with `create-pipeline-rasterization-state-create-info`
 
 **Members**
 * *sType*: `VkStructureType`
-* *pNext*: `void`
+* *pNext*: `Vulkan object`
 * *flags*: `VkPipelineMultisampleStateCreateFlags`
 * *rasterizationSamples*: `VkSampleCountFlagBits`
 * *sampleShadingEnable*: `VkBool32`
@@ -3684,7 +3680,7 @@ Wrap the body expressions with `create-pipeline-color-blend-attachment-state` an
 
 **Members**
 * *sType*: `VkStructureType`
-* *pNext*: `void`
+* *pNext*: `Vulkan object`
 * *flags*: `VkPipelineColorBlendStateCreateFlags`
 * *logicOpEnable*: `VkBool32`
 * *logicOp*: `VkLogicOp`
@@ -3735,7 +3731,7 @@ Wrap the body expressions with `create-pipeline-color-blend-state-create-info` a
 
 **Members**
 * *sType*: `VkStructureType`
-* *pNext*: `void`
+* *pNext*: `Vulkan object`
 * *flags*: `VkPipelineDynamicStateCreateFlags`
 * *dynamicStateCount*: `uint32`
 * *pDynamicStates*: `(list VkDynamicState)`
@@ -3777,7 +3773,7 @@ Wrap the body expressions with `create-pipeline-dynamic-state-create-info` and `
 
 **Members**
 * *sType*: `VkStructureType`
-* *pNext*: `void`
+* *pNext*: `Vulkan object`
 * *flags*: `VkPipelineCreateFlags`
 * *stageCount*: `uint32`
 * *pStages*: `(list VkPipelineShaderStageCreateInfo)`
@@ -3897,7 +3893,7 @@ Wrap the body expressions with `create-push-constant-range` and `destroy-push-co
 
 **Members**
 * *sType*: `VkStructureType`
-* *pNext*: `void`
+* *pNext*: `Vulkan object`
 * *flags*: `VkPipelineLayoutCreateFlags`
 * *setLayoutCount*: `uint32`
 * *pSetLayouts*: `(list VkDescriptorSetLayout)`
@@ -4520,11 +4516,11 @@ Wrap the body expressions with `create-attachment-reference` and `destroy-attach
 
 **Members**
 * *sType*: `VkStructureType`
-* *pNext*: `void`
+* *pNext*: `Vulkan object`
 * *flags*: `VkFramebufferCreateFlags`
 * *renderPass*: `VkRenderPass`
 * *attachmentCount*: `uint32`
-* *pAttachments*: `VkImageView`
+* *pAttachments*: `(list VkImageView)`
 * *width*: `uint32`
 * *height*: `uint32`
 * *layers*: `uint32`
@@ -4567,8 +4563,6 @@ Wrap the body expressions with `create-framebuffer-create-info` and `destroy-fra
 (framebuffer-create-info-height obj) ; setf-able
 (framebuffer-create-info-layers obj) ; setf-able
 ```
-
-* **Note**: This struct needs to be revised. Please, post an issue to request it.
 
 ---
 
@@ -4681,7 +4675,7 @@ Wrap the body expressions with `create-subpass-dependency` and `destroy-subpass-
 
 **Members**
 * *sType*: `VkStructureType`
-* *pNext*: `void`
+* *pNext*: `Vulkan object`
 * *flags*: `VkRenderPassCreateFlags`
 * *attachmentCount*: `uint32`
 * *pAttachments*: `(list VkAttachmentDescription)`
@@ -4735,7 +4729,7 @@ Wrap the body expressions with `create-render-pass-create-info` and `destroy-ren
 
 **Members**
 * *sType*: `VkStructureType`
-* *pNext*: `void`
+* *pNext*: `Vulkan object`
 * *flags*: `VkCommandPoolCreateFlags`
 * *queueFamilyIndex*: `uint32`
 
@@ -4768,15 +4762,13 @@ Wrap the body expressions with `create-command-pool-create-info` and `destroy-co
 (command-pool-create-info-queueFamilyIndex obj) ; setf-able
 ```
 
-* **Note**: This struct needs to be revised. Please, post an issue to request it.
-
 ---
 
 ### VkCommandBufferAllocateInfo
 
 **Members**
 * *sType*: `VkStructureType`
-* *pNext*: `void`
+* *pNext*: `Vulkan object`
 * *commandPool*: `VkCommandPool`
 * *level*: `VkCommandBufferLevel`
 * *commandBufferCount*: `uint32`
@@ -4812,15 +4804,13 @@ Wrap the body expressions with `create-command-buffer-allocate-info` and `destro
 (command-buffer-allocate-info-commandBufferCount obj) ; setf-able
 ```
 
-* **Note**: This struct needs to be revised. Please, post an issue to request it.
-
 ---
 
 ### VkCommandBufferInheritanceInfo
 
 **Members**
 * *sType*: `VkStructureType`
-* *pNext*: `void`
+* *pNext*: `Vulkan object`
 * *renderPass*: `VkRenderPass`
 * *subpass*: `uint32`
 * *framebuffer*: `VkFramebuffer`
@@ -4865,15 +4855,13 @@ Wrap the body expressions with `create-command-buffer-inheritance-info` and `des
 (command-buffer-inheritance-info-pipelineStatistics obj) ; setf-able
 ```
 
-* **Note**: This struct needs to be revised. Please, post an issue to request it.
-
 ---
 
 ### VkCommandBufferBeginInfo
 
 **Members**
 * *sType*: `VkStructureType`
-* *pNext*: `void`
+* *pNext*: `Vulkan object`
 * *flags*: `VkCommandBufferUsageFlags`
 * *pInheritanceInfo*: `VkCommandBufferInheritanceInfo`
 
@@ -4905,8 +4893,6 @@ Wrap the body expressions with `create-command-buffer-begin-info` and `destroy-c
 (command-buffer-begin-info-flags obj) ; setf-able
 (command-buffer-begin-info-pInheritanceInfo obj) ; setf-able
 ```
-
-* **Note**: This struct needs to be revised. Please, post an issue to request it.
 
 ---
 
@@ -5039,9 +5025,9 @@ Wrap the body expressions with `create-buffer-image-copy` and `destroy-buffer-im
 ### VkClearColorValue
 
 **Members**
-* *float32*: `float`
-* *int32*: `int32`
-* *uint32*: `uint32`
+* *float32*: `(list float)`
+* *int32*: `(list int32)`
+* *uint32*: `(list uint32)`
 
 **create-clear-color-value**
 ```lisp
@@ -5069,8 +5055,6 @@ Wrap the body expressions with `create-clear-color-value` and `destroy-clear-col
 (clear-color-value-int32 obj &optional int32-index) ; setf-able
 (clear-color-value-uint32 obj &optional uint32-index) ; setf-able
 ```
-
-* **Note**: This struct needs to be revised. Please, post an issue to request it.
 
 ---
 
@@ -5105,8 +5089,6 @@ Wrap the body expressions with `create-clear-depth-stencil-value` and `destroy-c
 (clear-depth-stencil-value-stencil obj) ; setf-able
 ```
 
-* **Note**: This struct needs to be revised. Please, post an issue to request it.
-
 ---
 
 ### VkClearValue
@@ -5139,8 +5121,6 @@ Wrap the body expressions with `create-clear-value` and `destroy-clear-value`. T
 (clear-value-color obj) ; setf-able
 (clear-value-depthStencil obj) ; setf-able
 ```
-
-* **Note**: This struct needs to be revised. Please, post an issue to request it.
 
 ---
 
@@ -5353,12 +5333,12 @@ Wrap the body expressions with `create-image-resolve` and `destroy-image-resolve
 
 **Members**
 * *sType*: `VkStructureType`
-* *pNext*: `void`
+* *pNext*: `Vulkan object`
 * *renderPass*: `VkRenderPass`
 * *framebuffer*: `VkFramebuffer`
 * *renderArea*: `VkRect2D`
 * *clearValueCount*: `uint32`
-* *pClearValues*: `VkClearValue`
+* *pClearValues*: `(list VkClearValue)`
 
 **create-render-pass-begin-info**
 ```lisp
@@ -5394,8 +5374,6 @@ Wrap the body expressions with `create-render-pass-begin-info` and `destroy-rend
 (render-pass-begin-info-clearValueCount obj) ; setf-able
 (render-pass-begin-info-pClearValues obj &optional pclearvalues-index) ; setf-able
 ```
-
-* **Note**: This struct needs to be revised. Please, post an issue to request it.
 
 ---
 
@@ -10238,7 +10216,7 @@ Wrap the body expressions with `create-external-fence-properties` and `destroy-e
 
 **Members**
 * *sType*: `VkStructureType`
-* *pNext*: `void`
+* *pNext*: `Vulkan object`
 * *handleTypes*: `VkExternalFenceHandleTypeFlags`
 
 **create-export-fence-create-info-khr**
@@ -10274,7 +10252,7 @@ Wrap the body expressions with `create-export-fence-create-info-khr` and `destro
 
 **Members**
 * *sType*: `VkStructureType`
-* *pNext*: `void`
+* *pNext*: `Vulkan object`
 * *handleTypes*: `VkExternalFenceHandleTypeFlags`
 
 **create-export-fence-create-info**
@@ -10303,8 +10281,6 @@ Wrap the body expressions with `create-export-fence-create-info` and `destroy-ex
 (export-fence-create-info-pNext obj) ; setf-able
 (export-fence-create-info-handleTypes obj) ; setf-able
 ```
-
-* **Note**: This struct needs to be revised. Please, post an issue to request it.
 
 ---
 
@@ -20663,7 +20639,7 @@ Wrap the body expressions with `create-surface-format-khr` and `destroy-surface-
 
 **Members**
 * *sType*: `VkStructureType`
-* *pNext*: `void`
+* *pNext*: `Vulkan object`
 * *flags*: `VkSwapchainCreateFlagsKHR`
 * *surface*: `VkSurfaceKHR`
 * *minImageCount*: `uint32`
@@ -20744,12 +20720,12 @@ Wrap the body expressions with `create-swapchain-create-info-khr` and `destroy-s
 
 **Members**
 * *sType*: `VkStructureType`
-* *pNext*: `void`
+* *pNext*: `Vulkan object`
 * *waitSemaphoreCount*: `uint32`
-* *pWaitSemaphores*: `VkSemaphore`
+* *pWaitSemaphores*: `(list VkSemaphore)`
 * *swapchainCount*: `uint32`
-* *pSwapchains*: `VkSwapchainKHR`
-* *pImageIndices*: `uint32`
+* *pSwapchains*: `(list VkSwapchainKHR)`
+* *pImageIndices*: `(list uint32)`
 * *pResults*: `VkResult`
 
 **create-present-info-khr**
@@ -20785,11 +20761,9 @@ Wrap the body expressions with `create-present-info-khr` and `destroy-present-in
 (present-info-khr-pWaitSemaphores obj &optional pwaitsemaphores-index) ; setf-able
 (present-info-khr-swapchainCount obj) ; setf-able
 (present-info-khr-pSwapchains obj &optional pswapchains-index) ; setf-able
-(present-info-khr-pImageIndices obj) ; setf-able
-(present-info-khr-pResults obj) ; setf-able
+(present-info-khr-pImageIndices obj &optional pimageindices-index) ; setf-able
+(present-info-khr-pResults obj &optional presults-index) ; setf-able
 ```
-
-* **Note**: This struct needs to be revised. Please, post an issue to request it.
 
 ---
 
@@ -26380,7 +26354,7 @@ Wrap the body expressions with `create-hdr-metadata-ext` and `destroy-hdr-metada
 
 **Members**
 * *sType*: `VkStructureType`
-* *pNext*: `void`
+* *pNext*: `Vulkan object`
 * *pLabelName*: `string`
 * *color*: `(list float)`
 
@@ -26419,7 +26393,7 @@ Wrap the body expressions with `create-debug-utils-label-ext` and `destroy-debug
 
 **Members**
 * *sType*: `VkStructureType`
-* *pNext*: `void`
+* *pNext*: `Vulkan object`
 * *objectType*: `VkObjectType`
 * *objectHandle*: `uint64`
 * *pObjectName*: `string`

@@ -289,7 +289,7 @@ Wrap the body expressions with `create-enumerate-instance-extension-properties` 
   * *pLayerName*: `string`
 
 * *Return:*
-  * *pProperties*: `VkExtensionProperties`
+  * *pProperties*: `(list VkExtensionProperties)`
   * *result*: `VkResult`
 
 **destroy-enumerate-device-extension-properties**
@@ -368,19 +368,16 @@ Wrap the body expressions with `create-enumerate-instance-layer-properties` and 
 
 **queue-submit**
 ```lisp
-(queue-submit queue submitCount pSubmits fence) => return-value
+(queue-submit queue pSubmits fence) => result
 ```
 
 * *Parameters*:
   * *queue*: `VkQueue`
-  * *submitCount*: `uint32`
   * *pSubmits*: `VkSubmitInfo`
   * *fence*: `VkFence`
 
 * *Return:*
-  * *return-value*: `VkResult`
-
-* **Note**: This function needs to be revised. Please, post an issue to request it.
+  * *result*: `VkResult`
 
 ## vkQueueWaitIdle
 
@@ -666,25 +663,23 @@ Wrap the body expressions with `create-enumerate-instance-layer-properties` and 
 
 **create-fence**
 ```lisp
-(create-fence device pCreateInfo pAllocator pFence) => return-value
+(create-fence device pCreateInfo pAllocator) => (values pFence result)
 ```
 
 * *Parameters*:
   * *device*: `VkDevice`
   * *pCreateInfo*: `VkFenceCreateInfo`
   * *pAllocator*: `VkAllocationCallbacks`
-  * *pFence*: `VkFence`
 
 * *Return:*
-  * *return-value*: `VkResult`
-
-* **Note**: This function needs to be revised. Please, post an issue to request it.
+  * *pFence*: `VkFence`
+  * *result*: `VkResult`
 
 ## vkDestroyFence
 
 **destroy-fence**
 ```lisp
-(destroy-fence device fence pAllocator) => return-value
+(destroy-fence device fence pAllocator)
 ```
 
 * *Parameters*:
@@ -692,27 +687,26 @@ Wrap the body expressions with `create-enumerate-instance-layer-properties` and 
   * *fence*: `VkFence`
   * *pAllocator*: `VkAllocationCallbacks`
 
-* *Return:*
-  * *return-value*: `void`
-
-* **Note**: This function needs to be revised. Please, post an issue to request it.
+**with-fence**
+```lisp
+(with-fence var (&rest args)
+  &body body)
+```
+Wrap the body expressions with `create-fence` and `destroy-fence`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
 ## vkResetFences
 
 **reset-fences**
 ```lisp
-(reset-fences device fenceCount pFences) => return-value
+(reset-fences device pFences) => result
 ```
 
 * *Parameters*:
   * *device*: `VkDevice`
-  * *fenceCount*: `uint32`
-  * *pFences*: `VkFence`
+  * *pFences*: `(list VkFence)`
 
 * *Return:*
-  * *return-value*: `VkResult`
-
-* **Note**: This function needs to be revised. Please, post an issue to request it.
+  * *result*: `VkResult`
 
 ## vkGetFenceStatus
 
@@ -734,44 +728,39 @@ Wrap the body expressions with `create-enumerate-instance-layer-properties` and 
 
 **wait-for-fences**
 ```lisp
-(wait-for-fences device fenceCount pFences waitAll timeout) => return-value
+(wait-for-fences device pFences waitAll timeout) => result
 ```
 
 * *Parameters*:
   * *device*: `VkDevice`
-  * *fenceCount*: `uint32`
-  * *pFences*: `VkFence`
+  * *pFences*: `(list VkFence)`
   * *waitAll*: `VkBool32`
   * *timeout*: `uint64`
 
 * *Return:*
-  * *return-value*: `VkResult`
-
-* **Note**: This function needs to be revised. Please, post an issue to request it.
+  * *result*: `VkResult`
 
 ## vkCreateSemaphore
 
 **create-semaphore**
 ```lisp
-(create-semaphore device pCreateInfo pAllocator pSemaphore) => return-value
+(create-semaphore device pCreateInfo pAllocator) => (values pSemaphore result)
 ```
 
 * *Parameters*:
   * *device*: `VkDevice`
   * *pCreateInfo*: `VkSemaphoreCreateInfo`
   * *pAllocator*: `VkAllocationCallbacks`
-  * *pSemaphore*: `VkSemaphore`
 
 * *Return:*
-  * *return-value*: `VkResult`
-
-* **Note**: This function needs to be revised. Please, post an issue to request it.
+  * *pSemaphore*: `VkSemaphore`
+  * *result*: `VkResult`
 
 ## vkDestroySemaphore
 
 **destroy-semaphore**
 ```lisp
-(destroy-semaphore device semaphore pAllocator) => return-value
+(destroy-semaphore device semaphore pAllocator)
 ```
 
 * *Parameters*:
@@ -779,10 +768,12 @@ Wrap the body expressions with `create-enumerate-instance-layer-properties` and 
   * *semaphore*: `VkSemaphore`
   * *pAllocator*: `VkAllocationCallbacks`
 
-* *Return:*
-  * *return-value*: `void`
-
-* **Note**: This function needs to be revised. Please, post an issue to request it.
+**with-semaphore**
+```lisp
+(with-semaphore var (&rest args)
+  &body body)
+```
+Wrap the body expressions with `create-semaphore` and `destroy-semaphore`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
 ## vkCreateEvent
 
@@ -1459,25 +1450,23 @@ Wrap the body expressions with `create-pipeline-layout` and `destroy-pipeline-la
 
 **create-framebuffer**
 ```lisp
-(create-framebuffer device pCreateInfo pAllocator pFramebuffer) => return-value
+(create-framebuffer device pCreateInfo pAllocator) => (values pFramebuffer result)
 ```
 
 * *Parameters*:
   * *device*: `VkDevice`
   * *pCreateInfo*: `VkFramebufferCreateInfo`
   * *pAllocator*: `VkAllocationCallbacks`
-  * *pFramebuffer*: `VkFramebuffer`
 
 * *Return:*
-  * *return-value*: `VkResult`
-
-* **Note**: This function needs to be revised. Please, post an issue to request it.
+  * *pFramebuffer*: `VkFramebuffer`
+  * *result*: `VkResult`
 
 ## vkDestroyFramebuffer
 
 **destroy-framebuffer**
 ```lisp
-(destroy-framebuffer device framebuffer pAllocator) => return-value
+(destroy-framebuffer device framebuffer pAllocator)
 ```
 
 * *Parameters*:
@@ -1485,10 +1474,14 @@ Wrap the body expressions with `create-pipeline-layout` and `destroy-pipeline-la
   * *framebuffer*: `VkFramebuffer`
   * *pAllocator*: `VkAllocationCallbacks`
 
-* *Return:*
-  * *return-value*: `void`
+**with-framebuffer**
+```lisp
+(with-framebuffer var (&rest args)
+  &body body)
+```
+Wrap the body expressions with `create-framebuffer` and `destroy-framebuffer`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
-* **Note**: This function needs to be revised. Please, post an issue to request it.
+* **Note**: The allocator is passed to both the constructor and destructor.
 
 ## vkCreateRenderPass
 
@@ -1546,25 +1539,23 @@ Wrap the body expressions with `create-render-pass` and `destroy-render-pass`. T
 
 **create-command-pool**
 ```lisp
-(create-command-pool device pCreateInfo pAllocator pCommandPool) => return-value
+(create-command-pool device pCreateInfo pAllocator) => (values pCommandPool result)
 ```
 
 * *Parameters*:
   * *device*: `VkDevice`
   * *pCreateInfo*: `VkCommandPoolCreateInfo`
   * *pAllocator*: `VkAllocationCallbacks`
-  * *pCommandPool*: `VkCommandPool`
 
 * *Return:*
-  * *return-value*: `VkResult`
-
-* **Note**: This function needs to be revised. Please, post an issue to request it.
+  * *pCommandPool*: `VkCommandPool`
+  * *result*: `VkResult`
 
 ## vkDestroyCommandPool
 
 **destroy-command-pool**
 ```lisp
-(destroy-command-pool device commandPool pAllocator) => return-value
+(destroy-command-pool device commandPool pAllocator)
 ```
 
 * *Parameters*:
@@ -1572,10 +1563,12 @@ Wrap the body expressions with `create-render-pass` and `destroy-render-pass`. T
   * *commandPool*: `VkCommandPool`
   * *pAllocator*: `VkAllocationCallbacks`
 
-* *Return:*
-  * *return-value*: `void`
-
-* **Note**: This function needs to be revised. Please, post an issue to request it.
+**with-command-pool**
+```lisp
+(with-command-pool var (&rest args)
+  &body body)
+```
+Wrap the body expressions with `create-command-pool` and `destroy-command-pool`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
 ## vkResetCommandPool
 
@@ -1598,42 +1591,41 @@ Wrap the body expressions with `create-render-pass` and `destroy-render-pass`. T
 
 **allocate-command-buffers**
 ```lisp
-(allocate-command-buffers device pAllocateInfo pCommandBuffers) => return-value
+(allocate-command-buffers device pAllocateInfo) => (values pCommandBuffers result)
 ```
 
 * *Parameters*:
   * *device*: `VkDevice`
   * *pAllocateInfo*: `VkCommandBufferAllocateInfo`
-  * *pCommandBuffers*: `VkCommandBuffer`
 
 * *Return:*
-  * *return-value*: `VkResult`
-
-* **Note**: This function needs to be revised. Please, post an issue to request it.
+  * *pCommandBuffers*: `(list VkCommandBuffer)`
+  * *result*: `VkResult`
 
 ## vkFreeCommandBuffers
 
 **free-command-buffers**
 ```lisp
-(free-command-buffers device commandPool commandBufferCount pCommandBuffers) => return-value
+(free-command-buffers device commandPool pCommandBuffers)
 ```
 
 * *Parameters*:
   * *device*: `VkDevice`
   * *commandPool*: `VkCommandPool`
-  * *commandBufferCount*: `uint32`
-  * *pCommandBuffers*: `VkCommandBuffer`
+  * *pCommandBuffers*: `(list VkCommandBuffer)`
 
-* *Return:*
-  * *return-value*: `void`
-
-* **Note**: This function needs to be revised. Please, post an issue to request it.
+**with-command-buffers**
+```lisp
+(with-command-buffers var (&rest args)
+  &body body)
+```
+Wrap the body expressions with `allocate-command-buffers` and `free-command-buffers`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
 ## vkBeginCommandBuffer
 
 **begin-command-buffer**
 ```lisp
-(begin-command-buffer commandBuffer pBeginInfo) => return-value
+(begin-command-buffer commandBuffer pBeginInfo) => result
 ```
 
 * *Parameters*:
@@ -1641,9 +1633,7 @@ Wrap the body expressions with `create-render-pass` and `destroy-render-pass`. T
   * *pBeginInfo*: `VkCommandBufferBeginInfo`
 
 * *Return:*
-  * *return-value*: `VkResult`
-
-* **Note**: This function needs to be revised. Please, post an issue to request it.
+  * *result*: `VkResult`
 
 ## vkEndCommandBuffer
 
@@ -1658,13 +1648,11 @@ Wrap the body expressions with `create-render-pass` and `destroy-render-pass`. T
 * *Return:*
   * *return-value*: `VkResult`
 
-* **Note**: This function needs to be revised. Please, post an issue to request it.
-
 ## vkResetCommandBuffer
 
 **reset-command-buffer**
 ```lisp
-(reset-command-buffer commandBuffer flags) => return-value
+(reset-command-buffer commandBuffer flags) => result
 ```
 
 * *Parameters*:
@@ -1672,15 +1660,13 @@ Wrap the body expressions with `create-render-pass` and `destroy-render-pass`. T
   * *flags*: `VkCommandBufferResetFlags`
 
 * *Return:*
-  * *return-value*: `VkResult`
-
-* **Note**: This function needs to be revised. Please, post an issue to request it.
+  * *result*: `VkResult`
 
 ## vkCmdBindPipeline
 
 **cmd-bind-pipeline**
 ```lisp
-(cmd-bind-pipeline commandBuffer pipelineBindPoint pipeline) => return-value
+(cmd-bind-pipeline commandBuffer pipelineBindPoint pipeline)
 ```
 
 * *Parameters*:
@@ -1688,34 +1674,24 @@ Wrap the body expressions with `create-render-pass` and `destroy-render-pass`. T
   * *pipelineBindPoint*: `VkPipelineBindPoint`
   * *pipeline*: `VkPipeline`
 
-* *Return:*
-  * *return-value*: `void`
-
-* **Note**: This function needs to be revised. Please, post an issue to request it.
-
 ## vkCmdSetViewport
 
 **cmd-set-viewport**
 ```lisp
-(cmd-set-viewport commandBuffer firstViewport viewportCount pViewports) => return-value
+(cmd-set-viewport commandBuffer firstViewport viewportCount pViewports)
 ```
 
 * *Parameters*:
   * *commandBuffer*: `VkCommandBuffer`
   * *firstViewport*: `uint32`
   * *viewportCount*: `uint32`
-  * *pViewports*: `VkViewport`
-
-* *Return:*
-  * *return-value*: `void`
-
-* **Note**: This function needs to be revised. Please, post an issue to request it.
+  * *pViewports*: `(list VkViewport)`
 
 ## vkCmdSetScissor
 
 **cmd-set-scissor**
 ```lisp
-(cmd-set-scissor commandBuffer firstScissor scissorCount pScissors) => return-value
+(cmd-set-scissor commandBuffer firstScissor scissorCount pScissors)
 ```
 
 * *Parameters*:
@@ -1723,11 +1699,6 @@ Wrap the body expressions with `create-render-pass` and `destroy-render-pass`. T
   * *firstScissor*: `uint32`
   * *scissorCount*: `uint32`
   * *pScissors*: `VkRect2D`
-
-* *Return:*
-  * *return-value*: `void`
-
-* **Note**: This function needs to be revised. Please, post an issue to request it.
 
 ## vkCmdSetLineWidth
 
@@ -1910,7 +1881,7 @@ Wrap the body expressions with `create-render-pass` and `destroy-render-pass`. T
 
 **cmd-draw**
 ```lisp
-(cmd-draw commandBuffer vertexCount instanceCount firstVertex firstInstance) => return-value
+(cmd-draw commandBuffer vertexCount instanceCount firstVertex firstInstance)
 ```
 
 * *Parameters*:
@@ -1919,11 +1890,6 @@ Wrap the body expressions with `create-render-pass` and `destroy-render-pass`. T
   * *instanceCount*: `uint32`
   * *firstVertex*: `uint32`
   * *firstInstance*: `uint32`
-
-* *Return:*
-  * *return-value*: `void`
-
-* **Note**: This function needs to be revised. Please, post an issue to request it.
 
 ## vkCmdDrawIndexed
 
@@ -2438,18 +2404,13 @@ Wrap the body expressions with `create-render-pass` and `destroy-render-pass`. T
 
 **cmd-begin-render-pass**
 ```lisp
-(cmd-begin-render-pass commandBuffer pRenderPassBegin contents) => return-value
+(cmd-begin-render-pass commandBuffer pRenderPassBegin contents)
 ```
 
 * *Parameters*:
   * *commandBuffer*: `VkCommandBuffer`
   * *pRenderPassBegin*: `VkRenderPassBeginInfo`
   * *contents*: `VkSubpassContents`
-
-* *Return:*
-  * *return-value*: `void`
-
-* **Note**: This function needs to be revised. Please, post an issue to request it.
 
 ## vkCmdNextSubpass
 
@@ -2471,16 +2432,11 @@ Wrap the body expressions with `create-render-pass` and `destroy-render-pass`. T
 
 **cmd-end-render-pass**
 ```lisp
-(cmd-end-render-pass commandBuffer) => return-value
+(cmd-end-render-pass commandBuffer)
 ```
 
 * *Parameters*:
   * *commandBuffer*: `VkCommandBuffer`
-
-* *Return:*
-  * *return-value*: `void`
-
-* **Note**: This function needs to be revised. Please, post an issue to request it.
 
 ## vkCmdExecuteCommands
 
@@ -3987,7 +3943,7 @@ Wrap the body expressions with `create-swapchain` and `destroy-swapchain`. The n
 
 **acquire-next-image-khr**
 ```lisp
-(acquire-next-image-khr device swapchain timeout semaphore fence pImageIndex) => return-value
+(acquire-next-image-khr device swapchain timeout semaphore fence) => (values pImageIndex return-value)
 ```
 
 * *Parameters*:
@@ -3996,18 +3952,16 @@ Wrap the body expressions with `create-swapchain` and `destroy-swapchain`. The n
   * *timeout*: `uint64`
   * *semaphore*: `VkSemaphore`
   * *fence*: `VkFence`
-  * *pImageIndex*: `uint32`
 
 * *Return:*
+  * *pImageIndex*: `uint32`
   * *return-value*: `VkResult`
-
-* **Note**: This function needs to be revised. Please, post an issue to request it.
 
 ## vkQueuePresentKHR
 
 **queue-present-khr**
 ```lisp
-(queue-present-khr queue pPresentInfo) => return-value
+(queue-present-khr queue pPresentInfo) => result
 ```
 
 * *Parameters*:
@@ -4015,9 +3969,7 @@ Wrap the body expressions with `create-swapchain` and `destroy-swapchain`. The n
   * *pPresentInfo*: `VkPresentInfoKHR`
 
 * *Return:*
-  * *return-value*: `VkResult`
-
-* **Note**: This function needs to be revised. Please, post an issue to request it.
+  * *result*: `VkResult`
 
 ## vkGetDeviceGroupPresentCapabilitiesKHR
 
