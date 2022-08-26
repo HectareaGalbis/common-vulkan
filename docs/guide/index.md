@@ -31,4 +31,10 @@ I think I'm not missing anything so..., let's code!
   * [Fixed functions](https://hectarea1996.github.io/common-vulkan/guide/fixed-functions.html)
   * [Render passes](https://hectarea1996.github.io/common-vulkan/guide/render-passes.html)
   * [Conclusion](https://hectarea1996.github.io/common-vulkan/guide/conclusion.html)
-  
+
+* **Drawing**
+  * [Framebuffers](https://hectarea1996.github.io/common-vulkan/guide/framebuffers.html)
+  * [Command buffers](https://hectarea1996.github.io/common-vulkan/guide/command-buffers.html)
+  * [Rendering and presentation](https://hectarea1996.github.io/common-vulkan/guide/rendering.html)
+  * [Frames in flight](https://hectarea1996.github.io/common-vulkan/guide/frames-in-flight.html)
+  * [Swap chain recreation](https://hectarea1996.github.io/common-vulkan/guide/swap-chain-recreation.html)
