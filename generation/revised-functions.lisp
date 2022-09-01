@@ -574,6 +574,16 @@
     (vkcmddraw commandbuffer vertexcount instancecount firstvertex firstinstance))
 
 
+  (more-cffi:def-foreign-function doc-file ("vkCmdBindVertexBuffers" cmd-bind-vertex-buffers funcall-cmd-bind-vertex-buffers) (commandbuffer firstbinding pbuffers poffsets)
+    (declare-types ("VkCommandBuffer" "commandBuffer") (uint32 "firstBinding") ((list "VkBuffer") "pBuffers") ((list "VkDeviceSize") "pOffsets"))
+    (let ((bindingCount (min (length pBuffers) (length pOffsets)))
+	  (pBuffers-c (cffi:foreign-alloc 'VkBuffer :initial-contents (mapcar (lambda (buffer) (if buffer buffer VK_NULL_HANDLE)) pBuffers)))
+	  (pOffsets-c (cffi:foreign-alloc 'VkDeviceSize :initial-contents pOffsets)))
+      (vkcmdbindvertexbuffers commandbuffer firstbinding bindingcount pbuffers-c poffsets-c)
+      (cffi:foreign-free pBuffers-c)
+      (cffi:foreign-free pOffsets-c)))
+  
+
   (more-cffi:def-foreign-function doc-file ("vkCreateSemaphore" create-semaphore funcall-create-semaphore) (device pcreateinfo pallocator)
     (declare-types ("VkDevice" device) ("VkSemaphoreCreateInfo" "pCreateInfo") ("VkAllocationCallbacks" "pAllocator")
 		   :return ("VkSemaphore" "pSemaphore") ("VkResult" result))
@@ -657,4 +667,102 @@
   (more-cffi:def-foreign-function doc-file ("vkQueuePresentKHR" queue-present-khr funcall-queue-present-khr) (queue ppresentinfo)
     (declare-types ("VkQueue" queue) ("VkPresentInfoKHR" "pPresentInfo")
 		   :return ("VkResult" result))
-    (vkqueuepresentkhr queue ppresentinfo)))
+    (vkqueuepresentkhr queue ppresentinfo))
+
+
+  (more-cffi:def-foreign-function doc-file ("vkCreateBuffer" create-buffer funcall-create-buffer) (device pcreateinfo pallocator)
+    (declare-types ("VkDevice" device) ("VkBufferCreateInfo" "pCreateInfo") ("VkAllocationCallbacks" "pAllocator")
+		   :return ("VkBuffer" "pBuffer") ("VkResult" result))
+    (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
+      (cffi:with-foreign-object (pBuffer 'VkBuffer)
+	(let ((result (vkcreatebuffer device pcreateinfo pallocator-c pbuffer)))
+	  (values (cffi:mem-ref pBuffer 'VkBuffer) result device pAllocator)))))
+
+
+  (more-cffi:def-foreign-function doc-file ("vkDestroyBuffer" destroy-buffer funcall-destroy-buffer) (device buffer pallocator)
+    (declare-types ("VkDevice" device) ("VkBuffer" buffer) ("VkAllocationCallbacks" "pAllocator"))
+    (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
+      (vkdestroybuffer device buffer pallocator-c)))
+
+
+  (mcffi:defwith doc-file with-buffer
+    create-buffer
+    destroy-buffer
+    :destructor-arguments (2 0 3))
+
+
+  (more-cffi:def-foreign-function doc-file ("vkGetBufferMemoryRequirements" create-get-buffer-memory-requirements funcall-get-buffer-memory-requirements) (device buffer)
+    (declare-types ("VkDevice" device) ("VkBuffer" buffer)
+		   :return ("VkMemoryRequirements" "pMemoryRequirements"))
+    (let ((pMemoryRequirements (cffi:foreign-alloc '(:struct VkMemoryRequirements))))
+      (vkgetbuffermemoryrequirements device buffer pmemoryrequirements)
+      (values pMemoryRequirements)))
+
+  (more-cffi:def-foreign-function doc-file (nil destroy-get-buffer-memory-requirements) (pMemoryRequirements)
+    (declare-types ("VkMemoryRequirements" "pMemoryRequirements"))
+    (cffi:foreign-free pMemoryRequirements))
+
+  (mcffi:defwith doc-file with-get-buffer-memory-requirements
+    create-get-buffer-memory-requirements
+    destroy-get-buffer-memory-requirements)
+
+
+  (more-cffi:def-foreign-function doc-file ("vkGetPhysicalDeviceMemoryProperties" create-get-physical-device-memory-properties funcall-get-physical-device-memory-properties) (physicaldevice)
+    (declare-types ("VkPhysicalDevice" "physicalDevice")
+		   :return ("VkPhysicalDeviceMemoryProperties" "pMemoryProperties"))
+    (let ((pMemoryProperties (cffi:foreign-alloc '(:struct VkPhysicalDeviceMemoryProperties))))
+      (vkgetphysicaldevicememoryproperties physicaldevice pmemoryproperties)
+      (values pMemoryProperties)))
+
+  (mcffi:def-foreign-function doc-file (nil destroy-get-physical-device-memory-properties) (pMemoryProperties)
+    (declare-types ("VkPhysicalDeviceMemoryProperties" "pMemoryProperties"))
+    (cffi:foreign-free pMemoryProperties))
+
+  (mcffi:defwith doc-file with-get-physical-device-memory-properties
+    create-get-physical-device-memory-properties
+    destroy-get-physical-device-memory-properties)
+
+
+  (more-cffi:def-foreign-function doc-file ("vkAllocateMemory" allocate-memory funcall-allocate-memory) (device pallocateinfo pallocator)
+    (declare-types ("VkDevice" device) ("VkMemoryAllocateInfo" "pAllocateInfo") ("VkAllocationCallbacks" "pAllocator")
+		   :return ("VkDeviceMemory" "pMemory") ("VkResult" result))
+    (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
+      (cffi:with-foreign-object (pMemory 'VkDeviceMemory)
+	(let ((result (vkallocatememory device pallocateinfo pallocator-c pmemory)))
+	  (values (cffi:mem-ref pMemory 'VkDeviceMemory) result device pAllocator)))))
+
+
+  (more-cffi:def-foreign-function doc-file ("vkFreeMemory" free-memory funcall-free-memory) (device memory pallocator)
+    (declare-types ("VkDevice" device) ("VkDeviceMemory" memory) ("VkAllocationCallbacks" "pAllocator"))
+    (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
+      (vkfreememory device memory pallocator-c)))
+
+
+  (mcffi:defwith doc-file with-allocated-memory
+    allocate-memory
+    free-memory)
+
+
+  (more-cffi:def-foreign-function doc-file ("vkBindBufferMemory" bind-buffer-memory funcall-bind-buffer-memory) (device buffer memory memoryoffset)
+    (declare-types ("VkDevice" device) ("VkBuffer" buffer) ("VkDeviceMemory" memory) ("VkDeviceSize" "memoryOffset")
+		   :return ("VkResult" result))
+    (vkbindbuffermemory device buffer memory memoryoffset))
+
+
+  (more-cffi:def-foreign-function doc-file ("vkMapMemory" map-memory funcall-map-memory) (device memory offset size flags)
+    (declare-types ("VkDevice" device) ("VkDeviceMemory" memory) ("VkDeviceSize" offset) ("VkDeviceSize" size) ("VkMemoryMapFlags" flags)
+		   :return ("Data pointer" "ppData") ("VkResult" result))
+    (cffi:with-foreign-object (ppData :pointer)
+      (let ((result (vkmapmemory device memory offset size flags ppdata)))
+	(values (cffi:mem-ref ppData :pointer) result device memory))))
+
+
+  (more-cffi:def-foreign-function doc-file ("vkUnmapMemory" unmap-memory funcall-unmap-memory) (device memory)
+    (declare-types ("VkDevice" device) ("VkDeviceMemory" memory))
+    (vkunmapmemory device memory))
+
+
+  (mcffi:defwith doc-file with-mapped-memory
+    map-memory
+    unmap-memory
+    :destructor-arguments (2 3)))

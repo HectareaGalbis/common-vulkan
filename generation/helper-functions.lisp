@@ -53,12 +53,14 @@
       (check-vulkan-struct-slot slot)))
 
   (defun create-constructor-code (struct-name names types counts)
-    (let* ((names-args (iter (for name in names) (collect (gensym (symbol-name name)))))
+    (let* ((keyword-args (iter (for name in names) (collect (intern (symbol-name name) "KEYWORD"))))
+	   (names-args (iter (for name in names) (collect (gensym (symbol-name name)))))
 	   (suppliedp-args (iter (for suppliedp-arg in names) (collect (gensym (symbol-name suppliedp-arg)))))
 	   (args (iter
+		   (for keyword-arg in keyword-args)
 		   (for name-arg in names-args)
 		   (for suppliedp-arg in suppliedp-args)
-		   (collect `(,name-arg 0 ,suppliedp-arg))))
+		   (collect `((,keyword-arg ,name-arg) 0 ,suppliedp-arg))))
 	   (i-sym (gensym "I"))
 	   (setf-exprs (iter
 			 (for name in names)
@@ -76,7 +78,8 @@
 	 (let ((,object-sym (cffi:foreign-alloc '(:struct ,struct-name))))
 	   (mcffi:memset ,object-sym 0 (cffi:foreign-type-size '(:struct ,struct-name)))
 	   (cffi:with-foreign-slots (,names ,object-sym (:struct ,struct-name))
-	     ,@setf-exprs)))))
+	     ,@setf-exprs)
+	   (values ,object-sym)))))
 
   (defun create-destructor-code (struct-name)
     (let ((object-sym (gensym)))
@@ -103,7 +106,7 @@
 			(if ,index-sym
 			    (cffi:mem-aref ,name ,type ,index-sym)
 			    (iter (for ,i-sym from 0 below ,count)
-			      (collect (cffi:mem-aref ,name '(:struct ,struct-name) ,i-sym)))))))))))
+			      (collect (cffi:mem-aref ,name ,type ,i-sym)))))))))))
 
   (defun create-set-code (struct-name names types counts)
     (let ((object-sym (gensym))
@@ -150,4 +153,58 @@
 
   (defun vulkan-struct-offset (type slot)
     (cffi:foreign-slot-offset (list :struct type) slot))
-  (export 'vulkan-struct-offset))
+  (export 'vulkan-struct-offset)
+
+
+  (defun memcpy (dst dst-type src src-type &optional (size nil)) ; Usar foreign-free
+    (unless (if (and (eq dst-type :pointer)
+		     (eq src-type :pointer)
+		     (not (listp dst))
+		     (not (listp src)))
+		size
+		t)
+      (error "If dst and src are of type :pointer, size must be specified."))
+    (let* ((dst-c (if (listp dst)
+		      (if (member dst-type '(:pointer :bool :int :uint :float :double))
+			  (cffi:foreign-alloc dst-type :initial-contents dst)
+			  (let ((arr (cffi:foreign-alloc (list :struct dst-type) :count (length dst))))
+			    (iter
+			      (for i from 0 below (length dst))
+			      (for elem in dst)
+			      (mcffi:memcpy (cffi:mem-aptr arr `(:struct ,dst-type) i) elem (cffi:foreign-type-size `(:struct ,dst-type))))
+			    arr))
+		      dst))
+	   (src-c (if (listp src)
+		      (if (member src-type '(:pointer :bool :int :uint :float :double))
+			  (cffi:foreign-alloc src-type :initial-contents src)
+			  (let ((arr (cffi:foreign-alloc (list :struct src-type) :count (length src))))
+			    (iter
+			      (for i from 0 below (length src))
+			      (for elem in src)
+			      (mcffi:memcpy (cffi:mem-aptr arr `(:struct ,src-type) i) elem (cffi:foreign-type-size `(:struct ,src-type))))
+			    arr))
+		      src))
+	   (dst-size (when (not size)
+		       (if (and (not (listp dst)) (eq dst-type :pointer))
+			   nil
+			   (let ((single-size (cffi:foreign-type-size (if (member dst-type '(:pointer :bool :int :uint :float :double))
+									  dst-type
+									  (list :struct dst-type)))))
+			     (if (listp dst)
+				 (* (length dst) single-size)
+				 single-size)))))
+	   (src-size (when (not size)
+		       (if (and (not (listp src)) (eq src-type :pointer))
+			   nil
+			   (let ((single-size (cffi:foreign-type-size (if (member src-type '(:pointer :bool :int :uint :float :double))
+									  src-type
+									  (list :struct src-type)))))
+			     (if (listp src)
+				 (* (length src) single-size)
+				 single-size)))))
+	   (size-c (or size
+		       (and dst-size src-size (min dst-size src-size))
+		       dst-size
+		       src-size)))
+      (mcffi:memcpy dst-c src-c size-c)))
+  (export 'memcpy))

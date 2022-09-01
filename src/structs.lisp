@@ -783,34 +783,33 @@
       (physical-device-memory-properties)
       (:default-create :default-get :default-set)
     (memorytypecount :name "memoryTypeCount" :type uint32)
-    (memorytypes :pointer t :name "memoryTypes" :type "VkMemoryType" :create
+    (memorytypes :pointer t :name "memoryTypes" :type (list "VkMemoryType")
+     :create
      ((memorytypes-arg)
       (create-array (:struct vkmemorytype) memorytypes memorytypes-arg :dynamic
-       nil :pointers ("VkMemoryType")))
+       nil :pointers t))
      :get
      ((&optional memorytypes-index)
       (get-array (:struct vkmemorytype) memorytypes memorytypes-index 32
-       :pointers ("VkMemoryType")))
+       :pointers t))
      :set
      ((memorytypes-arg &optional memorytypes-index)
       (set-array (:struct vkmemorytype) memorytypes memorytypes-arg
-       memorytypes-index :dynamic nil :pointers ("VkMemoryType"))))
+       memorytypes-index :dynamic nil :pointers t)))
     (memoryheapcount :name "memoryHeapCount" :type uint32)
-    (memoryheaps :pointer t :name "memoryHeaps" :type "VkMemoryHeap" :create
+    (memoryheaps :pointer t :name "memoryHeaps" :type (list "VkMemoryHeap")
+     :create
      ((memoryheaps-arg)
       (create-array (:struct vkmemoryheap) memoryheaps memoryheaps-arg :dynamic
-       nil :pointers ("VkMemoryHeap")))
+       nil :pointers t))
      :get
      ((&optional memoryheaps-index)
       (get-array (:struct vkmemoryheap) memoryheaps memoryheaps-index 16
-       :pointers ("VkMemoryHeap")))
+       :pointers t))
      :set
      ((memoryheaps-arg &optional memoryheaps-index)
       (set-array (:struct vkmemoryheap) memoryheaps memoryheaps-arg
-       memoryheaps-index :dynamic nil :pointers ("VkMemoryHeap")))))
-
-  (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
+       memoryheaps-index :dynamic nil :pointers t))))
 
   (more-cffi:def-foreign-struct doc-file
       "VkPhysicalDeviceSparseProperties"
@@ -1088,14 +1087,11 @@
       (memory-allocate-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "Vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (allocationsize :name "allocationSize" :type "VkDeviceSize")
     (memorytypeindex :name "memoryTypeIndex" :type uint32))
-
-  (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkMemoryRequirements"
@@ -1104,9 +1100,6 @@
     (size :name size :type "VkDeviceSize")
     (alignment :name alignment :type "VkDeviceSize")
     (memorytypebits :name "memoryTypeBits" :type uint32))
-
-  (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkSparseMemoryBind"
@@ -1427,7 +1420,7 @@
       (buffer-create-info)
       (:default-create :default-get :default-set)
     (stype :name "sType" :type "VkStructureType")
-    (pnext :name "pNext" :type void :init-form nil :create
+    (pnext :name "pNext" :type "Vulkan object" :init-form nil :create
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (flags :name flags :type "VkBufferCreateFlags")
@@ -1435,8 +1428,8 @@
     (usage :name usage :type "VkBufferUsageFlags")
     (sharingmode :name "sharingMode" :type "VkSharingMode")
     (queuefamilyindexcount :name "queueFamilyIndexCount" :type uint32)
-    (pqueuefamilyindices :name "pQueueFamilyIndices" :type uint32 :init-form
-     nil :create
+    (pqueuefamilyindices :name "pQueueFamilyIndices" :type (list uint32)
+     :init-form nil :create
      ((pqueuefamilyindices-arg)
       (create-array :uint32 pqueuefamilyindices pqueuefamilyindices-arg
        :dynamic t :pointers nil))
@@ -1448,9 +1441,6 @@
      ((pqueuefamilyindices-arg &optional pqueuefamilyindices-index)
       (set-array :uint32 pqueuefamilyindices pqueuefamilyindices-arg
        pqueuefamilyindices-index :dynamic t :pointers nil))))
-
-  (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
 
   (more-cffi:def-foreign-struct doc-file
       "VkBufferViewCreateInfo"
