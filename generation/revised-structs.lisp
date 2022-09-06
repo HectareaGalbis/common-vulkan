@@ -20,7 +20,7 @@
 		 (cffi-sys:null-pointer)))
       (let ((str-sym (gensym)))
 	`(cffi:with-foreign-string (,str-sym ,slot-arg)
-	   (mcffi:copy ,slot ,str-sym :char (1+ (length ,slot-arg)))))))
+	   (mcffi:memcpy ,slot ,str-sym (1+ (length ,slot-arg)))))))
 
 (defmacro destroy-string (slot)
   `(when (not (cffi-sys:null-pointer-p ,slot))
@@ -48,8 +48,8 @@
           (for ,i from 0 below (length ,slot-arg))
 	  (for ,elem in ,slot-arg)
           ,(if pointers
-               `(more-cffi:copy (cffi:mem-aptr ,slot ',type ,i) ,elem
-                                ',type)
+               `(more-cffi:memcpy (cffi:mem-aptr ,slot ',type ,i) ,elem
+                                (cffi:foreign-type-size ,type))
                `(setf (cffi:mem-aref ,slot ',type ,i) ,elem))))))
 
 (defmacro destroy-array (slot)
@@ -74,8 +74,8 @@
           (type slot new-value index &key (dynamic nil) (pointers nil))
   `(if ,index
        ,(if pointers
-            `(more-cffi:copy (cffi:mem-aptr ,slot ',type ,index) ,new-value
-                             ',type)
+            `(more-cffi:memcpy (cffi:mem-aptr ,slot ',type ,index) ,new-value
+                               (cffi:foreign-type-size ,type))
             `(setf (cffi:mem-aref ,slot ',type ,index) ,new-value))
        (progn
         (destroy-array ,slot)
@@ -127,6 +127,10 @@
         (create-array-strings ,slot ,new-value :dynamic ,dynamic))))
 
 
+(defun copy-object (slot slot-arg type)
+  (mcffi:memcpy slot slot-arg (cffi:foreign-type-size type)))
+
+
 (mcffi:with-doc-file (doc-file (asdf:system-relative-pathname "common-vulkan" "docs/api/structs.md"))
 
 
@@ -146,14 +150,14 @@
       (:default-create :default-get :default-set)
     (offset :pointer t :name offset :type "VkOffset2D"
 	    :create ((offset-arg)
-		     (more-cffi:copy offset offset-arg '(:struct vkoffset2d)))
+		     (copy-object offset offset-arg '(:struct vkoffset2d)))
 	    :set ((offset-arg)
-		  (more-cffi:copy offset offset-arg '(:struct vkoffset2d))))
+		  (copy-object offset offset-arg '(:struct vkoffset2d))))
     (extent :pointer t :name extent :type "VkExtent2D"
 	    :create ((extent-arg)
-		     (more-cffi:copy extent extent-arg '(:struct vkextent2d)))
+		     (copy-object extent extent-arg '(:struct vkextent2d)))
 	    :set ((extent-arg)
-		  (more-cffi:copy extent extent-arg '(:struct vkextent2d)))))
+		  (copy-object extent extent-arg '(:struct vkextent2d)))))
 
 
   (more-cffi:def-foreign-struct doc-file "VkComponentMapping" (component-mapping)
@@ -555,14 +559,14 @@
 			     (set-array :uint8 pipelinecacheuuid pipelinecacheuuid-arg pipelinecacheuuid-index :dynamic nil :pointers nil)))
     (limits :pointer t :name limits :type "VkPhysicalDeviceLimits"
 	    :create ((limits-arg)
-		     (more-cffi:copy limits limits-arg '(:struct vkphysicaldevicelimits)))
+		     (copy-object limits limits-arg '(:struct vkphysicaldevicelimits)))
 	    :set ((limits-arg)
-		  (more-cffi:copy limits limits-arg '(:struct vkphysicaldevicelimits))))
+		  (copy-object limits limits-arg '(:struct vkphysicaldevicelimits))))
     (sparseproperties :pointer t :name "sparseProperties" :type "VkPhysicalDeviceSparseProperties"
 		      :create ((sparseproperties-arg)
-			       (more-cffi:copy sparseproperties sparseproperties-arg '(:struct vkphysicaldevicesparseproperties)))
+			       (copy-object sparseproperties sparseproperties-arg '(:struct vkphysicaldevicesparseproperties)))
 		      :set ((sparseproperties-arg)
-			    (more-cffi:copy sparseproperties sparseproperties-arg '(:struct vkphysicaldevicesparseproperties)))))
+			    (copy-object sparseproperties sparseproperties-arg '(:struct vkphysicaldevicesparseproperties)))))
 
 
   (more-cffi:def-foreign-struct doc-file "VkPhysicalDeviceLimits" (physical-device-limits)
@@ -787,9 +791,9 @@
     (minimagetransfergranularity :pointer t :name "minImageTransferGranularity"
 				 :type "VkExtent3D"
 				 :create ((minimagetransfergranularity-arg)
-					  (more-cffi:copy minimagetransfergranularity minimagetransfergranularity-arg '(:struct vkextent3d)))
+					  (copy-object minimagetransfergranularity minimagetransfergranularity-arg '(:struct vkextent3d)))
 				 :set ((minimagetransfergranularity-arg)
-				       (more-cffi:copy minimagetransfergranularity minimagetransfergranularity-arg '(:struct vkextent3d)))))
+				       (copy-object minimagetransfergranularity minimagetransfergranularity-arg '(:struct vkextent3d)))))
 
 
   (more-cffi:def-foreign-struct doc-file "VkDeviceQueueCreateInfo" (device-queue-create-info)
@@ -865,19 +869,19 @@
     (maximagecount :name "maxImageCount" :type uint32)
     (currentextent :pointer t :name "currentExtent" :type "VkExtent2D"
 		   :create ((currentextent-arg)
-			    (more-cffi:copy currentextent currentextent-arg '(:struct vkextent2d)))
+			    (copy-object currentextent currentextent-arg '(:struct vkextent2d)))
 		   :set ((currentextent-arg)
-			 (more-cffi:copy currentextent currentextent-arg '(:struct vkextent2d))))
+			 (copy-object currentextent currentextent-arg '(:struct vkextent2d))))
     (minimageextent :pointer t :name "minImageExtent" :type "VkExtent2D"
 		    :create ((minimageextent-arg)
-			     (more-cffi:copy minimageextent minimageextent-arg '(:struct vkextent2d)))
+			     (copy-object minimageextent minimageextent-arg '(:struct vkextent2d)))
 		    :set ((minimageextent-arg)
-			  (more-cffi:copy minimageextent minimageextent-arg '(:struct vkextent2d))))
+			  (copy-object minimageextent minimageextent-arg '(:struct vkextent2d))))
     (maximageextent :pointer t :name "maxImageExtent" :type "VkExtent2D"
 		    :create ((maximageextent-arg)
-			     (more-cffi:copy maximageextent maximageextent-arg '(:struct vkextent2d)))
+			     (copy-object maximageextent maximageextent-arg '(:struct vkextent2d)))
 		    :set ((maximageextent-arg)
-			  (more-cffi:copy maximageextent maximageextent-arg '(:struct vkextent2d))))
+			  (copy-object maximageextent maximageextent-arg '(:struct vkextent2d))))
     (maximagearraylayers :name "maxImageArrayLayers" :type uint32)
     (supportedtransforms :name "supportedTransforms" :type "VkSurfaceTransformFlagsKHR")
     (currenttransform :name "currentTransform" :type "VkSurfaceTransformFlagBitsKHR")
@@ -930,14 +934,14 @@
     (format :name format :type "VkFormat")
     (components :pointer t :name components :type "VkComponentMapping"
 		:create ((components-arg)
-			 (more-cffi:copy components components-arg '(:struct vkcomponentmapping)))
+			 (copy-object components components-arg '(:struct vkcomponentmapping)))
 		:set ((components-arg)
-		      (more-cffi:copy components components-arg '(:struct vkcomponentmapping))))
+		      (copy-object components components-arg '(:struct vkcomponentmapping))))
     (subresourcerange :pointer t :name "subresourceRange" :type "VkImageSubresourceRange"
 		      :create ((subresourcerange-arg)
-			       (more-cffi:copy subresourcerange subresourcerange-arg '(:struct vkimagesubresourcerange)))
+			       (copy-object subresourcerange subresourcerange-arg '(:struct vkimagesubresourcerange)))
 		      :set ((subresourcerange-arg)
-			    (more-cffi:copy subresourcerange subresourcerange-arg '(:struct vkimagesubresourcerange)))))
+			    (copy-object subresourcerange subresourcerange-arg '(:struct vkimagesubresourcerange)))))
 
 
   (more-cffi:def-foreign-struct doc-file "VkSwapchainCreateInfoKHR" (swapchain-create-info-khr)
@@ -961,9 +965,9 @@
     (imagecolorspace :name "imageColorSpace" :type "VkColorSpaceKHR")
     (imageextent :pointer t :name "imageExtent" :type "VkExtent2D"
 		 :create ((imageextent-arg)
-			  (more-cffi:copy imageextent imageextent-arg '(:struct vkextent2d)))
+			  (copy-object imageextent imageextent-arg '(:struct vkextent2d)))
 		 :set ((imageextent-arg)
-		       (more-cffi:copy imageextent imageextent-arg '(:struct vkextent2d))))
+		       (copy-object imageextent imageextent-arg '(:struct vkextent2d))))
     (imagearraylayers :name "imageArrayLayers" :type uint32)
     (imageusage :name "imageUsage" :type "VkImageUsageFlags")
     (imagesharingmode :name "imageSharingMode" :type "VkSharingMode")
@@ -1520,14 +1524,14 @@
       (:default-create :default-get :default-set)
     (color :pointer t :name color :type "VkClearColorValue"
 	   :create ((color-arg)
-		    (more-cffi:copy color color-arg '(:union vkclearcolorvalue)))
+		    (copy-object color color-arg '(:union vkclearcolorvalue)))
 	   :set ((color-arg)
-		 (more-cffi:copy color color-arg '(:union vkclearcolorvalue))))
+		 (copy-object color color-arg '(:union vkclearcolorvalue))))
     (depthstencil :pointer t :name "depthStencil" :type "VkClearDepthStencilValue"
 		  :create ((depthstencil-arg)
-			   (more-cffi:copy depthstencil depthstencil-arg '(:struct vkcleardepthstencilvalue)))
+			   (copy-object depthstencil depthstencil-arg '(:struct vkcleardepthstencilvalue)))
 		  :set ((depthstencil-arg)
-			(more-cffi:copy depthstencil depthstencil-arg '(:struct vkcleardepthstencilvalue)))))
+			(copy-object depthstencil depthstencil-arg '(:struct vkcleardepthstencilvalue)))))
   
 
   (more-cffi:def-foreign-struct doc-file "VkRenderPassBeginInfo" (render-pass-begin-info)
@@ -1553,9 +1557,9 @@
 		       (set-pointer framebuffer framebuffer-arg)))
     (renderarea :pointer t :name "renderArea" :type "VkRect2D"
 		:create ((renderarea-arg)
-			 (more-cffi:copy renderarea renderarea-arg '(:struct vkrect2d)))
+			 (copy-object renderarea renderarea-arg '(:struct vkrect2d)))
 		:set ((renderarea-arg)
-		      (more-cffi:copy renderarea renderarea-arg '(:struct vkrect2d))))
+		      (copy-object renderarea renderarea-arg '(:struct vkrect2d))))
     (clearvaluecount :name "clearValueCount" :type uint32)
     (pclearvalues :name "pClearValues" :type (list "VkClearValue") :init-form nil
 		  :create ((pclearvalues-arg)

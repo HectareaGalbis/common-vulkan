@@ -2,35 +2,30 @@
 
 (mcffi:with-doc-file (doc-file (asdf:system-relative-pathname "common-vulkan" "docs/api/constants.md"))
 
-(more-cffi:def-foreign-constant-function doc-file
-    "VK_MAKE_API_VERSION"
-    vk_make_api_version
+(more-cffi:def-foreign-macro doc-file
+    ("VK_MAKE_API_VERSION" vk_make_api_version)
     (variant major minor patch)
-  (logior (ash variant 29) (ash major 22) (ash minor 12) patch))
+  `(logior (ash ,variant 29) (ash ,major 22) (ash ,minor 12) ,patch))
 
-(more-cffi:def-foreign-constant-function doc-file
-    "VK_API_VERSION_VARIANT"
-    vk_api_version_variant
+(more-cffi:def-foreign-macro doc-file
+    ("VK_API_VERSION_VARIANT" vk_api_version_variant)
     (version)
-  (ash version 29))
+  `(ash ,version 29))
 
-(more-cffi:def-foreign-constant-function doc-file
-    "VK_API_VERSION_MAJOR"
-    vk_api_version_major
+(more-cffi:def-foreign-macro doc-file
+    ("VK_API_VERSION_MAJOR" vk_api_version_major)
     (version)
-  (logand (ash version 22) 127))
+  `(logand (ash ,version 22) 127))
 
-(more-cffi:def-foreign-constant-function doc-file
-    "VK_API_VERSION_MINOR"
-    vk_api_version_minor
+(more-cffi:def-foreign-macro doc-file
+    ("VK_API_VERSION_MINOR" vk_api_version_minor)
     (version)
-  (logand (ash version 12) 1023))
+  `(logand (ash ,version 12) 1023))
 
-(more-cffi:def-foreign-constant-function doc-file
-    "VK_API_VERSION_PATCH"
-    vk_api_version_patch
+(more-cffi:def-foreign-macro doc-file
+    ("VK_API_VERSION_PATCH" vk_api_version_patch)
     (version)
-  (logand version 4095))
+  `(logand ,version 4095))
 
 (more-cffi:def-foreign-constant doc-file "UINT64_MAX" uint64_max
                                 (1- (expt 2 64)))

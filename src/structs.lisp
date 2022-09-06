@@ -21,7 +21,7 @@
                    (cffi-sys:null-pointer)))
       (let ((str-sym (gensym)))
         `(cffi:with-foreign-string (,str-sym ,slot-arg)
-           (more-cffi:copy ,slot ,str-sym :char (1+ (length ,slot-arg)))))))
+           (more-cffi:memcpy ,slot ,str-sym (1+ (length ,slot-arg)))))))
 
 (defmacro destroy-string (slot)
   `(when (not (cffi-sys:null-pointer-p ,slot))
@@ -46,7 +46,8 @@
           (for ,i from 0 below (length ,slot-arg))
           (for ,elem in ,slot-arg)
           ,(if pointers
-               `(more-cffi:copy (cffi:mem-aptr ,slot ',type ,i) ,elem ',type)
+               `(more-cffi:memcpy (cffi:mem-aptr ,slot ',type ,i) ,elem
+                                  (cffi:foreign-type-size ,type))
                `(setf (cffi:mem-aref ,slot ',type ,i) ,elem))))))
 
 (defmacro destroy-array (slot)
@@ -71,8 +72,8 @@
           (type slot new-value index &key (dynamic nil) (pointers nil))
   `(if ,index
        ,(if pointers
-            `(more-cffi:copy (cffi:mem-aptr ,slot ',type ,index) ,new-value
-                             ',type)
+            `(more-cffi:memcpy (cffi:mem-aptr ,slot ',type ,index) ,new-value
+                               (cffi:foreign-type-size ,type))
             `(setf (cffi:mem-aref ,slot ',type ,index) ,new-value))
        (progn
         (destroy-array ,slot)
@@ -122,6 +123,9 @@
         (destroy-array-strings ,slot ,count :dynamic ,dynamic)
         (create-array-strings ,slot ,new-value :dynamic ,dynamic))))
 
+(defun copy-object (slot slot-arg type)
+  (more-cffi:memcpy slot slot-arg (cffi:foreign-type-size type)))
+
 (more-cffi:with-doc-file (doc-file
                           (asdf/system:system-relative-pathname "common-vulkan"
                                                                 "docs/api/structs.md"))
@@ -167,13 +171,11 @@
       (rect-2d)
       (:default-create :default-get :default-set)
     (offset :pointer t :name offset :type "VkOffset2D" :create
-     ((offset-arg) (more-cffi:copy offset offset-arg '(:struct vkoffset2d)))
-     :set
-     ((offset-arg) (more-cffi:copy offset offset-arg '(:struct vkoffset2d))))
+     ((offset-arg) (copy-object offset offset-arg '(:struct vkoffset2d))) :set
+     ((offset-arg) (copy-object offset offset-arg '(:struct vkoffset2d))))
     (extent :pointer t :name extent :type "VkExtent2D" :create
-     ((extent-arg) (more-cffi:copy extent extent-arg '(:struct vkextent2d)))
-     :set
-     ((extent-arg) (more-cffi:copy extent extent-arg '(:struct vkextent2d)))))
+     ((extent-arg) (copy-object extent extent-arg '(:struct vkextent2d))) :set
+     ((extent-arg) (copy-object extent extent-arg '(:struct vkextent2d)))))
 
   (more-cffi:def-foreign-struct doc-file
       "VkBaseInStructure"
@@ -289,12 +291,12 @@
     (subresourcerange :pointer t :name "subresourceRange" :type
      "VkImageSubresourceRange" :create
      ((subresourcerange-arg)
-      (more-cffi:copy subresourcerange subresourcerange-arg
-                      '(:struct vkimagesubresourcerange)))
+      (copy-object subresourcerange subresourcerange-arg
+       '(:struct vkimagesubresourcerange)))
      :set
      ((subresourcerange-arg)
-      (more-cffi:copy subresourcerange subresourcerange-arg
-                      '(:struct vkimagesubresourcerange)))))
+      (copy-object subresourcerange subresourcerange-arg
+       '(:struct vkimagesubresourcerange)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -401,10 +403,10 @@
       (:default-create :default-get :default-set)
     (maxextent :pointer t :name "maxExtent" :type "VkExtent3D" :create
      ((maxextent-arg)
-      (more-cffi:copy maxextent maxextent-arg '(:struct vkextent3d)))
+      (copy-object maxextent maxextent-arg '(:struct vkextent3d)))
      :set
      ((maxextent-arg)
-      (more-cffi:copy maxextent maxextent-arg '(:struct vkextent3d))))
+      (copy-object maxextent maxextent-arg '(:struct vkextent3d))))
     (maxmiplevels :name "maxMipLevels" :type uint32)
     (maxarraylayers :name "maxArrayLayers" :type uint32)
     (samplecounts :name "sampleCounts" :type "VkSampleCountFlags")
@@ -852,19 +854,19 @@
        pipelinecacheuuid-index :dynamic nil :pointers nil)))
     (limits :pointer t :name limits :type "VkPhysicalDeviceLimits" :create
      ((limits-arg)
-      (more-cffi:copy limits limits-arg '(:struct vkphysicaldevicelimits)))
+      (copy-object limits limits-arg '(:struct vkphysicaldevicelimits)))
      :set
      ((limits-arg)
-      (more-cffi:copy limits limits-arg '(:struct vkphysicaldevicelimits))))
+      (copy-object limits limits-arg '(:struct vkphysicaldevicelimits))))
     (sparseproperties :pointer t :name "sparseProperties" :type
      "VkPhysicalDeviceSparseProperties" :create
      ((sparseproperties-arg)
-      (more-cffi:copy sparseproperties sparseproperties-arg
-                      '(:struct vkphysicaldevicesparseproperties)))
+      (copy-object sparseproperties sparseproperties-arg
+       '(:struct vkphysicaldevicesparseproperties)))
      :set
      ((sparseproperties-arg)
-      (more-cffi:copy sparseproperties sparseproperties-arg
-                      '(:struct vkphysicaldevicesparseproperties)))))
+      (copy-object sparseproperties sparseproperties-arg
+       '(:struct vkphysicaldevicesparseproperties)))))
 
   (more-cffi:def-foreign-struct doc-file
       "VkQueueFamilyProperties"
@@ -876,12 +878,12 @@
     (minimagetransfergranularity :pointer t :name "minImageTransferGranularity"
      :type "VkExtent3D" :create
      ((minimagetransfergranularity-arg)
-      (more-cffi:copy minimagetransfergranularity
-                      minimagetransfergranularity-arg '(:struct vkextent3d)))
+      (copy-object minimagetransfergranularity minimagetransfergranularity-arg
+       '(:struct vkextent3d)))
      :set
      ((minimagetransfergranularity-arg)
-      (more-cffi:copy minimagetransfergranularity
-                      minimagetransfergranularity-arg '(:struct vkextent3d)))))
+      (copy-object minimagetransfergranularity minimagetransfergranularity-arg
+       '(:struct vkextent3d)))))
 
   (more-cffi:def-foreign-struct doc-file
       "VkDeviceQueueCreateInfo"
@@ -1184,20 +1186,16 @@
     (subresource :pointer t :name subresource :type "VkImageSubresource"
      :create
      ((subresource-arg)
-      (more-cffi:copy subresource subresource-arg
-                      '(:struct vkimagesubresource)))
+      (copy-object subresource subresource-arg '(:struct vkimagesubresource)))
      :set
      ((subresource-arg)
-      (more-cffi:copy subresource subresource-arg
-                      '(:struct vkimagesubresource))))
+      (copy-object subresource subresource-arg '(:struct vkimagesubresource))))
     (offset :pointer t :name offset :type "VkOffset3D" :create
-     ((offset-arg) (more-cffi:copy offset offset-arg '(:struct vkoffset3d)))
-     :set
-     ((offset-arg) (more-cffi:copy offset offset-arg '(:struct vkoffset3d))))
+     ((offset-arg) (copy-object offset offset-arg '(:struct vkoffset3d))) :set
+     ((offset-arg) (copy-object offset offset-arg '(:struct vkoffset3d))))
     (extent :pointer t :name extent :type "VkExtent3D" :create
-     ((extent-arg) (more-cffi:copy extent extent-arg '(:struct vkextent3d)))
-     :set
-     ((extent-arg) (more-cffi:copy extent extent-arg '(:struct vkextent3d))))
+     ((extent-arg) (copy-object extent extent-arg '(:struct vkextent3d))) :set
+     ((extent-arg) (copy-object extent extent-arg '(:struct vkextent3d))))
     (memory :name memory :type "VkDeviceMemory" :create
      ((memory-arg) (create-pointer memory memory-arg)) :get
      (nil (get-pointer memory)) :set
@@ -1330,12 +1328,12 @@
     (imagegranularity :pointer t :name "imageGranularity" :type "VkExtent3D"
      :create
      ((imagegranularity-arg)
-      (more-cffi:copy imagegranularity imagegranularity-arg
-                      '(:struct vkextent3d)))
+      (copy-object imagegranularity imagegranularity-arg
+       '(:struct vkextent3d)))
      :set
      ((imagegranularity-arg)
-      (more-cffi:copy imagegranularity imagegranularity-arg
-                      '(:struct vkextent3d))))
+      (copy-object imagegranularity imagegranularity-arg
+       '(:struct vkextent3d))))
     (flags :name flags :type "VkSparseImageFormatFlags"))
 
   (more-cffi:doc-note doc-file
@@ -1348,12 +1346,12 @@
     (formatproperties :pointer t :name "formatProperties" :type
      "VkSparseImageFormatProperties" :create
      ((formatproperties-arg)
-      (more-cffi:copy formatproperties formatproperties-arg
-                      '(:struct vksparseimageformatproperties)))
+      (copy-object formatproperties formatproperties-arg
+       '(:struct vksparseimageformatproperties)))
      :set
      ((formatproperties-arg)
-      (more-cffi:copy formatproperties formatproperties-arg
-                      '(:struct vksparseimageformatproperties))))
+      (copy-object formatproperties formatproperties-arg
+       '(:struct vksparseimageformatproperties))))
     (imagemiptailfirstlod :name "imageMipTailFirstLod" :type uint32)
     (imagemiptailsize :name "imageMipTailSize" :type "VkDeviceSize")
     (imagemiptailoffset :name "imageMipTailOffset" :type "VkDeviceSize")
@@ -1474,9 +1472,8 @@
     (imagetype :name "imageType" :type "VkImageType")
     (format :name format :type "VkFormat")
     (extent :pointer t :name extent :type "VkExtent3D" :create
-     ((extent-arg) (more-cffi:copy extent extent-arg '(:struct vkextent3d)))
-     :set
-     ((extent-arg) (more-cffi:copy extent extent-arg '(:struct vkextent3d))))
+     ((extent-arg) (copy-object extent extent-arg '(:struct vkextent3d))) :set
+     ((extent-arg) (copy-object extent extent-arg '(:struct vkextent3d))))
     (miplevels :name "mipLevels" :type uint32)
     (arraylayers :name "arrayLayers" :type uint32)
     (samples :name samples :type "VkSampleCountFlagBits")
@@ -1540,19 +1537,19 @@
     (format :name format :type "VkFormat")
     (components :pointer t :name components :type "VkComponentMapping" :create
      ((components-arg)
-      (more-cffi:copy components components-arg '(:struct vkcomponentmapping)))
+      (copy-object components components-arg '(:struct vkcomponentmapping)))
      :set
      ((components-arg)
-      (more-cffi:copy components components-arg '(:struct vkcomponentmapping))))
+      (copy-object components components-arg '(:struct vkcomponentmapping))))
     (subresourcerange :pointer t :name "subresourceRange" :type
      "VkImageSubresourceRange" :create
      ((subresourcerange-arg)
-      (more-cffi:copy subresourcerange subresourcerange-arg
-                      '(:struct vkimagesubresourcerange)))
+      (copy-object subresourcerange subresourcerange-arg
+       '(:struct vkimagesubresourcerange)))
      :set
      ((subresourcerange-arg)
-      (more-cffi:copy subresourcerange subresourcerange-arg
-                      '(:struct vkimagesubresourcerange)))))
+      (copy-object subresourcerange subresourcerange-arg
+       '(:struct vkimagesubresourcerange)))))
 
   (more-cffi:def-foreign-struct doc-file
       "VkShaderModuleCreateInfo"
@@ -1657,12 +1654,10 @@
     (stage :pointer t :name stage :type "VkPipelineShaderStageCreateInfo"
      :create
      ((stage-arg)
-      (more-cffi:copy stage stage-arg
-                      '(:struct vkpipelineshaderstagecreateinfo)))
+      (copy-object stage stage-arg '(:struct vkpipelineshaderstagecreateinfo)))
      :set
      ((stage-arg)
-      (more-cffi:copy stage stage-arg
-                      '(:struct vkpipelineshaderstagecreateinfo))))
+      (copy-object stage stage-arg '(:struct vkpipelineshaderstagecreateinfo))))
     (layout :name layout :type "VkPipelineLayout" :create
      ((layout-arg) (create-pointer layout layout-arg)) :get
      (nil (get-pointer layout)) :set
@@ -1887,13 +1882,12 @@
     (depthboundstestenable :name "depthBoundsTestEnable" :type "VkBool32")
     (stenciltestenable :name "stencilTestEnable" :type "VkBool32")
     (front :pointer t :name front :type "VkStencilOpState" :create
-     ((front-arg) (more-cffi:copy front front-arg '(:struct vkstencilopstate)))
+     ((front-arg) (copy-object front front-arg '(:struct vkstencilopstate)))
      :set
-     ((front-arg) (more-cffi:copy front front-arg '(:struct vkstencilopstate))))
+     ((front-arg) (copy-object front front-arg '(:struct vkstencilopstate))))
     (back :pointer t :name back :type "VkStencilOpState" :create
-     ((back-arg) (more-cffi:copy back back-arg '(:struct vkstencilopstate)))
-     :set
-     ((back-arg) (more-cffi:copy back back-arg '(:struct vkstencilopstate))))
+     ((back-arg) (copy-object back back-arg '(:struct vkstencilopstate))) :set
+     ((back-arg) (copy-object back back-arg '(:struct vkstencilopstate))))
     (mindepthbounds :name "minDepthBounds" :type float)
     (maxdepthbounds :name "maxDepthBounds" :type float))
 
@@ -2640,24 +2634,24 @@
     (imagesubresource :pointer t :name "imageSubresource" :type
      "VkImageSubresourceLayers" :create
      ((imagesubresource-arg)
-      (more-cffi:copy imagesubresource imagesubresource-arg
-                      '(:struct vkimagesubresourcelayers)))
+      (copy-object imagesubresource imagesubresource-arg
+       '(:struct vkimagesubresourcelayers)))
      :set
      ((imagesubresource-arg)
-      (more-cffi:copy imagesubresource imagesubresource-arg
-                      '(:struct vkimagesubresourcelayers))))
+      (copy-object imagesubresource imagesubresource-arg
+       '(:struct vkimagesubresourcelayers))))
     (imageoffset :pointer t :name "imageOffset" :type "VkOffset3D" :create
      ((imageoffset-arg)
-      (more-cffi:copy imageoffset imageoffset-arg '(:struct vkoffset3d)))
+      (copy-object imageoffset imageoffset-arg '(:struct vkoffset3d)))
      :set
      ((imageoffset-arg)
-      (more-cffi:copy imageoffset imageoffset-arg '(:struct vkoffset3d))))
+      (copy-object imageoffset imageoffset-arg '(:struct vkoffset3d))))
     (imageextent :pointer t :name "imageExtent" :type "VkExtent3D" :create
      ((imageextent-arg)
-      (more-cffi:copy imageextent imageextent-arg '(:struct vkextent3d)))
+      (copy-object imageextent imageextent-arg '(:struct vkextent3d)))
      :set
      ((imageextent-arg)
-      (more-cffi:copy imageextent imageextent-arg '(:struct vkextent3d)))))
+      (copy-object imageextent imageextent-arg '(:struct vkextent3d)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -2709,18 +2703,18 @@
       (clear-value)
       (:default-create :default-get :default-set)
     (color :pointer t :name color :type "VkClearColorValue" :create
-     ((color-arg) (more-cffi:copy color color-arg '(:union vkclearcolorvalue)))
+     ((color-arg) (copy-object color color-arg '(:union vkclearcolorvalue)))
      :set
-     ((color-arg) (more-cffi:copy color color-arg '(:union vkclearcolorvalue))))
+     ((color-arg) (copy-object color color-arg '(:union vkclearcolorvalue))))
     (depthstencil :pointer t :name "depthStencil" :type
      "VkClearDepthStencilValue" :create
      ((depthstencil-arg)
-      (more-cffi:copy depthstencil depthstencil-arg
-                      '(:struct vkcleardepthstencilvalue)))
+      (copy-object depthstencil depthstencil-arg
+       '(:struct vkcleardepthstencilvalue)))
      :set
      ((depthstencil-arg)
-      (more-cffi:copy depthstencil depthstencil-arg
-                      '(:struct vkcleardepthstencilvalue)))))
+      (copy-object depthstencil depthstencil-arg
+       '(:struct vkcleardepthstencilvalue)))))
 
   (more-cffi:def-foreign-struct doc-file
       "VkClearAttachment"
@@ -2730,10 +2724,10 @@
     (colorattachment :name "colorAttachment" :type uint32)
     (clearvalue :pointer t :name "clearValue" :type "VkClearValue" :create
      ((clearvalue-arg)
-      (more-cffi:copy clearvalue clearvalue-arg '(:union vkclearvalue)))
+      (copy-object clearvalue clearvalue-arg '(:union vkclearvalue)))
      :set
      ((clearvalue-arg)
-      (more-cffi:copy clearvalue clearvalue-arg '(:union vkclearvalue)))))
+      (copy-object clearvalue clearvalue-arg '(:union vkclearvalue)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -2743,8 +2737,8 @@
       (clear-rect)
       (:default-create :default-get :default-set)
     (rect :pointer t :name rect :type "VkRect2D" :create
-     ((rect-arg) (more-cffi:copy rect rect-arg '(:struct vkrect2d))) :set
-     ((rect-arg) (more-cffi:copy rect rect-arg '(:struct vkrect2d))))
+     ((rect-arg) (copy-object rect rect-arg '(:struct vkrect2d))) :set
+     ((rect-arg) (copy-object rect rect-arg '(:struct vkrect2d))))
     (basearraylayer :name "baseArrayLayer" :type uint32)
     (layercount :name "layerCount" :type uint32))
 
@@ -2758,12 +2752,12 @@
     (srcsubresource :pointer t :name "srcSubresource" :type
      "VkImageSubresourceLayers" :create
      ((srcsubresource-arg)
-      (more-cffi:copy srcsubresource srcsubresource-arg
-                      '(:struct vkimagesubresourcelayers)))
+      (copy-object srcsubresource srcsubresource-arg
+       '(:struct vkimagesubresourcelayers)))
      :set
      ((srcsubresource-arg)
-      (more-cffi:copy srcsubresource srcsubresource-arg
-                      '(:struct vkimagesubresourcelayers))))
+      (copy-object srcsubresource srcsubresource-arg
+       '(:struct vkimagesubresourcelayers))))
     (srcoffsets :pointer t :name "srcOffsets" :type "VkOffset3D" :create
      ((srcoffsets-arg)
       (create-array (:struct vkoffset3d) srcoffsets srcoffsets-arg :dynamic nil
@@ -2779,12 +2773,12 @@
     (dstsubresource :pointer t :name "dstSubresource" :type
      "VkImageSubresourceLayers" :create
      ((dstsubresource-arg)
-      (more-cffi:copy dstsubresource dstsubresource-arg
-                      '(:struct vkimagesubresourcelayers)))
+      (copy-object dstsubresource dstsubresource-arg
+       '(:struct vkimagesubresourcelayers)))
      :set
      ((dstsubresource-arg)
-      (more-cffi:copy dstsubresource dstsubresource-arg
-                      '(:struct vkimagesubresourcelayers))))
+      (copy-object dstsubresource dstsubresource-arg
+       '(:struct vkimagesubresourcelayers))))
     (dstoffsets :pointer t :name "dstOffsets" :type "VkOffset3D" :create
      ((dstoffsets-arg)
       (create-array (:struct vkoffset3d) dstoffsets dstoffsets-arg :dynamic nil
@@ -2808,37 +2802,36 @@
     (srcsubresource :pointer t :name "srcSubresource" :type
      "VkImageSubresourceLayers" :create
      ((srcsubresource-arg)
-      (more-cffi:copy srcsubresource srcsubresource-arg
-                      '(:struct vkimagesubresourcelayers)))
+      (copy-object srcsubresource srcsubresource-arg
+       '(:struct vkimagesubresourcelayers)))
      :set
      ((srcsubresource-arg)
-      (more-cffi:copy srcsubresource srcsubresource-arg
-                      '(:struct vkimagesubresourcelayers))))
+      (copy-object srcsubresource srcsubresource-arg
+       '(:struct vkimagesubresourcelayers))))
     (srcoffset :pointer t :name "srcOffset" :type "VkOffset3D" :create
      ((srcoffset-arg)
-      (more-cffi:copy srcoffset srcoffset-arg '(:struct vkoffset3d)))
+      (copy-object srcoffset srcoffset-arg '(:struct vkoffset3d)))
      :set
      ((srcoffset-arg)
-      (more-cffi:copy srcoffset srcoffset-arg '(:struct vkoffset3d))))
+      (copy-object srcoffset srcoffset-arg '(:struct vkoffset3d))))
     (dstsubresource :pointer t :name "dstSubresource" :type
      "VkImageSubresourceLayers" :create
      ((dstsubresource-arg)
-      (more-cffi:copy dstsubresource dstsubresource-arg
-                      '(:struct vkimagesubresourcelayers)))
+      (copy-object dstsubresource dstsubresource-arg
+       '(:struct vkimagesubresourcelayers)))
      :set
      ((dstsubresource-arg)
-      (more-cffi:copy dstsubresource dstsubresource-arg
-                      '(:struct vkimagesubresourcelayers))))
+      (copy-object dstsubresource dstsubresource-arg
+       '(:struct vkimagesubresourcelayers))))
     (dstoffset :pointer t :name "dstOffset" :type "VkOffset3D" :create
      ((dstoffset-arg)
-      (more-cffi:copy dstoffset dstoffset-arg '(:struct vkoffset3d)))
+      (copy-object dstoffset dstoffset-arg '(:struct vkoffset3d)))
      :set
      ((dstoffset-arg)
-      (more-cffi:copy dstoffset dstoffset-arg '(:struct vkoffset3d))))
+      (copy-object dstoffset dstoffset-arg '(:struct vkoffset3d))))
     (extent :pointer t :name extent :type "VkExtent3D" :create
-     ((extent-arg) (more-cffi:copy extent extent-arg '(:struct vkextent3d)))
-     :set
-     ((extent-arg) (more-cffi:copy extent extent-arg '(:struct vkextent3d)))))
+     ((extent-arg) (copy-object extent extent-arg '(:struct vkextent3d))) :set
+     ((extent-arg) (copy-object extent extent-arg '(:struct vkextent3d)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -2850,37 +2843,36 @@
     (srcsubresource :pointer t :name "srcSubresource" :type
      "VkImageSubresourceLayers" :create
      ((srcsubresource-arg)
-      (more-cffi:copy srcsubresource srcsubresource-arg
-                      '(:struct vkimagesubresourcelayers)))
+      (copy-object srcsubresource srcsubresource-arg
+       '(:struct vkimagesubresourcelayers)))
      :set
      ((srcsubresource-arg)
-      (more-cffi:copy srcsubresource srcsubresource-arg
-                      '(:struct vkimagesubresourcelayers))))
+      (copy-object srcsubresource srcsubresource-arg
+       '(:struct vkimagesubresourcelayers))))
     (srcoffset :pointer t :name "srcOffset" :type "VkOffset3D" :create
      ((srcoffset-arg)
-      (more-cffi:copy srcoffset srcoffset-arg '(:struct vkoffset3d)))
+      (copy-object srcoffset srcoffset-arg '(:struct vkoffset3d)))
      :set
      ((srcoffset-arg)
-      (more-cffi:copy srcoffset srcoffset-arg '(:struct vkoffset3d))))
+      (copy-object srcoffset srcoffset-arg '(:struct vkoffset3d))))
     (dstsubresource :pointer t :name "dstSubresource" :type
      "VkImageSubresourceLayers" :create
      ((dstsubresource-arg)
-      (more-cffi:copy dstsubresource dstsubresource-arg
-                      '(:struct vkimagesubresourcelayers)))
+      (copy-object dstsubresource dstsubresource-arg
+       '(:struct vkimagesubresourcelayers)))
      :set
      ((dstsubresource-arg)
-      (more-cffi:copy dstsubresource dstsubresource-arg
-                      '(:struct vkimagesubresourcelayers))))
+      (copy-object dstsubresource dstsubresource-arg
+       '(:struct vkimagesubresourcelayers))))
     (dstoffset :pointer t :name "dstOffset" :type "VkOffset3D" :create
      ((dstoffset-arg)
-      (more-cffi:copy dstoffset dstoffset-arg '(:struct vkoffset3d)))
+      (copy-object dstoffset dstoffset-arg '(:struct vkoffset3d)))
      :set
      ((dstoffset-arg)
-      (more-cffi:copy dstoffset dstoffset-arg '(:struct vkoffset3d))))
+      (copy-object dstoffset dstoffset-arg '(:struct vkoffset3d))))
     (extent :pointer t :name extent :type "VkExtent3D" :create
-     ((extent-arg) (more-cffi:copy extent extent-arg '(:struct vkextent3d)))
-     :set
-     ((extent-arg) (more-cffi:copy extent extent-arg '(:struct vkextent3d)))))
+     ((extent-arg) (copy-object extent extent-arg '(:struct vkextent3d))) :set
+     ((extent-arg) (copy-object extent extent-arg '(:struct vkextent3d)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -2903,10 +2895,10 @@
      ((framebuffer-arg) (set-pointer framebuffer framebuffer-arg)))
     (renderarea :pointer t :name "renderArea" :type "VkRect2D" :create
      ((renderarea-arg)
-      (more-cffi:copy renderarea renderarea-arg '(:struct vkrect2d)))
+      (copy-object renderarea renderarea-arg '(:struct vkrect2d)))
      :set
      ((renderarea-arg)
-      (more-cffi:copy renderarea renderarea-arg '(:struct vkrect2d))))
+      (copy-object renderarea renderarea-arg '(:struct vkrect2d))))
     (clearvaluecount :name "clearValueCount" :type uint32)
     (pclearvalues :name "pClearValues" :type (list "VkClearValue") :init-form
      nil :create
@@ -3344,12 +3336,12 @@
     (memoryrequirements :pointer t :name "memoryRequirements" :type
      "VkMemoryRequirements" :create
      ((memoryrequirements-arg)
-      (more-cffi:copy memoryrequirements memoryrequirements-arg
-                      '(:struct vkmemoryrequirements)))
+      (copy-object memoryrequirements memoryrequirements-arg
+       '(:struct vkmemoryrequirements)))
      :set
      ((memoryrequirements-arg)
-      (more-cffi:copy memoryrequirements memoryrequirements-arg
-                      '(:struct vkmemoryrequirements)))))
+      (copy-object memoryrequirements memoryrequirements-arg
+       '(:struct vkmemoryrequirements)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -3366,12 +3358,12 @@
     (memoryrequirements :pointer t :name "memoryRequirements" :type
      "VkSparseImageMemoryRequirements" :create
      ((memoryrequirements-arg)
-      (more-cffi:copy memoryrequirements memoryrequirements-arg
-                      '(:struct vksparseimagememoryrequirements)))
+      (copy-object memoryrequirements memoryrequirements-arg
+       '(:struct vksparseimagememoryrequirements)))
      :set
      ((memoryrequirements-arg)
-      (more-cffi:copy memoryrequirements memoryrequirements-arg
-                      '(:struct vksparseimagememoryrequirements)))))
+      (copy-object memoryrequirements memoryrequirements-arg
+       '(:struct vksparseimagememoryrequirements)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -3387,12 +3379,10 @@
     (features :pointer t :name features :type "VkPhysicalDeviceFeatures"
      :create
      ((features-arg)
-      (more-cffi:copy features features-arg
-                      '(:struct vkphysicaldevicefeatures)))
+      (copy-object features features-arg '(:struct vkphysicaldevicefeatures)))
      :set
      ((features-arg)
-      (more-cffi:copy features features-arg
-                      '(:struct vkphysicaldevicefeatures)))))
+      (copy-object features features-arg '(:struct vkphysicaldevicefeatures)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -3408,12 +3398,12 @@
     (properties :pointer t :name properties :type "VkPhysicalDeviceProperties"
      :create
      ((properties-arg)
-      (more-cffi:copy properties properties-arg
-                      '(:struct vkphysicaldeviceproperties)))
+      (copy-object properties properties-arg
+       '(:struct vkphysicaldeviceproperties)))
      :set
      ((properties-arg)
-      (more-cffi:copy properties properties-arg
-                      '(:struct vkphysicaldeviceproperties)))))
+      (copy-object properties properties-arg
+       '(:struct vkphysicaldeviceproperties)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -3429,12 +3419,12 @@
     (formatproperties :pointer t :name "formatProperties" :type
      "VkFormatProperties" :create
      ((formatproperties-arg)
-      (more-cffi:copy formatproperties formatproperties-arg
-                      '(:struct vkformatproperties)))
+      (copy-object formatproperties formatproperties-arg
+       '(:struct vkformatproperties)))
      :set
      ((formatproperties-arg)
-      (more-cffi:copy formatproperties formatproperties-arg
-                      '(:struct vkformatproperties)))))
+      (copy-object formatproperties formatproperties-arg
+       '(:struct vkformatproperties)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -3450,12 +3440,12 @@
     (imageformatproperties :pointer t :name "imageFormatProperties" :type
      "VkImageFormatProperties" :create
      ((imageformatproperties-arg)
-      (more-cffi:copy imageformatproperties imageformatproperties-arg
-                      '(:struct vkimageformatproperties)))
+      (copy-object imageformatproperties imageformatproperties-arg
+       '(:struct vkimageformatproperties)))
      :set
      ((imageformatproperties-arg)
-      (more-cffi:copy imageformatproperties imageformatproperties-arg
-                      '(:struct vkimageformatproperties)))))
+      (copy-object imageformatproperties imageformatproperties-arg
+       '(:struct vkimageformatproperties)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -3489,12 +3479,12 @@
     (queuefamilyproperties :pointer t :name "queueFamilyProperties" :type
      "VkQueueFamilyProperties" :create
      ((queuefamilyproperties-arg)
-      (more-cffi:copy queuefamilyproperties queuefamilyproperties-arg
-                      '(:struct vkqueuefamilyproperties)))
+      (copy-object queuefamilyproperties queuefamilyproperties-arg
+       '(:struct vkqueuefamilyproperties)))
      :set
      ((queuefamilyproperties-arg)
-      (more-cffi:copy queuefamilyproperties queuefamilyproperties-arg
-                      '(:struct vkqueuefamilyproperties)))))
+      (copy-object queuefamilyproperties queuefamilyproperties-arg
+       '(:struct vkqueuefamilyproperties)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -3511,12 +3501,12 @@
     (memoryproperties :pointer t :name "memoryProperties" :type
      "VkPhysicalDeviceMemoryProperties" :create
      ((memoryproperties-arg)
-      (more-cffi:copy memoryproperties memoryproperties-arg
-                      '(:struct vkphysicaldevicememoryproperties)))
+      (copy-object memoryproperties memoryproperties-arg
+       '(:struct vkphysicaldevicememoryproperties)))
      :set
      ((memoryproperties-arg)
-      (more-cffi:copy memoryproperties memoryproperties-arg
-                      '(:struct vkphysicaldevicememoryproperties)))))
+      (copy-object memoryproperties memoryproperties-arg
+       '(:struct vkphysicaldevicememoryproperties)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -3532,12 +3522,12 @@
     (properties :pointer t :name properties :type
      "VkSparseImageFormatProperties" :create
      ((properties-arg)
-      (more-cffi:copy properties properties-arg
-                      '(:struct vksparseimageformatproperties)))
+      (copy-object properties properties-arg
+       '(:struct vksparseimageformatproperties)))
      :set
      ((properties-arg)
-      (more-cffi:copy properties properties-arg
-                      '(:struct vksparseimageformatproperties)))))
+      (copy-object properties properties-arg
+       '(:struct vksparseimageformatproperties)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -3813,10 +3803,10 @@
     (ycbcrrange :name "ycbcrRange" :type "VkSamplerYcbcrRange")
     (components :pointer t :name components :type "VkComponentMapping" :create
      ((components-arg)
-      (more-cffi:copy components components-arg '(:struct vkcomponentmapping)))
+      (copy-object components components-arg '(:struct vkcomponentmapping)))
      :set
      ((components-arg)
-      (more-cffi:copy components components-arg '(:struct vkcomponentmapping))))
+      (copy-object components components-arg '(:struct vkcomponentmapping))))
     (xchromaoffset :name "xChromaOffset" :type "VkChromaLocation")
     (ychromaoffset :name "yChromaOffset" :type "VkChromaLocation")
     (chromafilter :name "chromaFilter" :type "VkFilter")
@@ -3998,12 +3988,12 @@
     (externalmemoryproperties :pointer t :name "externalMemoryProperties" :type
      "VkExternalMemoryProperties" :create
      ((externalmemoryproperties-arg)
-      (more-cffi:copy externalmemoryproperties externalmemoryproperties-arg
-                      '(:struct vkexternalmemoryproperties)))
+      (copy-object externalmemoryproperties externalmemoryproperties-arg
+       '(:struct vkexternalmemoryproperties)))
      :set
      ((externalmemoryproperties-arg)
-      (more-cffi:copy externalmemoryproperties externalmemoryproperties-arg
-                      '(:struct vkexternalmemoryproperties)))))
+      (copy-object externalmemoryproperties externalmemoryproperties-arg
+       '(:struct vkexternalmemoryproperties)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -4035,12 +4025,12 @@
     (externalmemoryproperties :pointer t :name "externalMemoryProperties" :type
      "VkExternalMemoryProperties" :create
      ((externalmemoryproperties-arg)
-      (more-cffi:copy externalmemoryproperties externalmemoryproperties-arg
-                      '(:struct vkexternalmemoryproperties)))
+      (copy-object externalmemoryproperties externalmemoryproperties-arg
+       '(:struct vkexternalmemoryproperties)))
      :set
      ((externalmemoryproperties-arg)
-      (more-cffi:copy externalmemoryproperties externalmemoryproperties-arg
-                      '(:struct vkexternalmemoryproperties)))))
+      (copy-object externalmemoryproperties externalmemoryproperties-arg
+       '(:struct vkexternalmemoryproperties)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -4473,12 +4463,12 @@
     (conformanceversion :pointer t :name "conformanceVersion" :type
      "VkConformanceVersion" :create
      ((conformanceversion-arg)
-      (more-cffi:copy conformanceversion conformanceversion-arg
-                      '(:struct vkconformanceversion)))
+      (copy-object conformanceversion conformanceversion-arg
+       '(:struct vkconformanceversion)))
      :set
      ((conformanceversion-arg)
-      (more-cffi:copy conformanceversion conformanceversion-arg
-                      '(:struct vkconformanceversion))))
+      (copy-object conformanceversion conformanceversion-arg
+       '(:struct vkconformanceversion))))
     (denormbehaviorindependence :name "denormBehaviorIndependence" :type
      "VkShaderFloatControlsIndependence")
     (roundingmodeindependence :name "roundingModeIndependence" :type
@@ -4866,12 +4856,12 @@
     (conformanceversion :pointer t :name "conformanceVersion" :type
      "VkConformanceVersion" :create
      ((conformanceversion-arg)
-      (more-cffi:copy conformanceversion conformanceversion-arg
-                      '(:struct vkconformanceversion)))
+      (copy-object conformanceversion conformanceversion-arg
+       '(:struct vkconformanceversion)))
      :set
      ((conformanceversion-arg)
-      (more-cffi:copy conformanceversion conformanceversion-arg
-                      '(:struct vkconformanceversion)))))
+      (copy-object conformanceversion conformanceversion-arg
+       '(:struct vkconformanceversion)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -6034,12 +6024,12 @@
     (subresourcerange :pointer t :name "subresourceRange" :type
      "VkImageSubresourceRange" :create
      ((subresourcerange-arg)
-      (more-cffi:copy subresourcerange subresourcerange-arg
-                      '(:struct vkimagesubresourcerange)))
+      (copy-object subresourcerange subresourcerange-arg
+       '(:struct vkimagesubresourcerange)))
      :set
      ((subresourcerange-arg)
-      (more-cffi:copy subresourcerange subresourcerange-arg
-                      '(:struct vkimagesubresourcerange)))))
+      (copy-object subresourcerange subresourcerange-arg
+       '(:struct vkimagesubresourcerange)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -6307,37 +6297,36 @@
     (srcsubresource :pointer t :name "srcSubresource" :type
      "VkImageSubresourceLayers" :create
      ((srcsubresource-arg)
-      (more-cffi:copy srcsubresource srcsubresource-arg
-                      '(:struct vkimagesubresourcelayers)))
+      (copy-object srcsubresource srcsubresource-arg
+       '(:struct vkimagesubresourcelayers)))
      :set
      ((srcsubresource-arg)
-      (more-cffi:copy srcsubresource srcsubresource-arg
-                      '(:struct vkimagesubresourcelayers))))
+      (copy-object srcsubresource srcsubresource-arg
+       '(:struct vkimagesubresourcelayers))))
     (srcoffset :pointer t :name "srcOffset" :type "VkOffset3D" :create
      ((srcoffset-arg)
-      (more-cffi:copy srcoffset srcoffset-arg '(:struct vkoffset3d)))
+      (copy-object srcoffset srcoffset-arg '(:struct vkoffset3d)))
      :set
      ((srcoffset-arg)
-      (more-cffi:copy srcoffset srcoffset-arg '(:struct vkoffset3d))))
+      (copy-object srcoffset srcoffset-arg '(:struct vkoffset3d))))
     (dstsubresource :pointer t :name "dstSubresource" :type
      "VkImageSubresourceLayers" :create
      ((dstsubresource-arg)
-      (more-cffi:copy dstsubresource dstsubresource-arg
-                      '(:struct vkimagesubresourcelayers)))
+      (copy-object dstsubresource dstsubresource-arg
+       '(:struct vkimagesubresourcelayers)))
      :set
      ((dstsubresource-arg)
-      (more-cffi:copy dstsubresource dstsubresource-arg
-                      '(:struct vkimagesubresourcelayers))))
+      (copy-object dstsubresource dstsubresource-arg
+       '(:struct vkimagesubresourcelayers))))
     (dstoffset :pointer t :name "dstOffset" :type "VkOffset3D" :create
      ((dstoffset-arg)
-      (more-cffi:copy dstoffset dstoffset-arg '(:struct vkoffset3d)))
+      (copy-object dstoffset dstoffset-arg '(:struct vkoffset3d)))
      :set
      ((dstoffset-arg)
-      (more-cffi:copy dstoffset dstoffset-arg '(:struct vkoffset3d))))
+      (copy-object dstoffset dstoffset-arg '(:struct vkoffset3d))))
     (extent :pointer t :name extent :type "VkExtent3D" :create
-     ((extent-arg) (more-cffi:copy extent extent-arg '(:struct vkextent3d)))
-     :set
-     ((extent-arg) (more-cffi:copy extent extent-arg '(:struct vkextent3d)))))
+     ((extent-arg) (copy-object extent extent-arg '(:struct vkextent3d))) :set
+     ((extent-arg) (copy-object extent extent-arg '(:struct vkextent3d)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -6391,24 +6380,24 @@
     (imagesubresource :pointer t :name "imageSubresource" :type
      "VkImageSubresourceLayers" :create
      ((imagesubresource-arg)
-      (more-cffi:copy imagesubresource imagesubresource-arg
-                      '(:struct vkimagesubresourcelayers)))
+      (copy-object imagesubresource imagesubresource-arg
+       '(:struct vkimagesubresourcelayers)))
      :set
      ((imagesubresource-arg)
-      (more-cffi:copy imagesubresource imagesubresource-arg
-                      '(:struct vkimagesubresourcelayers))))
+      (copy-object imagesubresource imagesubresource-arg
+       '(:struct vkimagesubresourcelayers))))
     (imageoffset :pointer t :name "imageOffset" :type "VkOffset3D" :create
      ((imageoffset-arg)
-      (more-cffi:copy imageoffset imageoffset-arg '(:struct vkoffset3d)))
+      (copy-object imageoffset imageoffset-arg '(:struct vkoffset3d)))
      :set
      ((imageoffset-arg)
-      (more-cffi:copy imageoffset imageoffset-arg '(:struct vkoffset3d))))
+      (copy-object imageoffset imageoffset-arg '(:struct vkoffset3d))))
     (imageextent :pointer t :name "imageExtent" :type "VkExtent3D" :create
      ((imageextent-arg)
-      (more-cffi:copy imageextent imageextent-arg '(:struct vkextent3d)))
+      (copy-object imageextent imageextent-arg '(:struct vkextent3d)))
      :set
      ((imageextent-arg)
-      (more-cffi:copy imageextent imageextent-arg '(:struct vkextent3d)))))
+      (copy-object imageextent imageextent-arg '(:struct vkextent3d)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -6494,12 +6483,12 @@
     (srcsubresource :pointer t :name "srcSubresource" :type
      "VkImageSubresourceLayers" :create
      ((srcsubresource-arg)
-      (more-cffi:copy srcsubresource srcsubresource-arg
-                      '(:struct vkimagesubresourcelayers)))
+      (copy-object srcsubresource srcsubresource-arg
+       '(:struct vkimagesubresourcelayers)))
      :set
      ((srcsubresource-arg)
-      (more-cffi:copy srcsubresource srcsubresource-arg
-                      '(:struct vkimagesubresourcelayers))))
+      (copy-object srcsubresource srcsubresource-arg
+       '(:struct vkimagesubresourcelayers))))
     (srcoffsets :pointer t :name "srcOffsets" :type "VkOffset3D" :create
      ((srcoffsets-arg)
       (create-array (:struct vkoffset3d) srcoffsets srcoffsets-arg :dynamic nil
@@ -6515,12 +6504,12 @@
     (dstsubresource :pointer t :name "dstSubresource" :type
      "VkImageSubresourceLayers" :create
      ((dstsubresource-arg)
-      (more-cffi:copy dstsubresource dstsubresource-arg
-                      '(:struct vkimagesubresourcelayers)))
+      (copy-object dstsubresource dstsubresource-arg
+       '(:struct vkimagesubresourcelayers)))
      :set
      ((dstsubresource-arg)
-      (more-cffi:copy dstsubresource dstsubresource-arg
-                      '(:struct vkimagesubresourcelayers))))
+      (copy-object dstsubresource dstsubresource-arg
+       '(:struct vkimagesubresourcelayers))))
     (dstoffsets :pointer t :name "dstOffsets" :type "VkOffset3D" :create
      ((dstoffsets-arg)
       (create-array (:struct vkoffset3d) dstoffsets dstoffsets-arg :dynamic nil
@@ -6584,37 +6573,36 @@
     (srcsubresource :pointer t :name "srcSubresource" :type
      "VkImageSubresourceLayers" :create
      ((srcsubresource-arg)
-      (more-cffi:copy srcsubresource srcsubresource-arg
-                      '(:struct vkimagesubresourcelayers)))
+      (copy-object srcsubresource srcsubresource-arg
+       '(:struct vkimagesubresourcelayers)))
      :set
      ((srcsubresource-arg)
-      (more-cffi:copy srcsubresource srcsubresource-arg
-                      '(:struct vkimagesubresourcelayers))))
+      (copy-object srcsubresource srcsubresource-arg
+       '(:struct vkimagesubresourcelayers))))
     (srcoffset :pointer t :name "srcOffset" :type "VkOffset3D" :create
      ((srcoffset-arg)
-      (more-cffi:copy srcoffset srcoffset-arg '(:struct vkoffset3d)))
+      (copy-object srcoffset srcoffset-arg '(:struct vkoffset3d)))
      :set
      ((srcoffset-arg)
-      (more-cffi:copy srcoffset srcoffset-arg '(:struct vkoffset3d))))
+      (copy-object srcoffset srcoffset-arg '(:struct vkoffset3d))))
     (dstsubresource :pointer t :name "dstSubresource" :type
      "VkImageSubresourceLayers" :create
      ((dstsubresource-arg)
-      (more-cffi:copy dstsubresource dstsubresource-arg
-                      '(:struct vkimagesubresourcelayers)))
+      (copy-object dstsubresource dstsubresource-arg
+       '(:struct vkimagesubresourcelayers)))
      :set
      ((dstsubresource-arg)
-      (more-cffi:copy dstsubresource dstsubresource-arg
-                      '(:struct vkimagesubresourcelayers))))
+      (copy-object dstsubresource dstsubresource-arg
+       '(:struct vkimagesubresourcelayers))))
     (dstoffset :pointer t :name "dstOffset" :type "VkOffset3D" :create
      ((dstoffset-arg)
-      (more-cffi:copy dstoffset dstoffset-arg '(:struct vkoffset3d)))
+      (copy-object dstoffset dstoffset-arg '(:struct vkoffset3d)))
      :set
      ((dstoffset-arg)
-      (more-cffi:copy dstoffset dstoffset-arg '(:struct vkoffset3d))))
+      (copy-object dstoffset dstoffset-arg '(:struct vkoffset3d))))
     (extent :pointer t :name extent :type "VkExtent3D" :create
-     ((extent-arg) (more-cffi:copy extent extent-arg '(:struct vkextent3d)))
-     :set
-     ((extent-arg) (more-cffi:copy extent extent-arg '(:struct vkextent3d)))))
+     ((extent-arg) (copy-object extent extent-arg '(:struct vkextent3d))) :set
+     ((extent-arg) (copy-object extent extent-arg '(:struct vkextent3d)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -6813,10 +6801,10 @@
     (storeop :name "storeOp" :type "VkAttachmentStoreOp")
     (clearvalue :pointer t :name "clearValue" :type "VkClearValue" :create
      ((clearvalue-arg)
-      (more-cffi:copy clearvalue clearvalue-arg '(:union vkclearvalue)))
+      (copy-object clearvalue clearvalue-arg '(:union vkclearvalue)))
      :set
      ((clearvalue-arg)
-      (more-cffi:copy clearvalue clearvalue-arg '(:union vkclearvalue)))))
+      (copy-object clearvalue clearvalue-arg '(:union vkclearvalue)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -6832,10 +6820,10 @@
     (flags :name flags :type "VkRenderingFlags")
     (renderarea :pointer t :name "renderArea" :type "VkRect2D" :create
      ((renderarea-arg)
-      (more-cffi:copy renderarea renderarea-arg '(:struct vkrect2d)))
+      (copy-object renderarea renderarea-arg '(:struct vkrect2d)))
      :set
      ((renderarea-arg)
-      (more-cffi:copy renderarea renderarea-arg '(:struct vkrect2d))))
+      (copy-object renderarea renderarea-arg '(:struct vkrect2d))))
     (layercount :name "layerCount" :type uint32)
     (viewmask :name "viewMask" :type uint32)
     (colorattachmentcount :name "colorAttachmentCount" :type uint32)
@@ -7164,24 +7152,24 @@
     (maximagecount :name "maxImageCount" :type uint32)
     (currentextent :pointer t :name "currentExtent" :type "VkExtent2D" :create
      ((currentextent-arg)
-      (more-cffi:copy currentextent currentextent-arg '(:struct vkextent2d)))
+      (copy-object currentextent currentextent-arg '(:struct vkextent2d)))
      :set
      ((currentextent-arg)
-      (more-cffi:copy currentextent currentextent-arg '(:struct vkextent2d))))
+      (copy-object currentextent currentextent-arg '(:struct vkextent2d))))
     (minimageextent :pointer t :name "minImageExtent" :type "VkExtent2D"
      :create
      ((minimageextent-arg)
-      (more-cffi:copy minimageextent minimageextent-arg '(:struct vkextent2d)))
+      (copy-object minimageextent minimageextent-arg '(:struct vkextent2d)))
      :set
      ((minimageextent-arg)
-      (more-cffi:copy minimageextent minimageextent-arg '(:struct vkextent2d))))
+      (copy-object minimageextent minimageextent-arg '(:struct vkextent2d))))
     (maximageextent :pointer t :name "maxImageExtent" :type "VkExtent2D"
      :create
      ((maximageextent-arg)
-      (more-cffi:copy maximageextent maximageextent-arg '(:struct vkextent2d)))
+      (copy-object maximageextent maximageextent-arg '(:struct vkextent2d)))
      :set
      ((maximageextent-arg)
-      (more-cffi:copy maximageextent maximageextent-arg '(:struct vkextent2d))))
+      (copy-object maximageextent maximageextent-arg '(:struct vkextent2d))))
     (maximagearraylayers :name "maxImageArrayLayers" :type uint32)
     (supportedtransforms :name "supportedTransforms" :type
      "VkSurfaceTransformFlagsKHR")
@@ -7216,10 +7204,10 @@
     (imagecolorspace :name "imageColorSpace" :type "VkColorSpaceKHR")
     (imageextent :pointer t :name "imageExtent" :type "VkExtent2D" :create
      ((imageextent-arg)
-      (more-cffi:copy imageextent imageextent-arg '(:struct vkextent2d)))
+      (copy-object imageextent imageextent-arg '(:struct vkextent2d)))
      :set
      ((imageextent-arg)
-      (more-cffi:copy imageextent imageextent-arg '(:struct vkextent2d))))
+      (copy-object imageextent imageextent-arg '(:struct vkextent2d))))
     (imagearraylayers :name "imageArrayLayers" :type uint32)
     (imageusage :name "imageUsage" :type "VkImageUsageFlags")
     (imagesharingmode :name "imageSharingMode" :type "VkSharingMode")
@@ -7434,10 +7422,10 @@
       (:default-create :default-get :default-set)
     (visibleregion :pointer t :name "visibleRegion" :type "VkExtent2D" :create
      ((visibleregion-arg)
-      (more-cffi:copy visibleregion visibleregion-arg '(:struct vkextent2d)))
+      (copy-object visibleregion visibleregion-arg '(:struct vkextent2d)))
      :set
      ((visibleregion-arg)
-      (more-cffi:copy visibleregion visibleregion-arg '(:struct vkextent2d))))
+      (copy-object visibleregion visibleregion-arg '(:struct vkextent2d))))
     (refreshrate :name "refreshRate" :type uint32))
 
   (more-cffi:doc-note doc-file
@@ -7455,12 +7443,12 @@
     (parameters :pointer t :name parameters :type "VkDisplayModeParametersKHR"
      :create
      ((parameters-arg)
-      (more-cffi:copy parameters parameters-arg
-                      '(:struct vkdisplaymodeparameterskhr)))
+      (copy-object parameters parameters-arg
+       '(:struct vkdisplaymodeparameterskhr)))
      :set
      ((parameters-arg)
-      (more-cffi:copy parameters parameters-arg
-                      '(:struct vkdisplaymodeparameterskhr)))))
+      (copy-object parameters parameters-arg
+       '(:struct vkdisplaymodeparameterskhr)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -7476,12 +7464,12 @@
     (parameters :pointer t :name parameters :type "VkDisplayModeParametersKHR"
      :create
      ((parameters-arg)
-      (more-cffi:copy parameters parameters-arg
-                      '(:struct vkdisplaymodeparameterskhr)))
+      (copy-object parameters parameters-arg
+       '(:struct vkdisplaymodeparameterskhr)))
      :set
      ((parameters-arg)
-      (more-cffi:copy parameters parameters-arg
-                      '(:struct vkdisplaymodeparameterskhr)))))
+      (copy-object parameters parameters-arg
+       '(:struct vkdisplaymodeparameterskhr)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -7494,55 +7482,55 @@
     (minsrcposition :pointer t :name "minSrcPosition" :type "VkOffset2D"
      :create
      ((minsrcposition-arg)
-      (more-cffi:copy minsrcposition minsrcposition-arg '(:struct vkoffset2d)))
+      (copy-object minsrcposition minsrcposition-arg '(:struct vkoffset2d)))
      :set
      ((minsrcposition-arg)
-      (more-cffi:copy minsrcposition minsrcposition-arg '(:struct vkoffset2d))))
+      (copy-object minsrcposition minsrcposition-arg '(:struct vkoffset2d))))
     (maxsrcposition :pointer t :name "maxSrcPosition" :type "VkOffset2D"
      :create
      ((maxsrcposition-arg)
-      (more-cffi:copy maxsrcposition maxsrcposition-arg '(:struct vkoffset2d)))
+      (copy-object maxsrcposition maxsrcposition-arg '(:struct vkoffset2d)))
      :set
      ((maxsrcposition-arg)
-      (more-cffi:copy maxsrcposition maxsrcposition-arg '(:struct vkoffset2d))))
+      (copy-object maxsrcposition maxsrcposition-arg '(:struct vkoffset2d))))
     (minsrcextent :pointer t :name "minSrcExtent" :type "VkExtent2D" :create
      ((minsrcextent-arg)
-      (more-cffi:copy minsrcextent minsrcextent-arg '(:struct vkextent2d)))
+      (copy-object minsrcextent minsrcextent-arg '(:struct vkextent2d)))
      :set
      ((minsrcextent-arg)
-      (more-cffi:copy minsrcextent minsrcextent-arg '(:struct vkextent2d))))
+      (copy-object minsrcextent minsrcextent-arg '(:struct vkextent2d))))
     (maxsrcextent :pointer t :name "maxSrcExtent" :type "VkExtent2D" :create
      ((maxsrcextent-arg)
-      (more-cffi:copy maxsrcextent maxsrcextent-arg '(:struct vkextent2d)))
+      (copy-object maxsrcextent maxsrcextent-arg '(:struct vkextent2d)))
      :set
      ((maxsrcextent-arg)
-      (more-cffi:copy maxsrcextent maxsrcextent-arg '(:struct vkextent2d))))
+      (copy-object maxsrcextent maxsrcextent-arg '(:struct vkextent2d))))
     (mindstposition :pointer t :name "minDstPosition" :type "VkOffset2D"
      :create
      ((mindstposition-arg)
-      (more-cffi:copy mindstposition mindstposition-arg '(:struct vkoffset2d)))
+      (copy-object mindstposition mindstposition-arg '(:struct vkoffset2d)))
      :set
      ((mindstposition-arg)
-      (more-cffi:copy mindstposition mindstposition-arg '(:struct vkoffset2d))))
+      (copy-object mindstposition mindstposition-arg '(:struct vkoffset2d))))
     (maxdstposition :pointer t :name "maxDstPosition" :type "VkOffset2D"
      :create
      ((maxdstposition-arg)
-      (more-cffi:copy maxdstposition maxdstposition-arg '(:struct vkoffset2d)))
+      (copy-object maxdstposition maxdstposition-arg '(:struct vkoffset2d)))
      :set
      ((maxdstposition-arg)
-      (more-cffi:copy maxdstposition maxdstposition-arg '(:struct vkoffset2d))))
+      (copy-object maxdstposition maxdstposition-arg '(:struct vkoffset2d))))
     (mindstextent :pointer t :name "minDstExtent" :type "VkExtent2D" :create
      ((mindstextent-arg)
-      (more-cffi:copy mindstextent mindstextent-arg '(:struct vkextent2d)))
+      (copy-object mindstextent mindstextent-arg '(:struct vkextent2d)))
      :set
      ((mindstextent-arg)
-      (more-cffi:copy mindstextent mindstextent-arg '(:struct vkextent2d))))
+      (copy-object mindstextent mindstextent-arg '(:struct vkextent2d))))
     (maxdstextent :pointer t :name "maxDstExtent" :type "VkExtent2D" :create
      ((maxdstextent-arg)
-      (more-cffi:copy maxdstextent maxdstextent-arg '(:struct vkextent2d)))
+      (copy-object maxdstextent maxdstextent-arg '(:struct vkextent2d)))
      :set
      ((maxdstextent-arg)
-      (more-cffi:copy maxdstextent maxdstextent-arg '(:struct vkextent2d)))))
+      (copy-object maxdstextent maxdstextent-arg '(:struct vkextent2d)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -7576,21 +7564,21 @@
     (physicaldimensions :pointer t :name "physicalDimensions" :type
      "VkExtent2D" :create
      ((physicaldimensions-arg)
-      (more-cffi:copy physicaldimensions physicaldimensions-arg
-                      '(:struct vkextent2d)))
+      (copy-object physicaldimensions physicaldimensions-arg
+       '(:struct vkextent2d)))
      :set
      ((physicaldimensions-arg)
-      (more-cffi:copy physicaldimensions physicaldimensions-arg
-                      '(:struct vkextent2d))))
+      (copy-object physicaldimensions physicaldimensions-arg
+       '(:struct vkextent2d))))
     (physicalresolution :pointer t :name "physicalResolution" :type
      "VkExtent2D" :create
      ((physicalresolution-arg)
-      (more-cffi:copy physicalresolution physicalresolution-arg
-                      '(:struct vkextent2d)))
+      (copy-object physicalresolution physicalresolution-arg
+       '(:struct vkextent2d)))
      :set
      ((physicalresolution-arg)
-      (more-cffi:copy physicalresolution physicalresolution-arg
-                      '(:struct vkextent2d))))
+      (copy-object physicalresolution physicalresolution-arg
+       '(:struct vkextent2d))))
     (supportedtransforms :name "supportedTransforms" :type
      "VkSurfaceTransformFlagsKHR")
     (planereorderpossible :name "planeReorderPossible" :type "VkBool32")
@@ -7619,10 +7607,10 @@
     (alphamode :name "alphaMode" :type "VkDisplayPlaneAlphaFlagBitsKHR")
     (imageextent :pointer t :name "imageExtent" :type "VkExtent2D" :create
      ((imageextent-arg)
-      (more-cffi:copy imageextent imageextent-arg '(:struct vkextent2d)))
+      (copy-object imageextent imageextent-arg '(:struct vkextent2d)))
      :set
      ((imageextent-arg)
-      (more-cffi:copy imageextent imageextent-arg '(:struct vkextent2d)))))
+      (copy-object imageextent imageextent-arg '(:struct vkextent2d)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -7636,13 +7624,11 @@
      ((pnext-arg) (create-pointer pnext pnext-arg)) :get
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (srcrect :pointer t :name "srcRect" :type "VkRect2D" :create
-     ((srcrect-arg) (more-cffi:copy srcrect srcrect-arg '(:struct vkrect2d)))
-     :set
-     ((srcrect-arg) (more-cffi:copy srcrect srcrect-arg '(:struct vkrect2d))))
+     ((srcrect-arg) (copy-object srcrect srcrect-arg '(:struct vkrect2d))) :set
+     ((srcrect-arg) (copy-object srcrect srcrect-arg '(:struct vkrect2d))))
     (dstrect :pointer t :name "dstRect" :type "VkRect2D" :create
-     ((dstrect-arg) (more-cffi:copy dstrect dstrect-arg '(:struct vkrect2d)))
-     :set
-     ((dstrect-arg) (more-cffi:copy dstrect dstrect-arg '(:struct vkrect2d))))
+     ((dstrect-arg) (copy-object dstrect dstrect-arg '(:struct vkrect2d))) :set
+     ((dstrect-arg) (copy-object dstrect dstrect-arg '(:struct vkrect2d))))
     (persistent :name persistent :type "VkBool32"))
 
   (more-cffi:doc-note doc-file
@@ -7664,14 +7650,12 @@
     (shadingrateattachmenttexelsize :pointer t :name
      "shadingRateAttachmentTexelSize" :type "VkExtent2D" :create
      ((shadingrateattachmenttexelsize-arg)
-      (more-cffi:copy shadingrateattachmenttexelsize
-                      shadingrateattachmenttexelsize-arg
-                      '(:struct vkextent2d)))
+      (copy-object shadingrateattachmenttexelsize
+       shadingrateattachmenttexelsize-arg '(:struct vkextent2d)))
      :set
      ((shadingrateattachmenttexelsize-arg)
-      (more-cffi:copy shadingrateattachmenttexelsize
-                      shadingrateattachmenttexelsize-arg
-                      '(:struct vkextent2d)))))
+      (copy-object shadingrateattachmenttexelsize
+       shadingrateattachmenttexelsize-arg '(:struct vkextent2d)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -7837,13 +7821,11 @@
       (rect-layer-khr)
       (:default-create :default-get :default-set)
     (offset :pointer t :name offset :type "VkOffset2D" :create
-     ((offset-arg) (more-cffi:copy offset offset-arg '(:struct vkoffset2d)))
-     :set
-     ((offset-arg) (more-cffi:copy offset offset-arg '(:struct vkoffset2d))))
+     ((offset-arg) (copy-object offset offset-arg '(:struct vkoffset2d))) :set
+     ((offset-arg) (copy-object offset offset-arg '(:struct vkoffset2d))))
     (extent :pointer t :name extent :type "VkExtent2D" :create
-     ((extent-arg) (more-cffi:copy extent extent-arg '(:struct vkextent2d)))
-     :set
-     ((extent-arg) (more-cffi:copy extent extent-arg '(:struct vkextent2d))))
+     ((extent-arg) (copy-object extent extent-arg '(:struct vkextent2d))) :set
+     ((extent-arg) (copy-object extent extent-arg '(:struct vkextent2d))))
     (layer :name layer :type uint32))
 
   (more-cffi:doc-note doc-file
@@ -8120,12 +8102,12 @@
     (surfacecapabilities :pointer t :name "surfaceCapabilities" :type
      "VkSurfaceCapabilitiesKHR" :create
      ((surfacecapabilities-arg)
-      (more-cffi:copy surfacecapabilities surfacecapabilities-arg
-                      '(:struct vksurfacecapabilitieskhr)))
+      (copy-object surfacecapabilities surfacecapabilities-arg
+       '(:struct vksurfacecapabilitieskhr)))
      :set
      ((surfacecapabilities-arg)
-      (more-cffi:copy surfacecapabilities surfacecapabilities-arg
-                      '(:struct vksurfacecapabilitieskhr)))))
+      (copy-object surfacecapabilities surfacecapabilities-arg
+       '(:struct vksurfacecapabilitieskhr)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -8141,12 +8123,12 @@
     (surfaceformat :pointer t :name "surfaceFormat" :type "VkSurfaceFormatKHR"
      :create
      ((surfaceformat-arg)
-      (more-cffi:copy surfaceformat surfaceformat-arg
-                      '(:struct vksurfaceformatkhr)))
+      (copy-object surfaceformat surfaceformat-arg
+       '(:struct vksurfaceformatkhr)))
      :set
      ((surfaceformat-arg)
-      (more-cffi:copy surfaceformat surfaceformat-arg
-                      '(:struct vksurfaceformatkhr)))))
+      (copy-object surfaceformat surfaceformat-arg
+       '(:struct vksurfaceformatkhr)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -8162,12 +8144,12 @@
     (displayproperties :pointer t :name "displayProperties" :type
      "VkDisplayPropertiesKHR" :create
      ((displayproperties-arg)
-      (more-cffi:copy displayproperties displayproperties-arg
-                      '(:struct vkdisplaypropertieskhr)))
+      (copy-object displayproperties displayproperties-arg
+       '(:struct vkdisplaypropertieskhr)))
      :set
      ((displayproperties-arg)
-      (more-cffi:copy displayproperties displayproperties-arg
-                      '(:struct vkdisplaypropertieskhr)))))
+      (copy-object displayproperties displayproperties-arg
+       '(:struct vkdisplaypropertieskhr)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -8183,12 +8165,12 @@
     (displayplaneproperties :pointer t :name "displayPlaneProperties" :type
      "VkDisplayPlanePropertiesKHR" :create
      ((displayplaneproperties-arg)
-      (more-cffi:copy displayplaneproperties displayplaneproperties-arg
-                      '(:struct vkdisplayplanepropertieskhr)))
+      (copy-object displayplaneproperties displayplaneproperties-arg
+       '(:struct vkdisplayplanepropertieskhr)))
      :set
      ((displayplaneproperties-arg)
-      (more-cffi:copy displayplaneproperties displayplaneproperties-arg
-                      '(:struct vkdisplayplanepropertieskhr)))))
+      (copy-object displayplaneproperties displayplaneproperties-arg
+       '(:struct vkdisplayplanepropertieskhr)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -8204,12 +8186,12 @@
     (displaymodeproperties :pointer t :name "displayModeProperties" :type
      "VkDisplayModePropertiesKHR" :create
      ((displaymodeproperties-arg)
-      (more-cffi:copy displaymodeproperties displaymodeproperties-arg
-                      '(:struct vkdisplaymodepropertieskhr)))
+      (copy-object displaymodeproperties displaymodeproperties-arg
+       '(:struct vkdisplaymodepropertieskhr)))
      :set
      ((displaymodeproperties-arg)
-      (more-cffi:copy displaymodeproperties displaymodeproperties-arg
-                      '(:struct vkdisplaymodepropertieskhr)))))
+      (copy-object displaymodeproperties displaymodeproperties-arg
+       '(:struct vkdisplaymodepropertieskhr)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -8241,12 +8223,12 @@
     (capabilities :pointer t :name capabilities :type
      "VkDisplayPlaneCapabilitiesKHR" :create
      ((capabilities-arg)
-      (more-cffi:copy capabilities capabilities-arg
-                      '(:struct vkdisplayplanecapabilitieskhr)))
+      (copy-object capabilities capabilities-arg
+       '(:struct vkdisplayplanecapabilitieskhr)))
      :set
      ((capabilities-arg)
-      (more-cffi:copy capabilities capabilities-arg
-                      '(:struct vkdisplayplanecapabilitieskhr)))))
+      (copy-object capabilities capabilities-arg
+       '(:struct vkdisplayplanecapabilitieskhr)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -8339,14 +8321,12 @@
     (shadingrateattachmenttexelsize :pointer t :name
      "shadingRateAttachmentTexelSize" :type "VkExtent2D" :create
      ((shadingrateattachmenttexelsize-arg)
-      (more-cffi:copy shadingrateattachmenttexelsize
-                      shadingrateattachmenttexelsize-arg
-                      '(:struct vkextent2d)))
+      (copy-object shadingrateattachmenttexelsize
+       shadingrateattachmenttexelsize-arg '(:struct vkextent2d)))
      :set
      ((shadingrateattachmenttexelsize-arg)
-      (more-cffi:copy shadingrateattachmenttexelsize
-                      shadingrateattachmenttexelsize-arg
-                      '(:struct vkextent2d)))))
+      (copy-object shadingrateattachmenttexelsize
+       shadingrateattachmenttexelsize-arg '(:struct vkextent2d)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -8361,10 +8341,10 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (fragmentsize :pointer t :name "fragmentSize" :type "VkExtent2D" :create
      ((fragmentsize-arg)
-      (more-cffi:copy fragmentsize fragmentsize-arg '(:struct vkextent2d)))
+      (copy-object fragmentsize fragmentsize-arg '(:struct vkextent2d)))
      :set
      ((fragmentsize-arg)
-      (more-cffi:copy fragmentsize fragmentsize-arg '(:struct vkextent2d))))
+      (copy-object fragmentsize fragmentsize-arg '(:struct vkextent2d))))
     (combinerops :name "combinerOps" :type "VkFragmentShadingRateCombinerOpKHR"
      :create
      ((combinerops-arg)
@@ -8411,25 +8391,21 @@
     (minfragmentshadingrateattachmenttexelsize :pointer t :name
      "minFragmentShadingRateAttachmentTexelSize" :type "VkExtent2D" :create
      ((minfragmentshadingrateattachmenttexelsize-arg)
-      (more-cffi:copy minfragmentshadingrateattachmenttexelsize
-                      minfragmentshadingrateattachmenttexelsize-arg
-                      '(:struct vkextent2d)))
+      (copy-object minfragmentshadingrateattachmenttexelsize
+       minfragmentshadingrateattachmenttexelsize-arg '(:struct vkextent2d)))
      :set
      ((minfragmentshadingrateattachmenttexelsize-arg)
-      (more-cffi:copy minfragmentshadingrateattachmenttexelsize
-                      minfragmentshadingrateattachmenttexelsize-arg
-                      '(:struct vkextent2d))))
+      (copy-object minfragmentshadingrateattachmenttexelsize
+       minfragmentshadingrateattachmenttexelsize-arg '(:struct vkextent2d))))
     (maxfragmentshadingrateattachmenttexelsize :pointer t :name
      "maxFragmentShadingRateAttachmentTexelSize" :type "VkExtent2D" :create
      ((maxfragmentshadingrateattachmenttexelsize-arg)
-      (more-cffi:copy maxfragmentshadingrateattachmenttexelsize
-                      maxfragmentshadingrateattachmenttexelsize-arg
-                      '(:struct vkextent2d)))
+      (copy-object maxfragmentshadingrateattachmenttexelsize
+       maxfragmentshadingrateattachmenttexelsize-arg '(:struct vkextent2d)))
      :set
      ((maxfragmentshadingrateattachmenttexelsize-arg)
-      (more-cffi:copy maxfragmentshadingrateattachmenttexelsize
-                      maxfragmentshadingrateattachmenttexelsize-arg
-                      '(:struct vkextent2d))))
+      (copy-object maxfragmentshadingrateattachmenttexelsize
+       maxfragmentshadingrateattachmenttexelsize-arg '(:struct vkextent2d))))
     (maxfragmentshadingrateattachmenttexelsizeaspectratio :name
      "maxFragmentShadingRateAttachmentTexelSizeAspectRatio" :type uint32)
     (primitivefragmentshadingratewithmultipleviewports :name
@@ -8441,12 +8417,10 @@
     (maxfragmentsize :pointer t :name "maxFragmentSize" :type "VkExtent2D"
      :create
      ((maxfragmentsize-arg)
-      (more-cffi:copy maxfragmentsize maxfragmentsize-arg
-                      '(:struct vkextent2d)))
+      (copy-object maxfragmentsize maxfragmentsize-arg '(:struct vkextent2d)))
      :set
      ((maxfragmentsize-arg)
-      (more-cffi:copy maxfragmentsize maxfragmentsize-arg
-                      '(:struct vkextent2d))))
+      (copy-object maxfragmentsize maxfragmentsize-arg '(:struct vkextent2d))))
     (maxfragmentsizeaspectratio :name "maxFragmentSizeAspectRatio" :type uint32)
     (maxfragmentshadingratecoveragesamples :name
      "maxFragmentShadingRateCoverageSamples" :type uint32)
@@ -8481,10 +8455,10 @@
     (samplecounts :name "sampleCounts" :type "VkSampleCountFlags")
     (fragmentsize :pointer t :name "fragmentSize" :type "VkExtent2D" :create
      ((fragmentsize-arg)
-      (more-cffi:copy fragmentsize fragmentsize-arg '(:struct vkextent2d)))
+      (copy-object fragmentsize fragmentsize-arg '(:struct vkextent2d)))
      :set
      ((fragmentsize-arg)
-      (more-cffi:copy fragmentsize fragmentsize-arg '(:struct vkextent2d)))))
+      (copy-object fragmentsize fragmentsize-arg '(:struct vkextent2d)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -8617,12 +8591,12 @@
     (value :pointer t :name value :type "VkPipelineExecutableStatisticValueKHR"
      :create
      ((value-arg)
-      (more-cffi:copy value value-arg
-                      '(:union vkpipelineexecutablestatisticvaluekhr)))
+      (copy-object value value-arg
+       '(:union vkpipelineexecutablestatisticvaluekhr)))
      :set
      ((value-arg)
-      (more-cffi:copy value value-arg
-                      '(:union vkpipelineexecutablestatisticvaluekhr)))))
+      (copy-object value value-arg
+       '(:union vkpipelineexecutablestatisticvaluekhr)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -9201,12 +9175,12 @@
     (resourceusage :pointer t :name "resourceUsage" :type
      "VkShaderResourceUsageAMD" :create
      ((resourceusage-arg)
-      (more-cffi:copy resourceusage resourceusage-arg
-                      '(:struct vkshaderresourceusageamd)))
+      (copy-object resourceusage resourceusage-arg
+       '(:struct vkshaderresourceusageamd)))
      :set
      ((resourceusage-arg)
-      (more-cffi:copy resourceusage resourceusage-arg
-                      '(:struct vkshaderresourceusageamd))))
+      (copy-object resourceusage resourceusage-arg
+       '(:struct vkshaderresourceusageamd))))
     (numphysicalvgprs :name "numPhysicalVgprs" :type uint32)
     (numphysicalsgprs :name "numPhysicalSgprs" :type uint32)
     (numavailablevgprs :name "numAvailableVgprs" :type uint32)
@@ -9247,12 +9221,12 @@
     (imageformatproperties :pointer t :name "imageFormatProperties" :type
      "VkImageFormatProperties" :create
      ((imageformatproperties-arg)
-      (more-cffi:copy imageformatproperties imageformatproperties-arg
-                      '(:struct vkimageformatproperties)))
+      (copy-object imageformatproperties imageformatproperties-arg
+       '(:struct vkimageformatproperties)))
      :set
      ((imageformatproperties-arg)
-      (more-cffi:copy imageformatproperties imageformatproperties-arg
-                      '(:struct vkimageformatproperties))))
+      (copy-object imageformatproperties imageformatproperties-arg
+       '(:struct vkimageformatproperties))))
     (externalmemoryfeatures :name "externalMemoryFeatures" :type
      "VkExternalMemoryFeatureFlagsNV")
     (exportfromimportedhandletypes :name "exportFromImportedHandleTypes" :type
@@ -9443,24 +9417,24 @@
     (maximagecount :name "maxImageCount" :type uint32)
     (currentextent :pointer t :name "currentExtent" :type "VkExtent2D" :create
      ((currentextent-arg)
-      (more-cffi:copy currentextent currentextent-arg '(:struct vkextent2d)))
+      (copy-object currentextent currentextent-arg '(:struct vkextent2d)))
      :set
      ((currentextent-arg)
-      (more-cffi:copy currentextent currentextent-arg '(:struct vkextent2d))))
+      (copy-object currentextent currentextent-arg '(:struct vkextent2d))))
     (minimageextent :pointer t :name "minImageExtent" :type "VkExtent2D"
      :create
      ((minimageextent-arg)
-      (more-cffi:copy minimageextent minimageextent-arg '(:struct vkextent2d)))
+      (copy-object minimageextent minimageextent-arg '(:struct vkextent2d)))
      :set
      ((minimageextent-arg)
-      (more-cffi:copy minimageextent minimageextent-arg '(:struct vkextent2d))))
+      (copy-object minimageextent minimageextent-arg '(:struct vkextent2d))))
     (maximageextent :pointer t :name "maxImageExtent" :type "VkExtent2D"
      :create
      ((maximageextent-arg)
-      (more-cffi:copy maximageextent maximageextent-arg '(:struct vkextent2d)))
+      (copy-object maximageextent maximageextent-arg '(:struct vkextent2d)))
      :set
      ((maximageextent-arg)
-      (more-cffi:copy maximageextent maximageextent-arg '(:struct vkextent2d))))
+      (copy-object maximageextent maximageextent-arg '(:struct vkextent2d))))
     (maximagearraylayers :name "maxImageArrayLayers" :type uint32)
     (supportedtransforms :name "supportedTransforms" :type
      "VkSurfaceTransformFlagsKHR")
@@ -9777,36 +9751,36 @@
     (displayprimaryred :pointer t :name "displayPrimaryRed" :type
      "VkXYColorEXT" :create
      ((displayprimaryred-arg)
-      (more-cffi:copy displayprimaryred displayprimaryred-arg
-                      '(:struct vkxycolorext)))
+      (copy-object displayprimaryred displayprimaryred-arg
+       '(:struct vkxycolorext)))
      :set
      ((displayprimaryred-arg)
-      (more-cffi:copy displayprimaryred displayprimaryred-arg
-                      '(:struct vkxycolorext))))
+      (copy-object displayprimaryred displayprimaryred-arg
+       '(:struct vkxycolorext))))
     (displayprimarygreen :pointer t :name "displayPrimaryGreen" :type
      "VkXYColorEXT" :create
      ((displayprimarygreen-arg)
-      (more-cffi:copy displayprimarygreen displayprimarygreen-arg
-                      '(:struct vkxycolorext)))
+      (copy-object displayprimarygreen displayprimarygreen-arg
+       '(:struct vkxycolorext)))
      :set
      ((displayprimarygreen-arg)
-      (more-cffi:copy displayprimarygreen displayprimarygreen-arg
-                      '(:struct vkxycolorext))))
+      (copy-object displayprimarygreen displayprimarygreen-arg
+       '(:struct vkxycolorext))))
     (displayprimaryblue :pointer t :name "displayPrimaryBlue" :type
      "VkXYColorEXT" :create
      ((displayprimaryblue-arg)
-      (more-cffi:copy displayprimaryblue displayprimaryblue-arg
-                      '(:struct vkxycolorext)))
+      (copy-object displayprimaryblue displayprimaryblue-arg
+       '(:struct vkxycolorext)))
      :set
      ((displayprimaryblue-arg)
-      (more-cffi:copy displayprimaryblue displayprimaryblue-arg
-                      '(:struct vkxycolorext))))
+      (copy-object displayprimaryblue displayprimaryblue-arg
+       '(:struct vkxycolorext))))
     (whitepoint :pointer t :name "whitePoint" :type "VkXYColorEXT" :create
      ((whitepoint-arg)
-      (more-cffi:copy whitepoint whitepoint-arg '(:struct vkxycolorext)))
+      (copy-object whitepoint whitepoint-arg '(:struct vkxycolorext)))
      :set
      ((whitepoint-arg)
-      (more-cffi:copy whitepoint whitepoint-arg '(:struct vkxycolorext))))
+      (copy-object whitepoint whitepoint-arg '(:struct vkxycolorext))))
     (maxluminance :name "maxLuminance" :type float)
     (minluminance :name "minLuminance" :type float)
     (maxcontentlightlevel :name "maxContentLightLevel" :type float)
@@ -10029,12 +10003,12 @@
     (samplelocationgridsize :pointer t :name "sampleLocationGridSize" :type
      "VkExtent2D" :create
      ((samplelocationgridsize-arg)
-      (more-cffi:copy samplelocationgridsize samplelocationgridsize-arg
-                      '(:struct vkextent2d)))
+      (copy-object samplelocationgridsize samplelocationgridsize-arg
+       '(:struct vkextent2d)))
      :set
      ((samplelocationgridsize-arg)
-      (more-cffi:copy samplelocationgridsize samplelocationgridsize-arg
-                      '(:struct vkextent2d))))
+      (copy-object samplelocationgridsize samplelocationgridsize-arg
+       '(:struct vkextent2d))))
     (samplelocationscount :name "sampleLocationsCount" :type uint32)
     (psamplelocations :name "pSampleLocations" :type "VkSampleLocationEXT"
      :init-form nil :create
@@ -10063,12 +10037,12 @@
     (samplelocationsinfo :pointer t :name "sampleLocationsInfo" :type
      "VkSampleLocationsInfoEXT" :create
      ((samplelocationsinfo-arg)
-      (more-cffi:copy samplelocationsinfo samplelocationsinfo-arg
-                      '(:struct vksamplelocationsinfoext)))
+      (copy-object samplelocationsinfo samplelocationsinfo-arg
+       '(:struct vksamplelocationsinfoext)))
      :set
      ((samplelocationsinfo-arg)
-      (more-cffi:copy samplelocationsinfo samplelocationsinfo-arg
-                      '(:struct vksamplelocationsinfoext)))))
+      (copy-object samplelocationsinfo samplelocationsinfo-arg
+       '(:struct vksamplelocationsinfoext)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -10081,12 +10055,12 @@
     (samplelocationsinfo :pointer t :name "sampleLocationsInfo" :type
      "VkSampleLocationsInfoEXT" :create
      ((samplelocationsinfo-arg)
-      (more-cffi:copy samplelocationsinfo samplelocationsinfo-arg
-                      '(:struct vksamplelocationsinfoext)))
+      (copy-object samplelocationsinfo samplelocationsinfo-arg
+       '(:struct vksamplelocationsinfoext)))
      :set
      ((samplelocationsinfo-arg)
-      (more-cffi:copy samplelocationsinfo samplelocationsinfo-arg
-                      '(:struct vksamplelocationsinfoext)))))
+      (copy-object samplelocationsinfo samplelocationsinfo-arg
+       '(:struct vksamplelocationsinfoext)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -10159,12 +10133,12 @@
     (samplelocationsinfo :pointer t :name "sampleLocationsInfo" :type
      "VkSampleLocationsInfoEXT" :create
      ((samplelocationsinfo-arg)
-      (more-cffi:copy samplelocationsinfo samplelocationsinfo-arg
-                      '(:struct vksamplelocationsinfoext)))
+      (copy-object samplelocationsinfo samplelocationsinfo-arg
+       '(:struct vksamplelocationsinfoext)))
      :set
      ((samplelocationsinfo-arg)
-      (more-cffi:copy samplelocationsinfo samplelocationsinfo-arg
-                      '(:struct vksamplelocationsinfoext)))))
+      (copy-object samplelocationsinfo samplelocationsinfo-arg
+       '(:struct vksamplelocationsinfoext)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -10182,12 +10156,12 @@
     (maxsamplelocationgridsize :pointer t :name "maxSampleLocationGridSize"
      :type "VkExtent2D" :create
      ((maxsamplelocationgridsize-arg)
-      (more-cffi:copy maxsamplelocationgridsize maxsamplelocationgridsize-arg
-                      '(:struct vkextent2d)))
+      (copy-object maxsamplelocationgridsize maxsamplelocationgridsize-arg
+       '(:struct vkextent2d)))
      :set
      ((maxsamplelocationgridsize-arg)
-      (more-cffi:copy maxsamplelocationgridsize maxsamplelocationgridsize-arg
-                      '(:struct vkextent2d))))
+      (copy-object maxsamplelocationgridsize maxsamplelocationgridsize-arg
+       '(:struct vkextent2d))))
     (samplelocationcoordinaterange :name "sampleLocationCoordinateRange" :type
      float :create
      ((samplelocationcoordinaterange-arg)
@@ -10220,12 +10194,12 @@
     (maxsamplelocationgridsize :pointer t :name "maxSampleLocationGridSize"
      :type "VkExtent2D" :create
      ((maxsamplelocationgridsize-arg)
-      (more-cffi:copy maxsamplelocationgridsize maxsamplelocationgridsize-arg
-                      '(:struct vkextent2d)))
+      (copy-object maxsamplelocationgridsize maxsamplelocationgridsize-arg
+       '(:struct vkextent2d)))
      :set
      ((maxsamplelocationgridsize-arg)
-      (more-cffi:copy maxsamplelocationgridsize maxsamplelocationgridsize-arg
-                      '(:struct vkextent2d)))))
+      (copy-object maxsamplelocationgridsize maxsamplelocationgridsize-arg
+       '(:struct vkextent2d)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -10659,12 +10633,12 @@
     (shadingratetexelsize :pointer t :name "shadingRateTexelSize" :type
      "VkExtent2D" :create
      ((shadingratetexelsize-arg)
-      (more-cffi:copy shadingratetexelsize shadingratetexelsize-arg
-                      '(:struct vkextent2d)))
+      (copy-object shadingratetexelsize shadingratetexelsize-arg
+       '(:struct vkextent2d)))
      :set
      ((shadingratetexelsize-arg)
-      (more-cffi:copy shadingratetexelsize shadingratetexelsize-arg
-                      '(:struct vkextent2d))))
+      (copy-object shadingratetexelsize shadingratetexelsize-arg
+       '(:struct vkextent2d))))
     (shadingratepalettesize :name "shadingRatePaletteSize" :type uint32)
     (shadingratemaxcoarsesamples :name "shadingRateMaxCoarseSamples" :type
      uint32))
@@ -10869,17 +10843,14 @@
       (:default-create :default-get :default-set)
     (triangles :pointer t :name triangles :type "VkGeometryTrianglesNV" :create
      ((triangles-arg)
-      (more-cffi:copy triangles triangles-arg
-                      '(:struct vkgeometrytrianglesnv)))
+      (copy-object triangles triangles-arg '(:struct vkgeometrytrianglesnv)))
      :set
      ((triangles-arg)
-      (more-cffi:copy triangles triangles-arg
-                      '(:struct vkgeometrytrianglesnv))))
+      (copy-object triangles triangles-arg '(:struct vkgeometrytrianglesnv))))
     (aabbs :pointer t :name aabbs :type "VkGeometryAABBNV" :create
-     ((aabbs-arg) (more-cffi:copy aabbs aabbs-arg '(:struct vkgeometryaabbnv)))
+     ((aabbs-arg) (copy-object aabbs aabbs-arg '(:struct vkgeometryaabbnv)))
      :set
-     ((aabbs-arg)
-      (more-cffi:copy aabbs aabbs-arg '(:struct vkgeometryaabbnv)))))
+     ((aabbs-arg) (copy-object aabbs aabbs-arg '(:struct vkgeometryaabbnv)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -10895,10 +10866,10 @@
     (geometrytype :name "geometryType" :type "VkGeometryTypeKHR")
     (geometry :pointer t :name geometry :type "VkGeometryDataNV" :create
      ((geometry-arg)
-      (more-cffi:copy geometry geometry-arg '(:struct vkgeometrydatanv)))
+      (copy-object geometry geometry-arg '(:struct vkgeometrydatanv)))
      :set
      ((geometry-arg)
-      (more-cffi:copy geometry geometry-arg '(:struct vkgeometrydatanv))))
+      (copy-object geometry geometry-arg '(:struct vkgeometrydatanv))))
     (flags :name flags :type "VkGeometryFlagsKHR"))
 
   (more-cffi:doc-note doc-file
@@ -10944,10 +10915,10 @@
     (compactedsize :name "compactedSize" :type "VkDeviceSize")
     (info :pointer t :name info :type "VkAccelerationStructureInfoNV" :create
      ((info-arg)
-      (more-cffi:copy info info-arg '(:struct vkaccelerationstructureinfonv)))
+      (copy-object info info-arg '(:struct vkaccelerationstructureinfonv)))
      :set
      ((info-arg)
-      (more-cffi:copy info info-arg '(:struct vkaccelerationstructureinfonv)))))
+      (copy-object info info-arg '(:struct vkaccelerationstructureinfonv)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -11095,10 +11066,10 @@
       (:default-create :default-get :default-set)
     (transform :pointer t :name transform :type "VkTransformMatrixKHR" :create
      ((transform-arg)
-      (more-cffi:copy transform transform-arg '(:struct vktransformmatrixkhr)))
+      (copy-object transform transform-arg '(:struct vktransformmatrixkhr)))
      :set
      ((transform-arg)
-      (more-cffi:copy transform transform-arg '(:struct vktransformmatrixkhr))))
+      (copy-object transform transform-arg '(:struct vktransformmatrixkhr))))
     (instancecustomindex :name "instanceCustomIndex" :type uint32)
     (instanceshaderbindingtablerecordoffset :name
      "instanceShaderBindingTableRecordOffset" :type uint32)
@@ -11558,10 +11529,10 @@
     (type :name type :type "VkPerformanceValueTypeINTEL")
     (data :pointer t :name data :type "VkPerformanceValueDataINTEL" :create
      ((data-arg)
-      (more-cffi:copy data data-arg '(:union vkperformancevaluedataintel)))
+      (copy-object data data-arg '(:union vkperformancevaluedataintel)))
      :set
      ((data-arg)
-      (more-cffi:copy data data-arg '(:union vkperformancevaluedataintel)))))
+      (copy-object data data-arg '(:union vkperformancevaluedataintel)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -11721,21 +11692,21 @@
     (minfragmentdensitytexelsize :pointer t :name "minFragmentDensityTexelSize"
      :type "VkExtent2D" :create
      ((minfragmentdensitytexelsize-arg)
-      (more-cffi:copy minfragmentdensitytexelsize
-                      minfragmentdensitytexelsize-arg '(:struct vkextent2d)))
+      (copy-object minfragmentdensitytexelsize minfragmentdensitytexelsize-arg
+       '(:struct vkextent2d)))
      :set
      ((minfragmentdensitytexelsize-arg)
-      (more-cffi:copy minfragmentdensitytexelsize
-                      minfragmentdensitytexelsize-arg '(:struct vkextent2d))))
+      (copy-object minfragmentdensitytexelsize minfragmentdensitytexelsize-arg
+       '(:struct vkextent2d))))
     (maxfragmentdensitytexelsize :pointer t :name "maxFragmentDensityTexelSize"
      :type "VkExtent2D" :create
      ((maxfragmentdensitytexelsize-arg)
-      (more-cffi:copy maxfragmentdensitytexelsize
-                      maxfragmentdensitytexelsize-arg '(:struct vkextent2d)))
+      (copy-object maxfragmentdensitytexelsize maxfragmentdensitytexelsize-arg
+       '(:struct vkextent2d)))
      :set
      ((maxfragmentdensitytexelsize-arg)
-      (more-cffi:copy maxfragmentdensitytexelsize
-                      maxfragmentdensitytexelsize-arg '(:struct vkextent2d))))
+      (copy-object maxfragmentdensitytexelsize maxfragmentdensitytexelsize-arg
+       '(:struct vkextent2d))))
     (fragmentdensityinvocations :name "fragmentDensityInvocations" :type
      "VkBool32"))
 
@@ -11753,14 +11724,12 @@
     (fragmentdensitymapattachment :pointer t :name
      "fragmentDensityMapAttachment" :type "VkAttachmentReference" :create
      ((fragmentdensitymapattachment-arg)
-      (more-cffi:copy fragmentdensitymapattachment
-                      fragmentdensitymapattachment-arg
-                      '(:struct vkattachmentreference)))
+      (copy-object fragmentdensitymapattachment
+       fragmentdensitymapattachment-arg '(:struct vkattachmentreference)))
      :set
      ((fragmentdensitymapattachment-arg)
-      (more-cffi:copy fragmentdensitymapattachment
-                      fragmentdensitymapattachment-arg
-                      '(:struct vkattachmentreference)))))
+      (copy-object fragmentdensitymapattachment
+       fragmentdensitymapattachment-arg '(:struct vkattachmentreference)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -12722,10 +12691,10 @@
     (transform :name transform :type "VkSurfaceTransformFlagBitsKHR")
     (renderarea :pointer t :name "renderArea" :type "VkRect2D" :create
      ((renderarea-arg)
-      (more-cffi:copy renderarea renderarea-arg '(:struct vkrect2d)))
+      (copy-object renderarea renderarea-arg '(:struct vkrect2d)))
      :set
      ((renderarea-arg)
-      (more-cffi:copy renderarea renderarea-arg '(:struct vkrect2d)))))
+      (copy-object renderarea renderarea-arg '(:struct vkrect2d)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -12823,12 +12792,12 @@
     (custombordercolor :pointer t :name "customBorderColor" :type
      "VkClearColorValue" :create
      ((custombordercolor-arg)
-      (more-cffi:copy custombordercolor custombordercolor-arg
-                      '(:union vkclearcolorvalue)))
+      (copy-object custombordercolor custombordercolor-arg
+       '(:union vkclearcolorvalue)))
      :set
      ((custombordercolor-arg)
-      (more-cffi:copy custombordercolor custombordercolor-arg
-                      '(:union vkclearcolorvalue))))
+      (copy-object custombordercolor custombordercolor-arg
+       '(:union vkclearcolorvalue))))
     (format :name format :type "VkFormat"))
 
   (more-cffi:doc-note doc-file
@@ -13029,12 +12998,12 @@
     (vertexdata :pointer t :name "vertexData" :type
      "VkDeviceOrHostAddressConstKHR" :create
      ((vertexdata-arg)
-      (more-cffi:copy vertexdata vertexdata-arg
-                      '(:union vkdeviceorhostaddressconstkhr)))
+      (copy-object vertexdata vertexdata-arg
+       '(:union vkdeviceorhostaddressconstkhr)))
      :set
      ((vertexdata-arg)
-      (more-cffi:copy vertexdata vertexdata-arg
-                      '(:union vkdeviceorhostaddressconstkhr)))))
+      (copy-object vertexdata vertexdata-arg
+       '(:union vkdeviceorhostaddressconstkhr)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -13060,21 +13029,21 @@
     (transformt0 :pointer t :name "transformT0" :type "VkTransformMatrixKHR"
      :create
      ((transformt0-arg)
-      (more-cffi:copy transformt0 transformt0-arg
-                      '(:struct vktransformmatrixkhr)))
+      (copy-object transformt0 transformt0-arg
+       '(:struct vktransformmatrixkhr)))
      :set
      ((transformt0-arg)
-      (more-cffi:copy transformt0 transformt0-arg
-                      '(:struct vktransformmatrixkhr))))
+      (copy-object transformt0 transformt0-arg
+       '(:struct vktransformmatrixkhr))))
     (transformt1 :pointer t :name "transformT1" :type "VkTransformMatrixKHR"
      :create
      ((transformt1-arg)
-      (more-cffi:copy transformt1 transformt1-arg
-                      '(:struct vktransformmatrixkhr)))
+      (copy-object transformt1 transformt1-arg
+       '(:struct vktransformmatrixkhr)))
      :set
      ((transformt1-arg)
-      (more-cffi:copy transformt1 transformt1-arg
-                      '(:struct vktransformmatrixkhr))))
+      (copy-object transformt1 transformt1-arg
+       '(:struct vktransformmatrixkhr))))
     (instancecustomindex :name "instanceCustomIndex" :type uint32)
     (instanceshaderbindingtablerecordoffset :name
      "instanceShaderBindingTableRecordOffset" :type uint32)
@@ -13114,16 +13083,16 @@
       (:default-create :default-get :default-set)
     (transformt0 :pointer t :name "transformT0" :type "VkSRTDataNV" :create
      ((transformt0-arg)
-      (more-cffi:copy transformt0 transformt0-arg '(:struct vksrtdatanv)))
+      (copy-object transformt0 transformt0-arg '(:struct vksrtdatanv)))
      :set
      ((transformt0-arg)
-      (more-cffi:copy transformt0 transformt0-arg '(:struct vksrtdatanv))))
+      (copy-object transformt0 transformt0-arg '(:struct vksrtdatanv))))
     (transformt1 :pointer t :name "transformT1" :type "VkSRTDataNV" :create
      ((transformt1-arg)
-      (more-cffi:copy transformt1 transformt1-arg '(:struct vksrtdatanv)))
+      (copy-object transformt1 transformt1-arg '(:struct vksrtdatanv)))
      :set
      ((transformt1-arg)
-      (more-cffi:copy transformt1 transformt1-arg '(:struct vksrtdatanv))))
+      (copy-object transformt1 transformt1-arg '(:struct vksrtdatanv))))
     (instancecustomindex :name "instanceCustomIndex" :type uint32)
     (instanceshaderbindingtablerecordoffset :name
      "instanceShaderBindingTableRecordOffset" :type uint32)
@@ -13140,32 +13109,30 @@
     (staticinstance :pointer t :name "staticInstance" :type
      "VkAccelerationStructureInstanceKHR" :create
      ((staticinstance-arg)
-      (more-cffi:copy staticinstance staticinstance-arg
-                      '(:struct vkaccelerationstructureinstancekhr)))
+      (copy-object staticinstance staticinstance-arg
+       '(:struct vkaccelerationstructureinstancekhr)))
      :set
      ((staticinstance-arg)
-      (more-cffi:copy staticinstance staticinstance-arg
-                      '(:struct vkaccelerationstructureinstancekhr))))
+      (copy-object staticinstance staticinstance-arg
+       '(:struct vkaccelerationstructureinstancekhr))))
     (matrixmotioninstance :pointer t :name "matrixMotionInstance" :type
      "VkAccelerationStructureMatrixMotionInstanceNV" :create
      ((matrixmotioninstance-arg)
-      (more-cffi:copy matrixmotioninstance matrixmotioninstance-arg
-                      '(:struct
-                        vkaccelerationstructurematrixmotioninstancenv)))
+      (copy-object matrixmotioninstance matrixmotioninstance-arg
+       '(:struct vkaccelerationstructurematrixmotioninstancenv)))
      :set
      ((matrixmotioninstance-arg)
-      (more-cffi:copy matrixmotioninstance matrixmotioninstance-arg
-                      '(:struct
-                        vkaccelerationstructurematrixmotioninstancenv))))
+      (copy-object matrixmotioninstance matrixmotioninstance-arg
+       '(:struct vkaccelerationstructurematrixmotioninstancenv))))
     (srtmotioninstance :pointer t :name "srtMotionInstance" :type
      "VkAccelerationStructureSRTMotionInstanceNV" :create
      ((srtmotioninstance-arg)
-      (more-cffi:copy srtmotioninstance srtmotioninstance-arg
-                      '(:struct vkaccelerationstructuresrtmotioninstancenv)))
+      (copy-object srtmotioninstance srtmotioninstance-arg
+       '(:struct vkaccelerationstructuresrtmotioninstancenv)))
      :set
      ((srtmotioninstance-arg)
-      (more-cffi:copy srtmotioninstance srtmotioninstance-arg
-                      '(:struct vkaccelerationstructuresrtmotioninstancenv)))))
+      (copy-object srtmotioninstance srtmotioninstance-arg
+       '(:struct vkaccelerationstructuresrtmotioninstancenv)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -13179,12 +13146,12 @@
     (data :pointer t :name data :type
      "VkAccelerationStructureMotionInstanceDataNV" :create
      ((data-arg)
-      (more-cffi:copy data data-arg
-                      '(:union vkaccelerationstructuremotioninstancedatanv)))
+      (copy-object data data-arg
+       '(:union vkaccelerationstructuremotioninstancedatanv)))
      :set
      ((data-arg)
-      (more-cffi:copy data data-arg
-                      '(:union vkaccelerationstructuremotioninstancedatanv)))))
+      (copy-object data data-arg
+       '(:union vkaccelerationstructuremotioninstancedatanv)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -13314,12 +13281,12 @@
     (subresourcelayout :pointer t :name "subresourceLayout" :type
      "VkSubresourceLayout" :create
      ((subresourcelayout-arg)
-      (more-cffi:copy subresourcelayout subresourcelayout-arg
-                      '(:struct vksubresourcelayout)))
+      (copy-object subresourcelayout subresourcelayout-arg
+       '(:struct vksubresourcelayout)))
      :set
      ((subresourcelayout-arg)
-      (more-cffi:copy subresourcelayout subresourcelayout-arg
-                      '(:struct vksubresourcelayout)))))
+      (copy-object subresourcelayout subresourcelayout-arg
+       '(:struct vksubresourcelayout)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -13335,12 +13302,12 @@
     (imagesubresource :pointer t :name "imageSubresource" :type
      "VkImageSubresource" :create
      ((imagesubresource-arg)
-      (more-cffi:copy imagesubresource imagesubresource-arg
-                      '(:struct vkimagesubresource)))
+      (copy-object imagesubresource imagesubresource-arg
+       '(:struct vkimagesubresource)))
      :set
      ((imagesubresource-arg)
-      (more-cffi:copy imagesubresource imagesubresource-arg
-                      '(:struct vkimagesubresource)))))
+      (copy-object imagesubresource imagesubresource-arg
+       '(:struct vkimagesubresource)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -13890,10 +13857,10 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (components :pointer t :name components :type "VkComponentMapping" :create
      ((components-arg)
-      (more-cffi:copy components components-arg '(:struct vkcomponentmapping)))
+      (copy-object components components-arg '(:struct vkcomponentmapping)))
      :set
      ((components-arg)
-      (more-cffi:copy components components-arg '(:struct vkcomponentmapping))))
+      (copy-object components components-arg '(:struct vkcomponentmapping))))
     (srgb :name srgb :type "VkBool32"))
 
   (more-cffi:doc-note doc-file
@@ -13986,14 +13953,12 @@
     (fragmentdensityoffsetgranularity :pointer t :name
      "fragmentDensityOffsetGranularity" :type "VkExtent2D" :create
      ((fragmentdensityoffsetgranularity-arg)
-      (more-cffi:copy fragmentdensityoffsetgranularity
-                      fragmentdensityoffsetgranularity-arg
-                      '(:struct vkextent2d)))
+      (copy-object fragmentdensityoffsetgranularity
+       fragmentdensityoffsetgranularity-arg '(:struct vkextent2d)))
      :set
      ((fragmentdensityoffsetgranularity-arg)
-      (more-cffi:copy fragmentdensityoffsetgranularity
-                      fragmentdensityoffsetgranularity-arg
-                      '(:struct vkextent2d)))))
+      (copy-object fragmentdensityoffsetgranularity
+       fragmentdensityoffsetgranularity-arg '(:struct vkextent2d)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -14179,33 +14144,33 @@
     (vertexdata :pointer t :name "vertexData" :type
      "VkDeviceOrHostAddressConstKHR" :create
      ((vertexdata-arg)
-      (more-cffi:copy vertexdata vertexdata-arg
-                      '(:union vkdeviceorhostaddressconstkhr)))
+      (copy-object vertexdata vertexdata-arg
+       '(:union vkdeviceorhostaddressconstkhr)))
      :set
      ((vertexdata-arg)
-      (more-cffi:copy vertexdata vertexdata-arg
-                      '(:union vkdeviceorhostaddressconstkhr))))
+      (copy-object vertexdata vertexdata-arg
+       '(:union vkdeviceorhostaddressconstkhr))))
     (vertexstride :name "vertexStride" :type "VkDeviceSize")
     (maxvertex :name "maxVertex" :type uint32)
     (indextype :name "indexType" :type "VkIndexType")
     (indexdata :pointer t :name "indexData" :type
      "VkDeviceOrHostAddressConstKHR" :create
      ((indexdata-arg)
-      (more-cffi:copy indexdata indexdata-arg
-                      '(:union vkdeviceorhostaddressconstkhr)))
+      (copy-object indexdata indexdata-arg
+       '(:union vkdeviceorhostaddressconstkhr)))
      :set
      ((indexdata-arg)
-      (more-cffi:copy indexdata indexdata-arg
-                      '(:union vkdeviceorhostaddressconstkhr))))
+      (copy-object indexdata indexdata-arg
+       '(:union vkdeviceorhostaddressconstkhr))))
     (transformdata :pointer t :name "transformData" :type
      "VkDeviceOrHostAddressConstKHR" :create
      ((transformdata-arg)
-      (more-cffi:copy transformdata transformdata-arg
-                      '(:union vkdeviceorhostaddressconstkhr)))
+      (copy-object transformdata transformdata-arg
+       '(:union vkdeviceorhostaddressconstkhr)))
      :set
      ((transformdata-arg)
-      (more-cffi:copy transformdata transformdata-arg
-                      '(:union vkdeviceorhostaddressconstkhr)))))
+      (copy-object transformdata transformdata-arg
+       '(:union vkdeviceorhostaddressconstkhr)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -14220,10 +14185,10 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (data :pointer t :name data :type "VkDeviceOrHostAddressConstKHR" :create
      ((data-arg)
-      (more-cffi:copy data data-arg '(:union vkdeviceorhostaddressconstkhr)))
+      (copy-object data data-arg '(:union vkdeviceorhostaddressconstkhr)))
      :set
      ((data-arg)
-      (more-cffi:copy data data-arg '(:union vkdeviceorhostaddressconstkhr))))
+      (copy-object data data-arg '(:union vkdeviceorhostaddressconstkhr))))
     (stride :name stride :type "VkDeviceSize"))
 
   (more-cffi:doc-note doc-file
@@ -14240,10 +14205,10 @@
     (arrayofpointers :name "arrayOfPointers" :type "VkBool32")
     (data :pointer t :name data :type "VkDeviceOrHostAddressConstKHR" :create
      ((data-arg)
-      (more-cffi:copy data data-arg '(:union vkdeviceorhostaddressconstkhr)))
+      (copy-object data data-arg '(:union vkdeviceorhostaddressconstkhr)))
      :set
      ((data-arg)
-      (more-cffi:copy data data-arg '(:union vkdeviceorhostaddressconstkhr)))))
+      (copy-object data data-arg '(:union vkdeviceorhostaddressconstkhr)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -14255,34 +14220,30 @@
     (triangles :pointer t :name triangles :type
      "VkAccelerationStructureGeometryTrianglesDataKHR" :create
      ((triangles-arg)
-      (more-cffi:copy triangles triangles-arg
-                      '(:struct
-                        vkaccelerationstructuregeometrytrianglesdatakhr)))
+      (copy-object triangles triangles-arg
+       '(:struct vkaccelerationstructuregeometrytrianglesdatakhr)))
      :set
      ((triangles-arg)
-      (more-cffi:copy triangles triangles-arg
-                      '(:struct
-                        vkaccelerationstructuregeometrytrianglesdatakhr))))
+      (copy-object triangles triangles-arg
+       '(:struct vkaccelerationstructuregeometrytrianglesdatakhr))))
     (aabbs :pointer t :name aabbs :type
      "VkAccelerationStructureGeometryAabbsDataKHR" :create
      ((aabbs-arg)
-      (more-cffi:copy aabbs aabbs-arg
-                      '(:struct vkaccelerationstructuregeometryaabbsdatakhr)))
+      (copy-object aabbs aabbs-arg
+       '(:struct vkaccelerationstructuregeometryaabbsdatakhr)))
      :set
      ((aabbs-arg)
-      (more-cffi:copy aabbs aabbs-arg
-                      '(:struct vkaccelerationstructuregeometryaabbsdatakhr))))
+      (copy-object aabbs aabbs-arg
+       '(:struct vkaccelerationstructuregeometryaabbsdatakhr))))
     (instances :pointer t :name instances :type
      "VkAccelerationStructureGeometryInstancesDataKHR" :create
      ((instances-arg)
-      (more-cffi:copy instances instances-arg
-                      '(:struct
-                        vkaccelerationstructuregeometryinstancesdatakhr)))
+      (copy-object instances instances-arg
+       '(:struct vkaccelerationstructuregeometryinstancesdatakhr)))
      :set
      ((instances-arg)
-      (more-cffi:copy instances instances-arg
-                      '(:struct
-                        vkaccelerationstructuregeometryinstancesdatakhr)))))
+      (copy-object instances instances-arg
+       '(:struct vkaccelerationstructuregeometryinstancesdatakhr)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -14299,12 +14260,12 @@
     (geometry :pointer t :name geometry :type
      "VkAccelerationStructureGeometryDataKHR" :create
      ((geometry-arg)
-      (more-cffi:copy geometry geometry-arg
-                      '(:union vkaccelerationstructuregeometrydatakhr)))
+      (copy-object geometry geometry-arg
+       '(:union vkaccelerationstructuregeometrydatakhr)))
      :set
      ((geometry-arg)
-      (more-cffi:copy geometry geometry-arg
-                      '(:union vkaccelerationstructuregeometrydatakhr))))
+      (copy-object geometry geometry-arg
+       '(:union vkaccelerationstructuregeometrydatakhr))))
     (flags :name flags :type "VkGeometryFlagsKHR"))
 
   (more-cffi:doc-note doc-file
@@ -14360,12 +14321,12 @@
     (scratchdata :pointer t :name "scratchData" :type
      "VkDeviceOrHostAddressKHR" :create
      ((scratchdata-arg)
-      (more-cffi:copy scratchdata scratchdata-arg
-                      '(:union vkdeviceorhostaddresskhr)))
+      (copy-object scratchdata scratchdata-arg
+       '(:union vkdeviceorhostaddresskhr)))
      :set
      ((scratchdata-arg)
-      (more-cffi:copy scratchdata scratchdata-arg
-                      '(:union vkdeviceorhostaddresskhr)))))
+      (copy-object scratchdata scratchdata-arg
+       '(:union vkdeviceorhostaddresskhr)))))
 
   (more-cffi:doc-note doc-file
                       "This struct needs to be revised. Please, post an issue to request it.")
@@ -14512,11 +14473,9 @@
      ((src-arg) (create-pointer src src-arg)) :get (nil (get-pointer src)) :set
      ((src-arg) (set-pointer src src-arg)))
     (dst :pointer t :name dst :type "VkDeviceOrHostAddressKHR" :create
-     ((dst-arg)
-      (more-cffi:copy dst dst-arg '(:union vkdeviceorhostaddresskhr)))
+     ((dst-arg) (copy-object dst dst-arg '(:union vkdeviceorhostaddresskhr)))
      :set
-     ((dst-arg)
-      (more-cffi:copy dst dst-arg '(:union vkdeviceorhostaddresskhr))))
+     ((dst-arg) (copy-object dst dst-arg '(:union vkdeviceorhostaddresskhr))))
     (mode :name mode :type "VkCopyAccelerationStructureModeKHR"))
 
   (more-cffi:doc-note doc-file
@@ -14532,10 +14491,10 @@
      (nil (get-pointer pnext)) :set ((pnext-arg) (set-pointer pnext pnext-arg)))
     (src :pointer t :name src :type "VkDeviceOrHostAddressConstKHR" :create
      ((src-arg)
-      (more-cffi:copy src src-arg '(:union vkdeviceorhostaddressconstkhr)))
+      (copy-object src src-arg '(:union vkdeviceorhostaddressconstkhr)))
      :set
      ((src-arg)
-      (more-cffi:copy src src-arg '(:union vkdeviceorhostaddressconstkhr))))
+      (copy-object src src-arg '(:union vkdeviceorhostaddressconstkhr))))
     (dst :name dst :type "VkAccelerationStructureKHR" :create
      ((dst-arg) (create-pointer dst dst-arg)) :get (nil (get-pointer dst)) :set
      ((dst-arg) (set-pointer dst dst-arg)))
