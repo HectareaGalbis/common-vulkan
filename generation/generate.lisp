@@ -56,7 +56,8 @@
 
 ;; Given a read value, return its common lisp equivalent.
 (defun fix-value (value-str)
-  (multiple-value-bind (numberp num-regs) (ppcre:scan-to-strings "^(?:(\\(\\~)*)(?:(0x)*)([\\-\\d\\.]+)([ULF]*)" value-str)
+  ; "^(?:(\\(\\~)*)(?:(0x)*)((?:[\\dA-F])|(?:[\\-\\d\\.]+))(:?([ULF]*)\\)?)$"
+  (multiple-value-bind (numberp num-regs) (ppcre:scan-to-strings "^\\(?(\\~)?(?:(?:(?:0x)([0-9A-F]+)[UL]*)|(?:(\\-?[\\d\\.]+)([ULF]*)))\\)?$" value-str)
     (multiple-value-bind (macro-func-p func-regs) (ppcre:scan-to-strings "^(\\w+)(\\((?:\\s*\\d+\\s*,)*\\s*\\d+\\s*\\))" value-str)
       (cond
 	(numberp
@@ -67,11 +68,11 @@
 	   (cond
 	     (notopp `(- ,(if (string= suffix "U") 'UINT32_MAX 'UINT64_MAX)
 			 ,(read-from-string num-str)))
-	     (hexp (parse-integer num-str :radix 16))
+	     (hexp (parse-integer hexp :radix 16))
 	     (t (read-from-string num-str)))))
 	(macro-func-p
 	 (let ((args (ppcre:regex-replace-all "," (aref func-regs 1) " ")))
-	   (cons (intern (string-upcase (aref func-regs 0))) (read-from-string args)))) ; TODO: VK_MAKE.. -> make-api...
+	   (cons (intern (string-upcase (aref func-regs 0))) (read-from-string args))))
 	((equal (aref value-str 0) #\")
 	 (subseq value-str 1 (1- (length value-str))))
 	((ppcre:scan "^VK_API" value-str))

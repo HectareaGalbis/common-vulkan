@@ -61,7 +61,7 @@
                              vk_pipeline_compile_required)
                             ("VK_ERROR_PIPELINE_COMPILE_REQUIRED_EXT"
                              vk_pipeline_compile_required)
-                            ("VK_RESULT_MAX_ENUM" 7))
+                            ("VK_RESULT_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkStructureType"
                             ("VK_STRUCTURE_TYPE_APPLICATION_INFO" 0)
@@ -1651,11 +1651,12 @@
                              vk_structure_type_device_buffer_memory_requirements)
                             ("VK_STRUCTURE_TYPE_DEVICE_IMAGE_MEMORY_REQUIREMENTS_KHR"
                              vk_structure_type_device_image_memory_requirements)
-                            ("VK_STRUCTURE_TYPE_MAX_ENUM" 7))
+                            ("VK_STRUCTURE_TYPE_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkPipelineCacheHeaderVersion"
                             ("VK_PIPELINE_CACHE_HEADER_VERSION_ONE" 1)
-                            ("VK_PIPELINE_CACHE_HEADER_VERSION_MAX_ENUM" 7))
+                            ("VK_PIPELINE_CACHE_HEADER_VERSION_MAX_ENUM"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkImageLayout"
                             ("VK_IMAGE_LAYOUT_UNDEFINED" 0)
@@ -1713,7 +1714,7 @@
                              vk_image_layout_read_only_optimal)
                             ("VK_IMAGE_LAYOUT_ATTACHMENT_OPTIMAL_KHR"
                              vk_image_layout_attachment_optimal)
-                            ("VK_IMAGE_LAYOUT_MAX_ENUM" 7))
+                            ("VK_IMAGE_LAYOUT_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkObjectType"
                             ("VK_OBJECT_TYPE_UNKNOWN" 0)
@@ -1779,7 +1780,7 @@
                              vk_object_type_sampler_ycbcr_conversion)
                             ("VK_OBJECT_TYPE_PRIVATE_DATA_SLOT_EXT"
                              vk_object_type_private_data_slot)
-                            ("VK_OBJECT_TYPE_MAX_ENUM" 7))
+                            ("VK_OBJECT_TYPE_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkVendorId" ("VK_VENDOR_ID_VIV" 65537)
                             ("VK_VENDOR_ID_VSI" 65538)
@@ -1787,7 +1788,7 @@
                             ("VK_VENDOR_ID_CODEPLAY" 65540)
                             ("VK_VENDOR_ID_MESA" 65541)
                             ("VK_VENDOR_ID_POCL" 65542)
-                            ("VK_VENDOR_ID_MAX_ENUM" 7))
+                            ("VK_VENDOR_ID_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkSystemAllocationScope"
                             ("VK_SYSTEM_ALLOCATION_SCOPE_COMMAND" 0)
@@ -1795,11 +1796,11 @@
                             ("VK_SYSTEM_ALLOCATION_SCOPE_CACHE" 2)
                             ("VK_SYSTEM_ALLOCATION_SCOPE_DEVICE" 3)
                             ("VK_SYSTEM_ALLOCATION_SCOPE_INSTANCE" 4)
-                            ("VK_SYSTEM_ALLOCATION_SCOPE_MAX_ENUM" 7))
+                            ("VK_SYSTEM_ALLOCATION_SCOPE_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkInternalAllocationType"
                             ("VK_INTERNAL_ALLOCATION_TYPE_EXECUTABLE" 0)
-                            ("VK_INTERNAL_ALLOCATION_TYPE_MAX_ENUM" 7))
+                            ("VK_INTERNAL_ALLOCATION_TYPE_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkFormat" ("VK_FORMAT_UNDEFINED" 0)
                             ("VK_FORMAT_R4G4_UNORM_PACK8" 1)
@@ -2180,18 +2181,18 @@
                              vk_format_a4r4g4b4_unorm_pack16)
                             ("VK_FORMAT_A4B4G4R4_UNORM_PACK16_EXT"
                              vk_format_a4b4g4r4_unorm_pack16)
-                            ("VK_FORMAT_MAX_ENUM" 7))
+                            ("VK_FORMAT_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkImageTiling"
                             ("VK_IMAGE_TILING_OPTIMAL" 0)
                             ("VK_IMAGE_TILING_LINEAR" 1)
                             ("VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT"
                              1000158000)
-                            ("VK_IMAGE_TILING_MAX_ENUM" 7))
+                            ("VK_IMAGE_TILING_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkImageType" ("VK_IMAGE_TYPE_1D" 0)
                             ("VK_IMAGE_TYPE_2D" 1) ("VK_IMAGE_TYPE_3D" 2)
-                            ("VK_IMAGE_TYPE_MAX_ENUM" 7))
+                            ("VK_IMAGE_TYPE_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkPhysicalDeviceType"
                             ("VK_PHYSICAL_DEVICE_TYPE_OTHER" 0)
@@ -2199,7 +2200,7 @@
                             ("VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU" 2)
                             ("VK_PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU" 3)
                             ("VK_PHYSICAL_DEVICE_TYPE_CPU" 4)
-                            ("VK_PHYSICAL_DEVICE_TYPE_MAX_ENUM" 7))
+                            ("VK_PHYSICAL_DEVICE_TYPE_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkQueryType"
                             ("VK_QUERY_TYPE_OCCLUSION" 0)
@@ -2225,12 +2226,12 @@
                              1000386000)
                             ("VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SIZE_KHR"
                              1000386001)
-                            ("VK_QUERY_TYPE_MAX_ENUM" 7))
+                            ("VK_QUERY_TYPE_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkSharingMode"
                             ("VK_SHARING_MODE_EXCLUSIVE" 0)
                             ("VK_SHARING_MODE_CONCURRENT" 1)
-                            ("VK_SHARING_MODE_MAX_ENUM" 7))
+                            ("VK_SHARING_MODE_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkComponentSwizzle"
                             ("VK_COMPONENT_SWIZZLE_IDENTITY" 0)
@@ -2240,7 +2241,7 @@
                             ("VK_COMPONENT_SWIZZLE_G" 4)
                             ("VK_COMPONENT_SWIZZLE_B" 5)
                             ("VK_COMPONENT_SWIZZLE_A" 6)
-                            ("VK_COMPONENT_SWIZZLE_MAX_ENUM" 7))
+                            ("VK_COMPONENT_SWIZZLE_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkImageViewType"
                             ("VK_IMAGE_VIEW_TYPE_1D" 0)
@@ -2250,7 +2251,7 @@
                             ("VK_IMAGE_VIEW_TYPE_1D_ARRAY" 4)
                             ("VK_IMAGE_VIEW_TYPE_2D_ARRAY" 5)
                             ("VK_IMAGE_VIEW_TYPE_CUBE_ARRAY" 6)
-                            ("VK_IMAGE_VIEW_TYPE_MAX_ENUM" 7))
+                            ("VK_IMAGE_VIEW_TYPE_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkBlendFactor" ("VK_BLEND_FACTOR_ZERO" 0)
                             ("VK_BLEND_FACTOR_ONE" 1)
@@ -2271,7 +2272,7 @@
                             ("VK_BLEND_FACTOR_ONE_MINUS_SRC1_COLOR" 16)
                             ("VK_BLEND_FACTOR_SRC1_ALPHA" 17)
                             ("VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA" 18)
-                            ("VK_BLEND_FACTOR_MAX_ENUM" 7))
+                            ("VK_BLEND_FACTOR_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkBlendOp" ("VK_BLEND_OP_ADD" 0)
                             ("VK_BLEND_OP_SUBTRACT" 1)
@@ -2323,7 +2324,7 @@
                             ("VK_BLEND_OP_RED_EXT" 1000148043)
                             ("VK_BLEND_OP_GREEN_EXT" 1000148044)
                             ("VK_BLEND_OP_BLUE_EXT" 1000148045)
-                            ("VK_BLEND_OP_MAX_ENUM" 7))
+                            ("VK_BLEND_OP_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkCompareOp" ("VK_COMPARE_OP_NEVER" 0)
                             ("VK_COMPARE_OP_LESS" 1) ("VK_COMPARE_OP_EQUAL" 2)
@@ -2332,7 +2333,7 @@
                             ("VK_COMPARE_OP_NOT_EQUAL" 5)
                             ("VK_COMPARE_OP_GREATER_OR_EQUAL" 6)
                             ("VK_COMPARE_OP_ALWAYS" 7)
-                            ("VK_COMPARE_OP_MAX_ENUM" 7))
+                            ("VK_COMPARE_OP_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkDynamicState"
                             ("VK_DYNAMIC_STATE_VIEWPORT" 0)
@@ -2416,17 +2417,17 @@
                              vk_dynamic_state_depth_bias_enable)
                             ("VK_DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE_EXT"
                              vk_dynamic_state_primitive_restart_enable)
-                            ("VK_DYNAMIC_STATE_MAX_ENUM" 7))
+                            ("VK_DYNAMIC_STATE_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkFrontFace"
                             ("VK_FRONT_FACE_COUNTER_CLOCKWISE" 0)
                             ("VK_FRONT_FACE_CLOCKWISE" 1)
-                            ("VK_FRONT_FACE_MAX_ENUM" 7))
+                            ("VK_FRONT_FACE_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkVertexInputRate"
                             ("VK_VERTEX_INPUT_RATE_VERTEX" 0)
                             ("VK_VERTEX_INPUT_RATE_INSTANCE" 1)
-                            ("VK_VERTEX_INPUT_RATE_MAX_ENUM" 7))
+                            ("VK_VERTEX_INPUT_RATE_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkPrimitiveTopology"
                             ("VK_PRIMITIVE_TOPOLOGY_POINT_LIST" 0)
@@ -2444,13 +2445,13 @@
                             ("VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY"
                              9)
                             ("VK_PRIMITIVE_TOPOLOGY_PATCH_LIST" 10)
-                            ("VK_PRIMITIVE_TOPOLOGY_MAX_ENUM" 7))
+                            ("VK_PRIMITIVE_TOPOLOGY_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkPolygonMode" ("VK_POLYGON_MODE_FILL" 0)
                             ("VK_POLYGON_MODE_LINE" 1)
                             ("VK_POLYGON_MODE_POINT" 2)
                             ("VK_POLYGON_MODE_FILL_RECTANGLE_NV" 1000153000)
-                            ("VK_POLYGON_MODE_MAX_ENUM" 7))
+                            ("VK_POLYGON_MODE_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkStencilOp" ("VK_STENCIL_OP_KEEP" 0)
                             ("VK_STENCIL_OP_ZERO" 1)
@@ -2460,7 +2461,7 @@
                             ("VK_STENCIL_OP_INVERT" 5)
                             ("VK_STENCIL_OP_INCREMENT_AND_WRAP" 6)
                             ("VK_STENCIL_OP_DECREMENT_AND_WRAP" 7)
-                            ("VK_STENCIL_OP_MAX_ENUM" 7))
+                            ("VK_STENCIL_OP_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkLogicOp" ("VK_LOGIC_OP_CLEAR" 0)
                             ("VK_LOGIC_OP_AND" 1) ("VK_LOGIC_OP_AND_REVERSE" 2)
@@ -2474,7 +2475,7 @@
                             ("VK_LOGIC_OP_COPY_INVERTED" 12)
                             ("VK_LOGIC_OP_OR_INVERTED" 13)
                             ("VK_LOGIC_OP_NAND" 14) ("VK_LOGIC_OP_SET" 15)
-                            ("VK_LOGIC_OP_MAX_ENUM" 7))
+                            ("VK_LOGIC_OP_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkBorderColor"
                             ("VK_BORDER_COLOR_FLOAT_TRANSPARENT_BLACK" 0)
@@ -2485,13 +2486,13 @@
                             ("VK_BORDER_COLOR_INT_OPAQUE_WHITE" 5)
                             ("VK_BORDER_COLOR_FLOAT_CUSTOM_EXT" 1000287003)
                             ("VK_BORDER_COLOR_INT_CUSTOM_EXT" 1000287004)
-                            ("VK_BORDER_COLOR_MAX_ENUM" 7))
+                            ("VK_BORDER_COLOR_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkFilter" ("VK_FILTER_NEAREST" 0)
                             ("VK_FILTER_LINEAR" 1)
                             ("VK_FILTER_CUBIC_IMG" 1000015000)
                             ("VK_FILTER_CUBIC_EXT" vk_filter_cubic_img)
-                            ("VK_FILTER_MAX_ENUM" 7))
+                            ("VK_FILTER_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkSamplerAddressMode"
                             ("VK_SAMPLER_ADDRESS_MODE_REPEAT" 0)
@@ -2501,12 +2502,12 @@
                             ("VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE" 4)
                             ("VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE_KHR"
                              vk_sampler_address_mode_mirror_clamp_to_edge)
-                            ("VK_SAMPLER_ADDRESS_MODE_MAX_ENUM" 7))
+                            ("VK_SAMPLER_ADDRESS_MODE_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkSamplerMipmapMode"
                             ("VK_SAMPLER_MIPMAP_MODE_NEAREST" 0)
                             ("VK_SAMPLER_MIPMAP_MODE_LINEAR" 1)
-                            ("VK_SAMPLER_MIPMAP_MODE_MAX_ENUM" 7))
+                            ("VK_SAMPLER_MIPMAP_MODE_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkDescriptorType"
                             ("VK_DESCRIPTOR_TYPE_SAMPLER" 0)
@@ -2529,14 +2530,14 @@
                             ("VK_DESCRIPTOR_TYPE_MUTABLE_VALVE" 1000351000)
                             ("VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT"
                              vk_descriptor_type_inline_uniform_block)
-                            ("VK_DESCRIPTOR_TYPE_MAX_ENUM" 7))
+                            ("VK_DESCRIPTOR_TYPE_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkAttachmentLoadOp"
                             ("VK_ATTACHMENT_LOAD_OP_LOAD" 0)
                             ("VK_ATTACHMENT_LOAD_OP_CLEAR" 1)
                             ("VK_ATTACHMENT_LOAD_OP_DONT_CARE" 2)
                             ("VK_ATTACHMENT_LOAD_OP_NONE_EXT" 1000400000)
-                            ("VK_ATTACHMENT_LOAD_OP_MAX_ENUM" 7))
+                            ("VK_ATTACHMENT_LOAD_OP_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkAttachmentStoreOp"
                             ("VK_ATTACHMENT_STORE_OP_STORE" 0)
@@ -2548,7 +2549,7 @@
                              vk_attachment_store_op_none)
                             ("VK_ATTACHMENT_STORE_OP_NONE_EXT"
                              vk_attachment_store_op_none)
-                            ("VK_ATTACHMENT_STORE_OP_MAX_ENUM" 7))
+                            ("VK_ATTACHMENT_STORE_OP_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkPipelineBindPoint"
                             ("VK_PIPELINE_BIND_POINT_GRAPHICS" 0)
@@ -2559,24 +2560,24 @@
                              1000369003)
                             ("VK_PIPELINE_BIND_POINT_RAY_TRACING_NV"
                              vk_pipeline_bind_point_ray_tracing_khr)
-                            ("VK_PIPELINE_BIND_POINT_MAX_ENUM" 7))
+                            ("VK_PIPELINE_BIND_POINT_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkCommandBufferLevel"
                             ("VK_COMMAND_BUFFER_LEVEL_PRIMARY" 0)
                             ("VK_COMMAND_BUFFER_LEVEL_SECONDARY" 1)
-                            ("VK_COMMAND_BUFFER_LEVEL_MAX_ENUM" 7))
+                            ("VK_COMMAND_BUFFER_LEVEL_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkIndexType" ("VK_INDEX_TYPE_UINT16" 0)
                             ("VK_INDEX_TYPE_UINT32" 1)
                             ("VK_INDEX_TYPE_NONE_KHR" 1000165000)
                             ("VK_INDEX_TYPE_UINT8_EXT" 1000265000)
                             ("VK_INDEX_TYPE_NONE_NV" vk_index_type_none_khr)
-                            ("VK_INDEX_TYPE_MAX_ENUM" 7))
+                            ("VK_INDEX_TYPE_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkSubpassContents"
                             ("VK_SUBPASS_CONTENTS_INLINE" 0)
                             ("VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS" 1)
-                            ("VK_SUBPASS_CONTENTS_MAX_ENUM" 7))
+                            ("VK_SUBPASS_CONTENTS_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkAccessFlagBits"
                             ("VK_ACCESS_INDIRECT_COMMAND_READ_BIT" 1)
@@ -2626,7 +2627,7 @@
                             ("VK_ACCESS_ACCELERATION_STRUCTURE_WRITE_BIT_NV"
                              vk_access_acceleration_structure_write_bit_khr)
                             ("VK_ACCESS_NONE_KHR" vk_access_none)
-                            ("VK_ACCESS_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_ACCESS_FLAG_BITS_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkImageAspectFlagBits"
                             ("VK_IMAGE_ASPECT_COLOR_BIT" 1)
@@ -2648,7 +2649,7 @@
                             ("VK_IMAGE_ASPECT_PLANE_2_BIT_KHR"
                              vk_image_aspect_plane_2_bit)
                             ("VK_IMAGE_ASPECT_NONE_KHR" vk_image_aspect_none)
-                            ("VK_IMAGE_ASPECT_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_IMAGE_ASPECT_FLAG_BITS_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkFormatFeatureFlagBits"
                             ("VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT" 1)
@@ -2723,7 +2724,7 @@
                              vk_format_feature_cosited_chroma_samples_bit)
                             ("VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT"
                              vk_format_feature_sampled_image_filter_cubic_bit_img)
-                            ("VK_FORMAT_FEATURE_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_FORMAT_FEATURE_FLAG_BITS_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkImageCreateFlagBits"
                             ("VK_IMAGE_CREATE_SPARSE_BINDING_BIT" 1)
@@ -2760,7 +2761,7 @@
                              vk_image_create_disjoint_bit)
                             ("VK_IMAGE_CREATE_ALIAS_BIT_KHR"
                              vk_image_create_alias_bit)
-                            ("VK_IMAGE_CREATE_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_IMAGE_CREATE_FLAG_BITS_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkSampleCountFlagBits"
                             ("VK_SAMPLE_COUNT_1_BIT" 1)
@@ -2770,7 +2771,7 @@
                             ("VK_SAMPLE_COUNT_16_BIT" 16)
                             ("VK_SAMPLE_COUNT_32_BIT" 32)
                             ("VK_SAMPLE_COUNT_64_BIT" 64)
-                            ("VK_SAMPLE_COUNT_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_SAMPLE_COUNT_FLAG_BITS_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkImageUsageFlagBits"
                             ("VK_IMAGE_USAGE_TRANSFER_SRC_BIT" 1)
@@ -2794,19 +2795,20 @@
                              262144)
                             ("VK_IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV"
                              vk_image_usage_fragment_shading_rate_attachment_bit_khr)
-                            ("VK_IMAGE_USAGE_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_IMAGE_USAGE_FLAG_BITS_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkInstanceCreateFlagBits"
                             ("VK_INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR"
                              1)
-                            ("VK_INSTANCE_CREATE_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_INSTANCE_CREATE_FLAG_BITS_MAX_ENUM"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkMemoryHeapFlagBits"
                             ("VK_MEMORY_HEAP_DEVICE_LOCAL_BIT" 1)
                             ("VK_MEMORY_HEAP_MULTI_INSTANCE_BIT" 2)
                             ("VK_MEMORY_HEAP_MULTI_INSTANCE_BIT_KHR"
                              vk_memory_heap_multi_instance_bit)
-                            ("VK_MEMORY_HEAP_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_MEMORY_HEAP_FLAG_BITS_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkMemoryPropertyFlagBits"
                             ("VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT" 1)
@@ -2818,7 +2820,8 @@
                             ("VK_MEMORY_PROPERTY_DEVICE_COHERENT_BIT_AMD" 64)
                             ("VK_MEMORY_PROPERTY_DEVICE_UNCACHED_BIT_AMD" 128)
                             ("VK_MEMORY_PROPERTY_RDMA_CAPABLE_BIT_NV" 256)
-                            ("VK_MEMORY_PROPERTY_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_MEMORY_PROPERTY_FLAG_BITS_MAX_ENUM"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkQueueFlagBits"
                             ("VK_QUEUE_GRAPHICS_BIT" 1)
@@ -2828,11 +2831,12 @@
                             ("VK_QUEUE_PROTECTED_BIT" 16)
                             ("VK_QUEUE_VIDEO_DECODE_BIT_KHR" 32)
                             ("VK_QUEUE_VIDEO_ENCODE_BIT_KHR" 64)
-                            ("VK_QUEUE_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_QUEUE_FLAG_BITS_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkDeviceQueueCreateFlagBits"
                             ("VK_DEVICE_QUEUE_CREATE_PROTECTED_BIT" 1)
-                            ("VK_DEVICE_QUEUE_CREATE_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_DEVICE_QUEUE_CREATE_FLAG_BITS_MAX_ENUM"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkPipelineStageFlagBits"
                             ("VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT" 1)
@@ -2880,28 +2884,30 @@
                              vk_pipeline_stage_acceleration_structure_build_bit_khr)
                             ("VK_PIPELINE_STAGE_NONE_KHR"
                              vk_pipeline_stage_none)
-                            ("VK_PIPELINE_STAGE_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_PIPELINE_STAGE_FLAG_BITS_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkSparseMemoryBindFlagBits"
                             ("VK_SPARSE_MEMORY_BIND_METADATA_BIT" 1)
-                            ("VK_SPARSE_MEMORY_BIND_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_SPARSE_MEMORY_BIND_FLAG_BITS_MAX_ENUM"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkSparseImageFormatFlagBits"
                             ("VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT" 1)
                             ("VK_SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT" 2)
                             ("VK_SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT"
                              4)
-                            ("VK_SPARSE_IMAGE_FORMAT_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_SPARSE_IMAGE_FORMAT_FLAG_BITS_MAX_ENUM"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkFenceCreateFlagBits"
                             ("VK_FENCE_CREATE_SIGNALED_BIT" 1)
-                            ("VK_FENCE_CREATE_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_FENCE_CREATE_FLAG_BITS_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkEventCreateFlagBits"
                             ("VK_EVENT_CREATE_DEVICE_ONLY_BIT" 1)
                             ("VK_EVENT_CREATE_DEVICE_ONLY_BIT_KHR"
                              vk_event_create_device_only_bit)
-                            ("VK_EVENT_CREATE_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_EVENT_CREATE_FLAG_BITS_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkQueryPipelineStatisticFlagBits"
                             ("VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_VERTICES_BIT"
@@ -2927,7 +2933,7 @@
                             ("VK_QUERY_PIPELINE_STATISTIC_COMPUTE_SHADER_INVOCATIONS_BIT"
                              1024)
                             ("VK_QUERY_PIPELINE_STATISTIC_FLAG_BITS_MAX_ENUM"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkQueryResultFlagBits"
                             ("VK_QUERY_RESULT_64_BIT" 1)
@@ -2935,7 +2941,7 @@
                             ("VK_QUERY_RESULT_WITH_AVAILABILITY_BIT" 4)
                             ("VK_QUERY_RESULT_PARTIAL_BIT" 8)
                             ("VK_QUERY_RESULT_WITH_STATUS_BIT_KHR" 16)
-                            ("VK_QUERY_RESULT_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_QUERY_RESULT_FLAG_BITS_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkBufferCreateFlagBits"
                             ("VK_BUFFER_CREATE_SPARSE_BINDING_BIT" 1)
@@ -2948,7 +2954,7 @@
                              vk_buffer_create_device_address_capture_replay_bit)
                             ("VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR"
                              vk_buffer_create_device_address_capture_replay_bit)
-                            ("VK_BUFFER_CREATE_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_BUFFER_CREATE_FLAG_BITS_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkBufferUsageFlagBits"
                             ("VK_BUFFER_USAGE_TRANSFER_SRC_BIT" 1)
@@ -2984,28 +2990,31 @@
                              vk_buffer_usage_shader_device_address_bit)
                             ("VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_KHR"
                              vk_buffer_usage_shader_device_address_bit)
-                            ("VK_BUFFER_USAGE_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_BUFFER_USAGE_FLAG_BITS_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkImageViewCreateFlagBits"
                             ("VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT"
                              1)
                             ("VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DEFERRED_BIT_EXT"
                              2)
-                            ("VK_IMAGE_VIEW_CREATE_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_IMAGE_VIEW_CREATE_FLAG_BITS_MAX_ENUM"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkPipelineCacheCreateFlagBits"
                             ("VK_PIPELINE_CACHE_CREATE_EXTERNALLY_SYNCHRONIZED_BIT"
                              1)
                             ("VK_PIPELINE_CACHE_CREATE_EXTERNALLY_SYNCHRONIZED_BIT_EXT"
                              vk_pipeline_cache_create_externally_synchronized_bit)
-                            ("VK_PIPELINE_CACHE_CREATE_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_PIPELINE_CACHE_CREATE_FLAG_BITS_MAX_ENUM"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkColorComponentFlagBits"
                             ("VK_COLOR_COMPONENT_R_BIT" 1)
                             ("VK_COLOR_COMPONENT_G_BIT" 2)
                             ("VK_COLOR_COMPONENT_B_BIT" 4)
                             ("VK_COLOR_COMPONENT_A_BIT" 8)
-                            ("VK_COLOR_COMPONENT_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_COLOR_COMPONENT_FLAG_BITS_MAX_ENUM"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkPipelineCreateFlagBits"
                             ("VK_PIPELINE_CREATE_DISABLE_OPTIMIZATION_BIT" 1)
@@ -3064,7 +3073,8 @@
                              vk_pipeline_create_fail_on_pipeline_compile_required_bit)
                             ("VK_PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT_EXT"
                              vk_pipeline_create_early_return_on_failure_bit)
-                            ("VK_PIPELINE_CREATE_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_PIPELINE_CREATE_FLAG_BITS_MAX_ENUM"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkPipelineShaderStageCreateFlagBits"
                             ("VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT"
@@ -3076,7 +3086,7 @@
                             ("VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT"
                              vk_pipeline_shader_stage_create_require_full_subgroups_bit)
                             ("VK_PIPELINE_SHADER_STAGE_CREATE_FLAG_BITS_MAX_ENUM"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkShaderStageFlagBits"
                             ("VK_SHADER_STAGE_VERTEX_BIT" 1)
@@ -3085,8 +3095,8 @@
                             ("VK_SHADER_STAGE_GEOMETRY_BIT" 8)
                             ("VK_SHADER_STAGE_FRAGMENT_BIT" 16)
                             ("VK_SHADER_STAGE_COMPUTE_BIT" 32)
-                            ("VK_SHADER_STAGE_ALL_GRAPHICS" 1)
-                            ("VK_SHADER_STAGE_ALL" 7)
+                            ("VK_SHADER_STAGE_ALL_GRAPHICS" 31)
+                            ("VK_SHADER_STAGE_ALL" 2147483647)
                             ("VK_SHADER_STAGE_RAYGEN_BIT_KHR" 256)
                             ("VK_SHADER_STAGE_ANY_HIT_BIT_KHR" 512)
                             ("VK_SHADER_STAGE_CLOSEST_HIT_BIT_KHR" 1024)
@@ -3109,14 +3119,14 @@
                              vk_shader_stage_intersection_bit_khr)
                             ("VK_SHADER_STAGE_CALLABLE_BIT_NV"
                              vk_shader_stage_callable_bit_khr)
-                            ("VK_SHADER_STAGE_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_SHADER_STAGE_FLAG_BITS_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkCullModeFlagBits"
                             ("VK_CULL_MODE_NONE" 0)
                             ("VK_CULL_MODE_FRONT_BIT" 1)
                             ("VK_CULL_MODE_BACK_BIT" 2)
                             ("VK_CULL_MODE_FRONT_AND_BACK" 3)
-                            ("VK_CULL_MODE_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_CULL_MODE_FLAG_BITS_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file
                             "VkPipelineDepthStencilStateCreateFlagBits"
@@ -3125,24 +3135,25 @@
                             ("VK_PIPELINE_DEPTH_STENCIL_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_ARM"
                              2)
                             ("VK_PIPELINE_DEPTH_STENCIL_STATE_CREATE_FLAG_BITS_MAX_ENUM"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkPipelineColorBlendStateCreateFlagBits"
                             ("VK_PIPELINE_COLOR_BLEND_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_BIT_ARM"
                              1)
                             ("VK_PIPELINE_COLOR_BLEND_STATE_CREATE_FLAG_BITS_MAX_ENUM"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkPipelineLayoutCreateFlagBits"
                             ("VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT"
                              2)
-                            ("VK_PIPELINE_LAYOUT_CREATE_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_PIPELINE_LAYOUT_CREATE_FLAG_BITS_MAX_ENUM"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkSamplerCreateFlagBits"
                             ("VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT" 1)
                             ("VK_SAMPLER_CREATE_SUBSAMPLED_COARSE_RECONSTRUCTION_BIT_EXT"
                              2)
-                            ("VK_SAMPLER_CREATE_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_SAMPLER_CREATE_FLAG_BITS_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkDescriptorPoolCreateFlagBits"
                             ("VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT"
@@ -3152,7 +3163,8 @@
                             ("VK_DESCRIPTOR_POOL_CREATE_HOST_ONLY_BIT_VALVE" 4)
                             ("VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT_EXT"
                              vk_descriptor_pool_create_update_after_bind_bit)
-                            ("VK_DESCRIPTOR_POOL_CREATE_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_DESCRIPTOR_POOL_CREATE_FLAG_BITS_MAX_ENUM"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkDescriptorSetLayoutCreateFlagBits"
                             ("VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT"
@@ -3164,11 +3176,12 @@
                             ("VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT"
                              vk_descriptor_set_layout_create_update_after_bind_pool_bit)
                             ("VK_DESCRIPTOR_SET_LAYOUT_CREATE_FLAG_BITS_MAX_ENUM"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkAttachmentDescriptionFlagBits"
                             ("VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT" 1)
-                            ("VK_ATTACHMENT_DESCRIPTION_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_ATTACHMENT_DESCRIPTION_FLAG_BITS_MAX_ENUM"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkDependencyFlagBits"
                             ("VK_DEPENDENCY_BY_REGION_BIT" 1)
@@ -3178,17 +3191,19 @@
                              vk_dependency_view_local_bit)
                             ("VK_DEPENDENCY_DEVICE_GROUP_BIT_KHR"
                              vk_dependency_device_group_bit)
-                            ("VK_DEPENDENCY_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_DEPENDENCY_FLAG_BITS_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkFramebufferCreateFlagBits"
                             ("VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT" 1)
                             ("VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR"
                              vk_framebuffer_create_imageless_bit)
-                            ("VK_FRAMEBUFFER_CREATE_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_FRAMEBUFFER_CREATE_FLAG_BITS_MAX_ENUM"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkRenderPassCreateFlagBits"
                             ("VK_RENDER_PASS_CREATE_TRANSFORM_BIT_QCOM" 2)
-                            ("VK_RENDER_PASS_CREATE_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_RENDER_PASS_CREATE_FLAG_BITS_MAX_ENUM"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkSubpassDescriptionFlagBits"
                             ("VK_SUBPASS_DESCRIPTION_PER_VIEW_ATTRIBUTES_BIT_NVX"
@@ -3205,33 +3220,38 @@
                              32)
                             ("VK_SUBPASS_DESCRIPTION_RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_ARM"
                              64)
-                            ("VK_SUBPASS_DESCRIPTION_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_SUBPASS_DESCRIPTION_FLAG_BITS_MAX_ENUM"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkCommandPoolCreateFlagBits"
                             ("VK_COMMAND_POOL_CREATE_TRANSIENT_BIT" 1)
                             ("VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT"
                              2)
                             ("VK_COMMAND_POOL_CREATE_PROTECTED_BIT" 4)
-                            ("VK_COMMAND_POOL_CREATE_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_COMMAND_POOL_CREATE_FLAG_BITS_MAX_ENUM"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkCommandPoolResetFlagBits"
                             ("VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT" 1)
-                            ("VK_COMMAND_POOL_RESET_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_COMMAND_POOL_RESET_FLAG_BITS_MAX_ENUM"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkCommandBufferUsageFlagBits"
                             ("VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT" 1)
                             ("VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT"
                              2)
                             ("VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT" 4)
-                            ("VK_COMMAND_BUFFER_USAGE_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_COMMAND_BUFFER_USAGE_FLAG_BITS_MAX_ENUM"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkQueryControlFlagBits"
                             ("VK_QUERY_CONTROL_PRECISE_BIT" 1)
-                            ("VK_QUERY_CONTROL_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_QUERY_CONTROL_FLAG_BITS_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkCommandBufferResetFlagBits"
                             ("VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT" 1)
-                            ("VK_COMMAND_BUFFER_RESET_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_COMMAND_BUFFER_RESET_FLAG_BITS_MAX_ENUM"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkStencilFaceFlagBits"
                             ("VK_STENCIL_FACE_FRONT_BIT" 1)
@@ -3239,7 +3259,7 @@
                             ("VK_STENCIL_FACE_FRONT_AND_BACK" 3)
                             ("VK_STENCIL_FRONT_AND_BACK"
                              vk_stencil_face_front_and_back)
-                            ("VK_STENCIL_FACE_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_STENCIL_FACE_FLAG_BITS_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkPointClippingBehavior"
                             ("VK_POINT_CLIPPING_BEHAVIOR_ALL_CLIP_PLANES" 0)
@@ -3249,7 +3269,7 @@
                              vk_point_clipping_behavior_all_clip_planes)
                             ("VK_POINT_CLIPPING_BEHAVIOR_USER_CLIP_PLANES_ONLY_KHR"
                              vk_point_clipping_behavior_user_clip_planes_only)
-                            ("VK_POINT_CLIPPING_BEHAVIOR_MAX_ENUM" 7))
+                            ("VK_POINT_CLIPPING_BEHAVIOR_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkTessellationDomainOrigin"
                             ("VK_TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT" 0)
@@ -3258,7 +3278,8 @@
                              vk_tessellation_domain_origin_upper_left)
                             ("VK_TESSELLATION_DOMAIN_ORIGIN_LOWER_LEFT_KHR"
                              vk_tessellation_domain_origin_lower_left)
-                            ("VK_TESSELLATION_DOMAIN_ORIGIN_MAX_ENUM" 7))
+                            ("VK_TESSELLATION_DOMAIN_ORIGIN_MAX_ENUM"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkSamplerYcbcrModelConversion"
                             ("VK_SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY"
@@ -3278,7 +3299,8 @@
                              vk_sampler_ycbcr_model_conversion_ycbcr_601)
                             ("VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020_KHR"
                              vk_sampler_ycbcr_model_conversion_ycbcr_2020)
-                            ("VK_SAMPLER_YCBCR_MODEL_CONVERSION_MAX_ENUM" 7))
+                            ("VK_SAMPLER_YCBCR_MODEL_CONVERSION_MAX_ENUM"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkSamplerYcbcrRange"
                             ("VK_SAMPLER_YCBCR_RANGE_ITU_FULL" 0)
@@ -3287,7 +3309,7 @@
                              vk_sampler_ycbcr_range_itu_full)
                             ("VK_SAMPLER_YCBCR_RANGE_ITU_NARROW_KHR"
                              vk_sampler_ycbcr_range_itu_narrow)
-                            ("VK_SAMPLER_YCBCR_RANGE_MAX_ENUM" 7))
+                            ("VK_SAMPLER_YCBCR_RANGE_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkChromaLocation"
                             ("VK_CHROMA_LOCATION_COSITED_EVEN" 0)
@@ -3296,7 +3318,7 @@
                              vk_chroma_location_cosited_even)
                             ("VK_CHROMA_LOCATION_MIDPOINT_KHR"
                              vk_chroma_location_midpoint)
-                            ("VK_CHROMA_LOCATION_MAX_ENUM" 7))
+                            ("VK_CHROMA_LOCATION_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkDescriptorUpdateTemplateType"
                             ("VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET"
@@ -3305,7 +3327,8 @@
                              1)
                             ("VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET_KHR"
                              vk_descriptor_update_template_type_descriptor_set)
-                            ("VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_MAX_ENUM" 7))
+                            ("VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_MAX_ENUM"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkSubgroupFeatureFlagBits"
                             ("VK_SUBGROUP_FEATURE_BASIC_BIT" 1)
@@ -3317,7 +3340,8 @@
                             ("VK_SUBGROUP_FEATURE_CLUSTERED_BIT" 64)
                             ("VK_SUBGROUP_FEATURE_QUAD_BIT" 128)
                             ("VK_SUBGROUP_FEATURE_PARTITIONED_BIT_NV" 256)
-                            ("VK_SUBGROUP_FEATURE_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_SUBGROUP_FEATURE_FLAG_BITS_MAX_ENUM"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkPeerMemoryFeatureFlagBits"
                             ("VK_PEER_MEMORY_FEATURE_COPY_SRC_BIT" 1)
@@ -3332,7 +3356,8 @@
                              vk_peer_memory_feature_generic_src_bit)
                             ("VK_PEER_MEMORY_FEATURE_GENERIC_DST_BIT_KHR"
                              vk_peer_memory_feature_generic_dst_bit)
-                            ("VK_PEER_MEMORY_FEATURE_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_PEER_MEMORY_FEATURE_FLAG_BITS_MAX_ENUM"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkMemoryAllocateFlagBits"
                             ("VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT" 1)
@@ -3345,7 +3370,8 @@
                              vk_memory_allocate_device_address_bit)
                             ("VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR"
                              vk_memory_allocate_device_address_capture_replay_bit)
-                            ("VK_MEMORY_ALLOCATE_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_MEMORY_ALLOCATE_FLAG_BITS_MAX_ENUM"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkExternalMemoryHandleTypeFlagBits"
                             ("VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT" 1)
@@ -3388,7 +3414,7 @@
                             ("VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT_KHR"
                              vk_external_memory_handle_type_d3d12_resource_bit)
                             ("VK_EXTERNAL_MEMORY_HANDLE_TYPE_FLAG_BITS_MAX_ENUM"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkExternalMemoryFeatureFlagBits"
                             ("VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT" 1)
@@ -3400,7 +3426,8 @@
                              vk_external_memory_feature_exportable_bit)
                             ("VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_KHR"
                              vk_external_memory_feature_importable_bit)
-                            ("VK_EXTERNAL_MEMORY_FEATURE_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_EXTERNAL_MEMORY_FEATURE_FLAG_BITS_MAX_ENUM"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkExternalFenceHandleTypeFlagBits"
                             ("VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT" 1)
@@ -3418,7 +3445,7 @@
                             ("VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT_KHR"
                              vk_external_fence_handle_type_sync_fd_bit)
                             ("VK_EXTERNAL_FENCE_HANDLE_TYPE_FLAG_BITS_MAX_ENUM"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkExternalFenceFeatureFlagBits"
                             ("VK_EXTERNAL_FENCE_FEATURE_EXPORTABLE_BIT" 1)
@@ -3427,19 +3454,21 @@
                              vk_external_fence_feature_exportable_bit)
                             ("VK_EXTERNAL_FENCE_FEATURE_IMPORTABLE_BIT_KHR"
                              vk_external_fence_feature_importable_bit)
-                            ("VK_EXTERNAL_FENCE_FEATURE_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_EXTERNAL_FENCE_FEATURE_FLAG_BITS_MAX_ENUM"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkFenceImportFlagBits"
                             ("VK_FENCE_IMPORT_TEMPORARY_BIT" 1)
                             ("VK_FENCE_IMPORT_TEMPORARY_BIT_KHR"
                              vk_fence_import_temporary_bit)
-                            ("VK_FENCE_IMPORT_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_FENCE_IMPORT_FLAG_BITS_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkSemaphoreImportFlagBits"
                             ("VK_SEMAPHORE_IMPORT_TEMPORARY_BIT" 1)
                             ("VK_SEMAPHORE_IMPORT_TEMPORARY_BIT_KHR"
                              vk_semaphore_import_temporary_bit)
-                            ("VK_SEMAPHORE_IMPORT_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_SEMAPHORE_IMPORT_FLAG_BITS_MAX_ENUM"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkExternalSemaphoreHandleTypeFlagBits"
                             ("VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT"
@@ -3467,7 +3496,7 @@
                             ("VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT_KHR"
                              vk_external_semaphore_handle_type_sync_fd_bit)
                             ("VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_FLAG_BITS_MAX_ENUM"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkExternalSemaphoreFeatureFlagBits"
                             ("VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT" 1)
@@ -3477,7 +3506,7 @@
                             ("VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT_KHR"
                              vk_external_semaphore_feature_importable_bit)
                             ("VK_EXTERNAL_SEMAPHORE_FEATURE_FLAG_BITS_MAX_ENUM"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkDriverId"
                             ("VK_DRIVER_ID_AMD_PROPRIETARY" 1)
@@ -3526,7 +3555,7 @@
                              vk_driver_id_ggp_proprietary)
                             ("VK_DRIVER_ID_BROADCOM_PROPRIETARY_KHR"
                              vk_driver_id_broadcom_proprietary)
-                            ("VK_DRIVER_ID_MAX_ENUM" 7))
+                            ("VK_DRIVER_ID_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkShaderFloatControlsIndependence"
                             ("VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY"
@@ -3540,7 +3569,7 @@
                             ("VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_NONE_KHR"
                              vk_shader_float_controls_independence_none)
                             ("VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_MAX_ENUM"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkSamplerReductionMode"
                             ("VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE" 0)
@@ -3552,7 +3581,7 @@
                              vk_sampler_reduction_mode_min)
                             ("VK_SAMPLER_REDUCTION_MODE_MAX_EXT"
                              vk_sampler_reduction_mode_max)
-                            ("VK_SAMPLER_REDUCTION_MODE_MAX_ENUM" 7))
+                            ("VK_SAMPLER_REDUCTION_MODE_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkSemaphoreType"
                             ("VK_SEMAPHORE_TYPE_BINARY" 0)
@@ -3561,7 +3590,7 @@
                              vk_semaphore_type_binary)
                             ("VK_SEMAPHORE_TYPE_TIMELINE_KHR"
                              vk_semaphore_type_timeline)
-                            ("VK_SEMAPHORE_TYPE_MAX_ENUM" 7))
+                            ("VK_SEMAPHORE_TYPE_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkResolveModeFlagBits"
                             ("VK_RESOLVE_MODE_NONE" 0)
@@ -3578,7 +3607,7 @@
                              vk_resolve_mode_min_bit)
                             ("VK_RESOLVE_MODE_MAX_BIT_KHR"
                              vk_resolve_mode_max_bit)
-                            ("VK_RESOLVE_MODE_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_RESOLVE_MODE_FLAG_BITS_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkDescriptorBindingFlagBits"
                             ("VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT" 1)
@@ -3595,13 +3624,14 @@
                              vk_descriptor_binding_partially_bound_bit)
                             ("VK_DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT_EXT"
                              vk_descriptor_binding_variable_descriptor_count_bit)
-                            ("VK_DESCRIPTOR_BINDING_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_DESCRIPTOR_BINDING_FLAG_BITS_MAX_ENUM"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkSemaphoreWaitFlagBits"
                             ("VK_SEMAPHORE_WAIT_ANY_BIT" 1)
                             ("VK_SEMAPHORE_WAIT_ANY_BIT_KHR"
                              vk_semaphore_wait_any_bit)
-                            ("VK_SEMAPHORE_WAIT_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_SEMAPHORE_WAIT_FLAG_BITS_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkPipelineCreationFeedbackFlagBits"
                             ("VK_PIPELINE_CREATION_FEEDBACK_VALID_BIT" 1)
@@ -3616,7 +3646,7 @@
                             ("VK_PIPELINE_CREATION_FEEDBACK_BASE_PIPELINE_ACCELERATION_BIT_EXT"
                              vk_pipeline_creation_feedback_base_pipeline_acceleration_bit)
                             ("VK_PIPELINE_CREATION_FEEDBACK_FLAG_BITS_MAX_ENUM"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkToolPurposeFlagBits"
                             ("VK_TOOL_PURPOSE_VALIDATION_BIT" 1)
@@ -3636,13 +3666,13 @@
                              vk_tool_purpose_additional_features_bit)
                             ("VK_TOOL_PURPOSE_MODIFYING_FEATURES_BIT_EXT"
                              vk_tool_purpose_modifying_features_bit)
-                            ("VK_TOOL_PURPOSE_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_TOOL_PURPOSE_FLAG_BITS_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkSubmitFlagBits"
                             ("VK_SUBMIT_PROTECTED_BIT" 1)
                             ("VK_SUBMIT_PROTECTED_BIT_KHR"
                              vk_submit_protected_bit)
-                            ("VK_SUBMIT_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_SUBMIT_FLAG_BITS_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkRenderingFlagBits"
                             ("VK_RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT"
@@ -3655,7 +3685,7 @@
                              vk_rendering_suspending_bit)
                             ("VK_RENDERING_RESUMING_BIT_KHR"
                              vk_rendering_resuming_bit)
-                            ("VK_RENDERING_FLAG_BITS_MAX_ENUM" 7))
+                            ("VK_RENDERING_FLAG_BITS_MAX_ENUM" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkPresentModeKHR"
                             ("VK_PRESENT_MODE_IMMEDIATE_KHR" 0)
@@ -3666,7 +3696,7 @@
                              1000111000)
                             ("VK_PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR"
                              1000111001)
-                            ("VK_PRESENT_MODE_MAX_ENUM_KHR" 7))
+                            ("VK_PRESENT_MODE_MAX_ENUM_KHR" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkColorSpaceKHR"
                             ("VK_COLOR_SPACE_SRGB_NONLINEAR_KHR" 0)
@@ -3693,7 +3723,7 @@
                              vk_color_space_srgb_nonlinear_khr)
                             ("VK_COLOR_SPACE_DCI_P3_LINEAR_EXT"
                              vk_color_space_display_p3_linear_ext)
-                            ("VK_COLOR_SPACE_MAX_ENUM_KHR" 7))
+                            ("VK_COLOR_SPACE_MAX_ENUM_KHR" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkSurfaceTransformFlagBitsKHR"
                             ("VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR" 1)
@@ -3709,21 +3739,24 @@
                             ("VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR"
                              128)
                             ("VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR" 256)
-                            ("VK_SURFACE_TRANSFORM_FLAG_BITS_MAX_ENUM_KHR" 7))
+                            ("VK_SURFACE_TRANSFORM_FLAG_BITS_MAX_ENUM_KHR"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkCompositeAlphaFlagBitsKHR"
                             ("VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR" 1)
                             ("VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR" 2)
                             ("VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR" 4)
                             ("VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR" 8)
-                            ("VK_COMPOSITE_ALPHA_FLAG_BITS_MAX_ENUM_KHR" 7))
+                            ("VK_COMPOSITE_ALPHA_FLAG_BITS_MAX_ENUM_KHR"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkSwapchainCreateFlagBitsKHR"
                             ("VK_SWAPCHAIN_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR"
                              1)
                             ("VK_SWAPCHAIN_CREATE_PROTECTED_BIT_KHR" 2)
                             ("VK_SWAPCHAIN_CREATE_MUTABLE_FORMAT_BIT_KHR" 4)
-                            ("VK_SWAPCHAIN_CREATE_FLAG_BITS_MAX_ENUM_KHR" 7))
+                            ("VK_SWAPCHAIN_CREATE_FLAG_BITS_MAX_ENUM_KHR"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkDeviceGroupPresentModeFlagBitsKHR"
                             ("VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR" 1)
@@ -3732,7 +3765,7 @@
                             ("VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHR"
                              8)
                             ("VK_DEVICE_GROUP_PRESENT_MODE_FLAG_BITS_MAX_ENUM_KHR"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkDisplayPlaneAlphaFlagBitsKHR"
                             ("VK_DISPLAY_PLANE_ALPHA_OPAQUE_BIT_KHR" 1)
@@ -3740,7 +3773,8 @@
                             ("VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_BIT_KHR" 4)
                             ("VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_PREMULTIPLIED_BIT_KHR"
                              8)
-                            ("VK_DISPLAY_PLANE_ALPHA_FLAG_BITS_MAX_ENUM_KHR" 7))
+                            ("VK_DISPLAY_PLANE_ALPHA_FLAG_BITS_MAX_ENUM_KHR"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkPerformanceCounterUnitKHR"
                             ("VK_PERFORMANCE_COUNTER_UNIT_GENERIC_KHR" 0)
@@ -3755,7 +3789,8 @@
                             ("VK_PERFORMANCE_COUNTER_UNIT_AMPS_KHR" 8)
                             ("VK_PERFORMANCE_COUNTER_UNIT_HERTZ_KHR" 9)
                             ("VK_PERFORMANCE_COUNTER_UNIT_CYCLES_KHR" 10)
-                            ("VK_PERFORMANCE_COUNTER_UNIT_MAX_ENUM_KHR" 7))
+                            ("VK_PERFORMANCE_COUNTER_UNIT_MAX_ENUM_KHR"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkPerformanceCounterScopeKHR"
                             ("VK_PERFORMANCE_COUNTER_SCOPE_COMMAND_BUFFER_KHR"
@@ -3768,7 +3803,8 @@
                              vk_performance_counter_scope_render_pass_khr)
                             ("VK_QUERY_SCOPE_COMMAND_KHR"
                              vk_performance_counter_scope_command_khr)
-                            ("VK_PERFORMANCE_COUNTER_SCOPE_MAX_ENUM_KHR" 7))
+                            ("VK_PERFORMANCE_COUNTER_SCOPE_MAX_ENUM_KHR"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkPerformanceCounterStorageKHR"
                             ("VK_PERFORMANCE_COUNTER_STORAGE_INT32_KHR" 0)
@@ -3777,7 +3813,8 @@
                             ("VK_PERFORMANCE_COUNTER_STORAGE_UINT64_KHR" 3)
                             ("VK_PERFORMANCE_COUNTER_STORAGE_FLOAT32_KHR" 4)
                             ("VK_PERFORMANCE_COUNTER_STORAGE_FLOAT64_KHR" 5)
-                            ("VK_PERFORMANCE_COUNTER_STORAGE_MAX_ENUM_KHR" 7))
+                            ("VK_PERFORMANCE_COUNTER_STORAGE_MAX_ENUM_KHR"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file
                             "VkPerformanceCounterDescriptionFlagBitsKHR"
@@ -3790,11 +3827,11 @@
                             ("VK_PERFORMANCE_COUNTER_DESCRIPTION_CONCURRENTLY_IMPACTED_KHR"
                              vk_performance_counter_description_concurrently_impacted_bit_khr)
                             ("VK_PERFORMANCE_COUNTER_DESCRIPTION_FLAG_BITS_MAX_ENUM_KHR"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkAcquireProfilingLockFlagBitsKHR"
                             ("VK_ACQUIRE_PROFILING_LOCK_FLAG_BITS_MAX_ENUM_KHR"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkQueueGlobalPriorityKHR"
                             ("VK_QUEUE_GLOBAL_PRIORITY_LOW_KHR" 128)
@@ -3809,7 +3846,8 @@
                              vk_queue_global_priority_high_khr)
                             ("VK_QUEUE_GLOBAL_PRIORITY_REALTIME_EXT"
                              vk_queue_global_priority_realtime_khr)
-                            ("VK_QUEUE_GLOBAL_PRIORITY_MAX_ENUM_KHR" 7))
+                            ("VK_QUEUE_GLOBAL_PRIORITY_MAX_ENUM_KHR"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkFragmentShadingRateCombinerOpKHR"
                             ("VK_FRAGMENT_SHADING_RATE_COMBINER_OP_KEEP_KHR" 0)
@@ -3819,7 +3857,7 @@
                             ("VK_FRAGMENT_SHADING_RATE_COMBINER_OP_MAX_KHR" 3)
                             ("VK_FRAGMENT_SHADING_RATE_COMBINER_OP_MUL_KHR" 4)
                             ("VK_FRAGMENT_SHADING_RATE_COMBINER_OP_MAX_ENUM_KHR"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkPipelineExecutableStatisticFormatKHR"
                             ("VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_BOOL32_KHR"
@@ -3831,7 +3869,7 @@
                             ("VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_FLOAT64_KHR"
                              3)
                             ("VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_MAX_ENUM_KHR"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkDebugReportObjectTypeEXT"
                             ("VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT" 0)
@@ -3900,7 +3938,8 @@
                              vk_debug_report_object_type_descriptor_update_template_ext)
                             ("VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_KHR_EXT"
                              vk_debug_report_object_type_sampler_ycbcr_conversion_ext)
-                            ("VK_DEBUG_REPORT_OBJECT_TYPE_MAX_ENUM_EXT" 7))
+                            ("VK_DEBUG_REPORT_OBJECT_TYPE_MAX_ENUM_EXT"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkDebugReportFlagBitsEXT"
                             ("VK_DEBUG_REPORT_INFORMATION_BIT_EXT" 1)
@@ -3908,18 +3947,19 @@
                             ("VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT" 4)
                             ("VK_DEBUG_REPORT_ERROR_BIT_EXT" 8)
                             ("VK_DEBUG_REPORT_DEBUG_BIT_EXT" 16)
-                            ("VK_DEBUG_REPORT_FLAG_BITS_MAX_ENUM_EXT" 7))
+                            ("VK_DEBUG_REPORT_FLAG_BITS_MAX_ENUM_EXT"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkRasterizationOrderAMD"
                             ("VK_RASTERIZATION_ORDER_STRICT_AMD" 0)
                             ("VK_RASTERIZATION_ORDER_RELAXED_AMD" 1)
-                            ("VK_RASTERIZATION_ORDER_MAX_ENUM_AMD" 7))
+                            ("VK_RASTERIZATION_ORDER_MAX_ENUM_AMD" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkShaderInfoTypeAMD"
                             ("VK_SHADER_INFO_TYPE_STATISTICS_AMD" 0)
                             ("VK_SHADER_INFO_TYPE_BINARY_AMD" 1)
                             ("VK_SHADER_INFO_TYPE_DISASSEMBLY_AMD" 2)
-                            ("VK_SHADER_INFO_TYPE_MAX_ENUM_AMD" 7))
+                            ("VK_SHADER_INFO_TYPE_MAX_ENUM_AMD" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkExternalMemoryHandleTypeFlagBitsNV"
                             ("VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV"
@@ -3931,7 +3971,7 @@
                             ("VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_KMT_BIT_NV"
                              8)
                             ("VK_EXTERNAL_MEMORY_HANDLE_TYPE_FLAG_BITS_MAX_ENUM_NV"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkExternalMemoryFeatureFlagBitsNV"
                             ("VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_NV"
@@ -3939,37 +3979,38 @@
                             ("VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_NV" 2)
                             ("VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_NV" 4)
                             ("VK_EXTERNAL_MEMORY_FEATURE_FLAG_BITS_MAX_ENUM_NV"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkValidationCheckEXT"
                             ("VK_VALIDATION_CHECK_ALL_EXT" 0)
                             ("VK_VALIDATION_CHECK_SHADERS_EXT" 1)
-                            ("VK_VALIDATION_CHECK_MAX_ENUM_EXT" 7))
+                            ("VK_VALIDATION_CHECK_MAX_ENUM_EXT" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkConditionalRenderingFlagBitsEXT"
                             ("VK_CONDITIONAL_RENDERING_INVERTED_BIT_EXT" 1)
                             ("VK_CONDITIONAL_RENDERING_FLAG_BITS_MAX_ENUM_EXT"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkSurfaceCounterFlagBitsEXT"
                             ("VK_SURFACE_COUNTER_VBLANK_BIT_EXT" 1)
                             ("VK_SURFACE_COUNTER_VBLANK_EXT"
                              vk_surface_counter_vblank_bit_ext)
-                            ("VK_SURFACE_COUNTER_FLAG_BITS_MAX_ENUM_EXT" 7))
+                            ("VK_SURFACE_COUNTER_FLAG_BITS_MAX_ENUM_EXT"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkDisplayPowerStateEXT"
                             ("VK_DISPLAY_POWER_STATE_OFF_EXT" 0)
                             ("VK_DISPLAY_POWER_STATE_SUSPEND_EXT" 1)
                             ("VK_DISPLAY_POWER_STATE_ON_EXT" 2)
-                            ("VK_DISPLAY_POWER_STATE_MAX_ENUM_EXT" 7))
+                            ("VK_DISPLAY_POWER_STATE_MAX_ENUM_EXT" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkDeviceEventTypeEXT"
                             ("VK_DEVICE_EVENT_TYPE_DISPLAY_HOTPLUG_EXT" 0)
-                            ("VK_DEVICE_EVENT_TYPE_MAX_ENUM_EXT" 7))
+                            ("VK_DEVICE_EVENT_TYPE_MAX_ENUM_EXT" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkDisplayEventTypeEXT"
                             ("VK_DISPLAY_EVENT_TYPE_FIRST_PIXEL_OUT_EXT" 0)
-                            ("VK_DISPLAY_EVENT_TYPE_MAX_ENUM_EXT" 7))
+                            ("VK_DISPLAY_EVENT_TYPE_MAX_ENUM_EXT" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkViewportCoordinateSwizzleNV"
                             ("VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_X_NV" 0)
@@ -3980,12 +4021,14 @@
                             ("VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_Z_NV" 5)
                             ("VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_W_NV" 6)
                             ("VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_W_NV" 7)
-                            ("VK_VIEWPORT_COORDINATE_SWIZZLE_MAX_ENUM_NV" 7))
+                            ("VK_VIEWPORT_COORDINATE_SWIZZLE_MAX_ENUM_NV"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkDiscardRectangleModeEXT"
                             ("VK_DISCARD_RECTANGLE_MODE_INCLUSIVE_EXT" 0)
                             ("VK_DISCARD_RECTANGLE_MODE_EXCLUSIVE_EXT" 1)
-                            ("VK_DISCARD_RECTANGLE_MODE_MAX_ENUM_EXT" 7))
+                            ("VK_DISCARD_RECTANGLE_MODE_MAX_ENUM_EXT"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkConservativeRasterizationModeEXT"
                             ("VK_CONSERVATIVE_RASTERIZATION_MODE_DISABLED_EXT"
@@ -3995,7 +4038,7 @@
                             ("VK_CONSERVATIVE_RASTERIZATION_MODE_UNDERESTIMATE_EXT"
                              2)
                             ("VK_CONSERVATIVE_RASTERIZATION_MODE_MAX_ENUM_EXT"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkDebugUtilsMessageSeverityFlagBitsEXT"
                             ("VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT"
@@ -4006,7 +4049,7 @@
                             ("VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT"
                              4096)
                             ("VK_DEBUG_UTILS_MESSAGE_SEVERITY_FLAG_BITS_MAX_ENUM_EXT"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkDebugUtilsMessageTypeFlagBitsEXT"
                             ("VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT" 1)
@@ -4015,25 +4058,26 @@
                             ("VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT"
                              4)
                             ("VK_DEBUG_UTILS_MESSAGE_TYPE_FLAG_BITS_MAX_ENUM_EXT"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkBlendOverlapEXT"
                             ("VK_BLEND_OVERLAP_UNCORRELATED_EXT" 0)
                             ("VK_BLEND_OVERLAP_DISJOINT_EXT" 1)
                             ("VK_BLEND_OVERLAP_CONJOINT_EXT" 2)
-                            ("VK_BLEND_OVERLAP_MAX_ENUM_EXT" 7))
+                            ("VK_BLEND_OVERLAP_MAX_ENUM_EXT" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkCoverageModulationModeNV"
                             ("VK_COVERAGE_MODULATION_MODE_NONE_NV" 0)
                             ("VK_COVERAGE_MODULATION_MODE_RGB_NV" 1)
                             ("VK_COVERAGE_MODULATION_MODE_ALPHA_NV" 2)
                             ("VK_COVERAGE_MODULATION_MODE_RGBA_NV" 3)
-                            ("VK_COVERAGE_MODULATION_MODE_MAX_ENUM_NV" 7))
+                            ("VK_COVERAGE_MODULATION_MODE_MAX_ENUM_NV"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkValidationCacheHeaderVersionEXT"
                             ("VK_VALIDATION_CACHE_HEADER_VERSION_ONE_EXT" 1)
                             ("VK_VALIDATION_CACHE_HEADER_VERSION_MAX_ENUM_EXT"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkShadingRatePaletteEntryNV"
                             ("VK_SHADING_RATE_PALETTE_ENTRY_NO_INVOCATIONS_NV"
@@ -4060,14 +4104,16 @@
                              10)
                             ("VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_4X4_PIXELS_NV"
                              11)
-                            ("VK_SHADING_RATE_PALETTE_ENTRY_MAX_ENUM_NV" 7))
+                            ("VK_SHADING_RATE_PALETTE_ENTRY_MAX_ENUM_NV"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkCoarseSampleOrderTypeNV"
                             ("VK_COARSE_SAMPLE_ORDER_TYPE_DEFAULT_NV" 0)
                             ("VK_COARSE_SAMPLE_ORDER_TYPE_CUSTOM_NV" 1)
                             ("VK_COARSE_SAMPLE_ORDER_TYPE_PIXEL_MAJOR_NV" 2)
                             ("VK_COARSE_SAMPLE_ORDER_TYPE_SAMPLE_MAJOR_NV" 3)
-                            ("VK_COARSE_SAMPLE_ORDER_TYPE_MAX_ENUM_NV" 7))
+                            ("VK_COARSE_SAMPLE_ORDER_TYPE_MAX_ENUM_NV"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkRayTracingShaderGroupTypeKHR"
                             ("VK_RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_KHR" 0)
@@ -4081,7 +4127,8 @@
                              vk_ray_tracing_shader_group_type_triangles_hit_group_khr)
                             ("VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_NV"
                              vk_ray_tracing_shader_group_type_procedural_hit_group_khr)
-                            ("VK_RAY_TRACING_SHADER_GROUP_TYPE_MAX_ENUM_KHR" 7))
+                            ("VK_RAY_TRACING_SHADER_GROUP_TYPE_MAX_ENUM_KHR"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkGeometryTypeKHR"
                             ("VK_GEOMETRY_TYPE_TRIANGLES_KHR" 0)
@@ -4091,7 +4138,7 @@
                              vk_geometry_type_triangles_khr)
                             ("VK_GEOMETRY_TYPE_AABBS_NV"
                              vk_geometry_type_aabbs_khr)
-                            ("VK_GEOMETRY_TYPE_MAX_ENUM_KHR" 7))
+                            ("VK_GEOMETRY_TYPE_MAX_ENUM_KHR" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkAccelerationStructureTypeKHR"
                             ("VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR" 0)
@@ -4102,7 +4149,8 @@
                              vk_acceleration_structure_type_top_level_khr)
                             ("VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NV"
                              vk_acceleration_structure_type_bottom_level_khr)
-                            ("VK_ACCELERATION_STRUCTURE_TYPE_MAX_ENUM_KHR" 7))
+                            ("VK_ACCELERATION_STRUCTURE_TYPE_MAX_ENUM_KHR"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkCopyAccelerationStructureModeKHR"
                             ("VK_COPY_ACCELERATION_STRUCTURE_MODE_CLONE_KHR" 0)
@@ -4117,7 +4165,7 @@
                             ("VK_COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_NV"
                              vk_copy_acceleration_structure_mode_compact_khr)
                             ("VK_COPY_ACCELERATION_STRUCTURE_MODE_MAX_ENUM_KHR"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file
                             "VkAccelerationStructureMemoryRequirementsTypeNV"
@@ -4128,7 +4176,7 @@
                             ("VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_UPDATE_SCRATCH_NV"
                              2)
                             ("VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_MAX_ENUM_NV"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkGeometryFlagBitsKHR"
                             ("VK_GEOMETRY_OPAQUE_BIT_KHR" 1)
@@ -4138,7 +4186,7 @@
                              vk_geometry_opaque_bit_khr)
                             ("VK_GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_NV"
                              vk_geometry_no_duplicate_any_hit_invocation_bit_khr)
-                            ("VK_GEOMETRY_FLAG_BITS_MAX_ENUM_KHR" 7))
+                            ("VK_GEOMETRY_FLAG_BITS_MAX_ENUM_KHR" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkGeometryInstanceFlagBitsKHR"
                             ("VK_GEOMETRY_INSTANCE_TRIANGLE_FACING_CULL_DISABLE_BIT_KHR"
@@ -4157,7 +4205,8 @@
                              vk_geometry_instance_force_opaque_bit_khr)
                             ("VK_GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_NV"
                              vk_geometry_instance_force_no_opaque_bit_khr)
-                            ("VK_GEOMETRY_INSTANCE_FLAG_BITS_MAX_ENUM_KHR" 7))
+                            ("VK_GEOMETRY_INSTANCE_FLAG_BITS_MAX_ENUM_KHR"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkBuildAccelerationStructureFlagBitsKHR"
                             ("VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR"
@@ -4183,18 +4232,18 @@
                             ("VK_BUILD_ACCELERATION_STRUCTURE_LOW_MEMORY_BIT_NV"
                              vk_build_acceleration_structure_low_memory_bit_khr)
                             ("VK_BUILD_ACCELERATION_STRUCTURE_FLAG_BITS_MAX_ENUM_KHR"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkPipelineCompilerControlFlagBitsAMD"
                             ("VK_PIPELINE_COMPILER_CONTROL_FLAG_BITS_MAX_ENUM_AMD"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkTimeDomainEXT"
                             ("VK_TIME_DOMAIN_DEVICE_EXT" 0)
                             ("VK_TIME_DOMAIN_CLOCK_MONOTONIC_EXT" 1)
                             ("VK_TIME_DOMAIN_CLOCK_MONOTONIC_RAW_EXT" 2)
                             ("VK_TIME_DOMAIN_QUERY_PERFORMANCE_COUNTER_EXT" 3)
-                            ("VK_TIME_DOMAIN_MAX_ENUM_EXT" 7))
+                            ("VK_TIME_DOMAIN_MAX_ENUM_EXT" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkMemoryOverallocationBehaviorAMD"
                             ("VK_MEMORY_OVERALLOCATION_BEHAVIOR_DEFAULT_AMD" 0)
@@ -4202,31 +4251,34 @@
                             ("VK_MEMORY_OVERALLOCATION_BEHAVIOR_DISALLOWED_AMD"
                              2)
                             ("VK_MEMORY_OVERALLOCATION_BEHAVIOR_MAX_ENUM_AMD"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkPerformanceConfigurationTypeINTEL"
                             ("VK_PERFORMANCE_CONFIGURATION_TYPE_COMMAND_QUEUE_METRICS_DISCOVERY_ACTIVATED_INTEL"
                              0)
                             ("VK_PERFORMANCE_CONFIGURATION_TYPE_MAX_ENUM_INTEL"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkQueryPoolSamplingModeINTEL"
                             ("VK_QUERY_POOL_SAMPLING_MODE_MANUAL_INTEL" 0)
-                            ("VK_QUERY_POOL_SAMPLING_MODE_MAX_ENUM_INTEL" 7))
+                            ("VK_QUERY_POOL_SAMPLING_MODE_MAX_ENUM_INTEL"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkPerformanceOverrideTypeINTEL"
                             ("VK_PERFORMANCE_OVERRIDE_TYPE_NULL_HARDWARE_INTEL"
                              0)
                             ("VK_PERFORMANCE_OVERRIDE_TYPE_FLUSH_GPU_CACHES_INTEL"
                              1)
-                            ("VK_PERFORMANCE_OVERRIDE_TYPE_MAX_ENUM_INTEL" 7))
+                            ("VK_PERFORMANCE_OVERRIDE_TYPE_MAX_ENUM_INTEL"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkPerformanceParameterTypeINTEL"
                             ("VK_PERFORMANCE_PARAMETER_TYPE_HW_COUNTERS_SUPPORTED_INTEL"
                              0)
                             ("VK_PERFORMANCE_PARAMETER_TYPE_STREAM_MARKER_VALID_BITS_INTEL"
                              1)
-                            ("VK_PERFORMANCE_PARAMETER_TYPE_MAX_ENUM_INTEL" 7))
+                            ("VK_PERFORMANCE_PARAMETER_TYPE_MAX_ENUM_INTEL"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkPerformanceValueTypeINTEL"
                             ("VK_PERFORMANCE_VALUE_TYPE_UINT32_INTEL" 0)
@@ -4234,11 +4286,12 @@
                             ("VK_PERFORMANCE_VALUE_TYPE_FLOAT_INTEL" 2)
                             ("VK_PERFORMANCE_VALUE_TYPE_BOOL_INTEL" 3)
                             ("VK_PERFORMANCE_VALUE_TYPE_STRING_INTEL" 4)
-                            ("VK_PERFORMANCE_VALUE_TYPE_MAX_ENUM_INTEL" 7))
+                            ("VK_PERFORMANCE_VALUE_TYPE_MAX_ENUM_INTEL"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkShaderCorePropertiesFlagBitsAMD"
                             ("VK_SHADER_CORE_PROPERTIES_FLAG_BITS_MAX_ENUM_AMD"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkValidationFeatureEnableEXT"
                             ("VK_VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_EXT" 0)
@@ -4249,7 +4302,8 @@
                             ("VK_VALIDATION_FEATURE_ENABLE_DEBUG_PRINTF_EXT" 3)
                             ("VK_VALIDATION_FEATURE_ENABLE_SYNCHRONIZATION_VALIDATION_EXT"
                              4)
-                            ("VK_VALIDATION_FEATURE_ENABLE_MAX_ENUM_EXT" 7))
+                            ("VK_VALIDATION_FEATURE_ENABLE_MAX_ENUM_EXT"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkValidationFeatureDisableEXT"
                             ("VK_VALIDATION_FEATURE_DISABLE_ALL_EXT" 0)
@@ -4265,7 +4319,8 @@
                              6)
                             ("VK_VALIDATION_FEATURE_DISABLE_SHADER_VALIDATION_CACHE_EXT"
                              7)
-                            ("VK_VALIDATION_FEATURE_DISABLE_MAX_ENUM_EXT" 7))
+                            ("VK_VALIDATION_FEATURE_DISABLE_MAX_ENUM_EXT"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkComponentTypeNV"
                             ("VK_COMPONENT_TYPE_FLOAT16_NV" 0)
@@ -4279,23 +4334,25 @@
                             ("VK_COMPONENT_TYPE_UINT16_NV" 8)
                             ("VK_COMPONENT_TYPE_UINT32_NV" 9)
                             ("VK_COMPONENT_TYPE_UINT64_NV" 10)
-                            ("VK_COMPONENT_TYPE_MAX_ENUM_NV" 7))
+                            ("VK_COMPONENT_TYPE_MAX_ENUM_NV" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkScopeNV" ("VK_SCOPE_DEVICE_NV" 1)
                             ("VK_SCOPE_WORKGROUP_NV" 2)
                             ("VK_SCOPE_SUBGROUP_NV" 3)
                             ("VK_SCOPE_QUEUE_FAMILY_NV" 5)
-                            ("VK_SCOPE_MAX_ENUM_NV" 7))
+                            ("VK_SCOPE_MAX_ENUM_NV" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkCoverageReductionModeNV"
                             ("VK_COVERAGE_REDUCTION_MODE_MERGE_NV" 0)
                             ("VK_COVERAGE_REDUCTION_MODE_TRUNCATE_NV" 1)
-                            ("VK_COVERAGE_REDUCTION_MODE_MAX_ENUM_NV" 7))
+                            ("VK_COVERAGE_REDUCTION_MODE_MAX_ENUM_NV"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkProvokingVertexModeEXT"
                             ("VK_PROVOKING_VERTEX_MODE_FIRST_VERTEX_EXT" 0)
                             ("VK_PROVOKING_VERTEX_MODE_LAST_VERTEX_EXT" 1)
-                            ("VK_PROVOKING_VERTEX_MODE_MAX_ENUM_EXT" 7))
+                            ("VK_PROVOKING_VERTEX_MODE_MAX_ENUM_EXT"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkLineRasterizationModeEXT"
                             ("VK_LINE_RASTERIZATION_MODE_DEFAULT_EXT" 0)
@@ -4303,7 +4360,8 @@
                             ("VK_LINE_RASTERIZATION_MODE_BRESENHAM_EXT" 2)
                             ("VK_LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_EXT"
                              3)
-                            ("VK_LINE_RASTERIZATION_MODE_MAX_ENUM_EXT" 7))
+                            ("VK_LINE_RASTERIZATION_MODE_MAX_ENUM_EXT"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkIndirectCommandsTokenTypeNV"
                             ("VK_INDIRECT_COMMANDS_TOKEN_TYPE_SHADER_GROUP_NV"
@@ -4320,11 +4378,13 @@
                              5)
                             ("VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_NV" 6)
                             ("VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_TASKS_NV" 7)
-                            ("VK_INDIRECT_COMMANDS_TOKEN_TYPE_MAX_ENUM_NV" 7))
+                            ("VK_INDIRECT_COMMANDS_TOKEN_TYPE_MAX_ENUM_NV"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkIndirectStateFlagBitsNV"
                             ("VK_INDIRECT_STATE_FLAG_FRONTFACE_BIT_NV" 1)
-                            ("VK_INDIRECT_STATE_FLAG_BITS_MAX_ENUM_NV" 7))
+                            ("VK_INDIRECT_STATE_FLAG_BITS_MAX_ENUM_NV"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkIndirectCommandsLayoutUsageFlagBitsNV"
                             ("VK_INDIRECT_COMMANDS_LAYOUT_USAGE_EXPLICIT_PREPROCESS_BIT_NV"
@@ -4334,7 +4394,7 @@
                             ("VK_INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NV"
                              4)
                             ("VK_INDIRECT_COMMANDS_LAYOUT_USAGE_FLAG_BITS_MAX_ENUM_NV"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkDeviceMemoryReportEventTypeEXT"
                             ("VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATE_EXT"
@@ -4346,7 +4406,7 @@
                             ("VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATION_FAILED_EXT"
                              4)
                             ("VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_MAX_ENUM_EXT"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkDeviceDiagnosticsConfigFlagBitsNV"
                             ("VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_SHADER_DEBUG_INFO_BIT_NV"
@@ -4358,7 +4418,7 @@
                             ("VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_SHADER_ERROR_REPORTING_BIT_NV"
                              8)
                             ("VK_DEVICE_DIAGNOSTICS_CONFIG_FLAG_BITS_MAX_ENUM_NV"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkGraphicsPipelineLibraryFlagBitsEXT"
                             ("VK_GRAPHICS_PIPELINE_LIBRARY_VERTEX_INPUT_INTERFACE_BIT_EXT"
@@ -4370,13 +4430,14 @@
                             ("VK_GRAPHICS_PIPELINE_LIBRARY_FRAGMENT_OUTPUT_INTERFACE_BIT_EXT"
                              8)
                             ("VK_GRAPHICS_PIPELINE_LIBRARY_FLAG_BITS_MAX_ENUM_EXT"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkFragmentShadingRateTypeNV"
                             ("VK_FRAGMENT_SHADING_RATE_TYPE_FRAGMENT_SIZE_NV"
                              0)
                             ("VK_FRAGMENT_SHADING_RATE_TYPE_ENUMS_NV" 1)
-                            ("VK_FRAGMENT_SHADING_RATE_TYPE_MAX_ENUM_NV" 7))
+                            ("VK_FRAGMENT_SHADING_RATE_TYPE_MAX_ENUM_NV"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkFragmentShadingRateNV"
                             ("VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_PIXEL_NV"
@@ -4402,7 +4463,7 @@
                             ("VK_FRAGMENT_SHADING_RATE_16_INVOCATIONS_PER_PIXEL_NV"
                              14)
                             ("VK_FRAGMENT_SHADING_RATE_NO_INVOCATIONS_NV" 15)
-                            ("VK_FRAGMENT_SHADING_RATE_MAX_ENUM_NV" 7))
+                            ("VK_FRAGMENT_SHADING_RATE_MAX_ENUM_NV" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file
                             "VkAccelerationStructureMotionInstanceTypeNV"
@@ -4413,14 +4474,15 @@
                             ("VK_ACCELERATION_STRUCTURE_MOTION_INSTANCE_TYPE_SRT_MOTION_NV"
                              2)
                             ("VK_ACCELERATION_STRUCTURE_MOTION_INSTANCE_TYPE_MAX_ENUM_NV"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkImageCompressionFlagBitsEXT"
                             ("VK_IMAGE_COMPRESSION_DEFAULT_EXT" 0)
                             ("VK_IMAGE_COMPRESSION_FIXED_RATE_DEFAULT_EXT" 1)
                             ("VK_IMAGE_COMPRESSION_FIXED_RATE_EXPLICIT_EXT" 2)
                             ("VK_IMAGE_COMPRESSION_DISABLED_EXT" 4)
-                            ("VK_IMAGE_COMPRESSION_FLAG_BITS_MAX_ENUM_EXT" 7))
+                            ("VK_IMAGE_COMPRESSION_FLAG_BITS_MAX_ENUM_EXT"
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkImageCompressionFixedRateFlagBitsEXT"
                             ("VK_IMAGE_COMPRESSION_FIXED_RATE_NONE_EXT" 0)
@@ -4466,7 +4528,7 @@
                             ("VK_IMAGE_COMPRESSION_FIXED_RATE_24BPC_BIT_EXT"
                              8388608)
                             ("VK_IMAGE_COMPRESSION_FIXED_RATE_FLAG_BITS_MAX_ENUM_EXT"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkSubpassMergeStatusEXT"
                             ("VK_SUBPASS_MERGE_STATUS_MERGED_EXT" 0)
@@ -4495,7 +4557,7 @@
                              12)
                             ("VK_SUBPASS_MERGE_STATUS_NOT_MERGED_UNSPECIFIED_EXT"
                              13)
-                            ("VK_SUBPASS_MERGE_STATUS_MAX_ENUM_EXT" 7))
+                            ("VK_SUBPASS_MERGE_STATUS_MAX_ENUM_EXT" 2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkBuildAccelerationStructureModeKHR"
                             ("VK_BUILD_ACCELERATION_STRUCTURE_MODE_BUILD_KHR"
@@ -4503,7 +4565,7 @@
                             ("VK_BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR"
                              1)
                             ("VK_BUILD_ACCELERATION_STRUCTURE_MODE_MAX_ENUM_KHR"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkAccelerationStructureBuildTypeKHR"
                             ("VK_ACCELERATION_STRUCTURE_BUILD_TYPE_HOST_KHR" 0)
@@ -4512,7 +4574,7 @@
                             ("VK_ACCELERATION_STRUCTURE_BUILD_TYPE_HOST_OR_DEVICE_KHR"
                              2)
                             ("VK_ACCELERATION_STRUCTURE_BUILD_TYPE_MAX_ENUM_KHR"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkAccelerationStructureCompatibilityKHR"
                             ("VK_ACCELERATION_STRUCTURE_COMPATIBILITY_COMPATIBLE_KHR"
@@ -4520,7 +4582,7 @@
                             ("VK_ACCELERATION_STRUCTURE_COMPATIBILITY_INCOMPATIBLE_KHR"
                              1)
                             ("VK_ACCELERATION_STRUCTURE_COMPATIBILITY_MAX_ENUM_KHR"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkAccelerationStructureCreateFlagBitsKHR"
                             ("VK_ACCELERATION_STRUCTURE_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR"
@@ -4528,11 +4590,11 @@
                             ("VK_ACCELERATION_STRUCTURE_CREATE_MOTION_BIT_NV"
                              4)
                             ("VK_ACCELERATION_STRUCTURE_CREATE_FLAG_BITS_MAX_ENUM_KHR"
-                             7))
+                             2147483647))
 
 (more-cffi:def-foreign-enum doc-file "VkShaderGroupShaderKHR"
                             ("VK_SHADER_GROUP_SHADER_GENERAL_KHR" 0)
                             ("VK_SHADER_GROUP_SHADER_CLOSEST_HIT_KHR" 1)
                             ("VK_SHADER_GROUP_SHADER_ANY_HIT_KHR" 2)
                             ("VK_SHADER_GROUP_SHADER_INTERSECTION_KHR" 3)
-                            ("VK_SHADER_GROUP_SHADER_MAX_ENUM_KHR" 7)))
+                            ("VK_SHADER_GROUP_SHADER_MAX_ENUM_KHR" 2147483647)))
