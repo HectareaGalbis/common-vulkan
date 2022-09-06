@@ -5,7 +5,7 @@
 (mcffi:with-doc-file (doc-file (asdf:system-relative-pathname "common-vulkan" "docs/api/helper-functions.md"))
 
 
-  (mcffi:def-foreign-function doc-file (create-spv-code create-spv-code) (file)
+  (mcffi:def-lisp-function doc-file create-spv-code (file)
     (declare-types ("pathname designator" file) :return ("spv code" code) ("uint" size))
     (with-open-file (stream file :direction :input :element-type '(unsigned-byte 8))
       (let ((buffer (make-array 1024 :element-type '(unsigned-byte 8) :fill-pointer 0 :adjustable t)))
@@ -16,7 +16,7 @@
 	  (values code (fill-pointer buffer))))))
 
 
-  (mcffi:def-foreign-function doc-file (nil destroy-spv-code) (code)
+  (mcffi:def-lisp-function doc-file destroy-spv-code (code)
     (declare-types ("spv code" code))
     (cffi:foreign-free code))
 

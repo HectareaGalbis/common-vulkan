@@ -49,7 +49,7 @@
 	  (for ,elem in ,slot-arg)
           ,(if pointers
                `(more-cffi:memcpy (cffi:mem-aptr ,slot ',type ,i) ,elem
-                                (cffi:foreign-type-size ,type))
+                                (cffi:foreign-type-size ',type))
                `(setf (cffi:mem-aref ,slot ',type ,i) ,elem))))))
 
 (defmacro destroy-array (slot)
@@ -75,7 +75,7 @@
   `(if ,index
        ,(if pointers
             `(more-cffi:memcpy (cffi:mem-aptr ,slot ',type ,index) ,new-value
-                               (cffi:foreign-type-size ,type))
+                               (cffi:foreign-type-size ',type))
             `(setf (cffi:mem-aref ,slot ',type ,index) ,new-value))
        (progn
         (destroy-array ,slot)

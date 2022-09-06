@@ -60,9 +60,8 @@
       (vkgetphysicaldevicefeatures physicaldevice pfeatures)
       (values pfeatures)))
 
-  (more-cffi:def-foreign-function doc-file
-      (nil destroy-get-physical-device-features
-       funcall-destroy-get-physical-device-features)
+  (more-cffi:def-lisp-function doc-file
+      destroy-get-physical-device-features
       (pfeatures)
     (declare-types ("VkPhysicalDeviceFeatures" "pFeatures"))
     (cffi-sys:foreign-free pfeatures))
@@ -111,9 +110,8 @@
       (vkgetphysicaldeviceproperties physicaldevice pproperties)
       (values pproperties)))
 
-  (more-cffi:def-foreign-function doc-file
-      (nil destroy-get-physical-device-properties
-       funcall-destroy-get-physical-device-properties)
+  (more-cffi:def-lisp-function doc-file
+      destroy-get-physical-device-properties
       (pproperties)
     (declare-types ("VkPhysicalDeviceProperties" "pProperties"))
     (cffi-sys:foreign-free pproperties))
@@ -143,9 +141,8 @@
               collect (cffi:mem-aptr pqueuefamilyproperties
                                      '(:struct vkqueuefamilyproperties) i)))))
 
-  (more-cffi:def-foreign-function doc-file
-      (nil destroy-get-physical-device-queue-family-properties
-       funcall-destroy-get-physical-device-queue-family-properties)
+  (more-cffi:def-lisp-function doc-file
+      destroy-get-physical-device-queue-family-properties
       (pqueuefamilyproperties)
     (declare-types ((list "VkQueueFamilyProperties") pqueuefamilyproperties))
     (cffi-sys:foreign-free (car pqueuefamilyproperties)))
@@ -166,8 +163,8 @@
       (vkgetphysicaldevicememoryproperties physicaldevice pmemoryproperties)
       (values pmemoryproperties)))
 
-  (more-cffi:def-foreign-function doc-file
-      (nil destroy-get-physical-device-memory-properties)
+  (more-cffi:def-lisp-function doc-file
+      destroy-get-physical-device-memory-properties
       (pmemoryproperties)
     (declare-types ("VkPhysicalDeviceMemoryProperties" "pMemoryProperties"))
     (cffi-sys:foreign-free pmemoryproperties))
@@ -265,9 +262,8 @@
              (cffi:mem-aptr pproperties '(:struct vkextensionproperties)
                             i)))))))
 
-  (more-cffi:def-foreign-function doc-file
-      (nil destroy-enumerate-instance-extension-properties
-       funcall-destroy-enumerate-instance-extension-properties)
+  (more-cffi:def-lisp-function doc-file
+      destroy-enumerate-instance-extension-properties
       (extension-props)
     (declare-types ("(list VkExtensionProperties)" extension-props))
     (cffi-sys:foreign-free (car extension-props)))
@@ -302,9 +298,8 @@
                                    i)))))
             (values properties result))))))
 
-  (more-cffi:def-foreign-function doc-file
-      (nil destroy-enumerate-device-extension-properties
-       funcall-destroy-enumerate-device-extension-properties)
+  (more-cffi:def-lisp-function doc-file
+      destroy-enumerate-device-extension-properties
       (pproperties)
     (declare-types ((list "VkExtensionProperties") "pProperties"))
     (cffi-sys:foreign-free (car pproperties)))
@@ -332,9 +327,8 @@
           (collect
            (cffi:mem-aptr pproperties '(:struct vklayerproperties) i))))))
 
-  (more-cffi:def-foreign-function doc-file
-      (nil destroy-enumerate-instance-layer-properties
-       funcall-destroy-enumerate-instance-layer-properties)
+  (more-cffi:def-lisp-function doc-file
+      destroy-enumerate-instance-layer-properties
       (layer-props)
     (declare-types ((list "VkLayerProperties") layer-props))
     (cffi-sys:foreign-free (car layer-props)))
@@ -505,8 +499,8 @@
       (vkgetbuffermemoryrequirements device buffer pmemoryrequirements)
       (values pmemoryrequirements)))
 
-  (more-cffi:def-foreign-function doc-file
-      (nil destroy-get-buffer-memory-requirements)
+  (more-cffi:def-lisp-function doc-file
+      destroy-get-buffer-memory-requirements
       (pmemoryrequirements)
     (declare-types ("VkMemoryRequirements" "pMemoryRequirements"))
     (cffi-sys:foreign-free pmemoryrequirements))
@@ -2802,9 +2796,8 @@
              psurfacecapabilities)))
       (values psurfacecapabilities result)))
 
-  (more-cffi:def-foreign-function doc-file
-      (nil destroy-get-physical-device-surface-capabilities-khr
-       funcall-destroy-get-physical-device-surface-capabilities-khr)
+  (more-cffi:def-lisp-function doc-file
+      destroy-get-physical-device-surface-capabilities-khr
       (psurfacecapabilities)
     (declare-types ("VkSurfaceCapabilitiesKHR" "pSurfaceCapabilities"))
     (cffi-sys:foreign-free psurfacecapabilities))
@@ -2839,9 +2832,8 @@
                                 i)))))
         (values surface-formats result))))
 
-  (more-cffi:def-foreign-function doc-file
-      (nil destroy-get-physical-device-surface-formats-khr
-       funcall-destroy-get-physical-device-surface-formats-khr)
+  (more-cffi:def-lisp-function doc-file
+      destroy-get-physical-device-surface-formats-khr
       (psurfaceformats)
     (declare-types ((list "VkSurfaceFormatKHR") "pSurfaceFormats"))
     (cffi-sys:foreign-free (car psurfaceformats)))
