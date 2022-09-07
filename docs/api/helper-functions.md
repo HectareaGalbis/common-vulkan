@@ -12,6 +12,8 @@
   * *code*: `spv code`
   * *size*: `uint`
 
+## destroy-spv-code
+
 **destroy-spv-code**
 ```lisp
 (destroy-spv-code code)

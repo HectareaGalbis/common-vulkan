@@ -60,6 +60,8 @@ Wrap the body expressions with `create-instance` and `destroy-instance`. The new
 * *Return:*
   * *pfeatures*: `VkPhysicalDeviceFeatures`
 
+## destroy-get-physical-device-features
+
 **destroy-get-physical-device-features**
 ```lisp
 (destroy-get-physical-device-features pFeatures)
@@ -126,6 +128,8 @@ Wrap the body expressions with `create-get-physical-device-features` and `destro
 * *Return:*
   * *pProperties*: `VkPhysicalDeviceProperties`
 
+## destroy-get-physical-device-properties
+
 **destroy-get-physical-device-properties**
 ```lisp
 (destroy-get-physical-device-properties pProperties)
@@ -154,6 +158,8 @@ Wrap the body expressions with `create-get-physical-device-properties` and `dest
 * *Return:*
   * *pQueueFamilyProperties*: `(list VkQueueFamilyProperties)`
 
+## destroy-get-physical-device-queue-family-properties
+
 **destroy-get-physical-device-queue-family-properties**
 ```lisp
 (destroy-get-physical-device-queue-family-properties pqueuefamilyproperties)
@@ -171,19 +177,33 @@ Wrap the body expressions with `create-get-physical-device-queue-family-properti
 
 ## vkGetPhysicalDeviceMemoryProperties
 
-**get-physical-device-memory-properties**
+**create-get-physical-device-memory-properties**
 ```lisp
-(get-physical-device-memory-properties physicalDevice pMemoryProperties) => return-value
+(create-get-physical-device-memory-properties physicalDevice) => pMemoryProperties
 ```
 
 * *Parameters*:
   * *physicalDevice*: `VkPhysicalDevice`
-  * *pMemoryProperties*: `VkPhysicalDeviceMemoryProperties`
 
 * *Return:*
-  * *return-value*: `void`
+  * *pMemoryProperties*: `VkPhysicalDeviceMemoryProperties`
 
-* **Note**: This function needs to be revised. Please, post an issue to request it.
+## destroy-get-physical-device-memory-properties
+
+**destroy-get-physical-device-memory-properties**
+```lisp
+(destroy-get-physical-device-memory-properties pMemoryProperties)
+```
+
+* *Parameters*:
+  * *pMemoryProperties*: `VkPhysicalDeviceMemoryProperties`
+
+**with-get-physical-device-memory-properties**
+```lisp
+(with-get-physical-device-memory-properties var (&rest args)
+  &body body)
+```
+Wrap the body expressions with `create-get-physical-device-memory-properties` and `destroy-get-physical-device-memory-properties`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
 ## vkGetInstanceProcAddr
 
@@ -262,6 +282,8 @@ Wrap the body expressions with `create-device` and `destroy-device`. The new obj
 * *Return:*
   * *extension-props*: `(list VkExtensionProperties)`
 
+## destroy-enumerate-instance-extension-properties
+
 **destroy-enumerate-instance-extension-properties**
 ```lisp
 (destroy-enumerate-instance-extension-properties extension-props)
@@ -292,6 +314,8 @@ Wrap the body expressions with `create-enumerate-instance-extension-properties` 
   * *pProperties*: `(list VkExtensionProperties)`
   * *result*: `VkResult`
 
+## destroy-enumerate-device-extension-properties
+
 **destroy-enumerate-device-extension-properties**
 ```lisp
 (destroy-enumerate-device-extension-properties pProperties)
@@ -316,6 +340,8 @@ Wrap the body expressions with `create-enumerate-device-extension-properties` an
 
 * *Return:*
   * *layer-props*: `(list VkLayerProperties)`
+
+## destroy-enumerate-instance-layer-properties
 
 **destroy-enumerate-instance-layer-properties**
 ```lisp
@@ -413,25 +439,23 @@ Wrap the body expressions with `create-enumerate-instance-layer-properties` and 
 
 **allocate-memory**
 ```lisp
-(allocate-memory device pAllocateInfo pAllocator pMemory) => return-value
+(allocate-memory device pAllocateInfo pAllocator) => (values pMemory result)
 ```
 
 * *Parameters*:
   * *device*: `VkDevice`
   * *pAllocateInfo*: `VkMemoryAllocateInfo`
   * *pAllocator*: `VkAllocationCallbacks`
-  * *pMemory*: `VkDeviceMemory`
 
 * *Return:*
-  * *return-value*: `VkResult`
-
-* **Note**: This function needs to be revised. Please, post an issue to request it.
+  * *pMemory*: `VkDeviceMemory`
+  * *result*: `VkResult`
 
 ## vkFreeMemory
 
 **free-memory**
 ```lisp
-(free-memory device memory pAllocator) => return-value
+(free-memory device memory pAllocator)
 ```
 
 * *Parameters*:
@@ -439,16 +463,18 @@ Wrap the body expressions with `create-enumerate-instance-layer-properties` and 
   * *memory*: `VkDeviceMemory`
   * *pAllocator*: `VkAllocationCallbacks`
 
-* *Return:*
-  * *return-value*: `void`
-
-* **Note**: This function needs to be revised. Please, post an issue to request it.
+**with-allocated-memory**
+```lisp
+(with-allocated-memory var (&rest args)
+  &body body)
+```
+Wrap the body expressions with `allocate-memory` and `free-memory`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
 ## vkMapMemory
 
 **map-memory**
 ```lisp
-(map-memory device memory offset size flags ppData) => return-value
+(map-memory device memory offset size flags) => (values ppData result)
 ```
 
 * *Parameters*:
@@ -457,28 +483,28 @@ Wrap the body expressions with `create-enumerate-instance-layer-properties` and 
   * *offset*: `VkDeviceSize`
   * *size*: `VkDeviceSize`
   * *flags*: `VkMemoryMapFlags`
-  * *ppData*: `void`
 
 * *Return:*
-  * *return-value*: `VkResult`
-
-* **Note**: This function needs to be revised. Please, post an issue to request it.
+  * *ppData*: `Data pointer`
+  * *result*: `VkResult`
 
 ## vkUnmapMemory
 
 **unmap-memory**
 ```lisp
-(unmap-memory device memory) => return-value
+(unmap-memory device memory)
 ```
 
 * *Parameters*:
   * *device*: `VkDevice`
   * *memory*: `VkDeviceMemory`
 
-* *Return:*
-  * *return-value*: `void`
-
-* **Note**: This function needs to be revised. Please, post an issue to request it.
+**with-mapped-memory**
+```lisp
+(with-mapped-memory var (&rest args)
+  &body body)
+```
+Wrap the body expressions with `map-memory` and `unmap-memory`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
 ## vkFlushMappedMemoryRanges
 
@@ -535,7 +561,7 @@ Wrap the body expressions with `create-enumerate-instance-layer-properties` and 
 
 **bind-buffer-memory**
 ```lisp
-(bind-buffer-memory device buffer memory memoryOffset) => return-value
+(bind-buffer-memory device buffer memory memoryOffset) => result
 ```
 
 * *Parameters*:
@@ -545,9 +571,7 @@ Wrap the body expressions with `create-enumerate-instance-layer-properties` and 
   * *memoryOffset*: `VkDeviceSize`
 
 * *Return:*
-  * *return-value*: `VkResult`
-
-* **Note**: This function needs to be revised. Please, post an issue to request it.
+  * *result*: `VkResult`
 
 ## vkBindImageMemory
 
@@ -569,20 +593,34 @@ Wrap the body expressions with `create-enumerate-instance-layer-properties` and 
 
 ## vkGetBufferMemoryRequirements
 
-**get-buffer-memory-requirements**
+**create-get-buffer-memory-requirements**
 ```lisp
-(get-buffer-memory-requirements device buffer pMemoryRequirements) => return-value
+(create-get-buffer-memory-requirements device buffer) => pMemoryRequirements
 ```
 
 * *Parameters*:
   * *device*: `VkDevice`
   * *buffer*: `VkBuffer`
-  * *pMemoryRequirements*: `VkMemoryRequirements`
 
 * *Return:*
-  * *return-value*: `void`
+  * *pMemoryRequirements*: `VkMemoryRequirements`
 
-* **Note**: This function needs to be revised. Please, post an issue to request it.
+## destroy-get-buffer-memory-requirements
+
+**destroy-get-buffer-memory-requirements**
+```lisp
+(destroy-get-buffer-memory-requirements pMemoryRequirements)
+```
+
+* *Parameters*:
+  * *pMemoryRequirements*: `VkMemoryRequirements`
+
+**with-get-buffer-memory-requirements**
+```lisp
+(with-get-buffer-memory-requirements var (&rest args)
+  &body body)
+```
+Wrap the body expressions with `create-get-buffer-memory-requirements` and `destroy-get-buffer-memory-requirements`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
 ## vkGetImageMemoryRequirements
 
@@ -919,25 +957,23 @@ Wrap the body expressions with `create-semaphore` and `destroy-semaphore`. The n
 
 **create-buffer**
 ```lisp
-(create-buffer device pCreateInfo pAllocator pBuffer) => return-value
+(create-buffer device pCreateInfo pAllocator) => (values pBuffer result)
 ```
 
 * *Parameters*:
   * *device*: `VkDevice`
   * *pCreateInfo*: `VkBufferCreateInfo`
   * *pAllocator*: `VkAllocationCallbacks`
-  * *pBuffer*: `VkBuffer`
 
 * *Return:*
-  * *return-value*: `VkResult`
-
-* **Note**: This function needs to be revised. Please, post an issue to request it.
+  * *pBuffer*: `VkBuffer`
+  * *result*: `VkResult`
 
 ## vkDestroyBuffer
 
 **destroy-buffer**
 ```lisp
-(destroy-buffer device buffer pAllocator) => return-value
+(destroy-buffer device buffer pAllocator)
 ```
 
 * *Parameters*:
@@ -945,10 +981,12 @@ Wrap the body expressions with `create-semaphore` and `destroy-semaphore`. The n
   * *buffer*: `VkBuffer`
   * *pAllocator*: `VkAllocationCallbacks`
 
-* *Return:*
-  * *return-value*: `void`
-
-* **Note**: This function needs to be revised. Please, post an issue to request it.
+**with-buffer**
+```lisp
+(with-buffer var (&rest args)
+  &body body)
+```
+Wrap the body expressions with `create-buffer` and `destroy-buffer`. The new object(s) is(are) bound to `var`. The arguments `args` are passed to the constructor.
 
 ## vkCreateBufferView
 
@@ -1862,20 +1900,14 @@ Wrap the body expressions with `allocate-command-buffers` and `free-command-buff
 
 **cmd-bind-vertex-buffers**
 ```lisp
-(cmd-bind-vertex-buffers commandBuffer firstBinding bindingCount pBuffers pOffsets) => return-value
+(cmd-bind-vertex-buffers commandBuffer firstBinding pBuffers pOffsets)
 ```
 
 * *Parameters*:
   * *commandBuffer*: `VkCommandBuffer`
   * *firstBinding*: `uint32`
-  * *bindingCount*: `uint32`
-  * *pBuffers*: `VkBuffer`
-  * *pOffsets*: `VkDeviceSize`
-
-* *Return:*
-  * *return-value*: `void`
-
-* **Note**: This function needs to be revised. Please, post an issue to request it.
+  * *pBuffers*: `(list VkBuffer)`
+  * *pOffsets*: `(list VkDeviceSize)`
 
 ## vkCmdDraw
 
@@ -3829,6 +3861,8 @@ Wrap the body expressions with `allocate-command-buffers` and `free-command-buff
   * *pSurfaceCapabilities*: `VkSurfaceCapabilitiesKHR`
   * *result*: `VkResult`
 
+## destroy-get-physical-device-surface-capabilities-khr
+
 **destroy-get-physical-device-surface-capabilities-khr**
 ```lisp
 (destroy-get-physical-device-surface-capabilities-khr pSurfaceCapabilities)
@@ -3858,6 +3892,8 @@ Wrap the body expressions with `create-get-physical-device-surface-capabilities`
 * *Return:*
   * *pSurfaceFormats*: `VkSurfaceFormatKHR`
   * *result*: `VkResult`
+
+## destroy-get-physical-device-surface-formats-khr
 
 **destroy-get-physical-device-surface-formats-khr**
 ```lisp

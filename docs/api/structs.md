@@ -1449,9 +1449,9 @@ Wrap the body expressions with `create-physical-device-limits` and `destroy-phys
 
 **Members**
 * *memoryTypeCount*: `uint32`
-* *memoryTypes*: `VkMemoryType`
+* *memoryTypes*: `(list VkMemoryType)`
 * *memoryHeapCount*: `uint32`
-* *memoryHeaps*: `VkMemoryHeap`
+* *memoryHeaps*: `(list VkMemoryHeap)`
 
 **create-physical-device-memory-properties**
 ```lisp
@@ -1481,8 +1481,6 @@ Wrap the body expressions with `create-physical-device-memory-properties` and `d
 (physical-device-memory-properties-memoryHeapCount obj) ; setf-able
 (physical-device-memory-properties-memoryHeaps obj &optional memoryheaps-index) ; setf-able
 ```
-
-* **Note**: This struct needs to be revised. Please, post an issue to request it.
 
 ---
 
@@ -1897,7 +1895,7 @@ Wrap the body expressions with `create-mapped-memory-range` and `destroy-mapped-
 
 **Members**
 * *sType*: `VkStructureType`
-* *pNext*: `void`
+* *pNext*: `Vulkan object`
 * *allocationSize*: `VkDeviceSize`
 * *memoryTypeIndex*: `uint32`
 
@@ -1929,8 +1927,6 @@ Wrap the body expressions with `create-memory-allocate-info` and `destroy-memory
 (memory-allocate-info-allocationSize obj) ; setf-able
 (memory-allocate-info-memoryTypeIndex obj) ; setf-able
 ```
-
-* **Note**: This struct needs to be revised. Please, post an issue to request it.
 
 ---
 
@@ -1967,8 +1963,6 @@ Wrap the body expressions with `create-memory-requirements` and `destroy-memory-
 (memory-requirements-alignment obj) ; setf-able
 (memory-requirements-memoryTypeBits obj) ; setf-able
 ```
-
-* **Note**: This struct needs to be revised. Please, post an issue to request it.
 
 ---
 
@@ -2525,13 +2519,13 @@ Wrap the body expressions with `create-query-pool-create-info` and `destroy-quer
 
 **Members**
 * *sType*: `VkStructureType`
-* *pNext*: `void`
+* *pNext*: `Vulkan object`
 * *flags*: `VkBufferCreateFlags`
 * *size*: `VkDeviceSize`
 * *usage*: `VkBufferUsageFlags`
 * *sharingMode*: `VkSharingMode`
 * *queueFamilyIndexCount*: `uint32`
-* *pQueueFamilyIndices*: `uint32`
+* *pQueueFamilyIndices*: `(list uint32)`
 
 **create-buffer-create-info**
 ```lisp
@@ -2569,8 +2563,6 @@ Wrap the body expressions with `create-buffer-create-info` and `destroy-buffer-c
 (buffer-create-info-queueFamilyIndexCount obj) ; setf-able
 (buffer-create-info-pQueueFamilyIndices obj &optional pqueuefamilyindices-index) ; setf-able
 ```
-
-* **Note**: This struct needs to be revised. Please, post an issue to request it.
 
 ---
 
@@ -4532,7 +4524,6 @@ Wrap the body expressions with `create-attachment-reference` and `destroy-attach
                                   (pNext NIL)
                                   (flags 0)
                                   (renderPass 0)
-                                  (attachmentCount 0)
                                   (pAttachments NIL)
                                   (width 0)
                                   (height 0)
@@ -4557,8 +4548,8 @@ Wrap the body expressions with `create-framebuffer-create-info` and `destroy-fra
 (framebuffer-create-info-pNext obj) ; setf-able
 (framebuffer-create-info-flags obj) ; setf-able
 (framebuffer-create-info-renderPass obj) ; setf-able
-(framebuffer-create-info-attachmentCount obj) ; setf-able
-(framebuffer-create-info-pAttachments obj &optional pattachments-index) ; setf-able
+(framebuffer-create-info-attachmentCount obj)
+(framebuffer-create-info-pAttachments obj &optional (index nil)) ; setf-able
 (framebuffer-create-info-width obj) ; setf-able
 (framebuffer-create-info-height obj) ; setf-able
 (framebuffer-create-info-layers obj) ; setf-able

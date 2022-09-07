@@ -2384,20 +2384,37 @@
      ((renderpass-arg) (create-pointer renderpass renderpass-arg)) :get
      (nil (get-pointer renderpass)) :set
      ((renderpass-arg) (set-pointer renderpass renderpass-arg)))
-    (attachmentcount :name "attachmentCount" :type uint32)
+    (attachmentcount :name "attachmentCount" :type uint32 :create nil :set nil)
     (pattachments :name "pAttachments" :type (list "VkImageView") :init-form
      nil :create
-     ((pattachments-arg)
-      (create-array vkimageview pattachments pattachments-arg :dynamic t
-       :pointers nil))
-     :destroy (destroy-array pattachments) :get
-     ((&optional pattachments-index)
-      (get-array vkimageview pattachments pattachments-index attachmentcount
-       :pointers nil))
+     ((pattachments-arg) (setf attachmentcount (length pattachments-arg))
+      (setf pattachments
+              (cffi:foreign-alloc 'vkimageview :count attachmentcount))
+      (loop for i from 0 below attachmentcount
+            for attachment in pattachments-arg
+            do (more-cffi:memcpy (cffi:mem-aptr pattachments i) attachment
+                                 (cffi:foreign-type-size 'vkimage))))
+     :destroy (cffi-sys:foreign-free pattachments) :get
+     ((&optional (index nil))
+      (if index
+          (cffi:mem-aptr pattachments 'vkimageview index)
+          (loop for i from 0 below attachmentcount
+                collect (cffi:mem-aptr pattachments 'vkimageview i))))
      :set
-     ((pattachments-arg &optional pattachments-index)
-      (set-array vkimageview pattachments pattachments-arg pattachments-index
-       :dynamic t :pointers nil)))
+     ((new-value &optional (index nil))
+      (if index
+          (more-cffi:memcpy (cffi:mem-aptr pattachments 'vkimageview index)
+                            new-value (cffi:foreign-type-size 'vkimageview))
+          (progn
+           (cffi-sys:foreign-free pattachments)
+           (setf attachmentcount (length new-value))
+           (setf pattachments
+                   (cffi:foreign-alloc 'vkimageview :count attachmentcount))
+           (loop for i from 0 below attachmentcount
+                 for attachment in new-value
+                 do (more-cffi:memcpy
+                     (cffi:mem-aptr pattachments 'vkimageview i) attachment
+                     (cffi:foreign-type-size 'vkimageview)))))))
     (width :name width :type uint32)
     (height :name height :type uint32)
     (layers :name layers :type uint32))

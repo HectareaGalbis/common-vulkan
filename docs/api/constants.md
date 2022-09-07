@@ -1,29 +1,34 @@
 ## VK_MAKE_API_VERSION
 
+**vk_make_api_version**
 ```lisp
-(vk_make_api_version VARIANTMAJORMINORPATCH)
+(vk_make_api_version VARIANT MAJOR MINOR PATCH)
 ```
 
 ## VK_API_VERSION_VARIANT
 
+**vk_api_version_variant**
 ```lisp
 (vk_api_version_variant VERSION)
 ```
 
 ## VK_API_VERSION_MAJOR
 
+**vk_api_version_major**
 ```lisp
 (vk_api_version_major VERSION)
 ```
 
 ## VK_API_VERSION_MINOR
 
+**vk_api_version_minor**
 ```lisp
 (vk_api_version_minor VERSION)
 ```
 
 ## VK_API_VERSION_PATCH
 
+**vk_api_version_patch**
 ```lisp
 (vk_api_version_patch VERSION)
 ```
