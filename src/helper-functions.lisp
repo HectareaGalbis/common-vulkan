@@ -66,6 +66,7 @@
 		  (for suppliedp-arg in suppliedp-args)
 		  (collect `((,keyword-arg ,name-arg) 0 ,suppliedp-arg))))
 	   (i-sym (gensym "I"))
+	   (name-arg-elem (gensym "name-arg-elem"))
 	   (setf-exprs (iter
 			(for name in names)
 			(for type in types)
@@ -75,7 +76,8 @@
 			(collect `(when ,suppliedp-arg
 				    ,(if (> count 1)
 					 `(iter (for ,i-sym from 0 below ,count)
-						(setf (cffi:mem-aref ,name ,type ,i-sym) (aref ,name-arg ,i-sym)))
+					        (for ,name-arg-elem in ,name-arg)
+						(setf (cffi:mem-aref ,name ,type ,i-sym) ,name-arg-elem))
 					 `(setf ,name ,name-arg))))))
 	   (object-sym (gensym)))
       `(defun ,(intern (concatenate 'string "CREATE-" (symbol-name struct-name))) (&key ,@args)
@@ -116,7 +118,8 @@
     (let ((object-sym (gensym))
 	  (index-sym (gensym))
 	  (new-val-sym (gensym))
-	  (i-sym (gensym)))
+	  (i-sym (gensym))
+	  (new-val-elem (gensym)))
       (iter
        (for name in names)
        (for type in types)
@@ -128,7 +131,8 @@
 		       (if ,index-sym
 			   (setf (cffi:mem-aref ,name ,type ,index-sym) ,new-val-sym)
 			   (iter (for ,i-sym from 0 below ,count)
-				 (setf (cffi:mem-aref ,name '(:struct ,struct-name) ,i-sym) (aref ,new-val-sym ,i-sym)))))))))))
+			     (for ,new-val-elem in ,new-val-sym)
+			     (setf (cffi:mem-aref ,name '(:struct ,struct-name) ,i-sym) ,new-val-elem))))))))))
   
   (mcffi:def-lisp-macro doc-file def-vulkan-struct (name &body slots)
     "Define a struct named `name`. Each member slot follows the syntax `(member-name member-type [:count count])`.
