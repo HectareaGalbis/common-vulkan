@@ -4524,6 +4524,7 @@ Wrap the body expressions with `create-attachment-reference` and `destroy-attach
                                   (pNext NIL)
                                   (flags 0)
                                   (renderPass 0)
+                                  (attachmentCount 0)
                                   (pAttachments NIL)
                                   (width 0)
                                   (height 0)
@@ -4548,8 +4549,8 @@ Wrap the body expressions with `create-framebuffer-create-info` and `destroy-fra
 (framebuffer-create-info-pNext obj) ; setf-able
 (framebuffer-create-info-flags obj) ; setf-able
 (framebuffer-create-info-renderPass obj) ; setf-able
-(framebuffer-create-info-attachmentCount obj)
-(framebuffer-create-info-pAttachments obj &optional (index nil)) ; setf-able
+(framebuffer-create-info-attachmentCount obj) ; setf-able
+(framebuffer-create-info-pAttachments obj &optional pattachments-index) ; setf-able
 (framebuffer-create-info-width obj) ; setf-able
 (framebuffer-create-info-height obj) ; setf-able
 (framebuffer-create-info-layers obj) ; setf-able
