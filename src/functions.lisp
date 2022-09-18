@@ -362,7 +362,7 @@
   (more-cffi:def-foreign-function doc-file
       ("vkQueueSubmit" queue-submit funcall-queue-submit)
       (queue psubmits fence)
-    (declare-types ("VkQueue" queue) ("VkSubmitInfo" "pSubmits")
+    (declare-types ("VkQueue" queue) ((list "VkSubmitInfo") "pSubmits")
      ("VkFence" fence) :return ("VkResult" result))
     (let ((submitcount (length psubmits))
           (psubmits-c
@@ -1509,14 +1509,21 @@
 
   (more-cffi:def-foreign-function doc-file
       ("vkCmdCopyBuffer" cmd-copy-buffer funcall-cmd-copy-buffer)
-      (commandbuffer srcbuffer dstbuffer regioncount pregions)
+      (commandbuffer srcbuffer dstbuffer pregions)
     (declare-types ("VkCommandBuffer" "commandBuffer") ("VkBuffer" "srcBuffer")
-     ("VkBuffer" "dstBuffer") (uint32 "regionCount")
-     ("VkBufferCopy" "pRegions") :return ("void" return-value))
-    (vkcmdcopybuffer commandbuffer srcbuffer dstbuffer regioncount pregions))
-
-  (more-cffi:doc-note doc-file
-                      "This function needs to be revised. Please, post an issue to request it.")
+     ("VkBuffer" "dstBuffer") ("VkBufferCopy" "pRegions"))
+    (let* ((regioncount (length pregions))
+           (pregions-c
+            (cffi:foreign-alloc '(:struct vkbuffercopy) :count regioncount)))
+      (iter
+        (for i from 0 below regioncount)
+        (for region in pregions)
+        (more-cffi:memcpy (cffi:mem-aptr pregions-c '(:struct vkbuffercopy) i)
+                          region
+                          (cffi:foreign-type-size '(:struct vkbuffercopy))))
+      (vkcmdcopybuffer commandbuffer srcbuffer dstbuffer regioncount
+       pregions-c)
+      (cffi-sys:foreign-free pregions-c)))
 
   (more-cffi:def-foreign-function doc-file
       ("vkCmdCopyImage" cmd-copy-image funcall-cmd-copy-image)
