@@ -1758,4 +1758,11 @@
 	   :set ((pnext-arg)
 		 (set-pointer pnext pnext-arg)))
     (allocationsize :name "allocationSize" :type "VkDeviceSize")
-    (memorytypeindex :name "memoryTypeIndex" :type uint32)))
+    (memorytypeindex :name "memoryTypeIndex" :type uint32))
+
+
+  (more-cffi:def-foreign-struct doc-file "VkBufferCopy" (buffer-copy)
+      (:default-create :default-get :default-set)
+    (srcoffset :name "srcOffset" :type "VkDeviceSize")
+    (dstoffset :name "dstOffset" :type "VkDeviceSize")
+    (size :name size :type "VkDeviceSize")))

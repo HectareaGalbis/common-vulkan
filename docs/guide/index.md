@@ -38,3 +38,9 @@ I think I'm not missing anything so..., let's code!
   * [Rendering and presentation](https://hectarea1996.github.io/common-vulkan/guide/rendering.html)
   * [Frames in flight](https://hectarea1996.github.io/common-vulkan/guide/frames-in-flight.html)
   * [Swap chain recreation](https://hectarea1996.github.io/common-vulkan/guide/swap-chain-recreation.html)
+  
+* **Vertex buffers**
+  * [Vertex input description](https://hectarea1996.github.io/common-vulkan/guide/vertex-input.html)
+  * [Vertex buffer creation](https://hectarea1996.github.io/common-vulkan/guide/vertex-buffer.html)
+  * [Stagin buffer](https://hectarea1996.github.io/common-vulkan/guide/staging-buffer.html)
+  * [Index buffer](https://hectarea1996.github.io/common-vulkan/guide/index-buffer.html)

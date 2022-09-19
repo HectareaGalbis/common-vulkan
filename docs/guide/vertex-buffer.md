@@ -33,7 +33,7 @@ First we need to fill a `VkBufferCreateInfo` structure:
 ```Lisp
 (defun create-vertex-buffer (app)
   (cvk:with-buffer-create-info buffer-info (:sType cvk:VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO
-					                        :size (* (cvk:vulkan-struct-size 'vertex) (length vertices))
+					                        :size (* (cvk:sizeof 'vertex) (length vertices))
 					                        :usage cvk:VK_BUFFER_USAGE_VERTEX_BUFFER_BIT
 					                        :sharingMode cvk:VK_SHARING_MODE_EXCLUSIVE)
     ...))
@@ -52,7 +52,7 @@ And now we can create the buffer:
 ```Lisp
 (defun create-vertex-buffer (app)
   (cvk:with-buffer-create-info buffer-info (:sType cvk:VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO
-					                        :size (* (cvk:vulkan-struct-size 'vertex) (length vertices))
+					                        :size (* (cvk:sizeof 'vertex) (length vertices))
 					                        :usage cvk:VK_BUFFER_USAGE_VERTEX_BUFFER_BIT
 					                        :sharingMode cvk:VK_SHARING_MODE_EXCLUSIVE)
     (multiple-value-bind (vertex-buffer result) (cvk:create-buffer (device app) buffer-info nil)

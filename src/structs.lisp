@@ -2609,9 +2609,6 @@
     (dstoffset :name "dstOffset" :type "VkDeviceSize")
     (size :name size :type "VkDeviceSize"))
 
-  (more-cffi:doc-note doc-file
-                      "This struct needs to be revised. Please, post an issue to request it.")
-
   (more-cffi:def-foreign-struct doc-file
       "VkImageSubresourceLayers"
       (image-subresource-layers)

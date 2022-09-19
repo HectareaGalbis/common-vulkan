@@ -31,7 +31,7 @@ You can now remove the buffer creation and memory allocation code from `create-v
 
 ```Lisp
 (defun create-vertex-buffer (app)
-  (let ((buffer-size (* (cvk:vulkan-struct-size 'vertex) (length vertices))))
+  (let ((buffer-size (* (cvk:sizeof 'vertex) (length vertices))))
     (multiple-value-bind (vertex-buffer vertex-buffer-memory) (create-buffer app buffer-size
 									                                         (logior cvk:VK_BUFFER_USAGE_TRANSFER_DST_BIT
 										                                             cvk:VK_BUFFER_USAGE_VERTEX_BUFFER_BIT)
@@ -50,7 +50,7 @@ We are now going to change `create-vertex-buffer` to only use a host visible buf
 
 ```Lisp
 (defun create-vertex-buffer (app)
-  (let ((buffer-size (* (cvk:vulkan-struct-size 'vertex) (length vertices))))
+  (let ((buffer-size (* (cvk:sizeof 'vertex) (length vertices))))
     (multiple-value-bind (staging-buffer staging-buffer-memory) (create-buffer app buffer-size
 									                                           cvk:VK_BUFFER_USAGE_TRANSFER_SRC_BIT
 									                                           (logior cvk:VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT
@@ -123,7 +123,7 @@ We can now call `copy-buffer` from the `create-vertex-buffer` function to move t
 
 ```Lisp
 (defun create-vertex-buffer (app)
-  (let ((buffer-size (* (cvk:vulkan-struct-size 'vertex) (length vertices))))
+  (let ((buffer-size (* (cvk:sizeof 'vertex) (length vertices))))
     (multiple-value-bind (staging-buffer staging-buffer-memory) ...
       ...
       (multiple-value-bind (vertex-buffer vertex-buffer-memory) ...
@@ -137,7 +137,7 @@ After copying the data from the staging buffer to the device buffer, we should c
 
 ```Lisp
 (defun create-vertex-buffer (app)
-  (let ((buffer-size (* (cvk:vulkan-struct-size 'vertex) (length vertices))))
+  (let ((buffer-size (* (cvk:sizeof 'vertex) (length vertices))))
     (multiple-value-bind (staging-buffer staging-buffer-memory) ...
       ...
       (multiple-value-bind (vertex-buffer vertex-buffer-memory) ...

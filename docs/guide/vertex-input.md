@@ -42,15 +42,7 @@ Now create a list of vertices:
 					                        :color '(0.0 0.0 1.0))))
 ```
 
-See that we are using `create-vertex`. That means we need to free the vertices in the `cleanup` function:
-
-```Lisp
-(defun cleanup (app)
-  ...
-  (glfw:terminate)
-  (loop for vert in vertices
-	do (destroy-vertex vert)))
-```
+See that we are using `create-vertex`. You know already that it means we need to use the `destroy-` counterpart to free each vertex. However, we are defining a global variable. Think about when `vertices` is initialized. After starting the REPL you will load the code file. It is in that moment when the `vertices` is initialized and each `vertex` struct is created. When the file is completely loaded you will execute the `main` function. If we destroy the vertices in the `main` function you won't be able to run it again because the vertices are not longer available. If you want to recreate them you need to reload the file. So, I prefer not to free them. Another option is create a function that create the vertex and another one to delete them.
 
 ## Binding descriptions
 
@@ -59,11 +51,11 @@ We are going to create a function to create a `VkVertexInputDescription`:
 ```Lisp
 (defun create-binding-description ()
   (cvk:create-vertex-input-binding-description :binding 0
-					                           :stride (cvk:vulkan-struct-size 'vertex)
+					                           :stride (cvk:sizeof 'vertex)
 					                           :inputRate cvk:VK_VERTEX_INPUT_RATE_VERTEX))
 ```
 
-We use `vulkan-struct-size` to get the size of a `vertex` struct.
+We use `sizeof` to get the size of a `vertex` struct.
 
 ## Attribute descriptions
 
@@ -74,14 +66,14 @@ We need also two `VkVertexInputAttributeDescription` structures:
   (list (cvk:create-vertex-input-attribute-description :binding 0
 	                        					       :location 0
 	                        					       :format cvk:VK_FORMAT_R32G32_SFLOAT
-	                        					       :offset (cvk:vulkan-struct-offset 'vertex 'pos))
+	                        					       :offset (cvk:offsetof 'vertex 'pos))
 	    (cvk:create-vertex-input-attribute-description :binding 0
 	                        					       :location 1
 	                        					       :format cvk:VK_FORMAT_R32G32_SFLOAT
-	                        					       :offset (cvk:vulkan-struct-offset 'vertex 'color))))
+	                        					       :offset (cvk:offsetof 'vertex 'color))))
 ```
 
-We use `vulkan-struct-offset` to get the offset of a struct member.
+We use `offsetof` to get the offset of a struct member.
 
 ## Pipeline vertex input
 

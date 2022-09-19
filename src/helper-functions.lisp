@@ -29,6 +29,13 @@
     create-spv-code
     destroy-spv-code)
 
+
+  (defparameter primitive-types '(:char :unsigned-char :short :unsigned-short :int :unsigned-int
+				  :long :unsigned-long :long-long :unsigned-long-long
+				  :uchar :ushort :uint :ulong :llong :ullong
+				  :int8 :uint8 :int16 :uint16 :int32 :uint32 :int64 :uint64
+				  :size :ssize :intptr :uintptr :ptrdiff :offset :float :double))
+  
   
   (defun check-vulkan-struct-name (name)
     (unless (symbolp name)
@@ -41,9 +48,8 @@
 	(error "Expected a list of at least two elements. Found: ~s" slot))
       (unless (symbolp (car slot))
 	(error "Expected a symbol at the start of ~s" slot))
-      (let ((accepted-types '(:bool :int :uint :float :double)))
-	(unless (member (cadr slot) accepted-types)
-	  (error "The type ~s is not accepted." (cadr slot))))
+      (unless (member (cadr slot) primitive-types)
+	(error "The type ~s is not accepted." (cadr slot)))
       (when (>= slot-length 3)
 	(unless (eq (caddr slot) :count)
 	  (error "Expected the keyword :count as third element. Found: ~s" (caddr slot)))
@@ -131,8 +137,8 @@
 		       (if ,index-sym
 			   (setf (cffi:mem-aref ,name ,type ,index-sym) ,new-val-sym)
 			   (iter (for ,i-sym from 0 below ,count)
-			     (for ,new-val-elem in ,new-val-sym)
-			     (setf (cffi:mem-aref ,name '(:struct ,struct-name) ,i-sym) ,new-val-elem))))))))))
+				 (for ,new-val-elem in ,new-val-sym)
+				 (setf (cffi:mem-aref ,name '(:struct ,struct-name) ,i-sym) ,new-val-elem))))))))))
   
   (mcffi:def-lisp-macro doc-file def-vulkan-struct (name &body slots)
     "Define a struct named `name`. Each member slot follows the syntax `(member-name member-type [:count count])`.
@@ -158,18 +164,20 @@ want to retrieve from. The accessors are `setf`-able. Also, a `with-name` macro 
 	 ,@(create-get-code name slot-names slot-types slot-counts)
 	 ,@(create-set-code name slot-names slot-types slot-counts))))
   (export 'def-vulkan-struct)
+  
 
-
-  (mcffi:def-lisp-function doc-file vulkan-struct-size (type)
-    "Return the size in bytes of a vulkan struct. `type` is the symbol that denotes the vulkan struct type."
+  (mcffi:def-lisp-function doc-file sizeof (type)
+    "Return the size in bytes of a type. `type` is the symbol that denotes type."
     (declare-types (symbol type) :return (integer size))
-    (cffi:foreign-type-size (list :struct type)))
-  (export 'vulkan-struct-size)
+    (if (member type primitive-types)
+	(cffi:foreign-type-size type)
+	(cffi:foreign-type-size (list :struct type))))
+  (export 'sizeof)
 
 
-  (mcffi:def-lisp-function doc-file vulkan-struct-offset (type slot)
-    (declare-types (symbol type slot) :return (integer offset))
+  (mcffi:def-lisp-function doc-file offsetof (type slot)
     "Return the offset in bytes of a member of the struct `type`. `slot` must be a symbol denoting the member."
+    (declare-types (symbol type slot) :return (integer offset))
     (cffi:foreign-slot-offset (list :struct type) slot))
   (export 'vulkan-struct-offset)
 
@@ -181,7 +189,7 @@ as a type the respectively value must be a pointer to C data. If `dst-type` and 
 of copied data is the minimum of the size of `dst` and `src` data. If some of them is `:pointer` then the size is
 determined by the other value and its type. If both are `:pointer` the size must be specified with `size`.
 The possible types are: `:pointer`, `:bool`, `:int`, `:uint`, `:float` and `:double`."
-    (declare-types ((or pointer int boolean integer float double "Vulkan struct" list) dst src) ((member '(:pointer :bool :int :uint :float :double)) dst-type src-type) (integer size))
+    (declare-types ((or pointer int boolean integer float double "Vulkan struct" list) dst src) ((or primitive-type :pointer) dst-type src-type) (integer size))
     (unless (if (and (eq dst-type :pointer)
 		     (eq src-type :pointer)
 		     (not (listp dst))
@@ -189,23 +197,22 @@ The possible types are: `:pointer`, `:bool`, `:int`, `:uint`, `:float` and `:dou
 		size
 		t)
       (error "If dst and src are of type :pointer, size must be specified."))
-    (let* ((primitive-types '(:pointer :bool :int :uint :float :double))
-	   (actual-primitive-types (cdr primitive-types)))
+    (let* ((accepted-types (cons :pointer primitive-types)))
       (flet ((memory-alloc (lisp-obj type)
 	       (if (listp lisp-obj)
 		   (let ((list-length (length lisp-obj)))
-		     (if (member type primitive-types)
+		     (if (member type accepted-types)
 			 (let ((c-obj (cffi:foreign-alloc type :initial-contents lisp-obj))
 			       (c-size (* list-length (cffi:foreign-type-size type))))
 			   (values c-obj c-size t))
 			 (let ((c-obj (cffi:foreign-alloc (list :struct type) :count list-length))
 			       (c-size (* list-length (cffi:foreign-type-size `(:struct ,type)))))
 			   (iter
-			     (for i from 0 below list-length)
-			     (for elem in lisp-obj)
-			     (mcffi:memcpy (cffi:mem-aptr c-obj `(:struct ,type) i) elem (cffi:foreign-type-size `(:struct ,type))))
+			    (for i from 0 below list-length)
+			    (for elem in lisp-obj)
+			    (mcffi:memcpy (cffi:mem-aptr c-obj `(:struct ,type) i) elem (cffi:foreign-type-size `(:struct ,type))))
 			   (values c-obj c-size t))))
-		   (if (member type actual-primitive-types)
+		   (if (member type primitive-types)
 		       (let ((c-obj (cffi:foreign-alloc type :initial-element lisp-obj))
 			     (size (cffi:foreign-type-size type)))
 			 (values c-obj size t))
