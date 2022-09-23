@@ -35,11 +35,49 @@
 				  :uchar :ushort :uint :ulong :llong :ullong
 				  :int8 :uint8 :int16 :uint16 :int32 :uint32 :int64 :uint64
 				  :size :ssize :intptr :uintptr :ptrdiff :offset :float :double))
+
+
+  (defparameter complex-types '(:ivec2 :ivec3 :ivec4
+				:uvec2 :uvec3 :uvec4
+				:vec2 :vec3 :vec4
+				:dvec2 :dvec3 :dvec4
+				:mat2x2 :mat2x3 :mat2x4 :mat2
+				:mat3x2 :mat3x3 :mat3x4 :mat3
+				:mat4x2 :mat4x3 :mat4x4 :mat4
+				:dmat2x2 :dmat2x3 :dmat2x4 :dmat2
+				:dmat3x2 :dmat3x3 :dmat3x4 :dmat3
+				:dmat4x2 :dmat4x3 :dmat4x4 :dmat4))
+
+
+  (defparameter complex-to-primitive '(:ivec2 (:int 2) :ivec3 (:int 3) :ivec4 (:int 4)
+				       :uvec2 (:uint 2) :uvec3 (:uint 3) :uvec4 (:uint 4)
+				       :vec2 (:float 2) :vec3 (:float 3) :vec4 (:float 4)
+				       :dvec2 (:double 2) :dvec3 (:double 3) :dvec4 (:double 4)
+				       :mat2x2 (:float 2 2) :mat2x3 (:float 2 3) :mat2x4 (:float 2 4) :mat2 (:float 2 2)
+				       :mat3x2 (:float 3 2) :mat3x3 (:float 3 3) :mat3x4 (:float 3 4) :mat3 (:float 3 3)
+				       :mat4x2 (:float 4 2) :mat4x3 (:float 4 3) :mat4x4 (:float 4 4) :mat4 (:float 4 4)
+				       :dmat2x2 (:double 2 2) :dmat2x3 (:double 2 3) :dmat2x4 (:double 2 4) :dmat2 (:double 2 2)
+				       :dmat3x2 (:double 3 2) :dmat3x3 (:double 3 3) :dmat3x4 (:double 3 4) :dmat3 (:double 3 3)
+				       :dmat4x2 (:double 4 2) :dmat4x3 (:double 4 3) :dmat4x4 (:double 4 4) :dmat4 (:double 4 4)))
   
   
   (defun check-vulkan-struct-name (name)
-    (unless (symbolp name)
-      (error "Expected a symbol. Found: ~s" name)))
+    (if (listp name)
+	(progn
+	  (unless (let ((name-length (length name)))
+		    (or (= name-length 1)
+			(= name-length 3)))
+	    (error "Expected a list with a name and optionally a :size argument. Found: ~s" name))
+	  (unless (symbolp (car name))
+	    (error "Expected a symbol. Found: ~s" (car name)))
+	  (when (= (length name) 3)
+	    (unless (eq (cadr name) :size)
+	      (error "Expected the keyword :size. Found: ~s" (cadr name)))
+	    (unless (and (integerp (caddr name))
+			 (> (caddr name) 0))
+	      (error "Expected a positive integer after :size. Found: ~s" (caddr name)))))
+	(unless (symbolp name)
+	  (error "Expected a symbol. Found: ~s" name))))
 
   (defun check-vulkan-struct-slot (slot)
     (let ((slot-length (length slot)))
@@ -48,49 +86,122 @@
 	(error "Expected a list of at least two elements. Found: ~s" slot))
       (unless (symbolp (car slot))
 	(error "Expected a symbol at the start of ~s" slot))
-      (unless (member (cadr slot) primitive-types)
-	(error "The type ~s is not accepted." (cadr slot)))
-      (when (>= slot-length 3)
-	(unless (eq (caddr slot) :count)
-	  (error "Expected the keyword :count as third element. Found: ~s" (caddr slot)))
-	(unless (= slot-length 4)
-	  (error "Expected a number after :count. Found nothing."))
-	(unless (typep (cadddr slot) 'integer)
-	  (error "Expected an integer after :count. Found ~s" (cadddr slot))))))
+      (unless (and (symbolp (cadr slot))
+		   (when (keywordp (cadr slot))
+		     (or (member (cadr slot) primitive-types)
+			 (member (cadr slot) complex-types))))
+	(error "Expected a type. Found: ~s." (cadr slot)))
+      (iter (for rest-slot on (cddr slot) by #'cddr)
+	(unless (member (car rest-slot) '(:count :offset))
+	  (error "Expected :count or :offset keywords. Found: ~s" (car rest-slot)))
+	(cond
+	  ((eq (car rest-slot) :offset)
+	   (unless (and (integerp (cadr rest-slot))
+			(> (cadr rest-slot) 0))
+	     (error "Expected a positive integer after keyword. Found: ~s" (cadr rest-slot))))
+	  ((eq (car rest-slot) :count)
+	   (unless (or (and (integerp (cadr rest-slot))
+			    (> (cadr rest-slot) 0))
+		       (and (listp (cadr rest-slot))
+			    (iter (for elem in (cadr rest-slot))
+			      (always (> elem 0)))))))))))
   
   (defun check-vulkan-struct-slots (slots)
     (iter (for slot in slots)
-	  (check-vulkan-struct-slot slot)))
+      (check-vulkan-struct-slot slot)))
 
+  (defun convert-to-c-slot (slot)
+    (let ((name (car slot))
+	  (type (cadr slot)))
+      (if (member type complex-types)
+	  (let ((old-count (getf slot :count)) ; old-count can be nil (and it is ok)
+		(offset (getf slot :offset)))
+	    (destructuring-bind (new-type &rest new-count) (getf complex-to-primitive type)
+	      `(,name ,new-type
+		      ,@(when offset
+			  `(:offset ,offset))
+		      :count ,(apply #'* (if (listp old-count)
+					     (append old-count new-count)
+					     (cons old-count new-count))))))
+	  (let ((count (getf slot :count)))
+	    (when (and count
+		       (listp count))
+	      (setf (getf slot :count) (apply #'* count)))
+	    slot))))
+  
+  (defun convert-to-primitive-slot (slot)
+    (let ((name (car slot))
+	  (type (cadr slot)))
+      (if (member type complex-types)
+	  (let ((old-count (getf slot :count)) ; old-count can be nil (and it is ok)
+		(offset (getf slot :offset)))
+	    (destructuring-bind (new-type &rest new-count) (getf complex-to-primitive type)
+	      `(,name ,new-type
+		      ,@(when offset
+			  `(:offset ,offset))
+		      :count ,(if (listp old-count)
+				  (append old-count new-count)
+				  (cons old-count new-count)))))
+	  slot)))
+
+  (defun vulkan-struct-get-values (type structp counts indices arr accum-index)
+    (let ((multiplier (apply #'* (cdr counts))))
+      (if indices
+	  (vulkan-struct-get-values type structp (cdr counts) (cdr indices) arr (+ accum-index (* multiplier (car indices))))
+	  (if counts
+	      (iter (for i from 0 below (car counts))
+		(collect (vulkan-struct-get-values type structp (cdr counts) nil arr (+ accum-index (* multiplier i)))))
+	      (if structp
+		  (cffi:mem-aptr arr type accum-index)
+		  (cffi:mem-aref arr type accum-index))))))
+
+  (defun (setf vulkan-struct-get-values) (new-value type structp counts indices arr accum-index)
+    (let ((multiplier (apply #'* (cdr counts))))
+      (if indices
+	  (setf (vulkan-struct-get-values type structp (cdr counts) (cdr indices) arr (+ accum-index (* multiplier (car indices)))) new-value)
+	  (if counts
+	      (iter (for i from 0 below (car counts))
+		(for new-subvalue in new-value)
+		(setf (vulkan-struct-get-values type structp (cdr counts) nil arr (+ accum-index (* multiplier i))) new-subvalue))
+	      (if structp
+		  (mcffi:memcpy (cffi:mem-aptr arr type accum-index) new-value (cffi:foreign-type-size type))
+		  (setf (cffi:mem-aref arr type accum-index) new-value))))))
+  
   (defun create-constructor-code (struct-name names types counts)
     (let* ((keyword-args (iter (for name in names) (collect (intern (symbol-name name) "KEYWORD"))))
 	   (names-args (iter (for name in names) (collect (gensym (symbol-name name)))))
 	   (suppliedp-args (iter (for suppliedp-arg in names) (collect (gensym (symbol-name suppliedp-arg)))))
+	   (object-sym (gensym))
 	   (args (iter
-		  (for keyword-arg in keyword-args)
-		  (for name-arg in names-args)
-		  (for suppliedp-arg in suppliedp-args)
-		  (collect `((,keyword-arg ,name-arg) 0 ,suppliedp-arg))))
-	   (i-sym (gensym "I"))
-	   (name-arg-elem (gensym "name-arg-elem"))
+		   (for keyword-arg in keyword-args)
+		   (for name-arg in names-args)
+		   (for suppliedp-arg in suppliedp-args)
+		   (collect `((,keyword-arg ,name-arg) 0 ,suppliedp-arg))))
 	   (setf-exprs (iter
-			(for name in names)
-			(for type in types)
-			(for count in counts)
-			(for name-arg in names-args)
-			(for suppliedp-arg in suppliedp-args)
-			(collect `(when ,suppliedp-arg
-				    ,(if (> count 1)
-					 `(iter (for ,i-sym from 0 below ,count)
-					        (for ,name-arg-elem in ,name-arg)
-						(setf (cffi:mem-aref ,name ,type ,i-sym) ,name-arg-elem))
-					 `(setf ,name ,name-arg))))))
-	   (object-sym (gensym)))
+			 (for name in names)
+			 (for type in types)
+			 (for count in counts)
+			 (for name-arg in names-args)
+			 (for suppliedp-arg in suppliedp-args)
+			 (collect (let ((singlep (not (or (cdr count) (> (car count) 1))))
+					(structp (not (or (member type primitive-types)
+							  (member type complex-types)))))
+				    `(when ,suppliedp-arg
+				       ,(if singlep
+					    (if structp
+						`(mcffi:memcpy (cffi:foreign-slot-pointer ,object-sym '(:struct ,struct-name) ',name) ,name-arg ,(cffi:foreign-type-size type))
+						`(setf (cffi:foreign-slot-value ,object-sym '(:struct ,struct-name) ',name) ,name-arg))
+					    `(setf (vulkan-struct-get-values ,(if structp
+										  `(:struct ,type)
+										  type)
+									     ,structp ',count nil
+									     (cffi:foreign-slot-value ,object-sym '(:struct ,struct-name) ',name)
+									     0)
+						   ,name-arg))))))))
       `(defun ,(intern (concatenate 'string "CREATE-" (symbol-name struct-name))) (&key ,@args)
 	 (let ((,object-sym (cffi:foreign-alloc '(:struct ,struct-name))))
 	   (mcffi:memset ,object-sym 0 (cffi:foreign-type-size '(:struct ,struct-name)))
-	   (cffi:with-foreign-slots (,names ,object-sym (:struct ,struct-name))
-	     ,@setf-exprs)
+	   ,@setf-exprs
 	   (values ,object-sym)))))
 
   (defun create-destructor-code (struct-name)
@@ -102,43 +213,60 @@
     `(mcffi:defwith nil ,(intern (concatenate 'string "WITH-" (symbol-name struct-name)))
        ,(intern (concatenate 'string "CREATE-" (symbol-name struct-name)))
        ,(intern (concatenate 'string "DESTROY-" (symbol-name struct-name)))))
-
+  
   (defun create-get-code (struct-name names types counts)
-    (let ((object-sym (gensym))
-	  (index-sym (gensym))
-	  (i-sym (gensym)))
+    (let ((object-sym (gensym)))
       (iter
-       (for name in names)
-       (for type in types)
-       (for count in counts)
-       (let* ((arg `(,object-sym ,@(when (> count 1)
-				     `(&optional (,index-sym nil))))))
-	 (collect `(defun ,(intern (concatenate 'string (symbol-name struct-name) "-" (symbol-name name))) ,arg
-		     (cffi:with-foreign-slots ((,name) ,object-sym (:struct ,struct-name))
-		       (if ,index-sym
-			   (cffi:mem-aref ,name ,type ,index-sym)
-			   (iter (for ,i-sym from 0 below ,count)
-				 (collect (cffi:mem-aref ,name ,type ,i-sym)))))))))))
+	(for name in names)
+	(for type in types)
+	(for count in counts)
+	(let* ((singlep (not (or (cdr count) (> (car count) 1))))
+	       (structp (not (or (member type primitive-types)
+				 (member type complex-types))))
+	       (index-syms (loop repeat (length count) collect (gensym)))
+	       (arg `(,object-sym ,@(when (not singlep)
+				     `(&optional ,@index-syms)))))
+	  (collect `(defun ,(intern (concatenate 'string (symbol-name struct-name) "-" (symbol-name name))) ,arg
+		      ,(if singlep
+			   (if structp
+			       `(cffi:foreign-slot-pointer ,object-sym '(:struct ,struct-name) ',name)
+			       `(cffi:foreign-slot-value ,object-sym '(:struct ,struct-name) ',name))
+			   `(vulkan-struct-get-values ,(if structp
+							   `(:struct ,type)
+							   type)
+						      ,structp ',count (iter (for index in (list ,@index-syms))
+									 (while index)
+									 (collect index))
+						      (cffi:foreign-slot-value ,object-sym '(:struct ,struct-name) ',name)
+						      0))))))))
 
   (defun create-set-code (struct-name names types counts)
     (let ((object-sym (gensym))
-	  (index-sym (gensym))
-	  (new-val-sym (gensym))
-	  (i-sym (gensym))
-	  (new-val-elem (gensym)))
+	  (new-val-sym (gensym)))
       (iter
        (for name in names)
        (for type in types)
        (for count in counts)
-       (let* ((arg `(,new-val-sym ,object-sym ,@(when (> count 1)
-						  `(&optional (,index-sym nil))))))
+	(let* ((singlep (not (or (cdr count) (> (car count) 1))))
+	       (structp (not (or (member type primitive-types)
+				 (member type complex-types))))
+	       (index-syms (loop repeat (length count) collect (gensym)))
+	       (arg `(,new-val-sym ,object-sym ,@(when (not singlep)
+						  `(&optional ,@index-syms)))))
 	 (collect `(defun (setf ,(intern (concatenate 'string (symbol-name struct-name) "-" (symbol-name name)))) ,arg
-		     (cffi:with-foreign-slots ((,name) ,object-sym (:struct ,struct-name))
-		       (if ,index-sym
-			   (setf (cffi:mem-aref ,name ,type ,index-sym) ,new-val-sym)
-			   (iter (for ,i-sym from 0 below ,count)
-				 (for ,new-val-elem in ,new-val-sym)
-				 (setf (cffi:mem-aref ,name '(:struct ,struct-name) ,i-sym) ,new-val-elem))))))))))
+		     ,(if singlep
+			  (if structp
+			      `(mcffi:memcpy (cffi:foreign-slot-pointer ,object-sym '(:struct ,struct-name) ',name) ,new-val-sym ,(cffi:foreign-type-size `(:struct ,type)))
+			      `(setf (cffi:foreign-slot-value ,object-sym '(:struct ,struct-name) ',name) ,new-val-sym))
+			  `(setf (vulkan-struct-get-values ,(if structp
+								`(:struct ,type)
+								type)
+							   ,structp ',count (iter (for index in (list ,@index-syms))
+									      (while index)
+									      (collect index))
+							   (cffi:foreign-slot-value ,object-sym '(:struct ,struct-name) ',name)
+							   0)
+				 ,new-val-sym))))))))
   
   (mcffi:def-lisp-macro doc-file def-vulkan-struct (name &body slots)
     "Define a struct named `name`. Each member slot follows the syntax `(member-name member-type [:count count])`.
@@ -149,15 +277,16 @@ defined. If the member is an array because `:count` was used the accessor will a
 want to retrieve from. The accessors are `setf`-able. Also, a `with-name` macro is defined from the constructor and the destructor."
     (check-vulkan-struct-name name)
     (check-vulkan-struct-slots slots)
-    (let ((slot-names (mapcar #'car slots))
-	  (slot-types (mapcar #'cadr slots))
-	  (slot-counts (mapcar (lambda (x) (if (member :count x)
-					       (cadddr x)
-					       1))
-			       slots)))
+    (let* ((c-slots (mapcar #'convert-to-c-slot slots))
+	   (prim-slots (mapcar #'convert-to-primitive-slot slots))
+	   (slot-names (mapcar #'car prim-slots))
+	   (slot-types (mapcar #'cadr prim-slots))
+	   (slot-counts (mapcar (lambda (x) (let ((count (getf x :count)))
+					      (if count (if (listp count) count (list count)) '(1))))
+				prim-slots)))
       `(progn
 	 (cffi:defcstruct ,name
-	   ,@slots)
+	   ,@c-slots)
 	 ,(create-constructor-code name slot-names slot-types slot-counts)
 	 ,(create-destructor-code name)
 	 ,(create-with-code name)
