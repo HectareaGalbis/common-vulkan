@@ -777,4 +777,25 @@
 	(for region in pregions)
 	(mcffi:memcpy (cffi:mem-aptr pRegions-c '(:struct VkBufferCopy) i) region (cffi:foreign-type-size '(:struct VkBufferCopy))))
       (vkcmdcopybuffer commandbuffer srcbuffer dstbuffer regionCount pRegions-c)
-      (cffi:foreign-free pRegions-c))))
+      (cffi:foreign-free pRegions-c)))
+
+
+  (more-cffi:def-foreign-function doc-file ("vkCreateDescriptorSetLayout" create-descriptor-set-layout funcall-create-descriptor-set-layout) (device pcreateinfo pallocator)
+    (declare-types ("VkDevice" device) ("VkDescriptorSetLayoutCreateInfo" "pCreateInfo") ("VkAllocationCallbacks" "pAllocator")
+		   :return ("VkDescriptorSetLayout" "pSetLayout") ("VkResult" result))
+    (let ((pallocator-c (or pallocator (cffi:null-pointer))))
+      (cffi:with-foreign-object (psetlayout 'VkDescriptorSetLayout)
+	(let ((result (vkcreatedescriptorsetlayout device pcreateinfo pallocator-c psetlayout)))
+	  (values (cffi:mem-ref psetlayout 'VkDescriptorSetLayout) result device pallocator)))))
+
+
+  (more-cffi:def-foreign-function doc-file ("vkDestroyDescriptorSetLayout" destroy-descriptor-set-layout funcall-destroy-descriptor-set-layout) (device descriptorsetlayout pallocator)
+    (declare-types ("VkDevice" device) ("VkDescriptorSetLayout" "descriptorSetLayout") ("VkAllocationCallbacks" "pAllocator"))
+    (let ((pallocator-c (or pallocator (cffi:null-pointer))))
+      (vkdestroydescriptorsetlayout device descriptorsetlayout pallocator-c)))
+
+
+  (mcffi:defwith doc-file with-descriptor-set-layout
+    create-descriptor-set-layout
+    destroy-descriptor-set-layout
+    :destructor-arguments (2 0 3)))

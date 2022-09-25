@@ -30,23 +30,23 @@
     destroy-spv-code)
 
 
-  (defparameter primitive-types '(:char :unsigned-char :short :unsigned-short :int :unsigned-int
-				  :long :unsigned-long :long-long :unsigned-long-long
-				  :uchar :ushort :uint :ulong :llong :ullong
-				  :int8 :uint8 :int16 :uint16 :int32 :uint32 :int64 :uint64
-				  :size :ssize :intptr :uintptr :ptrdiff :offset :float :double))
+  (mcffi:def-lisp-constant doc-file primitive-types '(:char :unsigned-char :short :unsigned-short :int :unsigned-int
+						      :long :unsigned-long :long-long :unsigned-long-long
+						      :uchar :ushort :uint :ulong :llong :ullong
+						      :int8 :uint8 :int16 :uint16 :int32 :uint32 :int64 :uint64
+						      :size :ssize :intptr :uintptr :ptrdiff :offset :float :double))
 
 
-  (defparameter complex-types '(:ivec2 :ivec3 :ivec4
-				:uvec2 :uvec3 :uvec4
-				:vec2 :vec3 :vec4
-				:dvec2 :dvec3 :dvec4
-				:mat2x2 :mat2x3 :mat2x4 :mat2
-				:mat3x2 :mat3x3 :mat3x4 :mat3
-				:mat4x2 :mat4x3 :mat4x4 :mat4
-				:dmat2x2 :dmat2x3 :dmat2x4 :dmat2
-				:dmat3x2 :dmat3x3 :dmat3x4 :dmat3
-				:dmat4x2 :dmat4x3 :dmat4x4 :dmat4))
+  (mcffi:def-lisp-constant doc-file complex-types '(:ivec2 :ivec3 :ivec4
+						    :uvec2 :uvec3 :uvec4
+						    :vec2 :vec3 :vec4
+						    :dvec2 :dvec3 :dvec4
+						    :mat2x2 :mat2x3 :mat2x4 :mat2
+						    :mat3x2 :mat3x3 :mat3x4 :mat3
+						    :mat4x2 :mat4x3 :mat4x4 :mat4
+						    :dmat2x2 :dmat2x3 :dmat2x4 :dmat2
+						    :dmat3x2 :dmat3x3 :dmat3x4 :dmat3
+						    :dmat4x2 :dmat4x3 :dmat4x4 :dmat4))
 
 
   (defparameter complex-to-primitive '(:ivec2 (:int 2) :ivec3 (:int 3) :ivec4 (:int 4)
@@ -270,11 +270,13 @@
   
   (mcffi:def-lisp-macro doc-file def-vulkan-struct (name &body slots)
     "Define a struct named `name`. Each member slot follows the syntax `(member-name member-type [:count count])`.
-When `:count` is used the member will be an array of `count` elements. The possible types are: `:bool`, `:int`, `:uint`, `:float` and `:double`.
+When `:count` is used the member will be an array of `count` elements. The possible types are those from `primitive-types`, `complex-types` or any other struct defined with this macro.
 The struct will have its own constructor and destructor with names `create-name` and `destroy-name` respectively. Accessors are also defined
 with the names `name-member-name`. For example: If the struct is named `vertex` and it has a member named `x` the accessor `vertex-x` will be
-defined. If the member is an array because `:count` was used the accessor will accept an optional argument indicating the index of the element you
-want to retrieve from. The accessors are `setf`-able. Also, a `with-name` macro is defined from the constructor and the destructor."
+defined. If the member is an array because `:count` was used the accessor will accept additional arguments indicating the indices of the element you
+want to retrieve from. The value associated with `:count` must be a non-negative integer or a list of non-negative integers. If a member is an array
+the lisp type that must be used is the list. The accessor will return also a list in that case. You can specify the offset too using `:offset`. It works the same as its C namesake.
+The accessors are `setf`-able. Also, a `with-name` macro is defined using the constructor and the destructor."
     (check-vulkan-struct-name name)
     (check-vulkan-struct-slots slots)
     (let* ((c-slots (mapcar #'convert-to-c-slot slots))
@@ -317,7 +319,7 @@ In the same way, `src` can be a value of type `src-type` or a list of `src-type`
 as a type the respectively value must be a pointer to C data. If `dst-type` and `src-type` are not `:pointer` the size
 of copied data is the minimum of the size of `dst` and `src` data. If some of them is `:pointer` then the size is
 determined by the other value and its type. If both are `:pointer` the size must be specified with `size`.
-The possible types are: `:pointer`, `:bool`, `:int`, `:uint`, `:float` and `:double`."
+The possible types are: `:pointer`, those from `primitive-types` and user structs defined with `def-vulkan-struct`."
     (declare-types ((or pointer int boolean integer float double "Vulkan struct" list) dst src) ((or primitive-type :pointer) dst-type src-type) (integer size))
     (unless (if (and (eq dst-type :pointer)
 		     (eq src-type :pointer)
