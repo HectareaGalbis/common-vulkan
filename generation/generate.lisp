@@ -1,8 +1,494 @@
 
-(defpackage :generation
-  (:use :cl :iterate))
+(in-package :cvkg)
 
-(in-package :generation)
+
+;; ----------------------------
+;; ----- Helper functions -----
+;; ----------------------------
+
+(defparameter *structs* (make-hash-table :test 'equal))
+
+(defun structp (possible-struct)
+  "Check whether a type is a struct."
+  (declare (type string possible-struct))
+  (loop for struct-values being the hash-value in *structs*
+	  thereis (member possible-struct struct-values :test #'string=)))
+
+(defun add-struct (struct &optional equivalent-struct)
+  "Add a struct into the table of structs."
+  (declare (type string struct equivalent-struct))
+  (if equivalent-struct
+      (let ((equivalent-struct-present-p (nth-value 1 (gethash equivalent-struct *structs*)))) 
+	(assert equivalent-struct-present-p () "The struct ~a is not present in the table." equivalent-struct)
+	(push struct (gethash equivalent-struct *structs*)))
+      (push struct (gethash struct *structs*))))
+
+(defun get-equivalent-structs (struct)
+  "Return the list of the equivalent structs to STRUCT."
+  (declare (type string struct))
+  (let ((struct-present-p (nth-value 1 (gethash struct *structs*))))
+    (assert struct-present-p () "The struct ~a is not present in the table." struct)
+    (gethash struct *structs*)))
+
+
+(defparameter *unions* (make-hash-table :test 'equal))
+
+(defun unionp (possible-union)
+  "Check whether a type is an union."
+  (declare (type string possible-union))
+  (loop for union-values being the hash-value in *unions*
+	  thereis (member possible-union union-values :test #'string=)))
+
+(defun add-union (union &optional equivalent-union)
+  "Add a union into the table of unions."
+  (declare (type string union equivalent-union))
+  (if equivalent-union
+      (let ((equivalent-union-present-p (nth-value 1 (gethash equivalent-union *unions*)))) 
+	(assert equivalent-union-present-p () "The union ~a is not present in the table." equivalent-union)
+	(push union (gethash equivalent-union *unions*)))
+      (push union (gethash union *unions*))))
+
+(defun get-equivalent-unions (union)
+  "Return the list of the equivalent unions to UNION."
+  (declare (type string union))
+  (let ((union-present-p (nth-value 1 (gethash union *unions*))))
+    (assert union-present-p () "The union ~a is not present in the table." union))
+  (gethash union *unions*))
+
+
+(defparameter *constants* (make-hash-table :test 'equal))
+
+(defun constantp (possible-constant)
+  "Check whether POSSIBLE-CONSTANT is a constant."
+  (declare (type string constant))
+  (nth-value 1 (gethash possible-constant *constants*)))
+
+(defun add-constant (constant value)
+  "Add a constant and its value to the constant table."
+  (declare (type string constant) (type t value))
+  (setf (gethash constant *constants*) value))
+
+(defun get-constant-value (constant)
+  "Return the associated value of a constant."
+  (declare (type string constant))
+  (let ((constant-present-p (nth-value 1 (gethash constant *constants*))))
+    (assert constant-present-p () "The constant ~a is not present in the table." constant))
+  (gethash constant *constants*))
+
+
+(defparameter *pointers* nil)
+
+(defun pointerp (possible-pointer)
+  "Check whether POSSIBLE-POINTER is a pointer type."
+  (declare (type string possible-pointer))
+  (member possible-pointer *pointers* :test #'string=))
+
+(defun add-pointer (pointer)
+  "Add pointer type into the list of pointers."
+  (declare (type string pointer))
+  (push pointer *pointers*))
+
+
+(defun c-type-to-cffi (type)
+  "Given a string of a C type, return its CFFI symbol equivalent."
+  (declare (type string type))
+  (multiple-value-bind (match regs) (ppcre:scan-to-strings "(\\w+)_t" type-str)
+    (if match
+	(let ((primitive-type (aref regs 0)))
+	  (intern (string-upcase primitive-type) "KEYWORD"))
+	(let ((type-vk-p (ppcre:scan "(Vk|PFN_)(\\w+)" type-str)))
+	  (if type-vk-p
+	      (or (and (structp type-str)
+		       `(:struct ,(intern (string-upcase type-str) "CVK")))
+		  (and (unionp type-str)
+		       `(:union ,(intern (string-upcase type-str) "CVK")))
+		  (intern (string-upcase type-str) "CVK"))
+	      (intern (string-upcase type-str) "KEYWORD"))))))
+
+(defun string-to-symbol (str)
+  "Turns a string into a symbol."
+  (declare (type string str))
+  (intern (string-upcase str) "CVK"))
+
+(defun c-value-to-lisp (value)
+  "Given a string of a C value, return its Common Lisp equivalent expression."
+  (declare (type string value))
+  (multiple-value-bind (numberp num-regs) (ppcre:scan-to-strings "^\\(?(\\~)?(?:(?:(?:0x)([0-9A-F]+)[UL]*)|(?:(\\-?[\\d\\.]+)([ULF]*)))\\)?$" value-str)
+    (multiple-value-bind (macro-func-p func-regs) (ppcre:scan-to-strings "^(\\w+)(\\((?:\\s*\\d+\\s*,)*\\s*\\d+\\s*\\))" value-str)
+      (cond
+	(numberp
+	 (let* ((notopp  (aref num-regs 0))
+		(hexp    (aref num-regs 1))
+		(num-str (aref num-regs 2))
+		(suffix  (aref num-regs 3)))
+	   (cond
+	     (notopp `(- ,(if (string= suffix "U") 'UINT32_MAX 'UINT64_MAX)
+			 ,(read-from-string num-str)))
+	     (hexp (parse-integer hexp :radix 16))
+	     (t (read-from-string num-str)))))
+	(macro-func-p
+	 (let ((args (ppcre:regex-replace-all "," (aref func-regs 1) " ")))
+	   (cons (intern (string-upcase (aref func-regs 0)) "CVK") (read-from-string args))))
+	((equal (aref value-str 0) #\")
+	 (subseq value-str 1 (1- (length value-str))))
+	((ppcre:scan "^VK_API" value-str))
+	(t (intern (string-upcase value-str) "CVK"))))))
+
+(defun ignore-line-p (line)
+  "Check whether a line can be ignored."
+  (declare (type string line))
+  (or (string= line "")
+      (ppcre:scan "^#ifndef" line)
+      (ppcre:scan "^#endif" line)
+      (ppcre:scan "^#ifdef" line)
+      (ppcre:scan "^//" line)))
+
+
+;; --------------------------
+;; ----- Read functions -----
+;; --------------------------
+
+(defun parse-non-dispatchable-handle (line)
+  "If the line is a non dispatchable definition, return the type string which is being defined. Otherwise,
+return NIL."
+  (declare (type string line))
+  (multiple-value-bind (match regs) (ppcre:scan-to-strings "VK_DEFINE_NON_DISPATCHABLE_HANDLE\\((\\w+)\\)" line)
+    (if match
+	(let ((type-str (aref regs 0)))
+	  type-str)
+	nil)))
+
+(defun process-non-dispatchable-handle-data (type-str)
+  "Process the data from a non dispatchable handle definition."
+  (declare (type string type-str))
+  (add-pointer type-str))
+
+(defun create-non-dispatchable-handle-code (type-str non-dispatchable-type-symbol)
+  "Create the Common Lisp code to define a non dispatchable type."
+  (declare (type string type-str))
+  `(cffi:defctype ,(string-to-symbol type-str) ,non-dispatchable-type-symbol))
+
+
+(defun parse-handle (line)
+  "If the line is a handle definition, return the type string which is being defined. Otherwise, return NIL."
+  (declare (type string line))
+  (multiple-value-bind (match regs) (ppcre:scan-to-strings "VK_DEFINE_HANDLE\\((\\w+)\\)" line)
+    (if match
+	(let ((type-str (aref regs 0)))
+	  type-str)
+	nil)))
+
+(defun process-handle-data (type-str)
+  "Process the data from a handle definition."
+  (declare (type string type-str))
+  (add-pointer type-str))
+
+(defun create-handle-code (type-str handle-symbol)
+  "Create the Common Lisp code to define a handle type."
+  (declare (type string line))
+  `(cffi:defctype ,(string-to-symbol type-str) ,handle-symbol))
+
+
+(defun parse-typedef (line)
+  "If the line is a typedef definition, return the type being defined and the type used to define the new type.
+Otherwise, return NIL."
+  (declare (type string line))
+  (multiple-value-bind (match regs) (ppcre:scan-to-strings "typedef\\s+((?:const|\\s*)*\\w+(?:\\*|const|\\s*)*)\\s+(Vk\\w+);" line)
+    (if match
+	(let* ((old-type (aref regs 0))
+	       (new-type (aref regs 1)))
+	  (values old-type new-type))
+	nil)))
+
+(defun process-typedef-data (old-type new-type)
+  "Process the data from a typedef definition."
+  (declare (type string old-type new-type))
+  (multiple-value-bind (old-match old-regs) (ppcre:scan-to-strings "(?:const|\\s*)*(\\w+)((?:\\*|const|\\s*)*)" old-type)
+    (let* ((old-core-type       (aref old-regs 0))
+	   (old-type-qualifiers (aref old-regs 1))
+	   (new-core-type       new-type)
+	   (pointerp            (or (ppcre:scan "\\*" old-type-qualifiers) (pointerp old-core-type)))
+	   (structp             (structp old-core-type))
+	   (unionp              (unionp old-core-type)))
+      (when pointerp
+	(add-pointer new-core-type))
+      (when structp
+	(add-struct new-core-type old-core-type))
+      (when unionp
+	(add-union new-core-type old-core-type)))))
+
+(defun create-typedef-code (old-type new-type)
+  "Create the Common Lisp code to do a type definition."
+  (declare (type string old-type new-type))
+  (multiple-value-bind (old-match old-regs) (ppcre:scan-to-strings "(?:const|\\s*)*(\\w+)((?:\\*|const|\\s*)*)" old-type)
+    (let* ((old-core-type       (aref old-regs 0))
+	   (old-type-qualifiers (aref old-regs 1))
+	   (new-core-type       new-type)
+	   (pointerp            (or (ppcre:scan "\\*" old-type-qualifiers) (pointerp old-core-type))))
+      `(cffi:defctype ,(string-to-symbol new-core-type) ,(if pointerp :pointer (c-type-to-cffi old-core-type))))))
+
+
+(defun parse-pfn (line istream)
+  "If LINE is a function pointer definition, return the name of said pointer function. Otherwise, return NIL."
+  (declare (type string line) (type stream istream))
+  (multiple-value-bind (match regs) (ppcre:scan-to-strings "VKAPI_PTR\\s*\\*\\s*(PFN_\\w+)" line)
+    (if match
+	(progn
+	  (loop for subline = line then (read-line istream nil)
+		until (ppcre:scan "\\);" subline))
+	  (let ((func-name (aref regs 0)))
+	    func-name))
+	nil)))
+
+(defun process-pfn-data (func-name)
+  "Process the data from a function pointer definition."
+  (declare (type string func-name) (ignore func-name)))
+
+(defun create-pfn-code (func-name)
+  "Create the Common Lisp code to define a function pointer type."
+  (declare (type string func-name))
+  `(cffi:defctype ,(string-to-symbol func-name) :pointer))
+
+
+(defun parse-define (line)
+  "If LINE is a define macro, return the name of the macro and its value. Otherwise, return NIL."
+  (declare (type string line))
+  (multiple-value-bind (match regs) (ppcre:scan-to-strings "#define (\\w+)\\s+(\"?[\\-\\~\\w\\s\\d\\.,\\(\\)ULF]+\"?)" line)
+    (if match
+	(let ((name (aref regs 0))
+	      (value (aref regs 1)))
+	  (values name value))
+	nil)))
+
+(defun process-define-data (name value)
+  "Process the data from a define expression."
+  (declare (type string name value))
+  (add-constant name (c-value-to-lisp value)))
+
+(defun create-define-code (name value)
+  "Create the Common Lisp to define a macro constant."
+  (declare (type string name value))
+  `(adp:defparameter ,(string-to-symbol name) ,(c-value-to-lisp value)))
+
+
+(defun parse-static-const (line)
+  "If LINE is a static const definition, return the name and value of the defined constant. Otherwise, return NIL."
+  (declare (type string line))
+  (multiple-value-bind (match regs) (ppcre:scan-to-strings "static const \\w+ (\\w+) = (\"?[\\-\\~\\w\\s\\d\\.,\\(\\)ULF]+\"?)" line)
+    (if match
+	(let ((name (aref regs 0))
+	      (value (aref regs 1)))
+	  (values name value))
+	nil)))
+
+(defun process-static-const-data (name value)
+  "Process the data from a static const definition."
+  (declare (type string name value))
+  (add-constant name value))
+
+(defun create-static-const-code (name value)
+  "Create the Common Lisp code to define a static const variable."
+  (declare (type string name value))
+  `(adp:defparameter ,(string-to-symbol name) ,(c-value-to-lisp value)))
+
+
+(defun parse-enum (line istream)
+  "If LINE is an enumeration, return the name of the enum and a list of pairs (name . value) of each enum
+member. Otherwise, return NIL."
+  (declare (type string line) (type stream istream))
+  (multiple-value-bind (match regs) (ppcre:scan-to-strings "typedef\\s+enum\\s+(Vk\\w+)\\s+\\{" line)
+    (if match
+	(let ((enum-name (aref regs 0)))
+	  (loop for member-line = (read-line istream nil)
+		for endp = (ppcre:scan "^\\}" member-line)
+		until endp
+		collect (multiple-value-bind (match-mem regs-mem) (ppcre:scan-to-strings "\\s*(\\w+)\\s*=\\s*(\"?[\\-\\~\\w\\s\\d\\.\\(\\)ULF]+\"?)" member-line)
+			  (when match-mem
+			    (let ((name (aref regs-mem 0))
+				  (value (aref regs-mem 1)))
+			      (cons name value))))
+		  into enum-members
+		finally (return (values enum-name enum-members))))
+	nil)))
+
+(defun process-enum-data (enum-name enum-members)
+  "Process the data from an enumeration definition."
+  (declare (type string enum-name) (type list enum-members) (ignore enum-name enum-members)))
+
+(defun create-enum-code (enum-name enum-members)
+  "Return a list of Common Lisp expressions to define an enumeration."
+  (cons `(cffi:defctype ,(string-to-symbol enum-name) :int)
+	(mapcar (lambda (enum-member)
+		  (let ((name  (car enum-member))
+			(value (cdr enum-member)))
+		    `(adp:defparameter ,(string-to-symbol name) ,(c-value-to-lisp value))))
+		enum-members)))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ;; ----------------------------

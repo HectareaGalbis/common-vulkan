@@ -16,4 +16,13 @@
                 (:file "src/structs")
 		(:file "src/functions")
 		(:file "src/callbacks")))
+
+
+
+(asdf:defsystem "common-vulkan/generation"
+  :depends-on ("cffi" "more-cffi" "cl-ppcre" "iterate")
+  :components (:file "package"
+	       (:module "generation"
+		:components ((:file "package")
+			     (:file "generate")))))
 		
