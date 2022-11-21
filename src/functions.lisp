@@ -1,5 +1,24 @@
 (in-package :cvk)
 
+(adp:defmacro make-api-version (variant major minor patch)
+  `(logior (ash ,variant 29) (ash ,major 22) (ash ,minor 12) ,patch))
+
+(adp:defmacro  api-version-variant (version)
+  `(ash ,version 29))
+
+(adp:defmacro api-version-major (version)
+  `(logand (ash ,version 22) #x7F))
+
+(adp:defmacro api-version-minor (version)
+  `(logand (ash ,version 12) #x3FF))
+
+(adp:defmacro api-version-patch (version)
+  `(logand ,version #xFFF))
+
+
+(defmacro multiple-defun )
+
+
 (more-cffi:with-doc-file (doc-file
                           (asdf/system:system-relative-pathname "common-vulkan"
                                                                 "docs/api/functions.md"))
