@@ -1,6880 +1,7248 @@
 
-(in-package :cvk)
+(IN-PACKAGE :CVK)
 
-(cffi:defctype handle :pointer)
+(CFFI:DEFCTYPE HANDLE :POINTER)
 
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (if (= 8 (cffi:foreign-type-size :pointer))
-      (cffi:defctype non-dispatchable-handle :pointer)
-      (cffi:defctype non-dispatchable-handle :uint64)))
+(EVAL-WHEN (:COMPILE-TOPLEVEL :LOAD-TOPLEVEL :EXECUTE)
+  (IF (= 8 (CFFI:FOREIGN-TYPE-SIZE :POINTER))
+      (CFFI:DEFCTYPE NON-DISPATCHABLE-HANDLE :POINTER)
+      (CFFI:DEFCTYPE NON-DISPATCHABLE-HANDLE :UINT64)))
 
-(cffi:defctype vkbool32 :uint32)
+(CFFI:DEFCTYPE VKBOOL32 :UINT32)
 
-(cffi:defctype vkdeviceaddress :uint64)
+(CFFI:DEFCTYPE VKDEVICEADDRESS :UINT64)
 
-(cffi:defctype vkdevicesize :uint64)
+(CFFI:DEFCTYPE VKDEVICESIZE :UINT64)
 
-(cffi:defctype vkflags :uint32)
+(CFFI:DEFCTYPE VKFLAGS :UINT32)
 
-(cffi:defctype vksamplemask :uint32)
+(CFFI:DEFCTYPE VKSAMPLEMASK :UINT32)
 
-(cffi:defctype vkbuffer non-dispatchable-handle)
+(CFFI:DEFCTYPE VKBUFFER NON-DISPATCHABLE-HANDLE)
 
-(cffi:defctype vkimage non-dispatchable-handle)
+(CFFI:DEFCTYPE VKIMAGE NON-DISPATCHABLE-HANDLE)
 
-(cffi:defctype vkinstance handle)
+(CFFI:DEFCTYPE VKINSTANCE HANDLE)
 
-(cffi:defctype vkphysicaldevice handle)
+(CFFI:DEFCTYPE VKPHYSICALDEVICE HANDLE)
 
-(cffi:defctype vkdevice handle)
+(CFFI:DEFCTYPE VKDEVICE HANDLE)
 
-(cffi:defctype vkqueue handle)
+(CFFI:DEFCTYPE VKQUEUE HANDLE)
 
-(cffi:defctype vksemaphore non-dispatchable-handle)
+(CFFI:DEFCTYPE VKSEMAPHORE NON-DISPATCHABLE-HANDLE)
 
-(cffi:defctype vkcommandbuffer handle)
+(CFFI:DEFCTYPE VKCOMMANDBUFFER HANDLE)
 
-(cffi:defctype vkfence non-dispatchable-handle)
+(CFFI:DEFCTYPE VKFENCE NON-DISPATCHABLE-HANDLE)
 
-(cffi:defctype vkdevicememory non-dispatchable-handle)
+(CFFI:DEFCTYPE VKDEVICEMEMORY NON-DISPATCHABLE-HANDLE)
 
-(cffi:defctype vkevent non-dispatchable-handle)
+(CFFI:DEFCTYPE VKEVENT NON-DISPATCHABLE-HANDLE)
 
-(cffi:defctype vkquerypool non-dispatchable-handle)
+(CFFI:DEFCTYPE VKQUERYPOOL NON-DISPATCHABLE-HANDLE)
 
-(cffi:defctype vkbufferview non-dispatchable-handle)
+(CFFI:DEFCTYPE VKBUFFERVIEW NON-DISPATCHABLE-HANDLE)
 
-(cffi:defctype vkimageview non-dispatchable-handle)
+(CFFI:DEFCTYPE VKIMAGEVIEW NON-DISPATCHABLE-HANDLE)
 
-(cffi:defctype vkshadermodule non-dispatchable-handle)
+(CFFI:DEFCTYPE VKSHADERMODULE NON-DISPATCHABLE-HANDLE)
 
-(cffi:defctype vkpipelinecache non-dispatchable-handle)
+(CFFI:DEFCTYPE VKPIPELINECACHE NON-DISPATCHABLE-HANDLE)
 
-(cffi:defctype vkpipelinelayout non-dispatchable-handle)
+(CFFI:DEFCTYPE VKPIPELINELAYOUT NON-DISPATCHABLE-HANDLE)
 
-(cffi:defctype vkpipeline non-dispatchable-handle)
+(CFFI:DEFCTYPE VKPIPELINE NON-DISPATCHABLE-HANDLE)
 
-(cffi:defctype vkrenderpass non-dispatchable-handle)
+(CFFI:DEFCTYPE VKRENDERPASS NON-DISPATCHABLE-HANDLE)
 
-(cffi:defctype vkdescriptorsetlayout non-dispatchable-handle)
+(CFFI:DEFCTYPE VKDESCRIPTORSETLAYOUT NON-DISPATCHABLE-HANDLE)
 
-(cffi:defctype vksampler non-dispatchable-handle)
+(CFFI:DEFCTYPE VKSAMPLER NON-DISPATCHABLE-HANDLE)
 
-(cffi:defctype vkdescriptorset non-dispatchable-handle)
+(CFFI:DEFCTYPE VKDESCRIPTORSET NON-DISPATCHABLE-HANDLE)
 
-(cffi:defctype vkdescriptorpool non-dispatchable-handle)
+(CFFI:DEFCTYPE VKDESCRIPTORPOOL NON-DISPATCHABLE-HANDLE)
 
-(cffi:defctype vkframebuffer non-dispatchable-handle)
+(CFFI:DEFCTYPE VKFRAMEBUFFER NON-DISPATCHABLE-HANDLE)
 
-(cffi:defctype vkcommandpool non-dispatchable-handle)
+(CFFI:DEFCTYPE VKCOMMANDPOOL NON-DISPATCHABLE-HANDLE)
 
-(cffi:defctype vkaccessflags vkflags)
+(CFFI:DEFCTYPE VKRESULT :INT)
 
-(cffi:defctype vkimageaspectflags vkflags)
+(CFFI:DEFCTYPE VKSTRUCTURETYPE :INT)
 
-(cffi:defctype vkformatfeatureflags vkflags)
+(CFFI:DEFCTYPE VKPIPELINECACHEHEADERVERSION :INT)
 
-(cffi:defctype vkimagecreateflags vkflags)
+(CFFI:DEFCTYPE VKIMAGELAYOUT :INT)
 
-(cffi:defctype vksamplecountflags vkflags)
+(CFFI:DEFCTYPE VKOBJECTTYPE :INT)
 
-(cffi:defctype vkimageusageflags vkflags)
+(CFFI:DEFCTYPE VKVENDORID :INT)
 
-(cffi:defctype vkinstancecreateflags vkflags)
+(CFFI:DEFCTYPE VKSYSTEMALLOCATIONSCOPE :INT)
 
-(cffi:defctype vkmemoryheapflags vkflags)
+(CFFI:DEFCTYPE VKINTERNALALLOCATIONTYPE :INT)
 
-(cffi:defctype vkmemorypropertyflags vkflags)
+(CFFI:DEFCTYPE VKFORMAT :INT)
 
-(cffi:defctype vkqueueflags vkflags)
+(CFFI:DEFCTYPE VKIMAGETILING :INT)
 
-(cffi:defctype vkdevicecreateflags vkflags)
+(CFFI:DEFCTYPE VKIMAGETYPE :INT)
 
-(cffi:defctype vkdevicequeuecreateflags vkflags)
+(CFFI:DEFCTYPE VKPHYSICALDEVICETYPE :INT)
 
-(cffi:defctype vkpipelinestageflags vkflags)
+(CFFI:DEFCTYPE VKQUERYTYPE :INT)
 
-(cffi:defctype vkmemorymapflags vkflags)
+(CFFI:DEFCTYPE VKSHARINGMODE :INT)
 
-(cffi:defctype vksparsememorybindflags vkflags)
+(CFFI:DEFCTYPE VKCOMPONENTSWIZZLE :INT)
 
-(cffi:defctype vksparseimageformatflags vkflags)
+(CFFI:DEFCTYPE VKIMAGEVIEWTYPE :INT)
 
-(cffi:defctype vkfencecreateflags vkflags)
+(CFFI:DEFCTYPE VKBLENDFACTOR :INT)
 
-(cffi:defctype vksemaphorecreateflags vkflags)
+(CFFI:DEFCTYPE VKBLENDOP :INT)
 
-(cffi:defctype vkeventcreateflags vkflags)
+(CFFI:DEFCTYPE VKCOMPAREOP :INT)
 
-(cffi:defctype vkquerypipelinestatisticflags vkflags)
+(CFFI:DEFCTYPE VKDYNAMICSTATE :INT)
 
-(cffi:defctype vkquerypoolcreateflags vkflags)
+(CFFI:DEFCTYPE VKFRONTFACE :INT)
 
-(cffi:defctype vkqueryresultflags vkflags)
+(CFFI:DEFCTYPE VKVERTEXINPUTRATE :INT)
 
-(cffi:defctype vkbuffercreateflags vkflags)
+(CFFI:DEFCTYPE VKPRIMITIVETOPOLOGY :INT)
 
-(cffi:defctype vkbufferusageflags vkflags)
+(CFFI:DEFCTYPE VKPOLYGONMODE :INT)
 
-(cffi:defctype vkbufferviewcreateflags vkflags)
+(CFFI:DEFCTYPE VKSTENCILOP :INT)
 
-(cffi:defctype vkimageviewcreateflags vkflags)
+(CFFI:DEFCTYPE VKLOGICOP :INT)
 
-(cffi:defctype vkshadermodulecreateflags vkflags)
+(CFFI:DEFCTYPE VKBORDERCOLOR :INT)
 
-(cffi:defctype vkpipelinecachecreateflags vkflags)
+(CFFI:DEFCTYPE VKFILTER :INT)
 
-(cffi:defctype vkcolorcomponentflags vkflags)
+(CFFI:DEFCTYPE VKSAMPLERADDRESSMODE :INT)
 
-(cffi:defctype vkpipelinecreateflags vkflags)
+(CFFI:DEFCTYPE VKSAMPLERMIPMAPMODE :INT)
 
-(cffi:defctype vkpipelineshaderstagecreateflags vkflags)
+(CFFI:DEFCTYPE VKDESCRIPTORTYPE :INT)
 
-(cffi:defctype vkcullmodeflags vkflags)
+(CFFI:DEFCTYPE VKATTACHMENTLOADOP :INT)
 
-(cffi:defctype vkpipelinevertexinputstatecreateflags vkflags)
+(CFFI:DEFCTYPE VKATTACHMENTSTOREOP :INT)
 
-(cffi:defctype vkpipelineinputassemblystatecreateflags vkflags)
+(CFFI:DEFCTYPE VKPIPELINEBINDPOINT :INT)
 
-(cffi:defctype vkpipelinetessellationstatecreateflags vkflags)
+(CFFI:DEFCTYPE VKCOMMANDBUFFERLEVEL :INT)
 
-(cffi:defctype vkpipelineviewportstatecreateflags vkflags)
+(CFFI:DEFCTYPE VKINDEXTYPE :INT)
 
-(cffi:defctype vkpipelinerasterizationstatecreateflags vkflags)
+(CFFI:DEFCTYPE VKSUBPASSCONTENTS :INT)
 
-(cffi:defctype vkpipelinemultisamplestatecreateflags vkflags)
+(CFFI:DEFCTYPE VKACCESSFLAGBITS :INT)
 
-(cffi:defctype vkpipelinedepthstencilstatecreateflags vkflags)
+(CFFI:DEFCTYPE VKACCESSFLAGS VKFLAGS)
 
-(cffi:defctype vkpipelinecolorblendstatecreateflags vkflags)
+(CFFI:DEFCTYPE VKIMAGEASPECTFLAGBITS :INT)
 
-(cffi:defctype vkpipelinedynamicstatecreateflags vkflags)
+(CFFI:DEFCTYPE VKIMAGEASPECTFLAGS VKFLAGS)
 
-(cffi:defctype vkpipelinelayoutcreateflags vkflags)
+(CFFI:DEFCTYPE VKFORMATFEATUREFLAGBITS :INT)
 
-(cffi:defctype vkshaderstageflags vkflags)
+(CFFI:DEFCTYPE VKFORMATFEATUREFLAGS VKFLAGS)
 
-(cffi:defctype vksamplercreateflags vkflags)
+(CFFI:DEFCTYPE VKIMAGECREATEFLAGBITS :INT)
 
-(cffi:defctype vkdescriptorpoolcreateflags vkflags)
+(CFFI:DEFCTYPE VKIMAGECREATEFLAGS VKFLAGS)
 
-(cffi:defctype vkdescriptorpoolresetflags vkflags)
+(CFFI:DEFCTYPE VKSAMPLECOUNTFLAGBITS :INT)
 
-(cffi:defctype vkdescriptorsetlayoutcreateflags vkflags)
+(CFFI:DEFCTYPE VKSAMPLECOUNTFLAGS VKFLAGS)
 
-(cffi:defctype vkattachmentdescriptionflags vkflags)
+(CFFI:DEFCTYPE VKIMAGEUSAGEFLAGBITS :INT)
 
-(cffi:defctype vkdependencyflags vkflags)
+(CFFI:DEFCTYPE VKIMAGEUSAGEFLAGS VKFLAGS)
 
-(cffi:defctype vkframebuffercreateflags vkflags)
+(CFFI:DEFCTYPE VKINSTANCECREATEFLAGBITS :INT)
 
-(cffi:defctype vkrenderpasscreateflags vkflags)
+(CFFI:DEFCTYPE VKINSTANCECREATEFLAGS VKFLAGS)
 
-(cffi:defctype vksubpassdescriptionflags vkflags)
+(CFFI:DEFCTYPE VKMEMORYHEAPFLAGBITS :INT)
 
-(cffi:defctype vkcommandpoolcreateflags vkflags)
+(CFFI:DEFCTYPE VKMEMORYHEAPFLAGS VKFLAGS)
 
-(cffi:defctype vkcommandpoolresetflags vkflags)
+(CFFI:DEFCTYPE VKMEMORYPROPERTYFLAGBITS :INT)
 
-(cffi:defctype vkcommandbufferusageflags vkflags)
+(CFFI:DEFCTYPE VKMEMORYPROPERTYFLAGS VKFLAGS)
 
-(cffi:defctype vkquerycontrolflags vkflags)
+(CFFI:DEFCTYPE VKQUEUEFLAGBITS :INT)
 
-(cffi:defctype vkcommandbufferresetflags vkflags)
+(CFFI:DEFCTYPE VKQUEUEFLAGS VKFLAGS)
 
-(cffi:defctype vkstencilfaceflags vkflags)
+(CFFI:DEFCTYPE VKDEVICECREATEFLAGS VKFLAGS)
 
-(cffi:defcstruct vkextent2d
-  (width :uint32)
-  (height :uint32))
+(CFFI:DEFCTYPE VKDEVICEQUEUECREATEFLAGBITS :INT)
 
-(cffi:defcstruct vkextent3d
-  (width :uint32)
-  (height :uint32)
-  (depth :uint32))
+(CFFI:DEFCTYPE VKDEVICEQUEUECREATEFLAGS VKFLAGS)
 
-(cffi:defcstruct vkoffset2d
-  (x :int32)
-  (y :int32))
+(CFFI:DEFCTYPE VKPIPELINESTAGEFLAGBITS :INT)
 
-(cffi:defcstruct vkoffset3d
-  (x :int32)
-  (y :int32)
-  (z :int32))
+(CFFI:DEFCTYPE VKPIPELINESTAGEFLAGS VKFLAGS)
 
-(cffi:defcstruct vkrect2d
-  (offset (:struct vkoffset2d))
-  (extent (:struct vkextent2d)))
+(CFFI:DEFCTYPE VKMEMORYMAPFLAGS VKFLAGS)
 
-(cffi:defcstruct vkbaseinstructure
-  (stype vkstructuretype)
-  (pnext :pointer))
+(CFFI:DEFCTYPE VKSPARSEMEMORYBINDFLAGBITS :INT)
 
-(cffi:defcstruct vkbaseoutstructure
-  (stype vkstructuretype)
-  (pnext :pointer))
+(CFFI:DEFCTYPE VKSPARSEMEMORYBINDFLAGS VKFLAGS)
 
-(cffi:defcstruct vkbuffermemorybarrier
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (srcaccessmask vkaccessflags)
-  (dstaccessmask vkaccessflags)
-  (srcqueuefamilyindex :uint32)
-  (dstqueuefamilyindex :uint32)
-  (buffer vkbuffer)
-  (offset vkdevicesize)
-  (size vkdevicesize))
+(CFFI:DEFCTYPE VKSPARSEIMAGEFORMATFLAGBITS :INT)
 
-(cffi:defcstruct vkdispatchindirectcommand
-  (x :uint32)
-  (y :uint32)
-  (z :uint32))
+(CFFI:DEFCTYPE VKSPARSEIMAGEFORMATFLAGS VKFLAGS)
 
-(cffi:defcstruct vkdrawindexedindirectcommand
-  (indexcount :uint32)
-  (instancecount :uint32)
-  (firstindex :uint32)
-  (vertexoffset :int32)
-  (firstinstance :uint32))
+(CFFI:DEFCTYPE VKFENCECREATEFLAGBITS :INT)
 
-(cffi:defcstruct vkdrawindirectcommand
-  (vertexcount :uint32)
-  (instancecount :uint32)
-  (firstvertex :uint32)
-  (firstinstance :uint32))
+(CFFI:DEFCTYPE VKFENCECREATEFLAGS VKFLAGS)
 
-(cffi:defcstruct vkimagesubresourcerange
-  (aspectmask vkimageaspectflags)
-  (basemiplevel :uint32)
-  (levelcount :uint32)
-  (basearraylayer :uint32)
-  (layercount :uint32))
+(CFFI:DEFCTYPE VKSEMAPHORECREATEFLAGS VKFLAGS)
 
-(cffi:defcstruct vkimagememorybarrier
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (srcaccessmask vkaccessflags)
-  (dstaccessmask vkaccessflags)
-  (oldlayout vkimagelayout)
-  (newlayout vkimagelayout)
-  (srcqueuefamilyindex :uint32)
-  (dstqueuefamilyindex :uint32)
-  (image vkimage)
-  (subresourcerange (:struct vkimagesubresourcerange)))
+(CFFI:DEFCTYPE VKEVENTCREATEFLAGBITS :INT)
 
-(cffi:defcstruct vkmemorybarrier
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (srcaccessmask vkaccessflags)
-  (dstaccessmask vkaccessflags))
+(CFFI:DEFCTYPE VKEVENTCREATEFLAGS VKFLAGS)
 
-(cffi:defcstruct vkpipelinecacheheaderversionone
-  (headersize :uint32)
-  (headerversion vkpipelinecacheheaderversion)
-  (vendorid :uint32)
-  (deviceid :uint32)
-  (pipelinecacheuuid :uint8 :count 16))
+(CFFI:DEFCTYPE VKQUERYPIPELINESTATISTICFLAGBITS :INT)
 
-(cffi:defctype pfn_vkallocationfunction :pointer)
+(CFFI:DEFCTYPE VKQUERYPIPELINESTATISTICFLAGS VKFLAGS)
 
-(cffi:defctype pfn_vkfreefunction :pointer)
+(CFFI:DEFCTYPE VKQUERYPOOLCREATEFLAGS VKFLAGS)
 
-(cffi:defctype pfn_vkinternalallocationnotification :pointer)
+(CFFI:DEFCTYPE VKQUERYRESULTFLAGBITS :INT)
 
-(cffi:defctype pfn_vkinternalfreenotification :pointer)
+(CFFI:DEFCTYPE VKQUERYRESULTFLAGS VKFLAGS)
 
-(cffi:defctype pfn_vkreallocationfunction :pointer)
-
-(cffi:defctype pfn_vkvoidfunction :pointer)
-
-(cffi:defcstruct vkallocationcallbacks
-  (puserdata :pointer)
-  (pfnallocation pfn_vkallocationfunction)
-  (pfnreallocation pfn_vkreallocationfunction)
-  (pfnfree pfn_vkfreefunction)
-  (pfninternalallocation pfn_vkinternalallocationnotification)
-  (pfninternalfree pfn_vkinternalfreenotification))
-
-(cffi:defcstruct vkapplicationinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (papplicationname :pointer)
-  (applicationversion :uint32)
-  (penginename :pointer)
-  (engineversion :uint32)
-  (apiversion :uint32))
-
-(cffi:defcstruct vkformatproperties
-  (lineartilingfeatures vkformatfeatureflags)
-  (optimaltilingfeatures vkformatfeatureflags)
-  (bufferfeatures vkformatfeatureflags))
-
-(cffi:defcstruct vkimageformatproperties
-  (maxextent (:struct vkextent3d))
-  (maxmiplevels :uint32)
-  (maxarraylayers :uint32)
-  (samplecounts vksamplecountflags)
-  (maxresourcesize vkdevicesize))
-
-(cffi:defcstruct vkinstancecreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkinstancecreateflags)
-  (papplicationinfo :pointer)
-  (enabledlayercount :uint32)
-  (ppenabledlayernames :pointer)
-  (enabledextensioncount :uint32)
-  (ppenabledextensionnames :pointer))
-
-(cffi:defcstruct vkmemoryheap
-  (size vkdevicesize)
-  (flags vkmemoryheapflags))
-
-(cffi:defcstruct vkmemorytype
-  (propertyflags vkmemorypropertyflags)
-  (heapindex :uint32))
-
-(cffi:defcstruct vkphysicaldevicefeatures
-  (robustbufferaccess vkbool32)
-  (fulldrawindexuint32 vkbool32)
-  (imagecubearray vkbool32)
-  (independentblend vkbool32)
-  (geometryshader vkbool32)
-  (tessellationshader vkbool32)
-  (samplerateshading vkbool32)
-  (dualsrcblend vkbool32)
-  (logicop vkbool32)
-  (multidrawindirect vkbool32)
-  (drawindirectfirstinstance vkbool32)
-  (depthclamp vkbool32)
-  (depthbiasclamp vkbool32)
-  (fillmodenonsolid vkbool32)
-  (depthbounds vkbool32)
-  (widelines vkbool32)
-  (largepoints vkbool32)
-  (alphatoone vkbool32)
-  (multiviewport vkbool32)
-  (sampleranisotropy vkbool32)
-  (texturecompressionetc2 vkbool32)
-  (texturecompressionastc_ldr vkbool32)
-  (texturecompressionbc vkbool32)
-  (occlusionqueryprecise vkbool32)
-  (pipelinestatisticsquery vkbool32)
-  (vertexpipelinestoresandatomics vkbool32)
-  (fragmentstoresandatomics vkbool32)
-  (shadertessellationandgeometrypointsize vkbool32)
-  (shaderimagegatherextended vkbool32)
-  (shaderstorageimageextendedformats vkbool32)
-  (shaderstorageimagemultisample vkbool32)
-  (shaderstorageimagereadwithoutformat vkbool32)
-  (shaderstorageimagewritewithoutformat vkbool32)
-  (shaderuniformbufferarraydynamicindexing vkbool32)
-  (shadersampledimagearraydynamicindexing vkbool32)
-  (shaderstoragebufferarraydynamicindexing vkbool32)
-  (shaderstorageimagearraydynamicindexing vkbool32)
-  (shaderclipdistance vkbool32)
-  (shaderculldistance vkbool32)
-  (shaderfloat64 vkbool32)
-  (shaderint64 vkbool32)
-  (shaderint16 vkbool32)
-  (shaderresourceresidency vkbool32)
-  (shaderresourceminlod vkbool32)
-  (sparsebinding vkbool32)
-  (sparseresidencybuffer vkbool32)
-  (sparseresidencyimage2d vkbool32)
-  (sparseresidencyimage3d vkbool32)
-  (sparseresidency2samples vkbool32)
-  (sparseresidency4samples vkbool32)
-  (sparseresidency8samples vkbool32)
-  (sparseresidency16samples vkbool32)
-  (sparseresidencyaliased vkbool32)
-  (variablemultisamplerate vkbool32)
-  (inheritedqueries vkbool32))
-
-(cffi:defcstruct vkphysicaldevicelimits
-  (maximagedimension1d :uint32)
-  (maximagedimension2d :uint32)
-  (maximagedimension3d :uint32)
-  (maximagedimensioncube :uint32)
-  (maximagearraylayers :uint32)
-  (maxtexelbufferelements :uint32)
-  (maxuniformbufferrange :uint32)
-  (maxstoragebufferrange :uint32)
-  (maxpushconstantssize :uint32)
-  (maxmemoryallocationcount :uint32)
-  (maxsamplerallocationcount :uint32)
-  (bufferimagegranularity vkdevicesize)
-  (sparseaddressspacesize vkdevicesize)
-  (maxbounddescriptorsets :uint32)
-  (maxperstagedescriptorsamplers :uint32)
-  (maxperstagedescriptoruniformbuffers :uint32)
-  (maxperstagedescriptorstoragebuffers :uint32)
-  (maxperstagedescriptorsampledimages :uint32)
-  (maxperstagedescriptorstorageimages :uint32)
-  (maxperstagedescriptorinputattachments :uint32)
-  (maxperstageresources :uint32)
-  (maxdescriptorsetsamplers :uint32)
-  (maxdescriptorsetuniformbuffers :uint32)
-  (maxdescriptorsetuniformbuffersdynamic :uint32)
-  (maxdescriptorsetstoragebuffers :uint32)
-  (maxdescriptorsetstoragebuffersdynamic :uint32)
-  (maxdescriptorsetsampledimages :uint32)
-  (maxdescriptorsetstorageimages :uint32)
-  (maxdescriptorsetinputattachments :uint32)
-  (maxvertexinputattributes :uint32)
-  (maxvertexinputbindings :uint32)
-  (maxvertexinputattributeoffset :uint32)
-  (maxvertexinputbindingstride :uint32)
-  (maxvertexoutputcomponents :uint32)
-  (maxtessellationgenerationlevel :uint32)
-  (maxtessellationpatchsize :uint32)
-  (maxtessellationcontrolpervertexinputcomponents :uint32)
-  (maxtessellationcontrolpervertexoutputcomponents :uint32)
-  (maxtessellationcontrolperpatchoutputcomponents :uint32)
-  (maxtessellationcontroltotaloutputcomponents :uint32)
-  (maxtessellationevaluationinputcomponents :uint32)
-  (maxtessellationevaluationoutputcomponents :uint32)
-  (maxgeometryshaderinvocations :uint32)
-  (maxgeometryinputcomponents :uint32)
-  (maxgeometryoutputcomponents :uint32)
-  (maxgeometryoutputvertices :uint32)
-  (maxgeometrytotaloutputcomponents :uint32)
-  (maxfragmentinputcomponents :uint32)
-  (maxfragmentoutputattachments :uint32)
-  (maxfragmentdualsrcattachments :uint32)
-  (maxfragmentcombinedoutputresources :uint32)
-  (maxcomputesharedmemorysize :uint32)
-  (maxcomputeworkgroupcount :uint32 :count 3)
-  (maxcomputeworkgroupinvocations :uint32)
-  (maxcomputeworkgroupsize :uint32 :count 3)
-  (subpixelprecisionbits :uint32)
-  (subtexelprecisionbits :uint32)
-  (mipmapprecisionbits :uint32)
-  (maxdrawindexedindexvalue :uint32)
-  (maxdrawindirectcount :uint32)
-  (maxsamplerlodbias :float)
-  (maxsampleranisotropy :float)
-  (maxviewports :uint32)
-  (maxviewportdimensions :uint32 :count 2)
-  (viewportboundsrange :float :count 2)
-  (viewportsubpixelbits :uint32)
-  (minmemorymapalignment :size)
-  (mintexelbufferoffsetalignment vkdevicesize)
-  (minuniformbufferoffsetalignment vkdevicesize)
-  (minstoragebufferoffsetalignment vkdevicesize)
-  (mintexeloffset :int32)
-  (maxtexeloffset :uint32)
-  (mintexelgatheroffset :int32)
-  (maxtexelgatheroffset :uint32)
-  (mininterpolationoffset :float)
-  (maxinterpolationoffset :float)
-  (subpixelinterpolationoffsetbits :uint32)
-  (maxframebufferwidth :uint32)
-  (maxframebufferheight :uint32)
-  (maxframebufferlayers :uint32)
-  (framebuffercolorsamplecounts vksamplecountflags)
-  (framebufferdepthsamplecounts vksamplecountflags)
-  (framebufferstencilsamplecounts vksamplecountflags)
-  (framebuffernoattachmentssamplecounts vksamplecountflags)
-  (maxcolorattachments :uint32)
-  (sampledimagecolorsamplecounts vksamplecountflags)
-  (sampledimageintegersamplecounts vksamplecountflags)
-  (sampledimagedepthsamplecounts vksamplecountflags)
-  (sampledimagestencilsamplecounts vksamplecountflags)
-  (storageimagesamplecounts vksamplecountflags)
-  (maxsamplemaskwords :uint32)
-  (timestampcomputeandgraphics vkbool32)
-  (timestampperiod :float)
-  (maxclipdistances :uint32)
-  (maxculldistances :uint32)
-  (maxcombinedclipandculldistances :uint32)
-  (discretequeuepriorities :uint32)
-  (pointsizerange :float :count 2)
-  (linewidthrange :float :count 2)
-  (pointsizegranularity :float)
-  (linewidthgranularity :float)
-  (strictlines vkbool32)
-  (standardsamplelocations vkbool32)
-  (optimalbuffercopyoffsetalignment vkdevicesize)
-  (optimalbuffercopyrowpitchalignment vkdevicesize)
-  (noncoherentatomsize vkdevicesize))
-
-(cffi:defcstruct vkphysicaldevicememoryproperties
-  (memorytypecount :uint32)
-  (memorytypes (:struct vkmemorytype) :count 32)
-  (memoryheapcount :uint32)
-  (memoryheaps (:struct vkmemoryheap) :count 16))
-
-(cffi:defcstruct vkphysicaldevicesparseproperties
-  (residencystandard2dblockshape vkbool32)
-  (residencystandard2dmultisampleblockshape vkbool32)
-  (residencystandard3dblockshape vkbool32)
-  (residencyalignedmipsize vkbool32)
-  (residencynonresidentstrict vkbool32))
-
-(cffi:defcstruct vkphysicaldeviceproperties
-  (apiversion :uint32)
-  (driverversion :uint32)
-  (vendorid :uint32)
-  (deviceid :uint32)
-  (devicetype vkphysicaldevicetype)
-  (devicename :char :count 256)
-  (pipelinecacheuuid :uint8 :count 16)
-  (limits (:struct vkphysicaldevicelimits))
-  (sparseproperties (:struct vkphysicaldevicesparseproperties)))
-
-(cffi:defcstruct vkqueuefamilyproperties
-  (queueflags vkqueueflags)
-  (queuecount :uint32)
-  (timestampvalidbits :uint32)
-  (minimagetransfergranularity (:struct vkextent3d)))
-
-(cffi:defcstruct vkdevicequeuecreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkdevicequeuecreateflags)
-  (queuefamilyindex :uint32)
-  (queuecount :uint32)
-  (pqueuepriorities :pointer))
-
-(cffi:defcstruct vkdevicecreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkdevicecreateflags)
-  (queuecreateinfocount :uint32)
-  (pqueuecreateinfos :pointer)
-  (enabledlayercount :uint32)
-  (ppenabledlayernames :pointer)
-  (enabledextensioncount :uint32)
-  (ppenabledextensionnames :pointer)
-  (penabledfeatures :pointer))
-
-(cffi:defcstruct vkextensionproperties
-  (extensionname :char :count 256)
-  (specversion :uint32))
-
-(cffi:defcstruct vklayerproperties
-  (layername :char :count 256)
-  (specversion :uint32)
-  (implementationversion :uint32)
-  (description :char :count 256))
-
-(cffi:defcstruct vksubmitinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (waitsemaphorecount :uint32)
-  (pwaitsemaphores :pointer)
-  (pwaitdststagemask :pointer)
-  (commandbuffercount :uint32)
-  (pcommandbuffers :pointer)
-  (signalsemaphorecount :uint32)
-  (psignalsemaphores :pointer))
-
-(cffi:defcstruct vkmappedmemoryrange
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (memory vkdevicememory)
-  (offset vkdevicesize)
-  (size vkdevicesize))
-
-(cffi:defcstruct vkmemoryallocateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (allocationsize vkdevicesize)
-  (memorytypeindex :uint32))
-
-(cffi:defcstruct vkmemoryrequirements
-  (size vkdevicesize)
-  (alignment vkdevicesize)
-  (memorytypebits :uint32))
-
-(cffi:defcstruct vksparsememorybind
-  (resourceoffset vkdevicesize)
-  (size vkdevicesize)
-  (memory vkdevicememory)
-  (memoryoffset vkdevicesize)
-  (flags vksparsememorybindflags))
-
-(cffi:defcstruct vksparsebuffermemorybindinfo
-  (buffer vkbuffer)
-  (bindcount :uint32)
-  (pbinds :pointer))
-
-(cffi:defcstruct vksparseimageopaquememorybindinfo
-  (image vkimage)
-  (bindcount :uint32)
-  (pbinds :pointer))
-
-(cffi:defcstruct vkimagesubresource
-  (aspectmask vkimageaspectflags)
-  (miplevel :uint32)
-  (arraylayer :uint32))
-
-(cffi:defcstruct vksparseimagememorybind
-  (subresource (:struct vkimagesubresource))
-  (offset (:struct vkoffset3d))
-  (extent (:struct vkextent3d))
-  (memory vkdevicememory)
-  (memoryoffset vkdevicesize)
-  (flags vksparsememorybindflags))
-
-(cffi:defcstruct vksparseimagememorybindinfo
-  (image vkimage)
-  (bindcount :uint32)
-  (pbinds :pointer))
-
-(cffi:defcstruct vkbindsparseinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (waitsemaphorecount :uint32)
-  (pwaitsemaphores :pointer)
-  (bufferbindcount :uint32)
-  (pbufferbinds :pointer)
-  (imageopaquebindcount :uint32)
-  (pimageopaquebinds :pointer)
-  (imagebindcount :uint32)
-  (pimagebinds :pointer)
-  (signalsemaphorecount :uint32)
-  (psignalsemaphores :pointer))
-
-(cffi:defcstruct vksparseimageformatproperties
-  (aspectmask vkimageaspectflags)
-  (imagegranularity (:struct vkextent3d))
-  (flags vksparseimageformatflags))
-
-(cffi:defcstruct vksparseimagememoryrequirements
-  (formatproperties (:struct vksparseimageformatproperties))
-  (imagemiptailfirstlod :uint32)
-  (imagemiptailsize vkdevicesize)
-  (imagemiptailoffset vkdevicesize)
-  (imagemiptailstride vkdevicesize))
-
-(cffi:defcstruct vkfencecreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkfencecreateflags))
-
-(cffi:defcstruct vksemaphorecreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vksemaphorecreateflags))
-
-(cffi:defcstruct vkeventcreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkeventcreateflags))
-
-(cffi:defcstruct vkquerypoolcreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkquerypoolcreateflags)
-  (querytype vkquerytype)
-  (querycount :uint32)
-  (pipelinestatistics vkquerypipelinestatisticflags))
-
-(cffi:defcstruct vkbuffercreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkbuffercreateflags)
-  (size vkdevicesize)
-  (usage vkbufferusageflags)
-  (sharingmode vksharingmode)
-  (queuefamilyindexcount :uint32)
-  (pqueuefamilyindices :pointer))
-
-(cffi:defcstruct vkbufferviewcreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkbufferviewcreateflags)
-  (buffer vkbuffer)
-  (format vkformat)
-  (offset vkdevicesize)
-  (range vkdevicesize))
-
-(cffi:defcstruct vkimagecreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkimagecreateflags)
-  (imagetype vkimagetype)
-  (format vkformat)
-  (extent (:struct vkextent3d))
-  (miplevels :uint32)
-  (arraylayers :uint32)
-  (samples vksamplecountflagbits)
-  (tiling vkimagetiling)
-  (usage vkimageusageflags)
-  (sharingmode vksharingmode)
-  (queuefamilyindexcount :uint32)
-  (pqueuefamilyindices :pointer)
-  (initiallayout vkimagelayout))
-
-(cffi:defcstruct vksubresourcelayout
-  (offset vkdevicesize)
-  (size vkdevicesize)
-  (rowpitch vkdevicesize)
-  (arraypitch vkdevicesize)
-  (depthpitch vkdevicesize))
-
-(cffi:defcstruct vkcomponentmapping
-  (r vkcomponentswizzle)
-  (g vkcomponentswizzle)
-  (b vkcomponentswizzle)
-  (a vkcomponentswizzle))
-
-(cffi:defcstruct vkimageviewcreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkimageviewcreateflags)
-  (image vkimage)
-  (viewtype vkimageviewtype)
-  (format vkformat)
-  (components (:struct vkcomponentmapping))
-  (subresourcerange (:struct vkimagesubresourcerange)))
-
-(cffi:defcstruct vkshadermodulecreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkshadermodulecreateflags)
-  (codesize :size)
-  (pcode :pointer))
-
-(cffi:defcstruct vkpipelinecachecreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkpipelinecachecreateflags)
-  (initialdatasize :size)
-  (pinitialdata :pointer))
-
-(cffi:defcstruct vkspecializationmapentry
-  (antid :uint32)
-  (offset :uint32)
-  (size :size))
-
-(cffi:defcstruct vkspecializationinfo
-  (mapentrycount :uint32)
-  (pmapentries :pointer)
-  (datasize :size)
-  (pdata :pointer))
-
-(cffi:defcstruct vkpipelineshaderstagecreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkpipelineshaderstagecreateflags)
-  (stage vkshaderstageflagbits)
-  (module vkshadermodule)
-  (pname :pointer)
-  (pspecializationinfo :pointer))
-
-(cffi:defcstruct vkcomputepipelinecreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkpipelinecreateflags)
-  (stage (:struct vkpipelineshaderstagecreateinfo))
-  (layout vkpipelinelayout)
-  (basepipelinehandle vkpipeline)
-  (basepipelineindex :int32))
-
-(cffi:defcstruct vkvertexinputbindingdescription
-  (binding :uint32)
-  (stride :uint32)
-  (inputrate vkvertexinputrate))
-
-(cffi:defcstruct vkvertexinputattributedescription
-  (location :uint32)
-  (binding :uint32)
-  (format vkformat)
-  (offset :uint32))
-
-(cffi:defcstruct vkpipelinevertexinputstatecreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkpipelinevertexinputstatecreateflags)
-  (vertexbindingdescriptioncount :uint32)
-  (pvertexbindingdescriptions :pointer)
-  (vertexattributedescriptioncount :uint32)
-  (pvertexattributedescriptions :pointer))
-
-(cffi:defcstruct vkpipelineinputassemblystatecreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkpipelineinputassemblystatecreateflags)
-  (topology vkprimitivetopology)
-  (primitiverestartenable vkbool32))
-
-(cffi:defcstruct vkpipelinetessellationstatecreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkpipelinetessellationstatecreateflags)
-  (patchcontrolpoints :uint32))
-
-(cffi:defcstruct vkviewport
-  (x :float)
-  (y :float)
-  (width :float)
-  (height :float)
-  (mindepth :float)
-  (maxdepth :float))
-
-(cffi:defcstruct vkpipelineviewportstatecreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkpipelineviewportstatecreateflags)
-  (viewportcount :uint32)
-  (pviewports :pointer)
-  (scissorcount :uint32)
-  (pscissors :pointer))
-
-(cffi:defcstruct vkpipelinerasterizationstatecreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkpipelinerasterizationstatecreateflags)
-  (depthclampenable vkbool32)
-  (rasterizerdiscardenable vkbool32)
-  (polygonmode vkpolygonmode)
-  (cullmode vkcullmodeflags)
-  (frontface vkfrontface)
-  (depthbiasenable vkbool32)
-  (depthbiasconstantfactor :float)
-  (depthbiasclamp :float)
-  (depthbiasslopefactor :float)
-  (linewidth :float))
-
-(cffi:defcstruct vkpipelinemultisamplestatecreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkpipelinemultisamplestatecreateflags)
-  (rasterizationsamples vksamplecountflagbits)
-  (sampleshadingenable vkbool32)
-  (minsampleshading :float)
-  (psamplemask :pointer)
-  (alphatocoverageenable vkbool32)
-  (alphatooneenable vkbool32))
-
-(cffi:defcstruct vkstencilopstate
-  (failop vkstencilop)
-  (passop vkstencilop)
-  (depthfailop vkstencilop)
-  (compareop vkcompareop)
-  (comparemask :uint32)
-  (writemask :uint32)
-  (reference :uint32))
-
-(cffi:defcstruct vkpipelinedepthstencilstatecreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkpipelinedepthstencilstatecreateflags)
-  (depthtestenable vkbool32)
-  (depthwriteenable vkbool32)
-  (depthcompareop vkcompareop)
-  (depthboundstestenable vkbool32)
-  (stenciltestenable vkbool32)
-  (front (:struct vkstencilopstate))
-  (back (:struct vkstencilopstate))
-  (mindepthbounds :float)
-  (maxdepthbounds :float))
-
-(cffi:defcstruct vkpipelinecolorblendattachmentstate
-  (blendenable vkbool32)
-  (srccolorblendfactor vkblendfactor)
-  (dstcolorblendfactor vkblendfactor)
-  (colorblendop vkblendop)
-  (srcalphablendfactor vkblendfactor)
-  (dstalphablendfactor vkblendfactor)
-  (alphablendop vkblendop)
-  (colorwritemask vkcolorcomponentflags))
-
-(cffi:defcstruct vkpipelinecolorblendstatecreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkpipelinecolorblendstatecreateflags)
-  (logicopenable vkbool32)
-  (logicop vklogicop)
-  (attachmentcount :uint32)
-  (pattachments :pointer)
-  (blendconstants :float :count 4))
-
-(cffi:defcstruct vkpipelinedynamicstatecreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkpipelinedynamicstatecreateflags)
-  (dynamicstatecount :uint32)
-  (pdynamicstates :pointer))
-
-(cffi:defcstruct vkgraphicspipelinecreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkpipelinecreateflags)
-  (stagecount :uint32)
-  (pstages :pointer)
-  (pvertexinputstate :pointer)
-  (pinputassemblystate :pointer)
-  (ptessellationstate :pointer)
-  (pviewportstate :pointer)
-  (prasterizationstate :pointer)
-  (pmultisamplestate :pointer)
-  (pdepthstencilstate :pointer)
-  (pcolorblendstate :pointer)
-  (pdynamicstate :pointer)
-  (layout vkpipelinelayout)
-  (renderpass vkrenderpass)
-  (subpass :uint32)
-  (basepipelinehandle vkpipeline)
-  (basepipelineindex :int32))
-
-(cffi:defcstruct vkpushconstantrange
-  (stageflags vkshaderstageflags)
-  (offset :uint32)
-  (size :uint32))
-
-(cffi:defcstruct vkpipelinelayoutcreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkpipelinelayoutcreateflags)
-  (setlayoutcount :uint32)
-  (psetlayouts :pointer)
-  (pushconstantrangecount :uint32)
-  (ppushconstantranges :pointer))
-
-(cffi:defcstruct vksamplercreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vksamplercreateflags)
-  (magfilter vkfilter)
-  (minfilter vkfilter)
-  (mipmapmode vksamplermipmapmode)
-  (addressmodeu vksampleraddressmode)
-  (addressmodev vksampleraddressmode)
-  (addressmodew vksampleraddressmode)
-  (miplodbias :float)
-  (anisotropyenable vkbool32)
-  (maxanisotropy :float)
-  (compareenable vkbool32)
-  (compareop vkcompareop)
-  (minlod :float)
-  (maxlod :float)
-  (bordercolor vkbordercolor)
-  (unnormalizedcoordinates vkbool32))
-
-(cffi:defcstruct vkcopydescriptorset
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (srcset vkdescriptorset)
-  (srcbinding :uint32)
-  (srcarrayelement :uint32)
-  (dstset vkdescriptorset)
-  (dstbinding :uint32)
-  (dstarrayelement :uint32)
-  (descriptorcount :uint32))
-
-(cffi:defcstruct vkdescriptorbufferinfo
-  (buffer vkbuffer)
-  (offset vkdevicesize)
-  (range vkdevicesize))
-
-(cffi:defcstruct vkdescriptorimageinfo
-  (sampler vksampler)
-  (imageview vkimageview)
-  (imagelayout vkimagelayout))
-
-(cffi:defcstruct vkdescriptorpoolsize
-  (type vkdescriptortype)
-  (descriptorcount :uint32))
-
-(cffi:defcstruct vkdescriptorpoolcreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkdescriptorpoolcreateflags)
-  (maxsets :uint32)
-  (poolsizecount :uint32)
-  (ppoolsizes :pointer))
-
-(cffi:defcstruct vkdescriptorsetallocateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (descriptorpool vkdescriptorpool)
-  (descriptorsetcount :uint32)
-  (psetlayouts :pointer))
-
-(cffi:defcstruct vkdescriptorsetlayoutbinding
-  (binding :uint32)
-  (descriptortype vkdescriptortype)
-  (descriptorcount :uint32)
-  (stageflags vkshaderstageflags)
-  (pimmutablesamplers :pointer))
-
-(cffi:defcstruct vkdescriptorsetlayoutcreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkdescriptorsetlayoutcreateflags)
-  (bindingcount :uint32)
-  (pbindings :pointer))
-
-(cffi:defcstruct vkwritedescriptorset
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (dstset vkdescriptorset)
-  (dstbinding :uint32)
-  (dstarrayelement :uint32)
-  (descriptorcount :uint32)
-  (descriptortype vkdescriptortype)
-  (pimageinfo :pointer)
-  (pbufferinfo :pointer)
-  (ptexelbufferview :pointer))
-
-(cffi:defcstruct vkattachmentdescription
-  (flags vkattachmentdescriptionflags)
-  (format vkformat)
-  (samples vksamplecountflagbits)
-  (loadop vkattachmentloadop)
-  (storeop vkattachmentstoreop)
-  (stencilloadop vkattachmentloadop)
-  (stencilstoreop vkattachmentstoreop)
-  (initiallayout vkimagelayout)
-  (finallayout vkimagelayout))
-
-(cffi:defcstruct vkattachmentreference
-  (attachment :uint32)
-  (layout vkimagelayout))
-
-(cffi:defcstruct vkframebuffercreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkframebuffercreateflags)
-  (renderpass vkrenderpass)
-  (attachmentcount :uint32)
-  (pattachments :pointer)
-  (width :uint32)
-  (height :uint32)
-  (layers :uint32))
-
-(cffi:defcstruct vksubpassdescription
-  (flags vksubpassdescriptionflags)
-  (pipelinebindpoint vkpipelinebindpoint)
-  (inputattachmentcount :uint32)
-  (pinputattachments :pointer)
-  (colorattachmentcount :uint32)
-  (pcolorattachments :pointer)
-  (presolveattachments :pointer)
-  (pdepthstencilattachment :pointer)
-  (preserveattachmentcount :uint32)
-  (ppreserveattachments :pointer))
-
-(cffi:defcstruct vksubpassdependency
-  (srcsubpass :uint32)
-  (dstsubpass :uint32)
-  (srcstagemask vkpipelinestageflags)
-  (dststagemask vkpipelinestageflags)
-  (srcaccessmask vkaccessflags)
-  (dstaccessmask vkaccessflags)
-  (dependencyflags vkdependencyflags))
-
-(cffi:defcstruct vkrenderpasscreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkrenderpasscreateflags)
-  (attachmentcount :uint32)
-  (pattachments :pointer)
-  (subpasscount :uint32)
-  (psubpasses :pointer)
-  (dependencycount :uint32)
-  (pdependencies :pointer))
-
-(cffi:defcstruct vkcommandpoolcreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkcommandpoolcreateflags)
-  (queuefamilyindex :uint32))
-
-(cffi:defcstruct vkcommandbufferallocateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (commandpool vkcommandpool)
-  (level vkcommandbufferlevel)
-  (commandbuffercount :uint32))
-
-(cffi:defcstruct vkcommandbufferinheritanceinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (renderpass vkrenderpass)
-  (subpass :uint32)
-  (framebuffer vkframebuffer)
-  (occlusionqueryenable vkbool32)
-  (queryflags vkquerycontrolflags)
-  (pipelinestatistics vkquerypipelinestatisticflags))
-
-(cffi:defcstruct vkcommandbufferbegininfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkcommandbufferusageflags)
-  (pinheritanceinfo :pointer))
-
-(cffi:defcstruct vkbuffercopy
-  (srcoffset vkdevicesize)
-  (dstoffset vkdevicesize)
-  (size vkdevicesize))
-
-(cffi:defcstruct vkimagesubresourcelayers
-  (aspectmask vkimageaspectflags)
-  (miplevel :uint32)
-  (basearraylayer :uint32)
-  (layercount :uint32))
-
-(cffi:defcstruct vkbufferimagecopy
-  (bufferoffset vkdevicesize)
-  (bufferrowlength :uint32)
-  (bufferimageheight :uint32)
-  (imagesubresource (:struct vkimagesubresourcelayers))
-  (imageoffset (:struct vkoffset3d))
-  (imageextent (:struct vkextent3d)))
-
-(cffi:defcunion vkclearcolorvalue
-  (float32 :float :count 4)
-  (int32 :int32 :count 4)
-  (uint32 :uint32 :count 4))
-
-(cffi:defcstruct vkcleardepthstencilvalue
-  (depth :float)
-  (stencil :uint32))
-
-(cffi:defcunion vkclearvalue
-  (color (:union vkclearcolorvalue))
-  (depthstencil (:struct vkcleardepthstencilvalue)))
-
-(cffi:defcstruct vkclearattachment
-  (aspectmask vkimageaspectflags)
-  (colorattachment :uint32)
-  (clearvalue (:union vkclearvalue)))
-
-(cffi:defcstruct vkclearrect
-  (rect (:struct vkrect2d))
-  (basearraylayer :uint32)
-  (layercount :uint32))
-
-(cffi:defcstruct vkimageblit
-  (srcsubresource (:struct vkimagesubresourcelayers))
-  (srcoffsets (:struct vkoffset3d) :count 2)
-  (dstsubresource (:struct vkimagesubresourcelayers))
-  (dstoffsets (:struct vkoffset3d) :count 2))
-
-(cffi:defcstruct vkimagecopy
-  (srcsubresource (:struct vkimagesubresourcelayers))
-  (srcoffset (:struct vkoffset3d))
-  (dstsubresource (:struct vkimagesubresourcelayers))
-  (dstoffset (:struct vkoffset3d))
-  (extent (:struct vkextent3d)))
-
-(cffi:defcstruct vkimageresolve
-  (srcsubresource (:struct vkimagesubresourcelayers))
-  (srcoffset (:struct vkoffset3d))
-  (dstsubresource (:struct vkimagesubresourcelayers))
-  (dstoffset (:struct vkoffset3d))
-  (extent (:struct vkextent3d)))
-
-(cffi:defcstruct vkrenderpassbegininfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (renderpass vkrenderpass)
-  (framebuffer vkframebuffer)
-  (renderarea (:struct vkrect2d))
-  (clearvaluecount :uint32)
-  (pclearvalues :pointer))
-
-(cffi:defctype pfn_vkcreateinstance :pointer)
-
-(cffi:defctype pfn_vkdestroyinstance :pointer)
-
-(cffi:defctype pfn_vkenumeratephysicaldevices :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldevicefeatures :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldeviceformatproperties :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldeviceimageformatproperties :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldeviceproperties :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldevicequeuefamilyproperties :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldevicememoryproperties :pointer)
-
-(cffi:defctype pfn_vkgetinstanceprocaddr :pointer)
-
-(cffi:defctype pfn_vkgetdeviceprocaddr :pointer)
-
-(cffi:defctype pfn_vkcreatedevice :pointer)
-
-(cffi:defctype pfn_vkdestroydevice :pointer)
-
-(cffi:defctype pfn_vkenumerateinstanceextensionproperties :pointer)
-
-(cffi:defctype pfn_vkenumeratedeviceextensionproperties :pointer)
-
-(cffi:defctype pfn_vkenumerateinstancelayerproperties :pointer)
-
-(cffi:defctype pfn_vkenumeratedevicelayerproperties :pointer)
-
-(cffi:defctype pfn_vkgetdevicequeue :pointer)
-
-(cffi:defctype pfn_vkqueuesubmit :pointer)
-
-(cffi:defctype pfn_vkqueuewaitidle :pointer)
-
-(cffi:defctype pfn_vkdevicewaitidle :pointer)
-
-(cffi:defctype pfn_vkallocatememory :pointer)
-
-(cffi:defctype pfn_vkfreememory :pointer)
-
-(cffi:defctype pfn_vkmapmemory :pointer)
-
-(cffi:defctype pfn_vkunmapmemory :pointer)
-
-(cffi:defctype pfn_vkflushmappedmemoryranges :pointer)
-
-(cffi:defctype pfn_vkinvalidatemappedmemoryranges :pointer)
-
-(cffi:defctype pfn_vkgetdevicememorycommitment :pointer)
-
-(cffi:defctype pfn_vkbindbuffermemory :pointer)
-
-(cffi:defctype pfn_vkbindimagememory :pointer)
-
-(cffi:defctype pfn_vkgetbuffermemoryrequirements :pointer)
-
-(cffi:defctype pfn_vkgetimagememoryrequirements :pointer)
-
-(cffi:defctype pfn_vkgetimagesparsememoryrequirements :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldevicesparseimageformatproperties :pointer)
-
-(cffi:defctype pfn_vkqueuebindsparse :pointer)
-
-(cffi:defctype pfn_vkcreatefence :pointer)
-
-(cffi:defctype pfn_vkdestroyfence :pointer)
-
-(cffi:defctype pfn_vkresetfences :pointer)
-
-(cffi:defctype pfn_vkgetfencestatus :pointer)
-
-(cffi:defctype pfn_vkwaitforfences :pointer)
-
-(cffi:defctype pfn_vkcreatesemaphore :pointer)
-
-(cffi:defctype pfn_vkdestroysemaphore :pointer)
-
-(cffi:defctype pfn_vkcreateevent :pointer)
-
-(cffi:defctype pfn_vkdestroyevent :pointer)
-
-(cffi:defctype pfn_vkgeteventstatus :pointer)
-
-(cffi:defctype pfn_vksetevent :pointer)
-
-(cffi:defctype pfn_vkresetevent :pointer)
-
-(cffi:defctype pfn_vkcreatequerypool :pointer)
-
-(cffi:defctype pfn_vkdestroyquerypool :pointer)
-
-(cffi:defctype pfn_vkgetquerypoolresults :pointer)
-
-(cffi:defctype pfn_vkcreatebuffer :pointer)
-
-(cffi:defctype pfn_vkdestroybuffer :pointer)
-
-(cffi:defctype pfn_vkcreatebufferview :pointer)
-
-(cffi:defctype pfn_vkdestroybufferview :pointer)
-
-(cffi:defctype pfn_vkcreateimage :pointer)
-
-(cffi:defctype pfn_vkdestroyimage :pointer)
-
-(cffi:defctype pfn_vkgetimagesubresourcelayout :pointer)
-
-(cffi:defctype pfn_vkcreateimageview :pointer)
-
-(cffi:defctype pfn_vkdestroyimageview :pointer)
-
-(cffi:defctype pfn_vkcreateshadermodule :pointer)
-
-(cffi:defctype pfn_vkdestroyshadermodule :pointer)
-
-(cffi:defctype pfn_vkcreatepipelinecache :pointer)
-
-(cffi:defctype pfn_vkdestroypipelinecache :pointer)
-
-(cffi:defctype pfn_vkgetpipelinecachedata :pointer)
-
-(cffi:defctype pfn_vkmergepipelinecaches :pointer)
-
-(cffi:defctype pfn_vkcreategraphicspipelines :pointer)
-
-(cffi:defctype pfn_vkcreatecomputepipelines :pointer)
-
-(cffi:defctype pfn_vkdestroypipeline :pointer)
-
-(cffi:defctype pfn_vkcreatepipelinelayout :pointer)
-
-(cffi:defctype pfn_vkdestroypipelinelayout :pointer)
-
-(cffi:defctype pfn_vkcreatesampler :pointer)
-
-(cffi:defctype pfn_vkdestroysampler :pointer)
-
-(cffi:defctype pfn_vkcreatedescriptorsetlayout :pointer)
-
-(cffi:defctype pfn_vkdestroydescriptorsetlayout :pointer)
-
-(cffi:defctype pfn_vkcreatedescriptorpool :pointer)
-
-(cffi:defctype pfn_vkdestroydescriptorpool :pointer)
-
-(cffi:defctype pfn_vkresetdescriptorpool :pointer)
-
-(cffi:defctype pfn_vkallocatedescriptorsets :pointer)
-
-(cffi:defctype pfn_vkfreedescriptorsets :pointer)
-
-(cffi:defctype pfn_vkupdatedescriptorsets :pointer)
-
-(cffi:defctype pfn_vkcreateframebuffer :pointer)
-
-(cffi:defctype pfn_vkdestroyframebuffer :pointer)
-
-(cffi:defctype pfn_vkcreaterenderpass :pointer)
-
-(cffi:defctype pfn_vkdestroyrenderpass :pointer)
-
-(cffi:defctype pfn_vkgetrenderareagranularity :pointer)
-
-(cffi:defctype pfn_vkcreatecommandpool :pointer)
-
-(cffi:defctype pfn_vkdestroycommandpool :pointer)
-
-(cffi:defctype pfn_vkresetcommandpool :pointer)
-
-(cffi:defctype pfn_vkallocatecommandbuffers :pointer)
-
-(cffi:defctype pfn_vkfreecommandbuffers :pointer)
-
-(cffi:defctype pfn_vkbegincommandbuffer :pointer)
-
-(cffi:defctype pfn_vkendcommandbuffer :pointer)
-
-(cffi:defctype pfn_vkresetcommandbuffer :pointer)
-
-(cffi:defctype pfn_vkcmdbindpipeline :pointer)
-
-(cffi:defctype pfn_vkcmdsetviewport :pointer)
-
-(cffi:defctype pfn_vkcmdsetscissor :pointer)
-
-(cffi:defctype pfn_vkcmdsetlinewidth :pointer)
-
-(cffi:defctype pfn_vkcmdsetdepthbias :pointer)
-
-(cffi:defctype pfn_vkcmdsetblendconstants :pointer)
-
-(cffi:defctype pfn_vkcmdsetdepthbounds :pointer)
-
-(cffi:defctype pfn_vkcmdsetstencilcomparemask :pointer)
-
-(cffi:defctype pfn_vkcmdsetstencilwritemask :pointer)
-
-(cffi:defctype pfn_vkcmdsetstencilreference :pointer)
-
-(cffi:defctype pfn_vkcmdbinddescriptorsets :pointer)
-
-(cffi:defctype pfn_vkcmdbindindexbuffer :pointer)
-
-(cffi:defctype pfn_vkcmdbindvertexbuffers :pointer)
-
-(cffi:defctype pfn_vkcmddraw :pointer)
-
-(cffi:defctype pfn_vkcmddrawindexed :pointer)
-
-(cffi:defctype pfn_vkcmddrawindirect :pointer)
-
-(cffi:defctype pfn_vkcmddrawindexedindirect :pointer)
-
-(cffi:defctype pfn_vkcmddispatch :pointer)
-
-(cffi:defctype pfn_vkcmddispatchindirect :pointer)
-
-(cffi:defctype pfn_vkcmdcopybuffer :pointer)
-
-(cffi:defctype pfn_vkcmdcopyimage :pointer)
-
-(cffi:defctype pfn_vkcmdblitimage :pointer)
-
-(cffi:defctype pfn_vkcmdcopybuffertoimage :pointer)
-
-(cffi:defctype pfn_vkcmdcopyimagetobuffer :pointer)
-
-(cffi:defctype pfn_vkcmdupdatebuffer :pointer)
-
-(cffi:defctype pfn_vkcmdfillbuffer :pointer)
-
-(cffi:defctype pfn_vkcmdclearcolorimage :pointer)
-
-(cffi:defctype pfn_vkcmdcleardepthstencilimage :pointer)
-
-(cffi:defctype pfn_vkcmdclearattachments :pointer)
-
-(cffi:defctype pfn_vkcmdresolveimage :pointer)
-
-(cffi:defctype pfn_vkcmdsetevent :pointer)
-
-(cffi:defctype pfn_vkcmdresetevent :pointer)
-
-(cffi:defctype pfn_vkcmdwaitevents :pointer)
-
-(cffi:defctype pfn_vkcmdpipelinebarrier :pointer)
-
-(cffi:defctype pfn_vkcmdbeginquery :pointer)
-
-(cffi:defctype pfn_vkcmdendquery :pointer)
-
-(cffi:defctype pfn_vkcmdresetquerypool :pointer)
-
-(cffi:defctype pfn_vkcmdwritetimestamp :pointer)
-
-(cffi:defctype pfn_vkcmdcopyquerypoolresults :pointer)
-
-(cffi:defctype pfn_vkcmdpushconstants :pointer)
-
-(cffi:defctype pfn_vkcmdbeginrenderpass :pointer)
-
-(cffi:defctype pfn_vkcmdnextsubpass :pointer)
-
-(cffi:defctype pfn_vkcmdendrenderpass :pointer)
-
-(cffi:defctype pfn_vkcmdexecutecommands :pointer)
-
-(cffi:defctype vksamplerycbcrconversion non-dispatchable-handle)
-
-(cffi:defctype vkdescriptorupdatetemplate non-dispatchable-handle)
-
-(cffi:defctype vksubgroupfeatureflags vkflags)
-
-(cffi:defctype vkpeermemoryfeatureflags vkflags)
-
-(cffi:defctype vkmemoryallocateflags vkflags)
-
-(cffi:defctype vkcommandpooltrimflags vkflags)
-
-(cffi:defctype vkdescriptorupdatetemplatecreateflags vkflags)
-
-(cffi:defctype vkexternalmemoryhandletypeflags vkflags)
-
-(cffi:defctype vkexternalmemoryfeatureflags vkflags)
-
-(cffi:defctype vkexternalfencehandletypeflags vkflags)
-
-(cffi:defctype vkexternalfencefeatureflags vkflags)
-
-(cffi:defctype vkfenceimportflags vkflags)
-
-(cffi:defctype vksemaphoreimportflags vkflags)
-
-(cffi:defctype vkexternalsemaphorehandletypeflags vkflags)
-
-(cffi:defctype vkexternalsemaphorefeatureflags vkflags)
-
-(cffi:defcstruct vkphysicaldevicesubgroupproperties
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (subgroupsize :uint32)
-  (supportedstages vkshaderstageflags)
-  (supportedoperations vksubgroupfeatureflags)
-  (quadoperationsinallstages vkbool32))
-
-(cffi:defcstruct vkbindbuffermemoryinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (buffer vkbuffer)
-  (memory vkdevicememory)
-  (memoryoffset vkdevicesize))
-
-(cffi:defcstruct vkbindimagememoryinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (image vkimage)
-  (memory vkdevicememory)
-  (memoryoffset vkdevicesize))
-
-(cffi:defcstruct vkphysicaldevice16bitstoragefeatures
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (storagebuffer16bitaccess vkbool32)
-  (uniformandstoragebuffer16bitaccess vkbool32)
-  (storagepushconstant16 vkbool32)
-  (storageinputoutput16 vkbool32))
-
-(cffi:defcstruct vkmemorydedicatedrequirements
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (prefersdedicatedallocation vkbool32)
-  (requiresdedicatedallocation vkbool32))
-
-(cffi:defcstruct vkmemorydedicatedallocateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (image vkimage)
-  (buffer vkbuffer))
-
-(cffi:defcstruct vkmemoryallocateflagsinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkmemoryallocateflags)
-  (devicemask :uint32))
-
-(cffi:defcstruct vkdevicegrouprenderpassbegininfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (devicemask :uint32)
-  (devicerenderareacount :uint32)
-  (pdevicerenderareas :pointer))
-
-(cffi:defcstruct vkdevicegroupcommandbufferbegininfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (devicemask :uint32))
-
-(cffi:defcstruct vkdevicegroupsubmitinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (waitsemaphorecount :uint32)
-  (pwaitsemaphoredeviceindices :pointer)
-  (commandbuffercount :uint32)
-  (pcommandbufferdevicemasks :pointer)
-  (signalsemaphorecount :uint32)
-  (psignalsemaphoredeviceindices :pointer))
-
-(cffi:defcstruct vkdevicegroupbindsparseinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (resourcedeviceindex :uint32)
-  (memorydeviceindex :uint32))
-
-(cffi:defcstruct vkbindbuffermemorydevicegroupinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (deviceindexcount :uint32)
-  (pdeviceindices :pointer))
-
-(cffi:defcstruct vkbindimagememorydevicegroupinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (deviceindexcount :uint32)
-  (pdeviceindices :pointer)
-  (splitinstancebindregioncount :uint32)
-  (psplitinstancebindregions :pointer))
-
-(cffi:defcstruct vkphysicaldevicegroupproperties
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (physicaldevicecount :uint32)
-  (physicaldevices vkphysicaldevice :count 32)
-  (subsetallocation vkbool32))
-
-(cffi:defcstruct vkdevicegroupdevicecreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (physicaldevicecount :uint32)
-  (pphysicaldevices :pointer))
-
-(cffi:defcstruct vkbuffermemoryrequirementsinfo2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (buffer vkbuffer))
-
-(cffi:defcstruct vkimagememoryrequirementsinfo2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (image vkimage))
-
-(cffi:defcstruct vkimagesparsememoryrequirementsinfo2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (image vkimage))
-
-(cffi:defcstruct vkmemoryrequirements2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (memoryrequirements (:struct vkmemoryrequirements)))
-
-(cffi:defcstruct vksparseimagememoryrequirements2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (memoryrequirements (:struct vksparseimagememoryrequirements)))
-
-(cffi:defcstruct vkphysicaldevicefeatures2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (features (:struct vkphysicaldevicefeatures)))
-
-(cffi:defcstruct vkphysicaldeviceproperties2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (properties (:struct vkphysicaldeviceproperties)))
-
-(cffi:defcstruct vkformatproperties2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (formatproperties (:struct vkformatproperties)))
-
-(cffi:defcstruct vkimageformatproperties2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (imageformatproperties (:struct vkimageformatproperties)))
-
-(cffi:defcstruct vkphysicaldeviceimageformatinfo2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (format vkformat)
-  (type vkimagetype)
-  (tiling vkimagetiling)
-  (usage vkimageusageflags)
-  (flags vkimagecreateflags))
-
-(cffi:defcstruct vkqueuefamilyproperties2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (queuefamilyproperties (:struct vkqueuefamilyproperties)))
-
-(cffi:defcstruct vkphysicaldevicememoryproperties2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (memoryproperties (:struct vkphysicaldevicememoryproperties)))
-
-(cffi:defcstruct vksparseimageformatproperties2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (properties (:struct vksparseimageformatproperties)))
-
-(cffi:defcstruct vkphysicaldevicesparseimageformatinfo2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (format vkformat)
-  (type vkimagetype)
-  (samples vksamplecountflagbits)
-  (usage vkimageusageflags)
-  (tiling vkimagetiling))
-
-(cffi:defcstruct vkphysicaldevicepointclippingproperties
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (pointclippingbehavior vkpointclippingbehavior))
-
-(cffi:defcstruct vkinputattachmentaspectreference
-  (subpass :uint32)
-  (inputattachmentindex :uint32)
-  (aspectmask vkimageaspectflags))
-
-(cffi:defcstruct vkrenderpassinputattachmentaspectcreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (aspectreferencecount :uint32)
-  (paspectreferences :pointer))
-
-(cffi:defcstruct vkimageviewusagecreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (usage vkimageusageflags))
-
-(cffi:defcstruct vkpipelinetessellationdomainoriginstatecreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (domainorigin vktessellationdomainorigin))
-
-(cffi:defcstruct vkrenderpassmultiviewcreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (subpasscount :uint32)
-  (pviewmasks :pointer)
-  (dependencycount :uint32)
-  (pviewoffsets :pointer)
-  (correlationmaskcount :uint32)
-  (pcorrelationmasks :pointer))
-
-(cffi:defcstruct vkphysicaldevicemultiviewfeatures
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (multiview vkbool32)
-  (multiviewgeometryshader vkbool32)
-  (multiviewtessellationshader vkbool32))
-
-(cffi:defcstruct vkphysicaldevicemultiviewproperties
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (maxmultiviewviewcount :uint32)
-  (maxmultiviewinstanceindex :uint32))
-
-(cffi:defcstruct vkphysicaldevicevariablepointersfeatures
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (variablepointersstoragebuffer vkbool32)
-  (variablepointers vkbool32))
-
-(cffi:defctype vkphysicaldevicevariablepointerfeatures
-               (:struct vkphysicaldevicevariablepointersfeatures))
-
-(cffi:defcstruct vkphysicaldeviceprotectedmemoryfeatures
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (protectedmemory vkbool32))
-
-(cffi:defcstruct vkphysicaldeviceprotectedmemoryproperties
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (protectednofault vkbool32))
-
-(cffi:defcstruct vkdevicequeueinfo2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkdevicequeuecreateflags)
-  (queuefamilyindex :uint32)
-  (queueindex :uint32))
-
-(cffi:defcstruct vkprotectedsubmitinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (protectedsubmit vkbool32))
-
-(cffi:defcstruct vksamplerycbcrconversioncreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (format vkformat)
-  (ycbcrmodel vksamplerycbcrmodelconversion)
-  (ycbcrrange vksamplerycbcrrange)
-  (components (:struct vkcomponentmapping))
-  (xchromaoffset vkchromalocation)
-  (ychromaoffset vkchromalocation)
-  (chromafilter vkfilter)
-  (forceexplicitreconstruction vkbool32))
-
-(cffi:defcstruct vksamplerycbcrconversioninfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (conversion vksamplerycbcrconversion))
-
-(cffi:defcstruct vkbindimageplanememoryinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (planeaspect vkimageaspectflagbits))
-
-(cffi:defcstruct vkimageplanememoryrequirementsinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (planeaspect vkimageaspectflagbits))
-
-(cffi:defcstruct vkphysicaldevicesamplerycbcrconversionfeatures
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (samplerycbcrconversion vkbool32))
-
-(cffi:defcstruct vksamplerycbcrconversionimageformatproperties
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (combinedimagesamplerdescriptorcount :uint32))
-
-(cffi:defcstruct vkdescriptorupdatetemplateentry
-  (dstbinding :uint32)
-  (dstarrayelement :uint32)
-  (descriptorcount :uint32)
-  (descriptortype vkdescriptortype)
-  (offset :size)
-  (stride :size))
-
-(cffi:defcstruct vkdescriptorupdatetemplatecreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkdescriptorupdatetemplatecreateflags)
-  (descriptorupdateentrycount :uint32)
-  (pdescriptorupdateentries :pointer)
-  (templatetype vkdescriptorupdatetemplatetype)
-  (descriptorsetlayout vkdescriptorsetlayout)
-  (pipelinebindpoint vkpipelinebindpoint)
-  (pipelinelayout vkpipelinelayout)
-  (set :uint32))
-
-(cffi:defcstruct vkexternalmemoryproperties
-  (externalmemoryfeatures vkexternalmemoryfeatureflags)
-  (exportfromimportedhandletypes vkexternalmemoryhandletypeflags)
-  (compatiblehandletypes vkexternalmemoryhandletypeflags))
-
-(cffi:defcstruct vkphysicaldeviceexternalimageformatinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (handletype vkexternalmemoryhandletypeflagbits))
-
-(cffi:defcstruct vkexternalimageformatproperties
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (externalmemoryproperties (:struct vkexternalmemoryproperties)))
-
-(cffi:defcstruct vkphysicaldeviceexternalbufferinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkbuffercreateflags)
-  (usage vkbufferusageflags)
-  (handletype vkexternalmemoryhandletypeflagbits))
-
-(cffi:defcstruct vkexternalbufferproperties
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (externalmemoryproperties (:struct vkexternalmemoryproperties)))
-
-(cffi:defcstruct vkphysicaldeviceidproperties
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (deviceuuid :uint8 :count 16)
-  (driveruuid :uint8 :count 16)
-  (deviceluid :uint8 :count 8)
-  (devicenodemask :uint32)
-  (deviceluidvalid vkbool32))
-
-(cffi:defcstruct vkexternalmemoryimagecreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (handletypes vkexternalmemoryhandletypeflags))
-
-(cffi:defcstruct vkexternalmemorybuffercreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (handletypes vkexternalmemoryhandletypeflags))
-
-(cffi:defcstruct vkexportmemoryallocateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (handletypes vkexternalmemoryhandletypeflags))
-
-(cffi:defcstruct vkphysicaldeviceexternalfenceinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (handletype vkexternalfencehandletypeflagbits))
-
-(cffi:defcstruct vkexternalfenceproperties
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (exportfromimportedhandletypes vkexternalfencehandletypeflags)
-  (compatiblehandletypes vkexternalfencehandletypeflags)
-  (externalfencefeatures vkexternalfencefeatureflags))
-
-(cffi:defcstruct vkexportfencecreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (handletypes vkexternalfencehandletypeflags))
-
-(cffi:defcstruct vkexportsemaphorecreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (handletypes vkexternalsemaphorehandletypeflags))
-
-(cffi:defcstruct vkphysicaldeviceexternalsemaphoreinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (handletype vkexternalsemaphorehandletypeflagbits))
-
-(cffi:defcstruct vkexternalsemaphoreproperties
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (exportfromimportedhandletypes vkexternalsemaphorehandletypeflags)
-  (compatiblehandletypes vkexternalsemaphorehandletypeflags)
-  (externalsemaphorefeatures vkexternalsemaphorefeatureflags))
-
-(cffi:defcstruct vkphysicaldevicemaintenance3properties
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (maxpersetdescriptors :uint32)
-  (maxmemoryallocationsize vkdevicesize))
-
-(cffi:defcstruct vkdescriptorsetlayoutsupport
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (supported vkbool32))
-
-(cffi:defcstruct vkphysicaldeviceshaderdrawparametersfeatures
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (shaderdrawparameters vkbool32))
-
-(cffi:defctype vkphysicaldeviceshaderdrawparameterfeatures
-               (:struct vkphysicaldeviceshaderdrawparametersfeatures))
-
-(cffi:defctype pfn_vkenumerateinstanceversion :pointer)
-
-(cffi:defctype pfn_vkbindbuffermemory2 :pointer)
-
-(cffi:defctype pfn_vkbindimagememory2 :pointer)
-
-(cffi:defctype pfn_vkgetdevicegrouppeermemoryfeatures :pointer)
-
-(cffi:defctype pfn_vkcmdsetdevicemask :pointer)
-
-(cffi:defctype pfn_vkcmddispatchbase :pointer)
-
-(cffi:defctype pfn_vkenumeratephysicaldevicegroups :pointer)
-
-(cffi:defctype pfn_vkgetimagememoryrequirements2 :pointer)
-
-(cffi:defctype pfn_vkgetbuffermemoryrequirements2 :pointer)
-
-(cffi:defctype pfn_vkgetimagesparsememoryrequirements2 :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldevicefeatures2 :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldeviceproperties2 :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldeviceformatproperties2 :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldeviceimageformatproperties2 :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldevicequeuefamilyproperties2 :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldevicememoryproperties2 :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldevicesparseimageformatproperties2 :pointer)
-
-(cffi:defctype pfn_vktrimcommandpool :pointer)
-
-(cffi:defctype pfn_vkgetdevicequeue2 :pointer)
-
-(cffi:defctype pfn_vkcreatesamplerycbcrconversion :pointer)
-
-(cffi:defctype pfn_vkdestroysamplerycbcrconversion :pointer)
-
-(cffi:defctype pfn_vkcreatedescriptorupdatetemplate :pointer)
-
-(cffi:defctype pfn_vkdestroydescriptorupdatetemplate :pointer)
-
-(cffi:defctype pfn_vkupdatedescriptorsetwithtemplate :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldeviceexternalbufferproperties :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldeviceexternalfenceproperties :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldeviceexternalsemaphoreproperties :pointer)
-
-(cffi:defctype pfn_vkgetdescriptorsetlayoutsupport :pointer)
-
-(cffi:defctype vkresolvemodeflags vkflags)
-
-(cffi:defctype vkdescriptorbindingflags vkflags)
-
-(cffi:defctype vksemaphorewaitflags vkflags)
-
-(cffi:defcstruct vkphysicaldevicevulkan11features
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (storagebuffer16bitaccess vkbool32)
-  (uniformandstoragebuffer16bitaccess vkbool32)
-  (storagepushconstant16 vkbool32)
-  (storageinputoutput16 vkbool32)
-  (multiview vkbool32)
-  (multiviewgeometryshader vkbool32)
-  (multiviewtessellationshader vkbool32)
-  (variablepointersstoragebuffer vkbool32)
-  (variablepointers vkbool32)
-  (protectedmemory vkbool32)
-  (samplerycbcrconversion vkbool32)
-  (shaderdrawparameters vkbool32))
-
-(cffi:defcstruct vkphysicaldevicevulkan11properties
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (deviceuuid :uint8 :count 16)
-  (driveruuid :uint8 :count 16)
-  (deviceluid :uint8 :count 8)
-  (devicenodemask :uint32)
-  (deviceluidvalid vkbool32)
-  (subgroupsize :uint32)
-  (subgroupsupportedstages vkshaderstageflags)
-  (subgroupsupportedoperations vksubgroupfeatureflags)
-  (subgroupquadoperationsinallstages vkbool32)
-  (pointclippingbehavior vkpointclippingbehavior)
-  (maxmultiviewviewcount :uint32)
-  (maxmultiviewinstanceindex :uint32)
-  (protectednofault vkbool32)
-  (maxpersetdescriptors :uint32)
-  (maxmemoryallocationsize vkdevicesize))
-
-(cffi:defcstruct vkphysicaldevicevulkan12features
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (samplermirrorclamptoedge vkbool32)
-  (drawindirectcount vkbool32)
-  (storagebuffer8bitaccess vkbool32)
-  (uniformandstoragebuffer8bitaccess vkbool32)
-  (storagepushconstant8 vkbool32)
-  (shaderbufferint64atomics vkbool32)
-  (shadersharedint64atomics vkbool32)
-  (shaderfloat16 vkbool32)
-  (shaderint8 vkbool32)
-  (descriptorindexing vkbool32)
-  (shaderinputattachmentarraydynamicindexing vkbool32)
-  (shaderuniformtexelbufferarraydynamicindexing vkbool32)
-  (shaderstoragetexelbufferarraydynamicindexing vkbool32)
-  (shaderuniformbufferarraynonuniformindexing vkbool32)
-  (shadersampledimagearraynonuniformindexing vkbool32)
-  (shaderstoragebufferarraynonuniformindexing vkbool32)
-  (shaderstorageimagearraynonuniformindexing vkbool32)
-  (shaderinputattachmentarraynonuniformindexing vkbool32)
-  (shaderuniformtexelbufferarraynonuniformindexing vkbool32)
-  (shaderstoragetexelbufferarraynonuniformindexing vkbool32)
-  (descriptorbindinguniformbufferupdateafterbind vkbool32)
-  (descriptorbindingsampledimageupdateafterbind vkbool32)
-  (descriptorbindingstorageimageupdateafterbind vkbool32)
-  (descriptorbindingstoragebufferupdateafterbind vkbool32)
-  (descriptorbindinguniformtexelbufferupdateafterbind vkbool32)
-  (descriptorbindingstoragetexelbufferupdateafterbind vkbool32)
-  (descriptorbindingupdateunusedwhilepending vkbool32)
-  (descriptorbindingpartiallybound vkbool32)
-  (descriptorbindingvariabledescriptorcount vkbool32)
-  (runtimedescriptorarray vkbool32)
-  (samplerfilterminmax vkbool32)
-  (scalarblocklayout vkbool32)
-  (imagelessframebuffer vkbool32)
-  (uniformbufferstandardlayout vkbool32)
-  (shadersubgroupextendedtypes vkbool32)
-  (separatedepthstencillayouts vkbool32)
-  (hostqueryreset vkbool32)
-  (timelinesemaphore vkbool32)
-  (bufferdeviceaddress vkbool32)
-  (bufferdeviceaddresscapturereplay vkbool32)
-  (bufferdeviceaddressmultidevice vkbool32)
-  (vulkanmemorymodel vkbool32)
-  (vulkanmemorymodeldevicescope vkbool32)
-  (vulkanmemorymodelavailabilityvisibilitychains vkbool32)
-  (shaderoutputviewportindex vkbool32)
-  (shaderoutputlayer vkbool32)
-  (subgroupbroadcastdynamicid vkbool32))
-
-(cffi:defcstruct vkconformanceversion
-  (major :uint8)
-  (minor :uint8)
-  (subminor :uint8)
-  (patch :uint8))
-
-(cffi:defcstruct vkphysicaldevicevulkan12properties
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (driverid vkdriverid)
-  (drivername :char :count 256)
-  (driverinfo :char :count 256)
-  (conformanceversion (:struct vkconformanceversion))
-  (denormbehaviorindependence vkshaderfloatcontrolsindependence)
-  (roundingmodeindependence vkshaderfloatcontrolsindependence)
-  (shadersignedzeroinfnanpreservefloat16 vkbool32)
-  (shadersignedzeroinfnanpreservefloat32 vkbool32)
-  (shadersignedzeroinfnanpreservefloat64 vkbool32)
-  (shaderdenormpreservefloat16 vkbool32)
-  (shaderdenormpreservefloat32 vkbool32)
-  (shaderdenormpreservefloat64 vkbool32)
-  (shaderdenormflushtozerofloat16 vkbool32)
-  (shaderdenormflushtozerofloat32 vkbool32)
-  (shaderdenormflushtozerofloat64 vkbool32)
-  (shaderroundingmodertefloat16 vkbool32)
-  (shaderroundingmodertefloat32 vkbool32)
-  (shaderroundingmodertefloat64 vkbool32)
-  (shaderroundingmodertzfloat16 vkbool32)
-  (shaderroundingmodertzfloat32 vkbool32)
-  (shaderroundingmodertzfloat64 vkbool32)
-  (maxupdateafterbinddescriptorsinallpools :uint32)
-  (shaderuniformbufferarraynonuniformindexingnative vkbool32)
-  (shadersampledimagearraynonuniformindexingnative vkbool32)
-  (shaderstoragebufferarraynonuniformindexingnative vkbool32)
-  (shaderstorageimagearraynonuniformindexingnative vkbool32)
-  (shaderinputattachmentarraynonuniformindexingnative vkbool32)
-  (robustbufferaccessupdateafterbind vkbool32)
-  (quaddivergentimplicitlod vkbool32)
-  (maxperstagedescriptorupdateafterbindsamplers :uint32)
-  (maxperstagedescriptorupdateafterbinduniformbuffers :uint32)
-  (maxperstagedescriptorupdateafterbindstoragebuffers :uint32)
-  (maxperstagedescriptorupdateafterbindsampledimages :uint32)
-  (maxperstagedescriptorupdateafterbindstorageimages :uint32)
-  (maxperstagedescriptorupdateafterbindinputattachments :uint32)
-  (maxperstageupdateafterbindresources :uint32)
-  (maxdescriptorsetupdateafterbindsamplers :uint32)
-  (maxdescriptorsetupdateafterbinduniformbuffers :uint32)
-  (maxdescriptorsetupdateafterbinduniformbuffersdynamic :uint32)
-  (maxdescriptorsetupdateafterbindstoragebuffers :uint32)
-  (maxdescriptorsetupdateafterbindstoragebuffersdynamic :uint32)
-  (maxdescriptorsetupdateafterbindsampledimages :uint32)
-  (maxdescriptorsetupdateafterbindstorageimages :uint32)
-  (maxdescriptorsetupdateafterbindinputattachments :uint32)
-  (supporteddepthresolvemodes vkresolvemodeflags)
-  (supportedstencilresolvemodes vkresolvemodeflags)
-  (independentresolvenone vkbool32)
-  (independentresolve vkbool32)
-  (filterminmaxsinglecomponentformats vkbool32)
-  (filterminmaximagecomponentmapping vkbool32)
-  (maxtimelinesemaphorevaluedifference :uint64)
-  (framebufferintegercolorsamplecounts vksamplecountflags))
-
-(cffi:defcstruct vkimageformatlistcreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (viewformatcount :uint32)
-  (pviewformats :pointer))
-
-(cffi:defcstruct vkattachmentdescription2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkattachmentdescriptionflags)
-  (format vkformat)
-  (samples vksamplecountflagbits)
-  (loadop vkattachmentloadop)
-  (storeop vkattachmentstoreop)
-  (stencilloadop vkattachmentloadop)
-  (stencilstoreop vkattachmentstoreop)
-  (initiallayout vkimagelayout)
-  (finallayout vkimagelayout))
-
-(cffi:defcstruct vkattachmentreference2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (attachment :uint32)
-  (layout vkimagelayout)
-  (aspectmask vkimageaspectflags))
-
-(cffi:defcstruct vksubpassdescription2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vksubpassdescriptionflags)
-  (pipelinebindpoint vkpipelinebindpoint)
-  (viewmask :uint32)
-  (inputattachmentcount :uint32)
-  (pinputattachments :pointer)
-  (colorattachmentcount :uint32)
-  (pcolorattachments :pointer)
-  (presolveattachments :pointer)
-  (pdepthstencilattachment :pointer)
-  (preserveattachmentcount :uint32)
-  (ppreserveattachments :pointer))
-
-(cffi:defcstruct vksubpassdependency2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (srcsubpass :uint32)
-  (dstsubpass :uint32)
-  (srcstagemask vkpipelinestageflags)
-  (dststagemask vkpipelinestageflags)
-  (srcaccessmask vkaccessflags)
-  (dstaccessmask vkaccessflags)
-  (dependencyflags vkdependencyflags)
-  (viewoffset :int32))
-
-(cffi:defcstruct vkrenderpasscreateinfo2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkrenderpasscreateflags)
-  (attachmentcount :uint32)
-  (pattachments :pointer)
-  (subpasscount :uint32)
-  (psubpasses :pointer)
-  (dependencycount :uint32)
-  (pdependencies :pointer)
-  (correlatedviewmaskcount :uint32)
-  (pcorrelatedviewmasks :pointer))
-
-(cffi:defcstruct vksubpassbegininfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (contents vksubpasscontents))
-
-(cffi:defcstruct vksubpassendinfo
-  (stype vkstructuretype)
-  (pnext :pointer))
-
-(cffi:defcstruct vkphysicaldevice8bitstoragefeatures
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (storagebuffer8bitaccess vkbool32)
-  (uniformandstoragebuffer8bitaccess vkbool32)
-  (storagepushconstant8 vkbool32))
-
-(cffi:defcstruct vkphysicaldevicedriverproperties
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (driverid vkdriverid)
-  (drivername :char :count 256)
-  (driverinfo :char :count 256)
-  (conformanceversion (:struct vkconformanceversion)))
-
-(cffi:defcstruct vkphysicaldeviceshaderatomicint64features
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (shaderbufferint64atomics vkbool32)
-  (shadersharedint64atomics vkbool32))
-
-(cffi:defcstruct vkphysicaldeviceshaderfloat16int8features
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (shaderfloat16 vkbool32)
-  (shaderint8 vkbool32))
-
-(cffi:defcstruct vkphysicaldevicefloatcontrolsproperties
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (denormbehaviorindependence vkshaderfloatcontrolsindependence)
-  (roundingmodeindependence vkshaderfloatcontrolsindependence)
-  (shadersignedzeroinfnanpreservefloat16 vkbool32)
-  (shadersignedzeroinfnanpreservefloat32 vkbool32)
-  (shadersignedzeroinfnanpreservefloat64 vkbool32)
-  (shaderdenormpreservefloat16 vkbool32)
-  (shaderdenormpreservefloat32 vkbool32)
-  (shaderdenormpreservefloat64 vkbool32)
-  (shaderdenormflushtozerofloat16 vkbool32)
-  (shaderdenormflushtozerofloat32 vkbool32)
-  (shaderdenormflushtozerofloat64 vkbool32)
-  (shaderroundingmodertefloat16 vkbool32)
-  (shaderroundingmodertefloat32 vkbool32)
-  (shaderroundingmodertefloat64 vkbool32)
-  (shaderroundingmodertzfloat16 vkbool32)
-  (shaderroundingmodertzfloat32 vkbool32)
-  (shaderroundingmodertzfloat64 vkbool32))
-
-(cffi:defcstruct vkdescriptorsetlayoutbindingflagscreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (bindingcount :uint32)
-  (pbindingflags :pointer))
-
-(cffi:defcstruct vkphysicaldevicedescriptorindexingfeatures
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (shaderinputattachmentarraydynamicindexing vkbool32)
-  (shaderuniformtexelbufferarraydynamicindexing vkbool32)
-  (shaderstoragetexelbufferarraydynamicindexing vkbool32)
-  (shaderuniformbufferarraynonuniformindexing vkbool32)
-  (shadersampledimagearraynonuniformindexing vkbool32)
-  (shaderstoragebufferarraynonuniformindexing vkbool32)
-  (shaderstorageimagearraynonuniformindexing vkbool32)
-  (shaderinputattachmentarraynonuniformindexing vkbool32)
-  (shaderuniformtexelbufferarraynonuniformindexing vkbool32)
-  (shaderstoragetexelbufferarraynonuniformindexing vkbool32)
-  (descriptorbindinguniformbufferupdateafterbind vkbool32)
-  (descriptorbindingsampledimageupdateafterbind vkbool32)
-  (descriptorbindingstorageimageupdateafterbind vkbool32)
-  (descriptorbindingstoragebufferupdateafterbind vkbool32)
-  (descriptorbindinguniformtexelbufferupdateafterbind vkbool32)
-  (descriptorbindingstoragetexelbufferupdateafterbind vkbool32)
-  (descriptorbindingupdateunusedwhilepending vkbool32)
-  (descriptorbindingpartiallybound vkbool32)
-  (descriptorbindingvariabledescriptorcount vkbool32)
-  (runtimedescriptorarray vkbool32))
-
-(cffi:defcstruct vkphysicaldevicedescriptorindexingproperties
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (maxupdateafterbinddescriptorsinallpools :uint32)
-  (shaderuniformbufferarraynonuniformindexingnative vkbool32)
-  (shadersampledimagearraynonuniformindexingnative vkbool32)
-  (shaderstoragebufferarraynonuniformindexingnative vkbool32)
-  (shaderstorageimagearraynonuniformindexingnative vkbool32)
-  (shaderinputattachmentarraynonuniformindexingnative vkbool32)
-  (robustbufferaccessupdateafterbind vkbool32)
-  (quaddivergentimplicitlod vkbool32)
-  (maxperstagedescriptorupdateafterbindsamplers :uint32)
-  (maxperstagedescriptorupdateafterbinduniformbuffers :uint32)
-  (maxperstagedescriptorupdateafterbindstoragebuffers :uint32)
-  (maxperstagedescriptorupdateafterbindsampledimages :uint32)
-  (maxperstagedescriptorupdateafterbindstorageimages :uint32)
-  (maxperstagedescriptorupdateafterbindinputattachments :uint32)
-  (maxperstageupdateafterbindresources :uint32)
-  (maxdescriptorsetupdateafterbindsamplers :uint32)
-  (maxdescriptorsetupdateafterbinduniformbuffers :uint32)
-  (maxdescriptorsetupdateafterbinduniformbuffersdynamic :uint32)
-  (maxdescriptorsetupdateafterbindstoragebuffers :uint32)
-  (maxdescriptorsetupdateafterbindstoragebuffersdynamic :uint32)
-  (maxdescriptorsetupdateafterbindsampledimages :uint32)
-  (maxdescriptorsetupdateafterbindstorageimages :uint32)
-  (maxdescriptorsetupdateafterbindinputattachments :uint32))
-
-(cffi:defcstruct vkdescriptorsetvariabledescriptorcountallocateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (descriptorsetcount :uint32)
-  (pdescriptorcounts :pointer))
-
-(cffi:defcstruct vkdescriptorsetvariabledescriptorcountlayoutsupport
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (maxvariabledescriptorcount :uint32))
-
-(cffi:defcstruct vksubpassdescriptiondepthstencilresolve
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (depthresolvemode vkresolvemodeflagbits)
-  (stencilresolvemode vkresolvemodeflagbits)
-  (pdepthstencilresolveattachment :pointer))
-
-(cffi:defcstruct vkphysicaldevicedepthstencilresolveproperties
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (supporteddepthresolvemodes vkresolvemodeflags)
-  (supportedstencilresolvemodes vkresolvemodeflags)
-  (independentresolvenone vkbool32)
-  (independentresolve vkbool32))
-
-(cffi:defcstruct vkphysicaldevicescalarblocklayoutfeatures
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (scalarblocklayout vkbool32))
-
-(cffi:defcstruct vkimagestencilusagecreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (stencilusage vkimageusageflags))
-
-(cffi:defcstruct vksamplerreductionmodecreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (reductionmode vksamplerreductionmode))
-
-(cffi:defcstruct vkphysicaldevicesamplerfilterminmaxproperties
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (filterminmaxsinglecomponentformats vkbool32)
-  (filterminmaximagecomponentmapping vkbool32))
-
-(cffi:defcstruct vkphysicaldevicevulkanmemorymodelfeatures
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (vulkanmemorymodel vkbool32)
-  (vulkanmemorymodeldevicescope vkbool32)
-  (vulkanmemorymodelavailabilityvisibilitychains vkbool32))
-
-(cffi:defcstruct vkphysicaldeviceimagelessframebufferfeatures
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (imagelessframebuffer vkbool32))
-
-(cffi:defcstruct vkframebufferattachmentimageinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkimagecreateflags)
-  (usage vkimageusageflags)
-  (width :uint32)
-  (height :uint32)
-  (layercount :uint32)
-  (viewformatcount :uint32)
-  (pviewformats :pointer))
-
-(cffi:defcstruct vkframebufferattachmentscreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (attachmentimageinfocount :uint32)
-  (pattachmentimageinfos :pointer))
-
-(cffi:defcstruct vkrenderpassattachmentbegininfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (attachmentcount :uint32)
-  (pattachments :pointer))
-
-(cffi:defcstruct vkphysicaldeviceuniformbufferstandardlayoutfeatures
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (uniformbufferstandardlayout vkbool32))
-
-(cffi:defcstruct vkphysicaldeviceshadersubgroupextendedtypesfeatures
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (shadersubgroupextendedtypes vkbool32))
-
-(cffi:defcstruct vkphysicaldeviceseparatedepthstencillayoutsfeatures
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (separatedepthstencillayouts vkbool32))
-
-(cffi:defcstruct vkattachmentreferencestencillayout
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (stencillayout vkimagelayout))
-
-(cffi:defcstruct vkattachmentdescriptionstencillayout
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (stencilinitiallayout vkimagelayout)
-  (stencilfinallayout vkimagelayout))
-
-(cffi:defcstruct vkphysicaldevicehostqueryresetfeatures
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (hostqueryreset vkbool32))
-
-(cffi:defcstruct vkphysicaldevicetimelinesemaphorefeatures
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (timelinesemaphore vkbool32))
-
-(cffi:defcstruct vkphysicaldevicetimelinesemaphoreproperties
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (maxtimelinesemaphorevaluedifference :uint64))
-
-(cffi:defcstruct vksemaphoretypecreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (semaphoretype vksemaphoretype)
-  (initialvalue :uint64))
-
-(cffi:defcstruct vktimelinesemaphoresubmitinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (waitsemaphorevaluecount :uint32)
-  (pwaitsemaphorevalues :pointer)
-  (signalsemaphorevaluecount :uint32)
-  (psignalsemaphorevalues :pointer))
-
-(cffi:defcstruct vksemaphorewaitinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vksemaphorewaitflags)
-  (semaphorecount :uint32)
-  (psemaphores :pointer)
-  (pvalues :pointer))
-
-(cffi:defcstruct vksemaphoresignalinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (semaphore vksemaphore)
-  (value :uint64))
-
-(cffi:defcstruct vkphysicaldevicebufferdeviceaddressfeatures
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (bufferdeviceaddress vkbool32)
-  (bufferdeviceaddresscapturereplay vkbool32)
-  (bufferdeviceaddressmultidevice vkbool32))
-
-(cffi:defcstruct vkbufferdeviceaddressinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (buffer vkbuffer))
-
-(cffi:defcstruct vkbufferopaquecaptureaddresscreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (opaquecaptureaddress :uint64))
-
-(cffi:defcstruct vkmemoryopaquecaptureaddressallocateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (opaquecaptureaddress :uint64))
-
-(cffi:defcstruct vkdevicememoryopaquecaptureaddressinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (memory vkdevicememory))
-
-(cffi:defctype pfn_vkcmddrawindirectcount :pointer)
-
-(cffi:defctype pfn_vkcmddrawindexedindirectcount :pointer)
-
-(cffi:defctype pfn_vkcreaterenderpass2 :pointer)
-
-(cffi:defctype pfn_vkcmdbeginrenderpass2 :pointer)
-
-(cffi:defctype pfn_vkcmdnextsubpass2 :pointer)
-
-(cffi:defctype pfn_vkcmdendrenderpass2 :pointer)
-
-(cffi:defctype pfn_vkresetquerypool :pointer)
-
-(cffi:defctype pfn_vkgetsemaphorecountervalue :pointer)
-
-(cffi:defctype pfn_vkwaitsemaphores :pointer)
-
-(cffi:defctype pfn_vksignalsemaphore :pointer)
-
-(cffi:defctype pfn_vkgetbufferdeviceaddress :pointer)
-
-(cffi:defctype pfn_vkgetbufferopaquecaptureaddress :pointer)
-
-(cffi:defctype pfn_vkgetdevicememoryopaquecaptureaddress :pointer)
-
-(cffi:defctype vkflags64 :uint64)
-
-(cffi:defctype vkprivatedataslot non-dispatchable-handle)
-
-(cffi:defctype vkpipelinecreationfeedbackflags vkflags)
-
-(cffi:defctype vktoolpurposeflags vkflags)
-
-(cffi:defctype vkprivatedataslotcreateflags vkflags)
-
-(cffi:defctype vkpipelinestageflags2 vkflags64)
-
-(cffi:defctype vkpipelinestageflagbits2 vkflags64)
-
-(cffi:defctype vkaccessflags2 vkflags64)
-
-(cffi:defctype vkaccessflagbits2 vkflags64)
-
-(cffi:defctype vksubmitflags vkflags)
-
-(cffi:defctype vkrenderingflags vkflags)
-
-(cffi:defctype vkformatfeatureflags2 vkflags64)
-
-(cffi:defctype vkformatfeatureflagbits2 vkflags64)
-
-(cffi:defcstruct vkphysicaldevicevulkan13features
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (robustimageaccess vkbool32)
-  (inlineuniformblock vkbool32)
-  (descriptorbindinginlineuniformblockupdateafterbind vkbool32)
-  (pipelinecreationcachecontrol vkbool32)
-  (privatedata vkbool32)
-  (shaderdemotetohelperinvocation vkbool32)
-  (shaderterminateinvocation vkbool32)
-  (subgroupsizecontrol vkbool32)
-  (computefullsubgroups vkbool32)
-  (synchronization2 vkbool32)
-  (texturecompressionastc_hdr vkbool32)
-  (shaderzeroinitializeworkgroupmemory vkbool32)
-  (dynamicrendering vkbool32)
-  (shaderintegerdotproduct vkbool32)
-  (maintenance4 vkbool32))
-
-(cffi:defcstruct vkphysicaldevicevulkan13properties
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (minsubgroupsize :uint32)
-  (maxsubgroupsize :uint32)
-  (maxcomputeworkgroupsubgroups :uint32)
-  (requiredsubgroupsizestages vkshaderstageflags)
-  (maxinlineuniformblocksize :uint32)
-  (maxperstagedescriptorinlineuniformblocks :uint32)
-  (maxperstagedescriptorupdateafterbindinlineuniformblocks :uint32)
-  (maxdescriptorsetinlineuniformblocks :uint32)
-  (maxdescriptorsetupdateafterbindinlineuniformblocks :uint32)
-  (maxinlineuniformtotalsize :uint32)
-  (integerdotproduct8bitunsignedaccelerated vkbool32)
-  (integerdotproduct8bitsignedaccelerated vkbool32)
-  (integerdotproduct8bitmixedsignednessaccelerated vkbool32)
-  (integerdotproduct4x8bitpackedunsignedaccelerated vkbool32)
-  (integerdotproduct4x8bitpackedsignedaccelerated vkbool32)
-  (integerdotproduct4x8bitpackedmixedsignednessaccelerated vkbool32)
-  (integerdotproduct16bitunsignedaccelerated vkbool32)
-  (integerdotproduct16bitsignedaccelerated vkbool32)
-  (integerdotproduct16bitmixedsignednessaccelerated vkbool32)
-  (integerdotproduct32bitunsignedaccelerated vkbool32)
-  (integerdotproduct32bitsignedaccelerated vkbool32)
-  (integerdotproduct32bitmixedsignednessaccelerated vkbool32)
-  (integerdotproduct64bitunsignedaccelerated vkbool32)
-  (integerdotproduct64bitsignedaccelerated vkbool32)
-  (integerdotproduct64bitmixedsignednessaccelerated vkbool32)
-  (integerdotproductaccumulatingsaturating8bitunsignedaccelerated vkbool32)
-  (integerdotproductaccumulatingsaturating8bitsignedaccelerated vkbool32)
-  (integerdotproductaccumulatingsaturating8bitmixedsignednessaccelerated
-   vkbool32)
-  (integerdotproductaccumulatingsaturating4x8bitpackedunsignedaccelerated
-   vkbool32)
-  (integerdotproductaccumulatingsaturating4x8bitpackedsignedaccelerated
-   vkbool32)
-  (integerdotproductaccumulatingsaturating4x8bitpackedmixedsignednessaccelerated
-   vkbool32)
-  (integerdotproductaccumulatingsaturating16bitunsignedaccelerated vkbool32)
-  (integerdotproductaccumulatingsaturating16bitsignedaccelerated vkbool32)
-  (integerdotproductaccumulatingsaturating16bitmixedsignednessaccelerated
-   vkbool32)
-  (integerdotproductaccumulatingsaturating32bitunsignedaccelerated vkbool32)
-  (integerdotproductaccumulatingsaturating32bitsignedaccelerated vkbool32)
-  (integerdotproductaccumulatingsaturating32bitmixedsignednessaccelerated
-   vkbool32)
-  (integerdotproductaccumulatingsaturating64bitunsignedaccelerated vkbool32)
-  (integerdotproductaccumulatingsaturating64bitsignedaccelerated vkbool32)
-  (integerdotproductaccumulatingsaturating64bitmixedsignednessaccelerated
-   vkbool32)
-  (storagetexelbufferoffsetalignmentbytes vkdevicesize)
-  (storagetexelbufferoffsetsingletexelalignment vkbool32)
-  (uniformtexelbufferoffsetalignmentbytes vkdevicesize)
-  (uniformtexelbufferoffsetsingletexelalignment vkbool32)
-  (maxbuffersize vkdevicesize))
-
-(cffi:defcstruct vkpipelinecreationfeedback
-  (flags vkpipelinecreationfeedbackflags)
-  (duration :uint64))
-
-(cffi:defcstruct vkpipelinecreationfeedbackcreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (ppipelinecreationfeedback :pointer)
-  (pipelinestagecreationfeedbackcount :uint32)
-  (ppipelinestagecreationfeedbacks :pointer))
-
-(cffi:defcstruct vkphysicaldeviceshaderterminateinvocationfeatures
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (shaderterminateinvocation vkbool32))
-
-(cffi:defcstruct vkphysicaldevicetoolproperties
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (name :char :count 256)
-  (version :char :count 256)
-  (purposes vktoolpurposeflags)
-  (description :char :count 256)
-  (layer :char :count 256))
-
-(cffi:defcstruct vkphysicaldeviceshaderdemotetohelperinvocationfeatures
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (shaderdemotetohelperinvocation vkbool32))
-
-(cffi:defcstruct vkphysicaldeviceprivatedatafeatures
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (privatedata vkbool32))
-
-(cffi:defcstruct vkdeviceprivatedatacreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (privatedataslotrequestcount :uint32))
-
-(cffi:defcstruct vkprivatedataslotcreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkprivatedataslotcreateflags))
-
-(cffi:defcstruct vkphysicaldevicepipelinecreationcachecontrolfeatures
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (pipelinecreationcachecontrol vkbool32))
-
-(cffi:defcstruct vkmemorybarrier2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (srcstagemask vkpipelinestageflags2)
-  (srcaccessmask vkaccessflags2)
-  (dststagemask vkpipelinestageflags2)
-  (dstaccessmask vkaccessflags2))
-
-(cffi:defcstruct vkbuffermemorybarrier2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (srcstagemask vkpipelinestageflags2)
-  (srcaccessmask vkaccessflags2)
-  (dststagemask vkpipelinestageflags2)
-  (dstaccessmask vkaccessflags2)
-  (srcqueuefamilyindex :uint32)
-  (dstqueuefamilyindex :uint32)
-  (buffer vkbuffer)
-  (offset vkdevicesize)
-  (size vkdevicesize))
-
-(cffi:defcstruct vkimagememorybarrier2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (srcstagemask vkpipelinestageflags2)
-  (srcaccessmask vkaccessflags2)
-  (dststagemask vkpipelinestageflags2)
-  (dstaccessmask vkaccessflags2)
-  (oldlayout vkimagelayout)
-  (newlayout vkimagelayout)
-  (srcqueuefamilyindex :uint32)
-  (dstqueuefamilyindex :uint32)
-  (image vkimage)
-  (subresourcerange (:struct vkimagesubresourcerange)))
-
-(cffi:defcstruct vkdependencyinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (dependencyflags vkdependencyflags)
-  (memorybarriercount :uint32)
-  (pmemorybarriers :pointer)
-  (buffermemorybarriercount :uint32)
-  (pbuffermemorybarriers :pointer)
-  (imagememorybarriercount :uint32)
-  (pimagememorybarriers :pointer))
-
-(cffi:defcstruct vksemaphoresubmitinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (semaphore vksemaphore)
-  (value :uint64)
-  (stagemask vkpipelinestageflags2)
-  (deviceindex :uint32))
-
-(cffi:defcstruct vkcommandbuffersubmitinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (commandbuffer vkcommandbuffer)
-  (devicemask :uint32))
-
-(cffi:defcstruct vksubmitinfo2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vksubmitflags)
-  (waitsemaphoreinfocount :uint32)
-  (pwaitsemaphoreinfos :pointer)
-  (commandbufferinfocount :uint32)
-  (pcommandbufferinfos :pointer)
-  (signalsemaphoreinfocount :uint32)
-  (psignalsemaphoreinfos :pointer))
-
-(cffi:defcstruct vkphysicaldevicesynchronization2features
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (synchronization2 vkbool32))
-
-(cffi:defcstruct vkphysicaldevicezeroinitializeworkgroupmemoryfeatures
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (shaderzeroinitializeworkgroupmemory vkbool32))
-
-(cffi:defcstruct vkphysicaldeviceimagerobustnessfeatures
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (robustimageaccess vkbool32))
-
-(cffi:defcstruct vkbuffercopy2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (srcoffset vkdevicesize)
-  (dstoffset vkdevicesize)
-  (size vkdevicesize))
-
-(cffi:defcstruct vkcopybufferinfo2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (srcbuffer vkbuffer)
-  (dstbuffer vkbuffer)
-  (regioncount :uint32)
-  (pregions :pointer))
-
-(cffi:defcstruct vkimagecopy2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (srcsubresource (:struct vkimagesubresourcelayers))
-  (srcoffset (:struct vkoffset3d))
-  (dstsubresource (:struct vkimagesubresourcelayers))
-  (dstoffset (:struct vkoffset3d))
-  (extent (:struct vkextent3d)))
-
-(cffi:defcstruct vkcopyimageinfo2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (srcimage vkimage)
-  (srcimagelayout vkimagelayout)
-  (dstimage vkimage)
-  (dstimagelayout vkimagelayout)
-  (regioncount :uint32)
-  (pregions :pointer))
-
-(cffi:defcstruct vkbufferimagecopy2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (bufferoffset vkdevicesize)
-  (bufferrowlength :uint32)
-  (bufferimageheight :uint32)
-  (imagesubresource (:struct vkimagesubresourcelayers))
-  (imageoffset (:struct vkoffset3d))
-  (imageextent (:struct vkextent3d)))
-
-(cffi:defcstruct vkcopybuffertoimageinfo2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (srcbuffer vkbuffer)
-  (dstimage vkimage)
-  (dstimagelayout vkimagelayout)
-  (regioncount :uint32)
-  (pregions :pointer))
-
-(cffi:defcstruct vkcopyimagetobufferinfo2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (srcimage vkimage)
-  (srcimagelayout vkimagelayout)
-  (dstbuffer vkbuffer)
-  (regioncount :uint32)
-  (pregions :pointer))
-
-(cffi:defcstruct vkimageblit2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (srcsubresource (:struct vkimagesubresourcelayers))
-  (srcoffsets (:struct vkoffset3d) :count 2)
-  (dstsubresource (:struct vkimagesubresourcelayers))
-  (dstoffsets (:struct vkoffset3d) :count 2))
-
-(cffi:defcstruct vkblitimageinfo2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (srcimage vkimage)
-  (srcimagelayout vkimagelayout)
-  (dstimage vkimage)
-  (dstimagelayout vkimagelayout)
-  (regioncount :uint32)
-  (pregions :pointer)
-  (filter vkfilter))
-
-(cffi:defcstruct vkimageresolve2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (srcsubresource (:struct vkimagesubresourcelayers))
-  (srcoffset (:struct vkoffset3d))
-  (dstsubresource (:struct vkimagesubresourcelayers))
-  (dstoffset (:struct vkoffset3d))
-  (extent (:struct vkextent3d)))
-
-(cffi:defcstruct vkresolveimageinfo2
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (srcimage vkimage)
-  (srcimagelayout vkimagelayout)
-  (dstimage vkimage)
-  (dstimagelayout vkimagelayout)
-  (regioncount :uint32)
-  (pregions :pointer))
-
-(cffi:defcstruct vkphysicaldevicesubgroupsizecontrolfeatures
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (subgroupsizecontrol vkbool32)
-  (computefullsubgroups vkbool32))
-
-(cffi:defcstruct vkphysicaldevicesubgroupsizecontrolproperties
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (minsubgroupsize :uint32)
-  (maxsubgroupsize :uint32)
-  (maxcomputeworkgroupsubgroups :uint32)
-  (requiredsubgroupsizestages vkshaderstageflags))
-
-(cffi:defcstruct vkpipelineshaderstagerequiredsubgroupsizecreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (requiredsubgroupsize :uint32))
-
-(cffi:defcstruct vkphysicaldeviceinlineuniformblockfeatures
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (inlineuniformblock vkbool32)
-  (descriptorbindinginlineuniformblockupdateafterbind vkbool32))
-
-(cffi:defcstruct vkphysicaldeviceinlineuniformblockproperties
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (maxinlineuniformblocksize :uint32)
-  (maxperstagedescriptorinlineuniformblocks :uint32)
-  (maxperstagedescriptorupdateafterbindinlineuniformblocks :uint32)
-  (maxdescriptorsetinlineuniformblocks :uint32)
-  (maxdescriptorsetupdateafterbindinlineuniformblocks :uint32))
-
-(cffi:defcstruct vkwritedescriptorsetinlineuniformblock
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (datasize :uint32)
-  (pdata :pointer))
-
-(cffi:defcstruct vkdescriptorpoolinlineuniformblockcreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (maxinlineuniformblockbindings :uint32))
-
-(cffi:defcstruct vkphysicaldevicetexturecompressionastchdrfeatures
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (texturecompressionastc_hdr vkbool32))
-
-(cffi:defcstruct vkrenderingattachmentinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (imageview vkimageview)
-  (imagelayout vkimagelayout)
-  (resolvemode vkresolvemodeflagbits)
-  (resolveimageview vkimageview)
-  (resolveimagelayout vkimagelayout)
-  (loadop vkattachmentloadop)
-  (storeop vkattachmentstoreop)
-  (clearvalue (:union vkclearvalue)))
-
-(cffi:defcstruct vkrenderinginfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkrenderingflags)
-  (renderarea (:struct vkrect2d))
-  (layercount :uint32)
-  (viewmask :uint32)
-  (colorattachmentcount :uint32)
-  (pcolorattachments :pointer)
-  (pdepthattachment :pointer)
-  (pstencilattachment :pointer))
-
-(cffi:defcstruct vkpipelinerenderingcreateinfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (viewmask :uint32)
-  (colorattachmentcount :uint32)
-  (pcolorattachmentformats :pointer)
-  (depthattachmentformat vkformat)
-  (stencilattachmentformat vkformat))
-
-(cffi:defcstruct vkphysicaldevicedynamicrenderingfeatures
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (dynamicrendering vkbool32))
-
-(cffi:defcstruct vkcommandbufferinheritancerenderinginfo
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkrenderingflags)
-  (viewmask :uint32)
-  (colorattachmentcount :uint32)
-  (pcolorattachmentformats :pointer)
-  (depthattachmentformat vkformat)
-  (stencilattachmentformat vkformat)
-  (rasterizationsamples vksamplecountflagbits))
-
-(cffi:defcstruct vkphysicaldeviceshaderintegerdotproductfeatures
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (shaderintegerdotproduct vkbool32))
-
-(cffi:defcstruct vkphysicaldeviceshaderintegerdotproductproperties
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (integerdotproduct8bitunsignedaccelerated vkbool32)
-  (integerdotproduct8bitsignedaccelerated vkbool32)
-  (integerdotproduct8bitmixedsignednessaccelerated vkbool32)
-  (integerdotproduct4x8bitpackedunsignedaccelerated vkbool32)
-  (integerdotproduct4x8bitpackedsignedaccelerated vkbool32)
-  (integerdotproduct4x8bitpackedmixedsignednessaccelerated vkbool32)
-  (integerdotproduct16bitunsignedaccelerated vkbool32)
-  (integerdotproduct16bitsignedaccelerated vkbool32)
-  (integerdotproduct16bitmixedsignednessaccelerated vkbool32)
-  (integerdotproduct32bitunsignedaccelerated vkbool32)
-  (integerdotproduct32bitsignedaccelerated vkbool32)
-  (integerdotproduct32bitmixedsignednessaccelerated vkbool32)
-  (integerdotproduct64bitunsignedaccelerated vkbool32)
-  (integerdotproduct64bitsignedaccelerated vkbool32)
-  (integerdotproduct64bitmixedsignednessaccelerated vkbool32)
-  (integerdotproductaccumulatingsaturating8bitunsignedaccelerated vkbool32)
-  (integerdotproductaccumulatingsaturating8bitsignedaccelerated vkbool32)
-  (integerdotproductaccumulatingsaturating8bitmixedsignednessaccelerated
-   vkbool32)
-  (integerdotproductaccumulatingsaturating4x8bitpackedunsignedaccelerated
-   vkbool32)
-  (integerdotproductaccumulatingsaturating4x8bitpackedsignedaccelerated
-   vkbool32)
-  (integerdotproductaccumulatingsaturating4x8bitpackedmixedsignednessaccelerated
-   vkbool32)
-  (integerdotproductaccumulatingsaturating16bitunsignedaccelerated vkbool32)
-  (integerdotproductaccumulatingsaturating16bitsignedaccelerated vkbool32)
-  (integerdotproductaccumulatingsaturating16bitmixedsignednessaccelerated
-   vkbool32)
-  (integerdotproductaccumulatingsaturating32bitunsignedaccelerated vkbool32)
-  (integerdotproductaccumulatingsaturating32bitsignedaccelerated vkbool32)
-  (integerdotproductaccumulatingsaturating32bitmixedsignednessaccelerated
-   vkbool32)
-  (integerdotproductaccumulatingsaturating64bitunsignedaccelerated vkbool32)
-  (integerdotproductaccumulatingsaturating64bitsignedaccelerated vkbool32)
-  (integerdotproductaccumulatingsaturating64bitmixedsignednessaccelerated
-   vkbool32))
-
-(cffi:defcstruct vkphysicaldevicetexelbufferalignmentproperties
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (storagetexelbufferoffsetalignmentbytes vkdevicesize)
-  (storagetexelbufferoffsetsingletexelalignment vkbool32)
-  (uniformtexelbufferoffsetalignmentbytes vkdevicesize)
-  (uniformtexelbufferoffsetsingletexelalignment vkbool32))
-
-(cffi:defcstruct vkformatproperties3
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (lineartilingfeatures vkformatfeatureflags2)
-  (optimaltilingfeatures vkformatfeatureflags2)
-  (bufferfeatures vkformatfeatureflags2))
-
-(cffi:defcstruct vkphysicaldevicemaintenance4features
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (maintenance4 vkbool32))
-
-(cffi:defcstruct vkphysicaldevicemaintenance4properties
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (maxbuffersize vkdevicesize))
-
-(cffi:defcstruct vkdevicebuffermemoryrequirements
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (pcreateinfo :pointer))
-
-(cffi:defcstruct vkdeviceimagememoryrequirements
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (pcreateinfo :pointer)
-  (planeaspect vkimageaspectflagbits))
-
-(cffi:defctype pfn_vkgetphysicaldevicetoolproperties :pointer)
-
-(cffi:defctype pfn_vkcreateprivatedataslot :pointer)
-
-(cffi:defctype pfn_vkdestroyprivatedataslot :pointer)
-
-(cffi:defctype pfn_vksetprivatedata :pointer)
-
-(cffi:defctype pfn_vkgetprivatedata :pointer)
-
-(cffi:defctype pfn_vkcmdsetevent2 :pointer)
-
-(cffi:defctype pfn_vkcmdresetevent2 :pointer)
-
-(cffi:defctype pfn_vkcmdwaitevents2 :pointer)
-
-(cffi:defctype pfn_vkcmdpipelinebarrier2 :pointer)
-
-(cffi:defctype pfn_vkcmdwritetimestamp2 :pointer)
-
-(cffi:defctype pfn_vkqueuesubmit2 :pointer)
-
-(cffi:defctype pfn_vkcmdcopybuffer2 :pointer)
-
-(cffi:defctype pfn_vkcmdcopyimage2 :pointer)
-
-(cffi:defctype pfn_vkcmdcopybuffertoimage2 :pointer)
-
-(cffi:defctype pfn_vkcmdcopyimagetobuffer2 :pointer)
-
-(cffi:defctype pfn_vkcmdblitimage2 :pointer)
-
-(cffi:defctype pfn_vkcmdresolveimage2 :pointer)
-
-(cffi:defctype pfn_vkcmdbeginrendering :pointer)
-
-(cffi:defctype pfn_vkcmdendrendering :pointer)
-
-(cffi:defctype pfn_vkcmdsetcullmode :pointer)
-
-(cffi:defctype pfn_vkcmdsetfrontface :pointer)
-
-(cffi:defctype pfn_vkcmdsetprimitivetopology :pointer)
-
-(cffi:defctype pfn_vkcmdsetviewportwithcount :pointer)
-
-(cffi:defctype pfn_vkcmdsetscissorwithcount :pointer)
-
-(cffi:defctype pfn_vkcmdbindvertexbuffers2 :pointer)
-
-(cffi:defctype pfn_vkcmdsetdepthtestenable :pointer)
-
-(cffi:defctype pfn_vkcmdsetdepthwriteenable :pointer)
-
-(cffi:defctype pfn_vkcmdsetdepthcompareop :pointer)
-
-(cffi:defctype pfn_vkcmdsetdepthboundstestenable :pointer)
-
-(cffi:defctype pfn_vkcmdsetstenciltestenable :pointer)
-
-(cffi:defctype pfn_vkcmdsetstencilop :pointer)
-
-(cffi:defctype pfn_vkcmdsetrasterizerdiscardenable :pointer)
-
-(cffi:defctype pfn_vkcmdsetdepthbiasenable :pointer)
-
-(cffi:defctype pfn_vkcmdsetprimitiverestartenable :pointer)
-
-(cffi:defctype pfn_vkgetdevicebuffermemoryrequirements :pointer)
-
-(cffi:defctype pfn_vkgetdeviceimagememoryrequirements :pointer)
-
-(cffi:defctype pfn_vkgetdeviceimagesparsememoryrequirements :pointer)
-
-(cffi:defctype vksurfacekhr non-dispatchable-handle)
-
-(cffi:defctype vkcompositealphaflagskhr vkflags)
-
-(cffi:defctype vksurfacetransformflagskhr vkflags)
-
-(cffi:defcstruct vksurfacecapabilitieskhr
-  (minimagecount :uint32)
-  (maximagecount :uint32)
-  (currentextent (:struct vkextent2d))
-  (minimageextent (:struct vkextent2d))
-  (maximageextent (:struct vkextent2d))
-  (maximagearraylayers :uint32)
-  (supportedtransforms vksurfacetransformflagskhr)
-  (currenttransform vksurfacetransformflagbitskhr)
-  (supportedcompositealpha vkcompositealphaflagskhr)
-  (supportedusageflags vkimageusageflags))
-
-(cffi:defcstruct vksurfaceformatkhr
-  (format vkformat)
-  (colorspace vkcolorspacekhr))
-
-(cffi:defctype pfn_vkdestroysurfacekhr :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldevicesurfacesupportkhr :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldevicesurfacecapabilitieskhr :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldevicesurfaceformatskhr :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldevicesurfacepresentmodeskhr :pointer)
-
-(cffi:defctype vkswapchainkhr non-dispatchable-handle)
-
-(cffi:defctype vkswapchaincreateflagskhr vkflags)
-
-(cffi:defctype vkdevicegrouppresentmodeflagskhr vkflags)
-
-(cffi:defcstruct vkswapchaincreateinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkswapchaincreateflagskhr)
-  (surface vksurfacekhr)
-  (minimagecount :uint32)
-  (imageformat vkformat)
-  (imagecolorspace vkcolorspacekhr)
-  (imageextent (:struct vkextent2d))
-  (imagearraylayers :uint32)
-  (imageusage vkimageusageflags)
-  (imagesharingmode vksharingmode)
-  (queuefamilyindexcount :uint32)
-  (pqueuefamilyindices :pointer)
-  (pretransform vksurfacetransformflagbitskhr)
-  (compositealpha vkcompositealphaflagbitskhr)
-  (presentmode vkpresentmodekhr)
-  (clipped vkbool32)
-  (oldswapchain vkswapchainkhr))
-
-(cffi:defcstruct vkpresentinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (waitsemaphorecount :uint32)
-  (pwaitsemaphores :pointer)
-  (swapchaincount :uint32)
-  (pswapchains :pointer)
-  (pimageindices :pointer)
-  (presults :pointer))
-
-(cffi:defcstruct vkimageswapchaincreateinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (swapchain vkswapchainkhr))
-
-(cffi:defcstruct vkbindimagememoryswapchaininfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (swapchain vkswapchainkhr)
-  (imageindex :uint32))
-
-(cffi:defcstruct vkacquirenextimageinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (swapchain vkswapchainkhr)
-  (timeout :uint64)
-  (semaphore vksemaphore)
-  (fence vkfence)
-  (devicemask :uint32))
-
-(cffi:defcstruct vkdevicegrouppresentcapabilitieskhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (presentmask :uint32 :count 32)
-  (modes vkdevicegrouppresentmodeflagskhr))
-
-(cffi:defcstruct vkdevicegrouppresentinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (swapchaincount :uint32)
-  (pdevicemasks :pointer)
-  (mode vkdevicegrouppresentmodeflagbitskhr))
-
-(cffi:defcstruct vkdevicegroupswapchaincreateinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (modes vkdevicegrouppresentmodeflagskhr))
-
-(cffi:defctype pfn_vkcreateswapchainkhr :pointer)
-
-(cffi:defctype pfn_vkdestroyswapchainkhr :pointer)
-
-(cffi:defctype pfn_vkgetswapchainimageskhr :pointer)
-
-(cffi:defctype pfn_vkacquirenextimagekhr :pointer)
-
-(cffi:defctype pfn_vkqueuepresentkhr :pointer)
-
-(cffi:defctype pfn_vkgetdevicegrouppresentcapabilitieskhr :pointer)
-
-(cffi:defctype pfn_vkgetdevicegroupsurfacepresentmodeskhr :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldevicepresentrectangleskhr :pointer)
-
-(cffi:defctype pfn_vkacquirenextimage2khr :pointer)
-
-(cffi:defctype vkdisplaykhr non-dispatchable-handle)
-
-(cffi:defctype vkdisplaymodekhr non-dispatchable-handle)
-
-(cffi:defctype vkdisplaymodecreateflagskhr vkflags)
-
-(cffi:defctype vkdisplayplanealphaflagskhr vkflags)
-
-(cffi:defctype vkdisplaysurfacecreateflagskhr vkflags)
-
-(cffi:defcstruct vkdisplaymodeparameterskhr
-  (visibleregion (:struct vkextent2d))
-  (refreshrate :uint32))
-
-(cffi:defcstruct vkdisplaymodecreateinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkdisplaymodecreateflagskhr)
-  (parameters (:struct vkdisplaymodeparameterskhr)))
-
-(cffi:defcstruct vkdisplaymodepropertieskhr
-  (displaymode vkdisplaymodekhr)
-  (parameters (:struct vkdisplaymodeparameterskhr)))
-
-(cffi:defcstruct vkdisplayplanecapabilitieskhr
-  (supportedalpha vkdisplayplanealphaflagskhr)
-  (minsrcposition (:struct vkoffset2d))
-  (maxsrcposition (:struct vkoffset2d))
-  (minsrcextent (:struct vkextent2d))
-  (maxsrcextent (:struct vkextent2d))
-  (mindstposition (:struct vkoffset2d))
-  (maxdstposition (:struct vkoffset2d))
-  (mindstextent (:struct vkextent2d))
-  (maxdstextent (:struct vkextent2d)))
-
-(cffi:defcstruct vkdisplayplanepropertieskhr
-  (currentdisplay vkdisplaykhr)
-  (currentstackindex :uint32))
-
-(cffi:defcstruct vkdisplaypropertieskhr
-  (display vkdisplaykhr)
-  (displayname :pointer)
-  (physicaldimensions (:struct vkextent2d))
-  (physicalresolution (:struct vkextent2d))
-  (supportedtransforms vksurfacetransformflagskhr)
-  (planereorderpossible vkbool32)
-  (persistentcontent vkbool32))
-
-(cffi:defcstruct vkdisplaysurfacecreateinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkdisplaysurfacecreateflagskhr)
-  (displaymode vkdisplaymodekhr)
-  (planeindex :uint32)
-  (planestackindex :uint32)
-  (transform vksurfacetransformflagbitskhr)
-  (globalalpha :float)
-  (alphamode vkdisplayplanealphaflagbitskhr)
-  (imageextent (:struct vkextent2d)))
-
-(cffi:defctype pfn_vkgetphysicaldevicedisplaypropertieskhr :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldevicedisplayplanepropertieskhr :pointer)
-
-(cffi:defctype pfn_vkgetdisplayplanesupporteddisplayskhr :pointer)
-
-(cffi:defctype pfn_vkgetdisplaymodepropertieskhr :pointer)
-
-(cffi:defctype pfn_vkcreatedisplaymodekhr :pointer)
-
-(cffi:defctype pfn_vkgetdisplayplanecapabilitieskhr :pointer)
-
-(cffi:defctype pfn_vkcreatedisplayplanesurfacekhr :pointer)
-
-(cffi:defcstruct vkdisplaypresentinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (srcrect (:struct vkrect2d))
-  (dstrect (:struct vkrect2d))
-  (persistent vkbool32))
-
-(cffi:defctype pfn_vkcreatesharedswapchainskhr :pointer)
-
-(cffi:defctype vkrenderingflagskhr vkrenderingflags)
-
-(cffi:defctype vkrenderingflagbitskhr vkrenderingflagbits)
-
-(cffi:defctype vkrenderinginfokhr (:struct vkrenderinginfo))
-
-(cffi:defctype vkrenderingattachmentinfokhr (:struct vkrenderingattachmentinfo))
-
-(cffi:defctype vkpipelinerenderingcreateinfokhr
-               (:struct vkpipelinerenderingcreateinfo))
-
-(cffi:defctype vkphysicaldevicedynamicrenderingfeatureskhr
-               (:struct vkphysicaldevicedynamicrenderingfeatures))
-
-(cffi:defctype vkcommandbufferinheritancerenderinginfokhr
-               (:struct vkcommandbufferinheritancerenderinginfo))
-
-(cffi:defcstruct vkrenderingfragmentshadingrateattachmentinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (imageview vkimageview)
-  (imagelayout vkimagelayout)
-  (shadingrateattachmenttexelsize (:struct vkextent2d)))
-
-(cffi:defcstruct vkrenderingfragmentdensitymapattachmentinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (imageview vkimageview)
-  (imagelayout vkimagelayout))
-
-(cffi:defcstruct vkattachmentsamplecountinfoamd
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (colorattachmentcount :uint32)
-  (pcolorattachmentsamples :pointer)
-  (depthstencilattachmentsamples vksamplecountflagbits))
-
-(cffi:defctype vkattachmentsamplecountinfonv
-               (:struct vkattachmentsamplecountinfoamd))
-
-(cffi:defcstruct vkmultiviewperviewattributesinfonvx
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (perviewattributes vkbool32)
-  (perviewattributespositionxonly vkbool32))
-
-(cffi:defctype pfn_vkcmdbeginrenderingkhr :pointer)
-
-(cffi:defctype pfn_vkcmdendrenderingkhr :pointer)
-
-(cffi:defctype vkrenderpassmultiviewcreateinfokhr
-               (:struct vkrenderpassmultiviewcreateinfo))
-
-(cffi:defctype vkphysicaldevicemultiviewfeatureskhr
-               (:struct vkphysicaldevicemultiviewfeatures))
-
-(cffi:defctype vkphysicaldevicemultiviewpropertieskhr
-               (:struct vkphysicaldevicemultiviewproperties))
-
-(cffi:defctype vkphysicaldevicefeatures2khr (:struct vkphysicaldevicefeatures2))
-
-(cffi:defctype vkphysicaldeviceproperties2khr
-               (:struct vkphysicaldeviceproperties2))
-
-(cffi:defctype vkformatproperties2khr (:struct vkformatproperties2))
-
-(cffi:defctype vkimageformatproperties2khr (:struct vkimageformatproperties2))
-
-(cffi:defctype vkphysicaldeviceimageformatinfo2khr
-               (:struct vkphysicaldeviceimageformatinfo2))
-
-(cffi:defctype vkqueuefamilyproperties2khr (:struct vkqueuefamilyproperties2))
-
-(cffi:defctype vkphysicaldevicememoryproperties2khr
-               (:struct vkphysicaldevicememoryproperties2))
-
-(cffi:defctype vksparseimageformatproperties2khr
-               (:struct vksparseimageformatproperties2))
-
-(cffi:defctype vkphysicaldevicesparseimageformatinfo2khr
-               (:struct vkphysicaldevicesparseimageformatinfo2))
-
-(cffi:defctype pfn_vkgetphysicaldevicefeatures2khr :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldeviceproperties2khr :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldeviceformatproperties2khr :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldeviceimageformatproperties2khr :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldevicequeuefamilyproperties2khr :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldevicememoryproperties2khr :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldevicesparseimageformatproperties2khr :pointer)
-
-(cffi:defctype vkpeermemoryfeatureflagskhr vkpeermemoryfeatureflags)
-
-(cffi:defctype vkpeermemoryfeatureflagbitskhr vkpeermemoryfeatureflagbits)
-
-(cffi:defctype vkmemoryallocateflagskhr vkmemoryallocateflags)
-
-(cffi:defctype vkmemoryallocateflagbitskhr vkmemoryallocateflagbits)
-
-(cffi:defctype vkmemoryallocateflagsinfokhr (:struct vkmemoryallocateflagsinfo))
-
-(cffi:defctype vkdevicegrouprenderpassbegininfokhr
-               (:struct vkdevicegrouprenderpassbegininfo))
-
-(cffi:defctype vkdevicegroupcommandbufferbegininfokhr
-               (:struct vkdevicegroupcommandbufferbegininfo))
-
-(cffi:defctype vkdevicegroupsubmitinfokhr (:struct vkdevicegroupsubmitinfo))
-
-(cffi:defctype vkdevicegroupbindsparseinfokhr
-               (:struct vkdevicegroupbindsparseinfo))
-
-(cffi:defctype vkbindbuffermemorydevicegroupinfokhr
-               (:struct vkbindbuffermemorydevicegroupinfo))
-
-(cffi:defctype vkbindimagememorydevicegroupinfokhr
-               (:struct vkbindimagememorydevicegroupinfo))
-
-(cffi:defctype pfn_vkgetdevicegrouppeermemoryfeatureskhr :pointer)
-
-(cffi:defctype pfn_vkcmdsetdevicemaskkhr :pointer)
-
-(cffi:defctype pfn_vkcmddispatchbasekhr :pointer)
-
-(cffi:defctype vkcommandpooltrimflagskhr vkcommandpooltrimflags)
-
-(cffi:defctype pfn_vktrimcommandpoolkhr :pointer)
-
-(cffi:defctype vkphysicaldevicegrouppropertieskhr
-               (:struct vkphysicaldevicegroupproperties))
-
-(cffi:defctype vkdevicegroupdevicecreateinfokhr
-               (:struct vkdevicegroupdevicecreateinfo))
-
-(cffi:defctype pfn_vkenumeratephysicaldevicegroupskhr :pointer)
-
-(cffi:defctype vkexternalmemoryhandletypeflagskhr
-               vkexternalmemoryhandletypeflags)
-
-(cffi:defctype vkexternalmemoryhandletypeflagbitskhr
-               vkexternalmemoryhandletypeflagbits)
-
-(cffi:defctype vkexternalmemoryfeatureflagskhr vkexternalmemoryfeatureflags)
-
-(cffi:defctype vkexternalmemoryfeatureflagbitskhr
-               vkexternalmemoryfeatureflagbits)
-
-(cffi:defctype vkexternalmemorypropertieskhr
-               (:struct vkexternalmemoryproperties))
-
-(cffi:defctype vkphysicaldeviceexternalimageformatinfokhr
-               (:struct vkphysicaldeviceexternalimageformatinfo))
-
-(cffi:defctype vkexternalimageformatpropertieskhr
-               (:struct vkexternalimageformatproperties))
-
-(cffi:defctype vkphysicaldeviceexternalbufferinfokhr
-               (:struct vkphysicaldeviceexternalbufferinfo))
-
-(cffi:defctype vkexternalbufferpropertieskhr
-               (:struct vkexternalbufferproperties))
-
-(cffi:defctype vkphysicaldeviceidpropertieskhr
-               (:struct vkphysicaldeviceidproperties))
-
-(cffi:defctype pfn_vkgetphysicaldeviceexternalbufferpropertieskhr :pointer)
-
-(cffi:defctype vkexternalmemoryimagecreateinfokhr
-               (:struct vkexternalmemoryimagecreateinfo))
-
-(cffi:defctype vkexternalmemorybuffercreateinfokhr
-               (:struct vkexternalmemorybuffercreateinfo))
-
-(cffi:defctype vkexportmemoryallocateinfokhr
-               (:struct vkexportmemoryallocateinfo))
-
-(cffi:defcstruct vkimportmemoryfdinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (handletype vkexternalmemoryhandletypeflagbits)
-  (fd :int))
-
-(cffi:defcstruct vkmemoryfdpropertieskhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (memorytypebits :uint32))
-
-(cffi:defcstruct vkmemorygetfdinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (memory vkdevicememory)
-  (handletype vkexternalmemoryhandletypeflagbits))
-
-(cffi:defctype pfn_vkgetmemoryfdkhr :pointer)
-
-(cffi:defctype pfn_vkgetmemoryfdpropertieskhr :pointer)
-
-(cffi:defctype vkexternalsemaphorehandletypeflagskhr
-               vkexternalsemaphorehandletypeflags)
-
-(cffi:defctype vkexternalsemaphorehandletypeflagbitskhr
-               vkexternalsemaphorehandletypeflagbits)
-
-(cffi:defctype vkexternalsemaphorefeatureflagskhr
-               vkexternalsemaphorefeatureflags)
-
-(cffi:defctype vkexternalsemaphorefeatureflagbitskhr
-               vkexternalsemaphorefeatureflagbits)
-
-(cffi:defctype vkphysicaldeviceexternalsemaphoreinfokhr
-               (:struct vkphysicaldeviceexternalsemaphoreinfo))
-
-(cffi:defctype vkexternalsemaphorepropertieskhr
-               (:struct vkexternalsemaphoreproperties))
-
-(cffi:defctype pfn_vkgetphysicaldeviceexternalsemaphorepropertieskhr :pointer)
-
-(cffi:defctype vksemaphoreimportflagskhr vksemaphoreimportflags)
-
-(cffi:defctype vksemaphoreimportflagbitskhr vksemaphoreimportflagbits)
-
-(cffi:defctype vkexportsemaphorecreateinfokhr
-               (:struct vkexportsemaphorecreateinfo))
-
-(cffi:defcstruct vkimportsemaphorefdinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (semaphore vksemaphore)
-  (flags vksemaphoreimportflags)
-  (handletype vkexternalsemaphorehandletypeflagbits)
-  (fd :int))
-
-(cffi:defcstruct vksemaphoregetfdinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (semaphore vksemaphore)
-  (handletype vkexternalsemaphorehandletypeflagbits))
-
-(cffi:defctype pfn_vkimportsemaphorefdkhr :pointer)
-
-(cffi:defctype pfn_vkgetsemaphorefdkhr :pointer)
-
-(cffi:defcstruct vkphysicaldevicepushdescriptorpropertieskhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (maxpushdescriptors :uint32))
-
-(cffi:defctype pfn_vkcmdpushdescriptorsetkhr :pointer)
-
-(cffi:defctype pfn_vkcmdpushdescriptorsetwithtemplatekhr :pointer)
-
-(cffi:defctype vkphysicaldeviceshaderfloat16int8featureskhr
-               (:struct vkphysicaldeviceshaderfloat16int8features))
-
-(cffi:defctype vkphysicaldevicefloat16int8featureskhr
-               (:struct vkphysicaldeviceshaderfloat16int8features))
-
-(cffi:defctype vkphysicaldevice16bitstoragefeatureskhr
-               (:struct vkphysicaldevice16bitstoragefeatures))
-
-(cffi:defcstruct vkrectlayerkhr
-  (offset (:struct vkoffset2d))
-  (extent (:struct vkextent2d))
-  (layer :uint32))
-
-(cffi:defcstruct vkpresentregionkhr
-  (rectanglecount :uint32)
-  (prectangles :pointer))
-
-(cffi:defcstruct vkpresentregionskhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (swapchaincount :uint32)
-  (pregions :pointer))
-
-(cffi:defctype vkdescriptorupdatetemplatekhr :pointer)
-
-(cffi:defctype vkdescriptorupdatetemplatetypekhr vkdescriptorupdatetemplatetype)
-
-(cffi:defctype vkdescriptorupdatetemplatecreateflagskhr
-               vkdescriptorupdatetemplatecreateflags)
-
-(cffi:defctype vkdescriptorupdatetemplateentrykhr
-               (:struct vkdescriptorupdatetemplateentry))
-
-(cffi:defctype vkdescriptorupdatetemplatecreateinfokhr
-               (:struct vkdescriptorupdatetemplatecreateinfo))
-
-(cffi:defctype pfn_vkcreatedescriptorupdatetemplatekhr :pointer)
-
-(cffi:defctype pfn_vkdestroydescriptorupdatetemplatekhr :pointer)
-
-(cffi:defctype pfn_vkupdatedescriptorsetwithtemplatekhr :pointer)
-
-(cffi:defctype vkphysicaldeviceimagelessframebufferfeatureskhr
-               (:struct vkphysicaldeviceimagelessframebufferfeatures))
-
-(cffi:defctype vkframebufferattachmentscreateinfokhr
-               (:struct vkframebufferattachmentscreateinfo))
-
-(cffi:defctype vkframebufferattachmentimageinfokhr
-               (:struct vkframebufferattachmentimageinfo))
-
-(cffi:defctype vkrenderpassattachmentbegininfokhr
-               (:struct vkrenderpassattachmentbegininfo))
-
-(cffi:defctype vkrenderpasscreateinfo2khr (:struct vkrenderpasscreateinfo2))
-
-(cffi:defctype vkattachmentdescription2khr (:struct vkattachmentdescription2))
-
-(cffi:defctype vkattachmentreference2khr (:struct vkattachmentreference2))
-
-(cffi:defctype vksubpassdescription2khr (:struct vksubpassdescription2))
-
-(cffi:defctype vksubpassdependency2khr (:struct vksubpassdependency2))
-
-(cffi:defctype vksubpassbegininfokhr (:struct vksubpassbegininfo))
-
-(cffi:defctype vksubpassendinfokhr (:struct vksubpassendinfo))
-
-(cffi:defctype pfn_vkcreaterenderpass2khr :pointer)
-
-(cffi:defctype pfn_vkcmdbeginrenderpass2khr :pointer)
-
-(cffi:defctype pfn_vkcmdnextsubpass2khr :pointer)
-
-(cffi:defctype pfn_vkcmdendrenderpass2khr :pointer)
-
-(cffi:defcstruct vksharedpresentsurfacecapabilitieskhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (sharedpresentsupportedusageflags vkimageusageflags))
-
-(cffi:defctype pfn_vkgetswapchainstatuskhr :pointer)
-
-(cffi:defctype vkexternalfencehandletypeflagskhr vkexternalfencehandletypeflags)
-
-(cffi:defctype vkexternalfencehandletypeflagbitskhr
-               vkexternalfencehandletypeflagbits)
-
-(cffi:defctype vkexternalfencefeatureflagskhr vkexternalfencefeatureflags)
-
-(cffi:defctype vkexternalfencefeatureflagbitskhr vkexternalfencefeatureflagbits)
-
-(cffi:defctype vkphysicaldeviceexternalfenceinfokhr
-               (:struct vkphysicaldeviceexternalfenceinfo))
-
-(cffi:defctype vkexternalfencepropertieskhr (:struct vkexternalfenceproperties))
-
-(cffi:defctype pfn_vkgetphysicaldeviceexternalfencepropertieskhr :pointer)
-
-(cffi:defctype vkfenceimportflagskhr vkfenceimportflags)
-
-(cffi:defctype vkfenceimportflagbitskhr vkfenceimportflagbits)
-
-(cffi:defctype vkexportfencecreateinfokhr (:struct vkexportfencecreateinfo))
-
-(cffi:defcstruct vkimportfencefdinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (fence vkfence)
-  (flags vkfenceimportflags)
-  (handletype vkexternalfencehandletypeflagbits)
-  (fd :int))
-
-(cffi:defcstruct vkfencegetfdinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (fence vkfence)
-  (handletype vkexternalfencehandletypeflagbits))
-
-(cffi:defctype pfn_vkimportfencefdkhr :pointer)
-
-(cffi:defctype pfn_vkgetfencefdkhr :pointer)
-
-(cffi:defctype vkperformancecounterdescriptionflagskhr vkflags)
-
-(cffi:defctype vkacquireprofilinglockflagskhr vkflags)
-
-(cffi:defcstruct vkphysicaldeviceperformancequeryfeatureskhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (performancecounterquerypools vkbool32)
-  (performancecountermultiplequerypools vkbool32))
-
-(cffi:defcstruct vkphysicaldeviceperformancequerypropertieskhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (allowcommandbufferquerycopies vkbool32))
-
-(cffi:defcstruct vkperformancecounterkhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (unit vkperformancecounterunitkhr)
-  (scope vkperformancecounterscopekhr)
-  (storage vkperformancecounterstoragekhr)
-  (uuid :uint8 :count 16))
-
-(cffi:defcstruct vkperformancecounterdescriptionkhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkperformancecounterdescriptionflagskhr)
-  (name :char :count 256)
-  (category :char :count 256)
-  (description :char :count 256))
-
-(cffi:defcstruct vkquerypoolperformancecreateinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (queuefamilyindex :uint32)
-  (counterindexcount :uint32)
-  (pcounterindices :pointer))
-
-(cffi:defcunion vkperformancecounterresultkhr
-  (int32 :int32)
-  (int64 :int64)
-  (uint32 :uint32)
-  (uint64 :uint64)
-  (float32 :float)
-  (float64 :double))
-
-(cffi:defcstruct vkacquireprofilinglockinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkacquireprofilinglockflagskhr)
-  (timeout :uint64))
-
-(cffi:defcstruct vkperformancequerysubmitinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (counterpassindex :uint32))
-
-(cffi:defctype
- pfn_vkenumeratephysicaldevicequeuefamilyperformancequerycounterskhr :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldevicequeuefamilyperformancequerypasseskhr
-               :pointer)
-
-(cffi:defctype pfn_vkacquireprofilinglockkhr :pointer)
-
-(cffi:defctype pfn_vkreleaseprofilinglockkhr :pointer)
-
-(cffi:defctype vkpointclippingbehaviorkhr vkpointclippingbehavior)
-
-(cffi:defctype vktessellationdomainoriginkhr vktessellationdomainorigin)
-
-(cffi:defctype vkphysicaldevicepointclippingpropertieskhr
-               (:struct vkphysicaldevicepointclippingproperties))
-
-(cffi:defctype vkrenderpassinputattachmentaspectcreateinfokhr
-               (:struct vkrenderpassinputattachmentaspectcreateinfo))
-
-(cffi:defctype vkinputattachmentaspectreferencekhr
-               (:struct vkinputattachmentaspectreference))
-
-(cffi:defctype vkimageviewusagecreateinfokhr
-               (:struct vkimageviewusagecreateinfo))
-
-(cffi:defctype vkpipelinetessellationdomainoriginstatecreateinfokhr
-               (:struct vkpipelinetessellationdomainoriginstatecreateinfo))
-
-(cffi:defcstruct vkphysicaldevicesurfaceinfo2khr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (surface vksurfacekhr))
-
-(cffi:defcstruct vksurfacecapabilities2khr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (surfacecapabilities (:struct vksurfacecapabilitieskhr)))
-
-(cffi:defcstruct vksurfaceformat2khr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (surfaceformat (:struct vksurfaceformatkhr)))
-
-(cffi:defctype pfn_vkgetphysicaldevicesurfacecapabilities2khr :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldevicesurfaceformats2khr :pointer)
-
-(cffi:defctype vkphysicaldevicevariablepointerfeatureskhr
-               (:struct vkphysicaldevicevariablepointersfeatures))
-
-(cffi:defctype vkphysicaldevicevariablepointersfeatureskhr
-               (:struct vkphysicaldevicevariablepointersfeatures))
-
-(cffi:defcstruct vkdisplayproperties2khr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (displayproperties (:struct vkdisplaypropertieskhr)))
-
-(cffi:defcstruct vkdisplayplaneproperties2khr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (displayplaneproperties (:struct vkdisplayplanepropertieskhr)))
-
-(cffi:defcstruct vkdisplaymodeproperties2khr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (displaymodeproperties (:struct vkdisplaymodepropertieskhr)))
-
-(cffi:defcstruct vkdisplayplaneinfo2khr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (mode vkdisplaymodekhr)
-  (planeindex :uint32))
-
-(cffi:defcstruct vkdisplayplanecapabilities2khr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (capabilities (:struct vkdisplayplanecapabilitieskhr)))
-
-(cffi:defctype pfn_vkgetphysicaldevicedisplayproperties2khr :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldevicedisplayplaneproperties2khr :pointer)
-
-(cffi:defctype pfn_vkgetdisplaymodeproperties2khr :pointer)
-
-(cffi:defctype pfn_vkgetdisplayplanecapabilities2khr :pointer)
-
-(cffi:defctype vkmemorydedicatedrequirementskhr
-               (:struct vkmemorydedicatedrequirements))
-
-(cffi:defctype vkmemorydedicatedallocateinfokhr
-               (:struct vkmemorydedicatedallocateinfo))
-
-(cffi:defctype vkbuffermemoryrequirementsinfo2khr
-               (:struct vkbuffermemoryrequirementsinfo2))
-
-(cffi:defctype vkimagememoryrequirementsinfo2khr
-               (:struct vkimagememoryrequirementsinfo2))
-
-(cffi:defctype vkimagesparsememoryrequirementsinfo2khr
-               (:struct vkimagesparsememoryrequirementsinfo2))
-
-(cffi:defctype vkmemoryrequirements2khr (:struct vkmemoryrequirements2))
-
-(cffi:defctype vksparseimagememoryrequirements2khr
-               (:struct vksparseimagememoryrequirements2))
-
-(cffi:defctype pfn_vkgetimagememoryrequirements2khr :pointer)
-
-(cffi:defctype pfn_vkgetbuffermemoryrequirements2khr :pointer)
-
-(cffi:defctype pfn_vkgetimagesparsememoryrequirements2khr :pointer)
-
-(cffi:defctype vkimageformatlistcreateinfokhr
-               (:struct vkimageformatlistcreateinfo))
-
-(cffi:defctype vksamplerycbcrconversionkhr :pointer)
-
-(cffi:defctype vksamplerycbcrmodelconversionkhr vksamplerycbcrmodelconversion)
-
-(cffi:defctype vksamplerycbcrrangekhr vksamplerycbcrrange)
-
-(cffi:defctype vkchromalocationkhr vkchromalocation)
-
-(cffi:defctype vksamplerycbcrconversioncreateinfokhr
-               (:struct vksamplerycbcrconversioncreateinfo))
-
-(cffi:defctype vksamplerycbcrconversioninfokhr
-               (:struct vksamplerycbcrconversioninfo))
-
-(cffi:defctype vkbindimageplanememoryinfokhr
-               (:struct vkbindimageplanememoryinfo))
-
-(cffi:defctype vkimageplanememoryrequirementsinfokhr
-               (:struct vkimageplanememoryrequirementsinfo))
-
-(cffi:defctype vkphysicaldevicesamplerycbcrconversionfeatureskhr
-               (:struct vkphysicaldevicesamplerycbcrconversionfeatures))
-
-(cffi:defctype vksamplerycbcrconversionimageformatpropertieskhr
-               (:struct vksamplerycbcrconversionimageformatproperties))
-
-(cffi:defctype pfn_vkcreatesamplerycbcrconversionkhr :pointer)
-
-(cffi:defctype pfn_vkdestroysamplerycbcrconversionkhr :pointer)
-
-(cffi:defctype vkbindbuffermemoryinfokhr (:struct vkbindbuffermemoryinfo))
-
-(cffi:defctype vkbindimagememoryinfokhr (:struct vkbindimagememoryinfo))
-
-(cffi:defctype pfn_vkbindbuffermemory2khr :pointer)
-
-(cffi:defctype pfn_vkbindimagememory2khr :pointer)
-
-(cffi:defctype vkphysicaldevicemaintenance3propertieskhr
-               (:struct vkphysicaldevicemaintenance3properties))
-
-(cffi:defctype vkdescriptorsetlayoutsupportkhr
-               (:struct vkdescriptorsetlayoutsupport))
-
-(cffi:defctype pfn_vkgetdescriptorsetlayoutsupportkhr :pointer)
-
-(cffi:defctype pfn_vkcmddrawindirectcountkhr :pointer)
-
-(cffi:defctype pfn_vkcmddrawindexedindirectcountkhr :pointer)
-
-(cffi:defctype vkphysicaldeviceshadersubgroupextendedtypesfeatureskhr
-               (:struct vkphysicaldeviceshadersubgroupextendedtypesfeatures))
-
-(cffi:defctype vkphysicaldevice8bitstoragefeatureskhr
-               (:struct vkphysicaldevice8bitstoragefeatures))
-
-(cffi:defctype vkphysicaldeviceshaderatomicint64featureskhr
-               (:struct vkphysicaldeviceshaderatomicint64features))
-
-(cffi:defcstruct vkphysicaldeviceshaderclockfeatureskhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (shadersubgroupclock vkbool32)
-  (shaderdeviceclock vkbool32))
-
-(cffi:defcstruct vkdevicequeueglobalprioritycreateinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (globalpriority vkqueueglobalprioritykhr))
-
-(cffi:defcstruct vkphysicaldeviceglobalpriorityqueryfeatureskhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (globalpriorityquery vkbool32))
-
-(cffi:defcstruct vkqueuefamilyglobalprioritypropertieskhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (prioritycount :uint32)
-  (priorities vkqueueglobalprioritykhr :count 16))
-
-(cffi:defctype vkdriveridkhr vkdriverid)
-
-(cffi:defctype vkconformanceversionkhr (:struct vkconformanceversion))
-
-(cffi:defctype vkphysicaldevicedriverpropertieskhr
-               (:struct vkphysicaldevicedriverproperties))
-
-(cffi:defctype vkshaderfloatcontrolsindependencekhr
-               vkshaderfloatcontrolsindependence)
-
-(cffi:defctype vkphysicaldevicefloatcontrolspropertieskhr
-               (:struct vkphysicaldevicefloatcontrolsproperties))
-
-(cffi:defctype vkresolvemodeflagbitskhr vkresolvemodeflagbits)
-
-(cffi:defctype vkresolvemodeflagskhr vkresolvemodeflags)
-
-(cffi:defctype vksubpassdescriptiondepthstencilresolvekhr
-               (:struct vksubpassdescriptiondepthstencilresolve))
-
-(cffi:defctype vkphysicaldevicedepthstencilresolvepropertieskhr
-               (:struct vkphysicaldevicedepthstencilresolveproperties))
-
-(cffi:defctype vksemaphoretypekhr vksemaphoretype)
-
-(cffi:defctype vksemaphorewaitflagbitskhr vksemaphorewaitflagbits)
-
-(cffi:defctype vksemaphorewaitflagskhr vksemaphorewaitflags)
-
-(cffi:defctype vkphysicaldevicetimelinesemaphorefeatureskhr
-               (:struct vkphysicaldevicetimelinesemaphorefeatures))
-
-(cffi:defctype vkphysicaldevicetimelinesemaphorepropertieskhr
-               (:struct vkphysicaldevicetimelinesemaphoreproperties))
-
-(cffi:defctype vksemaphoretypecreateinfokhr (:struct vksemaphoretypecreateinfo))
-
-(cffi:defctype vktimelinesemaphoresubmitinfokhr
-               (:struct vktimelinesemaphoresubmitinfo))
-
-(cffi:defctype vksemaphorewaitinfokhr (:struct vksemaphorewaitinfo))
-
-(cffi:defctype vksemaphoresignalinfokhr (:struct vksemaphoresignalinfo))
-
-(cffi:defctype pfn_vkgetsemaphorecountervaluekhr :pointer)
-
-(cffi:defctype pfn_vkwaitsemaphoreskhr :pointer)
-
-(cffi:defctype pfn_vksignalsemaphorekhr :pointer)
-
-(cffi:defctype vkphysicaldevicevulkanmemorymodelfeatureskhr
-               (:struct vkphysicaldevicevulkanmemorymodelfeatures))
-
-(cffi:defctype vkphysicaldeviceshaderterminateinvocationfeatureskhr
-               (:struct vkphysicaldeviceshaderterminateinvocationfeatures))
-
-(cffi:defcstruct vkfragmentshadingrateattachmentinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (pfragmentshadingrateattachment :pointer)
-  (shadingrateattachmenttexelsize (:struct vkextent2d)))
-
-(cffi:defcstruct vkpipelinefragmentshadingratestatecreateinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (fragmentsize (:struct vkextent2d))
-  (combinerops vkfragmentshadingratecombineropkhr :count 2))
-
-(cffi:defcstruct vkphysicaldevicefragmentshadingratefeatureskhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (pipelinefragmentshadingrate vkbool32)
-  (primitivefragmentshadingrate vkbool32)
-  (attachmentfragmentshadingrate vkbool32))
-
-(cffi:defcstruct vkphysicaldevicefragmentshadingratepropertieskhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (minfragmentshadingrateattachmenttexelsize (:struct vkextent2d))
-  (maxfragmentshadingrateattachmenttexelsize (:struct vkextent2d))
-  (maxfragmentshadingrateattachmenttexelsizeaspectratio :uint32)
-  (primitivefragmentshadingratewithmultipleviewports vkbool32)
-  (layeredshadingrateattachments vkbool32)
-  (fragmentshadingratenontrivialcombinerops vkbool32)
-  (maxfragmentsize (:struct vkextent2d))
-  (maxfragmentsizeaspectratio :uint32)
-  (maxfragmentshadingratecoveragesamples :uint32)
-  (maxfragmentshadingraterasterizationsamples vksamplecountflagbits)
-  (fragmentshadingratewithshaderdepthstencilwrites vkbool32)
-  (fragmentshadingratewithsamplemask vkbool32)
-  (fragmentshadingratewithshadersamplemask vkbool32)
-  (fragmentshadingratewithconservativerasterization vkbool32)
-  (fragmentshadingratewithfragmentshaderinterlock vkbool32)
-  (fragmentshadingratewithcustomsamplelocations vkbool32)
-  (fragmentshadingratestrictmultiplycombiner vkbool32))
-
-(cffi:defcstruct vkphysicaldevicefragmentshadingratekhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (samplecounts vksamplecountflags)
-  (fragmentsize (:struct vkextent2d)))
-
-(cffi:defctype pfn_vkgetphysicaldevicefragmentshadingrateskhr :pointer)
-
-(cffi:defctype pfn_vkcmdsetfragmentshadingratekhr :pointer)
-
-(cffi:defcstruct vksurfaceprotectedcapabilitieskhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (supportsprotected vkbool32))
-
-(cffi:defctype vkphysicaldeviceseparatedepthstencillayoutsfeatureskhr
-               (:struct vkphysicaldeviceseparatedepthstencillayoutsfeatures))
-
-(cffi:defctype vkattachmentreferencestencillayoutkhr
-               (:struct vkattachmentreferencestencillayout))
-
-(cffi:defctype vkattachmentdescriptionstencillayoutkhr
-               (:struct vkattachmentdescriptionstencillayout))
-
-(cffi:defcstruct vkphysicaldevicepresentwaitfeatureskhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (presentwait vkbool32))
-
-(cffi:defctype pfn_vkwaitforpresentkhr :pointer)
-
-(cffi:defctype vkphysicaldeviceuniformbufferstandardlayoutfeatureskhr
-               (:struct vkphysicaldeviceuniformbufferstandardlayoutfeatures))
-
-(cffi:defctype vkphysicaldevicebufferdeviceaddressfeatureskhr
-               (:struct vkphysicaldevicebufferdeviceaddressfeatures))
-
-(cffi:defctype vkbufferdeviceaddressinfokhr (:struct vkbufferdeviceaddressinfo))
-
-(cffi:defctype vkbufferopaquecaptureaddresscreateinfokhr
-               (:struct vkbufferopaquecaptureaddresscreateinfo))
-
-(cffi:defctype vkmemoryopaquecaptureaddressallocateinfokhr
-               (:struct vkmemoryopaquecaptureaddressallocateinfo))
-
-(cffi:defctype vkdevicememoryopaquecaptureaddressinfokhr
-               (:struct vkdevicememoryopaquecaptureaddressinfo))
-
-(cffi:defctype pfn_vkgetbufferdeviceaddresskhr :pointer)
-
-(cffi:defctype pfn_vkgetbufferopaquecaptureaddresskhr :pointer)
-
-(cffi:defctype pfn_vkgetdevicememoryopaquecaptureaddresskhr :pointer)
-
-(cffi:defctype vkdeferredoperationkhr non-dispatchable-handle)
-
-(cffi:defctype pfn_vkcreatedeferredoperationkhr :pointer)
-
-(cffi:defctype pfn_vkdestroydeferredoperationkhr :pointer)
-
-(cffi:defctype pfn_vkgetdeferredoperationmaxconcurrencykhr :pointer)
-
-(cffi:defctype pfn_vkgetdeferredoperationresultkhr :pointer)
-
-(cffi:defctype pfn_vkdeferredoperationjoinkhr :pointer)
-
-(cffi:defcstruct vkphysicaldevicepipelineexecutablepropertiesfeatureskhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (pipelineexecutableinfo vkbool32))
-
-(cffi:defcstruct vkpipelineinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (pipeline vkpipeline))
-
-(cffi:defcstruct vkpipelineexecutablepropertieskhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (stages vkshaderstageflags)
-  (name :char :count 256)
-  (description :char :count 256)
-  (subgroupsize :uint32))
-
-(cffi:defcstruct vkpipelineexecutableinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (pipeline vkpipeline)
-  (executableindex :uint32))
-
-(cffi:defcunion vkpipelineexecutablestatisticvaluekhr
-  (b32 vkbool32)
-  (i64 :int64)
-  (u64 :uint64)
-  (f64 :double))
-
-(cffi:defcstruct vkpipelineexecutablestatistickhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (name :char :count 256)
-  (description :char :count 256)
-  (format vkpipelineexecutablestatisticformatkhr)
-  (value (:union vkpipelineexecutablestatisticvaluekhr)))
-
-(cffi:defcstruct vkpipelineexecutableinternalrepresentationkhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (name :char :count 256)
-  (description :char :count 256)
-  (istext vkbool32)
-  (datasize :size)
-  (pdata :pointer))
-
-(cffi:defctype pfn_vkgetpipelineexecutablepropertieskhr :pointer)
-
-(cffi:defctype pfn_vkgetpipelineexecutablestatisticskhr :pointer)
-
-(cffi:defctype pfn_vkgetpipelineexecutableinternalrepresentationskhr :pointer)
-
-(cffi:defctype vkphysicaldeviceshaderintegerdotproductfeatureskhr
-               (:struct vkphysicaldeviceshaderintegerdotproductfeatures))
-
-(cffi:defctype vkphysicaldeviceshaderintegerdotproductpropertieskhr
-               (:struct vkphysicaldeviceshaderintegerdotproductproperties))
-
-(cffi:defcstruct vkpipelinelibrarycreateinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (librarycount :uint32)
-  (plibraries :pointer))
-
-(cffi:defcstruct vkpresentidkhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (swapchaincount :uint32)
-  (ppresentids :pointer))
-
-(cffi:defcstruct vkphysicaldevicepresentidfeatureskhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (presentid vkbool32))
-
-(cffi:defctype vkpipelinestageflags2khr vkpipelinestageflags2)
-
-(cffi:defctype vkpipelinestageflagbits2khr vkpipelinestageflagbits2)
-
-(cffi:defctype vkaccessflags2khr vkaccessflags2)
-
-(cffi:defctype vkaccessflagbits2khr vkaccessflagbits2)
-
-(cffi:defctype vksubmitflagbitskhr vksubmitflagbits)
-
-(cffi:defctype vksubmitflagskhr vksubmitflags)
-
-(cffi:defctype vkmemorybarrier2khr (:struct vkmemorybarrier2))
-
-(cffi:defctype vkbuffermemorybarrier2khr (:struct vkbuffermemorybarrier2))
-
-(cffi:defctype vkimagememorybarrier2khr (:struct vkimagememorybarrier2))
-
-(cffi:defctype vkdependencyinfokhr (:struct vkdependencyinfo))
-
-(cffi:defctype vksubmitinfo2khr (:struct vksubmitinfo2))
-
-(cffi:defctype vksemaphoresubmitinfokhr (:struct vksemaphoresubmitinfo))
-
-(cffi:defctype vkcommandbuffersubmitinfokhr (:struct vkcommandbuffersubmitinfo))
-
-(cffi:defctype vkphysicaldevicesynchronization2featureskhr
-               (:struct vkphysicaldevicesynchronization2features))
-
-(cffi:defcstruct vkqueuefamilycheckpointproperties2nv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (checkpointexecutionstagemask vkpipelinestageflags2))
-
-(cffi:defcstruct vkcheckpointdata2nv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (stage vkpipelinestageflags2)
-  (pcheckpointmarker :pointer))
-
-(cffi:defctype pfn_vkcmdsetevent2khr :pointer)
-
-(cffi:defctype pfn_vkcmdresetevent2khr :pointer)
-
-(cffi:defctype pfn_vkcmdwaitevents2khr :pointer)
-
-(cffi:defctype pfn_vkcmdpipelinebarrier2khr :pointer)
-
-(cffi:defctype pfn_vkcmdwritetimestamp2khr :pointer)
-
-(cffi:defctype pfn_vkqueuesubmit2khr :pointer)
-
-(cffi:defctype pfn_vkcmdwritebuffermarker2amd :pointer)
-
-(cffi:defctype pfn_vkgetqueuecheckpointdata2nv :pointer)
-
-(cffi:defcstruct vkphysicaldevicefragmentshaderbarycentricfeatureskhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (fragmentshaderbarycentric vkbool32))
-
-(cffi:defcstruct vkphysicaldevicefragmentshaderbarycentricpropertieskhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (tristripvertexorderindependentofprovokingvertex vkbool32))
-
-(cffi:defcstruct vkphysicaldeviceshadersubgroupuniformcontrolflowfeatureskhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (shadersubgroupuniformcontrolflow vkbool32))
-
-(cffi:defctype vkphysicaldevicezeroinitializeworkgroupmemoryfeatureskhr
-               (:struct vkphysicaldevicezeroinitializeworkgroupmemoryfeatures))
-
-(cffi:defcstruct vkphysicaldeviceworkgroupmemoryexplicitlayoutfeatureskhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (workgroupmemoryexplicitlayout vkbool32)
-  (workgroupmemoryexplicitlayoutscalarblocklayout vkbool32)
-  (workgroupmemoryexplicitlayout8bitaccess vkbool32)
-  (workgroupmemoryexplicitlayout16bitaccess vkbool32))
-
-(cffi:defctype vkcopybufferinfo2khr (:struct vkcopybufferinfo2))
-
-(cffi:defctype vkcopyimageinfo2khr (:struct vkcopyimageinfo2))
-
-(cffi:defctype vkcopybuffertoimageinfo2khr (:struct vkcopybuffertoimageinfo2))
-
-(cffi:defctype vkcopyimagetobufferinfo2khr (:struct vkcopyimagetobufferinfo2))
-
-(cffi:defctype vkblitimageinfo2khr (:struct vkblitimageinfo2))
-
-(cffi:defctype vkresolveimageinfo2khr (:struct vkresolveimageinfo2))
-
-(cffi:defctype vkbuffercopy2khr (:struct vkbuffercopy2))
-
-(cffi:defctype vkimagecopy2khr (:struct vkimagecopy2))
-
-(cffi:defctype vkimageblit2khr (:struct vkimageblit2))
-
-(cffi:defctype vkbufferimagecopy2khr (:struct vkbufferimagecopy2))
-
-(cffi:defctype vkimageresolve2khr (:struct vkimageresolve2))
-
-(cffi:defctype pfn_vkcmdcopybuffer2khr :pointer)
-
-(cffi:defctype pfn_vkcmdcopyimage2khr :pointer)
-
-(cffi:defctype pfn_vkcmdcopybuffertoimage2khr :pointer)
-
-(cffi:defctype pfn_vkcmdcopyimagetobuffer2khr :pointer)
-
-(cffi:defctype pfn_vkcmdblitimage2khr :pointer)
-
-(cffi:defctype pfn_vkcmdresolveimage2khr :pointer)
-
-(cffi:defctype vkformatfeatureflags2khr vkformatfeatureflags2)
-
-(cffi:defctype vkformatfeatureflagbits2khr vkformatfeatureflagbits2)
-
-(cffi:defctype vkformatproperties3khr (:struct vkformatproperties3))
-
-(cffi:defcstruct vkphysicaldeviceraytracingmaintenance1featureskhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (raytracingmaintenance1 vkbool32)
-  (raytracingpipelinetraceraysindirect2 vkbool32))
-
-(cffi:defcstruct vktraceraysindirectcommand2khr
-  (raygenshaderrecordaddress vkdeviceaddress)
-  (raygenshaderrecordsize vkdevicesize)
-  (missshaderbindingtableaddress vkdeviceaddress)
-  (missshaderbindingtablesize vkdevicesize)
-  (missshaderbindingtablestride vkdevicesize)
-  (hitshaderbindingtableaddress vkdeviceaddress)
-  (hitshaderbindingtablesize vkdevicesize)
-  (hitshaderbindingtablestride vkdevicesize)
-  (callableshaderbindingtableaddress vkdeviceaddress)
-  (callableshaderbindingtablesize vkdevicesize)
-  (callableshaderbindingtablestride vkdevicesize)
-  (width :uint32)
-  (height :uint32)
-  (depth :uint32))
-
-(cffi:defctype pfn_vkcmdtraceraysindirect2khr :pointer)
-
-(cffi:defctype vkphysicaldevicemaintenance4featureskhr
-               (:struct vkphysicaldevicemaintenance4features))
-
-(cffi:defctype vkphysicaldevicemaintenance4propertieskhr
-               (:struct vkphysicaldevicemaintenance4properties))
-
-(cffi:defctype vkdevicebuffermemoryrequirementskhr
-               (:struct vkdevicebuffermemoryrequirements))
-
-(cffi:defctype vkdeviceimagememoryrequirementskhr
-               (:struct vkdeviceimagememoryrequirements))
-
-(cffi:defctype pfn_vkgetdevicebuffermemoryrequirementskhr :pointer)
-
-(cffi:defctype pfn_vkgetdeviceimagememoryrequirementskhr :pointer)
-
-(cffi:defctype pfn_vkgetdeviceimagesparsememoryrequirementskhr :pointer)
-
-(cffi:defctype vkdebugreportcallbackext non-dispatchable-handle)
-
-(cffi:defctype vkdebugreportflagsext vkflags)
-
-(cffi:defctype pfn_vkdebugreportcallbackext :pointer)
-
-(cffi:defcstruct vkdebugreportcallbackcreateinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkdebugreportflagsext)
-  (pfncallback pfn_vkdebugreportcallbackext)
-  (puserdata :pointer))
-
-(cffi:defctype pfn_vkcreatedebugreportcallbackext :pointer)
-
-(cffi:defctype pfn_vkdestroydebugreportcallbackext :pointer)
-
-(cffi:defctype pfn_vkdebugreportmessageext :pointer)
-
-(cffi:defcstruct vkpipelinerasterizationstaterasterizationorderamd
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (rasterizationorder vkrasterizationorderamd))
-
-(cffi:defcstruct vkdebugmarkerobjectnameinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (objecttype vkdebugreportobjecttypeext)
-  (object :uint64)
-  (pobjectname :pointer))
-
-(cffi:defcstruct vkdebugmarkerobjecttaginfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (objecttype vkdebugreportobjecttypeext)
-  (object :uint64)
-  (tagname :uint64)
-  (tagsize :size)
-  (ptag :pointer))
-
-(cffi:defcstruct vkdebugmarkermarkerinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (pmarkername :pointer)
-  (color :float :count 4))
-
-(cffi:defctype pfn_vkdebugmarkersetobjecttagext :pointer)
-
-(cffi:defctype pfn_vkdebugmarkersetobjectnameext :pointer)
-
-(cffi:defctype pfn_vkcmddebugmarkerbeginext :pointer)
-
-(cffi:defctype pfn_vkcmddebugmarkerendext :pointer)
-
-(cffi:defctype pfn_vkcmddebugmarkerinsertext :pointer)
-
-(cffi:defcstruct vkdedicatedallocationimagecreateinfonv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (dedicatedallocation vkbool32))
-
-(cffi:defcstruct vkdedicatedallocationbuffercreateinfonv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (dedicatedallocation vkbool32))
-
-(cffi:defcstruct vkdedicatedallocationmemoryallocateinfonv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (image vkimage)
-  (buffer vkbuffer))
-
-(cffi:defctype vkpipelinerasterizationstatestreamcreateflagsext vkflags)
-
-(cffi:defcstruct vkphysicaldevicetransformfeedbackfeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (transformfeedback vkbool32)
-  (geometrystreams vkbool32))
-
-(cffi:defcstruct vkphysicaldevicetransformfeedbackpropertiesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (maxtransformfeedbackstreams :uint32)
-  (maxtransformfeedbackbuffers :uint32)
-  (maxtransformfeedbackbuffersize vkdevicesize)
-  (maxtransformfeedbackstreamdatasize :uint32)
-  (maxtransformfeedbackbufferdatasize :uint32)
-  (maxtransformfeedbackbufferdatastride :uint32)
-  (transformfeedbackqueries vkbool32)
-  (transformfeedbackstreamslinestriangles vkbool32)
-  (transformfeedbackrasterizationstreamselect vkbool32)
-  (transformfeedbackdraw vkbool32))
-
-(cffi:defcstruct vkpipelinerasterizationstatestreamcreateinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkpipelinerasterizationstatestreamcreateflagsext)
-  (rasterizationstream :uint32))
-
-(cffi:defctype pfn_vkcmdbindtransformfeedbackbuffersext :pointer)
-
-(cffi:defctype pfn_vkcmdbegintransformfeedbackext :pointer)
-
-(cffi:defctype pfn_vkcmdendtransformfeedbackext :pointer)
-
-(cffi:defctype pfn_vkcmdbeginqueryindexedext :pointer)
-
-(cffi:defctype pfn_vkcmdendqueryindexedext :pointer)
-
-(cffi:defctype pfn_vkcmddrawindirectbytecountext :pointer)
-
-(cffi:defctype vkcumodulenvx non-dispatchable-handle)
-
-(cffi:defctype vkcufunctionnvx non-dispatchable-handle)
-
-(cffi:defcstruct vkcumodulecreateinfonvx
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (datasize :size)
-  (pdata :pointer))
-
-(cffi:defcstruct vkcufunctioncreateinfonvx
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (module vkcumodulenvx)
-  (pname :pointer))
-
-(cffi:defcstruct vkculaunchinfonvx
-  (stype vkstructuretype)
-  (pnext :pointer)
-  #'vkcufunctionnvx
-  (griddimx :uint32)
-  (griddimy :uint32)
-  (griddimz :uint32)
-  (blockdimx :uint32)
-  (blockdimy :uint32)
-  (blockdimz :uint32)
-  (sharedmembytes :uint32)
-  (paramcount :size)
-  (pparams :pointer)
-  (extracount :size)
-  (pextras :pointer))
-
-(cffi:defctype pfn_vkcreatecumodulenvx :pointer)
-
-(cffi:defctype pfn_vkcreatecufunctionnvx :pointer)
-
-(cffi:defctype pfn_vkdestroycumodulenvx :pointer)
-
-(cffi:defctype pfn_vkdestroycufunctionnvx :pointer)
-
-(cffi:defctype pfn_vkcmdculaunchkernelnvx :pointer)
-
-(cffi:defcstruct vkimageviewhandleinfonvx
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (imageview vkimageview)
-  (descriptortype vkdescriptortype)
-  (sampler vksampler))
-
-(cffi:defcstruct vkimageviewaddresspropertiesnvx
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (deviceaddress vkdeviceaddress)
-  (size vkdevicesize))
-
-(cffi:defctype pfn_vkgetimageviewhandlenvx :pointer)
-
-(cffi:defctype pfn_vkgetimageviewaddressnvx :pointer)
-
-(cffi:defctype pfn_vkcmddrawindirectcountamd :pointer)
-
-(cffi:defctype pfn_vkcmddrawindexedindirectcountamd :pointer)
-
-(cffi:defcstruct vktexturelodgatherformatpropertiesamd
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (supportstexturegatherlodbiasamd vkbool32))
-
-(cffi:defcstruct vkshaderresourceusageamd
-  (numusedvgprs :uint32)
-  (numusedsgprs :uint32)
-  (ldssizeperlocalworkgroup :uint32)
-  (ldsusagesizeinbytes :size)
-  (scratchmemusageinbytes :size))
-
-(cffi:defcstruct vkshaderstatisticsinfoamd
-  (shaderstagemask vkshaderstageflags)
-  (resourceusage (:struct vkshaderresourceusageamd))
-  (numphysicalvgprs :uint32)
-  (numphysicalsgprs :uint32)
-  (numavailablevgprs :uint32)
-  (numavailablesgprs :uint32)
-  (computeworkgroupsize :uint32 :count 3))
-
-(cffi:defctype pfn_vkgetshaderinfoamd :pointer)
-
-(cffi:defcstruct vkphysicaldevicecornersampledimagefeaturesnv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (cornersampledimage vkbool32))
-
-(cffi:defctype vkexternalmemoryhandletypeflagsnv vkflags)
-
-(cffi:defctype vkexternalmemoryfeatureflagsnv vkflags)
-
-(cffi:defcstruct vkexternalimageformatpropertiesnv
-  (imageformatproperties (:struct vkimageformatproperties))
-  (externalmemoryfeatures vkexternalmemoryfeatureflagsnv)
-  (exportfromimportedhandletypes vkexternalmemoryhandletypeflagsnv)
-  (compatiblehandletypes vkexternalmemoryhandletypeflagsnv))
-
-(cffi:defctype pfn_vkgetphysicaldeviceexternalimageformatpropertiesnv :pointer)
-
-(cffi:defcstruct vkexternalmemoryimagecreateinfonv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (handletypes vkexternalmemoryhandletypeflagsnv))
-
-(cffi:defcstruct vkexportmemoryallocateinfonv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (handletypes vkexternalmemoryhandletypeflagsnv))
-
-(cffi:defcstruct vkvalidationflagsext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (disabledvalidationcheckcount :uint32)
-  (pdisabledvalidationchecks :pointer))
-
-(cffi:defctype vkphysicaldevicetexturecompressionastchdrfeaturesext
-               (:struct vkphysicaldevicetexturecompressionastchdrfeatures))
-
-(cffi:defcstruct vkimageviewastcdecodemodeext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (decodemode vkformat))
-
-(cffi:defcstruct vkphysicaldeviceastcdecodefeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (decodemodesharedexponent vkbool32))
-
-(cffi:defctype vkconditionalrenderingflagsext vkflags)
-
-(cffi:defcstruct vkconditionalrenderingbegininfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (buffer vkbuffer)
-  (offset vkdevicesize)
-  (flags vkconditionalrenderingflagsext))
-
-(cffi:defcstruct vkphysicaldeviceconditionalrenderingfeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (conditionalrendering vkbool32)
-  (inheritedconditionalrendering vkbool32))
-
-(cffi:defcstruct vkcommandbufferinheritanceconditionalrenderinginfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (conditionalrenderingenable vkbool32))
-
-(cffi:defctype pfn_vkcmdbeginconditionalrenderingext :pointer)
-
-(cffi:defctype pfn_vkcmdendconditionalrenderingext :pointer)
-
-(cffi:defcstruct vkviewportwscalingnv
-  (xcoeff :float)
-  (ycoeff :float))
-
-(cffi:defcstruct vkpipelineviewportwscalingstatecreateinfonv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (viewportwscalingenable vkbool32)
-  (viewportcount :uint32)
-  (pviewportwscalings :pointer))
-
-(cffi:defctype pfn_vkcmdsetviewportwscalingnv :pointer)
-
-(cffi:defctype pfn_vkreleasedisplayext :pointer)
-
-(cffi:defctype vksurfacecounterflagsext vkflags)
-
-(cffi:defcstruct vksurfacecapabilities2ext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (minimagecount :uint32)
-  (maximagecount :uint32)
-  (currentextent (:struct vkextent2d))
-  (minimageextent (:struct vkextent2d))
-  (maximageextent (:struct vkextent2d))
-  (maximagearraylayers :uint32)
-  (supportedtransforms vksurfacetransformflagskhr)
-  (currenttransform vksurfacetransformflagbitskhr)
-  (supportedcompositealpha vkcompositealphaflagskhr)
-  (supportedusageflags vkimageusageflags)
-  (supportedsurfacecounters vksurfacecounterflagsext))
-
-(cffi:defctype pfn_vkgetphysicaldevicesurfacecapabilities2ext :pointer)
-
-(cffi:defcstruct vkdisplaypowerinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (powerstate vkdisplaypowerstateext))
-
-(cffi:defcstruct vkdeviceeventinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (deviceevent vkdeviceeventtypeext))
-
-(cffi:defcstruct vkdisplayeventinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (displayevent vkdisplayeventtypeext))
-
-(cffi:defcstruct vkswapchaincountercreateinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (surfacecounters vksurfacecounterflagsext))
-
-(cffi:defctype pfn_vkdisplaypowercontrolext :pointer)
-
-(cffi:defctype pfn_vkregisterdeviceeventext :pointer)
-
-(cffi:defctype pfn_vkregisterdisplayeventext :pointer)
-
-(cffi:defctype pfn_vkgetswapchaincounterext :pointer)
-
-(cffi:defcstruct vkrefreshcycledurationgoogle
-  (refreshduration :uint64))
-
-(cffi:defcstruct vkpastpresentationtiminggoogle
-  (presentid :uint32)
-  (desiredpresenttime :uint64)
-  (actualpresenttime :uint64)
-  (earliestpresenttime :uint64)
-  (presentmargin :uint64))
-
-(cffi:defcstruct vkpresenttimegoogle
-  (presentid :uint32)
-  (desiredpresenttime :uint64))
-
-(cffi:defcstruct vkpresenttimesinfogoogle
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (swapchaincount :uint32)
-  (ptimes :pointer))
-
-(cffi:defctype pfn_vkgetrefreshcycledurationgoogle :pointer)
-
-(cffi:defctype pfn_vkgetpastpresentationtiminggoogle :pointer)
-
-(cffi:defcstruct vkphysicaldevicemultiviewperviewattributespropertiesnvx
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (perviewpositionallcomponents vkbool32))
-
-(cffi:defctype vkpipelineviewportswizzlestatecreateflagsnv vkflags)
-
-(cffi:defcstruct vkviewportswizzlenv
-  (x vkviewportcoordinateswizzlenv)
-  (y vkviewportcoordinateswizzlenv)
-  (z vkviewportcoordinateswizzlenv)
-  (w vkviewportcoordinateswizzlenv))
-
-(cffi:defcstruct vkpipelineviewportswizzlestatecreateinfonv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkpipelineviewportswizzlestatecreateflagsnv)
-  (viewportcount :uint32)
-  (pviewportswizzles :pointer))
-
-(cffi:defctype vkpipelinediscardrectanglestatecreateflagsext vkflags)
-
-(cffi:defcstruct vkphysicaldevicediscardrectanglepropertiesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (maxdiscardrectangles :uint32))
-
-(cffi:defcstruct vkpipelinediscardrectanglestatecreateinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkpipelinediscardrectanglestatecreateflagsext)
-  (discardrectanglemode vkdiscardrectanglemodeext)
-  (discardrectanglecount :uint32)
-  (pdiscardrectangles :pointer))
-
-(cffi:defctype pfn_vkcmdsetdiscardrectangleext :pointer)
-
-(cffi:defctype vkpipelinerasterizationconservativestatecreateflagsext vkflags)
-
-(cffi:defcstruct vkphysicaldeviceconservativerasterizationpropertiesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (primitiveoverestimationsize :float)
-  (maxextraprimitiveoverestimationsize :float)
-  (extraprimitiveoverestimationsizegranularity :float)
-  (primitiveunderestimation vkbool32)
-  (conservativepointandlinerasterization vkbool32)
-  (degeneratetrianglesrasterized vkbool32)
-  (degeneratelinesrasterized vkbool32)
-  (fullycoveredfragmentshaderinputvariable vkbool32)
-  (conservativerasterizationpostdepthcoverage vkbool32))
-
-(cffi:defcstruct vkpipelinerasterizationconservativestatecreateinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkpipelinerasterizationconservativestatecreateflagsext)
-  (conservativerasterizationmode vkconservativerasterizationmodeext)
-  (extraprimitiveoverestimationsize :float))
-
-(cffi:defctype vkpipelinerasterizationdepthclipstatecreateflagsext vkflags)
-
-(cffi:defcstruct vkphysicaldevicedepthclipenablefeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (depthclipenable vkbool32))
-
-(cffi:defcstruct vkpipelinerasterizationdepthclipstatecreateinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkpipelinerasterizationdepthclipstatecreateflagsext)
-  (depthclipenable vkbool32))
-
-(cffi:defcstruct vkxycolorext
-  (x :float)
-  (y :float))
-
-(cffi:defcstruct vkhdrmetadataext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (displayprimaryred (:struct vkxycolorext))
-  (displayprimarygreen (:struct vkxycolorext))
-  (displayprimaryblue (:struct vkxycolorext))
-  (whitepoint (:struct vkxycolorext))
-  (maxluminance :float)
-  (minluminance :float)
-  (maxcontentlightlevel :float)
-  (maxframeaveragelightlevel :float))
-
-(cffi:defctype pfn_vksethdrmetadataext :pointer)
-
-(cffi:defctype vkdebugutilsmessengerext non-dispatchable-handle)
-
-(cffi:defctype vkdebugutilsmessengercallbackdataflagsext vkflags)
-
-(cffi:defctype vkdebugutilsmessagetypeflagsext vkflags)
-
-(cffi:defctype vkdebugutilsmessageseverityflagsext vkflags)
-
-(cffi:defctype vkdebugutilsmessengercreateflagsext vkflags)
-
-(cffi:defcstruct vkdebugutilslabelext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (plabelname :pointer)
-  (color :float :count 4))
-
-(cffi:defcstruct vkdebugutilsobjectnameinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (objecttype vkobjecttype)
-  (objecthandle :uint64)
-  (pobjectname :pointer))
-
-(cffi:defcstruct vkdebugutilsmessengercallbackdataext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkdebugutilsmessengercallbackdataflagsext)
-  (pmessageidname :pointer)
-  (messageidnumber :int32)
-  (pmessage :pointer)
-  (queuelabelcount :uint32)
-  (pqueuelabels :pointer)
-  (cmdbuflabelcount :uint32)
-  (pcmdbuflabels :pointer)
-  (objectcount :uint32)
-  (pobjects :pointer))
-
-(cffi:defctype pfn_vkdebugutilsmessengercallbackext :pointer)
-
-(cffi:defcstruct vkdebugutilsmessengercreateinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkdebugutilsmessengercreateflagsext)
-  (messageseverity vkdebugutilsmessageseverityflagsext)
-  (messagetype vkdebugutilsmessagetypeflagsext)
-  (pfnusercallback pfn_vkdebugutilsmessengercallbackext)
-  (puserdata :pointer))
-
-(cffi:defcstruct vkdebugutilsobjecttaginfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (objecttype vkobjecttype)
-  (objecthandle :uint64)
-  (tagname :uint64)
-  (tagsize :size)
-  (ptag :pointer))
-
-(cffi:defctype pfn_vksetdebugutilsobjectnameext :pointer)
-
-(cffi:defctype pfn_vksetdebugutilsobjecttagext :pointer)
-
-(cffi:defctype pfn_vkqueuebegindebugutilslabelext :pointer)
-
-(cffi:defctype pfn_vkqueueenddebugutilslabelext :pointer)
-
-(cffi:defctype pfn_vkqueueinsertdebugutilslabelext :pointer)
-
-(cffi:defctype pfn_vkcmdbegindebugutilslabelext :pointer)
-
-(cffi:defctype pfn_vkcmdenddebugutilslabelext :pointer)
-
-(cffi:defctype pfn_vkcmdinsertdebugutilslabelext :pointer)
-
-(cffi:defctype pfn_vkcreatedebugutilsmessengerext :pointer)
-
-(cffi:defctype pfn_vkdestroydebugutilsmessengerext :pointer)
-
-(cffi:defctype pfn_vksubmitdebugutilsmessageext :pointer)
-
-(cffi:defctype vksamplerreductionmodeext vksamplerreductionmode)
-
-(cffi:defctype vksamplerreductionmodecreateinfoext
-               (:struct vksamplerreductionmodecreateinfo))
-
-(cffi:defctype vkphysicaldevicesamplerfilterminmaxpropertiesext
-               (:struct vkphysicaldevicesamplerfilterminmaxproperties))
-
-(cffi:defctype vkphysicaldeviceinlineuniformblockfeaturesext
-               (:struct vkphysicaldeviceinlineuniformblockfeatures))
-
-(cffi:defctype vkphysicaldeviceinlineuniformblockpropertiesext
-               (:struct vkphysicaldeviceinlineuniformblockproperties))
-
-(cffi:defctype vkwritedescriptorsetinlineuniformblockext
-               (:struct vkwritedescriptorsetinlineuniformblock))
-
-(cffi:defctype vkdescriptorpoolinlineuniformblockcreateinfoext
-               (:struct vkdescriptorpoolinlineuniformblockcreateinfo))
-
-(cffi:defcstruct vksamplelocationext
-  (x :float)
-  (y :float))
-
-(cffi:defcstruct vksamplelocationsinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (samplelocationsperpixel vksamplecountflagbits)
-  (samplelocationgridsize (:struct vkextent2d))
-  (samplelocationscount :uint32)
-  (psamplelocations :pointer))
-
-(cffi:defcstruct vkattachmentsamplelocationsext
-  (attachmentindex :uint32)
-  (samplelocationsinfo (:struct vksamplelocationsinfoext)))
-
-(cffi:defcstruct vksubpasssamplelocationsext
-  (subpassindex :uint32)
-  (samplelocationsinfo (:struct vksamplelocationsinfoext)))
-
-(cffi:defcstruct vkrenderpasssamplelocationsbegininfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (attachmentinitialsamplelocationscount :uint32)
-  (pattachmentinitialsamplelocations :pointer)
-  (postsubpasssamplelocationscount :uint32)
-  (ppostsubpasssamplelocations :pointer))
-
-(cffi:defcstruct vkpipelinesamplelocationsstatecreateinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (samplelocationsenable vkbool32)
-  (samplelocationsinfo (:struct vksamplelocationsinfoext)))
-
-(cffi:defcstruct vkphysicaldevicesamplelocationspropertiesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (samplelocationsamplecounts vksamplecountflags)
-  (maxsamplelocationgridsize (:struct vkextent2d))
-  (samplelocationcoordinaterange :float :count 2)
-  (samplelocationsubpixelbits :uint32)
-  (variablesamplelocations vkbool32))
-
-(cffi:defcstruct vkmultisamplepropertiesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (maxsamplelocationgridsize (:struct vkextent2d)))
-
-(cffi:defctype pfn_vkcmdsetsamplelocationsext :pointer)
-
-(cffi:defctype pfn_vkgetphysicaldevicemultisamplepropertiesext :pointer)
-
-(cffi:defcstruct vkphysicaldeviceblendoperationadvancedfeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (advancedblendcoherentoperations vkbool32))
-
-(cffi:defcstruct vkphysicaldeviceblendoperationadvancedpropertiesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (advancedblendmaxcolorattachments :uint32)
-  (advancedblendindependentblend vkbool32)
-  (advancedblendnonpremultipliedsrccolor vkbool32)
-  (advancedblendnonpremultiplieddstcolor vkbool32)
-  (advancedblendcorrelatedoverlap vkbool32)
-  (advancedblendalloperations vkbool32))
-
-(cffi:defcstruct vkpipelinecolorblendadvancedstatecreateinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (srcpremultiplied vkbool32)
-  (dstpremultiplied vkbool32)
-  (blendoverlap vkblendoverlapext))
-
-(cffi:defctype vkpipelinecoveragetocolorstatecreateflagsnv vkflags)
-
-(cffi:defcstruct vkpipelinecoveragetocolorstatecreateinfonv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkpipelinecoveragetocolorstatecreateflagsnv)
-  (coveragetocolorenable vkbool32)
-  (coveragetocolorlocation :uint32))
-
-(cffi:defctype vkpipelinecoveragemodulationstatecreateflagsnv vkflags)
-
-(cffi:defcstruct vkpipelinecoveragemodulationstatecreateinfonv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkpipelinecoveragemodulationstatecreateflagsnv)
-  (coveragemodulationmode vkcoveragemodulationmodenv)
-  (coveragemodulationtableenable vkbool32)
-  (coveragemodulationtablecount :uint32)
-  (pcoveragemodulationtable :pointer))
-
-(cffi:defcstruct vkphysicaldeviceshadersmbuiltinspropertiesnv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (shadersmcount :uint32)
-  (shaderwarpspersm :uint32))
-
-(cffi:defcstruct vkphysicaldeviceshadersmbuiltinsfeaturesnv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (shadersmbuiltins vkbool32))
-
-(cffi:defcstruct vkdrmformatmodifierpropertiesext
-  (drmformatmodifier :uint64)
-  (drmformatmodifierplanecount :uint32)
-  (drmformatmodifiertilingfeatures vkformatfeatureflags))
-
-(cffi:defcstruct vkdrmformatmodifierpropertieslistext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (drmformatmodifiercount :uint32)
-  (pdrmformatmodifierproperties :pointer))
-
-(cffi:defcstruct vkphysicaldeviceimagedrmformatmodifierinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (drmformatmodifier :uint64)
-  (sharingmode vksharingmode)
-  (queuefamilyindexcount :uint32)
-  (pqueuefamilyindices :pointer))
-
-(cffi:defcstruct vkimagedrmformatmodifierlistcreateinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (drmformatmodifiercount :uint32)
-  (pdrmformatmodifiers :pointer))
-
-(cffi:defcstruct vkimagedrmformatmodifierexplicitcreateinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (drmformatmodifier :uint64)
-  (drmformatmodifierplanecount :uint32)
-  (pplanelayouts :pointer))
-
-(cffi:defcstruct vkimagedrmformatmodifierpropertiesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (drmformatmodifier :uint64))
-
-(cffi:defcstruct vkdrmformatmodifierproperties2ext
-  (drmformatmodifier :uint64)
-  (drmformatmodifierplanecount :uint32)
-  (drmformatmodifiertilingfeatures vkformatfeatureflags2))
-
-(cffi:defcstruct vkdrmformatmodifierpropertieslist2ext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (drmformatmodifiercount :uint32)
-  (pdrmformatmodifierproperties :pointer))
-
-(cffi:defctype pfn_vkgetimagedrmformatmodifierpropertiesext :pointer)
-
-(cffi:defctype vkvalidationcacheext non-dispatchable-handle)
-
-(cffi:defctype vkvalidationcachecreateflagsext vkflags)
-
-(cffi:defcstruct vkvalidationcachecreateinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkvalidationcachecreateflagsext)
-  (initialdatasize :size)
-  (pinitialdata :pointer))
-
-(cffi:defcstruct vkshadermodulevalidationcachecreateinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (validationcache vkvalidationcacheext))
-
-(cffi:defctype pfn_vkcreatevalidationcacheext :pointer)
-
-(cffi:defctype pfn_vkdestroyvalidationcacheext :pointer)
-
-(cffi:defctype pfn_vkmergevalidationcachesext :pointer)
-
-(cffi:defctype pfn_vkgetvalidationcachedataext :pointer)
-
-(cffi:defctype vkdescriptorbindingflagbitsext vkdescriptorbindingflagbits)
-
-(cffi:defctype vkdescriptorbindingflagsext vkdescriptorbindingflags)
-
-(cffi:defctype vkdescriptorsetlayoutbindingflagscreateinfoext
-               (:struct vkdescriptorsetlayoutbindingflagscreateinfo))
-
-(cffi:defctype vkphysicaldevicedescriptorindexingfeaturesext
-               (:struct vkphysicaldevicedescriptorindexingfeatures))
-
-(cffi:defctype vkphysicaldevicedescriptorindexingpropertiesext
-               (:struct vkphysicaldevicedescriptorindexingproperties))
-
-(cffi:defctype vkdescriptorsetvariabledescriptorcountallocateinfoext
-               (:struct vkdescriptorsetvariabledescriptorcountallocateinfo))
-
-(cffi:defctype vkdescriptorsetvariabledescriptorcountlayoutsupportext
-               (:struct vkdescriptorsetvariabledescriptorcountlayoutsupport))
-
-(cffi:defcstruct vkshadingratepalettenv
-  (shadingratepaletteentrycount :uint32)
-  (pshadingratepaletteentries :pointer))
-
-(cffi:defcstruct vkpipelineviewportshadingrateimagestatecreateinfonv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (shadingrateimageenable vkbool32)
-  (viewportcount :uint32)
-  (pshadingratepalettes :pointer))
-
-(cffi:defcstruct vkphysicaldeviceshadingrateimagefeaturesnv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (shadingrateimage vkbool32)
-  (shadingratecoarsesampleorder vkbool32))
-
-(cffi:defcstruct vkphysicaldeviceshadingrateimagepropertiesnv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (shadingratetexelsize (:struct vkextent2d))
-  (shadingratepalettesize :uint32)
-  (shadingratemaxcoarsesamples :uint32))
-
-(cffi:defcstruct vkcoarsesamplelocationnv
-  (pixelx :uint32)
-  (pixely :uint32)
-  (sample :uint32))
-
-(cffi:defcstruct vkcoarsesampleordercustomnv
-  (shadingrate vkshadingratepaletteentrynv)
-  (samplecount :uint32)
-  (samplelocationcount :uint32)
-  (psamplelocations :pointer))
-
-(cffi:defcstruct vkpipelineviewportcoarsesampleorderstatecreateinfonv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (sampleordertype vkcoarsesampleordertypenv)
-  (customsampleordercount :uint32)
-  (pcustomsampleorders :pointer))
-
-(cffi:defctype pfn_vkcmdbindshadingrateimagenv :pointer)
-
-(cffi:defctype pfn_vkcmdsetviewportshadingratepalettenv :pointer)
-
-(cffi:defctype pfn_vkcmdsetcoarsesampleordernv :pointer)
-
-(cffi:defctype vkaccelerationstructurenv non-dispatchable-handle)
-
-(cffi:defctype vkraytracingshadergrouptypenv vkraytracingshadergrouptypekhr)
-
-(cffi:defctype vkgeometrytypenv vkgeometrytypekhr)
-
-(cffi:defctype vkaccelerationstructuretypenv vkaccelerationstructuretypekhr)
-
-(cffi:defctype vkcopyaccelerationstructuremodenv
-               vkcopyaccelerationstructuremodekhr)
-
-(cffi:defctype vkgeometryflagskhr vkflags)
-
-(cffi:defctype vkgeometryflagsnv vkgeometryflagskhr)
-
-(cffi:defctype vkgeometryflagbitsnv vkgeometryflagbitskhr)
-
-(cffi:defctype vkgeometryinstanceflagskhr vkflags)
-
-(cffi:defctype vkgeometryinstanceflagsnv vkgeometryinstanceflagskhr)
-
-(cffi:defctype vkgeometryinstanceflagbitsnv vkgeometryinstanceflagbitskhr)
-
-(cffi:defctype vkbuildaccelerationstructureflagskhr vkflags)
-
-(cffi:defctype vkbuildaccelerationstructureflagsnv
-               vkbuildaccelerationstructureflagskhr)
-
-(cffi:defctype vkbuildaccelerationstructureflagbitsnv
-               vkbuildaccelerationstructureflagbitskhr)
-
-(cffi:defcstruct vkraytracingshadergroupcreateinfonv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (type vkraytracingshadergrouptypekhr)
-  (generalshader :uint32)
-  (closesthitshader :uint32)
-  (anyhitshader :uint32)
-  (intersectionshader :uint32))
-
-(cffi:defcstruct vkraytracingpipelinecreateinfonv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkpipelinecreateflags)
-  (stagecount :uint32)
-  (pstages :pointer)
-  (groupcount :uint32)
-  (pgroups :pointer)
-  (maxrecursiondepth :uint32)
-  (layout vkpipelinelayout)
-  (basepipelinehandle vkpipeline)
-  (basepipelineindex :int32))
-
-(cffi:defcstruct vkgeometrytrianglesnv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (vertexdata vkbuffer)
-  (vertexoffset vkdevicesize)
-  (vertexcount :uint32)
-  (vertexstride vkdevicesize)
-  (vertexformat vkformat)
-  (indexdata vkbuffer)
-  (indexoffset vkdevicesize)
-  (indexcount :uint32)
-  (indextype vkindextype)
-  (transformdata vkbuffer)
-  (transformoffset vkdevicesize))
-
-(cffi:defcstruct vkgeometryaabbnv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (aabbdata vkbuffer)
-  (numaabbs :uint32)
-  (stride :uint32)
-  (offset vkdevicesize))
-
-(cffi:defcstruct vkgeometrydatanv
-  (triangles (:struct vkgeometrytrianglesnv))
-  (aabbs (:struct vkgeometryaabbnv)))
-
-(cffi:defcstruct vkgeometrynv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (geometrytype vkgeometrytypekhr)
-  (geometry (:struct vkgeometrydatanv))
-  (flags vkgeometryflagskhr))
-
-(cffi:defcstruct vkaccelerationstructureinfonv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (type vkaccelerationstructuretypenv)
-  (flags vkbuildaccelerationstructureflagsnv)
-  (instancecount :uint32)
-  (geometrycount :uint32)
-  (pgeometries :pointer))
-
-(cffi:defcstruct vkaccelerationstructurecreateinfonv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (compactedsize vkdevicesize)
-  (info (:struct vkaccelerationstructureinfonv)))
-
-(cffi:defcstruct vkbindaccelerationstructurememoryinfonv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (accelerationstructure vkaccelerationstructurenv)
-  (memory vkdevicememory)
-  (memoryoffset vkdevicesize)
-  (deviceindexcount :uint32)
-  (pdeviceindices :pointer))
-
-(cffi:defcstruct vkwritedescriptorsetaccelerationstructurenv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (accelerationstructurecount :uint32)
-  (paccelerationstructures :pointer))
-
-(cffi:defcstruct vkaccelerationstructurememoryrequirementsinfonv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (type vkaccelerationstructurememoryrequirementstypenv)
-  (accelerationstructure vkaccelerationstructurenv))
-
-(cffi:defcstruct vkphysicaldeviceraytracingpropertiesnv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (shadergrouphandlesize :uint32)
-  (maxrecursiondepth :uint32)
-  (maxshadergroupstride :uint32)
-  (shadergroupbasealignment :uint32)
-  (maxgeometrycount :uint64)
-  (maxinstancecount :uint64)
-  (maxtrianglecount :uint64)
-  (maxdescriptorsetaccelerationstructures :uint32))
-
-(cffi:defcstruct vktransformmatrixkhr
-  (matrix :float :count 12))
-
-(cffi:defctype vktransformmatrixnv (:struct vktransformmatrixkhr))
-
-(cffi:defcstruct vkaabbpositionskhr
-  (minx :float)
-  (miny :float)
-  (minz :float)
-  (maxx :float)
-  (maxy :float)
-  (maxz :float))
-
-(cffi:defctype vkaabbpositionsnv (:struct vkaabbpositionskhr))
-
-(cffi:defcstruct vkaccelerationstructureinstancekhr
-  (transform (:struct vktransformmatrixkhr))
-  (instancecustomindex :uint32)
-  (instanceshaderbindingtablerecordoffset :uint32)
-  (accelerationstructurereference :uint64))
-
-(cffi:defctype vkaccelerationstructureinstancenv
-               (:struct vkaccelerationstructureinstancekhr))
-
-(cffi:defctype pfn_vkcreateaccelerationstructurenv :pointer)
-
-(cffi:defctype pfn_vkdestroyaccelerationstructurenv :pointer)
-
-(cffi:defctype pfn_vkgetaccelerationstructurememoryrequirementsnv :pointer)
-
-(cffi:defctype pfn_vkbindaccelerationstructurememorynv :pointer)
-
-(cffi:defctype pfn_vkcmdbuildaccelerationstructurenv :pointer)
-
-(cffi:defctype pfn_vkcmdcopyaccelerationstructurenv :pointer)
-
-(cffi:defctype pfn_vkcmdtraceraysnv :pointer)
-
-(cffi:defctype pfn_vkcreateraytracingpipelinesnv :pointer)
-
-(cffi:defctype pfn_vkgetraytracingshadergrouphandleskhr :pointer)
-
-(cffi:defctype pfn_vkgetraytracingshadergrouphandlesnv :pointer)
-
-(cffi:defctype pfn_vkgetaccelerationstructurehandlenv :pointer)
-
-(cffi:defctype pfn_vkcmdwriteaccelerationstructurespropertiesnv :pointer)
-
-(cffi:defctype pfn_vkcompiledeferrednv :pointer)
-
-(cffi:defcstruct vkphysicaldevicerepresentativefragmenttestfeaturesnv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (representativefragmenttest vkbool32))
-
-(cffi:defcstruct vkpipelinerepresentativefragmentteststatecreateinfonv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (representativefragmenttestenable vkbool32))
-
-(cffi:defcstruct vkphysicaldeviceimageviewimageformatinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (imageviewtype vkimageviewtype))
-
-(cffi:defcstruct vkfiltercubicimageviewimageformatpropertiesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (filtercubic vkbool32)
-  (filtercubicminmax vkbool32))
-
-(cffi:defctype vkqueueglobalpriorityext vkqueueglobalprioritykhr)
-
-(cffi:defctype vkdevicequeueglobalprioritycreateinfoext
-               (:struct vkdevicequeueglobalprioritycreateinfokhr))
-
-(cffi:defcstruct vkimportmemoryhostpointerinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (handletype vkexternalmemoryhandletypeflagbits)
-  (phostpointer :pointer))
-
-(cffi:defcstruct vkmemoryhostpointerpropertiesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (memorytypebits :uint32))
-
-(cffi:defcstruct vkphysicaldeviceexternalmemoryhostpropertiesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (minimportedhostpointeralignment vkdevicesize))
-
-(cffi:defctype pfn_vkgetmemoryhostpointerpropertiesext :pointer)
-
-(cffi:defctype pfn_vkcmdwritebuffermarkeramd :pointer)
-
-(cffi:defctype vkpipelinecompilercontrolflagsamd vkflags)
-
-(cffi:defcstruct vkpipelinecompilercontrolcreateinfoamd
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (compilercontrolflags vkpipelinecompilercontrolflagsamd))
-
-(cffi:defcstruct vkcalibratedtimestampinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (timedomain vktimedomainext))
-
-(cffi:defctype pfn_vkgetphysicaldevicecalibrateabletimedomainsext :pointer)
-
-(cffi:defctype pfn_vkgetcalibratedtimestampsext :pointer)
-
-(cffi:defcstruct vkphysicaldeviceshadercorepropertiesamd
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (shaderenginecount :uint32)
-  (shaderarraysperenginecount :uint32)
-  (computeunitspershaderarray :uint32)
-  (simdpercomputeunit :uint32)
-  (wavefrontspersimd :uint32)
-  (wavefrontsize :uint32)
-  (sgprspersimd :uint32)
-  (minsgprallocation :uint32)
-  (maxsgprallocation :uint32)
-  (sgprallocationgranularity :uint32)
-  (vgprspersimd :uint32)
-  (minvgprallocation :uint32)
-  (maxvgprallocation :uint32)
-  (vgprallocationgranularity :uint32))
-
-(cffi:defcstruct vkdevicememoryoverallocationcreateinfoamd
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (overallocationbehavior vkmemoryoverallocationbehavioramd))
-
-(cffi:defcstruct vkphysicaldevicevertexattributedivisorpropertiesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (maxvertexattribdivisor :uint32))
-
-(cffi:defcstruct vkvertexinputbindingdivisordescriptionext
-  (binding :uint32)
-  (divisor :uint32))
-
-(cffi:defcstruct vkpipelinevertexinputdivisorstatecreateinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (vertexbindingdivisorcount :uint32)
-  (pvertexbindingdivisors :pointer))
-
-(cffi:defcstruct vkphysicaldevicevertexattributedivisorfeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (vertexattributeinstanceratedivisor vkbool32)
-  (vertexattributeinstanceratezerodivisor vkbool32))
-
-(cffi:defctype vkpipelinecreationfeedbackflagbitsext
-               vkpipelinecreationfeedbackflagbits)
-
-(cffi:defctype vkpipelinecreationfeedbackflagsext
-               vkpipelinecreationfeedbackflags)
-
-(cffi:defctype vkpipelinecreationfeedbackcreateinfoext
-               (:struct vkpipelinecreationfeedbackcreateinfo))
-
-(cffi:defctype vkpipelinecreationfeedbackext
-               (:struct vkpipelinecreationfeedback))
-
-(cffi:defcstruct vkphysicaldevicecomputeshaderderivativesfeaturesnv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (computederivativegroupquads vkbool32)
-  (computederivativegrouplinear vkbool32))
-
-(cffi:defcstruct vkphysicaldevicemeshshaderfeaturesnv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (taskshader vkbool32)
-  (meshshader vkbool32))
-
-(cffi:defcstruct vkphysicaldevicemeshshaderpropertiesnv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (maxdrawmeshtaskscount :uint32)
-  (maxtaskworkgroupinvocations :uint32)
-  (maxtaskworkgroupsize :uint32 :count 3)
-  (maxtasktotalmemorysize :uint32)
-  (maxtaskoutputcount :uint32)
-  (maxmeshworkgroupinvocations :uint32)
-  (maxmeshworkgroupsize :uint32 :count 3)
-  (maxmeshtotalmemorysize :uint32)
-  (maxmeshoutputvertices :uint32)
-  (maxmeshoutputprimitives :uint32)
-  (maxmeshmultiviewviewcount :uint32)
-  (meshoutputpervertexgranularity :uint32)
-  (meshoutputperprimitivegranularity :uint32))
-
-(cffi:defcstruct vkdrawmeshtasksindirectcommandnv
-  (taskcount :uint32)
-  (firsttask :uint32))
-
-(cffi:defctype pfn_vkcmddrawmeshtasksnv :pointer)
-
-(cffi:defctype pfn_vkcmddrawmeshtasksindirectnv :pointer)
-
-(cffi:defctype pfn_vkcmddrawmeshtasksindirectcountnv :pointer)
-
-(cffi:defctype vkphysicaldevicefragmentshaderbarycentricfeaturesnv
-               (:struct vkphysicaldevicefragmentshaderbarycentricfeatureskhr))
-
-(cffi:defcstruct vkphysicaldeviceshaderimagefootprintfeaturesnv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (imagefootprint vkbool32))
-
-(cffi:defcstruct vkpipelineviewportexclusivescissorstatecreateinfonv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (exclusivescissorcount :uint32)
-  (pexclusivescissors :pointer))
-
-(cffi:defcstruct vkphysicaldeviceexclusivescissorfeaturesnv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (exclusivescissor vkbool32))
-
-(cffi:defctype pfn_vkcmdsetexclusivescissornv :pointer)
-
-(cffi:defcstruct vkqueuefamilycheckpointpropertiesnv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (checkpointexecutionstagemask vkpipelinestageflags))
-
-(cffi:defcstruct vkcheckpointdatanv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (stage vkpipelinestageflagbits)
-  (pcheckpointmarker :pointer))
-
-(cffi:defctype pfn_vkcmdsetcheckpointnv :pointer)
-
-(cffi:defctype pfn_vkgetqueuecheckpointdatanv :pointer)
-
-(cffi:defcstruct vkphysicaldeviceshaderintegerfunctions2featuresintel
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (shaderintegerfunctions2 vkbool32))
-
-(cffi:defctype vkperformanceconfigurationintel non-dispatchable-handle)
-
-(cffi:defcunion vkperformancevaluedataintel
-  (value32 :uint32)
-  (value64 :uint64)
-  (valuefloat :float)
-  (valuebool vkbool32)
-  (valuestring :pointer))
-
-(cffi:defcstruct vkperformancevalueintel
-  (type vkperformancevaluetypeintel)
-  (data (:union vkperformancevaluedataintel)))
-
-(cffi:defcstruct vkinitializeperformanceapiinfointel
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (puserdata :pointer))
-
-(cffi:defcstruct vkquerypoolperformancequerycreateinfointel
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (performancecounterssampling vkquerypoolsamplingmodeintel))
-
-(cffi:defctype vkquerypoolcreateinfointel
-               (:struct vkquerypoolperformancequerycreateinfointel))
-
-(cffi:defcstruct vkperformancemarkerinfointel
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (marker :uint64))
-
-(cffi:defcstruct vkperformancestreammarkerinfointel
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (marker :uint32))
-
-(cffi:defcstruct vkperformanceoverrideinfointel
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (type vkperformanceoverridetypeintel)
-  (enable vkbool32)
-  (parameter :uint64))
-
-(cffi:defcstruct vkperformanceconfigurationacquireinfointel
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (type vkperformanceconfigurationtypeintel))
-
-(cffi:defctype pfn_vkinitializeperformanceapiintel :pointer)
-
-(cffi:defctype pfn_vkuninitializeperformanceapiintel :pointer)
-
-(cffi:defctype pfn_vkcmdsetperformancemarkerintel :pointer)
-
-(cffi:defctype pfn_vkcmdsetperformancestreammarkerintel :pointer)
-
-(cffi:defctype pfn_vkcmdsetperformanceoverrideintel :pointer)
-
-(cffi:defctype pfn_vkacquireperformanceconfigurationintel :pointer)
-
-(cffi:defctype pfn_vkreleaseperformanceconfigurationintel :pointer)
-
-(cffi:defctype pfn_vkqueuesetperformanceconfigurationintel :pointer)
-
-(cffi:defctype pfn_vkgetperformanceparameterintel :pointer)
-
-(cffi:defcstruct vkphysicaldevicepcibusinfopropertiesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (pcidomain :uint32)
-  (pcibus :uint32)
-  (pcidevice :uint32)
-  (pcifunction :uint32))
-
-(cffi:defcstruct vkdisplaynativehdrsurfacecapabilitiesamd
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (localdimmingsupport vkbool32))
-
-(cffi:defcstruct vkswapchaindisplaynativehdrcreateinfoamd
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (localdimmingenable vkbool32))
-
-(cffi:defctype pfn_vksetlocaldimmingamd :pointer)
-
-(cffi:defcstruct vkphysicaldevicefragmentdensitymapfeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (fragmentdensitymap vkbool32)
-  (fragmentdensitymapdynamic vkbool32)
-  (fragmentdensitymapnonsubsampledimages vkbool32))
-
-(cffi:defcstruct vkphysicaldevicefragmentdensitymappropertiesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (minfragmentdensitytexelsize (:struct vkextent2d))
-  (maxfragmentdensitytexelsize (:struct vkextent2d))
-  (fragmentdensityinvocations vkbool32))
-
-(cffi:defcstruct vkrenderpassfragmentdensitymapcreateinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (fragmentdensitymapattachment (:struct vkattachmentreference)))
-
-(cffi:defctype vkphysicaldevicescalarblocklayoutfeaturesext
-               (:struct vkphysicaldevicescalarblocklayoutfeatures))
-
-(cffi:defctype vkphysicaldevicesubgroupsizecontrolfeaturesext
-               (:struct vkphysicaldevicesubgroupsizecontrolfeatures))
-
-(cffi:defctype vkphysicaldevicesubgroupsizecontrolpropertiesext
-               (:struct vkphysicaldevicesubgroupsizecontrolproperties))
-
-(cffi:defctype vkpipelineshaderstagerequiredsubgroupsizecreateinfoext
-               (:struct vkpipelineshaderstagerequiredsubgroupsizecreateinfo))
-
-(cffi:defctype vkshadercorepropertiesflagsamd vkflags)
-
-(cffi:defcstruct vkphysicaldeviceshadercoreproperties2amd
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (shadercorefeatures vkshadercorepropertiesflagsamd)
-  (activecomputeunitcount :uint32))
-
-(cffi:defcstruct vkphysicaldevicecoherentmemoryfeaturesamd
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (devicecoherentmemory vkbool32))
-
-(cffi:defcstruct vkphysicaldeviceshaderimageatomicint64featuresext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (shaderimageint64atomics vkbool32)
-  (sparseimageint64atomics vkbool32))
-
-(cffi:defcstruct vkphysicaldevicememorybudgetpropertiesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (heapbudget vkdevicesize :count 16)
-  (heapusage vkdevicesize :count 16))
-
-(cffi:defcstruct vkphysicaldevicememorypriorityfeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (memorypriority vkbool32))
-
-(cffi:defcstruct vkmemorypriorityallocateinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (priority :float))
-
-(cffi:defcstruct vkphysicaldevicededicatedallocationimagealiasingfeaturesnv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (dedicatedallocationimagealiasing vkbool32))
-
-(cffi:defcstruct vkphysicaldevicebufferdeviceaddressfeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (bufferdeviceaddress vkbool32)
-  (bufferdeviceaddresscapturereplay vkbool32)
-  (bufferdeviceaddressmultidevice vkbool32))
-
-(cffi:defctype vkphysicaldevicebufferaddressfeaturesext
-               (:struct vkphysicaldevicebufferdeviceaddressfeaturesext))
-
-(cffi:defctype vkbufferdeviceaddressinfoext (:struct vkbufferdeviceaddressinfo))
-
-(cffi:defcstruct vkbufferdeviceaddresscreateinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (deviceaddress vkdeviceaddress))
-
-(cffi:defctype pfn_vkgetbufferdeviceaddressext :pointer)
-
-(cffi:defctype vktoolpurposeflagbitsext vktoolpurposeflagbits)
-
-(cffi:defctype vktoolpurposeflagsext vktoolpurposeflags)
-
-(cffi:defctype vkphysicaldevicetoolpropertiesext
-               (:struct vkphysicaldevicetoolproperties))
-
-(cffi:defctype pfn_vkgetphysicaldevicetoolpropertiesext :pointer)
-
-(cffi:defctype vkimagestencilusagecreateinfoext
-               (:struct vkimagestencilusagecreateinfo))
-
-(cffi:defcstruct vkvalidationfeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (enabledvalidationfeaturecount :uint32)
-  (penabledvalidationfeatures :pointer)
-  (disabledvalidationfeaturecount :uint32)
-  (pdisabledvalidationfeatures :pointer))
-
-(cffi:defcstruct vkcooperativematrixpropertiesnv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (msize :uint32)
-  (nsize :uint32)
-  (ksize :uint32)
-  (atype vkcomponenttypenv)
-  (btype vkcomponenttypenv)
-  (ctype vkcomponenttypenv)
-  (dtype vkcomponenttypenv)
-  (scope vkscopenv))
-
-(cffi:defcstruct vkphysicaldevicecooperativematrixfeaturesnv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (cooperativematrix vkbool32)
-  (cooperativematrixrobustbufferaccess vkbool32))
-
-(cffi:defcstruct vkphysicaldevicecooperativematrixpropertiesnv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (cooperativematrixsupportedstages vkshaderstageflags))
-
-(cffi:defctype pfn_vkgetphysicaldevicecooperativematrixpropertiesnv :pointer)
-
-(cffi:defctype vkpipelinecoveragereductionstatecreateflagsnv vkflags)
-
-(cffi:defcstruct vkphysicaldevicecoveragereductionmodefeaturesnv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (coveragereductionmode vkbool32))
-
-(cffi:defcstruct vkpipelinecoveragereductionstatecreateinfonv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkpipelinecoveragereductionstatecreateflagsnv)
-  (coveragereductionmode vkcoveragereductionmodenv))
-
-(cffi:defcstruct vkframebuffermixedsamplescombinationnv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (coveragereductionmode vkcoveragereductionmodenv)
-  (rasterizationsamples vksamplecountflagbits)
-  (depthstencilsamples vksamplecountflags)
-  (colorsamples vksamplecountflags))
-
-(cffi:defctype
- pfn_vkgetphysicaldevicesupportedframebuffermixedsamplescombinationsnv :pointer)
-
-(cffi:defcstruct vkphysicaldevicefragmentshaderinterlockfeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (fragmentshadersampleinterlock vkbool32)
-  (fragmentshaderpixelinterlock vkbool32)
-  (fragmentshadershadingrateinterlock vkbool32))
-
-(cffi:defcstruct vkphysicaldeviceycbcrimagearraysfeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (ycbcrimagearrays vkbool32))
-
-(cffi:defcstruct vkphysicaldeviceprovokingvertexfeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (provokingvertexlast vkbool32)
-  (transformfeedbackpreservesprovokingvertex vkbool32))
-
-(cffi:defcstruct vkphysicaldeviceprovokingvertexpropertiesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (provokingvertexmodeperpipeline vkbool32)
-  (transformfeedbackpreservestrianglefanprovokingvertex vkbool32))
-
-(cffi:defcstruct vkpipelinerasterizationprovokingvertexstatecreateinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (provokingvertexmode vkprovokingvertexmodeext))
-
-(cffi:defctype vkheadlesssurfacecreateflagsext vkflags)
-
-(cffi:defcstruct vkheadlesssurfacecreateinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkheadlesssurfacecreateflagsext))
-
-(cffi:defctype pfn_vkcreateheadlesssurfaceext :pointer)
-
-(cffi:defcstruct vkphysicaldevicelinerasterizationfeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (rectangularlines vkbool32)
-  (bresenhamlines vkbool32)
-  (smoothlines vkbool32)
-  (stippledrectangularlines vkbool32)
-  (stippledbresenhamlines vkbool32)
-  (stippledsmoothlines vkbool32))
-
-(cffi:defcstruct vkphysicaldevicelinerasterizationpropertiesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (linesubpixelprecisionbits :uint32))
-
-(cffi:defcstruct vkpipelinerasterizationlinestatecreateinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (linerasterizationmode vklinerasterizationmodeext)
-  (stippledlineenable vkbool32)
-  (linestipplefactor :uint32)
-  (linestipplepattern :uint16))
-
-(cffi:defctype pfn_vkcmdsetlinestippleext :pointer)
-
-(cffi:defcstruct vkphysicaldeviceshaderatomicfloatfeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (shaderbufferfloat32atomics vkbool32)
-  (shaderbufferfloat32atomicadd vkbool32)
-  (shaderbufferfloat64atomics vkbool32)
-  (shaderbufferfloat64atomicadd vkbool32)
-  (shadersharedfloat32atomics vkbool32)
-  (shadersharedfloat32atomicadd vkbool32)
-  (shadersharedfloat64atomics vkbool32)
-  (shadersharedfloat64atomicadd vkbool32)
-  (shaderimagefloat32atomics vkbool32)
-  (shaderimagefloat32atomicadd vkbool32)
-  (sparseimagefloat32atomics vkbool32)
-  (sparseimagefloat32atomicadd vkbool32))
-
-(cffi:defctype vkphysicaldevicehostqueryresetfeaturesext
-               (:struct vkphysicaldevicehostqueryresetfeatures))
-
-(cffi:defctype pfn_vkresetquerypoolext :pointer)
-
-(cffi:defcstruct vkphysicaldeviceindextypeuint8featuresext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (indextypeuint8 vkbool32))
-
-(cffi:defcstruct vkphysicaldeviceextendeddynamicstatefeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (extendeddynamicstate vkbool32))
-
-(cffi:defctype pfn_vkcmdsetcullmodeext :pointer)
-
-(cffi:defctype pfn_vkcmdsetfrontfaceext :pointer)
-
-(cffi:defctype pfn_vkcmdsetprimitivetopologyext :pointer)
-
-(cffi:defctype pfn_vkcmdsetviewportwithcountext :pointer)
-
-(cffi:defctype pfn_vkcmdsetscissorwithcountext :pointer)
-
-(cffi:defctype pfn_vkcmdbindvertexbuffers2ext :pointer)
-
-(cffi:defctype pfn_vkcmdsetdepthtestenableext :pointer)
-
-(cffi:defctype pfn_vkcmdsetdepthwriteenableext :pointer)
-
-(cffi:defctype pfn_vkcmdsetdepthcompareopext :pointer)
-
-(cffi:defctype pfn_vkcmdsetdepthboundstestenableext :pointer)
-
-(cffi:defctype pfn_vkcmdsetstenciltestenableext :pointer)
-
-(cffi:defctype pfn_vkcmdsetstencilopext :pointer)
-
-(cffi:defcstruct vkphysicaldeviceshaderatomicfloat2featuresext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (shaderbufferfloat16atomics vkbool32)
-  (shaderbufferfloat16atomicadd vkbool32)
-  (shaderbufferfloat16atomicminmax vkbool32)
-  (shaderbufferfloat32atomicminmax vkbool32)
-  (shaderbufferfloat64atomicminmax vkbool32)
-  (shadersharedfloat16atomics vkbool32)
-  (shadersharedfloat16atomicadd vkbool32)
-  (shadersharedfloat16atomicminmax vkbool32)
-  (shadersharedfloat32atomicminmax vkbool32)
-  (shadersharedfloat64atomicminmax vkbool32)
-  (shaderimagefloat32atomicminmax vkbool32)
-  (sparseimagefloat32atomicminmax vkbool32))
-
-(cffi:defctype vkphysicaldeviceshaderdemotetohelperinvocationfeaturesext
-               (:struct vkphysicaldeviceshaderdemotetohelperinvocationfeatures))
-
-(cffi:defctype vkindirectcommandslayoutnv non-dispatchable-handle)
-
-(cffi:defctype vkindirectstateflagsnv vkflags)
-
-(cffi:defctype vkindirectcommandslayoutusageflagsnv vkflags)
-
-(cffi:defcstruct vkphysicaldevicedevicegeneratedcommandspropertiesnv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (maxgraphicsshadergroupcount :uint32)
-  (maxindirectsequencecount :uint32)
-  (maxindirectcommandstokencount :uint32)
-  (maxindirectcommandsstreamcount :uint32)
-  (maxindirectcommandstokenoffset :uint32)
-  (maxindirectcommandsstreamstride :uint32)
-  (minsequencescountbufferoffsetalignment :uint32)
-  (minsequencesindexbufferoffsetalignment :uint32)
-  (minindirectcommandsbufferoffsetalignment :uint32))
-
-(cffi:defcstruct vkphysicaldevicedevicegeneratedcommandsfeaturesnv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (devicegeneratedcommands vkbool32))
-
-(cffi:defcstruct vkgraphicsshadergroupcreateinfonv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (stagecount :uint32)
-  (pstages :pointer)
-  (pvertexinputstate :pointer)
-  (ptessellationstate :pointer))
-
-(cffi:defcstruct vkgraphicspipelineshadergroupscreateinfonv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (groupcount :uint32)
-  (pgroups :pointer)
-  (pipelinecount :uint32)
-  (ppipelines :pointer))
-
-(cffi:defcstruct vkbindshadergroupindirectcommandnv
-  (groupindex :uint32))
-
-(cffi:defcstruct vkbindindexbufferindirectcommandnv
-  (bufferaddress vkdeviceaddress)
-  (size :uint32)
-  (indextype vkindextype))
-
-(cffi:defcstruct vkbindvertexbufferindirectcommandnv
-  (bufferaddress vkdeviceaddress)
-  (size :uint32)
-  (stride :uint32))
-
-(cffi:defcstruct vksetstateflagsindirectcommandnv
-  (data :uint32))
-
-(cffi:defcstruct vkindirectcommandsstreamnv
-  (buffer vkbuffer)
-  (offset vkdevicesize))
-
-(cffi:defcstruct vkindirectcommandslayouttokennv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (tokentype vkindirectcommandstokentypenv)
-  (stream :uint32)
-  (offset :uint32)
-  (vertexbindingunit :uint32)
-  (vertexdynamicstride vkbool32)
-  (pushconstantpipelinelayout vkpipelinelayout)
-  (pushconstantshaderstageflags vkshaderstageflags)
-  (pushconstantoffset :uint32)
-  (pushconstantsize :uint32)
-  (indirectstateflags vkindirectstateflagsnv)
-  (indextypecount :uint32)
-  (pindextypes :pointer)
-  (pindextypevalues :pointer))
-
-(cffi:defcstruct vkindirectcommandslayoutcreateinfonv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkindirectcommandslayoutusageflagsnv)
-  (pipelinebindpoint vkpipelinebindpoint)
-  (tokencount :uint32)
-  (ptokens :pointer)
-  (streamcount :uint32)
-  (pstreamstrides :pointer))
-
-(cffi:defcstruct vkgeneratedcommandsinfonv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (pipelinebindpoint vkpipelinebindpoint)
-  (pipeline vkpipeline)
-  (indirectcommandslayout vkindirectcommandslayoutnv)
-  (streamcount :uint32)
-  (pstreams :pointer)
-  (sequencescount :uint32)
-  (preprocessbuffer vkbuffer)
-  (preprocessoffset vkdevicesize)
-  (preprocesssize vkdevicesize)
-  (sequencescountbuffer vkbuffer)
-  (sequencescountoffset vkdevicesize)
-  (sequencesindexbuffer vkbuffer)
-  (sequencesindexoffset vkdevicesize))
-
-(cffi:defcstruct vkgeneratedcommandsmemoryrequirementsinfonv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (pipelinebindpoint vkpipelinebindpoint)
-  (pipeline vkpipeline)
-  (indirectcommandslayout vkindirectcommandslayoutnv)
-  (maxsequencescount :uint32))
-
-(cffi:defctype pfn_vkgetgeneratedcommandsmemoryrequirementsnv :pointer)
-
-(cffi:defctype pfn_vkcmdpreprocessgeneratedcommandsnv :pointer)
-
-(cffi:defctype pfn_vkcmdexecutegeneratedcommandsnv :pointer)
-
-(cffi:defctype pfn_vkcmdbindpipelineshadergroupnv :pointer)
-
-(cffi:defctype pfn_vkcreateindirectcommandslayoutnv :pointer)
-
-(cffi:defctype pfn_vkdestroyindirectcommandslayoutnv :pointer)
-
-(cffi:defcstruct vkphysicaldeviceinheritedviewportscissorfeaturesnv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (inheritedviewportscissor2d vkbool32))
-
-(cffi:defcstruct vkcommandbufferinheritanceviewportscissorinfonv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (viewportscissor2d vkbool32)
-  (viewportdepthcount :uint32)
-  (pviewportdepths :pointer))
-
-(cffi:defcstruct vkphysicaldevicetexelbufferalignmentfeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (texelbufferalignment vkbool32))
-
-(cffi:defctype vkphysicaldevicetexelbufferalignmentpropertiesext
-               (:struct vkphysicaldevicetexelbufferalignmentproperties))
-
-(cffi:defcstruct vkrenderpasstransformbegininfoqcom
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (transform vksurfacetransformflagbitskhr))
-
-(cffi:defcstruct vkcommandbufferinheritancerenderpasstransforminfoqcom
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (transform vksurfacetransformflagbitskhr)
-  (renderarea (:struct vkrect2d)))
-
-(cffi:defctype vkdevicememoryreportflagsext vkflags)
-
-(cffi:defcstruct vkphysicaldevicedevicememoryreportfeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (devicememoryreport vkbool32))
-
-(cffi:defcstruct vkdevicememoryreportcallbackdataext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkdevicememoryreportflagsext)
-  (type vkdevicememoryreporteventtypeext)
-  (memoryobjectid :uint64)
-  (size vkdevicesize)
-  (objecttype vkobjecttype)
-  (objecthandle :uint64)
-  (heapindex :uint32))
-
-(cffi:defctype pfn_vkdevicememoryreportcallbackext :pointer)
-
-(cffi:defcstruct vkdevicedevicememoryreportcreateinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkdevicememoryreportflagsext)
-  (pfnusercallback pfn_vkdevicememoryreportcallbackext)
-  (puserdata :pointer))
-
-(cffi:defctype pfn_vkacquiredrmdisplayext :pointer)
-
-(cffi:defctype pfn_vkgetdrmdisplayext :pointer)
-
-(cffi:defcstruct vkphysicaldevicerobustness2featuresext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (robustbufferaccess2 vkbool32)
-  (robustimageaccess2 vkbool32)
-  (nulldescriptor vkbool32))
-
-(cffi:defcstruct vkphysicaldevicerobustness2propertiesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (robuststoragebufferaccesssizealignment vkdevicesize)
-  (robustuniformbufferaccesssizealignment vkdevicesize))
-
-(cffi:defcstruct vksamplercustombordercolorcreateinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (custombordercolor (:union vkclearcolorvalue))
-  (format vkformat))
-
-(cffi:defcstruct vkphysicaldevicecustombordercolorpropertiesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (maxcustombordercolorsamplers :uint32))
-
-(cffi:defcstruct vkphysicaldevicecustombordercolorfeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (custombordercolors vkbool32)
-  (custombordercolorwithoutformat vkbool32))
-
-(cffi:defctype vkprivatedataslotext :pointer)
-
-(cffi:defctype vkprivatedataslotcreateflagsext vkprivatedataslotcreateflags)
-
-(cffi:defctype vkphysicaldeviceprivatedatafeaturesext
-               (:struct vkphysicaldeviceprivatedatafeatures))
-
-(cffi:defctype vkdeviceprivatedatacreateinfoext
-               (:struct vkdeviceprivatedatacreateinfo))
-
-(cffi:defctype vkprivatedataslotcreateinfoext
-               (:struct vkprivatedataslotcreateinfo))
-
-(cffi:defctype pfn_vkcreateprivatedataslotext :pointer)
-
-(cffi:defctype pfn_vkdestroyprivatedataslotext :pointer)
-
-(cffi:defctype pfn_vksetprivatedataext :pointer)
-
-(cffi:defctype pfn_vkgetprivatedataext :pointer)
-
-(cffi:defctype vkphysicaldevicepipelinecreationcachecontrolfeaturesext
-               (:struct vkphysicaldevicepipelinecreationcachecontrolfeatures))
-
-(cffi:defctype vkdevicediagnosticsconfigflagsnv vkflags)
-
-(cffi:defcstruct vkphysicaldevicediagnosticsconfigfeaturesnv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (diagnosticsconfig vkbool32))
-
-(cffi:defcstruct vkdevicediagnosticsconfigcreateinfonv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkdevicediagnosticsconfigflagsnv))
-
-(cffi:defctype vkgraphicspipelinelibraryflagsext vkflags)
-
-(cffi:defcstruct vkphysicaldevicegraphicspipelinelibraryfeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (graphicspipelinelibrary vkbool32))
-
-(cffi:defcstruct vkphysicaldevicegraphicspipelinelibrarypropertiesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (graphicspipelinelibraryfastlinking vkbool32)
-  (graphicspipelinelibraryindependentinterpolationdecoration vkbool32))
-
-(cffi:defcstruct vkgraphicspipelinelibrarycreateinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkgraphicspipelinelibraryflagsext))
-
-(cffi:defcstruct vkphysicaldeviceshaderearlyandlatefragmenttestsfeaturesamd
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (shaderearlyandlatefragmenttests vkbool32))
-
-(cffi:defcstruct vkphysicaldevicefragmentshadingrateenumsfeaturesnv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (fragmentshadingrateenums vkbool32)
-  (supersamplefragmentshadingrates vkbool32)
-  (noinvocationfragmentshadingrates vkbool32))
-
-(cffi:defcstruct vkphysicaldevicefragmentshadingrateenumspropertiesnv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (maxfragmentshadingrateinvocationcount vksamplecountflagbits))
-
-(cffi:defcstruct vkpipelinefragmentshadingrateenumstatecreateinfonv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (shadingratetype vkfragmentshadingratetypenv)
-  (shadingrate vkfragmentshadingratenv)
-  (combinerops vkfragmentshadingratecombineropkhr :count 2))
-
-(cffi:defctype pfn_vkcmdsetfragmentshadingrateenumnv :pointer)
-
-(cffi:defctype vkaccelerationstructuremotioninfoflagsnv vkflags)
-
-(cffi:defctype vkaccelerationstructuremotioninstanceflagsnv vkflags)
-
-(cffi:defcunion vkdeviceorhostaddressconstkhr
-  (deviceaddress vkdeviceaddress)
-  (hostaddress :pointer))
-
-(cffi:defcstruct vkaccelerationstructuregeometrymotiontrianglesdatanv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (vertexdata (:union vkdeviceorhostaddressconstkhr)))
-
-(cffi:defcstruct vkaccelerationstructuremotioninfonv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (maxinstances :uint32)
-  (flags vkaccelerationstructuremotioninfoflagsnv))
-
-(cffi:defcstruct vkaccelerationstructurematrixmotioninstancenv
-  (transformt0 (:struct vktransformmatrixkhr))
-  (transformt1 (:struct vktransformmatrixkhr))
-  (instancecustomindex :uint32)
-  (instanceshaderbindingtablerecordoffset :uint32)
-  (accelerationstructurereference :uint64))
-
-(cffi:defcstruct vksrtdatanv
-  (sx :float)
-  (a :float)
-  (b :float)
-  (pvx :float)
-  (sy :float)
-  (c :float)
-  (pvy :float)
-  (sz :float)
-  (pvz :float)
-  (qx :float)
-  (qy :float)
-  (qz :float)
-  (qw :float)
-  (tx :float)
-  (ty :float)
-  (tz :float))
-
-(cffi:defcstruct vkaccelerationstructuresrtmotioninstancenv
-  (transformt0 (:struct vksrtdatanv))
-  (transformt1 (:struct vksrtdatanv))
-  (instancecustomindex :uint32)
-  (instanceshaderbindingtablerecordoffset :uint32)
-  (accelerationstructurereference :uint64))
-
-(cffi:defcunion vkaccelerationstructuremotioninstancedatanv
-  (staticinstance (:struct vkaccelerationstructureinstancekhr))
-  (matrixmotioninstance (:struct vkaccelerationstructurematrixmotioninstancenv))
-  (srtmotioninstance (:struct vkaccelerationstructuresrtmotioninstancenv)))
-
-(cffi:defcstruct vkaccelerationstructuremotioninstancenv
-  (type vkaccelerationstructuremotioninstancetypenv)
-  (flags vkaccelerationstructuremotioninstanceflagsnv)
-  (data (:union vkaccelerationstructuremotioninstancedatanv)))
-
-(cffi:defcstruct vkphysicaldeviceraytracingmotionblurfeaturesnv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (raytracingmotionblur vkbool32)
-  (raytracingmotionblurpipelinetraceraysindirect vkbool32))
-
-(cffi:defcstruct vkphysicaldeviceycbcr2plane444formatsfeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (ycbcr2plane444formats vkbool32))
-
-(cffi:defcstruct vkphysicaldevicefragmentdensitymap2featuresext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (fragmentdensitymapdeferred vkbool32))
-
-(cffi:defcstruct vkphysicaldevicefragmentdensitymap2propertiesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (subsampledloads vkbool32)
-  (subsampledcoarsereconstructionearlyaccess vkbool32)
-  (maxsubsampledarraylayers :uint32)
-  (maxdescriptorsetsubsampledsamplers :uint32))
-
-(cffi:defcstruct vkcopycommandtransforminfoqcom
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (transform vksurfacetransformflagbitskhr))
-
-(cffi:defctype vkphysicaldeviceimagerobustnessfeaturesext
-               (:struct vkphysicaldeviceimagerobustnessfeatures))
-
-(cffi:defctype vkimagecompressionflagsext vkflags)
-
-(cffi:defctype vkimagecompressionfixedrateflagsext vkflags)
-
-(cffi:defcstruct vkphysicaldeviceimagecompressioncontrolfeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (imagecompressioncontrol vkbool32))
-
-(cffi:defcstruct vkimagecompressioncontrolext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkimagecompressionflagsext)
-  (compressioncontrolplanecount :uint32)
-  (pfixedrateflags :pointer))
-
-(cffi:defcstruct vksubresourcelayout2ext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (subresourcelayout (:struct vksubresourcelayout)))
-
-(cffi:defcstruct vkimagesubresource2ext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (imagesubresource (:struct vkimagesubresource)))
-
-(cffi:defcstruct vkimagecompressionpropertiesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (imagecompressionflags vkimagecompressionflagsext)
-  (imagecompressionfixedrateflags vkimagecompressionfixedrateflagsext))
-
-(cffi:defctype pfn_vkgetimagesubresourcelayout2ext :pointer)
-
-(cffi:defcstruct vkphysicaldevice4444formatsfeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (formata4r4g4b4 vkbool32)
-  (formata4b4g4r4 vkbool32))
-
-(cffi:defcstruct vkphysicaldevicerasterizationorderattachmentaccessfeaturesarm
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (rasterizationordercolorattachmentaccess vkbool32)
-  (rasterizationorderdepthattachmentaccess vkbool32)
-  (rasterizationorderstencilattachmentaccess vkbool32))
-
-(cffi:defcstruct vkphysicaldevicergba10x6formatsfeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (formatrgba10x6withoutycbcrsampler vkbool32))
-
-(cffi:defctype pfn_vkacquirewinrtdisplaynv :pointer)
-
-(cffi:defctype pfn_vkgetwinrtdisplaynv :pointer)
-
-(cffi:defcstruct vkphysicaldevicemutabledescriptortypefeaturesvalve
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (mutabledescriptortype vkbool32))
-
-(cffi:defcstruct vkmutabledescriptortypelistvalve
-  (descriptortypecount :uint32)
-  (pdescriptortypes :pointer))
-
-(cffi:defcstruct vkmutabledescriptortypecreateinfovalve
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (mutabledescriptortypelistcount :uint32)
-  (pmutabledescriptortypelists :pointer))
-
-(cffi:defcstruct vkphysicaldevicevertexinputdynamicstatefeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (vertexinputdynamicstate vkbool32))
-
-(cffi:defcstruct vkvertexinputbindingdescription2ext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (binding :uint32)
-  (stride :uint32)
-  (inputrate vkvertexinputrate)
-  (divisor :uint32))
-
-(cffi:defcstruct vkvertexinputattributedescription2ext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (location :uint32)
-  (binding :uint32)
-  (format vkformat)
-  (offset :uint32))
-
-(cffi:defctype pfn_vkcmdsetvertexinputext :pointer)
-
-(cffi:defcstruct vkphysicaldevicedrmpropertiesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (hasprimary vkbool32)
-  (hasrender vkbool32)
-  (primarymajor :int64)
-  (primaryminor :int64)
-  (rendermajor :int64)
-  (renderminor :int64))
-
-(cffi:defcstruct vkphysicaldevicedepthclipcontrolfeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (depthclipcontrol vkbool32))
-
-(cffi:defcstruct vkpipelineviewportdepthclipcontrolcreateinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (negativeonetoone vkbool32))
-
-(cffi:defcstruct vkphysicaldeviceprimitivetopologylistrestartfeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (primitivetopologylistrestart vkbool32)
-  (primitivetopologypatchlistrestart vkbool32))
-
-(cffi:defcstruct vksubpassshadingpipelinecreateinfohuawei
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (renderpass vkrenderpass)
-  (subpass :uint32))
-
-(cffi:defcstruct vkphysicaldevicesubpassshadingfeatureshuawei
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (subpassshading vkbool32))
-
-(cffi:defcstruct vkphysicaldevicesubpassshadingpropertieshuawei
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (maxsubpassshadingworkgroupsizeaspectratio :uint32))
-
-(cffi:defctype pfn_vkgetdevicesubpassshadingmaxworkgroupsizehuawei :pointer)
-
-(cffi:defctype pfn_vkcmdsubpassshadinghuawei :pointer)
-
-(cffi:defcstruct vkphysicaldeviceinvocationmaskfeatureshuawei
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (invocationmask vkbool32))
-
-(cffi:defctype pfn_vkcmdbindinvocationmaskhuawei :pointer)
-
-(cffi:defctype vkremoteaddressnv :pointer)
-
-(cffi:defcstruct vkmemorygetremoteaddressinfonv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (memory vkdevicememory)
-  (handletype vkexternalmemoryhandletypeflagbits))
-
-(cffi:defcstruct vkphysicaldeviceexternalmemoryrdmafeaturesnv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (externalmemoryrdma vkbool32))
-
-(cffi:defctype pfn_vkgetmemoryremoteaddressnv :pointer)
-
-(cffi:defctype vkpipelineinfoext (:struct vkpipelineinfokhr))
-
-(cffi:defcstruct vkpipelinepropertiesidentifierext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (pipelineidentifier :uint8 :count 16))
-
-(cffi:defcstruct vkphysicaldevicepipelinepropertiesfeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (pipelinepropertiesidentifier vkbool32))
-
-(cffi:defctype pfn_vkgetpipelinepropertiesext :pointer)
-
-(cffi:defcstruct vkphysicaldeviceextendeddynamicstate2featuresext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (extendeddynamicstate2 vkbool32)
-  (extendeddynamicstate2logicop vkbool32)
-  (extendeddynamicstate2patchcontrolpoints vkbool32))
-
-(cffi:defctype pfn_vkcmdsetpatchcontrolpointsext :pointer)
-
-(cffi:defctype pfn_vkcmdsetrasterizerdiscardenableext :pointer)
-
-(cffi:defctype pfn_vkcmdsetdepthbiasenableext :pointer)
-
-(cffi:defctype pfn_vkcmdsetlogicopext :pointer)
-
-(cffi:defctype pfn_vkcmdsetprimitiverestartenableext :pointer)
-
-(cffi:defcstruct vkphysicaldevicecolorwriteenablefeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (colorwriteenable vkbool32))
-
-(cffi:defcstruct vkpipelinecolorwritecreateinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (attachmentcount :uint32)
-  (pcolorwriteenables :pointer))
-
-(cffi:defctype pfn_vkcmdsetcolorwriteenableext :pointer)
-
-(cffi:defcstruct vkphysicaldeviceprimitivesgeneratedqueryfeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (primitivesgeneratedquery vkbool32)
-  (primitivesgeneratedquerywithrasterizerdiscard vkbool32)
-  (primitivesgeneratedquerywithnonzerostreams vkbool32))
-
-(cffi:defctype vkphysicaldeviceglobalpriorityqueryfeaturesext
-               (:struct vkphysicaldeviceglobalpriorityqueryfeatureskhr))
-
-(cffi:defctype vkqueuefamilyglobalprioritypropertiesext
-               (:struct vkqueuefamilyglobalprioritypropertieskhr))
-
-(cffi:defcstruct vkphysicaldeviceimageviewminlodfeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (minlod vkbool32))
-
-(cffi:defcstruct vkimageviewminlodcreateinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (minlod :float))
-
-(cffi:defcstruct vkphysicaldevicemultidrawfeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (multidraw vkbool32))
-
-(cffi:defcstruct vkphysicaldevicemultidrawpropertiesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (maxmultidrawcount :uint32))
-
-(cffi:defcstruct vkmultidrawinfoext
-  (firstvertex :uint32)
-  (vertexcount :uint32))
-
-(cffi:defcstruct vkmultidrawindexedinfoext
-  (firstindex :uint32)
-  (indexcount :uint32)
-  (vertexoffset :int32))
-
-(cffi:defctype pfn_vkcmddrawmultiext :pointer)
-
-(cffi:defctype pfn_vkcmddrawmultiindexedext :pointer)
-
-(cffi:defcstruct vkphysicaldeviceimage2dviewof3dfeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (image2dviewof3d vkbool32)
-  (sampler2dviewof3d vkbool32))
-
-(cffi:defcstruct vkphysicaldevicebordercolorswizzlefeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (bordercolorswizzle vkbool32)
-  (bordercolorswizzlefromimage vkbool32))
-
-(cffi:defcstruct vksamplerbordercolorcomponentmappingcreateinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (components (:struct vkcomponentmapping))
-  (srgb vkbool32))
-
-(cffi:defcstruct vkphysicaldevicepageabledevicelocalmemoryfeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (pageabledevicelocalmemory vkbool32))
-
-(cffi:defctype pfn_vksetdevicememorypriorityext :pointer)
-
-(cffi:defcstruct vkphysicaldevicedescriptorsethostmappingfeaturesvalve
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (descriptorsethostmapping vkbool32))
-
-(cffi:defcstruct vkdescriptorsetbindingreferencevalve
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (descriptorsetlayout vkdescriptorsetlayout)
-  (binding :uint32))
-
-(cffi:defcstruct vkdescriptorsetlayouthostmappinginfovalve
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (descriptoroffset :size)
-  (descriptorsize :uint32))
-
-(cffi:defctype pfn_vkgetdescriptorsetlayouthostmappinginfovalve :pointer)
-
-(cffi:defctype pfn_vkgetdescriptorsethostmappingvalve :pointer)
-
-(cffi:defcstruct vkphysicaldevicefragmentdensitymapoffsetfeaturesqcom
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (fragmentdensitymapoffset vkbool32))
-
-(cffi:defcstruct vkphysicaldevicefragmentdensitymapoffsetpropertiesqcom
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (fragmentdensityoffsetgranularity (:struct vkextent2d)))
-
-(cffi:defcstruct vksubpassfragmentdensitymapoffsetendinfoqcom
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (fragmentdensityoffsetcount :uint32)
-  (pfragmentdensityoffsets :pointer))
-
-(cffi:defcstruct vkphysicaldevicelinearcolorattachmentfeaturesnv
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (linearcolorattachment vkbool32))
-
-(cffi:defcstruct vkphysicaldeviceimagecompressioncontrolswapchainfeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (imagecompressioncontrolswapchain vkbool32))
-
-(cffi:defcstruct vkphysicaldevicesubpassmergefeedbackfeaturesext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (subpassmergefeedback vkbool32))
-
-(cffi:defcstruct vkrenderpasscreationcontrolext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (disallowmerging vkbool32))
-
-(cffi:defcstruct vkrenderpasscreationfeedbackinfoext
-  (postmergesubpasscount :uint32))
-
-(cffi:defcstruct vkrenderpasscreationfeedbackcreateinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (prenderpassfeedback :pointer))
-
-(cffi:defcstruct vkrenderpasssubpassfeedbackinfoext
-  (subpassmergestatus vksubpassmergestatusext)
-  (description :char :count 256)
-  (postmergeindex :uint32))
-
-(cffi:defcstruct vkrenderpasssubpassfeedbackcreateinfoext
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (psubpassfeedback :pointer))
-
-(cffi:defctype vkaccelerationstructurekhr non-dispatchable-handle)
-
-(cffi:defctype vkaccelerationstructurecreateflagskhr vkflags)
-
-(cffi:defcunion vkdeviceorhostaddresskhr
-  (deviceaddress vkdeviceaddress)
-  (hostaddress :pointer))
-
-(cffi:defcstruct vkaccelerationstructurebuildrangeinfokhr
-  (primitivecount :uint32)
-  (primitiveoffset :uint32)
-  (firstvertex :uint32)
-  (transformoffset :uint32))
-
-(cffi:defcstruct vkaccelerationstructuregeometrytrianglesdatakhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (vertexformat vkformat)
-  (vertexdata (:union vkdeviceorhostaddressconstkhr))
-  (vertexstride vkdevicesize)
-  (maxvertex :uint32)
-  (indextype vkindextype)
-  (indexdata (:union vkdeviceorhostaddressconstkhr))
-  (transformdata (:union vkdeviceorhostaddressconstkhr)))
-
-(cffi:defcstruct vkaccelerationstructuregeometryaabbsdatakhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (data (:union vkdeviceorhostaddressconstkhr))
-  (stride vkdevicesize))
-
-(cffi:defcstruct vkaccelerationstructuregeometryinstancesdatakhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (arrayofpointers vkbool32)
-  (data (:union vkdeviceorhostaddressconstkhr)))
-
-(cffi:defcunion vkaccelerationstructuregeometrydatakhr
-  (triangles (:struct vkaccelerationstructuregeometrytrianglesdatakhr))
-  (aabbs (:struct vkaccelerationstructuregeometryaabbsdatakhr))
-  (instances (:struct vkaccelerationstructuregeometryinstancesdatakhr)))
-
-(cffi:defcstruct vkaccelerationstructuregeometrykhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (geometrytype vkgeometrytypekhr)
-  (geometry (:union vkaccelerationstructuregeometrydatakhr))
-  (flags vkgeometryflagskhr))
-
-(cffi:defcstruct vkaccelerationstructurebuildgeometryinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (type vkaccelerationstructuretypekhr)
-  (flags vkbuildaccelerationstructureflagskhr)
-  (mode vkbuildaccelerationstructuremodekhr)
-  (srcaccelerationstructure vkaccelerationstructurekhr)
-  (dstaccelerationstructure vkaccelerationstructurekhr)
-  (geometrycount :uint32)
-  (pgeometries :pointer)
-  (ppgeometries :pointer)
-  (scratchdata (:union vkdeviceorhostaddresskhr)))
-
-(cffi:defcstruct vkaccelerationstructurecreateinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (createflags vkaccelerationstructurecreateflagskhr)
-  (buffer vkbuffer)
-  (offset vkdevicesize)
-  (size vkdevicesize)
-  (type vkaccelerationstructuretypekhr)
-  (deviceaddress vkdeviceaddress))
-
-(cffi:defcstruct vkwritedescriptorsetaccelerationstructurekhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (accelerationstructurecount :uint32)
-  (paccelerationstructures :pointer))
-
-(cffi:defcstruct vkphysicaldeviceaccelerationstructurefeatureskhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (accelerationstructure vkbool32)
-  (accelerationstructurecapturereplay vkbool32)
-  (accelerationstructureindirectbuild vkbool32)
-  (accelerationstructurehostcommands vkbool32)
-  (descriptorbindingaccelerationstructureupdateafterbind vkbool32))
-
-(cffi:defcstruct vkphysicaldeviceaccelerationstructurepropertieskhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (maxgeometrycount :uint64)
-  (maxinstancecount :uint64)
-  (maxprimitivecount :uint64)
-  (maxperstagedescriptoraccelerationstructures :uint32)
-  (maxperstagedescriptorupdateafterbindaccelerationstructures :uint32)
-  (maxdescriptorsetaccelerationstructures :uint32)
-  (maxdescriptorsetupdateafterbindaccelerationstructures :uint32)
-  (minaccelerationstructurescratchoffsetalignment :uint32))
-
-(cffi:defcstruct vkaccelerationstructuredeviceaddressinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (accelerationstructure vkaccelerationstructurekhr))
-
-(cffi:defcstruct vkaccelerationstructureversioninfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (pversiondata :pointer))
-
-(cffi:defcstruct vkcopyaccelerationstructuretomemoryinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (src vkaccelerationstructurekhr)
-  (dst (:union vkdeviceorhostaddresskhr))
-  (mode vkcopyaccelerationstructuremodekhr))
-
-(cffi:defcstruct vkcopymemorytoaccelerationstructureinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (src (:union vkdeviceorhostaddressconstkhr))
-  (dst vkaccelerationstructurekhr)
-  (mode vkcopyaccelerationstructuremodekhr))
-
-(cffi:defcstruct vkcopyaccelerationstructureinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (src vkaccelerationstructurekhr)
-  (dst vkaccelerationstructurekhr)
-  (mode vkcopyaccelerationstructuremodekhr))
-
-(cffi:defcstruct vkaccelerationstructurebuildsizesinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (accelerationstructuresize vkdevicesize)
-  (updatescratchsize vkdevicesize)
-  (buildscratchsize vkdevicesize))
-
-(cffi:defctype pfn_vkcreateaccelerationstructurekhr :pointer)
-
-(cffi:defctype pfn_vkdestroyaccelerationstructurekhr :pointer)
-
-(cffi:defctype pfn_vkcmdbuildaccelerationstructureskhr :pointer)
-
-(cffi:defctype pfn_vkcmdbuildaccelerationstructuresindirectkhr :pointer)
-
-(cffi:defctype pfn_vkbuildaccelerationstructureskhr :pointer)
-
-(cffi:defctype pfn_vkcopyaccelerationstructurekhr :pointer)
-
-(cffi:defctype pfn_vkcopyaccelerationstructuretomemorykhr :pointer)
-
-(cffi:defctype pfn_vkcopymemorytoaccelerationstructurekhr :pointer)
-
-(cffi:defctype pfn_vkwriteaccelerationstructurespropertieskhr :pointer)
-
-(cffi:defctype pfn_vkcmdcopyaccelerationstructurekhr :pointer)
-
-(cffi:defctype pfn_vkcmdcopyaccelerationstructuretomemorykhr :pointer)
-
-(cffi:defctype pfn_vkcmdcopymemorytoaccelerationstructurekhr :pointer)
-
-(cffi:defctype pfn_vkgetaccelerationstructuredeviceaddresskhr :pointer)
-
-(cffi:defctype pfn_vkcmdwriteaccelerationstructurespropertieskhr :pointer)
-
-(cffi:defctype pfn_vkgetdeviceaccelerationstructurecompatibilitykhr :pointer)
-
-(cffi:defctype pfn_vkgetaccelerationstructurebuildsizeskhr :pointer)
-
-(cffi:defcstruct vkraytracingshadergroupcreateinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (type vkraytracingshadergrouptypekhr)
-  (generalshader :uint32)
-  (closesthitshader :uint32)
-  (anyhitshader :uint32)
-  (intersectionshader :uint32)
-  (pshadergroupcapturereplayhandle :pointer))
-
-(cffi:defcstruct vkraytracingpipelineinterfacecreateinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (maxpipelineraypayloadsize :uint32)
-  (maxpipelinerayhitattributesize :uint32))
-
-(cffi:defcstruct vkraytracingpipelinecreateinfokhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (flags vkpipelinecreateflags)
-  (stagecount :uint32)
-  (pstages :pointer)
-  (groupcount :uint32)
-  (pgroups :pointer)
-  (maxpipelinerayrecursiondepth :uint32)
-  (plibraryinfo :pointer)
-  (plibraryinterface :pointer)
-  (pdynamicstate :pointer)
-  (layout vkpipelinelayout)
-  (basepipelinehandle vkpipeline)
-  (basepipelineindex :int32))
-
-(cffi:defcstruct vkphysicaldeviceraytracingpipelinefeatureskhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (raytracingpipeline vkbool32)
-  (raytracingpipelineshadergrouphandlecapturereplay vkbool32)
-  (raytracingpipelineshadergrouphandlecapturereplaymixed vkbool32)
-  (raytracingpipelinetraceraysindirect vkbool32)
-  (raytraversalprimitiveculling vkbool32))
-
-(cffi:defcstruct vkphysicaldeviceraytracingpipelinepropertieskhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (shadergrouphandlesize :uint32)
-  (maxrayrecursiondepth :uint32)
-  (maxshadergroupstride :uint32)
-  (shadergroupbasealignment :uint32)
-  (shadergrouphandlecapturereplaysize :uint32)
-  (maxraydispatchinvocationcount :uint32)
-  (shadergrouphandlealignment :uint32)
-  (maxrayhitattributesize :uint32))
-
-(cffi:defcstruct vkstrideddeviceaddressregionkhr
-  (deviceaddress vkdeviceaddress)
-  (stride vkdevicesize)
-  (size vkdevicesize))
-
-(cffi:defcstruct vktraceraysindirectcommandkhr
-  (width :uint32)
-  (height :uint32)
-  (depth :uint32))
-
-(cffi:defctype pfn_vkcmdtracerayskhr :pointer)
-
-(cffi:defctype pfn_vkcreateraytracingpipelineskhr :pointer)
-
-(cffi:defctype pfn_vkgetraytracingcapturereplayshadergrouphandleskhr :pointer)
-
-(cffi:defctype pfn_vkcmdtraceraysindirectkhr :pointer)
-
-(cffi:defctype pfn_vkgetraytracingshadergroupstacksizekhr :pointer)
-
-(cffi:defctype pfn_vkcmdsetraytracingpipelinestacksizekhr :pointer)
-
-(cffi:defcstruct vkphysicaldevicerayqueryfeatureskhr
-  (stype vkstructuretype)
-  (pnext :pointer)
-  (rayquery vkbool32))
+(CFFI:DEFCTYPE VKBUFFERCREATEFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKBUFFERCREATEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKBUFFERUSAGEFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKBUFFERUSAGEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKBUFFERVIEWCREATEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKIMAGEVIEWCREATEFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKIMAGEVIEWCREATEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKSHADERMODULECREATEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKPIPELINECACHECREATEFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKPIPELINECACHECREATEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKCOLORCOMPONENTFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKCOLORCOMPONENTFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKPIPELINECREATEFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKPIPELINECREATEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKPIPELINESHADERSTAGECREATEFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKPIPELINESHADERSTAGECREATEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKSHADERSTAGEFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKCULLMODEFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKCULLMODEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKPIPELINEVERTEXINPUTSTATECREATEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKPIPELINEINPUTASSEMBLYSTATECREATEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKPIPELINETESSELLATIONSTATECREATEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKPIPELINEVIEWPORTSTATECREATEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKPIPELINERASTERIZATIONSTATECREATEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKPIPELINEMULTISAMPLESTATECREATEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKPIPELINEDEPTHSTENCILSTATECREATEFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKPIPELINEDEPTHSTENCILSTATECREATEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKPIPELINECOLORBLENDSTATECREATEFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKPIPELINECOLORBLENDSTATECREATEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKPIPELINEDYNAMICSTATECREATEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKPIPELINELAYOUTCREATEFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKPIPELINELAYOUTCREATEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKSHADERSTAGEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKSAMPLERCREATEFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKSAMPLERCREATEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKDESCRIPTORPOOLCREATEFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKDESCRIPTORPOOLCREATEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKDESCRIPTORPOOLRESETFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKDESCRIPTORSETLAYOUTCREATEFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKDESCRIPTORSETLAYOUTCREATEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKATTACHMENTDESCRIPTIONFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKATTACHMENTDESCRIPTIONFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKDEPENDENCYFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKDEPENDENCYFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKFRAMEBUFFERCREATEFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKFRAMEBUFFERCREATEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKRENDERPASSCREATEFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKRENDERPASSCREATEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKSUBPASSDESCRIPTIONFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKSUBPASSDESCRIPTIONFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKCOMMANDPOOLCREATEFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKCOMMANDPOOLCREATEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKCOMMANDPOOLRESETFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKCOMMANDPOOLRESETFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKCOMMANDBUFFERUSAGEFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKCOMMANDBUFFERUSAGEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKQUERYCONTROLFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKQUERYCONTROLFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKCOMMANDBUFFERRESETFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKCOMMANDBUFFERRESETFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKSTENCILFACEFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKSTENCILFACEFLAGS VKFLAGS)
+
+(CFFI:DEFCSTRUCT VKEXTENT2D
+  (WIDTH :UINT32)
+  (HEIGHT :UINT32))
+
+(CFFI:DEFCSTRUCT VKEXTENT3D
+  (WIDTH :UINT32)
+  (HEIGHT :UINT32)
+  (DEPTH :UINT32))
+
+(CFFI:DEFCSTRUCT VKOFFSET2D
+  (X :INT32)
+  (Y :INT32))
+
+(CFFI:DEFCSTRUCT VKOFFSET3D
+  (X :INT32)
+  (Y :INT32)
+  (Z :INT32))
+
+(CFFI:DEFCSTRUCT VKRECT2D
+  (OFFSET (:STRUCT VKOFFSET2D))
+  (EXTENT (:STRUCT VKEXTENT2D)))
+
+(CFFI:DEFCSTRUCT VKBASEINSTRUCTURE
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER))
+
+(CFFI:DEFCSTRUCT VKBASEOUTSTRUCTURE
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER))
+
+(CFFI:DEFCSTRUCT VKBUFFERMEMORYBARRIER
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SRCACCESSMASK VKACCESSFLAGS)
+  (DSTACCESSMASK VKACCESSFLAGS)
+  (SRCQUEUEFAMILYINDEX :UINT32)
+  (DSTQUEUEFAMILYINDEX :UINT32)
+  (BUFFER VKBUFFER)
+  (OFFSET VKDEVICESIZE)
+  (SIZE VKDEVICESIZE))
+
+(CFFI:DEFCSTRUCT VKDISPATCHINDIRECTCOMMAND
+  (X :UINT32)
+  (Y :UINT32)
+  (Z :UINT32))
+
+(CFFI:DEFCSTRUCT VKDRAWINDEXEDINDIRECTCOMMAND
+  (INDEXCOUNT :UINT32)
+  (INSTANCECOUNT :UINT32)
+  (FIRSTINDEX :UINT32)
+  (VERTEXOFFSET :INT32)
+  (FIRSTINSTANCE :UINT32))
+
+(CFFI:DEFCSTRUCT VKDRAWINDIRECTCOMMAND
+  (VERTEXCOUNT :UINT32)
+  (INSTANCECOUNT :UINT32)
+  (FIRSTVERTEX :UINT32)
+  (FIRSTINSTANCE :UINT32))
+
+(CFFI:DEFCSTRUCT VKIMAGESUBRESOURCERANGE
+  (ASPECTMASK VKIMAGEASPECTFLAGS)
+  (BASEMIPLEVEL :UINT32)
+  (LEVELCOUNT :UINT32)
+  (BASEARRAYLAYER :UINT32)
+  (LAYERCOUNT :UINT32))
+
+(CFFI:DEFCSTRUCT VKIMAGEMEMORYBARRIER
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SRCACCESSMASK VKACCESSFLAGS)
+  (DSTACCESSMASK VKACCESSFLAGS)
+  (OLDLAYOUT VKIMAGELAYOUT)
+  (NEWLAYOUT VKIMAGELAYOUT)
+  (SRCQUEUEFAMILYINDEX :UINT32)
+  (DSTQUEUEFAMILYINDEX :UINT32)
+  (IMAGE VKIMAGE)
+  (SUBRESOURCERANGE (:STRUCT VKIMAGESUBRESOURCERANGE)))
+
+(CFFI:DEFCSTRUCT VKMEMORYBARRIER
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SRCACCESSMASK VKACCESSFLAGS)
+  (DSTACCESSMASK VKACCESSFLAGS))
+
+(CFFI:DEFCSTRUCT VKPIPELINECACHEHEADERVERSIONONE
+  (HEADERSIZE :UINT32)
+  (HEADERVERSION VKPIPELINECACHEHEADERVERSION)
+  (VENDORID :UINT32)
+  (DEVICEID :UINT32)
+  (PIPELINECACHEUUID :UINT8 :COUNT 16))
+
+(CFFI:DEFCTYPE PFN_VKALLOCATIONFUNCTION :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKFREEFUNCTION :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKINTERNALALLOCATIONNOTIFICATION :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKINTERNALFREENOTIFICATION :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKREALLOCATIONFUNCTION :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKVOIDFUNCTION :POINTER)
+
+(CFFI:DEFCSTRUCT VKALLOCATIONCALLBACKS
+  (PUSERDATA :POINTER)
+  (PFNALLOCATION PFN_VKALLOCATIONFUNCTION)
+  (PFNREALLOCATION PFN_VKREALLOCATIONFUNCTION)
+  (PFNFREE PFN_VKFREEFUNCTION)
+  (PFNINTERNALALLOCATION PFN_VKINTERNALALLOCATIONNOTIFICATION)
+  (PFNINTERNALFREE PFN_VKINTERNALFREENOTIFICATION))
+
+(CFFI:DEFCSTRUCT VKAPPLICATIONINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PAPPLICATIONNAME :POINTER)
+  (APPLICATIONVERSION :UINT32)
+  (PENGINENAME :POINTER)
+  (ENGINEVERSION :UINT32)
+  (APIVERSION :UINT32))
+
+(CFFI:DEFCSTRUCT VKFORMATPROPERTIES
+  (LINEARTILINGFEATURES VKFORMATFEATUREFLAGS)
+  (OPTIMALTILINGFEATURES VKFORMATFEATUREFLAGS)
+  (BUFFERFEATURES VKFORMATFEATUREFLAGS))
+
+(CFFI:DEFCSTRUCT VKIMAGEFORMATPROPERTIES
+  (MAXEXTENT (:STRUCT VKEXTENT3D))
+  (MAXMIPLEVELS :UINT32)
+  (MAXARRAYLAYERS :UINT32)
+  (SAMPLECOUNTS VKSAMPLECOUNTFLAGS)
+  (MAXRESOURCESIZE VKDEVICESIZE))
+
+(CFFI:DEFCSTRUCT VKINSTANCECREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKINSTANCECREATEFLAGS)
+  (PAPPLICATIONINFO :POINTER)
+  (ENABLEDLAYERCOUNT :UINT32)
+  (PPENABLEDLAYERNAMES :POINTER)
+  (ENABLEDEXTENSIONCOUNT :UINT32)
+  (PPENABLEDEXTENSIONNAMES :POINTER))
+
+(CFFI:DEFCSTRUCT VKMEMORYHEAP
+  (SIZE VKDEVICESIZE)
+  (FLAGS VKMEMORYHEAPFLAGS))
+
+(CFFI:DEFCSTRUCT VKMEMORYTYPE
+  (PROPERTYFLAGS VKMEMORYPROPERTYFLAGS)
+  (HEAPINDEX :UINT32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEFEATURES
+  (ROBUSTBUFFERACCESS VKBOOL32)
+  (FULLDRAWINDEXUINT32 VKBOOL32)
+  (IMAGECUBEARRAY VKBOOL32)
+  (INDEPENDENTBLEND VKBOOL32)
+  (GEOMETRYSHADER VKBOOL32)
+  (TESSELLATIONSHADER VKBOOL32)
+  (SAMPLERATESHADING VKBOOL32)
+  (DUALSRCBLEND VKBOOL32)
+  (LOGICOP VKBOOL32)
+  (MULTIDRAWINDIRECT VKBOOL32)
+  (DRAWINDIRECTFIRSTINSTANCE VKBOOL32)
+  (DEPTHCLAMP VKBOOL32)
+  (DEPTHBIASCLAMP VKBOOL32)
+  (FILLMODENONSOLID VKBOOL32)
+  (DEPTHBOUNDS VKBOOL32)
+  (WIDELINES VKBOOL32)
+  (LARGEPOINTS VKBOOL32)
+  (ALPHATOONE VKBOOL32)
+  (MULTIVIEWPORT VKBOOL32)
+  (SAMPLERANISOTROPY VKBOOL32)
+  (TEXTURECOMPRESSIONETC2 VKBOOL32)
+  (TEXTURECOMPRESSIONASTC_LDR VKBOOL32)
+  (TEXTURECOMPRESSIONBC VKBOOL32)
+  (OCCLUSIONQUERYPRECISE VKBOOL32)
+  (PIPELINESTATISTICSQUERY VKBOOL32)
+  (VERTEXPIPELINESTORESANDATOMICS VKBOOL32)
+  (FRAGMENTSTORESANDATOMICS VKBOOL32)
+  (SHADERTESSELLATIONANDGEOMETRYPOINTSIZE VKBOOL32)
+  (SHADERIMAGEGATHEREXTENDED VKBOOL32)
+  (SHADERSTORAGEIMAGEEXTENDEDFORMATS VKBOOL32)
+  (SHADERSTORAGEIMAGEMULTISAMPLE VKBOOL32)
+  (SHADERSTORAGEIMAGEREADWITHOUTFORMAT VKBOOL32)
+  (SHADERSTORAGEIMAGEWRITEWITHOUTFORMAT VKBOOL32)
+  (SHADERUNIFORMBUFFERARRAYDYNAMICINDEXING VKBOOL32)
+  (SHADERSAMPLEDIMAGEARRAYDYNAMICINDEXING VKBOOL32)
+  (SHADERSTORAGEBUFFERARRAYDYNAMICINDEXING VKBOOL32)
+  (SHADERSTORAGEIMAGEARRAYDYNAMICINDEXING VKBOOL32)
+  (SHADERCLIPDISTANCE VKBOOL32)
+  (SHADERCULLDISTANCE VKBOOL32)
+  (SHADERFLOAT64 VKBOOL32)
+  (SHADERINT64 VKBOOL32)
+  (SHADERINT16 VKBOOL32)
+  (SHADERRESOURCERESIDENCY VKBOOL32)
+  (SHADERRESOURCEMINLOD VKBOOL32)
+  (SPARSEBINDING VKBOOL32)
+  (SPARSERESIDENCYBUFFER VKBOOL32)
+  (SPARSERESIDENCYIMAGE2D VKBOOL32)
+  (SPARSERESIDENCYIMAGE3D VKBOOL32)
+  (SPARSERESIDENCY2SAMPLES VKBOOL32)
+  (SPARSERESIDENCY4SAMPLES VKBOOL32)
+  (SPARSERESIDENCY8SAMPLES VKBOOL32)
+  (SPARSERESIDENCY16SAMPLES VKBOOL32)
+  (SPARSERESIDENCYALIASED VKBOOL32)
+  (VARIABLEMULTISAMPLERATE VKBOOL32)
+  (INHERITEDQUERIES VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICELIMITS
+  (MAXIMAGEDIMENSION1D :UINT32)
+  (MAXIMAGEDIMENSION2D :UINT32)
+  (MAXIMAGEDIMENSION3D :UINT32)
+  (MAXIMAGEDIMENSIONCUBE :UINT32)
+  (MAXIMAGEARRAYLAYERS :UINT32)
+  (MAXTEXELBUFFERELEMENTS :UINT32)
+  (MAXUNIFORMBUFFERRANGE :UINT32)
+  (MAXSTORAGEBUFFERRANGE :UINT32)
+  (MAXPUSHCONSTANTSSIZE :UINT32)
+  (MAXMEMORYALLOCATIONCOUNT :UINT32)
+  (MAXSAMPLERALLOCATIONCOUNT :UINT32)
+  (BUFFERIMAGEGRANULARITY VKDEVICESIZE)
+  (SPARSEADDRESSSPACESIZE VKDEVICESIZE)
+  (MAXBOUNDDESCRIPTORSETS :UINT32)
+  (MAXPERSTAGEDESCRIPTORSAMPLERS :UINT32)
+  (MAXPERSTAGEDESCRIPTORUNIFORMBUFFERS :UINT32)
+  (MAXPERSTAGEDESCRIPTORSTORAGEBUFFERS :UINT32)
+  (MAXPERSTAGEDESCRIPTORSAMPLEDIMAGES :UINT32)
+  (MAXPERSTAGEDESCRIPTORSTORAGEIMAGES :UINT32)
+  (MAXPERSTAGEDESCRIPTORINPUTATTACHMENTS :UINT32)
+  (MAXPERSTAGERESOURCES :UINT32)
+  (MAXDESCRIPTORSETSAMPLERS :UINT32)
+  (MAXDESCRIPTORSETUNIFORMBUFFERS :UINT32)
+  (MAXDESCRIPTORSETUNIFORMBUFFERSDYNAMIC :UINT32)
+  (MAXDESCRIPTORSETSTORAGEBUFFERS :UINT32)
+  (MAXDESCRIPTORSETSTORAGEBUFFERSDYNAMIC :UINT32)
+  (MAXDESCRIPTORSETSAMPLEDIMAGES :UINT32)
+  (MAXDESCRIPTORSETSTORAGEIMAGES :UINT32)
+  (MAXDESCRIPTORSETINPUTATTACHMENTS :UINT32)
+  (MAXVERTEXINPUTATTRIBUTES :UINT32)
+  (MAXVERTEXINPUTBINDINGS :UINT32)
+  (MAXVERTEXINPUTATTRIBUTEOFFSET :UINT32)
+  (MAXVERTEXINPUTBINDINGSTRIDE :UINT32)
+  (MAXVERTEXOUTPUTCOMPONENTS :UINT32)
+  (MAXTESSELLATIONGENERATIONLEVEL :UINT32)
+  (MAXTESSELLATIONPATCHSIZE :UINT32)
+  (MAXTESSELLATIONCONTROLPERVERTEXINPUTCOMPONENTS :UINT32)
+  (MAXTESSELLATIONCONTROLPERVERTEXOUTPUTCOMPONENTS :UINT32)
+  (MAXTESSELLATIONCONTROLPERPATCHOUTPUTCOMPONENTS :UINT32)
+  (MAXTESSELLATIONCONTROLTOTALOUTPUTCOMPONENTS :UINT32)
+  (MAXTESSELLATIONEVALUATIONINPUTCOMPONENTS :UINT32)
+  (MAXTESSELLATIONEVALUATIONOUTPUTCOMPONENTS :UINT32)
+  (MAXGEOMETRYSHADERINVOCATIONS :UINT32)
+  (MAXGEOMETRYINPUTCOMPONENTS :UINT32)
+  (MAXGEOMETRYOUTPUTCOMPONENTS :UINT32)
+  (MAXGEOMETRYOUTPUTVERTICES :UINT32)
+  (MAXGEOMETRYTOTALOUTPUTCOMPONENTS :UINT32)
+  (MAXFRAGMENTINPUTCOMPONENTS :UINT32)
+  (MAXFRAGMENTOUTPUTATTACHMENTS :UINT32)
+  (MAXFRAGMENTDUALSRCATTACHMENTS :UINT32)
+  (MAXFRAGMENTCOMBINEDOUTPUTRESOURCES :UINT32)
+  (MAXCOMPUTESHAREDMEMORYSIZE :UINT32)
+  (MAXCOMPUTEWORKGROUPCOUNT :UINT32 :COUNT 3)
+  (MAXCOMPUTEWORKGROUPINVOCATIONS :UINT32)
+  (MAXCOMPUTEWORKGROUPSIZE :UINT32 :COUNT 3)
+  (SUBPIXELPRECISIONBITS :UINT32)
+  (SUBTEXELPRECISIONBITS :UINT32)
+  (MIPMAPPRECISIONBITS :UINT32)
+  (MAXDRAWINDEXEDINDEXVALUE :UINT32)
+  (MAXDRAWINDIRECTCOUNT :UINT32)
+  (MAXSAMPLERLODBIAS :FLOAT)
+  (MAXSAMPLERANISOTROPY :FLOAT)
+  (MAXVIEWPORTS :UINT32)
+  (MAXVIEWPORTDIMENSIONS :UINT32 :COUNT 2)
+  (VIEWPORTBOUNDSRANGE :FLOAT :COUNT 2)
+  (VIEWPORTSUBPIXELBITS :UINT32)
+  (MINMEMORYMAPALIGNMENT :SIZE)
+  (MINTEXELBUFFEROFFSETALIGNMENT VKDEVICESIZE)
+  (MINUNIFORMBUFFEROFFSETALIGNMENT VKDEVICESIZE)
+  (MINSTORAGEBUFFEROFFSETALIGNMENT VKDEVICESIZE)
+  (MINTEXELOFFSET :INT32)
+  (MAXTEXELOFFSET :UINT32)
+  (MINTEXELGATHEROFFSET :INT32)
+  (MAXTEXELGATHEROFFSET :UINT32)
+  (MININTERPOLATIONOFFSET :FLOAT)
+  (MAXINTERPOLATIONOFFSET :FLOAT)
+  (SUBPIXELINTERPOLATIONOFFSETBITS :UINT32)
+  (MAXFRAMEBUFFERWIDTH :UINT32)
+  (MAXFRAMEBUFFERHEIGHT :UINT32)
+  (MAXFRAMEBUFFERLAYERS :UINT32)
+  (FRAMEBUFFERCOLORSAMPLECOUNTS VKSAMPLECOUNTFLAGS)
+  (FRAMEBUFFERDEPTHSAMPLECOUNTS VKSAMPLECOUNTFLAGS)
+  (FRAMEBUFFERSTENCILSAMPLECOUNTS VKSAMPLECOUNTFLAGS)
+  (FRAMEBUFFERNOATTACHMENTSSAMPLECOUNTS VKSAMPLECOUNTFLAGS)
+  (MAXCOLORATTACHMENTS :UINT32)
+  (SAMPLEDIMAGECOLORSAMPLECOUNTS VKSAMPLECOUNTFLAGS)
+  (SAMPLEDIMAGEINTEGERSAMPLECOUNTS VKSAMPLECOUNTFLAGS)
+  (SAMPLEDIMAGEDEPTHSAMPLECOUNTS VKSAMPLECOUNTFLAGS)
+  (SAMPLEDIMAGESTENCILSAMPLECOUNTS VKSAMPLECOUNTFLAGS)
+  (STORAGEIMAGESAMPLECOUNTS VKSAMPLECOUNTFLAGS)
+  (MAXSAMPLEMASKWORDS :UINT32)
+  (TIMESTAMPCOMPUTEANDGRAPHICS VKBOOL32)
+  (TIMESTAMPPERIOD :FLOAT)
+  (MAXCLIPDISTANCES :UINT32)
+  (MAXCULLDISTANCES :UINT32)
+  (MAXCOMBINEDCLIPANDCULLDISTANCES :UINT32)
+  (DISCRETEQUEUEPRIORITIES :UINT32)
+  (POINTSIZERANGE :FLOAT :COUNT 2)
+  (LINEWIDTHRANGE :FLOAT :COUNT 2)
+  (POINTSIZEGRANULARITY :FLOAT)
+  (LINEWIDTHGRANULARITY :FLOAT)
+  (STRICTLINES VKBOOL32)
+  (STANDARDSAMPLELOCATIONS VKBOOL32)
+  (OPTIMALBUFFERCOPYOFFSETALIGNMENT VKDEVICESIZE)
+  (OPTIMALBUFFERCOPYROWPITCHALIGNMENT VKDEVICESIZE)
+  (NONCOHERENTATOMSIZE VKDEVICESIZE))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEMEMORYPROPERTIES
+  (MEMORYTYPECOUNT :UINT32)
+  (MEMORYTYPES (:STRUCT VKMEMORYTYPE) :COUNT 32)
+  (MEMORYHEAPCOUNT :UINT32)
+  (MEMORYHEAPS (:STRUCT VKMEMORYHEAP) :COUNT 16))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESPARSEPROPERTIES
+  (RESIDENCYSTANDARD2DBLOCKSHAPE VKBOOL32)
+  (RESIDENCYSTANDARD2DMULTISAMPLEBLOCKSHAPE VKBOOL32)
+  (RESIDENCYSTANDARD3DBLOCKSHAPE VKBOOL32)
+  (RESIDENCYALIGNEDMIPSIZE VKBOOL32)
+  (RESIDENCYNONRESIDENTSTRICT VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEPROPERTIES
+  (APIVERSION :UINT32)
+  (DRIVERVERSION :UINT32)
+  (VENDORID :UINT32)
+  (DEVICEID :UINT32)
+  (DEVICETYPE VKPHYSICALDEVICETYPE)
+  (DEVICENAME :CHAR :COUNT 256)
+  (PIPELINECACHEUUID :UINT8 :COUNT 16)
+  (LIMITS (:STRUCT VKPHYSICALDEVICELIMITS))
+  (SPARSEPROPERTIES (:STRUCT VKPHYSICALDEVICESPARSEPROPERTIES)))
+
+(CFFI:DEFCSTRUCT VKQUEUEFAMILYPROPERTIES
+  (QUEUEFLAGS VKQUEUEFLAGS)
+  (QUEUECOUNT :UINT32)
+  (TIMESTAMPVALIDBITS :UINT32)
+  (MINIMAGETRANSFERGRANULARITY (:STRUCT VKEXTENT3D)))
+
+(CFFI:DEFCSTRUCT VKDEVICEQUEUECREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKDEVICEQUEUECREATEFLAGS)
+  (QUEUEFAMILYINDEX :UINT32)
+  (QUEUECOUNT :UINT32)
+  (PQUEUEPRIORITIES :POINTER))
+
+(CFFI:DEFCSTRUCT VKDEVICECREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKDEVICECREATEFLAGS)
+  (QUEUECREATEINFOCOUNT :UINT32)
+  (PQUEUECREATEINFOS :POINTER)
+  (ENABLEDLAYERCOUNT :UINT32)
+  (PPENABLEDLAYERNAMES :POINTER)
+  (ENABLEDEXTENSIONCOUNT :UINT32)
+  (PPENABLEDEXTENSIONNAMES :POINTER)
+  (PENABLEDFEATURES :POINTER))
+
+(CFFI:DEFCSTRUCT VKEXTENSIONPROPERTIES
+  (EXTENSIONNAME :CHAR :COUNT 256)
+  (SPECVERSION :UINT32))
+
+(CFFI:DEFCSTRUCT VKLAYERPROPERTIES
+  (LAYERNAME :CHAR :COUNT 256)
+  (SPECVERSION :UINT32)
+  (IMPLEMENTATIONVERSION :UINT32)
+  (DESCRIPTION :CHAR :COUNT 256))
+
+(CFFI:DEFCSTRUCT VKSUBMITINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (WAITSEMAPHORECOUNT :UINT32)
+  (PWAITSEMAPHORES :POINTER)
+  (PWAITDSTSTAGEMASK :POINTER)
+  (COMMANDBUFFERCOUNT :UINT32)
+  (PCOMMANDBUFFERS :POINTER)
+  (SIGNALSEMAPHORECOUNT :UINT32)
+  (PSIGNALSEMAPHORES :POINTER))
+
+(CFFI:DEFCSTRUCT VKMAPPEDMEMORYRANGE
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MEMORY VKDEVICEMEMORY)
+  (OFFSET VKDEVICESIZE)
+  (SIZE VKDEVICESIZE))
+
+(CFFI:DEFCSTRUCT VKMEMORYALLOCATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (ALLOCATIONSIZE VKDEVICESIZE)
+  (MEMORYTYPEINDEX :UINT32))
+
+(CFFI:DEFCSTRUCT VKMEMORYREQUIREMENTS
+  (SIZE VKDEVICESIZE)
+  (ALIGNMENT VKDEVICESIZE)
+  (MEMORYTYPEBITS :UINT32))
+
+(CFFI:DEFCSTRUCT VKSPARSEMEMORYBIND
+  (RESOURCEOFFSET VKDEVICESIZE)
+  (SIZE VKDEVICESIZE)
+  (MEMORY VKDEVICEMEMORY)
+  (MEMORYOFFSET VKDEVICESIZE)
+  (FLAGS VKSPARSEMEMORYBINDFLAGS))
+
+(CFFI:DEFCSTRUCT VKSPARSEBUFFERMEMORYBINDINFO
+  (BUFFER VKBUFFER)
+  (BINDCOUNT :UINT32)
+  (PBINDS :POINTER))
+
+(CFFI:DEFCSTRUCT VKSPARSEIMAGEOPAQUEMEMORYBINDINFO
+  (IMAGE VKIMAGE)
+  (BINDCOUNT :UINT32)
+  (PBINDS :POINTER))
+
+(CFFI:DEFCSTRUCT VKIMAGESUBRESOURCE
+  (ASPECTMASK VKIMAGEASPECTFLAGS)
+  (MIPLEVEL :UINT32)
+  (ARRAYLAYER :UINT32))
+
+(CFFI:DEFCSTRUCT VKSPARSEIMAGEMEMORYBIND
+  (SUBRESOURCE (:STRUCT VKIMAGESUBRESOURCE))
+  (OFFSET (:STRUCT VKOFFSET3D))
+  (EXTENT (:STRUCT VKEXTENT3D))
+  (MEMORY VKDEVICEMEMORY)
+  (MEMORYOFFSET VKDEVICESIZE)
+  (FLAGS VKSPARSEMEMORYBINDFLAGS))
+
+(CFFI:DEFCSTRUCT VKSPARSEIMAGEMEMORYBINDINFO
+  (IMAGE VKIMAGE)
+  (BINDCOUNT :UINT32)
+  (PBINDS :POINTER))
+
+(CFFI:DEFCSTRUCT VKBINDSPARSEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (WAITSEMAPHORECOUNT :UINT32)
+  (PWAITSEMAPHORES :POINTER)
+  (BUFFERBINDCOUNT :UINT32)
+  (PBUFFERBINDS :POINTER)
+  (IMAGEOPAQUEBINDCOUNT :UINT32)
+  (PIMAGEOPAQUEBINDS :POINTER)
+  (IMAGEBINDCOUNT :UINT32)
+  (PIMAGEBINDS :POINTER)
+  (SIGNALSEMAPHORECOUNT :UINT32)
+  (PSIGNALSEMAPHORES :POINTER))
+
+(CFFI:DEFCSTRUCT VKSPARSEIMAGEFORMATPROPERTIES
+  (ASPECTMASK VKIMAGEASPECTFLAGS)
+  (IMAGEGRANULARITY (:STRUCT VKEXTENT3D))
+  (FLAGS VKSPARSEIMAGEFORMATFLAGS))
+
+(CFFI:DEFCSTRUCT VKSPARSEIMAGEMEMORYREQUIREMENTS
+  (FORMATPROPERTIES (:STRUCT VKSPARSEIMAGEFORMATPROPERTIES))
+  (IMAGEMIPTAILFIRSTLOD :UINT32)
+  (IMAGEMIPTAILSIZE VKDEVICESIZE)
+  (IMAGEMIPTAILOFFSET VKDEVICESIZE)
+  (IMAGEMIPTAILSTRIDE VKDEVICESIZE))
+
+(CFFI:DEFCSTRUCT VKFENCECREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKFENCECREATEFLAGS))
+
+(CFFI:DEFCSTRUCT VKSEMAPHORECREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKSEMAPHORECREATEFLAGS))
+
+(CFFI:DEFCSTRUCT VKEVENTCREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKEVENTCREATEFLAGS))
+
+(CFFI:DEFCSTRUCT VKQUERYPOOLCREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKQUERYPOOLCREATEFLAGS)
+  (QUERYTYPE VKQUERYTYPE)
+  (QUERYCOUNT :UINT32)
+  (PIPELINESTATISTICS VKQUERYPIPELINESTATISTICFLAGS))
+
+(CFFI:DEFCSTRUCT VKBUFFERCREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKBUFFERCREATEFLAGS)
+  (SIZE VKDEVICESIZE)
+  (USAGE VKBUFFERUSAGEFLAGS)
+  (SHARINGMODE VKSHARINGMODE)
+  (QUEUEFAMILYINDEXCOUNT :UINT32)
+  (PQUEUEFAMILYINDICES :POINTER))
+
+(CFFI:DEFCSTRUCT VKBUFFERVIEWCREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKBUFFERVIEWCREATEFLAGS)
+  (BUFFER VKBUFFER)
+  (FORMAT VKFORMAT)
+  (OFFSET VKDEVICESIZE)
+  (RANGE VKDEVICESIZE))
+
+(CFFI:DEFCSTRUCT VKIMAGECREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKIMAGECREATEFLAGS)
+  (IMAGETYPE VKIMAGETYPE)
+  (FORMAT VKFORMAT)
+  (EXTENT (:STRUCT VKEXTENT3D))
+  (MIPLEVELS :UINT32)
+  (ARRAYLAYERS :UINT32)
+  (SAMPLES VKSAMPLECOUNTFLAGBITS)
+  (TILING VKIMAGETILING)
+  (USAGE VKIMAGEUSAGEFLAGS)
+  (SHARINGMODE VKSHARINGMODE)
+  (QUEUEFAMILYINDEXCOUNT :UINT32)
+  (PQUEUEFAMILYINDICES :POINTER)
+  (INITIALLAYOUT VKIMAGELAYOUT))
+
+(CFFI:DEFCSTRUCT VKSUBRESOURCELAYOUT
+  (OFFSET VKDEVICESIZE)
+  (SIZE VKDEVICESIZE)
+  (ROWPITCH VKDEVICESIZE)
+  (ARRAYPITCH VKDEVICESIZE)
+  (DEPTHPITCH VKDEVICESIZE))
+
+(CFFI:DEFCSTRUCT VKCOMPONENTMAPPING
+  (R VKCOMPONENTSWIZZLE)
+  (G VKCOMPONENTSWIZZLE)
+  (B VKCOMPONENTSWIZZLE)
+  (A VKCOMPONENTSWIZZLE))
+
+(CFFI:DEFCSTRUCT VKIMAGEVIEWCREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKIMAGEVIEWCREATEFLAGS)
+  (IMAGE VKIMAGE)
+  (VIEWTYPE VKIMAGEVIEWTYPE)
+  (FORMAT VKFORMAT)
+  (COMPONENTS (:STRUCT VKCOMPONENTMAPPING))
+  (SUBRESOURCERANGE (:STRUCT VKIMAGESUBRESOURCERANGE)))
+
+(CFFI:DEFCSTRUCT VKSHADERMODULECREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKSHADERMODULECREATEFLAGS)
+  (CODESIZE :SIZE)
+  (PCODE :POINTER))
+
+(CFFI:DEFCSTRUCT VKPIPELINECACHECREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKPIPELINECACHECREATEFLAGS)
+  (INITIALDATASIZE :SIZE)
+  (PINITIALDATA :POINTER))
+
+(CFFI:DEFCSTRUCT VKSPECIALIZATIONMAPENTRY
+  (ANTID :UINT32)
+  (OFFSET :UINT32)
+  (SIZE :SIZE))
+
+(CFFI:DEFCSTRUCT VKSPECIALIZATIONINFO
+  (MAPENTRYCOUNT :UINT32)
+  (PMAPENTRIES :POINTER)
+  (DATASIZE :SIZE)
+  (PDATA :POINTER))
+
+(CFFI:DEFCSTRUCT VKPIPELINESHADERSTAGECREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKPIPELINESHADERSTAGECREATEFLAGS)
+  (STAGE VKSHADERSTAGEFLAGBITS)
+  (MODULE VKSHADERMODULE)
+  (PNAME :POINTER)
+  (PSPECIALIZATIONINFO :POINTER))
+
+(CFFI:DEFCSTRUCT VKCOMPUTEPIPELINECREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKPIPELINECREATEFLAGS)
+  (STAGE (:STRUCT VKPIPELINESHADERSTAGECREATEINFO))
+  (LAYOUT VKPIPELINELAYOUT)
+  (BASEPIPELINEHANDLE VKPIPELINE)
+  (BASEPIPELINEINDEX :INT32))
+
+(CFFI:DEFCSTRUCT VKVERTEXINPUTBINDINGDESCRIPTION
+  (BINDING :UINT32)
+  (STRIDE :UINT32)
+  (INPUTRATE VKVERTEXINPUTRATE))
+
+(CFFI:DEFCSTRUCT VKVERTEXINPUTATTRIBUTEDESCRIPTION
+  (LOCATION :UINT32)
+  (BINDING :UINT32)
+  (FORMAT VKFORMAT)
+  (OFFSET :UINT32))
+
+(CFFI:DEFCSTRUCT VKPIPELINEVERTEXINPUTSTATECREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKPIPELINEVERTEXINPUTSTATECREATEFLAGS)
+  (VERTEXBINDINGDESCRIPTIONCOUNT :UINT32)
+  (PVERTEXBINDINGDESCRIPTIONS :POINTER)
+  (VERTEXATTRIBUTEDESCRIPTIONCOUNT :UINT32)
+  (PVERTEXATTRIBUTEDESCRIPTIONS :POINTER))
+
+(CFFI:DEFCSTRUCT VKPIPELINEINPUTASSEMBLYSTATECREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKPIPELINEINPUTASSEMBLYSTATECREATEFLAGS)
+  (TOPOLOGY VKPRIMITIVETOPOLOGY)
+  (PRIMITIVERESTARTENABLE VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPIPELINETESSELLATIONSTATECREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKPIPELINETESSELLATIONSTATECREATEFLAGS)
+  (PATCHCONTROLPOINTS :UINT32))
+
+(CFFI:DEFCSTRUCT VKVIEWPORT
+  (X :FLOAT)
+  (Y :FLOAT)
+  (WIDTH :FLOAT)
+  (HEIGHT :FLOAT)
+  (MINDEPTH :FLOAT)
+  (MAXDEPTH :FLOAT))
+
+(CFFI:DEFCSTRUCT VKPIPELINEVIEWPORTSTATECREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKPIPELINEVIEWPORTSTATECREATEFLAGS)
+  (VIEWPORTCOUNT :UINT32)
+  (PVIEWPORTS :POINTER)
+  (SCISSORCOUNT :UINT32)
+  (PSCISSORS :POINTER))
+
+(CFFI:DEFCSTRUCT VKPIPELINERASTERIZATIONSTATECREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKPIPELINERASTERIZATIONSTATECREATEFLAGS)
+  (DEPTHCLAMPENABLE VKBOOL32)
+  (RASTERIZERDISCARDENABLE VKBOOL32)
+  (POLYGONMODE VKPOLYGONMODE)
+  (CULLMODE VKCULLMODEFLAGS)
+  (FRONTFACE VKFRONTFACE)
+  (DEPTHBIASENABLE VKBOOL32)
+  (DEPTHBIASCONSTANTFACTOR :FLOAT)
+  (DEPTHBIASCLAMP :FLOAT)
+  (DEPTHBIASSLOPEFACTOR :FLOAT)
+  (LINEWIDTH :FLOAT))
+
+(CFFI:DEFCSTRUCT VKPIPELINEMULTISAMPLESTATECREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKPIPELINEMULTISAMPLESTATECREATEFLAGS)
+  (RASTERIZATIONSAMPLES VKSAMPLECOUNTFLAGBITS)
+  (SAMPLESHADINGENABLE VKBOOL32)
+  (MINSAMPLESHADING :FLOAT)
+  (PSAMPLEMASK :POINTER)
+  (ALPHATOCOVERAGEENABLE VKBOOL32)
+  (ALPHATOONEENABLE VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKSTENCILOPSTATE
+  (FAILOP VKSTENCILOP)
+  (PASSOP VKSTENCILOP)
+  (DEPTHFAILOP VKSTENCILOP)
+  (COMPAREOP VKCOMPAREOP)
+  (COMPAREMASK :UINT32)
+  (WRITEMASK :UINT32)
+  (REFERENCE :UINT32))
+
+(CFFI:DEFCSTRUCT VKPIPELINEDEPTHSTENCILSTATECREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKPIPELINEDEPTHSTENCILSTATECREATEFLAGS)
+  (DEPTHTESTENABLE VKBOOL32)
+  (DEPTHWRITEENABLE VKBOOL32)
+  (DEPTHCOMPAREOP VKCOMPAREOP)
+  (DEPTHBOUNDSTESTENABLE VKBOOL32)
+  (STENCILTESTENABLE VKBOOL32)
+  (FRONT (:STRUCT VKSTENCILOPSTATE))
+  (BACK (:STRUCT VKSTENCILOPSTATE))
+  (MINDEPTHBOUNDS :FLOAT)
+  (MAXDEPTHBOUNDS :FLOAT))
+
+(CFFI:DEFCSTRUCT VKPIPELINECOLORBLENDATTACHMENTSTATE
+  (BLENDENABLE VKBOOL32)
+  (SRCCOLORBLENDFACTOR VKBLENDFACTOR)
+  (DSTCOLORBLENDFACTOR VKBLENDFACTOR)
+  (COLORBLENDOP VKBLENDOP)
+  (SRCALPHABLENDFACTOR VKBLENDFACTOR)
+  (DSTALPHABLENDFACTOR VKBLENDFACTOR)
+  (ALPHABLENDOP VKBLENDOP)
+  (COLORWRITEMASK VKCOLORCOMPONENTFLAGS))
+
+(CFFI:DEFCSTRUCT VKPIPELINECOLORBLENDSTATECREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKPIPELINECOLORBLENDSTATECREATEFLAGS)
+  (LOGICOPENABLE VKBOOL32)
+  (LOGICOP VKLOGICOP)
+  (ATTACHMENTCOUNT :UINT32)
+  (PATTACHMENTS :POINTER)
+  (BLENDCONSTANTS :FLOAT :COUNT 4))
+
+(CFFI:DEFCSTRUCT VKPIPELINEDYNAMICSTATECREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKPIPELINEDYNAMICSTATECREATEFLAGS)
+  (DYNAMICSTATECOUNT :UINT32)
+  (PDYNAMICSTATES :POINTER))
+
+(CFFI:DEFCSTRUCT VKGRAPHICSPIPELINECREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKPIPELINECREATEFLAGS)
+  (STAGECOUNT :UINT32)
+  (PSTAGES :POINTER)
+  (PVERTEXINPUTSTATE :POINTER)
+  (PINPUTASSEMBLYSTATE :POINTER)
+  (PTESSELLATIONSTATE :POINTER)
+  (PVIEWPORTSTATE :POINTER)
+  (PRASTERIZATIONSTATE :POINTER)
+  (PMULTISAMPLESTATE :POINTER)
+  (PDEPTHSTENCILSTATE :POINTER)
+  (PCOLORBLENDSTATE :POINTER)
+  (PDYNAMICSTATE :POINTER)
+  (LAYOUT VKPIPELINELAYOUT)
+  (RENDERPASS VKRENDERPASS)
+  (SUBPASS :UINT32)
+  (BASEPIPELINEHANDLE VKPIPELINE)
+  (BASEPIPELINEINDEX :INT32))
+
+(CFFI:DEFCSTRUCT VKPUSHCONSTANTRANGE
+  (STAGEFLAGS VKSHADERSTAGEFLAGS)
+  (OFFSET :UINT32)
+  (SIZE :UINT32))
+
+(CFFI:DEFCSTRUCT VKPIPELINELAYOUTCREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKPIPELINELAYOUTCREATEFLAGS)
+  (SETLAYOUTCOUNT :UINT32)
+  (PSETLAYOUTS :POINTER)
+  (PUSHCONSTANTRANGECOUNT :UINT32)
+  (PPUSHCONSTANTRANGES :POINTER))
+
+(CFFI:DEFCSTRUCT VKSAMPLERCREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKSAMPLERCREATEFLAGS)
+  (MAGFILTER VKFILTER)
+  (MINFILTER VKFILTER)
+  (MIPMAPMODE VKSAMPLERMIPMAPMODE)
+  (ADDRESSMODEU VKSAMPLERADDRESSMODE)
+  (ADDRESSMODEV VKSAMPLERADDRESSMODE)
+  (ADDRESSMODEW VKSAMPLERADDRESSMODE)
+  (MIPLODBIAS :FLOAT)
+  (ANISOTROPYENABLE VKBOOL32)
+  (MAXANISOTROPY :FLOAT)
+  (COMPAREENABLE VKBOOL32)
+  (COMPAREOP VKCOMPAREOP)
+  (MINLOD :FLOAT)
+  (MAXLOD :FLOAT)
+  (BORDERCOLOR VKBORDERCOLOR)
+  (UNNORMALIZEDCOORDINATES VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKCOPYDESCRIPTORSET
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SRCSET VKDESCRIPTORSET)
+  (SRCBINDING :UINT32)
+  (SRCARRAYELEMENT :UINT32)
+  (DSTSET VKDESCRIPTORSET)
+  (DSTBINDING :UINT32)
+  (DSTARRAYELEMENT :UINT32)
+  (DESCRIPTORCOUNT :UINT32))
+
+(CFFI:DEFCSTRUCT VKDESCRIPTORBUFFERINFO
+  (BUFFER VKBUFFER)
+  (OFFSET VKDEVICESIZE)
+  (RANGE VKDEVICESIZE))
+
+(CFFI:DEFCSTRUCT VKDESCRIPTORIMAGEINFO
+  (SAMPLER VKSAMPLER)
+  (IMAGEVIEW VKIMAGEVIEW)
+  (IMAGELAYOUT VKIMAGELAYOUT))
+
+(CFFI:DEFCSTRUCT VKDESCRIPTORPOOLSIZE
+  (TYPE VKDESCRIPTORTYPE)
+  (DESCRIPTORCOUNT :UINT32))
+
+(CFFI:DEFCSTRUCT VKDESCRIPTORPOOLCREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKDESCRIPTORPOOLCREATEFLAGS)
+  (MAXSETS :UINT32)
+  (POOLSIZECOUNT :UINT32)
+  (PPOOLSIZES :POINTER))
+
+(CFFI:DEFCSTRUCT VKDESCRIPTORSETALLOCATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DESCRIPTORPOOL VKDESCRIPTORPOOL)
+  (DESCRIPTORSETCOUNT :UINT32)
+  (PSETLAYOUTS :POINTER))
+
+(CFFI:DEFCSTRUCT VKDESCRIPTORSETLAYOUTBINDING
+  (BINDING :UINT32)
+  (DESCRIPTORTYPE VKDESCRIPTORTYPE)
+  (DESCRIPTORCOUNT :UINT32)
+  (STAGEFLAGS VKSHADERSTAGEFLAGS)
+  (PIMMUTABLESAMPLERS :POINTER))
+
+(CFFI:DEFCSTRUCT VKDESCRIPTORSETLAYOUTCREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKDESCRIPTORSETLAYOUTCREATEFLAGS)
+  (BINDINGCOUNT :UINT32)
+  (PBINDINGS :POINTER))
+
+(CFFI:DEFCSTRUCT VKWRITEDESCRIPTORSET
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DSTSET VKDESCRIPTORSET)
+  (DSTBINDING :UINT32)
+  (DSTARRAYELEMENT :UINT32)
+  (DESCRIPTORCOUNT :UINT32)
+  (DESCRIPTORTYPE VKDESCRIPTORTYPE)
+  (PIMAGEINFO :POINTER)
+  (PBUFFERINFO :POINTER)
+  (PTEXELBUFFERVIEW :POINTER))
+
+(CFFI:DEFCSTRUCT VKATTACHMENTDESCRIPTION
+  (FLAGS VKATTACHMENTDESCRIPTIONFLAGS)
+  (FORMAT VKFORMAT)
+  (SAMPLES VKSAMPLECOUNTFLAGBITS)
+  (LOADOP VKATTACHMENTLOADOP)
+  (STOREOP VKATTACHMENTSTOREOP)
+  (STENCILLOADOP VKATTACHMENTLOADOP)
+  (STENCILSTOREOP VKATTACHMENTSTOREOP)
+  (INITIALLAYOUT VKIMAGELAYOUT)
+  (FINALLAYOUT VKIMAGELAYOUT))
+
+(CFFI:DEFCSTRUCT VKATTACHMENTREFERENCE
+  (ATTACHMENT :UINT32)
+  (LAYOUT VKIMAGELAYOUT))
+
+(CFFI:DEFCSTRUCT VKFRAMEBUFFERCREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKFRAMEBUFFERCREATEFLAGS)
+  (RENDERPASS VKRENDERPASS)
+  (ATTACHMENTCOUNT :UINT32)
+  (PATTACHMENTS :POINTER)
+  (WIDTH :UINT32)
+  (HEIGHT :UINT32)
+  (LAYERS :UINT32))
+
+(CFFI:DEFCSTRUCT VKSUBPASSDESCRIPTION
+  (FLAGS VKSUBPASSDESCRIPTIONFLAGS)
+  (PIPELINEBINDPOINT VKPIPELINEBINDPOINT)
+  (INPUTATTACHMENTCOUNT :UINT32)
+  (PINPUTATTACHMENTS :POINTER)
+  (COLORATTACHMENTCOUNT :UINT32)
+  (PCOLORATTACHMENTS :POINTER)
+  (PRESOLVEATTACHMENTS :POINTER)
+  (PDEPTHSTENCILATTACHMENT :POINTER)
+  (PRESERVEATTACHMENTCOUNT :UINT32)
+  (PPRESERVEATTACHMENTS :POINTER))
+
+(CFFI:DEFCSTRUCT VKSUBPASSDEPENDENCY
+  (SRCSUBPASS :UINT32)
+  (DSTSUBPASS :UINT32)
+  (SRCSTAGEMASK VKPIPELINESTAGEFLAGS)
+  (DSTSTAGEMASK VKPIPELINESTAGEFLAGS)
+  (SRCACCESSMASK VKACCESSFLAGS)
+  (DSTACCESSMASK VKACCESSFLAGS)
+  (DEPENDENCYFLAGS VKDEPENDENCYFLAGS))
+
+(CFFI:DEFCSTRUCT VKRENDERPASSCREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKRENDERPASSCREATEFLAGS)
+  (ATTACHMENTCOUNT :UINT32)
+  (PATTACHMENTS :POINTER)
+  (SUBPASSCOUNT :UINT32)
+  (PSUBPASSES :POINTER)
+  (DEPENDENCYCOUNT :UINT32)
+  (PDEPENDENCIES :POINTER))
+
+(CFFI:DEFCSTRUCT VKCOMMANDPOOLCREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKCOMMANDPOOLCREATEFLAGS)
+  (QUEUEFAMILYINDEX :UINT32))
+
+(CFFI:DEFCSTRUCT VKCOMMANDBUFFERALLOCATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (COMMANDPOOL VKCOMMANDPOOL)
+  (LEVEL VKCOMMANDBUFFERLEVEL)
+  (COMMANDBUFFERCOUNT :UINT32))
+
+(CFFI:DEFCSTRUCT VKCOMMANDBUFFERINHERITANCEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (RENDERPASS VKRENDERPASS)
+  (SUBPASS :UINT32)
+  (FRAMEBUFFER VKFRAMEBUFFER)
+  (OCCLUSIONQUERYENABLE VKBOOL32)
+  (QUERYFLAGS VKQUERYCONTROLFLAGS)
+  (PIPELINESTATISTICS VKQUERYPIPELINESTATISTICFLAGS))
+
+(CFFI:DEFCSTRUCT VKCOMMANDBUFFERBEGININFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKCOMMANDBUFFERUSAGEFLAGS)
+  (PINHERITANCEINFO :POINTER))
+
+(CFFI:DEFCSTRUCT VKBUFFERCOPY
+  (SRCOFFSET VKDEVICESIZE)
+  (DSTOFFSET VKDEVICESIZE)
+  (SIZE VKDEVICESIZE))
+
+(CFFI:DEFCSTRUCT VKIMAGESUBRESOURCELAYERS
+  (ASPECTMASK VKIMAGEASPECTFLAGS)
+  (MIPLEVEL :UINT32)
+  (BASEARRAYLAYER :UINT32)
+  (LAYERCOUNT :UINT32))
+
+(CFFI:DEFCSTRUCT VKBUFFERIMAGECOPY
+  (BUFFEROFFSET VKDEVICESIZE)
+  (BUFFERROWLENGTH :UINT32)
+  (BUFFERIMAGEHEIGHT :UINT32)
+  (IMAGESUBRESOURCE (:STRUCT VKIMAGESUBRESOURCELAYERS))
+  (IMAGEOFFSET (:STRUCT VKOFFSET3D))
+  (IMAGEEXTENT (:STRUCT VKEXTENT3D)))
+
+(CFFI:DEFCUNION VKCLEARCOLORVALUE
+  (FLOAT32 :FLOAT :COUNT 4)
+  (INT32 :INT32 :COUNT 4)
+  (UINT32 :UINT32 :COUNT 4))
+
+(CFFI:DEFCSTRUCT VKCLEARDEPTHSTENCILVALUE
+  (DEPTH :FLOAT)
+  (STENCIL :UINT32))
+
+(CFFI:DEFCUNION VKCLEARVALUE
+  (COLOR (:UNION VKCLEARCOLORVALUE))
+  (DEPTHSTENCIL (:STRUCT VKCLEARDEPTHSTENCILVALUE)))
+
+(CFFI:DEFCSTRUCT VKCLEARATTACHMENT
+  (ASPECTMASK VKIMAGEASPECTFLAGS)
+  (COLORATTACHMENT :UINT32)
+  (CLEARVALUE (:UNION VKCLEARVALUE)))
+
+(CFFI:DEFCSTRUCT VKCLEARRECT
+  (RECT (:STRUCT VKRECT2D))
+  (BASEARRAYLAYER :UINT32)
+  (LAYERCOUNT :UINT32))
+
+(CFFI:DEFCSTRUCT VKIMAGEBLIT
+  (SRCSUBRESOURCE (:STRUCT VKIMAGESUBRESOURCELAYERS))
+  (SRCOFFSETS (:STRUCT VKOFFSET3D) :COUNT 2)
+  (DSTSUBRESOURCE (:STRUCT VKIMAGESUBRESOURCELAYERS))
+  (DSTOFFSETS (:STRUCT VKOFFSET3D) :COUNT 2))
+
+(CFFI:DEFCSTRUCT VKIMAGECOPY
+  (SRCSUBRESOURCE (:STRUCT VKIMAGESUBRESOURCELAYERS))
+  (SRCOFFSET (:STRUCT VKOFFSET3D))
+  (DSTSUBRESOURCE (:STRUCT VKIMAGESUBRESOURCELAYERS))
+  (DSTOFFSET (:STRUCT VKOFFSET3D))
+  (EXTENT (:STRUCT VKEXTENT3D)))
+
+(CFFI:DEFCSTRUCT VKIMAGERESOLVE
+  (SRCSUBRESOURCE (:STRUCT VKIMAGESUBRESOURCELAYERS))
+  (SRCOFFSET (:STRUCT VKOFFSET3D))
+  (DSTSUBRESOURCE (:STRUCT VKIMAGESUBRESOURCELAYERS))
+  (DSTOFFSET (:STRUCT VKOFFSET3D))
+  (EXTENT (:STRUCT VKEXTENT3D)))
+
+(CFFI:DEFCSTRUCT VKRENDERPASSBEGININFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (RENDERPASS VKRENDERPASS)
+  (FRAMEBUFFER VKFRAMEBUFFER)
+  (RENDERAREA (:STRUCT VKRECT2D))
+  (CLEARVALUECOUNT :UINT32)
+  (PCLEARVALUES :POINTER))
+
+(CFFI:DEFCTYPE PFN_VKCREATEINSTANCE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYINSTANCE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKENUMERATEPHYSICALDEVICES :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEFEATURES :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEFORMATPROPERTIES :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEIMAGEFORMATPROPERTIES :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEPROPERTIES :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEQUEUEFAMILYPROPERTIES :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEMEMORYPROPERTIES :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETINSTANCEPROCADDR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETDEVICEPROCADDR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCREATEDEVICE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYDEVICE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKENUMERATEINSTANCEEXTENSIONPROPERTIES :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKENUMERATEDEVICEEXTENSIONPROPERTIES :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKENUMERATEINSTANCELAYERPROPERTIES :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKENUMERATEDEVICELAYERPROPERTIES :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETDEVICEQUEUE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKQUEUESUBMIT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKQUEUEWAITIDLE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDEVICEWAITIDLE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKALLOCATEMEMORY :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKFREEMEMORY :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKMAPMEMORY :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKUNMAPMEMORY :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKFLUSHMAPPEDMEMORYRANGES :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKINVALIDATEMAPPEDMEMORYRANGES :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETDEVICEMEMORYCOMMITMENT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKBINDBUFFERMEMORY :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKBINDIMAGEMEMORY :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETBUFFERMEMORYREQUIREMENTS :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETIMAGEMEMORYREQUIREMENTS :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETIMAGESPARSEMEMORYREQUIREMENTS :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICESPARSEIMAGEFORMATPROPERTIES :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKQUEUEBINDSPARSE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCREATEFENCE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYFENCE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKRESETFENCES :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETFENCESTATUS :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKWAITFORFENCES :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCREATESEMAPHORE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYSEMAPHORE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCREATEEVENT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYEVENT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETEVENTSTATUS :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKSETEVENT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKRESETEVENT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCREATEQUERYPOOL :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYQUERYPOOL :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETQUERYPOOLRESULTS :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCREATEBUFFER :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYBUFFER :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCREATEBUFFERVIEW :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYBUFFERVIEW :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCREATEIMAGE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYIMAGE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETIMAGESUBRESOURCELAYOUT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCREATEIMAGEVIEW :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYIMAGEVIEW :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCREATESHADERMODULE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYSHADERMODULE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCREATEPIPELINECACHE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYPIPELINECACHE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPIPELINECACHEDATA :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKMERGEPIPELINECACHES :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCREATEGRAPHICSPIPELINES :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCREATECOMPUTEPIPELINES :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYPIPELINE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCREATEPIPELINELAYOUT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYPIPELINELAYOUT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCREATESAMPLER :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYSAMPLER :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCREATEDESCRIPTORSETLAYOUT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYDESCRIPTORSETLAYOUT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCREATEDESCRIPTORPOOL :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYDESCRIPTORPOOL :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKRESETDESCRIPTORPOOL :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKALLOCATEDESCRIPTORSETS :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKFREEDESCRIPTORSETS :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKUPDATEDESCRIPTORSETS :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCREATEFRAMEBUFFER :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYFRAMEBUFFER :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCREATERENDERPASS :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYRENDERPASS :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETRENDERAREAGRANULARITY :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCREATECOMMANDPOOL :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYCOMMANDPOOL :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKRESETCOMMANDPOOL :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKALLOCATECOMMANDBUFFERS :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKFREECOMMANDBUFFERS :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKBEGINCOMMANDBUFFER :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKENDCOMMANDBUFFER :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKRESETCOMMANDBUFFER :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDBINDPIPELINE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETVIEWPORT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETSCISSOR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETLINEWIDTH :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETDEPTHBIAS :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETBLENDCONSTANTS :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETDEPTHBOUNDS :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETSTENCILCOMPAREMASK :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETSTENCILWRITEMASK :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETSTENCILREFERENCE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDBINDDESCRIPTORSETS :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDBINDINDEXBUFFER :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDBINDVERTEXBUFFERS :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDDRAW :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDDRAWINDEXED :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDDRAWINDIRECT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDDRAWINDEXEDINDIRECT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDDISPATCH :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDDISPATCHINDIRECT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDCOPYBUFFER :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDCOPYIMAGE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDBLITIMAGE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDCOPYBUFFERTOIMAGE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDCOPYIMAGETOBUFFER :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDUPDATEBUFFER :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDFILLBUFFER :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDCLEARCOLORIMAGE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDCLEARDEPTHSTENCILIMAGE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDCLEARATTACHMENTS :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDRESOLVEIMAGE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETEVENT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDRESETEVENT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDWAITEVENTS :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDPIPELINEBARRIER :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDBEGINQUERY :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDENDQUERY :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDRESETQUERYPOOL :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDWRITETIMESTAMP :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDCOPYQUERYPOOLRESULTS :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDPUSHCONSTANTS :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDBEGINRENDERPASS :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDNEXTSUBPASS :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDENDRENDERPASS :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDEXECUTECOMMANDS :POINTER)
+
+(CFFI:DEFCTYPE VKSAMPLERYCBCRCONVERSION NON-DISPATCHABLE-HANDLE)
+
+(CFFI:DEFCTYPE VKDESCRIPTORUPDATETEMPLATE NON-DISPATCHABLE-HANDLE)
+
+(CFFI:DEFCTYPE VKPOINTCLIPPINGBEHAVIOR :INT)
+
+(CFFI:DEFCTYPE VKTESSELLATIONDOMAINORIGIN :INT)
+
+(CFFI:DEFCTYPE VKSAMPLERYCBCRMODELCONVERSION :INT)
+
+(CFFI:DEFCTYPE VKSAMPLERYCBCRRANGE :INT)
+
+(CFFI:DEFCTYPE VKCHROMALOCATION :INT)
+
+(CFFI:DEFCTYPE VKDESCRIPTORUPDATETEMPLATETYPE :INT)
+
+(CFFI:DEFCTYPE VKSUBGROUPFEATUREFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKSUBGROUPFEATUREFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKPEERMEMORYFEATUREFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKPEERMEMORYFEATUREFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKMEMORYALLOCATEFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKMEMORYALLOCATEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKCOMMANDPOOLTRIMFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKDESCRIPTORUPDATETEMPLATECREATEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKEXTERNALMEMORYHANDLETYPEFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKEXTERNALMEMORYHANDLETYPEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKEXTERNALMEMORYFEATUREFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKEXTERNALMEMORYFEATUREFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKEXTERNALFENCEHANDLETYPEFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKEXTERNALFENCEHANDLETYPEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKEXTERNALFENCEFEATUREFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKEXTERNALFENCEFEATUREFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKFENCEIMPORTFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKFENCEIMPORTFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKSEMAPHOREIMPORTFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKSEMAPHOREIMPORTFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKEXTERNALSEMAPHOREHANDLETYPEFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKEXTERNALSEMAPHOREHANDLETYPEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKEXTERNALSEMAPHOREFEATUREFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKEXTERNALSEMAPHOREFEATUREFLAGS VKFLAGS)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESUBGROUPPROPERTIES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SUBGROUPSIZE :UINT32)
+  (SUPPORTEDSTAGES VKSHADERSTAGEFLAGS)
+  (SUPPORTEDOPERATIONS VKSUBGROUPFEATUREFLAGS)
+  (QUADOPERATIONSINALLSTAGES VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKBINDBUFFERMEMORYINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (BUFFER VKBUFFER)
+  (MEMORY VKDEVICEMEMORY)
+  (MEMORYOFFSET VKDEVICESIZE))
+
+(CFFI:DEFCSTRUCT VKBINDIMAGEMEMORYINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (IMAGE VKIMAGE)
+  (MEMORY VKDEVICEMEMORY)
+  (MEMORYOFFSET VKDEVICESIZE))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICE16BITSTORAGEFEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (STORAGEBUFFER16BITACCESS VKBOOL32)
+  (UNIFORMANDSTORAGEBUFFER16BITACCESS VKBOOL32)
+  (STORAGEPUSHCONSTANT16 VKBOOL32)
+  (STORAGEINPUTOUTPUT16 VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKMEMORYDEDICATEDREQUIREMENTS
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PREFERSDEDICATEDALLOCATION VKBOOL32)
+  (REQUIRESDEDICATEDALLOCATION VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKMEMORYDEDICATEDALLOCATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (IMAGE VKIMAGE)
+  (BUFFER VKBUFFER))
+
+(CFFI:DEFCSTRUCT VKMEMORYALLOCATEFLAGSINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKMEMORYALLOCATEFLAGS)
+  (DEVICEMASK :UINT32))
+
+(CFFI:DEFCSTRUCT VKDEVICEGROUPRENDERPASSBEGININFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DEVICEMASK :UINT32)
+  (DEVICERENDERAREACOUNT :UINT32)
+  (PDEVICERENDERAREAS :POINTER))
+
+(CFFI:DEFCSTRUCT VKDEVICEGROUPCOMMANDBUFFERBEGININFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DEVICEMASK :UINT32))
+
+(CFFI:DEFCSTRUCT VKDEVICEGROUPSUBMITINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (WAITSEMAPHORECOUNT :UINT32)
+  (PWAITSEMAPHOREDEVICEINDICES :POINTER)
+  (COMMANDBUFFERCOUNT :UINT32)
+  (PCOMMANDBUFFERDEVICEMASKS :POINTER)
+  (SIGNALSEMAPHORECOUNT :UINT32)
+  (PSIGNALSEMAPHOREDEVICEINDICES :POINTER))
+
+(CFFI:DEFCSTRUCT VKDEVICEGROUPBINDSPARSEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (RESOURCEDEVICEINDEX :UINT32)
+  (MEMORYDEVICEINDEX :UINT32))
+
+(CFFI:DEFCSTRUCT VKBINDBUFFERMEMORYDEVICEGROUPINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DEVICEINDEXCOUNT :UINT32)
+  (PDEVICEINDICES :POINTER))
+
+(CFFI:DEFCSTRUCT VKBINDIMAGEMEMORYDEVICEGROUPINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DEVICEINDEXCOUNT :UINT32)
+  (PDEVICEINDICES :POINTER)
+  (SPLITINSTANCEBINDREGIONCOUNT :UINT32)
+  (PSPLITINSTANCEBINDREGIONS :POINTER))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEGROUPPROPERTIES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PHYSICALDEVICECOUNT :UINT32)
+  (PHYSICALDEVICES VKPHYSICALDEVICE :COUNT 32)
+  (SUBSETALLOCATION VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKDEVICEGROUPDEVICECREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PHYSICALDEVICECOUNT :UINT32)
+  (PPHYSICALDEVICES :POINTER))
+
+(CFFI:DEFCSTRUCT VKBUFFERMEMORYREQUIREMENTSINFO2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (BUFFER VKBUFFER))
+
+(CFFI:DEFCSTRUCT VKIMAGEMEMORYREQUIREMENTSINFO2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (IMAGE VKIMAGE))
+
+(CFFI:DEFCSTRUCT VKIMAGESPARSEMEMORYREQUIREMENTSINFO2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (IMAGE VKIMAGE))
+
+(CFFI:DEFCSTRUCT VKMEMORYREQUIREMENTS2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MEMORYREQUIREMENTS (:STRUCT VKMEMORYREQUIREMENTS)))
+
+(CFFI:DEFCSTRUCT VKSPARSEIMAGEMEMORYREQUIREMENTS2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MEMORYREQUIREMENTS (:STRUCT VKSPARSEIMAGEMEMORYREQUIREMENTS)))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEFEATURES2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FEATURES (:STRUCT VKPHYSICALDEVICEFEATURES)))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEPROPERTIES2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PROPERTIES (:STRUCT VKPHYSICALDEVICEPROPERTIES)))
+
+(CFFI:DEFCSTRUCT VKFORMATPROPERTIES2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FORMATPROPERTIES (:STRUCT VKFORMATPROPERTIES)))
+
+(CFFI:DEFCSTRUCT VKIMAGEFORMATPROPERTIES2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (IMAGEFORMATPROPERTIES (:STRUCT VKIMAGEFORMATPROPERTIES)))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEIMAGEFORMATINFO2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FORMAT VKFORMAT)
+  (TYPE VKIMAGETYPE)
+  (TILING VKIMAGETILING)
+  (USAGE VKIMAGEUSAGEFLAGS)
+  (FLAGS VKIMAGECREATEFLAGS))
+
+(CFFI:DEFCSTRUCT VKQUEUEFAMILYPROPERTIES2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (QUEUEFAMILYPROPERTIES (:STRUCT VKQUEUEFAMILYPROPERTIES)))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEMEMORYPROPERTIES2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MEMORYPROPERTIES (:STRUCT VKPHYSICALDEVICEMEMORYPROPERTIES)))
+
+(CFFI:DEFCSTRUCT VKSPARSEIMAGEFORMATPROPERTIES2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PROPERTIES (:STRUCT VKSPARSEIMAGEFORMATPROPERTIES)))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESPARSEIMAGEFORMATINFO2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FORMAT VKFORMAT)
+  (TYPE VKIMAGETYPE)
+  (SAMPLES VKSAMPLECOUNTFLAGBITS)
+  (USAGE VKIMAGEUSAGEFLAGS)
+  (TILING VKIMAGETILING))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEPOINTCLIPPINGPROPERTIES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (POINTCLIPPINGBEHAVIOR VKPOINTCLIPPINGBEHAVIOR))
+
+(CFFI:DEFCSTRUCT VKINPUTATTACHMENTASPECTREFERENCE
+  (SUBPASS :UINT32)
+  (INPUTATTACHMENTINDEX :UINT32)
+  (ASPECTMASK VKIMAGEASPECTFLAGS))
+
+(CFFI:DEFCSTRUCT VKRENDERPASSINPUTATTACHMENTASPECTCREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (ASPECTREFERENCECOUNT :UINT32)
+  (PASPECTREFERENCES :POINTER))
+
+(CFFI:DEFCSTRUCT VKIMAGEVIEWUSAGECREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (USAGE VKIMAGEUSAGEFLAGS))
+
+(CFFI:DEFCSTRUCT VKPIPELINETESSELLATIONDOMAINORIGINSTATECREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DOMAINORIGIN VKTESSELLATIONDOMAINORIGIN))
+
+(CFFI:DEFCSTRUCT VKRENDERPASSMULTIVIEWCREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SUBPASSCOUNT :UINT32)
+  (PVIEWMASKS :POINTER)
+  (DEPENDENCYCOUNT :UINT32)
+  (PVIEWOFFSETS :POINTER)
+  (CORRELATIONMASKCOUNT :UINT32)
+  (PCORRELATIONMASKS :POINTER))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEMULTIVIEWFEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MULTIVIEW VKBOOL32)
+  (MULTIVIEWGEOMETRYSHADER VKBOOL32)
+  (MULTIVIEWTESSELLATIONSHADER VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEMULTIVIEWPROPERTIES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MAXMULTIVIEWVIEWCOUNT :UINT32)
+  (MAXMULTIVIEWINSTANCEINDEX :UINT32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEVARIABLEPOINTERSFEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (VARIABLEPOINTERSSTORAGEBUFFER VKBOOL32)
+  (VARIABLEPOINTERS VKBOOL32))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEVARIABLEPOINTERFEATURES
+               (:STRUCT VKPHYSICALDEVICEVARIABLEPOINTERSFEATURES))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEPROTECTEDMEMORYFEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PROTECTEDMEMORY VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEPROTECTEDMEMORYPROPERTIES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PROTECTEDNOFAULT VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKDEVICEQUEUEINFO2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKDEVICEQUEUECREATEFLAGS)
+  (QUEUEFAMILYINDEX :UINT32)
+  (QUEUEINDEX :UINT32))
+
+(CFFI:DEFCSTRUCT VKPROTECTEDSUBMITINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PROTECTEDSUBMIT VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKSAMPLERYCBCRCONVERSIONCREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FORMAT VKFORMAT)
+  (YCBCRMODEL VKSAMPLERYCBCRMODELCONVERSION)
+  (YCBCRRANGE VKSAMPLERYCBCRRANGE)
+  (COMPONENTS (:STRUCT VKCOMPONENTMAPPING))
+  (XCHROMAOFFSET VKCHROMALOCATION)
+  (YCHROMAOFFSET VKCHROMALOCATION)
+  (CHROMAFILTER VKFILTER)
+  (FORCEEXPLICITRECONSTRUCTION VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKSAMPLERYCBCRCONVERSIONINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (CONVERSION VKSAMPLERYCBCRCONVERSION))
+
+(CFFI:DEFCSTRUCT VKBINDIMAGEPLANEMEMORYINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PLANEASPECT VKIMAGEASPECTFLAGBITS))
+
+(CFFI:DEFCSTRUCT VKIMAGEPLANEMEMORYREQUIREMENTSINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PLANEASPECT VKIMAGEASPECTFLAGBITS))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESAMPLERYCBCRCONVERSIONFEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SAMPLERYCBCRCONVERSION VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKSAMPLERYCBCRCONVERSIONIMAGEFORMATPROPERTIES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (COMBINEDIMAGESAMPLERDESCRIPTORCOUNT :UINT32))
+
+(CFFI:DEFCSTRUCT VKDESCRIPTORUPDATETEMPLATEENTRY
+  (DSTBINDING :UINT32)
+  (DSTARRAYELEMENT :UINT32)
+  (DESCRIPTORCOUNT :UINT32)
+  (DESCRIPTORTYPE VKDESCRIPTORTYPE)
+  (OFFSET :SIZE)
+  (STRIDE :SIZE))
+
+(CFFI:DEFCSTRUCT VKDESCRIPTORUPDATETEMPLATECREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKDESCRIPTORUPDATETEMPLATECREATEFLAGS)
+  (DESCRIPTORUPDATEENTRYCOUNT :UINT32)
+  (PDESCRIPTORUPDATEENTRIES :POINTER)
+  (TEMPLATETYPE VKDESCRIPTORUPDATETEMPLATETYPE)
+  (DESCRIPTORSETLAYOUT VKDESCRIPTORSETLAYOUT)
+  (PIPELINEBINDPOINT VKPIPELINEBINDPOINT)
+  (PIPELINELAYOUT VKPIPELINELAYOUT)
+  (SET :UINT32))
+
+(CFFI:DEFCSTRUCT VKEXTERNALMEMORYPROPERTIES
+  (EXTERNALMEMORYFEATURES VKEXTERNALMEMORYFEATUREFLAGS)
+  (EXPORTFROMIMPORTEDHANDLETYPES VKEXTERNALMEMORYHANDLETYPEFLAGS)
+  (COMPATIBLEHANDLETYPES VKEXTERNALMEMORYHANDLETYPEFLAGS))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEEXTERNALIMAGEFORMATINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (HANDLETYPE VKEXTERNALMEMORYHANDLETYPEFLAGBITS))
+
+(CFFI:DEFCSTRUCT VKEXTERNALIMAGEFORMATPROPERTIES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (EXTERNALMEMORYPROPERTIES (:STRUCT VKEXTERNALMEMORYPROPERTIES)))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEEXTERNALBUFFERINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKBUFFERCREATEFLAGS)
+  (USAGE VKBUFFERUSAGEFLAGS)
+  (HANDLETYPE VKEXTERNALMEMORYHANDLETYPEFLAGBITS))
+
+(CFFI:DEFCSTRUCT VKEXTERNALBUFFERPROPERTIES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (EXTERNALMEMORYPROPERTIES (:STRUCT VKEXTERNALMEMORYPROPERTIES)))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEIDPROPERTIES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DEVICEUUID :UINT8 :COUNT 16)
+  (DRIVERUUID :UINT8 :COUNT 16)
+  (DEVICELUID :UINT8 :COUNT 8)
+  (DEVICENODEMASK :UINT32)
+  (DEVICELUIDVALID VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKEXTERNALMEMORYIMAGECREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (HANDLETYPES VKEXTERNALMEMORYHANDLETYPEFLAGS))
+
+(CFFI:DEFCSTRUCT VKEXTERNALMEMORYBUFFERCREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (HANDLETYPES VKEXTERNALMEMORYHANDLETYPEFLAGS))
+
+(CFFI:DEFCSTRUCT VKEXPORTMEMORYALLOCATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (HANDLETYPES VKEXTERNALMEMORYHANDLETYPEFLAGS))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEEXTERNALFENCEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (HANDLETYPE VKEXTERNALFENCEHANDLETYPEFLAGBITS))
+
+(CFFI:DEFCSTRUCT VKEXTERNALFENCEPROPERTIES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (EXPORTFROMIMPORTEDHANDLETYPES VKEXTERNALFENCEHANDLETYPEFLAGS)
+  (COMPATIBLEHANDLETYPES VKEXTERNALFENCEHANDLETYPEFLAGS)
+  (EXTERNALFENCEFEATURES VKEXTERNALFENCEFEATUREFLAGS))
+
+(CFFI:DEFCSTRUCT VKEXPORTFENCECREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (HANDLETYPES VKEXTERNALFENCEHANDLETYPEFLAGS))
+
+(CFFI:DEFCSTRUCT VKEXPORTSEMAPHORECREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (HANDLETYPES VKEXTERNALSEMAPHOREHANDLETYPEFLAGS))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEEXTERNALSEMAPHOREINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (HANDLETYPE VKEXTERNALSEMAPHOREHANDLETYPEFLAGBITS))
+
+(CFFI:DEFCSTRUCT VKEXTERNALSEMAPHOREPROPERTIES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (EXPORTFROMIMPORTEDHANDLETYPES VKEXTERNALSEMAPHOREHANDLETYPEFLAGS)
+  (COMPATIBLEHANDLETYPES VKEXTERNALSEMAPHOREHANDLETYPEFLAGS)
+  (EXTERNALSEMAPHOREFEATURES VKEXTERNALSEMAPHOREFEATUREFLAGS))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEMAINTENANCE3PROPERTIES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MAXPERSETDESCRIPTORS :UINT32)
+  (MAXMEMORYALLOCATIONSIZE VKDEVICESIZE))
+
+(CFFI:DEFCSTRUCT VKDESCRIPTORSETLAYOUTSUPPORT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SUPPORTED VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESHADERDRAWPARAMETERSFEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SHADERDRAWPARAMETERS VKBOOL32))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICESHADERDRAWPARAMETERFEATURES
+               (:STRUCT VKPHYSICALDEVICESHADERDRAWPARAMETERSFEATURES))
+
+(CFFI:DEFCTYPE PFN_VKENUMERATEINSTANCEVERSION :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKBINDBUFFERMEMORY2 :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKBINDIMAGEMEMORY2 :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETDEVICEGROUPPEERMEMORYFEATURES :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETDEVICEMASK :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDDISPATCHBASE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKENUMERATEPHYSICALDEVICEGROUPS :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETIMAGEMEMORYREQUIREMENTS2 :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETBUFFERMEMORYREQUIREMENTS2 :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETIMAGESPARSEMEMORYREQUIREMENTS2 :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEFEATURES2 :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEPROPERTIES2 :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEFORMATPROPERTIES2 :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEIMAGEFORMATPROPERTIES2 :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEQUEUEFAMILYPROPERTIES2 :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEMEMORYPROPERTIES2 :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICESPARSEIMAGEFORMATPROPERTIES2 :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKTRIMCOMMANDPOOL :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETDEVICEQUEUE2 :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCREATESAMPLERYCBCRCONVERSION :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYSAMPLERYCBCRCONVERSION :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCREATEDESCRIPTORUPDATETEMPLATE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYDESCRIPTORUPDATETEMPLATE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKUPDATEDESCRIPTORSETWITHTEMPLATE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEEXTERNALBUFFERPROPERTIES :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEEXTERNALFENCEPROPERTIES :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEEXTERNALSEMAPHOREPROPERTIES :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETDESCRIPTORSETLAYOUTSUPPORT :POINTER)
+
+(CFFI:DEFCTYPE VKDRIVERID :INT)
+
+(CFFI:DEFCTYPE VKSHADERFLOATCONTROLSINDEPENDENCE :INT)
+
+(CFFI:DEFCTYPE VKSAMPLERREDUCTIONMODE :INT)
+
+(CFFI:DEFCTYPE VKSEMAPHORETYPE :INT)
+
+(CFFI:DEFCTYPE VKRESOLVEMODEFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKRESOLVEMODEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKDESCRIPTORBINDINGFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKDESCRIPTORBINDINGFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKSEMAPHOREWAITFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKSEMAPHOREWAITFLAGS VKFLAGS)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEVULKAN11FEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (STORAGEBUFFER16BITACCESS VKBOOL32)
+  (UNIFORMANDSTORAGEBUFFER16BITACCESS VKBOOL32)
+  (STORAGEPUSHCONSTANT16 VKBOOL32)
+  (STORAGEINPUTOUTPUT16 VKBOOL32)
+  (MULTIVIEW VKBOOL32)
+  (MULTIVIEWGEOMETRYSHADER VKBOOL32)
+  (MULTIVIEWTESSELLATIONSHADER VKBOOL32)
+  (VARIABLEPOINTERSSTORAGEBUFFER VKBOOL32)
+  (VARIABLEPOINTERS VKBOOL32)
+  (PROTECTEDMEMORY VKBOOL32)
+  (SAMPLERYCBCRCONVERSION VKBOOL32)
+  (SHADERDRAWPARAMETERS VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEVULKAN11PROPERTIES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DEVICEUUID :UINT8 :COUNT 16)
+  (DRIVERUUID :UINT8 :COUNT 16)
+  (DEVICELUID :UINT8 :COUNT 8)
+  (DEVICENODEMASK :UINT32)
+  (DEVICELUIDVALID VKBOOL32)
+  (SUBGROUPSIZE :UINT32)
+  (SUBGROUPSUPPORTEDSTAGES VKSHADERSTAGEFLAGS)
+  (SUBGROUPSUPPORTEDOPERATIONS VKSUBGROUPFEATUREFLAGS)
+  (SUBGROUPQUADOPERATIONSINALLSTAGES VKBOOL32)
+  (POINTCLIPPINGBEHAVIOR VKPOINTCLIPPINGBEHAVIOR)
+  (MAXMULTIVIEWVIEWCOUNT :UINT32)
+  (MAXMULTIVIEWINSTANCEINDEX :UINT32)
+  (PROTECTEDNOFAULT VKBOOL32)
+  (MAXPERSETDESCRIPTORS :UINT32)
+  (MAXMEMORYALLOCATIONSIZE VKDEVICESIZE))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEVULKAN12FEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SAMPLERMIRRORCLAMPTOEDGE VKBOOL32)
+  (DRAWINDIRECTCOUNT VKBOOL32)
+  (STORAGEBUFFER8BITACCESS VKBOOL32)
+  (UNIFORMANDSTORAGEBUFFER8BITACCESS VKBOOL32)
+  (STORAGEPUSHCONSTANT8 VKBOOL32)
+  (SHADERBUFFERINT64ATOMICS VKBOOL32)
+  (SHADERSHAREDINT64ATOMICS VKBOOL32)
+  (SHADERFLOAT16 VKBOOL32)
+  (SHADERINT8 VKBOOL32)
+  (DESCRIPTORINDEXING VKBOOL32)
+  (SHADERINPUTATTACHMENTARRAYDYNAMICINDEXING VKBOOL32)
+  (SHADERUNIFORMTEXELBUFFERARRAYDYNAMICINDEXING VKBOOL32)
+  (SHADERSTORAGETEXELBUFFERARRAYDYNAMICINDEXING VKBOOL32)
+  (SHADERUNIFORMBUFFERARRAYNONUNIFORMINDEXING VKBOOL32)
+  (SHADERSAMPLEDIMAGEARRAYNONUNIFORMINDEXING VKBOOL32)
+  (SHADERSTORAGEBUFFERARRAYNONUNIFORMINDEXING VKBOOL32)
+  (SHADERSTORAGEIMAGEARRAYNONUNIFORMINDEXING VKBOOL32)
+  (SHADERINPUTATTACHMENTARRAYNONUNIFORMINDEXING VKBOOL32)
+  (SHADERUNIFORMTEXELBUFFERARRAYNONUNIFORMINDEXING VKBOOL32)
+  (SHADERSTORAGETEXELBUFFERARRAYNONUNIFORMINDEXING VKBOOL32)
+  (DESCRIPTORBINDINGUNIFORMBUFFERUPDATEAFTERBIND VKBOOL32)
+  (DESCRIPTORBINDINGSAMPLEDIMAGEUPDATEAFTERBIND VKBOOL32)
+  (DESCRIPTORBINDINGSTORAGEIMAGEUPDATEAFTERBIND VKBOOL32)
+  (DESCRIPTORBINDINGSTORAGEBUFFERUPDATEAFTERBIND VKBOOL32)
+  (DESCRIPTORBINDINGUNIFORMTEXELBUFFERUPDATEAFTERBIND VKBOOL32)
+  (DESCRIPTORBINDINGSTORAGETEXELBUFFERUPDATEAFTERBIND VKBOOL32)
+  (DESCRIPTORBINDINGUPDATEUNUSEDWHILEPENDING VKBOOL32)
+  (DESCRIPTORBINDINGPARTIALLYBOUND VKBOOL32)
+  (DESCRIPTORBINDINGVARIABLEDESCRIPTORCOUNT VKBOOL32)
+  (RUNTIMEDESCRIPTORARRAY VKBOOL32)
+  (SAMPLERFILTERMINMAX VKBOOL32)
+  (SCALARBLOCKLAYOUT VKBOOL32)
+  (IMAGELESSFRAMEBUFFER VKBOOL32)
+  (UNIFORMBUFFERSTANDARDLAYOUT VKBOOL32)
+  (SHADERSUBGROUPEXTENDEDTYPES VKBOOL32)
+  (SEPARATEDEPTHSTENCILLAYOUTS VKBOOL32)
+  (HOSTQUERYRESET VKBOOL32)
+  (TIMELINESEMAPHORE VKBOOL32)
+  (BUFFERDEVICEADDRESS VKBOOL32)
+  (BUFFERDEVICEADDRESSCAPTUREREPLAY VKBOOL32)
+  (BUFFERDEVICEADDRESSMULTIDEVICE VKBOOL32)
+  (VULKANMEMORYMODEL VKBOOL32)
+  (VULKANMEMORYMODELDEVICESCOPE VKBOOL32)
+  (VULKANMEMORYMODELAVAILABILITYVISIBILITYCHAINS VKBOOL32)
+  (SHADEROUTPUTVIEWPORTINDEX VKBOOL32)
+  (SHADEROUTPUTLAYER VKBOOL32)
+  (SUBGROUPBROADCASTDYNAMICID VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKCONFORMANCEVERSION
+  (MAJOR :UINT8)
+  (MINOR :UINT8)
+  (SUBMINOR :UINT8)
+  (PATCH :UINT8))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEVULKAN12PROPERTIES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DRIVERID VKDRIVERID)
+  (DRIVERNAME :CHAR :COUNT 256)
+  (DRIVERINFO :CHAR :COUNT 256)
+  (CONFORMANCEVERSION (:STRUCT VKCONFORMANCEVERSION))
+  (DENORMBEHAVIORINDEPENDENCE VKSHADERFLOATCONTROLSINDEPENDENCE)
+  (ROUNDINGMODEINDEPENDENCE VKSHADERFLOATCONTROLSINDEPENDENCE)
+  (SHADERSIGNEDZEROINFNANPRESERVEFLOAT16 VKBOOL32)
+  (SHADERSIGNEDZEROINFNANPRESERVEFLOAT32 VKBOOL32)
+  (SHADERSIGNEDZEROINFNANPRESERVEFLOAT64 VKBOOL32)
+  (SHADERDENORMPRESERVEFLOAT16 VKBOOL32)
+  (SHADERDENORMPRESERVEFLOAT32 VKBOOL32)
+  (SHADERDENORMPRESERVEFLOAT64 VKBOOL32)
+  (SHADERDENORMFLUSHTOZEROFLOAT16 VKBOOL32)
+  (SHADERDENORMFLUSHTOZEROFLOAT32 VKBOOL32)
+  (SHADERDENORMFLUSHTOZEROFLOAT64 VKBOOL32)
+  (SHADERROUNDINGMODERTEFLOAT16 VKBOOL32)
+  (SHADERROUNDINGMODERTEFLOAT32 VKBOOL32)
+  (SHADERROUNDINGMODERTEFLOAT64 VKBOOL32)
+  (SHADERROUNDINGMODERTZFLOAT16 VKBOOL32)
+  (SHADERROUNDINGMODERTZFLOAT32 VKBOOL32)
+  (SHADERROUNDINGMODERTZFLOAT64 VKBOOL32)
+  (MAXUPDATEAFTERBINDDESCRIPTORSINALLPOOLS :UINT32)
+  (SHADERUNIFORMBUFFERARRAYNONUNIFORMINDEXINGNATIVE VKBOOL32)
+  (SHADERSAMPLEDIMAGEARRAYNONUNIFORMINDEXINGNATIVE VKBOOL32)
+  (SHADERSTORAGEBUFFERARRAYNONUNIFORMINDEXINGNATIVE VKBOOL32)
+  (SHADERSTORAGEIMAGEARRAYNONUNIFORMINDEXINGNATIVE VKBOOL32)
+  (SHADERINPUTATTACHMENTARRAYNONUNIFORMINDEXINGNATIVE VKBOOL32)
+  (ROBUSTBUFFERACCESSUPDATEAFTERBIND VKBOOL32)
+  (QUADDIVERGENTIMPLICITLOD VKBOOL32)
+  (MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDSAMPLERS :UINT32)
+  (MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDUNIFORMBUFFERS :UINT32)
+  (MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDSTORAGEBUFFERS :UINT32)
+  (MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDSAMPLEDIMAGES :UINT32)
+  (MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDSTORAGEIMAGES :UINT32)
+  (MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDINPUTATTACHMENTS :UINT32)
+  (MAXPERSTAGEUPDATEAFTERBINDRESOURCES :UINT32)
+  (MAXDESCRIPTORSETUPDATEAFTERBINDSAMPLERS :UINT32)
+  (MAXDESCRIPTORSETUPDATEAFTERBINDUNIFORMBUFFERS :UINT32)
+  (MAXDESCRIPTORSETUPDATEAFTERBINDUNIFORMBUFFERSDYNAMIC :UINT32)
+  (MAXDESCRIPTORSETUPDATEAFTERBINDSTORAGEBUFFERS :UINT32)
+  (MAXDESCRIPTORSETUPDATEAFTERBINDSTORAGEBUFFERSDYNAMIC :UINT32)
+  (MAXDESCRIPTORSETUPDATEAFTERBINDSAMPLEDIMAGES :UINT32)
+  (MAXDESCRIPTORSETUPDATEAFTERBINDSTORAGEIMAGES :UINT32)
+  (MAXDESCRIPTORSETUPDATEAFTERBINDINPUTATTACHMENTS :UINT32)
+  (SUPPORTEDDEPTHRESOLVEMODES VKRESOLVEMODEFLAGS)
+  (SUPPORTEDSTENCILRESOLVEMODES VKRESOLVEMODEFLAGS)
+  (INDEPENDENTRESOLVENONE VKBOOL32)
+  (INDEPENDENTRESOLVE VKBOOL32)
+  (FILTERMINMAXSINGLECOMPONENTFORMATS VKBOOL32)
+  (FILTERMINMAXIMAGECOMPONENTMAPPING VKBOOL32)
+  (MAXTIMELINESEMAPHOREVALUEDIFFERENCE :UINT64)
+  (FRAMEBUFFERINTEGERCOLORSAMPLECOUNTS VKSAMPLECOUNTFLAGS))
+
+(CFFI:DEFCSTRUCT VKIMAGEFORMATLISTCREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (VIEWFORMATCOUNT :UINT32)
+  (PVIEWFORMATS :POINTER))
+
+(CFFI:DEFCSTRUCT VKATTACHMENTDESCRIPTION2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKATTACHMENTDESCRIPTIONFLAGS)
+  (FORMAT VKFORMAT)
+  (SAMPLES VKSAMPLECOUNTFLAGBITS)
+  (LOADOP VKATTACHMENTLOADOP)
+  (STOREOP VKATTACHMENTSTOREOP)
+  (STENCILLOADOP VKATTACHMENTLOADOP)
+  (STENCILSTOREOP VKATTACHMENTSTOREOP)
+  (INITIALLAYOUT VKIMAGELAYOUT)
+  (FINALLAYOUT VKIMAGELAYOUT))
+
+(CFFI:DEFCSTRUCT VKATTACHMENTREFERENCE2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (ATTACHMENT :UINT32)
+  (LAYOUT VKIMAGELAYOUT)
+  (ASPECTMASK VKIMAGEASPECTFLAGS))
+
+(CFFI:DEFCSTRUCT VKSUBPASSDESCRIPTION2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKSUBPASSDESCRIPTIONFLAGS)
+  (PIPELINEBINDPOINT VKPIPELINEBINDPOINT)
+  (VIEWMASK :UINT32)
+  (INPUTATTACHMENTCOUNT :UINT32)
+  (PINPUTATTACHMENTS :POINTER)
+  (COLORATTACHMENTCOUNT :UINT32)
+  (PCOLORATTACHMENTS :POINTER)
+  (PRESOLVEATTACHMENTS :POINTER)
+  (PDEPTHSTENCILATTACHMENT :POINTER)
+  (PRESERVEATTACHMENTCOUNT :UINT32)
+  (PPRESERVEATTACHMENTS :POINTER))
+
+(CFFI:DEFCSTRUCT VKSUBPASSDEPENDENCY2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SRCSUBPASS :UINT32)
+  (DSTSUBPASS :UINT32)
+  (SRCSTAGEMASK VKPIPELINESTAGEFLAGS)
+  (DSTSTAGEMASK VKPIPELINESTAGEFLAGS)
+  (SRCACCESSMASK VKACCESSFLAGS)
+  (DSTACCESSMASK VKACCESSFLAGS)
+  (DEPENDENCYFLAGS VKDEPENDENCYFLAGS)
+  (VIEWOFFSET :INT32))
+
+(CFFI:DEFCSTRUCT VKRENDERPASSCREATEINFO2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKRENDERPASSCREATEFLAGS)
+  (ATTACHMENTCOUNT :UINT32)
+  (PATTACHMENTS :POINTER)
+  (SUBPASSCOUNT :UINT32)
+  (PSUBPASSES :POINTER)
+  (DEPENDENCYCOUNT :UINT32)
+  (PDEPENDENCIES :POINTER)
+  (CORRELATEDVIEWMASKCOUNT :UINT32)
+  (PCORRELATEDVIEWMASKS :POINTER))
+
+(CFFI:DEFCSTRUCT VKSUBPASSBEGININFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (CONTENTS VKSUBPASSCONTENTS))
+
+(CFFI:DEFCSTRUCT VKSUBPASSENDINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICE8BITSTORAGEFEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (STORAGEBUFFER8BITACCESS VKBOOL32)
+  (UNIFORMANDSTORAGEBUFFER8BITACCESS VKBOOL32)
+  (STORAGEPUSHCONSTANT8 VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEDRIVERPROPERTIES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DRIVERID VKDRIVERID)
+  (DRIVERNAME :CHAR :COUNT 256)
+  (DRIVERINFO :CHAR :COUNT 256)
+  (CONFORMANCEVERSION (:STRUCT VKCONFORMANCEVERSION)))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESHADERATOMICINT64FEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SHADERBUFFERINT64ATOMICS VKBOOL32)
+  (SHADERSHAREDINT64ATOMICS VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESHADERFLOAT16INT8FEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SHADERFLOAT16 VKBOOL32)
+  (SHADERINT8 VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEFLOATCONTROLSPROPERTIES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DENORMBEHAVIORINDEPENDENCE VKSHADERFLOATCONTROLSINDEPENDENCE)
+  (ROUNDINGMODEINDEPENDENCE VKSHADERFLOATCONTROLSINDEPENDENCE)
+  (SHADERSIGNEDZEROINFNANPRESERVEFLOAT16 VKBOOL32)
+  (SHADERSIGNEDZEROINFNANPRESERVEFLOAT32 VKBOOL32)
+  (SHADERSIGNEDZEROINFNANPRESERVEFLOAT64 VKBOOL32)
+  (SHADERDENORMPRESERVEFLOAT16 VKBOOL32)
+  (SHADERDENORMPRESERVEFLOAT32 VKBOOL32)
+  (SHADERDENORMPRESERVEFLOAT64 VKBOOL32)
+  (SHADERDENORMFLUSHTOZEROFLOAT16 VKBOOL32)
+  (SHADERDENORMFLUSHTOZEROFLOAT32 VKBOOL32)
+  (SHADERDENORMFLUSHTOZEROFLOAT64 VKBOOL32)
+  (SHADERROUNDINGMODERTEFLOAT16 VKBOOL32)
+  (SHADERROUNDINGMODERTEFLOAT32 VKBOOL32)
+  (SHADERROUNDINGMODERTEFLOAT64 VKBOOL32)
+  (SHADERROUNDINGMODERTZFLOAT16 VKBOOL32)
+  (SHADERROUNDINGMODERTZFLOAT32 VKBOOL32)
+  (SHADERROUNDINGMODERTZFLOAT64 VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKDESCRIPTORSETLAYOUTBINDINGFLAGSCREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (BINDINGCOUNT :UINT32)
+  (PBINDINGFLAGS :POINTER))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEDESCRIPTORINDEXINGFEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SHADERINPUTATTACHMENTARRAYDYNAMICINDEXING VKBOOL32)
+  (SHADERUNIFORMTEXELBUFFERARRAYDYNAMICINDEXING VKBOOL32)
+  (SHADERSTORAGETEXELBUFFERARRAYDYNAMICINDEXING VKBOOL32)
+  (SHADERUNIFORMBUFFERARRAYNONUNIFORMINDEXING VKBOOL32)
+  (SHADERSAMPLEDIMAGEARRAYNONUNIFORMINDEXING VKBOOL32)
+  (SHADERSTORAGEBUFFERARRAYNONUNIFORMINDEXING VKBOOL32)
+  (SHADERSTORAGEIMAGEARRAYNONUNIFORMINDEXING VKBOOL32)
+  (SHADERINPUTATTACHMENTARRAYNONUNIFORMINDEXING VKBOOL32)
+  (SHADERUNIFORMTEXELBUFFERARRAYNONUNIFORMINDEXING VKBOOL32)
+  (SHADERSTORAGETEXELBUFFERARRAYNONUNIFORMINDEXING VKBOOL32)
+  (DESCRIPTORBINDINGUNIFORMBUFFERUPDATEAFTERBIND VKBOOL32)
+  (DESCRIPTORBINDINGSAMPLEDIMAGEUPDATEAFTERBIND VKBOOL32)
+  (DESCRIPTORBINDINGSTORAGEIMAGEUPDATEAFTERBIND VKBOOL32)
+  (DESCRIPTORBINDINGSTORAGEBUFFERUPDATEAFTERBIND VKBOOL32)
+  (DESCRIPTORBINDINGUNIFORMTEXELBUFFERUPDATEAFTERBIND VKBOOL32)
+  (DESCRIPTORBINDINGSTORAGETEXELBUFFERUPDATEAFTERBIND VKBOOL32)
+  (DESCRIPTORBINDINGUPDATEUNUSEDWHILEPENDING VKBOOL32)
+  (DESCRIPTORBINDINGPARTIALLYBOUND VKBOOL32)
+  (DESCRIPTORBINDINGVARIABLEDESCRIPTORCOUNT VKBOOL32)
+  (RUNTIMEDESCRIPTORARRAY VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEDESCRIPTORINDEXINGPROPERTIES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MAXUPDATEAFTERBINDDESCRIPTORSINALLPOOLS :UINT32)
+  (SHADERUNIFORMBUFFERARRAYNONUNIFORMINDEXINGNATIVE VKBOOL32)
+  (SHADERSAMPLEDIMAGEARRAYNONUNIFORMINDEXINGNATIVE VKBOOL32)
+  (SHADERSTORAGEBUFFERARRAYNONUNIFORMINDEXINGNATIVE VKBOOL32)
+  (SHADERSTORAGEIMAGEARRAYNONUNIFORMINDEXINGNATIVE VKBOOL32)
+  (SHADERINPUTATTACHMENTARRAYNONUNIFORMINDEXINGNATIVE VKBOOL32)
+  (ROBUSTBUFFERACCESSUPDATEAFTERBIND VKBOOL32)
+  (QUADDIVERGENTIMPLICITLOD VKBOOL32)
+  (MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDSAMPLERS :UINT32)
+  (MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDUNIFORMBUFFERS :UINT32)
+  (MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDSTORAGEBUFFERS :UINT32)
+  (MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDSAMPLEDIMAGES :UINT32)
+  (MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDSTORAGEIMAGES :UINT32)
+  (MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDINPUTATTACHMENTS :UINT32)
+  (MAXPERSTAGEUPDATEAFTERBINDRESOURCES :UINT32)
+  (MAXDESCRIPTORSETUPDATEAFTERBINDSAMPLERS :UINT32)
+  (MAXDESCRIPTORSETUPDATEAFTERBINDUNIFORMBUFFERS :UINT32)
+  (MAXDESCRIPTORSETUPDATEAFTERBINDUNIFORMBUFFERSDYNAMIC :UINT32)
+  (MAXDESCRIPTORSETUPDATEAFTERBINDSTORAGEBUFFERS :UINT32)
+  (MAXDESCRIPTORSETUPDATEAFTERBINDSTORAGEBUFFERSDYNAMIC :UINT32)
+  (MAXDESCRIPTORSETUPDATEAFTERBINDSAMPLEDIMAGES :UINT32)
+  (MAXDESCRIPTORSETUPDATEAFTERBINDSTORAGEIMAGES :UINT32)
+  (MAXDESCRIPTORSETUPDATEAFTERBINDINPUTATTACHMENTS :UINT32))
+
+(CFFI:DEFCSTRUCT VKDESCRIPTORSETVARIABLEDESCRIPTORCOUNTALLOCATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DESCRIPTORSETCOUNT :UINT32)
+  (PDESCRIPTORCOUNTS :POINTER))
+
+(CFFI:DEFCSTRUCT VKDESCRIPTORSETVARIABLEDESCRIPTORCOUNTLAYOUTSUPPORT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MAXVARIABLEDESCRIPTORCOUNT :UINT32))
+
+(CFFI:DEFCSTRUCT VKSUBPASSDESCRIPTIONDEPTHSTENCILRESOLVE
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DEPTHRESOLVEMODE VKRESOLVEMODEFLAGBITS)
+  (STENCILRESOLVEMODE VKRESOLVEMODEFLAGBITS)
+  (PDEPTHSTENCILRESOLVEATTACHMENT :POINTER))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEDEPTHSTENCILRESOLVEPROPERTIES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SUPPORTEDDEPTHRESOLVEMODES VKRESOLVEMODEFLAGS)
+  (SUPPORTEDSTENCILRESOLVEMODES VKRESOLVEMODEFLAGS)
+  (INDEPENDENTRESOLVENONE VKBOOL32)
+  (INDEPENDENTRESOLVE VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESCALARBLOCKLAYOUTFEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SCALARBLOCKLAYOUT VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKIMAGESTENCILUSAGECREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (STENCILUSAGE VKIMAGEUSAGEFLAGS))
+
+(CFFI:DEFCSTRUCT VKSAMPLERREDUCTIONMODECREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (REDUCTIONMODE VKSAMPLERREDUCTIONMODE))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESAMPLERFILTERMINMAXPROPERTIES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FILTERMINMAXSINGLECOMPONENTFORMATS VKBOOL32)
+  (FILTERMINMAXIMAGECOMPONENTMAPPING VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEVULKANMEMORYMODELFEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (VULKANMEMORYMODEL VKBOOL32)
+  (VULKANMEMORYMODELDEVICESCOPE VKBOOL32)
+  (VULKANMEMORYMODELAVAILABILITYVISIBILITYCHAINS VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEIMAGELESSFRAMEBUFFERFEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (IMAGELESSFRAMEBUFFER VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKFRAMEBUFFERATTACHMENTIMAGEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKIMAGECREATEFLAGS)
+  (USAGE VKIMAGEUSAGEFLAGS)
+  (WIDTH :UINT32)
+  (HEIGHT :UINT32)
+  (LAYERCOUNT :UINT32)
+  (VIEWFORMATCOUNT :UINT32)
+  (PVIEWFORMATS :POINTER))
+
+(CFFI:DEFCSTRUCT VKFRAMEBUFFERATTACHMENTSCREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (ATTACHMENTIMAGEINFOCOUNT :UINT32)
+  (PATTACHMENTIMAGEINFOS :POINTER))
+
+(CFFI:DEFCSTRUCT VKRENDERPASSATTACHMENTBEGININFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (ATTACHMENTCOUNT :UINT32)
+  (PATTACHMENTS :POINTER))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEUNIFORMBUFFERSTANDARDLAYOUTFEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (UNIFORMBUFFERSTANDARDLAYOUT VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESHADERSUBGROUPEXTENDEDTYPESFEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SHADERSUBGROUPEXTENDEDTYPES VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESEPARATEDEPTHSTENCILLAYOUTSFEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SEPARATEDEPTHSTENCILLAYOUTS VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKATTACHMENTREFERENCESTENCILLAYOUT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (STENCILLAYOUT VKIMAGELAYOUT))
+
+(CFFI:DEFCSTRUCT VKATTACHMENTDESCRIPTIONSTENCILLAYOUT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (STENCILINITIALLAYOUT VKIMAGELAYOUT)
+  (STENCILFINALLAYOUT VKIMAGELAYOUT))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEHOSTQUERYRESETFEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (HOSTQUERYRESET VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICETIMELINESEMAPHOREFEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (TIMELINESEMAPHORE VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICETIMELINESEMAPHOREPROPERTIES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MAXTIMELINESEMAPHOREVALUEDIFFERENCE :UINT64))
+
+(CFFI:DEFCSTRUCT VKSEMAPHORETYPECREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SEMAPHORETYPE VKSEMAPHORETYPE)
+  (INITIALVALUE :UINT64))
+
+(CFFI:DEFCSTRUCT VKTIMELINESEMAPHORESUBMITINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (WAITSEMAPHOREVALUECOUNT :UINT32)
+  (PWAITSEMAPHOREVALUES :POINTER)
+  (SIGNALSEMAPHOREVALUECOUNT :UINT32)
+  (PSIGNALSEMAPHOREVALUES :POINTER))
+
+(CFFI:DEFCSTRUCT VKSEMAPHOREWAITINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKSEMAPHOREWAITFLAGS)
+  (SEMAPHORECOUNT :UINT32)
+  (PSEMAPHORES :POINTER)
+  (PVALUES :POINTER))
+
+(CFFI:DEFCSTRUCT VKSEMAPHORESIGNALINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SEMAPHORE VKSEMAPHORE)
+  (VALUE :UINT64))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEBUFFERDEVICEADDRESSFEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (BUFFERDEVICEADDRESS VKBOOL32)
+  (BUFFERDEVICEADDRESSCAPTUREREPLAY VKBOOL32)
+  (BUFFERDEVICEADDRESSMULTIDEVICE VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKBUFFERDEVICEADDRESSINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (BUFFER VKBUFFER))
+
+(CFFI:DEFCSTRUCT VKBUFFEROPAQUECAPTUREADDRESSCREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (OPAQUECAPTUREADDRESS :UINT64))
+
+(CFFI:DEFCSTRUCT VKMEMORYOPAQUECAPTUREADDRESSALLOCATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (OPAQUECAPTUREADDRESS :UINT64))
+
+(CFFI:DEFCSTRUCT VKDEVICEMEMORYOPAQUECAPTUREADDRESSINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MEMORY VKDEVICEMEMORY))
+
+(CFFI:DEFCTYPE PFN_VKCMDDRAWINDIRECTCOUNT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDDRAWINDEXEDINDIRECTCOUNT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCREATERENDERPASS2 :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDBEGINRENDERPASS2 :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDNEXTSUBPASS2 :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDENDRENDERPASS2 :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKRESETQUERYPOOL :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETSEMAPHORECOUNTERVALUE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKWAITSEMAPHORES :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKSIGNALSEMAPHORE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETBUFFERDEVICEADDRESS :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETBUFFEROPAQUECAPTUREADDRESS :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETDEVICEMEMORYOPAQUECAPTUREADDRESS :POINTER)
+
+(CFFI:DEFCTYPE VKFLAGS64 :UINT64)
+
+(CFFI:DEFCTYPE VKPRIVATEDATASLOT NON-DISPATCHABLE-HANDLE)
+
+(CFFI:DEFCTYPE VKPIPELINECREATIONFEEDBACKFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKPIPELINECREATIONFEEDBACKFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKTOOLPURPOSEFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKTOOLPURPOSEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKPRIVATEDATASLOTCREATEFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKPIPELINESTAGEFLAGS2 VKFLAGS64)
+
+(CFFI:DEFCTYPE VKPIPELINESTAGEFLAGBITS2 VKFLAGS64)
+
+(CFFI:DEFCTYPE VKACCESSFLAGS2 VKFLAGS64)
+
+(CFFI:DEFCTYPE VKACCESSFLAGBITS2 VKFLAGS64)
+
+(CFFI:DEFCTYPE VKSUBMITFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKSUBMITFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKRENDERINGFLAGBITS :INT)
+
+(CFFI:DEFCTYPE VKRENDERINGFLAGS VKFLAGS)
+
+(CFFI:DEFCTYPE VKFORMATFEATUREFLAGS2 VKFLAGS64)
+
+(CFFI:DEFCTYPE VKFORMATFEATUREFLAGBITS2 VKFLAGS64)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEVULKAN13FEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (ROBUSTIMAGEACCESS VKBOOL32)
+  (INLINEUNIFORMBLOCK VKBOOL32)
+  (DESCRIPTORBINDINGINLINEUNIFORMBLOCKUPDATEAFTERBIND VKBOOL32)
+  (PIPELINECREATIONCACHECONTROL VKBOOL32)
+  (PRIVATEDATA VKBOOL32)
+  (SHADERDEMOTETOHELPERINVOCATION VKBOOL32)
+  (SHADERTERMINATEINVOCATION VKBOOL32)
+  (SUBGROUPSIZECONTROL VKBOOL32)
+  (COMPUTEFULLSUBGROUPS VKBOOL32)
+  (SYNCHRONIZATION2 VKBOOL32)
+  (TEXTURECOMPRESSIONASTC_HDR VKBOOL32)
+  (SHADERZEROINITIALIZEWORKGROUPMEMORY VKBOOL32)
+  (DYNAMICRENDERING VKBOOL32)
+  (SHADERINTEGERDOTPRODUCT VKBOOL32)
+  (MAINTENANCE4 VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEVULKAN13PROPERTIES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MINSUBGROUPSIZE :UINT32)
+  (MAXSUBGROUPSIZE :UINT32)
+  (MAXCOMPUTEWORKGROUPSUBGROUPS :UINT32)
+  (REQUIREDSUBGROUPSIZESTAGES VKSHADERSTAGEFLAGS)
+  (MAXINLINEUNIFORMBLOCKSIZE :UINT32)
+  (MAXPERSTAGEDESCRIPTORINLINEUNIFORMBLOCKS :UINT32)
+  (MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDINLINEUNIFORMBLOCKS :UINT32)
+  (MAXDESCRIPTORSETINLINEUNIFORMBLOCKS :UINT32)
+  (MAXDESCRIPTORSETUPDATEAFTERBINDINLINEUNIFORMBLOCKS :UINT32)
+  (MAXINLINEUNIFORMTOTALSIZE :UINT32)
+  (INTEGERDOTPRODUCT8BITUNSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCT8BITSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCT8BITMIXEDSIGNEDNESSACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCT4X8BITPACKEDUNSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCT4X8BITPACKEDSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCT4X8BITPACKEDMIXEDSIGNEDNESSACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCT16BITUNSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCT16BITSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCT16BITMIXEDSIGNEDNESSACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCT32BITUNSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCT32BITSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCT32BITMIXEDSIGNEDNESSACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCT64BITUNSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCT64BITSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCT64BITMIXEDSIGNEDNESSACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCTACCUMULATINGSATURATING8BITUNSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCTACCUMULATINGSATURATING8BITSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCTACCUMULATINGSATURATING8BITMIXEDSIGNEDNESSACCELERATED
+   VKBOOL32)
+  (INTEGERDOTPRODUCTACCUMULATINGSATURATING4X8BITPACKEDUNSIGNEDACCELERATED
+   VKBOOL32)
+  (INTEGERDOTPRODUCTACCUMULATINGSATURATING4X8BITPACKEDSIGNEDACCELERATED
+   VKBOOL32)
+  (INTEGERDOTPRODUCTACCUMULATINGSATURATING4X8BITPACKEDMIXEDSIGNEDNESSACCELERATED
+   VKBOOL32)
+  (INTEGERDOTPRODUCTACCUMULATINGSATURATING16BITUNSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCTACCUMULATINGSATURATING16BITSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCTACCUMULATINGSATURATING16BITMIXEDSIGNEDNESSACCELERATED
+   VKBOOL32)
+  (INTEGERDOTPRODUCTACCUMULATINGSATURATING32BITUNSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCTACCUMULATINGSATURATING32BITSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCTACCUMULATINGSATURATING32BITMIXEDSIGNEDNESSACCELERATED
+   VKBOOL32)
+  (INTEGERDOTPRODUCTACCUMULATINGSATURATING64BITUNSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCTACCUMULATINGSATURATING64BITSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCTACCUMULATINGSATURATING64BITMIXEDSIGNEDNESSACCELERATED
+   VKBOOL32)
+  (STORAGETEXELBUFFEROFFSETALIGNMENTBYTES VKDEVICESIZE)
+  (STORAGETEXELBUFFEROFFSETSINGLETEXELALIGNMENT VKBOOL32)
+  (UNIFORMTEXELBUFFEROFFSETALIGNMENTBYTES VKDEVICESIZE)
+  (UNIFORMTEXELBUFFEROFFSETSINGLETEXELALIGNMENT VKBOOL32)
+  (MAXBUFFERSIZE VKDEVICESIZE))
+
+(CFFI:DEFCSTRUCT VKPIPELINECREATIONFEEDBACK
+  (FLAGS VKPIPELINECREATIONFEEDBACKFLAGS)
+  (DURATION :UINT64))
+
+(CFFI:DEFCSTRUCT VKPIPELINECREATIONFEEDBACKCREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PPIPELINECREATIONFEEDBACK :POINTER)
+  (PIPELINESTAGECREATIONFEEDBACKCOUNT :UINT32)
+  (PPIPELINESTAGECREATIONFEEDBACKS :POINTER))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESHADERTERMINATEINVOCATIONFEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SHADERTERMINATEINVOCATION VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICETOOLPROPERTIES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (NAME :CHAR :COUNT 256)
+  (VERSION :CHAR :COUNT 256)
+  (PURPOSES VKTOOLPURPOSEFLAGS)
+  (DESCRIPTION :CHAR :COUNT 256)
+  (LAYER :CHAR :COUNT 256))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESHADERDEMOTETOHELPERINVOCATIONFEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SHADERDEMOTETOHELPERINVOCATION VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEPRIVATEDATAFEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PRIVATEDATA VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKDEVICEPRIVATEDATACREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PRIVATEDATASLOTREQUESTCOUNT :UINT32))
+
+(CFFI:DEFCSTRUCT VKPRIVATEDATASLOTCREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKPRIVATEDATASLOTCREATEFLAGS))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEPIPELINECREATIONCACHECONTROLFEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PIPELINECREATIONCACHECONTROL VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKMEMORYBARRIER2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SRCSTAGEMASK VKPIPELINESTAGEFLAGS2)
+  (SRCACCESSMASK VKACCESSFLAGS2)
+  (DSTSTAGEMASK VKPIPELINESTAGEFLAGS2)
+  (DSTACCESSMASK VKACCESSFLAGS2))
+
+(CFFI:DEFCSTRUCT VKBUFFERMEMORYBARRIER2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SRCSTAGEMASK VKPIPELINESTAGEFLAGS2)
+  (SRCACCESSMASK VKACCESSFLAGS2)
+  (DSTSTAGEMASK VKPIPELINESTAGEFLAGS2)
+  (DSTACCESSMASK VKACCESSFLAGS2)
+  (SRCQUEUEFAMILYINDEX :UINT32)
+  (DSTQUEUEFAMILYINDEX :UINT32)
+  (BUFFER VKBUFFER)
+  (OFFSET VKDEVICESIZE)
+  (SIZE VKDEVICESIZE))
+
+(CFFI:DEFCSTRUCT VKIMAGEMEMORYBARRIER2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SRCSTAGEMASK VKPIPELINESTAGEFLAGS2)
+  (SRCACCESSMASK VKACCESSFLAGS2)
+  (DSTSTAGEMASK VKPIPELINESTAGEFLAGS2)
+  (DSTACCESSMASK VKACCESSFLAGS2)
+  (OLDLAYOUT VKIMAGELAYOUT)
+  (NEWLAYOUT VKIMAGELAYOUT)
+  (SRCQUEUEFAMILYINDEX :UINT32)
+  (DSTQUEUEFAMILYINDEX :UINT32)
+  (IMAGE VKIMAGE)
+  (SUBRESOURCERANGE (:STRUCT VKIMAGESUBRESOURCERANGE)))
+
+(CFFI:DEFCSTRUCT VKDEPENDENCYINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DEPENDENCYFLAGS VKDEPENDENCYFLAGS)
+  (MEMORYBARRIERCOUNT :UINT32)
+  (PMEMORYBARRIERS :POINTER)
+  (BUFFERMEMORYBARRIERCOUNT :UINT32)
+  (PBUFFERMEMORYBARRIERS :POINTER)
+  (IMAGEMEMORYBARRIERCOUNT :UINT32)
+  (PIMAGEMEMORYBARRIERS :POINTER))
+
+(CFFI:DEFCSTRUCT VKSEMAPHORESUBMITINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SEMAPHORE VKSEMAPHORE)
+  (VALUE :UINT64)
+  (STAGEMASK VKPIPELINESTAGEFLAGS2)
+  (DEVICEINDEX :UINT32))
+
+(CFFI:DEFCSTRUCT VKCOMMANDBUFFERSUBMITINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (COMMANDBUFFER VKCOMMANDBUFFER)
+  (DEVICEMASK :UINT32))
+
+(CFFI:DEFCSTRUCT VKSUBMITINFO2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKSUBMITFLAGS)
+  (WAITSEMAPHOREINFOCOUNT :UINT32)
+  (PWAITSEMAPHOREINFOS :POINTER)
+  (COMMANDBUFFERINFOCOUNT :UINT32)
+  (PCOMMANDBUFFERINFOS :POINTER)
+  (SIGNALSEMAPHOREINFOCOUNT :UINT32)
+  (PSIGNALSEMAPHOREINFOS :POINTER))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESYNCHRONIZATION2FEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SYNCHRONIZATION2 VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEZEROINITIALIZEWORKGROUPMEMORYFEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SHADERZEROINITIALIZEWORKGROUPMEMORY VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEIMAGEROBUSTNESSFEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (ROBUSTIMAGEACCESS VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKBUFFERCOPY2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SRCOFFSET VKDEVICESIZE)
+  (DSTOFFSET VKDEVICESIZE)
+  (SIZE VKDEVICESIZE))
+
+(CFFI:DEFCSTRUCT VKCOPYBUFFERINFO2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SRCBUFFER VKBUFFER)
+  (DSTBUFFER VKBUFFER)
+  (REGIONCOUNT :UINT32)
+  (PREGIONS :POINTER))
+
+(CFFI:DEFCSTRUCT VKIMAGECOPY2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SRCSUBRESOURCE (:STRUCT VKIMAGESUBRESOURCELAYERS))
+  (SRCOFFSET (:STRUCT VKOFFSET3D))
+  (DSTSUBRESOURCE (:STRUCT VKIMAGESUBRESOURCELAYERS))
+  (DSTOFFSET (:STRUCT VKOFFSET3D))
+  (EXTENT (:STRUCT VKEXTENT3D)))
+
+(CFFI:DEFCSTRUCT VKCOPYIMAGEINFO2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SRCIMAGE VKIMAGE)
+  (SRCIMAGELAYOUT VKIMAGELAYOUT)
+  (DSTIMAGE VKIMAGE)
+  (DSTIMAGELAYOUT VKIMAGELAYOUT)
+  (REGIONCOUNT :UINT32)
+  (PREGIONS :POINTER))
+
+(CFFI:DEFCSTRUCT VKBUFFERIMAGECOPY2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (BUFFEROFFSET VKDEVICESIZE)
+  (BUFFERROWLENGTH :UINT32)
+  (BUFFERIMAGEHEIGHT :UINT32)
+  (IMAGESUBRESOURCE (:STRUCT VKIMAGESUBRESOURCELAYERS))
+  (IMAGEOFFSET (:STRUCT VKOFFSET3D))
+  (IMAGEEXTENT (:STRUCT VKEXTENT3D)))
+
+(CFFI:DEFCSTRUCT VKCOPYBUFFERTOIMAGEINFO2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SRCBUFFER VKBUFFER)
+  (DSTIMAGE VKIMAGE)
+  (DSTIMAGELAYOUT VKIMAGELAYOUT)
+  (REGIONCOUNT :UINT32)
+  (PREGIONS :POINTER))
+
+(CFFI:DEFCSTRUCT VKCOPYIMAGETOBUFFERINFO2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SRCIMAGE VKIMAGE)
+  (SRCIMAGELAYOUT VKIMAGELAYOUT)
+  (DSTBUFFER VKBUFFER)
+  (REGIONCOUNT :UINT32)
+  (PREGIONS :POINTER))
+
+(CFFI:DEFCSTRUCT VKIMAGEBLIT2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SRCSUBRESOURCE (:STRUCT VKIMAGESUBRESOURCELAYERS))
+  (SRCOFFSETS (:STRUCT VKOFFSET3D) :COUNT 2)
+  (DSTSUBRESOURCE (:STRUCT VKIMAGESUBRESOURCELAYERS))
+  (DSTOFFSETS (:STRUCT VKOFFSET3D) :COUNT 2))
+
+(CFFI:DEFCSTRUCT VKBLITIMAGEINFO2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SRCIMAGE VKIMAGE)
+  (SRCIMAGELAYOUT VKIMAGELAYOUT)
+  (DSTIMAGE VKIMAGE)
+  (DSTIMAGELAYOUT VKIMAGELAYOUT)
+  (REGIONCOUNT :UINT32)
+  (PREGIONS :POINTER)
+  (FILTER VKFILTER))
+
+(CFFI:DEFCSTRUCT VKIMAGERESOLVE2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SRCSUBRESOURCE (:STRUCT VKIMAGESUBRESOURCELAYERS))
+  (SRCOFFSET (:STRUCT VKOFFSET3D))
+  (DSTSUBRESOURCE (:STRUCT VKIMAGESUBRESOURCELAYERS))
+  (DSTOFFSET (:STRUCT VKOFFSET3D))
+  (EXTENT (:STRUCT VKEXTENT3D)))
+
+(CFFI:DEFCSTRUCT VKRESOLVEIMAGEINFO2
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SRCIMAGE VKIMAGE)
+  (SRCIMAGELAYOUT VKIMAGELAYOUT)
+  (DSTIMAGE VKIMAGE)
+  (DSTIMAGELAYOUT VKIMAGELAYOUT)
+  (REGIONCOUNT :UINT32)
+  (PREGIONS :POINTER))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESUBGROUPSIZECONTROLFEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SUBGROUPSIZECONTROL VKBOOL32)
+  (COMPUTEFULLSUBGROUPS VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESUBGROUPSIZECONTROLPROPERTIES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MINSUBGROUPSIZE :UINT32)
+  (MAXSUBGROUPSIZE :UINT32)
+  (MAXCOMPUTEWORKGROUPSUBGROUPS :UINT32)
+  (REQUIREDSUBGROUPSIZESTAGES VKSHADERSTAGEFLAGS))
+
+(CFFI:DEFCSTRUCT VKPIPELINESHADERSTAGEREQUIREDSUBGROUPSIZECREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (REQUIREDSUBGROUPSIZE :UINT32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEINLINEUNIFORMBLOCKFEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (INLINEUNIFORMBLOCK VKBOOL32)
+  (DESCRIPTORBINDINGINLINEUNIFORMBLOCKUPDATEAFTERBIND VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEINLINEUNIFORMBLOCKPROPERTIES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MAXINLINEUNIFORMBLOCKSIZE :UINT32)
+  (MAXPERSTAGEDESCRIPTORINLINEUNIFORMBLOCKS :UINT32)
+  (MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDINLINEUNIFORMBLOCKS :UINT32)
+  (MAXDESCRIPTORSETINLINEUNIFORMBLOCKS :UINT32)
+  (MAXDESCRIPTORSETUPDATEAFTERBINDINLINEUNIFORMBLOCKS :UINT32))
+
+(CFFI:DEFCSTRUCT VKWRITEDESCRIPTORSETINLINEUNIFORMBLOCK
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DATASIZE :UINT32)
+  (PDATA :POINTER))
+
+(CFFI:DEFCSTRUCT VKDESCRIPTORPOOLINLINEUNIFORMBLOCKCREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MAXINLINEUNIFORMBLOCKBINDINGS :UINT32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICETEXTURECOMPRESSIONASTCHDRFEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (TEXTURECOMPRESSIONASTC_HDR VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKRENDERINGATTACHMENTINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (IMAGEVIEW VKIMAGEVIEW)
+  (IMAGELAYOUT VKIMAGELAYOUT)
+  (RESOLVEMODE VKRESOLVEMODEFLAGBITS)
+  (RESOLVEIMAGEVIEW VKIMAGEVIEW)
+  (RESOLVEIMAGELAYOUT VKIMAGELAYOUT)
+  (LOADOP VKATTACHMENTLOADOP)
+  (STOREOP VKATTACHMENTSTOREOP)
+  (CLEARVALUE (:UNION VKCLEARVALUE)))
+
+(CFFI:DEFCSTRUCT VKRENDERINGINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKRENDERINGFLAGS)
+  (RENDERAREA (:STRUCT VKRECT2D))
+  (LAYERCOUNT :UINT32)
+  (VIEWMASK :UINT32)
+  (COLORATTACHMENTCOUNT :UINT32)
+  (PCOLORATTACHMENTS :POINTER)
+  (PDEPTHATTACHMENT :POINTER)
+  (PSTENCILATTACHMENT :POINTER))
+
+(CFFI:DEFCSTRUCT VKPIPELINERENDERINGCREATEINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (VIEWMASK :UINT32)
+  (COLORATTACHMENTCOUNT :UINT32)
+  (PCOLORATTACHMENTFORMATS :POINTER)
+  (DEPTHATTACHMENTFORMAT VKFORMAT)
+  (STENCILATTACHMENTFORMAT VKFORMAT))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEDYNAMICRENDERINGFEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DYNAMICRENDERING VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKCOMMANDBUFFERINHERITANCERENDERINGINFO
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKRENDERINGFLAGS)
+  (VIEWMASK :UINT32)
+  (COLORATTACHMENTCOUNT :UINT32)
+  (PCOLORATTACHMENTFORMATS :POINTER)
+  (DEPTHATTACHMENTFORMAT VKFORMAT)
+  (STENCILATTACHMENTFORMAT VKFORMAT)
+  (RASTERIZATIONSAMPLES VKSAMPLECOUNTFLAGBITS))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESHADERINTEGERDOTPRODUCTFEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SHADERINTEGERDOTPRODUCT VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESHADERINTEGERDOTPRODUCTPROPERTIES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (INTEGERDOTPRODUCT8BITUNSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCT8BITSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCT8BITMIXEDSIGNEDNESSACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCT4X8BITPACKEDUNSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCT4X8BITPACKEDSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCT4X8BITPACKEDMIXEDSIGNEDNESSACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCT16BITUNSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCT16BITSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCT16BITMIXEDSIGNEDNESSACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCT32BITUNSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCT32BITSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCT32BITMIXEDSIGNEDNESSACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCT64BITUNSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCT64BITSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCT64BITMIXEDSIGNEDNESSACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCTACCUMULATINGSATURATING8BITUNSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCTACCUMULATINGSATURATING8BITSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCTACCUMULATINGSATURATING8BITMIXEDSIGNEDNESSACCELERATED
+   VKBOOL32)
+  (INTEGERDOTPRODUCTACCUMULATINGSATURATING4X8BITPACKEDUNSIGNEDACCELERATED
+   VKBOOL32)
+  (INTEGERDOTPRODUCTACCUMULATINGSATURATING4X8BITPACKEDSIGNEDACCELERATED
+   VKBOOL32)
+  (INTEGERDOTPRODUCTACCUMULATINGSATURATING4X8BITPACKEDMIXEDSIGNEDNESSACCELERATED
+   VKBOOL32)
+  (INTEGERDOTPRODUCTACCUMULATINGSATURATING16BITUNSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCTACCUMULATINGSATURATING16BITSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCTACCUMULATINGSATURATING16BITMIXEDSIGNEDNESSACCELERATED
+   VKBOOL32)
+  (INTEGERDOTPRODUCTACCUMULATINGSATURATING32BITUNSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCTACCUMULATINGSATURATING32BITSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCTACCUMULATINGSATURATING32BITMIXEDSIGNEDNESSACCELERATED
+   VKBOOL32)
+  (INTEGERDOTPRODUCTACCUMULATINGSATURATING64BITUNSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCTACCUMULATINGSATURATING64BITSIGNEDACCELERATED VKBOOL32)
+  (INTEGERDOTPRODUCTACCUMULATINGSATURATING64BITMIXEDSIGNEDNESSACCELERATED
+   VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICETEXELBUFFERALIGNMENTPROPERTIES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (STORAGETEXELBUFFEROFFSETALIGNMENTBYTES VKDEVICESIZE)
+  (STORAGETEXELBUFFEROFFSETSINGLETEXELALIGNMENT VKBOOL32)
+  (UNIFORMTEXELBUFFEROFFSETALIGNMENTBYTES VKDEVICESIZE)
+  (UNIFORMTEXELBUFFEROFFSETSINGLETEXELALIGNMENT VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKFORMATPROPERTIES3
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (LINEARTILINGFEATURES VKFORMATFEATUREFLAGS2)
+  (OPTIMALTILINGFEATURES VKFORMATFEATUREFLAGS2)
+  (BUFFERFEATURES VKFORMATFEATUREFLAGS2))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEMAINTENANCE4FEATURES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MAINTENANCE4 VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEMAINTENANCE4PROPERTIES
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MAXBUFFERSIZE VKDEVICESIZE))
+
+(CFFI:DEFCSTRUCT VKDEVICEBUFFERMEMORYREQUIREMENTS
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PCREATEINFO :POINTER))
+
+(CFFI:DEFCSTRUCT VKDEVICEIMAGEMEMORYREQUIREMENTS
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PCREATEINFO :POINTER)
+  (PLANEASPECT VKIMAGEASPECTFLAGBITS))
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICETOOLPROPERTIES :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCREATEPRIVATEDATASLOT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYPRIVATEDATASLOT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKSETPRIVATEDATA :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPRIVATEDATA :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETEVENT2 :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDRESETEVENT2 :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDWAITEVENTS2 :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDPIPELINEBARRIER2 :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDWRITETIMESTAMP2 :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKQUEUESUBMIT2 :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDCOPYBUFFER2 :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDCOPYIMAGE2 :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDCOPYBUFFERTOIMAGE2 :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDCOPYIMAGETOBUFFER2 :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDBLITIMAGE2 :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDRESOLVEIMAGE2 :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDBEGINRENDERING :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDENDRENDERING :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETCULLMODE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETFRONTFACE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETPRIMITIVETOPOLOGY :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETVIEWPORTWITHCOUNT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETSCISSORWITHCOUNT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDBINDVERTEXBUFFERS2 :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETDEPTHTESTENABLE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETDEPTHWRITEENABLE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETDEPTHCOMPAREOP :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETDEPTHBOUNDSTESTENABLE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETSTENCILTESTENABLE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETSTENCILOP :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETRASTERIZERDISCARDENABLE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETDEPTHBIASENABLE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETPRIMITIVERESTARTENABLE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETDEVICEBUFFERMEMORYREQUIREMENTS :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETDEVICEIMAGEMEMORYREQUIREMENTS :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETDEVICEIMAGESPARSEMEMORYREQUIREMENTS :POINTER)
+
+(CFFI:DEFCTYPE VKSURFACEKHR NON-DISPATCHABLE-HANDLE)
+
+(CFFI:DEFCTYPE VKPRESENTMODEKHR :INT)
+
+(CFFI:DEFCTYPE VKCOLORSPACEKHR :INT)
+
+(CFFI:DEFCTYPE VKSURFACETRANSFORMFLAGBITSKHR :INT)
+
+(CFFI:DEFCTYPE VKCOMPOSITEALPHAFLAGBITSKHR :INT)
+
+(CFFI:DEFCTYPE VKCOMPOSITEALPHAFLAGSKHR VKFLAGS)
+
+(CFFI:DEFCTYPE VKSURFACETRANSFORMFLAGSKHR VKFLAGS)
+
+(CFFI:DEFCSTRUCT VKSURFACECAPABILITIESKHR
+  (MINIMAGECOUNT :UINT32)
+  (MAXIMAGECOUNT :UINT32)
+  (CURRENTEXTENT (:STRUCT VKEXTENT2D))
+  (MINIMAGEEXTENT (:STRUCT VKEXTENT2D))
+  (MAXIMAGEEXTENT (:STRUCT VKEXTENT2D))
+  (MAXIMAGEARRAYLAYERS :UINT32)
+  (SUPPORTEDTRANSFORMS VKSURFACETRANSFORMFLAGSKHR)
+  (CURRENTTRANSFORM VKSURFACETRANSFORMFLAGBITSKHR)
+  (SUPPORTEDCOMPOSITEALPHA VKCOMPOSITEALPHAFLAGSKHR)
+  (SUPPORTEDUSAGEFLAGS VKIMAGEUSAGEFLAGS))
+
+(CFFI:DEFCSTRUCT VKSURFACEFORMATKHR
+  (FORMAT VKFORMAT)
+  (COLORSPACE VKCOLORSPACEKHR))
+
+(CFFI:DEFCTYPE PFN_VKDESTROYSURFACEKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICESURFACESUPPORTKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICESURFACECAPABILITIESKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICESURFACEFORMATSKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICESURFACEPRESENTMODESKHR :POINTER)
+
+(CFFI:DEFCTYPE VKSWAPCHAINKHR NON-DISPATCHABLE-HANDLE)
+
+(CFFI:DEFCTYPE VKSWAPCHAINCREATEFLAGBITSKHR :INT)
+
+(CFFI:DEFCTYPE VKSWAPCHAINCREATEFLAGSKHR VKFLAGS)
+
+(CFFI:DEFCTYPE VKDEVICEGROUPPRESENTMODEFLAGBITSKHR :INT)
+
+(CFFI:DEFCTYPE VKDEVICEGROUPPRESENTMODEFLAGSKHR VKFLAGS)
+
+(CFFI:DEFCSTRUCT VKSWAPCHAINCREATEINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKSWAPCHAINCREATEFLAGSKHR)
+  (SURFACE VKSURFACEKHR)
+  (MINIMAGECOUNT :UINT32)
+  (IMAGEFORMAT VKFORMAT)
+  (IMAGECOLORSPACE VKCOLORSPACEKHR)
+  (IMAGEEXTENT (:STRUCT VKEXTENT2D))
+  (IMAGEARRAYLAYERS :UINT32)
+  (IMAGEUSAGE VKIMAGEUSAGEFLAGS)
+  (IMAGESHARINGMODE VKSHARINGMODE)
+  (QUEUEFAMILYINDEXCOUNT :UINT32)
+  (PQUEUEFAMILYINDICES :POINTER)
+  (PRETRANSFORM VKSURFACETRANSFORMFLAGBITSKHR)
+  (COMPOSITEALPHA VKCOMPOSITEALPHAFLAGBITSKHR)
+  (PRESENTMODE VKPRESENTMODEKHR)
+  (CLIPPED VKBOOL32)
+  (OLDSWAPCHAIN VKSWAPCHAINKHR))
+
+(CFFI:DEFCSTRUCT VKPRESENTINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (WAITSEMAPHORECOUNT :UINT32)
+  (PWAITSEMAPHORES :POINTER)
+  (SWAPCHAINCOUNT :UINT32)
+  (PSWAPCHAINS :POINTER)
+  (PIMAGEINDICES :POINTER)
+  (PRESULTS :POINTER))
+
+(CFFI:DEFCSTRUCT VKIMAGESWAPCHAINCREATEINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SWAPCHAIN VKSWAPCHAINKHR))
+
+(CFFI:DEFCSTRUCT VKBINDIMAGEMEMORYSWAPCHAININFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SWAPCHAIN VKSWAPCHAINKHR)
+  (IMAGEINDEX :UINT32))
+
+(CFFI:DEFCSTRUCT VKACQUIRENEXTIMAGEINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SWAPCHAIN VKSWAPCHAINKHR)
+  (TIMEOUT :UINT64)
+  (SEMAPHORE VKSEMAPHORE)
+  (FENCE VKFENCE)
+  (DEVICEMASK :UINT32))
+
+(CFFI:DEFCSTRUCT VKDEVICEGROUPPRESENTCAPABILITIESKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PRESENTMASK :UINT32 :COUNT 32)
+  (MODES VKDEVICEGROUPPRESENTMODEFLAGSKHR))
+
+(CFFI:DEFCSTRUCT VKDEVICEGROUPPRESENTINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SWAPCHAINCOUNT :UINT32)
+  (PDEVICEMASKS :POINTER)
+  (MODE VKDEVICEGROUPPRESENTMODEFLAGBITSKHR))
+
+(CFFI:DEFCSTRUCT VKDEVICEGROUPSWAPCHAINCREATEINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MODES VKDEVICEGROUPPRESENTMODEFLAGSKHR))
+
+(CFFI:DEFCTYPE PFN_VKCREATESWAPCHAINKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYSWAPCHAINKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETSWAPCHAINIMAGESKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKACQUIRENEXTIMAGEKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKQUEUEPRESENTKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETDEVICEGROUPPRESENTCAPABILITIESKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETDEVICEGROUPSURFACEPRESENTMODESKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEPRESENTRECTANGLESKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKACQUIRENEXTIMAGE2KHR :POINTER)
+
+(CFFI:DEFCTYPE VKDISPLAYKHR NON-DISPATCHABLE-HANDLE)
+
+(CFFI:DEFCTYPE VKDISPLAYMODEKHR NON-DISPATCHABLE-HANDLE)
+
+(CFFI:DEFCTYPE VKDISPLAYMODECREATEFLAGSKHR VKFLAGS)
+
+(CFFI:DEFCTYPE VKDISPLAYPLANEALPHAFLAGBITSKHR :INT)
+
+(CFFI:DEFCTYPE VKDISPLAYPLANEALPHAFLAGSKHR VKFLAGS)
+
+(CFFI:DEFCTYPE VKDISPLAYSURFACECREATEFLAGSKHR VKFLAGS)
+
+(CFFI:DEFCSTRUCT VKDISPLAYMODEPARAMETERSKHR
+  (VISIBLEREGION (:STRUCT VKEXTENT2D))
+  (REFRESHRATE :UINT32))
+
+(CFFI:DEFCSTRUCT VKDISPLAYMODECREATEINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKDISPLAYMODECREATEFLAGSKHR)
+  (PARAMETERS (:STRUCT VKDISPLAYMODEPARAMETERSKHR)))
+
+(CFFI:DEFCSTRUCT VKDISPLAYMODEPROPERTIESKHR
+  (DISPLAYMODE VKDISPLAYMODEKHR)
+  (PARAMETERS (:STRUCT VKDISPLAYMODEPARAMETERSKHR)))
+
+(CFFI:DEFCSTRUCT VKDISPLAYPLANECAPABILITIESKHR
+  (SUPPORTEDALPHA VKDISPLAYPLANEALPHAFLAGSKHR)
+  (MINSRCPOSITION (:STRUCT VKOFFSET2D))
+  (MAXSRCPOSITION (:STRUCT VKOFFSET2D))
+  (MINSRCEXTENT (:STRUCT VKEXTENT2D))
+  (MAXSRCEXTENT (:STRUCT VKEXTENT2D))
+  (MINDSTPOSITION (:STRUCT VKOFFSET2D))
+  (MAXDSTPOSITION (:STRUCT VKOFFSET2D))
+  (MINDSTEXTENT (:STRUCT VKEXTENT2D))
+  (MAXDSTEXTENT (:STRUCT VKEXTENT2D)))
+
+(CFFI:DEFCSTRUCT VKDISPLAYPLANEPROPERTIESKHR
+  (CURRENTDISPLAY VKDISPLAYKHR)
+  (CURRENTSTACKINDEX :UINT32))
+
+(CFFI:DEFCSTRUCT VKDISPLAYPROPERTIESKHR
+  (DISPLAY VKDISPLAYKHR)
+  (DISPLAYNAME :POINTER)
+  (PHYSICALDIMENSIONS (:STRUCT VKEXTENT2D))
+  (PHYSICALRESOLUTION (:STRUCT VKEXTENT2D))
+  (SUPPORTEDTRANSFORMS VKSURFACETRANSFORMFLAGSKHR)
+  (PLANEREORDERPOSSIBLE VKBOOL32)
+  (PERSISTENTCONTENT VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKDISPLAYSURFACECREATEINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKDISPLAYSURFACECREATEFLAGSKHR)
+  (DISPLAYMODE VKDISPLAYMODEKHR)
+  (PLANEINDEX :UINT32)
+  (PLANESTACKINDEX :UINT32)
+  (TRANSFORM VKSURFACETRANSFORMFLAGBITSKHR)
+  (GLOBALALPHA :FLOAT)
+  (ALPHAMODE VKDISPLAYPLANEALPHAFLAGBITSKHR)
+  (IMAGEEXTENT (:STRUCT VKEXTENT2D)))
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEDISPLAYPROPERTIESKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEDISPLAYPLANEPROPERTIESKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETDISPLAYPLANESUPPORTEDDISPLAYSKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETDISPLAYMODEPROPERTIESKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCREATEDISPLAYMODEKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETDISPLAYPLANECAPABILITIESKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCREATEDISPLAYPLANESURFACEKHR :POINTER)
+
+(CFFI:DEFCSTRUCT VKDISPLAYPRESENTINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SRCRECT (:STRUCT VKRECT2D))
+  (DSTRECT (:STRUCT VKRECT2D))
+  (PERSISTENT VKBOOL32))
+
+(CFFI:DEFCTYPE PFN_VKCREATESHAREDSWAPCHAINSKHR :POINTER)
+
+(CFFI:DEFCTYPE VKRENDERINGFLAGSKHR VKRENDERINGFLAGS)
+
+(CFFI:DEFCTYPE VKRENDERINGFLAGBITSKHR VKRENDERINGFLAGBITS)
+
+(CFFI:DEFCTYPE VKRENDERINGINFOKHR (:STRUCT VKRENDERINGINFO))
+
+(CFFI:DEFCTYPE VKRENDERINGATTACHMENTINFOKHR (:STRUCT VKRENDERINGATTACHMENTINFO))
+
+(CFFI:DEFCTYPE VKPIPELINERENDERINGCREATEINFOKHR
+               (:STRUCT VKPIPELINERENDERINGCREATEINFO))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEDYNAMICRENDERINGFEATURESKHR
+               (:STRUCT VKPHYSICALDEVICEDYNAMICRENDERINGFEATURES))
+
+(CFFI:DEFCTYPE VKCOMMANDBUFFERINHERITANCERENDERINGINFOKHR
+               (:STRUCT VKCOMMANDBUFFERINHERITANCERENDERINGINFO))
+
+(CFFI:DEFCSTRUCT VKRENDERINGFRAGMENTSHADINGRATEATTACHMENTINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (IMAGEVIEW VKIMAGEVIEW)
+  (IMAGELAYOUT VKIMAGELAYOUT)
+  (SHADINGRATEATTACHMENTTEXELSIZE (:STRUCT VKEXTENT2D)))
+
+(CFFI:DEFCSTRUCT VKRENDERINGFRAGMENTDENSITYMAPATTACHMENTINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (IMAGEVIEW VKIMAGEVIEW)
+  (IMAGELAYOUT VKIMAGELAYOUT))
+
+(CFFI:DEFCSTRUCT VKATTACHMENTSAMPLECOUNTINFOAMD
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (COLORATTACHMENTCOUNT :UINT32)
+  (PCOLORATTACHMENTSAMPLES :POINTER)
+  (DEPTHSTENCILATTACHMENTSAMPLES VKSAMPLECOUNTFLAGBITS))
+
+(CFFI:DEFCTYPE VKATTACHMENTSAMPLECOUNTINFONV
+               (:STRUCT VKATTACHMENTSAMPLECOUNTINFOAMD))
+
+(CFFI:DEFCSTRUCT VKMULTIVIEWPERVIEWATTRIBUTESINFONVX
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PERVIEWATTRIBUTES VKBOOL32)
+  (PERVIEWATTRIBUTESPOSITIONXONLY VKBOOL32))
+
+(CFFI:DEFCTYPE PFN_VKCMDBEGINRENDERINGKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDENDRENDERINGKHR :POINTER)
+
+(CFFI:DEFCTYPE VKRENDERPASSMULTIVIEWCREATEINFOKHR
+               (:STRUCT VKRENDERPASSMULTIVIEWCREATEINFO))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEMULTIVIEWFEATURESKHR
+               (:STRUCT VKPHYSICALDEVICEMULTIVIEWFEATURES))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEMULTIVIEWPROPERTIESKHR
+               (:STRUCT VKPHYSICALDEVICEMULTIVIEWPROPERTIES))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEFEATURES2KHR (:STRUCT VKPHYSICALDEVICEFEATURES2))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEPROPERTIES2KHR
+               (:STRUCT VKPHYSICALDEVICEPROPERTIES2))
+
+(CFFI:DEFCTYPE VKFORMATPROPERTIES2KHR (:STRUCT VKFORMATPROPERTIES2))
+
+(CFFI:DEFCTYPE VKIMAGEFORMATPROPERTIES2KHR (:STRUCT VKIMAGEFORMATPROPERTIES2))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEIMAGEFORMATINFO2KHR
+               (:STRUCT VKPHYSICALDEVICEIMAGEFORMATINFO2))
+
+(CFFI:DEFCTYPE VKQUEUEFAMILYPROPERTIES2KHR (:STRUCT VKQUEUEFAMILYPROPERTIES2))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEMEMORYPROPERTIES2KHR
+               (:STRUCT VKPHYSICALDEVICEMEMORYPROPERTIES2))
+
+(CFFI:DEFCTYPE VKSPARSEIMAGEFORMATPROPERTIES2KHR
+               (:STRUCT VKSPARSEIMAGEFORMATPROPERTIES2))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICESPARSEIMAGEFORMATINFO2KHR
+               (:STRUCT VKPHYSICALDEVICESPARSEIMAGEFORMATINFO2))
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEFEATURES2KHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEPROPERTIES2KHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEFORMATPROPERTIES2KHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEIMAGEFORMATPROPERTIES2KHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEQUEUEFAMILYPROPERTIES2KHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEMEMORYPROPERTIES2KHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICESPARSEIMAGEFORMATPROPERTIES2KHR :POINTER)
+
+(CFFI:DEFCTYPE VKPEERMEMORYFEATUREFLAGSKHR VKPEERMEMORYFEATUREFLAGS)
+
+(CFFI:DEFCTYPE VKPEERMEMORYFEATUREFLAGBITSKHR VKPEERMEMORYFEATUREFLAGBITS)
+
+(CFFI:DEFCTYPE VKMEMORYALLOCATEFLAGSKHR VKMEMORYALLOCATEFLAGS)
+
+(CFFI:DEFCTYPE VKMEMORYALLOCATEFLAGBITSKHR VKMEMORYALLOCATEFLAGBITS)
+
+(CFFI:DEFCTYPE VKMEMORYALLOCATEFLAGSINFOKHR (:STRUCT VKMEMORYALLOCATEFLAGSINFO))
+
+(CFFI:DEFCTYPE VKDEVICEGROUPRENDERPASSBEGININFOKHR
+               (:STRUCT VKDEVICEGROUPRENDERPASSBEGININFO))
+
+(CFFI:DEFCTYPE VKDEVICEGROUPCOMMANDBUFFERBEGININFOKHR
+               (:STRUCT VKDEVICEGROUPCOMMANDBUFFERBEGININFO))
+
+(CFFI:DEFCTYPE VKDEVICEGROUPSUBMITINFOKHR (:STRUCT VKDEVICEGROUPSUBMITINFO))
+
+(CFFI:DEFCTYPE VKDEVICEGROUPBINDSPARSEINFOKHR
+               (:STRUCT VKDEVICEGROUPBINDSPARSEINFO))
+
+(CFFI:DEFCTYPE VKBINDBUFFERMEMORYDEVICEGROUPINFOKHR
+               (:STRUCT VKBINDBUFFERMEMORYDEVICEGROUPINFO))
+
+(CFFI:DEFCTYPE VKBINDIMAGEMEMORYDEVICEGROUPINFOKHR
+               (:STRUCT VKBINDIMAGEMEMORYDEVICEGROUPINFO))
+
+(CFFI:DEFCTYPE PFN_VKGETDEVICEGROUPPEERMEMORYFEATURESKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETDEVICEMASKKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDDISPATCHBASEKHR :POINTER)
+
+(CFFI:DEFCTYPE VKCOMMANDPOOLTRIMFLAGSKHR VKCOMMANDPOOLTRIMFLAGS)
+
+(CFFI:DEFCTYPE PFN_VKTRIMCOMMANDPOOLKHR :POINTER)
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEGROUPPROPERTIESKHR
+               (:STRUCT VKPHYSICALDEVICEGROUPPROPERTIES))
+
+(CFFI:DEFCTYPE VKDEVICEGROUPDEVICECREATEINFOKHR
+               (:STRUCT VKDEVICEGROUPDEVICECREATEINFO))
+
+(CFFI:DEFCTYPE PFN_VKENUMERATEPHYSICALDEVICEGROUPSKHR :POINTER)
+
+(CFFI:DEFCTYPE VKEXTERNALMEMORYHANDLETYPEFLAGSKHR
+               VKEXTERNALMEMORYHANDLETYPEFLAGS)
+
+(CFFI:DEFCTYPE VKEXTERNALMEMORYHANDLETYPEFLAGBITSKHR
+               VKEXTERNALMEMORYHANDLETYPEFLAGBITS)
+
+(CFFI:DEFCTYPE VKEXTERNALMEMORYFEATUREFLAGSKHR VKEXTERNALMEMORYFEATUREFLAGS)
+
+(CFFI:DEFCTYPE VKEXTERNALMEMORYFEATUREFLAGBITSKHR
+               VKEXTERNALMEMORYFEATUREFLAGBITS)
+
+(CFFI:DEFCTYPE VKEXTERNALMEMORYPROPERTIESKHR
+               (:STRUCT VKEXTERNALMEMORYPROPERTIES))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEEXTERNALIMAGEFORMATINFOKHR
+               (:STRUCT VKPHYSICALDEVICEEXTERNALIMAGEFORMATINFO))
+
+(CFFI:DEFCTYPE VKEXTERNALIMAGEFORMATPROPERTIESKHR
+               (:STRUCT VKEXTERNALIMAGEFORMATPROPERTIES))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEEXTERNALBUFFERINFOKHR
+               (:STRUCT VKPHYSICALDEVICEEXTERNALBUFFERINFO))
+
+(CFFI:DEFCTYPE VKEXTERNALBUFFERPROPERTIESKHR
+               (:STRUCT VKEXTERNALBUFFERPROPERTIES))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEIDPROPERTIESKHR
+               (:STRUCT VKPHYSICALDEVICEIDPROPERTIES))
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEEXTERNALBUFFERPROPERTIESKHR :POINTER)
+
+(CFFI:DEFCTYPE VKEXTERNALMEMORYIMAGECREATEINFOKHR
+               (:STRUCT VKEXTERNALMEMORYIMAGECREATEINFO))
+
+(CFFI:DEFCTYPE VKEXTERNALMEMORYBUFFERCREATEINFOKHR
+               (:STRUCT VKEXTERNALMEMORYBUFFERCREATEINFO))
+
+(CFFI:DEFCTYPE VKEXPORTMEMORYALLOCATEINFOKHR
+               (:STRUCT VKEXPORTMEMORYALLOCATEINFO))
+
+(CFFI:DEFCSTRUCT VKIMPORTMEMORYFDINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (HANDLETYPE VKEXTERNALMEMORYHANDLETYPEFLAGBITS)
+  (FD :INT))
+
+(CFFI:DEFCSTRUCT VKMEMORYFDPROPERTIESKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MEMORYTYPEBITS :UINT32))
+
+(CFFI:DEFCSTRUCT VKMEMORYGETFDINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MEMORY VKDEVICEMEMORY)
+  (HANDLETYPE VKEXTERNALMEMORYHANDLETYPEFLAGBITS))
+
+(CFFI:DEFCTYPE PFN_VKGETMEMORYFDKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETMEMORYFDPROPERTIESKHR :POINTER)
+
+(CFFI:DEFCTYPE VKEXTERNALSEMAPHOREHANDLETYPEFLAGSKHR
+               VKEXTERNALSEMAPHOREHANDLETYPEFLAGS)
+
+(CFFI:DEFCTYPE VKEXTERNALSEMAPHOREHANDLETYPEFLAGBITSKHR
+               VKEXTERNALSEMAPHOREHANDLETYPEFLAGBITS)
+
+(CFFI:DEFCTYPE VKEXTERNALSEMAPHOREFEATUREFLAGSKHR
+               VKEXTERNALSEMAPHOREFEATUREFLAGS)
+
+(CFFI:DEFCTYPE VKEXTERNALSEMAPHOREFEATUREFLAGBITSKHR
+               VKEXTERNALSEMAPHOREFEATUREFLAGBITS)
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEEXTERNALSEMAPHOREINFOKHR
+               (:STRUCT VKPHYSICALDEVICEEXTERNALSEMAPHOREINFO))
+
+(CFFI:DEFCTYPE VKEXTERNALSEMAPHOREPROPERTIESKHR
+               (:STRUCT VKEXTERNALSEMAPHOREPROPERTIES))
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEEXTERNALSEMAPHOREPROPERTIESKHR :POINTER)
+
+(CFFI:DEFCTYPE VKSEMAPHOREIMPORTFLAGSKHR VKSEMAPHOREIMPORTFLAGS)
+
+(CFFI:DEFCTYPE VKSEMAPHOREIMPORTFLAGBITSKHR VKSEMAPHOREIMPORTFLAGBITS)
+
+(CFFI:DEFCTYPE VKEXPORTSEMAPHORECREATEINFOKHR
+               (:STRUCT VKEXPORTSEMAPHORECREATEINFO))
+
+(CFFI:DEFCSTRUCT VKIMPORTSEMAPHOREFDINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SEMAPHORE VKSEMAPHORE)
+  (FLAGS VKSEMAPHOREIMPORTFLAGS)
+  (HANDLETYPE VKEXTERNALSEMAPHOREHANDLETYPEFLAGBITS)
+  (FD :INT))
+
+(CFFI:DEFCSTRUCT VKSEMAPHOREGETFDINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SEMAPHORE VKSEMAPHORE)
+  (HANDLETYPE VKEXTERNALSEMAPHOREHANDLETYPEFLAGBITS))
+
+(CFFI:DEFCTYPE PFN_VKIMPORTSEMAPHOREFDKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETSEMAPHOREFDKHR :POINTER)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEPUSHDESCRIPTORPROPERTIESKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MAXPUSHDESCRIPTORS :UINT32))
+
+(CFFI:DEFCTYPE PFN_VKCMDPUSHDESCRIPTORSETKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDPUSHDESCRIPTORSETWITHTEMPLATEKHR :POINTER)
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICESHADERFLOAT16INT8FEATURESKHR
+               (:STRUCT VKPHYSICALDEVICESHADERFLOAT16INT8FEATURES))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEFLOAT16INT8FEATURESKHR
+               (:STRUCT VKPHYSICALDEVICESHADERFLOAT16INT8FEATURES))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICE16BITSTORAGEFEATURESKHR
+               (:STRUCT VKPHYSICALDEVICE16BITSTORAGEFEATURES))
+
+(CFFI:DEFCSTRUCT VKRECTLAYERKHR
+  (OFFSET (:STRUCT VKOFFSET2D))
+  (EXTENT (:STRUCT VKEXTENT2D))
+  (LAYER :UINT32))
+
+(CFFI:DEFCSTRUCT VKPRESENTREGIONKHR
+  (RECTANGLECOUNT :UINT32)
+  (PRECTANGLES :POINTER))
+
+(CFFI:DEFCSTRUCT VKPRESENTREGIONSKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SWAPCHAINCOUNT :UINT32)
+  (PREGIONS :POINTER))
+
+(CFFI:DEFCTYPE VKDESCRIPTORUPDATETEMPLATEKHR :POINTER)
+
+(CFFI:DEFCTYPE VKDESCRIPTORUPDATETEMPLATETYPEKHR VKDESCRIPTORUPDATETEMPLATETYPE)
+
+(CFFI:DEFCTYPE VKDESCRIPTORUPDATETEMPLATECREATEFLAGSKHR
+               VKDESCRIPTORUPDATETEMPLATECREATEFLAGS)
+
+(CFFI:DEFCTYPE VKDESCRIPTORUPDATETEMPLATEENTRYKHR
+               (:STRUCT VKDESCRIPTORUPDATETEMPLATEENTRY))
+
+(CFFI:DEFCTYPE VKDESCRIPTORUPDATETEMPLATECREATEINFOKHR
+               (:STRUCT VKDESCRIPTORUPDATETEMPLATECREATEINFO))
+
+(CFFI:DEFCTYPE PFN_VKCREATEDESCRIPTORUPDATETEMPLATEKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYDESCRIPTORUPDATETEMPLATEKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKUPDATEDESCRIPTORSETWITHTEMPLATEKHR :POINTER)
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEIMAGELESSFRAMEBUFFERFEATURESKHR
+               (:STRUCT VKPHYSICALDEVICEIMAGELESSFRAMEBUFFERFEATURES))
+
+(CFFI:DEFCTYPE VKFRAMEBUFFERATTACHMENTSCREATEINFOKHR
+               (:STRUCT VKFRAMEBUFFERATTACHMENTSCREATEINFO))
+
+(CFFI:DEFCTYPE VKFRAMEBUFFERATTACHMENTIMAGEINFOKHR
+               (:STRUCT VKFRAMEBUFFERATTACHMENTIMAGEINFO))
+
+(CFFI:DEFCTYPE VKRENDERPASSATTACHMENTBEGININFOKHR
+               (:STRUCT VKRENDERPASSATTACHMENTBEGININFO))
+
+(CFFI:DEFCTYPE VKRENDERPASSCREATEINFO2KHR (:STRUCT VKRENDERPASSCREATEINFO2))
+
+(CFFI:DEFCTYPE VKATTACHMENTDESCRIPTION2KHR (:STRUCT VKATTACHMENTDESCRIPTION2))
+
+(CFFI:DEFCTYPE VKATTACHMENTREFERENCE2KHR (:STRUCT VKATTACHMENTREFERENCE2))
+
+(CFFI:DEFCTYPE VKSUBPASSDESCRIPTION2KHR (:STRUCT VKSUBPASSDESCRIPTION2))
+
+(CFFI:DEFCTYPE VKSUBPASSDEPENDENCY2KHR (:STRUCT VKSUBPASSDEPENDENCY2))
+
+(CFFI:DEFCTYPE VKSUBPASSBEGININFOKHR (:STRUCT VKSUBPASSBEGININFO))
+
+(CFFI:DEFCTYPE VKSUBPASSENDINFOKHR (:STRUCT VKSUBPASSENDINFO))
+
+(CFFI:DEFCTYPE PFN_VKCREATERENDERPASS2KHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDBEGINRENDERPASS2KHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDNEXTSUBPASS2KHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDENDRENDERPASS2KHR :POINTER)
+
+(CFFI:DEFCSTRUCT VKSHAREDPRESENTSURFACECAPABILITIESKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SHAREDPRESENTSUPPORTEDUSAGEFLAGS VKIMAGEUSAGEFLAGS))
+
+(CFFI:DEFCTYPE PFN_VKGETSWAPCHAINSTATUSKHR :POINTER)
+
+(CFFI:DEFCTYPE VKEXTERNALFENCEHANDLETYPEFLAGSKHR VKEXTERNALFENCEHANDLETYPEFLAGS)
+
+(CFFI:DEFCTYPE VKEXTERNALFENCEHANDLETYPEFLAGBITSKHR
+               VKEXTERNALFENCEHANDLETYPEFLAGBITS)
+
+(CFFI:DEFCTYPE VKEXTERNALFENCEFEATUREFLAGSKHR VKEXTERNALFENCEFEATUREFLAGS)
+
+(CFFI:DEFCTYPE VKEXTERNALFENCEFEATUREFLAGBITSKHR VKEXTERNALFENCEFEATUREFLAGBITS)
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEEXTERNALFENCEINFOKHR
+               (:STRUCT VKPHYSICALDEVICEEXTERNALFENCEINFO))
+
+(CFFI:DEFCTYPE VKEXTERNALFENCEPROPERTIESKHR (:STRUCT VKEXTERNALFENCEPROPERTIES))
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEEXTERNALFENCEPROPERTIESKHR :POINTER)
+
+(CFFI:DEFCTYPE VKFENCEIMPORTFLAGSKHR VKFENCEIMPORTFLAGS)
+
+(CFFI:DEFCTYPE VKFENCEIMPORTFLAGBITSKHR VKFENCEIMPORTFLAGBITS)
+
+(CFFI:DEFCTYPE VKEXPORTFENCECREATEINFOKHR (:STRUCT VKEXPORTFENCECREATEINFO))
+
+(CFFI:DEFCSTRUCT VKIMPORTFENCEFDINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FENCE VKFENCE)
+  (FLAGS VKFENCEIMPORTFLAGS)
+  (HANDLETYPE VKEXTERNALFENCEHANDLETYPEFLAGBITS)
+  (FD :INT))
+
+(CFFI:DEFCSTRUCT VKFENCEGETFDINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FENCE VKFENCE)
+  (HANDLETYPE VKEXTERNALFENCEHANDLETYPEFLAGBITS))
+
+(CFFI:DEFCTYPE PFN_VKIMPORTFENCEFDKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETFENCEFDKHR :POINTER)
+
+(CFFI:DEFCTYPE VKPERFORMANCECOUNTERUNITKHR :INT)
+
+(CFFI:DEFCTYPE VKPERFORMANCECOUNTERSCOPEKHR :INT)
+
+(CFFI:DEFCTYPE VKPERFORMANCECOUNTERSTORAGEKHR :INT)
+
+(CFFI:DEFCTYPE VKPERFORMANCECOUNTERDESCRIPTIONFLAGBITSKHR :INT)
+
+(CFFI:DEFCTYPE VKPERFORMANCECOUNTERDESCRIPTIONFLAGSKHR VKFLAGS)
+
+(CFFI:DEFCTYPE VKACQUIREPROFILINGLOCKFLAGBITSKHR :INT)
+
+(CFFI:DEFCTYPE VKACQUIREPROFILINGLOCKFLAGSKHR VKFLAGS)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEPERFORMANCEQUERYFEATURESKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PERFORMANCECOUNTERQUERYPOOLS VKBOOL32)
+  (PERFORMANCECOUNTERMULTIPLEQUERYPOOLS VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEPERFORMANCEQUERYPROPERTIESKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (ALLOWCOMMANDBUFFERQUERYCOPIES VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPERFORMANCECOUNTERKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (UNIT VKPERFORMANCECOUNTERUNITKHR)
+  (SCOPE VKPERFORMANCECOUNTERSCOPEKHR)
+  (STORAGE VKPERFORMANCECOUNTERSTORAGEKHR)
+  (UUID :UINT8 :COUNT 16))
+
+(CFFI:DEFCSTRUCT VKPERFORMANCECOUNTERDESCRIPTIONKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKPERFORMANCECOUNTERDESCRIPTIONFLAGSKHR)
+  (NAME :CHAR :COUNT 256)
+  (CATEGORY :CHAR :COUNT 256)
+  (DESCRIPTION :CHAR :COUNT 256))
+
+(CFFI:DEFCSTRUCT VKQUERYPOOLPERFORMANCECREATEINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (QUEUEFAMILYINDEX :UINT32)
+  (COUNTERINDEXCOUNT :UINT32)
+  (PCOUNTERINDICES :POINTER))
+
+(CFFI:DEFCUNION VKPERFORMANCECOUNTERRESULTKHR
+  (INT32 :INT32)
+  (INT64 :INT64)
+  (UINT32 :UINT32)
+  (UINT64 :UINT64)
+  (FLOAT32 :FLOAT)
+  (FLOAT64 :DOUBLE))
+
+(CFFI:DEFCSTRUCT VKACQUIREPROFILINGLOCKINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKACQUIREPROFILINGLOCKFLAGSKHR)
+  (TIMEOUT :UINT64))
+
+(CFFI:DEFCSTRUCT VKPERFORMANCEQUERYSUBMITINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (COUNTERPASSINDEX :UINT32))
+
+(CFFI:DEFCTYPE
+ PFN_VKENUMERATEPHYSICALDEVICEQUEUEFAMILYPERFORMANCEQUERYCOUNTERSKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEQUEUEFAMILYPERFORMANCEQUERYPASSESKHR
+               :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKACQUIREPROFILINGLOCKKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKRELEASEPROFILINGLOCKKHR :POINTER)
+
+(CFFI:DEFCTYPE VKPOINTCLIPPINGBEHAVIORKHR VKPOINTCLIPPINGBEHAVIOR)
+
+(CFFI:DEFCTYPE VKTESSELLATIONDOMAINORIGINKHR VKTESSELLATIONDOMAINORIGIN)
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEPOINTCLIPPINGPROPERTIESKHR
+               (:STRUCT VKPHYSICALDEVICEPOINTCLIPPINGPROPERTIES))
+
+(CFFI:DEFCTYPE VKRENDERPASSINPUTATTACHMENTASPECTCREATEINFOKHR
+               (:STRUCT VKRENDERPASSINPUTATTACHMENTASPECTCREATEINFO))
+
+(CFFI:DEFCTYPE VKINPUTATTACHMENTASPECTREFERENCEKHR
+               (:STRUCT VKINPUTATTACHMENTASPECTREFERENCE))
+
+(CFFI:DEFCTYPE VKIMAGEVIEWUSAGECREATEINFOKHR
+               (:STRUCT VKIMAGEVIEWUSAGECREATEINFO))
+
+(CFFI:DEFCTYPE VKPIPELINETESSELLATIONDOMAINORIGINSTATECREATEINFOKHR
+               (:STRUCT VKPIPELINETESSELLATIONDOMAINORIGINSTATECREATEINFO))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESURFACEINFO2KHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SURFACE VKSURFACEKHR))
+
+(CFFI:DEFCSTRUCT VKSURFACECAPABILITIES2KHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SURFACECAPABILITIES (:STRUCT VKSURFACECAPABILITIESKHR)))
+
+(CFFI:DEFCSTRUCT VKSURFACEFORMAT2KHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SURFACEFORMAT (:STRUCT VKSURFACEFORMATKHR)))
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICESURFACECAPABILITIES2KHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICESURFACEFORMATS2KHR :POINTER)
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEVARIABLEPOINTERFEATURESKHR
+               (:STRUCT VKPHYSICALDEVICEVARIABLEPOINTERSFEATURES))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEVARIABLEPOINTERSFEATURESKHR
+               (:STRUCT VKPHYSICALDEVICEVARIABLEPOINTERSFEATURES))
+
+(CFFI:DEFCSTRUCT VKDISPLAYPROPERTIES2KHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DISPLAYPROPERTIES (:STRUCT VKDISPLAYPROPERTIESKHR)))
+
+(CFFI:DEFCSTRUCT VKDISPLAYPLANEPROPERTIES2KHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DISPLAYPLANEPROPERTIES (:STRUCT VKDISPLAYPLANEPROPERTIESKHR)))
+
+(CFFI:DEFCSTRUCT VKDISPLAYMODEPROPERTIES2KHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DISPLAYMODEPROPERTIES (:STRUCT VKDISPLAYMODEPROPERTIESKHR)))
+
+(CFFI:DEFCSTRUCT VKDISPLAYPLANEINFO2KHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MODE VKDISPLAYMODEKHR)
+  (PLANEINDEX :UINT32))
+
+(CFFI:DEFCSTRUCT VKDISPLAYPLANECAPABILITIES2KHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (CAPABILITIES (:STRUCT VKDISPLAYPLANECAPABILITIESKHR)))
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEDISPLAYPROPERTIES2KHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEDISPLAYPLANEPROPERTIES2KHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETDISPLAYMODEPROPERTIES2KHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETDISPLAYPLANECAPABILITIES2KHR :POINTER)
+
+(CFFI:DEFCTYPE VKMEMORYDEDICATEDREQUIREMENTSKHR
+               (:STRUCT VKMEMORYDEDICATEDREQUIREMENTS))
+
+(CFFI:DEFCTYPE VKMEMORYDEDICATEDALLOCATEINFOKHR
+               (:STRUCT VKMEMORYDEDICATEDALLOCATEINFO))
+
+(CFFI:DEFCTYPE VKBUFFERMEMORYREQUIREMENTSINFO2KHR
+               (:STRUCT VKBUFFERMEMORYREQUIREMENTSINFO2))
+
+(CFFI:DEFCTYPE VKIMAGEMEMORYREQUIREMENTSINFO2KHR
+               (:STRUCT VKIMAGEMEMORYREQUIREMENTSINFO2))
+
+(CFFI:DEFCTYPE VKIMAGESPARSEMEMORYREQUIREMENTSINFO2KHR
+               (:STRUCT VKIMAGESPARSEMEMORYREQUIREMENTSINFO2))
+
+(CFFI:DEFCTYPE VKMEMORYREQUIREMENTS2KHR (:STRUCT VKMEMORYREQUIREMENTS2))
+
+(CFFI:DEFCTYPE VKSPARSEIMAGEMEMORYREQUIREMENTS2KHR
+               (:STRUCT VKSPARSEIMAGEMEMORYREQUIREMENTS2))
+
+(CFFI:DEFCTYPE PFN_VKGETIMAGEMEMORYREQUIREMENTS2KHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETBUFFERMEMORYREQUIREMENTS2KHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETIMAGESPARSEMEMORYREQUIREMENTS2KHR :POINTER)
+
+(CFFI:DEFCTYPE VKIMAGEFORMATLISTCREATEINFOKHR
+               (:STRUCT VKIMAGEFORMATLISTCREATEINFO))
+
+(CFFI:DEFCTYPE VKSAMPLERYCBCRCONVERSIONKHR :POINTER)
+
+(CFFI:DEFCTYPE VKSAMPLERYCBCRMODELCONVERSIONKHR VKSAMPLERYCBCRMODELCONVERSION)
+
+(CFFI:DEFCTYPE VKSAMPLERYCBCRRANGEKHR VKSAMPLERYCBCRRANGE)
+
+(CFFI:DEFCTYPE VKCHROMALOCATIONKHR VKCHROMALOCATION)
+
+(CFFI:DEFCTYPE VKSAMPLERYCBCRCONVERSIONCREATEINFOKHR
+               (:STRUCT VKSAMPLERYCBCRCONVERSIONCREATEINFO))
+
+(CFFI:DEFCTYPE VKSAMPLERYCBCRCONVERSIONINFOKHR
+               (:STRUCT VKSAMPLERYCBCRCONVERSIONINFO))
+
+(CFFI:DEFCTYPE VKBINDIMAGEPLANEMEMORYINFOKHR
+               (:STRUCT VKBINDIMAGEPLANEMEMORYINFO))
+
+(CFFI:DEFCTYPE VKIMAGEPLANEMEMORYREQUIREMENTSINFOKHR
+               (:STRUCT VKIMAGEPLANEMEMORYREQUIREMENTSINFO))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICESAMPLERYCBCRCONVERSIONFEATURESKHR
+               (:STRUCT VKPHYSICALDEVICESAMPLERYCBCRCONVERSIONFEATURES))
+
+(CFFI:DEFCTYPE VKSAMPLERYCBCRCONVERSIONIMAGEFORMATPROPERTIESKHR
+               (:STRUCT VKSAMPLERYCBCRCONVERSIONIMAGEFORMATPROPERTIES))
+
+(CFFI:DEFCTYPE PFN_VKCREATESAMPLERYCBCRCONVERSIONKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYSAMPLERYCBCRCONVERSIONKHR :POINTER)
+
+(CFFI:DEFCTYPE VKBINDBUFFERMEMORYINFOKHR (:STRUCT VKBINDBUFFERMEMORYINFO))
+
+(CFFI:DEFCTYPE VKBINDIMAGEMEMORYINFOKHR (:STRUCT VKBINDIMAGEMEMORYINFO))
+
+(CFFI:DEFCTYPE PFN_VKBINDBUFFERMEMORY2KHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKBINDIMAGEMEMORY2KHR :POINTER)
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEMAINTENANCE3PROPERTIESKHR
+               (:STRUCT VKPHYSICALDEVICEMAINTENANCE3PROPERTIES))
+
+(CFFI:DEFCTYPE VKDESCRIPTORSETLAYOUTSUPPORTKHR
+               (:STRUCT VKDESCRIPTORSETLAYOUTSUPPORT))
+
+(CFFI:DEFCTYPE PFN_VKGETDESCRIPTORSETLAYOUTSUPPORTKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDDRAWINDIRECTCOUNTKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDDRAWINDEXEDINDIRECTCOUNTKHR :POINTER)
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICESHADERSUBGROUPEXTENDEDTYPESFEATURESKHR
+               (:STRUCT VKPHYSICALDEVICESHADERSUBGROUPEXTENDEDTYPESFEATURES))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICE8BITSTORAGEFEATURESKHR
+               (:STRUCT VKPHYSICALDEVICE8BITSTORAGEFEATURES))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICESHADERATOMICINT64FEATURESKHR
+               (:STRUCT VKPHYSICALDEVICESHADERATOMICINT64FEATURES))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESHADERCLOCKFEATURESKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SHADERSUBGROUPCLOCK VKBOOL32)
+  (SHADERDEVICECLOCK VKBOOL32))
+
+(CFFI:DEFCTYPE VKQUEUEGLOBALPRIORITYKHR :INT)
+
+(CFFI:DEFCSTRUCT VKDEVICEQUEUEGLOBALPRIORITYCREATEINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (GLOBALPRIORITY VKQUEUEGLOBALPRIORITYKHR))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEGLOBALPRIORITYQUERYFEATURESKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (GLOBALPRIORITYQUERY VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKQUEUEFAMILYGLOBALPRIORITYPROPERTIESKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PRIORITYCOUNT :UINT32)
+  (PRIORITIES VKQUEUEGLOBALPRIORITYKHR :COUNT 16))
+
+(CFFI:DEFCTYPE VKDRIVERIDKHR VKDRIVERID)
+
+(CFFI:DEFCTYPE VKCONFORMANCEVERSIONKHR (:STRUCT VKCONFORMANCEVERSION))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEDRIVERPROPERTIESKHR
+               (:STRUCT VKPHYSICALDEVICEDRIVERPROPERTIES))
+
+(CFFI:DEFCTYPE VKSHADERFLOATCONTROLSINDEPENDENCEKHR
+               VKSHADERFLOATCONTROLSINDEPENDENCE)
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEFLOATCONTROLSPROPERTIESKHR
+               (:STRUCT VKPHYSICALDEVICEFLOATCONTROLSPROPERTIES))
+
+(CFFI:DEFCTYPE VKRESOLVEMODEFLAGBITSKHR VKRESOLVEMODEFLAGBITS)
+
+(CFFI:DEFCTYPE VKRESOLVEMODEFLAGSKHR VKRESOLVEMODEFLAGS)
+
+(CFFI:DEFCTYPE VKSUBPASSDESCRIPTIONDEPTHSTENCILRESOLVEKHR
+               (:STRUCT VKSUBPASSDESCRIPTIONDEPTHSTENCILRESOLVE))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEDEPTHSTENCILRESOLVEPROPERTIESKHR
+               (:STRUCT VKPHYSICALDEVICEDEPTHSTENCILRESOLVEPROPERTIES))
+
+(CFFI:DEFCTYPE VKSEMAPHORETYPEKHR VKSEMAPHORETYPE)
+
+(CFFI:DEFCTYPE VKSEMAPHOREWAITFLAGBITSKHR VKSEMAPHOREWAITFLAGBITS)
+
+(CFFI:DEFCTYPE VKSEMAPHOREWAITFLAGSKHR VKSEMAPHOREWAITFLAGS)
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICETIMELINESEMAPHOREFEATURESKHR
+               (:STRUCT VKPHYSICALDEVICETIMELINESEMAPHOREFEATURES))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICETIMELINESEMAPHOREPROPERTIESKHR
+               (:STRUCT VKPHYSICALDEVICETIMELINESEMAPHOREPROPERTIES))
+
+(CFFI:DEFCTYPE VKSEMAPHORETYPECREATEINFOKHR (:STRUCT VKSEMAPHORETYPECREATEINFO))
+
+(CFFI:DEFCTYPE VKTIMELINESEMAPHORESUBMITINFOKHR
+               (:STRUCT VKTIMELINESEMAPHORESUBMITINFO))
+
+(CFFI:DEFCTYPE VKSEMAPHOREWAITINFOKHR (:STRUCT VKSEMAPHOREWAITINFO))
+
+(CFFI:DEFCTYPE VKSEMAPHORESIGNALINFOKHR (:STRUCT VKSEMAPHORESIGNALINFO))
+
+(CFFI:DEFCTYPE PFN_VKGETSEMAPHORECOUNTERVALUEKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKWAITSEMAPHORESKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKSIGNALSEMAPHOREKHR :POINTER)
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEVULKANMEMORYMODELFEATURESKHR
+               (:STRUCT VKPHYSICALDEVICEVULKANMEMORYMODELFEATURES))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICESHADERTERMINATEINVOCATIONFEATURESKHR
+               (:STRUCT VKPHYSICALDEVICESHADERTERMINATEINVOCATIONFEATURES))
+
+(CFFI:DEFCTYPE VKFRAGMENTSHADINGRATECOMBINEROPKHR :INT)
+
+(CFFI:DEFCSTRUCT VKFRAGMENTSHADINGRATEATTACHMENTINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PFRAGMENTSHADINGRATEATTACHMENT :POINTER)
+  (SHADINGRATEATTACHMENTTEXELSIZE (:STRUCT VKEXTENT2D)))
+
+(CFFI:DEFCSTRUCT VKPIPELINEFRAGMENTSHADINGRATESTATECREATEINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FRAGMENTSIZE (:STRUCT VKEXTENT2D))
+  (COMBINEROPS VKFRAGMENTSHADINGRATECOMBINEROPKHR :COUNT 2))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEFRAGMENTSHADINGRATEFEATURESKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PIPELINEFRAGMENTSHADINGRATE VKBOOL32)
+  (PRIMITIVEFRAGMENTSHADINGRATE VKBOOL32)
+  (ATTACHMENTFRAGMENTSHADINGRATE VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEFRAGMENTSHADINGRATEPROPERTIESKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MINFRAGMENTSHADINGRATEATTACHMENTTEXELSIZE (:STRUCT VKEXTENT2D))
+  (MAXFRAGMENTSHADINGRATEATTACHMENTTEXELSIZE (:STRUCT VKEXTENT2D))
+  (MAXFRAGMENTSHADINGRATEATTACHMENTTEXELSIZEASPECTRATIO :UINT32)
+  (PRIMITIVEFRAGMENTSHADINGRATEWITHMULTIPLEVIEWPORTS VKBOOL32)
+  (LAYEREDSHADINGRATEATTACHMENTS VKBOOL32)
+  (FRAGMENTSHADINGRATENONTRIVIALCOMBINEROPS VKBOOL32)
+  (MAXFRAGMENTSIZE (:STRUCT VKEXTENT2D))
+  (MAXFRAGMENTSIZEASPECTRATIO :UINT32)
+  (MAXFRAGMENTSHADINGRATECOVERAGESAMPLES :UINT32)
+  (MAXFRAGMENTSHADINGRATERASTERIZATIONSAMPLES VKSAMPLECOUNTFLAGBITS)
+  (FRAGMENTSHADINGRATEWITHSHADERDEPTHSTENCILWRITES VKBOOL32)
+  (FRAGMENTSHADINGRATEWITHSAMPLEMASK VKBOOL32)
+  (FRAGMENTSHADINGRATEWITHSHADERSAMPLEMASK VKBOOL32)
+  (FRAGMENTSHADINGRATEWITHCONSERVATIVERASTERIZATION VKBOOL32)
+  (FRAGMENTSHADINGRATEWITHFRAGMENTSHADERINTERLOCK VKBOOL32)
+  (FRAGMENTSHADINGRATEWITHCUSTOMSAMPLELOCATIONS VKBOOL32)
+  (FRAGMENTSHADINGRATESTRICTMULTIPLYCOMBINER VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEFRAGMENTSHADINGRATEKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SAMPLECOUNTS VKSAMPLECOUNTFLAGS)
+  (FRAGMENTSIZE (:STRUCT VKEXTENT2D)))
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEFRAGMENTSHADINGRATESKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETFRAGMENTSHADINGRATEKHR :POINTER)
+
+(CFFI:DEFCSTRUCT VKSURFACEPROTECTEDCAPABILITIESKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SUPPORTSPROTECTED VKBOOL32))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICESEPARATEDEPTHSTENCILLAYOUTSFEATURESKHR
+               (:STRUCT VKPHYSICALDEVICESEPARATEDEPTHSTENCILLAYOUTSFEATURES))
+
+(CFFI:DEFCTYPE VKATTACHMENTREFERENCESTENCILLAYOUTKHR
+               (:STRUCT VKATTACHMENTREFERENCESTENCILLAYOUT))
+
+(CFFI:DEFCTYPE VKATTACHMENTDESCRIPTIONSTENCILLAYOUTKHR
+               (:STRUCT VKATTACHMENTDESCRIPTIONSTENCILLAYOUT))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEPRESENTWAITFEATURESKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PRESENTWAIT VKBOOL32))
+
+(CFFI:DEFCTYPE PFN_VKWAITFORPRESENTKHR :POINTER)
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEUNIFORMBUFFERSTANDARDLAYOUTFEATURESKHR
+               (:STRUCT VKPHYSICALDEVICEUNIFORMBUFFERSTANDARDLAYOUTFEATURES))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEBUFFERDEVICEADDRESSFEATURESKHR
+               (:STRUCT VKPHYSICALDEVICEBUFFERDEVICEADDRESSFEATURES))
+
+(CFFI:DEFCTYPE VKBUFFERDEVICEADDRESSINFOKHR (:STRUCT VKBUFFERDEVICEADDRESSINFO))
+
+(CFFI:DEFCTYPE VKBUFFEROPAQUECAPTUREADDRESSCREATEINFOKHR
+               (:STRUCT VKBUFFEROPAQUECAPTUREADDRESSCREATEINFO))
+
+(CFFI:DEFCTYPE VKMEMORYOPAQUECAPTUREADDRESSALLOCATEINFOKHR
+               (:STRUCT VKMEMORYOPAQUECAPTUREADDRESSALLOCATEINFO))
+
+(CFFI:DEFCTYPE VKDEVICEMEMORYOPAQUECAPTUREADDRESSINFOKHR
+               (:STRUCT VKDEVICEMEMORYOPAQUECAPTUREADDRESSINFO))
+
+(CFFI:DEFCTYPE PFN_VKGETBUFFERDEVICEADDRESSKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETBUFFEROPAQUECAPTUREADDRESSKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETDEVICEMEMORYOPAQUECAPTUREADDRESSKHR :POINTER)
+
+(CFFI:DEFCTYPE VKDEFERREDOPERATIONKHR NON-DISPATCHABLE-HANDLE)
+
+(CFFI:DEFCTYPE PFN_VKCREATEDEFERREDOPERATIONKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYDEFERREDOPERATIONKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETDEFERREDOPERATIONMAXCONCURRENCYKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETDEFERREDOPERATIONRESULTKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDEFERREDOPERATIONJOINKHR :POINTER)
+
+(CFFI:DEFCTYPE VKPIPELINEEXECUTABLESTATISTICFORMATKHR :INT)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEPIPELINEEXECUTABLEPROPERTIESFEATURESKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PIPELINEEXECUTABLEINFO VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPIPELINEINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PIPELINE VKPIPELINE))
+
+(CFFI:DEFCSTRUCT VKPIPELINEEXECUTABLEPROPERTIESKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (STAGES VKSHADERSTAGEFLAGS)
+  (NAME :CHAR :COUNT 256)
+  (DESCRIPTION :CHAR :COUNT 256)
+  (SUBGROUPSIZE :UINT32))
+
+(CFFI:DEFCSTRUCT VKPIPELINEEXECUTABLEINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PIPELINE VKPIPELINE)
+  (EXECUTABLEINDEX :UINT32))
+
+(CFFI:DEFCUNION VKPIPELINEEXECUTABLESTATISTICVALUEKHR
+  (B32 VKBOOL32)
+  (I64 :INT64)
+  (U64 :UINT64)
+  (F64 :DOUBLE))
+
+(CFFI:DEFCSTRUCT VKPIPELINEEXECUTABLESTATISTICKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (NAME :CHAR :COUNT 256)
+  (DESCRIPTION :CHAR :COUNT 256)
+  (FORMAT VKPIPELINEEXECUTABLESTATISTICFORMATKHR)
+  (VALUE (:UNION VKPIPELINEEXECUTABLESTATISTICVALUEKHR)))
+
+(CFFI:DEFCSTRUCT VKPIPELINEEXECUTABLEINTERNALREPRESENTATIONKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (NAME :CHAR :COUNT 256)
+  (DESCRIPTION :CHAR :COUNT 256)
+  (ISTEXT VKBOOL32)
+  (DATASIZE :SIZE)
+  (PDATA :POINTER))
+
+(CFFI:DEFCTYPE PFN_VKGETPIPELINEEXECUTABLEPROPERTIESKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPIPELINEEXECUTABLESTATISTICSKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPIPELINEEXECUTABLEINTERNALREPRESENTATIONSKHR :POINTER)
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICESHADERINTEGERDOTPRODUCTFEATURESKHR
+               (:STRUCT VKPHYSICALDEVICESHADERINTEGERDOTPRODUCTFEATURES))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICESHADERINTEGERDOTPRODUCTPROPERTIESKHR
+               (:STRUCT VKPHYSICALDEVICESHADERINTEGERDOTPRODUCTPROPERTIES))
+
+(CFFI:DEFCSTRUCT VKPIPELINELIBRARYCREATEINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (LIBRARYCOUNT :UINT32)
+  (PLIBRARIES :POINTER))
+
+(CFFI:DEFCSTRUCT VKPRESENTIDKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SWAPCHAINCOUNT :UINT32)
+  (PPRESENTIDS :POINTER))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEPRESENTIDFEATURESKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PRESENTID VKBOOL32))
+
+(CFFI:DEFCTYPE VKPIPELINESTAGEFLAGS2KHR VKPIPELINESTAGEFLAGS2)
+
+(CFFI:DEFCTYPE VKPIPELINESTAGEFLAGBITS2KHR VKPIPELINESTAGEFLAGBITS2)
+
+(CFFI:DEFCTYPE VKACCESSFLAGS2KHR VKACCESSFLAGS2)
+
+(CFFI:DEFCTYPE VKACCESSFLAGBITS2KHR VKACCESSFLAGBITS2)
+
+(CFFI:DEFCTYPE VKSUBMITFLAGBITSKHR VKSUBMITFLAGBITS)
+
+(CFFI:DEFCTYPE VKSUBMITFLAGSKHR VKSUBMITFLAGS)
+
+(CFFI:DEFCTYPE VKMEMORYBARRIER2KHR (:STRUCT VKMEMORYBARRIER2))
+
+(CFFI:DEFCTYPE VKBUFFERMEMORYBARRIER2KHR (:STRUCT VKBUFFERMEMORYBARRIER2))
+
+(CFFI:DEFCTYPE VKIMAGEMEMORYBARRIER2KHR (:STRUCT VKIMAGEMEMORYBARRIER2))
+
+(CFFI:DEFCTYPE VKDEPENDENCYINFOKHR (:STRUCT VKDEPENDENCYINFO))
+
+(CFFI:DEFCTYPE VKSUBMITINFO2KHR (:STRUCT VKSUBMITINFO2))
+
+(CFFI:DEFCTYPE VKSEMAPHORESUBMITINFOKHR (:STRUCT VKSEMAPHORESUBMITINFO))
+
+(CFFI:DEFCTYPE VKCOMMANDBUFFERSUBMITINFOKHR (:STRUCT VKCOMMANDBUFFERSUBMITINFO))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICESYNCHRONIZATION2FEATURESKHR
+               (:STRUCT VKPHYSICALDEVICESYNCHRONIZATION2FEATURES))
+
+(CFFI:DEFCSTRUCT VKQUEUEFAMILYCHECKPOINTPROPERTIES2NV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (CHECKPOINTEXECUTIONSTAGEMASK VKPIPELINESTAGEFLAGS2))
+
+(CFFI:DEFCSTRUCT VKCHECKPOINTDATA2NV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (STAGE VKPIPELINESTAGEFLAGS2)
+  (PCHECKPOINTMARKER :POINTER))
+
+(CFFI:DEFCTYPE PFN_VKCMDSETEVENT2KHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDRESETEVENT2KHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDWAITEVENTS2KHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDPIPELINEBARRIER2KHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDWRITETIMESTAMP2KHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKQUEUESUBMIT2KHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDWRITEBUFFERMARKER2AMD :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETQUEUECHECKPOINTDATA2NV :POINTER)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEFRAGMENTSHADERBARYCENTRICFEATURESKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FRAGMENTSHADERBARYCENTRIC VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEFRAGMENTSHADERBARYCENTRICPROPERTIESKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (TRISTRIPVERTEXORDERINDEPENDENTOFPROVOKINGVERTEX VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESHADERSUBGROUPUNIFORMCONTROLFLOWFEATURESKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SHADERSUBGROUPUNIFORMCONTROLFLOW VKBOOL32))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEZEROINITIALIZEWORKGROUPMEMORYFEATURESKHR
+               (:STRUCT VKPHYSICALDEVICEZEROINITIALIZEWORKGROUPMEMORYFEATURES))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEWORKGROUPMEMORYEXPLICITLAYOUTFEATURESKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (WORKGROUPMEMORYEXPLICITLAYOUT VKBOOL32)
+  (WORKGROUPMEMORYEXPLICITLAYOUTSCALARBLOCKLAYOUT VKBOOL32)
+  (WORKGROUPMEMORYEXPLICITLAYOUT8BITACCESS VKBOOL32)
+  (WORKGROUPMEMORYEXPLICITLAYOUT16BITACCESS VKBOOL32))
+
+(CFFI:DEFCTYPE VKCOPYBUFFERINFO2KHR (:STRUCT VKCOPYBUFFERINFO2))
+
+(CFFI:DEFCTYPE VKCOPYIMAGEINFO2KHR (:STRUCT VKCOPYIMAGEINFO2))
+
+(CFFI:DEFCTYPE VKCOPYBUFFERTOIMAGEINFO2KHR (:STRUCT VKCOPYBUFFERTOIMAGEINFO2))
+
+(CFFI:DEFCTYPE VKCOPYIMAGETOBUFFERINFO2KHR (:STRUCT VKCOPYIMAGETOBUFFERINFO2))
+
+(CFFI:DEFCTYPE VKBLITIMAGEINFO2KHR (:STRUCT VKBLITIMAGEINFO2))
+
+(CFFI:DEFCTYPE VKRESOLVEIMAGEINFO2KHR (:STRUCT VKRESOLVEIMAGEINFO2))
+
+(CFFI:DEFCTYPE VKBUFFERCOPY2KHR (:STRUCT VKBUFFERCOPY2))
+
+(CFFI:DEFCTYPE VKIMAGECOPY2KHR (:STRUCT VKIMAGECOPY2))
+
+(CFFI:DEFCTYPE VKIMAGEBLIT2KHR (:STRUCT VKIMAGEBLIT2))
+
+(CFFI:DEFCTYPE VKBUFFERIMAGECOPY2KHR (:STRUCT VKBUFFERIMAGECOPY2))
+
+(CFFI:DEFCTYPE VKIMAGERESOLVE2KHR (:STRUCT VKIMAGERESOLVE2))
+
+(CFFI:DEFCTYPE PFN_VKCMDCOPYBUFFER2KHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDCOPYIMAGE2KHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDCOPYBUFFERTOIMAGE2KHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDCOPYIMAGETOBUFFER2KHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDBLITIMAGE2KHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDRESOLVEIMAGE2KHR :POINTER)
+
+(CFFI:DEFCTYPE VKFORMATFEATUREFLAGS2KHR VKFORMATFEATUREFLAGS2)
+
+(CFFI:DEFCTYPE VKFORMATFEATUREFLAGBITS2KHR VKFORMATFEATUREFLAGBITS2)
+
+(CFFI:DEFCTYPE VKFORMATPROPERTIES3KHR (:STRUCT VKFORMATPROPERTIES3))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICERAYTRACINGMAINTENANCE1FEATURESKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (RAYTRACINGMAINTENANCE1 VKBOOL32)
+  (RAYTRACINGPIPELINETRACERAYSINDIRECT2 VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKTRACERAYSINDIRECTCOMMAND2KHR
+  (RAYGENSHADERRECORDADDRESS VKDEVICEADDRESS)
+  (RAYGENSHADERRECORDSIZE VKDEVICESIZE)
+  (MISSSHADERBINDINGTABLEADDRESS VKDEVICEADDRESS)
+  (MISSSHADERBINDINGTABLESIZE VKDEVICESIZE)
+  (MISSSHADERBINDINGTABLESTRIDE VKDEVICESIZE)
+  (HITSHADERBINDINGTABLEADDRESS VKDEVICEADDRESS)
+  (HITSHADERBINDINGTABLESIZE VKDEVICESIZE)
+  (HITSHADERBINDINGTABLESTRIDE VKDEVICESIZE)
+  (CALLABLESHADERBINDINGTABLEADDRESS VKDEVICEADDRESS)
+  (CALLABLESHADERBINDINGTABLESIZE VKDEVICESIZE)
+  (CALLABLESHADERBINDINGTABLESTRIDE VKDEVICESIZE)
+  (WIDTH :UINT32)
+  (HEIGHT :UINT32)
+  (DEPTH :UINT32))
+
+(CFFI:DEFCTYPE PFN_VKCMDTRACERAYSINDIRECT2KHR :POINTER)
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEMAINTENANCE4FEATURESKHR
+               (:STRUCT VKPHYSICALDEVICEMAINTENANCE4FEATURES))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEMAINTENANCE4PROPERTIESKHR
+               (:STRUCT VKPHYSICALDEVICEMAINTENANCE4PROPERTIES))
+
+(CFFI:DEFCTYPE VKDEVICEBUFFERMEMORYREQUIREMENTSKHR
+               (:STRUCT VKDEVICEBUFFERMEMORYREQUIREMENTS))
+
+(CFFI:DEFCTYPE VKDEVICEIMAGEMEMORYREQUIREMENTSKHR
+               (:STRUCT VKDEVICEIMAGEMEMORYREQUIREMENTS))
+
+(CFFI:DEFCTYPE PFN_VKGETDEVICEBUFFERMEMORYREQUIREMENTSKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETDEVICEIMAGEMEMORYREQUIREMENTSKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETDEVICEIMAGESPARSEMEMORYREQUIREMENTSKHR :POINTER)
+
+(CFFI:DEFCTYPE VKDEBUGREPORTCALLBACKEXT NON-DISPATCHABLE-HANDLE)
+
+(CFFI:DEFCTYPE VKDEBUGREPORTOBJECTTYPEEXT :INT)
+
+(CFFI:DEFCTYPE VKDEBUGREPORTFLAGBITSEXT :INT)
+
+(CFFI:DEFCTYPE VKDEBUGREPORTFLAGSEXT VKFLAGS)
+
+(CFFI:DEFCTYPE PFN_VKDEBUGREPORTCALLBACKEXT :POINTER)
+
+(CFFI:DEFCSTRUCT VKDEBUGREPORTCALLBACKCREATEINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKDEBUGREPORTFLAGSEXT)
+  (PFNCALLBACK PFN_VKDEBUGREPORTCALLBACKEXT)
+  (PUSERDATA :POINTER))
+
+(CFFI:DEFCTYPE PFN_VKCREATEDEBUGREPORTCALLBACKEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYDEBUGREPORTCALLBACKEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDEBUGREPORTMESSAGEEXT :POINTER)
+
+(CFFI:DEFCTYPE VKRASTERIZATIONORDERAMD :INT)
+
+(CFFI:DEFCSTRUCT VKPIPELINERASTERIZATIONSTATERASTERIZATIONORDERAMD
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (RASTERIZATIONORDER VKRASTERIZATIONORDERAMD))
+
+(CFFI:DEFCSTRUCT VKDEBUGMARKEROBJECTNAMEINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (OBJECTTYPE VKDEBUGREPORTOBJECTTYPEEXT)
+  (OBJECT :UINT64)
+  (POBJECTNAME :POINTER))
+
+(CFFI:DEFCSTRUCT VKDEBUGMARKEROBJECTTAGINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (OBJECTTYPE VKDEBUGREPORTOBJECTTYPEEXT)
+  (OBJECT :UINT64)
+  (TAGNAME :UINT64)
+  (TAGSIZE :SIZE)
+  (PTAG :POINTER))
+
+(CFFI:DEFCSTRUCT VKDEBUGMARKERMARKERINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PMARKERNAME :POINTER)
+  (COLOR :FLOAT :COUNT 4))
+
+(CFFI:DEFCTYPE PFN_VKDEBUGMARKERSETOBJECTTAGEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDEBUGMARKERSETOBJECTNAMEEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDDEBUGMARKERBEGINEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDDEBUGMARKERENDEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDDEBUGMARKERINSERTEXT :POINTER)
+
+(CFFI:DEFCSTRUCT VKDEDICATEDALLOCATIONIMAGECREATEINFONV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DEDICATEDALLOCATION VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKDEDICATEDALLOCATIONBUFFERCREATEINFONV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DEDICATEDALLOCATION VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKDEDICATEDALLOCATIONMEMORYALLOCATEINFONV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (IMAGE VKIMAGE)
+  (BUFFER VKBUFFER))
+
+(CFFI:DEFCTYPE VKPIPELINERASTERIZATIONSTATESTREAMCREATEFLAGSEXT VKFLAGS)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICETRANSFORMFEEDBACKFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (TRANSFORMFEEDBACK VKBOOL32)
+  (GEOMETRYSTREAMS VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICETRANSFORMFEEDBACKPROPERTIESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MAXTRANSFORMFEEDBACKSTREAMS :UINT32)
+  (MAXTRANSFORMFEEDBACKBUFFERS :UINT32)
+  (MAXTRANSFORMFEEDBACKBUFFERSIZE VKDEVICESIZE)
+  (MAXTRANSFORMFEEDBACKSTREAMDATASIZE :UINT32)
+  (MAXTRANSFORMFEEDBACKBUFFERDATASIZE :UINT32)
+  (MAXTRANSFORMFEEDBACKBUFFERDATASTRIDE :UINT32)
+  (TRANSFORMFEEDBACKQUERIES VKBOOL32)
+  (TRANSFORMFEEDBACKSTREAMSLINESTRIANGLES VKBOOL32)
+  (TRANSFORMFEEDBACKRASTERIZATIONSTREAMSELECT VKBOOL32)
+  (TRANSFORMFEEDBACKDRAW VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPIPELINERASTERIZATIONSTATESTREAMCREATEINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKPIPELINERASTERIZATIONSTATESTREAMCREATEFLAGSEXT)
+  (RASTERIZATIONSTREAM :UINT32))
+
+(CFFI:DEFCTYPE PFN_VKCMDBINDTRANSFORMFEEDBACKBUFFERSEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDBEGINTRANSFORMFEEDBACKEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDENDTRANSFORMFEEDBACKEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDBEGINQUERYINDEXEDEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDENDQUERYINDEXEDEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDDRAWINDIRECTBYTECOUNTEXT :POINTER)
+
+(CFFI:DEFCTYPE VKCUMODULENVX NON-DISPATCHABLE-HANDLE)
+
+(CFFI:DEFCTYPE VKCUFUNCTIONNVX NON-DISPATCHABLE-HANDLE)
+
+(CFFI:DEFCSTRUCT VKCUMODULECREATEINFONVX
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DATASIZE :SIZE)
+  (PDATA :POINTER))
+
+(CFFI:DEFCSTRUCT VKCUFUNCTIONCREATEINFONVX
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MODULE VKCUMODULENVX)
+  (PNAME :POINTER))
+
+(CFFI:DEFCSTRUCT VKCULAUNCHINFONVX
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  #'VKCUFUNCTIONNVX
+  (GRIDDIMX :UINT32)
+  (GRIDDIMY :UINT32)
+  (GRIDDIMZ :UINT32)
+  (BLOCKDIMX :UINT32)
+  (BLOCKDIMY :UINT32)
+  (BLOCKDIMZ :UINT32)
+  (SHAREDMEMBYTES :UINT32)
+  (PARAMCOUNT :SIZE)
+  (PPARAMS :POINTER)
+  (EXTRACOUNT :SIZE)
+  (PEXTRAS :POINTER))
+
+(CFFI:DEFCTYPE PFN_VKCREATECUMODULENVX :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCREATECUFUNCTIONNVX :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYCUMODULENVX :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYCUFUNCTIONNVX :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDCULAUNCHKERNELNVX :POINTER)
+
+(CFFI:DEFCSTRUCT VKIMAGEVIEWHANDLEINFONVX
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (IMAGEVIEW VKIMAGEVIEW)
+  (DESCRIPTORTYPE VKDESCRIPTORTYPE)
+  (SAMPLER VKSAMPLER))
+
+(CFFI:DEFCSTRUCT VKIMAGEVIEWADDRESSPROPERTIESNVX
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DEVICEADDRESS VKDEVICEADDRESS)
+  (SIZE VKDEVICESIZE))
+
+(CFFI:DEFCTYPE PFN_VKGETIMAGEVIEWHANDLENVX :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETIMAGEVIEWADDRESSNVX :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDDRAWINDIRECTCOUNTAMD :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDDRAWINDEXEDINDIRECTCOUNTAMD :POINTER)
+
+(CFFI:DEFCSTRUCT VKTEXTURELODGATHERFORMATPROPERTIESAMD
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SUPPORTSTEXTUREGATHERLODBIASAMD VKBOOL32))
+
+(CFFI:DEFCTYPE VKSHADERINFOTYPEAMD :INT)
+
+(CFFI:DEFCSTRUCT VKSHADERRESOURCEUSAGEAMD
+  (NUMUSEDVGPRS :UINT32)
+  (NUMUSEDSGPRS :UINT32)
+  (LDSSIZEPERLOCALWORKGROUP :UINT32)
+  (LDSUSAGESIZEINBYTES :SIZE)
+  (SCRATCHMEMUSAGEINBYTES :SIZE))
+
+(CFFI:DEFCSTRUCT VKSHADERSTATISTICSINFOAMD
+  (SHADERSTAGEMASK VKSHADERSTAGEFLAGS)
+  (RESOURCEUSAGE (:STRUCT VKSHADERRESOURCEUSAGEAMD))
+  (NUMPHYSICALVGPRS :UINT32)
+  (NUMPHYSICALSGPRS :UINT32)
+  (NUMAVAILABLEVGPRS :UINT32)
+  (NUMAVAILABLESGPRS :UINT32)
+  (COMPUTEWORKGROUPSIZE :UINT32 :COUNT 3))
+
+(CFFI:DEFCTYPE PFN_VKGETSHADERINFOAMD :POINTER)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICECORNERSAMPLEDIMAGEFEATURESNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (CORNERSAMPLEDIMAGE VKBOOL32))
+
+(CFFI:DEFCTYPE VKEXTERNALMEMORYHANDLETYPEFLAGBITSNV :INT)
+
+(CFFI:DEFCTYPE VKEXTERNALMEMORYHANDLETYPEFLAGSNV VKFLAGS)
+
+(CFFI:DEFCTYPE VKEXTERNALMEMORYFEATUREFLAGBITSNV :INT)
+
+(CFFI:DEFCTYPE VKEXTERNALMEMORYFEATUREFLAGSNV VKFLAGS)
+
+(CFFI:DEFCSTRUCT VKEXTERNALIMAGEFORMATPROPERTIESNV
+  (IMAGEFORMATPROPERTIES (:STRUCT VKIMAGEFORMATPROPERTIES))
+  (EXTERNALMEMORYFEATURES VKEXTERNALMEMORYFEATUREFLAGSNV)
+  (EXPORTFROMIMPORTEDHANDLETYPES VKEXTERNALMEMORYHANDLETYPEFLAGSNV)
+  (COMPATIBLEHANDLETYPES VKEXTERNALMEMORYHANDLETYPEFLAGSNV))
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEEXTERNALIMAGEFORMATPROPERTIESNV :POINTER)
+
+(CFFI:DEFCSTRUCT VKEXTERNALMEMORYIMAGECREATEINFONV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (HANDLETYPES VKEXTERNALMEMORYHANDLETYPEFLAGSNV))
+
+(CFFI:DEFCSTRUCT VKEXPORTMEMORYALLOCATEINFONV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (HANDLETYPES VKEXTERNALMEMORYHANDLETYPEFLAGSNV))
+
+(CFFI:DEFCTYPE VKVALIDATIONCHECKEXT :INT)
+
+(CFFI:DEFCSTRUCT VKVALIDATIONFLAGSEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DISABLEDVALIDATIONCHECKCOUNT :UINT32)
+  (PDISABLEDVALIDATIONCHECKS :POINTER))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICETEXTURECOMPRESSIONASTCHDRFEATURESEXT
+               (:STRUCT VKPHYSICALDEVICETEXTURECOMPRESSIONASTCHDRFEATURES))
+
+(CFFI:DEFCSTRUCT VKIMAGEVIEWASTCDECODEMODEEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DECODEMODE VKFORMAT))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEASTCDECODEFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DECODEMODESHAREDEXPONENT VKBOOL32))
+
+(CFFI:DEFCTYPE VKCONDITIONALRENDERINGFLAGBITSEXT :INT)
+
+(CFFI:DEFCTYPE VKCONDITIONALRENDERINGFLAGSEXT VKFLAGS)
+
+(CFFI:DEFCSTRUCT VKCONDITIONALRENDERINGBEGININFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (BUFFER VKBUFFER)
+  (OFFSET VKDEVICESIZE)
+  (FLAGS VKCONDITIONALRENDERINGFLAGSEXT))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICECONDITIONALRENDERINGFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (CONDITIONALRENDERING VKBOOL32)
+  (INHERITEDCONDITIONALRENDERING VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKCOMMANDBUFFERINHERITANCECONDITIONALRENDERINGINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (CONDITIONALRENDERINGENABLE VKBOOL32))
+
+(CFFI:DEFCTYPE PFN_VKCMDBEGINCONDITIONALRENDERINGEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDENDCONDITIONALRENDERINGEXT :POINTER)
+
+(CFFI:DEFCSTRUCT VKVIEWPORTWSCALINGNV
+  (XCOEFF :FLOAT)
+  (YCOEFF :FLOAT))
+
+(CFFI:DEFCSTRUCT VKPIPELINEVIEWPORTWSCALINGSTATECREATEINFONV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (VIEWPORTWSCALINGENABLE VKBOOL32)
+  (VIEWPORTCOUNT :UINT32)
+  (PVIEWPORTWSCALINGS :POINTER))
+
+(CFFI:DEFCTYPE PFN_VKCMDSETVIEWPORTWSCALINGNV :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKRELEASEDISPLAYEXT :POINTER)
+
+(CFFI:DEFCTYPE VKSURFACECOUNTERFLAGBITSEXT :INT)
+
+(CFFI:DEFCTYPE VKSURFACECOUNTERFLAGSEXT VKFLAGS)
+
+(CFFI:DEFCSTRUCT VKSURFACECAPABILITIES2EXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MINIMAGECOUNT :UINT32)
+  (MAXIMAGECOUNT :UINT32)
+  (CURRENTEXTENT (:STRUCT VKEXTENT2D))
+  (MINIMAGEEXTENT (:STRUCT VKEXTENT2D))
+  (MAXIMAGEEXTENT (:STRUCT VKEXTENT2D))
+  (MAXIMAGEARRAYLAYERS :UINT32)
+  (SUPPORTEDTRANSFORMS VKSURFACETRANSFORMFLAGSKHR)
+  (CURRENTTRANSFORM VKSURFACETRANSFORMFLAGBITSKHR)
+  (SUPPORTEDCOMPOSITEALPHA VKCOMPOSITEALPHAFLAGSKHR)
+  (SUPPORTEDUSAGEFLAGS VKIMAGEUSAGEFLAGS)
+  (SUPPORTEDSURFACECOUNTERS VKSURFACECOUNTERFLAGSEXT))
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICESURFACECAPABILITIES2EXT :POINTER)
+
+(CFFI:DEFCTYPE VKDISPLAYPOWERSTATEEXT :INT)
+
+(CFFI:DEFCTYPE VKDEVICEEVENTTYPEEXT :INT)
+
+(CFFI:DEFCTYPE VKDISPLAYEVENTTYPEEXT :INT)
+
+(CFFI:DEFCSTRUCT VKDISPLAYPOWERINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (POWERSTATE VKDISPLAYPOWERSTATEEXT))
+
+(CFFI:DEFCSTRUCT VKDEVICEEVENTINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DEVICEEVENT VKDEVICEEVENTTYPEEXT))
+
+(CFFI:DEFCSTRUCT VKDISPLAYEVENTINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DISPLAYEVENT VKDISPLAYEVENTTYPEEXT))
+
+(CFFI:DEFCSTRUCT VKSWAPCHAINCOUNTERCREATEINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SURFACECOUNTERS VKSURFACECOUNTERFLAGSEXT))
+
+(CFFI:DEFCTYPE PFN_VKDISPLAYPOWERCONTROLEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKREGISTERDEVICEEVENTEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKREGISTERDISPLAYEVENTEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETSWAPCHAINCOUNTEREXT :POINTER)
+
+(CFFI:DEFCSTRUCT VKREFRESHCYCLEDURATIONGOOGLE
+  (REFRESHDURATION :UINT64))
+
+(CFFI:DEFCSTRUCT VKPASTPRESENTATIONTIMINGGOOGLE
+  (PRESENTID :UINT32)
+  (DESIREDPRESENTTIME :UINT64)
+  (ACTUALPRESENTTIME :UINT64)
+  (EARLIESTPRESENTTIME :UINT64)
+  (PRESENTMARGIN :UINT64))
+
+(CFFI:DEFCSTRUCT VKPRESENTTIMEGOOGLE
+  (PRESENTID :UINT32)
+  (DESIREDPRESENTTIME :UINT64))
+
+(CFFI:DEFCSTRUCT VKPRESENTTIMESINFOGOOGLE
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SWAPCHAINCOUNT :UINT32)
+  (PTIMES :POINTER))
+
+(CFFI:DEFCTYPE PFN_VKGETREFRESHCYCLEDURATIONGOOGLE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPASTPRESENTATIONTIMINGGOOGLE :POINTER)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEMULTIVIEWPERVIEWATTRIBUTESPROPERTIESNVX
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PERVIEWPOSITIONALLCOMPONENTS VKBOOL32))
+
+(CFFI:DEFCTYPE VKVIEWPORTCOORDINATESWIZZLENV :INT)
+
+(CFFI:DEFCTYPE VKPIPELINEVIEWPORTSWIZZLESTATECREATEFLAGSNV VKFLAGS)
+
+(CFFI:DEFCSTRUCT VKVIEWPORTSWIZZLENV
+  (X VKVIEWPORTCOORDINATESWIZZLENV)
+  (Y VKVIEWPORTCOORDINATESWIZZLENV)
+  (Z VKVIEWPORTCOORDINATESWIZZLENV)
+  (W VKVIEWPORTCOORDINATESWIZZLENV))
+
+(CFFI:DEFCSTRUCT VKPIPELINEVIEWPORTSWIZZLESTATECREATEINFONV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKPIPELINEVIEWPORTSWIZZLESTATECREATEFLAGSNV)
+  (VIEWPORTCOUNT :UINT32)
+  (PVIEWPORTSWIZZLES :POINTER))
+
+(CFFI:DEFCTYPE VKDISCARDRECTANGLEMODEEXT :INT)
+
+(CFFI:DEFCTYPE VKPIPELINEDISCARDRECTANGLESTATECREATEFLAGSEXT VKFLAGS)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEDISCARDRECTANGLEPROPERTIESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MAXDISCARDRECTANGLES :UINT32))
+
+(CFFI:DEFCSTRUCT VKPIPELINEDISCARDRECTANGLESTATECREATEINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKPIPELINEDISCARDRECTANGLESTATECREATEFLAGSEXT)
+  (DISCARDRECTANGLEMODE VKDISCARDRECTANGLEMODEEXT)
+  (DISCARDRECTANGLECOUNT :UINT32)
+  (PDISCARDRECTANGLES :POINTER))
+
+(CFFI:DEFCTYPE PFN_VKCMDSETDISCARDRECTANGLEEXT :POINTER)
+
+(CFFI:DEFCTYPE VKCONSERVATIVERASTERIZATIONMODEEXT :INT)
+
+(CFFI:DEFCTYPE VKPIPELINERASTERIZATIONCONSERVATIVESTATECREATEFLAGSEXT VKFLAGS)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICECONSERVATIVERASTERIZATIONPROPERTIESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PRIMITIVEOVERESTIMATIONSIZE :FLOAT)
+  (MAXEXTRAPRIMITIVEOVERESTIMATIONSIZE :FLOAT)
+  (EXTRAPRIMITIVEOVERESTIMATIONSIZEGRANULARITY :FLOAT)
+  (PRIMITIVEUNDERESTIMATION VKBOOL32)
+  (CONSERVATIVEPOINTANDLINERASTERIZATION VKBOOL32)
+  (DEGENERATETRIANGLESRASTERIZED VKBOOL32)
+  (DEGENERATELINESRASTERIZED VKBOOL32)
+  (FULLYCOVEREDFRAGMENTSHADERINPUTVARIABLE VKBOOL32)
+  (CONSERVATIVERASTERIZATIONPOSTDEPTHCOVERAGE VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPIPELINERASTERIZATIONCONSERVATIVESTATECREATEINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKPIPELINERASTERIZATIONCONSERVATIVESTATECREATEFLAGSEXT)
+  (CONSERVATIVERASTERIZATIONMODE VKCONSERVATIVERASTERIZATIONMODEEXT)
+  (EXTRAPRIMITIVEOVERESTIMATIONSIZE :FLOAT))
+
+(CFFI:DEFCTYPE VKPIPELINERASTERIZATIONDEPTHCLIPSTATECREATEFLAGSEXT VKFLAGS)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEDEPTHCLIPENABLEFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DEPTHCLIPENABLE VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPIPELINERASTERIZATIONDEPTHCLIPSTATECREATEINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKPIPELINERASTERIZATIONDEPTHCLIPSTATECREATEFLAGSEXT)
+  (DEPTHCLIPENABLE VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKXYCOLOREXT
+  (X :FLOAT)
+  (Y :FLOAT))
+
+(CFFI:DEFCSTRUCT VKHDRMETADATAEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DISPLAYPRIMARYRED (:STRUCT VKXYCOLOREXT))
+  (DISPLAYPRIMARYGREEN (:STRUCT VKXYCOLOREXT))
+  (DISPLAYPRIMARYBLUE (:STRUCT VKXYCOLOREXT))
+  (WHITEPOINT (:STRUCT VKXYCOLOREXT))
+  (MAXLUMINANCE :FLOAT)
+  (MINLUMINANCE :FLOAT)
+  (MAXCONTENTLIGHTLEVEL :FLOAT)
+  (MAXFRAMEAVERAGELIGHTLEVEL :FLOAT))
+
+(CFFI:DEFCTYPE PFN_VKSETHDRMETADATAEXT :POINTER)
+
+(CFFI:DEFCTYPE VKDEBUGUTILSMESSENGEREXT NON-DISPATCHABLE-HANDLE)
+
+(CFFI:DEFCTYPE VKDEBUGUTILSMESSENGERCALLBACKDATAFLAGSEXT VKFLAGS)
+
+(CFFI:DEFCTYPE VKDEBUGUTILSMESSAGESEVERITYFLAGBITSEXT :INT)
+
+(CFFI:DEFCTYPE VKDEBUGUTILSMESSAGETYPEFLAGBITSEXT :INT)
+
+(CFFI:DEFCTYPE VKDEBUGUTILSMESSAGETYPEFLAGSEXT VKFLAGS)
+
+(CFFI:DEFCTYPE VKDEBUGUTILSMESSAGESEVERITYFLAGSEXT VKFLAGS)
+
+(CFFI:DEFCTYPE VKDEBUGUTILSMESSENGERCREATEFLAGSEXT VKFLAGS)
+
+(CFFI:DEFCSTRUCT VKDEBUGUTILSLABELEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PLABELNAME :POINTER)
+  (COLOR :FLOAT :COUNT 4))
+
+(CFFI:DEFCSTRUCT VKDEBUGUTILSOBJECTNAMEINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (OBJECTTYPE VKOBJECTTYPE)
+  (OBJECTHANDLE :UINT64)
+  (POBJECTNAME :POINTER))
+
+(CFFI:DEFCSTRUCT VKDEBUGUTILSMESSENGERCALLBACKDATAEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKDEBUGUTILSMESSENGERCALLBACKDATAFLAGSEXT)
+  (PMESSAGEIDNAME :POINTER)
+  (MESSAGEIDNUMBER :INT32)
+  (PMESSAGE :POINTER)
+  (QUEUELABELCOUNT :UINT32)
+  (PQUEUELABELS :POINTER)
+  (CMDBUFLABELCOUNT :UINT32)
+  (PCMDBUFLABELS :POINTER)
+  (OBJECTCOUNT :UINT32)
+  (POBJECTS :POINTER))
+
+(CFFI:DEFCTYPE PFN_VKDEBUGUTILSMESSENGERCALLBACKEXT :POINTER)
+
+(CFFI:DEFCSTRUCT VKDEBUGUTILSMESSENGERCREATEINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKDEBUGUTILSMESSENGERCREATEFLAGSEXT)
+  (MESSAGESEVERITY VKDEBUGUTILSMESSAGESEVERITYFLAGSEXT)
+  (MESSAGETYPE VKDEBUGUTILSMESSAGETYPEFLAGSEXT)
+  (PFNUSERCALLBACK PFN_VKDEBUGUTILSMESSENGERCALLBACKEXT)
+  (PUSERDATA :POINTER))
+
+(CFFI:DEFCSTRUCT VKDEBUGUTILSOBJECTTAGINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (OBJECTTYPE VKOBJECTTYPE)
+  (OBJECTHANDLE :UINT64)
+  (TAGNAME :UINT64)
+  (TAGSIZE :SIZE)
+  (PTAG :POINTER))
+
+(CFFI:DEFCTYPE PFN_VKSETDEBUGUTILSOBJECTNAMEEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKSETDEBUGUTILSOBJECTTAGEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKQUEUEBEGINDEBUGUTILSLABELEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKQUEUEENDDEBUGUTILSLABELEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKQUEUEINSERTDEBUGUTILSLABELEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDBEGINDEBUGUTILSLABELEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDENDDEBUGUTILSLABELEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDINSERTDEBUGUTILSLABELEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCREATEDEBUGUTILSMESSENGEREXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYDEBUGUTILSMESSENGEREXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKSUBMITDEBUGUTILSMESSAGEEXT :POINTER)
+
+(CFFI:DEFCTYPE VKSAMPLERREDUCTIONMODEEXT VKSAMPLERREDUCTIONMODE)
+
+(CFFI:DEFCTYPE VKSAMPLERREDUCTIONMODECREATEINFOEXT
+               (:STRUCT VKSAMPLERREDUCTIONMODECREATEINFO))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICESAMPLERFILTERMINMAXPROPERTIESEXT
+               (:STRUCT VKPHYSICALDEVICESAMPLERFILTERMINMAXPROPERTIES))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEINLINEUNIFORMBLOCKFEATURESEXT
+               (:STRUCT VKPHYSICALDEVICEINLINEUNIFORMBLOCKFEATURES))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEINLINEUNIFORMBLOCKPROPERTIESEXT
+               (:STRUCT VKPHYSICALDEVICEINLINEUNIFORMBLOCKPROPERTIES))
+
+(CFFI:DEFCTYPE VKWRITEDESCRIPTORSETINLINEUNIFORMBLOCKEXT
+               (:STRUCT VKWRITEDESCRIPTORSETINLINEUNIFORMBLOCK))
+
+(CFFI:DEFCTYPE VKDESCRIPTORPOOLINLINEUNIFORMBLOCKCREATEINFOEXT
+               (:STRUCT VKDESCRIPTORPOOLINLINEUNIFORMBLOCKCREATEINFO))
+
+(CFFI:DEFCSTRUCT VKSAMPLELOCATIONEXT
+  (X :FLOAT)
+  (Y :FLOAT))
+
+(CFFI:DEFCSTRUCT VKSAMPLELOCATIONSINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SAMPLELOCATIONSPERPIXEL VKSAMPLECOUNTFLAGBITS)
+  (SAMPLELOCATIONGRIDSIZE (:STRUCT VKEXTENT2D))
+  (SAMPLELOCATIONSCOUNT :UINT32)
+  (PSAMPLELOCATIONS :POINTER))
+
+(CFFI:DEFCSTRUCT VKATTACHMENTSAMPLELOCATIONSEXT
+  (ATTACHMENTINDEX :UINT32)
+  (SAMPLELOCATIONSINFO (:STRUCT VKSAMPLELOCATIONSINFOEXT)))
+
+(CFFI:DEFCSTRUCT VKSUBPASSSAMPLELOCATIONSEXT
+  (SUBPASSINDEX :UINT32)
+  (SAMPLELOCATIONSINFO (:STRUCT VKSAMPLELOCATIONSINFOEXT)))
+
+(CFFI:DEFCSTRUCT VKRENDERPASSSAMPLELOCATIONSBEGININFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (ATTACHMENTINITIALSAMPLELOCATIONSCOUNT :UINT32)
+  (PATTACHMENTINITIALSAMPLELOCATIONS :POINTER)
+  (POSTSUBPASSSAMPLELOCATIONSCOUNT :UINT32)
+  (PPOSTSUBPASSSAMPLELOCATIONS :POINTER))
+
+(CFFI:DEFCSTRUCT VKPIPELINESAMPLELOCATIONSSTATECREATEINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SAMPLELOCATIONSENABLE VKBOOL32)
+  (SAMPLELOCATIONSINFO (:STRUCT VKSAMPLELOCATIONSINFOEXT)))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESAMPLELOCATIONSPROPERTIESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SAMPLELOCATIONSAMPLECOUNTS VKSAMPLECOUNTFLAGS)
+  (MAXSAMPLELOCATIONGRIDSIZE (:STRUCT VKEXTENT2D))
+  (SAMPLELOCATIONCOORDINATERANGE :FLOAT :COUNT 2)
+  (SAMPLELOCATIONSUBPIXELBITS :UINT32)
+  (VARIABLESAMPLELOCATIONS VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKMULTISAMPLEPROPERTIESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MAXSAMPLELOCATIONGRIDSIZE (:STRUCT VKEXTENT2D)))
+
+(CFFI:DEFCTYPE PFN_VKCMDSETSAMPLELOCATIONSEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICEMULTISAMPLEPROPERTIESEXT :POINTER)
+
+(CFFI:DEFCTYPE VKBLENDOVERLAPEXT :INT)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEBLENDOPERATIONADVANCEDFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (ADVANCEDBLENDCOHERENTOPERATIONS VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEBLENDOPERATIONADVANCEDPROPERTIESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (ADVANCEDBLENDMAXCOLORATTACHMENTS :UINT32)
+  (ADVANCEDBLENDINDEPENDENTBLEND VKBOOL32)
+  (ADVANCEDBLENDNONPREMULTIPLIEDSRCCOLOR VKBOOL32)
+  (ADVANCEDBLENDNONPREMULTIPLIEDDSTCOLOR VKBOOL32)
+  (ADVANCEDBLENDCORRELATEDOVERLAP VKBOOL32)
+  (ADVANCEDBLENDALLOPERATIONS VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPIPELINECOLORBLENDADVANCEDSTATECREATEINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SRCPREMULTIPLIED VKBOOL32)
+  (DSTPREMULTIPLIED VKBOOL32)
+  (BLENDOVERLAP VKBLENDOVERLAPEXT))
+
+(CFFI:DEFCTYPE VKPIPELINECOVERAGETOCOLORSTATECREATEFLAGSNV VKFLAGS)
+
+(CFFI:DEFCSTRUCT VKPIPELINECOVERAGETOCOLORSTATECREATEINFONV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKPIPELINECOVERAGETOCOLORSTATECREATEFLAGSNV)
+  (COVERAGETOCOLORENABLE VKBOOL32)
+  (COVERAGETOCOLORLOCATION :UINT32))
+
+(CFFI:DEFCTYPE VKCOVERAGEMODULATIONMODENV :INT)
+
+(CFFI:DEFCTYPE VKPIPELINECOVERAGEMODULATIONSTATECREATEFLAGSNV VKFLAGS)
+
+(CFFI:DEFCSTRUCT VKPIPELINECOVERAGEMODULATIONSTATECREATEINFONV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKPIPELINECOVERAGEMODULATIONSTATECREATEFLAGSNV)
+  (COVERAGEMODULATIONMODE VKCOVERAGEMODULATIONMODENV)
+  (COVERAGEMODULATIONTABLEENABLE VKBOOL32)
+  (COVERAGEMODULATIONTABLECOUNT :UINT32)
+  (PCOVERAGEMODULATIONTABLE :POINTER))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESHADERSMBUILTINSPROPERTIESNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SHADERSMCOUNT :UINT32)
+  (SHADERWARPSPERSM :UINT32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESHADERSMBUILTINSFEATURESNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SHADERSMBUILTINS VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKDRMFORMATMODIFIERPROPERTIESEXT
+  (DRMFORMATMODIFIER :UINT64)
+  (DRMFORMATMODIFIERPLANECOUNT :UINT32)
+  (DRMFORMATMODIFIERTILINGFEATURES VKFORMATFEATUREFLAGS))
+
+(CFFI:DEFCSTRUCT VKDRMFORMATMODIFIERPROPERTIESLISTEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DRMFORMATMODIFIERCOUNT :UINT32)
+  (PDRMFORMATMODIFIERPROPERTIES :POINTER))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEIMAGEDRMFORMATMODIFIERINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DRMFORMATMODIFIER :UINT64)
+  (SHARINGMODE VKSHARINGMODE)
+  (QUEUEFAMILYINDEXCOUNT :UINT32)
+  (PQUEUEFAMILYINDICES :POINTER))
+
+(CFFI:DEFCSTRUCT VKIMAGEDRMFORMATMODIFIERLISTCREATEINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DRMFORMATMODIFIERCOUNT :UINT32)
+  (PDRMFORMATMODIFIERS :POINTER))
+
+(CFFI:DEFCSTRUCT VKIMAGEDRMFORMATMODIFIEREXPLICITCREATEINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DRMFORMATMODIFIER :UINT64)
+  (DRMFORMATMODIFIERPLANECOUNT :UINT32)
+  (PPLANELAYOUTS :POINTER))
+
+(CFFI:DEFCSTRUCT VKIMAGEDRMFORMATMODIFIERPROPERTIESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DRMFORMATMODIFIER :UINT64))
+
+(CFFI:DEFCSTRUCT VKDRMFORMATMODIFIERPROPERTIES2EXT
+  (DRMFORMATMODIFIER :UINT64)
+  (DRMFORMATMODIFIERPLANECOUNT :UINT32)
+  (DRMFORMATMODIFIERTILINGFEATURES VKFORMATFEATUREFLAGS2))
+
+(CFFI:DEFCSTRUCT VKDRMFORMATMODIFIERPROPERTIESLIST2EXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DRMFORMATMODIFIERCOUNT :UINT32)
+  (PDRMFORMATMODIFIERPROPERTIES :POINTER))
+
+(CFFI:DEFCTYPE PFN_VKGETIMAGEDRMFORMATMODIFIERPROPERTIESEXT :POINTER)
+
+(CFFI:DEFCTYPE VKVALIDATIONCACHEEXT NON-DISPATCHABLE-HANDLE)
+
+(CFFI:DEFCTYPE VKVALIDATIONCACHEHEADERVERSIONEXT :INT)
+
+(CFFI:DEFCTYPE VKVALIDATIONCACHECREATEFLAGSEXT VKFLAGS)
+
+(CFFI:DEFCSTRUCT VKVALIDATIONCACHECREATEINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKVALIDATIONCACHECREATEFLAGSEXT)
+  (INITIALDATASIZE :SIZE)
+  (PINITIALDATA :POINTER))
+
+(CFFI:DEFCSTRUCT VKSHADERMODULEVALIDATIONCACHECREATEINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (VALIDATIONCACHE VKVALIDATIONCACHEEXT))
+
+(CFFI:DEFCTYPE PFN_VKCREATEVALIDATIONCACHEEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYVALIDATIONCACHEEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKMERGEVALIDATIONCACHESEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETVALIDATIONCACHEDATAEXT :POINTER)
+
+(CFFI:DEFCTYPE VKDESCRIPTORBINDINGFLAGBITSEXT VKDESCRIPTORBINDINGFLAGBITS)
+
+(CFFI:DEFCTYPE VKDESCRIPTORBINDINGFLAGSEXT VKDESCRIPTORBINDINGFLAGS)
+
+(CFFI:DEFCTYPE VKDESCRIPTORSETLAYOUTBINDINGFLAGSCREATEINFOEXT
+               (:STRUCT VKDESCRIPTORSETLAYOUTBINDINGFLAGSCREATEINFO))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEDESCRIPTORINDEXINGFEATURESEXT
+               (:STRUCT VKPHYSICALDEVICEDESCRIPTORINDEXINGFEATURES))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEDESCRIPTORINDEXINGPROPERTIESEXT
+               (:STRUCT VKPHYSICALDEVICEDESCRIPTORINDEXINGPROPERTIES))
+
+(CFFI:DEFCTYPE VKDESCRIPTORSETVARIABLEDESCRIPTORCOUNTALLOCATEINFOEXT
+               (:STRUCT VKDESCRIPTORSETVARIABLEDESCRIPTORCOUNTALLOCATEINFO))
+
+(CFFI:DEFCTYPE VKDESCRIPTORSETVARIABLEDESCRIPTORCOUNTLAYOUTSUPPORTEXT
+               (:STRUCT VKDESCRIPTORSETVARIABLEDESCRIPTORCOUNTLAYOUTSUPPORT))
+
+(CFFI:DEFCTYPE VKSHADINGRATEPALETTEENTRYNV :INT)
+
+(CFFI:DEFCTYPE VKCOARSESAMPLEORDERTYPENV :INT)
+
+(CFFI:DEFCSTRUCT VKSHADINGRATEPALETTENV
+  (SHADINGRATEPALETTEENTRYCOUNT :UINT32)
+  (PSHADINGRATEPALETTEENTRIES :POINTER))
+
+(CFFI:DEFCSTRUCT VKPIPELINEVIEWPORTSHADINGRATEIMAGESTATECREATEINFONV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SHADINGRATEIMAGEENABLE VKBOOL32)
+  (VIEWPORTCOUNT :UINT32)
+  (PSHADINGRATEPALETTES :POINTER))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESHADINGRATEIMAGEFEATURESNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SHADINGRATEIMAGE VKBOOL32)
+  (SHADINGRATECOARSESAMPLEORDER VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESHADINGRATEIMAGEPROPERTIESNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SHADINGRATETEXELSIZE (:STRUCT VKEXTENT2D))
+  (SHADINGRATEPALETTESIZE :UINT32)
+  (SHADINGRATEMAXCOARSESAMPLES :UINT32))
+
+(CFFI:DEFCSTRUCT VKCOARSESAMPLELOCATIONNV
+  (PIXELX :UINT32)
+  (PIXELY :UINT32)
+  (SAMPLE :UINT32))
+
+(CFFI:DEFCSTRUCT VKCOARSESAMPLEORDERCUSTOMNV
+  (SHADINGRATE VKSHADINGRATEPALETTEENTRYNV)
+  (SAMPLECOUNT :UINT32)
+  (SAMPLELOCATIONCOUNT :UINT32)
+  (PSAMPLELOCATIONS :POINTER))
+
+(CFFI:DEFCSTRUCT VKPIPELINEVIEWPORTCOARSESAMPLEORDERSTATECREATEINFONV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SAMPLEORDERTYPE VKCOARSESAMPLEORDERTYPENV)
+  (CUSTOMSAMPLEORDERCOUNT :UINT32)
+  (PCUSTOMSAMPLEORDERS :POINTER))
+
+(CFFI:DEFCTYPE PFN_VKCMDBINDSHADINGRATEIMAGENV :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETVIEWPORTSHADINGRATEPALETTENV :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETCOARSESAMPLEORDERNV :POINTER)
+
+(CFFI:DEFCTYPE VKACCELERATIONSTRUCTURENV NON-DISPATCHABLE-HANDLE)
+
+(CFFI:DEFCTYPE VKRAYTRACINGSHADERGROUPTYPEKHR :INT)
+
+(CFFI:DEFCTYPE VKRAYTRACINGSHADERGROUPTYPENV VKRAYTRACINGSHADERGROUPTYPEKHR)
+
+(CFFI:DEFCTYPE VKGEOMETRYTYPEKHR :INT)
+
+(CFFI:DEFCTYPE VKGEOMETRYTYPENV VKGEOMETRYTYPEKHR)
+
+(CFFI:DEFCTYPE VKACCELERATIONSTRUCTURETYPEKHR :INT)
+
+(CFFI:DEFCTYPE VKACCELERATIONSTRUCTURETYPENV VKACCELERATIONSTRUCTURETYPEKHR)
+
+(CFFI:DEFCTYPE VKCOPYACCELERATIONSTRUCTUREMODEKHR :INT)
+
+(CFFI:DEFCTYPE VKCOPYACCELERATIONSTRUCTUREMODENV
+               VKCOPYACCELERATIONSTRUCTUREMODEKHR)
+
+(CFFI:DEFCTYPE VKACCELERATIONSTRUCTUREMEMORYREQUIREMENTSTYPENV :INT)
+
+(CFFI:DEFCTYPE VKGEOMETRYFLAGBITSKHR :INT)
+
+(CFFI:DEFCTYPE VKGEOMETRYFLAGSKHR VKFLAGS)
+
+(CFFI:DEFCTYPE VKGEOMETRYFLAGSNV VKGEOMETRYFLAGSKHR)
+
+(CFFI:DEFCTYPE VKGEOMETRYFLAGBITSNV VKGEOMETRYFLAGBITSKHR)
+
+(CFFI:DEFCTYPE VKGEOMETRYINSTANCEFLAGBITSKHR :INT)
+
+(CFFI:DEFCTYPE VKGEOMETRYINSTANCEFLAGSKHR VKFLAGS)
+
+(CFFI:DEFCTYPE VKGEOMETRYINSTANCEFLAGSNV VKGEOMETRYINSTANCEFLAGSKHR)
+
+(CFFI:DEFCTYPE VKGEOMETRYINSTANCEFLAGBITSNV VKGEOMETRYINSTANCEFLAGBITSKHR)
+
+(CFFI:DEFCTYPE VKBUILDACCELERATIONSTRUCTUREFLAGBITSKHR :INT)
+
+(CFFI:DEFCTYPE VKBUILDACCELERATIONSTRUCTUREFLAGSKHR VKFLAGS)
+
+(CFFI:DEFCTYPE VKBUILDACCELERATIONSTRUCTUREFLAGSNV
+               VKBUILDACCELERATIONSTRUCTUREFLAGSKHR)
+
+(CFFI:DEFCTYPE VKBUILDACCELERATIONSTRUCTUREFLAGBITSNV
+               VKBUILDACCELERATIONSTRUCTUREFLAGBITSKHR)
+
+(CFFI:DEFCSTRUCT VKRAYTRACINGSHADERGROUPCREATEINFONV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (TYPE VKRAYTRACINGSHADERGROUPTYPEKHR)
+  (GENERALSHADER :UINT32)
+  (CLOSESTHITSHADER :UINT32)
+  (ANYHITSHADER :UINT32)
+  (INTERSECTIONSHADER :UINT32))
+
+(CFFI:DEFCSTRUCT VKRAYTRACINGPIPELINECREATEINFONV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKPIPELINECREATEFLAGS)
+  (STAGECOUNT :UINT32)
+  (PSTAGES :POINTER)
+  (GROUPCOUNT :UINT32)
+  (PGROUPS :POINTER)
+  (MAXRECURSIONDEPTH :UINT32)
+  (LAYOUT VKPIPELINELAYOUT)
+  (BASEPIPELINEHANDLE VKPIPELINE)
+  (BASEPIPELINEINDEX :INT32))
+
+(CFFI:DEFCSTRUCT VKGEOMETRYTRIANGLESNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (VERTEXDATA VKBUFFER)
+  (VERTEXOFFSET VKDEVICESIZE)
+  (VERTEXCOUNT :UINT32)
+  (VERTEXSTRIDE VKDEVICESIZE)
+  (VERTEXFORMAT VKFORMAT)
+  (INDEXDATA VKBUFFER)
+  (INDEXOFFSET VKDEVICESIZE)
+  (INDEXCOUNT :UINT32)
+  (INDEXTYPE VKINDEXTYPE)
+  (TRANSFORMDATA VKBUFFER)
+  (TRANSFORMOFFSET VKDEVICESIZE))
+
+(CFFI:DEFCSTRUCT VKGEOMETRYAABBNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (AABBDATA VKBUFFER)
+  (NUMAABBS :UINT32)
+  (STRIDE :UINT32)
+  (OFFSET VKDEVICESIZE))
+
+(CFFI:DEFCSTRUCT VKGEOMETRYDATANV
+  (TRIANGLES (:STRUCT VKGEOMETRYTRIANGLESNV))
+  (AABBS (:STRUCT VKGEOMETRYAABBNV)))
+
+(CFFI:DEFCSTRUCT VKGEOMETRYNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (GEOMETRYTYPE VKGEOMETRYTYPEKHR)
+  (GEOMETRY (:STRUCT VKGEOMETRYDATANV))
+  (FLAGS VKGEOMETRYFLAGSKHR))
+
+(CFFI:DEFCSTRUCT VKACCELERATIONSTRUCTUREINFONV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (TYPE VKACCELERATIONSTRUCTURETYPENV)
+  (FLAGS VKBUILDACCELERATIONSTRUCTUREFLAGSNV)
+  (INSTANCECOUNT :UINT32)
+  (GEOMETRYCOUNT :UINT32)
+  (PGEOMETRIES :POINTER))
+
+(CFFI:DEFCSTRUCT VKACCELERATIONSTRUCTURECREATEINFONV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (COMPACTEDSIZE VKDEVICESIZE)
+  (INFO (:STRUCT VKACCELERATIONSTRUCTUREINFONV)))
+
+(CFFI:DEFCSTRUCT VKBINDACCELERATIONSTRUCTUREMEMORYINFONV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (ACCELERATIONSTRUCTURE VKACCELERATIONSTRUCTURENV)
+  (MEMORY VKDEVICEMEMORY)
+  (MEMORYOFFSET VKDEVICESIZE)
+  (DEVICEINDEXCOUNT :UINT32)
+  (PDEVICEINDICES :POINTER))
+
+(CFFI:DEFCSTRUCT VKWRITEDESCRIPTORSETACCELERATIONSTRUCTURENV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (ACCELERATIONSTRUCTURECOUNT :UINT32)
+  (PACCELERATIONSTRUCTURES :POINTER))
+
+(CFFI:DEFCSTRUCT VKACCELERATIONSTRUCTUREMEMORYREQUIREMENTSINFONV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (TYPE VKACCELERATIONSTRUCTUREMEMORYREQUIREMENTSTYPENV)
+  (ACCELERATIONSTRUCTURE VKACCELERATIONSTRUCTURENV))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICERAYTRACINGPROPERTIESNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SHADERGROUPHANDLESIZE :UINT32)
+  (MAXRECURSIONDEPTH :UINT32)
+  (MAXSHADERGROUPSTRIDE :UINT32)
+  (SHADERGROUPBASEALIGNMENT :UINT32)
+  (MAXGEOMETRYCOUNT :UINT64)
+  (MAXINSTANCECOUNT :UINT64)
+  (MAXTRIANGLECOUNT :UINT64)
+  (MAXDESCRIPTORSETACCELERATIONSTRUCTURES :UINT32))
+
+(CFFI:DEFCSTRUCT VKTRANSFORMMATRIXKHR
+  (MATRIX :FLOAT :COUNT 12))
+
+(CFFI:DEFCTYPE VKTRANSFORMMATRIXNV (:STRUCT VKTRANSFORMMATRIXKHR))
+
+(CFFI:DEFCSTRUCT VKAABBPOSITIONSKHR
+  (MINX :FLOAT)
+  (MINY :FLOAT)
+  (MINZ :FLOAT)
+  (MAXX :FLOAT)
+  (MAXY :FLOAT)
+  (MAXZ :FLOAT))
+
+(CFFI:DEFCTYPE VKAABBPOSITIONSNV (:STRUCT VKAABBPOSITIONSKHR))
+
+(CFFI:DEFCSTRUCT VKACCELERATIONSTRUCTUREINSTANCEKHR
+  (TRANSFORM (:STRUCT VKTRANSFORMMATRIXKHR))
+  (INSTANCECUSTOMINDEX :UINT32))
+
+(CFFI:DEFCTYPE VKACCELERATIONSTRUCTUREINSTANCENV
+               (:STRUCT VKACCELERATIONSTRUCTUREINSTANCEKHR))
+
+(CFFI:DEFCTYPE PFN_VKCREATEACCELERATIONSTRUCTURENV :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYACCELERATIONSTRUCTURENV :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETACCELERATIONSTRUCTUREMEMORYREQUIREMENTSNV :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKBINDACCELERATIONSTRUCTUREMEMORYNV :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDBUILDACCELERATIONSTRUCTURENV :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDCOPYACCELERATIONSTRUCTURENV :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDTRACERAYSNV :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCREATERAYTRACINGPIPELINESNV :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETRAYTRACINGSHADERGROUPHANDLESKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETRAYTRACINGSHADERGROUPHANDLESNV :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETACCELERATIONSTRUCTUREHANDLENV :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDWRITEACCELERATIONSTRUCTURESPROPERTIESNV :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCOMPILEDEFERREDNV :POINTER)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEREPRESENTATIVEFRAGMENTTESTFEATURESNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (REPRESENTATIVEFRAGMENTTEST VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPIPELINEREPRESENTATIVEFRAGMENTTESTSTATECREATEINFONV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (REPRESENTATIVEFRAGMENTTESTENABLE VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEIMAGEVIEWIMAGEFORMATINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (IMAGEVIEWTYPE VKIMAGEVIEWTYPE))
+
+(CFFI:DEFCSTRUCT VKFILTERCUBICIMAGEVIEWIMAGEFORMATPROPERTIESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FILTERCUBIC VKBOOL32)
+  (FILTERCUBICMINMAX VKBOOL32))
+
+(CFFI:DEFCTYPE VKQUEUEGLOBALPRIORITYEXT VKQUEUEGLOBALPRIORITYKHR)
+
+(CFFI:DEFCTYPE VKDEVICEQUEUEGLOBALPRIORITYCREATEINFOEXT
+               (:STRUCT VKDEVICEQUEUEGLOBALPRIORITYCREATEINFOKHR))
+
+(CFFI:DEFCSTRUCT VKIMPORTMEMORYHOSTPOINTERINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (HANDLETYPE VKEXTERNALMEMORYHANDLETYPEFLAGBITS)
+  (PHOSTPOINTER :POINTER))
+
+(CFFI:DEFCSTRUCT VKMEMORYHOSTPOINTERPROPERTIESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MEMORYTYPEBITS :UINT32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEEXTERNALMEMORYHOSTPROPERTIESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MINIMPORTEDHOSTPOINTERALIGNMENT VKDEVICESIZE))
+
+(CFFI:DEFCTYPE PFN_VKGETMEMORYHOSTPOINTERPROPERTIESEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDWRITEBUFFERMARKERAMD :POINTER)
+
+(CFFI:DEFCTYPE VKPIPELINECOMPILERCONTROLFLAGBITSAMD :INT)
+
+(CFFI:DEFCTYPE VKPIPELINECOMPILERCONTROLFLAGSAMD VKFLAGS)
+
+(CFFI:DEFCSTRUCT VKPIPELINECOMPILERCONTROLCREATEINFOAMD
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (COMPILERCONTROLFLAGS VKPIPELINECOMPILERCONTROLFLAGSAMD))
+
+(CFFI:DEFCTYPE VKTIMEDOMAINEXT :INT)
+
+(CFFI:DEFCSTRUCT VKCALIBRATEDTIMESTAMPINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (TIMEDOMAIN VKTIMEDOMAINEXT))
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICECALIBRATEABLETIMEDOMAINSEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETCALIBRATEDTIMESTAMPSEXT :POINTER)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESHADERCOREPROPERTIESAMD
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SHADERENGINECOUNT :UINT32)
+  (SHADERARRAYSPERENGINECOUNT :UINT32)
+  (COMPUTEUNITSPERSHADERARRAY :UINT32)
+  (SIMDPERCOMPUTEUNIT :UINT32)
+  (WAVEFRONTSPERSIMD :UINT32)
+  (WAVEFRONTSIZE :UINT32)
+  (SGPRSPERSIMD :UINT32)
+  (MINSGPRALLOCATION :UINT32)
+  (MAXSGPRALLOCATION :UINT32)
+  (SGPRALLOCATIONGRANULARITY :UINT32)
+  (VGPRSPERSIMD :UINT32)
+  (MINVGPRALLOCATION :UINT32)
+  (MAXVGPRALLOCATION :UINT32)
+  (VGPRALLOCATIONGRANULARITY :UINT32))
+
+(CFFI:DEFCTYPE VKMEMORYOVERALLOCATIONBEHAVIORAMD :INT)
+
+(CFFI:DEFCSTRUCT VKDEVICEMEMORYOVERALLOCATIONCREATEINFOAMD
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (OVERALLOCATIONBEHAVIOR VKMEMORYOVERALLOCATIONBEHAVIORAMD))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEVERTEXATTRIBUTEDIVISORPROPERTIESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MAXVERTEXATTRIBDIVISOR :UINT32))
+
+(CFFI:DEFCSTRUCT VKVERTEXINPUTBINDINGDIVISORDESCRIPTIONEXT
+  (BINDING :UINT32)
+  (DIVISOR :UINT32))
+
+(CFFI:DEFCSTRUCT VKPIPELINEVERTEXINPUTDIVISORSTATECREATEINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (VERTEXBINDINGDIVISORCOUNT :UINT32)
+  (PVERTEXBINDINGDIVISORS :POINTER))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEVERTEXATTRIBUTEDIVISORFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (VERTEXATTRIBUTEINSTANCERATEDIVISOR VKBOOL32)
+  (VERTEXATTRIBUTEINSTANCERATEZERODIVISOR VKBOOL32))
+
+(CFFI:DEFCTYPE VKPIPELINECREATIONFEEDBACKFLAGBITSEXT
+               VKPIPELINECREATIONFEEDBACKFLAGBITS)
+
+(CFFI:DEFCTYPE VKPIPELINECREATIONFEEDBACKFLAGSEXT
+               VKPIPELINECREATIONFEEDBACKFLAGS)
+
+(CFFI:DEFCTYPE VKPIPELINECREATIONFEEDBACKCREATEINFOEXT
+               (:STRUCT VKPIPELINECREATIONFEEDBACKCREATEINFO))
+
+(CFFI:DEFCTYPE VKPIPELINECREATIONFEEDBACKEXT
+               (:STRUCT VKPIPELINECREATIONFEEDBACK))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICECOMPUTESHADERDERIVATIVESFEATURESNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (COMPUTEDERIVATIVEGROUPQUADS VKBOOL32)
+  (COMPUTEDERIVATIVEGROUPLINEAR VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEMESHSHADERFEATURESNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (TASKSHADER VKBOOL32)
+  (MESHSHADER VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEMESHSHADERPROPERTIESNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MAXDRAWMESHTASKSCOUNT :UINT32)
+  (MAXTASKWORKGROUPINVOCATIONS :UINT32)
+  (MAXTASKWORKGROUPSIZE :UINT32 :COUNT 3)
+  (MAXTASKTOTALMEMORYSIZE :UINT32)
+  (MAXTASKOUTPUTCOUNT :UINT32)
+  (MAXMESHWORKGROUPINVOCATIONS :UINT32)
+  (MAXMESHWORKGROUPSIZE :UINT32 :COUNT 3)
+  (MAXMESHTOTALMEMORYSIZE :UINT32)
+  (MAXMESHOUTPUTVERTICES :UINT32)
+  (MAXMESHOUTPUTPRIMITIVES :UINT32)
+  (MAXMESHMULTIVIEWVIEWCOUNT :UINT32)
+  (MESHOUTPUTPERVERTEXGRANULARITY :UINT32)
+  (MESHOUTPUTPERPRIMITIVEGRANULARITY :UINT32))
+
+(CFFI:DEFCSTRUCT VKDRAWMESHTASKSINDIRECTCOMMANDNV
+  (TASKCOUNT :UINT32)
+  (FIRSTTASK :UINT32))
+
+(CFFI:DEFCTYPE PFN_VKCMDDRAWMESHTASKSNV :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDDRAWMESHTASKSINDIRECTNV :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDDRAWMESHTASKSINDIRECTCOUNTNV :POINTER)
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEFRAGMENTSHADERBARYCENTRICFEATURESNV
+               (:STRUCT VKPHYSICALDEVICEFRAGMENTSHADERBARYCENTRICFEATURESKHR))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESHADERIMAGEFOOTPRINTFEATURESNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (IMAGEFOOTPRINT VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPIPELINEVIEWPORTEXCLUSIVESCISSORSTATECREATEINFONV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (EXCLUSIVESCISSORCOUNT :UINT32)
+  (PEXCLUSIVESCISSORS :POINTER))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEEXCLUSIVESCISSORFEATURESNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (EXCLUSIVESCISSOR VKBOOL32))
+
+(CFFI:DEFCTYPE PFN_VKCMDSETEXCLUSIVESCISSORNV :POINTER)
+
+(CFFI:DEFCSTRUCT VKQUEUEFAMILYCHECKPOINTPROPERTIESNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (CHECKPOINTEXECUTIONSTAGEMASK VKPIPELINESTAGEFLAGS))
+
+(CFFI:DEFCSTRUCT VKCHECKPOINTDATANV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (STAGE VKPIPELINESTAGEFLAGBITS)
+  (PCHECKPOINTMARKER :POINTER))
+
+(CFFI:DEFCTYPE PFN_VKCMDSETCHECKPOINTNV :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETQUEUECHECKPOINTDATANV :POINTER)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESHADERINTEGERFUNCTIONS2FEATURESINTEL
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SHADERINTEGERFUNCTIONS2 VKBOOL32))
+
+(CFFI:DEFCTYPE VKPERFORMANCECONFIGURATIONINTEL NON-DISPATCHABLE-HANDLE)
+
+(CFFI:DEFCTYPE VKPERFORMANCECONFIGURATIONTYPEINTEL :INT)
+
+(CFFI:DEFCTYPE VKQUERYPOOLSAMPLINGMODEINTEL :INT)
+
+(CFFI:DEFCTYPE VKPERFORMANCEOVERRIDETYPEINTEL :INT)
+
+(CFFI:DEFCTYPE VKPERFORMANCEPARAMETERTYPEINTEL :INT)
+
+(CFFI:DEFCTYPE VKPERFORMANCEVALUETYPEINTEL :INT)
+
+(CFFI:DEFCUNION VKPERFORMANCEVALUEDATAINTEL
+  (VALUE32 :UINT32)
+  (VALUE64 :UINT64)
+  (VALUEFLOAT :FLOAT)
+  (VALUEBOOL VKBOOL32)
+  (VALUESTRING :POINTER))
+
+(CFFI:DEFCSTRUCT VKPERFORMANCEVALUEINTEL
+  (TYPE VKPERFORMANCEVALUETYPEINTEL)
+  (DATA (:UNION VKPERFORMANCEVALUEDATAINTEL)))
+
+(CFFI:DEFCSTRUCT VKINITIALIZEPERFORMANCEAPIINFOINTEL
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PUSERDATA :POINTER))
+
+(CFFI:DEFCSTRUCT VKQUERYPOOLPERFORMANCEQUERYCREATEINFOINTEL
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PERFORMANCECOUNTERSSAMPLING VKQUERYPOOLSAMPLINGMODEINTEL))
+
+(CFFI:DEFCTYPE VKQUERYPOOLCREATEINFOINTEL
+               (:STRUCT VKQUERYPOOLPERFORMANCEQUERYCREATEINFOINTEL))
+
+(CFFI:DEFCSTRUCT VKPERFORMANCEMARKERINFOINTEL
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MARKER :UINT64))
+
+(CFFI:DEFCSTRUCT VKPERFORMANCESTREAMMARKERINFOINTEL
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MARKER :UINT32))
+
+(CFFI:DEFCSTRUCT VKPERFORMANCEOVERRIDEINFOINTEL
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (TYPE VKPERFORMANCEOVERRIDETYPEINTEL)
+  (ENABLE VKBOOL32)
+  (PARAMETER :UINT64))
+
+(CFFI:DEFCSTRUCT VKPERFORMANCECONFIGURATIONACQUIREINFOINTEL
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (TYPE VKPERFORMANCECONFIGURATIONTYPEINTEL))
+
+(CFFI:DEFCTYPE PFN_VKINITIALIZEPERFORMANCEAPIINTEL :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKUNINITIALIZEPERFORMANCEAPIINTEL :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETPERFORMANCEMARKERINTEL :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETPERFORMANCESTREAMMARKERINTEL :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETPERFORMANCEOVERRIDEINTEL :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKACQUIREPERFORMANCECONFIGURATIONINTEL :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKRELEASEPERFORMANCECONFIGURATIONINTEL :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKQUEUESETPERFORMANCECONFIGURATIONINTEL :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPERFORMANCEPARAMETERINTEL :POINTER)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEPCIBUSINFOPROPERTIESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PCIDOMAIN :UINT32)
+  (PCIBUS :UINT32)
+  (PCIDEVICE :UINT32)
+  (PCIFUNCTION :UINT32))
+
+(CFFI:DEFCSTRUCT VKDISPLAYNATIVEHDRSURFACECAPABILITIESAMD
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (LOCALDIMMINGSUPPORT VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKSWAPCHAINDISPLAYNATIVEHDRCREATEINFOAMD
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (LOCALDIMMINGENABLE VKBOOL32))
+
+(CFFI:DEFCTYPE PFN_VKSETLOCALDIMMINGAMD :POINTER)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEFRAGMENTDENSITYMAPFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FRAGMENTDENSITYMAP VKBOOL32)
+  (FRAGMENTDENSITYMAPDYNAMIC VKBOOL32)
+  (FRAGMENTDENSITYMAPNONSUBSAMPLEDIMAGES VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEFRAGMENTDENSITYMAPPROPERTIESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MINFRAGMENTDENSITYTEXELSIZE (:STRUCT VKEXTENT2D))
+  (MAXFRAGMENTDENSITYTEXELSIZE (:STRUCT VKEXTENT2D))
+  (FRAGMENTDENSITYINVOCATIONS VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKRENDERPASSFRAGMENTDENSITYMAPCREATEINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FRAGMENTDENSITYMAPATTACHMENT (:STRUCT VKATTACHMENTREFERENCE)))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICESCALARBLOCKLAYOUTFEATURESEXT
+               (:STRUCT VKPHYSICALDEVICESCALARBLOCKLAYOUTFEATURES))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICESUBGROUPSIZECONTROLFEATURESEXT
+               (:STRUCT VKPHYSICALDEVICESUBGROUPSIZECONTROLFEATURES))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICESUBGROUPSIZECONTROLPROPERTIESEXT
+               (:STRUCT VKPHYSICALDEVICESUBGROUPSIZECONTROLPROPERTIES))
+
+(CFFI:DEFCTYPE VKPIPELINESHADERSTAGEREQUIREDSUBGROUPSIZECREATEINFOEXT
+               (:STRUCT VKPIPELINESHADERSTAGEREQUIREDSUBGROUPSIZECREATEINFO))
+
+(CFFI:DEFCTYPE VKSHADERCOREPROPERTIESFLAGBITSAMD :INT)
+
+(CFFI:DEFCTYPE VKSHADERCOREPROPERTIESFLAGSAMD VKFLAGS)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESHADERCOREPROPERTIES2AMD
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SHADERCOREFEATURES VKSHADERCOREPROPERTIESFLAGSAMD)
+  (ACTIVECOMPUTEUNITCOUNT :UINT32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICECOHERENTMEMORYFEATURESAMD
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DEVICECOHERENTMEMORY VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESHADERIMAGEATOMICINT64FEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SHADERIMAGEINT64ATOMICS VKBOOL32)
+  (SPARSEIMAGEINT64ATOMICS VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEMEMORYBUDGETPROPERTIESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (HEAPBUDGET VKDEVICESIZE :COUNT 16)
+  (HEAPUSAGE VKDEVICESIZE :COUNT 16))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEMEMORYPRIORITYFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MEMORYPRIORITY VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKMEMORYPRIORITYALLOCATEINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PRIORITY :FLOAT))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEDEDICATEDALLOCATIONIMAGEALIASINGFEATURESNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DEDICATEDALLOCATIONIMAGEALIASING VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEBUFFERDEVICEADDRESSFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (BUFFERDEVICEADDRESS VKBOOL32)
+  (BUFFERDEVICEADDRESSCAPTUREREPLAY VKBOOL32)
+  (BUFFERDEVICEADDRESSMULTIDEVICE VKBOOL32))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEBUFFERADDRESSFEATURESEXT
+               (:STRUCT VKPHYSICALDEVICEBUFFERDEVICEADDRESSFEATURESEXT))
+
+(CFFI:DEFCTYPE VKBUFFERDEVICEADDRESSINFOEXT (:STRUCT VKBUFFERDEVICEADDRESSINFO))
+
+(CFFI:DEFCSTRUCT VKBUFFERDEVICEADDRESSCREATEINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DEVICEADDRESS VKDEVICEADDRESS))
+
+(CFFI:DEFCTYPE PFN_VKGETBUFFERDEVICEADDRESSEXT :POINTER)
+
+(CFFI:DEFCTYPE VKTOOLPURPOSEFLAGBITSEXT VKTOOLPURPOSEFLAGBITS)
+
+(CFFI:DEFCTYPE VKTOOLPURPOSEFLAGSEXT VKTOOLPURPOSEFLAGS)
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICETOOLPROPERTIESEXT
+               (:STRUCT VKPHYSICALDEVICETOOLPROPERTIES))
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICETOOLPROPERTIESEXT :POINTER)
+
+(CFFI:DEFCTYPE VKIMAGESTENCILUSAGECREATEINFOEXT
+               (:STRUCT VKIMAGESTENCILUSAGECREATEINFO))
+
+(CFFI:DEFCTYPE VKVALIDATIONFEATUREENABLEEXT :INT)
+
+(CFFI:DEFCTYPE VKVALIDATIONFEATUREDISABLEEXT :INT)
+
+(CFFI:DEFCSTRUCT VKVALIDATIONFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (ENABLEDVALIDATIONFEATURECOUNT :UINT32)
+  (PENABLEDVALIDATIONFEATURES :POINTER)
+  (DISABLEDVALIDATIONFEATURECOUNT :UINT32)
+  (PDISABLEDVALIDATIONFEATURES :POINTER))
+
+(CFFI:DEFCTYPE VKCOMPONENTTYPENV :INT)
+
+(CFFI:DEFCTYPE VKSCOPENV :INT)
+
+(CFFI:DEFCSTRUCT VKCOOPERATIVEMATRIXPROPERTIESNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MSIZE :UINT32)
+  (NSIZE :UINT32)
+  (KSIZE :UINT32)
+  (ATYPE VKCOMPONENTTYPENV)
+  (BTYPE VKCOMPONENTTYPENV)
+  (CTYPE VKCOMPONENTTYPENV)
+  (DTYPE VKCOMPONENTTYPENV)
+  (SCOPE VKSCOPENV))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICECOOPERATIVEMATRIXFEATURESNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (COOPERATIVEMATRIX VKBOOL32)
+  (COOPERATIVEMATRIXROBUSTBUFFERACCESS VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICECOOPERATIVEMATRIXPROPERTIESNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (COOPERATIVEMATRIXSUPPORTEDSTAGES VKSHADERSTAGEFLAGS))
+
+(CFFI:DEFCTYPE PFN_VKGETPHYSICALDEVICECOOPERATIVEMATRIXPROPERTIESNV :POINTER)
+
+(CFFI:DEFCTYPE VKCOVERAGEREDUCTIONMODENV :INT)
+
+(CFFI:DEFCTYPE VKPIPELINECOVERAGEREDUCTIONSTATECREATEFLAGSNV VKFLAGS)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICECOVERAGEREDUCTIONMODEFEATURESNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (COVERAGEREDUCTIONMODE VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPIPELINECOVERAGEREDUCTIONSTATECREATEINFONV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKPIPELINECOVERAGEREDUCTIONSTATECREATEFLAGSNV)
+  (COVERAGEREDUCTIONMODE VKCOVERAGEREDUCTIONMODENV))
+
+(CFFI:DEFCSTRUCT VKFRAMEBUFFERMIXEDSAMPLESCOMBINATIONNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (COVERAGEREDUCTIONMODE VKCOVERAGEREDUCTIONMODENV)
+  (RASTERIZATIONSAMPLES VKSAMPLECOUNTFLAGBITS)
+  (DEPTHSTENCILSAMPLES VKSAMPLECOUNTFLAGS)
+  (COLORSAMPLES VKSAMPLECOUNTFLAGS))
+
+(CFFI:DEFCTYPE
+ PFN_VKGETPHYSICALDEVICESUPPORTEDFRAMEBUFFERMIXEDSAMPLESCOMBINATIONSNV :POINTER)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEFRAGMENTSHADERINTERLOCKFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FRAGMENTSHADERSAMPLEINTERLOCK VKBOOL32)
+  (FRAGMENTSHADERPIXELINTERLOCK VKBOOL32)
+  (FRAGMENTSHADERSHADINGRATEINTERLOCK VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEYCBCRIMAGEARRAYSFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (YCBCRIMAGEARRAYS VKBOOL32))
+
+(CFFI:DEFCTYPE VKPROVOKINGVERTEXMODEEXT :INT)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEPROVOKINGVERTEXFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PROVOKINGVERTEXLAST VKBOOL32)
+  (TRANSFORMFEEDBACKPRESERVESPROVOKINGVERTEX VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEPROVOKINGVERTEXPROPERTIESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PROVOKINGVERTEXMODEPERPIPELINE VKBOOL32)
+  (TRANSFORMFEEDBACKPRESERVESTRIANGLEFANPROVOKINGVERTEX VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPIPELINERASTERIZATIONPROVOKINGVERTEXSTATECREATEINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PROVOKINGVERTEXMODE VKPROVOKINGVERTEXMODEEXT))
+
+(CFFI:DEFCTYPE VKHEADLESSSURFACECREATEFLAGSEXT VKFLAGS)
+
+(CFFI:DEFCSTRUCT VKHEADLESSSURFACECREATEINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKHEADLESSSURFACECREATEFLAGSEXT))
+
+(CFFI:DEFCTYPE PFN_VKCREATEHEADLESSSURFACEEXT :POINTER)
+
+(CFFI:DEFCTYPE VKLINERASTERIZATIONMODEEXT :INT)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICELINERASTERIZATIONFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (RECTANGULARLINES VKBOOL32)
+  (BRESENHAMLINES VKBOOL32)
+  (SMOOTHLINES VKBOOL32)
+  (STIPPLEDRECTANGULARLINES VKBOOL32)
+  (STIPPLEDBRESENHAMLINES VKBOOL32)
+  (STIPPLEDSMOOTHLINES VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICELINERASTERIZATIONPROPERTIESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (LINESUBPIXELPRECISIONBITS :UINT32))
+
+(CFFI:DEFCSTRUCT VKPIPELINERASTERIZATIONLINESTATECREATEINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (LINERASTERIZATIONMODE VKLINERASTERIZATIONMODEEXT)
+  (STIPPLEDLINEENABLE VKBOOL32)
+  (LINESTIPPLEFACTOR :UINT32)
+  (LINESTIPPLEPATTERN :UINT16))
+
+(CFFI:DEFCTYPE PFN_VKCMDSETLINESTIPPLEEXT :POINTER)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESHADERATOMICFLOATFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SHADERBUFFERFLOAT32ATOMICS VKBOOL32)
+  (SHADERBUFFERFLOAT32ATOMICADD VKBOOL32)
+  (SHADERBUFFERFLOAT64ATOMICS VKBOOL32)
+  (SHADERBUFFERFLOAT64ATOMICADD VKBOOL32)
+  (SHADERSHAREDFLOAT32ATOMICS VKBOOL32)
+  (SHADERSHAREDFLOAT32ATOMICADD VKBOOL32)
+  (SHADERSHAREDFLOAT64ATOMICS VKBOOL32)
+  (SHADERSHAREDFLOAT64ATOMICADD VKBOOL32)
+  (SHADERIMAGEFLOAT32ATOMICS VKBOOL32)
+  (SHADERIMAGEFLOAT32ATOMICADD VKBOOL32)
+  (SPARSEIMAGEFLOAT32ATOMICS VKBOOL32)
+  (SPARSEIMAGEFLOAT32ATOMICADD VKBOOL32))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEHOSTQUERYRESETFEATURESEXT
+               (:STRUCT VKPHYSICALDEVICEHOSTQUERYRESETFEATURES))
+
+(CFFI:DEFCTYPE PFN_VKRESETQUERYPOOLEXT :POINTER)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEINDEXTYPEUINT8FEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (INDEXTYPEUINT8 VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEEXTENDEDDYNAMICSTATEFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (EXTENDEDDYNAMICSTATE VKBOOL32))
+
+(CFFI:DEFCTYPE PFN_VKCMDSETCULLMODEEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETFRONTFACEEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETPRIMITIVETOPOLOGYEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETVIEWPORTWITHCOUNTEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETSCISSORWITHCOUNTEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDBINDVERTEXBUFFERS2EXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETDEPTHTESTENABLEEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETDEPTHWRITEENABLEEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETDEPTHCOMPAREOPEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETDEPTHBOUNDSTESTENABLEEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETSTENCILTESTENABLEEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETSTENCILOPEXT :POINTER)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESHADERATOMICFLOAT2FEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SHADERBUFFERFLOAT16ATOMICS VKBOOL32)
+  (SHADERBUFFERFLOAT16ATOMICADD VKBOOL32)
+  (SHADERBUFFERFLOAT16ATOMICMINMAX VKBOOL32)
+  (SHADERBUFFERFLOAT32ATOMICMINMAX VKBOOL32)
+  (SHADERBUFFERFLOAT64ATOMICMINMAX VKBOOL32)
+  (SHADERSHAREDFLOAT16ATOMICS VKBOOL32)
+  (SHADERSHAREDFLOAT16ATOMICADD VKBOOL32)
+  (SHADERSHAREDFLOAT16ATOMICMINMAX VKBOOL32)
+  (SHADERSHAREDFLOAT32ATOMICMINMAX VKBOOL32)
+  (SHADERSHAREDFLOAT64ATOMICMINMAX VKBOOL32)
+  (SHADERIMAGEFLOAT32ATOMICMINMAX VKBOOL32)
+  (SPARSEIMAGEFLOAT32ATOMICMINMAX VKBOOL32))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICESHADERDEMOTETOHELPERINVOCATIONFEATURESEXT
+               (:STRUCT VKPHYSICALDEVICESHADERDEMOTETOHELPERINVOCATIONFEATURES))
+
+(CFFI:DEFCTYPE VKINDIRECTCOMMANDSLAYOUTNV NON-DISPATCHABLE-HANDLE)
+
+(CFFI:DEFCTYPE VKINDIRECTCOMMANDSTOKENTYPENV :INT)
+
+(CFFI:DEFCTYPE VKINDIRECTSTATEFLAGBITSNV :INT)
+
+(CFFI:DEFCTYPE VKINDIRECTSTATEFLAGSNV VKFLAGS)
+
+(CFFI:DEFCTYPE VKINDIRECTCOMMANDSLAYOUTUSAGEFLAGBITSNV :INT)
+
+(CFFI:DEFCTYPE VKINDIRECTCOMMANDSLAYOUTUSAGEFLAGSNV VKFLAGS)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEDEVICEGENERATEDCOMMANDSPROPERTIESNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MAXGRAPHICSSHADERGROUPCOUNT :UINT32)
+  (MAXINDIRECTSEQUENCECOUNT :UINT32)
+  (MAXINDIRECTCOMMANDSTOKENCOUNT :UINT32)
+  (MAXINDIRECTCOMMANDSSTREAMCOUNT :UINT32)
+  (MAXINDIRECTCOMMANDSTOKENOFFSET :UINT32)
+  (MAXINDIRECTCOMMANDSSTREAMSTRIDE :UINT32)
+  (MINSEQUENCESCOUNTBUFFEROFFSETALIGNMENT :UINT32)
+  (MINSEQUENCESINDEXBUFFEROFFSETALIGNMENT :UINT32)
+  (MININDIRECTCOMMANDSBUFFEROFFSETALIGNMENT :UINT32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEDEVICEGENERATEDCOMMANDSFEATURESNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DEVICEGENERATEDCOMMANDS VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKGRAPHICSSHADERGROUPCREATEINFONV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (STAGECOUNT :UINT32)
+  (PSTAGES :POINTER)
+  (PVERTEXINPUTSTATE :POINTER)
+  (PTESSELLATIONSTATE :POINTER))
+
+(CFFI:DEFCSTRUCT VKGRAPHICSPIPELINESHADERGROUPSCREATEINFONV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (GROUPCOUNT :UINT32)
+  (PGROUPS :POINTER)
+  (PIPELINECOUNT :UINT32)
+  (PPIPELINES :POINTER))
+
+(CFFI:DEFCSTRUCT VKBINDSHADERGROUPINDIRECTCOMMANDNV
+  (GROUPINDEX :UINT32))
+
+(CFFI:DEFCSTRUCT VKBINDINDEXBUFFERINDIRECTCOMMANDNV
+  (BUFFERADDRESS VKDEVICEADDRESS)
+  (SIZE :UINT32)
+  (INDEXTYPE VKINDEXTYPE))
+
+(CFFI:DEFCSTRUCT VKBINDVERTEXBUFFERINDIRECTCOMMANDNV
+  (BUFFERADDRESS VKDEVICEADDRESS)
+  (SIZE :UINT32)
+  (STRIDE :UINT32))
+
+(CFFI:DEFCSTRUCT VKSETSTATEFLAGSINDIRECTCOMMANDNV
+  (DATA :UINT32))
+
+(CFFI:DEFCSTRUCT VKINDIRECTCOMMANDSSTREAMNV
+  (BUFFER VKBUFFER)
+  (OFFSET VKDEVICESIZE))
+
+(CFFI:DEFCSTRUCT VKINDIRECTCOMMANDSLAYOUTTOKENNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (TOKENTYPE VKINDIRECTCOMMANDSTOKENTYPENV)
+  (STREAM :UINT32)
+  (OFFSET :UINT32)
+  (VERTEXBINDINGUNIT :UINT32)
+  (VERTEXDYNAMICSTRIDE VKBOOL32)
+  (PUSHCONSTANTPIPELINELAYOUT VKPIPELINELAYOUT)
+  (PUSHCONSTANTSHADERSTAGEFLAGS VKSHADERSTAGEFLAGS)
+  (PUSHCONSTANTOFFSET :UINT32)
+  (PUSHCONSTANTSIZE :UINT32)
+  (INDIRECTSTATEFLAGS VKINDIRECTSTATEFLAGSNV)
+  (INDEXTYPECOUNT :UINT32)
+  (PINDEXTYPES :POINTER)
+  (PINDEXTYPEVALUES :POINTER))
+
+(CFFI:DEFCSTRUCT VKINDIRECTCOMMANDSLAYOUTCREATEINFONV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKINDIRECTCOMMANDSLAYOUTUSAGEFLAGSNV)
+  (PIPELINEBINDPOINT VKPIPELINEBINDPOINT)
+  (TOKENCOUNT :UINT32)
+  (PTOKENS :POINTER)
+  (STREAMCOUNT :UINT32)
+  (PSTREAMSTRIDES :POINTER))
+
+(CFFI:DEFCSTRUCT VKGENERATEDCOMMANDSINFONV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PIPELINEBINDPOINT VKPIPELINEBINDPOINT)
+  (PIPELINE VKPIPELINE)
+  (INDIRECTCOMMANDSLAYOUT VKINDIRECTCOMMANDSLAYOUTNV)
+  (STREAMCOUNT :UINT32)
+  (PSTREAMS :POINTER)
+  (SEQUENCESCOUNT :UINT32)
+  (PREPROCESSBUFFER VKBUFFER)
+  (PREPROCESSOFFSET VKDEVICESIZE)
+  (PREPROCESSSIZE VKDEVICESIZE)
+  (SEQUENCESCOUNTBUFFER VKBUFFER)
+  (SEQUENCESCOUNTOFFSET VKDEVICESIZE)
+  (SEQUENCESINDEXBUFFER VKBUFFER)
+  (SEQUENCESINDEXOFFSET VKDEVICESIZE))
+
+(CFFI:DEFCSTRUCT VKGENERATEDCOMMANDSMEMORYREQUIREMENTSINFONV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PIPELINEBINDPOINT VKPIPELINEBINDPOINT)
+  (PIPELINE VKPIPELINE)
+  (INDIRECTCOMMANDSLAYOUT VKINDIRECTCOMMANDSLAYOUTNV)
+  (MAXSEQUENCESCOUNT :UINT32))
+
+(CFFI:DEFCTYPE PFN_VKGETGENERATEDCOMMANDSMEMORYREQUIREMENTSNV :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDPREPROCESSGENERATEDCOMMANDSNV :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDEXECUTEGENERATEDCOMMANDSNV :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDBINDPIPELINESHADERGROUPNV :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCREATEINDIRECTCOMMANDSLAYOUTNV :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYINDIRECTCOMMANDSLAYOUTNV :POINTER)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEINHERITEDVIEWPORTSCISSORFEATURESNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (INHERITEDVIEWPORTSCISSOR2D VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKCOMMANDBUFFERINHERITANCEVIEWPORTSCISSORINFONV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (VIEWPORTSCISSOR2D VKBOOL32)
+  (VIEWPORTDEPTHCOUNT :UINT32)
+  (PVIEWPORTDEPTHS :POINTER))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICETEXELBUFFERALIGNMENTFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (TEXELBUFFERALIGNMENT VKBOOL32))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICETEXELBUFFERALIGNMENTPROPERTIESEXT
+               (:STRUCT VKPHYSICALDEVICETEXELBUFFERALIGNMENTPROPERTIES))
+
+(CFFI:DEFCSTRUCT VKRENDERPASSTRANSFORMBEGININFOQCOM
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (TRANSFORM VKSURFACETRANSFORMFLAGBITSKHR))
+
+(CFFI:DEFCSTRUCT VKCOMMANDBUFFERINHERITANCERENDERPASSTRANSFORMINFOQCOM
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (TRANSFORM VKSURFACETRANSFORMFLAGBITSKHR)
+  (RENDERAREA (:STRUCT VKRECT2D)))
+
+(CFFI:DEFCTYPE VKDEVICEMEMORYREPORTEVENTTYPEEXT :INT)
+
+(CFFI:DEFCTYPE VKDEVICEMEMORYREPORTFLAGSEXT VKFLAGS)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEDEVICEMEMORYREPORTFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DEVICEMEMORYREPORT VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKDEVICEMEMORYREPORTCALLBACKDATAEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKDEVICEMEMORYREPORTFLAGSEXT)
+  (TYPE VKDEVICEMEMORYREPORTEVENTTYPEEXT)
+  (MEMORYOBJECTID :UINT64)
+  (SIZE VKDEVICESIZE)
+  (OBJECTTYPE VKOBJECTTYPE)
+  (OBJECTHANDLE :UINT64)
+  (HEAPINDEX :UINT32))
+
+(CFFI:DEFCTYPE PFN_VKDEVICEMEMORYREPORTCALLBACKEXT :POINTER)
+
+(CFFI:DEFCSTRUCT VKDEVICEDEVICEMEMORYREPORTCREATEINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKDEVICEMEMORYREPORTFLAGSEXT)
+  (PFNUSERCALLBACK PFN_VKDEVICEMEMORYREPORTCALLBACKEXT)
+  (PUSERDATA :POINTER))
+
+(CFFI:DEFCTYPE PFN_VKACQUIREDRMDISPLAYEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETDRMDISPLAYEXT :POINTER)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEROBUSTNESS2FEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (ROBUSTBUFFERACCESS2 VKBOOL32)
+  (ROBUSTIMAGEACCESS2 VKBOOL32)
+  (NULLDESCRIPTOR VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEROBUSTNESS2PROPERTIESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (ROBUSTSTORAGEBUFFERACCESSSIZEALIGNMENT VKDEVICESIZE)
+  (ROBUSTUNIFORMBUFFERACCESSSIZEALIGNMENT VKDEVICESIZE))
+
+(CFFI:DEFCSTRUCT VKSAMPLERCUSTOMBORDERCOLORCREATEINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (CUSTOMBORDERCOLOR (:UNION VKCLEARCOLORVALUE))
+  (FORMAT VKFORMAT))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICECUSTOMBORDERCOLORPROPERTIESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MAXCUSTOMBORDERCOLORSAMPLERS :UINT32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICECUSTOMBORDERCOLORFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (CUSTOMBORDERCOLORS VKBOOL32)
+  (CUSTOMBORDERCOLORWITHOUTFORMAT VKBOOL32))
+
+(CFFI:DEFCTYPE VKPRIVATEDATASLOTEXT :POINTER)
+
+(CFFI:DEFCTYPE VKPRIVATEDATASLOTCREATEFLAGSEXT VKPRIVATEDATASLOTCREATEFLAGS)
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEPRIVATEDATAFEATURESEXT
+               (:STRUCT VKPHYSICALDEVICEPRIVATEDATAFEATURES))
+
+(CFFI:DEFCTYPE VKDEVICEPRIVATEDATACREATEINFOEXT
+               (:STRUCT VKDEVICEPRIVATEDATACREATEINFO))
+
+(CFFI:DEFCTYPE VKPRIVATEDATASLOTCREATEINFOEXT
+               (:STRUCT VKPRIVATEDATASLOTCREATEINFO))
+
+(CFFI:DEFCTYPE PFN_VKCREATEPRIVATEDATASLOTEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYPRIVATEDATASLOTEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKSETPRIVATEDATAEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETPRIVATEDATAEXT :POINTER)
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEPIPELINECREATIONCACHECONTROLFEATURESEXT
+               (:STRUCT VKPHYSICALDEVICEPIPELINECREATIONCACHECONTROLFEATURES))
+
+(CFFI:DEFCTYPE VKDEVICEDIAGNOSTICSCONFIGFLAGBITSNV :INT)
+
+(CFFI:DEFCTYPE VKDEVICEDIAGNOSTICSCONFIGFLAGSNV VKFLAGS)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEDIAGNOSTICSCONFIGFEATURESNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DIAGNOSTICSCONFIG VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKDEVICEDIAGNOSTICSCONFIGCREATEINFONV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKDEVICEDIAGNOSTICSCONFIGFLAGSNV))
+
+(CFFI:DEFCTYPE VKGRAPHICSPIPELINELIBRARYFLAGBITSEXT :INT)
+
+(CFFI:DEFCTYPE VKGRAPHICSPIPELINELIBRARYFLAGSEXT VKFLAGS)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEGRAPHICSPIPELINELIBRARYFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (GRAPHICSPIPELINELIBRARY VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEGRAPHICSPIPELINELIBRARYPROPERTIESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (GRAPHICSPIPELINELIBRARYFASTLINKING VKBOOL32)
+  (GRAPHICSPIPELINELIBRARYINDEPENDENTINTERPOLATIONDECORATION VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKGRAPHICSPIPELINELIBRARYCREATEINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKGRAPHICSPIPELINELIBRARYFLAGSEXT))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESHADEREARLYANDLATEFRAGMENTTESTSFEATURESAMD
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SHADEREARLYANDLATEFRAGMENTTESTS VKBOOL32))
+
+(CFFI:DEFCTYPE VKFRAGMENTSHADINGRATETYPENV :INT)
+
+(CFFI:DEFCTYPE VKFRAGMENTSHADINGRATENV :INT)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEFRAGMENTSHADINGRATEENUMSFEATURESNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FRAGMENTSHADINGRATEENUMS VKBOOL32)
+  (SUPERSAMPLEFRAGMENTSHADINGRATES VKBOOL32)
+  (NOINVOCATIONFRAGMENTSHADINGRATES VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEFRAGMENTSHADINGRATEENUMSPROPERTIESNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MAXFRAGMENTSHADINGRATEINVOCATIONCOUNT VKSAMPLECOUNTFLAGBITS))
+
+(CFFI:DEFCSTRUCT VKPIPELINEFRAGMENTSHADINGRATEENUMSTATECREATEINFONV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SHADINGRATETYPE VKFRAGMENTSHADINGRATETYPENV)
+  (SHADINGRATE VKFRAGMENTSHADINGRATENV)
+  (COMBINEROPS VKFRAGMENTSHADINGRATECOMBINEROPKHR :COUNT 2))
+
+(CFFI:DEFCTYPE PFN_VKCMDSETFRAGMENTSHADINGRATEENUMNV :POINTER)
+
+(CFFI:DEFCTYPE VKACCELERATIONSTRUCTUREMOTIONINSTANCETYPENV :INT)
+
+(CFFI:DEFCTYPE VKACCELERATIONSTRUCTUREMOTIONINFOFLAGSNV VKFLAGS)
+
+(CFFI:DEFCTYPE VKACCELERATIONSTRUCTUREMOTIONINSTANCEFLAGSNV VKFLAGS)
+
+(CFFI:DEFCUNION VKDEVICEORHOSTADDRESSCONSTKHR
+  (DEVICEADDRESS VKDEVICEADDRESS)
+  (HOSTADDRESS :POINTER))
+
+(CFFI:DEFCSTRUCT VKACCELERATIONSTRUCTUREGEOMETRYMOTIONTRIANGLESDATANV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (VERTEXDATA (:UNION VKDEVICEORHOSTADDRESSCONSTKHR)))
+
+(CFFI:DEFCSTRUCT VKACCELERATIONSTRUCTUREMOTIONINFONV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MAXINSTANCES :UINT32)
+  (FLAGS VKACCELERATIONSTRUCTUREMOTIONINFOFLAGSNV))
+
+(CFFI:DEFCSTRUCT VKACCELERATIONSTRUCTUREMATRIXMOTIONINSTANCENV
+  (TRANSFORMT0 (:STRUCT VKTRANSFORMMATRIXKHR))
+  (TRANSFORMT1 (:STRUCT VKTRANSFORMMATRIXKHR))
+  (INSTANCECUSTOMINDEX :UINT32))
+
+(CFFI:DEFCSTRUCT VKSRTDATANV
+  (SX :FLOAT)
+  (A :FLOAT)
+  (B :FLOAT)
+  (PVX :FLOAT)
+  (SY :FLOAT)
+  (C :FLOAT)
+  (PVY :FLOAT)
+  (SZ :FLOAT)
+  (PVZ :FLOAT)
+  (QX :FLOAT)
+  (QY :FLOAT)
+  (QZ :FLOAT)
+  (QW :FLOAT)
+  (TX :FLOAT)
+  (TY :FLOAT)
+  (TZ :FLOAT))
+
+(CFFI:DEFCSTRUCT VKACCELERATIONSTRUCTURESRTMOTIONINSTANCENV
+  (TRANSFORMT0 (:STRUCT VKSRTDATANV))
+  (TRANSFORMT1 (:STRUCT VKSRTDATANV))
+  (INSTANCECUSTOMINDEX :UINT32))
+
+(CFFI:DEFCUNION VKACCELERATIONSTRUCTUREMOTIONINSTANCEDATANV
+  (STATICINSTANCE (:STRUCT VKACCELERATIONSTRUCTUREINSTANCEKHR))
+  (MATRIXMOTIONINSTANCE (:STRUCT VKACCELERATIONSTRUCTUREMATRIXMOTIONINSTANCENV))
+  (SRTMOTIONINSTANCE (:STRUCT VKACCELERATIONSTRUCTURESRTMOTIONINSTANCENV)))
+
+(CFFI:DEFCSTRUCT VKACCELERATIONSTRUCTUREMOTIONINSTANCENV
+  (TYPE VKACCELERATIONSTRUCTUREMOTIONINSTANCETYPENV)
+  (FLAGS VKACCELERATIONSTRUCTUREMOTIONINSTANCEFLAGSNV)
+  (DATA (:UNION VKACCELERATIONSTRUCTUREMOTIONINSTANCEDATANV)))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICERAYTRACINGMOTIONBLURFEATURESNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (RAYTRACINGMOTIONBLUR VKBOOL32)
+  (RAYTRACINGMOTIONBLURPIPELINETRACERAYSINDIRECT VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEYCBCR2PLANE444FORMATSFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (YCBCR2PLANE444FORMATS VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEFRAGMENTDENSITYMAP2FEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FRAGMENTDENSITYMAPDEFERRED VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEFRAGMENTDENSITYMAP2PROPERTIESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SUBSAMPLEDLOADS VKBOOL32)
+  (SUBSAMPLEDCOARSERECONSTRUCTIONEARLYACCESS VKBOOL32)
+  (MAXSUBSAMPLEDARRAYLAYERS :UINT32)
+  (MAXDESCRIPTORSETSUBSAMPLEDSAMPLERS :UINT32))
+
+(CFFI:DEFCSTRUCT VKCOPYCOMMANDTRANSFORMINFOQCOM
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (TRANSFORM VKSURFACETRANSFORMFLAGBITSKHR))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEIMAGEROBUSTNESSFEATURESEXT
+               (:STRUCT VKPHYSICALDEVICEIMAGEROBUSTNESSFEATURES))
+
+(CFFI:DEFCTYPE VKIMAGECOMPRESSIONFLAGBITSEXT :INT)
+
+(CFFI:DEFCTYPE VKIMAGECOMPRESSIONFLAGSEXT VKFLAGS)
+
+(CFFI:DEFCTYPE VKIMAGECOMPRESSIONFIXEDRATEFLAGBITSEXT :INT)
+
+(CFFI:DEFCTYPE VKIMAGECOMPRESSIONFIXEDRATEFLAGSEXT VKFLAGS)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEIMAGECOMPRESSIONCONTROLFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (IMAGECOMPRESSIONCONTROL VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKIMAGECOMPRESSIONCONTROLEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKIMAGECOMPRESSIONFLAGSEXT)
+  (COMPRESSIONCONTROLPLANECOUNT :UINT32)
+  (PFIXEDRATEFLAGS :POINTER))
+
+(CFFI:DEFCSTRUCT VKSUBRESOURCELAYOUT2EXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SUBRESOURCELAYOUT (:STRUCT VKSUBRESOURCELAYOUT)))
+
+(CFFI:DEFCSTRUCT VKIMAGESUBRESOURCE2EXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (IMAGESUBRESOURCE (:STRUCT VKIMAGESUBRESOURCE)))
+
+(CFFI:DEFCSTRUCT VKIMAGECOMPRESSIONPROPERTIESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (IMAGECOMPRESSIONFLAGS VKIMAGECOMPRESSIONFLAGSEXT)
+  (IMAGECOMPRESSIONFIXEDRATEFLAGS VKIMAGECOMPRESSIONFIXEDRATEFLAGSEXT))
+
+(CFFI:DEFCTYPE PFN_VKGETIMAGESUBRESOURCELAYOUT2EXT :POINTER)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICE4444FORMATSFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FORMATA4R4G4B4 VKBOOL32)
+  (FORMATA4B4G4R4 VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICERASTERIZATIONORDERATTACHMENTACCESSFEATURESARM
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (RASTERIZATIONORDERCOLORATTACHMENTACCESS VKBOOL32)
+  (RASTERIZATIONORDERDEPTHATTACHMENTACCESS VKBOOL32)
+  (RASTERIZATIONORDERSTENCILATTACHMENTACCESS VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICERGBA10X6FORMATSFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FORMATRGBA10X6WITHOUTYCBCRSAMPLER VKBOOL32))
+
+(CFFI:DEFCTYPE PFN_VKACQUIREWINRTDISPLAYNV :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETWINRTDISPLAYNV :POINTER)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEMUTABLEDESCRIPTORTYPEFEATURESVALVE
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MUTABLEDESCRIPTORTYPE VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKMUTABLEDESCRIPTORTYPELISTVALVE
+  (DESCRIPTORTYPECOUNT :UINT32)
+  (PDESCRIPTORTYPES :POINTER))
+
+(CFFI:DEFCSTRUCT VKMUTABLEDESCRIPTORTYPECREATEINFOVALVE
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MUTABLEDESCRIPTORTYPELISTCOUNT :UINT32)
+  (PMUTABLEDESCRIPTORTYPELISTS :POINTER))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEVERTEXINPUTDYNAMICSTATEFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (VERTEXINPUTDYNAMICSTATE VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKVERTEXINPUTBINDINGDESCRIPTION2EXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (BINDING :UINT32)
+  (STRIDE :UINT32)
+  (INPUTRATE VKVERTEXINPUTRATE)
+  (DIVISOR :UINT32))
+
+(CFFI:DEFCSTRUCT VKVERTEXINPUTATTRIBUTEDESCRIPTION2EXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (LOCATION :UINT32)
+  (BINDING :UINT32)
+  (FORMAT VKFORMAT)
+  (OFFSET :UINT32))
+
+(CFFI:DEFCTYPE PFN_VKCMDSETVERTEXINPUTEXT :POINTER)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEDRMPROPERTIESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (HASPRIMARY VKBOOL32)
+  (HASRENDER VKBOOL32)
+  (PRIMARYMAJOR :INT64)
+  (PRIMARYMINOR :INT64)
+  (RENDERMAJOR :INT64)
+  (RENDERMINOR :INT64))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEDEPTHCLIPCONTROLFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DEPTHCLIPCONTROL VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPIPELINEVIEWPORTDEPTHCLIPCONTROLCREATEINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (NEGATIVEONETOONE VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEPRIMITIVETOPOLOGYLISTRESTARTFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PRIMITIVETOPOLOGYLISTRESTART VKBOOL32)
+  (PRIMITIVETOPOLOGYPATCHLISTRESTART VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKSUBPASSSHADINGPIPELINECREATEINFOHUAWEI
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (RENDERPASS VKRENDERPASS)
+  (SUBPASS :UINT32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESUBPASSSHADINGFEATURESHUAWEI
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SUBPASSSHADING VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESUBPASSSHADINGPROPERTIESHUAWEI
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MAXSUBPASSSHADINGWORKGROUPSIZEASPECTRATIO :UINT32))
+
+(CFFI:DEFCTYPE PFN_VKGETDEVICESUBPASSSHADINGMAXWORKGROUPSIZEHUAWEI :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSUBPASSSHADINGHUAWEI :POINTER)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEINVOCATIONMASKFEATURESHUAWEI
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (INVOCATIONMASK VKBOOL32))
+
+(CFFI:DEFCTYPE PFN_VKCMDBINDINVOCATIONMASKHUAWEI :POINTER)
+
+(CFFI:DEFCTYPE VKREMOTEADDRESSNV :POINTER)
+
+(CFFI:DEFCSTRUCT VKMEMORYGETREMOTEADDRESSINFONV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MEMORY VKDEVICEMEMORY)
+  (HANDLETYPE VKEXTERNALMEMORYHANDLETYPEFLAGBITS))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEEXTERNALMEMORYRDMAFEATURESNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (EXTERNALMEMORYRDMA VKBOOL32))
+
+(CFFI:DEFCTYPE PFN_VKGETMEMORYREMOTEADDRESSNV :POINTER)
+
+(CFFI:DEFCTYPE VKPIPELINEINFOEXT (:STRUCT VKPIPELINEINFOKHR))
+
+(CFFI:DEFCSTRUCT VKPIPELINEPROPERTIESIDENTIFIEREXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PIPELINEIDENTIFIER :UINT8 :COUNT 16))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEPIPELINEPROPERTIESFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PIPELINEPROPERTIESIDENTIFIER VKBOOL32))
+
+(CFFI:DEFCTYPE PFN_VKGETPIPELINEPROPERTIESEXT :POINTER)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEEXTENDEDDYNAMICSTATE2FEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (EXTENDEDDYNAMICSTATE2 VKBOOL32)
+  (EXTENDEDDYNAMICSTATE2LOGICOP VKBOOL32)
+  (EXTENDEDDYNAMICSTATE2PATCHCONTROLPOINTS VKBOOL32))
+
+(CFFI:DEFCTYPE PFN_VKCMDSETPATCHCONTROLPOINTSEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETRASTERIZERDISCARDENABLEEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETDEPTHBIASENABLEEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETLOGICOPEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETPRIMITIVERESTARTENABLEEXT :POINTER)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICECOLORWRITEENABLEFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (COLORWRITEENABLE VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPIPELINECOLORWRITECREATEINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (ATTACHMENTCOUNT :UINT32)
+  (PCOLORWRITEENABLES :POINTER))
+
+(CFFI:DEFCTYPE PFN_VKCMDSETCOLORWRITEENABLEEXT :POINTER)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEPRIMITIVESGENERATEDQUERYFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PRIMITIVESGENERATEDQUERY VKBOOL32)
+  (PRIMITIVESGENERATEDQUERYWITHRASTERIZERDISCARD VKBOOL32)
+  (PRIMITIVESGENERATEDQUERYWITHNONZEROSTREAMS VKBOOL32))
+
+(CFFI:DEFCTYPE VKPHYSICALDEVICEGLOBALPRIORITYQUERYFEATURESEXT
+               (:STRUCT VKPHYSICALDEVICEGLOBALPRIORITYQUERYFEATURESKHR))
+
+(CFFI:DEFCTYPE VKQUEUEFAMILYGLOBALPRIORITYPROPERTIESEXT
+               (:STRUCT VKQUEUEFAMILYGLOBALPRIORITYPROPERTIESKHR))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEIMAGEVIEWMINLODFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MINLOD VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKIMAGEVIEWMINLODCREATEINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MINLOD :FLOAT))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEMULTIDRAWFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MULTIDRAW VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEMULTIDRAWPROPERTIESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MAXMULTIDRAWCOUNT :UINT32))
+
+(CFFI:DEFCSTRUCT VKMULTIDRAWINFOEXT
+  (FIRSTVERTEX :UINT32)
+  (VERTEXCOUNT :UINT32))
+
+(CFFI:DEFCSTRUCT VKMULTIDRAWINDEXEDINFOEXT
+  (FIRSTINDEX :UINT32)
+  (INDEXCOUNT :UINT32)
+  (VERTEXOFFSET :INT32))
+
+(CFFI:DEFCTYPE PFN_VKCMDDRAWMULTIEXT :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDDRAWMULTIINDEXEDEXT :POINTER)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEIMAGE2DVIEWOF3DFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (IMAGE2DVIEWOF3D VKBOOL32)
+  (SAMPLER2DVIEWOF3D VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEBORDERCOLORSWIZZLEFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (BORDERCOLORSWIZZLE VKBOOL32)
+  (BORDERCOLORSWIZZLEFROMIMAGE VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKSAMPLERBORDERCOLORCOMPONENTMAPPINGCREATEINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (COMPONENTS (:STRUCT VKCOMPONENTMAPPING))
+  (SRGB VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEPAGEABLEDEVICELOCALMEMORYFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PAGEABLEDEVICELOCALMEMORY VKBOOL32))
+
+(CFFI:DEFCTYPE PFN_VKSETDEVICEMEMORYPRIORITYEXT :POINTER)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEDESCRIPTORSETHOSTMAPPINGFEATURESVALVE
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DESCRIPTORSETHOSTMAPPING VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKDESCRIPTORSETBINDINGREFERENCEVALVE
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DESCRIPTORSETLAYOUT VKDESCRIPTORSETLAYOUT)
+  (BINDING :UINT32))
+
+(CFFI:DEFCSTRUCT VKDESCRIPTORSETLAYOUTHOSTMAPPINGINFOVALVE
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DESCRIPTOROFFSET :SIZE)
+  (DESCRIPTORSIZE :UINT32))
+
+(CFFI:DEFCTYPE PFN_VKGETDESCRIPTORSETLAYOUTHOSTMAPPINGINFOVALVE :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETDESCRIPTORSETHOSTMAPPINGVALVE :POINTER)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEFRAGMENTDENSITYMAPOFFSETFEATURESQCOM
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FRAGMENTDENSITYMAPOFFSET VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEFRAGMENTDENSITYMAPOFFSETPROPERTIESQCOM
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FRAGMENTDENSITYOFFSETGRANULARITY (:STRUCT VKEXTENT2D)))
+
+(CFFI:DEFCSTRUCT VKSUBPASSFRAGMENTDENSITYMAPOFFSETENDINFOQCOM
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FRAGMENTDENSITYOFFSETCOUNT :UINT32)
+  (PFRAGMENTDENSITYOFFSETS :POINTER))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICELINEARCOLORATTACHMENTFEATURESNV
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (LINEARCOLORATTACHMENT VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEIMAGECOMPRESSIONCONTROLSWAPCHAINFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (IMAGECOMPRESSIONCONTROLSWAPCHAIN VKBOOL32))
+
+(CFFI:DEFCTYPE VKSUBPASSMERGESTATUSEXT :INT)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICESUBPASSMERGEFEEDBACKFEATURESEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SUBPASSMERGEFEEDBACK VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKRENDERPASSCREATIONCONTROLEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DISALLOWMERGING VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKRENDERPASSCREATIONFEEDBACKINFOEXT
+  (POSTMERGESUBPASSCOUNT :UINT32))
+
+(CFFI:DEFCSTRUCT VKRENDERPASSCREATIONFEEDBACKCREATEINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PRENDERPASSFEEDBACK :POINTER))
+
+(CFFI:DEFCSTRUCT VKRENDERPASSSUBPASSFEEDBACKINFOEXT
+  (SUBPASSMERGESTATUS VKSUBPASSMERGESTATUSEXT)
+  (DESCRIPTION :CHAR :COUNT 256)
+  (POSTMERGEINDEX :UINT32))
+
+(CFFI:DEFCSTRUCT VKRENDERPASSSUBPASSFEEDBACKCREATEINFOEXT
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PSUBPASSFEEDBACK :POINTER))
+
+(CFFI:DEFCTYPE VKACCELERATIONSTRUCTUREKHR NON-DISPATCHABLE-HANDLE)
+
+(CFFI:DEFCTYPE VKBUILDACCELERATIONSTRUCTUREMODEKHR :INT)
+
+(CFFI:DEFCTYPE VKACCELERATIONSTRUCTUREBUILDTYPEKHR :INT)
+
+(CFFI:DEFCTYPE VKACCELERATIONSTRUCTURECOMPATIBILITYKHR :INT)
+
+(CFFI:DEFCTYPE VKACCELERATIONSTRUCTURECREATEFLAGBITSKHR :INT)
+
+(CFFI:DEFCTYPE VKACCELERATIONSTRUCTURECREATEFLAGSKHR VKFLAGS)
+
+(CFFI:DEFCUNION VKDEVICEORHOSTADDRESSKHR
+  (DEVICEADDRESS VKDEVICEADDRESS)
+  (HOSTADDRESS :POINTER))
+
+(CFFI:DEFCSTRUCT VKACCELERATIONSTRUCTUREBUILDRANGEINFOKHR
+  (PRIMITIVECOUNT :UINT32)
+  (PRIMITIVEOFFSET :UINT32)
+  (FIRSTVERTEX :UINT32)
+  (TRANSFORMOFFSET :UINT32))
+
+(CFFI:DEFCSTRUCT VKACCELERATIONSTRUCTUREGEOMETRYTRIANGLESDATAKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (VERTEXFORMAT VKFORMAT)
+  (VERTEXDATA (:UNION VKDEVICEORHOSTADDRESSCONSTKHR))
+  (VERTEXSTRIDE VKDEVICESIZE)
+  (MAXVERTEX :UINT32)
+  (INDEXTYPE VKINDEXTYPE)
+  (INDEXDATA (:UNION VKDEVICEORHOSTADDRESSCONSTKHR))
+  (TRANSFORMDATA (:UNION VKDEVICEORHOSTADDRESSCONSTKHR)))
+
+(CFFI:DEFCSTRUCT VKACCELERATIONSTRUCTUREGEOMETRYAABBSDATAKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (DATA (:UNION VKDEVICEORHOSTADDRESSCONSTKHR))
+  (STRIDE VKDEVICESIZE))
+
+(CFFI:DEFCSTRUCT VKACCELERATIONSTRUCTUREGEOMETRYINSTANCESDATAKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (ARRAYOFPOINTERS VKBOOL32)
+  (DATA (:UNION VKDEVICEORHOSTADDRESSCONSTKHR)))
+
+(CFFI:DEFCUNION VKACCELERATIONSTRUCTUREGEOMETRYDATAKHR
+  (TRIANGLES (:STRUCT VKACCELERATIONSTRUCTUREGEOMETRYTRIANGLESDATAKHR))
+  (AABBS (:STRUCT VKACCELERATIONSTRUCTUREGEOMETRYAABBSDATAKHR))
+  (INSTANCES (:STRUCT VKACCELERATIONSTRUCTUREGEOMETRYINSTANCESDATAKHR)))
+
+(CFFI:DEFCSTRUCT VKACCELERATIONSTRUCTUREGEOMETRYKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (GEOMETRYTYPE VKGEOMETRYTYPEKHR)
+  (GEOMETRY (:UNION VKACCELERATIONSTRUCTUREGEOMETRYDATAKHR))
+  (FLAGS VKGEOMETRYFLAGSKHR))
+
+(CFFI:DEFCSTRUCT VKACCELERATIONSTRUCTUREBUILDGEOMETRYINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (TYPE VKACCELERATIONSTRUCTURETYPEKHR)
+  (FLAGS VKBUILDACCELERATIONSTRUCTUREFLAGSKHR)
+  (MODE VKBUILDACCELERATIONSTRUCTUREMODEKHR)
+  (SRCACCELERATIONSTRUCTURE VKACCELERATIONSTRUCTUREKHR)
+  (DSTACCELERATIONSTRUCTURE VKACCELERATIONSTRUCTUREKHR)
+  (GEOMETRYCOUNT :UINT32)
+  (PGEOMETRIES :POINTER)
+  (PPGEOMETRIES :POINTER)
+  (SCRATCHDATA (:UNION VKDEVICEORHOSTADDRESSKHR)))
+
+(CFFI:DEFCSTRUCT VKACCELERATIONSTRUCTURECREATEINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (CREATEFLAGS VKACCELERATIONSTRUCTURECREATEFLAGSKHR)
+  (BUFFER VKBUFFER)
+  (OFFSET VKDEVICESIZE)
+  (SIZE VKDEVICESIZE)
+  (TYPE VKACCELERATIONSTRUCTURETYPEKHR)
+  (DEVICEADDRESS VKDEVICEADDRESS))
+
+(CFFI:DEFCSTRUCT VKWRITEDESCRIPTORSETACCELERATIONSTRUCTUREKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (ACCELERATIONSTRUCTURECOUNT :UINT32)
+  (PACCELERATIONSTRUCTURES :POINTER))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEACCELERATIONSTRUCTUREFEATURESKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (ACCELERATIONSTRUCTURE VKBOOL32)
+  (ACCELERATIONSTRUCTURECAPTUREREPLAY VKBOOL32)
+  (ACCELERATIONSTRUCTUREINDIRECTBUILD VKBOOL32)
+  (ACCELERATIONSTRUCTUREHOSTCOMMANDS VKBOOL32)
+  (DESCRIPTORBINDINGACCELERATIONSTRUCTUREUPDATEAFTERBIND VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICEACCELERATIONSTRUCTUREPROPERTIESKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MAXGEOMETRYCOUNT :UINT64)
+  (MAXINSTANCECOUNT :UINT64)
+  (MAXPRIMITIVECOUNT :UINT64)
+  (MAXPERSTAGEDESCRIPTORACCELERATIONSTRUCTURES :UINT32)
+  (MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDACCELERATIONSTRUCTURES :UINT32)
+  (MAXDESCRIPTORSETACCELERATIONSTRUCTURES :UINT32)
+  (MAXDESCRIPTORSETUPDATEAFTERBINDACCELERATIONSTRUCTURES :UINT32)
+  (MINACCELERATIONSTRUCTURESCRATCHOFFSETALIGNMENT :UINT32))
+
+(CFFI:DEFCSTRUCT VKACCELERATIONSTRUCTUREDEVICEADDRESSINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (ACCELERATIONSTRUCTURE VKACCELERATIONSTRUCTUREKHR))
+
+(CFFI:DEFCSTRUCT VKACCELERATIONSTRUCTUREVERSIONINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (PVERSIONDATA :POINTER))
+
+(CFFI:DEFCSTRUCT VKCOPYACCELERATIONSTRUCTURETOMEMORYINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SRC VKACCELERATIONSTRUCTUREKHR)
+  (DST (:UNION VKDEVICEORHOSTADDRESSKHR))
+  (MODE VKCOPYACCELERATIONSTRUCTUREMODEKHR))
+
+(CFFI:DEFCSTRUCT VKCOPYMEMORYTOACCELERATIONSTRUCTUREINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SRC (:UNION VKDEVICEORHOSTADDRESSCONSTKHR))
+  (DST VKACCELERATIONSTRUCTUREKHR)
+  (MODE VKCOPYACCELERATIONSTRUCTUREMODEKHR))
+
+(CFFI:DEFCSTRUCT VKCOPYACCELERATIONSTRUCTUREINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SRC VKACCELERATIONSTRUCTUREKHR)
+  (DST VKACCELERATIONSTRUCTUREKHR)
+  (MODE VKCOPYACCELERATIONSTRUCTUREMODEKHR))
+
+(CFFI:DEFCSTRUCT VKACCELERATIONSTRUCTUREBUILDSIZESINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (ACCELERATIONSTRUCTURESIZE VKDEVICESIZE)
+  (UPDATESCRATCHSIZE VKDEVICESIZE)
+  (BUILDSCRATCHSIZE VKDEVICESIZE))
+
+(CFFI:DEFCTYPE PFN_VKCREATEACCELERATIONSTRUCTUREKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKDESTROYACCELERATIONSTRUCTUREKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDBUILDACCELERATIONSTRUCTURESKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDBUILDACCELERATIONSTRUCTURESINDIRECTKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKBUILDACCELERATIONSTRUCTURESKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCOPYACCELERATIONSTRUCTUREKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCOPYACCELERATIONSTRUCTURETOMEMORYKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCOPYMEMORYTOACCELERATIONSTRUCTUREKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKWRITEACCELERATIONSTRUCTURESPROPERTIESKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDCOPYACCELERATIONSTRUCTUREKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDCOPYACCELERATIONSTRUCTURETOMEMORYKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDCOPYMEMORYTOACCELERATIONSTRUCTUREKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETACCELERATIONSTRUCTUREDEVICEADDRESSKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDWRITEACCELERATIONSTRUCTURESPROPERTIESKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETDEVICEACCELERATIONSTRUCTURECOMPATIBILITYKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETACCELERATIONSTRUCTUREBUILDSIZESKHR :POINTER)
+
+(CFFI:DEFCTYPE VKSHADERGROUPSHADERKHR :INT)
+
+(CFFI:DEFCSTRUCT VKRAYTRACINGSHADERGROUPCREATEINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (TYPE VKRAYTRACINGSHADERGROUPTYPEKHR)
+  (GENERALSHADER :UINT32)
+  (CLOSESTHITSHADER :UINT32)
+  (ANYHITSHADER :UINT32)
+  (INTERSECTIONSHADER :UINT32)
+  (PSHADERGROUPCAPTUREREPLAYHANDLE :POINTER))
+
+(CFFI:DEFCSTRUCT VKRAYTRACINGPIPELINEINTERFACECREATEINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (MAXPIPELINERAYPAYLOADSIZE :UINT32)
+  (MAXPIPELINERAYHITATTRIBUTESIZE :UINT32))
+
+(CFFI:DEFCSTRUCT VKRAYTRACINGPIPELINECREATEINFOKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (FLAGS VKPIPELINECREATEFLAGS)
+  (STAGECOUNT :UINT32)
+  (PSTAGES :POINTER)
+  (GROUPCOUNT :UINT32)
+  (PGROUPS :POINTER)
+  (MAXPIPELINERAYRECURSIONDEPTH :UINT32)
+  (PLIBRARYINFO :POINTER)
+  (PLIBRARYINTERFACE :POINTER)
+  (PDYNAMICSTATE :POINTER)
+  (LAYOUT VKPIPELINELAYOUT)
+  (BASEPIPELINEHANDLE VKPIPELINE)
+  (BASEPIPELINEINDEX :INT32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICERAYTRACINGPIPELINEFEATURESKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (RAYTRACINGPIPELINE VKBOOL32)
+  (RAYTRACINGPIPELINESHADERGROUPHANDLECAPTUREREPLAY VKBOOL32)
+  (RAYTRACINGPIPELINESHADERGROUPHANDLECAPTUREREPLAYMIXED VKBOOL32)
+  (RAYTRACINGPIPELINETRACERAYSINDIRECT VKBOOL32)
+  (RAYTRAVERSALPRIMITIVECULLING VKBOOL32))
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICERAYTRACINGPIPELINEPROPERTIESKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (SHADERGROUPHANDLESIZE :UINT32)
+  (MAXRAYRECURSIONDEPTH :UINT32)
+  (MAXSHADERGROUPSTRIDE :UINT32)
+  (SHADERGROUPBASEALIGNMENT :UINT32)
+  (SHADERGROUPHANDLECAPTUREREPLAYSIZE :UINT32)
+  (MAXRAYDISPATCHINVOCATIONCOUNT :UINT32)
+  (SHADERGROUPHANDLEALIGNMENT :UINT32)
+  (MAXRAYHITATTRIBUTESIZE :UINT32))
+
+(CFFI:DEFCSTRUCT VKSTRIDEDDEVICEADDRESSREGIONKHR
+  (DEVICEADDRESS VKDEVICEADDRESS)
+  (STRIDE VKDEVICESIZE)
+  (SIZE VKDEVICESIZE))
+
+(CFFI:DEFCSTRUCT VKTRACERAYSINDIRECTCOMMANDKHR
+  (WIDTH :UINT32)
+  (HEIGHT :UINT32)
+  (DEPTH :UINT32))
+
+(CFFI:DEFCTYPE PFN_VKCMDTRACERAYSKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCREATERAYTRACINGPIPELINESKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETRAYTRACINGCAPTUREREPLAYSHADERGROUPHANDLESKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDTRACERAYSINDIRECTKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKGETRAYTRACINGSHADERGROUPSTACKSIZEKHR :POINTER)
+
+(CFFI:DEFCTYPE PFN_VKCMDSETRAYTRACINGPIPELINESTACKSIZEKHR :POINTER)
+
+(CFFI:DEFCSTRUCT VKPHYSICALDEVICERAYQUERYFEATURESKHR
+  (STYPE VKSTRUCTURETYPE)
+  (PNEXT :POINTER)
+  (RAYQUERY VKBOOL32))

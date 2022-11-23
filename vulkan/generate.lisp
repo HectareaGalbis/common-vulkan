@@ -8,9 +8,9 @@
 
 (defstruct context
   "Store the data read from the C Vulkan file."
-  (structs   (make-array 100 :adjustable t :fill-pointer 0 :element-type 'string))
-  (unions    (make-array 100 :adjustable t :fill-pointer 0 :element-type 'string))
-  (pointers  (make-array 100 :adjustable t :fill-pointer 0 :element-type 'string))
+  (structs   (make-array 100 :adjustable t :fill-pointer 0 :element-type 'string :initial-element ""))
+  (unions    (make-array 100 :adjustable t :fill-pointer 0 :element-type 'string :initial-element ""))
+  (pointers  (make-array 100 :adjustable t :fill-pointer 0 :element-type 'string :initial-element ""))
   (constants (make-hash-table :test 'equal))
   
   (type-definitions     (make-array 100 :adjustable t :fill-pointer 0))
@@ -52,8 +52,8 @@
   "Check whether POSSIBLE-POINTER is a pointer type."
   (declare (type context context) (type string possible-pointer))
   (let ((pointers (context-pointers context)))
-    (loop pointer across pointers
-	  thereis (string= pointer possible-pointer))))
+    (loop for pointer across pointers
+	    thereis (string= pointer possible-pointer))))
 
 (defun add-pointer (context pointer)
   "Add pointer type into the list of pointers."
@@ -63,16 +63,16 @@
       (vector-push-extend pointer pointers))))
 
 
-(defun constantp (context possible-constant)
+(defun constant-p (context possible-constant)
   "Check whether POSSIBLE-CONSTANT is a constant."
-  (declare (type context context) (type string constant))
+  (declare (type context context) (type string possible-constant))
   (let ((constants (context-constants context)))
     (nth-value 1 (gethash possible-constant constants))))
 
 (defun add-constant (context constant value)
   "Add a constant and its value to the constant table."
   (declare (type context context) (type string constant) (type t value))
-  (when (not (constantp context constant))
+  (when (not (constant-p context constant))
     (let ((constants (context-constants context)))
       (setf (gethash constant constants) value))))
 
@@ -107,18 +107,18 @@
 (defun c-type-to-cffi (context type)
   "Given a string of a C type, return its CFFI symbol equivalent."
   (declare (type context context) (type string type))
-  (multiple-value-bind (match regs) (ppcre:scan-to-strings "(\\w+)_t" type-str)
+  (multiple-value-bind (match regs) (ppcre:scan-to-strings "(\\w+)_t" type)
     (if match
 	(let ((primitive-type (aref regs 0)))
 	  (intern (string-upcase primitive-type) "KEYWORD"))
-	(let ((type-vk-p (ppcre:scan "(Vk|PFN_)(\\w+)" type-str)))
+	(let ((type-vk-p (ppcre:scan "(Vk|PFN_)(\\w+)" type)))
 	  (if type-vk-p
-	      (or (and (structp context type-str)
-		       `(:struct ,(intern (string-upcase type-str))))
-		  (and (unionp context type-str)
-		       `(:union ,(intern (string-upcase type-str))))
-		  (intern (string-upcase type-str)))
-	      (intern (string-upcase type-str) "KEYWORD"))))))
+	      (or (and (structp context type)
+		       `(:struct ,(intern (string-upcase type))))
+		  (and (unionp context type)
+		       `(:union ,(intern (string-upcase type))))
+		  (intern (string-upcase type)))
+	      (intern (string-upcase type) "KEYWORD"))))))
 
 (defun string-to-symbol (str)
   "Turns a string into a symbol."
@@ -128,8 +128,8 @@
 (defun c-value-to-lisp (value)
   "Given a string of a C value, return its Common Lisp equivalent expression."
   (declare (type string value))
-  (multiple-value-bind (numberp num-regs) (ppcre:scan-to-strings "^\\(?(\\~)?(?:(?:(?:0x)([0-9A-F]+)[UL]*)|(?:(\\-?[\\d\\.]+)([ULF]*)))\\)?$" value-str)
-    (multiple-value-bind (macro-func-p func-regs) (ppcre:scan-to-strings "^(\\w+)(\\((?:\\s*\\d+\\s*,)*\\s*\\d+\\s*\\))" value-str)
+  (multiple-value-bind (numberp num-regs) (ppcre:scan-to-strings "^\\(?(\\~)?(?:(?:(?:0x)([0-9A-F]+)[UL]*)|(?:(\\-?[\\d\\.]+)([ULF]*)))\\)?$" value)
+    (multiple-value-bind (macro-func-p func-regs) (ppcre:scan-to-strings "^(\\w+)(\\((?:\\s*\\d+\\s*,)*\\s*\\d+\\s*\\))" value)
       (cond
 	(numberp
 	 (let* ((notopp  (aref num-regs 0))
@@ -144,10 +144,10 @@
 	(macro-func-p
 	 (let ((args (ppcre:regex-replace-all "," (aref func-regs 1) " ")))
 	   (cons (intern (string-upcase (aref func-regs 0))) (read-from-string args))))
-	((equal (aref value-str 0) #\")
-	 (subseq value-str 1 (1- (length value-str))))
-	((ppcre:scan "^VK_API" value-str))
-	(t (intern (string-upcase value-str)))))))
+	((equal (aref value 0) #\")
+	 (subseq value 1 (1- (length value))))
+	((ppcre:scan "^VK_API" value))
+	(t (intern (string-upcase value)))))))
 
 (defun c-func-name-to-lisp (func-name)
   "Turns a C function name into a lisp function name."
@@ -186,8 +186,8 @@ return NIL."
 
 (defun store-non-dispatchable-handle-code (context type-str)
   "Create the Common Lisp code to define a non dispatchable type."
-  (declare (type context context) (type string type-str) (ignore context))
-  (add-type-definition `(cffi:defctype ,(string-to-symbol type-str) non-dispatchable-handle)))
+  (declare (type context context) (type string type-str))
+  (add-type-definition context `(cffi:defctype ,(string-to-symbol type-str) non-dispatchable-handle)))
 
 
 (defun parse-handle (line)
@@ -202,20 +202,19 @@ return NIL."
 (defun process-handle-data (context type-str)
   "Process the data from a handle definition."
   (declare (type context context) (type string type-str))
-  (add-pointer context type-str)
-  (add-type-definition-info type-str (concatenate 'string type-str "_T *")))
+  (add-pointer context type-str))
 
 (defun store-handle-code (context type-str)
   "Create the Common Lisp code to define a handle type."
-  (declare (type context context) (type string line) (ignore context))
-  (add-type-definition `(cffi:defctype ,(string-to-symbol type-str) handle)))
+  (declare (type context context) (type string type-str))
+  (add-type-definition context `(cffi:defctype ,(string-to-symbol type-str) handle)))
 
 
 (defun parse-typedef (line)
   "If the line is a typedef definition, return the type being defined and the type used to define the new type.
 Otherwise, return NIL."
   (declare (type string line))
-  (multiple-value-bind (match regs) (ppcre:scan-to-strings "typedef\\s+((?:const|\\s*)*\\w+(?:\\*|const|\\s*)*)\\s+(Vk\\w+);" line)
+  (multiple-value-bind (match regs) (ppcre:scan-to-strings "typedef\\s+((?:const|\\s)*\\w+(?:\\*|const|\\s)*)\\s+(Vk\\w+);" line)
     (if match
 	(let* ((old-type (aref regs 0))
 	       (new-type (aref regs 1)))
@@ -226,6 +225,7 @@ Otherwise, return NIL."
   "Process the data from a typedef definition."
   (declare (type context context) (type string old-type new-type))
   (multiple-value-bind (old-match old-regs) (ppcre:scan-to-strings "(?:const|\\s*)*(\\w+)((?:\\*|const|\\s*)*)" old-type)
+    (declare (ignore old-match))
     (let* ((old-core-type       (aref old-regs 0))
 	   (old-type-qualifiers (aref old-regs 1))
 	   (new-core-type       new-type)
@@ -235,19 +235,20 @@ Otherwise, return NIL."
       (when pointerp
 	(add-pointer context new-core-type))
       (when structp
-	(add-struct context new-core-type old-core-type))
+	(add-struct context new-core-type))
       (when unionp
-	(add-union context new-core-type old-core-type)))))
+	(add-union context new-core-type)))))
 
 (defun store-typedef-code (context old-type new-type)
   "Create the Common Lisp code to do a type definition."
   (declare (type context context) (type string old-type new-type))
   (multiple-value-bind (old-match old-regs) (ppcre:scan-to-strings "(?:const|\\s*)*(\\w+)((?:\\*|const|\\s*)*)" old-type)
+    (declare (ignore old-match))
     (let* ((old-core-type       (aref old-regs 0))
 	   (old-type-qualifiers (aref old-regs 1))
 	   (new-core-type       new-type)
 	   (pointerp            (or (ppcre:scan "\\*" old-type-qualifiers) (pointerp context old-core-type))))
-      (add-type-definition `(cffi:defctype ,(string-to-symbol new-core-type) ,(if pointerp :pointer (c-type-to-cffi context old-core-type)))))))
+      (add-type-definition context `(cffi:defctype ,(string-to-symbol new-core-type) ,(if pointerp :pointer (c-type-to-cffi context old-core-type)))))))
 
 
 (defun parse-pfn (line istream)
@@ -268,8 +269,8 @@ Otherwise, return NIL."
 
 (defun store-pfn-code (context func-name)
   "Create the Common Lisp code to define a function pointer type."
-  (declare (type context context) (type string func-name) (ignore context))
-  (add-type-definition `(cffi:defctype ,(string-to-symbol func-name) :pointer)))
+  (declare (type context context) (type string func-name))
+  (add-type-definition context `(cffi:defctype ,(string-to-symbol func-name) :pointer)))
 
 
 (defun parse-define (line)
@@ -289,8 +290,8 @@ Otherwise, return NIL."
 
 (defun store-define-code (context name value)
   "Create the Common Lisp to define a macro constant."
-  (declare (type context context) (type string name value) (ignore context))
-  (add-constant-definition `(adp:defparameter ,(string-to-symbol name) ,(c-value-to-lisp value))))
+  (declare (type context context) (type string name value))
+  (add-constant-definition context `(adp:defparameter ,(string-to-symbol name) ,(c-value-to-lisp value))))
 
 
 (defun parse-static-const (line)
@@ -310,8 +311,8 @@ Otherwise, return NIL."
 
 (defun store-static-const-code (context name value)
   "Create the Common Lisp code to define a static const variable."
-  (declare (type context context) (type string name value) (ignore context))
-  (add-constant-definition `(adp:defparameter ,(string-to-symbol name) ,(c-value-to-lisp value))))
+  (declare (type context context) (type string name value))
+  (add-constant-definition context `(adp:defparameter ,(string-to-symbol name) ,(c-value-to-lisp value))))
 
 
 (defun parse-enum (line istream)
@@ -324,12 +325,12 @@ member. Otherwise, return NIL."
 	  (loop for member-line = (read-line istream nil)
 		for endp = (ppcre:scan "^\\}" member-line)
 		until endp
-		collect (multiple-value-bind (match-mem regs-mem) (ppcre:scan-to-strings "\\s*(\\w+)\\s*=\\s*(\"?[\\-\\~\\w\\s\\d\\.\\(\\)ULF]+\"?)" member-line)
-			  (when match-mem
-			    (let ((name (aref regs-mem 0))
-				  (value (aref regs-mem 1)))
-			      (cons name value))))
-		  into enum-members
+		for (match-mem regs-mem) = (multiple-value-list (ppcre:scan-to-strings "\\s*(\\w+)\\s*=\\s*(\"?[\\-\\~\\w\\s\\d\\.\\(\\)ULF]+\"?)" member-line))
+		when match-mem
+		  collect (let ((name (aref regs-mem 0))
+				(value (aref regs-mem 1)))
+			    (cons name value))
+		    into enum-members
 		finally (return (values enum-name enum-members))))
 	nil)))
 
@@ -339,12 +340,12 @@ member. Otherwise, return NIL."
 
 (defun store-enum-code (context enum-name enum-members)
   "Return a list of Common Lisp expressions to define an enumeration."
-  (declare (type context context) (type string enum-name) (type list enum-members) (ignore context))
-  (add-type-definition `(cffi:defctype ,(string-to-symbol enum-name) :int))
+  (declare (type context context) (type string enum-name) (type list enum-members))
+  (add-type-definition context `(cffi:defctype ,(string-to-symbol enum-name) :int))
   (loop for enum-member in enum-members
 	do (let ((name  (car enum-member))
 		 (value (cdr enum-member)))
-	     (add-constant-definition `(adp:defparameter ,(string-to-symbol name) ,(c-value-to-lisp value))))))
+	     (add-constant-definition context `(adp:defparameter ,(string-to-symbol name) ,(c-value-to-lisp value))))))
 
 
 (defun parse-function (line istream)
@@ -357,9 +358,9 @@ member. Otherwise, return NIL."
 	      (func-name           (aref regs 1)))
 	  (loop for arg-line = (read-line istream nil)
 		for endp = (ppcre:scan "\\)\\s*;" arg-line)
-		collect (multiple-value-bind (match-arg regs-arg) (ppcre:scan-to-strings "((?:const|\\s*)*\\w+(?:\\*|const|\\s*)*)(\\w+)" arg-line)
+		collect (multiple-value-bind (match-arg regs-arg) (ppcre:scan-to-strings "((?:const|\\s)*\\w+(?:\\*|const|\\s)*)(\\w+)" arg-line)
 			  (declare (ignore match-arg))
-			  (let* ((arg-type            (aref regs-arg 0))
+			  (let* ((arg-type (aref regs-arg 0))
 				 (arg-name (aref regs-arg 1)))			    
 			    (cons arg-type arg-name)))
 		  into function-args
@@ -369,32 +370,29 @@ member. Otherwise, return NIL."
 
 (defun process-function-data (context func-name return-type function-args)
   "Process the data from a function declaration."
-  (declare (type context context) (type string func-name return-type) (type list function-args) (ignore func-name return-type))
-  (loop for function-arg in function-args
-	for arg-type = (car function-arg) 
-	do (multiple-value-bind (match-arg regs-arg) (ppcre:scan-to-strings "(?:const|\\s*)*(\\w+)(?:(?:\\*|const|\\s*)*)" arg-type)
-	     (declare (ignore match-arg))
-	     (let* ((arg-core-type          (aref regs-arg 0))
-		    (function-pointer-arg-p (ppcre:scan "^PFN_" arg-core-type)))
-	       (when function-pointer-arg-p
-		 (add-callback context arg-core-type))))))
+  (declare (type context context) (type string func-name return-type) (type list function-args) (ignore context func-name return-type function-args)))
 
 (defun store-function-code (context func-name return-type function-args)
   "Create the Common Lisp code of a function declaration. Return two values: The C binding and the Common Lisp
 wrap."
   (declare (type context context) (type string func-name return-type) (type list function-args))
-  (loop for function-arg in function-args
-	for arg-type = (car function-arg)
-	for arg-name = (cdr function-arg)
-	collect (multiple-value-bind (match-arg regs-arg) (ppcre:scan-to-strings "(?:const|\\s*)*(\\w+)((?:\\*|const|\\s*)*)" arg-type)
-		  (declare (ignore match-arg))
-		  (let* ((arg-core-type       (aref regs-arg 0))
-			 (post-arg-qualifiers (aref regs-arg 1))
-			 (pointerp            (ppcre:scan "\\*" post-arg-qualifiers)))
-		    `(,(string-to-symbol arg-name) ,(if pointerp :pointer (c-type-to-cffi context arg-core-type)))))
-	  into arg-slots
-	finally (add-function-definition `(multiple-defcfun (,func-name ,(string-to-symbol func-name) ,(string-to-symbol (concatenate 'string "FUNCALL-" func-name)))
-							    ,(c-type-to-cffi context return-type) ,@arg-slots))))
+  (flet ((get-cffi-type (type)
+	   (if (not type)
+		   (error ""))
+	   (multiple-value-bind (match-mem regs-mem) (ppcre:scan-to-strings"(?:const|\\s)*(\\w+)((?:\\*|const|\\s)*)" type)
+	     (declare (ignore match-mem))
+	     (let* ((core-type (aref regs-mem 0))
+		    (post-qualifiers (aref regs-mem 1))
+		    (pointerp (ppcre:scan "\\*" post-qualifiers)))
+	       (if pointerp :pointer (c-type-to-cffi context core-type))))))
+    (let ((ret-type (get-cffi-type return-type)))
+      (loop for function-arg in function-args
+	    for arg-type = (car function-arg)
+	    for arg-name = (cdr function-arg)
+	    collect `(,(string-to-symbol arg-name) ,(get-cffi-type arg-type))
+	      into arg-slots
+	    finally (add-function-definition context `(multiple-defcfun (,func-name ,(string-to-symbol func-name) ,(string-to-symbol (concatenate 'string "FUNCALL-" func-name)))
+								        ,ret-type ,@arg-slots))))))
 
 
 (defun parse-struct-union (line istream)
@@ -406,7 +404,7 @@ its name and a list of lists (type name post-name) of each of its members. Other
 	(let ((struct-or-union (aref regs 0))
 	      (struct-name     (aref regs 1)))
 	  (loop for previous-slot-name = nil then (ppcre:register-groups-bind (name) ("(\\w+)(?:(?:\\[\\w+\\])*)(?::\\d+)*;" member-line) name)
-		for member-line = (read-line ifile nil)
+		for member-line = (read-line istream nil)
 		for memberp = (not (ppcre:scan "^\\}" member-line))
 		while memberp
 		collect (multiple-value-bind (match-mem reg-mem) (ppcre:scan-to-strings "\\s+((?:const|\\s*)*\\w+(?:\\*|const|\\s*)*)(\\w+)((?:\\[\\w+\\])*(?::\\d+)*);" member-line)
@@ -423,23 +421,13 @@ its name and a list of lists (type name post-name) of each of its members. Other
 
 (defun process-struct-union-data (context struct-or-union struct-name members)
   "Process the data from a struct or union definition."
-  (declare (type context context) (type string struct-or-union struct-name) (type list members))
+  (declare (type context context) (type string struct-or-union struct-name) (type list members) (ignore members))
   (cond
     ((string= struct-or-union "struct")
      (add-struct context struct-name))
     ((string= struct-or-union "union")
      (add-union context struct-name))
-    (t (error "~s is not \"struct\" or \"union\"." struct-or-union)))
-  (let* ((core-types (mapcar (lambda (member)
-			       (multiple-value-bind (match reg) (ppcre:scan-to-strings "(?:const|\\s*)*(\\w+)(?:(?:\\*|const|\\s*)*)" (car member))
-				 (declare (ignore match))
-				 (aref reg 0)))
-			     members))
-	 (function-pointer-members (remove-if-not (lambda (type)
-						    (ppcre:scan "^PFN_" type))
-						  core-types)))
-    (loop for function-pointer-member in function-pointer-members
-	  do (add-callback context function-pointer-member))))
+    (t (error "~s is not \"struct\" or \"union\"." struct-or-union))))
 
 (defun store-struct-union-code (context struct-or-union struct-name members)
   "Create the Common Lisp code of a struct or union definition. Return two values: The C binding
@@ -448,12 +436,12 @@ and the Common Lisp wrap."
   (loop for (type name post-name) in members
 	for previous-bitfieldsp = nil then bitfieldsp
 	for (core-type type-qualifiers) = (coerce (nth-value 1 (ppcre:scan-to-strings "(?:const|\\s*)*(\\w+)((?:\\*|const|\\s*)*)" type)) 'list)
-	for pointerp = (ppcre:scan "\\*" post-qualifiers)
+	for pointerp = (ppcre:scan "\\*" type-qualifiers)
 	for (brackets bitfields) = (coerce (nth-value 1 (ppcre:scan-to-strings "((?:\\[\\w+\\])*)((?::\\d+)*)" post-name)) 'list)
 	for bracketsp = (loop for str in (ppcre:all-matches-as-strings "\\w+" brackets)
 			      collect (if (ppcre:scan "^\\d+" str)
 					  (parse-integer str)
-					  (constant-value context str constant-table)))
+					  (constant-value context str)))
 	for bitfieldsp = (not (zerop (length bitfields)))
 	for function-pointerp = (ppcre:scan "^PFN_" core-type)
 	when (not previous-bitfieldsp)
@@ -461,9 +449,9 @@ and the Common Lisp wrap."
 		       (if pointerp :pointer (c-type-to-cffi context core-type))
 		       (if bracketsp `(:count ,(apply #'* bracketsp)) nil))
 	    into members
-	finally (add-type-definition `(,(intern (string-upcase (concatenate 'string "defc" struct-or-union)) "CFFI")
-				       ,(string-to-symbol struct-name)
-				       ,@members))))
+	finally (add-type-definition context `(,(intern (string-upcase (concatenate 'string "defc" struct-or-union)) "CFFI")
+					       ,(string-to-symbol struct-name)
+					       ,@members))))
 
 
 (defmacro define-read-header-function (name)
@@ -473,11 +461,11 @@ in CONTEXT. Return a boolean indicating if the expression was read."
 	(parse-name (intern (concatenate 'string "PARSE-" (symbol-name name))))
 	(process-name (intern (concatenate 'string "PROCESS-" (symbol-name name) "-DATA")))
 	(store-name (intern (concatenate 'string "STORE-" (symbol-name name) "-CODE"))))
-    (with-gensyms (context line stream parsed-data)
-      `(defun ,read-name (,context ,line ,stream)
-	 (declare (type context ,context) (type string ,line) (type stream ,stream))
-	 (let ((,parsed-data (multiple-value-list (,parse-name ,line ,stream))))
-	   (if ,parsed-data
+    (with-gensyms (context line rest-args parsed-data)
+      `(defun ,read-name (,context ,line &rest ,rest-args)
+	 (declare (type context ,context) (type string ,line))
+	 (let ((,parsed-data (multiple-value-list (apply #',parse-name ,line ,rest-args))))
+	   (if (car ,parsed-data)
 	       (progn
 		 (apply #',process-name ,context ,parsed-data)
 		 (apply #',store-name ,context ,parsed-data)
@@ -503,12 +491,12 @@ Return a context structure with the information."
     (with-open-file (istream file-path)
       (loop for line = (read-line istream nil)
 	    while line
-	    do (or (read-non-dispatchable-handle context line istream)
-		   (read-handle context line istream)
-		   (read-typedef context line istream)
+	    do (or (read-non-dispatchable-handle context line)
+		   (read-handle context line)
+		   (read-typedef context line)
 		   (read-pfn context line istream)
-		   (read-define context line istream)
-		   (read-static-consts context line istream)
+		   (read-define context line)
+		   (read-static-const context line)
 		   (read-enum context line istream)
 		   (read-function context line istream)
 		   (read-struct-union context line istream)
@@ -530,7 +518,7 @@ Return a context structure with the information."
 	     (if (= 8 (cffi:foreign-type-size :pointer))
 		 (cffi:defctype non-dispatchable-handle :pointer)
 		 (cffi:defctype non-dispatchable-handle :uint64))))
-  (loop for type-def in (context-type-code context)
+  (loop for type-def across (context-type-definitions context)
 	do (format stream "~%~%~s" type-def)))
 
 
@@ -548,9 +536,9 @@ Return a context structure with the information."
 		`(progn
 		   (defun ,name ,name-args
 		     (cffi:foreign-funcall ,foreign-name ,@ordered-args ,ret-type))
-		   (defun ,funcall-name ,(cons ,func-ptr ,name-args)
+		   (defun ,funcall-name ,(cons func-ptr name-args)
 		     (cffi:foreign-funcall-pointer ,func-ptr () ,@ordered-args ,ret-type)))))))
-  (loop for function-def in (context-function-code context)
+  (loop for function-def across (context-function-definitions context)
 	do (format stream "~%~%~s" function-def)))
 
 
@@ -570,7 +558,7 @@ Return a context structure with the information."
 	  '(adp:defparameter VK_HEADER_VERSION 216))
   (format stream "~s"
 	  '(adp:defparameter VK_HEADER_VERSION_COMPLETE (make-api-version 0 1 3 VK_HEADER_VERSION)))
-  (loop for constant-def in (context-wrapped-constant-code context)
+  (loop for constant-def across (context-constant-definitions context)
 	do (format stream "~%~%~s"
 		   constant-def)))
 
@@ -582,7 +570,7 @@ Return a context structure with the information."
 (defun generate-bindings ()
   "Generate the Common Vulkan bindings using the information from 'generation/vulkan_core_tail.h'.
 Generate the files 'vulkan/ctypes.lisp', 'vulkan/cfunctions.lisp' and 'src/constants.lisp'"
-  (let ((header-file (asdf:system-relative-pathname "common-vulkan" "generation/vulkan_core_tail.h"))
+  (let ((header-file (asdf:system-relative-pathname "common-vulkan" "vulkan/vulkan_core_tail.h"))
 	(type-file (asdf:system-relative-pathname "common-vulkan" "vulkan/ctypes.lisp"))
 	(function-file (asdf:system-relative-pathname "common-vulkan" "vulkan/cfunctions.lisp"))
 	(constant-file (asdf:system-relative-pathname "common-vulkan" "src/constants.lisp")))
@@ -594,3 +582,9 @@ Generate the files 'vulkan/ctypes.lisp', 'vulkan/cfunctions.lisp' and 'src/const
 	(write-function-code context function-stream))
       (with-open-file (constant-stream constant-file :direction :output :if-exists :supersede :if-does-not-exist :create)
 	(write-constant-code context constant-stream)))))
+
+
+
+
+;; We generate the bindings
+(generate-bindings)

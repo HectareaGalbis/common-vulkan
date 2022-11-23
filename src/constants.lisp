@@ -1,3968 +1,14770 @@
-(in-package :cvk)
 
-(mcffi:with-doc-file (doc-file (asdf:system-relative-pathname "common-vulkan" "docs/api/constants.md"))
+(IN-PACKAGE :CVK)
 
-(more-cffi:def-foreign-macro doc-file
-    ("VK_MAKE_API_VERSION" vk_make_api_version)
-    (variant major minor patch)
-  `(logior (ash ,variant 29) (ash ,major 22) (ash ,minor 12) ,patch))
+(ADP:DEFPARAMETER
+  UINT64-MAX
+  18446744073709551615)
 
-(more-cffi:def-foreign-macro doc-file
-    ("VK_API_VERSION_VARIANT" vk_api_version_variant)
-    (version)
-  `(ash ,version 29))
+(ADP:DEFPARAMETER
+  UINT32-MAX
+  4294967295)
 
-(more-cffi:def-foreign-macro doc-file
-    ("VK_API_VERSION_MAJOR" vk_api_version_major)
-    (version)
-  `(logand (ash ,version 22) 127))
+(ADP:DEFPARAMETER
+  VK_NULL_HANDLE
+  (CFFI-SYS:NULL-POINTER))
 
-(more-cffi:def-foreign-macro doc-file
-    ("VK_API_VERSION_MINOR" vk_api_version_minor)
-    (version)
-  `(logand (ash ,version 12) 1023))
+(ADP:DEFPARAMETER
+  VK_API_VERSION_1_0
+  (MAKE-API-VERSION 0 1 0 0))
 
-(more-cffi:def-foreign-macro doc-file
-    ("VK_API_VERSION_PATCH" vk_api_version_patch)
-    (version)
-  `(logand ,version 4095))
+(ADP:DEFPARAMETER
+  VK_HEADER_VERSION
+  216)
 
-(more-cffi:def-foreign-constant doc-file "UINT64_MAX" uint64_max
-                                (1- (expt 2 64)))
+(ADP:DEFPARAMETER
+  VK_HEADER_VERSION_COMPLETE
+  (MAKE-API-VERSION 0 1 3 VK_HEADER_VERSION))
 
-(more-cffi:def-foreign-constant doc-file "UINT32_MAX" uint32_max
-                                (1- (expt 2 32)))
+(ADP:DEFPARAMETER
+  VK_ATTACHMENT_UNUSED
+  (- UINT32_MAX 0))
 
-(more-cffi:def-foreign-constant doc-file "VK_NULL_HANDLE" vk_null_handle
-                                (cffi-sys:null-pointer))
+(ADP:DEFPARAMETER
+  VK_FALSE
+  0)
 
-(more-cffi:def-foreign-constant doc-file "VK_API_VERSION_1_0"
-                                vk_api_version_1_0
-                                (vk_make_api_version 0 1 0 0))
+(ADP:DEFPARAMETER
+  VK_LOD_CLAMP_NONE
+  1000.0)
 
-(more-cffi:def-foreign-constant doc-file "VK_HEADER_VERSION" vk_header_version
-                                216)
+(ADP:DEFPARAMETER
+  VK_QUEUE_FAMILY_IGNORED
+  (- UINT32_MAX 0))
 
-(more-cffi:def-foreign-constant doc-file "VK_HEADER_VERSION_COMPLETE"
-                                vk_header_version_complete
-                                (vk_make_api_version 0 1 3 vk_header_version))
+(ADP:DEFPARAMETER
+  VK_REMAINING_ARRAY_LAYERS
+  (- UINT32_MAX 0))
 
-(more-cffi:def-foreign-constant doc-file "VK_ATTACHMENT_UNUSED"
-                                vk_attachment_unused (- uint32_max 0))
+(ADP:DEFPARAMETER
+  VK_REMAINING_MIP_LEVELS
+  (- UINT32_MAX 0))
 
-(more-cffi:def-foreign-constant doc-file "VK_FALSE" vk_false 0)
+(ADP:DEFPARAMETER
+  VK_SUBPASS_EXTERNAL
+  (- UINT32_MAX 0))
 
-(more-cffi:def-foreign-constant doc-file "VK_LOD_CLAMP_NONE" vk_lod_clamp_none
-                                1000.0)
+(ADP:DEFPARAMETER
+  VK_TRUE
+  1)
 
-(more-cffi:def-foreign-constant doc-file "VK_QUEUE_FAMILY_IGNORED"
-                                vk_queue_family_ignored (- uint32_max 0))
+(ADP:DEFPARAMETER
+  VK_WHOLE_SIZE
+  (- UINT64_MAX 0))
 
-(more-cffi:def-foreign-constant doc-file "VK_REMAINING_ARRAY_LAYERS"
-                                vk_remaining_array_layers (- uint32_max 0))
+(ADP:DEFPARAMETER
+  VK_MAX_MEMORY_TYPES
+  32)
 
-(more-cffi:def-foreign-constant doc-file "VK_REMAINING_MIP_LEVELS"
-                                vk_remaining_mip_levels (- uint32_max 0))
+(ADP:DEFPARAMETER
+  VK_MAX_PHYSICAL_DEVICE_NAME_SIZE
+  256)
 
-(more-cffi:def-foreign-constant doc-file "VK_SUBPASS_EXTERNAL"
-                                vk_subpass_external (- uint32_max 0))
+(ADP:DEFPARAMETER
+  VK_UUID_SIZE
+  16)
 
-(more-cffi:def-foreign-constant doc-file "VK_TRUE" vk_true 1)
+(ADP:DEFPARAMETER
+  VK_MAX_EXTENSION_NAME_SIZE
+  256)
 
-(more-cffi:def-foreign-constant doc-file "VK_WHOLE_SIZE" vk_whole_size
-                                (- uint64_max 0))
+(ADP:DEFPARAMETER
+  VK_MAX_DESCRIPTION_SIZE
+  256)
 
-(more-cffi:def-foreign-constant doc-file "VK_MAX_MEMORY_TYPES"
-                                vk_max_memory_types 32)
+(ADP:DEFPARAMETER
+  VK_MAX_MEMORY_HEAPS
+  16)
 
-(more-cffi:def-foreign-constant doc-file "VK_MAX_PHYSICAL_DEVICE_NAME_SIZE"
-                                vk_max_physical_device_name_size 256)
+(ADP:DEFPARAMETER
+  VK_SUCCESS
+  0)
 
-(more-cffi:def-foreign-constant doc-file "VK_UUID_SIZE" vk_uuid_size 16)
+(ADP:DEFPARAMETER
+  VK_NOT_READY
+  1)
 
-(more-cffi:def-foreign-constant doc-file "VK_MAX_EXTENSION_NAME_SIZE"
-                                vk_max_extension_name_size 256)
+(ADP:DEFPARAMETER
+  VK_TIMEOUT
+  2)
 
-(more-cffi:def-foreign-constant doc-file "VK_MAX_DESCRIPTION_SIZE"
-                                vk_max_description_size 256)
-
-(more-cffi:def-foreign-constant doc-file "VK_MAX_MEMORY_HEAPS"
-                                vk_max_memory_heaps 16)
-
-(more-cffi:def-foreign-constant doc-file "VK_VERSION_1_1" vk_version_1_1 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_API_VERSION_1_1"
-                                vk_api_version_1_1
-                                (vk_make_api_version 0 1 1 0))
-
-(more-cffi:def-foreign-constant doc-file "VK_MAX_DEVICE_GROUP_SIZE"
-                                vk_max_device_group_size 32)
-
-(more-cffi:def-foreign-constant doc-file "VK_LUID_SIZE" vk_luid_size 8)
-
-(more-cffi:def-foreign-constant doc-file "VK_QUEUE_FAMILY_EXTERNAL"
-                                vk_queue_family_external (- uint32_max 1))
-
-(more-cffi:def-foreign-constant doc-file "VK_VERSION_1_2" vk_version_1_2 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_API_VERSION_1_2"
-                                vk_api_version_1_2
-                                (vk_make_api_version 0 1 2 0))
-
-(more-cffi:def-foreign-constant doc-file "VK_MAX_DRIVER_NAME_SIZE"
-                                vk_max_driver_name_size 256)
-
-(more-cffi:def-foreign-constant doc-file "VK_MAX_DRIVER_INFO_SIZE"
-                                vk_max_driver_info_size 256)
-
-(more-cffi:def-foreign-constant doc-file "VK_VERSION_1_3" vk_version_1_3 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_API_VERSION_1_3"
-                                vk_api_version_1_3
-                                (vk_make_api_version 0 1 3 0))
-
-(more-cffi:def-foreign-constant doc-file "VK_PIPELINE_STAGE_2_NONE"
-                                vk_pipeline_stage_2_none 0)
-
-(more-cffi:def-foreign-constant doc-file "VK_PIPELINE_STAGE_2_NONE_KHR"
-                                vk_pipeline_stage_2_none_khr 0)
-
-(more-cffi:def-foreign-constant doc-file "VK_PIPELINE_STAGE_2_TOP_OF_PIPE_BIT"
-                                vk_pipeline_stage_2_top_of_pipe_bit 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_TOP_OF_PIPE_BIT_KHR"
-                                vk_pipeline_stage_2_top_of_pipe_bit_khr 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_DRAW_INDIRECT_BIT"
-                                vk_pipeline_stage_2_draw_indirect_bit 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_DRAW_INDIRECT_BIT_KHR"
-                                vk_pipeline_stage_2_draw_indirect_bit_khr 2)
-
-(more-cffi:def-foreign-constant doc-file "VK_PIPELINE_STAGE_2_VERTEX_INPUT_BIT"
-                                vk_pipeline_stage_2_vertex_input_bit 4)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_VERTEX_INPUT_BIT_KHR"
-                                vk_pipeline_stage_2_vertex_input_bit_khr 4)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_VERTEX_SHADER_BIT"
-                                vk_pipeline_stage_2_vertex_shader_bit 8)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_VERTEX_SHADER_BIT_KHR"
-                                vk_pipeline_stage_2_vertex_shader_bit_khr 8)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_TESSELLATION_CONTROL_SHADER_BIT"
-                                vk_pipeline_stage_2_tessellation_control_shader_bit
-                                16)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_TESSELLATION_CONTROL_SHADER_BIT_KHR"
-                                vk_pipeline_stage_2_tessellation_control_shader_bit_khr
-                                16)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_TESSELLATION_EVALUATION_SHADER_BIT"
-                                vk_pipeline_stage_2_tessellation_evaluation_shader_bit
-                                32)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_TESSELLATION_EVALUATION_SHADER_BIT_KHR"
-                                vk_pipeline_stage_2_tessellation_evaluation_shader_bit_khr
-                                32)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_GEOMETRY_SHADER_BIT"
-                                vk_pipeline_stage_2_geometry_shader_bit 64)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_GEOMETRY_SHADER_BIT_KHR"
-                                vk_pipeline_stage_2_geometry_shader_bit_khr 64)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT"
-                                vk_pipeline_stage_2_fragment_shader_bit 128)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT_KHR"
-                                vk_pipeline_stage_2_fragment_shader_bit_khr 128)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT"
-                                vk_pipeline_stage_2_early_fragment_tests_bit
-                                256)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT_KHR"
-                                vk_pipeline_stage_2_early_fragment_tests_bit_khr
-                                256)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT"
-                                vk_pipeline_stage_2_late_fragment_tests_bit 512)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT_KHR"
-                                vk_pipeline_stage_2_late_fragment_tests_bit_khr
-                                512)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT"
-                                vk_pipeline_stage_2_color_attachment_output_bit
-                                1024)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT_KHR"
-                                vk_pipeline_stage_2_color_attachment_output_bit_khr
-                                1024)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_COMPUTE_SHADER_BIT"
-                                vk_pipeline_stage_2_compute_shader_bit 2048)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_COMPUTE_SHADER_BIT_KHR"
-                                vk_pipeline_stage_2_compute_shader_bit_khr 2048)
-
-(more-cffi:def-foreign-constant doc-file "VK_PIPELINE_STAGE_2_ALL_TRANSFER_BIT"
-                                vk_pipeline_stage_2_all_transfer_bit 4096)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_ALL_TRANSFER_BIT_KHR"
-                                vk_pipeline_stage_2_all_transfer_bit_khr 4096)
-
-(more-cffi:def-foreign-constant doc-file "VK_PIPELINE_STAGE_2_TRANSFER_BIT"
-                                vk_pipeline_stage_2_transfer_bit 4096)
-
-(more-cffi:def-foreign-constant doc-file "VK_PIPELINE_STAGE_2_TRANSFER_BIT_KHR"
-                                vk_pipeline_stage_2_transfer_bit_khr 4096)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_BOTTOM_OF_PIPE_BIT"
-                                vk_pipeline_stage_2_bottom_of_pipe_bit 8192)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_BOTTOM_OF_PIPE_BIT_KHR"
-                                vk_pipeline_stage_2_bottom_of_pipe_bit_khr 8192)
-
-(more-cffi:def-foreign-constant doc-file "VK_PIPELINE_STAGE_2_HOST_BIT"
-                                vk_pipeline_stage_2_host_bit 16384)
-
-(more-cffi:def-foreign-constant doc-file "VK_PIPELINE_STAGE_2_HOST_BIT_KHR"
-                                vk_pipeline_stage_2_host_bit_khr 16384)
-
-(more-cffi:def-foreign-constant doc-file "VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT"
-                                vk_pipeline_stage_2_all_graphics_bit 32768)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT_KHR"
-                                vk_pipeline_stage_2_all_graphics_bit_khr 32768)
-
-(more-cffi:def-foreign-constant doc-file "VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT"
-                                vk_pipeline_stage_2_all_commands_bit 65536)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR"
-                                vk_pipeline_stage_2_all_commands_bit_khr 65536)
-
-(more-cffi:def-foreign-constant doc-file "VK_PIPELINE_STAGE_2_COPY_BIT"
-                                vk_pipeline_stage_2_copy_bit 4294967296)
-
-(more-cffi:def-foreign-constant doc-file "VK_PIPELINE_STAGE_2_COPY_BIT_KHR"
-                                vk_pipeline_stage_2_copy_bit_khr 4294967296)
-
-(more-cffi:def-foreign-constant doc-file "VK_PIPELINE_STAGE_2_RESOLVE_BIT"
-                                vk_pipeline_stage_2_resolve_bit 8589934592)
-
-(more-cffi:def-foreign-constant doc-file "VK_PIPELINE_STAGE_2_RESOLVE_BIT_KHR"
-                                vk_pipeline_stage_2_resolve_bit_khr 8589934592)
-
-(more-cffi:def-foreign-constant doc-file "VK_PIPELINE_STAGE_2_BLIT_BIT"
-                                vk_pipeline_stage_2_blit_bit 17179869184)
-
-(more-cffi:def-foreign-constant doc-file "VK_PIPELINE_STAGE_2_BLIT_BIT_KHR"
-                                vk_pipeline_stage_2_blit_bit_khr 17179869184)
-
-(more-cffi:def-foreign-constant doc-file "VK_PIPELINE_STAGE_2_CLEAR_BIT"
-                                vk_pipeline_stage_2_clear_bit 34359738368)
-
-(more-cffi:def-foreign-constant doc-file "VK_PIPELINE_STAGE_2_CLEAR_BIT_KHR"
-                                vk_pipeline_stage_2_clear_bit_khr 34359738368)
-
-(more-cffi:def-foreign-constant doc-file "VK_PIPELINE_STAGE_2_INDEX_INPUT_BIT"
-                                vk_pipeline_stage_2_index_input_bit 68719476736)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_INDEX_INPUT_BIT_KHR"
-                                vk_pipeline_stage_2_index_input_bit_khr
-                                68719476736)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_VERTEX_ATTRIBUTE_INPUT_BIT"
-                                vk_pipeline_stage_2_vertex_attribute_input_bit
-                                137438953472)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_VERTEX_ATTRIBUTE_INPUT_BIT_KHR"
-                                vk_pipeline_stage_2_vertex_attribute_input_bit_khr
-                                137438953472)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_PRE_RASTERIZATION_SHADERS_BIT"
-                                vk_pipeline_stage_2_pre_rasterization_shaders_bit
-                                274877906944)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_PRE_RASTERIZATION_SHADERS_BIT_KHR"
-                                vk_pipeline_stage_2_pre_rasterization_shaders_bit_khr
-                                274877906944)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_VIDEO_DECODE_BIT_KHR"
-                                vk_pipeline_stage_2_video_decode_bit_khr
-                                67108864)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_VIDEO_ENCODE_BIT_KHR"
-                                vk_pipeline_stage_2_video_encode_bit_khr
-                                134217728)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT"
-                                vk_pipeline_stage_2_transform_feedback_bit_ext
-                                16777216)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_CONDITIONAL_RENDERING_BIT_EXT"
-                                vk_pipeline_stage_2_conditional_rendering_bit_ext
-                                262144)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_COMMAND_PREPROCESS_BIT_NV"
-                                vk_pipeline_stage_2_command_preprocess_bit_nv
-                                131072)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR"
-                                vk_pipeline_stage_2_fragment_shading_rate_attachment_bit_khr
-                                4194304)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_SHADING_RATE_IMAGE_BIT_NV"
-                                vk_pipeline_stage_2_shading_rate_image_bit_nv
-                                4194304)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR"
-                                vk_pipeline_stage_2_acceleration_structure_build_bit_khr
-                                33554432)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR"
-                                vk_pipeline_stage_2_ray_tracing_shader_bit_khr
-                                2097152)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_NV"
-                                vk_pipeline_stage_2_ray_tracing_shader_bit_nv
-                                2097152)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_NV"
-                                vk_pipeline_stage_2_acceleration_structure_build_bit_nv
-                                33554432)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_BIT_EXT"
-                                vk_pipeline_stage_2_fragment_density_process_bit_ext
-                                8388608)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_TASK_SHADER_BIT_NV"
-                                vk_pipeline_stage_2_task_shader_bit_nv 524288)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_MESH_SHADER_BIT_NV"
-                                vk_pipeline_stage_2_mesh_shader_bit_nv 1048576)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_SUBPASS_SHADING_BIT_HUAWEI"
-                                vk_pipeline_stage_2_subpass_shading_bit_huawei
-                                549755813888)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI"
-                                vk_pipeline_stage_2_invocation_mask_bit_huawei
-                                1099511627776)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_COPY_BIT_KHR"
-                                vk_pipeline_stage_2_acceleration_structure_copy_bit_khr
-                                268435456)
-
-(more-cffi:def-foreign-constant doc-file "VK_ACCESS_2_NONE" vk_access_2_none 0)
-
-(more-cffi:def-foreign-constant doc-file "VK_ACCESS_2_NONE_KHR"
-                                vk_access_2_none_khr 0)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_INDIRECT_COMMAND_READ_BIT"
-                                vk_access_2_indirect_command_read_bit 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_INDIRECT_COMMAND_READ_BIT_KHR"
-                                vk_access_2_indirect_command_read_bit_khr 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_ACCESS_2_INDEX_READ_BIT"
-                                vk_access_2_index_read_bit 2)
-
-(more-cffi:def-foreign-constant doc-file "VK_ACCESS_2_INDEX_READ_BIT_KHR"
-                                vk_access_2_index_read_bit_khr 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_VERTEX_ATTRIBUTE_READ_BIT"
-                                vk_access_2_vertex_attribute_read_bit 4)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_VERTEX_ATTRIBUTE_READ_BIT_KHR"
-                                vk_access_2_vertex_attribute_read_bit_khr 4)
-
-(more-cffi:def-foreign-constant doc-file "VK_ACCESS_2_UNIFORM_READ_BIT"
-                                vk_access_2_uniform_read_bit 8)
-
-(more-cffi:def-foreign-constant doc-file "VK_ACCESS_2_UNIFORM_READ_BIT_KHR"
-                                vk_access_2_uniform_read_bit_khr 8)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_INPUT_ATTACHMENT_READ_BIT"
-                                vk_access_2_input_attachment_read_bit 16)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_INPUT_ATTACHMENT_READ_BIT_KHR"
-                                vk_access_2_input_attachment_read_bit_khr 16)
-
-(more-cffi:def-foreign-constant doc-file "VK_ACCESS_2_SHADER_READ_BIT"
-                                vk_access_2_shader_read_bit 32)
-
-(more-cffi:def-foreign-constant doc-file "VK_ACCESS_2_SHADER_READ_BIT_KHR"
-                                vk_access_2_shader_read_bit_khr 32)
-
-(more-cffi:def-foreign-constant doc-file "VK_ACCESS_2_SHADER_WRITE_BIT"
-                                vk_access_2_shader_write_bit 64)
-
-(more-cffi:def-foreign-constant doc-file "VK_ACCESS_2_SHADER_WRITE_BIT_KHR"
-                                vk_access_2_shader_write_bit_khr 64)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_COLOR_ATTACHMENT_READ_BIT"
-                                vk_access_2_color_attachment_read_bit 128)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_COLOR_ATTACHMENT_READ_BIT_KHR"
-                                vk_access_2_color_attachment_read_bit_khr 128)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_COLOR_ATTACHMENT_WRITE_BIT"
-                                vk_access_2_color_attachment_write_bit 256)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_COLOR_ATTACHMENT_WRITE_BIT_KHR"
-                                vk_access_2_color_attachment_write_bit_khr 256)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_READ_BIT"
-                                vk_access_2_depth_stencil_attachment_read_bit
-                                512)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_READ_BIT_KHR"
-                                vk_access_2_depth_stencil_attachment_read_bit_khr
-                                512)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT"
-                                vk_access_2_depth_stencil_attachment_write_bit
-                                1024)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT_KHR"
-                                vk_access_2_depth_stencil_attachment_write_bit_khr
-                                1024)
-
-(more-cffi:def-foreign-constant doc-file "VK_ACCESS_2_TRANSFER_READ_BIT"
-                                vk_access_2_transfer_read_bit 2048)
-
-(more-cffi:def-foreign-constant doc-file "VK_ACCESS_2_TRANSFER_READ_BIT_KHR"
-                                vk_access_2_transfer_read_bit_khr 2048)
-
-(more-cffi:def-foreign-constant doc-file "VK_ACCESS_2_TRANSFER_WRITE_BIT"
-                                vk_access_2_transfer_write_bit 4096)
-
-(more-cffi:def-foreign-constant doc-file "VK_ACCESS_2_TRANSFER_WRITE_BIT_KHR"
-                                vk_access_2_transfer_write_bit_khr 4096)
-
-(more-cffi:def-foreign-constant doc-file "VK_ACCESS_2_HOST_READ_BIT"
-                                vk_access_2_host_read_bit 8192)
-
-(more-cffi:def-foreign-constant doc-file "VK_ACCESS_2_HOST_READ_BIT_KHR"
-                                vk_access_2_host_read_bit_khr 8192)
-
-(more-cffi:def-foreign-constant doc-file "VK_ACCESS_2_HOST_WRITE_BIT"
-                                vk_access_2_host_write_bit 16384)
-
-(more-cffi:def-foreign-constant doc-file "VK_ACCESS_2_HOST_WRITE_BIT_KHR"
-                                vk_access_2_host_write_bit_khr 16384)
-
-(more-cffi:def-foreign-constant doc-file "VK_ACCESS_2_MEMORY_READ_BIT"
-                                vk_access_2_memory_read_bit 32768)
-
-(more-cffi:def-foreign-constant doc-file "VK_ACCESS_2_MEMORY_READ_BIT_KHR"
-                                vk_access_2_memory_read_bit_khr 32768)
-
-(more-cffi:def-foreign-constant doc-file "VK_ACCESS_2_MEMORY_WRITE_BIT"
-                                vk_access_2_memory_write_bit 65536)
-
-(more-cffi:def-foreign-constant doc-file "VK_ACCESS_2_MEMORY_WRITE_BIT_KHR"
-                                vk_access_2_memory_write_bit_khr 65536)
-
-(more-cffi:def-foreign-constant doc-file "VK_ACCESS_2_SHADER_SAMPLED_READ_BIT"
-                                vk_access_2_shader_sampled_read_bit 4294967296)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_SHADER_SAMPLED_READ_BIT_KHR"
-                                vk_access_2_shader_sampled_read_bit_khr
-                                4294967296)
-
-(more-cffi:def-foreign-constant doc-file "VK_ACCESS_2_SHADER_STORAGE_READ_BIT"
-                                vk_access_2_shader_storage_read_bit 8589934592)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_SHADER_STORAGE_READ_BIT_KHR"
-                                vk_access_2_shader_storage_read_bit_khr
-                                8589934592)
-
-(more-cffi:def-foreign-constant doc-file "VK_ACCESS_2_SHADER_STORAGE_WRITE_BIT"
-                                vk_access_2_shader_storage_write_bit
-                                17179869184)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_SHADER_STORAGE_WRITE_BIT_KHR"
-                                vk_access_2_shader_storage_write_bit_khr
-                                17179869184)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_VIDEO_DECODE_READ_BIT_KHR"
-                                vk_access_2_video_decode_read_bit_khr
-                                34359738368)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_VIDEO_DECODE_WRITE_BIT_KHR"
-                                vk_access_2_video_decode_write_bit_khr
-                                68719476736)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_VIDEO_ENCODE_READ_BIT_KHR"
-                                vk_access_2_video_encode_read_bit_khr
-                                137438953472)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_VIDEO_ENCODE_WRITE_BIT_KHR"
-                                vk_access_2_video_encode_write_bit_khr
-                                274877906944)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_TRANSFORM_FEEDBACK_WRITE_BIT_EXT"
-                                vk_access_2_transform_feedback_write_bit_ext
-                                33554432)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT"
-                                vk_access_2_transform_feedback_counter_read_bit_ext
-                                67108864)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_WRITE_BIT_EXT"
-                                vk_access_2_transform_feedback_counter_write_bit_ext
-                                134217728)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_CONDITIONAL_RENDERING_READ_BIT_EXT"
-                                vk_access_2_conditional_rendering_read_bit_ext
-                                1048576)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_COMMAND_PREPROCESS_READ_BIT_NV"
-                                vk_access_2_command_preprocess_read_bit_nv
-                                131072)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_COMMAND_PREPROCESS_WRITE_BIT_NV"
-                                vk_access_2_command_preprocess_write_bit_nv
-                                262144)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT_KHR"
-                                vk_access_2_fragment_shading_rate_attachment_read_bit_khr
-                                8388608)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_SHADING_RATE_IMAGE_READ_BIT_NV"
-                                vk_access_2_shading_rate_image_read_bit_nv
-                                8388608)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR"
-                                vk_access_2_acceleration_structure_read_bit_khr
-                                2097152)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_ACCELERATION_STRUCTURE_WRITE_BIT_KHR"
-                                vk_access_2_acceleration_structure_write_bit_khr
-                                4194304)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_NV"
-                                vk_access_2_acceleration_structure_read_bit_nv
-                                2097152)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_ACCELERATION_STRUCTURE_WRITE_BIT_NV"
-                                vk_access_2_acceleration_structure_write_bit_nv
-                                4194304)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_FRAGMENT_DENSITY_MAP_READ_BIT_EXT"
-                                vk_access_2_fragment_density_map_read_bit_ext
-                                16777216)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT"
-                                vk_access_2_color_attachment_read_noncoherent_bit_ext
-                                524288)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_INVOCATION_MASK_READ_BIT_HUAWEI"
-                                vk_access_2_invocation_mask_read_bit_huawei
-                                549755813888)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ACCESS_2_SHADER_BINDING_TABLE_READ_BIT_KHR"
-                                vk_access_2_shader_binding_table_read_bit_khr
-                                1099511627776)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_BIT"
-                                vk_format_feature_2_sampled_image_bit 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_BIT_KHR"
-                                vk_format_feature_2_sampled_image_bit_khr 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_STORAGE_IMAGE_BIT"
-                                vk_format_feature_2_storage_image_bit 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_STORAGE_IMAGE_BIT_KHR"
-                                vk_format_feature_2_storage_image_bit_khr 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_STORAGE_IMAGE_ATOMIC_BIT"
-                                vk_format_feature_2_storage_image_atomic_bit 4)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_STORAGE_IMAGE_ATOMIC_BIT_KHR"
-                                vk_format_feature_2_storage_image_atomic_bit_khr
-                                4)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_UNIFORM_TEXEL_BUFFER_BIT"
-                                vk_format_feature_2_uniform_texel_buffer_bit 8)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_UNIFORM_TEXEL_BUFFER_BIT_KHR"
-                                vk_format_feature_2_uniform_texel_buffer_bit_khr
-                                8)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_STORAGE_TEXEL_BUFFER_BIT"
-                                vk_format_feature_2_storage_texel_buffer_bit 16)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_STORAGE_TEXEL_BUFFER_BIT_KHR"
-                                vk_format_feature_2_storage_texel_buffer_bit_khr
-                                16)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_STORAGE_TEXEL_BUFFER_ATOMIC_BIT"
-                                vk_format_feature_2_storage_texel_buffer_atomic_bit
-                                32)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_STORAGE_TEXEL_BUFFER_ATOMIC_BIT_KHR"
-                                vk_format_feature_2_storage_texel_buffer_atomic_bit_khr
-                                32)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_VERTEX_BUFFER_BIT"
-                                vk_format_feature_2_vertex_buffer_bit 64)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_VERTEX_BUFFER_BIT_KHR"
-                                vk_format_feature_2_vertex_buffer_bit_khr 64)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_COLOR_ATTACHMENT_BIT"
-                                vk_format_feature_2_color_attachment_bit 128)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_COLOR_ATTACHMENT_BIT_KHR"
-                                vk_format_feature_2_color_attachment_bit_khr
-                                128)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_COLOR_ATTACHMENT_BLEND_BIT"
-                                vk_format_feature_2_color_attachment_blend_bit
-                                256)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_COLOR_ATTACHMENT_BLEND_BIT_KHR"
-                                vk_format_feature_2_color_attachment_blend_bit_khr
-                                256)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_DEPTH_STENCIL_ATTACHMENT_BIT"
-                                vk_format_feature_2_depth_stencil_attachment_bit
-                                512)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_DEPTH_STENCIL_ATTACHMENT_BIT_KHR"
-                                vk_format_feature_2_depth_stencil_attachment_bit_khr
-                                512)
-
-(more-cffi:def-foreign-constant doc-file "VK_FORMAT_FEATURE_2_BLIT_SRC_BIT"
-                                vk_format_feature_2_blit_src_bit 1024)
-
-(more-cffi:def-foreign-constant doc-file "VK_FORMAT_FEATURE_2_BLIT_SRC_BIT_KHR"
-                                vk_format_feature_2_blit_src_bit_khr 1024)
-
-(more-cffi:def-foreign-constant doc-file "VK_FORMAT_FEATURE_2_BLIT_DST_BIT"
-                                vk_format_feature_2_blit_dst_bit 2048)
-
-(more-cffi:def-foreign-constant doc-file "VK_FORMAT_FEATURE_2_BLIT_DST_BIT_KHR"
-                                vk_format_feature_2_blit_dst_bit_khr 2048)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_FILTER_LINEAR_BIT"
-                                vk_format_feature_2_sampled_image_filter_linear_bit
-                                4096)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_FILTER_LINEAR_BIT_KHR"
-                                vk_format_feature_2_sampled_image_filter_linear_bit_khr
-                                4096)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_FILTER_CUBIC_BIT"
-                                vk_format_feature_2_sampled_image_filter_cubic_bit
-                                8192)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT"
-                                vk_format_feature_2_sampled_image_filter_cubic_bit_ext
-                                8192)
-
-(more-cffi:def-foreign-constant doc-file "VK_FORMAT_FEATURE_2_TRANSFER_SRC_BIT"
-                                vk_format_feature_2_transfer_src_bit 16384)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_TRANSFER_SRC_BIT_KHR"
-                                vk_format_feature_2_transfer_src_bit_khr 16384)
-
-(more-cffi:def-foreign-constant doc-file "VK_FORMAT_FEATURE_2_TRANSFER_DST_BIT"
-                                vk_format_feature_2_transfer_dst_bit 32768)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_TRANSFER_DST_BIT_KHR"
-                                vk_format_feature_2_transfer_dst_bit_khr 32768)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_FILTER_MINMAX_BIT"
-                                vk_format_feature_2_sampled_image_filter_minmax_bit
-                                65536)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_FILTER_MINMAX_BIT_KHR"
-                                vk_format_feature_2_sampled_image_filter_minmax_bit_khr
-                                65536)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_MIDPOINT_CHROMA_SAMPLES_BIT"
-                                vk_format_feature_2_midpoint_chroma_samples_bit
-                                131072)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_MIDPOINT_CHROMA_SAMPLES_BIT_KHR"
-                                vk_format_feature_2_midpoint_chroma_samples_bit_khr
-                                131072)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT"
-                                vk_format_feature_2_sampled_image_ycbcr_conversion_linear_filter_bit
-                                262144)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT_KHR"
-                                vk_format_feature_2_sampled_image_ycbcr_conversion_linear_filter_bit_khr
-                                262144)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT"
-                                vk_format_feature_2_sampled_image_ycbcr_conversion_separate_reconstruction_filter_bit
-                                524288)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT_KHR"
-                                vk_format_feature_2_sampled_image_ycbcr_conversion_separate_reconstruction_filter_bit_khr
-                                524288)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT"
-                                vk_format_feature_2_sampled_image_ycbcr_conversion_chroma_reconstruction_explicit_bit
-                                1048576)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT_KHR"
-                                vk_format_feature_2_sampled_image_ycbcr_conversion_chroma_reconstruction_explicit_bit_khr
-                                1048576)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT"
-                                vk_format_feature_2_sampled_image_ycbcr_conversion_chroma_reconstruction_explicit_forceable_bit
-                                2097152)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT_KHR"
-                                vk_format_feature_2_sampled_image_ycbcr_conversion_chroma_reconstruction_explicit_forceable_bit_khr
-                                2097152)
-
-(more-cffi:def-foreign-constant doc-file "VK_FORMAT_FEATURE_2_DISJOINT_BIT"
-                                vk_format_feature_2_disjoint_bit 4194304)
-
-(more-cffi:def-foreign-constant doc-file "VK_FORMAT_FEATURE_2_DISJOINT_BIT_KHR"
-                                vk_format_feature_2_disjoint_bit_khr 4194304)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_COSITED_CHROMA_SAMPLES_BIT"
-                                vk_format_feature_2_cosited_chroma_samples_bit
-                                8388608)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_COSITED_CHROMA_SAMPLES_BIT_KHR"
-                                vk_format_feature_2_cosited_chroma_samples_bit_khr
-                                8388608)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT"
-                                vk_format_feature_2_storage_read_without_format_bit
-                                2147483648)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR"
-                                vk_format_feature_2_storage_read_without_format_bit_khr
-                                2147483648)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT"
-                                vk_format_feature_2_storage_write_without_format_bit
-                                4294967296)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR"
-                                vk_format_feature_2_storage_write_without_format_bit_khr
-                                4294967296)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_DEPTH_COMPARISON_BIT"
-                                vk_format_feature_2_sampled_image_depth_comparison_bit
-                                8589934592)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_DEPTH_COMPARISON_BIT_KHR"
-                                vk_format_feature_2_sampled_image_depth_comparison_bit_khr
-                                8589934592)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_VIDEO_DECODE_OUTPUT_BIT_KHR"
-                                vk_format_feature_2_video_decode_output_bit_khr
-                                33554432)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_VIDEO_DECODE_DPB_BIT_KHR"
-                                vk_format_feature_2_video_decode_dpb_bit_khr
-                                67108864)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_ACCELERATION_STRUCTURE_VERTEX_BUFFER_BIT_KHR"
-                                vk_format_feature_2_acceleration_structure_vertex_buffer_bit_khr
-                                536870912)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_FRAGMENT_DENSITY_MAP_BIT_EXT"
-                                vk_format_feature_2_fragment_density_map_bit_ext
-                                16777216)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR"
-                                vk_format_feature_2_fragment_shading_rate_attachment_bit_khr
-                                1073741824)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_VIDEO_ENCODE_INPUT_BIT_KHR"
-                                vk_format_feature_2_video_encode_input_bit_khr
-                                134217728)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_VIDEO_ENCODE_DPB_BIT_KHR"
-                                vk_format_feature_2_video_encode_dpb_bit_khr
-                                268435456)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_FORMAT_FEATURE_2_LINEAR_COLOR_ATTACHMENT_BIT_NV"
-                                vk_format_feature_2_linear_color_attachment_bit_nv
-                                274877906944)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_surface" vk_khr_surface 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_SURFACE_SPEC_VERSION"
-                                vk_khr_surface_spec_version 25)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_SURFACE_EXTENSION_NAME"
-                                vk_khr_surface_extension_name "VK_KHR_surface")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_swapchain" vk_khr_swapchain 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_SWAPCHAIN_SPEC_VERSION"
-                                vk_khr_swapchain_spec_version 70)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_SWAPCHAIN_EXTENSION_NAME"
-                                vk_khr_swapchain_extension_name
-                                "VK_KHR_swapchain")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_display" vk_khr_display 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_DISPLAY_SPEC_VERSION"
-                                vk_khr_display_spec_version 23)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_DISPLAY_EXTENSION_NAME"
-                                vk_khr_display_extension_name "VK_KHR_display")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_display_swapchain"
-                                vk_khr_display_swapchain 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_DISPLAY_SWAPCHAIN_SPEC_VERSION"
-                                vk_khr_display_swapchain_spec_version 10)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_DISPLAY_SWAPCHAIN_EXTENSION_NAME"
-                                vk_khr_display_swapchain_extension_name
-                                "VK_KHR_display_swapchain")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_sampler_mirror_clamp_to_edge"
-                                vk_khr_sampler_mirror_clamp_to_edge 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SAMPLER_MIRROR_CLAMP_TO_EDGE_SPEC_VERSION"
-                                vk_khr_sampler_mirror_clamp_to_edge_spec_version
-                                3)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SAMPLER_MIRROR_CLAMP_TO_EDGE_EXTENSION_NAME"
-                                vk_khr_sampler_mirror_clamp_to_edge_extension_name
-                                "VK_KHR_sampler_mirror_clamp_to_edge")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_dynamic_rendering"
-                                vk_khr_dynamic_rendering 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_DYNAMIC_RENDERING_SPEC_VERSION"
-                                vk_khr_dynamic_rendering_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_DYNAMIC_RENDERING_EXTENSION_NAME"
-                                vk_khr_dynamic_rendering_extension_name
-                                "VK_KHR_dynamic_rendering")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_multiview" vk_khr_multiview 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_MULTIVIEW_SPEC_VERSION"
-                                vk_khr_multiview_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_MULTIVIEW_EXTENSION_NAME"
-                                vk_khr_multiview_extension_name
-                                "VK_KHR_multiview")
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_get_physical_device_properties2"
-                                vk_khr_get_physical_device_properties2 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_SPEC_VERSION"
-                                vk_khr_get_physical_device_properties_2_spec_version
-                                2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_EXTENSION_NAME"
-                                vk_khr_get_physical_device_properties_2_extension_name
-                                "VK_KHR_get_physical_device_properties2")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_device_group"
-                                vk_khr_device_group 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_DEVICE_GROUP_SPEC_VERSION"
-                                vk_khr_device_group_spec_version 4)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_DEVICE_GROUP_EXTENSION_NAME"
-                                vk_khr_device_group_extension_name
-                                "VK_KHR_device_group")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_shader_draw_parameters"
-                                vk_khr_shader_draw_parameters 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SHADER_DRAW_PARAMETERS_SPEC_VERSION"
-                                vk_khr_shader_draw_parameters_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SHADER_DRAW_PARAMETERS_EXTENSION_NAME"
-                                vk_khr_shader_draw_parameters_extension_name
-                                "VK_KHR_shader_draw_parameters")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_maintenance1"
-                                vk_khr_maintenance1 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_MAINTENANCE_1_SPEC_VERSION"
-                                vk_khr_maintenance_1_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_MAINTENANCE_1_EXTENSION_NAME"
-                                vk_khr_maintenance_1_extension_name
-                                "VK_KHR_maintenance1")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_MAINTENANCE1_SPEC_VERSION"
-                                vk_khr_maintenance1_spec_version
-                                vk_khr_maintenance_1_spec_version)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_MAINTENANCE1_EXTENSION_NAME"
-                                vk_khr_maintenance1_extension_name
-                                vk_khr_maintenance_1_extension_name)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_device_group_creation"
-                                vk_khr_device_group_creation 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_DEVICE_GROUP_CREATION_SPEC_VERSION"
-                                vk_khr_device_group_creation_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_DEVICE_GROUP_CREATION_EXTENSION_NAME"
-                                vk_khr_device_group_creation_extension_name
-                                "VK_KHR_device_group_creation")
-
-(more-cffi:def-foreign-constant doc-file "VK_MAX_DEVICE_GROUP_SIZE_KHR"
-                                vk_max_device_group_size_khr
-                                vk_max_device_group_size)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_external_memory_capabilities"
-                                vk_khr_external_memory_capabilities 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_EXTERNAL_MEMORY_CAPABILITIES_SPEC_VERSION"
-                                vk_khr_external_memory_capabilities_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION_NAME"
-                                vk_khr_external_memory_capabilities_extension_name
-                                "VK_KHR_external_memory_capabilities")
-
-(more-cffi:def-foreign-constant doc-file "VK_LUID_SIZE_KHR" vk_luid_size_khr
-                                vk_luid_size)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_external_memory"
-                                vk_khr_external_memory 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_EXTERNAL_MEMORY_SPEC_VERSION"
-                                vk_khr_external_memory_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_EXTERNAL_MEMORY_EXTENSION_NAME"
-                                vk_khr_external_memory_extension_name
-                                "VK_KHR_external_memory")
-
-(more-cffi:def-foreign-constant doc-file "VK_QUEUE_FAMILY_EXTERNAL_KHR"
-                                vk_queue_family_external_khr
-                                vk_queue_family_external)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_external_memory_fd"
-                                vk_khr_external_memory_fd 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_EXTERNAL_MEMORY_FD_SPEC_VERSION"
-                                vk_khr_external_memory_fd_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_EXTERNAL_MEMORY_FD_EXTENSION_NAME"
-                                vk_khr_external_memory_fd_extension_name
-                                "VK_KHR_external_memory_fd")
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_external_semaphore_capabilities"
-                                vk_khr_external_semaphore_capabilities 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_EXTERNAL_SEMAPHORE_CAPABILITIES_SPEC_VERSION"
-                                vk_khr_external_semaphore_capabilities_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_EXTERNAL_SEMAPHORE_CAPABILITIES_EXTENSION_NAME"
-                                vk_khr_external_semaphore_capabilities_extension_name
-                                "VK_KHR_external_semaphore_capabilities")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_external_semaphore"
-                                vk_khr_external_semaphore 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_EXTERNAL_SEMAPHORE_SPEC_VERSION"
-                                vk_khr_external_semaphore_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_EXTERNAL_SEMAPHORE_EXTENSION_NAME"
-                                vk_khr_external_semaphore_extension_name
-                                "VK_KHR_external_semaphore")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_external_semaphore_fd"
-                                vk_khr_external_semaphore_fd 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_EXTERNAL_SEMAPHORE_FD_SPEC_VERSION"
-                                vk_khr_external_semaphore_fd_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_EXTERNAL_SEMAPHORE_FD_EXTENSION_NAME"
-                                vk_khr_external_semaphore_fd_extension_name
-                                "VK_KHR_external_semaphore_fd")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_push_descriptor"
-                                vk_khr_push_descriptor 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_PUSH_DESCRIPTOR_SPEC_VERSION"
-                                vk_khr_push_descriptor_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_PUSH_DESCRIPTOR_EXTENSION_NAME"
-                                vk_khr_push_descriptor_extension_name
-                                "VK_KHR_push_descriptor")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_shader_float16_int8"
-                                vk_khr_shader_float16_int8 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SHADER_FLOAT16_INT8_SPEC_VERSION"
-                                vk_khr_shader_float16_int8_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SHADER_FLOAT16_INT8_EXTENSION_NAME"
-                                vk_khr_shader_float16_int8_extension_name
-                                "VK_KHR_shader_float16_int8")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_16bit_storage"
-                                vk_khr_16bit_storage 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_16BIT_STORAGE_SPEC_VERSION"
-                                vk_khr_16bit_storage_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_16BIT_STORAGE_EXTENSION_NAME"
-                                vk_khr_16bit_storage_extension_name
-                                "VK_KHR_16bit_storage")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_incremental_present"
-                                vk_khr_incremental_present 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_INCREMENTAL_PRESENT_SPEC_VERSION"
-                                vk_khr_incremental_present_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_INCREMENTAL_PRESENT_EXTENSION_NAME"
-                                vk_khr_incremental_present_extension_name
-                                "VK_KHR_incremental_present")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_descriptor_update_template"
-                                vk_khr_descriptor_update_template 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_DESCRIPTOR_UPDATE_TEMPLATE_SPEC_VERSION"
-                                vk_khr_descriptor_update_template_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_DESCRIPTOR_UPDATE_TEMPLATE_EXTENSION_NAME"
-                                vk_khr_descriptor_update_template_extension_name
-                                "VK_KHR_descriptor_update_template")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_imageless_framebuffer"
-                                vk_khr_imageless_framebuffer 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_IMAGELESS_FRAMEBUFFER_SPEC_VERSION"
-                                vk_khr_imageless_framebuffer_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_IMAGELESS_FRAMEBUFFER_EXTENSION_NAME"
-                                vk_khr_imageless_framebuffer_extension_name
-                                "VK_KHR_imageless_framebuffer")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_create_renderpass2"
-                                vk_khr_create_renderpass2 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_CREATE_RENDERPASS_2_SPEC_VERSION"
-                                vk_khr_create_renderpass_2_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_CREATE_RENDERPASS_2_EXTENSION_NAME"
-                                vk_khr_create_renderpass_2_extension_name
-                                "VK_KHR_create_renderpass2")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_shared_presentable_image"
-                                vk_khr_shared_presentable_image 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SHARED_PRESENTABLE_IMAGE_SPEC_VERSION"
-                                vk_khr_shared_presentable_image_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SHARED_PRESENTABLE_IMAGE_EXTENSION_NAME"
-                                vk_khr_shared_presentable_image_extension_name
-                                "VK_KHR_shared_presentable_image")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_external_fence_capabilities"
-                                vk_khr_external_fence_capabilities 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_EXTERNAL_FENCE_CAPABILITIES_SPEC_VERSION"
-                                vk_khr_external_fence_capabilities_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_EXTERNAL_FENCE_CAPABILITIES_EXTENSION_NAME"
-                                vk_khr_external_fence_capabilities_extension_name
-                                "VK_KHR_external_fence_capabilities")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_external_fence"
-                                vk_khr_external_fence 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_EXTERNAL_FENCE_SPEC_VERSION"
-                                vk_khr_external_fence_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_EXTERNAL_FENCE_EXTENSION_NAME"
-                                vk_khr_external_fence_extension_name
-                                "VK_KHR_external_fence")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_external_fence_fd"
-                                vk_khr_external_fence_fd 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_EXTERNAL_FENCE_FD_SPEC_VERSION"
-                                vk_khr_external_fence_fd_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_EXTERNAL_FENCE_FD_EXTENSION_NAME"
-                                vk_khr_external_fence_fd_extension_name
-                                "VK_KHR_external_fence_fd")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_performance_query"
-                                vk_khr_performance_query 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_PERFORMANCE_QUERY_SPEC_VERSION"
-                                vk_khr_performance_query_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_PERFORMANCE_QUERY_EXTENSION_NAME"
-                                vk_khr_performance_query_extension_name
-                                "VK_KHR_performance_query")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_maintenance2"
-                                vk_khr_maintenance2 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_MAINTENANCE_2_SPEC_VERSION"
-                                vk_khr_maintenance_2_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_MAINTENANCE_2_EXTENSION_NAME"
-                                vk_khr_maintenance_2_extension_name
-                                "VK_KHR_maintenance2")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_MAINTENANCE2_SPEC_VERSION"
-                                vk_khr_maintenance2_spec_version
-                                vk_khr_maintenance_2_spec_version)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_MAINTENANCE2_EXTENSION_NAME"
-                                vk_khr_maintenance2_extension_name
-                                vk_khr_maintenance_2_extension_name)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_get_surface_capabilities2"
-                                vk_khr_get_surface_capabilities2 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_GET_SURFACE_CAPABILITIES_2_SPEC_VERSION"
-                                vk_khr_get_surface_capabilities_2_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_GET_SURFACE_CAPABILITIES_2_EXTENSION_NAME"
-                                vk_khr_get_surface_capabilities_2_extension_name
-                                "VK_KHR_get_surface_capabilities2")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_variable_pointers"
-                                vk_khr_variable_pointers 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_VARIABLE_POINTERS_SPEC_VERSION"
-                                vk_khr_variable_pointers_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_VARIABLE_POINTERS_EXTENSION_NAME"
-                                vk_khr_variable_pointers_extension_name
-                                "VK_KHR_variable_pointers")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_get_display_properties2"
-                                vk_khr_get_display_properties2 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_GET_DISPLAY_PROPERTIES_2_SPEC_VERSION"
-                                vk_khr_get_display_properties_2_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_GET_DISPLAY_PROPERTIES_2_EXTENSION_NAME"
-                                vk_khr_get_display_properties_2_extension_name
-                                "VK_KHR_get_display_properties2")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_dedicated_allocation"
-                                vk_khr_dedicated_allocation 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_DEDICATED_ALLOCATION_SPEC_VERSION"
-                                vk_khr_dedicated_allocation_spec_version 3)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_DEDICATED_ALLOCATION_EXTENSION_NAME"
-                                vk_khr_dedicated_allocation_extension_name
-                                "VK_KHR_dedicated_allocation")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_storage_buffer_storage_class"
-                                vk_khr_storage_buffer_storage_class 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_STORAGE_BUFFER_STORAGE_CLASS_SPEC_VERSION"
-                                vk_khr_storage_buffer_storage_class_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_STORAGE_BUFFER_STORAGE_CLASS_EXTENSION_NAME"
-                                vk_khr_storage_buffer_storage_class_extension_name
-                                "VK_KHR_storage_buffer_storage_class")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_relaxed_block_layout"
-                                vk_khr_relaxed_block_layout 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_RELAXED_BLOCK_LAYOUT_SPEC_VERSION"
-                                vk_khr_relaxed_block_layout_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_RELAXED_BLOCK_LAYOUT_EXTENSION_NAME"
-                                vk_khr_relaxed_block_layout_extension_name
-                                "VK_KHR_relaxed_block_layout")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_get_memory_requirements2"
-                                vk_khr_get_memory_requirements2 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_GET_MEMORY_REQUIREMENTS_2_SPEC_VERSION"
-                                vk_khr_get_memory_requirements_2_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_GET_MEMORY_REQUIREMENTS_2_EXTENSION_NAME"
-                                vk_khr_get_memory_requirements_2_extension_name
-                                "VK_KHR_get_memory_requirements2")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_image_format_list"
-                                vk_khr_image_format_list 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_IMAGE_FORMAT_LIST_SPEC_VERSION"
-                                vk_khr_image_format_list_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_IMAGE_FORMAT_LIST_EXTENSION_NAME"
-                                vk_khr_image_format_list_extension_name
-                                "VK_KHR_image_format_list")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_sampler_ycbcr_conversion"
-                                vk_khr_sampler_ycbcr_conversion 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SAMPLER_YCBCR_CONVERSION_SPEC_VERSION"
-                                vk_khr_sampler_ycbcr_conversion_spec_version 14)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SAMPLER_YCBCR_CONVERSION_EXTENSION_NAME"
-                                vk_khr_sampler_ycbcr_conversion_extension_name
-                                "VK_KHR_sampler_ycbcr_conversion")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_bind_memory2"
-                                vk_khr_bind_memory2 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_BIND_MEMORY_2_SPEC_VERSION"
-                                vk_khr_bind_memory_2_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_BIND_MEMORY_2_EXTENSION_NAME"
-                                vk_khr_bind_memory_2_extension_name
-                                "VK_KHR_bind_memory2")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_maintenance3"
-                                vk_khr_maintenance3 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_MAINTENANCE_3_SPEC_VERSION"
-                                vk_khr_maintenance_3_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_MAINTENANCE_3_EXTENSION_NAME"
-                                vk_khr_maintenance_3_extension_name
-                                "VK_KHR_maintenance3")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_MAINTENANCE3_SPEC_VERSION"
-                                vk_khr_maintenance3_spec_version
-                                vk_khr_maintenance_3_spec_version)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_MAINTENANCE3_EXTENSION_NAME"
-                                vk_khr_maintenance3_extension_name
-                                vk_khr_maintenance_3_extension_name)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_draw_indirect_count"
-                                vk_khr_draw_indirect_count 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_DRAW_INDIRECT_COUNT_SPEC_VERSION"
-                                vk_khr_draw_indirect_count_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_DRAW_INDIRECT_COUNT_EXTENSION_NAME"
-                                vk_khr_draw_indirect_count_extension_name
-                                "VK_KHR_draw_indirect_count")
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_shader_subgroup_extended_types"
-                                vk_khr_shader_subgroup_extended_types 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SHADER_SUBGROUP_EXTENDED_TYPES_SPEC_VERSION"
-                                vk_khr_shader_subgroup_extended_types_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SHADER_SUBGROUP_EXTENDED_TYPES_EXTENSION_NAME"
-                                vk_khr_shader_subgroup_extended_types_extension_name
-                                "VK_KHR_shader_subgroup_extended_types")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_8bit_storage"
-                                vk_khr_8bit_storage 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_8BIT_STORAGE_SPEC_VERSION"
-                                vk_khr_8bit_storage_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_8BIT_STORAGE_EXTENSION_NAME"
-                                vk_khr_8bit_storage_extension_name
-                                "VK_KHR_8bit_storage")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_shader_atomic_int64"
-                                vk_khr_shader_atomic_int64 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SHADER_ATOMIC_INT64_SPEC_VERSION"
-                                vk_khr_shader_atomic_int64_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SHADER_ATOMIC_INT64_EXTENSION_NAME"
-                                vk_khr_shader_atomic_int64_extension_name
-                                "VK_KHR_shader_atomic_int64")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_shader_clock"
-                                vk_khr_shader_clock 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_SHADER_CLOCK_SPEC_VERSION"
-                                vk_khr_shader_clock_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_SHADER_CLOCK_EXTENSION_NAME"
-                                vk_khr_shader_clock_extension_name
-                                "VK_KHR_shader_clock")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_global_priority"
-                                vk_khr_global_priority 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_MAX_GLOBAL_PRIORITY_SIZE_KHR"
-                                vk_max_global_priority_size_khr 16)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_GLOBAL_PRIORITY_SPEC_VERSION"
-                                vk_khr_global_priority_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_GLOBAL_PRIORITY_EXTENSION_NAME"
-                                vk_khr_global_priority_extension_name
-                                "VK_KHR_global_priority")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_driver_properties"
-                                vk_khr_driver_properties 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_DRIVER_PROPERTIES_SPEC_VERSION"
-                                vk_khr_driver_properties_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_DRIVER_PROPERTIES_EXTENSION_NAME"
-                                vk_khr_driver_properties_extension_name
-                                "VK_KHR_driver_properties")
-
-(more-cffi:def-foreign-constant doc-file "VK_MAX_DRIVER_NAME_SIZE_KHR"
-                                vk_max_driver_name_size_khr
-                                vk_max_driver_name_size)
-
-(more-cffi:def-foreign-constant doc-file "VK_MAX_DRIVER_INFO_SIZE_KHR"
-                                vk_max_driver_info_size_khr
-                                vk_max_driver_info_size)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_shader_float_controls"
-                                vk_khr_shader_float_controls 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SHADER_FLOAT_CONTROLS_SPEC_VERSION"
-                                vk_khr_shader_float_controls_spec_version 4)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SHADER_FLOAT_CONTROLS_EXTENSION_NAME"
-                                vk_khr_shader_float_controls_extension_name
-                                "VK_KHR_shader_float_controls")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_depth_stencil_resolve"
-                                vk_khr_depth_stencil_resolve 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_DEPTH_STENCIL_RESOLVE_SPEC_VERSION"
-                                vk_khr_depth_stencil_resolve_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_DEPTH_STENCIL_RESOLVE_EXTENSION_NAME"
-                                vk_khr_depth_stencil_resolve_extension_name
-                                "VK_KHR_depth_stencil_resolve")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_swapchain_mutable_format"
-                                vk_khr_swapchain_mutable_format 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SWAPCHAIN_MUTABLE_FORMAT_SPEC_VERSION"
-                                vk_khr_swapchain_mutable_format_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SWAPCHAIN_MUTABLE_FORMAT_EXTENSION_NAME"
-                                vk_khr_swapchain_mutable_format_extension_name
-                                "VK_KHR_swapchain_mutable_format")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_timeline_semaphore"
-                                vk_khr_timeline_semaphore 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_TIMELINE_SEMAPHORE_SPEC_VERSION"
-                                vk_khr_timeline_semaphore_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_TIMELINE_SEMAPHORE_EXTENSION_NAME"
-                                vk_khr_timeline_semaphore_extension_name
-                                "VK_KHR_timeline_semaphore")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_vulkan_memory_model"
-                                vk_khr_vulkan_memory_model 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_VULKAN_MEMORY_MODEL_SPEC_VERSION"
-                                vk_khr_vulkan_memory_model_spec_version 3)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_VULKAN_MEMORY_MODEL_EXTENSION_NAME"
-                                vk_khr_vulkan_memory_model_extension_name
-                                "VK_KHR_vulkan_memory_model")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_shader_terminate_invocation"
-                                vk_khr_shader_terminate_invocation 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SHADER_TERMINATE_INVOCATION_SPEC_VERSION"
-                                vk_khr_shader_terminate_invocation_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SHADER_TERMINATE_INVOCATION_EXTENSION_NAME"
-                                vk_khr_shader_terminate_invocation_extension_name
-                                "VK_KHR_shader_terminate_invocation")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_fragment_shading_rate"
-                                vk_khr_fragment_shading_rate 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_FRAGMENT_SHADING_RATE_SPEC_VERSION"
-                                vk_khr_fragment_shading_rate_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_FRAGMENT_SHADING_RATE_EXTENSION_NAME"
-                                vk_khr_fragment_shading_rate_extension_name
-                                "VK_KHR_fragment_shading_rate")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_spirv_1_4" vk_khr_spirv_1_4 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_SPIRV_1_4_SPEC_VERSION"
-                                vk_khr_spirv_1_4_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_SPIRV_1_4_EXTENSION_NAME"
-                                vk_khr_spirv_1_4_extension_name
-                                "VK_KHR_spirv_1_4")
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_surface_protected_capabilities"
-                                vk_khr_surface_protected_capabilities 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SURFACE_PROTECTED_CAPABILITIES_SPEC_VERSION"
-                                vk_khr_surface_protected_capabilities_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SURFACE_PROTECTED_CAPABILITIES_EXTENSION_NAME"
-                                vk_khr_surface_protected_capabilities_extension_name
-                                "VK_KHR_surface_protected_capabilities")
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_separate_depth_stencil_layouts"
-                                vk_khr_separate_depth_stencil_layouts 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SEPARATE_DEPTH_STENCIL_LAYOUTS_SPEC_VERSION"
-                                vk_khr_separate_depth_stencil_layouts_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SEPARATE_DEPTH_STENCIL_LAYOUTS_EXTENSION_NAME"
-                                vk_khr_separate_depth_stencil_layouts_extension_name
-                                "VK_KHR_separate_depth_stencil_layouts")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_present_wait"
-                                vk_khr_present_wait 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_PRESENT_WAIT_SPEC_VERSION"
-                                vk_khr_present_wait_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_PRESENT_WAIT_EXTENSION_NAME"
-                                vk_khr_present_wait_extension_name
-                                "VK_KHR_present_wait")
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_uniform_buffer_standard_layout"
-                                vk_khr_uniform_buffer_standard_layout 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_UNIFORM_BUFFER_STANDARD_LAYOUT_SPEC_VERSION"
-                                vk_khr_uniform_buffer_standard_layout_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_UNIFORM_BUFFER_STANDARD_LAYOUT_EXTENSION_NAME"
-                                vk_khr_uniform_buffer_standard_layout_extension_name
-                                "VK_KHR_uniform_buffer_standard_layout")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_buffer_device_address"
-                                vk_khr_buffer_device_address 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_BUFFER_DEVICE_ADDRESS_SPEC_VERSION"
-                                vk_khr_buffer_device_address_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_BUFFER_DEVICE_ADDRESS_EXTENSION_NAME"
-                                vk_khr_buffer_device_address_extension_name
-                                "VK_KHR_buffer_device_address")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_deferred_host_operations"
-                                vk_khr_deferred_host_operations 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_DEFERRED_HOST_OPERATIONS_SPEC_VERSION"
-                                vk_khr_deferred_host_operations_spec_version 4)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_DEFERRED_HOST_OPERATIONS_EXTENSION_NAME"
-                                vk_khr_deferred_host_operations_extension_name
-                                "VK_KHR_deferred_host_operations")
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_pipeline_executable_properties"
-                                vk_khr_pipeline_executable_properties 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_PIPELINE_EXECUTABLE_PROPERTIES_SPEC_VERSION"
-                                vk_khr_pipeline_executable_properties_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_PIPELINE_EXECUTABLE_PROPERTIES_EXTENSION_NAME"
-                                vk_khr_pipeline_executable_properties_extension_name
-                                "VK_KHR_pipeline_executable_properties")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_shader_integer_dot_product"
-                                vk_khr_shader_integer_dot_product 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SHADER_INTEGER_DOT_PRODUCT_SPEC_VERSION"
-                                vk_khr_shader_integer_dot_product_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SHADER_INTEGER_DOT_PRODUCT_EXTENSION_NAME"
-                                vk_khr_shader_integer_dot_product_extension_name
-                                "VK_KHR_shader_integer_dot_product")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_pipeline_library"
-                                vk_khr_pipeline_library 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_PIPELINE_LIBRARY_SPEC_VERSION"
-                                vk_khr_pipeline_library_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_PIPELINE_LIBRARY_EXTENSION_NAME"
-                                vk_khr_pipeline_library_extension_name
-                                "VK_KHR_pipeline_library")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_shader_non_semantic_info"
-                                vk_khr_shader_non_semantic_info 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SHADER_NON_SEMANTIC_INFO_SPEC_VERSION"
-                                vk_khr_shader_non_semantic_info_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SHADER_NON_SEMANTIC_INFO_EXTENSION_NAME"
-                                vk_khr_shader_non_semantic_info_extension_name
-                                "VK_KHR_shader_non_semantic_info")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_present_id" vk_khr_present_id
-                                1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_PRESENT_ID_SPEC_VERSION"
-                                vk_khr_present_id_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_PRESENT_ID_EXTENSION_NAME"
-                                vk_khr_present_id_extension_name
-                                "VK_KHR_present_id")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_synchronization2"
-                                vk_khr_synchronization2 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SYNCHRONIZATION_2_SPEC_VERSION"
-                                vk_khr_synchronization_2_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SYNCHRONIZATION_2_EXTENSION_NAME"
-                                vk_khr_synchronization_2_extension_name
-                                "VK_KHR_synchronization2")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_fragment_shader_barycentric"
-                                vk_khr_fragment_shader_barycentric 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_FRAGMENT_SHADER_BARYCENTRIC_SPEC_VERSION"
-                                vk_khr_fragment_shader_barycentric_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_FRAGMENT_SHADER_BARYCENTRIC_EXTENSION_NAME"
-                                vk_khr_fragment_shader_barycentric_extension_name
-                                "VK_KHR_fragment_shader_barycentric")
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_shader_subgroup_uniform_control_flow"
-                                vk_khr_shader_subgroup_uniform_control_flow 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_SPEC_VERSION"
-                                vk_khr_shader_subgroup_uniform_control_flow_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_EXTENSION_NAME"
-                                vk_khr_shader_subgroup_uniform_control_flow_extension_name
-                                "VK_KHR_shader_subgroup_uniform_control_flow")
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_zero_initialize_workgroup_memory"
-                                vk_khr_zero_initialize_workgroup_memory 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_ZERO_INITIALIZE_WORKGROUP_MEMORY_SPEC_VERSION"
-                                vk_khr_zero_initialize_workgroup_memory_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_ZERO_INITIALIZE_WORKGROUP_MEMORY_EXTENSION_NAME"
-                                vk_khr_zero_initialize_workgroup_memory_extension_name
-                                "VK_KHR_zero_initialize_workgroup_memory")
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_workgroup_memory_explicit_layout"
-                                vk_khr_workgroup_memory_explicit_layout 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_WORKGROUP_MEMORY_EXPLICIT_LAYOUT_SPEC_VERSION"
-                                vk_khr_workgroup_memory_explicit_layout_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_WORKGROUP_MEMORY_EXPLICIT_LAYOUT_EXTENSION_NAME"
-                                vk_khr_workgroup_memory_explicit_layout_extension_name
-                                "VK_KHR_workgroup_memory_explicit_layout")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_copy_commands2"
-                                vk_khr_copy_commands2 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_COPY_COMMANDS_2_SPEC_VERSION"
-                                vk_khr_copy_commands_2_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_COPY_COMMANDS_2_EXTENSION_NAME"
-                                vk_khr_copy_commands_2_extension_name
-                                "VK_KHR_copy_commands2")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_format_feature_flags2"
-                                vk_khr_format_feature_flags2 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_FORMAT_FEATURE_FLAGS_2_SPEC_VERSION"
-                                vk_khr_format_feature_flags_2_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_FORMAT_FEATURE_FLAGS_2_EXTENSION_NAME"
-                                vk_khr_format_feature_flags_2_extension_name
-                                "VK_KHR_format_feature_flags2")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_ray_tracing_maintenance1"
-                                vk_khr_ray_tracing_maintenance1 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_RAY_TRACING_MAINTENANCE_1_SPEC_VERSION"
-                                vk_khr_ray_tracing_maintenance_1_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_RAY_TRACING_MAINTENANCE_1_EXTENSION_NAME"
-                                vk_khr_ray_tracing_maintenance_1_extension_name
-                                "VK_KHR_ray_tracing_maintenance1")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_portability_enumeration"
-                                vk_khr_portability_enumeration 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_PORTABILITY_ENUMERATION_SPEC_VERSION"
-                                vk_khr_portability_enumeration_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_PORTABILITY_ENUMERATION_EXTENSION_NAME"
-                                vk_khr_portability_enumeration_extension_name
-                                "VK_KHR_portability_enumeration")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_maintenance4"
-                                vk_khr_maintenance4 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_MAINTENANCE_4_SPEC_VERSION"
-                                vk_khr_maintenance_4_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_MAINTENANCE_4_EXTENSION_NAME"
-                                vk_khr_maintenance_4_extension_name
-                                "VK_KHR_maintenance4")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_debug_report"
-                                vk_ext_debug_report 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_DEBUG_REPORT_SPEC_VERSION"
-                                vk_ext_debug_report_spec_version 10)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_DEBUG_REPORT_EXTENSION_NAME"
-                                vk_ext_debug_report_extension_name
-                                "VK_EXT_debug_report")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_glsl_shader" vk_nv_glsl_shader
-                                1)
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_GLSL_SHADER_SPEC_VERSION"
-                                vk_nv_glsl_shader_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_GLSL_SHADER_EXTENSION_NAME"
-                                vk_nv_glsl_shader_extension_name
-                                "VK_NV_glsl_shader")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_depth_range_unrestricted"
-                                vk_ext_depth_range_unrestricted 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_DEPTH_RANGE_UNRESTRICTED_SPEC_VERSION"
-                                vk_ext_depth_range_unrestricted_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_DEPTH_RANGE_UNRESTRICTED_EXTENSION_NAME"
-                                vk_ext_depth_range_unrestricted_extension_name
-                                "VK_EXT_depth_range_unrestricted")
-
-(more-cffi:def-foreign-constant doc-file "VK_IMG_filter_cubic"
-                                vk_img_filter_cubic 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_IMG_FILTER_CUBIC_SPEC_VERSION"
-                                vk_img_filter_cubic_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_IMG_FILTER_CUBIC_EXTENSION_NAME"
-                                vk_img_filter_cubic_extension_name
-                                "VK_IMG_filter_cubic")
-
-(more-cffi:def-foreign-constant doc-file "VK_AMD_rasterization_order"
-                                vk_amd_rasterization_order 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_RASTERIZATION_ORDER_SPEC_VERSION"
-                                vk_amd_rasterization_order_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_RASTERIZATION_ORDER_EXTENSION_NAME"
-                                vk_amd_rasterization_order_extension_name
-                                "VK_AMD_rasterization_order")
-
-(more-cffi:def-foreign-constant doc-file "VK_AMD_shader_trinary_minmax"
-                                vk_amd_shader_trinary_minmax 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_SHADER_TRINARY_MINMAX_SPEC_VERSION"
-                                vk_amd_shader_trinary_minmax_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_SHADER_TRINARY_MINMAX_EXTENSION_NAME"
-                                vk_amd_shader_trinary_minmax_extension_name
-                                "VK_AMD_shader_trinary_minmax")
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_shader_explicit_vertex_parameter"
-                                vk_amd_shader_explicit_vertex_parameter 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_SHADER_EXPLICIT_VERTEX_PARAMETER_SPEC_VERSION"
-                                vk_amd_shader_explicit_vertex_parameter_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_SHADER_EXPLICIT_VERTEX_PARAMETER_EXTENSION_NAME"
-                                vk_amd_shader_explicit_vertex_parameter_extension_name
-                                "VK_AMD_shader_explicit_vertex_parameter")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_debug_marker"
-                                vk_ext_debug_marker 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_DEBUG_MARKER_SPEC_VERSION"
-                                vk_ext_debug_marker_spec_version 4)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_DEBUG_MARKER_EXTENSION_NAME"
-                                vk_ext_debug_marker_extension_name
-                                "VK_EXT_debug_marker")
-
-(more-cffi:def-foreign-constant doc-file "VK_AMD_gcn_shader" vk_amd_gcn_shader
-                                1)
-
-(more-cffi:def-foreign-constant doc-file "VK_AMD_GCN_SHADER_SPEC_VERSION"
-                                vk_amd_gcn_shader_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_AMD_GCN_SHADER_EXTENSION_NAME"
-                                vk_amd_gcn_shader_extension_name
-                                "VK_AMD_gcn_shader")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_dedicated_allocation"
-                                vk_nv_dedicated_allocation 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_DEDICATED_ALLOCATION_SPEC_VERSION"
-                                vk_nv_dedicated_allocation_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_DEDICATED_ALLOCATION_EXTENSION_NAME"
-                                vk_nv_dedicated_allocation_extension_name
-                                "VK_NV_dedicated_allocation")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_transform_feedback"
-                                vk_ext_transform_feedback 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_TRANSFORM_FEEDBACK_SPEC_VERSION"
-                                vk_ext_transform_feedback_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_TRANSFORM_FEEDBACK_EXTENSION_NAME"
-                                vk_ext_transform_feedback_extension_name
-                                "VK_EXT_transform_feedback")
-
-(more-cffi:def-foreign-constant doc-file "VK_NVX_binary_import"
-                                vk_nvx_binary_import 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_NVX_BINARY_IMPORT_SPEC_VERSION"
-                                vk_nvx_binary_import_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_NVX_BINARY_IMPORT_EXTENSION_NAME"
-                                vk_nvx_binary_import_extension_name
-                                "VK_NVX_binary_import")
-
-(more-cffi:def-foreign-constant doc-file "VK_NVX_image_view_handle"
-                                vk_nvx_image_view_handle 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NVX_IMAGE_VIEW_HANDLE_SPEC_VERSION"
-                                vk_nvx_image_view_handle_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NVX_IMAGE_VIEW_HANDLE_EXTENSION_NAME"
-                                vk_nvx_image_view_handle_extension_name
-                                "VK_NVX_image_view_handle")
-
-(more-cffi:def-foreign-constant doc-file "VK_AMD_draw_indirect_count"
-                                vk_amd_draw_indirect_count 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_DRAW_INDIRECT_COUNT_SPEC_VERSION"
-                                vk_amd_draw_indirect_count_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_DRAW_INDIRECT_COUNT_EXTENSION_NAME"
-                                vk_amd_draw_indirect_count_extension_name
-                                "VK_AMD_draw_indirect_count")
-
-(more-cffi:def-foreign-constant doc-file "VK_AMD_negative_viewport_height"
-                                vk_amd_negative_viewport_height 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_NEGATIVE_VIEWPORT_HEIGHT_SPEC_VERSION"
-                                vk_amd_negative_viewport_height_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_NEGATIVE_VIEWPORT_HEIGHT_EXTENSION_NAME"
-                                vk_amd_negative_viewport_height_extension_name
-                                "VK_AMD_negative_viewport_height")
-
-(more-cffi:def-foreign-constant doc-file "VK_AMD_gpu_shader_half_float"
-                                vk_amd_gpu_shader_half_float 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_GPU_SHADER_HALF_FLOAT_SPEC_VERSION"
-                                vk_amd_gpu_shader_half_float_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_GPU_SHADER_HALF_FLOAT_EXTENSION_NAME"
-                                vk_amd_gpu_shader_half_float_extension_name
-                                "VK_AMD_gpu_shader_half_float")
-
-(more-cffi:def-foreign-constant doc-file "VK_AMD_shader_ballot"
-                                vk_amd_shader_ballot 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_AMD_SHADER_BALLOT_SPEC_VERSION"
-                                vk_amd_shader_ballot_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_AMD_SHADER_BALLOT_EXTENSION_NAME"
-                                vk_amd_shader_ballot_extension_name
-                                "VK_AMD_shader_ballot")
-
-(more-cffi:def-foreign-constant doc-file "VK_AMD_texture_gather_bias_lod"
-                                vk_amd_texture_gather_bias_lod 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_TEXTURE_GATHER_BIAS_LOD_SPEC_VERSION"
-                                vk_amd_texture_gather_bias_lod_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_TEXTURE_GATHER_BIAS_LOD_EXTENSION_NAME"
-                                vk_amd_texture_gather_bias_lod_extension_name
-                                "VK_AMD_texture_gather_bias_lod")
-
-(more-cffi:def-foreign-constant doc-file "VK_AMD_shader_info"
-                                vk_amd_shader_info 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_AMD_SHADER_INFO_SPEC_VERSION"
-                                vk_amd_shader_info_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_AMD_SHADER_INFO_EXTENSION_NAME"
-                                vk_amd_shader_info_extension_name
-                                "VK_AMD_shader_info")
-
-(more-cffi:def-foreign-constant doc-file "VK_AMD_shader_image_load_store_lod"
-                                vk_amd_shader_image_load_store_lod 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_SHADER_IMAGE_LOAD_STORE_LOD_SPEC_VERSION"
-                                vk_amd_shader_image_load_store_lod_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_SHADER_IMAGE_LOAD_STORE_LOD_EXTENSION_NAME"
-                                vk_amd_shader_image_load_store_lod_extension_name
-                                "VK_AMD_shader_image_load_store_lod")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_corner_sampled_image"
-                                vk_nv_corner_sampled_image 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_CORNER_SAMPLED_IMAGE_SPEC_VERSION"
-                                vk_nv_corner_sampled_image_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_CORNER_SAMPLED_IMAGE_EXTENSION_NAME"
-                                vk_nv_corner_sampled_image_extension_name
-                                "VK_NV_corner_sampled_image")
-
-(more-cffi:def-foreign-constant doc-file "VK_IMG_format_pvrtc"
-                                vk_img_format_pvrtc 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_IMG_FORMAT_PVRTC_SPEC_VERSION"
-                                vk_img_format_pvrtc_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_IMG_FORMAT_PVRTC_EXTENSION_NAME"
-                                vk_img_format_pvrtc_extension_name
-                                "VK_IMG_format_pvrtc")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_external_memory_capabilities"
-                                vk_nv_external_memory_capabilities 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_EXTERNAL_MEMORY_CAPABILITIES_SPEC_VERSION"
-                                vk_nv_external_memory_capabilities_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION_NAME"
-                                vk_nv_external_memory_capabilities_extension_name
-                                "VK_NV_external_memory_capabilities")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_external_memory"
-                                vk_nv_external_memory 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_EXTERNAL_MEMORY_SPEC_VERSION"
-                                vk_nv_external_memory_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_EXTERNAL_MEMORY_EXTENSION_NAME"
-                                vk_nv_external_memory_extension_name
-                                "VK_NV_external_memory")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_validation_flags"
-                                vk_ext_validation_flags 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_VALIDATION_FLAGS_SPEC_VERSION"
-                                vk_ext_validation_flags_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_VALIDATION_FLAGS_EXTENSION_NAME"
-                                vk_ext_validation_flags_extension_name
-                                "VK_EXT_validation_flags")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_shader_subgroup_ballot"
-                                vk_ext_shader_subgroup_ballot 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_SHADER_SUBGROUP_BALLOT_SPEC_VERSION"
-                                vk_ext_shader_subgroup_ballot_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_SHADER_SUBGROUP_BALLOT_EXTENSION_NAME"
-                                vk_ext_shader_subgroup_ballot_extension_name
-                                "VK_EXT_shader_subgroup_ballot")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_shader_subgroup_vote"
-                                vk_ext_shader_subgroup_vote 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_SHADER_SUBGROUP_VOTE_SPEC_VERSION"
-                                vk_ext_shader_subgroup_vote_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_SHADER_SUBGROUP_VOTE_EXTENSION_NAME"
-                                vk_ext_shader_subgroup_vote_extension_name
-                                "VK_EXT_shader_subgroup_vote")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_texture_compression_astc_hdr"
-                                vk_ext_texture_compression_astc_hdr 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_TEXTURE_COMPRESSION_ASTC_HDR_SPEC_VERSION"
-                                vk_ext_texture_compression_astc_hdr_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_TEXTURE_COMPRESSION_ASTC_HDR_EXTENSION_NAME"
-                                vk_ext_texture_compression_astc_hdr_extension_name
-                                "VK_EXT_texture_compression_astc_hdr")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_astc_decode_mode"
-                                vk_ext_astc_decode_mode 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_ASTC_DECODE_MODE_SPEC_VERSION"
-                                vk_ext_astc_decode_mode_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_ASTC_DECODE_MODE_EXTENSION_NAME"
-                                vk_ext_astc_decode_mode_extension_name
-                                "VK_EXT_astc_decode_mode")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_conditional_rendering"
-                                vk_ext_conditional_rendering 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_CONDITIONAL_RENDERING_SPEC_VERSION"
-                                vk_ext_conditional_rendering_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_CONDITIONAL_RENDERING_EXTENSION_NAME"
-                                vk_ext_conditional_rendering_extension_name
-                                "VK_EXT_conditional_rendering")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_clip_space_w_scaling"
-                                vk_nv_clip_space_w_scaling 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_CLIP_SPACE_W_SCALING_SPEC_VERSION"
-                                vk_nv_clip_space_w_scaling_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_CLIP_SPACE_W_SCALING_EXTENSION_NAME"
-                                vk_nv_clip_space_w_scaling_extension_name
-                                "VK_NV_clip_space_w_scaling")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_direct_mode_display"
-                                vk_ext_direct_mode_display 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_DIRECT_MODE_DISPLAY_SPEC_VERSION"
-                                vk_ext_direct_mode_display_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_DIRECT_MODE_DISPLAY_EXTENSION_NAME"
-                                vk_ext_direct_mode_display_extension_name
-                                "VK_EXT_direct_mode_display")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_display_surface_counter"
-                                vk_ext_display_surface_counter 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_DISPLAY_SURFACE_COUNTER_SPEC_VERSION"
-                                vk_ext_display_surface_counter_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_DISPLAY_SURFACE_COUNTER_EXTENSION_NAME"
-                                vk_ext_display_surface_counter_extension_name
-                                "VK_EXT_display_surface_counter")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_display_control"
-                                vk_ext_display_control 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_DISPLAY_CONTROL_SPEC_VERSION"
-                                vk_ext_display_control_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_DISPLAY_CONTROL_EXTENSION_NAME"
-                                vk_ext_display_control_extension_name
-                                "VK_EXT_display_control")
-
-(more-cffi:def-foreign-constant doc-file "VK_GOOGLE_display_timing"
-                                vk_google_display_timing 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_GOOGLE_DISPLAY_TIMING_SPEC_VERSION"
-                                vk_google_display_timing_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_GOOGLE_DISPLAY_TIMING_EXTENSION_NAME"
-                                vk_google_display_timing_extension_name
-                                "VK_GOOGLE_display_timing")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_sample_mask_override_coverage"
-                                vk_nv_sample_mask_override_coverage 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_SAMPLE_MASK_OVERRIDE_COVERAGE_SPEC_VERSION"
-                                vk_nv_sample_mask_override_coverage_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_SAMPLE_MASK_OVERRIDE_COVERAGE_EXTENSION_NAME"
-                                vk_nv_sample_mask_override_coverage_extension_name
-                                "VK_NV_sample_mask_override_coverage")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_geometry_shader_passthrough"
-                                vk_nv_geometry_shader_passthrough 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_GEOMETRY_SHADER_PASSTHROUGH_SPEC_VERSION"
-                                vk_nv_geometry_shader_passthrough_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_GEOMETRY_SHADER_PASSTHROUGH_EXTENSION_NAME"
-                                vk_nv_geometry_shader_passthrough_extension_name
-                                "VK_NV_geometry_shader_passthrough")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_viewport_array2"
-                                vk_nv_viewport_array2 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_VIEWPORT_ARRAY_2_SPEC_VERSION"
-                                vk_nv_viewport_array_2_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_VIEWPORT_ARRAY_2_EXTENSION_NAME"
-                                vk_nv_viewport_array_2_extension_name
-                                "VK_NV_viewport_array2")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_VIEWPORT_ARRAY2_SPEC_VERSION"
-                                vk_nv_viewport_array2_spec_version
-                                vk_nv_viewport_array_2_spec_version)
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_VIEWPORT_ARRAY2_EXTENSION_NAME"
-                                vk_nv_viewport_array2_extension_name
-                                vk_nv_viewport_array_2_extension_name)
-
-(more-cffi:def-foreign-constant doc-file "VK_NVX_multiview_per_view_attributes"
-                                vk_nvx_multiview_per_view_attributes 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NVX_MULTIVIEW_PER_VIEW_ATTRIBUTES_SPEC_VERSION"
-                                vk_nvx_multiview_per_view_attributes_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NVX_MULTIVIEW_PER_VIEW_ATTRIBUTES_EXTENSION_NAME"
-                                vk_nvx_multiview_per_view_attributes_extension_name
-                                "VK_NVX_multiview_per_view_attributes")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_viewport_swizzle"
-                                vk_nv_viewport_swizzle 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_VIEWPORT_SWIZZLE_SPEC_VERSION"
-                                vk_nv_viewport_swizzle_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_VIEWPORT_SWIZZLE_EXTENSION_NAME"
-                                vk_nv_viewport_swizzle_extension_name
-                                "VK_NV_viewport_swizzle")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_discard_rectangles"
-                                vk_ext_discard_rectangles 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_DISCARD_RECTANGLES_SPEC_VERSION"
-                                vk_ext_discard_rectangles_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_DISCARD_RECTANGLES_EXTENSION_NAME"
-                                vk_ext_discard_rectangles_extension_name
-                                "VK_EXT_discard_rectangles")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_conservative_rasterization"
-                                vk_ext_conservative_rasterization 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_CONSERVATIVE_RASTERIZATION_SPEC_VERSION"
-                                vk_ext_conservative_rasterization_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_CONSERVATIVE_RASTERIZATION_EXTENSION_NAME"
-                                vk_ext_conservative_rasterization_extension_name
-                                "VK_EXT_conservative_rasterization")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_depth_clip_enable"
-                                vk_ext_depth_clip_enable 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_DEPTH_CLIP_ENABLE_SPEC_VERSION"
-                                vk_ext_depth_clip_enable_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_DEPTH_CLIP_ENABLE_EXTENSION_NAME"
-                                vk_ext_depth_clip_enable_extension_name
-                                "VK_EXT_depth_clip_enable")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_swapchain_colorspace"
-                                vk_ext_swapchain_colorspace 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_SWAPCHAIN_COLOR_SPACE_SPEC_VERSION"
-                                vk_ext_swapchain_color_space_spec_version 4)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_SWAPCHAIN_COLOR_SPACE_EXTENSION_NAME"
-                                vk_ext_swapchain_color_space_extension_name
-                                "VK_EXT_swapchain_colorspace")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_hdr_metadata"
-                                vk_ext_hdr_metadata 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_HDR_METADATA_SPEC_VERSION"
-                                vk_ext_hdr_metadata_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_HDR_METADATA_EXTENSION_NAME"
-                                vk_ext_hdr_metadata_extension_name
-                                "VK_EXT_hdr_metadata")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_external_memory_dma_buf"
-                                vk_ext_external_memory_dma_buf 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_EXTERNAL_MEMORY_DMA_BUF_SPEC_VERSION"
-                                vk_ext_external_memory_dma_buf_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_EXTERNAL_MEMORY_DMA_BUF_EXTENSION_NAME"
-                                vk_ext_external_memory_dma_buf_extension_name
-                                "VK_EXT_external_memory_dma_buf")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_queue_family_foreign"
-                                vk_ext_queue_family_foreign 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_QUEUE_FAMILY_FOREIGN_SPEC_VERSION"
-                                vk_ext_queue_family_foreign_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_QUEUE_FAMILY_FOREIGN_EXTENSION_NAME"
-                                vk_ext_queue_family_foreign_extension_name
-                                "VK_EXT_queue_family_foreign")
-
-(more-cffi:def-foreign-constant doc-file "VK_QUEUE_FAMILY_FOREIGN_EXT"
-                                vk_queue_family_foreign_ext (- uint32_max 2))
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_debug_utils"
-                                vk_ext_debug_utils 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_DEBUG_UTILS_SPEC_VERSION"
-                                vk_ext_debug_utils_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_DEBUG_UTILS_EXTENSION_NAME"
-                                vk_ext_debug_utils_extension_name
-                                "VK_EXT_debug_utils")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_sampler_filter_minmax"
-                                vk_ext_sampler_filter_minmax 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_SAMPLER_FILTER_MINMAX_SPEC_VERSION"
-                                vk_ext_sampler_filter_minmax_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_SAMPLER_FILTER_MINMAX_EXTENSION_NAME"
-                                vk_ext_sampler_filter_minmax_extension_name
-                                "VK_EXT_sampler_filter_minmax")
-
-(more-cffi:def-foreign-constant doc-file "VK_AMD_gpu_shader_int16"
-                                vk_amd_gpu_shader_int16 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_AMD_GPU_SHADER_INT16_SPEC_VERSION"
-                                vk_amd_gpu_shader_int16_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_GPU_SHADER_INT16_EXTENSION_NAME"
-                                vk_amd_gpu_shader_int16_extension_name
-                                "VK_AMD_gpu_shader_int16")
-
-(more-cffi:def-foreign-constant doc-file "VK_AMD_mixed_attachment_samples"
-                                vk_amd_mixed_attachment_samples 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_MIXED_ATTACHMENT_SAMPLES_SPEC_VERSION"
-                                vk_amd_mixed_attachment_samples_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_MIXED_ATTACHMENT_SAMPLES_EXTENSION_NAME"
-                                vk_amd_mixed_attachment_samples_extension_name
-                                "VK_AMD_mixed_attachment_samples")
-
-(more-cffi:def-foreign-constant doc-file "VK_AMD_shader_fragment_mask"
-                                vk_amd_shader_fragment_mask 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_SHADER_FRAGMENT_MASK_SPEC_VERSION"
-                                vk_amd_shader_fragment_mask_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_SHADER_FRAGMENT_MASK_EXTENSION_NAME"
-                                vk_amd_shader_fragment_mask_extension_name
-                                "VK_AMD_shader_fragment_mask")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_inline_uniform_block"
-                                vk_ext_inline_uniform_block 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_INLINE_UNIFORM_BLOCK_SPEC_VERSION"
-                                vk_ext_inline_uniform_block_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_INLINE_UNIFORM_BLOCK_EXTENSION_NAME"
-                                vk_ext_inline_uniform_block_extension_name
-                                "VK_EXT_inline_uniform_block")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_shader_stencil_export"
-                                vk_ext_shader_stencil_export 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_SHADER_STENCIL_EXPORT_SPEC_VERSION"
-                                vk_ext_shader_stencil_export_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_SHADER_STENCIL_EXPORT_EXTENSION_NAME"
-                                vk_ext_shader_stencil_export_extension_name
-                                "VK_EXT_shader_stencil_export")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_sample_locations"
-                                vk_ext_sample_locations 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_SAMPLE_LOCATIONS_SPEC_VERSION"
-                                vk_ext_sample_locations_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_SAMPLE_LOCATIONS_EXTENSION_NAME"
-                                vk_ext_sample_locations_extension_name
-                                "VK_EXT_sample_locations")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_blend_operation_advanced"
-                                vk_ext_blend_operation_advanced 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_BLEND_OPERATION_ADVANCED_SPEC_VERSION"
-                                vk_ext_blend_operation_advanced_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_BLEND_OPERATION_ADVANCED_EXTENSION_NAME"
-                                vk_ext_blend_operation_advanced_extension_name
-                                "VK_EXT_blend_operation_advanced")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_fragment_coverage_to_color"
-                                vk_nv_fragment_coverage_to_color 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_FRAGMENT_COVERAGE_TO_COLOR_SPEC_VERSION"
-                                vk_nv_fragment_coverage_to_color_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_FRAGMENT_COVERAGE_TO_COLOR_EXTENSION_NAME"
-                                vk_nv_fragment_coverage_to_color_extension_name
-                                "VK_NV_fragment_coverage_to_color")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_framebuffer_mixed_samples"
-                                vk_nv_framebuffer_mixed_samples 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_FRAMEBUFFER_MIXED_SAMPLES_SPEC_VERSION"
-                                vk_nv_framebuffer_mixed_samples_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_FRAMEBUFFER_MIXED_SAMPLES_EXTENSION_NAME"
-                                vk_nv_framebuffer_mixed_samples_extension_name
-                                "VK_NV_framebuffer_mixed_samples")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_fill_rectangle"
-                                vk_nv_fill_rectangle 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_FILL_RECTANGLE_SPEC_VERSION"
-                                vk_nv_fill_rectangle_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_FILL_RECTANGLE_EXTENSION_NAME"
-                                vk_nv_fill_rectangle_extension_name
-                                "VK_NV_fill_rectangle")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_shader_sm_builtins"
-                                vk_nv_shader_sm_builtins 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_SHADER_SM_BUILTINS_SPEC_VERSION"
-                                vk_nv_shader_sm_builtins_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_SHADER_SM_BUILTINS_EXTENSION_NAME"
-                                vk_nv_shader_sm_builtins_extension_name
-                                "VK_NV_shader_sm_builtins")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_post_depth_coverage"
-                                vk_ext_post_depth_coverage 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_POST_DEPTH_COVERAGE_SPEC_VERSION"
-                                vk_ext_post_depth_coverage_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_POST_DEPTH_COVERAGE_EXTENSION_NAME"
-                                vk_ext_post_depth_coverage_extension_name
-                                "VK_EXT_post_depth_coverage")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_image_drm_format_modifier"
-                                vk_ext_image_drm_format_modifier 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_IMAGE_DRM_FORMAT_MODIFIER_SPEC_VERSION"
-                                vk_ext_image_drm_format_modifier_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_IMAGE_DRM_FORMAT_MODIFIER_EXTENSION_NAME"
-                                vk_ext_image_drm_format_modifier_extension_name
-                                "VK_EXT_image_drm_format_modifier")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_validation_cache"
-                                vk_ext_validation_cache 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_VALIDATION_CACHE_SPEC_VERSION"
-                                vk_ext_validation_cache_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_VALIDATION_CACHE_EXTENSION_NAME"
-                                vk_ext_validation_cache_extension_name
-                                "VK_EXT_validation_cache")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_descriptor_indexing"
-                                vk_ext_descriptor_indexing 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_DESCRIPTOR_INDEXING_SPEC_VERSION"
-                                vk_ext_descriptor_indexing_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_DESCRIPTOR_INDEXING_EXTENSION_NAME"
-                                vk_ext_descriptor_indexing_extension_name
-                                "VK_EXT_descriptor_indexing")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_shader_viewport_index_layer"
-                                vk_ext_shader_viewport_index_layer 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_SHADER_VIEWPORT_INDEX_LAYER_SPEC_VERSION"
-                                vk_ext_shader_viewport_index_layer_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_SHADER_VIEWPORT_INDEX_LAYER_EXTENSION_NAME"
-                                vk_ext_shader_viewport_index_layer_extension_name
-                                "VK_EXT_shader_viewport_index_layer")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_shading_rate_image"
-                                vk_nv_shading_rate_image 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_SHADING_RATE_IMAGE_SPEC_VERSION"
-                                vk_nv_shading_rate_image_spec_version 3)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_SHADING_RATE_IMAGE_EXTENSION_NAME"
-                                vk_nv_shading_rate_image_extension_name
-                                "VK_NV_shading_rate_image")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_ray_tracing" vk_nv_ray_tracing
-                                1)
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_RAY_TRACING_SPEC_VERSION"
-                                vk_nv_ray_tracing_spec_version 3)
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_RAY_TRACING_EXTENSION_NAME"
-                                vk_nv_ray_tracing_extension_name
-                                "VK_NV_ray_tracing")
-
-(more-cffi:def-foreign-constant doc-file "VK_SHADER_UNUSED_KHR"
-                                vk_shader_unused_khr (- uint32_max 0))
-
-(more-cffi:def-foreign-constant doc-file "VK_SHADER_UNUSED_NV"
-                                vk_shader_unused_nv vk_shader_unused_khr)
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_representative_fragment_test"
-                                vk_nv_representative_fragment_test 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_REPRESENTATIVE_FRAGMENT_TEST_SPEC_VERSION"
-                                vk_nv_representative_fragment_test_spec_version
-                                2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_REPRESENTATIVE_FRAGMENT_TEST_EXTENSION_NAME"
-                                vk_nv_representative_fragment_test_extension_name
-                                "VK_NV_representative_fragment_test")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_filter_cubic"
-                                vk_ext_filter_cubic 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_FILTER_CUBIC_SPEC_VERSION"
-                                vk_ext_filter_cubic_spec_version 3)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_FILTER_CUBIC_EXTENSION_NAME"
-                                vk_ext_filter_cubic_extension_name
-                                "VK_EXT_filter_cubic")
-
-(more-cffi:def-foreign-constant doc-file "VK_QCOM_render_pass_shader_resolve"
-                                vk_qcom_render_pass_shader_resolve 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_QCOM_RENDER_PASS_SHADER_RESOLVE_SPEC_VERSION"
-                                vk_qcom_render_pass_shader_resolve_spec_version
-                                4)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_QCOM_RENDER_PASS_SHADER_RESOLVE_EXTENSION_NAME"
-                                vk_qcom_render_pass_shader_resolve_extension_name
-                                "VK_QCOM_render_pass_shader_resolve")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_global_priority"
-                                vk_ext_global_priority 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_GLOBAL_PRIORITY_SPEC_VERSION"
-                                vk_ext_global_priority_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_GLOBAL_PRIORITY_EXTENSION_NAME"
-                                vk_ext_global_priority_extension_name
-                                "VK_EXT_global_priority")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_external_memory_host"
-                                vk_ext_external_memory_host 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_EXTERNAL_MEMORY_HOST_SPEC_VERSION"
-                                vk_ext_external_memory_host_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_EXTERNAL_MEMORY_HOST_EXTENSION_NAME"
-                                vk_ext_external_memory_host_extension_name
-                                "VK_EXT_external_memory_host")
-
-(more-cffi:def-foreign-constant doc-file "VK_AMD_buffer_marker"
-                                vk_amd_buffer_marker 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_AMD_BUFFER_MARKER_SPEC_VERSION"
-                                vk_amd_buffer_marker_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_AMD_BUFFER_MARKER_EXTENSION_NAME"
-                                vk_amd_buffer_marker_extension_name
-                                "VK_AMD_buffer_marker")
-
-(more-cffi:def-foreign-constant doc-file "VK_AMD_pipeline_compiler_control"
-                                vk_amd_pipeline_compiler_control 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_PIPELINE_COMPILER_CONTROL_SPEC_VERSION"
-                                vk_amd_pipeline_compiler_control_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_PIPELINE_COMPILER_CONTROL_EXTENSION_NAME"
-                                vk_amd_pipeline_compiler_control_extension_name
-                                "VK_AMD_pipeline_compiler_control")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_calibrated_timestamps"
-                                vk_ext_calibrated_timestamps 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_CALIBRATED_TIMESTAMPS_SPEC_VERSION"
-                                vk_ext_calibrated_timestamps_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_CALIBRATED_TIMESTAMPS_EXTENSION_NAME"
-                                vk_ext_calibrated_timestamps_extension_name
-                                "VK_EXT_calibrated_timestamps")
-
-(more-cffi:def-foreign-constant doc-file "VK_AMD_shader_core_properties"
-                                vk_amd_shader_core_properties 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_SHADER_CORE_PROPERTIES_SPEC_VERSION"
-                                vk_amd_shader_core_properties_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_SHADER_CORE_PROPERTIES_EXTENSION_NAME"
-                                vk_amd_shader_core_properties_extension_name
-                                "VK_AMD_shader_core_properties")
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_memory_overallocation_behavior"
-                                vk_amd_memory_overallocation_behavior 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_MEMORY_OVERALLOCATION_BEHAVIOR_SPEC_VERSION"
-                                vk_amd_memory_overallocation_behavior_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_MEMORY_OVERALLOCATION_BEHAVIOR_EXTENSION_NAME"
-                                vk_amd_memory_overallocation_behavior_extension_name
-                                "VK_AMD_memory_overallocation_behavior")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_vertex_attribute_divisor"
-                                vk_ext_vertex_attribute_divisor 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_VERTEX_ATTRIBUTE_DIVISOR_SPEC_VERSION"
-                                vk_ext_vertex_attribute_divisor_spec_version 3)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_VERTEX_ATTRIBUTE_DIVISOR_EXTENSION_NAME"
-                                vk_ext_vertex_attribute_divisor_extension_name
-                                "VK_EXT_vertex_attribute_divisor")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_pipeline_creation_feedback"
-                                vk_ext_pipeline_creation_feedback 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_PIPELINE_CREATION_FEEDBACK_SPEC_VERSION"
-                                vk_ext_pipeline_creation_feedback_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_PIPELINE_CREATION_FEEDBACK_EXTENSION_NAME"
-                                vk_ext_pipeline_creation_feedback_extension_name
-                                "VK_EXT_pipeline_creation_feedback")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_shader_subgroup_partitioned"
-                                vk_nv_shader_subgroup_partitioned 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_SHADER_SUBGROUP_PARTITIONED_SPEC_VERSION"
-                                vk_nv_shader_subgroup_partitioned_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_SHADER_SUBGROUP_PARTITIONED_EXTENSION_NAME"
-                                vk_nv_shader_subgroup_partitioned_extension_name
-                                "VK_NV_shader_subgroup_partitioned")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_compute_shader_derivatives"
-                                vk_nv_compute_shader_derivatives 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_COMPUTE_SHADER_DERIVATIVES_SPEC_VERSION"
-                                vk_nv_compute_shader_derivatives_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_COMPUTE_SHADER_DERIVATIVES_EXTENSION_NAME"
-                                vk_nv_compute_shader_derivatives_extension_name
-                                "VK_NV_compute_shader_derivatives")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_mesh_shader" vk_nv_mesh_shader
-                                1)
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_MESH_SHADER_SPEC_VERSION"
-                                vk_nv_mesh_shader_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_MESH_SHADER_EXTENSION_NAME"
-                                vk_nv_mesh_shader_extension_name
-                                "VK_NV_mesh_shader")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_fragment_shader_barycentric"
-                                vk_nv_fragment_shader_barycentric 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_FRAGMENT_SHADER_BARYCENTRIC_SPEC_VERSION"
-                                vk_nv_fragment_shader_barycentric_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_FRAGMENT_SHADER_BARYCENTRIC_EXTENSION_NAME"
-                                vk_nv_fragment_shader_barycentric_extension_name
-                                "VK_NV_fragment_shader_barycentric")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_shader_image_footprint"
-                                vk_nv_shader_image_footprint 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_SHADER_IMAGE_FOOTPRINT_SPEC_VERSION"
-                                vk_nv_shader_image_footprint_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_SHADER_IMAGE_FOOTPRINT_EXTENSION_NAME"
-                                vk_nv_shader_image_footprint_extension_name
-                                "VK_NV_shader_image_footprint")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_scissor_exclusive"
-                                vk_nv_scissor_exclusive 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_SCISSOR_EXCLUSIVE_SPEC_VERSION"
-                                vk_nv_scissor_exclusive_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_SCISSOR_EXCLUSIVE_EXTENSION_NAME"
-                                vk_nv_scissor_exclusive_extension_name
-                                "VK_NV_scissor_exclusive")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_device_diagnostic_checkpoints"
-                                vk_nv_device_diagnostic_checkpoints 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_DEVICE_DIAGNOSTIC_CHECKPOINTS_SPEC_VERSION"
-                                vk_nv_device_diagnostic_checkpoints_spec_version
-                                2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_DEVICE_DIAGNOSTIC_CHECKPOINTS_EXTENSION_NAME"
-                                vk_nv_device_diagnostic_checkpoints_extension_name
-                                "VK_NV_device_diagnostic_checkpoints")
-
-(more-cffi:def-foreign-constant doc-file "VK_INTEL_shader_integer_functions2"
-                                vk_intel_shader_integer_functions2 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_INTEL_SHADER_INTEGER_FUNCTIONS_2_SPEC_VERSION"
-                                vk_intel_shader_integer_functions_2_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_INTEL_SHADER_INTEGER_FUNCTIONS_2_EXTENSION_NAME"
-                                vk_intel_shader_integer_functions_2_extension_name
-                                "VK_INTEL_shader_integer_functions2")
-
-(more-cffi:def-foreign-constant doc-file "VK_INTEL_performance_query"
-                                vk_intel_performance_query 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_INTEL_PERFORMANCE_QUERY_SPEC_VERSION"
-                                vk_intel_performance_query_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_INTEL_PERFORMANCE_QUERY_EXTENSION_NAME"
-                                vk_intel_performance_query_extension_name
-                                "VK_INTEL_performance_query")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_pci_bus_info"
-                                vk_ext_pci_bus_info 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_PCI_BUS_INFO_SPEC_VERSION"
-                                vk_ext_pci_bus_info_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_PCI_BUS_INFO_EXTENSION_NAME"
-                                vk_ext_pci_bus_info_extension_name
-                                "VK_EXT_pci_bus_info")
-
-(more-cffi:def-foreign-constant doc-file "VK_AMD_display_native_hdr"
-                                vk_amd_display_native_hdr 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_DISPLAY_NATIVE_HDR_SPEC_VERSION"
-                                vk_amd_display_native_hdr_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_DISPLAY_NATIVE_HDR_EXTENSION_NAME"
-                                vk_amd_display_native_hdr_extension_name
-                                "VK_AMD_display_native_hdr")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_fragment_density_map"
-                                vk_ext_fragment_density_map 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_FRAGMENT_DENSITY_MAP_SPEC_VERSION"
-                                vk_ext_fragment_density_map_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_FRAGMENT_DENSITY_MAP_EXTENSION_NAME"
-                                vk_ext_fragment_density_map_extension_name
-                                "VK_EXT_fragment_density_map")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_scalar_block_layout"
-                                vk_ext_scalar_block_layout 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_SCALAR_BLOCK_LAYOUT_SPEC_VERSION"
-                                vk_ext_scalar_block_layout_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_SCALAR_BLOCK_LAYOUT_EXTENSION_NAME"
-                                vk_ext_scalar_block_layout_extension_name
-                                "VK_EXT_scalar_block_layout")
-
-(more-cffi:def-foreign-constant doc-file "VK_GOOGLE_hlsl_functionality1"
-                                vk_google_hlsl_functionality1 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_GOOGLE_HLSL_FUNCTIONALITY_1_SPEC_VERSION"
-                                vk_google_hlsl_functionality_1_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_GOOGLE_HLSL_FUNCTIONALITY_1_EXTENSION_NAME"
-                                vk_google_hlsl_functionality_1_extension_name
-                                "VK_GOOGLE_hlsl_functionality1")
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_GOOGLE_HLSL_FUNCTIONALITY1_SPEC_VERSION"
-                                vk_google_hlsl_functionality1_spec_version
-                                vk_google_hlsl_functionality_1_spec_version)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_GOOGLE_HLSL_FUNCTIONALITY1_EXTENSION_NAME"
-                                vk_google_hlsl_functionality1_extension_name
-                                vk_google_hlsl_functionality_1_extension_name)
-
-(more-cffi:def-foreign-constant doc-file "VK_GOOGLE_decorate_string"
-                                vk_google_decorate_string 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_GOOGLE_DECORATE_STRING_SPEC_VERSION"
-                                vk_google_decorate_string_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_GOOGLE_DECORATE_STRING_EXTENSION_NAME"
-                                vk_google_decorate_string_extension_name
-                                "VK_GOOGLE_decorate_string")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_subgroup_size_control"
-                                vk_ext_subgroup_size_control 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_SUBGROUP_SIZE_CONTROL_SPEC_VERSION"
-                                vk_ext_subgroup_size_control_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_SUBGROUP_SIZE_CONTROL_EXTENSION_NAME"
-                                vk_ext_subgroup_size_control_extension_name
-                                "VK_EXT_subgroup_size_control")
-
-(more-cffi:def-foreign-constant doc-file "VK_AMD_shader_core_properties2"
-                                vk_amd_shader_core_properties2 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_SHADER_CORE_PROPERTIES_2_SPEC_VERSION"
-                                vk_amd_shader_core_properties_2_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_SHADER_CORE_PROPERTIES_2_EXTENSION_NAME"
-                                vk_amd_shader_core_properties_2_extension_name
-                                "VK_AMD_shader_core_properties2")
-
-(more-cffi:def-foreign-constant doc-file "VK_AMD_device_coherent_memory"
-                                vk_amd_device_coherent_memory 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_DEVICE_COHERENT_MEMORY_SPEC_VERSION"
-                                vk_amd_device_coherent_memory_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_DEVICE_COHERENT_MEMORY_EXTENSION_NAME"
-                                vk_amd_device_coherent_memory_extension_name
-                                "VK_AMD_device_coherent_memory")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_shader_image_atomic_int64"
-                                vk_ext_shader_image_atomic_int64 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_SHADER_IMAGE_ATOMIC_INT64_SPEC_VERSION"
-                                vk_ext_shader_image_atomic_int64_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_SHADER_IMAGE_ATOMIC_INT64_EXTENSION_NAME"
-                                vk_ext_shader_image_atomic_int64_extension_name
-                                "VK_EXT_shader_image_atomic_int64")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_memory_budget"
-                                vk_ext_memory_budget 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_MEMORY_BUDGET_SPEC_VERSION"
-                                vk_ext_memory_budget_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_MEMORY_BUDGET_EXTENSION_NAME"
-                                vk_ext_memory_budget_extension_name
-                                "VK_EXT_memory_budget")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_memory_priority"
-                                vk_ext_memory_priority 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_MEMORY_PRIORITY_SPEC_VERSION"
-                                vk_ext_memory_priority_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_MEMORY_PRIORITY_EXTENSION_NAME"
-                                vk_ext_memory_priority_extension_name
-                                "VK_EXT_memory_priority")
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_dedicated_allocation_image_aliasing"
-                                vk_nv_dedicated_allocation_image_aliasing 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_DEDICATED_ALLOCATION_IMAGE_ALIASING_SPEC_VERSION"
-                                vk_nv_dedicated_allocation_image_aliasing_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_DEDICATED_ALLOCATION_IMAGE_ALIASING_EXTENSION_NAME"
-                                vk_nv_dedicated_allocation_image_aliasing_extension_name
-                                "VK_NV_dedicated_allocation_image_aliasing")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_buffer_device_address"
-                                vk_ext_buffer_device_address 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_BUFFER_DEVICE_ADDRESS_SPEC_VERSION"
-                                vk_ext_buffer_device_address_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_BUFFER_DEVICE_ADDRESS_EXTENSION_NAME"
-                                vk_ext_buffer_device_address_extension_name
-                                "VK_EXT_buffer_device_address")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_tooling_info"
-                                vk_ext_tooling_info 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_TOOLING_INFO_SPEC_VERSION"
-                                vk_ext_tooling_info_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_TOOLING_INFO_EXTENSION_NAME"
-                                vk_ext_tooling_info_extension_name
-                                "VK_EXT_tooling_info")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_separate_stencil_usage"
-                                vk_ext_separate_stencil_usage 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_SEPARATE_STENCIL_USAGE_SPEC_VERSION"
-                                vk_ext_separate_stencil_usage_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_SEPARATE_STENCIL_USAGE_EXTENSION_NAME"
-                                vk_ext_separate_stencil_usage_extension_name
-                                "VK_EXT_separate_stencil_usage")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_validation_features"
-                                vk_ext_validation_features 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_VALIDATION_FEATURES_SPEC_VERSION"
-                                vk_ext_validation_features_spec_version 5)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_VALIDATION_FEATURES_EXTENSION_NAME"
-                                vk_ext_validation_features_extension_name
-                                "VK_EXT_validation_features")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_cooperative_matrix"
-                                vk_nv_cooperative_matrix 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_COOPERATIVE_MATRIX_SPEC_VERSION"
-                                vk_nv_cooperative_matrix_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_COOPERATIVE_MATRIX_EXTENSION_NAME"
-                                vk_nv_cooperative_matrix_extension_name
-                                "VK_NV_cooperative_matrix")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_coverage_reduction_mode"
-                                vk_nv_coverage_reduction_mode 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_COVERAGE_REDUCTION_MODE_SPEC_VERSION"
-                                vk_nv_coverage_reduction_mode_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_COVERAGE_REDUCTION_MODE_EXTENSION_NAME"
-                                vk_nv_coverage_reduction_mode_extension_name
-                                "VK_NV_coverage_reduction_mode")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_fragment_shader_interlock"
-                                vk_ext_fragment_shader_interlock 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_FRAGMENT_SHADER_INTERLOCK_SPEC_VERSION"
-                                vk_ext_fragment_shader_interlock_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_FRAGMENT_SHADER_INTERLOCK_EXTENSION_NAME"
-                                vk_ext_fragment_shader_interlock_extension_name
-                                "VK_EXT_fragment_shader_interlock")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_ycbcr_image_arrays"
-                                vk_ext_ycbcr_image_arrays 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_YCBCR_IMAGE_ARRAYS_SPEC_VERSION"
-                                vk_ext_ycbcr_image_arrays_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_YCBCR_IMAGE_ARRAYS_EXTENSION_NAME"
-                                vk_ext_ycbcr_image_arrays_extension_name
-                                "VK_EXT_ycbcr_image_arrays")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_provoking_vertex"
-                                vk_ext_provoking_vertex 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_PROVOKING_VERTEX_SPEC_VERSION"
-                                vk_ext_provoking_vertex_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_PROVOKING_VERTEX_EXTENSION_NAME"
-                                vk_ext_provoking_vertex_extension_name
-                                "VK_EXT_provoking_vertex")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_headless_surface"
-                                vk_ext_headless_surface 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_HEADLESS_SURFACE_SPEC_VERSION"
-                                vk_ext_headless_surface_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_HEADLESS_SURFACE_EXTENSION_NAME"
-                                vk_ext_headless_surface_extension_name
-                                "VK_EXT_headless_surface")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_line_rasterization"
-                                vk_ext_line_rasterization 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_LINE_RASTERIZATION_SPEC_VERSION"
-                                vk_ext_line_rasterization_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_LINE_RASTERIZATION_EXTENSION_NAME"
-                                vk_ext_line_rasterization_extension_name
-                                "VK_EXT_line_rasterization")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_shader_atomic_float"
-                                vk_ext_shader_atomic_float 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_SHADER_ATOMIC_FLOAT_SPEC_VERSION"
-                                vk_ext_shader_atomic_float_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_SHADER_ATOMIC_FLOAT_EXTENSION_NAME"
-                                vk_ext_shader_atomic_float_extension_name
-                                "VK_EXT_shader_atomic_float")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_host_query_reset"
-                                vk_ext_host_query_reset 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_HOST_QUERY_RESET_SPEC_VERSION"
-                                vk_ext_host_query_reset_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_HOST_QUERY_RESET_EXTENSION_NAME"
-                                vk_ext_host_query_reset_extension_name
-                                "VK_EXT_host_query_reset")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_index_type_uint8"
-                                vk_ext_index_type_uint8 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_INDEX_TYPE_UINT8_SPEC_VERSION"
-                                vk_ext_index_type_uint8_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_INDEX_TYPE_UINT8_EXTENSION_NAME"
-                                vk_ext_index_type_uint8_extension_name
-                                "VK_EXT_index_type_uint8")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_extended_dynamic_state"
-                                vk_ext_extended_dynamic_state 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_EXTENDED_DYNAMIC_STATE_SPEC_VERSION"
-                                vk_ext_extended_dynamic_state_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_EXTENDED_DYNAMIC_STATE_EXTENSION_NAME"
-                                vk_ext_extended_dynamic_state_extension_name
-                                "VK_EXT_extended_dynamic_state")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_shader_atomic_float2"
-                                vk_ext_shader_atomic_float2 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_SHADER_ATOMIC_FLOAT_2_SPEC_VERSION"
-                                vk_ext_shader_atomic_float_2_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_SHADER_ATOMIC_FLOAT_2_EXTENSION_NAME"
-                                vk_ext_shader_atomic_float_2_extension_name
-                                "VK_EXT_shader_atomic_float2")
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_shader_demote_to_helper_invocation"
-                                vk_ext_shader_demote_to_helper_invocation 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_SHADER_DEMOTE_TO_HELPER_INVOCATION_SPEC_VERSION"
-                                vk_ext_shader_demote_to_helper_invocation_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_SHADER_DEMOTE_TO_HELPER_INVOCATION_EXTENSION_NAME"
-                                vk_ext_shader_demote_to_helper_invocation_extension_name
-                                "VK_EXT_shader_demote_to_helper_invocation")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_device_generated_commands"
-                                vk_nv_device_generated_commands 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_DEVICE_GENERATED_COMMANDS_SPEC_VERSION"
-                                vk_nv_device_generated_commands_spec_version 3)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_DEVICE_GENERATED_COMMANDS_EXTENSION_NAME"
-                                vk_nv_device_generated_commands_extension_name
-                                "VK_NV_device_generated_commands")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_inherited_viewport_scissor"
-                                vk_nv_inherited_viewport_scissor 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_INHERITED_VIEWPORT_SCISSOR_SPEC_VERSION"
-                                vk_nv_inherited_viewport_scissor_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_INHERITED_VIEWPORT_SCISSOR_EXTENSION_NAME"
-                                vk_nv_inherited_viewport_scissor_extension_name
-                                "VK_NV_inherited_viewport_scissor")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_texel_buffer_alignment"
-                                vk_ext_texel_buffer_alignment 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_TEXEL_BUFFER_ALIGNMENT_SPEC_VERSION"
-                                vk_ext_texel_buffer_alignment_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_TEXEL_BUFFER_ALIGNMENT_EXTENSION_NAME"
-                                vk_ext_texel_buffer_alignment_extension_name
-                                "VK_EXT_texel_buffer_alignment")
-
-(more-cffi:def-foreign-constant doc-file "VK_QCOM_render_pass_transform"
-                                vk_qcom_render_pass_transform 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_QCOM_RENDER_PASS_TRANSFORM_SPEC_VERSION"
-                                vk_qcom_render_pass_transform_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_QCOM_RENDER_PASS_TRANSFORM_EXTENSION_NAME"
-                                vk_qcom_render_pass_transform_extension_name
-                                "VK_QCOM_render_pass_transform")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_device_memory_report"
-                                vk_ext_device_memory_report 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_DEVICE_MEMORY_REPORT_SPEC_VERSION"
-                                vk_ext_device_memory_report_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_DEVICE_MEMORY_REPORT_EXTENSION_NAME"
-                                vk_ext_device_memory_report_extension_name
-                                "VK_EXT_device_memory_report")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_acquire_drm_display"
-                                vk_ext_acquire_drm_display 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_ACQUIRE_DRM_DISPLAY_SPEC_VERSION"
-                                vk_ext_acquire_drm_display_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_ACQUIRE_DRM_DISPLAY_EXTENSION_NAME"
-                                vk_ext_acquire_drm_display_extension_name
-                                "VK_EXT_acquire_drm_display")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_robustness2"
-                                vk_ext_robustness2 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_ROBUSTNESS_2_SPEC_VERSION"
-                                vk_ext_robustness_2_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_ROBUSTNESS_2_EXTENSION_NAME"
-                                vk_ext_robustness_2_extension_name
-                                "VK_EXT_robustness2")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_custom_border_color"
-                                vk_ext_custom_border_color 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_CUSTOM_BORDER_COLOR_SPEC_VERSION"
-                                vk_ext_custom_border_color_spec_version 12)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_CUSTOM_BORDER_COLOR_EXTENSION_NAME"
-                                vk_ext_custom_border_color_extension_name
-                                "VK_EXT_custom_border_color")
-
-(more-cffi:def-foreign-constant doc-file "VK_GOOGLE_user_type"
-                                vk_google_user_type 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_GOOGLE_USER_TYPE_SPEC_VERSION"
-                                vk_google_user_type_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_GOOGLE_USER_TYPE_EXTENSION_NAME"
-                                vk_google_user_type_extension_name
-                                "VK_GOOGLE_user_type")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_private_data"
-                                vk_ext_private_data 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_PRIVATE_DATA_SPEC_VERSION"
-                                vk_ext_private_data_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_PRIVATE_DATA_EXTENSION_NAME"
-                                vk_ext_private_data_extension_name
-                                "VK_EXT_private_data")
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_pipeline_creation_cache_control"
-                                vk_ext_pipeline_creation_cache_control 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_PIPELINE_CREATION_CACHE_CONTROL_SPEC_VERSION"
-                                vk_ext_pipeline_creation_cache_control_spec_version
-                                3)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_PIPELINE_CREATION_CACHE_CONTROL_EXTENSION_NAME"
-                                vk_ext_pipeline_creation_cache_control_extension_name
-                                "VK_EXT_pipeline_creation_cache_control")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_device_diagnostics_config"
-                                vk_nv_device_diagnostics_config 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_DEVICE_DIAGNOSTICS_CONFIG_SPEC_VERSION"
-                                vk_nv_device_diagnostics_config_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_DEVICE_DIAGNOSTICS_CONFIG_EXTENSION_NAME"
-                                vk_nv_device_diagnostics_config_extension_name
-                                "VK_NV_device_diagnostics_config")
-
-(more-cffi:def-foreign-constant doc-file "VK_QCOM_render_pass_store_ops"
-                                vk_qcom_render_pass_store_ops 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_QCOM_RENDER_PASS_STORE_OPS_SPEC_VERSION"
-                                vk_qcom_render_pass_store_ops_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_QCOM_RENDER_PASS_STORE_OPS_EXTENSION_NAME"
-                                vk_qcom_render_pass_store_ops_extension_name
-                                "VK_QCOM_render_pass_store_ops")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_graphics_pipeline_library"
-                                vk_ext_graphics_pipeline_library 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_GRAPHICS_PIPELINE_LIBRARY_SPEC_VERSION"
-                                vk_ext_graphics_pipeline_library_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_GRAPHICS_PIPELINE_LIBRARY_EXTENSION_NAME"
-                                vk_ext_graphics_pipeline_library_extension_name
-                                "VK_EXT_graphics_pipeline_library")
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_shader_early_and_late_fragment_tests"
-                                vk_amd_shader_early_and_late_fragment_tests 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_SPEC_VERSION"
-                                vk_amd_shader_early_and_late_fragment_tests_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_AMD_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_EXTENSION_NAME"
-                                vk_amd_shader_early_and_late_fragment_tests_extension_name
-                                "VK_AMD_shader_early_and_late_fragment_tests")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_fragment_shading_rate_enums"
-                                vk_nv_fragment_shading_rate_enums 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_FRAGMENT_SHADING_RATE_ENUMS_SPEC_VERSION"
-                                vk_nv_fragment_shading_rate_enums_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_FRAGMENT_SHADING_RATE_ENUMS_EXTENSION_NAME"
-                                vk_nv_fragment_shading_rate_enums_extension_name
-                                "VK_NV_fragment_shading_rate_enums")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_ray_tracing_motion_blur"
-                                vk_nv_ray_tracing_motion_blur 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_RAY_TRACING_MOTION_BLUR_SPEC_VERSION"
-                                vk_nv_ray_tracing_motion_blur_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_RAY_TRACING_MOTION_BLUR_EXTENSION_NAME"
-                                vk_nv_ray_tracing_motion_blur_extension_name
-                                "VK_NV_ray_tracing_motion_blur")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_ycbcr_2plane_444_formats"
-                                vk_ext_ycbcr_2plane_444_formats 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_YCBCR_2PLANE_444_FORMATS_SPEC_VERSION"
-                                vk_ext_ycbcr_2plane_444_formats_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_YCBCR_2PLANE_444_FORMATS_EXTENSION_NAME"
-                                vk_ext_ycbcr_2plane_444_formats_extension_name
-                                "VK_EXT_ycbcr_2plane_444_formats")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_fragment_density_map2"
-                                vk_ext_fragment_density_map2 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_FRAGMENT_DENSITY_MAP_2_SPEC_VERSION"
-                                vk_ext_fragment_density_map_2_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_FRAGMENT_DENSITY_MAP_2_EXTENSION_NAME"
-                                vk_ext_fragment_density_map_2_extension_name
-                                "VK_EXT_fragment_density_map2")
-
-(more-cffi:def-foreign-constant doc-file "VK_QCOM_rotated_copy_commands"
-                                vk_qcom_rotated_copy_commands 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_QCOM_ROTATED_COPY_COMMANDS_SPEC_VERSION"
-                                vk_qcom_rotated_copy_commands_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_QCOM_ROTATED_COPY_COMMANDS_EXTENSION_NAME"
-                                vk_qcom_rotated_copy_commands_extension_name
-                                "VK_QCOM_rotated_copy_commands")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_image_robustness"
-                                vk_ext_image_robustness 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_IMAGE_ROBUSTNESS_SPEC_VERSION"
-                                vk_ext_image_robustness_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_IMAGE_ROBUSTNESS_EXTENSION_NAME"
-                                vk_ext_image_robustness_extension_name
-                                "VK_EXT_image_robustness")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_image_compression_control"
-                                vk_ext_image_compression_control 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_IMAGE_COMPRESSION_CONTROL_SPEC_VERSION"
-                                vk_ext_image_compression_control_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_IMAGE_COMPRESSION_CONTROL_EXTENSION_NAME"
-                                vk_ext_image_compression_control_extension_name
-                                "VK_EXT_image_compression_control")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_4444_formats"
-                                vk_ext_4444_formats 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_4444_FORMATS_SPEC_VERSION"
-                                vk_ext_4444_formats_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_4444_FORMATS_EXTENSION_NAME"
-                                vk_ext_4444_formats_extension_name
-                                "VK_EXT_4444_formats")
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ARM_rasterization_order_attachment_access"
-                                vk_arm_rasterization_order_attachment_access 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ARM_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_SPEC_VERSION"
-                                vk_arm_rasterization_order_attachment_access_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_ARM_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_EXTENSION_NAME"
-                                vk_arm_rasterization_order_attachment_access_extension_name
-                                "VK_ARM_rasterization_order_attachment_access")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_rgba10x6_formats"
-                                vk_ext_rgba10x6_formats 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_RGBA10X6_FORMATS_SPEC_VERSION"
-                                vk_ext_rgba10x6_formats_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_RGBA10X6_FORMATS_EXTENSION_NAME"
-                                vk_ext_rgba10x6_formats_extension_name
-                                "VK_EXT_rgba10x6_formats")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_acquire_winrt_display"
-                                vk_nv_acquire_winrt_display 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_ACQUIRE_WINRT_DISPLAY_SPEC_VERSION"
-                                vk_nv_acquire_winrt_display_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_ACQUIRE_WINRT_DISPLAY_EXTENSION_NAME"
-                                vk_nv_acquire_winrt_display_extension_name
-                                "VK_NV_acquire_winrt_display")
-
-(more-cffi:def-foreign-constant doc-file "VK_VALVE_mutable_descriptor_type"
-                                vk_valve_mutable_descriptor_type 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_VALVE_MUTABLE_DESCRIPTOR_TYPE_SPEC_VERSION"
-                                vk_valve_mutable_descriptor_type_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_VALVE_MUTABLE_DESCRIPTOR_TYPE_EXTENSION_NAME"
-                                vk_valve_mutable_descriptor_type_extension_name
-                                "VK_VALVE_mutable_descriptor_type")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_vertex_input_dynamic_state"
-                                vk_ext_vertex_input_dynamic_state 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_VERTEX_INPUT_DYNAMIC_STATE_SPEC_VERSION"
-                                vk_ext_vertex_input_dynamic_state_spec_version
-                                2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_VERTEX_INPUT_DYNAMIC_STATE_EXTENSION_NAME"
-                                vk_ext_vertex_input_dynamic_state_extension_name
-                                "VK_EXT_vertex_input_dynamic_state")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_physical_device_drm"
-                                vk_ext_physical_device_drm 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_PHYSICAL_DEVICE_DRM_SPEC_VERSION"
-                                vk_ext_physical_device_drm_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_PHYSICAL_DEVICE_DRM_EXTENSION_NAME"
-                                vk_ext_physical_device_drm_extension_name
-                                "VK_EXT_physical_device_drm")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_depth_clip_control"
-                                vk_ext_depth_clip_control 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_DEPTH_CLIP_CONTROL_SPEC_VERSION"
-                                vk_ext_depth_clip_control_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_DEPTH_CLIP_CONTROL_EXTENSION_NAME"
-                                vk_ext_depth_clip_control_extension_name
-                                "VK_EXT_depth_clip_control")
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_primitive_topology_list_restart"
-                                vk_ext_primitive_topology_list_restart 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_PRIMITIVE_TOPOLOGY_LIST_RESTART_SPEC_VERSION"
-                                vk_ext_primitive_topology_list_restart_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_PRIMITIVE_TOPOLOGY_LIST_RESTART_EXTENSION_NAME"
-                                vk_ext_primitive_topology_list_restart_extension_name
-                                "VK_EXT_primitive_topology_list_restart")
-
-(more-cffi:def-foreign-constant doc-file "VK_HUAWEI_subpass_shading"
-                                vk_huawei_subpass_shading 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_HUAWEI_SUBPASS_SHADING_SPEC_VERSION"
-                                vk_huawei_subpass_shading_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_HUAWEI_SUBPASS_SHADING_EXTENSION_NAME"
-                                vk_huawei_subpass_shading_extension_name
-                                "VK_HUAWEI_subpass_shading")
-
-(more-cffi:def-foreign-constant doc-file "VK_HUAWEI_invocation_mask"
-                                vk_huawei_invocation_mask 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_HUAWEI_INVOCATION_MASK_SPEC_VERSION"
-                                vk_huawei_invocation_mask_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_HUAWEI_INVOCATION_MASK_EXTENSION_NAME"
-                                vk_huawei_invocation_mask_extension_name
-                                "VK_HUAWEI_invocation_mask")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_external_memory_rdma"
-                                vk_nv_external_memory_rdma 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_EXTERNAL_MEMORY_RDMA_SPEC_VERSION"
-                                vk_nv_external_memory_rdma_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_EXTERNAL_MEMORY_RDMA_EXTENSION_NAME"
-                                vk_nv_external_memory_rdma_extension_name
-                                "VK_NV_external_memory_rdma")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_pipeline_properties"
-                                vk_ext_pipeline_properties 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_PIPELINE_PROPERTIES_SPEC_VERSION"
-                                vk_ext_pipeline_properties_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_PIPELINE_PROPERTIES_EXTENSION_NAME"
-                                vk_ext_pipeline_properties_extension_name
-                                "VK_EXT_pipeline_properties")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_extended_dynamic_state2"
-                                vk_ext_extended_dynamic_state2 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_EXTENDED_DYNAMIC_STATE_2_SPEC_VERSION"
-                                vk_ext_extended_dynamic_state_2_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_EXTENDED_DYNAMIC_STATE_2_EXTENSION_NAME"
-                                vk_ext_extended_dynamic_state_2_extension_name
-                                "VK_EXT_extended_dynamic_state2")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_color_write_enable"
-                                vk_ext_color_write_enable 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_COLOR_WRITE_ENABLE_SPEC_VERSION"
-                                vk_ext_color_write_enable_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_COLOR_WRITE_ENABLE_EXTENSION_NAME"
-                                vk_ext_color_write_enable_extension_name
-                                "VK_EXT_color_write_enable")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_primitives_generated_query"
-                                vk_ext_primitives_generated_query 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_PRIMITIVES_GENERATED_QUERY_SPEC_VERSION"
-                                vk_ext_primitives_generated_query_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_PRIMITIVES_GENERATED_QUERY_EXTENSION_NAME"
-                                vk_ext_primitives_generated_query_extension_name
-                                "VK_EXT_primitives_generated_query")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_global_priority_query"
-                                vk_ext_global_priority_query 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_GLOBAL_PRIORITY_QUERY_SPEC_VERSION"
-                                vk_ext_global_priority_query_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_GLOBAL_PRIORITY_QUERY_EXTENSION_NAME"
-                                vk_ext_global_priority_query_extension_name
-                                "VK_EXT_global_priority_query")
-
-(more-cffi:def-foreign-constant doc-file "VK_MAX_GLOBAL_PRIORITY_SIZE_EXT"
-                                vk_max_global_priority_size_ext
-                                vk_max_global_priority_size_khr)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_image_view_min_lod"
-                                vk_ext_image_view_min_lod 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_IMAGE_VIEW_MIN_LOD_SPEC_VERSION"
-                                vk_ext_image_view_min_lod_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_IMAGE_VIEW_MIN_LOD_EXTENSION_NAME"
-                                vk_ext_image_view_min_lod_extension_name
-                                "VK_EXT_image_view_min_lod")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_multi_draw" vk_ext_multi_draw
-                                1)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_MULTI_DRAW_SPEC_VERSION"
-                                vk_ext_multi_draw_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_MULTI_DRAW_EXTENSION_NAME"
-                                vk_ext_multi_draw_extension_name
-                                "VK_EXT_multi_draw")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_image_2d_view_of_3d"
-                                vk_ext_image_2d_view_of_3d 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_IMAGE_2D_VIEW_OF_3D_SPEC_VERSION"
-                                vk_ext_image_2d_view_of_3d_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_IMAGE_2D_VIEW_OF_3D_EXTENSION_NAME"
-                                vk_ext_image_2d_view_of_3d_extension_name
-                                "VK_EXT_image_2d_view_of_3d")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_load_store_op_none"
-                                vk_ext_load_store_op_none 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_LOAD_STORE_OP_NONE_SPEC_VERSION"
-                                vk_ext_load_store_op_none_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_LOAD_STORE_OP_NONE_EXTENSION_NAME"
-                                vk_ext_load_store_op_none_extension_name
-                                "VK_EXT_load_store_op_none")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_border_color_swizzle"
-                                vk_ext_border_color_swizzle 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_BORDER_COLOR_SWIZZLE_SPEC_VERSION"
-                                vk_ext_border_color_swizzle_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_BORDER_COLOR_SWIZZLE_EXTENSION_NAME"
-                                vk_ext_border_color_swizzle_extension_name
-                                "VK_EXT_border_color_swizzle")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_pageable_device_local_memory"
-                                vk_ext_pageable_device_local_memory 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_PAGEABLE_DEVICE_LOCAL_MEMORY_SPEC_VERSION"
-                                vk_ext_pageable_device_local_memory_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_PAGEABLE_DEVICE_LOCAL_MEMORY_EXTENSION_NAME"
-                                vk_ext_pageable_device_local_memory_extension_name
-                                "VK_EXT_pageable_device_local_memory")
-
-(more-cffi:def-foreign-constant doc-file "VK_VALVE_descriptor_set_host_mapping"
-                                vk_valve_descriptor_set_host_mapping 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_VALVE_DESCRIPTOR_SET_HOST_MAPPING_SPEC_VERSION"
-                                vk_valve_descriptor_set_host_mapping_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_VALVE_DESCRIPTOR_SET_HOST_MAPPING_EXTENSION_NAME"
-                                vk_valve_descriptor_set_host_mapping_extension_name
-                                "VK_VALVE_descriptor_set_host_mapping")
-
-(more-cffi:def-foreign-constant doc-file "VK_QCOM_fragment_density_map_offset"
-                                vk_qcom_fragment_density_map_offset 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_QCOM_FRAGMENT_DENSITY_MAP_OFFSET_SPEC_VERSION"
-                                vk_qcom_fragment_density_map_offset_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_QCOM_FRAGMENT_DENSITY_MAP_OFFSET_EXTENSION_NAME"
-                                vk_qcom_fragment_density_map_offset_extension_name
-                                "VK_QCOM_fragment_density_map_offset")
-
-(more-cffi:def-foreign-constant doc-file "VK_NV_linear_color_attachment"
-                                vk_nv_linear_color_attachment 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_LINEAR_COLOR_ATTACHMENT_SPEC_VERSION"
-                                vk_nv_linear_color_attachment_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_NV_LINEAR_COLOR_ATTACHMENT_EXTENSION_NAME"
-                                vk_nv_linear_color_attachment_extension_name
-                                "VK_NV_linear_color_attachment")
-
-(more-cffi:def-foreign-constant doc-file "VK_GOOGLE_surfaceless_query"
-                                vk_google_surfaceless_query 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_GOOGLE_SURFACELESS_QUERY_SPEC_VERSION"
-                                vk_google_surfaceless_query_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_GOOGLE_SURFACELESS_QUERY_EXTENSION_NAME"
-                                vk_google_surfaceless_query_extension_name
-                                "VK_GOOGLE_surfaceless_query")
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_image_compression_control_swapchain"
-                                vk_ext_image_compression_control_swapchain 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_SPEC_VERSION"
-                                vk_ext_image_compression_control_swapchain_spec_version
-                                1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_EXTENSION_NAME"
-                                vk_ext_image_compression_control_swapchain_extension_name
-                                "VK_EXT_image_compression_control_swapchain")
-
-(more-cffi:def-foreign-constant doc-file "VK_EXT_subpass_merge_feedback"
-                                vk_ext_subpass_merge_feedback 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_SUBPASS_MERGE_FEEDBACK_SPEC_VERSION"
-                                vk_ext_subpass_merge_feedback_spec_version 2)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_EXT_SUBPASS_MERGE_FEEDBACK_EXTENSION_NAME"
-                                vk_ext_subpass_merge_feedback_extension_name
-                                "VK_EXT_subpass_merge_feedback")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_acceleration_structure"
-                                vk_khr_acceleration_structure 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_ACCELERATION_STRUCTURE_SPEC_VERSION"
-                                vk_khr_acceleration_structure_spec_version 13)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_ACCELERATION_STRUCTURE_EXTENSION_NAME"
-                                vk_khr_acceleration_structure_extension_name
-                                "VK_KHR_acceleration_structure")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_ray_tracing_pipeline"
-                                vk_khr_ray_tracing_pipeline 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_RAY_TRACING_PIPELINE_SPEC_VERSION"
-                                vk_khr_ray_tracing_pipeline_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file
-                                "VK_KHR_RAY_TRACING_PIPELINE_EXTENSION_NAME"
-                                vk_khr_ray_tracing_pipeline_extension_name
-                                "VK_KHR_ray_tracing_pipeline")
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_ray_query" vk_khr_ray_query 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_RAY_QUERY_SPEC_VERSION"
-                                vk_khr_ray_query_spec_version 1)
-
-(more-cffi:def-foreign-constant doc-file "VK_KHR_RAY_QUERY_EXTENSION_NAME"
-                                vk_khr_ray_query_extension_name
-                                "VK_KHR_ray_query"))
+(ADP:DEFPARAMETER
+  VK_EVENT_SET
+  3)
+
+(ADP:DEFPARAMETER
+  VK_EVENT_RESET
+  4)
+
+(ADP:DEFPARAMETER
+  VK_INCOMPLETE
+  5)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_OUT_OF_HOST_MEMORY
+  -1)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_OUT_OF_DEVICE_MEMORY
+  -2)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_INITIALIZATION_FAILED
+  -3)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_DEVICE_LOST
+  -4)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_MEMORY_MAP_FAILED
+  -5)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_LAYER_NOT_PRESENT
+  -6)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_EXTENSION_NOT_PRESENT
+  -7)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_FEATURE_NOT_PRESENT
+  -8)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_INCOMPATIBLE_DRIVER
+  -9)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_TOO_MANY_OBJECTS
+  -10)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_FORMAT_NOT_SUPPORTED
+  -11)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_FRAGMENTED_POOL
+  -12)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_UNKNOWN
+  -13)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_OUT_OF_POOL_MEMORY
+  -1000069000)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_INVALID_EXTERNAL_HANDLE
+  -1000072003)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_FRAGMENTATION
+  -1000161000)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS
+  -1000257000)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_COMPILE_REQUIRED
+  1000297000)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_SURFACE_LOST_KHR
+  -1000000000)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_NATIVE_WINDOW_IN_USE_KHR
+  -1000000001)
+
+(ADP:DEFPARAMETER
+  VK_SUBOPTIMAL_KHR
+  1000001003)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_OUT_OF_DATE_KHR
+  -1000001004)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_INCOMPATIBLE_DISPLAY_KHR
+  -1000003001)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_VALIDATION_FAILED_EXT
+  -1000011001)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_INVALID_SHADER_NV
+  -1000012000)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT
+  -1000158000)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_NOT_PERMITTED_KHR
+  -1000174001)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT
+  -1000255000)
+
+(ADP:DEFPARAMETER
+  VK_THREAD_IDLE_KHR
+  1000268000)
+
+(ADP:DEFPARAMETER
+  VK_THREAD_DONE_KHR
+  1000268001)
+
+(ADP:DEFPARAMETER
+  VK_OPERATION_DEFERRED_KHR
+  1000268002)
+
+(ADP:DEFPARAMETER
+  VK_OPERATION_NOT_DEFERRED_KHR
+  1000268003)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_COMPRESSION_EXHAUSTED_EXT
+  -1000338000)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_OUT_OF_POOL_MEMORY_KHR
+  VK_ERROR_OUT_OF_POOL_MEMORY)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_INVALID_EXTERNAL_HANDLE_KHR
+  VK_ERROR_INVALID_EXTERNAL_HANDLE)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_FRAGMENTATION_EXT
+  VK_ERROR_FRAGMENTATION)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_NOT_PERMITTED_EXT
+  VK_ERROR_NOT_PERMITTED_KHR)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_INVALID_DEVICE_ADDRESS_EXT
+  VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS_KHR
+  VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_COMPILE_REQUIRED_EXT
+  VK_PIPELINE_COMPILE_REQUIRED)
+
+(ADP:DEFPARAMETER
+  VK_ERROR_PIPELINE_COMPILE_REQUIRED_EXT
+  VK_PIPELINE_COMPILE_REQUIRED)
+
+(ADP:DEFPARAMETER
+  VK_RESULT_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_APPLICATION_INFO
+  0)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO
+  1)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO
+  2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO
+  3)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SUBMIT_INFO
+  4)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO
+  5)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE
+  6)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BIND_SPARSE_INFO
+  7)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_FENCE_CREATE_INFO
+  8)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO
+  9)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_EVENT_CREATE_INFO
+  10)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO
+  11)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO
+  12)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO
+  13)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO
+  14)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO
+  15)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO
+  16)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO
+  17)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO
+  18)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO
+  19)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO
+  20)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO
+  21)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO
+  22)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO
+  23)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO
+  24)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO
+  25)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO
+  26)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO
+  27)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO
+  28)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO
+  29)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO
+  30)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO
+  31)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO
+  32)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO
+  33)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO
+  34)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET
+  35)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_COPY_DESCRIPTOR_SET
+  36)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO
+  37)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO
+  38)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO
+  39)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO
+  40)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO
+  41)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO
+  42)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO
+  43)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER
+  44)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER
+  45)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_MEMORY_BARRIER
+  46)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_LOADER_INSTANCE_CREATE_INFO
+  47)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_LOADER_DEVICE_CREATE_INFO
+  48)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_PROPERTIES
+  1000094000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO
+  1000157000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO
+  1000157001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES
+  1000083000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS
+  1000127000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO
+  1000127001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO
+  1000060000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO
+  1000060003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO
+  1000060004)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO
+  1000060005)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO
+  1000060006)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO
+  1000060013)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO
+  1000060014)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES
+  1000070000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO
+  1000070001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2
+  1000146000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2
+  1000146001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2
+  1000146002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2
+  1000146003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2
+  1000146004)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2
+  1000059000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2
+  1000059001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2
+  1000059002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2
+  1000059003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2
+  1000059004)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2
+  1000059005)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2
+  1000059006)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2
+  1000059007)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2
+  1000059008)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES
+  1000117000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO
+  1000117001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO
+  1000117002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO
+  1000117003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO
+  1000053000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES
+  1000053001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES
+  1000053002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES
+  1000120000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PROTECTED_SUBMIT_INFO
+  1000145000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES
+  1000145001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_PROPERTIES
+  1000145002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEVICE_QUEUE_INFO_2
+  1000145003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO
+  1000156000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO
+  1000156001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO
+  1000156002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO
+  1000156003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES
+  1000156004)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES
+  1000156005)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO
+  1000085000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO
+  1000071000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES
+  1000071001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO
+  1000071002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES
+  1000071003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES
+  1000071004)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO
+  1000072000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO
+  1000072001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO
+  1000072002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO
+  1000112000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES
+  1000112001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO
+  1000113000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO
+  1000077000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO
+  1000076000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES
+  1000076001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES
+  1000168000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT
+  1000168001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES
+  1000063000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_FEATURES
+  49)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_PROPERTIES
+  50)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_FEATURES
+  51)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_PROPERTIES
+  52)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO
+  1000147000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2
+  1000109000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2
+  1000109001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_2
+  1000109002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2
+  1000109003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2
+  1000109004)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO
+  1000109005)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SUBPASS_END_INFO
+  1000109006)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES
+  1000177000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES
+  1000196000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES
+  1000180000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES
+  1000082000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES
+  1000197000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO
+  1000161000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES
+  1000161001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES
+  1000161002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO
+  1000161003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT
+  1000161004)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES
+  1000199000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE
+  1000199001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES
+  1000221000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO
+  1000246000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES
+  1000130000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO
+  1000130001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES
+  1000211000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES
+  1000108000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO
+  1000108001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO
+  1000108002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO
+  1000108003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES
+  1000253000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES
+  1000175000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES
+  1000241000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT
+  1000241001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_STENCIL_LAYOUT
+  1000241002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES
+  1000261000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES
+  1000207000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES
+  1000207001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO
+  1000207002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO
+  1000207003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO
+  1000207004)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO
+  1000207005)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES
+  1000257000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO
+  1000244001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO
+  1000257002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO
+  1000257003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO
+  1000257004)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_3_FEATURES
+  53)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_3_PROPERTIES
+  54)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO
+  1000192000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES
+  1000215000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES
+  1000245000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES
+  1000276000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES
+  1000295000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO
+  1000295001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PRIVATE_DATA_SLOT_CREATE_INFO
+  1000295002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES
+  1000297000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_MEMORY_BARRIER_2
+  1000314000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2
+  1000314001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER_2
+  1000314002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEPENDENCY_INFO
+  1000314003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SUBMIT_INFO_2
+  1000314004)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO
+  1000314005)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO
+  1000314006)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES
+  1000314007)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES
+  1000325000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES
+  1000335000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_COPY_BUFFER_INFO_2
+  1000337000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_COPY_IMAGE_INFO_2
+  1000337001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_COPY_BUFFER_TO_IMAGE_INFO_2
+  1000337002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_COPY_IMAGE_TO_BUFFER_INFO_2
+  1000337003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BLIT_IMAGE_INFO_2
+  1000337004)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_RESOLVE_IMAGE_INFO_2
+  1000337005)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BUFFER_COPY_2
+  1000337006)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_COPY_2
+  1000337007)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_BLIT_2
+  1000337008)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2
+  1000337009)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_RESOLVE_2
+  1000337010)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES
+  1000225000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO
+  1000225001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES
+  1000225002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES
+  1000138000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES
+  1000138001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK
+  1000138002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO
+  1000138003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES
+  1000066000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_RENDERING_INFO
+  1000044000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_INFO
+  1000044001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_RENDERING_CREATE_INFO
+  1000044002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_FEATURES
+  1000044003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO
+  1000044004)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES
+  1000280000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES
+  1000280001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES
+  1000281001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_3
+  1000360000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES
+  1000413000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES
+  1000413001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS
+  1000413002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEVICE_IMAGE_MEMORY_REQUIREMENTS
+  1000413003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR
+  1000001000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PRESENT_INFO_KHR
+  1000001001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_CAPABILITIES_KHR
+  1000060007)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR
+  1000060008)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHR
+  1000060009)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR
+  1000060010)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHR
+  1000060011)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHR
+  1000060012)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR
+  1000002000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DISPLAY_SURFACE_CREATE_INFO_KHR
+  1000002001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR
+  1000003000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_XLIB_SURFACE_CREATE_INFO_KHR
+  1000004000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR
+  1000005000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_WAYLAND_SURFACE_CREATE_INFO_KHR
+  1000006000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR
+  1000008000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR
+  1000009000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT
+  1000011000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_RASTERIZATION_ORDER_AMD
+  1000018000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_NAME_INFO_EXT
+  1000022000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT
+  1000022001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT
+  1000022002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_PROFILE_KHR
+  1000023000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR
+  1000023001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_PICTURE_RESOURCE_KHR
+  1000023002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_GET_MEMORY_PROPERTIES_KHR
+  1000023003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_BIND_MEMORY_KHR
+  1000023004)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_SESSION_CREATE_INFO_KHR
+  1000023005)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_CREATE_INFO_KHR
+  1000023006)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_UPDATE_INFO_KHR
+  1000023007)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_BEGIN_CODING_INFO_KHR
+  1000023008)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_END_CODING_INFO_KHR
+  1000023009)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_CODING_CONTROL_INFO_KHR
+  1000023010)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_REFERENCE_SLOT_KHR
+  1000023011)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_QUEUE_FAMILY_PROPERTIES_2_KHR
+  1000023012)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_PROFILES_KHR
+  1000023013)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR
+  1000023014)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_FORMAT_PROPERTIES_KHR
+  1000023015)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_2_KHR
+  1000023016)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR
+  1000024000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_DECODE_CAPABILITIES_KHR
+  1000024001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV
+  1000026000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_BUFFER_CREATE_INFO_NV
+  1000026001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_MEMORY_ALLOCATE_INFO_NV
+  1000026002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_FEATURES_EXT
+  1000028000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT
+  1000028001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_STREAM_CREATE_INFO_EXT
+  1000028002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_CU_MODULE_CREATE_INFO_NVX
+  1000029000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_CU_FUNCTION_CREATE_INFO_NVX
+  1000029001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_CU_LAUNCH_INFO_NVX
+  1000029002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_VIEW_HANDLE_INFO_NVX
+  1000030000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_VIEW_ADDRESS_PROPERTIES_NVX
+  1000030001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_EXT
+  1000038000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_CREATE_INFO_EXT
+  1000038001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_ADD_INFO_EXT
+  1000038002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_VCL_FRAME_INFO_EXT
+  1000038003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT
+  1000038004)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_NALU_SLICE_EXT
+  1000038005)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_EMIT_PICTURE_PARAMETERS_EXT
+  1000038006)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_PROFILE_EXT
+  1000038007)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_INFO_EXT
+  1000038008)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_EXT
+  1000038009)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_REFERENCE_LISTS_EXT
+  1000038010)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_CAPABILITIES_EXT
+  1000039000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_CREATE_INFO_EXT
+  1000039001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT
+  1000039002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_VCL_FRAME_INFO_EXT
+  1000039003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_DPB_SLOT_INFO_EXT
+  1000039004)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_EXT
+  1000039005)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_EMIT_PICTURE_PARAMETERS_EXT
+  1000039006)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_PROFILE_EXT
+  1000039007)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_REFERENCE_LISTS_EXT
+  1000039008)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_INFO_EXT
+  1000039009)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_LAYER_INFO_EXT
+  1000039010)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_CAPABILITIES_EXT
+  1000040000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_PICTURE_INFO_EXT
+  1000040001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_MVC_EXT
+  1000040002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_PROFILE_EXT
+  1000040003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_SESSION_PARAMETERS_CREATE_INFO_EXT
+  1000040004)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_SESSION_PARAMETERS_ADD_INFO_EXT
+  1000040005)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_DPB_SLOT_INFO_EXT
+  1000040006)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD
+  1000041000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR
+  1000044006)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT
+  1000044007)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD
+  1000044008)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX
+  1000044009)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_STREAM_DESCRIPTOR_SURFACE_CREATE_INFO_GGP
+  1000049000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV
+  1000050000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV
+  1000056000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_NV
+  1000056001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_NV
+  1000057000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_NV
+  1000057001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_NV
+  1000058000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VALIDATION_FLAGS_EXT
+  1000061000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VI_SURFACE_CREATE_INFO_NN
+  1000062000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT
+  1000067000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT
+  1000067001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR
+  1000073000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_KHR
+  1000073001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_MEMORY_WIN32_HANDLE_PROPERTIES_KHR
+  1000073002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_MEMORY_GET_WIN32_HANDLE_INFO_KHR
+  1000073003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR
+  1000074000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_MEMORY_FD_PROPERTIES_KHR
+  1000074001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_MEMORY_GET_FD_INFO_KHR
+  1000074002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR
+  1000075000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR
+  1000078000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR
+  1000078001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_D3D12_FENCE_SUBMIT_INFO_KHR
+  1000078002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SEMAPHORE_GET_WIN32_HANDLE_INFO_KHR
+  1000078003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_FD_INFO_KHR
+  1000079000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SEMAPHORE_GET_FD_INFO_KHR
+  1000079001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR
+  1000080000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_CONDITIONAL_RENDERING_INFO_EXT
+  1000081000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT
+  1000081001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT
+  1000081002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PRESENT_REGIONS_KHR
+  1000084000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_W_SCALING_STATE_CREATE_INFO_NV
+  1000087000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_EXT
+  1000090000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DISPLAY_POWER_INFO_EXT
+  1000091000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEVICE_EVENT_INFO_EXT
+  1000091001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DISPLAY_EVENT_INFO_EXT
+  1000091002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SWAPCHAIN_COUNTER_CREATE_INFO_EXT
+  1000091003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PRESENT_TIMES_INFO_GOOGLE
+  1000092000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_ATTRIBUTES_PROPERTIES_NVX
+  1000097000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SWIZZLE_STATE_CREATE_INFO_NV
+  1000098000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT
+  1000099000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT
+  1000099001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT
+  1000101000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_CONSERVATIVE_STATE_CREATE_INFO_EXT
+  1000101001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT
+  1000102000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_DEPTH_CLIP_STATE_CREATE_INFO_EXT
+  1000102001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_HDR_METADATA_EXT
+  1000105000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR
+  1000111000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMPORT_FENCE_WIN32_HANDLE_INFO_KHR
+  1000114000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_EXPORT_FENCE_WIN32_HANDLE_INFO_KHR
+  1000114001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_FENCE_GET_WIN32_HANDLE_INFO_KHR
+  1000114002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMPORT_FENCE_FD_INFO_KHR
+  1000115000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_FENCE_GET_FD_INFO_KHR
+  1000115001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR
+  1000116000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_PROPERTIES_KHR
+  1000116001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_CREATE_INFO_KHR
+  1000116002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PERFORMANCE_QUERY_SUBMIT_INFO_KHR
+  1000116003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_ACQUIRE_PROFILING_LOCK_INFO_KHR
+  1000116004)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_KHR
+  1000116005)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_DESCRIPTION_KHR
+  1000116006)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR
+  1000119000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_KHR
+  1000119001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SURFACE_FORMAT_2_KHR
+  1000119002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DISPLAY_PROPERTIES_2_KHR
+  1000121000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DISPLAY_PLANE_PROPERTIES_2_KHR
+  1000121001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DISPLAY_MODE_PROPERTIES_2_KHR
+  1000121002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DISPLAY_PLANE_INFO_2_KHR
+  1000121003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DISPLAY_PLANE_CAPABILITIES_2_KHR
+  1000121004)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IOS_SURFACE_CREATE_INFO_MVK
+  1000122000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_MACOS_SURFACE_CREATE_INFO_MVK
+  1000123000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT
+  1000128000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_TAG_INFO_EXT
+  1000128001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT
+  1000128002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT
+  1000128003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT
+  1000128004)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_USAGE_ANDROID
+  1000129000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_PROPERTIES_ANDROID
+  1000129001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_PROPERTIES_ANDROID
+  1000129002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMPORT_ANDROID_HARDWARE_BUFFER_INFO_ANDROID
+  1000129003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_MEMORY_GET_ANDROID_HARDWARE_BUFFER_INFO_ANDROID
+  1000129004)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID
+  1000129005)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_PROPERTIES_2_ANDROID
+  1000129006)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SAMPLE_LOCATIONS_INFO_EXT
+  1000143000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT
+  1000143001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_SAMPLE_LOCATIONS_STATE_CREATE_INFO_EXT
+  1000143002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLE_LOCATIONS_PROPERTIES_EXT
+  1000143003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_MULTISAMPLE_PROPERTIES_EXT
+  1000143004)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT
+  1000148000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT
+  1000148001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_ADVANCED_STATE_CREATE_INFO_EXT
+  1000148002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_TO_COLOR_STATE_CREATE_INFO_NV
+  1000149000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR
+  1000150007)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_GEOMETRY_INFO_KHR
+  1000150000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_DEVICE_ADDRESS_INFO_KHR
+  1000150002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_AABBS_DATA_KHR
+  1000150003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_INSTANCES_DATA_KHR
+  1000150004)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_TRIANGLES_DATA_KHR
+  1000150005)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_KHR
+  1000150006)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_VERSION_INFO_KHR
+  1000150009)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_COPY_ACCELERATION_STRUCTURE_INFO_KHR
+  1000150010)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_COPY_ACCELERATION_STRUCTURE_TO_MEMORY_INFO_KHR
+  1000150011)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_COPY_MEMORY_TO_ACCELERATION_STRUCTURE_INFO_KHR
+  1000150012)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_FEATURES_KHR
+  1000150013)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_PROPERTIES_KHR
+  1000150014)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_KHR
+  1000150017)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_SIZES_INFO_KHR
+  1000150020)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_FEATURES_KHR
+  1000347000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_PROPERTIES_KHR
+  1000347001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CREATE_INFO_KHR
+  1000150015)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_KHR
+  1000150016)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_INTERFACE_CREATE_INFO_KHR
+  1000150018)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR
+  1000348013)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_MODULATION_STATE_CREATE_INFO_NV
+  1000152000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_FEATURES_NV
+  1000154000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_PROPERTIES_NV
+  1000154001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT
+  1000158000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT
+  1000158002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_LIST_CREATE_INFO_EXT
+  1000158003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT
+  1000158004)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT
+  1000158005)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_2_EXT
+  1000158006)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VALIDATION_CACHE_CREATE_INFO_EXT
+  1000160000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SHADER_MODULE_VALIDATION_CACHE_CREATE_INFO_EXT
+  1000160001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_FEATURES_KHR
+  1000163000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_PROPERTIES_KHR
+  1000163001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SHADING_RATE_IMAGE_STATE_CREATE_INFO_NV
+  1000164000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_FEATURES_NV
+  1000164001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_PROPERTIES_NV
+  1000164002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_COARSE_SAMPLE_ORDER_STATE_CREATE_INFO_NV
+  1000164005)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CREATE_INFO_NV
+  1000165000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_NV
+  1000165001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_GEOMETRY_NV
+  1000165003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_GEOMETRY_TRIANGLES_NV
+  1000165004)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_GEOMETRY_AABB_NV
+  1000165005)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BIND_ACCELERATION_STRUCTURE_MEMORY_INFO_NV
+  1000165006)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_NV
+  1000165007)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_INFO_NV
+  1000165008)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_NV
+  1000165009)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_NV
+  1000165011)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_INFO_NV
+  1000165012)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_REPRESENTATIVE_FRAGMENT_TEST_FEATURES_NV
+  1000166000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_REPRESENTATIVE_FRAGMENT_TEST_STATE_CREATE_INFO_NV
+  1000166001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_VIEW_IMAGE_FORMAT_INFO_EXT
+  1000170000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT
+  1000170001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT
+  1000178000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_MEMORY_HOST_POINTER_PROPERTIES_EXT
+  1000178001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT
+  1000178002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CLOCK_FEATURES_KHR
+  1000181000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD
+  1000183000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_EXT
+  1000184000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD
+  1000185000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_CAPABILITIES_EXT
+  1000187000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_PARAMETERS_CREATE_INFO_EXT
+  1000187001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT
+  1000187002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_PROFILE_EXT
+  1000187003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_PICTURE_INFO_EXT
+  1000187004)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_DPB_SLOT_INFO_EXT
+  1000187005)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_KHR
+  1000174000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_KHR
+  1000388000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_KHR
+  1000388001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEVICE_MEMORY_OVERALLOCATION_CREATE_INFO_AMD
+  1000189000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT
+  1000190000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT
+  1000190001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT
+  1000190002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PRESENT_FRAME_TOKEN_GGP
+  1000191000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_NV
+  1000201000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV
+  1000202000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_PROPERTIES_NV
+  1000202001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_FOOTPRINT_FEATURES_NV
+  1000204000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_EXCLUSIVE_SCISSOR_STATE_CREATE_INFO_NV
+  1000205000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXCLUSIVE_SCISSOR_FEATURES_NV
+  1000205002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_CHECKPOINT_DATA_NV
+  1000206000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV
+  1000206001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_FUNCTIONS_2_FEATURES_INTEL
+  1000209000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL
+  1000210000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_INITIALIZE_PERFORMANCE_API_INFO_INTEL
+  1000210001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PERFORMANCE_MARKER_INFO_INTEL
+  1000210002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PERFORMANCE_STREAM_MARKER_INFO_INTEL
+  1000210003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PERFORMANCE_OVERRIDE_INFO_INTEL
+  1000210004)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PERFORMANCE_CONFIGURATION_ACQUIRE_INFO_INTEL
+  1000210005)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PCI_BUS_INFO_PROPERTIES_EXT
+  1000212000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DISPLAY_NATIVE_HDR_SURFACE_CAPABILITIES_AMD
+  1000213000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD
+  1000213001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGEPIPE_SURFACE_CREATE_INFO_FUCHSIA
+  1000214000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_METAL_SURFACE_CREATE_INFO_EXT
+  1000217000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT
+  1000218000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_PROPERTIES_EXT
+  1000218001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_RENDER_PASS_FRAGMENT_DENSITY_MAP_CREATE_INFO_EXT
+  1000218002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR
+  1000226000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_FRAGMENT_SHADING_RATE_STATE_CREATE_INFO_KHR
+  1000226001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_PROPERTIES_KHR
+  1000226002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_FEATURES_KHR
+  1000226003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_KHR
+  1000226004)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_2_AMD
+  1000227000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COHERENT_MEMORY_FEATURES_AMD
+  1000229000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_ATOMIC_INT64_FEATURES_EXT
+  1000234000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT
+  1000237000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PRIORITY_FEATURES_EXT
+  1000238000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_MEMORY_PRIORITY_ALLOCATE_INFO_EXT
+  1000238001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR
+  1000239000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEDICATED_ALLOCATION_IMAGE_ALIASING_FEATURES_NV
+  1000240000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_EXT
+  1000244000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT
+  1000244002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VALIDATION_FEATURES_EXT
+  1000247000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_WAIT_FEATURES_KHR
+  1000248000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_NV
+  1000249000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_COOPERATIVE_MATRIX_PROPERTIES_NV
+  1000249001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_NV
+  1000249002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COVERAGE_REDUCTION_MODE_FEATURES_NV
+  1000250000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_REDUCTION_STATE_CREATE_INFO_NV
+  1000250001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_FRAMEBUFFER_MIXED_SAMPLES_COMBINATION_NV
+  1000250002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_INTERLOCK_FEATURES_EXT
+  1000251000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_IMAGE_ARRAYS_FEATURES_EXT
+  1000252000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_FEATURES_EXT
+  1000254000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_PROVOKING_VERTEX_STATE_CREATE_INFO_EXT
+  1000254001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_PROPERTIES_EXT
+  1000254002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_INFO_EXT
+  1000255000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_FULL_SCREEN_EXCLUSIVE_EXT
+  1000255002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT
+  1000255001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_HEADLESS_SURFACE_CREATE_INFO_EXT
+  1000256000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_EXT
+  1000259000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_EXT
+  1000259001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_EXT
+  1000259002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_FEATURES_EXT
+  1000260000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_EXT
+  1000265000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_FEATURES_EXT
+  1000267000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_EXECUTABLE_PROPERTIES_FEATURES_KHR
+  1000269000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_INFO_KHR
+  1000269001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_PROPERTIES_KHR
+  1000269002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INFO_KHR
+  1000269003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_STATISTIC_KHR
+  1000269004)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR
+  1000269005)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_2_FEATURES_EXT
+  1000273000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_NV
+  1000277000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_GRAPHICS_SHADER_GROUP_CREATE_INFO_NV
+  1000277001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_SHADER_GROUPS_CREATE_INFO_NV
+  1000277002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_NV
+  1000277003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_NV
+  1000277004)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_GENERATED_COMMANDS_INFO_NV
+  1000277005)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_NV
+  1000277006)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_NV
+  1000277007)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INHERITED_VIEWPORT_SCISSOR_FEATURES_NV
+  1000278000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_VIEWPORT_SCISSOR_INFO_NV
+  1000278001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_FEATURES_EXT
+  1000281000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDER_PASS_TRANSFORM_INFO_QCOM
+  1000282000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_RENDER_PASS_TRANSFORM_BEGIN_INFO_QCOM
+  1000282001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_MEMORY_REPORT_FEATURES_EXT
+  1000284000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEVICE_DEVICE_MEMORY_REPORT_CREATE_INFO_EXT
+  1000284001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT
+  1000284002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_EXT
+  1000286000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_EXT
+  1000286001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SAMPLER_CUSTOM_BORDER_COLOR_CREATE_INFO_EXT
+  1000287000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_PROPERTIES_EXT
+  1000287001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_FEATURES_EXT
+  1000287002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_LIBRARY_CREATE_INFO_KHR
+  1000290000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PRESENT_ID_KHR
+  1000294000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_ID_FEATURES_KHR
+  1000294001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_ENCODE_INFO_KHR
+  1000299000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_INFO_KHR
+  1000299001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR
+  1000299002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR
+  1000299003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV
+  1000300000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV
+  1000300001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV
+  1000314008)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV
+  1000314009)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_FEATURES_EXT
+  1000320000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_PROPERTIES_EXT
+  1000320001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_LIBRARY_CREATE_INFO_EXT
+  1000320002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_FEATURES_AMD
+  1000321000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_BARYCENTRIC_FEATURES_KHR
+  1000203000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_BARYCENTRIC_PROPERTIES_KHR
+  1000322000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR
+  1000323000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_PROPERTIES_NV
+  1000326000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_FEATURES_NV
+  1000326001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_FRAGMENT_SHADING_RATE_ENUM_STATE_CREATE_INFO_NV
+  1000326002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_MOTION_TRIANGLES_DATA_NV
+  1000327000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_MOTION_BLUR_FEATURES_NV
+  1000327001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MOTION_INFO_NV
+  1000327002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT
+  1000330000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_FEATURES_EXT
+  1000332000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT
+  1000332001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_COPY_COMMAND_TRANSFORM_INFO_QCOM
+  1000333000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_WORKGROUP_MEMORY_EXPLICIT_LAYOUT_FEATURES_KHR
+  1000336000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_FEATURES_EXT
+  1000338000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_COMPRESSION_CONTROL_EXT
+  1000338001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2_EXT
+  1000338002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2_EXT
+  1000338003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_COMPRESSION_PROPERTIES_EXT
+  1000338004)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT
+  1000340000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_FEATURES_ARM
+  1000342000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RGBA10X6_FORMATS_FEATURES_EXT
+  1000344000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DIRECTFB_SURFACE_CREATE_INFO_EXT
+  1000346000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_VALVE
+  1000351000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_VALVE
+  1000351002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_INPUT_DYNAMIC_STATE_FEATURES_EXT
+  1000352000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT
+  1000352001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_VERTEX_INPUT_ATTRIBUTE_DESCRIPTION_2_EXT
+  1000352002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRM_PROPERTIES_EXT
+  1000353000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_CONTROL_FEATURES_EXT
+  1000355000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_DEPTH_CLIP_CONTROL_CREATE_INFO_EXT
+  1000355001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVE_TOPOLOGY_LIST_RESTART_FEATURES_EXT
+  1000356000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMPORT_MEMORY_ZIRCON_HANDLE_INFO_FUCHSIA
+  1000364000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_MEMORY_ZIRCON_HANDLE_PROPERTIES_FUCHSIA
+  1000364001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_MEMORY_GET_ZIRCON_HANDLE_INFO_FUCHSIA
+  1000364002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_ZIRCON_HANDLE_INFO_FUCHSIA
+  1000365000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SEMAPHORE_GET_ZIRCON_HANDLE_INFO_FUCHSIA
+  1000365001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BUFFER_COLLECTION_CREATE_INFO_FUCHSIA
+  1000366000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMPORT_MEMORY_BUFFER_COLLECTION_FUCHSIA
+  1000366001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BUFFER_COLLECTION_IMAGE_CREATE_INFO_FUCHSIA
+  1000366002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BUFFER_COLLECTION_PROPERTIES_FUCHSIA
+  1000366003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BUFFER_CONSTRAINTS_INFO_FUCHSIA
+  1000366004)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BUFFER_COLLECTION_BUFFER_CREATE_INFO_FUCHSIA
+  1000366005)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_CONSTRAINTS_INFO_FUCHSIA
+  1000366006)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_FORMAT_CONSTRAINTS_INFO_FUCHSIA
+  1000366007)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SYSMEM_COLOR_SPACE_FUCHSIA
+  1000366008)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BUFFER_COLLECTION_CONSTRAINTS_INFO_FUCHSIA
+  1000366009)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SUBPASS_SHADING_PIPELINE_CREATE_INFO_HUAWEI
+  1000369000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_FEATURES_HUAWEI
+  1000369001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_PROPERTIES_HUAWEI
+  1000369002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INVOCATION_MASK_FEATURES_HUAWEI
+  1000370000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_MEMORY_GET_REMOTE_ADDRESS_INFO_NV
+  1000371000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_RDMA_FEATURES_NV
+  1000371001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_PROPERTIES_IDENTIFIER_EXT
+  1000372000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_PROPERTIES_FEATURES_EXT
+  1000372001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT
+  1000377000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SCREEN_SURFACE_CREATE_INFO_QNX
+  1000378000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT
+  1000381000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_COLOR_WRITE_CREATE_INFO_EXT
+  1000381001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVES_GENERATED_QUERY_FEATURES_EXT
+  1000382000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_MAINTENANCE_1_FEATURES_KHR
+  1000386000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_VIEW_MIN_LOD_FEATURES_EXT
+  1000391000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_VIEW_MIN_LOD_CREATE_INFO_EXT
+  1000391001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT
+  1000392000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_PROPERTIES_EXT
+  1000392001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_2D_VIEW_OF_3D_FEATURES_EXT
+  1000393000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BORDER_COLOR_SWIZZLE_FEATURES_EXT
+  1000411000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SAMPLER_BORDER_COLOR_COMPONENT_MAPPING_CREATE_INFO_EXT
+  1000411001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT
+  1000412000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_SET_HOST_MAPPING_FEATURES_VALVE
+  1000420000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DESCRIPTOR_SET_BINDING_REFERENCE_VALVE
+  1000420001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_HOST_MAPPING_INFO_VALVE
+  1000420002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_FEATURES_QCOM
+  1000425000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_PROPERTIES_QCOM
+  1000425001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SUBPASS_FRAGMENT_DENSITY_MAP_OFFSET_END_INFO_QCOM
+  1000425002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV
+  1000430000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_FEATURES_EXT
+  1000437000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT
+  1000458000)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_CONTROL_EXT
+  1000458001)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_FEEDBACK_CREATE_INFO_EXT
+  1000458002)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_RENDER_PASS_SUBPASS_FEEDBACK_CREATE_INFO_EXT
+  1000458003)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEBUG_REPORT_CREATE_INFO_EXT
+  VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_RENDERING_INFO_KHR
+  VK_STRUCTURE_TYPE_RENDERING_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_INFO_KHR
+  VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_RENDERING_CREATE_INFO_KHR
+  VK_STRUCTURE_TYPE_PIPELINE_RENDERING_CREATE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_FEATURES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO_KHR
+  VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_NV
+  VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO_KHR
+  VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2_KHR
+  VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2_KHR
+  VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2_KHR
+  VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2_KHR
+  VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO_KHR
+  VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO_KHR
+  VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO_KHR
+  VK_STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO_KHR
+  VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO_KHR
+  VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO_KHR
+  VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO_KHR
+  VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES_EXT
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO_KHR
+  VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES_KHR
+  VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES_KHR
+  VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO_KHR
+  VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_KHR
+  VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_KHR
+  VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES_KHR
+  VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO_KHR
+  VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT16_INT8_FEATURES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO_KHR
+  VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES2_EXT
+  VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_EXT)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO_KHR
+  VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO_KHR
+  VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO_KHR
+  VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2_KHR
+  VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2_KHR
+  VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_2_KHR
+  VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2_KHR
+  VK_STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2_KHR
+  VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO_KHR
+  VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SUBPASS_END_INFO_KHR
+  VK_STRUCTURE_TYPE_SUBPASS_END_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES_KHR
+  VK_STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO_KHR
+  VK_STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO_KHR
+  VK_STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO_KHR
+  VK_STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO_KHR
+  VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES_KHR)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS_KHR
+  VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO_KHR
+  VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO_EXT
+  VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT
+  VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO_EXT
+  VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2_KHR
+  VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2_KHR
+  VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2_KHR
+  VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2_KHR
+  VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2_KHR
+  VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO_KHR
+  VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO_KHR
+  VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO_KHR
+  VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO_KHR
+  VK_STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO_KHR
+  VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES_KHR
+  VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO_KHR
+  VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO_KHR
+  VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO_EXT
+  VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES_EXT
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES_EXT
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO_EXT
+  VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT_EXT
+  VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT_KHR
+  VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_EXT
+  VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_KHR)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO_EXT
+  VK_STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE_KHR
+  VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_BARYCENTRIC_FEATURES_NV
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_BARYCENTRIC_FEATURES_KHR)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO_KHR
+  VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO_KHR
+  VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO_KHR
+  VK_STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO_KHR
+  VK_STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO_INTEL
+  VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES_EXT
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES_EXT
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT
+  VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT_KHR
+  VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_STENCIL_LAYOUT_KHR
+  VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_STENCIL_LAYOUT)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_ADDRESS_FEATURES_EXT
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_EXT)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO_EXT
+  VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES_EXT
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO_EXT
+  VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO_KHR
+  VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO_KHR
+  VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO_KHR
+  VK_STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO_KHR
+  VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES_EXT
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES_EXT
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES_EXT
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO_EXT
+  VK_STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PRIVATE_DATA_SLOT_CREATE_INFO_EXT
+  VK_STRUCTURE_TYPE_PRIVATE_DATA_SLOT_CREATE_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES_EXT
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_MEMORY_BARRIER_2_KHR
+  VK_STRUCTURE_TYPE_MEMORY_BARRIER_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2_KHR
+  VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER_2_KHR
+  VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEPENDENCY_INFO_KHR
+  VK_STRUCTURE_TYPE_DEPENDENCY_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SUBMIT_INFO_2_KHR
+  VK_STRUCTURE_TYPE_SUBMIT_INFO_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO_KHR
+  VK_STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO_KHR
+  VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES_EXT
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_COPY_BUFFER_INFO_2_KHR
+  VK_STRUCTURE_TYPE_COPY_BUFFER_INFO_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_COPY_IMAGE_INFO_2_KHR
+  VK_STRUCTURE_TYPE_COPY_IMAGE_INFO_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_COPY_BUFFER_TO_IMAGE_INFO_2_KHR
+  VK_STRUCTURE_TYPE_COPY_BUFFER_TO_IMAGE_INFO_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_COPY_IMAGE_TO_BUFFER_INFO_2_KHR
+  VK_STRUCTURE_TYPE_COPY_IMAGE_TO_BUFFER_INFO_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BLIT_IMAGE_INFO_2_KHR
+  VK_STRUCTURE_TYPE_BLIT_IMAGE_INFO_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_RESOLVE_IMAGE_INFO_2_KHR
+  VK_STRUCTURE_TYPE_RESOLVE_IMAGE_INFO_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BUFFER_COPY_2_KHR
+  VK_STRUCTURE_TYPE_BUFFER_COPY_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_COPY_2_KHR
+  VK_STRUCTURE_TYPE_IMAGE_COPY_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_BLIT_2_KHR
+  VK_STRUCTURE_TYPE_IMAGE_BLIT_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2_KHR
+  VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_IMAGE_RESOLVE_2_KHR
+  VK_STRUCTURE_TYPE_IMAGE_RESOLVE_2)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_3_KHR
+  VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_3)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PIPELINE_INFO_EXT
+  VK_STRUCTURE_TYPE_PIPELINE_INFO_KHR)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_KHR)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT
+  VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_KHR)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES_KHR
+  VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS_KHR
+  VK_STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_DEVICE_IMAGE_MEMORY_REQUIREMENTS_KHR
+  VK_STRUCTURE_TYPE_DEVICE_IMAGE_MEMORY_REQUIREMENTS)
+
+(ADP:DEFPARAMETER
+  VK_STRUCTURE_TYPE_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CACHE_HEADER_VERSION_ONE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CACHE_HEADER_VERSION_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_UNDEFINED
+  0)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_GENERAL
+  1)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL
+  2)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL
+  3)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL
+  4)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL
+  5)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL
+  6)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL
+  7)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_PREINITIALIZED
+  8)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL
+  1000117000)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL
+  1000117001)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL
+  1000241000)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL
+  1000241001)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL
+  1000241002)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL
+  1000241003)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_READ_ONLY_OPTIMAL
+  1000314000)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_ATTACHMENT_OPTIMAL
+  1000314001)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_PRESENT_SRC_KHR
+  1000001002)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_VIDEO_DECODE_DST_KHR
+  1000024000)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_VIDEO_DECODE_SRC_KHR
+  1000024001)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_VIDEO_DECODE_DPB_KHR
+  1000024002)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_SHARED_PRESENT_KHR
+  1000111000)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_FRAGMENT_DENSITY_MAP_OPTIMAL_EXT
+  1000218000)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR
+  1000164003)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_VIDEO_ENCODE_DST_KHR
+  1000299000)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_VIDEO_ENCODE_SRC_KHR
+  1000299001)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_VIDEO_ENCODE_DPB_KHR
+  1000299002)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL_KHR
+  VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL_KHR
+  VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_SHADING_RATE_OPTIMAL_NV
+  VK_IMAGE_LAYOUT_FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR
+  VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR
+  VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL_KHR
+  VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL_KHR
+  VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_READ_ONLY_OPTIMAL_KHR
+  VK_IMAGE_LAYOUT_READ_ONLY_OPTIMAL)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_ATTACHMENT_OPTIMAL_KHR
+  VK_IMAGE_LAYOUT_ATTACHMENT_OPTIMAL)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_LAYOUT_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_UNKNOWN
+  0)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_INSTANCE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_PHYSICAL_DEVICE
+  2)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_DEVICE
+  3)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_QUEUE
+  4)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_SEMAPHORE
+  5)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_COMMAND_BUFFER
+  6)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_FENCE
+  7)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_DEVICE_MEMORY
+  8)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_BUFFER
+  9)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_IMAGE
+  10)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_EVENT
+  11)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_QUERY_POOL
+  12)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_BUFFER_VIEW
+  13)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_IMAGE_VIEW
+  14)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_SHADER_MODULE
+  15)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_PIPELINE_CACHE
+  16)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_PIPELINE_LAYOUT
+  17)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_RENDER_PASS
+  18)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_PIPELINE
+  19)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT
+  20)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_SAMPLER
+  21)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_DESCRIPTOR_POOL
+  22)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_DESCRIPTOR_SET
+  23)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_FRAMEBUFFER
+  24)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_COMMAND_POOL
+  25)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION
+  1000156000)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE
+  1000085000)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_PRIVATE_DATA_SLOT
+  1000295000)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_SURFACE_KHR
+  1000000000)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_SWAPCHAIN_KHR
+  1000001000)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_DISPLAY_KHR
+  1000002000)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_DISPLAY_MODE_KHR
+  1000002001)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT
+  1000011000)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_VIDEO_SESSION_KHR
+  1000023000)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_VIDEO_SESSION_PARAMETERS_KHR
+  1000023001)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_CU_MODULE_NVX
+  1000029000)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_CU_FUNCTION_NVX
+  1000029001)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_DEBUG_UTILS_MESSENGER_EXT
+  1000128000)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_ACCELERATION_STRUCTURE_KHR
+  1000150000)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_VALIDATION_CACHE_EXT
+  1000160000)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_ACCELERATION_STRUCTURE_NV
+  1000165000)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_PERFORMANCE_CONFIGURATION_INTEL
+  1000210000)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_DEFERRED_OPERATION_KHR
+  1000268000)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NV
+  1000277000)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_BUFFER_COLLECTION_FUCHSIA
+  1000366000)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR
+  VK_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_KHR
+  VK_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_PRIVATE_DATA_SLOT_EXT
+  VK_OBJECT_TYPE_PRIVATE_DATA_SLOT)
+
+(ADP:DEFPARAMETER
+  VK_OBJECT_TYPE_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_VENDOR_ID_VIV
+  65537)
+
+(ADP:DEFPARAMETER
+  VK_VENDOR_ID_VSI
+  65538)
+
+(ADP:DEFPARAMETER
+  VK_VENDOR_ID_KAZAN
+  65539)
+
+(ADP:DEFPARAMETER
+  VK_VENDOR_ID_CODEPLAY
+  65540)
+
+(ADP:DEFPARAMETER
+  VK_VENDOR_ID_MESA
+  65541)
+
+(ADP:DEFPARAMETER
+  VK_VENDOR_ID_POCL
+  65542)
+
+(ADP:DEFPARAMETER
+  VK_VENDOR_ID_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_SYSTEM_ALLOCATION_SCOPE_COMMAND
+  0)
+
+(ADP:DEFPARAMETER
+  VK_SYSTEM_ALLOCATION_SCOPE_OBJECT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_SYSTEM_ALLOCATION_SCOPE_CACHE
+  2)
+
+(ADP:DEFPARAMETER
+  VK_SYSTEM_ALLOCATION_SCOPE_DEVICE
+  3)
+
+(ADP:DEFPARAMETER
+  VK_SYSTEM_ALLOCATION_SCOPE_INSTANCE
+  4)
+
+(ADP:DEFPARAMETER
+  VK_SYSTEM_ALLOCATION_SCOPE_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_INTERNAL_ALLOCATION_TYPE_EXECUTABLE
+  0)
+
+(ADP:DEFPARAMETER
+  VK_INTERNAL_ALLOCATION_TYPE_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_UNDEFINED
+  0)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R4G4_UNORM_PACK8
+  1)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R4G4B4A4_UNORM_PACK16
+  2)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_B4G4R4A4_UNORM_PACK16
+  3)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R5G6B5_UNORM_PACK16
+  4)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_B5G6R5_UNORM_PACK16
+  5)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R5G5B5A1_UNORM_PACK16
+  6)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_B5G5R5A1_UNORM_PACK16
+  7)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_A1R5G5B5_UNORM_PACK16
+  8)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R8_UNORM
+  9)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R8_SNORM
+  10)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R8_USCALED
+  11)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R8_SSCALED
+  12)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R8_UINT
+  13)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R8_SINT
+  14)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R8_SRGB
+  15)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R8G8_UNORM
+  16)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R8G8_SNORM
+  17)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R8G8_USCALED
+  18)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R8G8_SSCALED
+  19)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R8G8_UINT
+  20)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R8G8_SINT
+  21)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R8G8_SRGB
+  22)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R8G8B8_UNORM
+  23)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R8G8B8_SNORM
+  24)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R8G8B8_USCALED
+  25)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R8G8B8_SSCALED
+  26)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R8G8B8_UINT
+  27)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R8G8B8_SINT
+  28)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R8G8B8_SRGB
+  29)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_B8G8R8_UNORM
+  30)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_B8G8R8_SNORM
+  31)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_B8G8R8_USCALED
+  32)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_B8G8R8_SSCALED
+  33)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_B8G8R8_UINT
+  34)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_B8G8R8_SINT
+  35)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_B8G8R8_SRGB
+  36)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R8G8B8A8_UNORM
+  37)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R8G8B8A8_SNORM
+  38)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R8G8B8A8_USCALED
+  39)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R8G8B8A8_SSCALED
+  40)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R8G8B8A8_UINT
+  41)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R8G8B8A8_SINT
+  42)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R8G8B8A8_SRGB
+  43)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_B8G8R8A8_UNORM
+  44)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_B8G8R8A8_SNORM
+  45)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_B8G8R8A8_USCALED
+  46)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_B8G8R8A8_SSCALED
+  47)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_B8G8R8A8_UINT
+  48)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_B8G8R8A8_SINT
+  49)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_B8G8R8A8_SRGB
+  50)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_A8B8G8R8_UNORM_PACK32
+  51)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_A8B8G8R8_SNORM_PACK32
+  52)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_A8B8G8R8_USCALED_PACK32
+  53)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_A8B8G8R8_SSCALED_PACK32
+  54)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_A8B8G8R8_UINT_PACK32
+  55)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_A8B8G8R8_SINT_PACK32
+  56)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_A8B8G8R8_SRGB_PACK32
+  57)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_A2R10G10B10_UNORM_PACK32
+  58)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_A2R10G10B10_SNORM_PACK32
+  59)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_A2R10G10B10_USCALED_PACK32
+  60)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_A2R10G10B10_SSCALED_PACK32
+  61)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_A2R10G10B10_UINT_PACK32
+  62)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_A2R10G10B10_SINT_PACK32
+  63)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_A2B10G10R10_UNORM_PACK32
+  64)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_A2B10G10R10_SNORM_PACK32
+  65)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_A2B10G10R10_USCALED_PACK32
+  66)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_A2B10G10R10_SSCALED_PACK32
+  67)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_A2B10G10R10_UINT_PACK32
+  68)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_A2B10G10R10_SINT_PACK32
+  69)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R16_UNORM
+  70)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R16_SNORM
+  71)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R16_USCALED
+  72)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R16_SSCALED
+  73)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R16_UINT
+  74)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R16_SINT
+  75)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R16_SFLOAT
+  76)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R16G16_UNORM
+  77)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R16G16_SNORM
+  78)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R16G16_USCALED
+  79)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R16G16_SSCALED
+  80)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R16G16_UINT
+  81)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R16G16_SINT
+  82)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R16G16_SFLOAT
+  83)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R16G16B16_UNORM
+  84)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R16G16B16_SNORM
+  85)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R16G16B16_USCALED
+  86)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R16G16B16_SSCALED
+  87)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R16G16B16_UINT
+  88)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R16G16B16_SINT
+  89)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R16G16B16_SFLOAT
+  90)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R16G16B16A16_UNORM
+  91)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R16G16B16A16_SNORM
+  92)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R16G16B16A16_USCALED
+  93)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R16G16B16A16_SSCALED
+  94)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R16G16B16A16_UINT
+  95)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R16G16B16A16_SINT
+  96)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R16G16B16A16_SFLOAT
+  97)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R32_UINT
+  98)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R32_SINT
+  99)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R32_SFLOAT
+  100)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R32G32_UINT
+  101)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R32G32_SINT
+  102)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R32G32_SFLOAT
+  103)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R32G32B32_UINT
+  104)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R32G32B32_SINT
+  105)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R32G32B32_SFLOAT
+  106)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R32G32B32A32_UINT
+  107)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R32G32B32A32_SINT
+  108)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R32G32B32A32_SFLOAT
+  109)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R64_UINT
+  110)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R64_SINT
+  111)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R64_SFLOAT
+  112)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R64G64_UINT
+  113)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R64G64_SINT
+  114)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R64G64_SFLOAT
+  115)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R64G64B64_UINT
+  116)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R64G64B64_SINT
+  117)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R64G64B64_SFLOAT
+  118)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R64G64B64A64_UINT
+  119)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R64G64B64A64_SINT
+  120)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R64G64B64A64_SFLOAT
+  121)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_B10G11R11_UFLOAT_PACK32
+  122)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_E5B9G9R9_UFLOAT_PACK32
+  123)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_D16_UNORM
+  124)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_X8_D24_UNORM_PACK32
+  125)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_D32_SFLOAT
+  126)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_S8_UINT
+  127)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_D16_UNORM_S8_UINT
+  128)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_D24_UNORM_S8_UINT
+  129)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_D32_SFLOAT_S8_UINT
+  130)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_BC1_RGB_UNORM_BLOCK
+  131)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_BC1_RGB_SRGB_BLOCK
+  132)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_BC1_RGBA_UNORM_BLOCK
+  133)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_BC1_RGBA_SRGB_BLOCK
+  134)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_BC2_UNORM_BLOCK
+  135)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_BC2_SRGB_BLOCK
+  136)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_BC3_UNORM_BLOCK
+  137)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_BC3_SRGB_BLOCK
+  138)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_BC4_UNORM_BLOCK
+  139)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_BC4_SNORM_BLOCK
+  140)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_BC5_UNORM_BLOCK
+  141)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_BC5_SNORM_BLOCK
+  142)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_BC6H_UFLOAT_BLOCK
+  143)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_BC6H_SFLOAT_BLOCK
+  144)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_BC7_UNORM_BLOCK
+  145)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_BC7_SRGB_BLOCK
+  146)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ETC2_R8G8B8_UNORM_BLOCK
+  147)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ETC2_R8G8B8_SRGB_BLOCK
+  148)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ETC2_R8G8B8A1_UNORM_BLOCK
+  149)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ETC2_R8G8B8A1_SRGB_BLOCK
+  150)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ETC2_R8G8B8A8_UNORM_BLOCK
+  151)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ETC2_R8G8B8A8_SRGB_BLOCK
+  152)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_EAC_R11_UNORM_BLOCK
+  153)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_EAC_R11_SNORM_BLOCK
+  154)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_EAC_R11G11_UNORM_BLOCK
+  155)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_EAC_R11G11_SNORM_BLOCK
+  156)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_4X4_UNORM_BLOCK
+  157)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_4X4_SRGB_BLOCK
+  158)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_5X4_UNORM_BLOCK
+  159)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_5X4_SRGB_BLOCK
+  160)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_5X5_UNORM_BLOCK
+  161)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_5X5_SRGB_BLOCK
+  162)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_6X5_UNORM_BLOCK
+  163)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_6X5_SRGB_BLOCK
+  164)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_6X6_UNORM_BLOCK
+  165)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_6X6_SRGB_BLOCK
+  166)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_8X5_UNORM_BLOCK
+  167)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_8X5_SRGB_BLOCK
+  168)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_8X6_UNORM_BLOCK
+  169)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_8X6_SRGB_BLOCK
+  170)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_8X8_UNORM_BLOCK
+  171)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_8X8_SRGB_BLOCK
+  172)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_10X5_UNORM_BLOCK
+  173)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_10X5_SRGB_BLOCK
+  174)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_10X6_UNORM_BLOCK
+  175)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_10X6_SRGB_BLOCK
+  176)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_10X8_UNORM_BLOCK
+  177)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_10X8_SRGB_BLOCK
+  178)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_10X10_UNORM_BLOCK
+  179)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_10X10_SRGB_BLOCK
+  180)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_12X10_UNORM_BLOCK
+  181)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_12X10_SRGB_BLOCK
+  182)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_12X12_UNORM_BLOCK
+  183)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_12X12_SRGB_BLOCK
+  184)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G8B8G8R8_422_UNORM
+  1000156000)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_B8G8R8G8_422_UNORM
+  1000156001)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G8_B8_R8_3PLANE_420_UNORM
+  1000156002)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G8_B8R8_2PLANE_420_UNORM
+  1000156003)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G8_B8_R8_3PLANE_422_UNORM
+  1000156004)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G8_B8R8_2PLANE_422_UNORM
+  1000156005)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G8_B8_R8_3PLANE_444_UNORM
+  1000156006)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R10X6_UNORM_PACK16
+  1000156007)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R10X6G10X6_UNORM_2PACK16
+  1000156008)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R10X6G10X6B10X6A10X6_UNORM_4PACK16
+  1000156009)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G10X6B10X6G10X6R10X6_422_UNORM_4PACK16
+  1000156010)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_B10X6G10X6R10X6G10X6_422_UNORM_4PACK16
+  1000156011)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_420_UNORM_3PACK16
+  1000156012)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G10X6_B10X6R10X6_2PLANE_420_UNORM_3PACK16
+  1000156013)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_422_UNORM_3PACK16
+  1000156014)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G10X6_B10X6R10X6_2PLANE_422_UNORM_3PACK16
+  1000156015)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_444_UNORM_3PACK16
+  1000156016)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R12X4_UNORM_PACK16
+  1000156017)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R12X4G12X4_UNORM_2PACK16
+  1000156018)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R12X4G12X4B12X4A12X4_UNORM_4PACK16
+  1000156019)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G12X4B12X4G12X4R12X4_422_UNORM_4PACK16
+  1000156020)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_B12X4G12X4R12X4G12X4_422_UNORM_4PACK16
+  1000156021)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_420_UNORM_3PACK16
+  1000156022)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G12X4_B12X4R12X4_2PLANE_420_UNORM_3PACK16
+  1000156023)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_422_UNORM_3PACK16
+  1000156024)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G12X4_B12X4R12X4_2PLANE_422_UNORM_3PACK16
+  1000156025)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_444_UNORM_3PACK16
+  1000156026)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G16B16G16R16_422_UNORM
+  1000156027)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_B16G16R16G16_422_UNORM
+  1000156028)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G16_B16_R16_3PLANE_420_UNORM
+  1000156029)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G16_B16R16_2PLANE_420_UNORM
+  1000156030)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G16_B16_R16_3PLANE_422_UNORM
+  1000156031)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G16_B16R16_2PLANE_422_UNORM
+  1000156032)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G16_B16_R16_3PLANE_444_UNORM
+  1000156033)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G8_B8R8_2PLANE_444_UNORM
+  1000330000)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G10X6_B10X6R10X6_2PLANE_444_UNORM_3PACK16
+  1000330001)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G12X4_B12X4R12X4_2PLANE_444_UNORM_3PACK16
+  1000330002)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G16_B16R16_2PLANE_444_UNORM
+  1000330003)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_A4R4G4B4_UNORM_PACK16
+  1000340000)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_A4B4G4R4_UNORM_PACK16
+  1000340001)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_4X4_SFLOAT_BLOCK
+  1000066000)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_5X4_SFLOAT_BLOCK
+  1000066001)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_5X5_SFLOAT_BLOCK
+  1000066002)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_6X5_SFLOAT_BLOCK
+  1000066003)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_6X6_SFLOAT_BLOCK
+  1000066004)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_8X5_SFLOAT_BLOCK
+  1000066005)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_8X6_SFLOAT_BLOCK
+  1000066006)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_8X8_SFLOAT_BLOCK
+  1000066007)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_10X5_SFLOAT_BLOCK
+  1000066008)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_10X6_SFLOAT_BLOCK
+  1000066009)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_10X8_SFLOAT_BLOCK
+  1000066010)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_10X10_SFLOAT_BLOCK
+  1000066011)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_12X10_SFLOAT_BLOCK
+  1000066012)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_12X12_SFLOAT_BLOCK
+  1000066013)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_PVRTC1_2BPP_UNORM_BLOCK_IMG
+  1000054000)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_PVRTC1_4BPP_UNORM_BLOCK_IMG
+  1000054001)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_PVRTC2_2BPP_UNORM_BLOCK_IMG
+  1000054002)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_PVRTC2_4BPP_UNORM_BLOCK_IMG
+  1000054003)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_PVRTC1_2BPP_SRGB_BLOCK_IMG
+  1000054004)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_PVRTC1_4BPP_SRGB_BLOCK_IMG
+  1000054005)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_PVRTC2_2BPP_SRGB_BLOCK_IMG
+  1000054006)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_PVRTC2_4BPP_SRGB_BLOCK_IMG
+  1000054007)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_4X4_SFLOAT_BLOCK_EXT
+  VK_FORMAT_ASTC_4X4_SFLOAT_BLOCK)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_5X4_SFLOAT_BLOCK_EXT
+  VK_FORMAT_ASTC_5X4_SFLOAT_BLOCK)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_5X5_SFLOAT_BLOCK_EXT
+  VK_FORMAT_ASTC_5X5_SFLOAT_BLOCK)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_6X5_SFLOAT_BLOCK_EXT
+  VK_FORMAT_ASTC_6X5_SFLOAT_BLOCK)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_6X6_SFLOAT_BLOCK_EXT
+  VK_FORMAT_ASTC_6X6_SFLOAT_BLOCK)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_8X5_SFLOAT_BLOCK_EXT
+  VK_FORMAT_ASTC_8X5_SFLOAT_BLOCK)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_8X6_SFLOAT_BLOCK_EXT
+  VK_FORMAT_ASTC_8X6_SFLOAT_BLOCK)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_8X8_SFLOAT_BLOCK_EXT
+  VK_FORMAT_ASTC_8X8_SFLOAT_BLOCK)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_10X5_SFLOAT_BLOCK_EXT
+  VK_FORMAT_ASTC_10X5_SFLOAT_BLOCK)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_10X6_SFLOAT_BLOCK_EXT
+  VK_FORMAT_ASTC_10X6_SFLOAT_BLOCK)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_10X8_SFLOAT_BLOCK_EXT
+  VK_FORMAT_ASTC_10X8_SFLOAT_BLOCK)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_10X10_SFLOAT_BLOCK_EXT
+  VK_FORMAT_ASTC_10X10_SFLOAT_BLOCK)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_12X10_SFLOAT_BLOCK_EXT
+  VK_FORMAT_ASTC_12X10_SFLOAT_BLOCK)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_ASTC_12X12_SFLOAT_BLOCK_EXT
+  VK_FORMAT_ASTC_12X12_SFLOAT_BLOCK)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G8B8G8R8_422_UNORM_KHR
+  VK_FORMAT_G8B8G8R8_422_UNORM)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_B8G8R8G8_422_UNORM_KHR
+  VK_FORMAT_B8G8R8G8_422_UNORM)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G8_B8_R8_3PLANE_420_UNORM_KHR
+  VK_FORMAT_G8_B8_R8_3PLANE_420_UNORM)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G8_B8R8_2PLANE_420_UNORM_KHR
+  VK_FORMAT_G8_B8R8_2PLANE_420_UNORM)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G8_B8_R8_3PLANE_422_UNORM_KHR
+  VK_FORMAT_G8_B8_R8_3PLANE_422_UNORM)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G8_B8R8_2PLANE_422_UNORM_KHR
+  VK_FORMAT_G8_B8R8_2PLANE_422_UNORM)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G8_B8_R8_3PLANE_444_UNORM_KHR
+  VK_FORMAT_G8_B8_R8_3PLANE_444_UNORM)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R10X6_UNORM_PACK16_KHR
+  VK_FORMAT_R10X6_UNORM_PACK16)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R10X6G10X6_UNORM_2PACK16_KHR
+  VK_FORMAT_R10X6G10X6_UNORM_2PACK16)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R10X6G10X6B10X6A10X6_UNORM_4PACK16_KHR
+  VK_FORMAT_R10X6G10X6B10X6A10X6_UNORM_4PACK16)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G10X6B10X6G10X6R10X6_422_UNORM_4PACK16_KHR
+  VK_FORMAT_G10X6B10X6G10X6R10X6_422_UNORM_4PACK16)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_B10X6G10X6R10X6G10X6_422_UNORM_4PACK16_KHR
+  VK_FORMAT_B10X6G10X6R10X6G10X6_422_UNORM_4PACK16)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_420_UNORM_3PACK16_KHR
+  VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_420_UNORM_3PACK16)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G10X6_B10X6R10X6_2PLANE_420_UNORM_3PACK16_KHR
+  VK_FORMAT_G10X6_B10X6R10X6_2PLANE_420_UNORM_3PACK16)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_422_UNORM_3PACK16_KHR
+  VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_422_UNORM_3PACK16)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G10X6_B10X6R10X6_2PLANE_422_UNORM_3PACK16_KHR
+  VK_FORMAT_G10X6_B10X6R10X6_2PLANE_422_UNORM_3PACK16)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_444_UNORM_3PACK16_KHR
+  VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_444_UNORM_3PACK16)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R12X4_UNORM_PACK16_KHR
+  VK_FORMAT_R12X4_UNORM_PACK16)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R12X4G12X4_UNORM_2PACK16_KHR
+  VK_FORMAT_R12X4G12X4_UNORM_2PACK16)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_R12X4G12X4B12X4A12X4_UNORM_4PACK16_KHR
+  VK_FORMAT_R12X4G12X4B12X4A12X4_UNORM_4PACK16)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G12X4B12X4G12X4R12X4_422_UNORM_4PACK16_KHR
+  VK_FORMAT_G12X4B12X4G12X4R12X4_422_UNORM_4PACK16)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_B12X4G12X4R12X4G12X4_422_UNORM_4PACK16_KHR
+  VK_FORMAT_B12X4G12X4R12X4G12X4_422_UNORM_4PACK16)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_420_UNORM_3PACK16_KHR
+  VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_420_UNORM_3PACK16)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G12X4_B12X4R12X4_2PLANE_420_UNORM_3PACK16_KHR
+  VK_FORMAT_G12X4_B12X4R12X4_2PLANE_420_UNORM_3PACK16)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_422_UNORM_3PACK16_KHR
+  VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_422_UNORM_3PACK16)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G12X4_B12X4R12X4_2PLANE_422_UNORM_3PACK16_KHR
+  VK_FORMAT_G12X4_B12X4R12X4_2PLANE_422_UNORM_3PACK16)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_444_UNORM_3PACK16_KHR
+  VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_444_UNORM_3PACK16)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G16B16G16R16_422_UNORM_KHR
+  VK_FORMAT_G16B16G16R16_422_UNORM)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_B16G16R16G16_422_UNORM_KHR
+  VK_FORMAT_B16G16R16G16_422_UNORM)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G16_B16_R16_3PLANE_420_UNORM_KHR
+  VK_FORMAT_G16_B16_R16_3PLANE_420_UNORM)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G16_B16R16_2PLANE_420_UNORM_KHR
+  VK_FORMAT_G16_B16R16_2PLANE_420_UNORM)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G16_B16_R16_3PLANE_422_UNORM_KHR
+  VK_FORMAT_G16_B16_R16_3PLANE_422_UNORM)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G16_B16R16_2PLANE_422_UNORM_KHR
+  VK_FORMAT_G16_B16R16_2PLANE_422_UNORM)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G16_B16_R16_3PLANE_444_UNORM_KHR
+  VK_FORMAT_G16_B16_R16_3PLANE_444_UNORM)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G8_B8R8_2PLANE_444_UNORM_EXT
+  VK_FORMAT_G8_B8R8_2PLANE_444_UNORM)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G10X6_B10X6R10X6_2PLANE_444_UNORM_3PACK16_EXT
+  VK_FORMAT_G10X6_B10X6R10X6_2PLANE_444_UNORM_3PACK16)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G12X4_B12X4R12X4_2PLANE_444_UNORM_3PACK16_EXT
+  VK_FORMAT_G12X4_B12X4R12X4_2PLANE_444_UNORM_3PACK16)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_G16_B16R16_2PLANE_444_UNORM_EXT
+  VK_FORMAT_G16_B16R16_2PLANE_444_UNORM)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_A4R4G4B4_UNORM_PACK16_EXT
+  VK_FORMAT_A4R4G4B4_UNORM_PACK16)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_A4B4G4R4_UNORM_PACK16_EXT
+  VK_FORMAT_A4B4G4R4_UNORM_PACK16)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_TILING_OPTIMAL
+  0)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_TILING_LINEAR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT
+  1000158000)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_TILING_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_TYPE_1D
+  0)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_TYPE_2D
+  1)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_TYPE_3D
+  2)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_TYPE_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_PHYSICAL_DEVICE_TYPE_OTHER
+  0)
+
+(ADP:DEFPARAMETER
+  VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU
+  1)
+
+(ADP:DEFPARAMETER
+  VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU
+  2)
+
+(ADP:DEFPARAMETER
+  VK_PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU
+  3)
+
+(ADP:DEFPARAMETER
+  VK_PHYSICAL_DEVICE_TYPE_CPU
+  4)
+
+(ADP:DEFPARAMETER
+  VK_PHYSICAL_DEVICE_TYPE_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_TYPE_OCCLUSION
+  0)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_TYPE_PIPELINE_STATISTICS
+  1)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_TYPE_TIMESTAMP
+  2)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_TYPE_RESULT_STATUS_ONLY_KHR
+  1000023000)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT
+  1000028004)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR
+  1000116000)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR
+  1000150000)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR
+  1000150001)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_NV
+  1000165000)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_TYPE_PERFORMANCE_QUERY_INTEL
+  1000210000)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_TYPE_VIDEO_ENCODE_BITSTREAM_BUFFER_RANGE_KHR
+  1000299000)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_TYPE_PRIMITIVES_GENERATED_EXT
+  1000382000)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_BOTTOM_LEVEL_POINTERS_KHR
+  1000386000)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SIZE_KHR
+  1000386001)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_TYPE_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_SHARING_MODE_EXCLUSIVE
+  0)
+
+(ADP:DEFPARAMETER
+  VK_SHARING_MODE_CONCURRENT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_SHARING_MODE_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_COMPONENT_SWIZZLE_IDENTITY
+  0)
+
+(ADP:DEFPARAMETER
+  VK_COMPONENT_SWIZZLE_ZERO
+  1)
+
+(ADP:DEFPARAMETER
+  VK_COMPONENT_SWIZZLE_ONE
+  2)
+
+(ADP:DEFPARAMETER
+  VK_COMPONENT_SWIZZLE_R
+  3)
+
+(ADP:DEFPARAMETER
+  VK_COMPONENT_SWIZZLE_G
+  4)
+
+(ADP:DEFPARAMETER
+  VK_COMPONENT_SWIZZLE_B
+  5)
+
+(ADP:DEFPARAMETER
+  VK_COMPONENT_SWIZZLE_A
+  6)
+
+(ADP:DEFPARAMETER
+  VK_COMPONENT_SWIZZLE_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_VIEW_TYPE_1D
+  0)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_VIEW_TYPE_2D
+  1)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_VIEW_TYPE_3D
+  2)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_VIEW_TYPE_CUBE
+  3)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_VIEW_TYPE_1D_ARRAY
+  4)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_VIEW_TYPE_2D_ARRAY
+  5)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_VIEW_TYPE_CUBE_ARRAY
+  6)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_VIEW_TYPE_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_FACTOR_ZERO
+  0)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_FACTOR_ONE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_FACTOR_SRC_COLOR
+  2)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_FACTOR_ONE_MINUS_SRC_COLOR
+  3)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_FACTOR_DST_COLOR
+  4)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_FACTOR_ONE_MINUS_DST_COLOR
+  5)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_FACTOR_SRC_ALPHA
+  6)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA
+  7)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_FACTOR_DST_ALPHA
+  8)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_FACTOR_ONE_MINUS_DST_ALPHA
+  9)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_FACTOR_CONSTANT_COLOR
+  10)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR
+  11)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_FACTOR_CONSTANT_ALPHA
+  12)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA
+  13)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_FACTOR_SRC_ALPHA_SATURATE
+  14)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_FACTOR_SRC1_COLOR
+  15)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_FACTOR_ONE_MINUS_SRC1_COLOR
+  16)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_FACTOR_SRC1_ALPHA
+  17)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA
+  18)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_FACTOR_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_ADD
+  0)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_SUBTRACT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_REVERSE_SUBTRACT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_MIN
+  3)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_MAX
+  4)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_ZERO_EXT
+  1000148000)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_SRC_EXT
+  1000148001)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_DST_EXT
+  1000148002)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_SRC_OVER_EXT
+  1000148003)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_DST_OVER_EXT
+  1000148004)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_SRC_IN_EXT
+  1000148005)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_DST_IN_EXT
+  1000148006)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_SRC_OUT_EXT
+  1000148007)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_DST_OUT_EXT
+  1000148008)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_SRC_ATOP_EXT
+  1000148009)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_DST_ATOP_EXT
+  1000148010)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_XOR_EXT
+  1000148011)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_MULTIPLY_EXT
+  1000148012)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_SCREEN_EXT
+  1000148013)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_OVERLAY_EXT
+  1000148014)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_DARKEN_EXT
+  1000148015)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_LIGHTEN_EXT
+  1000148016)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_COLORDODGE_EXT
+  1000148017)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_COLORBURN_EXT
+  1000148018)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_HARDLIGHT_EXT
+  1000148019)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_SOFTLIGHT_EXT
+  1000148020)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_DIFFERENCE_EXT
+  1000148021)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_EXCLUSION_EXT
+  1000148022)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_INVERT_EXT
+  1000148023)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_INVERT_RGB_EXT
+  1000148024)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_LINEARDODGE_EXT
+  1000148025)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_LINEARBURN_EXT
+  1000148026)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_VIVIDLIGHT_EXT
+  1000148027)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_LINEARLIGHT_EXT
+  1000148028)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_PINLIGHT_EXT
+  1000148029)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_HARDMIX_EXT
+  1000148030)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_HSL_HUE_EXT
+  1000148031)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_HSL_SATURATION_EXT
+  1000148032)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_HSL_COLOR_EXT
+  1000148033)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_HSL_LUMINOSITY_EXT
+  1000148034)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_PLUS_EXT
+  1000148035)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_PLUS_CLAMPED_EXT
+  1000148036)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_PLUS_CLAMPED_ALPHA_EXT
+  1000148037)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_PLUS_DARKER_EXT
+  1000148038)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_MINUS_EXT
+  1000148039)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_MINUS_CLAMPED_EXT
+  1000148040)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_CONTRAST_EXT
+  1000148041)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_INVERT_OVG_EXT
+  1000148042)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_RED_EXT
+  1000148043)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_GREEN_EXT
+  1000148044)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_BLUE_EXT
+  1000148045)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OP_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_COMPARE_OP_NEVER
+  0)
+
+(ADP:DEFPARAMETER
+  VK_COMPARE_OP_LESS
+  1)
+
+(ADP:DEFPARAMETER
+  VK_COMPARE_OP_EQUAL
+  2)
+
+(ADP:DEFPARAMETER
+  VK_COMPARE_OP_LESS_OR_EQUAL
+  3)
+
+(ADP:DEFPARAMETER
+  VK_COMPARE_OP_GREATER
+  4)
+
+(ADP:DEFPARAMETER
+  VK_COMPARE_OP_NOT_EQUAL
+  5)
+
+(ADP:DEFPARAMETER
+  VK_COMPARE_OP_GREATER_OR_EQUAL
+  6)
+
+(ADP:DEFPARAMETER
+  VK_COMPARE_OP_ALWAYS
+  7)
+
+(ADP:DEFPARAMETER
+  VK_COMPARE_OP_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_VIEWPORT
+  0)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_SCISSOR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_LINE_WIDTH
+  2)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_DEPTH_BIAS
+  3)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_BLEND_CONSTANTS
+  4)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_DEPTH_BOUNDS
+  5)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_STENCIL_COMPARE_MASK
+  6)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_STENCIL_WRITE_MASK
+  7)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_STENCIL_REFERENCE
+  8)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_CULL_MODE
+  1000267000)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_FRONT_FACE
+  1000267001)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY
+  1000267002)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT
+  1000267003)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT
+  1000267004)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE
+  1000267005)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_DEPTH_TEST_ENABLE
+  1000267006)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_DEPTH_WRITE_ENABLE
+  1000267007)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_DEPTH_COMPARE_OP
+  1000267008)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE
+  1000267009)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_STENCIL_TEST_ENABLE
+  1000267010)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_STENCIL_OP
+  1000267011)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE
+  1000377001)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_DEPTH_BIAS_ENABLE
+  1000377002)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE
+  1000377004)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV
+  1000087000)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_DISCARD_RECTANGLE_EXT
+  1000099000)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT
+  1000143000)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_RAY_TRACING_PIPELINE_STACK_SIZE_KHR
+  1000347000)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV
+  1000164004)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_VIEWPORT_COARSE_SAMPLE_ORDER_NV
+  1000164006)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_EXCLUSIVE_SCISSOR_NV
+  1000205001)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_FRAGMENT_SHADING_RATE_KHR
+  1000226000)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_LINE_STIPPLE_EXT
+  1000259000)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_VERTEX_INPUT_EXT
+  1000352000)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_PATCH_CONTROL_POINTS_EXT
+  1000377000)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_LOGIC_OP_EXT
+  1000377003)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT
+  1000381000)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_CULL_MODE_EXT
+  VK_DYNAMIC_STATE_CULL_MODE)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_FRONT_FACE_EXT
+  VK_DYNAMIC_STATE_FRONT_FACE)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT
+  VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT
+  VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT
+  VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT
+  VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_DEPTH_TEST_ENABLE_EXT
+  VK_DYNAMIC_STATE_DEPTH_TEST_ENABLE)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_DEPTH_WRITE_ENABLE_EXT
+  VK_DYNAMIC_STATE_DEPTH_WRITE_ENABLE)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_DEPTH_COMPARE_OP_EXT
+  VK_DYNAMIC_STATE_DEPTH_COMPARE_OP)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE_EXT
+  VK_DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_STENCIL_TEST_ENABLE_EXT
+  VK_DYNAMIC_STATE_STENCIL_TEST_ENABLE)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_STENCIL_OP_EXT
+  VK_DYNAMIC_STATE_STENCIL_OP)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE_EXT
+  VK_DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_DEPTH_BIAS_ENABLE_EXT
+  VK_DYNAMIC_STATE_DEPTH_BIAS_ENABLE)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE_EXT
+  VK_DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE)
+
+(ADP:DEFPARAMETER
+  VK_DYNAMIC_STATE_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_FRONT_FACE_COUNTER_CLOCKWISE
+  0)
+
+(ADP:DEFPARAMETER
+  VK_FRONT_FACE_CLOCKWISE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_FRONT_FACE_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_VERTEX_INPUT_RATE_VERTEX
+  0)
+
+(ADP:DEFPARAMETER
+  VK_VERTEX_INPUT_RATE_INSTANCE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_VERTEX_INPUT_RATE_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_PRIMITIVE_TOPOLOGY_POINT_LIST
+  0)
+
+(ADP:DEFPARAMETER
+  VK_PRIMITIVE_TOPOLOGY_LINE_LIST
+  1)
+
+(ADP:DEFPARAMETER
+  VK_PRIMITIVE_TOPOLOGY_LINE_STRIP
+  2)
+
+(ADP:DEFPARAMETER
+  VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST
+  3)
+
+(ADP:DEFPARAMETER
+  VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP
+  4)
+
+(ADP:DEFPARAMETER
+  VK_PRIMITIVE_TOPOLOGY_TRIANGLE_FAN
+  5)
+
+(ADP:DEFPARAMETER
+  VK_PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY
+  6)
+
+(ADP:DEFPARAMETER
+  VK_PRIMITIVE_TOPOLOGY_LINE_STRIP_WITH_ADJACENCY
+  7)
+
+(ADP:DEFPARAMETER
+  VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY
+  8)
+
+(ADP:DEFPARAMETER
+  VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY
+  9)
+
+(ADP:DEFPARAMETER
+  VK_PRIMITIVE_TOPOLOGY_PATCH_LIST
+  10)
+
+(ADP:DEFPARAMETER
+  VK_PRIMITIVE_TOPOLOGY_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_POLYGON_MODE_FILL
+  0)
+
+(ADP:DEFPARAMETER
+  VK_POLYGON_MODE_LINE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_POLYGON_MODE_POINT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_POLYGON_MODE_FILL_RECTANGLE_NV
+  1000153000)
+
+(ADP:DEFPARAMETER
+  VK_POLYGON_MODE_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_STENCIL_OP_KEEP
+  0)
+
+(ADP:DEFPARAMETER
+  VK_STENCIL_OP_ZERO
+  1)
+
+(ADP:DEFPARAMETER
+  VK_STENCIL_OP_REPLACE
+  2)
+
+(ADP:DEFPARAMETER
+  VK_STENCIL_OP_INCREMENT_AND_CLAMP
+  3)
+
+(ADP:DEFPARAMETER
+  VK_STENCIL_OP_DECREMENT_AND_CLAMP
+  4)
+
+(ADP:DEFPARAMETER
+  VK_STENCIL_OP_INVERT
+  5)
+
+(ADP:DEFPARAMETER
+  VK_STENCIL_OP_INCREMENT_AND_WRAP
+  6)
+
+(ADP:DEFPARAMETER
+  VK_STENCIL_OP_DECREMENT_AND_WRAP
+  7)
+
+(ADP:DEFPARAMETER
+  VK_STENCIL_OP_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_LOGIC_OP_CLEAR
+  0)
+
+(ADP:DEFPARAMETER
+  VK_LOGIC_OP_AND
+  1)
+
+(ADP:DEFPARAMETER
+  VK_LOGIC_OP_AND_REVERSE
+  2)
+
+(ADP:DEFPARAMETER
+  VK_LOGIC_OP_COPY
+  3)
+
+(ADP:DEFPARAMETER
+  VK_LOGIC_OP_AND_INVERTED
+  4)
+
+(ADP:DEFPARAMETER
+  VK_LOGIC_OP_NO_OP
+  5)
+
+(ADP:DEFPARAMETER
+  VK_LOGIC_OP_XOR
+  6)
+
+(ADP:DEFPARAMETER
+  VK_LOGIC_OP_OR
+  7)
+
+(ADP:DEFPARAMETER
+  VK_LOGIC_OP_NOR
+  8)
+
+(ADP:DEFPARAMETER
+  VK_LOGIC_OP_EQUIVALENT
+  9)
+
+(ADP:DEFPARAMETER
+  VK_LOGIC_OP_INVERT
+  10)
+
+(ADP:DEFPARAMETER
+  VK_LOGIC_OP_OR_REVERSE
+  11)
+
+(ADP:DEFPARAMETER
+  VK_LOGIC_OP_COPY_INVERTED
+  12)
+
+(ADP:DEFPARAMETER
+  VK_LOGIC_OP_OR_INVERTED
+  13)
+
+(ADP:DEFPARAMETER
+  VK_LOGIC_OP_NAND
+  14)
+
+(ADP:DEFPARAMETER
+  VK_LOGIC_OP_SET
+  15)
+
+(ADP:DEFPARAMETER
+  VK_LOGIC_OP_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_BORDER_COLOR_FLOAT_TRANSPARENT_BLACK
+  0)
+
+(ADP:DEFPARAMETER
+  VK_BORDER_COLOR_INT_TRANSPARENT_BLACK
+  1)
+
+(ADP:DEFPARAMETER
+  VK_BORDER_COLOR_FLOAT_OPAQUE_BLACK
+  2)
+
+(ADP:DEFPARAMETER
+  VK_BORDER_COLOR_INT_OPAQUE_BLACK
+  3)
+
+(ADP:DEFPARAMETER
+  VK_BORDER_COLOR_FLOAT_OPAQUE_WHITE
+  4)
+
+(ADP:DEFPARAMETER
+  VK_BORDER_COLOR_INT_OPAQUE_WHITE
+  5)
+
+(ADP:DEFPARAMETER
+  VK_BORDER_COLOR_FLOAT_CUSTOM_EXT
+  1000287003)
+
+(ADP:DEFPARAMETER
+  VK_BORDER_COLOR_INT_CUSTOM_EXT
+  1000287004)
+
+(ADP:DEFPARAMETER
+  VK_BORDER_COLOR_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_FILTER_NEAREST
+  0)
+
+(ADP:DEFPARAMETER
+  VK_FILTER_LINEAR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_FILTER_CUBIC_IMG
+  1000015000)
+
+(ADP:DEFPARAMETER
+  VK_FILTER_CUBIC_EXT
+  VK_FILTER_CUBIC_IMG)
+
+(ADP:DEFPARAMETER
+  VK_FILTER_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_ADDRESS_MODE_REPEAT
+  0)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE
+  2)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER
+  3)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE
+  4)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE_KHR
+  VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_ADDRESS_MODE_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_MIPMAP_MODE_NEAREST
+  0)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_MIPMAP_MODE_LINEAR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_MIPMAP_MODE_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_TYPE_SAMPLER
+  0)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER
+  1)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE
+  2)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_TYPE_STORAGE_IMAGE
+  3)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER
+  4)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER
+  5)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER
+  6)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_TYPE_STORAGE_BUFFER
+  7)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC
+  8)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC
+  9)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT
+  10)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK
+  1000138000)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR
+  1000150000)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_NV
+  1000165000)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_TYPE_MUTABLE_VALVE
+  1000351000)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT
+  VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_TYPE_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_ATTACHMENT_LOAD_OP_LOAD
+  0)
+
+(ADP:DEFPARAMETER
+  VK_ATTACHMENT_LOAD_OP_CLEAR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_ATTACHMENT_LOAD_OP_DONT_CARE
+  2)
+
+(ADP:DEFPARAMETER
+  VK_ATTACHMENT_LOAD_OP_NONE_EXT
+  1000400000)
+
+(ADP:DEFPARAMETER
+  VK_ATTACHMENT_LOAD_OP_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_ATTACHMENT_STORE_OP_STORE
+  0)
+
+(ADP:DEFPARAMETER
+  VK_ATTACHMENT_STORE_OP_DONT_CARE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_ATTACHMENT_STORE_OP_NONE
+  1000301000)
+
+(ADP:DEFPARAMETER
+  VK_ATTACHMENT_STORE_OP_NONE_KHR
+  VK_ATTACHMENT_STORE_OP_NONE)
+
+(ADP:DEFPARAMETER
+  VK_ATTACHMENT_STORE_OP_NONE_QCOM
+  VK_ATTACHMENT_STORE_OP_NONE)
+
+(ADP:DEFPARAMETER
+  VK_ATTACHMENT_STORE_OP_NONE_EXT
+  VK_ATTACHMENT_STORE_OP_NONE)
+
+(ADP:DEFPARAMETER
+  VK_ATTACHMENT_STORE_OP_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_BIND_POINT_GRAPHICS
+  0)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_BIND_POINT_COMPUTE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_BIND_POINT_RAY_TRACING_KHR
+  1000165000)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_BIND_POINT_SUBPASS_SHADING_HUAWEI
+  1000369003)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_BIND_POINT_RAY_TRACING_NV
+  VK_PIPELINE_BIND_POINT_RAY_TRACING_KHR)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_BIND_POINT_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_COMMAND_BUFFER_LEVEL_PRIMARY
+  0)
+
+(ADP:DEFPARAMETER
+  VK_COMMAND_BUFFER_LEVEL_SECONDARY
+  1)
+
+(ADP:DEFPARAMETER
+  VK_COMMAND_BUFFER_LEVEL_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_INDEX_TYPE_UINT16
+  0)
+
+(ADP:DEFPARAMETER
+  VK_INDEX_TYPE_UINT32
+  1)
+
+(ADP:DEFPARAMETER
+  VK_INDEX_TYPE_NONE_KHR
+  1000165000)
+
+(ADP:DEFPARAMETER
+  VK_INDEX_TYPE_UINT8_EXT
+  1000265000)
+
+(ADP:DEFPARAMETER
+  VK_INDEX_TYPE_NONE_NV
+  VK_INDEX_TYPE_NONE_KHR)
+
+(ADP:DEFPARAMETER
+  VK_INDEX_TYPE_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_SUBPASS_CONTENTS_INLINE
+  0)
+
+(ADP:DEFPARAMETER
+  VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS
+  1)
+
+(ADP:DEFPARAMETER
+  VK_SUBPASS_CONTENTS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_INDIRECT_COMMAND_READ_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_INDEX_READ_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_VERTEX_ATTRIBUTE_READ_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_UNIFORM_READ_BIT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_INPUT_ATTACHMENT_READ_BIT
+  16)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_SHADER_READ_BIT
+  32)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_SHADER_WRITE_BIT
+  64)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_COLOR_ATTACHMENT_READ_BIT
+  128)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT
+  256)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT
+  512)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT
+  1024)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_TRANSFER_READ_BIT
+  2048)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_TRANSFER_WRITE_BIT
+  4096)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_HOST_READ_BIT
+  8192)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_HOST_WRITE_BIT
+  16384)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_MEMORY_READ_BIT
+  32768)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_MEMORY_WRITE_BIT
+  65536)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_NONE
+  0)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_TRANSFORM_FEEDBACK_WRITE_BIT_EXT
+  33554432)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT
+  67108864)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_TRANSFORM_FEEDBACK_COUNTER_WRITE_BIT_EXT
+  134217728)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_CONDITIONAL_RENDERING_READ_BIT_EXT
+  1048576)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT
+  524288)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_ACCELERATION_STRUCTURE_READ_BIT_KHR
+  2097152)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_ACCELERATION_STRUCTURE_WRITE_BIT_KHR
+  4194304)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_FRAGMENT_DENSITY_MAP_READ_BIT_EXT
+  16777216)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT_KHR
+  8388608)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_COMMAND_PREPROCESS_READ_BIT_NV
+  131072)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_COMMAND_PREPROCESS_WRITE_BIT_NV
+  262144)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_SHADING_RATE_IMAGE_READ_BIT_NV
+  VK_ACCESS_FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT_KHR)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_ACCELERATION_STRUCTURE_READ_BIT_NV
+  VK_ACCESS_ACCELERATION_STRUCTURE_READ_BIT_KHR)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_ACCELERATION_STRUCTURE_WRITE_BIT_NV
+  VK_ACCESS_ACCELERATION_STRUCTURE_WRITE_BIT_KHR)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_NONE_KHR
+  VK_ACCESS_NONE)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_ASPECT_COLOR_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_ASPECT_DEPTH_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_ASPECT_STENCIL_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_ASPECT_METADATA_BIT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_ASPECT_PLANE_0_BIT
+  16)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_ASPECT_PLANE_1_BIT
+  32)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_ASPECT_PLANE_2_BIT
+  64)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_ASPECT_NONE
+  0)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_ASPECT_MEMORY_PLANE_0_BIT_EXT
+  128)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_ASPECT_MEMORY_PLANE_1_BIT_EXT
+  256)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_ASPECT_MEMORY_PLANE_2_BIT_EXT
+  512)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_ASPECT_MEMORY_PLANE_3_BIT_EXT
+  1024)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_ASPECT_PLANE_0_BIT_KHR
+  VK_IMAGE_ASPECT_PLANE_0_BIT)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_ASPECT_PLANE_1_BIT_KHR
+  VK_IMAGE_ASPECT_PLANE_1_BIT)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_ASPECT_PLANE_2_BIT_KHR
+  VK_IMAGE_ASPECT_PLANE_2_BIT)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_ASPECT_NONE_KHR
+  VK_IMAGE_ASPECT_NONE)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_ASPECT_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_UNIFORM_TEXEL_BUFFER_BIT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_BIT
+  16)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_ATOMIC_BIT
+  32)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_VERTEX_BUFFER_BIT
+  64)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT
+  128)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT
+  256)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT
+  512)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_BLIT_SRC_BIT
+  1024)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_BLIT_DST_BIT
+  2048)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT
+  4096)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_TRANSFER_SRC_BIT
+  16384)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_TRANSFER_DST_BIT
+  32768)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT
+  131072)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT
+  262144)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT
+  524288)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT
+  1048576)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT
+  2097152)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_DISJOINT_BIT
+  4194304)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT
+  8388608)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT
+  65536)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG
+  8192)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_VIDEO_DECODE_OUTPUT_BIT_KHR
+  33554432)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_VIDEO_DECODE_DPB_BIT_KHR
+  67108864)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_ACCELERATION_STRUCTURE_VERTEX_BUFFER_BIT_KHR
+  536870912)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_FRAGMENT_DENSITY_MAP_BIT_EXT
+  16777216)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR
+  1073741824)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_VIDEO_ENCODE_INPUT_BIT_KHR
+  134217728)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_VIDEO_ENCODE_DPB_BIT_KHR
+  268435456)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_TRANSFER_SRC_BIT_KHR
+  VK_FORMAT_FEATURE_TRANSFER_SRC_BIT)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_TRANSFER_DST_BIT_KHR
+  VK_FORMAT_FEATURE_TRANSFER_DST_BIT)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT_EXT
+  VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT_KHR
+  VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT_KHR
+  VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT_KHR
+  VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT_KHR
+  VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT_KHR
+  VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_DISJOINT_BIT_KHR
+  VK_FORMAT_FEATURE_DISJOINT_BIT)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT_KHR
+  VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT
+  VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_CREATE_SPARSE_BINDING_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_CREATE_SPARSE_ALIASED_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT
+  16)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_CREATE_ALIAS_BIT
+  1024)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT
+  64)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT
+  32)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT
+  128)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_CREATE_EXTENDED_USAGE_BIT
+  256)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_CREATE_PROTECTED_BIT
+  2048)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_CREATE_DISJOINT_BIT
+  512)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV
+  8192)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT
+  4096)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT
+  16384)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_CREATE_2D_VIEW_COMPATIBLE_BIT_EXT
+  131072)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_CREATE_FRAGMENT_DENSITY_MAP_OFFSET_BIT_QCOM
+  32768)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR
+  VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT_KHR
+  VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT_KHR
+  VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_CREATE_EXTENDED_USAGE_BIT_KHR
+  VK_IMAGE_CREATE_EXTENDED_USAGE_BIT)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_CREATE_DISJOINT_BIT_KHR
+  VK_IMAGE_CREATE_DISJOINT_BIT)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_CREATE_ALIAS_BIT_KHR
+  VK_IMAGE_CREATE_ALIAS_BIT)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_CREATE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLE_COUNT_1_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLE_COUNT_2_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLE_COUNT_4_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLE_COUNT_8_BIT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLE_COUNT_16_BIT
+  16)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLE_COUNT_32_BIT
+  32)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLE_COUNT_64_BIT
+  64)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLE_COUNT_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_USAGE_TRANSFER_SRC_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_USAGE_TRANSFER_DST_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_USAGE_SAMPLED_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_USAGE_STORAGE_BIT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT
+  16)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT
+  32)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT
+  64)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT
+  128)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR
+  1024)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_USAGE_VIDEO_DECODE_SRC_BIT_KHR
+  2048)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR
+  4096)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT
+  512)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR
+  256)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_USAGE_VIDEO_ENCODE_DST_BIT_KHR
+  8192)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_USAGE_VIDEO_ENCODE_SRC_BIT_KHR
+  16384)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR
+  32768)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_USAGE_INVOCATION_MASK_BIT_HUAWEI
+  262144)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV
+  VK_IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_USAGE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_INSTANCE_CREATE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_MEMORY_HEAP_DEVICE_LOCAL_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_MEMORY_HEAP_MULTI_INSTANCE_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_MEMORY_HEAP_MULTI_INSTANCE_BIT_KHR
+  VK_MEMORY_HEAP_MULTI_INSTANCE_BIT)
+
+(ADP:DEFPARAMETER
+  VK_MEMORY_HEAP_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_MEMORY_PROPERTY_HOST_COHERENT_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_MEMORY_PROPERTY_HOST_CACHED_BIT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT
+  16)
+
+(ADP:DEFPARAMETER
+  VK_MEMORY_PROPERTY_PROTECTED_BIT
+  32)
+
+(ADP:DEFPARAMETER
+  VK_MEMORY_PROPERTY_DEVICE_COHERENT_BIT_AMD
+  64)
+
+(ADP:DEFPARAMETER
+  VK_MEMORY_PROPERTY_DEVICE_UNCACHED_BIT_AMD
+  128)
+
+(ADP:DEFPARAMETER
+  VK_MEMORY_PROPERTY_RDMA_CAPABLE_BIT_NV
+  256)
+
+(ADP:DEFPARAMETER
+  VK_MEMORY_PROPERTY_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_QUEUE_GRAPHICS_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_QUEUE_COMPUTE_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_QUEUE_TRANSFER_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_QUEUE_SPARSE_BINDING_BIT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_QUEUE_PROTECTED_BIT
+  16)
+
+(ADP:DEFPARAMETER
+  VK_QUEUE_VIDEO_DECODE_BIT_KHR
+  32)
+
+(ADP:DEFPARAMETER
+  VK_QUEUE_VIDEO_ENCODE_BIT_KHR
+  64)
+
+(ADP:DEFPARAMETER
+  VK_QUEUE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_DEVICE_QUEUE_CREATE_PROTECTED_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_DEVICE_QUEUE_CREATE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_VERTEX_INPUT_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_VERTEX_SHADER_BIT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT
+  16)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT
+  32)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT
+  64)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT
+  128)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT
+  256)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT
+  512)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT
+  1024)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT
+  2048)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_TRANSFER_BIT
+  4096)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT
+  8192)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_HOST_BIT
+  16384)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_ALL_GRAPHICS_BIT
+  32768)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_ALL_COMMANDS_BIT
+  65536)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_NONE
+  0)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_TRANSFORM_FEEDBACK_BIT_EXT
+  16777216)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_CONDITIONAL_RENDERING_BIT_EXT
+  262144)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR
+  33554432)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_RAY_TRACING_SHADER_BIT_KHR
+  2097152)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV
+  524288)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV
+  1048576)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_FRAGMENT_DENSITY_PROCESS_BIT_EXT
+  8388608)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR
+  4194304)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_COMMAND_PREPROCESS_BIT_NV
+  131072)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_SHADING_RATE_IMAGE_BIT_NV
+  VK_PIPELINE_STAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_RAY_TRACING_SHADER_BIT_NV
+  VK_PIPELINE_STAGE_RAY_TRACING_SHADER_BIT_KHR)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_NV
+  VK_PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_NONE_KHR
+  VK_PIPELINE_STAGE_NONE)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_SPARSE_MEMORY_BIND_METADATA_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_SPARSE_MEMORY_BIND_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_SPARSE_IMAGE_FORMAT_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_FENCE_CREATE_SIGNALED_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_FENCE_CREATE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_EVENT_CREATE_DEVICE_ONLY_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EVENT_CREATE_DEVICE_ONLY_BIT_KHR
+  VK_EVENT_CREATE_DEVICE_ONLY_BIT)
+
+(ADP:DEFPARAMETER
+  VK_EVENT_CREATE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_VERTICES_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_PRIMITIVES_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_PIPELINE_STATISTIC_VERTEX_SHADER_INVOCATIONS_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_INVOCATIONS_BIT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_PRIMITIVES_BIT
+  16)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_PIPELINE_STATISTIC_CLIPPING_INVOCATIONS_BIT
+  32)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_PIPELINE_STATISTIC_CLIPPING_PRIMITIVES_BIT
+  64)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_PIPELINE_STATISTIC_FRAGMENT_SHADER_INVOCATIONS_BIT
+  128)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_CONTROL_SHADER_PATCHES_BIT
+  256)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT
+  512)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_PIPELINE_STATISTIC_COMPUTE_SHADER_INVOCATIONS_BIT
+  1024)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_PIPELINE_STATISTIC_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_RESULT_64_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_RESULT_WAIT_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_RESULT_WITH_AVAILABILITY_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_RESULT_PARTIAL_BIT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_RESULT_WITH_STATUS_BIT_KHR
+  16)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_RESULT_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_CREATE_SPARSE_BINDING_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_CREATE_SPARSE_ALIASED_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_CREATE_PROTECTED_BIT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT
+  16)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT
+  VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR
+  VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_CREATE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_USAGE_TRANSFER_SRC_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_USAGE_TRANSFER_DST_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT
+  16)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_USAGE_STORAGE_BUFFER_BIT
+  32)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_USAGE_INDEX_BUFFER_BIT
+  64)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_USAGE_VERTEX_BUFFER_BIT
+  128)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT
+  256)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT
+  131072)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_USAGE_VIDEO_DECODE_SRC_BIT_KHR
+  8192)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_USAGE_VIDEO_DECODE_DST_BIT_KHR
+  16384)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_USAGE_TRANSFORM_FEEDBACK_BUFFER_BIT_EXT
+  2048)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_USAGE_TRANSFORM_FEEDBACK_COUNTER_BUFFER_BIT_EXT
+  4096)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_USAGE_CONDITIONAL_RENDERING_BIT_EXT
+  512)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_USAGE_ACCELERATION_STRUCTURE_BUILD_INPUT_READ_ONLY_BIT_KHR
+  524288)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_USAGE_ACCELERATION_STRUCTURE_STORAGE_BIT_KHR
+  1048576)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_USAGE_SHADER_BINDING_TABLE_BIT_KHR
+  1024)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_USAGE_VIDEO_ENCODE_DST_BIT_KHR
+  32768)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_USAGE_VIDEO_ENCODE_SRC_BIT_KHR
+  65536)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_USAGE_RAY_TRACING_BIT_NV
+  VK_BUFFER_USAGE_SHADER_BINDING_TABLE_BIT_KHR)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_EXT
+  VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_KHR
+  VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT)
+
+(ADP:DEFPARAMETER
+  VK_BUFFER_USAGE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DEFERRED_BIT_EXT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_VIEW_CREATE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CACHE_CREATE_EXTERNALLY_SYNCHRONIZED_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CACHE_CREATE_EXTERNALLY_SYNCHRONIZED_BIT_EXT
+  VK_PIPELINE_CACHE_CREATE_EXTERNALLY_SYNCHRONIZED_BIT)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CACHE_CREATE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_COLOR_COMPONENT_R_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_COLOR_COMPONENT_G_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_COLOR_COMPONENT_B_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_COLOR_COMPONENT_A_BIT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_COLOR_COMPONENT_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATE_DISABLE_OPTIMIZATION_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATE_DERIVATIVE_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATE_DISPATCH_BASE_BIT
+  16)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT
+  256)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT
+  512)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR
+  2097152)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT
+  4194304)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_ANY_HIT_SHADERS_BIT_KHR
+  16384)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_CLOSEST_HIT_SHADERS_BIT_KHR
+  32768)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_MISS_SHADERS_BIT_KHR
+  65536)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_INTERSECTION_SHADERS_BIT_KHR
+  131072)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATE_RAY_TRACING_SKIP_TRIANGLES_BIT_KHR
+  4096)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATE_RAY_TRACING_SKIP_AABBS_BIT_KHR
+  8192)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATE_RAY_TRACING_SHADER_GROUP_HANDLE_CAPTURE_REPLAY_BIT_KHR
+  524288)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATE_DEFER_COMPILE_BIT_NV
+  32)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATE_CAPTURE_STATISTICS_BIT_KHR
+  64)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATE_CAPTURE_INTERNAL_REPRESENTATIONS_BIT_KHR
+  128)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATE_INDIRECT_BINDABLE_BIT_NV
+  262144)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATE_LIBRARY_BIT_KHR
+  2048)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATE_RETAIN_LINK_TIME_OPTIMIZATION_INFO_BIT_EXT
+  8388608)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATE_LINK_TIME_OPTIMIZATION_BIT_EXT
+  1024)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATE_RAY_TRACING_ALLOW_MOTION_BIT_NV
+  1048576)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATE_DISPATCH_BASE
+  VK_PIPELINE_CREATE_DISPATCH_BASE_BIT)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR
+  VK_PIPELINE_CREATE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT
+  VK_PIPELINE_CREATE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT_KHR
+  VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATE_DISPATCH_BASE_KHR
+  VK_PIPELINE_CREATE_DISPATCH_BASE)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT_EXT
+  VK_PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT_EXT
+  VK_PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT
+  VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT
+  VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_SHADER_STAGE_CREATE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_STAGE_VERTEX_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_STAGE_GEOMETRY_BIT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_STAGE_FRAGMENT_BIT
+  16)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_STAGE_COMPUTE_BIT
+  32)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_STAGE_ALL_GRAPHICS
+  31)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_STAGE_ALL
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_STAGE_RAYGEN_BIT_KHR
+  256)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_STAGE_ANY_HIT_BIT_KHR
+  512)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_STAGE_CLOSEST_HIT_BIT_KHR
+  1024)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_STAGE_MISS_BIT_KHR
+  2048)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_STAGE_INTERSECTION_BIT_KHR
+  4096)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_STAGE_CALLABLE_BIT_KHR
+  8192)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_STAGE_TASK_BIT_NV
+  64)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_STAGE_MESH_BIT_NV
+  128)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_STAGE_SUBPASS_SHADING_BIT_HUAWEI
+  16384)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_STAGE_RAYGEN_BIT_NV
+  VK_SHADER_STAGE_RAYGEN_BIT_KHR)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_STAGE_ANY_HIT_BIT_NV
+  VK_SHADER_STAGE_ANY_HIT_BIT_KHR)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_STAGE_CLOSEST_HIT_BIT_NV
+  VK_SHADER_STAGE_CLOSEST_HIT_BIT_KHR)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_STAGE_MISS_BIT_NV
+  VK_SHADER_STAGE_MISS_BIT_KHR)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_STAGE_INTERSECTION_BIT_NV
+  VK_SHADER_STAGE_INTERSECTION_BIT_KHR)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_STAGE_CALLABLE_BIT_NV
+  VK_SHADER_STAGE_CALLABLE_BIT_KHR)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_STAGE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_CULL_MODE_NONE
+  0)
+
+(ADP:DEFPARAMETER
+  VK_CULL_MODE_FRONT_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_CULL_MODE_BACK_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_CULL_MODE_FRONT_AND_BACK
+  3)
+
+(ADP:DEFPARAMETER
+  VK_CULL_MODE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_DEPTH_STENCIL_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_BIT_ARM
+  1)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_DEPTH_STENCIL_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_ARM
+  2)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_DEPTH_STENCIL_STATE_CREATE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_COLOR_BLEND_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_BIT_ARM
+  1)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_COLOR_BLEND_STATE_CREATE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_LAYOUT_CREATE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_CREATE_SUBSAMPLED_COARSE_RECONSTRUCTION_BIT_EXT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_CREATE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_POOL_CREATE_HOST_ONLY_BIT_VALVE
+  4)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT_EXT
+  VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_POOL_CREATE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_SET_LAYOUT_CREATE_HOST_ONLY_POOL_BIT_VALVE
+  4)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT
+  VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_SET_LAYOUT_CREATE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_ATTACHMENT_DESCRIPTION_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_DEPENDENCY_BY_REGION_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_DEPENDENCY_DEVICE_GROUP_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_DEPENDENCY_VIEW_LOCAL_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_DEPENDENCY_VIEW_LOCAL_BIT_KHR
+  VK_DEPENDENCY_VIEW_LOCAL_BIT)
+
+(ADP:DEFPARAMETER
+  VK_DEPENDENCY_DEVICE_GROUP_BIT_KHR
+  VK_DEPENDENCY_DEVICE_GROUP_BIT)
+
+(ADP:DEFPARAMETER
+  VK_DEPENDENCY_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR
+  VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT)
+
+(ADP:DEFPARAMETER
+  VK_FRAMEBUFFER_CREATE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_RENDER_PASS_CREATE_TRANSFORM_BIT_QCOM
+  2)
+
+(ADP:DEFPARAMETER
+  VK_RENDER_PASS_CREATE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_SUBPASS_DESCRIPTION_PER_VIEW_ATTRIBUTES_BIT_NVX
+  1)
+
+(ADP:DEFPARAMETER
+  VK_SUBPASS_DESCRIPTION_PER_VIEW_POSITION_X_ONLY_BIT_NVX
+  2)
+
+(ADP:DEFPARAMETER
+  VK_SUBPASS_DESCRIPTION_FRAGMENT_REGION_BIT_QCOM
+  4)
+
+(ADP:DEFPARAMETER
+  VK_SUBPASS_DESCRIPTION_SHADER_RESOLVE_BIT_QCOM
+  8)
+
+(ADP:DEFPARAMETER
+  VK_SUBPASS_DESCRIPTION_RASTERIZATION_ORDER_ATTACHMENT_COLOR_ACCESS_BIT_ARM
+  16)
+
+(ADP:DEFPARAMETER
+  VK_SUBPASS_DESCRIPTION_RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_BIT_ARM
+  32)
+
+(ADP:DEFPARAMETER
+  VK_SUBPASS_DESCRIPTION_RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_ARM
+  64)
+
+(ADP:DEFPARAMETER
+  VK_SUBPASS_DESCRIPTION_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_COMMAND_POOL_CREATE_TRANSIENT_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_COMMAND_POOL_CREATE_PROTECTED_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_COMMAND_POOL_CREATE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_COMMAND_POOL_RESET_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_COMMAND_BUFFER_USAGE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_CONTROL_PRECISE_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_CONTROL_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_COMMAND_BUFFER_RESET_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_STENCIL_FACE_FRONT_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_STENCIL_FACE_BACK_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_STENCIL_FACE_FRONT_AND_BACK
+  3)
+
+(ADP:DEFPARAMETER
+  VK_STENCIL_FRONT_AND_BACK
+  VK_STENCIL_FACE_FRONT_AND_BACK)
+
+(ADP:DEFPARAMETER
+  VK_STENCIL_FACE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_VERSION_1_1
+  1)
+
+(ADP:DEFPARAMETER
+  VK_API_VERSION_1_1
+  (VK_MAKE_API_VERSION 0 1 1 0))
+
+(ADP:DEFPARAMETER
+  VK_MAX_DEVICE_GROUP_SIZE
+  32)
+
+(ADP:DEFPARAMETER
+  VK_LUID_SIZE
+  8)
+
+(ADP:DEFPARAMETER
+  VK_QUEUE_FAMILY_EXTERNAL
+  (- UINT32_MAX 1))
+
+(ADP:DEFPARAMETER
+  VK_POINT_CLIPPING_BEHAVIOR_ALL_CLIP_PLANES
+  0)
+
+(ADP:DEFPARAMETER
+  VK_POINT_CLIPPING_BEHAVIOR_USER_CLIP_PLANES_ONLY
+  1)
+
+(ADP:DEFPARAMETER
+  VK_POINT_CLIPPING_BEHAVIOR_ALL_CLIP_PLANES_KHR
+  VK_POINT_CLIPPING_BEHAVIOR_ALL_CLIP_PLANES)
+
+(ADP:DEFPARAMETER
+  VK_POINT_CLIPPING_BEHAVIOR_USER_CLIP_PLANES_ONLY_KHR
+  VK_POINT_CLIPPING_BEHAVIOR_USER_CLIP_PLANES_ONLY)
+
+(ADP:DEFPARAMETER
+  VK_POINT_CLIPPING_BEHAVIOR_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT
+  0)
+
+(ADP:DEFPARAMETER
+  VK_TESSELLATION_DOMAIN_ORIGIN_LOWER_LEFT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT_KHR
+  VK_TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT)
+
+(ADP:DEFPARAMETER
+  VK_TESSELLATION_DOMAIN_ORIGIN_LOWER_LEFT_KHR
+  VK_TESSELLATION_DOMAIN_ORIGIN_LOWER_LEFT)
+
+(ADP:DEFPARAMETER
+  VK_TESSELLATION_DOMAIN_ORIGIN_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY
+  0)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_IDENTITY
+  1)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_709
+  2)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601
+  3)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020
+  4)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY_KHR
+  VK_SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_IDENTITY_KHR
+  VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_IDENTITY)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_709_KHR
+  VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_709)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601_KHR
+  VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020_KHR
+  VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_YCBCR_MODEL_CONVERSION_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_YCBCR_RANGE_ITU_FULL
+  0)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_YCBCR_RANGE_ITU_NARROW
+  1)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_YCBCR_RANGE_ITU_FULL_KHR
+  VK_SAMPLER_YCBCR_RANGE_ITU_FULL)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_YCBCR_RANGE_ITU_NARROW_KHR
+  VK_SAMPLER_YCBCR_RANGE_ITU_NARROW)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_YCBCR_RANGE_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_CHROMA_LOCATION_COSITED_EVEN
+  0)
+
+(ADP:DEFPARAMETER
+  VK_CHROMA_LOCATION_MIDPOINT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_CHROMA_LOCATION_COSITED_EVEN_KHR
+  VK_CHROMA_LOCATION_COSITED_EVEN)
+
+(ADP:DEFPARAMETER
+  VK_CHROMA_LOCATION_MIDPOINT_KHR
+  VK_CHROMA_LOCATION_MIDPOINT)
+
+(ADP:DEFPARAMETER
+  VK_CHROMA_LOCATION_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET
+  0)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET_KHR
+  VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_SUBGROUP_FEATURE_BASIC_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_SUBGROUP_FEATURE_VOTE_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_SUBGROUP_FEATURE_ARITHMETIC_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_SUBGROUP_FEATURE_BALLOT_BIT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_SUBGROUP_FEATURE_SHUFFLE_BIT
+  16)
+
+(ADP:DEFPARAMETER
+  VK_SUBGROUP_FEATURE_SHUFFLE_RELATIVE_BIT
+  32)
+
+(ADP:DEFPARAMETER
+  VK_SUBGROUP_FEATURE_CLUSTERED_BIT
+  64)
+
+(ADP:DEFPARAMETER
+  VK_SUBGROUP_FEATURE_QUAD_BIT
+  128)
+
+(ADP:DEFPARAMETER
+  VK_SUBGROUP_FEATURE_PARTITIONED_BIT_NV
+  256)
+
+(ADP:DEFPARAMETER
+  VK_SUBGROUP_FEATURE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_PEER_MEMORY_FEATURE_COPY_SRC_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_PEER_MEMORY_FEATURE_COPY_DST_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_PEER_MEMORY_FEATURE_GENERIC_SRC_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_PEER_MEMORY_FEATURE_GENERIC_DST_BIT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_PEER_MEMORY_FEATURE_COPY_SRC_BIT_KHR
+  VK_PEER_MEMORY_FEATURE_COPY_SRC_BIT)
+
+(ADP:DEFPARAMETER
+  VK_PEER_MEMORY_FEATURE_COPY_DST_BIT_KHR
+  VK_PEER_MEMORY_FEATURE_COPY_DST_BIT)
+
+(ADP:DEFPARAMETER
+  VK_PEER_MEMORY_FEATURE_GENERIC_SRC_BIT_KHR
+  VK_PEER_MEMORY_FEATURE_GENERIC_SRC_BIT)
+
+(ADP:DEFPARAMETER
+  VK_PEER_MEMORY_FEATURE_GENERIC_DST_BIT_KHR
+  VK_PEER_MEMORY_FEATURE_GENERIC_DST_BIT)
+
+(ADP:DEFPARAMETER
+  VK_PEER_MEMORY_FEATURE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT_KHR
+  VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT)
+
+(ADP:DEFPARAMETER
+  VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT_KHR
+  VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT)
+
+(ADP:DEFPARAMETER
+  VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR
+  VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT)
+
+(ADP:DEFPARAMETER
+  VK_MEMORY_ALLOCATE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT
+  16)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT
+  32)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT
+  64)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT
+  512)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID
+  1024)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT
+  128)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT
+  256)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_ZIRCON_VMO_BIT_FUCHSIA
+  2048)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_RDMA_ADDRESS_BIT_NV
+  4096)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHR
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT_KHR
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT_KHR
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT_KHR
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT_KHR
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_KHR
+  VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_KHR
+  VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_KHR
+  VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_FEATURE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR
+  VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR
+  VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR
+  VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT_KHR
+  VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_FENCE_HANDLE_TYPE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_FENCE_FEATURE_EXPORTABLE_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_FENCE_FEATURE_IMPORTABLE_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_FENCE_FEATURE_EXPORTABLE_BIT_KHR
+  VK_EXTERNAL_FENCE_FEATURE_EXPORTABLE_BIT)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_FENCE_FEATURE_IMPORTABLE_BIT_KHR
+  VK_EXTERNAL_FENCE_FEATURE_IMPORTABLE_BIT)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_FENCE_FEATURE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_FENCE_IMPORT_TEMPORARY_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_FENCE_IMPORT_TEMPORARY_BIT_KHR
+  VK_FENCE_IMPORT_TEMPORARY_BIT)
+
+(ADP:DEFPARAMETER
+  VK_FENCE_IMPORT_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_SEMAPHORE_IMPORT_TEMPORARY_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_SEMAPHORE_IMPORT_TEMPORARY_BIT_KHR
+  VK_SEMAPHORE_IMPORT_TEMPORARY_BIT)
+
+(ADP:DEFPARAMETER
+  VK_SEMAPHORE_IMPORT_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT
+  16)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_ZIRCON_EVENT_BIT_FUCHSIA
+  128)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_FENCE_BIT
+  VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR
+  VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR
+  VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR
+  VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT_KHR
+  VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT_KHR
+  VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT_KHR
+  VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT_KHR
+  VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_SEMAPHORE_FEATURE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_VERSION_1_2
+  1)
+
+(ADP:DEFPARAMETER
+  VK_API_VERSION_1_2
+  (VK_MAKE_API_VERSION 0 1 2 0))
+
+(ADP:DEFPARAMETER
+  VK_MAX_DRIVER_NAME_SIZE
+  256)
+
+(ADP:DEFPARAMETER
+  VK_MAX_DRIVER_INFO_SIZE
+  256)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_AMD_PROPRIETARY
+  1)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_AMD_OPEN_SOURCE
+  2)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_MESA_RADV
+  3)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_NVIDIA_PROPRIETARY
+  4)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_INTEL_PROPRIETARY_WINDOWS
+  5)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_INTEL_OPEN_SOURCE_MESA
+  6)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_IMAGINATION_PROPRIETARY
+  7)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_QUALCOMM_PROPRIETARY
+  8)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_ARM_PROPRIETARY
+  9)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_GOOGLE_SWIFTSHADER
+  10)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_GGP_PROPRIETARY
+  11)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_BROADCOM_PROPRIETARY
+  12)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_MESA_LLVMPIPE
+  13)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_MOLTENVK
+  14)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_COREAVI_PROPRIETARY
+  15)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_JUICE_PROPRIETARY
+  16)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_VERISILICON_PROPRIETARY
+  17)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_MESA_TURNIP
+  18)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_MESA_V3DV
+  19)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_MESA_PANVK
+  20)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_SAMSUNG_PROPRIETARY
+  21)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_MESA_VENUS
+  22)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_AMD_PROPRIETARY_KHR
+  VK_DRIVER_ID_AMD_PROPRIETARY)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_AMD_OPEN_SOURCE_KHR
+  VK_DRIVER_ID_AMD_OPEN_SOURCE)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_MESA_RADV_KHR
+  VK_DRIVER_ID_MESA_RADV)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_NVIDIA_PROPRIETARY_KHR
+  VK_DRIVER_ID_NVIDIA_PROPRIETARY)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_INTEL_PROPRIETARY_WINDOWS_KHR
+  VK_DRIVER_ID_INTEL_PROPRIETARY_WINDOWS)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_INTEL_OPEN_SOURCE_MESA_KHR
+  VK_DRIVER_ID_INTEL_OPEN_SOURCE_MESA)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_IMAGINATION_PROPRIETARY_KHR
+  VK_DRIVER_ID_IMAGINATION_PROPRIETARY)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_QUALCOMM_PROPRIETARY_KHR
+  VK_DRIVER_ID_QUALCOMM_PROPRIETARY)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_ARM_PROPRIETARY_KHR
+  VK_DRIVER_ID_ARM_PROPRIETARY)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_GOOGLE_SWIFTSHADER_KHR
+  VK_DRIVER_ID_GOOGLE_SWIFTSHADER)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_GGP_PROPRIETARY_KHR
+  VK_DRIVER_ID_GGP_PROPRIETARY)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_BROADCOM_PROPRIETARY_KHR
+  VK_DRIVER_ID_BROADCOM_PROPRIETARY)
+
+(ADP:DEFPARAMETER
+  VK_DRIVER_ID_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY
+  0)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_ALL
+  1)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_NONE
+  2)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY_KHR
+  VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_ALL_KHR
+  VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_ALL)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_NONE_KHR
+  VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_NONE)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE
+  0)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_REDUCTION_MODE_MIN
+  1)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_REDUCTION_MODE_MAX
+  2)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_EXT
+  VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_REDUCTION_MODE_MIN_EXT
+  VK_SAMPLER_REDUCTION_MODE_MIN)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_REDUCTION_MODE_MAX_EXT
+  VK_SAMPLER_REDUCTION_MODE_MAX)
+
+(ADP:DEFPARAMETER
+  VK_SAMPLER_REDUCTION_MODE_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_SEMAPHORE_TYPE_BINARY
+  0)
+
+(ADP:DEFPARAMETER
+  VK_SEMAPHORE_TYPE_TIMELINE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_SEMAPHORE_TYPE_BINARY_KHR
+  VK_SEMAPHORE_TYPE_BINARY)
+
+(ADP:DEFPARAMETER
+  VK_SEMAPHORE_TYPE_TIMELINE_KHR
+  VK_SEMAPHORE_TYPE_TIMELINE)
+
+(ADP:DEFPARAMETER
+  VK_SEMAPHORE_TYPE_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_RESOLVE_MODE_NONE
+  0)
+
+(ADP:DEFPARAMETER
+  VK_RESOLVE_MODE_SAMPLE_ZERO_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_RESOLVE_MODE_AVERAGE_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_RESOLVE_MODE_MIN_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_RESOLVE_MODE_MAX_BIT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_RESOLVE_MODE_NONE_KHR
+  VK_RESOLVE_MODE_NONE)
+
+(ADP:DEFPARAMETER
+  VK_RESOLVE_MODE_SAMPLE_ZERO_BIT_KHR
+  VK_RESOLVE_MODE_SAMPLE_ZERO_BIT)
+
+(ADP:DEFPARAMETER
+  VK_RESOLVE_MODE_AVERAGE_BIT_KHR
+  VK_RESOLVE_MODE_AVERAGE_BIT)
+
+(ADP:DEFPARAMETER
+  VK_RESOLVE_MODE_MIN_BIT_KHR
+  VK_RESOLVE_MODE_MIN_BIT)
+
+(ADP:DEFPARAMETER
+  VK_RESOLVE_MODE_MAX_BIT_KHR
+  VK_RESOLVE_MODE_MAX_BIT)
+
+(ADP:DEFPARAMETER
+  VK_RESOLVE_MODE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT
+  VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT_EXT
+  VK_DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT_EXT
+  VK_DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT_EXT
+  VK_DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT)
+
+(ADP:DEFPARAMETER
+  VK_DESCRIPTOR_BINDING_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_SEMAPHORE_WAIT_ANY_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_SEMAPHORE_WAIT_ANY_BIT_KHR
+  VK_SEMAPHORE_WAIT_ANY_BIT)
+
+(ADP:DEFPARAMETER
+  VK_SEMAPHORE_WAIT_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_VERSION_1_3
+  1)
+
+(ADP:DEFPARAMETER
+  VK_API_VERSION_1_3
+  (VK_MAKE_API_VERSION 0 1 3 0))
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATION_FEEDBACK_VALID_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATION_FEEDBACK_APPLICATION_PIPELINE_CACHE_HIT_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATION_FEEDBACK_BASE_PIPELINE_ACCELERATION_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATION_FEEDBACK_VALID_BIT_EXT
+  VK_PIPELINE_CREATION_FEEDBACK_VALID_BIT)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATION_FEEDBACK_APPLICATION_PIPELINE_CACHE_HIT_BIT_EXT
+  VK_PIPELINE_CREATION_FEEDBACK_APPLICATION_PIPELINE_CACHE_HIT_BIT)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATION_FEEDBACK_BASE_PIPELINE_ACCELERATION_BIT_EXT
+  VK_PIPELINE_CREATION_FEEDBACK_BASE_PIPELINE_ACCELERATION_BIT)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_CREATION_FEEDBACK_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_TOOL_PURPOSE_VALIDATION_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_TOOL_PURPOSE_PROFILING_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_TOOL_PURPOSE_TRACING_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_TOOL_PURPOSE_ADDITIONAL_FEATURES_BIT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_TOOL_PURPOSE_MODIFYING_FEATURES_BIT
+  16)
+
+(ADP:DEFPARAMETER
+  VK_TOOL_PURPOSE_DEBUG_REPORTING_BIT_EXT
+  32)
+
+(ADP:DEFPARAMETER
+  VK_TOOL_PURPOSE_DEBUG_MARKERS_BIT_EXT
+  64)
+
+(ADP:DEFPARAMETER
+  VK_TOOL_PURPOSE_VALIDATION_BIT_EXT
+  VK_TOOL_PURPOSE_VALIDATION_BIT)
+
+(ADP:DEFPARAMETER
+  VK_TOOL_PURPOSE_PROFILING_BIT_EXT
+  VK_TOOL_PURPOSE_PROFILING_BIT)
+
+(ADP:DEFPARAMETER
+  VK_TOOL_PURPOSE_TRACING_BIT_EXT
+  VK_TOOL_PURPOSE_TRACING_BIT)
+
+(ADP:DEFPARAMETER
+  VK_TOOL_PURPOSE_ADDITIONAL_FEATURES_BIT_EXT
+  VK_TOOL_PURPOSE_ADDITIONAL_FEATURES_BIT)
+
+(ADP:DEFPARAMETER
+  VK_TOOL_PURPOSE_MODIFYING_FEATURES_BIT_EXT
+  VK_TOOL_PURPOSE_MODIFYING_FEATURES_BIT)
+
+(ADP:DEFPARAMETER
+  VK_TOOL_PURPOSE_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_NONE
+  0)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_NONE_KHR
+  0)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_TOP_OF_PIPE_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_TOP_OF_PIPE_BIT_KHR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_DRAW_INDIRECT_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_DRAW_INDIRECT_BIT_KHR
+  2)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_VERTEX_INPUT_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_VERTEX_INPUT_BIT_KHR
+  4)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_VERTEX_SHADER_BIT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_VERTEX_SHADER_BIT_KHR
+  8)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_TESSELLATION_CONTROL_SHADER_BIT
+  16)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_TESSELLATION_CONTROL_SHADER_BIT_KHR
+  16)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_TESSELLATION_EVALUATION_SHADER_BIT
+  32)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_TESSELLATION_EVALUATION_SHADER_BIT_KHR
+  32)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_GEOMETRY_SHADER_BIT
+  64)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_GEOMETRY_SHADER_BIT_KHR
+  64)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT
+  128)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT_KHR
+  128)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT
+  256)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT_KHR
+  256)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT
+  512)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT_KHR
+  512)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT
+  1024)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT_KHR
+  1024)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_COMPUTE_SHADER_BIT
+  2048)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_COMPUTE_SHADER_BIT_KHR
+  2048)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_ALL_TRANSFER_BIT
+  4096)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_ALL_TRANSFER_BIT_KHR
+  4096)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_TRANSFER_BIT
+  4096)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_TRANSFER_BIT_KHR
+  4096)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_BOTTOM_OF_PIPE_BIT
+  8192)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_BOTTOM_OF_PIPE_BIT_KHR
+  8192)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_HOST_BIT
+  16384)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_HOST_BIT_KHR
+  16384)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT
+  32768)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT_KHR
+  32768)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT
+  65536)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR
+  65536)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_COPY_BIT
+  4294967296)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_COPY_BIT_KHR
+  4294967296)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_RESOLVE_BIT
+  8589934592)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_RESOLVE_BIT_KHR
+  8589934592)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_BLIT_BIT
+  17179869184)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_BLIT_BIT_KHR
+  17179869184)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_CLEAR_BIT
+  34359738368)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_CLEAR_BIT_KHR
+  34359738368)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_INDEX_INPUT_BIT
+  68719476736)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_INDEX_INPUT_BIT_KHR
+  68719476736)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_VERTEX_ATTRIBUTE_INPUT_BIT
+  137438953472)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_VERTEX_ATTRIBUTE_INPUT_BIT_KHR
+  137438953472)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_PRE_RASTERIZATION_SHADERS_BIT
+  274877906944)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_PRE_RASTERIZATION_SHADERS_BIT_KHR
+  274877906944)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_VIDEO_DECODE_BIT_KHR
+  67108864)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_VIDEO_ENCODE_BIT_KHR
+  134217728)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT
+  16777216)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_CONDITIONAL_RENDERING_BIT_EXT
+  262144)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_COMMAND_PREPROCESS_BIT_NV
+  131072)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR
+  4194304)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_SHADING_RATE_IMAGE_BIT_NV
+  4194304)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR
+  33554432)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR
+  2097152)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_NV
+  2097152)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_NV
+  33554432)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_BIT_EXT
+  8388608)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_TASK_SHADER_BIT_NV
+  524288)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_MESH_SHADER_BIT_NV
+  1048576)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_SUBPASS_SHADING_BIT_HUAWEI
+  549755813888)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI
+  1099511627776)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_COPY_BIT_KHR
+  268435456)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_NONE
+  0)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_NONE_KHR
+  0)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_INDIRECT_COMMAND_READ_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_INDIRECT_COMMAND_READ_BIT_KHR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_INDEX_READ_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_INDEX_READ_BIT_KHR
+  2)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_VERTEX_ATTRIBUTE_READ_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_VERTEX_ATTRIBUTE_READ_BIT_KHR
+  4)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_UNIFORM_READ_BIT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_UNIFORM_READ_BIT_KHR
+  8)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_INPUT_ATTACHMENT_READ_BIT
+  16)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_INPUT_ATTACHMENT_READ_BIT_KHR
+  16)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_SHADER_READ_BIT
+  32)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_SHADER_READ_BIT_KHR
+  32)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_SHADER_WRITE_BIT
+  64)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_SHADER_WRITE_BIT_KHR
+  64)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_COLOR_ATTACHMENT_READ_BIT
+  128)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_COLOR_ATTACHMENT_READ_BIT_KHR
+  128)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_COLOR_ATTACHMENT_WRITE_BIT
+  256)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_COLOR_ATTACHMENT_WRITE_BIT_KHR
+  256)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_READ_BIT
+  512)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_READ_BIT_KHR
+  512)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT
+  1024)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT_KHR
+  1024)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_TRANSFER_READ_BIT
+  2048)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_TRANSFER_READ_BIT_KHR
+  2048)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_TRANSFER_WRITE_BIT
+  4096)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_TRANSFER_WRITE_BIT_KHR
+  4096)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_HOST_READ_BIT
+  8192)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_HOST_READ_BIT_KHR
+  8192)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_HOST_WRITE_BIT
+  16384)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_HOST_WRITE_BIT_KHR
+  16384)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_MEMORY_READ_BIT
+  32768)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_MEMORY_READ_BIT_KHR
+  32768)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_MEMORY_WRITE_BIT
+  65536)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_MEMORY_WRITE_BIT_KHR
+  65536)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_SHADER_SAMPLED_READ_BIT
+  4294967296)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_SHADER_SAMPLED_READ_BIT_KHR
+  4294967296)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_SHADER_STORAGE_READ_BIT
+  8589934592)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_SHADER_STORAGE_READ_BIT_KHR
+  8589934592)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_SHADER_STORAGE_WRITE_BIT
+  17179869184)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_SHADER_STORAGE_WRITE_BIT_KHR
+  17179869184)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_VIDEO_DECODE_READ_BIT_KHR
+  34359738368)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_VIDEO_DECODE_WRITE_BIT_KHR
+  68719476736)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_VIDEO_ENCODE_READ_BIT_KHR
+  137438953472)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_VIDEO_ENCODE_WRITE_BIT_KHR
+  274877906944)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_TRANSFORM_FEEDBACK_WRITE_BIT_EXT
+  33554432)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT
+  67108864)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_WRITE_BIT_EXT
+  134217728)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_CONDITIONAL_RENDERING_READ_BIT_EXT
+  1048576)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_COMMAND_PREPROCESS_READ_BIT_NV
+  131072)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_COMMAND_PREPROCESS_WRITE_BIT_NV
+  262144)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT_KHR
+  8388608)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_SHADING_RATE_IMAGE_READ_BIT_NV
+  8388608)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR
+  2097152)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_ACCELERATION_STRUCTURE_WRITE_BIT_KHR
+  4194304)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_NV
+  2097152)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_ACCELERATION_STRUCTURE_WRITE_BIT_NV
+  4194304)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_FRAGMENT_DENSITY_MAP_READ_BIT_EXT
+  16777216)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT
+  524288)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_INVOCATION_MASK_READ_BIT_HUAWEI
+  549755813888)
+
+(ADP:DEFPARAMETER
+  VK_ACCESS_2_SHADER_BINDING_TABLE_READ_BIT_KHR
+  1099511627776)
+
+(ADP:DEFPARAMETER
+  VK_SUBMIT_PROTECTED_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_SUBMIT_PROTECTED_BIT_KHR
+  VK_SUBMIT_PROTECTED_BIT)
+
+(ADP:DEFPARAMETER
+  VK_SUBMIT_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_RENDERING_SUSPENDING_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_RENDERING_RESUMING_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT_KHR
+  VK_RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT)
+
+(ADP:DEFPARAMETER
+  VK_RENDERING_SUSPENDING_BIT_KHR
+  VK_RENDERING_SUSPENDING_BIT)
+
+(ADP:DEFPARAMETER
+  VK_RENDERING_RESUMING_BIT_KHR
+  VK_RENDERING_RESUMING_BIT)
+
+(ADP:DEFPARAMETER
+  VK_RENDERING_FLAG_BITS_MAX_ENUM
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_BIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_BIT_KHR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_STORAGE_IMAGE_BIT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_STORAGE_IMAGE_BIT_KHR
+  2)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_STORAGE_IMAGE_ATOMIC_BIT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_STORAGE_IMAGE_ATOMIC_BIT_KHR
+  4)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_UNIFORM_TEXEL_BUFFER_BIT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_UNIFORM_TEXEL_BUFFER_BIT_KHR
+  8)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_STORAGE_TEXEL_BUFFER_BIT
+  16)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_STORAGE_TEXEL_BUFFER_BIT_KHR
+  16)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_STORAGE_TEXEL_BUFFER_ATOMIC_BIT
+  32)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_STORAGE_TEXEL_BUFFER_ATOMIC_BIT_KHR
+  32)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_VERTEX_BUFFER_BIT
+  64)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_VERTEX_BUFFER_BIT_KHR
+  64)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_COLOR_ATTACHMENT_BIT
+  128)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_COLOR_ATTACHMENT_BIT_KHR
+  128)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_COLOR_ATTACHMENT_BLEND_BIT
+  256)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_COLOR_ATTACHMENT_BLEND_BIT_KHR
+  256)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_DEPTH_STENCIL_ATTACHMENT_BIT
+  512)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_DEPTH_STENCIL_ATTACHMENT_BIT_KHR
+  512)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_BLIT_SRC_BIT
+  1024)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_BLIT_SRC_BIT_KHR
+  1024)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_BLIT_DST_BIT
+  2048)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_BLIT_DST_BIT_KHR
+  2048)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_FILTER_LINEAR_BIT
+  4096)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_FILTER_LINEAR_BIT_KHR
+  4096)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_FILTER_CUBIC_BIT
+  8192)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT
+  8192)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_TRANSFER_SRC_BIT
+  16384)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_TRANSFER_SRC_BIT_KHR
+  16384)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_TRANSFER_DST_BIT
+  32768)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_TRANSFER_DST_BIT_KHR
+  32768)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_FILTER_MINMAX_BIT
+  65536)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_FILTER_MINMAX_BIT_KHR
+  65536)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_MIDPOINT_CHROMA_SAMPLES_BIT
+  131072)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_MIDPOINT_CHROMA_SAMPLES_BIT_KHR
+  131072)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT
+  262144)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT_KHR
+  262144)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT
+  524288)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT_KHR
+  524288)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT
+  1048576)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT_KHR
+  1048576)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT
+  2097152)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT_KHR
+  2097152)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_DISJOINT_BIT
+  4194304)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_DISJOINT_BIT_KHR
+  4194304)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_COSITED_CHROMA_SAMPLES_BIT
+  8388608)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_COSITED_CHROMA_SAMPLES_BIT_KHR
+  8388608)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT
+  2147483648)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR
+  2147483648)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT
+  4294967296)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR
+  4294967296)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_DEPTH_COMPARISON_BIT
+  8589934592)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_DEPTH_COMPARISON_BIT_KHR
+  8589934592)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_VIDEO_DECODE_OUTPUT_BIT_KHR
+  33554432)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_VIDEO_DECODE_DPB_BIT_KHR
+  67108864)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_ACCELERATION_STRUCTURE_VERTEX_BUFFER_BIT_KHR
+  536870912)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_FRAGMENT_DENSITY_MAP_BIT_EXT
+  16777216)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR
+  1073741824)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_VIDEO_ENCODE_INPUT_BIT_KHR
+  134217728)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_VIDEO_ENCODE_DPB_BIT_KHR
+  268435456)
+
+(ADP:DEFPARAMETER
+  VK_FORMAT_FEATURE_2_LINEAR_COLOR_ATTACHMENT_BIT_NV
+  274877906944)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SURFACE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SURFACE_SPEC_VERSION
+  25)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SURFACE_EXTENSION_NAME
+  "VK_KHR_surface")
+
+(ADP:DEFPARAMETER
+  VK_PRESENT_MODE_IMMEDIATE_KHR
+  0)
+
+(ADP:DEFPARAMETER
+  VK_PRESENT_MODE_MAILBOX_KHR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_PRESENT_MODE_FIFO_KHR
+  2)
+
+(ADP:DEFPARAMETER
+  VK_PRESENT_MODE_FIFO_RELAXED_KHR
+  3)
+
+(ADP:DEFPARAMETER
+  VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR
+  1000111000)
+
+(ADP:DEFPARAMETER
+  VK_PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR
+  1000111001)
+
+(ADP:DEFPARAMETER
+  VK_PRESENT_MODE_MAX_ENUM_KHR
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_COLOR_SPACE_SRGB_NONLINEAR_KHR
+  0)
+
+(ADP:DEFPARAMETER
+  VK_COLOR_SPACE_DISPLAY_P3_NONLINEAR_EXT
+  1000104001)
+
+(ADP:DEFPARAMETER
+  VK_COLOR_SPACE_EXTENDED_SRGB_LINEAR_EXT
+  1000104002)
+
+(ADP:DEFPARAMETER
+  VK_COLOR_SPACE_DISPLAY_P3_LINEAR_EXT
+  1000104003)
+
+(ADP:DEFPARAMETER
+  VK_COLOR_SPACE_DCI_P3_NONLINEAR_EXT
+  1000104004)
+
+(ADP:DEFPARAMETER
+  VK_COLOR_SPACE_BT709_LINEAR_EXT
+  1000104005)
+
+(ADP:DEFPARAMETER
+  VK_COLOR_SPACE_BT709_NONLINEAR_EXT
+  1000104006)
+
+(ADP:DEFPARAMETER
+  VK_COLOR_SPACE_BT2020_LINEAR_EXT
+  1000104007)
+
+(ADP:DEFPARAMETER
+  VK_COLOR_SPACE_HDR10_ST2084_EXT
+  1000104008)
+
+(ADP:DEFPARAMETER
+  VK_COLOR_SPACE_DOLBYVISION_EXT
+  1000104009)
+
+(ADP:DEFPARAMETER
+  VK_COLOR_SPACE_HDR10_HLG_EXT
+  1000104010)
+
+(ADP:DEFPARAMETER
+  VK_COLOR_SPACE_ADOBERGB_LINEAR_EXT
+  1000104011)
+
+(ADP:DEFPARAMETER
+  VK_COLOR_SPACE_ADOBERGB_NONLINEAR_EXT
+  1000104012)
+
+(ADP:DEFPARAMETER
+  VK_COLOR_SPACE_PASS_THROUGH_EXT
+  1000104013)
+
+(ADP:DEFPARAMETER
+  VK_COLOR_SPACE_EXTENDED_SRGB_NONLINEAR_EXT
+  1000104014)
+
+(ADP:DEFPARAMETER
+  VK_COLOR_SPACE_DISPLAY_NATIVE_AMD
+  1000213000)
+
+(ADP:DEFPARAMETER
+  VK_COLORSPACE_SRGB_NONLINEAR_KHR
+  VK_COLOR_SPACE_SRGB_NONLINEAR_KHR)
+
+(ADP:DEFPARAMETER
+  VK_COLOR_SPACE_DCI_P3_LINEAR_EXT
+  VK_COLOR_SPACE_DISPLAY_P3_LINEAR_EXT)
+
+(ADP:DEFPARAMETER
+  VK_COLOR_SPACE_MAX_ENUM_KHR
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR
+  2)
+
+(ADP:DEFPARAMETER
+  VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR
+  4)
+
+(ADP:DEFPARAMETER
+  VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR
+  8)
+
+(ADP:DEFPARAMETER
+  VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_BIT_KHR
+  16)
+
+(ADP:DEFPARAMETER
+  VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR
+  32)
+
+(ADP:DEFPARAMETER
+  VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR
+  64)
+
+(ADP:DEFPARAMETER
+  VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR
+  128)
+
+(ADP:DEFPARAMETER
+  VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR
+  256)
+
+(ADP:DEFPARAMETER
+  VK_SURFACE_TRANSFORM_FLAG_BITS_MAX_ENUM_KHR
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR
+  2)
+
+(ADP:DEFPARAMETER
+  VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR
+  4)
+
+(ADP:DEFPARAMETER
+  VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR
+  8)
+
+(ADP:DEFPARAMETER
+  VK_COMPOSITE_ALPHA_FLAG_BITS_MAX_ENUM_KHR
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SWAPCHAIN
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SWAPCHAIN_SPEC_VERSION
+  70)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SWAPCHAIN_EXTENSION_NAME
+  "VK_KHR_swapchain")
+
+(ADP:DEFPARAMETER
+  VK_SWAPCHAIN_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_SWAPCHAIN_CREATE_PROTECTED_BIT_KHR
+  2)
+
+(ADP:DEFPARAMETER
+  VK_SWAPCHAIN_CREATE_MUTABLE_FORMAT_BIT_KHR
+  4)
+
+(ADP:DEFPARAMETER
+  VK_SWAPCHAIN_CREATE_FLAG_BITS_MAX_ENUM_KHR
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHR
+  2)
+
+(ADP:DEFPARAMETER
+  VK_DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHR
+  4)
+
+(ADP:DEFPARAMETER
+  VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHR
+  8)
+
+(ADP:DEFPARAMETER
+  VK_DEVICE_GROUP_PRESENT_MODE_FLAG_BITS_MAX_ENUM_KHR
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_KHR_DISPLAY
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_DISPLAY_SPEC_VERSION
+  23)
+
+(ADP:DEFPARAMETER
+  VK_KHR_DISPLAY_EXTENSION_NAME
+  "VK_KHR_display")
+
+(ADP:DEFPARAMETER
+  VK_DISPLAY_PLANE_ALPHA_OPAQUE_BIT_KHR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR
+  2)
+
+(ADP:DEFPARAMETER
+  VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_BIT_KHR
+  4)
+
+(ADP:DEFPARAMETER
+  VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_PREMULTIPLIED_BIT_KHR
+  8)
+
+(ADP:DEFPARAMETER
+  VK_DISPLAY_PLANE_ALPHA_FLAG_BITS_MAX_ENUM_KHR
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_KHR_DISPLAY_SWAPCHAIN
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_DISPLAY_SWAPCHAIN_SPEC_VERSION
+  10)
+
+(ADP:DEFPARAMETER
+  VK_KHR_DISPLAY_SWAPCHAIN_EXTENSION_NAME
+  "VK_KHR_display_swapchain")
+
+(ADP:DEFPARAMETER
+  VK_KHR_SAMPLER_MIRROR_CLAMP_TO_EDGE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SAMPLER_MIRROR_CLAMP_TO_EDGE_SPEC_VERSION
+  3)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SAMPLER_MIRROR_CLAMP_TO_EDGE_EXTENSION_NAME
+  "VK_KHR_sampler_mirror_clamp_to_edge")
+
+(ADP:DEFPARAMETER
+  VK_KHR_DYNAMIC_RENDERING
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_DYNAMIC_RENDERING_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_DYNAMIC_RENDERING_EXTENSION_NAME
+  "VK_KHR_dynamic_rendering")
+
+(ADP:DEFPARAMETER
+  VK_KHR_MULTIVIEW
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_MULTIVIEW_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_MULTIVIEW_EXTENSION_NAME
+  "VK_KHR_multiview")
+
+(ADP:DEFPARAMETER
+  VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES2
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_EXTENSION_NAME
+  "VK_KHR_get_physical_device_properties2")
+
+(ADP:DEFPARAMETER
+  VK_KHR_DEVICE_GROUP
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_DEVICE_GROUP_SPEC_VERSION
+  4)
+
+(ADP:DEFPARAMETER
+  VK_KHR_DEVICE_GROUP_EXTENSION_NAME
+  "VK_KHR_device_group")
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHADER_DRAW_PARAMETERS
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHADER_DRAW_PARAMETERS_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHADER_DRAW_PARAMETERS_EXTENSION_NAME
+  "VK_KHR_shader_draw_parameters")
+
+(ADP:DEFPARAMETER
+  VK_KHR_MAINTENANCE1
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_MAINTENANCE_1_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_KHR_MAINTENANCE_1_EXTENSION_NAME
+  "VK_KHR_maintenance1")
+
+(ADP:DEFPARAMETER
+  VK_KHR_MAINTENANCE1_SPEC_VERSION
+  VK_KHR_MAINTENANCE_1_SPEC_VERSION)
+
+(ADP:DEFPARAMETER
+  VK_KHR_MAINTENANCE1_EXTENSION_NAME
+  VK_KHR_MAINTENANCE_1_EXTENSION_NAME)
+
+(ADP:DEFPARAMETER
+  VK_KHR_DEVICE_GROUP_CREATION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_DEVICE_GROUP_CREATION_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_DEVICE_GROUP_CREATION_EXTENSION_NAME
+  "VK_KHR_device_group_creation")
+
+(ADP:DEFPARAMETER
+  VK_MAX_DEVICE_GROUP_SIZE_KHR
+  VK_MAX_DEVICE_GROUP_SIZE)
+
+(ADP:DEFPARAMETER
+  VK_KHR_EXTERNAL_MEMORY_CAPABILITIES
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_EXTERNAL_MEMORY_CAPABILITIES_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION_NAME
+  "VK_KHR_external_memory_capabilities")
+
+(ADP:DEFPARAMETER
+  VK_LUID_SIZE_KHR
+  VK_LUID_SIZE)
+
+(ADP:DEFPARAMETER
+  VK_KHR_EXTERNAL_MEMORY
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_EXTERNAL_MEMORY_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_EXTERNAL_MEMORY_EXTENSION_NAME
+  "VK_KHR_external_memory")
+
+(ADP:DEFPARAMETER
+  VK_QUEUE_FAMILY_EXTERNAL_KHR
+  VK_QUEUE_FAMILY_EXTERNAL)
+
+(ADP:DEFPARAMETER
+  VK_KHR_EXTERNAL_MEMORY_FD
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_EXTERNAL_MEMORY_FD_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_EXTERNAL_MEMORY_FD_EXTENSION_NAME
+  "VK_KHR_external_memory_fd")
+
+(ADP:DEFPARAMETER
+  VK_KHR_EXTERNAL_SEMAPHORE_CAPABILITIES
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_EXTERNAL_SEMAPHORE_CAPABILITIES_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_EXTERNAL_SEMAPHORE_CAPABILITIES_EXTENSION_NAME
+  "VK_KHR_external_semaphore_capabilities")
+
+(ADP:DEFPARAMETER
+  VK_KHR_EXTERNAL_SEMAPHORE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_EXTERNAL_SEMAPHORE_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_EXTERNAL_SEMAPHORE_EXTENSION_NAME
+  "VK_KHR_external_semaphore")
+
+(ADP:DEFPARAMETER
+  VK_KHR_EXTERNAL_SEMAPHORE_FD
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_EXTERNAL_SEMAPHORE_FD_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_EXTERNAL_SEMAPHORE_FD_EXTENSION_NAME
+  "VK_KHR_external_semaphore_fd")
+
+(ADP:DEFPARAMETER
+  VK_KHR_PUSH_DESCRIPTOR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_PUSH_DESCRIPTOR_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_KHR_PUSH_DESCRIPTOR_EXTENSION_NAME
+  "VK_KHR_push_descriptor")
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHADER_FLOAT16_INT8
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHADER_FLOAT16_INT8_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHADER_FLOAT16_INT8_EXTENSION_NAME
+  "VK_KHR_shader_float16_int8")
+
+(ADP:DEFPARAMETER
+  VK_KHR_16BIT_STORAGE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_16BIT_STORAGE_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_16BIT_STORAGE_EXTENSION_NAME
+  "VK_KHR_16bit_storage")
+
+(ADP:DEFPARAMETER
+  VK_KHR_INCREMENTAL_PRESENT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_INCREMENTAL_PRESENT_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_KHR_INCREMENTAL_PRESENT_EXTENSION_NAME
+  "VK_KHR_incremental_present")
+
+(ADP:DEFPARAMETER
+  VK_KHR_DESCRIPTOR_UPDATE_TEMPLATE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_DESCRIPTOR_UPDATE_TEMPLATE_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_DESCRIPTOR_UPDATE_TEMPLATE_EXTENSION_NAME
+  "VK_KHR_descriptor_update_template")
+
+(ADP:DEFPARAMETER
+  VK_KHR_IMAGELESS_FRAMEBUFFER
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_IMAGELESS_FRAMEBUFFER_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_IMAGELESS_FRAMEBUFFER_EXTENSION_NAME
+  "VK_KHR_imageless_framebuffer")
+
+(ADP:DEFPARAMETER
+  VK_KHR_CREATE_RENDERPASS2
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_CREATE_RENDERPASS_2_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_CREATE_RENDERPASS_2_EXTENSION_NAME
+  "VK_KHR_create_renderpass2")
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHARED_PRESENTABLE_IMAGE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHARED_PRESENTABLE_IMAGE_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHARED_PRESENTABLE_IMAGE_EXTENSION_NAME
+  "VK_KHR_shared_presentable_image")
+
+(ADP:DEFPARAMETER
+  VK_KHR_EXTERNAL_FENCE_CAPABILITIES
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_EXTERNAL_FENCE_CAPABILITIES_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_EXTERNAL_FENCE_CAPABILITIES_EXTENSION_NAME
+  "VK_KHR_external_fence_capabilities")
+
+(ADP:DEFPARAMETER
+  VK_KHR_EXTERNAL_FENCE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_EXTERNAL_FENCE_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_EXTERNAL_FENCE_EXTENSION_NAME
+  "VK_KHR_external_fence")
+
+(ADP:DEFPARAMETER
+  VK_KHR_EXTERNAL_FENCE_FD
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_EXTERNAL_FENCE_FD_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_EXTERNAL_FENCE_FD_EXTENSION_NAME
+  "VK_KHR_external_fence_fd")
+
+(ADP:DEFPARAMETER
+  VK_KHR_PERFORMANCE_QUERY
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_PERFORMANCE_QUERY_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_PERFORMANCE_QUERY_EXTENSION_NAME
+  "VK_KHR_performance_query")
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_COUNTER_UNIT_GENERIC_KHR
+  0)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_COUNTER_UNIT_PERCENTAGE_KHR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_COUNTER_UNIT_NANOSECONDS_KHR
+  2)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_COUNTER_UNIT_BYTES_KHR
+  3)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_COUNTER_UNIT_BYTES_PER_SECOND_KHR
+  4)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_COUNTER_UNIT_KELVIN_KHR
+  5)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_COUNTER_UNIT_WATTS_KHR
+  6)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_COUNTER_UNIT_VOLTS_KHR
+  7)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_COUNTER_UNIT_AMPS_KHR
+  8)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_COUNTER_UNIT_HERTZ_KHR
+  9)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_COUNTER_UNIT_CYCLES_KHR
+  10)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_COUNTER_UNIT_MAX_ENUM_KHR
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_COUNTER_SCOPE_COMMAND_BUFFER_KHR
+  0)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_COUNTER_SCOPE_RENDER_PASS_KHR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_COUNTER_SCOPE_COMMAND_KHR
+  2)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_SCOPE_COMMAND_BUFFER_KHR
+  VK_PERFORMANCE_COUNTER_SCOPE_COMMAND_BUFFER_KHR)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_SCOPE_RENDER_PASS_KHR
+  VK_PERFORMANCE_COUNTER_SCOPE_RENDER_PASS_KHR)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_SCOPE_COMMAND_KHR
+  VK_PERFORMANCE_COUNTER_SCOPE_COMMAND_KHR)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_COUNTER_SCOPE_MAX_ENUM_KHR
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_COUNTER_STORAGE_INT32_KHR
+  0)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_COUNTER_STORAGE_INT64_KHR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_COUNTER_STORAGE_UINT32_KHR
+  2)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_COUNTER_STORAGE_UINT64_KHR
+  3)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_COUNTER_STORAGE_FLOAT32_KHR
+  4)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_COUNTER_STORAGE_FLOAT64_KHR
+  5)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_COUNTER_STORAGE_MAX_ENUM_KHR
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_COUNTER_DESCRIPTION_PERFORMANCE_IMPACTING_BIT_KHR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_COUNTER_DESCRIPTION_CONCURRENTLY_IMPACTED_BIT_KHR
+  2)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_COUNTER_DESCRIPTION_PERFORMANCE_IMPACTING_KHR
+  VK_PERFORMANCE_COUNTER_DESCRIPTION_PERFORMANCE_IMPACTING_BIT_KHR)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_COUNTER_DESCRIPTION_CONCURRENTLY_IMPACTED_KHR
+  VK_PERFORMANCE_COUNTER_DESCRIPTION_CONCURRENTLY_IMPACTED_BIT_KHR)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_COUNTER_DESCRIPTION_FLAG_BITS_MAX_ENUM_KHR
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_ACQUIRE_PROFILING_LOCK_FLAG_BITS_MAX_ENUM_KHR
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_KHR_MAINTENANCE2
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_MAINTENANCE_2_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_MAINTENANCE_2_EXTENSION_NAME
+  "VK_KHR_maintenance2")
+
+(ADP:DEFPARAMETER
+  VK_KHR_MAINTENANCE2_SPEC_VERSION
+  VK_KHR_MAINTENANCE_2_SPEC_VERSION)
+
+(ADP:DEFPARAMETER
+  VK_KHR_MAINTENANCE2_EXTENSION_NAME
+  VK_KHR_MAINTENANCE_2_EXTENSION_NAME)
+
+(ADP:DEFPARAMETER
+  VK_KHR_GET_SURFACE_CAPABILITIES2
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_GET_SURFACE_CAPABILITIES_2_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_GET_SURFACE_CAPABILITIES_2_EXTENSION_NAME
+  "VK_KHR_get_surface_capabilities2")
+
+(ADP:DEFPARAMETER
+  VK_KHR_VARIABLE_POINTERS
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_VARIABLE_POINTERS_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_VARIABLE_POINTERS_EXTENSION_NAME
+  "VK_KHR_variable_pointers")
+
+(ADP:DEFPARAMETER
+  VK_KHR_GET_DISPLAY_PROPERTIES2
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_GET_DISPLAY_PROPERTIES_2_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_GET_DISPLAY_PROPERTIES_2_EXTENSION_NAME
+  "VK_KHR_get_display_properties2")
+
+(ADP:DEFPARAMETER
+  VK_KHR_DEDICATED_ALLOCATION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_DEDICATED_ALLOCATION_SPEC_VERSION
+  3)
+
+(ADP:DEFPARAMETER
+  VK_KHR_DEDICATED_ALLOCATION_EXTENSION_NAME
+  "VK_KHR_dedicated_allocation")
+
+(ADP:DEFPARAMETER
+  VK_KHR_STORAGE_BUFFER_STORAGE_CLASS
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_STORAGE_BUFFER_STORAGE_CLASS_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_STORAGE_BUFFER_STORAGE_CLASS_EXTENSION_NAME
+  "VK_KHR_storage_buffer_storage_class")
+
+(ADP:DEFPARAMETER
+  VK_KHR_RELAXED_BLOCK_LAYOUT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_RELAXED_BLOCK_LAYOUT_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_RELAXED_BLOCK_LAYOUT_EXTENSION_NAME
+  "VK_KHR_relaxed_block_layout")
+
+(ADP:DEFPARAMETER
+  VK_KHR_GET_MEMORY_REQUIREMENTS2
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_GET_MEMORY_REQUIREMENTS_2_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_GET_MEMORY_REQUIREMENTS_2_EXTENSION_NAME
+  "VK_KHR_get_memory_requirements2")
+
+(ADP:DEFPARAMETER
+  VK_KHR_IMAGE_FORMAT_LIST
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_IMAGE_FORMAT_LIST_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_IMAGE_FORMAT_LIST_EXTENSION_NAME
+  "VK_KHR_image_format_list")
+
+(ADP:DEFPARAMETER
+  VK_KHR_SAMPLER_YCBCR_CONVERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SAMPLER_YCBCR_CONVERSION_SPEC_VERSION
+  14)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SAMPLER_YCBCR_CONVERSION_EXTENSION_NAME
+  "VK_KHR_sampler_ycbcr_conversion")
+
+(ADP:DEFPARAMETER
+  VK_KHR_BIND_MEMORY2
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_BIND_MEMORY_2_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_BIND_MEMORY_2_EXTENSION_NAME
+  "VK_KHR_bind_memory2")
+
+(ADP:DEFPARAMETER
+  VK_KHR_MAINTENANCE3
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_MAINTENANCE_3_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_MAINTENANCE_3_EXTENSION_NAME
+  "VK_KHR_maintenance3")
+
+(ADP:DEFPARAMETER
+  VK_KHR_MAINTENANCE3_SPEC_VERSION
+  VK_KHR_MAINTENANCE_3_SPEC_VERSION)
+
+(ADP:DEFPARAMETER
+  VK_KHR_MAINTENANCE3_EXTENSION_NAME
+  VK_KHR_MAINTENANCE_3_EXTENSION_NAME)
+
+(ADP:DEFPARAMETER
+  VK_KHR_DRAW_INDIRECT_COUNT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_DRAW_INDIRECT_COUNT_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_DRAW_INDIRECT_COUNT_EXTENSION_NAME
+  "VK_KHR_draw_indirect_count")
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHADER_SUBGROUP_EXTENDED_TYPES
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHADER_SUBGROUP_EXTENDED_TYPES_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHADER_SUBGROUP_EXTENDED_TYPES_EXTENSION_NAME
+  "VK_KHR_shader_subgroup_extended_types")
+
+(ADP:DEFPARAMETER
+  VK_KHR_8BIT_STORAGE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_8BIT_STORAGE_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_8BIT_STORAGE_EXTENSION_NAME
+  "VK_KHR_8bit_storage")
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHADER_ATOMIC_INT64
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHADER_ATOMIC_INT64_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHADER_ATOMIC_INT64_EXTENSION_NAME
+  "VK_KHR_shader_atomic_int64")
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHADER_CLOCK
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHADER_CLOCK_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHADER_CLOCK_EXTENSION_NAME
+  "VK_KHR_shader_clock")
+
+(ADP:DEFPARAMETER
+  VK_KHR_GLOBAL_PRIORITY
+  1)
+
+(ADP:DEFPARAMETER
+  VK_MAX_GLOBAL_PRIORITY_SIZE_KHR
+  16)
+
+(ADP:DEFPARAMETER
+  VK_KHR_GLOBAL_PRIORITY_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_GLOBAL_PRIORITY_EXTENSION_NAME
+  "VK_KHR_global_priority")
+
+(ADP:DEFPARAMETER
+  VK_QUEUE_GLOBAL_PRIORITY_LOW_KHR
+  128)
+
+(ADP:DEFPARAMETER
+  VK_QUEUE_GLOBAL_PRIORITY_MEDIUM_KHR
+  256)
+
+(ADP:DEFPARAMETER
+  VK_QUEUE_GLOBAL_PRIORITY_HIGH_KHR
+  512)
+
+(ADP:DEFPARAMETER
+  VK_QUEUE_GLOBAL_PRIORITY_REALTIME_KHR
+  1024)
+
+(ADP:DEFPARAMETER
+  VK_QUEUE_GLOBAL_PRIORITY_LOW_EXT
+  VK_QUEUE_GLOBAL_PRIORITY_LOW_KHR)
+
+(ADP:DEFPARAMETER
+  VK_QUEUE_GLOBAL_PRIORITY_MEDIUM_EXT
+  VK_QUEUE_GLOBAL_PRIORITY_MEDIUM_KHR)
+
+(ADP:DEFPARAMETER
+  VK_QUEUE_GLOBAL_PRIORITY_HIGH_EXT
+  VK_QUEUE_GLOBAL_PRIORITY_HIGH_KHR)
+
+(ADP:DEFPARAMETER
+  VK_QUEUE_GLOBAL_PRIORITY_REALTIME_EXT
+  VK_QUEUE_GLOBAL_PRIORITY_REALTIME_KHR)
+
+(ADP:DEFPARAMETER
+  VK_QUEUE_GLOBAL_PRIORITY_MAX_ENUM_KHR
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_KHR_DRIVER_PROPERTIES
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_DRIVER_PROPERTIES_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_DRIVER_PROPERTIES_EXTENSION_NAME
+  "VK_KHR_driver_properties")
+
+(ADP:DEFPARAMETER
+  VK_MAX_DRIVER_NAME_SIZE_KHR
+  VK_MAX_DRIVER_NAME_SIZE)
+
+(ADP:DEFPARAMETER
+  VK_MAX_DRIVER_INFO_SIZE_KHR
+  VK_MAX_DRIVER_INFO_SIZE)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHADER_FLOAT_CONTROLS
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHADER_FLOAT_CONTROLS_SPEC_VERSION
+  4)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHADER_FLOAT_CONTROLS_EXTENSION_NAME
+  "VK_KHR_shader_float_controls")
+
+(ADP:DEFPARAMETER
+  VK_KHR_DEPTH_STENCIL_RESOLVE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_DEPTH_STENCIL_RESOLVE_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_DEPTH_STENCIL_RESOLVE_EXTENSION_NAME
+  "VK_KHR_depth_stencil_resolve")
+
+(ADP:DEFPARAMETER
+  VK_KHR_SWAPCHAIN_MUTABLE_FORMAT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SWAPCHAIN_MUTABLE_FORMAT_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SWAPCHAIN_MUTABLE_FORMAT_EXTENSION_NAME
+  "VK_KHR_swapchain_mutable_format")
+
+(ADP:DEFPARAMETER
+  VK_KHR_TIMELINE_SEMAPHORE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_TIMELINE_SEMAPHORE_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_KHR_TIMELINE_SEMAPHORE_EXTENSION_NAME
+  "VK_KHR_timeline_semaphore")
+
+(ADP:DEFPARAMETER
+  VK_KHR_VULKAN_MEMORY_MODEL
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_VULKAN_MEMORY_MODEL_SPEC_VERSION
+  3)
+
+(ADP:DEFPARAMETER
+  VK_KHR_VULKAN_MEMORY_MODEL_EXTENSION_NAME
+  "VK_KHR_vulkan_memory_model")
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHADER_TERMINATE_INVOCATION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHADER_TERMINATE_INVOCATION_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHADER_TERMINATE_INVOCATION_EXTENSION_NAME
+  "VK_KHR_shader_terminate_invocation")
+
+(ADP:DEFPARAMETER
+  VK_KHR_FRAGMENT_SHADING_RATE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_FRAGMENT_SHADING_RATE_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_KHR_FRAGMENT_SHADING_RATE_EXTENSION_NAME
+  "VK_KHR_fragment_shading_rate")
+
+(ADP:DEFPARAMETER
+  VK_FRAGMENT_SHADING_RATE_COMBINER_OP_KEEP_KHR
+  0)
+
+(ADP:DEFPARAMETER
+  VK_FRAGMENT_SHADING_RATE_COMBINER_OP_REPLACE_KHR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_FRAGMENT_SHADING_RATE_COMBINER_OP_MIN_KHR
+  2)
+
+(ADP:DEFPARAMETER
+  VK_FRAGMENT_SHADING_RATE_COMBINER_OP_MAX_KHR
+  3)
+
+(ADP:DEFPARAMETER
+  VK_FRAGMENT_SHADING_RATE_COMBINER_OP_MUL_KHR
+  4)
+
+(ADP:DEFPARAMETER
+  VK_FRAGMENT_SHADING_RATE_COMBINER_OP_MAX_ENUM_KHR
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SPIRV_1_4
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SPIRV_1_4_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SPIRV_1_4_EXTENSION_NAME
+  "VK_KHR_spirv_1_4")
+
+(ADP:DEFPARAMETER
+  VK_KHR_SURFACE_PROTECTED_CAPABILITIES
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SURFACE_PROTECTED_CAPABILITIES_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SURFACE_PROTECTED_CAPABILITIES_EXTENSION_NAME
+  "VK_KHR_surface_protected_capabilities")
+
+(ADP:DEFPARAMETER
+  VK_KHR_SEPARATE_DEPTH_STENCIL_LAYOUTS
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SEPARATE_DEPTH_STENCIL_LAYOUTS_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SEPARATE_DEPTH_STENCIL_LAYOUTS_EXTENSION_NAME
+  "VK_KHR_separate_depth_stencil_layouts")
+
+(ADP:DEFPARAMETER
+  VK_KHR_PRESENT_WAIT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_PRESENT_WAIT_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_PRESENT_WAIT_EXTENSION_NAME
+  "VK_KHR_present_wait")
+
+(ADP:DEFPARAMETER
+  VK_KHR_UNIFORM_BUFFER_STANDARD_LAYOUT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_UNIFORM_BUFFER_STANDARD_LAYOUT_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_UNIFORM_BUFFER_STANDARD_LAYOUT_EXTENSION_NAME
+  "VK_KHR_uniform_buffer_standard_layout")
+
+(ADP:DEFPARAMETER
+  VK_KHR_BUFFER_DEVICE_ADDRESS
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_BUFFER_DEVICE_ADDRESS_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_BUFFER_DEVICE_ADDRESS_EXTENSION_NAME
+  "VK_KHR_buffer_device_address")
+
+(ADP:DEFPARAMETER
+  VK_KHR_DEFERRED_HOST_OPERATIONS
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_DEFERRED_HOST_OPERATIONS_SPEC_VERSION
+  4)
+
+(ADP:DEFPARAMETER
+  VK_KHR_DEFERRED_HOST_OPERATIONS_EXTENSION_NAME
+  "VK_KHR_deferred_host_operations")
+
+(ADP:DEFPARAMETER
+  VK_KHR_PIPELINE_EXECUTABLE_PROPERTIES
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_PIPELINE_EXECUTABLE_PROPERTIES_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_PIPELINE_EXECUTABLE_PROPERTIES_EXTENSION_NAME
+  "VK_KHR_pipeline_executable_properties")
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_BOOL32_KHR
+  0)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_INT64_KHR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_UINT64_KHR
+  2)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_FLOAT64_KHR
+  3)
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_MAX_ENUM_KHR
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHADER_INTEGER_DOT_PRODUCT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHADER_INTEGER_DOT_PRODUCT_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHADER_INTEGER_DOT_PRODUCT_EXTENSION_NAME
+  "VK_KHR_shader_integer_dot_product")
+
+(ADP:DEFPARAMETER
+  VK_KHR_PIPELINE_LIBRARY
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_PIPELINE_LIBRARY_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_PIPELINE_LIBRARY_EXTENSION_NAME
+  "VK_KHR_pipeline_library")
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHADER_NON_SEMANTIC_INFO
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHADER_NON_SEMANTIC_INFO_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHADER_NON_SEMANTIC_INFO_EXTENSION_NAME
+  "VK_KHR_shader_non_semantic_info")
+
+(ADP:DEFPARAMETER
+  VK_KHR_PRESENT_ID
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_PRESENT_ID_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_PRESENT_ID_EXTENSION_NAME
+  "VK_KHR_present_id")
+
+(ADP:DEFPARAMETER
+  VK_KHR_SYNCHRONIZATION2
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SYNCHRONIZATION_2_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SYNCHRONIZATION_2_EXTENSION_NAME
+  "VK_KHR_synchronization2")
+
+(ADP:DEFPARAMETER
+  VK_KHR_FRAGMENT_SHADER_BARYCENTRIC
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_FRAGMENT_SHADER_BARYCENTRIC_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_FRAGMENT_SHADER_BARYCENTRIC_EXTENSION_NAME
+  "VK_KHR_fragment_shader_barycentric")
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_EXTENSION_NAME
+  "VK_KHR_shader_subgroup_uniform_control_flow")
+
+(ADP:DEFPARAMETER
+  VK_KHR_ZERO_INITIALIZE_WORKGROUP_MEMORY
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_ZERO_INITIALIZE_WORKGROUP_MEMORY_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_ZERO_INITIALIZE_WORKGROUP_MEMORY_EXTENSION_NAME
+  "VK_KHR_zero_initialize_workgroup_memory")
+
+(ADP:DEFPARAMETER
+  VK_KHR_WORKGROUP_MEMORY_EXPLICIT_LAYOUT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_WORKGROUP_MEMORY_EXPLICIT_LAYOUT_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_WORKGROUP_MEMORY_EXPLICIT_LAYOUT_EXTENSION_NAME
+  "VK_KHR_workgroup_memory_explicit_layout")
+
+(ADP:DEFPARAMETER
+  VK_KHR_COPY_COMMANDS2
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_COPY_COMMANDS_2_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_COPY_COMMANDS_2_EXTENSION_NAME
+  "VK_KHR_copy_commands2")
+
+(ADP:DEFPARAMETER
+  VK_KHR_FORMAT_FEATURE_FLAGS2
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_FORMAT_FEATURE_FLAGS_2_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_FORMAT_FEATURE_FLAGS_2_EXTENSION_NAME
+  "VK_KHR_format_feature_flags2")
+
+(ADP:DEFPARAMETER
+  VK_KHR_RAY_TRACING_MAINTENANCE1
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_RAY_TRACING_MAINTENANCE_1_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_RAY_TRACING_MAINTENANCE_1_EXTENSION_NAME
+  "VK_KHR_ray_tracing_maintenance1")
+
+(ADP:DEFPARAMETER
+  VK_KHR_PORTABILITY_ENUMERATION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_PORTABILITY_ENUMERATION_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_PORTABILITY_ENUMERATION_EXTENSION_NAME
+  "VK_KHR_portability_enumeration")
+
+(ADP:DEFPARAMETER
+  VK_KHR_MAINTENANCE4
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_MAINTENANCE_4_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_KHR_MAINTENANCE_4_EXTENSION_NAME
+  "VK_KHR_maintenance4")
+
+(ADP:DEFPARAMETER
+  VK_EXT_DEBUG_REPORT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_DEBUG_REPORT_SPEC_VERSION
+  10)
+
+(ADP:DEFPARAMETER
+  VK_EXT_DEBUG_REPORT_EXTENSION_NAME
+  "VK_EXT_debug_report")
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT
+  0)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_INSTANCE_EXT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_PHYSICAL_DEVICE_EXT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_DEVICE_EXT
+  3)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_QUEUE_EXT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_SEMAPHORE_EXT
+  5)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_BUFFER_EXT
+  6)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_FENCE_EXT
+  7)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_DEVICE_MEMORY_EXT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_EXT
+  9)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_IMAGE_EXT
+  10)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_EVENT_EXT
+  11)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_QUERY_POOL_EXT
+  12)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_VIEW_EXT
+  13)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_IMAGE_VIEW_EXT
+  14)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_SHADER_MODULE_EXT
+  15)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_CACHE_EXT
+  16)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_LAYOUT_EXT
+  17)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_RENDER_PASS_EXT
+  18)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_EXT
+  19)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT_EXT
+  20)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_EXT
+  21)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_POOL_EXT
+  22)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_EXT
+  23)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_FRAMEBUFFER_EXT
+  24)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_POOL_EXT
+  25)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_SURFACE_KHR_EXT
+  26)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN_KHR_EXT
+  27)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT
+  28)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_KHR_EXT
+  29)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT
+  30)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT_EXT
+  33)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_EXT
+  1000156000)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_EXT
+  1000085000)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_CU_MODULE_NVX_EXT
+  1000029000)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_CU_FUNCTION_NVX_EXT
+  1000029001)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_ACCELERATION_STRUCTURE_KHR_EXT
+  1000150000)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_ACCELERATION_STRUCTURE_NV_EXT
+  1000165000)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_COLLECTION_FUCHSIA_EXT
+  1000366000)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT
+  VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT
+  VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT_EXT)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR_EXT
+  VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_EXT)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_KHR_EXT
+  VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_EXT)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_OBJECT_TYPE_MAX_ENUM_EXT
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_INFORMATION_BIT_EXT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_WARNING_BIT_EXT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_ERROR_BIT_EXT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_DEBUG_BIT_EXT
+  16)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_REPORT_FLAG_BITS_MAX_ENUM_EXT
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_NV_GLSL_SHADER
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_GLSL_SHADER_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_GLSL_SHADER_EXTENSION_NAME
+  "VK_NV_glsl_shader")
+
+(ADP:DEFPARAMETER
+  VK_EXT_DEPTH_RANGE_UNRESTRICTED
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_DEPTH_RANGE_UNRESTRICTED_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_DEPTH_RANGE_UNRESTRICTED_EXTENSION_NAME
+  "VK_EXT_depth_range_unrestricted")
+
+(ADP:DEFPARAMETER
+  VK_IMG_FILTER_CUBIC
+  1)
+
+(ADP:DEFPARAMETER
+  VK_IMG_FILTER_CUBIC_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_IMG_FILTER_CUBIC_EXTENSION_NAME
+  "VK_IMG_filter_cubic")
+
+(ADP:DEFPARAMETER
+  VK_AMD_RASTERIZATION_ORDER
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_RASTERIZATION_ORDER_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_RASTERIZATION_ORDER_EXTENSION_NAME
+  "VK_AMD_rasterization_order")
+
+(ADP:DEFPARAMETER
+  VK_RASTERIZATION_ORDER_STRICT_AMD
+  0)
+
+(ADP:DEFPARAMETER
+  VK_RASTERIZATION_ORDER_RELAXED_AMD
+  1)
+
+(ADP:DEFPARAMETER
+  VK_RASTERIZATION_ORDER_MAX_ENUM_AMD
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_AMD_SHADER_TRINARY_MINMAX
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_SHADER_TRINARY_MINMAX_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_SHADER_TRINARY_MINMAX_EXTENSION_NAME
+  "VK_AMD_shader_trinary_minmax")
+
+(ADP:DEFPARAMETER
+  VK_AMD_SHADER_EXPLICIT_VERTEX_PARAMETER
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_SHADER_EXPLICIT_VERTEX_PARAMETER_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_SHADER_EXPLICIT_VERTEX_PARAMETER_EXTENSION_NAME
+  "VK_AMD_shader_explicit_vertex_parameter")
+
+(ADP:DEFPARAMETER
+  VK_EXT_DEBUG_MARKER
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_DEBUG_MARKER_SPEC_VERSION
+  4)
+
+(ADP:DEFPARAMETER
+  VK_EXT_DEBUG_MARKER_EXTENSION_NAME
+  "VK_EXT_debug_marker")
+
+(ADP:DEFPARAMETER
+  VK_AMD_GCN_SHADER
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_GCN_SHADER_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_GCN_SHADER_EXTENSION_NAME
+  "VK_AMD_gcn_shader")
+
+(ADP:DEFPARAMETER
+  VK_NV_DEDICATED_ALLOCATION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_DEDICATED_ALLOCATION_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_DEDICATED_ALLOCATION_EXTENSION_NAME
+  "VK_NV_dedicated_allocation")
+
+(ADP:DEFPARAMETER
+  VK_EXT_TRANSFORM_FEEDBACK
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_TRANSFORM_FEEDBACK_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_TRANSFORM_FEEDBACK_EXTENSION_NAME
+  "VK_EXT_transform_feedback")
+
+(ADP:DEFPARAMETER
+  VK_NVX_BINARY_IMPORT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NVX_BINARY_IMPORT_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NVX_BINARY_IMPORT_EXTENSION_NAME
+  "VK_NVX_binary_import")
+
+(ADP:DEFPARAMETER
+  VK_NVX_IMAGE_VIEW_HANDLE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NVX_IMAGE_VIEW_HANDLE_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_NVX_IMAGE_VIEW_HANDLE_EXTENSION_NAME
+  "VK_NVX_image_view_handle")
+
+(ADP:DEFPARAMETER
+  VK_AMD_DRAW_INDIRECT_COUNT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_DRAW_INDIRECT_COUNT_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_AMD_DRAW_INDIRECT_COUNT_EXTENSION_NAME
+  "VK_AMD_draw_indirect_count")
+
+(ADP:DEFPARAMETER
+  VK_AMD_NEGATIVE_VIEWPORT_HEIGHT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_NEGATIVE_VIEWPORT_HEIGHT_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_NEGATIVE_VIEWPORT_HEIGHT_EXTENSION_NAME
+  "VK_AMD_negative_viewport_height")
+
+(ADP:DEFPARAMETER
+  VK_AMD_GPU_SHADER_HALF_FLOAT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_GPU_SHADER_HALF_FLOAT_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_AMD_GPU_SHADER_HALF_FLOAT_EXTENSION_NAME
+  "VK_AMD_gpu_shader_half_float")
+
+(ADP:DEFPARAMETER
+  VK_AMD_SHADER_BALLOT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_SHADER_BALLOT_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_SHADER_BALLOT_EXTENSION_NAME
+  "VK_AMD_shader_ballot")
+
+(ADP:DEFPARAMETER
+  VK_AMD_TEXTURE_GATHER_BIAS_LOD
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_TEXTURE_GATHER_BIAS_LOD_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_TEXTURE_GATHER_BIAS_LOD_EXTENSION_NAME
+  "VK_AMD_texture_gather_bias_lod")
+
+(ADP:DEFPARAMETER
+  VK_AMD_SHADER_INFO
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_SHADER_INFO_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_SHADER_INFO_EXTENSION_NAME
+  "VK_AMD_shader_info")
+
+(ADP:DEFPARAMETER
+  VK_SHADER_INFO_TYPE_STATISTICS_AMD
+  0)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_INFO_TYPE_BINARY_AMD
+  1)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_INFO_TYPE_DISASSEMBLY_AMD
+  2)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_INFO_TYPE_MAX_ENUM_AMD
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_AMD_SHADER_IMAGE_LOAD_STORE_LOD
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_SHADER_IMAGE_LOAD_STORE_LOD_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_SHADER_IMAGE_LOAD_STORE_LOD_EXTENSION_NAME
+  "VK_AMD_shader_image_load_store_lod")
+
+(ADP:DEFPARAMETER
+  VK_NV_CORNER_SAMPLED_IMAGE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_CORNER_SAMPLED_IMAGE_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_NV_CORNER_SAMPLED_IMAGE_EXTENSION_NAME
+  "VK_NV_corner_sampled_image")
+
+(ADP:DEFPARAMETER
+  VK_IMG_FORMAT_PVRTC
+  1)
+
+(ADP:DEFPARAMETER
+  VK_IMG_FORMAT_PVRTC_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_IMG_FORMAT_PVRTC_EXTENSION_NAME
+  "VK_IMG_format_pvrtc")
+
+(ADP:DEFPARAMETER
+  VK_NV_EXTERNAL_MEMORY_CAPABILITIES
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_EXTERNAL_MEMORY_CAPABILITIES_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION_NAME
+  "VK_NV_external_memory_capabilities")
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_NV
+  2)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_BIT_NV
+  4)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_KMT_BIT_NV
+  8)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_HANDLE_TYPE_FLAG_BITS_MAX_ENUM_NV
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_NV
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_NV
+  2)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_NV
+  4)
+
+(ADP:DEFPARAMETER
+  VK_EXTERNAL_MEMORY_FEATURE_FLAG_BITS_MAX_ENUM_NV
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_NV_EXTERNAL_MEMORY
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_EXTERNAL_MEMORY_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_EXTERNAL_MEMORY_EXTENSION_NAME
+  "VK_NV_external_memory")
+
+(ADP:DEFPARAMETER
+  VK_EXT_VALIDATION_FLAGS
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_VALIDATION_FLAGS_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_EXT_VALIDATION_FLAGS_EXTENSION_NAME
+  "VK_EXT_validation_flags")
+
+(ADP:DEFPARAMETER
+  VK_VALIDATION_CHECK_ALL_EXT
+  0)
+
+(ADP:DEFPARAMETER
+  VK_VALIDATION_CHECK_SHADERS_EXT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_VALIDATION_CHECK_MAX_ENUM_EXT
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SHADER_SUBGROUP_BALLOT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SHADER_SUBGROUP_BALLOT_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SHADER_SUBGROUP_BALLOT_EXTENSION_NAME
+  "VK_EXT_shader_subgroup_ballot")
+
+(ADP:DEFPARAMETER
+  VK_EXT_SHADER_SUBGROUP_VOTE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SHADER_SUBGROUP_VOTE_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SHADER_SUBGROUP_VOTE_EXTENSION_NAME
+  "VK_EXT_shader_subgroup_vote")
+
+(ADP:DEFPARAMETER
+  VK_EXT_TEXTURE_COMPRESSION_ASTC_HDR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_TEXTURE_COMPRESSION_ASTC_HDR_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_TEXTURE_COMPRESSION_ASTC_HDR_EXTENSION_NAME
+  "VK_EXT_texture_compression_astc_hdr")
+
+(ADP:DEFPARAMETER
+  VK_EXT_ASTC_DECODE_MODE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_ASTC_DECODE_MODE_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_ASTC_DECODE_MODE_EXTENSION_NAME
+  "VK_EXT_astc_decode_mode")
+
+(ADP:DEFPARAMETER
+  VK_EXT_CONDITIONAL_RENDERING
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_CONDITIONAL_RENDERING_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_EXT_CONDITIONAL_RENDERING_EXTENSION_NAME
+  "VK_EXT_conditional_rendering")
+
+(ADP:DEFPARAMETER
+  VK_CONDITIONAL_RENDERING_INVERTED_BIT_EXT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_CONDITIONAL_RENDERING_FLAG_BITS_MAX_ENUM_EXT
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_NV_CLIP_SPACE_W_SCALING
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_CLIP_SPACE_W_SCALING_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_CLIP_SPACE_W_SCALING_EXTENSION_NAME
+  "VK_NV_clip_space_w_scaling")
+
+(ADP:DEFPARAMETER
+  VK_EXT_DIRECT_MODE_DISPLAY
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_DIRECT_MODE_DISPLAY_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_DIRECT_MODE_DISPLAY_EXTENSION_NAME
+  "VK_EXT_direct_mode_display")
+
+(ADP:DEFPARAMETER
+  VK_EXT_DISPLAY_SURFACE_COUNTER
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_DISPLAY_SURFACE_COUNTER_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_DISPLAY_SURFACE_COUNTER_EXTENSION_NAME
+  "VK_EXT_display_surface_counter")
+
+(ADP:DEFPARAMETER
+  VK_SURFACE_COUNTER_VBLANK_BIT_EXT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_SURFACE_COUNTER_VBLANK_EXT
+  VK_SURFACE_COUNTER_VBLANK_BIT_EXT)
+
+(ADP:DEFPARAMETER
+  VK_SURFACE_COUNTER_FLAG_BITS_MAX_ENUM_EXT
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_EXT_DISPLAY_CONTROL
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_DISPLAY_CONTROL_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_DISPLAY_CONTROL_EXTENSION_NAME
+  "VK_EXT_display_control")
+
+(ADP:DEFPARAMETER
+  VK_DISPLAY_POWER_STATE_OFF_EXT
+  0)
+
+(ADP:DEFPARAMETER
+  VK_DISPLAY_POWER_STATE_SUSPEND_EXT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_DISPLAY_POWER_STATE_ON_EXT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_DISPLAY_POWER_STATE_MAX_ENUM_EXT
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_DEVICE_EVENT_TYPE_DISPLAY_HOTPLUG_EXT
+  0)
+
+(ADP:DEFPARAMETER
+  VK_DEVICE_EVENT_TYPE_MAX_ENUM_EXT
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_DISPLAY_EVENT_TYPE_FIRST_PIXEL_OUT_EXT
+  0)
+
+(ADP:DEFPARAMETER
+  VK_DISPLAY_EVENT_TYPE_MAX_ENUM_EXT
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_GOOGLE_DISPLAY_TIMING
+  1)
+
+(ADP:DEFPARAMETER
+  VK_GOOGLE_DISPLAY_TIMING_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_GOOGLE_DISPLAY_TIMING_EXTENSION_NAME
+  "VK_GOOGLE_display_timing")
+
+(ADP:DEFPARAMETER
+  VK_NV_SAMPLE_MASK_OVERRIDE_COVERAGE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_SAMPLE_MASK_OVERRIDE_COVERAGE_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_SAMPLE_MASK_OVERRIDE_COVERAGE_EXTENSION_NAME
+  "VK_NV_sample_mask_override_coverage")
+
+(ADP:DEFPARAMETER
+  VK_NV_GEOMETRY_SHADER_PASSTHROUGH
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_GEOMETRY_SHADER_PASSTHROUGH_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_GEOMETRY_SHADER_PASSTHROUGH_EXTENSION_NAME
+  "VK_NV_geometry_shader_passthrough")
+
+(ADP:DEFPARAMETER
+  VK_NV_VIEWPORT_ARRAY2
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_VIEWPORT_ARRAY_2_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_VIEWPORT_ARRAY_2_EXTENSION_NAME
+  "VK_NV_viewport_array2")
+
+(ADP:DEFPARAMETER
+  VK_NV_VIEWPORT_ARRAY2_SPEC_VERSION
+  VK_NV_VIEWPORT_ARRAY_2_SPEC_VERSION)
+
+(ADP:DEFPARAMETER
+  VK_NV_VIEWPORT_ARRAY2_EXTENSION_NAME
+  VK_NV_VIEWPORT_ARRAY_2_EXTENSION_NAME)
+
+(ADP:DEFPARAMETER
+  VK_NVX_MULTIVIEW_PER_VIEW_ATTRIBUTES
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NVX_MULTIVIEW_PER_VIEW_ATTRIBUTES_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NVX_MULTIVIEW_PER_VIEW_ATTRIBUTES_EXTENSION_NAME
+  "VK_NVX_multiview_per_view_attributes")
+
+(ADP:DEFPARAMETER
+  VK_NV_VIEWPORT_SWIZZLE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_VIEWPORT_SWIZZLE_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_VIEWPORT_SWIZZLE_EXTENSION_NAME
+  "VK_NV_viewport_swizzle")
+
+(ADP:DEFPARAMETER
+  VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_X_NV
+  0)
+
+(ADP:DEFPARAMETER
+  VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_X_NV
+  1)
+
+(ADP:DEFPARAMETER
+  VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_Y_NV
+  2)
+
+(ADP:DEFPARAMETER
+  VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_Y_NV
+  3)
+
+(ADP:DEFPARAMETER
+  VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_Z_NV
+  4)
+
+(ADP:DEFPARAMETER
+  VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_Z_NV
+  5)
+
+(ADP:DEFPARAMETER
+  VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_W_NV
+  6)
+
+(ADP:DEFPARAMETER
+  VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_W_NV
+  7)
+
+(ADP:DEFPARAMETER
+  VK_VIEWPORT_COORDINATE_SWIZZLE_MAX_ENUM_NV
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_EXT_DISCARD_RECTANGLES
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_DISCARD_RECTANGLES_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_DISCARD_RECTANGLES_EXTENSION_NAME
+  "VK_EXT_discard_rectangles")
+
+(ADP:DEFPARAMETER
+  VK_DISCARD_RECTANGLE_MODE_INCLUSIVE_EXT
+  0)
+
+(ADP:DEFPARAMETER
+  VK_DISCARD_RECTANGLE_MODE_EXCLUSIVE_EXT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_DISCARD_RECTANGLE_MODE_MAX_ENUM_EXT
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_EXT_CONSERVATIVE_RASTERIZATION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_CONSERVATIVE_RASTERIZATION_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_CONSERVATIVE_RASTERIZATION_EXTENSION_NAME
+  "VK_EXT_conservative_rasterization")
+
+(ADP:DEFPARAMETER
+  VK_CONSERVATIVE_RASTERIZATION_MODE_DISABLED_EXT
+  0)
+
+(ADP:DEFPARAMETER
+  VK_CONSERVATIVE_RASTERIZATION_MODE_OVERESTIMATE_EXT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_CONSERVATIVE_RASTERIZATION_MODE_UNDERESTIMATE_EXT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_CONSERVATIVE_RASTERIZATION_MODE_MAX_ENUM_EXT
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_EXT_DEPTH_CLIP_ENABLE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_DEPTH_CLIP_ENABLE_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_DEPTH_CLIP_ENABLE_EXTENSION_NAME
+  "VK_EXT_depth_clip_enable")
+
+(ADP:DEFPARAMETER
+  VK_EXT_SWAPCHAIN_COLORSPACE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SWAPCHAIN_COLOR_SPACE_SPEC_VERSION
+  4)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SWAPCHAIN_COLOR_SPACE_EXTENSION_NAME
+  "VK_EXT_swapchain_colorspace")
+
+(ADP:DEFPARAMETER
+  VK_EXT_HDR_METADATA
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_HDR_METADATA_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_EXT_HDR_METADATA_EXTENSION_NAME
+  "VK_EXT_hdr_metadata")
+
+(ADP:DEFPARAMETER
+  VK_EXT_EXTERNAL_MEMORY_DMA_BUF
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_EXTERNAL_MEMORY_DMA_BUF_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_EXTERNAL_MEMORY_DMA_BUF_EXTENSION_NAME
+  "VK_EXT_external_memory_dma_buf")
+
+(ADP:DEFPARAMETER
+  VK_EXT_QUEUE_FAMILY_FOREIGN
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_QUEUE_FAMILY_FOREIGN_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_QUEUE_FAMILY_FOREIGN_EXTENSION_NAME
+  "VK_EXT_queue_family_foreign")
+
+(ADP:DEFPARAMETER
+  VK_QUEUE_FAMILY_FOREIGN_EXT
+  (- UINT32_MAX 2))
+
+(ADP:DEFPARAMETER
+  VK_EXT_DEBUG_UTILS
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_DEBUG_UTILS_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_EXT_DEBUG_UTILS_EXTENSION_NAME
+  "VK_EXT_debug_utils")
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT
+  16)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT
+  256)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT
+  4096)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_UTILS_MESSAGE_SEVERITY_FLAG_BITS_MAX_ENUM_EXT
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_DEBUG_UTILS_MESSAGE_TYPE_FLAG_BITS_MAX_ENUM_EXT
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SAMPLER_FILTER_MINMAX
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SAMPLER_FILTER_MINMAX_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SAMPLER_FILTER_MINMAX_EXTENSION_NAME
+  "VK_EXT_sampler_filter_minmax")
+
+(ADP:DEFPARAMETER
+  VK_AMD_GPU_SHADER_INT16
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_GPU_SHADER_INT16_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_AMD_GPU_SHADER_INT16_EXTENSION_NAME
+  "VK_AMD_gpu_shader_int16")
+
+(ADP:DEFPARAMETER
+  VK_AMD_MIXED_ATTACHMENT_SAMPLES
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_MIXED_ATTACHMENT_SAMPLES_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_MIXED_ATTACHMENT_SAMPLES_EXTENSION_NAME
+  "VK_AMD_mixed_attachment_samples")
+
+(ADP:DEFPARAMETER
+  VK_AMD_SHADER_FRAGMENT_MASK
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_SHADER_FRAGMENT_MASK_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_SHADER_FRAGMENT_MASK_EXTENSION_NAME
+  "VK_AMD_shader_fragment_mask")
+
+(ADP:DEFPARAMETER
+  VK_EXT_INLINE_UNIFORM_BLOCK
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_INLINE_UNIFORM_BLOCK_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_INLINE_UNIFORM_BLOCK_EXTENSION_NAME
+  "VK_EXT_inline_uniform_block")
+
+(ADP:DEFPARAMETER
+  VK_EXT_SHADER_STENCIL_EXPORT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SHADER_STENCIL_EXPORT_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SHADER_STENCIL_EXPORT_EXTENSION_NAME
+  "VK_EXT_shader_stencil_export")
+
+(ADP:DEFPARAMETER
+  VK_EXT_SAMPLE_LOCATIONS
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SAMPLE_LOCATIONS_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SAMPLE_LOCATIONS_EXTENSION_NAME
+  "VK_EXT_sample_locations")
+
+(ADP:DEFPARAMETER
+  VK_EXT_BLEND_OPERATION_ADVANCED
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_BLEND_OPERATION_ADVANCED_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_EXT_BLEND_OPERATION_ADVANCED_EXTENSION_NAME
+  "VK_EXT_blend_operation_advanced")
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OVERLAP_UNCORRELATED_EXT
+  0)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OVERLAP_DISJOINT_EXT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OVERLAP_CONJOINT_EXT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_BLEND_OVERLAP_MAX_ENUM_EXT
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_NV_FRAGMENT_COVERAGE_TO_COLOR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_FRAGMENT_COVERAGE_TO_COLOR_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_FRAGMENT_COVERAGE_TO_COLOR_EXTENSION_NAME
+  "VK_NV_fragment_coverage_to_color")
+
+(ADP:DEFPARAMETER
+  VK_NV_FRAMEBUFFER_MIXED_SAMPLES
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_FRAMEBUFFER_MIXED_SAMPLES_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_FRAMEBUFFER_MIXED_SAMPLES_EXTENSION_NAME
+  "VK_NV_framebuffer_mixed_samples")
+
+(ADP:DEFPARAMETER
+  VK_COVERAGE_MODULATION_MODE_NONE_NV
+  0)
+
+(ADP:DEFPARAMETER
+  VK_COVERAGE_MODULATION_MODE_RGB_NV
+  1)
+
+(ADP:DEFPARAMETER
+  VK_COVERAGE_MODULATION_MODE_ALPHA_NV
+  2)
+
+(ADP:DEFPARAMETER
+  VK_COVERAGE_MODULATION_MODE_RGBA_NV
+  3)
+
+(ADP:DEFPARAMETER
+  VK_COVERAGE_MODULATION_MODE_MAX_ENUM_NV
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_NV_FILL_RECTANGLE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_FILL_RECTANGLE_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_FILL_RECTANGLE_EXTENSION_NAME
+  "VK_NV_fill_rectangle")
+
+(ADP:DEFPARAMETER
+  VK_NV_SHADER_SM_BUILTINS
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_SHADER_SM_BUILTINS_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_SHADER_SM_BUILTINS_EXTENSION_NAME
+  "VK_NV_shader_sm_builtins")
+
+(ADP:DEFPARAMETER
+  VK_EXT_POST_DEPTH_COVERAGE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_POST_DEPTH_COVERAGE_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_POST_DEPTH_COVERAGE_EXTENSION_NAME
+  "VK_EXT_post_depth_coverage")
+
+(ADP:DEFPARAMETER
+  VK_EXT_IMAGE_DRM_FORMAT_MODIFIER
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_IMAGE_DRM_FORMAT_MODIFIER_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_EXT_IMAGE_DRM_FORMAT_MODIFIER_EXTENSION_NAME
+  "VK_EXT_image_drm_format_modifier")
+
+(ADP:DEFPARAMETER
+  VK_EXT_VALIDATION_CACHE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_VALIDATION_CACHE_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_VALIDATION_CACHE_EXTENSION_NAME
+  "VK_EXT_validation_cache")
+
+(ADP:DEFPARAMETER
+  VK_VALIDATION_CACHE_HEADER_VERSION_ONE_EXT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_VALIDATION_CACHE_HEADER_VERSION_MAX_ENUM_EXT
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_EXT_DESCRIPTOR_INDEXING
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_DESCRIPTOR_INDEXING_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_EXT_DESCRIPTOR_INDEXING_EXTENSION_NAME
+  "VK_EXT_descriptor_indexing")
+
+(ADP:DEFPARAMETER
+  VK_EXT_SHADER_VIEWPORT_INDEX_LAYER
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SHADER_VIEWPORT_INDEX_LAYER_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SHADER_VIEWPORT_INDEX_LAYER_EXTENSION_NAME
+  "VK_EXT_shader_viewport_index_layer")
+
+(ADP:DEFPARAMETER
+  VK_NV_SHADING_RATE_IMAGE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_SHADING_RATE_IMAGE_SPEC_VERSION
+  3)
+
+(ADP:DEFPARAMETER
+  VK_NV_SHADING_RATE_IMAGE_EXTENSION_NAME
+  "VK_NV_shading_rate_image")
+
+(ADP:DEFPARAMETER
+  VK_SHADING_RATE_PALETTE_ENTRY_NO_INVOCATIONS_NV
+  0)
+
+(ADP:DEFPARAMETER
+  VK_SHADING_RATE_PALETTE_ENTRY_16_INVOCATIONS_PER_PIXEL_NV
+  1)
+
+(ADP:DEFPARAMETER
+  VK_SHADING_RATE_PALETTE_ENTRY_8_INVOCATIONS_PER_PIXEL_NV
+  2)
+
+(ADP:DEFPARAMETER
+  VK_SHADING_RATE_PALETTE_ENTRY_4_INVOCATIONS_PER_PIXEL_NV
+  3)
+
+(ADP:DEFPARAMETER
+  VK_SHADING_RATE_PALETTE_ENTRY_2_INVOCATIONS_PER_PIXEL_NV
+  4)
+
+(ADP:DEFPARAMETER
+  VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_PIXEL_NV
+  5)
+
+(ADP:DEFPARAMETER
+  VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_2X1_PIXELS_NV
+  6)
+
+(ADP:DEFPARAMETER
+  VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_1X2_PIXELS_NV
+  7)
+
+(ADP:DEFPARAMETER
+  VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_2X2_PIXELS_NV
+  8)
+
+(ADP:DEFPARAMETER
+  VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_4X2_PIXELS_NV
+  9)
+
+(ADP:DEFPARAMETER
+  VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_2X4_PIXELS_NV
+  10)
+
+(ADP:DEFPARAMETER
+  VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_4X4_PIXELS_NV
+  11)
+
+(ADP:DEFPARAMETER
+  VK_SHADING_RATE_PALETTE_ENTRY_MAX_ENUM_NV
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_COARSE_SAMPLE_ORDER_TYPE_DEFAULT_NV
+  0)
+
+(ADP:DEFPARAMETER
+  VK_COARSE_SAMPLE_ORDER_TYPE_CUSTOM_NV
+  1)
+
+(ADP:DEFPARAMETER
+  VK_COARSE_SAMPLE_ORDER_TYPE_PIXEL_MAJOR_NV
+  2)
+
+(ADP:DEFPARAMETER
+  VK_COARSE_SAMPLE_ORDER_TYPE_SAMPLE_MAJOR_NV
+  3)
+
+(ADP:DEFPARAMETER
+  VK_COARSE_SAMPLE_ORDER_TYPE_MAX_ENUM_NV
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_NV_RAY_TRACING
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_RAY_TRACING_SPEC_VERSION
+  3)
+
+(ADP:DEFPARAMETER
+  VK_NV_RAY_TRACING_EXTENSION_NAME
+  "VK_NV_ray_tracing")
+
+(ADP:DEFPARAMETER
+  VK_SHADER_UNUSED_KHR
+  (- UINT32_MAX 0))
+
+(ADP:DEFPARAMETER
+  VK_SHADER_UNUSED_NV
+  VK_SHADER_UNUSED_KHR)
+
+(ADP:DEFPARAMETER
+  VK_RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_KHR
+  0)
+
+(ADP:DEFPARAMETER
+  VK_RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_KHR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR
+  2)
+
+(ADP:DEFPARAMETER
+  VK_RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_NV
+  VK_RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_KHR)
+
+(ADP:DEFPARAMETER
+  VK_RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_NV
+  VK_RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_KHR)
+
+(ADP:DEFPARAMETER
+  VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_NV
+  VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR)
+
+(ADP:DEFPARAMETER
+  VK_RAY_TRACING_SHADER_GROUP_TYPE_MAX_ENUM_KHR
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_GEOMETRY_TYPE_TRIANGLES_KHR
+  0)
+
+(ADP:DEFPARAMETER
+  VK_GEOMETRY_TYPE_AABBS_KHR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_GEOMETRY_TYPE_INSTANCES_KHR
+  2)
+
+(ADP:DEFPARAMETER
+  VK_GEOMETRY_TYPE_TRIANGLES_NV
+  VK_GEOMETRY_TYPE_TRIANGLES_KHR)
+
+(ADP:DEFPARAMETER
+  VK_GEOMETRY_TYPE_AABBS_NV
+  VK_GEOMETRY_TYPE_AABBS_KHR)
+
+(ADP:DEFPARAMETER
+  VK_GEOMETRY_TYPE_MAX_ENUM_KHR
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR
+  0)
+
+(ADP:DEFPARAMETER
+  VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_KHR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_ACCELERATION_STRUCTURE_TYPE_GENERIC_KHR
+  2)
+
+(ADP:DEFPARAMETER
+  VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NV
+  VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR)
+
+(ADP:DEFPARAMETER
+  VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NV
+  VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_KHR)
+
+(ADP:DEFPARAMETER
+  VK_ACCELERATION_STRUCTURE_TYPE_MAX_ENUM_KHR
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_COPY_ACCELERATION_STRUCTURE_MODE_CLONE_KHR
+  0)
+
+(ADP:DEFPARAMETER
+  VK_COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_KHR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_COPY_ACCELERATION_STRUCTURE_MODE_SERIALIZE_KHR
+  2)
+
+(ADP:DEFPARAMETER
+  VK_COPY_ACCELERATION_STRUCTURE_MODE_DESERIALIZE_KHR
+  3)
+
+(ADP:DEFPARAMETER
+  VK_COPY_ACCELERATION_STRUCTURE_MODE_CLONE_NV
+  VK_COPY_ACCELERATION_STRUCTURE_MODE_CLONE_KHR)
+
+(ADP:DEFPARAMETER
+  VK_COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_NV
+  VK_COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_KHR)
+
+(ADP:DEFPARAMETER
+  VK_COPY_ACCELERATION_STRUCTURE_MODE_MAX_ENUM_KHR
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_OBJECT_NV
+  0)
+
+(ADP:DEFPARAMETER
+  VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_BUILD_SCRATCH_NV
+  1)
+
+(ADP:DEFPARAMETER
+  VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_UPDATE_SCRATCH_NV
+  2)
+
+(ADP:DEFPARAMETER
+  VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_MAX_ENUM_NV
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_GEOMETRY_OPAQUE_BIT_KHR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_KHR
+  2)
+
+(ADP:DEFPARAMETER
+  VK_GEOMETRY_OPAQUE_BIT_NV
+  VK_GEOMETRY_OPAQUE_BIT_KHR)
+
+(ADP:DEFPARAMETER
+  VK_GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_NV
+  VK_GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_KHR)
+
+(ADP:DEFPARAMETER
+  VK_GEOMETRY_FLAG_BITS_MAX_ENUM_KHR
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_GEOMETRY_INSTANCE_TRIANGLE_FACING_CULL_DISABLE_BIT_KHR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_GEOMETRY_INSTANCE_TRIANGLE_FLIP_FACING_BIT_KHR
+  2)
+
+(ADP:DEFPARAMETER
+  VK_GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_KHR
+  4)
+
+(ADP:DEFPARAMETER
+  VK_GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_KHR
+  8)
+
+(ADP:DEFPARAMETER
+  VK_GEOMETRY_INSTANCE_TRIANGLE_FRONT_COUNTERCLOCKWISE_BIT_KHR
+  VK_GEOMETRY_INSTANCE_TRIANGLE_FLIP_FACING_BIT_KHR)
+
+(ADP:DEFPARAMETER
+  VK_GEOMETRY_INSTANCE_TRIANGLE_CULL_DISABLE_BIT_NV
+  VK_GEOMETRY_INSTANCE_TRIANGLE_FACING_CULL_DISABLE_BIT_KHR)
+
+(ADP:DEFPARAMETER
+  VK_GEOMETRY_INSTANCE_TRIANGLE_FRONT_COUNTERCLOCKWISE_BIT_NV
+  VK_GEOMETRY_INSTANCE_TRIANGLE_FRONT_COUNTERCLOCKWISE_BIT_KHR)
+
+(ADP:DEFPARAMETER
+  VK_GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_NV
+  VK_GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_KHR)
+
+(ADP:DEFPARAMETER
+  VK_GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_NV
+  VK_GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_KHR)
+
+(ADP:DEFPARAMETER
+  VK_GEOMETRY_INSTANCE_FLAG_BITS_MAX_ENUM_KHR
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR
+  2)
+
+(ADP:DEFPARAMETER
+  VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_KHR
+  4)
+
+(ADP:DEFPARAMETER
+  VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_KHR
+  8)
+
+(ADP:DEFPARAMETER
+  VK_BUILD_ACCELERATION_STRUCTURE_LOW_MEMORY_BIT_KHR
+  16)
+
+(ADP:DEFPARAMETER
+  VK_BUILD_ACCELERATION_STRUCTURE_MOTION_BIT_NV
+  32)
+
+(ADP:DEFPARAMETER
+  VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_NV
+  VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR)
+
+(ADP:DEFPARAMETER
+  VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_NV
+  VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR)
+
+(ADP:DEFPARAMETER
+  VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_NV
+  VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_KHR)
+
+(ADP:DEFPARAMETER
+  VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_NV
+  VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_KHR)
+
+(ADP:DEFPARAMETER
+  VK_BUILD_ACCELERATION_STRUCTURE_LOW_MEMORY_BIT_NV
+  VK_BUILD_ACCELERATION_STRUCTURE_LOW_MEMORY_BIT_KHR)
+
+(ADP:DEFPARAMETER
+  VK_BUILD_ACCELERATION_STRUCTURE_FLAG_BITS_MAX_ENUM_KHR
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_NV_REPRESENTATIVE_FRAGMENT_TEST
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_REPRESENTATIVE_FRAGMENT_TEST_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_NV_REPRESENTATIVE_FRAGMENT_TEST_EXTENSION_NAME
+  "VK_NV_representative_fragment_test")
+
+(ADP:DEFPARAMETER
+  VK_EXT_FILTER_CUBIC
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_FILTER_CUBIC_SPEC_VERSION
+  3)
+
+(ADP:DEFPARAMETER
+  VK_EXT_FILTER_CUBIC_EXTENSION_NAME
+  "VK_EXT_filter_cubic")
+
+(ADP:DEFPARAMETER
+  VK_QCOM_RENDER_PASS_SHADER_RESOLVE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_QCOM_RENDER_PASS_SHADER_RESOLVE_SPEC_VERSION
+  4)
+
+(ADP:DEFPARAMETER
+  VK_QCOM_RENDER_PASS_SHADER_RESOLVE_EXTENSION_NAME
+  "VK_QCOM_render_pass_shader_resolve")
+
+(ADP:DEFPARAMETER
+  VK_EXT_GLOBAL_PRIORITY
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_GLOBAL_PRIORITY_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_EXT_GLOBAL_PRIORITY_EXTENSION_NAME
+  "VK_EXT_global_priority")
+
+(ADP:DEFPARAMETER
+  VK_EXT_EXTERNAL_MEMORY_HOST
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_EXTERNAL_MEMORY_HOST_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_EXTERNAL_MEMORY_HOST_EXTENSION_NAME
+  "VK_EXT_external_memory_host")
+
+(ADP:DEFPARAMETER
+  VK_AMD_BUFFER_MARKER
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_BUFFER_MARKER_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_BUFFER_MARKER_EXTENSION_NAME
+  "VK_AMD_buffer_marker")
+
+(ADP:DEFPARAMETER
+  VK_AMD_PIPELINE_COMPILER_CONTROL
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_PIPELINE_COMPILER_CONTROL_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_PIPELINE_COMPILER_CONTROL_EXTENSION_NAME
+  "VK_AMD_pipeline_compiler_control")
+
+(ADP:DEFPARAMETER
+  VK_PIPELINE_COMPILER_CONTROL_FLAG_BITS_MAX_ENUM_AMD
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_EXT_CALIBRATED_TIMESTAMPS
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_CALIBRATED_TIMESTAMPS_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_EXT_CALIBRATED_TIMESTAMPS_EXTENSION_NAME
+  "VK_EXT_calibrated_timestamps")
+
+(ADP:DEFPARAMETER
+  VK_TIME_DOMAIN_DEVICE_EXT
+  0)
+
+(ADP:DEFPARAMETER
+  VK_TIME_DOMAIN_CLOCK_MONOTONIC_EXT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_TIME_DOMAIN_CLOCK_MONOTONIC_RAW_EXT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_TIME_DOMAIN_QUERY_PERFORMANCE_COUNTER_EXT
+  3)
+
+(ADP:DEFPARAMETER
+  VK_TIME_DOMAIN_MAX_ENUM_EXT
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_AMD_SHADER_CORE_PROPERTIES
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_SHADER_CORE_PROPERTIES_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_AMD_SHADER_CORE_PROPERTIES_EXTENSION_NAME
+  "VK_AMD_shader_core_properties")
+
+(ADP:DEFPARAMETER
+  VK_AMD_MEMORY_OVERALLOCATION_BEHAVIOR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_MEMORY_OVERALLOCATION_BEHAVIOR_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_MEMORY_OVERALLOCATION_BEHAVIOR_EXTENSION_NAME
+  "VK_AMD_memory_overallocation_behavior")
+
+(ADP:DEFPARAMETER
+  VK_MEMORY_OVERALLOCATION_BEHAVIOR_DEFAULT_AMD
+  0)
+
+(ADP:DEFPARAMETER
+  VK_MEMORY_OVERALLOCATION_BEHAVIOR_ALLOWED_AMD
+  1)
+
+(ADP:DEFPARAMETER
+  VK_MEMORY_OVERALLOCATION_BEHAVIOR_DISALLOWED_AMD
+  2)
+
+(ADP:DEFPARAMETER
+  VK_MEMORY_OVERALLOCATION_BEHAVIOR_MAX_ENUM_AMD
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_EXT_VERTEX_ATTRIBUTE_DIVISOR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_VERTEX_ATTRIBUTE_DIVISOR_SPEC_VERSION
+  3)
+
+(ADP:DEFPARAMETER
+  VK_EXT_VERTEX_ATTRIBUTE_DIVISOR_EXTENSION_NAME
+  "VK_EXT_vertex_attribute_divisor")
+
+(ADP:DEFPARAMETER
+  VK_EXT_PIPELINE_CREATION_FEEDBACK
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_PIPELINE_CREATION_FEEDBACK_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_PIPELINE_CREATION_FEEDBACK_EXTENSION_NAME
+  "VK_EXT_pipeline_creation_feedback")
+
+(ADP:DEFPARAMETER
+  VK_NV_SHADER_SUBGROUP_PARTITIONED
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_SHADER_SUBGROUP_PARTITIONED_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_SHADER_SUBGROUP_PARTITIONED_EXTENSION_NAME
+  "VK_NV_shader_subgroup_partitioned")
+
+(ADP:DEFPARAMETER
+  VK_NV_COMPUTE_SHADER_DERIVATIVES
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_COMPUTE_SHADER_DERIVATIVES_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_COMPUTE_SHADER_DERIVATIVES_EXTENSION_NAME
+  "VK_NV_compute_shader_derivatives")
+
+(ADP:DEFPARAMETER
+  VK_NV_MESH_SHADER
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_MESH_SHADER_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_MESH_SHADER_EXTENSION_NAME
+  "VK_NV_mesh_shader")
+
+(ADP:DEFPARAMETER
+  VK_NV_FRAGMENT_SHADER_BARYCENTRIC
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_FRAGMENT_SHADER_BARYCENTRIC_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_FRAGMENT_SHADER_BARYCENTRIC_EXTENSION_NAME
+  "VK_NV_fragment_shader_barycentric")
+
+(ADP:DEFPARAMETER
+  VK_NV_SHADER_IMAGE_FOOTPRINT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_SHADER_IMAGE_FOOTPRINT_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_NV_SHADER_IMAGE_FOOTPRINT_EXTENSION_NAME
+  "VK_NV_shader_image_footprint")
+
+(ADP:DEFPARAMETER
+  VK_NV_SCISSOR_EXCLUSIVE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_SCISSOR_EXCLUSIVE_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_SCISSOR_EXCLUSIVE_EXTENSION_NAME
+  "VK_NV_scissor_exclusive")
+
+(ADP:DEFPARAMETER
+  VK_NV_DEVICE_DIAGNOSTIC_CHECKPOINTS
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_DEVICE_DIAGNOSTIC_CHECKPOINTS_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_NV_DEVICE_DIAGNOSTIC_CHECKPOINTS_EXTENSION_NAME
+  "VK_NV_device_diagnostic_checkpoints")
+
+(ADP:DEFPARAMETER
+  VK_INTEL_SHADER_INTEGER_FUNCTIONS2
+  1)
+
+(ADP:DEFPARAMETER
+  VK_INTEL_SHADER_INTEGER_FUNCTIONS_2_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_INTEL_SHADER_INTEGER_FUNCTIONS_2_EXTENSION_NAME
+  "VK_INTEL_shader_integer_functions2")
+
+(ADP:DEFPARAMETER
+  VK_INTEL_PERFORMANCE_QUERY
+  1)
+
+(ADP:DEFPARAMETER
+  VK_INTEL_PERFORMANCE_QUERY_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_INTEL_PERFORMANCE_QUERY_EXTENSION_NAME
+  "VK_INTEL_performance_query")
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_CONFIGURATION_TYPE_COMMAND_QUEUE_METRICS_DISCOVERY_ACTIVATED_INTEL
+  0)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_CONFIGURATION_TYPE_MAX_ENUM_INTEL
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_POOL_SAMPLING_MODE_MANUAL_INTEL
+  0)
+
+(ADP:DEFPARAMETER
+  VK_QUERY_POOL_SAMPLING_MODE_MAX_ENUM_INTEL
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_OVERRIDE_TYPE_NULL_HARDWARE_INTEL
+  0)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_OVERRIDE_TYPE_FLUSH_GPU_CACHES_INTEL
+  1)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_OVERRIDE_TYPE_MAX_ENUM_INTEL
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_PARAMETER_TYPE_HW_COUNTERS_SUPPORTED_INTEL
+  0)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_PARAMETER_TYPE_STREAM_MARKER_VALID_BITS_INTEL
+  1)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_PARAMETER_TYPE_MAX_ENUM_INTEL
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_VALUE_TYPE_UINT32_INTEL
+  0)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_VALUE_TYPE_UINT64_INTEL
+  1)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_VALUE_TYPE_FLOAT_INTEL
+  2)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_VALUE_TYPE_BOOL_INTEL
+  3)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_VALUE_TYPE_STRING_INTEL
+  4)
+
+(ADP:DEFPARAMETER
+  VK_PERFORMANCE_VALUE_TYPE_MAX_ENUM_INTEL
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_EXT_PCI_BUS_INFO
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_PCI_BUS_INFO_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_EXT_PCI_BUS_INFO_EXTENSION_NAME
+  "VK_EXT_pci_bus_info")
+
+(ADP:DEFPARAMETER
+  VK_AMD_DISPLAY_NATIVE_HDR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_DISPLAY_NATIVE_HDR_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_DISPLAY_NATIVE_HDR_EXTENSION_NAME
+  "VK_AMD_display_native_hdr")
+
+(ADP:DEFPARAMETER
+  VK_EXT_FRAGMENT_DENSITY_MAP
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_FRAGMENT_DENSITY_MAP_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_EXT_FRAGMENT_DENSITY_MAP_EXTENSION_NAME
+  "VK_EXT_fragment_density_map")
+
+(ADP:DEFPARAMETER
+  VK_EXT_SCALAR_BLOCK_LAYOUT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SCALAR_BLOCK_LAYOUT_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SCALAR_BLOCK_LAYOUT_EXTENSION_NAME
+  "VK_EXT_scalar_block_layout")
+
+(ADP:DEFPARAMETER
+  VK_GOOGLE_HLSL_FUNCTIONALITY1
+  1)
+
+(ADP:DEFPARAMETER
+  VK_GOOGLE_HLSL_FUNCTIONALITY_1_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_GOOGLE_HLSL_FUNCTIONALITY_1_EXTENSION_NAME
+  "VK_GOOGLE_hlsl_functionality1")
+
+(ADP:DEFPARAMETER
+  VK_GOOGLE_HLSL_FUNCTIONALITY1_SPEC_VERSION
+  VK_GOOGLE_HLSL_FUNCTIONALITY_1_SPEC_VERSION)
+
+(ADP:DEFPARAMETER
+  VK_GOOGLE_HLSL_FUNCTIONALITY1_EXTENSION_NAME
+  VK_GOOGLE_HLSL_FUNCTIONALITY_1_EXTENSION_NAME)
+
+(ADP:DEFPARAMETER
+  VK_GOOGLE_DECORATE_STRING
+  1)
+
+(ADP:DEFPARAMETER
+  VK_GOOGLE_DECORATE_STRING_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_GOOGLE_DECORATE_STRING_EXTENSION_NAME
+  "VK_GOOGLE_decorate_string")
+
+(ADP:DEFPARAMETER
+  VK_EXT_SUBGROUP_SIZE_CONTROL
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SUBGROUP_SIZE_CONTROL_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SUBGROUP_SIZE_CONTROL_EXTENSION_NAME
+  "VK_EXT_subgroup_size_control")
+
+(ADP:DEFPARAMETER
+  VK_AMD_SHADER_CORE_PROPERTIES2
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_SHADER_CORE_PROPERTIES_2_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_SHADER_CORE_PROPERTIES_2_EXTENSION_NAME
+  "VK_AMD_shader_core_properties2")
+
+(ADP:DEFPARAMETER
+  VK_SHADER_CORE_PROPERTIES_FLAG_BITS_MAX_ENUM_AMD
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_AMD_DEVICE_COHERENT_MEMORY
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_DEVICE_COHERENT_MEMORY_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_DEVICE_COHERENT_MEMORY_EXTENSION_NAME
+  "VK_AMD_device_coherent_memory")
+
+(ADP:DEFPARAMETER
+  VK_EXT_SHADER_IMAGE_ATOMIC_INT64
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SHADER_IMAGE_ATOMIC_INT64_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SHADER_IMAGE_ATOMIC_INT64_EXTENSION_NAME
+  "VK_EXT_shader_image_atomic_int64")
+
+(ADP:DEFPARAMETER
+  VK_EXT_MEMORY_BUDGET
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_MEMORY_BUDGET_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_MEMORY_BUDGET_EXTENSION_NAME
+  "VK_EXT_memory_budget")
+
+(ADP:DEFPARAMETER
+  VK_EXT_MEMORY_PRIORITY
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_MEMORY_PRIORITY_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_MEMORY_PRIORITY_EXTENSION_NAME
+  "VK_EXT_memory_priority")
+
+(ADP:DEFPARAMETER
+  VK_NV_DEDICATED_ALLOCATION_IMAGE_ALIASING
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_DEDICATED_ALLOCATION_IMAGE_ALIASING_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_DEDICATED_ALLOCATION_IMAGE_ALIASING_EXTENSION_NAME
+  "VK_NV_dedicated_allocation_image_aliasing")
+
+(ADP:DEFPARAMETER
+  VK_EXT_BUFFER_DEVICE_ADDRESS
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_BUFFER_DEVICE_ADDRESS_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_EXT_BUFFER_DEVICE_ADDRESS_EXTENSION_NAME
+  "VK_EXT_buffer_device_address")
+
+(ADP:DEFPARAMETER
+  VK_EXT_TOOLING_INFO
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_TOOLING_INFO_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_TOOLING_INFO_EXTENSION_NAME
+  "VK_EXT_tooling_info")
+
+(ADP:DEFPARAMETER
+  VK_EXT_SEPARATE_STENCIL_USAGE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SEPARATE_STENCIL_USAGE_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SEPARATE_STENCIL_USAGE_EXTENSION_NAME
+  "VK_EXT_separate_stencil_usage")
+
+(ADP:DEFPARAMETER
+  VK_EXT_VALIDATION_FEATURES
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_VALIDATION_FEATURES_SPEC_VERSION
+  5)
+
+(ADP:DEFPARAMETER
+  VK_EXT_VALIDATION_FEATURES_EXTENSION_NAME
+  "VK_EXT_validation_features")
+
+(ADP:DEFPARAMETER
+  VK_VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_EXT
+  0)
+
+(ADP:DEFPARAMETER
+  VK_VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_RESERVE_BINDING_SLOT_EXT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_VALIDATION_FEATURE_ENABLE_BEST_PRACTICES_EXT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_VALIDATION_FEATURE_ENABLE_DEBUG_PRINTF_EXT
+  3)
+
+(ADP:DEFPARAMETER
+  VK_VALIDATION_FEATURE_ENABLE_SYNCHRONIZATION_VALIDATION_EXT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_VALIDATION_FEATURE_ENABLE_MAX_ENUM_EXT
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_VALIDATION_FEATURE_DISABLE_ALL_EXT
+  0)
+
+(ADP:DEFPARAMETER
+  VK_VALIDATION_FEATURE_DISABLE_SHADERS_EXT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_VALIDATION_FEATURE_DISABLE_THREAD_SAFETY_EXT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_VALIDATION_FEATURE_DISABLE_API_PARAMETERS_EXT
+  3)
+
+(ADP:DEFPARAMETER
+  VK_VALIDATION_FEATURE_DISABLE_OBJECT_LIFETIMES_EXT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_VALIDATION_FEATURE_DISABLE_CORE_CHECKS_EXT
+  5)
+
+(ADP:DEFPARAMETER
+  VK_VALIDATION_FEATURE_DISABLE_UNIQUE_HANDLES_EXT
+  6)
+
+(ADP:DEFPARAMETER
+  VK_VALIDATION_FEATURE_DISABLE_SHADER_VALIDATION_CACHE_EXT
+  7)
+
+(ADP:DEFPARAMETER
+  VK_VALIDATION_FEATURE_DISABLE_MAX_ENUM_EXT
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_NV_COOPERATIVE_MATRIX
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_COOPERATIVE_MATRIX_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_COOPERATIVE_MATRIX_EXTENSION_NAME
+  "VK_NV_cooperative_matrix")
+
+(ADP:DEFPARAMETER
+  VK_COMPONENT_TYPE_FLOAT16_NV
+  0)
+
+(ADP:DEFPARAMETER
+  VK_COMPONENT_TYPE_FLOAT32_NV
+  1)
+
+(ADP:DEFPARAMETER
+  VK_COMPONENT_TYPE_FLOAT64_NV
+  2)
+
+(ADP:DEFPARAMETER
+  VK_COMPONENT_TYPE_SINT8_NV
+  3)
+
+(ADP:DEFPARAMETER
+  VK_COMPONENT_TYPE_SINT16_NV
+  4)
+
+(ADP:DEFPARAMETER
+  VK_COMPONENT_TYPE_SINT32_NV
+  5)
+
+(ADP:DEFPARAMETER
+  VK_COMPONENT_TYPE_SINT64_NV
+  6)
+
+(ADP:DEFPARAMETER
+  VK_COMPONENT_TYPE_UINT8_NV
+  7)
+
+(ADP:DEFPARAMETER
+  VK_COMPONENT_TYPE_UINT16_NV
+  8)
+
+(ADP:DEFPARAMETER
+  VK_COMPONENT_TYPE_UINT32_NV
+  9)
+
+(ADP:DEFPARAMETER
+  VK_COMPONENT_TYPE_UINT64_NV
+  10)
+
+(ADP:DEFPARAMETER
+  VK_COMPONENT_TYPE_MAX_ENUM_NV
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_SCOPE_DEVICE_NV
+  1)
+
+(ADP:DEFPARAMETER
+  VK_SCOPE_WORKGROUP_NV
+  2)
+
+(ADP:DEFPARAMETER
+  VK_SCOPE_SUBGROUP_NV
+  3)
+
+(ADP:DEFPARAMETER
+  VK_SCOPE_QUEUE_FAMILY_NV
+  5)
+
+(ADP:DEFPARAMETER
+  VK_SCOPE_MAX_ENUM_NV
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_NV_COVERAGE_REDUCTION_MODE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_COVERAGE_REDUCTION_MODE_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_COVERAGE_REDUCTION_MODE_EXTENSION_NAME
+  "VK_NV_coverage_reduction_mode")
+
+(ADP:DEFPARAMETER
+  VK_COVERAGE_REDUCTION_MODE_MERGE_NV
+  0)
+
+(ADP:DEFPARAMETER
+  VK_COVERAGE_REDUCTION_MODE_TRUNCATE_NV
+  1)
+
+(ADP:DEFPARAMETER
+  VK_COVERAGE_REDUCTION_MODE_MAX_ENUM_NV
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_EXT_FRAGMENT_SHADER_INTERLOCK
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_FRAGMENT_SHADER_INTERLOCK_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_FRAGMENT_SHADER_INTERLOCK_EXTENSION_NAME
+  "VK_EXT_fragment_shader_interlock")
+
+(ADP:DEFPARAMETER
+  VK_EXT_YCBCR_IMAGE_ARRAYS
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_YCBCR_IMAGE_ARRAYS_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_YCBCR_IMAGE_ARRAYS_EXTENSION_NAME
+  "VK_EXT_ycbcr_image_arrays")
+
+(ADP:DEFPARAMETER
+  VK_EXT_PROVOKING_VERTEX
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_PROVOKING_VERTEX_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_PROVOKING_VERTEX_EXTENSION_NAME
+  "VK_EXT_provoking_vertex")
+
+(ADP:DEFPARAMETER
+  VK_PROVOKING_VERTEX_MODE_FIRST_VERTEX_EXT
+  0)
+
+(ADP:DEFPARAMETER
+  VK_PROVOKING_VERTEX_MODE_LAST_VERTEX_EXT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_PROVOKING_VERTEX_MODE_MAX_ENUM_EXT
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_EXT_HEADLESS_SURFACE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_HEADLESS_SURFACE_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_HEADLESS_SURFACE_EXTENSION_NAME
+  "VK_EXT_headless_surface")
+
+(ADP:DEFPARAMETER
+  VK_EXT_LINE_RASTERIZATION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_LINE_RASTERIZATION_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_LINE_RASTERIZATION_EXTENSION_NAME
+  "VK_EXT_line_rasterization")
+
+(ADP:DEFPARAMETER
+  VK_LINE_RASTERIZATION_MODE_DEFAULT_EXT
+  0)
+
+(ADP:DEFPARAMETER
+  VK_LINE_RASTERIZATION_MODE_RECTANGULAR_EXT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_LINE_RASTERIZATION_MODE_BRESENHAM_EXT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_EXT
+  3)
+
+(ADP:DEFPARAMETER
+  VK_LINE_RASTERIZATION_MODE_MAX_ENUM_EXT
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SHADER_ATOMIC_FLOAT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SHADER_ATOMIC_FLOAT_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SHADER_ATOMIC_FLOAT_EXTENSION_NAME
+  "VK_EXT_shader_atomic_float")
+
+(ADP:DEFPARAMETER
+  VK_EXT_HOST_QUERY_RESET
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_HOST_QUERY_RESET_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_HOST_QUERY_RESET_EXTENSION_NAME
+  "VK_EXT_host_query_reset")
+
+(ADP:DEFPARAMETER
+  VK_EXT_INDEX_TYPE_UINT8
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_INDEX_TYPE_UINT8_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_INDEX_TYPE_UINT8_EXTENSION_NAME
+  "VK_EXT_index_type_uint8")
+
+(ADP:DEFPARAMETER
+  VK_EXT_EXTENDED_DYNAMIC_STATE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_EXTENDED_DYNAMIC_STATE_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_EXTENDED_DYNAMIC_STATE_EXTENSION_NAME
+  "VK_EXT_extended_dynamic_state")
+
+(ADP:DEFPARAMETER
+  VK_EXT_SHADER_ATOMIC_FLOAT2
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SHADER_ATOMIC_FLOAT_2_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SHADER_ATOMIC_FLOAT_2_EXTENSION_NAME
+  "VK_EXT_shader_atomic_float2")
+
+(ADP:DEFPARAMETER
+  VK_EXT_SHADER_DEMOTE_TO_HELPER_INVOCATION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SHADER_DEMOTE_TO_HELPER_INVOCATION_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SHADER_DEMOTE_TO_HELPER_INVOCATION_EXTENSION_NAME
+  "VK_EXT_shader_demote_to_helper_invocation")
+
+(ADP:DEFPARAMETER
+  VK_NV_DEVICE_GENERATED_COMMANDS
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_DEVICE_GENERATED_COMMANDS_SPEC_VERSION
+  3)
+
+(ADP:DEFPARAMETER
+  VK_NV_DEVICE_GENERATED_COMMANDS_EXTENSION_NAME
+  "VK_NV_device_generated_commands")
+
+(ADP:DEFPARAMETER
+  VK_INDIRECT_COMMANDS_TOKEN_TYPE_SHADER_GROUP_NV
+  0)
+
+(ADP:DEFPARAMETER
+  VK_INDIRECT_COMMANDS_TOKEN_TYPE_STATE_FLAGS_NV
+  1)
+
+(ADP:DEFPARAMETER
+  VK_INDIRECT_COMMANDS_TOKEN_TYPE_INDEX_BUFFER_NV
+  2)
+
+(ADP:DEFPARAMETER
+  VK_INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_NV
+  3)
+
+(ADP:DEFPARAMETER
+  VK_INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NV
+  4)
+
+(ADP:DEFPARAMETER
+  VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_INDEXED_NV
+  5)
+
+(ADP:DEFPARAMETER
+  VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_NV
+  6)
+
+(ADP:DEFPARAMETER
+  VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_TASKS_NV
+  7)
+
+(ADP:DEFPARAMETER
+  VK_INDIRECT_COMMANDS_TOKEN_TYPE_MAX_ENUM_NV
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_INDIRECT_STATE_FLAG_FRONTFACE_BIT_NV
+  1)
+
+(ADP:DEFPARAMETER
+  VK_INDIRECT_STATE_FLAG_BITS_MAX_ENUM_NV
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_INDIRECT_COMMANDS_LAYOUT_USAGE_EXPLICIT_PREPROCESS_BIT_NV
+  1)
+
+(ADP:DEFPARAMETER
+  VK_INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NV
+  2)
+
+(ADP:DEFPARAMETER
+  VK_INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NV
+  4)
+
+(ADP:DEFPARAMETER
+  VK_INDIRECT_COMMANDS_LAYOUT_USAGE_FLAG_BITS_MAX_ENUM_NV
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_NV_INHERITED_VIEWPORT_SCISSOR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_INHERITED_VIEWPORT_SCISSOR_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_INHERITED_VIEWPORT_SCISSOR_EXTENSION_NAME
+  "VK_NV_inherited_viewport_scissor")
+
+(ADP:DEFPARAMETER
+  VK_EXT_TEXEL_BUFFER_ALIGNMENT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_TEXEL_BUFFER_ALIGNMENT_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_TEXEL_BUFFER_ALIGNMENT_EXTENSION_NAME
+  "VK_EXT_texel_buffer_alignment")
+
+(ADP:DEFPARAMETER
+  VK_QCOM_RENDER_PASS_TRANSFORM
+  1)
+
+(ADP:DEFPARAMETER
+  VK_QCOM_RENDER_PASS_TRANSFORM_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_QCOM_RENDER_PASS_TRANSFORM_EXTENSION_NAME
+  "VK_QCOM_render_pass_transform")
+
+(ADP:DEFPARAMETER
+  VK_EXT_DEVICE_MEMORY_REPORT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_DEVICE_MEMORY_REPORT_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_EXT_DEVICE_MEMORY_REPORT_EXTENSION_NAME
+  "VK_EXT_device_memory_report")
+
+(ADP:DEFPARAMETER
+  VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATE_EXT
+  0)
+
+(ADP:DEFPARAMETER
+  VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_FREE_EXT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_IMPORT_EXT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_UNIMPORT_EXT
+  3)
+
+(ADP:DEFPARAMETER
+  VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATION_FAILED_EXT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_MAX_ENUM_EXT
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_EXT_ACQUIRE_DRM_DISPLAY
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_ACQUIRE_DRM_DISPLAY_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_ACQUIRE_DRM_DISPLAY_EXTENSION_NAME
+  "VK_EXT_acquire_drm_display")
+
+(ADP:DEFPARAMETER
+  VK_EXT_ROBUSTNESS2
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_ROBUSTNESS_2_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_ROBUSTNESS_2_EXTENSION_NAME
+  "VK_EXT_robustness2")
+
+(ADP:DEFPARAMETER
+  VK_EXT_CUSTOM_BORDER_COLOR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_CUSTOM_BORDER_COLOR_SPEC_VERSION
+  12)
+
+(ADP:DEFPARAMETER
+  VK_EXT_CUSTOM_BORDER_COLOR_EXTENSION_NAME
+  "VK_EXT_custom_border_color")
+
+(ADP:DEFPARAMETER
+  VK_GOOGLE_USER_TYPE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_GOOGLE_USER_TYPE_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_GOOGLE_USER_TYPE_EXTENSION_NAME
+  "VK_GOOGLE_user_type")
+
+(ADP:DEFPARAMETER
+  VK_EXT_PRIVATE_DATA
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_PRIVATE_DATA_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_PRIVATE_DATA_EXTENSION_NAME
+  "VK_EXT_private_data")
+
+(ADP:DEFPARAMETER
+  VK_EXT_PIPELINE_CREATION_CACHE_CONTROL
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_PIPELINE_CREATION_CACHE_CONTROL_SPEC_VERSION
+  3)
+
+(ADP:DEFPARAMETER
+  VK_EXT_PIPELINE_CREATION_CACHE_CONTROL_EXTENSION_NAME
+  "VK_EXT_pipeline_creation_cache_control")
+
+(ADP:DEFPARAMETER
+  VK_NV_DEVICE_DIAGNOSTICS_CONFIG
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_DEVICE_DIAGNOSTICS_CONFIG_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_NV_DEVICE_DIAGNOSTICS_CONFIG_EXTENSION_NAME
+  "VK_NV_device_diagnostics_config")
+
+(ADP:DEFPARAMETER
+  VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_SHADER_DEBUG_INFO_BIT_NV
+  1)
+
+(ADP:DEFPARAMETER
+  VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_RESOURCE_TRACKING_BIT_NV
+  2)
+
+(ADP:DEFPARAMETER
+  VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_AUTOMATIC_CHECKPOINTS_BIT_NV
+  4)
+
+(ADP:DEFPARAMETER
+  VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_SHADER_ERROR_REPORTING_BIT_NV
+  8)
+
+(ADP:DEFPARAMETER
+  VK_DEVICE_DIAGNOSTICS_CONFIG_FLAG_BITS_MAX_ENUM_NV
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_QCOM_RENDER_PASS_STORE_OPS
+  1)
+
+(ADP:DEFPARAMETER
+  VK_QCOM_RENDER_PASS_STORE_OPS_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_QCOM_RENDER_PASS_STORE_OPS_EXTENSION_NAME
+  "VK_QCOM_render_pass_store_ops")
+
+(ADP:DEFPARAMETER
+  VK_EXT_GRAPHICS_PIPELINE_LIBRARY
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_GRAPHICS_PIPELINE_LIBRARY_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_GRAPHICS_PIPELINE_LIBRARY_EXTENSION_NAME
+  "VK_EXT_graphics_pipeline_library")
+
+(ADP:DEFPARAMETER
+  VK_GRAPHICS_PIPELINE_LIBRARY_VERTEX_INPUT_INTERFACE_BIT_EXT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_GRAPHICS_PIPELINE_LIBRARY_PRE_RASTERIZATION_SHADERS_BIT_EXT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_GRAPHICS_PIPELINE_LIBRARY_FRAGMENT_SHADER_BIT_EXT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_GRAPHICS_PIPELINE_LIBRARY_FRAGMENT_OUTPUT_INTERFACE_BIT_EXT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_GRAPHICS_PIPELINE_LIBRARY_FLAG_BITS_MAX_ENUM_EXT
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_AMD_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_AMD_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_EXTENSION_NAME
+  "VK_AMD_shader_early_and_late_fragment_tests")
+
+(ADP:DEFPARAMETER
+  VK_NV_FRAGMENT_SHADING_RATE_ENUMS
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_FRAGMENT_SHADING_RATE_ENUMS_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_FRAGMENT_SHADING_RATE_ENUMS_EXTENSION_NAME
+  "VK_NV_fragment_shading_rate_enums")
+
+(ADP:DEFPARAMETER
+  VK_FRAGMENT_SHADING_RATE_TYPE_FRAGMENT_SIZE_NV
+  0)
+
+(ADP:DEFPARAMETER
+  VK_FRAGMENT_SHADING_RATE_TYPE_ENUMS_NV
+  1)
+
+(ADP:DEFPARAMETER
+  VK_FRAGMENT_SHADING_RATE_TYPE_MAX_ENUM_NV
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_PIXEL_NV
+  0)
+
+(ADP:DEFPARAMETER
+  VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_1X2_PIXELS_NV
+  1)
+
+(ADP:DEFPARAMETER
+  VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_2X1_PIXELS_NV
+  4)
+
+(ADP:DEFPARAMETER
+  VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_2X2_PIXELS_NV
+  5)
+
+(ADP:DEFPARAMETER
+  VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_2X4_PIXELS_NV
+  6)
+
+(ADP:DEFPARAMETER
+  VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_4X2_PIXELS_NV
+  9)
+
+(ADP:DEFPARAMETER
+  VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_4X4_PIXELS_NV
+  10)
+
+(ADP:DEFPARAMETER
+  VK_FRAGMENT_SHADING_RATE_2_INVOCATIONS_PER_PIXEL_NV
+  11)
+
+(ADP:DEFPARAMETER
+  VK_FRAGMENT_SHADING_RATE_4_INVOCATIONS_PER_PIXEL_NV
+  12)
+
+(ADP:DEFPARAMETER
+  VK_FRAGMENT_SHADING_RATE_8_INVOCATIONS_PER_PIXEL_NV
+  13)
+
+(ADP:DEFPARAMETER
+  VK_FRAGMENT_SHADING_RATE_16_INVOCATIONS_PER_PIXEL_NV
+  14)
+
+(ADP:DEFPARAMETER
+  VK_FRAGMENT_SHADING_RATE_NO_INVOCATIONS_NV
+  15)
+
+(ADP:DEFPARAMETER
+  VK_FRAGMENT_SHADING_RATE_MAX_ENUM_NV
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_NV_RAY_TRACING_MOTION_BLUR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_RAY_TRACING_MOTION_BLUR_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_RAY_TRACING_MOTION_BLUR_EXTENSION_NAME
+  "VK_NV_ray_tracing_motion_blur")
+
+(ADP:DEFPARAMETER
+  VK_ACCELERATION_STRUCTURE_MOTION_INSTANCE_TYPE_STATIC_NV
+  0)
+
+(ADP:DEFPARAMETER
+  VK_ACCELERATION_STRUCTURE_MOTION_INSTANCE_TYPE_MATRIX_MOTION_NV
+  1)
+
+(ADP:DEFPARAMETER
+  VK_ACCELERATION_STRUCTURE_MOTION_INSTANCE_TYPE_SRT_MOTION_NV
+  2)
+
+(ADP:DEFPARAMETER
+  VK_ACCELERATION_STRUCTURE_MOTION_INSTANCE_TYPE_MAX_ENUM_NV
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_EXT_YCBCR_2PLANE_444_FORMATS
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_YCBCR_2PLANE_444_FORMATS_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_YCBCR_2PLANE_444_FORMATS_EXTENSION_NAME
+  "VK_EXT_ycbcr_2plane_444_formats")
+
+(ADP:DEFPARAMETER
+  VK_EXT_FRAGMENT_DENSITY_MAP2
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_FRAGMENT_DENSITY_MAP_2_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_FRAGMENT_DENSITY_MAP_2_EXTENSION_NAME
+  "VK_EXT_fragment_density_map2")
+
+(ADP:DEFPARAMETER
+  VK_QCOM_ROTATED_COPY_COMMANDS
+  1)
+
+(ADP:DEFPARAMETER
+  VK_QCOM_ROTATED_COPY_COMMANDS_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_QCOM_ROTATED_COPY_COMMANDS_EXTENSION_NAME
+  "VK_QCOM_rotated_copy_commands")
+
+(ADP:DEFPARAMETER
+  VK_EXT_IMAGE_ROBUSTNESS
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_IMAGE_ROBUSTNESS_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_IMAGE_ROBUSTNESS_EXTENSION_NAME
+  "VK_EXT_image_robustness")
+
+(ADP:DEFPARAMETER
+  VK_EXT_IMAGE_COMPRESSION_CONTROL
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_IMAGE_COMPRESSION_CONTROL_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_IMAGE_COMPRESSION_CONTROL_EXTENSION_NAME
+  "VK_EXT_image_compression_control")
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_COMPRESSION_DEFAULT_EXT
+  0)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_COMPRESSION_FIXED_RATE_DEFAULT_EXT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_COMPRESSION_FIXED_RATE_EXPLICIT_EXT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_COMPRESSION_DISABLED_EXT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_COMPRESSION_FLAG_BITS_MAX_ENUM_EXT
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_COMPRESSION_FIXED_RATE_NONE_EXT
+  0)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_COMPRESSION_FIXED_RATE_1BPC_BIT_EXT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_COMPRESSION_FIXED_RATE_2BPC_BIT_EXT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_COMPRESSION_FIXED_RATE_3BPC_BIT_EXT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_COMPRESSION_FIXED_RATE_4BPC_BIT_EXT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_COMPRESSION_FIXED_RATE_5BPC_BIT_EXT
+  16)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_COMPRESSION_FIXED_RATE_6BPC_BIT_EXT
+  32)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_COMPRESSION_FIXED_RATE_7BPC_BIT_EXT
+  64)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_COMPRESSION_FIXED_RATE_8BPC_BIT_EXT
+  128)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_COMPRESSION_FIXED_RATE_9BPC_BIT_EXT
+  256)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_COMPRESSION_FIXED_RATE_10BPC_BIT_EXT
+  512)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_COMPRESSION_FIXED_RATE_11BPC_BIT_EXT
+  1024)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_COMPRESSION_FIXED_RATE_12BPC_BIT_EXT
+  2048)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_COMPRESSION_FIXED_RATE_13BPC_BIT_EXT
+  4096)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_COMPRESSION_FIXED_RATE_14BPC_BIT_EXT
+  8192)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_COMPRESSION_FIXED_RATE_15BPC_BIT_EXT
+  16384)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_COMPRESSION_FIXED_RATE_16BPC_BIT_EXT
+  32768)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_COMPRESSION_FIXED_RATE_17BPC_BIT_EXT
+  65536)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_COMPRESSION_FIXED_RATE_18BPC_BIT_EXT
+  131072)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_COMPRESSION_FIXED_RATE_19BPC_BIT_EXT
+  262144)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_COMPRESSION_FIXED_RATE_20BPC_BIT_EXT
+  524288)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_COMPRESSION_FIXED_RATE_21BPC_BIT_EXT
+  1048576)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_COMPRESSION_FIXED_RATE_22BPC_BIT_EXT
+  2097152)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_COMPRESSION_FIXED_RATE_23BPC_BIT_EXT
+  4194304)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_COMPRESSION_FIXED_RATE_24BPC_BIT_EXT
+  8388608)
+
+(ADP:DEFPARAMETER
+  VK_IMAGE_COMPRESSION_FIXED_RATE_FLAG_BITS_MAX_ENUM_EXT
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_EXT_4444_FORMATS
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_4444_FORMATS_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_4444_FORMATS_EXTENSION_NAME
+  "VK_EXT_4444_formats")
+
+(ADP:DEFPARAMETER
+  VK_ARM_RASTERIZATION_ORDER_ATTACHMENT_ACCESS
+  1)
+
+(ADP:DEFPARAMETER
+  VK_ARM_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_ARM_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_EXTENSION_NAME
+  "VK_ARM_rasterization_order_attachment_access")
+
+(ADP:DEFPARAMETER
+  VK_EXT_RGBA10X6_FORMATS
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_RGBA10X6_FORMATS_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_RGBA10X6_FORMATS_EXTENSION_NAME
+  "VK_EXT_rgba10x6_formats")
+
+(ADP:DEFPARAMETER
+  VK_NV_ACQUIRE_WINRT_DISPLAY
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_ACQUIRE_WINRT_DISPLAY_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_ACQUIRE_WINRT_DISPLAY_EXTENSION_NAME
+  "VK_NV_acquire_winrt_display")
+
+(ADP:DEFPARAMETER
+  VK_VALVE_MUTABLE_DESCRIPTOR_TYPE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_VALVE_MUTABLE_DESCRIPTOR_TYPE_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_VALVE_MUTABLE_DESCRIPTOR_TYPE_EXTENSION_NAME
+  "VK_VALVE_mutable_descriptor_type")
+
+(ADP:DEFPARAMETER
+  VK_EXT_VERTEX_INPUT_DYNAMIC_STATE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_VERTEX_INPUT_DYNAMIC_STATE_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_EXT_VERTEX_INPUT_DYNAMIC_STATE_EXTENSION_NAME
+  "VK_EXT_vertex_input_dynamic_state")
+
+(ADP:DEFPARAMETER
+  VK_EXT_PHYSICAL_DEVICE_DRM
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_PHYSICAL_DEVICE_DRM_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_PHYSICAL_DEVICE_DRM_EXTENSION_NAME
+  "VK_EXT_physical_device_drm")
+
+(ADP:DEFPARAMETER
+  VK_EXT_DEPTH_CLIP_CONTROL
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_DEPTH_CLIP_CONTROL_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_DEPTH_CLIP_CONTROL_EXTENSION_NAME
+  "VK_EXT_depth_clip_control")
+
+(ADP:DEFPARAMETER
+  VK_EXT_PRIMITIVE_TOPOLOGY_LIST_RESTART
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_PRIMITIVE_TOPOLOGY_LIST_RESTART_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_PRIMITIVE_TOPOLOGY_LIST_RESTART_EXTENSION_NAME
+  "VK_EXT_primitive_topology_list_restart")
+
+(ADP:DEFPARAMETER
+  VK_HUAWEI_SUBPASS_SHADING
+  1)
+
+(ADP:DEFPARAMETER
+  VK_HUAWEI_SUBPASS_SHADING_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_HUAWEI_SUBPASS_SHADING_EXTENSION_NAME
+  "VK_HUAWEI_subpass_shading")
+
+(ADP:DEFPARAMETER
+  VK_HUAWEI_INVOCATION_MASK
+  1)
+
+(ADP:DEFPARAMETER
+  VK_HUAWEI_INVOCATION_MASK_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_HUAWEI_INVOCATION_MASK_EXTENSION_NAME
+  "VK_HUAWEI_invocation_mask")
+
+(ADP:DEFPARAMETER
+  VK_NV_EXTERNAL_MEMORY_RDMA
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_EXTERNAL_MEMORY_RDMA_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_EXTERNAL_MEMORY_RDMA_EXTENSION_NAME
+  "VK_NV_external_memory_rdma")
+
+(ADP:DEFPARAMETER
+  VK_EXT_PIPELINE_PROPERTIES
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_PIPELINE_PROPERTIES_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_PIPELINE_PROPERTIES_EXTENSION_NAME
+  "VK_EXT_pipeline_properties")
+
+(ADP:DEFPARAMETER
+  VK_EXT_EXTENDED_DYNAMIC_STATE2
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_EXTENDED_DYNAMIC_STATE_2_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_EXTENDED_DYNAMIC_STATE_2_EXTENSION_NAME
+  "VK_EXT_extended_dynamic_state2")
+
+(ADP:DEFPARAMETER
+  VK_EXT_COLOR_WRITE_ENABLE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_COLOR_WRITE_ENABLE_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_COLOR_WRITE_ENABLE_EXTENSION_NAME
+  "VK_EXT_color_write_enable")
+
+(ADP:DEFPARAMETER
+  VK_EXT_PRIMITIVES_GENERATED_QUERY
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_PRIMITIVES_GENERATED_QUERY_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_PRIMITIVES_GENERATED_QUERY_EXTENSION_NAME
+  "VK_EXT_primitives_generated_query")
+
+(ADP:DEFPARAMETER
+  VK_EXT_GLOBAL_PRIORITY_QUERY
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_GLOBAL_PRIORITY_QUERY_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_GLOBAL_PRIORITY_QUERY_EXTENSION_NAME
+  "VK_EXT_global_priority_query")
+
+(ADP:DEFPARAMETER
+  VK_MAX_GLOBAL_PRIORITY_SIZE_EXT
+  VK_MAX_GLOBAL_PRIORITY_SIZE_KHR)
+
+(ADP:DEFPARAMETER
+  VK_EXT_IMAGE_VIEW_MIN_LOD
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_IMAGE_VIEW_MIN_LOD_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_IMAGE_VIEW_MIN_LOD_EXTENSION_NAME
+  "VK_EXT_image_view_min_lod")
+
+(ADP:DEFPARAMETER
+  VK_EXT_MULTI_DRAW
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_MULTI_DRAW_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_MULTI_DRAW_EXTENSION_NAME
+  "VK_EXT_multi_draw")
+
+(ADP:DEFPARAMETER
+  VK_EXT_IMAGE_2D_VIEW_OF_3D
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_IMAGE_2D_VIEW_OF_3D_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_IMAGE_2D_VIEW_OF_3D_EXTENSION_NAME
+  "VK_EXT_image_2d_view_of_3d")
+
+(ADP:DEFPARAMETER
+  VK_EXT_LOAD_STORE_OP_NONE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_LOAD_STORE_OP_NONE_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_LOAD_STORE_OP_NONE_EXTENSION_NAME
+  "VK_EXT_load_store_op_none")
+
+(ADP:DEFPARAMETER
+  VK_EXT_BORDER_COLOR_SWIZZLE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_BORDER_COLOR_SWIZZLE_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_BORDER_COLOR_SWIZZLE_EXTENSION_NAME
+  "VK_EXT_border_color_swizzle")
+
+(ADP:DEFPARAMETER
+  VK_EXT_PAGEABLE_DEVICE_LOCAL_MEMORY
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_PAGEABLE_DEVICE_LOCAL_MEMORY_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_PAGEABLE_DEVICE_LOCAL_MEMORY_EXTENSION_NAME
+  "VK_EXT_pageable_device_local_memory")
+
+(ADP:DEFPARAMETER
+  VK_VALVE_DESCRIPTOR_SET_HOST_MAPPING
+  1)
+
+(ADP:DEFPARAMETER
+  VK_VALVE_DESCRIPTOR_SET_HOST_MAPPING_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_VALVE_DESCRIPTOR_SET_HOST_MAPPING_EXTENSION_NAME
+  "VK_VALVE_descriptor_set_host_mapping")
+
+(ADP:DEFPARAMETER
+  VK_QCOM_FRAGMENT_DENSITY_MAP_OFFSET
+  1)
+
+(ADP:DEFPARAMETER
+  VK_QCOM_FRAGMENT_DENSITY_MAP_OFFSET_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_QCOM_FRAGMENT_DENSITY_MAP_OFFSET_EXTENSION_NAME
+  "VK_QCOM_fragment_density_map_offset")
+
+(ADP:DEFPARAMETER
+  VK_NV_LINEAR_COLOR_ATTACHMENT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_LINEAR_COLOR_ATTACHMENT_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_NV_LINEAR_COLOR_ATTACHMENT_EXTENSION_NAME
+  "VK_NV_linear_color_attachment")
+
+(ADP:DEFPARAMETER
+  VK_GOOGLE_SURFACELESS_QUERY
+  1)
+
+(ADP:DEFPARAMETER
+  VK_GOOGLE_SURFACELESS_QUERY_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_GOOGLE_SURFACELESS_QUERY_EXTENSION_NAME
+  "VK_GOOGLE_surfaceless_query")
+
+(ADP:DEFPARAMETER
+  VK_EXT_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_EXTENSION_NAME
+  "VK_EXT_image_compression_control_swapchain")
+
+(ADP:DEFPARAMETER
+  VK_EXT_SUBPASS_MERGE_FEEDBACK
+  1)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SUBPASS_MERGE_FEEDBACK_SPEC_VERSION
+  2)
+
+(ADP:DEFPARAMETER
+  VK_EXT_SUBPASS_MERGE_FEEDBACK_EXTENSION_NAME
+  "VK_EXT_subpass_merge_feedback")
+
+(ADP:DEFPARAMETER
+  VK_SUBPASS_MERGE_STATUS_MERGED_EXT
+  0)
+
+(ADP:DEFPARAMETER
+  VK_SUBPASS_MERGE_STATUS_DISALLOWED_EXT
+  1)
+
+(ADP:DEFPARAMETER
+  VK_SUBPASS_MERGE_STATUS_NOT_MERGED_SIDE_EFFECTS_EXT
+  2)
+
+(ADP:DEFPARAMETER
+  VK_SUBPASS_MERGE_STATUS_NOT_MERGED_SAMPLES_MISMATCH_EXT
+  3)
+
+(ADP:DEFPARAMETER
+  VK_SUBPASS_MERGE_STATUS_NOT_MERGED_VIEWS_MISMATCH_EXT
+  4)
+
+(ADP:DEFPARAMETER
+  VK_SUBPASS_MERGE_STATUS_NOT_MERGED_ALIASING_EXT
+  5)
+
+(ADP:DEFPARAMETER
+  VK_SUBPASS_MERGE_STATUS_NOT_MERGED_DEPENDENCIES_EXT
+  6)
+
+(ADP:DEFPARAMETER
+  VK_SUBPASS_MERGE_STATUS_NOT_MERGED_INCOMPATIBLE_INPUT_ATTACHMENT_EXT
+  7)
+
+(ADP:DEFPARAMETER
+  VK_SUBPASS_MERGE_STATUS_NOT_MERGED_TOO_MANY_ATTACHMENTS_EXT
+  8)
+
+(ADP:DEFPARAMETER
+  VK_SUBPASS_MERGE_STATUS_NOT_MERGED_INSUFFICIENT_STORAGE_EXT
+  9)
+
+(ADP:DEFPARAMETER
+  VK_SUBPASS_MERGE_STATUS_NOT_MERGED_DEPTH_STENCIL_COUNT_EXT
+  10)
+
+(ADP:DEFPARAMETER
+  VK_SUBPASS_MERGE_STATUS_NOT_MERGED_RESOLVE_ATTACHMENT_REUSE_EXT
+  11)
+
+(ADP:DEFPARAMETER
+  VK_SUBPASS_MERGE_STATUS_NOT_MERGED_SINGLE_SUBPASS_EXT
+  12)
+
+(ADP:DEFPARAMETER
+  VK_SUBPASS_MERGE_STATUS_NOT_MERGED_UNSPECIFIED_EXT
+  13)
+
+(ADP:DEFPARAMETER
+  VK_SUBPASS_MERGE_STATUS_MAX_ENUM_EXT
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_KHR_ACCELERATION_STRUCTURE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_ACCELERATION_STRUCTURE_SPEC_VERSION
+  13)
+
+(ADP:DEFPARAMETER
+  VK_KHR_ACCELERATION_STRUCTURE_EXTENSION_NAME
+  "VK_KHR_acceleration_structure")
+
+(ADP:DEFPARAMETER
+  VK_BUILD_ACCELERATION_STRUCTURE_MODE_BUILD_KHR
+  0)
+
+(ADP:DEFPARAMETER
+  VK_BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_BUILD_ACCELERATION_STRUCTURE_MODE_MAX_ENUM_KHR
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_ACCELERATION_STRUCTURE_BUILD_TYPE_HOST_KHR
+  0)
+
+(ADP:DEFPARAMETER
+  VK_ACCELERATION_STRUCTURE_BUILD_TYPE_DEVICE_KHR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_ACCELERATION_STRUCTURE_BUILD_TYPE_HOST_OR_DEVICE_KHR
+  2)
+
+(ADP:DEFPARAMETER
+  VK_ACCELERATION_STRUCTURE_BUILD_TYPE_MAX_ENUM_KHR
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_ACCELERATION_STRUCTURE_COMPATIBILITY_COMPATIBLE_KHR
+  0)
+
+(ADP:DEFPARAMETER
+  VK_ACCELERATION_STRUCTURE_COMPATIBILITY_INCOMPATIBLE_KHR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_ACCELERATION_STRUCTURE_COMPATIBILITY_MAX_ENUM_KHR
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_ACCELERATION_STRUCTURE_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_ACCELERATION_STRUCTURE_CREATE_MOTION_BIT_NV
+  4)
+
+(ADP:DEFPARAMETER
+  VK_ACCELERATION_STRUCTURE_CREATE_FLAG_BITS_MAX_ENUM_KHR
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_KHR_RAY_TRACING_PIPELINE
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_RAY_TRACING_PIPELINE_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_RAY_TRACING_PIPELINE_EXTENSION_NAME
+  "VK_KHR_ray_tracing_pipeline")
+
+(ADP:DEFPARAMETER
+  VK_SHADER_GROUP_SHADER_GENERAL_KHR
+  0)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_GROUP_SHADER_CLOSEST_HIT_KHR
+  1)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_GROUP_SHADER_ANY_HIT_KHR
+  2)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_GROUP_SHADER_INTERSECTION_KHR
+  3)
+
+(ADP:DEFPARAMETER
+  VK_SHADER_GROUP_SHADER_MAX_ENUM_KHR
+  2147483647)
+
+(ADP:DEFPARAMETER
+  VK_KHR_RAY_QUERY
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_RAY_QUERY_SPEC_VERSION
+  1)
+
+(ADP:DEFPARAMETER
+  VK_KHR_RAY_QUERY_EXTENSION_NAME
+  "VK_KHR_ray_query")
