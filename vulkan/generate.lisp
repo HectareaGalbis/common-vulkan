@@ -512,6 +512,8 @@ Return a context structure with the information."
   "Write the type definitions in the specified stream."
   (declare (type context context) (type stream stream))
   (format stream "~%~s~%~%" '(in-package :cvk))
+  (format stream "~s~%~%"
+	  '(adp:write-in-file #P"docs/api/structs"))
   (format stream "~s~%~%" `(cffi:defctype handle :pointer))
   (format stream "~s"
 	  `(eval-when (:compile-toplevel :load-toplevel :execute)
@@ -526,6 +528,8 @@ Return a context structure with the information."
   "Write the function definitions in the specified stream."
   (declare (type context context) (type stream stream))
   (format stream "~%~s~%~%" '(in-package :cvk))
+  (format stream "~s~%~%"
+	  '(adp:write-in-file #P"docs/api/functions"))
   (format stream "~s"
 	  '(defmacro multiple-defcfun ((foreign-name name funcall-name) ret-type &body args)
 	    (let ((name-args (mapcar #'car args))
@@ -545,19 +549,36 @@ Return a context structure with the information."
 (defun write-constant-code (context stream)
   "Write the constant definitions in the specified stream."
   (declare (type context context) (type stream stream))
-  (format stream "~%~s~%~%" '(in-package :cvk))  
+  (format stream "~%~s~%~%" '(in-package :cvk))
   (format stream "~s~%~%"
-	  `(adp:defparameter uint64-max ,(1- (expt 2 64))))
+	  '(adp:write-in-file #P"docs/api/constants"))
   (format stream "~s~%~%"
-	  `(adp:defparameter uint32-max ,(1- (expt 2 32))))
+	  '(adp:defmacro VK_MAKE_API_VERSION (variant major minor patch)
+	    `(logior (ash ,variant 29) (ash ,major 22) (ash ,minor 12) ,patch)))
+  (format stream "~s~%~%"
+	  '(adp:defmacro  VK_API_VERSION_VARIANT (version)
+	    `(ash ,version 29)))
+  (format stream "~s~%~%"
+	  '(adp:defmacro VK_API_VERSION_MAJOR (version)
+	    `(logand (ash ,version 22) #x7F)))
+  (format stream "~s~%~%"
+	  '(adp:defmacro VK_API_VERSION_MINOR (version)
+	    `(logand (ash ,version 12) #x3FF)))
+  (format stream "~s~%~%"
+	  '(adp:defmacro VK_API_VERSION_PATCH (version)
+	    `(logand ,version #xFFF)))
+  (format stream "~s~%~%"
+	  `(adp:defparameter UINT64_MAX ,(1- (expt 2 64))))
+  (format stream "~s~%~%"
+	  `(adp:defparameter UINT32_MAX ,(1- (expt 2 32))))
   (format stream "~s~%~%"
 	  '(adp:defparameter VK_NULL_HANDLE (cffi:null-pointer)))
   (format stream "~s~%~%"
-	  '(adp:defparameter VK_API_VERSION_1_0 (make-api-version 0 1 0 0)))
+	  '(adp:defparameter VK_API_VERSION_1_0 (VK_MAKE_API_VERSION 0 1 0 0)))
   (format stream "~s~%~%"
 	  '(adp:defparameter VK_HEADER_VERSION 216))
   (format stream "~s"
-	  '(adp:defparameter VK_HEADER_VERSION_COMPLETE (make-api-version 0 1 3 VK_HEADER_VERSION)))
+	  '(adp:defparameter VK_HEADER_VERSION_COMPLETE (VK_MAKE_API_VERSION 0 1 3 VK_HEADER_VERSION)))
   (loop for constant-def across (context-constant-definitions context)
 	do (format stream "~%~%~s"
 		   constant-def)))

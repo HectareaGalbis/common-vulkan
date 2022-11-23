@@ -1,6006 +1,22188 @@
-## VK_MAKE_API_VERSION
+#### Macro: VK\_MAKE\_API\_VERSION
 
-**vk_make_api_version**
-```lisp
-(vk_make_api_version VARIANT MAJOR MINOR PATCH)
+```Lisp
+(defmacro VK_MAKE_API_VERSION (VARIANT MAJOR MINOR PATCH)
+  ...)
 ```
 
-## VK_API_VERSION_VARIANT
+#### Macro: VK\_API\_VERSION\_VARIANT
 
-**vk_api_version_variant**
-```lisp
-(vk_api_version_variant VERSION)
+```Lisp
+(defmacro VK_API_VERSION_VARIANT (VERSION)
+  ...)
 ```
 
-## VK_API_VERSION_MAJOR
+#### Macro: VK\_API\_VERSION\_MAJOR
 
-**vk_api_version_major**
-```lisp
-(vk_api_version_major VERSION)
+```Lisp
+(defmacro VK_API_VERSION_MAJOR (VERSION)
+  ...)
 ```
 
-## VK_API_VERSION_MINOR
+#### Macro: VK\_API\_VERSION\_MINOR
 
-**vk_api_version_minor**
-```lisp
-(vk_api_version_minor VERSION)
+```Lisp
+(defmacro VK_API_VERSION_MINOR (VERSION)
+  ...)
 ```
 
-## VK_API_VERSION_PATCH
+#### Macro: VK\_API\_VERSION\_PATCH
 
-**vk_api_version_patch**
-```lisp
-(vk_api_version_patch VERSION)
+```Lisp
+(defmacro VK_API_VERSION_PATCH (VERSION)
+  ...)
 ```
 
-## UINT64_MAX
+#### Variable: UINT64\_MAX
 
-```lisp
-(defconstant uint64_max (1- (EXPT 2 64)))
+```Lisp
+(defparameter UINT64_MAX 18446744073709551615)
 ```
 
-## UINT32_MAX
+#### Variable: UINT32\_MAX
 
-```lisp
-(defconstant uint32_max (1- (EXPT 2 32)))
+```Lisp
+(defparameter UINT32_MAX 4294967295)
 ```
 
-## VK_NULL_HANDLE
+#### Variable: VK\_NULL\_HANDLE
 
-```lisp
-(defconstant vk_null_handle (NULL-POINTER))
+```Lisp
+(defparameter VK_NULL_HANDLE (CFFI-SYS:NULL-POINTER))
 ```
 
-## VK_API_VERSION_1_0
+#### Variable: VK\_API\_VERSION\_1\_0
 
-```lisp
-(defconstant vk_api_version_1_0 (VK_MAKE_API_VERSION 0 1 0 0))
+```Lisp
+(defparameter VK_API_VERSION_1_0 (VK_MAKE_API_VERSION 0 1 0 0))
 ```
 
-## VK_HEADER_VERSION
+#### Variable: VK\_HEADER\_VERSION
 
-```lisp
-(defconstant vk_header_version 216)
+```Lisp
+(defparameter VK_HEADER_VERSION 216)
 ```
 
-## VK_HEADER_VERSION_COMPLETE
+#### Variable: VK\_HEADER\_VERSION\_COMPLETE
 
-```lisp
-(defconstant vk_header_version_complete (VK_MAKE_API_VERSION 0 1 3
-                                                             VK_HEADER_VERSION))
+```Lisp
+(defparameter VK_HEADER_VERSION_COMPLETE (VK_MAKE_API_VERSION 0 1 3
+                                                              VK_HEADER_VERSION))
 ```
 
-## VK_ATTACHMENT_UNUSED
+#### Variable: VK\_ATTACHMENT\_UNUSED
 
-```lisp
-(defconstant vk_attachment_unused (- UINT32_MAX 0))
+```Lisp
+(defparameter VK_ATTACHMENT_UNUSED (- UINT32_MAX 0))
 ```
 
-## VK_FALSE
+#### Variable: VK\_FALSE
 
-```lisp
-(defconstant vk_false 0)
+```Lisp
+(defparameter VK_FALSE 0)
 ```
 
-## VK_LOD_CLAMP_NONE
+#### Variable: VK\_LOD\_CLAMP\_NONE
 
-```lisp
-(defconstant vk_lod_clamp_none 1000.0)
+```Lisp
+(defparameter VK_LOD_CLAMP_NONE 1000.0)
 ```
 
-## VK_QUEUE_FAMILY_IGNORED
+#### Variable: VK\_QUEUE\_FAMILY\_IGNORED
 
-```lisp
-(defconstant vk_queue_family_ignored (- UINT32_MAX 0))
+```Lisp
+(defparameter VK_QUEUE_FAMILY_IGNORED (- UINT32_MAX 0))
 ```
 
-## VK_REMAINING_ARRAY_LAYERS
+#### Variable: VK\_REMAINING\_ARRAY\_LAYERS
 
-```lisp
-(defconstant vk_remaining_array_layers (- UINT32_MAX 0))
+```Lisp
+(defparameter VK_REMAINING_ARRAY_LAYERS (- UINT32_MAX 0))
 ```
 
-## VK_REMAINING_MIP_LEVELS
+#### Variable: VK\_REMAINING\_MIP\_LEVELS
 
-```lisp
-(defconstant vk_remaining_mip_levels (- UINT32_MAX 0))
+```Lisp
+(defparameter VK_REMAINING_MIP_LEVELS (- UINT32_MAX 0))
 ```
 
-## VK_SUBPASS_EXTERNAL
+#### Variable: VK\_SUBPASS\_EXTERNAL
 
-```lisp
-(defconstant vk_subpass_external (- UINT32_MAX 0))
+```Lisp
+(defparameter VK_SUBPASS_EXTERNAL (- UINT32_MAX 0))
 ```
 
-## VK_TRUE
+#### Variable: VK\_TRUE
 
-```lisp
-(defconstant vk_true 1)
+```Lisp
+(defparameter VK_TRUE 1)
 ```
 
-## VK_WHOLE_SIZE
+#### Variable: VK\_WHOLE\_SIZE
 
-```lisp
-(defconstant vk_whole_size (- UINT64_MAX 0))
+```Lisp
+(defparameter VK_WHOLE_SIZE (- UINT64_MAX 0))
 ```
 
-## VK_MAX_MEMORY_TYPES
+#### Variable: VK\_MAX\_MEMORY\_TYPES
 
-```lisp
-(defconstant vk_max_memory_types 32)
+```Lisp
+(defparameter VK_MAX_MEMORY_TYPES 32)
 ```
 
-## VK_MAX_PHYSICAL_DEVICE_NAME_SIZE
+#### Variable: VK\_MAX\_PHYSICAL\_DEVICE\_NAME\_SIZE
 
-```lisp
-(defconstant vk_max_physical_device_name_size 256)
+```Lisp
+(defparameter VK_MAX_PHYSICAL_DEVICE_NAME_SIZE 256)
 ```
 
-## VK_UUID_SIZE
+#### Variable: VK\_UUID\_SIZE
 
-```lisp
-(defconstant vk_uuid_size 16)
+```Lisp
+(defparameter VK_UUID_SIZE 16)
 ```
 
-## VK_MAX_EXTENSION_NAME_SIZE
+#### Variable: VK\_MAX\_EXTENSION\_NAME\_SIZE
 
-```lisp
-(defconstant vk_max_extension_name_size 256)
+```Lisp
+(defparameter VK_MAX_EXTENSION_NAME_SIZE 256)
 ```
 
-## VK_MAX_DESCRIPTION_SIZE
+#### Variable: VK\_MAX\_DESCRIPTION\_SIZE
 
-```lisp
-(defconstant vk_max_description_size 256)
+```Lisp
+(defparameter VK_MAX_DESCRIPTION_SIZE 256)
 ```
 
-## VK_MAX_MEMORY_HEAPS
+#### Variable: VK\_MAX\_MEMORY\_HEAPS
 
-```lisp
-(defconstant vk_max_memory_heaps 16)
+```Lisp
+(defparameter VK_MAX_MEMORY_HEAPS 16)
 ```
 
-## VK_VERSION_1_1
+#### Variable: VK\_SUCCESS
 
-```lisp
-(defconstant vk_version_1_1 1)
+```Lisp
+(defparameter VK_SUCCESS 0)
 ```
 
-## VK_API_VERSION_1_1
+#### Variable: VK\_NOT\_READY
 
-```lisp
-(defconstant vk_api_version_1_1 (VK_MAKE_API_VERSION 0 1 1 0))
+```Lisp
+(defparameter VK_NOT_READY 1)
 ```
 
-## VK_MAX_DEVICE_GROUP_SIZE
+#### Variable: VK\_TIMEOUT
 
-```lisp
-(defconstant vk_max_device_group_size 32)
+```Lisp
+(defparameter VK_TIMEOUT 2)
 ```
 
-## VK_LUID_SIZE
+#### Variable: VK\_EVENT\_SET
 
-```lisp
-(defconstant vk_luid_size 8)
+```Lisp
+(defparameter VK_EVENT_SET 3)
 ```
 
-## VK_QUEUE_FAMILY_EXTERNAL
+#### Variable: VK\_EVENT\_RESET
 
-```lisp
-(defconstant vk_queue_family_external (- UINT32_MAX 1))
+```Lisp
+(defparameter VK_EVENT_RESET 4)
 ```
 
-## VK_VERSION_1_2
+#### Variable: VK\_INCOMPLETE
 
-```lisp
-(defconstant vk_version_1_2 1)
+```Lisp
+(defparameter VK_INCOMPLETE 5)
 ```
 
-## VK_API_VERSION_1_2
+#### Variable: VK\_ERROR\_OUT\_OF\_HOST\_MEMORY
 
-```lisp
-(defconstant vk_api_version_1_2 (VK_MAKE_API_VERSION 0 1 2 0))
+```Lisp
+(defparameter VK_ERROR_OUT_OF_HOST_MEMORY -1)
 ```
 
-## VK_MAX_DRIVER_NAME_SIZE
+#### Variable: VK\_ERROR\_OUT\_OF\_DEVICE\_MEMORY
 
-```lisp
-(defconstant vk_max_driver_name_size 256)
+```Lisp
+(defparameter VK_ERROR_OUT_OF_DEVICE_MEMORY -2)
 ```
 
-## VK_MAX_DRIVER_INFO_SIZE
+#### Variable: VK\_ERROR\_INITIALIZATION\_FAILED
 
-```lisp
-(defconstant vk_max_driver_info_size 256)
+```Lisp
+(defparameter VK_ERROR_INITIALIZATION_FAILED -3)
 ```
 
-## VK_VERSION_1_3
+#### Variable: VK\_ERROR\_DEVICE\_LOST
 
-```lisp
-(defconstant vk_version_1_3 1)
+```Lisp
+(defparameter VK_ERROR_DEVICE_LOST -4)
 ```
 
-## VK_API_VERSION_1_3
+#### Variable: VK\_ERROR\_MEMORY\_MAP\_FAILED
 
-```lisp
-(defconstant vk_api_version_1_3 (VK_MAKE_API_VERSION 0 1 3 0))
+```Lisp
+(defparameter VK_ERROR_MEMORY_MAP_FAILED -5)
 ```
 
-## VK_PIPELINE_STAGE_2_NONE
+#### Variable: VK\_ERROR\_LAYER\_NOT\_PRESENT
 
-```lisp
-(defconstant vk_pipeline_stage_2_none 0)
+```Lisp
+(defparameter VK_ERROR_LAYER_NOT_PRESENT -6)
 ```
 
-## VK_PIPELINE_STAGE_2_NONE_KHR
+#### Variable: VK\_ERROR\_EXTENSION\_NOT\_PRESENT
 
-```lisp
-(defconstant vk_pipeline_stage_2_none_khr 0)
+```Lisp
+(defparameter VK_ERROR_EXTENSION_NOT_PRESENT -7)
 ```
 
-## VK_PIPELINE_STAGE_2_TOP_OF_PIPE_BIT
+#### Variable: VK\_ERROR\_FEATURE\_NOT\_PRESENT
 
-```lisp
-(defconstant vk_pipeline_stage_2_top_of_pipe_bit 1)
+```Lisp
+(defparameter VK_ERROR_FEATURE_NOT_PRESENT -8)
 ```
 
-## VK_PIPELINE_STAGE_2_TOP_OF_PIPE_BIT_KHR
+#### Variable: VK\_ERROR\_INCOMPATIBLE\_DRIVER
 
-```lisp
-(defconstant vk_pipeline_stage_2_top_of_pipe_bit_khr 1)
+```Lisp
+(defparameter VK_ERROR_INCOMPATIBLE_DRIVER -9)
 ```
 
-## VK_PIPELINE_STAGE_2_DRAW_INDIRECT_BIT
+#### Variable: VK\_ERROR\_TOO\_MANY\_OBJECTS
 
-```lisp
-(defconstant vk_pipeline_stage_2_draw_indirect_bit 2)
+```Lisp
+(defparameter VK_ERROR_TOO_MANY_OBJECTS -10)
 ```
 
-## VK_PIPELINE_STAGE_2_DRAW_INDIRECT_BIT_KHR
+#### Variable: VK\_ERROR\_FORMAT\_NOT\_SUPPORTED
 
-```lisp
-(defconstant vk_pipeline_stage_2_draw_indirect_bit_khr 2)
+```Lisp
+(defparameter VK_ERROR_FORMAT_NOT_SUPPORTED -11)
 ```
 
-## VK_PIPELINE_STAGE_2_VERTEX_INPUT_BIT
+#### Variable: VK\_ERROR\_FRAGMENTED\_POOL
 
-```lisp
-(defconstant vk_pipeline_stage_2_vertex_input_bit 4)
+```Lisp
+(defparameter VK_ERROR_FRAGMENTED_POOL -12)
 ```
 
-## VK_PIPELINE_STAGE_2_VERTEX_INPUT_BIT_KHR
+#### Variable: VK\_ERROR\_UNKNOWN
 
-```lisp
-(defconstant vk_pipeline_stage_2_vertex_input_bit_khr 4)
+```Lisp
+(defparameter VK_ERROR_UNKNOWN -13)
 ```
 
-## VK_PIPELINE_STAGE_2_VERTEX_SHADER_BIT
+#### Variable: VK\_ERROR\_OUT\_OF\_POOL\_MEMORY
 
-```lisp
-(defconstant vk_pipeline_stage_2_vertex_shader_bit 8)
+```Lisp
+(defparameter VK_ERROR_OUT_OF_POOL_MEMORY -1000069000)
 ```
 
-## VK_PIPELINE_STAGE_2_VERTEX_SHADER_BIT_KHR
+#### Variable: VK\_ERROR\_INVALID\_EXTERNAL\_HANDLE
 
-```lisp
-(defconstant vk_pipeline_stage_2_vertex_shader_bit_khr 8)
+```Lisp
+(defparameter VK_ERROR_INVALID_EXTERNAL_HANDLE -1000072003)
 ```
 
-## VK_PIPELINE_STAGE_2_TESSELLATION_CONTROL_SHADER_BIT
+#### Variable: VK\_ERROR\_FRAGMENTATION
 
-```lisp
-(defconstant vk_pipeline_stage_2_tessellation_control_shader_bit 16)
+```Lisp
+(defparameter VK_ERROR_FRAGMENTATION -1000161000)
 ```
 
-## VK_PIPELINE_STAGE_2_TESSELLATION_CONTROL_SHADER_BIT_KHR
+#### Variable: VK\_ERROR\_INVALID\_OPAQUE\_CAPTURE\_ADDRESS
 
-```lisp
-(defconstant vk_pipeline_stage_2_tessellation_control_shader_bit_khr 16)
+```Lisp
+(defparameter VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS -1000257000)
 ```
 
-## VK_PIPELINE_STAGE_2_TESSELLATION_EVALUATION_SHADER_BIT
+#### Variable: VK\_PIPELINE\_COMPILE\_REQUIRED
 
-```lisp
-(defconstant vk_pipeline_stage_2_tessellation_evaluation_shader_bit 32)
+```Lisp
+(defparameter VK_PIPELINE_COMPILE_REQUIRED 1000297000)
 ```
 
-## VK_PIPELINE_STAGE_2_TESSELLATION_EVALUATION_SHADER_BIT_KHR
+#### Variable: VK\_ERROR\_SURFACE\_LOST\_KHR
 
-```lisp
-(defconstant vk_pipeline_stage_2_tessellation_evaluation_shader_bit_khr 32)
+```Lisp
+(defparameter VK_ERROR_SURFACE_LOST_KHR -1000000000)
 ```
 
-## VK_PIPELINE_STAGE_2_GEOMETRY_SHADER_BIT
+#### Variable: VK\_ERROR\_NATIVE\_WINDOW\_IN\_USE\_KHR
 
-```lisp
-(defconstant vk_pipeline_stage_2_geometry_shader_bit 64)
+```Lisp
+(defparameter VK_ERROR_NATIVE_WINDOW_IN_USE_KHR -1000000001)
 ```
 
-## VK_PIPELINE_STAGE_2_GEOMETRY_SHADER_BIT_KHR
+#### Variable: VK\_SUBOPTIMAL\_KHR
 
-```lisp
-(defconstant vk_pipeline_stage_2_geometry_shader_bit_khr 64)
+```Lisp
+(defparameter VK_SUBOPTIMAL_KHR 1000001003)
 ```
 
-## VK_PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT
+#### Variable: VK\_ERROR\_OUT\_OF\_DATE\_KHR
 
-```lisp
-(defconstant vk_pipeline_stage_2_fragment_shader_bit 128)
+```Lisp
+(defparameter VK_ERROR_OUT_OF_DATE_KHR -1000001004)
 ```
 
-## VK_PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT_KHR
+#### Variable: VK\_ERROR\_INCOMPATIBLE\_DISPLAY\_KHR
 
-```lisp
-(defconstant vk_pipeline_stage_2_fragment_shader_bit_khr 128)
+```Lisp
+(defparameter VK_ERROR_INCOMPATIBLE_DISPLAY_KHR -1000003001)
 ```
 
-## VK_PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT
+#### Variable: VK\_ERROR\_VALIDATION\_FAILED\_EXT
 
-```lisp
-(defconstant vk_pipeline_stage_2_early_fragment_tests_bit 256)
+```Lisp
+(defparameter VK_ERROR_VALIDATION_FAILED_EXT -1000011001)
 ```
 
-## VK_PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT_KHR
+#### Variable: VK\_ERROR\_INVALID\_SHADER\_NV
 
-```lisp
-(defconstant vk_pipeline_stage_2_early_fragment_tests_bit_khr 256)
+```Lisp
+(defparameter VK_ERROR_INVALID_SHADER_NV -1000012000)
 ```
 
-## VK_PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT
+#### Variable: VK\_ERROR\_INVALID\_DRM\_FORMAT\_MODIFIER\_PLANE\_LAYOUT\_EXT
 
-```lisp
-(defconstant vk_pipeline_stage_2_late_fragment_tests_bit 512)
+```Lisp
+(defparameter VK_ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT -1000158000)
 ```
 
-## VK_PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT_KHR
+#### Variable: VK\_ERROR\_NOT\_PERMITTED\_KHR
 
-```lisp
-(defconstant vk_pipeline_stage_2_late_fragment_tests_bit_khr 512)
+```Lisp
+(defparameter VK_ERROR_NOT_PERMITTED_KHR -1000174001)
 ```
 
-## VK_PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT
+#### Variable: VK\_ERROR\_FULL\_SCREEN\_EXCLUSIVE\_MODE\_LOST\_EXT
 
-```lisp
-(defconstant vk_pipeline_stage_2_color_attachment_output_bit 1024)
+```Lisp
+(defparameter VK_ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT -1000255000)
 ```
 
-## VK_PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT_KHR
+#### Variable: VK\_THREAD\_IDLE\_KHR
 
-```lisp
-(defconstant vk_pipeline_stage_2_color_attachment_output_bit_khr 1024)
+```Lisp
+(defparameter VK_THREAD_IDLE_KHR 1000268000)
 ```
 
-## VK_PIPELINE_STAGE_2_COMPUTE_SHADER_BIT
+#### Variable: VK\_THREAD\_DONE\_KHR
 
-```lisp
-(defconstant vk_pipeline_stage_2_compute_shader_bit 2048)
+```Lisp
+(defparameter VK_THREAD_DONE_KHR 1000268001)
 ```
 
-## VK_PIPELINE_STAGE_2_COMPUTE_SHADER_BIT_KHR
+#### Variable: VK\_OPERATION\_DEFERRED\_KHR
 
-```lisp
-(defconstant vk_pipeline_stage_2_compute_shader_bit_khr 2048)
+```Lisp
+(defparameter VK_OPERATION_DEFERRED_KHR 1000268002)
 ```
 
-## VK_PIPELINE_STAGE_2_ALL_TRANSFER_BIT
+#### Variable: VK\_OPERATION\_NOT\_DEFERRED\_KHR
 
-```lisp
-(defconstant vk_pipeline_stage_2_all_transfer_bit 4096)
+```Lisp
+(defparameter VK_OPERATION_NOT_DEFERRED_KHR 1000268003)
 ```
 
-## VK_PIPELINE_STAGE_2_ALL_TRANSFER_BIT_KHR
+#### Variable: VK\_ERROR\_COMPRESSION\_EXHAUSTED\_EXT
 
-```lisp
-(defconstant vk_pipeline_stage_2_all_transfer_bit_khr 4096)
+```Lisp
+(defparameter VK_ERROR_COMPRESSION_EXHAUSTED_EXT -1000338000)
 ```
 
-## VK_PIPELINE_STAGE_2_TRANSFER_BIT
+#### Variable: VK\_ERROR\_OUT\_OF\_POOL\_MEMORY\_KHR
 
-```lisp
-(defconstant vk_pipeline_stage_2_transfer_bit 4096)
+```Lisp
+(defparameter VK_ERROR_OUT_OF_POOL_MEMORY_KHR VK_ERROR_OUT_OF_POOL_MEMORY)
 ```
 
-## VK_PIPELINE_STAGE_2_TRANSFER_BIT_KHR
+#### Variable: VK\_ERROR\_INVALID\_EXTERNAL\_HANDLE\_KHR
 
-```lisp
-(defconstant vk_pipeline_stage_2_transfer_bit_khr 4096)
+```Lisp
+(defparameter VK_ERROR_INVALID_EXTERNAL_HANDLE_KHR VK_ERROR_INVALID_EXTERNAL_HANDLE)
 ```
 
-## VK_PIPELINE_STAGE_2_BOTTOM_OF_PIPE_BIT
+#### Variable: VK\_ERROR\_FRAGMENTATION\_EXT
 
-```lisp
-(defconstant vk_pipeline_stage_2_bottom_of_pipe_bit 8192)
+```Lisp
+(defparameter VK_ERROR_FRAGMENTATION_EXT VK_ERROR_FRAGMENTATION)
 ```
 
-## VK_PIPELINE_STAGE_2_BOTTOM_OF_PIPE_BIT_KHR
+#### Variable: VK\_ERROR\_NOT\_PERMITTED\_EXT
 
-```lisp
-(defconstant vk_pipeline_stage_2_bottom_of_pipe_bit_khr 8192)
+```Lisp
+(defparameter VK_ERROR_NOT_PERMITTED_EXT VK_ERROR_NOT_PERMITTED_KHR)
 ```
 
-## VK_PIPELINE_STAGE_2_HOST_BIT
+#### Variable: VK\_ERROR\_INVALID\_DEVICE\_ADDRESS\_EXT
 
-```lisp
-(defconstant vk_pipeline_stage_2_host_bit 16384)
+```Lisp
+(defparameter VK_ERROR_INVALID_DEVICE_ADDRESS_EXT VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS)
 ```
 
-## VK_PIPELINE_STAGE_2_HOST_BIT_KHR
+#### Variable: VK\_ERROR\_INVALID\_OPAQUE\_CAPTURE\_ADDRESS\_KHR
 
-```lisp
-(defconstant vk_pipeline_stage_2_host_bit_khr 16384)
+```Lisp
+(defparameter VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS_KHR VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS)
 ```
 
-## VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT
+#### Variable: VK\_PIPELINE\_COMPILE\_REQUIRED\_EXT
 
-```lisp
-(defconstant vk_pipeline_stage_2_all_graphics_bit 32768)
+```Lisp
+(defparameter VK_PIPELINE_COMPILE_REQUIRED_EXT VK_PIPELINE_COMPILE_REQUIRED)
 ```
 
-## VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT_KHR
+#### Variable: VK\_ERROR\_PIPELINE\_COMPILE\_REQUIRED\_EXT
 
-```lisp
-(defconstant vk_pipeline_stage_2_all_graphics_bit_khr 32768)
+```Lisp
+(defparameter VK_ERROR_PIPELINE_COMPILE_REQUIRED_EXT VK_PIPELINE_COMPILE_REQUIRED)
 ```
 
-## VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT
+#### Variable: VK\_RESULT\_MAX\_ENUM
 
-```lisp
-(defconstant vk_pipeline_stage_2_all_commands_bit 65536)
+```Lisp
+(defparameter VK_RESULT_MAX_ENUM 2147483647)
 ```
 
-## VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_APPLICATION\_INFO
 
-```lisp
-(defconstant vk_pipeline_stage_2_all_commands_bit_khr 65536)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_APPLICATION_INFO 0)
 ```
 
-## VK_PIPELINE_STAGE_2_COPY_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_INSTANCE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_pipeline_stage_2_copy_bit 4294967296)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO 1)
 ```
 
-## VK_PIPELINE_STAGE_2_COPY_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_DEVICE\_QUEUE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_pipeline_stage_2_copy_bit_khr 4294967296)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO 2)
 ```
 
-## VK_PIPELINE_STAGE_2_RESOLVE_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_DEVICE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_pipeline_stage_2_resolve_bit 8589934592)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO 3)
 ```
 
-## VK_PIPELINE_STAGE_2_RESOLVE_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_SUBMIT\_INFO
 
-```lisp
-(defconstant vk_pipeline_stage_2_resolve_bit_khr 8589934592)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SUBMIT_INFO 4)
 ```
 
-## VK_PIPELINE_STAGE_2_BLIT_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_MEMORY\_ALLOCATE\_INFO
 
-```lisp
-(defconstant vk_pipeline_stage_2_blit_bit 17179869184)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO 5)
 ```
 
-## VK_PIPELINE_STAGE_2_BLIT_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_MAPPED\_MEMORY\_RANGE
 
-```lisp
-(defconstant vk_pipeline_stage_2_blit_bit_khr 17179869184)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE 6)
 ```
 
-## VK_PIPELINE_STAGE_2_CLEAR_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_BIND\_SPARSE\_INFO
 
-```lisp
-(defconstant vk_pipeline_stage_2_clear_bit 34359738368)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BIND_SPARSE_INFO 7)
 ```
 
-## VK_PIPELINE_STAGE_2_CLEAR_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_FENCE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_pipeline_stage_2_clear_bit_khr 34359738368)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_FENCE_CREATE_INFO 8)
 ```
 
-## VK_PIPELINE_STAGE_2_INDEX_INPUT_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_SEMAPHORE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_pipeline_stage_2_index_input_bit 68719476736)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO 9)
 ```
 
-## VK_PIPELINE_STAGE_2_INDEX_INPUT_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_EVENT\_CREATE\_INFO
 
-```lisp
-(defconstant vk_pipeline_stage_2_index_input_bit_khr 68719476736)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_EVENT_CREATE_INFO 10)
 ```
 
-## VK_PIPELINE_STAGE_2_VERTEX_ATTRIBUTE_INPUT_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_QUERY\_POOL\_CREATE\_INFO
 
-```lisp
-(defconstant vk_pipeline_stage_2_vertex_attribute_input_bit 137438953472)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO 11)
 ```
 
-## VK_PIPELINE_STAGE_2_VERTEX_ATTRIBUTE_INPUT_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_BUFFER\_CREATE\_INFO
 
-```lisp
-(defconstant vk_pipeline_stage_2_vertex_attribute_input_bit_khr 137438953472)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO 12)
 ```
 
-## VK_PIPELINE_STAGE_2_PRE_RASTERIZATION_SHADERS_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_BUFFER\_VIEW\_CREATE\_INFO
 
-```lisp
-(defconstant vk_pipeline_stage_2_pre_rasterization_shaders_bit 274877906944)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO 13)
 ```
 
-## VK_PIPELINE_STAGE_2_PRE_RASTERIZATION_SHADERS_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_pipeline_stage_2_pre_rasterization_shaders_bit_khr 274877906944)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO 14)
 ```
 
-## VK_PIPELINE_STAGE_2_VIDEO_DECODE_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_VIEW\_CREATE\_INFO
 
-```lisp
-(defconstant vk_pipeline_stage_2_video_decode_bit_khr 67108864)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO 15)
 ```
 
-## VK_PIPELINE_STAGE_2_VIDEO_ENCODE_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_SHADER\_MODULE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_pipeline_stage_2_video_encode_bit_khr 134217728)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO 16)
 ```
 
-## VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_CACHE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_pipeline_stage_2_transform_feedback_bit_ext 16777216)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO 17)
 ```
 
-## VK_PIPELINE_STAGE_2_CONDITIONAL_RENDERING_BIT_EXT
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_SHADER\_STAGE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_pipeline_stage_2_conditional_rendering_bit_ext 262144)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO 18)
 ```
 
-## VK_PIPELINE_STAGE_2_COMMAND_PREPROCESS_BIT_NV
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_VERTEX\_INPUT\_STATE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_pipeline_stage_2_command_preprocess_bit_nv 131072)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO 19)
 ```
 
-## VK_PIPELINE_STAGE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_INPUT\_ASSEMBLY\_STATE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_pipeline_stage_2_fragment_shading_rate_attachment_bit_khr 4194304)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO 20)
 ```
 
-## VK_PIPELINE_STAGE_2_SHADING_RATE_IMAGE_BIT_NV
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_TESSELLATION\_STATE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_pipeline_stage_2_shading_rate_image_bit_nv 4194304)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO 21)
 ```
 
-## VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_VIEWPORT\_STATE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_pipeline_stage_2_acceleration_structure_build_bit_khr 33554432)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO 22)
 ```
 
-## VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_RASTERIZATION\_STATE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_pipeline_stage_2_ray_tracing_shader_bit_khr 2097152)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO 23)
 ```
 
-## VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_NV
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_MULTISAMPLE\_STATE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_pipeline_stage_2_ray_tracing_shader_bit_nv 2097152)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO 24)
 ```
 
-## VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_NV
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_DEPTH\_STENCIL\_STATE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_pipeline_stage_2_acceleration_structure_build_bit_nv 33554432)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO 25)
 ```
 
-## VK_PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_BIT_EXT
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_COLOR\_BLEND\_STATE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_pipeline_stage_2_fragment_density_process_bit_ext 8388608)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO 26)
 ```
 
-## VK_PIPELINE_STAGE_2_TASK_SHADER_BIT_NV
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_DYNAMIC\_STATE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_pipeline_stage_2_task_shader_bit_nv 524288)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO 27)
 ```
 
-## VK_PIPELINE_STAGE_2_MESH_SHADER_BIT_NV
+#### Variable: VK\_STRUCTURE\_TYPE\_GRAPHICS\_PIPELINE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_pipeline_stage_2_mesh_shader_bit_nv 1048576)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO 28)
 ```
 
-## VK_PIPELINE_STAGE_2_SUBPASS_SHADING_BIT_HUAWEI
+#### Variable: VK\_STRUCTURE\_TYPE\_COMPUTE\_PIPELINE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_pipeline_stage_2_subpass_shading_bit_huawei 549755813888)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO 29)
 ```
 
-## VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_LAYOUT\_CREATE\_INFO
 
-```lisp
-(defconstant vk_pipeline_stage_2_invocation_mask_bit_huawei 1099511627776)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO 30)
 ```
 
-## VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_COPY_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_SAMPLER\_CREATE\_INFO
 
-```lisp
-(defconstant vk_pipeline_stage_2_acceleration_structure_copy_bit_khr 268435456)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO 31)
 ```
 
-## VK_ACCESS_2_NONE
+#### Variable: VK\_STRUCTURE\_TYPE\_DESCRIPTOR\_SET\_LAYOUT\_CREATE\_INFO
 
-```lisp
-(defconstant vk_access_2_none 0)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO 32)
 ```
 
-## VK_ACCESS_2_NONE_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_DESCRIPTOR\_POOL\_CREATE\_INFO
 
-```lisp
-(defconstant vk_access_2_none_khr 0)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO 33)
 ```
 
-## VK_ACCESS_2_INDIRECT_COMMAND_READ_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_DESCRIPTOR\_SET\_ALLOCATE\_INFO
 
-```lisp
-(defconstant vk_access_2_indirect_command_read_bit 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO 34)
 ```
 
-## VK_ACCESS_2_INDIRECT_COMMAND_READ_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_WRITE\_DESCRIPTOR\_SET
 
-```lisp
-(defconstant vk_access_2_indirect_command_read_bit_khr 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET 35)
 ```
 
-## VK_ACCESS_2_INDEX_READ_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_COPY\_DESCRIPTOR\_SET
 
-```lisp
-(defconstant vk_access_2_index_read_bit 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_COPY_DESCRIPTOR_SET 36)
 ```
 
-## VK_ACCESS_2_INDEX_READ_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_FRAMEBUFFER\_CREATE\_INFO
 
-```lisp
-(defconstant vk_access_2_index_read_bit_khr 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO 37)
 ```
 
-## VK_ACCESS_2_VERTEX_ATTRIBUTE_READ_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_RENDER\_PASS\_CREATE\_INFO
 
-```lisp
-(defconstant vk_access_2_vertex_attribute_read_bit 4)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO 38)
 ```
 
-## VK_ACCESS_2_VERTEX_ATTRIBUTE_READ_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_COMMAND\_POOL\_CREATE\_INFO
 
-```lisp
-(defconstant vk_access_2_vertex_attribute_read_bit_khr 4)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO 39)
 ```
 
-## VK_ACCESS_2_UNIFORM_READ_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_COMMAND\_BUFFER\_ALLOCATE\_INFO
 
-```lisp
-(defconstant vk_access_2_uniform_read_bit 8)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO 40)
 ```
 
-## VK_ACCESS_2_UNIFORM_READ_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_COMMAND\_BUFFER\_INHERITANCE\_INFO
 
-```lisp
-(defconstant vk_access_2_uniform_read_bit_khr 8)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO 41)
 ```
 
-## VK_ACCESS_2_INPUT_ATTACHMENT_READ_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_COMMAND\_BUFFER\_BEGIN\_INFO
 
-```lisp
-(defconstant vk_access_2_input_attachment_read_bit 16)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO 42)
 ```
 
-## VK_ACCESS_2_INPUT_ATTACHMENT_READ_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_RENDER\_PASS\_BEGIN\_INFO
 
-```lisp
-(defconstant vk_access_2_input_attachment_read_bit_khr 16)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO 43)
 ```
 
-## VK_ACCESS_2_SHADER_READ_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_BUFFER\_MEMORY\_BARRIER
 
-```lisp
-(defconstant vk_access_2_shader_read_bit 32)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER 44)
 ```
 
-## VK_ACCESS_2_SHADER_READ_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_MEMORY\_BARRIER
 
-```lisp
-(defconstant vk_access_2_shader_read_bit_khr 32)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER 45)
 ```
 
-## VK_ACCESS_2_SHADER_WRITE_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_MEMORY\_BARRIER
 
-```lisp
-(defconstant vk_access_2_shader_write_bit 64)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_MEMORY_BARRIER 46)
 ```
 
-## VK_ACCESS_2_SHADER_WRITE_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_LOADER\_INSTANCE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_access_2_shader_write_bit_khr 64)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_LOADER_INSTANCE_CREATE_INFO 47)
 ```
 
-## VK_ACCESS_2_COLOR_ATTACHMENT_READ_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_LOADER\_DEVICE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_access_2_color_attachment_read_bit 128)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_LOADER_DEVICE_CREATE_INFO 48)
 ```
 
-## VK_ACCESS_2_COLOR_ATTACHMENT_READ_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SUBGROUP\_PROPERTIES
 
-```lisp
-(defconstant vk_access_2_color_attachment_read_bit_khr 128)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_PROPERTIES 1000094000)
 ```
 
-## VK_ACCESS_2_COLOR_ATTACHMENT_WRITE_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_BIND\_BUFFER\_MEMORY\_INFO
 
-```lisp
-(defconstant vk_access_2_color_attachment_write_bit 256)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO 1000157000)
 ```
 
-## VK_ACCESS_2_COLOR_ATTACHMENT_WRITE_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_BIND\_IMAGE\_MEMORY\_INFO
 
-```lisp
-(defconstant vk_access_2_color_attachment_write_bit_khr 256)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO 1000157001)
 ```
 
-## VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_READ_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_16BIT\_STORAGE\_FEATURES
 
-```lisp
-(defconstant vk_access_2_depth_stencil_attachment_read_bit 512)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES 1000083000)
 ```
 
-## VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_READ_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_MEMORY\_DEDICATED\_REQUIREMENTS
 
-```lisp
-(defconstant vk_access_2_depth_stencil_attachment_read_bit_khr 512)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS 1000127000)
 ```
 
-## VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_MEMORY\_DEDICATED\_ALLOCATE\_INFO
 
-```lisp
-(defconstant vk_access_2_depth_stencil_attachment_write_bit 1024)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO 1000127001)
 ```
 
-## VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_MEMORY\_ALLOCATE\_FLAGS\_INFO
 
-```lisp
-(defconstant vk_access_2_depth_stencil_attachment_write_bit_khr 1024)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO 1000060000)
 ```
 
-## VK_ACCESS_2_TRANSFER_READ_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_DEVICE\_GROUP\_RENDER\_PASS\_BEGIN\_INFO
 
-```lisp
-(defconstant vk_access_2_transfer_read_bit 2048)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO 1000060003)
 ```
 
-## VK_ACCESS_2_TRANSFER_READ_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_DEVICE\_GROUP\_COMMAND\_BUFFER\_BEGIN\_INFO
 
-```lisp
-(defconstant vk_access_2_transfer_read_bit_khr 2048)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO 1000060004)
 ```
 
-## VK_ACCESS_2_TRANSFER_WRITE_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_DEVICE\_GROUP\_SUBMIT\_INFO
 
-```lisp
-(defconstant vk_access_2_transfer_write_bit 4096)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO 1000060005)
 ```
 
-## VK_ACCESS_2_TRANSFER_WRITE_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_DEVICE\_GROUP\_BIND\_SPARSE\_INFO
 
-```lisp
-(defconstant vk_access_2_transfer_write_bit_khr 4096)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO 1000060006)
 ```
 
-## VK_ACCESS_2_HOST_READ_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_BIND\_BUFFER\_MEMORY\_DEVICE\_GROUP\_INFO
 
-```lisp
-(defconstant vk_access_2_host_read_bit 8192)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO 1000060013)
 ```
 
-## VK_ACCESS_2_HOST_READ_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_BIND\_IMAGE\_MEMORY\_DEVICE\_GROUP\_INFO
 
-```lisp
-(defconstant vk_access_2_host_read_bit_khr 8192)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO 1000060014)
 ```
 
-## VK_ACCESS_2_HOST_WRITE_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_GROUP\_PROPERTIES
 
-```lisp
-(defconstant vk_access_2_host_write_bit 16384)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES 1000070000)
 ```
 
-## VK_ACCESS_2_HOST_WRITE_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_DEVICE\_GROUP\_DEVICE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_access_2_host_write_bit_khr 16384)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO 1000070001)
 ```
 
-## VK_ACCESS_2_MEMORY_READ_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_BUFFER\_MEMORY\_REQUIREMENTS\_INFO\_2
 
-```lisp
-(defconstant vk_access_2_memory_read_bit 32768)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2 1000146000)
 ```
 
-## VK_ACCESS_2_MEMORY_READ_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_MEMORY\_REQUIREMENTS\_INFO\_2
 
-```lisp
-(defconstant vk_access_2_memory_read_bit_khr 32768)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2 1000146001)
 ```
 
-## VK_ACCESS_2_MEMORY_WRITE_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_SPARSE\_MEMORY\_REQUIREMENTS\_INFO\_2
 
-```lisp
-(defconstant vk_access_2_memory_write_bit 65536)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2 1000146002)
 ```
 
-## VK_ACCESS_2_MEMORY_WRITE_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_MEMORY\_REQUIREMENTS\_2
 
-```lisp
-(defconstant vk_access_2_memory_write_bit_khr 65536)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2 1000146003)
 ```
 
-## VK_ACCESS_2_SHADER_SAMPLED_READ_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_SPARSE\_IMAGE\_MEMORY\_REQUIREMENTS\_2
 
-```lisp
-(defconstant vk_access_2_shader_sampled_read_bit 4294967296)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2 1000146004)
 ```
 
-## VK_ACCESS_2_SHADER_SAMPLED_READ_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_FEATURES\_2
 
-```lisp
-(defconstant vk_access_2_shader_sampled_read_bit_khr 4294967296)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2 1000059000)
 ```
 
-## VK_ACCESS_2_SHADER_STORAGE_READ_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_PROPERTIES\_2
 
-```lisp
-(defconstant vk_access_2_shader_storage_read_bit 8589934592)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2 1000059001)
 ```
 
-## VK_ACCESS_2_SHADER_STORAGE_READ_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_FORMAT\_PROPERTIES\_2
 
-```lisp
-(defconstant vk_access_2_shader_storage_read_bit_khr 8589934592)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2 1000059002)
 ```
 
-## VK_ACCESS_2_SHADER_STORAGE_WRITE_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_FORMAT\_PROPERTIES\_2
 
-```lisp
-(defconstant vk_access_2_shader_storage_write_bit 17179869184)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2 1000059003)
 ```
 
-## VK_ACCESS_2_SHADER_STORAGE_WRITE_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_IMAGE\_FORMAT\_INFO\_2
 
-```lisp
-(defconstant vk_access_2_shader_storage_write_bit_khr 17179869184)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2 1000059004)
 ```
 
-## VK_ACCESS_2_VIDEO_DECODE_READ_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_QUEUE\_FAMILY\_PROPERTIES\_2
 
-```lisp
-(defconstant vk_access_2_video_decode_read_bit_khr 34359738368)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2 1000059005)
 ```
 
-## VK_ACCESS_2_VIDEO_DECODE_WRITE_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_MEMORY\_PROPERTIES\_2
 
-```lisp
-(defconstant vk_access_2_video_decode_write_bit_khr 68719476736)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2 1000059006)
 ```
 
-## VK_ACCESS_2_VIDEO_ENCODE_READ_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_SPARSE\_IMAGE\_FORMAT\_PROPERTIES\_2
 
-```lisp
-(defconstant vk_access_2_video_encode_read_bit_khr 137438953472)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2 1000059007)
 ```
 
-## VK_ACCESS_2_VIDEO_ENCODE_WRITE_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SPARSE\_IMAGE\_FORMAT\_INFO\_2
 
-```lisp
-(defconstant vk_access_2_video_encode_write_bit_khr 274877906944)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2 1000059008)
 ```
 
-## VK_ACCESS_2_TRANSFORM_FEEDBACK_WRITE_BIT_EXT
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_POINT\_CLIPPING\_PROPERTIES
 
-```lisp
-(defconstant vk_access_2_transform_feedback_write_bit_ext 33554432)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES 1000117000)
 ```
 
-## VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT
+#### Variable: VK\_STRUCTURE\_TYPE\_RENDER\_PASS\_INPUT\_ATTACHMENT\_ASPECT\_CREATE\_INFO
 
-```lisp
-(defconstant vk_access_2_transform_feedback_counter_read_bit_ext 67108864)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO 1000117001)
 ```
 
-## VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_WRITE_BIT_EXT
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_VIEW\_USAGE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_access_2_transform_feedback_counter_write_bit_ext 134217728)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO 1000117002)
 ```
 
-## VK_ACCESS_2_CONDITIONAL_RENDERING_READ_BIT_EXT
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_TESSELLATION\_DOMAIN\_ORIGIN\_STATE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_access_2_conditional_rendering_read_bit_ext 1048576)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO 1000117003)
 ```
 
-## VK_ACCESS_2_COMMAND_PREPROCESS_READ_BIT_NV
+#### Variable: VK\_STRUCTURE\_TYPE\_RENDER\_PASS\_MULTIVIEW\_CREATE\_INFO
 
-```lisp
-(defconstant vk_access_2_command_preprocess_read_bit_nv 131072)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO 1000053000)
 ```
 
-## VK_ACCESS_2_COMMAND_PREPROCESS_WRITE_BIT_NV
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_MULTIVIEW\_FEATURES
 
-```lisp
-(defconstant vk_access_2_command_preprocess_write_bit_nv 262144)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES 1000053001)
 ```
 
-## VK_ACCESS_2_FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_MULTIVIEW\_PROPERTIES
 
-```lisp
-(defconstant vk_access_2_fragment_shading_rate_attachment_read_bit_khr 8388608)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES 1000053002)
 ```
 
-## VK_ACCESS_2_SHADING_RATE_IMAGE_READ_BIT_NV
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_VARIABLE\_POINTERS\_FEATURES
 
-```lisp
-(defconstant vk_access_2_shading_rate_image_read_bit_nv 8388608)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES 1000120000)
 ```
 
-## VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PROTECTED\_SUBMIT\_INFO
 
-```lisp
-(defconstant vk_access_2_acceleration_structure_read_bit_khr 2097152)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PROTECTED_SUBMIT_INFO 1000145000)
 ```
 
-## VK_ACCESS_2_ACCELERATION_STRUCTURE_WRITE_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_PROTECTED\_MEMORY\_FEATURES
 
-```lisp
-(defconstant vk_access_2_acceleration_structure_write_bit_khr 4194304)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES 1000145001)
 ```
 
-## VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_NV
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_PROTECTED\_MEMORY\_PROPERTIES
 
-```lisp
-(defconstant vk_access_2_acceleration_structure_read_bit_nv 2097152)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_PROPERTIES 1000145002)
 ```
 
-## VK_ACCESS_2_ACCELERATION_STRUCTURE_WRITE_BIT_NV
+#### Variable: VK\_STRUCTURE\_TYPE\_DEVICE\_QUEUE\_INFO\_2
 
-```lisp
-(defconstant vk_access_2_acceleration_structure_write_bit_nv 4194304)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEVICE_QUEUE_INFO_2 1000145003)
 ```
 
-## VK_ACCESS_2_FRAGMENT_DENSITY_MAP_READ_BIT_EXT
+#### Variable: VK\_STRUCTURE\_TYPE\_SAMPLER\_YCBCR\_CONVERSION\_CREATE\_INFO
 
-```lisp
-(defconstant vk_access_2_fragment_density_map_read_bit_ext 16777216)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO 1000156000)
 ```
 
-## VK_ACCESS_2_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT
+#### Variable: VK\_STRUCTURE\_TYPE\_SAMPLER\_YCBCR\_CONVERSION\_INFO
 
-```lisp
-(defconstant vk_access_2_color_attachment_read_noncoherent_bit_ext 524288)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO 1000156001)
 ```
 
-## VK_ACCESS_2_INVOCATION_MASK_READ_BIT_HUAWEI
+#### Variable: VK\_STRUCTURE\_TYPE\_BIND\_IMAGE\_PLANE\_MEMORY\_INFO
 
-```lisp
-(defconstant vk_access_2_invocation_mask_read_bit_huawei 549755813888)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO 1000156002)
 ```
 
-## VK_ACCESS_2_SHADER_BINDING_TABLE_READ_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_PLANE\_MEMORY\_REQUIREMENTS\_INFO
 
-```lisp
-(defconstant vk_access_2_shader_binding_table_read_bit_khr 1099511627776)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO 1000156003)
 ```
 
-## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SAMPLER\_YCBCR\_CONVERSION\_FEATURES
 
-```lisp
-(defconstant vk_format_feature_2_sampled_image_bit 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES 1000156004)
 ```
 
-## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_SAMPLER\_YCBCR\_CONVERSION\_IMAGE\_FORMAT\_PROPERTIES
 
-```lisp
-(defconstant vk_format_feature_2_sampled_image_bit_khr 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES 1000156005)
 ```
 
-## VK_FORMAT_FEATURE_2_STORAGE_IMAGE_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_DESCRIPTOR\_UPDATE\_TEMPLATE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_format_feature_2_storage_image_bit 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO 1000085000)
 ```
 
-## VK_FORMAT_FEATURE_2_STORAGE_IMAGE_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_EXTERNAL\_IMAGE\_FORMAT\_INFO
 
-```lisp
-(defconstant vk_format_feature_2_storage_image_bit_khr 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO 1000071000)
 ```
 
-## VK_FORMAT_FEATURE_2_STORAGE_IMAGE_ATOMIC_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_EXTERNAL\_IMAGE\_FORMAT\_PROPERTIES
 
-```lisp
-(defconstant vk_format_feature_2_storage_image_atomic_bit 4)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES 1000071001)
 ```
 
-## VK_FORMAT_FEATURE_2_STORAGE_IMAGE_ATOMIC_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_EXTERNAL\_BUFFER\_INFO
 
-```lisp
-(defconstant vk_format_feature_2_storage_image_atomic_bit_khr 4)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO 1000071002)
 ```
 
-## VK_FORMAT_FEATURE_2_UNIFORM_TEXEL_BUFFER_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_EXTERNAL\_BUFFER\_PROPERTIES
 
-```lisp
-(defconstant vk_format_feature_2_uniform_texel_buffer_bit 8)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES 1000071003)
 ```
 
-## VK_FORMAT_FEATURE_2_UNIFORM_TEXEL_BUFFER_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_ID\_PROPERTIES
 
-```lisp
-(defconstant vk_format_feature_2_uniform_texel_buffer_bit_khr 8)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES 1000071004)
 ```
 
-## VK_FORMAT_FEATURE_2_STORAGE_TEXEL_BUFFER_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_EXTERNAL\_MEMORY\_BUFFER\_CREATE\_INFO
 
-```lisp
-(defconstant vk_format_feature_2_storage_texel_buffer_bit 16)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO 1000072000)
 ```
 
-## VK_FORMAT_FEATURE_2_STORAGE_TEXEL_BUFFER_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_EXTERNAL\_MEMORY\_IMAGE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_format_feature_2_storage_texel_buffer_bit_khr 16)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO 1000072001)
 ```
 
-## VK_FORMAT_FEATURE_2_STORAGE_TEXEL_BUFFER_ATOMIC_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_EXPORT\_MEMORY\_ALLOCATE\_INFO
 
-```lisp
-(defconstant vk_format_feature_2_storage_texel_buffer_atomic_bit 32)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO 1000072002)
 ```
 
-## VK_FORMAT_FEATURE_2_STORAGE_TEXEL_BUFFER_ATOMIC_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_EXTERNAL\_FENCE\_INFO
 
-```lisp
-(defconstant vk_format_feature_2_storage_texel_buffer_atomic_bit_khr 32)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO 1000112000)
 ```
 
-## VK_FORMAT_FEATURE_2_VERTEX_BUFFER_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_EXTERNAL\_FENCE\_PROPERTIES
 
-```lisp
-(defconstant vk_format_feature_2_vertex_buffer_bit 64)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES 1000112001)
 ```
 
-## VK_FORMAT_FEATURE_2_VERTEX_BUFFER_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_EXPORT\_FENCE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_format_feature_2_vertex_buffer_bit_khr 64)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO 1000113000)
 ```
 
-## VK_FORMAT_FEATURE_2_COLOR_ATTACHMENT_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_EXPORT\_SEMAPHORE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_format_feature_2_color_attachment_bit 128)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO 1000077000)
 ```
 
-## VK_FORMAT_FEATURE_2_COLOR_ATTACHMENT_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_EXTERNAL\_SEMAPHORE\_INFO
 
-```lisp
-(defconstant vk_format_feature_2_color_attachment_bit_khr 128)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO 1000076000)
 ```
 
-## VK_FORMAT_FEATURE_2_COLOR_ATTACHMENT_BLEND_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_EXTERNAL\_SEMAPHORE\_PROPERTIES
 
-```lisp
-(defconstant vk_format_feature_2_color_attachment_blend_bit 256)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES 1000076001)
 ```
 
-## VK_FORMAT_FEATURE_2_COLOR_ATTACHMENT_BLEND_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_MAINTENANCE\_3\_PROPERTIES
 
-```lisp
-(defconstant vk_format_feature_2_color_attachment_blend_bit_khr 256)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES 1000168000)
 ```
 
-## VK_FORMAT_FEATURE_2_DEPTH_STENCIL_ATTACHMENT_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_DESCRIPTOR\_SET\_LAYOUT\_SUPPORT
 
-```lisp
-(defconstant vk_format_feature_2_depth_stencil_attachment_bit 512)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT 1000168001)
 ```
 
-## VK_FORMAT_FEATURE_2_DEPTH_STENCIL_ATTACHMENT_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SHADER\_DRAW\_PARAMETERS\_FEATURES
 
-```lisp
-(defconstant vk_format_feature_2_depth_stencil_attachment_bit_khr 512)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES 1000063000)
 ```
 
-## VK_FORMAT_FEATURE_2_BLIT_SRC_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_VULKAN\_1\_1\_FEATURES
 
-```lisp
-(defconstant vk_format_feature_2_blit_src_bit 1024)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_FEATURES 49)
 ```
 
-## VK_FORMAT_FEATURE_2_BLIT_SRC_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_VULKAN\_1\_1\_PROPERTIES
 
-```lisp
-(defconstant vk_format_feature_2_blit_src_bit_khr 1024)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_PROPERTIES 50)
 ```
 
-## VK_FORMAT_FEATURE_2_BLIT_DST_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_VULKAN\_1\_2\_FEATURES
 
-```lisp
-(defconstant vk_format_feature_2_blit_dst_bit 2048)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_FEATURES 51)
 ```
 
-## VK_FORMAT_FEATURE_2_BLIT_DST_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_VULKAN\_1\_2\_PROPERTIES
 
-```lisp
-(defconstant vk_format_feature_2_blit_dst_bit_khr 2048)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_PROPERTIES 52)
 ```
 
-## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_FILTER_LINEAR_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_FORMAT\_LIST\_CREATE\_INFO
 
-```lisp
-(defconstant vk_format_feature_2_sampled_image_filter_linear_bit 4096)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO 1000147000)
 ```
 
-## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_FILTER_LINEAR_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_ATTACHMENT\_DESCRIPTION\_2
 
-```lisp
-(defconstant vk_format_feature_2_sampled_image_filter_linear_bit_khr 4096)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2 1000109000)
 ```
 
-## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_FILTER_CUBIC_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_ATTACHMENT\_REFERENCE\_2
 
-```lisp
-(defconstant vk_format_feature_2_sampled_image_filter_cubic_bit 8192)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2 1000109001)
 ```
 
-## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT
+#### Variable: VK\_STRUCTURE\_TYPE\_SUBPASS\_DESCRIPTION\_2
 
-```lisp
-(defconstant vk_format_feature_2_sampled_image_filter_cubic_bit_ext 8192)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_2 1000109002)
 ```
 
-## VK_FORMAT_FEATURE_2_TRANSFER_SRC_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_SUBPASS\_DEPENDENCY\_2
 
-```lisp
-(defconstant vk_format_feature_2_transfer_src_bit 16384)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2 1000109003)
 ```
 
-## VK_FORMAT_FEATURE_2_TRANSFER_SRC_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_RENDER\_PASS\_CREATE\_INFO\_2
 
-```lisp
-(defconstant vk_format_feature_2_transfer_src_bit_khr 16384)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2 1000109004)
 ```
 
-## VK_FORMAT_FEATURE_2_TRANSFER_DST_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_SUBPASS\_BEGIN\_INFO
 
-```lisp
-(defconstant vk_format_feature_2_transfer_dst_bit 32768)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO 1000109005)
 ```
 
-## VK_FORMAT_FEATURE_2_TRANSFER_DST_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_SUBPASS\_END\_INFO
 
-```lisp
-(defconstant vk_format_feature_2_transfer_dst_bit_khr 32768)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SUBPASS_END_INFO 1000109006)
 ```
 
-## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_FILTER_MINMAX_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_8BIT\_STORAGE\_FEATURES
 
-```lisp
-(defconstant vk_format_feature_2_sampled_image_filter_minmax_bit 65536)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES 1000177000)
 ```
 
-## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_FILTER_MINMAX_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_DRIVER\_PROPERTIES
 
-```lisp
-(defconstant vk_format_feature_2_sampled_image_filter_minmax_bit_khr 65536)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES 1000196000)
 ```
 
-## VK_FORMAT_FEATURE_2_MIDPOINT_CHROMA_SAMPLES_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SHADER\_ATOMIC\_INT64\_FEATURES
 
-```lisp
-(defconstant vk_format_feature_2_midpoint_chroma_samples_bit 131072)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES 1000180000)
 ```
 
-## VK_FORMAT_FEATURE_2_MIDPOINT_CHROMA_SAMPLES_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SHADER\_FLOAT16\_INT8\_FEATURES
 
-```lisp
-(defconstant vk_format_feature_2_midpoint_chroma_samples_bit_khr 131072)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES 1000082000)
 ```
 
-## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_FLOAT\_CONTROLS\_PROPERTIES
 
-```lisp
-(defconstant vk_format_feature_2_sampled_image_ycbcr_conversion_linear_filter_bit 262144)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES 1000197000)
 ```
 
-## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_DESCRIPTOR\_SET\_LAYOUT\_BINDING\_FLAGS\_CREATE\_INFO
 
-```lisp
-(defconstant vk_format_feature_2_sampled_image_ycbcr_conversion_linear_filter_bit_khr 262144)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO 1000161000)
 ```
 
-## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_DESCRIPTOR\_INDEXING\_FEATURES
 
-```lisp
-(defconstant vk_format_feature_2_sampled_image_ycbcr_conversion_separate_reconstruction_filter_bit 524288)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES 1000161001)
 ```
 
-## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_DESCRIPTOR\_INDEXING\_PROPERTIES
 
-```lisp
-(defconstant vk_format_feature_2_sampled_image_ycbcr_conversion_separate_reconstruction_filter_bit_khr 524288)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES 1000161002)
 ```
 
-## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_DESCRIPTOR\_SET\_VARIABLE\_DESCRIPTOR\_COUNT\_ALLOCATE\_INFO
 
-```lisp
-(defconstant vk_format_feature_2_sampled_image_ycbcr_conversion_chroma_reconstruction_explicit_bit 1048576)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO 1000161003)
 ```
 
-## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_DESCRIPTOR\_SET\_VARIABLE\_DESCRIPTOR\_COUNT\_LAYOUT\_SUPPORT
 
-```lisp
-(defconstant vk_format_feature_2_sampled_image_ycbcr_conversion_chroma_reconstruction_explicit_bit_khr 1048576)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT 1000161004)
 ```
 
-## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_DEPTH\_STENCIL\_RESOLVE\_PROPERTIES
 
-```lisp
-(defconstant vk_format_feature_2_sampled_image_ycbcr_conversion_chroma_reconstruction_explicit_forceable_bit 2097152)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES 1000199000)
 ```
 
-## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_SUBPASS\_DESCRIPTION\_DEPTH\_STENCIL\_RESOLVE
 
-```lisp
-(defconstant vk_format_feature_2_sampled_image_ycbcr_conversion_chroma_reconstruction_explicit_forceable_bit_khr 2097152)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE 1000199001)
 ```
 
-## VK_FORMAT_FEATURE_2_DISJOINT_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SCALAR\_BLOCK\_LAYOUT\_FEATURES
 
-```lisp
-(defconstant vk_format_feature_2_disjoint_bit 4194304)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES 1000221000)
 ```
 
-## VK_FORMAT_FEATURE_2_DISJOINT_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_STENCIL\_USAGE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_format_feature_2_disjoint_bit_khr 4194304)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO 1000246000)
 ```
 
-## VK_FORMAT_FEATURE_2_COSITED_CHROMA_SAMPLES_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SAMPLER\_FILTER\_MINMAX\_PROPERTIES
 
-```lisp
-(defconstant vk_format_feature_2_cosited_chroma_samples_bit 8388608)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES 1000130000)
 ```
 
-## VK_FORMAT_FEATURE_2_COSITED_CHROMA_SAMPLES_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_SAMPLER\_REDUCTION\_MODE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_format_feature_2_cosited_chroma_samples_bit_khr 8388608)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO 1000130001)
 ```
 
-## VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_VULKAN\_MEMORY\_MODEL\_FEATURES
 
-```lisp
-(defconstant vk_format_feature_2_storage_read_without_format_bit 2147483648)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES 1000211000)
 ```
 
-## VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_IMAGELESS\_FRAMEBUFFER\_FEATURES
 
-```lisp
-(defconstant vk_format_feature_2_storage_read_without_format_bit_khr 2147483648)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES 1000108000)
 ```
 
-## VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_FRAMEBUFFER\_ATTACHMENTS\_CREATE\_INFO
 
-```lisp
-(defconstant vk_format_feature_2_storage_write_without_format_bit 4294967296)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO 1000108001)
 ```
 
-## VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_FRAMEBUFFER\_ATTACHMENT\_IMAGE\_INFO
 
-```lisp
-(defconstant vk_format_feature_2_storage_write_without_format_bit_khr 4294967296)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO 1000108002)
 ```
 
-## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_DEPTH_COMPARISON_BIT
+#### Variable: VK\_STRUCTURE\_TYPE\_RENDER\_PASS\_ATTACHMENT\_BEGIN\_INFO
 
-```lisp
-(defconstant vk_format_feature_2_sampled_image_depth_comparison_bit 8589934592)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO 1000108003)
 ```
 
-## VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_DEPTH_COMPARISON_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_UNIFORM\_BUFFER\_STANDARD\_LAYOUT\_FEATURES
 
-```lisp
-(defconstant vk_format_feature_2_sampled_image_depth_comparison_bit_khr 8589934592)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES 1000253000)
 ```
 
-## VK_FORMAT_FEATURE_2_VIDEO_DECODE_OUTPUT_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SHADER\_SUBGROUP\_EXTENDED\_TYPES\_FEATURES
 
-```lisp
-(defconstant vk_format_feature_2_video_decode_output_bit_khr 33554432)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES 1000175000)
 ```
 
-## VK_FORMAT_FEATURE_2_VIDEO_DECODE_DPB_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SEPARATE\_DEPTH\_STENCIL\_LAYOUTS\_FEATURES
 
-```lisp
-(defconstant vk_format_feature_2_video_decode_dpb_bit_khr 67108864)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES 1000241000)
 ```
 
-## VK_FORMAT_FEATURE_2_ACCELERATION_STRUCTURE_VERTEX_BUFFER_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_ATTACHMENT\_REFERENCE\_STENCIL\_LAYOUT
 
-```lisp
-(defconstant vk_format_feature_2_acceleration_structure_vertex_buffer_bit_khr 536870912)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT 1000241001)
 ```
 
-## VK_FORMAT_FEATURE_2_FRAGMENT_DENSITY_MAP_BIT_EXT
+#### Variable: VK\_STRUCTURE\_TYPE\_ATTACHMENT\_DESCRIPTION\_STENCIL\_LAYOUT
 
-```lisp
-(defconstant vk_format_feature_2_fragment_density_map_bit_ext 16777216)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_STENCIL_LAYOUT 1000241002)
 ```
 
-## VK_FORMAT_FEATURE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_HOST\_QUERY\_RESET\_FEATURES
 
-```lisp
-(defconstant vk_format_feature_2_fragment_shading_rate_attachment_bit_khr 1073741824)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES 1000261000)
 ```
 
-## VK_FORMAT_FEATURE_2_VIDEO_ENCODE_INPUT_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_TIMELINE\_SEMAPHORE\_FEATURES
 
-```lisp
-(defconstant vk_format_feature_2_video_encode_input_bit_khr 134217728)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES 1000207000)
 ```
 
-## VK_FORMAT_FEATURE_2_VIDEO_ENCODE_DPB_BIT_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_TIMELINE\_SEMAPHORE\_PROPERTIES
 
-```lisp
-(defconstant vk_format_feature_2_video_encode_dpb_bit_khr 268435456)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES 1000207001)
 ```
 
-## VK_FORMAT_FEATURE_2_LINEAR_COLOR_ATTACHMENT_BIT_NV
+#### Variable: VK\_STRUCTURE\_TYPE\_SEMAPHORE\_TYPE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_format_feature_2_linear_color_attachment_bit_nv 274877906944)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO 1000207002)
 ```
 
-## VK_KHR_surface
+#### Variable: VK\_STRUCTURE\_TYPE\_TIMELINE\_SEMAPHORE\_SUBMIT\_INFO
 
-```lisp
-(defconstant vk_khr_surface 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO 1000207003)
 ```
 
-## VK_KHR_SURFACE_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_SEMAPHORE\_WAIT\_INFO
 
-```lisp
-(defconstant vk_khr_surface_spec_version 25)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO 1000207004)
 ```
 
-## VK_KHR_SURFACE_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_SEMAPHORE\_SIGNAL\_INFO
 
-```lisp
-(defconstant vk_khr_surface_extension_name VK_KHR_surface)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO 1000207005)
 ```
 
-## VK_KHR_swapchain
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_BUFFER\_DEVICE\_ADDRESS\_FEATURES
 
-```lisp
-(defconstant vk_khr_swapchain 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES 1000257000)
 ```
 
-## VK_KHR_SWAPCHAIN_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_BUFFER\_DEVICE\_ADDRESS\_INFO
 
-```lisp
-(defconstant vk_khr_swapchain_spec_version 70)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO 1000244001)
 ```
 
-## VK_KHR_SWAPCHAIN_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_BUFFER\_OPAQUE\_CAPTURE\_ADDRESS\_CREATE\_INFO
 
-```lisp
-(defconstant vk_khr_swapchain_extension_name VK_KHR_swapchain)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO 1000257002)
 ```
 
-## VK_KHR_display
+#### Variable: VK\_STRUCTURE\_TYPE\_MEMORY\_OPAQUE\_CAPTURE\_ADDRESS\_ALLOCATE\_INFO
 
-```lisp
-(defconstant vk_khr_display 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO 1000257003)
 ```
 
-## VK_KHR_DISPLAY_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_DEVICE\_MEMORY\_OPAQUE\_CAPTURE\_ADDRESS\_INFO
 
-```lisp
-(defconstant vk_khr_display_spec_version 23)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO 1000257004)
 ```
 
-## VK_KHR_DISPLAY_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_VULKAN\_1\_3\_FEATURES
 
-```lisp
-(defconstant vk_khr_display_extension_name VK_KHR_display)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_3_FEATURES 53)
 ```
 
-## VK_KHR_display_swapchain
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_VULKAN\_1\_3\_PROPERTIES
 
-```lisp
-(defconstant vk_khr_display_swapchain 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_3_PROPERTIES 54)
 ```
 
-## VK_KHR_DISPLAY_SWAPCHAIN_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_CREATION\_FEEDBACK\_CREATE\_INFO
 
-```lisp
-(defconstant vk_khr_display_swapchain_spec_version 10)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO 1000192000)
 ```
 
-## VK_KHR_DISPLAY_SWAPCHAIN_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SHADER\_TERMINATE\_INVOCATION\_FEATURES
 
-```lisp
-(defconstant vk_khr_display_swapchain_extension_name VK_KHR_display_swapchain)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES 1000215000)
 ```
 
-## VK_KHR_sampler_mirror_clamp_to_edge
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_TOOL\_PROPERTIES
 
-```lisp
-(defconstant vk_khr_sampler_mirror_clamp_to_edge 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES 1000245000)
 ```
 
-## VK_KHR_SAMPLER_MIRROR_CLAMP_TO_EDGE_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SHADER\_DEMOTE\_TO\_HELPER\_INVOCATION\_FEATURES
 
-```lisp
-(defconstant vk_khr_sampler_mirror_clamp_to_edge_spec_version 3)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES 1000276000)
 ```
 
-## VK_KHR_SAMPLER_MIRROR_CLAMP_TO_EDGE_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_PRIVATE\_DATA\_FEATURES
 
-```lisp
-(defconstant vk_khr_sampler_mirror_clamp_to_edge_extension_name VK_KHR_sampler_mirror_clamp_to_edge)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES 1000295000)
 ```
 
-## VK_KHR_dynamic_rendering
+#### Variable: VK\_STRUCTURE\_TYPE\_DEVICE\_PRIVATE\_DATA\_CREATE\_INFO
 
-```lisp
-(defconstant vk_khr_dynamic_rendering 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO 1000295001)
 ```
 
-## VK_KHR_DYNAMIC_RENDERING_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PRIVATE\_DATA\_SLOT\_CREATE\_INFO
 
-```lisp
-(defconstant vk_khr_dynamic_rendering_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PRIVATE_DATA_SLOT_CREATE_INFO 1000295002)
 ```
 
-## VK_KHR_DYNAMIC_RENDERING_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_PIPELINE\_CREATION\_CACHE\_CONTROL\_FEATURES
 
-```lisp
-(defconstant vk_khr_dynamic_rendering_extension_name VK_KHR_dynamic_rendering)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES 1000297000)
 ```
 
-## VK_KHR_multiview
+#### Variable: VK\_STRUCTURE\_TYPE\_MEMORY\_BARRIER\_2
 
-```lisp
-(defconstant vk_khr_multiview 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_MEMORY_BARRIER_2 1000314000)
 ```
 
-## VK_KHR_MULTIVIEW_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_BUFFER\_MEMORY\_BARRIER\_2
 
-```lisp
-(defconstant vk_khr_multiview_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2 1000314001)
 ```
 
-## VK_KHR_MULTIVIEW_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_MEMORY\_BARRIER\_2
 
-```lisp
-(defconstant vk_khr_multiview_extension_name VK_KHR_multiview)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER_2 1000314002)
 ```
 
-## VK_KHR_get_physical_device_properties2
+#### Variable: VK\_STRUCTURE\_TYPE\_DEPENDENCY\_INFO
 
-```lisp
-(defconstant vk_khr_get_physical_device_properties2 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEPENDENCY_INFO 1000314003)
 ```
 
-## VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_SUBMIT\_INFO\_2
 
-```lisp
-(defconstant vk_khr_get_physical_device_properties_2_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SUBMIT_INFO_2 1000314004)
 ```
 
-## VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_SEMAPHORE\_SUBMIT\_INFO
 
-```lisp
-(defconstant vk_khr_get_physical_device_properties_2_extension_name VK_KHR_get_physical_device_properties2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO 1000314005)
 ```
 
-## VK_KHR_device_group
+#### Variable: VK\_STRUCTURE\_TYPE\_COMMAND\_BUFFER\_SUBMIT\_INFO
 
-```lisp
-(defconstant vk_khr_device_group 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO 1000314006)
 ```
 
-## VK_KHR_DEVICE_GROUP_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SYNCHRONIZATION\_2\_FEATURES
 
-```lisp
-(defconstant vk_khr_device_group_spec_version 4)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES 1000314007)
 ```
 
-## VK_KHR_DEVICE_GROUP_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_ZERO\_INITIALIZE\_WORKGROUP\_MEMORY\_FEATURES
 
-```lisp
-(defconstant vk_khr_device_group_extension_name VK_KHR_device_group)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES 1000325000)
 ```
 
-## VK_KHR_shader_draw_parameters
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_IMAGE\_ROBUSTNESS\_FEATURES
 
-```lisp
-(defconstant vk_khr_shader_draw_parameters 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES 1000335000)
 ```
 
-## VK_KHR_SHADER_DRAW_PARAMETERS_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_COPY\_BUFFER\_INFO\_2
 
-```lisp
-(defconstant vk_khr_shader_draw_parameters_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_COPY_BUFFER_INFO_2 1000337000)
 ```
 
-## VK_KHR_SHADER_DRAW_PARAMETERS_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_COPY\_IMAGE\_INFO\_2
 
-```lisp
-(defconstant vk_khr_shader_draw_parameters_extension_name VK_KHR_shader_draw_parameters)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_COPY_IMAGE_INFO_2 1000337001)
 ```
 
-## VK_KHR_maintenance1
+#### Variable: VK\_STRUCTURE\_TYPE\_COPY\_BUFFER\_TO\_IMAGE\_INFO\_2
 
-```lisp
-(defconstant vk_khr_maintenance1 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_COPY_BUFFER_TO_IMAGE_INFO_2 1000337002)
 ```
 
-## VK_KHR_MAINTENANCE_1_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_COPY\_IMAGE\_TO\_BUFFER\_INFO\_2
 
-```lisp
-(defconstant vk_khr_maintenance_1_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_COPY_IMAGE_TO_BUFFER_INFO_2 1000337003)
 ```
 
-## VK_KHR_MAINTENANCE_1_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_BLIT\_IMAGE\_INFO\_2
 
-```lisp
-(defconstant vk_khr_maintenance_1_extension_name VK_KHR_maintenance1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BLIT_IMAGE_INFO_2 1000337004)
 ```
 
-## VK_KHR_MAINTENANCE1_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_RESOLVE\_IMAGE\_INFO\_2
 
-```lisp
-(defconstant vk_khr_maintenance1_spec_version VK_KHR_MAINTENANCE_1_SPEC_VERSION)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_RESOLVE_IMAGE_INFO_2 1000337005)
 ```
 
-## VK_KHR_MAINTENANCE1_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_BUFFER\_COPY\_2
 
-```lisp
-(defconstant vk_khr_maintenance1_extension_name VK_KHR_MAINTENANCE_1_EXTENSION_NAME)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BUFFER_COPY_2 1000337006)
 ```
 
-## VK_KHR_device_group_creation
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_COPY\_2
 
-```lisp
-(defconstant vk_khr_device_group_creation 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_COPY_2 1000337007)
 ```
 
-## VK_KHR_DEVICE_GROUP_CREATION_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_BLIT\_2
 
-```lisp
-(defconstant vk_khr_device_group_creation_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_BLIT_2 1000337008)
 ```
 
-## VK_KHR_DEVICE_GROUP_CREATION_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_BUFFER\_IMAGE\_COPY\_2
 
-```lisp
-(defconstant vk_khr_device_group_creation_extension_name VK_KHR_device_group_creation)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2 1000337009)
 ```
 
-## VK_MAX_DEVICE_GROUP_SIZE_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_RESOLVE\_2
 
-```lisp
-(defconstant vk_max_device_group_size_khr VK_MAX_DEVICE_GROUP_SIZE)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_RESOLVE_2 1000337010)
 ```
 
-## VK_KHR_external_memory_capabilities
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SUBGROUP\_SIZE\_CONTROL\_PROPERTIES
 
-```lisp
-(defconstant vk_khr_external_memory_capabilities 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES 1000225000)
 ```
 
-## VK_KHR_EXTERNAL_MEMORY_CAPABILITIES_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_SHADER\_STAGE\_REQUIRED\_SUBGROUP\_SIZE\_CREATE\_INFO
 
-```lisp
-(defconstant vk_khr_external_memory_capabilities_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO 1000225001)
 ```
 
-## VK_KHR_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SUBGROUP\_SIZE\_CONTROL\_FEATURES
 
-```lisp
-(defconstant vk_khr_external_memory_capabilities_extension_name VK_KHR_external_memory_capabilities)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES 1000225002)
 ```
 
-## VK_LUID_SIZE_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_INLINE\_UNIFORM\_BLOCK\_FEATURES
 
-```lisp
-(defconstant vk_luid_size_khr VK_LUID_SIZE)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES 1000138000)
 ```
 
-## VK_KHR_external_memory
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_INLINE\_UNIFORM\_BLOCK\_PROPERTIES
 
-```lisp
-(defconstant vk_khr_external_memory 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES 1000138001)
 ```
 
-## VK_KHR_EXTERNAL_MEMORY_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_WRITE\_DESCRIPTOR\_SET\_INLINE\_UNIFORM\_BLOCK
 
-```lisp
-(defconstant vk_khr_external_memory_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK 1000138002)
 ```
 
-## VK_KHR_EXTERNAL_MEMORY_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_DESCRIPTOR\_POOL\_INLINE\_UNIFORM\_BLOCK\_CREATE\_INFO
 
-```lisp
-(defconstant vk_khr_external_memory_extension_name VK_KHR_external_memory)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO 1000138003)
 ```
 
-## VK_QUEUE_FAMILY_EXTERNAL_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_TEXTURE\_COMPRESSION\_ASTC\_HDR\_FEATURES
 
-```lisp
-(defconstant vk_queue_family_external_khr VK_QUEUE_FAMILY_EXTERNAL)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES 1000066000)
 ```
 
-## VK_KHR_external_memory_fd
+#### Variable: VK\_STRUCTURE\_TYPE\_RENDERING\_INFO
 
-```lisp
-(defconstant vk_khr_external_memory_fd 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_RENDERING_INFO 1000044000)
 ```
 
-## VK_KHR_EXTERNAL_MEMORY_FD_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_RENDERING\_ATTACHMENT\_INFO
 
-```lisp
-(defconstant vk_khr_external_memory_fd_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_INFO 1000044001)
 ```
 
-## VK_KHR_EXTERNAL_MEMORY_FD_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_RENDERING\_CREATE\_INFO
 
-```lisp
-(defconstant vk_khr_external_memory_fd_extension_name VK_KHR_external_memory_fd)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_RENDERING_CREATE_INFO 1000044002)
 ```
 
-## VK_KHR_external_semaphore_capabilities
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_DYNAMIC\_RENDERING\_FEATURES
 
-```lisp
-(defconstant vk_khr_external_semaphore_capabilities 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_FEATURES 1000044003)
 ```
 
-## VK_KHR_EXTERNAL_SEMAPHORE_CAPABILITIES_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_COMMAND\_BUFFER\_INHERITANCE\_RENDERING\_INFO
 
-```lisp
-(defconstant vk_khr_external_semaphore_capabilities_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO 1000044004)
 ```
 
-## VK_KHR_EXTERNAL_SEMAPHORE_CAPABILITIES_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SHADER\_INTEGER\_DOT\_PRODUCT\_FEATURES
 
-```lisp
-(defconstant vk_khr_external_semaphore_capabilities_extension_name VK_KHR_external_semaphore_capabilities)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES 1000280000)
 ```
 
-## VK_KHR_external_semaphore
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SHADER\_INTEGER\_DOT\_PRODUCT\_PROPERTIES
 
-```lisp
-(defconstant vk_khr_external_semaphore 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES 1000280001)
 ```
 
-## VK_KHR_EXTERNAL_SEMAPHORE_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_TEXEL\_BUFFER\_ALIGNMENT\_PROPERTIES
 
-```lisp
-(defconstant vk_khr_external_semaphore_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES 1000281001)
 ```
 
-## VK_KHR_EXTERNAL_SEMAPHORE_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_FORMAT\_PROPERTIES\_3
 
-```lisp
-(defconstant vk_khr_external_semaphore_extension_name VK_KHR_external_semaphore)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_3 1000360000)
 ```
 
-## VK_KHR_external_semaphore_fd
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_MAINTENANCE\_4\_FEATURES
 
-```lisp
-(defconstant vk_khr_external_semaphore_fd 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES 1000413000)
 ```
 
-## VK_KHR_EXTERNAL_SEMAPHORE_FD_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_MAINTENANCE\_4\_PROPERTIES
 
-```lisp
-(defconstant vk_khr_external_semaphore_fd_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES 1000413001)
 ```
 
-## VK_KHR_EXTERNAL_SEMAPHORE_FD_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_DEVICE\_BUFFER\_MEMORY\_REQUIREMENTS
 
-```lisp
-(defconstant vk_khr_external_semaphore_fd_extension_name VK_KHR_external_semaphore_fd)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS 1000413002)
 ```
 
-## VK_KHR_push_descriptor
+#### Variable: VK\_STRUCTURE\_TYPE\_DEVICE\_IMAGE\_MEMORY\_REQUIREMENTS
 
-```lisp
-(defconstant vk_khr_push_descriptor 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEVICE_IMAGE_MEMORY_REQUIREMENTS 1000413003)
 ```
 
-## VK_KHR_PUSH_DESCRIPTOR_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_SWAPCHAIN\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_push_descriptor_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR 1000001000)
 ```
 
-## VK_KHR_PUSH_DESCRIPTOR_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PRESENT\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_push_descriptor_extension_name VK_KHR_push_descriptor)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PRESENT_INFO_KHR 1000001001)
 ```
 
-## VK_KHR_shader_float16_int8
+#### Variable: VK\_STRUCTURE\_TYPE\_DEVICE\_GROUP\_PRESENT\_CAPABILITIES\_KHR
 
-```lisp
-(defconstant vk_khr_shader_float16_int8 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_CAPABILITIES_KHR 1000060007)
 ```
 
-## VK_KHR_SHADER_FLOAT16_INT8_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_SWAPCHAIN\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_shader_float16_int8_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR 1000060008)
 ```
 
-## VK_KHR_SHADER_FLOAT16_INT8_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_BIND\_IMAGE\_MEMORY\_SWAPCHAIN\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_shader_float16_int8_extension_name VK_KHR_shader_float16_int8)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHR 1000060009)
 ```
 
-## VK_KHR_16bit_storage
+#### Variable: VK\_STRUCTURE\_TYPE\_ACQUIRE\_NEXT\_IMAGE\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_16bit_storage 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR 1000060010)
 ```
 
-## VK_KHR_16BIT_STORAGE_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_DEVICE\_GROUP\_PRESENT\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_16bit_storage_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHR 1000060011)
 ```
 
-## VK_KHR_16BIT_STORAGE_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_DEVICE\_GROUP\_SWAPCHAIN\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_16bit_storage_extension_name VK_KHR_16bit_storage)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHR 1000060012)
 ```
 
-## VK_KHR_incremental_present
+#### Variable: VK\_STRUCTURE\_TYPE\_DISPLAY\_MODE\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_incremental_present 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR 1000002000)
 ```
 
-## VK_KHR_INCREMENTAL_PRESENT_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_DISPLAY\_SURFACE\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_incremental_present_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DISPLAY_SURFACE_CREATE_INFO_KHR 1000002001)
 ```
 
-## VK_KHR_INCREMENTAL_PRESENT_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_DISPLAY\_PRESENT\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_incremental_present_extension_name VK_KHR_incremental_present)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR 1000003000)
 ```
 
-## VK_KHR_descriptor_update_template
+#### Variable: VK\_STRUCTURE\_TYPE\_XLIB\_SURFACE\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_descriptor_update_template 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_XLIB_SURFACE_CREATE_INFO_KHR 1000004000)
 ```
 
-## VK_KHR_DESCRIPTOR_UPDATE_TEMPLATE_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_XCB\_SURFACE\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_descriptor_update_template_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR 1000005000)
 ```
 
-## VK_KHR_DESCRIPTOR_UPDATE_TEMPLATE_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_WAYLAND\_SURFACE\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_descriptor_update_template_extension_name VK_KHR_descriptor_update_template)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_WAYLAND_SURFACE_CREATE_INFO_KHR 1000006000)
 ```
 
-## VK_KHR_imageless_framebuffer
+#### Variable: VK\_STRUCTURE\_TYPE\_ANDROID\_SURFACE\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_imageless_framebuffer 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR 1000008000)
 ```
 
-## VK_KHR_IMAGELESS_FRAMEBUFFER_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_WIN32\_SURFACE\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_imageless_framebuffer_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR 1000009000)
 ```
 
-## VK_KHR_IMAGELESS_FRAMEBUFFER_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_DEBUG\_REPORT\_CALLBACK\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_imageless_framebuffer_extension_name VK_KHR_imageless_framebuffer)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT 1000011000)
 ```
 
-## VK_KHR_create_renderpass2
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_RASTERIZATION\_STATE\_RASTERIZATION\_ORDER\_AMD
 
-```lisp
-(defconstant vk_khr_create_renderpass2 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_RASTERIZATION_ORDER_AMD 1000018000)
 ```
 
-## VK_KHR_CREATE_RENDERPASS_2_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_DEBUG\_MARKER\_OBJECT\_NAME\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_create_renderpass_2_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_NAME_INFO_EXT 1000022000)
 ```
 
-## VK_KHR_CREATE_RENDERPASS_2_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_DEBUG\_MARKER\_OBJECT\_TAG\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_create_renderpass_2_extension_name VK_KHR_create_renderpass2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT 1000022001)
 ```
 
-## VK_KHR_shared_presentable_image
+#### Variable: VK\_STRUCTURE\_TYPE\_DEBUG\_MARKER\_MARKER\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_shared_presentable_image 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT 1000022002)
 ```
 
-## VK_KHR_SHARED_PRESENTABLE_IMAGE_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_PROFILE\_KHR
 
-```lisp
-(defconstant vk_khr_shared_presentable_image_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_PROFILE_KHR 1000023000)
 ```
 
-## VK_KHR_SHARED_PRESENTABLE_IMAGE_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_CAPABILITIES\_KHR
 
-```lisp
-(defconstant vk_khr_shared_presentable_image_extension_name VK_KHR_shared_presentable_image)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR 1000023001)
 ```
 
-## VK_KHR_external_fence_capabilities
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_PICTURE\_RESOURCE\_KHR
 
-```lisp
-(defconstant vk_khr_external_fence_capabilities 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_PICTURE_RESOURCE_KHR 1000023002)
 ```
 
-## VK_KHR_EXTERNAL_FENCE_CAPABILITIES_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_GET\_MEMORY\_PROPERTIES\_KHR
 
-```lisp
-(defconstant vk_khr_external_fence_capabilities_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_GET_MEMORY_PROPERTIES_KHR 1000023003)
 ```
 
-## VK_KHR_EXTERNAL_FENCE_CAPABILITIES_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_BIND\_MEMORY\_KHR
 
-```lisp
-(defconstant vk_khr_external_fence_capabilities_extension_name VK_KHR_external_fence_capabilities)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_BIND_MEMORY_KHR 1000023004)
 ```
 
-## VK_KHR_external_fence
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_SESSION\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_external_fence 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_SESSION_CREATE_INFO_KHR 1000023005)
 ```
 
-## VK_KHR_EXTERNAL_FENCE_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_SESSION\_PARAMETERS\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_external_fence_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_CREATE_INFO_KHR 1000023006)
 ```
 
-## VK_KHR_EXTERNAL_FENCE_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_SESSION\_PARAMETERS\_UPDATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_external_fence_extension_name VK_KHR_external_fence)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_UPDATE_INFO_KHR 1000023007)
 ```
 
-## VK_KHR_external_fence_fd
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_BEGIN\_CODING\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_external_fence_fd 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_BEGIN_CODING_INFO_KHR 1000023008)
 ```
 
-## VK_KHR_EXTERNAL_FENCE_FD_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_END\_CODING\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_external_fence_fd_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_END_CODING_INFO_KHR 1000023009)
 ```
 
-## VK_KHR_EXTERNAL_FENCE_FD_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_CODING\_CONTROL\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_external_fence_fd_extension_name VK_KHR_external_fence_fd)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_CODING_CONTROL_INFO_KHR 1000023010)
 ```
 
-## VK_KHR_performance_query
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_REFERENCE\_SLOT\_KHR
 
-```lisp
-(defconstant vk_khr_performance_query 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_REFERENCE_SLOT_KHR 1000023011)
 ```
 
-## VK_KHR_PERFORMANCE_QUERY_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_QUEUE\_FAMILY\_PROPERTIES\_2\_KHR
 
-```lisp
-(defconstant vk_khr_performance_query_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_QUEUE_FAMILY_PROPERTIES_2_KHR 1000023012)
 ```
 
-## VK_KHR_PERFORMANCE_QUERY_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_PROFILES\_KHR
 
-```lisp
-(defconstant vk_khr_performance_query_extension_name VK_KHR_performance_query)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_PROFILES_KHR 1000023013)
 ```
 
-## VK_KHR_maintenance2
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_VIDEO\_FORMAT\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_maintenance2 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR 1000023014)
 ```
 
-## VK_KHR_MAINTENANCE_2_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_FORMAT\_PROPERTIES\_KHR
 
-```lisp
-(defconstant vk_khr_maintenance_2_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_FORMAT_PROPERTIES_KHR 1000023015)
 ```
 
-## VK_KHR_MAINTENANCE_2_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_QUEUE\_FAMILY\_QUERY\_RESULT\_STATUS\_PROPERTIES\_2\_KHR
 
-```lisp
-(defconstant vk_khr_maintenance_2_extension_name VK_KHR_maintenance2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_2_KHR 1000023016)
 ```
 
-## VK_KHR_MAINTENANCE2_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_DECODE\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_maintenance2_spec_version VK_KHR_MAINTENANCE_2_SPEC_VERSION)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR 1000024000)
 ```
 
-## VK_KHR_MAINTENANCE2_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_DECODE\_CAPABILITIES\_KHR
 
-```lisp
-(defconstant vk_khr_maintenance2_extension_name VK_KHR_MAINTENANCE_2_EXTENSION_NAME)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_DECODE_CAPABILITIES_KHR 1000024001)
 ```
 
-## VK_KHR_get_surface_capabilities2
+#### Variable: VK\_STRUCTURE\_TYPE\_DEDICATED\_ALLOCATION\_IMAGE\_CREATE\_INFO\_NV
 
-```lisp
-(defconstant vk_khr_get_surface_capabilities2 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV 1000026000)
 ```
 
-## VK_KHR_GET_SURFACE_CAPABILITIES_2_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_DEDICATED\_ALLOCATION\_BUFFER\_CREATE\_INFO\_NV
 
-```lisp
-(defconstant vk_khr_get_surface_capabilities_2_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_BUFFER_CREATE_INFO_NV 1000026001)
 ```
 
-## VK_KHR_GET_SURFACE_CAPABILITIES_2_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_DEDICATED\_ALLOCATION\_MEMORY\_ALLOCATE\_INFO\_NV
 
-```lisp
-(defconstant vk_khr_get_surface_capabilities_2_extension_name VK_KHR_get_surface_capabilities2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_MEMORY_ALLOCATE_INFO_NV 1000026002)
 ```
 
-## VK_KHR_variable_pointers
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_TRANSFORM\_FEEDBACK\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_khr_variable_pointers 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_FEATURES_EXT 1000028000)
 ```
 
-## VK_KHR_VARIABLE_POINTERS_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_TRANSFORM\_FEEDBACK\_PROPERTIES\_EXT
 
-```lisp
-(defconstant vk_khr_variable_pointers_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT 1000028001)
 ```
 
-## VK_KHR_VARIABLE_POINTERS_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_RASTERIZATION\_STATE\_STREAM\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_variable_pointers_extension_name VK_KHR_variable_pointers)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_STREAM_CREATE_INFO_EXT 1000028002)
 ```
 
-## VK_KHR_get_display_properties2
+#### Variable: VK\_STRUCTURE\_TYPE\_CU\_MODULE\_CREATE\_INFO\_NVX
 
-```lisp
-(defconstant vk_khr_get_display_properties2 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_CU_MODULE_CREATE_INFO_NVX 1000029000)
 ```
 
-## VK_KHR_GET_DISPLAY_PROPERTIES_2_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_CU\_FUNCTION\_CREATE\_INFO\_NVX
 
-```lisp
-(defconstant vk_khr_get_display_properties_2_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_CU_FUNCTION_CREATE_INFO_NVX 1000029001)
 ```
 
-## VK_KHR_GET_DISPLAY_PROPERTIES_2_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_CU\_LAUNCH\_INFO\_NVX
 
-```lisp
-(defconstant vk_khr_get_display_properties_2_extension_name VK_KHR_get_display_properties2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_CU_LAUNCH_INFO_NVX 1000029002)
 ```
 
-## VK_KHR_dedicated_allocation
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_VIEW\_HANDLE\_INFO\_NVX
 
-```lisp
-(defconstant vk_khr_dedicated_allocation 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_VIEW_HANDLE_INFO_NVX 1000030000)
 ```
 
-## VK_KHR_DEDICATED_ALLOCATION_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_VIEW\_ADDRESS\_PROPERTIES\_NVX
 
-```lisp
-(defconstant vk_khr_dedicated_allocation_spec_version 3)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_VIEW_ADDRESS_PROPERTIES_NVX 1000030001)
 ```
 
-## VK_KHR_DEDICATED_ALLOCATION_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_ENCODE\_H264\_CAPABILITIES\_EXT
 
-```lisp
-(defconstant vk_khr_dedicated_allocation_extension_name VK_KHR_dedicated_allocation)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_EXT 1000038000)
 ```
 
-## VK_KHR_storage_buffer_storage_class
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_ENCODE\_H264\_SESSION\_PARAMETERS\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_storage_buffer_storage_class 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_CREATE_INFO_EXT 1000038001)
 ```
 
-## VK_KHR_STORAGE_BUFFER_STORAGE_CLASS_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_ENCODE\_H264\_SESSION\_PARAMETERS\_ADD\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_storage_buffer_storage_class_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_ADD_INFO_EXT 1000038002)
 ```
 
-## VK_KHR_STORAGE_BUFFER_STORAGE_CLASS_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_ENCODE\_H264\_VCL\_FRAME\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_storage_buffer_storage_class_extension_name VK_KHR_storage_buffer_storage_class)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_VCL_FRAME_INFO_EXT 1000038003)
 ```
 
-## VK_KHR_relaxed_block_layout
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_ENCODE\_H264\_DPB\_SLOT\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_relaxed_block_layout 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT 1000038004)
 ```
 
-## VK_KHR_RELAXED_BLOCK_LAYOUT_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_ENCODE\_H264\_NALU\_SLICE\_EXT
 
-```lisp
-(defconstant vk_khr_relaxed_block_layout_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_NALU_SLICE_EXT 1000038005)
 ```
 
-## VK_KHR_RELAXED_BLOCK_LAYOUT_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_ENCODE\_H264\_EMIT\_PICTURE\_PARAMETERS\_EXT
 
-```lisp
-(defconstant vk_khr_relaxed_block_layout_extension_name VK_KHR_relaxed_block_layout)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_EMIT_PICTURE_PARAMETERS_EXT 1000038006)
 ```
 
-## VK_KHR_get_memory_requirements2
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_ENCODE\_H264\_PROFILE\_EXT
 
-```lisp
-(defconstant vk_khr_get_memory_requirements2 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_PROFILE_EXT 1000038007)
 ```
 
-## VK_KHR_GET_MEMORY_REQUIREMENTS_2_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_ENCODE\_H264\_RATE\_CONTROL\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_get_memory_requirements_2_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_INFO_EXT 1000038008)
 ```
 
-## VK_KHR_GET_MEMORY_REQUIREMENTS_2_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_ENCODE\_H264\_RATE\_CONTROL\_LAYER\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_get_memory_requirements_2_extension_name VK_KHR_get_memory_requirements2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_EXT 1000038009)
 ```
 
-## VK_KHR_image_format_list
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_ENCODE\_H264\_REFERENCE\_LISTS\_EXT
 
-```lisp
-(defconstant vk_khr_image_format_list 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_REFERENCE_LISTS_EXT 1000038010)
 ```
 
-## VK_KHR_IMAGE_FORMAT_LIST_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_ENCODE\_H265\_CAPABILITIES\_EXT
 
-```lisp
-(defconstant vk_khr_image_format_list_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_CAPABILITIES_EXT 1000039000)
 ```
 
-## VK_KHR_IMAGE_FORMAT_LIST_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_ENCODE\_H265\_SESSION\_PARAMETERS\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_image_format_list_extension_name VK_KHR_image_format_list)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_CREATE_INFO_EXT 1000039001)
 ```
 
-## VK_KHR_sampler_ycbcr_conversion
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_ENCODE\_H265\_SESSION\_PARAMETERS\_ADD\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_sampler_ycbcr_conversion 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT 1000039002)
 ```
 
-## VK_KHR_SAMPLER_YCBCR_CONVERSION_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_ENCODE\_H265\_VCL\_FRAME\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_sampler_ycbcr_conversion_spec_version 14)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_VCL_FRAME_INFO_EXT 1000039003)
 ```
 
-## VK_KHR_SAMPLER_YCBCR_CONVERSION_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_ENCODE\_H265\_DPB\_SLOT\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_sampler_ycbcr_conversion_extension_name VK_KHR_sampler_ycbcr_conversion)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_DPB_SLOT_INFO_EXT 1000039004)
 ```
 
-## VK_KHR_bind_memory2
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_ENCODE\_H265\_NALU\_SLICE\_SEGMENT\_EXT
 
-```lisp
-(defconstant vk_khr_bind_memory2 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_EXT 1000039005)
 ```
 
-## VK_KHR_BIND_MEMORY_2_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_ENCODE\_H265\_EMIT\_PICTURE\_PARAMETERS\_EXT
 
-```lisp
-(defconstant vk_khr_bind_memory_2_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_EMIT_PICTURE_PARAMETERS_EXT 1000039006)
 ```
 
-## VK_KHR_BIND_MEMORY_2_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_ENCODE\_H265\_PROFILE\_EXT
 
-```lisp
-(defconstant vk_khr_bind_memory_2_extension_name VK_KHR_bind_memory2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_PROFILE_EXT 1000039007)
 ```
 
-## VK_KHR_maintenance3
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_ENCODE\_H265\_REFERENCE\_LISTS\_EXT
 
-```lisp
-(defconstant vk_khr_maintenance3 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_REFERENCE_LISTS_EXT 1000039008)
 ```
 
-## VK_KHR_MAINTENANCE_3_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_ENCODE\_H265\_RATE\_CONTROL\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_maintenance_3_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_INFO_EXT 1000039009)
 ```
 
-## VK_KHR_MAINTENANCE_3_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_ENCODE\_H265\_RATE\_CONTROL\_LAYER\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_maintenance_3_extension_name VK_KHR_maintenance3)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_LAYER_INFO_EXT 1000039010)
 ```
 
-## VK_KHR_MAINTENANCE3_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_DECODE\_H264\_CAPABILITIES\_EXT
 
-```lisp
-(defconstant vk_khr_maintenance3_spec_version VK_KHR_MAINTENANCE_3_SPEC_VERSION)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_CAPABILITIES_EXT 1000040000)
 ```
 
-## VK_KHR_MAINTENANCE3_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_DECODE\_H264\_PICTURE\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_maintenance3_extension_name VK_KHR_MAINTENANCE_3_EXTENSION_NAME)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_PICTURE_INFO_EXT 1000040001)
 ```
 
-## VK_KHR_draw_indirect_count
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_DECODE\_H264\_MVC\_EXT
 
-```lisp
-(defconstant vk_khr_draw_indirect_count 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_MVC_EXT 1000040002)
 ```
 
-## VK_KHR_DRAW_INDIRECT_COUNT_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_DECODE\_H264\_PROFILE\_EXT
 
-```lisp
-(defconstant vk_khr_draw_indirect_count_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_PROFILE_EXT 1000040003)
 ```
 
-## VK_KHR_DRAW_INDIRECT_COUNT_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_DECODE\_H264\_SESSION\_PARAMETERS\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_draw_indirect_count_extension_name VK_KHR_draw_indirect_count)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_SESSION_PARAMETERS_CREATE_INFO_EXT 1000040004)
 ```
 
-## VK_KHR_shader_subgroup_extended_types
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_DECODE\_H264\_SESSION\_PARAMETERS\_ADD\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_shader_subgroup_extended_types 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_SESSION_PARAMETERS_ADD_INFO_EXT 1000040005)
 ```
 
-## VK_KHR_SHADER_SUBGROUP_EXTENDED_TYPES_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_DECODE\_H264\_DPB\_SLOT\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_shader_subgroup_extended_types_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_DPB_SLOT_INFO_EXT 1000040006)
 ```
 
-## VK_KHR_SHADER_SUBGROUP_EXTENDED_TYPES_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_TEXTURE\_LOD\_GATHER\_FORMAT\_PROPERTIES\_AMD
 
-```lisp
-(defconstant vk_khr_shader_subgroup_extended_types_extension_name VK_KHR_shader_subgroup_extended_types)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD 1000041000)
 ```
 
-## VK_KHR_8bit_storage
+#### Variable: VK\_STRUCTURE\_TYPE\_RENDERING\_FRAGMENT\_SHADING\_RATE\_ATTACHMENT\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_8bit_storage 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR 1000044006)
 ```
 
-## VK_KHR_8BIT_STORAGE_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_RENDERING\_FRAGMENT\_DENSITY\_MAP\_ATTACHMENT\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_8bit_storage_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT 1000044007)
 ```
 
-## VK_KHR_8BIT_STORAGE_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_ATTACHMENT\_SAMPLE\_COUNT\_INFO\_AMD
 
-```lisp
-(defconstant vk_khr_8bit_storage_extension_name VK_KHR_8bit_storage)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD 1000044008)
 ```
 
-## VK_KHR_shader_atomic_int64
+#### Variable: VK\_STRUCTURE\_TYPE\_MULTIVIEW\_PER\_VIEW\_ATTRIBUTES\_INFO\_NVX
 
-```lisp
-(defconstant vk_khr_shader_atomic_int64 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX 1000044009)
 ```
 
-## VK_KHR_SHADER_ATOMIC_INT64_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_STREAM\_DESCRIPTOR\_SURFACE\_CREATE\_INFO\_GGP
 
-```lisp
-(defconstant vk_khr_shader_atomic_int64_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_STREAM_DESCRIPTOR_SURFACE_CREATE_INFO_GGP 1000049000)
 ```
 
-## VK_KHR_SHADER_ATOMIC_INT64_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_CORNER\_SAMPLED\_IMAGE\_FEATURES\_NV
 
-```lisp
-(defconstant vk_khr_shader_atomic_int64_extension_name VK_KHR_shader_atomic_int64)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV 1000050000)
 ```
 
-## VK_KHR_shader_clock
+#### Variable: VK\_STRUCTURE\_TYPE\_EXTERNAL\_MEMORY\_IMAGE\_CREATE\_INFO\_NV
 
-```lisp
-(defconstant vk_khr_shader_clock 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV 1000056000)
 ```
 
-## VK_KHR_SHADER_CLOCK_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_EXPORT\_MEMORY\_ALLOCATE\_INFO\_NV
 
-```lisp
-(defconstant vk_khr_shader_clock_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_NV 1000056001)
 ```
 
-## VK_KHR_SHADER_CLOCK_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_IMPORT\_MEMORY\_WIN32\_HANDLE\_INFO\_NV
 
-```lisp
-(defconstant vk_khr_shader_clock_extension_name VK_KHR_shader_clock)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_NV 1000057000)
 ```
 
-## VK_KHR_global_priority
+#### Variable: VK\_STRUCTURE\_TYPE\_EXPORT\_MEMORY\_WIN32\_HANDLE\_INFO\_NV
 
-```lisp
-(defconstant vk_khr_global_priority 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_NV 1000057001)
 ```
 
-## VK_MAX_GLOBAL_PRIORITY_SIZE_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_WIN32\_KEYED\_MUTEX\_ACQUIRE\_RELEASE\_INFO\_NV
 
-```lisp
-(defconstant vk_max_global_priority_size_khr 16)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_NV 1000058000)
 ```
 
-## VK_KHR_GLOBAL_PRIORITY_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_VALIDATION\_FLAGS\_EXT
 
-```lisp
-(defconstant vk_khr_global_priority_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VALIDATION_FLAGS_EXT 1000061000)
 ```
 
-## VK_KHR_GLOBAL_PRIORITY_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_VI\_SURFACE\_CREATE\_INFO\_NN
 
-```lisp
-(defconstant vk_khr_global_priority_extension_name VK_KHR_global_priority)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VI_SURFACE_CREATE_INFO_NN 1000062000)
 ```
 
-## VK_KHR_driver_properties
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_VIEW\_ASTC\_DECODE\_MODE\_EXT
 
-```lisp
-(defconstant vk_khr_driver_properties 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT 1000067000)
 ```
 
-## VK_KHR_DRIVER_PROPERTIES_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_ASTC\_DECODE\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_khr_driver_properties_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT 1000067001)
 ```
 
-## VK_KHR_DRIVER_PROPERTIES_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_IMPORT\_MEMORY\_WIN32\_HANDLE\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_driver_properties_extension_name VK_KHR_driver_properties)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR 1000073000)
 ```
 
-## VK_MAX_DRIVER_NAME_SIZE_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_EXPORT\_MEMORY\_WIN32\_HANDLE\_INFO\_KHR
 
-```lisp
-(defconstant vk_max_driver_name_size_khr VK_MAX_DRIVER_NAME_SIZE)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_KHR 1000073001)
 ```
 
-## VK_MAX_DRIVER_INFO_SIZE_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_MEMORY\_WIN32\_HANDLE\_PROPERTIES\_KHR
 
-```lisp
-(defconstant vk_max_driver_info_size_khr VK_MAX_DRIVER_INFO_SIZE)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_MEMORY_WIN32_HANDLE_PROPERTIES_KHR 1000073002)
 ```
 
-## VK_KHR_shader_float_controls
+#### Variable: VK\_STRUCTURE\_TYPE\_MEMORY\_GET\_WIN32\_HANDLE\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_shader_float_controls 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_MEMORY_GET_WIN32_HANDLE_INFO_KHR 1000073003)
 ```
 
-## VK_KHR_SHADER_FLOAT_CONTROLS_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_IMPORT\_MEMORY\_FD\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_shader_float_controls_spec_version 4)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR 1000074000)
 ```
 
-## VK_KHR_SHADER_FLOAT_CONTROLS_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_MEMORY\_FD\_PROPERTIES\_KHR
 
-```lisp
-(defconstant vk_khr_shader_float_controls_extension_name VK_KHR_shader_float_controls)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_MEMORY_FD_PROPERTIES_KHR 1000074001)
 ```
 
-## VK_KHR_depth_stencil_resolve
+#### Variable: VK\_STRUCTURE\_TYPE\_MEMORY\_GET\_FD\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_depth_stencil_resolve 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_MEMORY_GET_FD_INFO_KHR 1000074002)
 ```
 
-## VK_KHR_DEPTH_STENCIL_RESOLVE_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_WIN32\_KEYED\_MUTEX\_ACQUIRE\_RELEASE\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_depth_stencil_resolve_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR 1000075000)
 ```
 
-## VK_KHR_DEPTH_STENCIL_RESOLVE_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_IMPORT\_SEMAPHORE\_WIN32\_HANDLE\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_depth_stencil_resolve_extension_name VK_KHR_depth_stencil_resolve)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR 1000078000)
 ```
 
-## VK_KHR_swapchain_mutable_format
+#### Variable: VK\_STRUCTURE\_TYPE\_EXPORT\_SEMAPHORE\_WIN32\_HANDLE\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_swapchain_mutable_format 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR 1000078001)
 ```
 
-## VK_KHR_SWAPCHAIN_MUTABLE_FORMAT_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_D3D12\_FENCE\_SUBMIT\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_swapchain_mutable_format_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_D3D12_FENCE_SUBMIT_INFO_KHR 1000078002)
 ```
 
-## VK_KHR_SWAPCHAIN_MUTABLE_FORMAT_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_SEMAPHORE\_GET\_WIN32\_HANDLE\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_swapchain_mutable_format_extension_name VK_KHR_swapchain_mutable_format)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SEMAPHORE_GET_WIN32_HANDLE_INFO_KHR 1000078003)
 ```
 
-## VK_KHR_timeline_semaphore
+#### Variable: VK\_STRUCTURE\_TYPE\_IMPORT\_SEMAPHORE\_FD\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_timeline_semaphore 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_FD_INFO_KHR 1000079000)
 ```
 
-## VK_KHR_TIMELINE_SEMAPHORE_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_SEMAPHORE\_GET\_FD\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_timeline_semaphore_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SEMAPHORE_GET_FD_INFO_KHR 1000079001)
 ```
 
-## VK_KHR_TIMELINE_SEMAPHORE_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_PUSH\_DESCRIPTOR\_PROPERTIES\_KHR
 
-```lisp
-(defconstant vk_khr_timeline_semaphore_extension_name VK_KHR_timeline_semaphore)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR 1000080000)
 ```
 
-## VK_KHR_vulkan_memory_model
+#### Variable: VK\_STRUCTURE\_TYPE\_COMMAND\_BUFFER\_INHERITANCE\_CONDITIONAL\_RENDERING\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_vulkan_memory_model 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_CONDITIONAL_RENDERING_INFO_EXT 1000081000)
 ```
 
-## VK_KHR_VULKAN_MEMORY_MODEL_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_CONDITIONAL\_RENDERING\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_khr_vulkan_memory_model_spec_version 3)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT 1000081001)
 ```
 
-## VK_KHR_VULKAN_MEMORY_MODEL_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_CONDITIONAL\_RENDERING\_BEGIN\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_vulkan_memory_model_extension_name VK_KHR_vulkan_memory_model)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT 1000081002)
 ```
 
-## VK_KHR_shader_terminate_invocation
+#### Variable: VK\_STRUCTURE\_TYPE\_PRESENT\_REGIONS\_KHR
 
-```lisp
-(defconstant vk_khr_shader_terminate_invocation 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PRESENT_REGIONS_KHR 1000084000)
 ```
 
-## VK_KHR_SHADER_TERMINATE_INVOCATION_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_VIEWPORT\_W\_SCALING\_STATE\_CREATE\_INFO\_NV
 
-```lisp
-(defconstant vk_khr_shader_terminate_invocation_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_W_SCALING_STATE_CREATE_INFO_NV 1000087000)
 ```
 
-## VK_KHR_SHADER_TERMINATE_INVOCATION_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_SURFACE\_CAPABILITIES\_2\_EXT
 
-```lisp
-(defconstant vk_khr_shader_terminate_invocation_extension_name VK_KHR_shader_terminate_invocation)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_EXT 1000090000)
 ```
 
-## VK_KHR_fragment_shading_rate
+#### Variable: VK\_STRUCTURE\_TYPE\_DISPLAY\_POWER\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_fragment_shading_rate 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DISPLAY_POWER_INFO_EXT 1000091000)
 ```
 
-## VK_KHR_FRAGMENT_SHADING_RATE_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_DEVICE\_EVENT\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_fragment_shading_rate_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEVICE_EVENT_INFO_EXT 1000091001)
 ```
 
-## VK_KHR_FRAGMENT_SHADING_RATE_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_DISPLAY\_EVENT\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_fragment_shading_rate_extension_name VK_KHR_fragment_shading_rate)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DISPLAY_EVENT_INFO_EXT 1000091002)
 ```
 
-## VK_KHR_spirv_1_4
+#### Variable: VK\_STRUCTURE\_TYPE\_SWAPCHAIN\_COUNTER\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_spirv_1_4 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SWAPCHAIN_COUNTER_CREATE_INFO_EXT 1000091003)
 ```
 
-## VK_KHR_SPIRV_1_4_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PRESENT\_TIMES\_INFO\_GOOGLE
 
-```lisp
-(defconstant vk_khr_spirv_1_4_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PRESENT_TIMES_INFO_GOOGLE 1000092000)
 ```
 
-## VK_KHR_SPIRV_1_4_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_MULTIVIEW\_PER\_VIEW\_ATTRIBUTES\_PROPERTIES\_NVX
 
-```lisp
-(defconstant vk_khr_spirv_1_4_extension_name VK_KHR_spirv_1_4)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_ATTRIBUTES_PROPERTIES_NVX 1000097000)
 ```
 
-## VK_KHR_surface_protected_capabilities
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_VIEWPORT\_SWIZZLE\_STATE\_CREATE\_INFO\_NV
 
-```lisp
-(defconstant vk_khr_surface_protected_capabilities 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SWIZZLE_STATE_CREATE_INFO_NV 1000098000)
 ```
 
-## VK_KHR_SURFACE_PROTECTED_CAPABILITIES_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_DISCARD\_RECTANGLE\_PROPERTIES\_EXT
 
-```lisp
-(defconstant vk_khr_surface_protected_capabilities_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT 1000099000)
 ```
 
-## VK_KHR_SURFACE_PROTECTED_CAPABILITIES_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_DISCARD\_RECTANGLE\_STATE\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_surface_protected_capabilities_extension_name VK_KHR_surface_protected_capabilities)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT 1000099001)
 ```
 
-## VK_KHR_separate_depth_stencil_layouts
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_CONSERVATIVE\_RASTERIZATION\_PROPERTIES\_EXT
 
-```lisp
-(defconstant vk_khr_separate_depth_stencil_layouts 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT 1000101000)
 ```
 
-## VK_KHR_SEPARATE_DEPTH_STENCIL_LAYOUTS_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_RASTERIZATION\_CONSERVATIVE\_STATE\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_separate_depth_stencil_layouts_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_CONSERVATIVE_STATE_CREATE_INFO_EXT 1000101001)
 ```
 
-## VK_KHR_SEPARATE_DEPTH_STENCIL_LAYOUTS_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_DEPTH\_CLIP\_ENABLE\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_khr_separate_depth_stencil_layouts_extension_name VK_KHR_separate_depth_stencil_layouts)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT 1000102000)
 ```
 
-## VK_KHR_present_wait
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_RASTERIZATION\_DEPTH\_CLIP\_STATE\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_present_wait 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_DEPTH_CLIP_STATE_CREATE_INFO_EXT 1000102001)
 ```
 
-## VK_KHR_PRESENT_WAIT_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_HDR\_METADATA\_EXT
 
-```lisp
-(defconstant vk_khr_present_wait_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_HDR_METADATA_EXT 1000105000)
 ```
 
-## VK_KHR_PRESENT_WAIT_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_SHARED\_PRESENT\_SURFACE\_CAPABILITIES\_KHR
 
-```lisp
-(defconstant vk_khr_present_wait_extension_name VK_KHR_present_wait)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR 1000111000)
 ```
 
-## VK_KHR_uniform_buffer_standard_layout
+#### Variable: VK\_STRUCTURE\_TYPE\_IMPORT\_FENCE\_WIN32\_HANDLE\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_uniform_buffer_standard_layout 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMPORT_FENCE_WIN32_HANDLE_INFO_KHR 1000114000)
 ```
 
-## VK_KHR_UNIFORM_BUFFER_STANDARD_LAYOUT_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_EXPORT\_FENCE\_WIN32\_HANDLE\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_uniform_buffer_standard_layout_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_EXPORT_FENCE_WIN32_HANDLE_INFO_KHR 1000114001)
 ```
 
-## VK_KHR_UNIFORM_BUFFER_STANDARD_LAYOUT_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_FENCE\_GET\_WIN32\_HANDLE\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_uniform_buffer_standard_layout_extension_name VK_KHR_uniform_buffer_standard_layout)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_FENCE_GET_WIN32_HANDLE_INFO_KHR 1000114002)
 ```
 
-## VK_KHR_buffer_device_address
+#### Variable: VK\_STRUCTURE\_TYPE\_IMPORT\_FENCE\_FD\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_buffer_device_address 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMPORT_FENCE_FD_INFO_KHR 1000115000)
 ```
 
-## VK_KHR_BUFFER_DEVICE_ADDRESS_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_FENCE\_GET\_FD\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_buffer_device_address_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_FENCE_GET_FD_INFO_KHR 1000115001)
 ```
 
-## VK_KHR_BUFFER_DEVICE_ADDRESS_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_PERFORMANCE\_QUERY\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_khr_buffer_device_address_extension_name VK_KHR_buffer_device_address)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR 1000116000)
 ```
 
-## VK_KHR_deferred_host_operations
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_PERFORMANCE\_QUERY\_PROPERTIES\_KHR
 
-```lisp
-(defconstant vk_khr_deferred_host_operations 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_PROPERTIES_KHR 1000116001)
 ```
 
-## VK_KHR_DEFERRED_HOST_OPERATIONS_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_QUERY\_POOL\_PERFORMANCE\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_deferred_host_operations_spec_version 4)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_CREATE_INFO_KHR 1000116002)
 ```
 
-## VK_KHR_DEFERRED_HOST_OPERATIONS_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PERFORMANCE\_QUERY\_SUBMIT\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_deferred_host_operations_extension_name VK_KHR_deferred_host_operations)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PERFORMANCE_QUERY_SUBMIT_INFO_KHR 1000116003)
 ```
 
-## VK_KHR_pipeline_executable_properties
+#### Variable: VK\_STRUCTURE\_TYPE\_ACQUIRE\_PROFILING\_LOCK\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_pipeline_executable_properties 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_ACQUIRE_PROFILING_LOCK_INFO_KHR 1000116004)
 ```
 
-## VK_KHR_PIPELINE_EXECUTABLE_PROPERTIES_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PERFORMANCE\_COUNTER\_KHR
 
-```lisp
-(defconstant vk_khr_pipeline_executable_properties_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_KHR 1000116005)
 ```
 
-## VK_KHR_PIPELINE_EXECUTABLE_PROPERTIES_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PERFORMANCE\_COUNTER\_DESCRIPTION\_KHR
 
-```lisp
-(defconstant vk_khr_pipeline_executable_properties_extension_name VK_KHR_pipeline_executable_properties)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_DESCRIPTION_KHR 1000116006)
 ```
 
-## VK_KHR_shader_integer_dot_product
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SURFACE\_INFO\_2\_KHR
 
-```lisp
-(defconstant vk_khr_shader_integer_dot_product 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR 1000119000)
 ```
 
-## VK_KHR_SHADER_INTEGER_DOT_PRODUCT_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_SURFACE\_CAPABILITIES\_2\_KHR
 
-```lisp
-(defconstant vk_khr_shader_integer_dot_product_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_KHR 1000119001)
 ```
 
-## VK_KHR_SHADER_INTEGER_DOT_PRODUCT_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_SURFACE\_FORMAT\_2\_KHR
 
-```lisp
-(defconstant vk_khr_shader_integer_dot_product_extension_name VK_KHR_shader_integer_dot_product)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SURFACE_FORMAT_2_KHR 1000119002)
 ```
 
-## VK_KHR_pipeline_library
+#### Variable: VK\_STRUCTURE\_TYPE\_DISPLAY\_PROPERTIES\_2\_KHR
 
-```lisp
-(defconstant vk_khr_pipeline_library 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DISPLAY_PROPERTIES_2_KHR 1000121000)
 ```
 
-## VK_KHR_PIPELINE_LIBRARY_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_DISPLAY\_PLANE\_PROPERTIES\_2\_KHR
 
-```lisp
-(defconstant vk_khr_pipeline_library_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DISPLAY_PLANE_PROPERTIES_2_KHR 1000121001)
 ```
 
-## VK_KHR_PIPELINE_LIBRARY_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_DISPLAY\_MODE\_PROPERTIES\_2\_KHR
 
-```lisp
-(defconstant vk_khr_pipeline_library_extension_name VK_KHR_pipeline_library)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DISPLAY_MODE_PROPERTIES_2_KHR 1000121002)
 ```
 
-## VK_KHR_shader_non_semantic_info
+#### Variable: VK\_STRUCTURE\_TYPE\_DISPLAY\_PLANE\_INFO\_2\_KHR
 
-```lisp
-(defconstant vk_khr_shader_non_semantic_info 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DISPLAY_PLANE_INFO_2_KHR 1000121003)
 ```
 
-## VK_KHR_SHADER_NON_SEMANTIC_INFO_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_DISPLAY\_PLANE\_CAPABILITIES\_2\_KHR
 
-```lisp
-(defconstant vk_khr_shader_non_semantic_info_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DISPLAY_PLANE_CAPABILITIES_2_KHR 1000121004)
 ```
 
-## VK_KHR_SHADER_NON_SEMANTIC_INFO_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_IOS\_SURFACE\_CREATE\_INFO\_MVK
 
-```lisp
-(defconstant vk_khr_shader_non_semantic_info_extension_name VK_KHR_shader_non_semantic_info)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IOS_SURFACE_CREATE_INFO_MVK 1000122000)
 ```
 
-## VK_KHR_present_id
+#### Variable: VK\_STRUCTURE\_TYPE\_MACOS\_SURFACE\_CREATE\_INFO\_MVK
 
-```lisp
-(defconstant vk_khr_present_id 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_MACOS_SURFACE_CREATE_INFO_MVK 1000123000)
 ```
 
-## VK_KHR_PRESENT_ID_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_DEBUG\_UTILS\_OBJECT\_NAME\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_present_id_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT 1000128000)
 ```
 
-## VK_KHR_PRESENT_ID_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_DEBUG\_UTILS\_OBJECT\_TAG\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_present_id_extension_name VK_KHR_present_id)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_TAG_INFO_EXT 1000128001)
 ```
 
-## VK_KHR_synchronization2
+#### Variable: VK\_STRUCTURE\_TYPE\_DEBUG\_UTILS\_LABEL\_EXT
 
-```lisp
-(defconstant vk_khr_synchronization2 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT 1000128002)
 ```
 
-## VK_KHR_SYNCHRONIZATION_2_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_DEBUG\_UTILS\_MESSENGER\_CALLBACK\_DATA\_EXT
 
-```lisp
-(defconstant vk_khr_synchronization_2_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT 1000128003)
 ```
 
-## VK_KHR_SYNCHRONIZATION_2_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_DEBUG\_UTILS\_MESSENGER\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_synchronization_2_extension_name VK_KHR_synchronization2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT 1000128004)
 ```
 
-## VK_KHR_fragment_shader_barycentric
+#### Variable: VK\_STRUCTURE\_TYPE\_ANDROID\_HARDWARE\_BUFFER\_USAGE\_ANDROID
 
-```lisp
-(defconstant vk_khr_fragment_shader_barycentric 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_USAGE_ANDROID 1000129000)
 ```
 
-## VK_KHR_FRAGMENT_SHADER_BARYCENTRIC_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_ANDROID\_HARDWARE\_BUFFER\_PROPERTIES\_ANDROID
 
-```lisp
-(defconstant vk_khr_fragment_shader_barycentric_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_PROPERTIES_ANDROID 1000129001)
 ```
 
-## VK_KHR_FRAGMENT_SHADER_BARYCENTRIC_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_ANDROID\_HARDWARE\_BUFFER\_FORMAT\_PROPERTIES\_ANDROID
 
-```lisp
-(defconstant vk_khr_fragment_shader_barycentric_extension_name VK_KHR_fragment_shader_barycentric)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_PROPERTIES_ANDROID 1000129002)
 ```
 
-## VK_KHR_shader_subgroup_uniform_control_flow
+#### Variable: VK\_STRUCTURE\_TYPE\_IMPORT\_ANDROID\_HARDWARE\_BUFFER\_INFO\_ANDROID
 
-```lisp
-(defconstant vk_khr_shader_subgroup_uniform_control_flow 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMPORT_ANDROID_HARDWARE_BUFFER_INFO_ANDROID 1000129003)
 ```
 
-## VK_KHR_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_MEMORY\_GET\_ANDROID\_HARDWARE\_BUFFER\_INFO\_ANDROID
 
-```lisp
-(defconstant vk_khr_shader_subgroup_uniform_control_flow_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_MEMORY_GET_ANDROID_HARDWARE_BUFFER_INFO_ANDROID 1000129004)
 ```
 
-## VK_KHR_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_EXTERNAL\_FORMAT\_ANDROID
 
-```lisp
-(defconstant vk_khr_shader_subgroup_uniform_control_flow_extension_name VK_KHR_shader_subgroup_uniform_control_flow)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID 1000129005)
 ```
 
-## VK_KHR_zero_initialize_workgroup_memory
+#### Variable: VK\_STRUCTURE\_TYPE\_ANDROID\_HARDWARE\_BUFFER\_FORMAT\_PROPERTIES\_2\_ANDROID
 
-```lisp
-(defconstant vk_khr_zero_initialize_workgroup_memory 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_PROPERTIES_2_ANDROID 1000129006)
 ```
 
-## VK_KHR_ZERO_INITIALIZE_WORKGROUP_MEMORY_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_SAMPLE\_LOCATIONS\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_zero_initialize_workgroup_memory_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SAMPLE_LOCATIONS_INFO_EXT 1000143000)
 ```
 
-## VK_KHR_ZERO_INITIALIZE_WORKGROUP_MEMORY_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_RENDER\_PASS\_SAMPLE\_LOCATIONS\_BEGIN\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_zero_initialize_workgroup_memory_extension_name VK_KHR_zero_initialize_workgroup_memory)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT 1000143001)
 ```
 
-## VK_KHR_workgroup_memory_explicit_layout
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_SAMPLE\_LOCATIONS\_STATE\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_workgroup_memory_explicit_layout 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_SAMPLE_LOCATIONS_STATE_CREATE_INFO_EXT 1000143002)
 ```
 
-## VK_KHR_WORKGROUP_MEMORY_EXPLICIT_LAYOUT_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SAMPLE\_LOCATIONS\_PROPERTIES\_EXT
 
-```lisp
-(defconstant vk_khr_workgroup_memory_explicit_layout_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLE_LOCATIONS_PROPERTIES_EXT 1000143003)
 ```
 
-## VK_KHR_WORKGROUP_MEMORY_EXPLICIT_LAYOUT_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_MULTISAMPLE\_PROPERTIES\_EXT
 
-```lisp
-(defconstant vk_khr_workgroup_memory_explicit_layout_extension_name VK_KHR_workgroup_memory_explicit_layout)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_MULTISAMPLE_PROPERTIES_EXT 1000143004)
 ```
 
-## VK_KHR_copy_commands2
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_BLEND\_OPERATION\_ADVANCED\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_khr_copy_commands2 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT 1000148000)
 ```
 
-## VK_KHR_COPY_COMMANDS_2_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_BLEND\_OPERATION\_ADVANCED\_PROPERTIES\_EXT
 
-```lisp
-(defconstant vk_khr_copy_commands_2_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT 1000148001)
 ```
 
-## VK_KHR_COPY_COMMANDS_2_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_COLOR\_BLEND\_ADVANCED\_STATE\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_khr_copy_commands_2_extension_name VK_KHR_copy_commands2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_ADVANCED_STATE_CREATE_INFO_EXT 1000148002)
 ```
 
-## VK_KHR_format_feature_flags2
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_COVERAGE\_TO\_COLOR\_STATE\_CREATE\_INFO\_NV
 
-```lisp
-(defconstant vk_khr_format_feature_flags2 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_TO_COLOR_STATE_CREATE_INFO_NV 1000149000)
 ```
 
-## VK_KHR_FORMAT_FEATURE_FLAGS_2_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_WRITE\_DESCRIPTOR\_SET\_ACCELERATION\_STRUCTURE\_KHR
 
-```lisp
-(defconstant vk_khr_format_feature_flags_2_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR 1000150007)
 ```
 
-## VK_KHR_FORMAT_FEATURE_FLAGS_2_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_ACCELERATION\_STRUCTURE\_BUILD\_GEOMETRY\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_format_feature_flags_2_extension_name VK_KHR_format_feature_flags2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_GEOMETRY_INFO_KHR 1000150000)
 ```
 
-## VK_KHR_ray_tracing_maintenance1
+#### Variable: VK\_STRUCTURE\_TYPE\_ACCELERATION\_STRUCTURE\_DEVICE\_ADDRESS\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_ray_tracing_maintenance1 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_DEVICE_ADDRESS_INFO_KHR 1000150002)
 ```
 
-## VK_KHR_RAY_TRACING_MAINTENANCE_1_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_ACCELERATION\_STRUCTURE\_GEOMETRY\_AABBS\_DATA\_KHR
 
-```lisp
-(defconstant vk_khr_ray_tracing_maintenance_1_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_AABBS_DATA_KHR 1000150003)
 ```
 
-## VK_KHR_RAY_TRACING_MAINTENANCE_1_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_ACCELERATION\_STRUCTURE\_GEOMETRY\_INSTANCES\_DATA\_KHR
 
-```lisp
-(defconstant vk_khr_ray_tracing_maintenance_1_extension_name VK_KHR_ray_tracing_maintenance1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_INSTANCES_DATA_KHR 1000150004)
 ```
 
-## VK_KHR_portability_enumeration
+#### Variable: VK\_STRUCTURE\_TYPE\_ACCELERATION\_STRUCTURE\_GEOMETRY\_TRIANGLES\_DATA\_KHR
 
-```lisp
-(defconstant vk_khr_portability_enumeration 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_TRIANGLES_DATA_KHR 1000150005)
 ```
 
-## VK_KHR_PORTABILITY_ENUMERATION_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_ACCELERATION\_STRUCTURE\_GEOMETRY\_KHR
 
-```lisp
-(defconstant vk_khr_portability_enumeration_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_KHR 1000150006)
 ```
 
-## VK_KHR_PORTABILITY_ENUMERATION_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_ACCELERATION\_STRUCTURE\_VERSION\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_portability_enumeration_extension_name VK_KHR_portability_enumeration)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_VERSION_INFO_KHR 1000150009)
 ```
 
-## VK_KHR_maintenance4
+#### Variable: VK\_STRUCTURE\_TYPE\_COPY\_ACCELERATION\_STRUCTURE\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_maintenance4 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_COPY_ACCELERATION_STRUCTURE_INFO_KHR 1000150010)
 ```
 
-## VK_KHR_MAINTENANCE_4_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_COPY\_ACCELERATION\_STRUCTURE\_TO\_MEMORY\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_maintenance_4_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_COPY_ACCELERATION_STRUCTURE_TO_MEMORY_INFO_KHR 1000150011)
 ```
 
-## VK_KHR_MAINTENANCE_4_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_COPY\_MEMORY\_TO\_ACCELERATION\_STRUCTURE\_INFO\_KHR
 
-```lisp
-(defconstant vk_khr_maintenance_4_extension_name VK_KHR_maintenance4)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_COPY_MEMORY_TO_ACCELERATION_STRUCTURE_INFO_KHR 1000150012)
 ```
 
-## VK_EXT_debug_report
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_ACCELERATION\_STRUCTURE\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_ext_debug_report 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_FEATURES_KHR 1000150013)
 ```
 
-## VK_EXT_DEBUG_REPORT_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_ACCELERATION\_STRUCTURE\_PROPERTIES\_KHR
 
-```lisp
-(defconstant vk_ext_debug_report_spec_version 10)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_PROPERTIES_KHR 1000150014)
 ```
 
-## VK_EXT_DEBUG_REPORT_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_ACCELERATION\_STRUCTURE\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_debug_report_extension_name VK_EXT_debug_report)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_KHR 1000150017)
 ```
 
-## VK_NV_glsl_shader
+#### Variable: VK\_STRUCTURE\_TYPE\_ACCELERATION\_STRUCTURE\_BUILD\_SIZES\_INFO\_KHR
 
-```lisp
-(defconstant vk_nv_glsl_shader 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_SIZES_INFO_KHR 1000150020)
 ```
 
-## VK_NV_GLSL_SHADER_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_RAY\_TRACING\_PIPELINE\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_nv_glsl_shader_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_FEATURES_KHR 1000347000)
 ```
 
-## VK_NV_GLSL_SHADER_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_RAY\_TRACING\_PIPELINE\_PROPERTIES\_KHR
 
-```lisp
-(defconstant vk_nv_glsl_shader_extension_name VK_NV_glsl_shader)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_PROPERTIES_KHR 1000347001)
 ```
 
-## VK_EXT_depth_range_unrestricted
+#### Variable: VK\_STRUCTURE\_TYPE\_RAY\_TRACING\_PIPELINE\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_depth_range_unrestricted 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CREATE_INFO_KHR 1000150015)
 ```
 
-## VK_EXT_DEPTH_RANGE_UNRESTRICTED_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_RAY\_TRACING\_SHADER\_GROUP\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_depth_range_unrestricted_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_KHR 1000150016)
 ```
 
-## VK_EXT_DEPTH_RANGE_UNRESTRICTED_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_RAY\_TRACING\_PIPELINE\_INTERFACE\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_depth_range_unrestricted_extension_name VK_EXT_depth_range_unrestricted)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_INTERFACE_CREATE_INFO_KHR 1000150018)
 ```
 
-## VK_IMG_filter_cubic
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_RAY\_QUERY\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_img_filter_cubic 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR 1000348013)
 ```
 
-## VK_IMG_FILTER_CUBIC_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_COVERAGE\_MODULATION\_STATE\_CREATE\_INFO\_NV
 
-```lisp
-(defconstant vk_img_filter_cubic_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_MODULATION_STATE_CREATE_INFO_NV 1000152000)
 ```
 
-## VK_IMG_FILTER_CUBIC_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SHADER\_SM\_BUILTINS\_FEATURES\_NV
 
-```lisp
-(defconstant vk_img_filter_cubic_extension_name VK_IMG_filter_cubic)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_FEATURES_NV 1000154000)
 ```
 
-## VK_AMD_rasterization_order
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SHADER\_SM\_BUILTINS\_PROPERTIES\_NV
 
-```lisp
-(defconstant vk_amd_rasterization_order 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_PROPERTIES_NV 1000154001)
 ```
 
-## VK_AMD_RASTERIZATION_ORDER_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_DRM\_FORMAT\_MODIFIER\_PROPERTIES\_LIST\_EXT
 
-```lisp
-(defconstant vk_amd_rasterization_order_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT 1000158000)
 ```
 
-## VK_AMD_RASTERIZATION_ORDER_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_IMAGE\_DRM\_FORMAT\_MODIFIER\_INFO\_EXT
 
-```lisp
-(defconstant vk_amd_rasterization_order_extension_name VK_AMD_rasterization_order)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT 1000158002)
 ```
 
-## VK_AMD_shader_trinary_minmax
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_DRM\_FORMAT\_MODIFIER\_LIST\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_amd_shader_trinary_minmax 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_LIST_CREATE_INFO_EXT 1000158003)
 ```
 
-## VK_AMD_SHADER_TRINARY_MINMAX_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_DRM\_FORMAT\_MODIFIER\_EXPLICIT\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_amd_shader_trinary_minmax_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT 1000158004)
 ```
 
-## VK_AMD_SHADER_TRINARY_MINMAX_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_DRM\_FORMAT\_MODIFIER\_PROPERTIES\_EXT
 
-```lisp
-(defconstant vk_amd_shader_trinary_minmax_extension_name VK_AMD_shader_trinary_minmax)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT 1000158005)
 ```
 
-## VK_AMD_shader_explicit_vertex_parameter
+#### Variable: VK\_STRUCTURE\_TYPE\_DRM\_FORMAT\_MODIFIER\_PROPERTIES\_LIST\_2\_EXT
 
-```lisp
-(defconstant vk_amd_shader_explicit_vertex_parameter 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_2_EXT 1000158006)
 ```
 
-## VK_AMD_SHADER_EXPLICIT_VERTEX_PARAMETER_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_VALIDATION\_CACHE\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_amd_shader_explicit_vertex_parameter_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VALIDATION_CACHE_CREATE_INFO_EXT 1000160000)
 ```
 
-## VK_AMD_SHADER_EXPLICIT_VERTEX_PARAMETER_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_SHADER\_MODULE\_VALIDATION\_CACHE\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_amd_shader_explicit_vertex_parameter_extension_name VK_AMD_shader_explicit_vertex_parameter)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SHADER_MODULE_VALIDATION_CACHE_CREATE_INFO_EXT 1000160001)
 ```
 
-## VK_EXT_debug_marker
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_PORTABILITY\_SUBSET\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_ext_debug_marker 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_FEATURES_KHR 1000163000)
 ```
 
-## VK_EXT_DEBUG_MARKER_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_PORTABILITY\_SUBSET\_PROPERTIES\_KHR
 
-```lisp
-(defconstant vk_ext_debug_marker_spec_version 4)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_PROPERTIES_KHR 1000163001)
 ```
 
-## VK_EXT_DEBUG_MARKER_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_VIEWPORT\_SHADING\_RATE\_IMAGE\_STATE\_CREATE\_INFO\_NV
 
-```lisp
-(defconstant vk_ext_debug_marker_extension_name VK_EXT_debug_marker)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SHADING_RATE_IMAGE_STATE_CREATE_INFO_NV 1000164000)
 ```
 
-## VK_AMD_gcn_shader
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SHADING\_RATE\_IMAGE\_FEATURES\_NV
 
-```lisp
-(defconstant vk_amd_gcn_shader 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_FEATURES_NV 1000164001)
 ```
 
-## VK_AMD_GCN_SHADER_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SHADING\_RATE\_IMAGE\_PROPERTIES\_NV
 
-```lisp
-(defconstant vk_amd_gcn_shader_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_PROPERTIES_NV 1000164002)
 ```
 
-## VK_AMD_GCN_SHADER_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_VIEWPORT\_COARSE\_SAMPLE\_ORDER\_STATE\_CREATE\_INFO\_NV
 
-```lisp
-(defconstant vk_amd_gcn_shader_extension_name VK_AMD_gcn_shader)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_COARSE_SAMPLE_ORDER_STATE_CREATE_INFO_NV 1000164005)
 ```
 
-## VK_NV_dedicated_allocation
+#### Variable: VK\_STRUCTURE\_TYPE\_RAY\_TRACING\_PIPELINE\_CREATE\_INFO\_NV
 
-```lisp
-(defconstant vk_nv_dedicated_allocation 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CREATE_INFO_NV 1000165000)
 ```
 
-## VK_NV_DEDICATED_ALLOCATION_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_ACCELERATION\_STRUCTURE\_CREATE\_INFO\_NV
 
-```lisp
-(defconstant vk_nv_dedicated_allocation_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_NV 1000165001)
 ```
 
-## VK_NV_DEDICATED_ALLOCATION_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_GEOMETRY\_NV
 
-```lisp
-(defconstant vk_nv_dedicated_allocation_extension_name VK_NV_dedicated_allocation)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_GEOMETRY_NV 1000165003)
 ```
 
-## VK_EXT_transform_feedback
+#### Variable: VK\_STRUCTURE\_TYPE\_GEOMETRY\_TRIANGLES\_NV
 
-```lisp
-(defconstant vk_ext_transform_feedback 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_GEOMETRY_TRIANGLES_NV 1000165004)
 ```
 
-## VK_EXT_TRANSFORM_FEEDBACK_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_GEOMETRY\_AABB\_NV
 
-```lisp
-(defconstant vk_ext_transform_feedback_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_GEOMETRY_AABB_NV 1000165005)
 ```
 
-## VK_EXT_TRANSFORM_FEEDBACK_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_BIND\_ACCELERATION\_STRUCTURE\_MEMORY\_INFO\_NV
 
-```lisp
-(defconstant vk_ext_transform_feedback_extension_name VK_EXT_transform_feedback)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BIND_ACCELERATION_STRUCTURE_MEMORY_INFO_NV 1000165006)
 ```
 
-## VK_NVX_binary_import
+#### Variable: VK\_STRUCTURE\_TYPE\_WRITE\_DESCRIPTOR\_SET\_ACCELERATION\_STRUCTURE\_NV
 
-```lisp
-(defconstant vk_nvx_binary_import 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_NV 1000165007)
 ```
 
-## VK_NVX_BINARY_IMPORT_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_ACCELERATION\_STRUCTURE\_MEMORY\_REQUIREMENTS\_INFO\_NV
 
-```lisp
-(defconstant vk_nvx_binary_import_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_INFO_NV 1000165008)
 ```
 
-## VK_NVX_BINARY_IMPORT_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_RAY\_TRACING\_PROPERTIES\_NV
 
-```lisp
-(defconstant vk_nvx_binary_import_extension_name VK_NVX_binary_import)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_NV 1000165009)
 ```
 
-## VK_NVX_image_view_handle
+#### Variable: VK\_STRUCTURE\_TYPE\_RAY\_TRACING\_SHADER\_GROUP\_CREATE\_INFO\_NV
 
-```lisp
-(defconstant vk_nvx_image_view_handle 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_NV 1000165011)
 ```
 
-## VK_NVX_IMAGE_VIEW_HANDLE_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_ACCELERATION\_STRUCTURE\_INFO\_NV
 
-```lisp
-(defconstant vk_nvx_image_view_handle_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_INFO_NV 1000165012)
 ```
 
-## VK_NVX_IMAGE_VIEW_HANDLE_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_REPRESENTATIVE\_FRAGMENT\_TEST\_FEATURES\_NV
 
-```lisp
-(defconstant vk_nvx_image_view_handle_extension_name VK_NVX_image_view_handle)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_REPRESENTATIVE_FRAGMENT_TEST_FEATURES_NV 1000166000)
 ```
 
-## VK_AMD_draw_indirect_count
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_REPRESENTATIVE\_FRAGMENT\_TEST\_STATE\_CREATE\_INFO\_NV
 
-```lisp
-(defconstant vk_amd_draw_indirect_count 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_REPRESENTATIVE_FRAGMENT_TEST_STATE_CREATE_INFO_NV 1000166001)
 ```
 
-## VK_AMD_DRAW_INDIRECT_COUNT_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_IMAGE\_VIEW\_IMAGE\_FORMAT\_INFO\_EXT
 
-```lisp
-(defconstant vk_amd_draw_indirect_count_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_VIEW_IMAGE_FORMAT_INFO_EXT 1000170000)
 ```
 
-## VK_AMD_DRAW_INDIRECT_COUNT_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_FILTER\_CUBIC\_IMAGE\_VIEW\_IMAGE\_FORMAT\_PROPERTIES\_EXT
 
-```lisp
-(defconstant vk_amd_draw_indirect_count_extension_name VK_AMD_draw_indirect_count)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT 1000170001)
 ```
 
-## VK_AMD_negative_viewport_height
+#### Variable: VK\_STRUCTURE\_TYPE\_IMPORT\_MEMORY\_HOST\_POINTER\_INFO\_EXT
 
-```lisp
-(defconstant vk_amd_negative_viewport_height 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT 1000178000)
 ```
 
-## VK_AMD_NEGATIVE_VIEWPORT_HEIGHT_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_MEMORY\_HOST\_POINTER\_PROPERTIES\_EXT
 
-```lisp
-(defconstant vk_amd_negative_viewport_height_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_MEMORY_HOST_POINTER_PROPERTIES_EXT 1000178001)
 ```
 
-## VK_AMD_NEGATIVE_VIEWPORT_HEIGHT_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_EXTERNAL\_MEMORY\_HOST\_PROPERTIES\_EXT
 
-```lisp
-(defconstant vk_amd_negative_viewport_height_extension_name VK_AMD_negative_viewport_height)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT 1000178002)
 ```
 
-## VK_AMD_gpu_shader_half_float
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SHADER\_CLOCK\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_amd_gpu_shader_half_float 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CLOCK_FEATURES_KHR 1000181000)
 ```
 
-## VK_AMD_GPU_SHADER_HALF_FLOAT_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_COMPILER\_CONTROL\_CREATE\_INFO\_AMD
 
-```lisp
-(defconstant vk_amd_gpu_shader_half_float_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD 1000183000)
 ```
 
-## VK_AMD_GPU_SHADER_HALF_FLOAT_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_CALIBRATED\_TIMESTAMP\_INFO\_EXT
 
-```lisp
-(defconstant vk_amd_gpu_shader_half_float_extension_name VK_AMD_gpu_shader_half_float)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_EXT 1000184000)
 ```
 
-## VK_AMD_shader_ballot
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SHADER\_CORE\_PROPERTIES\_AMD
 
-```lisp
-(defconstant vk_amd_shader_ballot 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD 1000185000)
 ```
 
-## VK_AMD_SHADER_BALLOT_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_DECODE\_H265\_CAPABILITIES\_EXT
 
-```lisp
-(defconstant vk_amd_shader_ballot_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_CAPABILITIES_EXT 1000187000)
 ```
 
-## VK_AMD_SHADER_BALLOT_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_DECODE\_H265\_SESSION\_PARAMETERS\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_amd_shader_ballot_extension_name VK_AMD_shader_ballot)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_PARAMETERS_CREATE_INFO_EXT 1000187001)
 ```
 
-## VK_AMD_texture_gather_bias_lod
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_DECODE\_H265\_SESSION\_PARAMETERS\_ADD\_INFO\_EXT
 
-```lisp
-(defconstant vk_amd_texture_gather_bias_lod 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT 1000187002)
 ```
 
-## VK_AMD_TEXTURE_GATHER_BIAS_LOD_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_DECODE\_H265\_PROFILE\_EXT
 
-```lisp
-(defconstant vk_amd_texture_gather_bias_lod_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_PROFILE_EXT 1000187003)
 ```
 
-## VK_AMD_TEXTURE_GATHER_BIAS_LOD_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_DECODE\_H265\_PICTURE\_INFO\_EXT
 
-```lisp
-(defconstant vk_amd_texture_gather_bias_lod_extension_name VK_AMD_texture_gather_bias_lod)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_PICTURE_INFO_EXT 1000187004)
 ```
 
-## VK_AMD_shader_info
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_DECODE\_H265\_DPB\_SLOT\_INFO\_EXT
 
-```lisp
-(defconstant vk_amd_shader_info 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_DPB_SLOT_INFO_EXT 1000187005)
 ```
 
-## VK_AMD_SHADER_INFO_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_DEVICE\_QUEUE\_GLOBAL\_PRIORITY\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_amd_shader_info_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_KHR 1000174000)
 ```
 
-## VK_AMD_SHADER_INFO_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_GLOBAL\_PRIORITY\_QUERY\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_amd_shader_info_extension_name VK_AMD_shader_info)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_KHR 1000388000)
 ```
 
-## VK_AMD_shader_image_load_store_lod
+#### Variable: VK\_STRUCTURE\_TYPE\_QUEUE\_FAMILY\_GLOBAL\_PRIORITY\_PROPERTIES\_KHR
 
-```lisp
-(defconstant vk_amd_shader_image_load_store_lod 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_KHR 1000388001)
 ```
 
-## VK_AMD_SHADER_IMAGE_LOAD_STORE_LOD_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_DEVICE\_MEMORY\_OVERALLOCATION\_CREATE\_INFO\_AMD
 
-```lisp
-(defconstant vk_amd_shader_image_load_store_lod_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEVICE_MEMORY_OVERALLOCATION_CREATE_INFO_AMD 1000189000)
 ```
 
-## VK_AMD_SHADER_IMAGE_LOAD_STORE_LOD_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_VERTEX\_ATTRIBUTE\_DIVISOR\_PROPERTIES\_EXT
 
-```lisp
-(defconstant vk_amd_shader_image_load_store_lod_extension_name VK_AMD_shader_image_load_store_lod)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT 1000190000)
 ```
 
-## VK_NV_corner_sampled_image
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_VERTEX\_INPUT\_DIVISOR\_STATE\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_nv_corner_sampled_image 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT 1000190001)
 ```
 
-## VK_NV_CORNER_SAMPLED_IMAGE_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_VERTEX\_ATTRIBUTE\_DIVISOR\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_nv_corner_sampled_image_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT 1000190002)
 ```
 
-## VK_NV_CORNER_SAMPLED_IMAGE_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PRESENT\_FRAME\_TOKEN\_GGP
 
-```lisp
-(defconstant vk_nv_corner_sampled_image_extension_name VK_NV_corner_sampled_image)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PRESENT_FRAME_TOKEN_GGP 1000191000)
 ```
 
-## VK_IMG_format_pvrtc
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_COMPUTE\_SHADER\_DERIVATIVES\_FEATURES\_NV
 
-```lisp
-(defconstant vk_img_format_pvrtc 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_NV 1000201000)
 ```
 
-## VK_IMG_FORMAT_PVRTC_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_MESH\_SHADER\_FEATURES\_NV
 
-```lisp
-(defconstant vk_img_format_pvrtc_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV 1000202000)
 ```
 
-## VK_IMG_FORMAT_PVRTC_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_MESH\_SHADER\_PROPERTIES\_NV
 
-```lisp
-(defconstant vk_img_format_pvrtc_extension_name VK_IMG_format_pvrtc)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_PROPERTIES_NV 1000202001)
 ```
 
-## VK_NV_external_memory_capabilities
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SHADER\_IMAGE\_FOOTPRINT\_FEATURES\_NV
 
-```lisp
-(defconstant vk_nv_external_memory_capabilities 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_FOOTPRINT_FEATURES_NV 1000204000)
 ```
 
-## VK_NV_EXTERNAL_MEMORY_CAPABILITIES_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_VIEWPORT\_EXCLUSIVE\_SCISSOR\_STATE\_CREATE\_INFO\_NV
 
-```lisp
-(defconstant vk_nv_external_memory_capabilities_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_EXCLUSIVE_SCISSOR_STATE_CREATE_INFO_NV 1000205000)
 ```
 
-## VK_NV_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_EXCLUSIVE\_SCISSOR\_FEATURES\_NV
 
-```lisp
-(defconstant vk_nv_external_memory_capabilities_extension_name VK_NV_external_memory_capabilities)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXCLUSIVE_SCISSOR_FEATURES_NV 1000205002)
 ```
 
-## VK_NV_external_memory
+#### Variable: VK\_STRUCTURE\_TYPE\_CHECKPOINT\_DATA\_NV
 
-```lisp
-(defconstant vk_nv_external_memory 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_CHECKPOINT_DATA_NV 1000206000)
 ```
 
-## VK_NV_EXTERNAL_MEMORY_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_QUEUE\_FAMILY\_CHECKPOINT\_PROPERTIES\_NV
 
-```lisp
-(defconstant vk_nv_external_memory_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV 1000206001)
 ```
 
-## VK_NV_EXTERNAL_MEMORY_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SHADER\_INTEGER\_FUNCTIONS\_2\_FEATURES\_INTEL
 
-```lisp
-(defconstant vk_nv_external_memory_extension_name VK_NV_external_memory)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_FUNCTIONS_2_FEATURES_INTEL 1000209000)
 ```
 
-## VK_EXT_validation_flags
+#### Variable: VK\_STRUCTURE\_TYPE\_QUERY\_POOL\_PERFORMANCE\_QUERY\_CREATE\_INFO\_INTEL
 
-```lisp
-(defconstant vk_ext_validation_flags 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL 1000210000)
 ```
 
-## VK_EXT_VALIDATION_FLAGS_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_INITIALIZE\_PERFORMANCE\_API\_INFO\_INTEL
 
-```lisp
-(defconstant vk_ext_validation_flags_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_INITIALIZE_PERFORMANCE_API_INFO_INTEL 1000210001)
 ```
 
-## VK_EXT_VALIDATION_FLAGS_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PERFORMANCE\_MARKER\_INFO\_INTEL
 
-```lisp
-(defconstant vk_ext_validation_flags_extension_name VK_EXT_validation_flags)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PERFORMANCE_MARKER_INFO_INTEL 1000210002)
 ```
 
-## VK_EXT_shader_subgroup_ballot
+#### Variable: VK\_STRUCTURE\_TYPE\_PERFORMANCE\_STREAM\_MARKER\_INFO\_INTEL
 
-```lisp
-(defconstant vk_ext_shader_subgroup_ballot 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PERFORMANCE_STREAM_MARKER_INFO_INTEL 1000210003)
 ```
 
-## VK_EXT_SHADER_SUBGROUP_BALLOT_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PERFORMANCE\_OVERRIDE\_INFO\_INTEL
 
-```lisp
-(defconstant vk_ext_shader_subgroup_ballot_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PERFORMANCE_OVERRIDE_INFO_INTEL 1000210004)
 ```
 
-## VK_EXT_SHADER_SUBGROUP_BALLOT_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PERFORMANCE\_CONFIGURATION\_ACQUIRE\_INFO\_INTEL
 
-```lisp
-(defconstant vk_ext_shader_subgroup_ballot_extension_name VK_EXT_shader_subgroup_ballot)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PERFORMANCE_CONFIGURATION_ACQUIRE_INFO_INTEL 1000210005)
 ```
 
-## VK_EXT_shader_subgroup_vote
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_PCI\_BUS\_INFO\_PROPERTIES\_EXT
 
-```lisp
-(defconstant vk_ext_shader_subgroup_vote 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PCI_BUS_INFO_PROPERTIES_EXT 1000212000)
 ```
 
-## VK_EXT_SHADER_SUBGROUP_VOTE_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_DISPLAY\_NATIVE\_HDR\_SURFACE\_CAPABILITIES\_AMD
 
-```lisp
-(defconstant vk_ext_shader_subgroup_vote_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DISPLAY_NATIVE_HDR_SURFACE_CAPABILITIES_AMD 1000213000)
 ```
 
-## VK_EXT_SHADER_SUBGROUP_VOTE_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_SWAPCHAIN\_DISPLAY\_NATIVE\_HDR\_CREATE\_INFO\_AMD
 
-```lisp
-(defconstant vk_ext_shader_subgroup_vote_extension_name VK_EXT_shader_subgroup_vote)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD 1000213001)
 ```
 
-## VK_EXT_texture_compression_astc_hdr
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGEPIPE\_SURFACE\_CREATE\_INFO\_FUCHSIA
 
-```lisp
-(defconstant vk_ext_texture_compression_astc_hdr 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGEPIPE_SURFACE_CREATE_INFO_FUCHSIA 1000214000)
 ```
 
-## VK_EXT_TEXTURE_COMPRESSION_ASTC_HDR_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_METAL\_SURFACE\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_ext_texture_compression_astc_hdr_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_METAL_SURFACE_CREATE_INFO_EXT 1000217000)
 ```
 
-## VK_EXT_TEXTURE_COMPRESSION_ASTC_HDR_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_FRAGMENT\_DENSITY\_MAP\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_ext_texture_compression_astc_hdr_extension_name VK_EXT_texture_compression_astc_hdr)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT 1000218000)
 ```
 
-## VK_EXT_astc_decode_mode
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_FRAGMENT\_DENSITY\_MAP\_PROPERTIES\_EXT
 
-```lisp
-(defconstant vk_ext_astc_decode_mode 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_PROPERTIES_EXT 1000218001)
 ```
 
-## VK_EXT_ASTC_DECODE_MODE_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_RENDER\_PASS\_FRAGMENT\_DENSITY\_MAP\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_ext_astc_decode_mode_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_RENDER_PASS_FRAGMENT_DENSITY_MAP_CREATE_INFO_EXT 1000218002)
 ```
 
-## VK_EXT_ASTC_DECODE_MODE_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_FRAGMENT\_SHADING\_RATE\_ATTACHMENT\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_astc_decode_mode_extension_name VK_EXT_astc_decode_mode)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR 1000226000)
 ```
 
-## VK_EXT_conditional_rendering
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_FRAGMENT\_SHADING\_RATE\_STATE\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_conditional_rendering 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_FRAGMENT_SHADING_RATE_STATE_CREATE_INFO_KHR 1000226001)
 ```
 
-## VK_EXT_CONDITIONAL_RENDERING_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_FRAGMENT\_SHADING\_RATE\_PROPERTIES\_KHR
 
-```lisp
-(defconstant vk_ext_conditional_rendering_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_PROPERTIES_KHR 1000226002)
 ```
 
-## VK_EXT_CONDITIONAL_RENDERING_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_FRAGMENT\_SHADING\_RATE\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_ext_conditional_rendering_extension_name VK_EXT_conditional_rendering)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_FEATURES_KHR 1000226003)
 ```
 
-## VK_NV_clip_space_w_scaling
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_FRAGMENT\_SHADING\_RATE\_KHR
 
-```lisp
-(defconstant vk_nv_clip_space_w_scaling 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_KHR 1000226004)
 ```
 
-## VK_NV_CLIP_SPACE_W_SCALING_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SHADER\_CORE\_PROPERTIES\_2\_AMD
 
-```lisp
-(defconstant vk_nv_clip_space_w_scaling_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_2_AMD 1000227000)
 ```
 
-## VK_NV_CLIP_SPACE_W_SCALING_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_COHERENT\_MEMORY\_FEATURES\_AMD
 
-```lisp
-(defconstant vk_nv_clip_space_w_scaling_extension_name VK_NV_clip_space_w_scaling)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COHERENT_MEMORY_FEATURES_AMD 1000229000)
 ```
 
-## VK_EXT_direct_mode_display
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SHADER\_IMAGE\_ATOMIC\_INT64\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_ext_direct_mode_display 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_ATOMIC_INT64_FEATURES_EXT 1000234000)
 ```
 
-## VK_EXT_DIRECT_MODE_DISPLAY_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_MEMORY\_BUDGET\_PROPERTIES\_EXT
 
-```lisp
-(defconstant vk_ext_direct_mode_display_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT 1000237000)
 ```
 
-## VK_EXT_DIRECT_MODE_DISPLAY_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_MEMORY\_PRIORITY\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_ext_direct_mode_display_extension_name VK_EXT_direct_mode_display)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PRIORITY_FEATURES_EXT 1000238000)
 ```
 
-## VK_EXT_display_surface_counter
+#### Variable: VK\_STRUCTURE\_TYPE\_MEMORY\_PRIORITY\_ALLOCATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_ext_display_surface_counter 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_MEMORY_PRIORITY_ALLOCATE_INFO_EXT 1000238001)
 ```
 
-## VK_EXT_DISPLAY_SURFACE_COUNTER_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_SURFACE\_PROTECTED\_CAPABILITIES\_KHR
 
-```lisp
-(defconstant vk_ext_display_surface_counter_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR 1000239000)
 ```
 
-## VK_EXT_DISPLAY_SURFACE_COUNTER_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_DEDICATED\_ALLOCATION\_IMAGE\_ALIASING\_FEATURES\_NV
 
-```lisp
-(defconstant vk_ext_display_surface_counter_extension_name VK_EXT_display_surface_counter)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEDICATED_ALLOCATION_IMAGE_ALIASING_FEATURES_NV 1000240000)
 ```
 
-## VK_EXT_display_control
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_BUFFER\_DEVICE\_ADDRESS\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_ext_display_control 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_EXT 1000244000)
 ```
 
-## VK_EXT_DISPLAY_CONTROL_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_BUFFER\_DEVICE\_ADDRESS\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_ext_display_control_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT 1000244002)
 ```
 
-## VK_EXT_DISPLAY_CONTROL_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_VALIDATION\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_ext_display_control_extension_name VK_EXT_display_control)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VALIDATION_FEATURES_EXT 1000247000)
 ```
 
-## VK_GOOGLE_display_timing
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_PRESENT\_WAIT\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_google_display_timing 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_WAIT_FEATURES_KHR 1000248000)
 ```
 
-## VK_GOOGLE_DISPLAY_TIMING_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_COOPERATIVE\_MATRIX\_FEATURES\_NV
 
-```lisp
-(defconstant vk_google_display_timing_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_NV 1000249000)
 ```
 
-## VK_GOOGLE_DISPLAY_TIMING_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_COOPERATIVE\_MATRIX\_PROPERTIES\_NV
 
-```lisp
-(defconstant vk_google_display_timing_extension_name VK_GOOGLE_display_timing)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_COOPERATIVE_MATRIX_PROPERTIES_NV 1000249001)
 ```
 
-## VK_NV_sample_mask_override_coverage
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_COOPERATIVE\_MATRIX\_PROPERTIES\_NV
 
-```lisp
-(defconstant vk_nv_sample_mask_override_coverage 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_NV 1000249002)
 ```
 
-## VK_NV_SAMPLE_MASK_OVERRIDE_COVERAGE_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_COVERAGE\_REDUCTION\_MODE\_FEATURES\_NV
 
-```lisp
-(defconstant vk_nv_sample_mask_override_coverage_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COVERAGE_REDUCTION_MODE_FEATURES_NV 1000250000)
 ```
 
-## VK_NV_SAMPLE_MASK_OVERRIDE_COVERAGE_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_COVERAGE\_REDUCTION\_STATE\_CREATE\_INFO\_NV
 
-```lisp
-(defconstant vk_nv_sample_mask_override_coverage_extension_name VK_NV_sample_mask_override_coverage)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_REDUCTION_STATE_CREATE_INFO_NV 1000250001)
 ```
 
-## VK_NV_geometry_shader_passthrough
+#### Variable: VK\_STRUCTURE\_TYPE\_FRAMEBUFFER\_MIXED\_SAMPLES\_COMBINATION\_NV
 
-```lisp
-(defconstant vk_nv_geometry_shader_passthrough 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_FRAMEBUFFER_MIXED_SAMPLES_COMBINATION_NV 1000250002)
 ```
 
-## VK_NV_GEOMETRY_SHADER_PASSTHROUGH_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_FRAGMENT\_SHADER\_INTERLOCK\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_nv_geometry_shader_passthrough_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_INTERLOCK_FEATURES_EXT 1000251000)
 ```
 
-## VK_NV_GEOMETRY_SHADER_PASSTHROUGH_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_YCBCR\_IMAGE\_ARRAYS\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_nv_geometry_shader_passthrough_extension_name VK_NV_geometry_shader_passthrough)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_IMAGE_ARRAYS_FEATURES_EXT 1000252000)
 ```
 
-## VK_NV_viewport_array2
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_PROVOKING\_VERTEX\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_nv_viewport_array2 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_FEATURES_EXT 1000254000)
 ```
 
-## VK_NV_VIEWPORT_ARRAY_2_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_RASTERIZATION\_PROVOKING\_VERTEX\_STATE\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_nv_viewport_array_2_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_PROVOKING_VERTEX_STATE_CREATE_INFO_EXT 1000254001)
 ```
 
-## VK_NV_VIEWPORT_ARRAY_2_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_PROVOKING\_VERTEX\_PROPERTIES\_EXT
 
-```lisp
-(defconstant vk_nv_viewport_array_2_extension_name VK_NV_viewport_array2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_PROPERTIES_EXT 1000254002)
 ```
 
-## VK_NV_VIEWPORT_ARRAY2_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_SURFACE\_FULL\_SCREEN\_EXCLUSIVE\_INFO\_EXT
 
-```lisp
-(defconstant vk_nv_viewport_array2_spec_version VK_NV_VIEWPORT_ARRAY_2_SPEC_VERSION)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_INFO_EXT 1000255000)
 ```
 
-## VK_NV_VIEWPORT_ARRAY2_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_SURFACE\_CAPABILITIES\_FULL\_SCREEN\_EXCLUSIVE\_EXT
 
-```lisp
-(defconstant vk_nv_viewport_array2_extension_name VK_NV_VIEWPORT_ARRAY_2_EXTENSION_NAME)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_FULL_SCREEN_EXCLUSIVE_EXT 1000255002)
 ```
 
-## VK_NVX_multiview_per_view_attributes
+#### Variable: VK\_STRUCTURE\_TYPE\_SURFACE\_FULL\_SCREEN\_EXCLUSIVE\_WIN32\_INFO\_EXT
 
-```lisp
-(defconstant vk_nvx_multiview_per_view_attributes 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT 1000255001)
 ```
 
-## VK_NVX_MULTIVIEW_PER_VIEW_ATTRIBUTES_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_HEADLESS\_SURFACE\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_nvx_multiview_per_view_attributes_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_HEADLESS_SURFACE_CREATE_INFO_EXT 1000256000)
 ```
 
-## VK_NVX_MULTIVIEW_PER_VIEW_ATTRIBUTES_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_LINE\_RASTERIZATION\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_nvx_multiview_per_view_attributes_extension_name VK_NVX_multiview_per_view_attributes)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_EXT 1000259000)
 ```
 
-## VK_NV_viewport_swizzle
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_RASTERIZATION\_LINE\_STATE\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_nv_viewport_swizzle 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_EXT 1000259001)
 ```
 
-## VK_NV_VIEWPORT_SWIZZLE_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_LINE\_RASTERIZATION\_PROPERTIES\_EXT
 
-```lisp
-(defconstant vk_nv_viewport_swizzle_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_EXT 1000259002)
 ```
 
-## VK_NV_VIEWPORT_SWIZZLE_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SHADER\_ATOMIC\_FLOAT\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_nv_viewport_swizzle_extension_name VK_NV_viewport_swizzle)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_FEATURES_EXT 1000260000)
 ```
 
-## VK_EXT_discard_rectangles
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_INDEX\_TYPE\_UINT8\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_ext_discard_rectangles 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_EXT 1000265000)
 ```
 
-## VK_EXT_DISCARD_RECTANGLES_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_EXTENDED\_DYNAMIC\_STATE\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_ext_discard_rectangles_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_FEATURES_EXT 1000267000)
 ```
 
-## VK_EXT_DISCARD_RECTANGLES_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_PIPELINE\_EXECUTABLE\_PROPERTIES\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_ext_discard_rectangles_extension_name VK_EXT_discard_rectangles)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_EXECUTABLE_PROPERTIES_FEATURES_KHR 1000269000)
 ```
 
-## VK_EXT_conservative_rasterization
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_conservative_rasterization 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_INFO_KHR 1000269001)
 ```
 
-## VK_EXT_CONSERVATIVE_RASTERIZATION_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_EXECUTABLE\_PROPERTIES\_KHR
 
-```lisp
-(defconstant vk_ext_conservative_rasterization_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_PROPERTIES_KHR 1000269002)
 ```
 
-## VK_EXT_CONSERVATIVE_RASTERIZATION_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_EXECUTABLE\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_conservative_rasterization_extension_name VK_EXT_conservative_rasterization)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INFO_KHR 1000269003)
 ```
 
-## VK_EXT_depth_clip_enable
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_EXECUTABLE\_STATISTIC\_KHR
 
-```lisp
-(defconstant vk_ext_depth_clip_enable 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_STATISTIC_KHR 1000269004)
 ```
 
-## VK_EXT_DEPTH_CLIP_ENABLE_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_EXECUTABLE\_INTERNAL\_REPRESENTATION\_KHR
 
-```lisp
-(defconstant vk_ext_depth_clip_enable_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR 1000269005)
 ```
 
-## VK_EXT_DEPTH_CLIP_ENABLE_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SHADER\_ATOMIC\_FLOAT\_2\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_ext_depth_clip_enable_extension_name VK_EXT_depth_clip_enable)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_2_FEATURES_EXT 1000273000)
 ```
 
-## VK_EXT_swapchain_colorspace
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_DEVICE\_GENERATED\_COMMANDS\_PROPERTIES\_NV
 
-```lisp
-(defconstant vk_ext_swapchain_colorspace 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_NV 1000277000)
 ```
 
-## VK_EXT_SWAPCHAIN_COLOR_SPACE_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_GRAPHICS\_SHADER\_GROUP\_CREATE\_INFO\_NV
 
-```lisp
-(defconstant vk_ext_swapchain_color_space_spec_version 4)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_GRAPHICS_SHADER_GROUP_CREATE_INFO_NV 1000277001)
 ```
 
-## VK_EXT_SWAPCHAIN_COLOR_SPACE_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_GRAPHICS\_PIPELINE\_SHADER\_GROUPS\_CREATE\_INFO\_NV
 
-```lisp
-(defconstant vk_ext_swapchain_color_space_extension_name VK_EXT_swapchain_colorspace)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_SHADER_GROUPS_CREATE_INFO_NV 1000277002)
 ```
 
-## VK_EXT_hdr_metadata
+#### Variable: VK\_STRUCTURE\_TYPE\_INDIRECT\_COMMANDS\_LAYOUT\_TOKEN\_NV
 
-```lisp
-(defconstant vk_ext_hdr_metadata 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_NV 1000277003)
 ```
 
-## VK_EXT_HDR_METADATA_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_INDIRECT\_COMMANDS\_LAYOUT\_CREATE\_INFO\_NV
 
-```lisp
-(defconstant vk_ext_hdr_metadata_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_NV 1000277004)
 ```
 
-## VK_EXT_HDR_METADATA_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_GENERATED\_COMMANDS\_INFO\_NV
 
-```lisp
-(defconstant vk_ext_hdr_metadata_extension_name VK_EXT_hdr_metadata)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_GENERATED_COMMANDS_INFO_NV 1000277005)
 ```
 
-## VK_EXT_external_memory_dma_buf
+#### Variable: VK\_STRUCTURE\_TYPE\_GENERATED\_COMMANDS\_MEMORY\_REQUIREMENTS\_INFO\_NV
 
-```lisp
-(defconstant vk_ext_external_memory_dma_buf 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_NV 1000277006)
 ```
 
-## VK_EXT_EXTERNAL_MEMORY_DMA_BUF_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_DEVICE\_GENERATED\_COMMANDS\_FEATURES\_NV
 
-```lisp
-(defconstant vk_ext_external_memory_dma_buf_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_NV 1000277007)
 ```
 
-## VK_EXT_EXTERNAL_MEMORY_DMA_BUF_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_INHERITED\_VIEWPORT\_SCISSOR\_FEATURES\_NV
 
-```lisp
-(defconstant vk_ext_external_memory_dma_buf_extension_name VK_EXT_external_memory_dma_buf)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INHERITED_VIEWPORT_SCISSOR_FEATURES_NV 1000278000)
 ```
 
-## VK_EXT_queue_family_foreign
+#### Variable: VK\_STRUCTURE\_TYPE\_COMMAND\_BUFFER\_INHERITANCE\_VIEWPORT\_SCISSOR\_INFO\_NV
 
-```lisp
-(defconstant vk_ext_queue_family_foreign 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_VIEWPORT_SCISSOR_INFO_NV 1000278001)
 ```
 
-## VK_EXT_QUEUE_FAMILY_FOREIGN_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_TEXEL\_BUFFER\_ALIGNMENT\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_ext_queue_family_foreign_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_FEATURES_EXT 1000281000)
 ```
 
-## VK_EXT_QUEUE_FAMILY_FOREIGN_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_COMMAND\_BUFFER\_INHERITANCE\_RENDER\_PASS\_TRANSFORM\_INFO\_QCOM
 
-```lisp
-(defconstant vk_ext_queue_family_foreign_extension_name VK_EXT_queue_family_foreign)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDER_PASS_TRANSFORM_INFO_QCOM 1000282000)
 ```
 
-## VK_QUEUE_FAMILY_FOREIGN_EXT
+#### Variable: VK\_STRUCTURE\_TYPE\_RENDER\_PASS\_TRANSFORM\_BEGIN\_INFO\_QCOM
 
-```lisp
-(defconstant vk_queue_family_foreign_ext (- UINT32_MAX 2))
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_RENDER_PASS_TRANSFORM_BEGIN_INFO_QCOM 1000282001)
 ```
 
-## VK_EXT_debug_utils
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_DEVICE\_MEMORY\_REPORT\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_ext_debug_utils 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_MEMORY_REPORT_FEATURES_EXT 1000284000)
 ```
 
-## VK_EXT_DEBUG_UTILS_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_DEVICE\_DEVICE\_MEMORY\_REPORT\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_ext_debug_utils_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEVICE_DEVICE_MEMORY_REPORT_CREATE_INFO_EXT 1000284001)
 ```
 
-## VK_EXT_DEBUG_UTILS_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_DEVICE\_MEMORY\_REPORT\_CALLBACK\_DATA\_EXT
 
-```lisp
-(defconstant vk_ext_debug_utils_extension_name VK_EXT_debug_utils)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT 1000284002)
 ```
 
-## VK_EXT_sampler_filter_minmax
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_ROBUSTNESS\_2\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_ext_sampler_filter_minmax 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_EXT 1000286000)
 ```
 
-## VK_EXT_SAMPLER_FILTER_MINMAX_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_ROBUSTNESS\_2\_PROPERTIES\_EXT
 
-```lisp
-(defconstant vk_ext_sampler_filter_minmax_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_EXT 1000286001)
 ```
 
-## VK_EXT_SAMPLER_FILTER_MINMAX_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_SAMPLER\_CUSTOM\_BORDER\_COLOR\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_ext_sampler_filter_minmax_extension_name VK_EXT_sampler_filter_minmax)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SAMPLER_CUSTOM_BORDER_COLOR_CREATE_INFO_EXT 1000287000)
 ```
 
-## VK_AMD_gpu_shader_int16
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_CUSTOM\_BORDER\_COLOR\_PROPERTIES\_EXT
 
-```lisp
-(defconstant vk_amd_gpu_shader_int16 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_PROPERTIES_EXT 1000287001)
 ```
 
-## VK_AMD_GPU_SHADER_INT16_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_CUSTOM\_BORDER\_COLOR\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_amd_gpu_shader_int16_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_FEATURES_EXT 1000287002)
 ```
 
-## VK_AMD_GPU_SHADER_INT16_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_LIBRARY\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_amd_gpu_shader_int16_extension_name VK_AMD_gpu_shader_int16)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_LIBRARY_CREATE_INFO_KHR 1000290000)
 ```
 
-## VK_AMD_mixed_attachment_samples
+#### Variable: VK\_STRUCTURE\_TYPE\_PRESENT\_ID\_KHR
 
-```lisp
-(defconstant vk_amd_mixed_attachment_samples 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PRESENT_ID_KHR 1000294000)
 ```
 
-## VK_AMD_MIXED_ATTACHMENT_SAMPLES_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_PRESENT\_ID\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_amd_mixed_attachment_samples_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_ID_FEATURES_KHR 1000294001)
 ```
 
-## VK_AMD_MIXED_ATTACHMENT_SAMPLES_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_ENCODE\_INFO\_KHR
 
-```lisp
-(defconstant vk_amd_mixed_attachment_samples_extension_name VK_AMD_mixed_attachment_samples)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_ENCODE_INFO_KHR 1000299000)
 ```
 
-## VK_AMD_shader_fragment_mask
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_ENCODE\_RATE\_CONTROL\_INFO\_KHR
 
-```lisp
-(defconstant vk_amd_shader_fragment_mask 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_INFO_KHR 1000299001)
 ```
 
-## VK_AMD_SHADER_FRAGMENT_MASK_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_ENCODE\_RATE\_CONTROL\_LAYER\_INFO\_KHR
 
-```lisp
-(defconstant vk_amd_shader_fragment_mask_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR 1000299002)
 ```
 
-## VK_AMD_SHADER_FRAGMENT_MASK_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_VIDEO\_ENCODE\_CAPABILITIES\_KHR
 
-```lisp
-(defconstant vk_amd_shader_fragment_mask_extension_name VK_AMD_shader_fragment_mask)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR 1000299003)
 ```
 
-## VK_EXT_inline_uniform_block
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_DIAGNOSTICS\_CONFIG\_FEATURES\_NV
 
-```lisp
-(defconstant vk_ext_inline_uniform_block 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV 1000300000)
 ```
 
-## VK_EXT_INLINE_UNIFORM_BLOCK_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_DEVICE\_DIAGNOSTICS\_CONFIG\_CREATE\_INFO\_NV
 
-```lisp
-(defconstant vk_ext_inline_uniform_block_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV 1000300001)
 ```
 
-## VK_EXT_INLINE_UNIFORM_BLOCK_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_QUEUE\_FAMILY\_CHECKPOINT\_PROPERTIES\_2\_NV
 
-```lisp
-(defconstant vk_ext_inline_uniform_block_extension_name VK_EXT_inline_uniform_block)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV 1000314008)
 ```
 
-## VK_EXT_shader_stencil_export
+#### Variable: VK\_STRUCTURE\_TYPE\_CHECKPOINT\_DATA\_2\_NV
 
-```lisp
-(defconstant vk_ext_shader_stencil_export 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV 1000314009)
 ```
 
-## VK_EXT_SHADER_STENCIL_EXPORT_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_GRAPHICS\_PIPELINE\_LIBRARY\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_ext_shader_stencil_export_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_FEATURES_EXT 1000320000)
 ```
 
-## VK_EXT_SHADER_STENCIL_EXPORT_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_GRAPHICS\_PIPELINE\_LIBRARY\_PROPERTIES\_EXT
 
-```lisp
-(defconstant vk_ext_shader_stencil_export_extension_name VK_EXT_shader_stencil_export)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_PROPERTIES_EXT 1000320001)
 ```
 
-## VK_EXT_sample_locations
+#### Variable: VK\_STRUCTURE\_TYPE\_GRAPHICS\_PIPELINE\_LIBRARY\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_ext_sample_locations 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_LIBRARY_CREATE_INFO_EXT 1000320002)
 ```
 
-## VK_EXT_SAMPLE_LOCATIONS_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SHADER\_EARLY\_AND\_LATE\_FRAGMENT\_TESTS\_FEATURES\_AMD
 
-```lisp
-(defconstant vk_ext_sample_locations_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_FEATURES_AMD 1000321000)
 ```
 
-## VK_EXT_SAMPLE_LOCATIONS_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_FRAGMENT\_SHADER\_BARYCENTRIC\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_ext_sample_locations_extension_name VK_EXT_sample_locations)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_BARYCENTRIC_FEATURES_KHR 1000203000)
 ```
 
-## VK_EXT_blend_operation_advanced
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_FRAGMENT\_SHADER\_BARYCENTRIC\_PROPERTIES\_KHR
 
-```lisp
-(defconstant vk_ext_blend_operation_advanced 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_BARYCENTRIC_PROPERTIES_KHR 1000322000)
 ```
 
-## VK_EXT_BLEND_OPERATION_ADVANCED_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SHADER\_SUBGROUP\_UNIFORM\_CONTROL\_FLOW\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_ext_blend_operation_advanced_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR 1000323000)
 ```
 
-## VK_EXT_BLEND_OPERATION_ADVANCED_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_FRAGMENT\_SHADING\_RATE\_ENUMS\_PROPERTIES\_NV
 
-```lisp
-(defconstant vk_ext_blend_operation_advanced_extension_name VK_EXT_blend_operation_advanced)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_PROPERTIES_NV 1000326000)
 ```
 
-## VK_NV_fragment_coverage_to_color
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_FRAGMENT\_SHADING\_RATE\_ENUMS\_FEATURES\_NV
 
-```lisp
-(defconstant vk_nv_fragment_coverage_to_color 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_FEATURES_NV 1000326001)
 ```
 
-## VK_NV_FRAGMENT_COVERAGE_TO_COLOR_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_FRAGMENT\_SHADING\_RATE\_ENUM\_STATE\_CREATE\_INFO\_NV
 
-```lisp
-(defconstant vk_nv_fragment_coverage_to_color_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_FRAGMENT_SHADING_RATE_ENUM_STATE_CREATE_INFO_NV 1000326002)
 ```
 
-## VK_NV_FRAGMENT_COVERAGE_TO_COLOR_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_ACCELERATION\_STRUCTURE\_GEOMETRY\_MOTION\_TRIANGLES\_DATA\_NV
 
-```lisp
-(defconstant vk_nv_fragment_coverage_to_color_extension_name VK_NV_fragment_coverage_to_color)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_MOTION_TRIANGLES_DATA_NV 1000327000)
 ```
 
-## VK_NV_framebuffer_mixed_samples
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_RAY\_TRACING\_MOTION\_BLUR\_FEATURES\_NV
 
-```lisp
-(defconstant vk_nv_framebuffer_mixed_samples 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_MOTION_BLUR_FEATURES_NV 1000327001)
 ```
 
-## VK_NV_FRAMEBUFFER_MIXED_SAMPLES_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_ACCELERATION\_STRUCTURE\_MOTION\_INFO\_NV
 
-```lisp
-(defconstant vk_nv_framebuffer_mixed_samples_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MOTION_INFO_NV 1000327002)
 ```
 
-## VK_NV_FRAMEBUFFER_MIXED_SAMPLES_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_YCBCR\_2\_PLANE\_444\_FORMATS\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_nv_framebuffer_mixed_samples_extension_name VK_NV_framebuffer_mixed_samples)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT 1000330000)
 ```
 
-## VK_NV_fill_rectangle
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_FRAGMENT\_DENSITY\_MAP\_2\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_nv_fill_rectangle 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_FEATURES_EXT 1000332000)
 ```
 
-## VK_NV_FILL_RECTANGLE_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_FRAGMENT\_DENSITY\_MAP\_2\_PROPERTIES\_EXT
 
-```lisp
-(defconstant vk_nv_fill_rectangle_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT 1000332001)
 ```
 
-## VK_NV_FILL_RECTANGLE_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_COPY\_COMMAND\_TRANSFORM\_INFO\_QCOM
 
-```lisp
-(defconstant vk_nv_fill_rectangle_extension_name VK_NV_fill_rectangle)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_COPY_COMMAND_TRANSFORM_INFO_QCOM 1000333000)
 ```
 
-## VK_NV_shader_sm_builtins
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_WORKGROUP\_MEMORY\_EXPLICIT\_LAYOUT\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_nv_shader_sm_builtins 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_WORKGROUP_MEMORY_EXPLICIT_LAYOUT_FEATURES_KHR 1000336000)
 ```
 
-## VK_NV_SHADER_SM_BUILTINS_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_IMAGE\_COMPRESSION\_CONTROL\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_nv_shader_sm_builtins_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_FEATURES_EXT 1000338000)
 ```
 
-## VK_NV_SHADER_SM_BUILTINS_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_COMPRESSION\_CONTROL\_EXT
 
-```lisp
-(defconstant vk_nv_shader_sm_builtins_extension_name VK_NV_shader_sm_builtins)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_COMPRESSION_CONTROL_EXT 1000338001)
 ```
 
-## VK_EXT_post_depth_coverage
+#### Variable: VK\_STRUCTURE\_TYPE\_SUBRESOURCE\_LAYOUT\_2\_EXT
 
-```lisp
-(defconstant vk_ext_post_depth_coverage 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2_EXT 1000338002)
 ```
 
-## VK_EXT_POST_DEPTH_COVERAGE_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_SUBRESOURCE\_2\_EXT
 
-```lisp
-(defconstant vk_ext_post_depth_coverage_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2_EXT 1000338003)
 ```
 
-## VK_EXT_POST_DEPTH_COVERAGE_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_COMPRESSION\_PROPERTIES\_EXT
 
-```lisp
-(defconstant vk_ext_post_depth_coverage_extension_name VK_EXT_post_depth_coverage)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_COMPRESSION_PROPERTIES_EXT 1000338004)
 ```
 
-## VK_EXT_image_drm_format_modifier
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_4444\_FORMATS\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_ext_image_drm_format_modifier 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT 1000340000)
 ```
 
-## VK_EXT_IMAGE_DRM_FORMAT_MODIFIER_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_RASTERIZATION\_ORDER\_ATTACHMENT\_ACCESS\_FEATURES\_ARM
 
-```lisp
-(defconstant vk_ext_image_drm_format_modifier_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_FEATURES_ARM 1000342000)
 ```
 
-## VK_EXT_IMAGE_DRM_FORMAT_MODIFIER_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_RGBA10X6\_FORMATS\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_ext_image_drm_format_modifier_extension_name VK_EXT_image_drm_format_modifier)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RGBA10X6_FORMATS_FEATURES_EXT 1000344000)
 ```
 
-## VK_EXT_validation_cache
+#### Variable: VK\_STRUCTURE\_TYPE\_DIRECTFB\_SURFACE\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_ext_validation_cache 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DIRECTFB_SURFACE_CREATE_INFO_EXT 1000346000)
 ```
 
-## VK_EXT_VALIDATION_CACHE_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_MUTABLE\_DESCRIPTOR\_TYPE\_FEATURES\_VALVE
 
-```lisp
-(defconstant vk_ext_validation_cache_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_VALVE 1000351000)
 ```
 
-## VK_EXT_VALIDATION_CACHE_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_MUTABLE\_DESCRIPTOR\_TYPE\_CREATE\_INFO\_VALVE
 
-```lisp
-(defconstant vk_ext_validation_cache_extension_name VK_EXT_validation_cache)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_VALVE 1000351002)
 ```
 
-## VK_EXT_descriptor_indexing
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_VERTEX\_INPUT\_DYNAMIC\_STATE\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_ext_descriptor_indexing 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_INPUT_DYNAMIC_STATE_FEATURES_EXT 1000352000)
 ```
 
-## VK_EXT_DESCRIPTOR_INDEXING_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_VERTEX\_INPUT\_BINDING\_DESCRIPTION\_2\_EXT
 
-```lisp
-(defconstant vk_ext_descriptor_indexing_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT 1000352001)
 ```
 
-## VK_EXT_DESCRIPTOR_INDEXING_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_VERTEX\_INPUT\_ATTRIBUTE\_DESCRIPTION\_2\_EXT
 
-```lisp
-(defconstant vk_ext_descriptor_indexing_extension_name VK_EXT_descriptor_indexing)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_VERTEX_INPUT_ATTRIBUTE_DESCRIPTION_2_EXT 1000352002)
 ```
 
-## VK_EXT_shader_viewport_index_layer
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_DRM\_PROPERTIES\_EXT
 
-```lisp
-(defconstant vk_ext_shader_viewport_index_layer 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRM_PROPERTIES_EXT 1000353000)
 ```
 
-## VK_EXT_SHADER_VIEWPORT_INDEX_LAYER_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_DEPTH\_CLIP\_CONTROL\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_ext_shader_viewport_index_layer_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_CONTROL_FEATURES_EXT 1000355000)
 ```
 
-## VK_EXT_SHADER_VIEWPORT_INDEX_LAYER_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_VIEWPORT\_DEPTH\_CLIP\_CONTROL\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_ext_shader_viewport_index_layer_extension_name VK_EXT_shader_viewport_index_layer)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_DEPTH_CLIP_CONTROL_CREATE_INFO_EXT 1000355001)
 ```
 
-## VK_NV_shading_rate_image
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_PRIMITIVE\_TOPOLOGY\_LIST\_RESTART\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_nv_shading_rate_image 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVE_TOPOLOGY_LIST_RESTART_FEATURES_EXT 1000356000)
 ```
 
-## VK_NV_SHADING_RATE_IMAGE_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_IMPORT\_MEMORY\_ZIRCON\_HANDLE\_INFO\_FUCHSIA
 
-```lisp
-(defconstant vk_nv_shading_rate_image_spec_version 3)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMPORT_MEMORY_ZIRCON_HANDLE_INFO_FUCHSIA 1000364000)
 ```
 
-## VK_NV_SHADING_RATE_IMAGE_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_MEMORY\_ZIRCON\_HANDLE\_PROPERTIES\_FUCHSIA
 
-```lisp
-(defconstant vk_nv_shading_rate_image_extension_name VK_NV_shading_rate_image)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_MEMORY_ZIRCON_HANDLE_PROPERTIES_FUCHSIA 1000364001)
 ```
 
-## VK_NV_ray_tracing
+#### Variable: VK\_STRUCTURE\_TYPE\_MEMORY\_GET\_ZIRCON\_HANDLE\_INFO\_FUCHSIA
 
-```lisp
-(defconstant vk_nv_ray_tracing 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_MEMORY_GET_ZIRCON_HANDLE_INFO_FUCHSIA 1000364002)
 ```
 
-## VK_NV_RAY_TRACING_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_IMPORT\_SEMAPHORE\_ZIRCON\_HANDLE\_INFO\_FUCHSIA
 
-```lisp
-(defconstant vk_nv_ray_tracing_spec_version 3)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_ZIRCON_HANDLE_INFO_FUCHSIA 1000365000)
 ```
 
-## VK_NV_RAY_TRACING_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_SEMAPHORE\_GET\_ZIRCON\_HANDLE\_INFO\_FUCHSIA
 
-```lisp
-(defconstant vk_nv_ray_tracing_extension_name VK_NV_ray_tracing)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SEMAPHORE_GET_ZIRCON_HANDLE_INFO_FUCHSIA 1000365001)
 ```
 
-## VK_SHADER_UNUSED_KHR
+#### Variable: VK\_STRUCTURE\_TYPE\_BUFFER\_COLLECTION\_CREATE\_INFO\_FUCHSIA
 
-```lisp
-(defconstant vk_shader_unused_khr (- UINT32_MAX 0))
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BUFFER_COLLECTION_CREATE_INFO_FUCHSIA 1000366000)
 ```
 
-## VK_SHADER_UNUSED_NV
+#### Variable: VK\_STRUCTURE\_TYPE\_IMPORT\_MEMORY\_BUFFER\_COLLECTION\_FUCHSIA
 
-```lisp
-(defconstant vk_shader_unused_nv VK_SHADER_UNUSED_KHR)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMPORT_MEMORY_BUFFER_COLLECTION_FUCHSIA 1000366001)
 ```
 
-## VK_NV_representative_fragment_test
+#### Variable: VK\_STRUCTURE\_TYPE\_BUFFER\_COLLECTION\_IMAGE\_CREATE\_INFO\_FUCHSIA
 
-```lisp
-(defconstant vk_nv_representative_fragment_test 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BUFFER_COLLECTION_IMAGE_CREATE_INFO_FUCHSIA 1000366002)
 ```
 
-## VK_NV_REPRESENTATIVE_FRAGMENT_TEST_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_BUFFER\_COLLECTION\_PROPERTIES\_FUCHSIA
 
-```lisp
-(defconstant vk_nv_representative_fragment_test_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BUFFER_COLLECTION_PROPERTIES_FUCHSIA 1000366003)
 ```
 
-## VK_NV_REPRESENTATIVE_FRAGMENT_TEST_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_BUFFER\_CONSTRAINTS\_INFO\_FUCHSIA
 
-```lisp
-(defconstant vk_nv_representative_fragment_test_extension_name VK_NV_representative_fragment_test)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BUFFER_CONSTRAINTS_INFO_FUCHSIA 1000366004)
 ```
 
-## VK_EXT_filter_cubic
+#### Variable: VK\_STRUCTURE\_TYPE\_BUFFER\_COLLECTION\_BUFFER\_CREATE\_INFO\_FUCHSIA
 
-```lisp
-(defconstant vk_ext_filter_cubic 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BUFFER_COLLECTION_BUFFER_CREATE_INFO_FUCHSIA 1000366005)
 ```
 
-## VK_EXT_FILTER_CUBIC_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_CONSTRAINTS\_INFO\_FUCHSIA
 
-```lisp
-(defconstant vk_ext_filter_cubic_spec_version 3)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_CONSTRAINTS_INFO_FUCHSIA 1000366006)
 ```
 
-## VK_EXT_FILTER_CUBIC_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_FORMAT\_CONSTRAINTS\_INFO\_FUCHSIA
 
-```lisp
-(defconstant vk_ext_filter_cubic_extension_name VK_EXT_filter_cubic)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_FORMAT_CONSTRAINTS_INFO_FUCHSIA 1000366007)
 ```
 
-## VK_QCOM_render_pass_shader_resolve
+#### Variable: VK\_STRUCTURE\_TYPE\_SYSMEM\_COLOR\_SPACE\_FUCHSIA
 
-```lisp
-(defconstant vk_qcom_render_pass_shader_resolve 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SYSMEM_COLOR_SPACE_FUCHSIA 1000366008)
 ```
 
-## VK_QCOM_RENDER_PASS_SHADER_RESOLVE_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_BUFFER\_COLLECTION\_CONSTRAINTS\_INFO\_FUCHSIA
 
-```lisp
-(defconstant vk_qcom_render_pass_shader_resolve_spec_version 4)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BUFFER_COLLECTION_CONSTRAINTS_INFO_FUCHSIA 1000366009)
 ```
 
-## VK_QCOM_RENDER_PASS_SHADER_RESOLVE_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_SUBPASS\_SHADING\_PIPELINE\_CREATE\_INFO\_HUAWEI
 
-```lisp
-(defconstant vk_qcom_render_pass_shader_resolve_extension_name VK_QCOM_render_pass_shader_resolve)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SUBPASS_SHADING_PIPELINE_CREATE_INFO_HUAWEI 1000369000)
 ```
 
-## VK_EXT_global_priority
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SUBPASS\_SHADING\_FEATURES\_HUAWEI
 
-```lisp
-(defconstant vk_ext_global_priority 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_FEATURES_HUAWEI 1000369001)
 ```
 
-## VK_EXT_GLOBAL_PRIORITY_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SUBPASS\_SHADING\_PROPERTIES\_HUAWEI
 
-```lisp
-(defconstant vk_ext_global_priority_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_PROPERTIES_HUAWEI 1000369002)
 ```
 
-## VK_EXT_GLOBAL_PRIORITY_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_INVOCATION\_MASK\_FEATURES\_HUAWEI
 
-```lisp
-(defconstant vk_ext_global_priority_extension_name VK_EXT_global_priority)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INVOCATION_MASK_FEATURES_HUAWEI 1000370000)
 ```
 
-## VK_EXT_external_memory_host
+#### Variable: VK\_STRUCTURE\_TYPE\_MEMORY\_GET\_REMOTE\_ADDRESS\_INFO\_NV
 
-```lisp
-(defconstant vk_ext_external_memory_host 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_MEMORY_GET_REMOTE_ADDRESS_INFO_NV 1000371000)
 ```
 
-## VK_EXT_EXTERNAL_MEMORY_HOST_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_EXTERNAL\_MEMORY\_RDMA\_FEATURES\_NV
 
-```lisp
-(defconstant vk_ext_external_memory_host_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_RDMA_FEATURES_NV 1000371001)
 ```
 
-## VK_EXT_EXTERNAL_MEMORY_HOST_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_PROPERTIES\_IDENTIFIER\_EXT
 
-```lisp
-(defconstant vk_ext_external_memory_host_extension_name VK_EXT_external_memory_host)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_PROPERTIES_IDENTIFIER_EXT 1000372000)
 ```
 
-## VK_AMD_buffer_marker
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_PIPELINE\_PROPERTIES\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_amd_buffer_marker 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_PROPERTIES_FEATURES_EXT 1000372001)
 ```
 
-## VK_AMD_BUFFER_MARKER_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_EXTENDED\_DYNAMIC\_STATE\_2\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_amd_buffer_marker_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT 1000377000)
 ```
 
-## VK_AMD_BUFFER_MARKER_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_SCREEN\_SURFACE\_CREATE\_INFO\_QNX
 
-```lisp
-(defconstant vk_amd_buffer_marker_extension_name VK_AMD_buffer_marker)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SCREEN_SURFACE_CREATE_INFO_QNX 1000378000)
 ```
 
-## VK_AMD_pipeline_compiler_control
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_COLOR\_WRITE\_ENABLE\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_amd_pipeline_compiler_control 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT 1000381000)
 ```
 
-## VK_AMD_PIPELINE_COMPILER_CONTROL_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_COLOR\_WRITE\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_amd_pipeline_compiler_control_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_COLOR_WRITE_CREATE_INFO_EXT 1000381001)
 ```
 
-## VK_AMD_PIPELINE_COMPILER_CONTROL_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_PRIMITIVES\_GENERATED\_QUERY\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_amd_pipeline_compiler_control_extension_name VK_AMD_pipeline_compiler_control)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVES_GENERATED_QUERY_FEATURES_EXT 1000382000)
 ```
 
-## VK_EXT_calibrated_timestamps
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_RAY\_TRACING\_MAINTENANCE\_1\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_ext_calibrated_timestamps 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_MAINTENANCE_1_FEATURES_KHR 1000386000)
 ```
 
-## VK_EXT_CALIBRATED_TIMESTAMPS_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_IMAGE\_VIEW\_MIN\_LOD\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_ext_calibrated_timestamps_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_VIEW_MIN_LOD_FEATURES_EXT 1000391000)
 ```
 
-## VK_EXT_CALIBRATED_TIMESTAMPS_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_VIEW\_MIN\_LOD\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_ext_calibrated_timestamps_extension_name VK_EXT_calibrated_timestamps)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_VIEW_MIN_LOD_CREATE_INFO_EXT 1000391001)
 ```
 
-## VK_AMD_shader_core_properties
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_MULTI\_DRAW\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_amd_shader_core_properties 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT 1000392000)
 ```
 
-## VK_AMD_SHADER_CORE_PROPERTIES_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_MULTI\_DRAW\_PROPERTIES\_EXT
 
-```lisp
-(defconstant vk_amd_shader_core_properties_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_PROPERTIES_EXT 1000392001)
 ```
 
-## VK_AMD_SHADER_CORE_PROPERTIES_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_IMAGE\_2D\_VIEW\_OF\_3D\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_amd_shader_core_properties_extension_name VK_AMD_shader_core_properties)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_2D_VIEW_OF_3D_FEATURES_EXT 1000393000)
 ```
 
-## VK_AMD_memory_overallocation_behavior
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_BORDER\_COLOR\_SWIZZLE\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_amd_memory_overallocation_behavior 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BORDER_COLOR_SWIZZLE_FEATURES_EXT 1000411000)
 ```
 
-## VK_AMD_MEMORY_OVERALLOCATION_BEHAVIOR_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_SAMPLER\_BORDER\_COLOR\_COMPONENT\_MAPPING\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_amd_memory_overallocation_behavior_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SAMPLER_BORDER_COLOR_COMPONENT_MAPPING_CREATE_INFO_EXT 1000411001)
 ```
 
-## VK_AMD_MEMORY_OVERALLOCATION_BEHAVIOR_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_PAGEABLE\_DEVICE\_LOCAL\_MEMORY\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_amd_memory_overallocation_behavior_extension_name VK_AMD_memory_overallocation_behavior)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT 1000412000)
 ```
 
-## VK_EXT_vertex_attribute_divisor
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_DESCRIPTOR\_SET\_HOST\_MAPPING\_FEATURES\_VALVE
 
-```lisp
-(defconstant vk_ext_vertex_attribute_divisor 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_SET_HOST_MAPPING_FEATURES_VALVE 1000420000)
 ```
 
-## VK_EXT_VERTEX_ATTRIBUTE_DIVISOR_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_DESCRIPTOR\_SET\_BINDING\_REFERENCE\_VALVE
 
-```lisp
-(defconstant vk_ext_vertex_attribute_divisor_spec_version 3)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DESCRIPTOR_SET_BINDING_REFERENCE_VALVE 1000420001)
 ```
 
-## VK_EXT_VERTEX_ATTRIBUTE_DIVISOR_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_DESCRIPTOR\_SET\_LAYOUT\_HOST\_MAPPING\_INFO\_VALVE
 
-```lisp
-(defconstant vk_ext_vertex_attribute_divisor_extension_name VK_EXT_vertex_attribute_divisor)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_HOST_MAPPING_INFO_VALVE 1000420002)
 ```
 
-## VK_EXT_pipeline_creation_feedback
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_FRAGMENT\_DENSITY\_MAP\_OFFSET\_FEATURES\_QCOM
 
-```lisp
-(defconstant vk_ext_pipeline_creation_feedback 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_FEATURES_QCOM 1000425000)
 ```
 
-## VK_EXT_PIPELINE_CREATION_FEEDBACK_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_FRAGMENT\_DENSITY\_MAP\_OFFSET\_PROPERTIES\_QCOM
 
-```lisp
-(defconstant vk_ext_pipeline_creation_feedback_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_PROPERTIES_QCOM 1000425001)
 ```
 
-## VK_EXT_PIPELINE_CREATION_FEEDBACK_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_SUBPASS\_FRAGMENT\_DENSITY\_MAP\_OFFSET\_END\_INFO\_QCOM
 
-```lisp
-(defconstant vk_ext_pipeline_creation_feedback_extension_name VK_EXT_pipeline_creation_feedback)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SUBPASS_FRAGMENT_DENSITY_MAP_OFFSET_END_INFO_QCOM 1000425002)
 ```
 
-## VK_NV_shader_subgroup_partitioned
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_LINEAR\_COLOR\_ATTACHMENT\_FEATURES\_NV
 
-```lisp
-(defconstant vk_nv_shader_subgroup_partitioned 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV 1000430000)
 ```
 
-## VK_NV_SHADER_SUBGROUP_PARTITIONED_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_IMAGE\_COMPRESSION\_CONTROL\_SWAPCHAIN\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_nv_shader_subgroup_partitioned_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_FEATURES_EXT 1000437000)
 ```
 
-## VK_NV_SHADER_SUBGROUP_PARTITIONED_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SUBPASS\_MERGE\_FEEDBACK\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_nv_shader_subgroup_partitioned_extension_name VK_NV_shader_subgroup_partitioned)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT 1000458000)
 ```
 
-## VK_NV_compute_shader_derivatives
+#### Variable: VK\_STRUCTURE\_TYPE\_RENDER\_PASS\_CREATION\_CONTROL\_EXT
 
-```lisp
-(defconstant vk_nv_compute_shader_derivatives 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_CONTROL_EXT 1000458001)
 ```
 
-## VK_NV_COMPUTE_SHADER_DERIVATIVES_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_RENDER\_PASS\_CREATION\_FEEDBACK\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_nv_compute_shader_derivatives_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_FEEDBACK_CREATE_INFO_EXT 1000458002)
 ```
 
-## VK_NV_COMPUTE_SHADER_DERIVATIVES_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_RENDER\_PASS\_SUBPASS\_FEEDBACK\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_nv_compute_shader_derivatives_extension_name VK_NV_compute_shader_derivatives)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_RENDER_PASS_SUBPASS_FEEDBACK_CREATE_INFO_EXT 1000458003)
 ```
 
-## VK_NV_mesh_shader
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_VARIABLE\_POINTER\_FEATURES
 
-```lisp
-(defconstant vk_nv_mesh_shader 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES)
 ```
 
-## VK_NV_MESH_SHADER_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SHADER\_DRAW\_PARAMETER\_FEATURES
 
-```lisp
-(defconstant vk_nv_mesh_shader_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES)
 ```
 
-## VK_NV_MESH_SHADER_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_DEBUG\_REPORT\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_nv_mesh_shader_extension_name VK_NV_mesh_shader)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEBUG_REPORT_CREATE_INFO_EXT VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT)
 ```
 
-## VK_NV_fragment_shader_barycentric
+#### Variable: VK\_STRUCTURE\_TYPE\_RENDERING\_INFO\_KHR
 
-```lisp
-(defconstant vk_nv_fragment_shader_barycentric 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_RENDERING_INFO_KHR VK_STRUCTURE_TYPE_RENDERING_INFO)
 ```
 
-## VK_NV_FRAGMENT_SHADER_BARYCENTRIC_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_RENDERING\_ATTACHMENT\_INFO\_KHR
 
-```lisp
-(defconstant vk_nv_fragment_shader_barycentric_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_INFO_KHR VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_INFO)
 ```
 
-## VK_NV_FRAGMENT_SHADER_BARYCENTRIC_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_RENDERING\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_nv_fragment_shader_barycentric_extension_name VK_NV_fragment_shader_barycentric)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_RENDERING_CREATE_INFO_KHR VK_STRUCTURE_TYPE_PIPELINE_RENDERING_CREATE_INFO)
 ```
 
-## VK_NV_shader_image_footprint
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_DYNAMIC\_RENDERING\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_nv_shader_image_footprint 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_FEATURES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_FEATURES)
 ```
 
-## VK_NV_SHADER_IMAGE_FOOTPRINT_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_COMMAND\_BUFFER\_INHERITANCE\_RENDERING\_INFO\_KHR
 
-```lisp
-(defconstant vk_nv_shader_image_footprint_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO_KHR VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO)
 ```
 
-## VK_NV_SHADER_IMAGE_FOOTPRINT_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_ATTACHMENT\_SAMPLE\_COUNT\_INFO\_NV
 
-```lisp
-(defconstant vk_nv_shader_image_footprint_extension_name VK_NV_shader_image_footprint)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_NV VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD)
 ```
 
-## VK_NV_scissor_exclusive
+#### Variable: VK\_STRUCTURE\_TYPE\_RENDER\_PASS\_MULTIVIEW\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_nv_scissor_exclusive 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO_KHR VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO)
 ```
 
-## VK_NV_SCISSOR_EXCLUSIVE_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_MULTIVIEW\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_nv_scissor_exclusive_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES)
 ```
 
-## VK_NV_SCISSOR_EXCLUSIVE_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_MULTIVIEW\_PROPERTIES\_KHR
 
-```lisp
-(defconstant vk_nv_scissor_exclusive_extension_name VK_NV_scissor_exclusive)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES)
 ```
 
-## VK_NV_device_diagnostic_checkpoints
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_FEATURES\_2\_KHR
 
-```lisp
-(defconstant vk_nv_device_diagnostic_checkpoints 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2)
 ```
 
-## VK_NV_DEVICE_DIAGNOSTIC_CHECKPOINTS_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_PROPERTIES\_2\_KHR
 
-```lisp
-(defconstant vk_nv_device_diagnostic_checkpoints_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2)
 ```
 
-## VK_NV_DEVICE_DIAGNOSTIC_CHECKPOINTS_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_FORMAT\_PROPERTIES\_2\_KHR
 
-```lisp
-(defconstant vk_nv_device_diagnostic_checkpoints_extension_name VK_NV_device_diagnostic_checkpoints)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2_KHR VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2)
 ```
 
-## VK_INTEL_shader_integer_functions2
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_FORMAT\_PROPERTIES\_2\_KHR
 
-```lisp
-(defconstant vk_intel_shader_integer_functions2 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2_KHR VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2)
 ```
 
-## VK_INTEL_SHADER_INTEGER_FUNCTIONS_2_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_IMAGE\_FORMAT\_INFO\_2\_KHR
 
-```lisp
-(defconstant vk_intel_shader_integer_functions_2_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2)
 ```
 
-## VK_INTEL_SHADER_INTEGER_FUNCTIONS_2_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_QUEUE\_FAMILY\_PROPERTIES\_2\_KHR
 
-```lisp
-(defconstant vk_intel_shader_integer_functions_2_extension_name VK_INTEL_shader_integer_functions2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2_KHR VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2)
 ```
 
-## VK_INTEL_performance_query
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_MEMORY\_PROPERTIES\_2\_KHR
 
-```lisp
-(defconstant vk_intel_performance_query 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2)
 ```
 
-## VK_INTEL_PERFORMANCE_QUERY_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_SPARSE\_IMAGE\_FORMAT\_PROPERTIES\_2\_KHR
 
-```lisp
-(defconstant vk_intel_performance_query_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2_KHR VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2)
 ```
 
-## VK_INTEL_PERFORMANCE_QUERY_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SPARSE\_IMAGE\_FORMAT\_INFO\_2\_KHR
 
-```lisp
-(defconstant vk_intel_performance_query_extension_name VK_INTEL_performance_query)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2)
 ```
 
-## VK_EXT_pci_bus_info
+#### Variable: VK\_STRUCTURE\_TYPE\_MEMORY\_ALLOCATE\_FLAGS\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_pci_bus_info 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO_KHR VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO)
 ```
 
-## VK_EXT_PCI_BUS_INFO_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_DEVICE\_GROUP\_RENDER\_PASS\_BEGIN\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_pci_bus_info_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO_KHR VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO)
 ```
 
-## VK_EXT_PCI_BUS_INFO_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_DEVICE\_GROUP\_COMMAND\_BUFFER\_BEGIN\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_pci_bus_info_extension_name VK_EXT_pci_bus_info)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO_KHR VK_STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO)
 ```
 
-## VK_AMD_display_native_hdr
+#### Variable: VK\_STRUCTURE\_TYPE\_DEVICE\_GROUP\_SUBMIT\_INFO\_KHR
 
-```lisp
-(defconstant vk_amd_display_native_hdr 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO_KHR VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO)
 ```
 
-## VK_AMD_DISPLAY_NATIVE_HDR_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_DEVICE\_GROUP\_BIND\_SPARSE\_INFO\_KHR
 
-```lisp
-(defconstant vk_amd_display_native_hdr_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO_KHR VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO)
 ```
 
-## VK_AMD_DISPLAY_NATIVE_HDR_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_BIND\_BUFFER\_MEMORY\_DEVICE\_GROUP\_INFO\_KHR
 
-```lisp
-(defconstant vk_amd_display_native_hdr_extension_name VK_AMD_display_native_hdr)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO_KHR VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO)
 ```
 
-## VK_EXT_fragment_density_map
+#### Variable: VK\_STRUCTURE\_TYPE\_BIND\_IMAGE\_MEMORY\_DEVICE\_GROUP\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_fragment_density_map 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO_KHR VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO)
 ```
 
-## VK_EXT_FRAGMENT_DENSITY_MAP_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_TEXTURE\_COMPRESSION\_ASTC\_HDR\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_ext_fragment_density_map_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES_EXT VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES)
 ```
 
-## VK_EXT_FRAGMENT_DENSITY_MAP_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_GROUP\_PROPERTIES\_KHR
 
-```lisp
-(defconstant vk_ext_fragment_density_map_extension_name VK_EXT_fragment_density_map)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES)
 ```
 
-## VK_EXT_scalar_block_layout
+#### Variable: VK\_STRUCTURE\_TYPE\_DEVICE\_GROUP\_DEVICE\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_scalar_block_layout 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO_KHR VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO)
 ```
 
-## VK_EXT_SCALAR_BLOCK_LAYOUT_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_EXTERNAL\_IMAGE\_FORMAT\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_scalar_block_layout_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO)
 ```
 
-## VK_EXT_SCALAR_BLOCK_LAYOUT_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_EXTERNAL\_IMAGE\_FORMAT\_PROPERTIES\_KHR
 
-```lisp
-(defconstant vk_ext_scalar_block_layout_extension_name VK_EXT_scalar_block_layout)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES_KHR VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES)
 ```
 
-## VK_GOOGLE_hlsl_functionality1
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_EXTERNAL\_BUFFER\_INFO\_KHR
 
-```lisp
-(defconstant vk_google_hlsl_functionality1 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO)
 ```
 
-## VK_GOOGLE_HLSL_FUNCTIONALITY_1_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_EXTERNAL\_BUFFER\_PROPERTIES\_KHR
 
-```lisp
-(defconstant vk_google_hlsl_functionality_1_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES_KHR VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES)
 ```
 
-## VK_GOOGLE_HLSL_FUNCTIONALITY_1_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_ID\_PROPERTIES\_KHR
 
-```lisp
-(defconstant vk_google_hlsl_functionality_1_extension_name VK_GOOGLE_hlsl_functionality1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES)
 ```
 
-## VK_GOOGLE_HLSL_FUNCTIONALITY1_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_EXTERNAL\_MEMORY\_BUFFER\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_google_hlsl_functionality1_spec_version VK_GOOGLE_HLSL_FUNCTIONALITY_1_SPEC_VERSION)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO_KHR VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO)
 ```
 
-## VK_GOOGLE_HLSL_FUNCTIONALITY1_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_EXTERNAL\_MEMORY\_IMAGE\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_google_hlsl_functionality1_extension_name VK_GOOGLE_HLSL_FUNCTIONALITY_1_EXTENSION_NAME)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_KHR VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO)
 ```
 
-## VK_GOOGLE_decorate_string
+#### Variable: VK\_STRUCTURE\_TYPE\_EXPORT\_MEMORY\_ALLOCATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_google_decorate_string 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_KHR VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO)
 ```
 
-## VK_GOOGLE_DECORATE_STRING_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_EXTERNAL\_SEMAPHORE\_INFO\_KHR
 
-```lisp
-(defconstant vk_google_decorate_string_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO)
 ```
 
-## VK_GOOGLE_DECORATE_STRING_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_EXTERNAL\_SEMAPHORE\_PROPERTIES\_KHR
 
-```lisp
-(defconstant vk_google_decorate_string_extension_name VK_GOOGLE_decorate_string)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES_KHR VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES)
 ```
 
-## VK_EXT_subgroup_size_control
+#### Variable: VK\_STRUCTURE\_TYPE\_EXPORT\_SEMAPHORE\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_subgroup_size_control 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO_KHR VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO)
 ```
 
-## VK_EXT_SUBGROUP_SIZE_CONTROL_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SHADER\_FLOAT16\_INT8\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_ext_subgroup_size_control_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES)
 ```
 
-## VK_EXT_SUBGROUP_SIZE_CONTROL_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_FLOAT16\_INT8\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_ext_subgroup_size_control_extension_name VK_EXT_subgroup_size_control)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT16_INT8_FEATURES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES)
 ```
 
-## VK_AMD_shader_core_properties2
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_16BIT\_STORAGE\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_amd_shader_core_properties2 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES)
 ```
 
-## VK_AMD_SHADER_CORE_PROPERTIES_2_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_DESCRIPTOR\_UPDATE\_TEMPLATE\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_amd_shader_core_properties_2_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO_KHR VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO)
 ```
 
-## VK_AMD_SHADER_CORE_PROPERTIES_2_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_SURFACE\_CAPABILITIES2\_EXT
 
-```lisp
-(defconstant vk_amd_shader_core_properties_2_extension_name VK_AMD_shader_core_properties2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES2_EXT VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_EXT)
 ```
 
-## VK_AMD_device_coherent_memory
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_IMAGELESS\_FRAMEBUFFER\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_amd_device_coherent_memory 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES)
 ```
 
-## VK_AMD_DEVICE_COHERENT_MEMORY_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_FRAMEBUFFER\_ATTACHMENTS\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_amd_device_coherent_memory_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO_KHR VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO)
 ```
 
-## VK_AMD_DEVICE_COHERENT_MEMORY_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_FRAMEBUFFER\_ATTACHMENT\_IMAGE\_INFO\_KHR
 
-```lisp
-(defconstant vk_amd_device_coherent_memory_extension_name VK_AMD_device_coherent_memory)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO_KHR VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO)
 ```
 
-## VK_EXT_shader_image_atomic_int64
+#### Variable: VK\_STRUCTURE\_TYPE\_RENDER\_PASS\_ATTACHMENT\_BEGIN\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_shader_image_atomic_int64 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO_KHR VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO)
 ```
 
-## VK_EXT_SHADER_IMAGE_ATOMIC_INT64_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_ATTACHMENT\_DESCRIPTION\_2\_KHR
 
-```lisp
-(defconstant vk_ext_shader_image_atomic_int64_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2_KHR VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2)
 ```
 
-## VK_EXT_SHADER_IMAGE_ATOMIC_INT64_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_ATTACHMENT\_REFERENCE\_2\_KHR
 
-```lisp
-(defconstant vk_ext_shader_image_atomic_int64_extension_name VK_EXT_shader_image_atomic_int64)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2_KHR VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2)
 ```
 
-## VK_EXT_memory_budget
+#### Variable: VK\_STRUCTURE\_TYPE\_SUBPASS\_DESCRIPTION\_2\_KHR
 
-```lisp
-(defconstant vk_ext_memory_budget 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_2_KHR VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_2)
 ```
 
-## VK_EXT_MEMORY_BUDGET_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_SUBPASS\_DEPENDENCY\_2\_KHR
 
-```lisp
-(defconstant vk_ext_memory_budget_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2_KHR VK_STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2)
 ```
 
-## VK_EXT_MEMORY_BUDGET_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_RENDER\_PASS\_CREATE\_INFO\_2\_KHR
 
-```lisp
-(defconstant vk_ext_memory_budget_extension_name VK_EXT_memory_budget)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2_KHR VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2)
 ```
 
-## VK_EXT_memory_priority
+#### Variable: VK\_STRUCTURE\_TYPE\_SUBPASS\_BEGIN\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_memory_priority 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO_KHR VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO)
 ```
 
-## VK_EXT_MEMORY_PRIORITY_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_SUBPASS\_END\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_memory_priority_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SUBPASS_END_INFO_KHR VK_STRUCTURE_TYPE_SUBPASS_END_INFO)
 ```
 
-## VK_EXT_MEMORY_PRIORITY_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_EXTERNAL\_FENCE\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_memory_priority_extension_name VK_EXT_memory_priority)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO)
 ```
 
-## VK_NV_dedicated_allocation_image_aliasing
+#### Variable: VK\_STRUCTURE\_TYPE\_EXTERNAL\_FENCE\_PROPERTIES\_KHR
 
-```lisp
-(defconstant vk_nv_dedicated_allocation_image_aliasing 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES_KHR VK_STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES)
 ```
 
-## VK_NV_DEDICATED_ALLOCATION_IMAGE_ALIASING_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_EXPORT\_FENCE\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_nv_dedicated_allocation_image_aliasing_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO_KHR VK_STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO)
 ```
 
-## VK_NV_DEDICATED_ALLOCATION_IMAGE_ALIASING_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_POINT\_CLIPPING\_PROPERTIES\_KHR
 
-```lisp
-(defconstant vk_nv_dedicated_allocation_image_aliasing_extension_name VK_NV_dedicated_allocation_image_aliasing)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES)
 ```
 
-## VK_EXT_buffer_device_address
+#### Variable: VK\_STRUCTURE\_TYPE\_RENDER\_PASS\_INPUT\_ATTACHMENT\_ASPECT\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_buffer_device_address 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO_KHR VK_STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO)
 ```
 
-## VK_EXT_BUFFER_DEVICE_ADDRESS_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_VIEW\_USAGE\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_buffer_device_address_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO_KHR VK_STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO)
 ```
 
-## VK_EXT_BUFFER_DEVICE_ADDRESS_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_TESSELLATION\_DOMAIN\_ORIGIN\_STATE\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_buffer_device_address_extension_name VK_EXT_buffer_device_address)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO_KHR VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO)
 ```
 
-## VK_EXT_tooling_info
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_VARIABLE\_POINTERS\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_ext_tooling_info 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES)
 ```
 
-## VK_EXT_TOOLING_INFO_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_VARIABLE\_POINTER\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_ext_tooling_info_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES_KHR)
 ```
 
-## VK_EXT_TOOLING_INFO_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_MEMORY\_DEDICATED\_REQUIREMENTS\_KHR
 
-```lisp
-(defconstant vk_ext_tooling_info_extension_name VK_EXT_tooling_info)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS_KHR VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS)
 ```
 
-## VK_EXT_separate_stencil_usage
+#### Variable: VK\_STRUCTURE\_TYPE\_MEMORY\_DEDICATED\_ALLOCATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_separate_stencil_usage 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO_KHR VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO)
 ```
 
-## VK_EXT_SEPARATE_STENCIL_USAGE_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SAMPLER\_FILTER\_MINMAX\_PROPERTIES\_EXT
 
-```lisp
-(defconstant vk_ext_separate_stencil_usage_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES)
 ```
 
-## VK_EXT_SEPARATE_STENCIL_USAGE_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_SAMPLER\_REDUCTION\_MODE\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_ext_separate_stencil_usage_extension_name VK_EXT_separate_stencil_usage)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO_EXT VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO)
 ```
 
-## VK_EXT_validation_features
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_INLINE\_UNIFORM\_BLOCK\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_ext_validation_features 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES)
 ```
 
-## VK_EXT_VALIDATION_FEATURES_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_INLINE\_UNIFORM\_BLOCK\_PROPERTIES\_EXT
 
-```lisp
-(defconstant vk_ext_validation_features_spec_version 5)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES)
 ```
 
-## VK_EXT_VALIDATION_FEATURES_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_WRITE\_DESCRIPTOR\_SET\_INLINE\_UNIFORM\_BLOCK\_EXT
 
-```lisp
-(defconstant vk_ext_validation_features_extension_name VK_EXT_validation_features)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK)
 ```
 
-## VK_NV_cooperative_matrix
+#### Variable: VK\_STRUCTURE\_TYPE\_DESCRIPTOR\_POOL\_INLINE\_UNIFORM\_BLOCK\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_nv_cooperative_matrix 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO_EXT VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO)
 ```
 
-## VK_NV_COOPERATIVE_MATRIX_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_BUFFER\_MEMORY\_REQUIREMENTS\_INFO\_2\_KHR
 
-```lisp
-(defconstant vk_nv_cooperative_matrix_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2_KHR VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2)
 ```
 
-## VK_NV_COOPERATIVE_MATRIX_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_MEMORY\_REQUIREMENTS\_INFO\_2\_KHR
 
-```lisp
-(defconstant vk_nv_cooperative_matrix_extension_name VK_NV_cooperative_matrix)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2_KHR VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2)
 ```
 
-## VK_NV_coverage_reduction_mode
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_SPARSE\_MEMORY\_REQUIREMENTS\_INFO\_2\_KHR
 
-```lisp
-(defconstant vk_nv_coverage_reduction_mode 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2_KHR VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2)
 ```
 
-## VK_NV_COVERAGE_REDUCTION_MODE_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_MEMORY\_REQUIREMENTS\_2\_KHR
 
-```lisp
-(defconstant vk_nv_coverage_reduction_mode_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2_KHR VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2)
 ```
 
-## VK_NV_COVERAGE_REDUCTION_MODE_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_SPARSE\_IMAGE\_MEMORY\_REQUIREMENTS\_2\_KHR
 
-```lisp
-(defconstant vk_nv_coverage_reduction_mode_extension_name VK_NV_coverage_reduction_mode)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2_KHR VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2)
 ```
 
-## VK_EXT_fragment_shader_interlock
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_FORMAT\_LIST\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_fragment_shader_interlock 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO_KHR VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO)
 ```
 
-## VK_EXT_FRAGMENT_SHADER_INTERLOCK_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_SAMPLER\_YCBCR\_CONVERSION\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_fragment_shader_interlock_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO_KHR VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO)
 ```
 
-## VK_EXT_FRAGMENT_SHADER_INTERLOCK_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_SAMPLER\_YCBCR\_CONVERSION\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_fragment_shader_interlock_extension_name VK_EXT_fragment_shader_interlock)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO_KHR VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO)
 ```
 
-## VK_EXT_ycbcr_image_arrays
+#### Variable: VK\_STRUCTURE\_TYPE\_BIND\_IMAGE\_PLANE\_MEMORY\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_ycbcr_image_arrays 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO_KHR VK_STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO)
 ```
 
-## VK_EXT_YCBCR_IMAGE_ARRAYS_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_PLANE\_MEMORY\_REQUIREMENTS\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_ycbcr_image_arrays_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO_KHR VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO)
 ```
 
-## VK_EXT_YCBCR_IMAGE_ARRAYS_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SAMPLER\_YCBCR\_CONVERSION\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_ext_ycbcr_image_arrays_extension_name VK_EXT_ycbcr_image_arrays)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES)
 ```
 
-## VK_EXT_provoking_vertex
+#### Variable: VK\_STRUCTURE\_TYPE\_SAMPLER\_YCBCR\_CONVERSION\_IMAGE\_FORMAT\_PROPERTIES\_KHR
 
-```lisp
-(defconstant vk_ext_provoking_vertex 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES_KHR VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES)
 ```
 
-## VK_EXT_PROVOKING_VERTEX_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_BIND\_BUFFER\_MEMORY\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_provoking_vertex_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO_KHR VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO)
 ```
 
-## VK_EXT_PROVOKING_VERTEX_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_BIND\_IMAGE\_MEMORY\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_provoking_vertex_extension_name VK_EXT_provoking_vertex)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO_KHR VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO)
 ```
 
-## VK_EXT_headless_surface
+#### Variable: VK\_STRUCTURE\_TYPE\_DESCRIPTOR\_SET\_LAYOUT\_BINDING\_FLAGS\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_ext_headless_surface 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO_EXT VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO)
 ```
 
-## VK_EXT_HEADLESS_SURFACE_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_DESCRIPTOR\_INDEXING\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_ext_headless_surface_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES_EXT VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES)
 ```
 
-## VK_EXT_HEADLESS_SURFACE_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_DESCRIPTOR\_INDEXING\_PROPERTIES\_EXT
 
-```lisp
-(defconstant vk_ext_headless_surface_extension_name VK_EXT_headless_surface)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES_EXT VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES)
 ```
 
-## VK_EXT_line_rasterization
+#### Variable: VK\_STRUCTURE\_TYPE\_DESCRIPTOR\_SET\_VARIABLE\_DESCRIPTOR\_COUNT\_ALLOCATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_ext_line_rasterization 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO_EXT VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO)
 ```
 
-## VK_EXT_LINE_RASTERIZATION_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_DESCRIPTOR\_SET\_VARIABLE\_DESCRIPTOR\_COUNT\_LAYOUT\_SUPPORT\_EXT
 
-```lisp
-(defconstant vk_ext_line_rasterization_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT_EXT VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT)
 ```
 
-## VK_EXT_LINE_RASTERIZATION_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_MAINTENANCE\_3\_PROPERTIES\_KHR
 
-```lisp
-(defconstant vk_ext_line_rasterization_extension_name VK_EXT_line_rasterization)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES)
 ```
 
-## VK_EXT_shader_atomic_float
+#### Variable: VK\_STRUCTURE\_TYPE\_DESCRIPTOR\_SET\_LAYOUT\_SUPPORT\_KHR
 
-```lisp
-(defconstant vk_ext_shader_atomic_float 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT_KHR VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT)
 ```
 
-## VK_EXT_SHADER_ATOMIC_FLOAT_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_DEVICE\_QUEUE\_GLOBAL\_PRIORITY\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_ext_shader_atomic_float_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_EXT VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_KHR)
 ```
 
-## VK_EXT_SHADER_ATOMIC_FLOAT_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SHADER\_SUBGROUP\_EXTENDED\_TYPES\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_ext_shader_atomic_float_extension_name VK_EXT_shader_atomic_float)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES)
 ```
 
-## VK_EXT_host_query_reset
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_8BIT\_STORAGE\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_ext_host_query_reset 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES)
 ```
 
-## VK_EXT_HOST_QUERY_RESET_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SHADER\_ATOMIC\_INT64\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_ext_host_query_reset_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES)
 ```
 
-## VK_EXT_HOST_QUERY_RESET_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_CREATION\_FEEDBACK\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_ext_host_query_reset_extension_name VK_EXT_host_query_reset)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO_EXT VK_STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO)
 ```
 
-## VK_EXT_index_type_uint8
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_DRIVER\_PROPERTIES\_KHR
 
-```lisp
-(defconstant vk_ext_index_type_uint8 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES)
 ```
 
-## VK_EXT_INDEX_TYPE_UINT8_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_FLOAT\_CONTROLS\_PROPERTIES\_KHR
 
-```lisp
-(defconstant vk_ext_index_type_uint8_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES)
 ```
 
-## VK_EXT_INDEX_TYPE_UINT8_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_DEPTH\_STENCIL\_RESOLVE\_PROPERTIES\_KHR
 
-```lisp
-(defconstant vk_ext_index_type_uint8_extension_name VK_EXT_index_type_uint8)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES)
 ```
 
-## VK_EXT_extended_dynamic_state
+#### Variable: VK\_STRUCTURE\_TYPE\_SUBPASS\_DESCRIPTION\_DEPTH\_STENCIL\_RESOLVE\_KHR
 
-```lisp
-(defconstant vk_ext_extended_dynamic_state 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE_KHR VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE)
 ```
 
-## VK_EXT_EXTENDED_DYNAMIC_STATE_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_FRAGMENT\_SHADER\_BARYCENTRIC\_FEATURES\_NV
 
-```lisp
-(defconstant vk_ext_extended_dynamic_state_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_BARYCENTRIC_FEATURES_NV VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_BARYCENTRIC_FEATURES_KHR)
 ```
 
-## VK_EXT_EXTENDED_DYNAMIC_STATE_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_TIMELINE\_SEMAPHORE\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_ext_extended_dynamic_state_extension_name VK_EXT_extended_dynamic_state)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES)
 ```
 
-## VK_EXT_shader_atomic_float2
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_TIMELINE\_SEMAPHORE\_PROPERTIES\_KHR
 
-```lisp
-(defconstant vk_ext_shader_atomic_float2 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES)
 ```
 
-## VK_EXT_SHADER_ATOMIC_FLOAT_2_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_SEMAPHORE\_TYPE\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_shader_atomic_float_2_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO_KHR VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO)
 ```
 
-## VK_EXT_SHADER_ATOMIC_FLOAT_2_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_TIMELINE\_SEMAPHORE\_SUBMIT\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_shader_atomic_float_2_extension_name VK_EXT_shader_atomic_float2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO_KHR VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO)
 ```
 
-## VK_EXT_shader_demote_to_helper_invocation
+#### Variable: VK\_STRUCTURE\_TYPE\_SEMAPHORE\_WAIT\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_shader_demote_to_helper_invocation 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO_KHR VK_STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO)
 ```
 
-## VK_EXT_SHADER_DEMOTE_TO_HELPER_INVOCATION_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_SEMAPHORE\_SIGNAL\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_shader_demote_to_helper_invocation_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO_KHR VK_STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO)
 ```
 
-## VK_EXT_SHADER_DEMOTE_TO_HELPER_INVOCATION_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_QUERY\_POOL\_CREATE\_INFO\_INTEL
 
-```lisp
-(defconstant vk_ext_shader_demote_to_helper_invocation_extension_name VK_EXT_shader_demote_to_helper_invocation)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO_INTEL VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL)
 ```
 
-## VK_NV_device_generated_commands
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_VULKAN\_MEMORY\_MODEL\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_nv_device_generated_commands 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES)
 ```
 
-## VK_NV_DEVICE_GENERATED_COMMANDS_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SHADER\_TERMINATE\_INVOCATION\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_nv_device_generated_commands_spec_version 3)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES)
 ```
 
-## VK_NV_DEVICE_GENERATED_COMMANDS_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SCALAR\_BLOCK\_LAYOUT\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_nv_device_generated_commands_extension_name VK_NV_device_generated_commands)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES_EXT VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES)
 ```
 
-## VK_NV_inherited_viewport_scissor
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SUBGROUP\_SIZE\_CONTROL\_PROPERTIES\_EXT
 
-```lisp
-(defconstant vk_nv_inherited_viewport_scissor 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES_EXT VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES)
 ```
 
-## VK_NV_INHERITED_VIEWPORT_SCISSOR_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_SHADER\_STAGE\_REQUIRED\_SUBGROUP\_SIZE\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_nv_inherited_viewport_scissor_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO)
 ```
 
-## VK_NV_INHERITED_VIEWPORT_SCISSOR_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SUBGROUP\_SIZE\_CONTROL\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_nv_inherited_viewport_scissor_extension_name VK_NV_inherited_viewport_scissor)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES)
 ```
 
-## VK_EXT_texel_buffer_alignment
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SEPARATE\_DEPTH\_STENCIL\_LAYOUTS\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_ext_texel_buffer_alignment 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES)
 ```
 
-## VK_EXT_TEXEL_BUFFER_ALIGNMENT_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_ATTACHMENT\_REFERENCE\_STENCIL\_LAYOUT\_KHR
 
-```lisp
-(defconstant vk_ext_texel_buffer_alignment_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT_KHR VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT)
 ```
 
-## VK_EXT_TEXEL_BUFFER_ALIGNMENT_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_ATTACHMENT\_DESCRIPTION\_STENCIL\_LAYOUT\_KHR
 
-```lisp
-(defconstant vk_ext_texel_buffer_alignment_extension_name VK_EXT_texel_buffer_alignment)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_STENCIL_LAYOUT_KHR VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_STENCIL_LAYOUT)
 ```
 
-## VK_QCOM_render_pass_transform
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_BUFFER\_ADDRESS\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_qcom_render_pass_transform 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_ADDRESS_FEATURES_EXT VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_EXT)
 ```
 
-## VK_QCOM_RENDER_PASS_TRANSFORM_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_BUFFER\_DEVICE\_ADDRESS\_INFO\_EXT
 
-```lisp
-(defconstant vk_qcom_render_pass_transform_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO_EXT VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO)
 ```
 
-## VK_QCOM_RENDER_PASS_TRANSFORM_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_TOOL\_PROPERTIES\_EXT
 
-```lisp
-(defconstant vk_qcom_render_pass_transform_extension_name VK_QCOM_render_pass_transform)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES_EXT VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES)
 ```
 
-## VK_EXT_device_memory_report
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_STENCIL\_USAGE\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_ext_device_memory_report 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO_EXT VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO)
 ```
 
-## VK_EXT_DEVICE_MEMORY_REPORT_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_UNIFORM\_BUFFER\_STANDARD\_LAYOUT\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_ext_device_memory_report_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES)
 ```
 
-## VK_EXT_DEVICE_MEMORY_REPORT_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_BUFFER\_DEVICE\_ADDRESS\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_ext_device_memory_report_extension_name VK_EXT_device_memory_report)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES)
 ```
 
-## VK_EXT_acquire_drm_display
+#### Variable: VK\_STRUCTURE\_TYPE\_BUFFER\_DEVICE\_ADDRESS\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_acquire_drm_display 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO_KHR VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO)
 ```
 
-## VK_EXT_ACQUIRE_DRM_DISPLAY_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_BUFFER\_OPAQUE\_CAPTURE\_ADDRESS\_CREATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_acquire_drm_display_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO_KHR VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO)
 ```
 
-## VK_EXT_ACQUIRE_DRM_DISPLAY_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_MEMORY\_OPAQUE\_CAPTURE\_ADDRESS\_ALLOCATE\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_acquire_drm_display_extension_name VK_EXT_acquire_drm_display)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO_KHR VK_STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO)
 ```
 
-## VK_EXT_robustness2
+#### Variable: VK\_STRUCTURE\_TYPE\_DEVICE\_MEMORY\_OPAQUE\_CAPTURE\_ADDRESS\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_robustness2 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO_KHR VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO)
 ```
 
-## VK_EXT_ROBUSTNESS_2_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_HOST\_QUERY\_RESET\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_ext_robustness_2_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES_EXT VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES)
 ```
 
-## VK_EXT_ROBUSTNESS_2_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SHADER\_DEMOTE\_TO\_HELPER\_INVOCATION\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_ext_robustness_2_extension_name VK_EXT_robustness2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES)
 ```
 
-## VK_EXT_custom_border_color
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SHADER\_INTEGER\_DOT\_PRODUCT\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_ext_custom_border_color 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES)
 ```
 
-## VK_EXT_CUSTOM_BORDER_COLOR_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SHADER\_INTEGER\_DOT\_PRODUCT\_PROPERTIES\_KHR
 
-```lisp
-(defconstant vk_ext_custom_border_color_spec_version 12)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES)
 ```
 
-## VK_EXT_CUSTOM_BORDER_COLOR_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_TEXEL\_BUFFER\_ALIGNMENT\_PROPERTIES\_EXT
 
-```lisp
-(defconstant vk_ext_custom_border_color_extension_name VK_EXT_custom_border_color)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES_EXT VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES)
 ```
 
-## VK_GOOGLE_user_type
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_PRIVATE\_DATA\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_google_user_type 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES_EXT VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES)
 ```
 
-## VK_GOOGLE_USER_TYPE_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_DEVICE\_PRIVATE\_DATA\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_google_user_type_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO_EXT VK_STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO)
 ```
 
-## VK_GOOGLE_USER_TYPE_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PRIVATE\_DATA\_SLOT\_CREATE\_INFO\_EXT
 
-```lisp
-(defconstant vk_google_user_type_extension_name VK_GOOGLE_user_type)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PRIVATE_DATA_SLOT_CREATE_INFO_EXT VK_STRUCTURE_TYPE_PRIVATE_DATA_SLOT_CREATE_INFO)
 ```
 
-## VK_EXT_private_data
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_PIPELINE\_CREATION\_CACHE\_CONTROL\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_ext_private_data 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES_EXT VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES)
 ```
 
-## VK_EXT_PRIVATE_DATA_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_MEMORY\_BARRIER\_2\_KHR
 
-```lisp
-(defconstant vk_ext_private_data_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_MEMORY_BARRIER_2_KHR VK_STRUCTURE_TYPE_MEMORY_BARRIER_2)
 ```
 
-## VK_EXT_PRIVATE_DATA_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_BUFFER\_MEMORY\_BARRIER\_2\_KHR
 
-```lisp
-(defconstant vk_ext_private_data_extension_name VK_EXT_private_data)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2_KHR VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2)
 ```
 
-## VK_EXT_pipeline_creation_cache_control
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_MEMORY\_BARRIER\_2\_KHR
 
-```lisp
-(defconstant vk_ext_pipeline_creation_cache_control 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER_2_KHR VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER_2)
 ```
 
-## VK_EXT_PIPELINE_CREATION_CACHE_CONTROL_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_DEPENDENCY\_INFO\_KHR
 
-```lisp
-(defconstant vk_ext_pipeline_creation_cache_control_spec_version 3)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEPENDENCY_INFO_KHR VK_STRUCTURE_TYPE_DEPENDENCY_INFO)
 ```
 
-## VK_EXT_PIPELINE_CREATION_CACHE_CONTROL_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_SUBMIT\_INFO\_2\_KHR
 
-```lisp
-(defconstant vk_ext_pipeline_creation_cache_control_extension_name VK_EXT_pipeline_creation_cache_control)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SUBMIT_INFO_2_KHR VK_STRUCTURE_TYPE_SUBMIT_INFO_2)
 ```
 
-## VK_NV_device_diagnostics_config
+#### Variable: VK\_STRUCTURE\_TYPE\_SEMAPHORE\_SUBMIT\_INFO\_KHR
 
-```lisp
-(defconstant vk_nv_device_diagnostics_config 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO_KHR VK_STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO)
 ```
 
-## VK_NV_DEVICE_DIAGNOSTICS_CONFIG_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_COMMAND\_BUFFER\_SUBMIT\_INFO\_KHR
 
-```lisp
-(defconstant vk_nv_device_diagnostics_config_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO_KHR VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO)
 ```
 
-## VK_NV_DEVICE_DIAGNOSTICS_CONFIG_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_SYNCHRONIZATION\_2\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_nv_device_diagnostics_config_extension_name VK_NV_device_diagnostics_config)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES)
 ```
 
-## VK_QCOM_render_pass_store_ops
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_ZERO\_INITIALIZE\_WORKGROUP\_MEMORY\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_qcom_render_pass_store_ops 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES)
 ```
 
-## VK_QCOM_RENDER_PASS_STORE_OPS_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_IMAGE\_ROBUSTNESS\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_qcom_render_pass_store_ops_spec_version 2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES_EXT VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES)
 ```
 
-## VK_QCOM_RENDER_PASS_STORE_OPS_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_COPY\_BUFFER\_INFO\_2\_KHR
 
-```lisp
-(defconstant vk_qcom_render_pass_store_ops_extension_name VK_QCOM_render_pass_store_ops)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_COPY_BUFFER_INFO_2_KHR VK_STRUCTURE_TYPE_COPY_BUFFER_INFO_2)
 ```
 
-## VK_EXT_graphics_pipeline_library
+#### Variable: VK\_STRUCTURE\_TYPE\_COPY\_IMAGE\_INFO\_2\_KHR
 
-```lisp
-(defconstant vk_ext_graphics_pipeline_library 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_COPY_IMAGE_INFO_2_KHR VK_STRUCTURE_TYPE_COPY_IMAGE_INFO_2)
 ```
 
-## VK_EXT_GRAPHICS_PIPELINE_LIBRARY_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_COPY\_BUFFER\_TO\_IMAGE\_INFO\_2\_KHR
 
-```lisp
-(defconstant vk_ext_graphics_pipeline_library_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_COPY_BUFFER_TO_IMAGE_INFO_2_KHR VK_STRUCTURE_TYPE_COPY_BUFFER_TO_IMAGE_INFO_2)
 ```
 
-## VK_EXT_GRAPHICS_PIPELINE_LIBRARY_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_COPY\_IMAGE\_TO\_BUFFER\_INFO\_2\_KHR
 
-```lisp
-(defconstant vk_ext_graphics_pipeline_library_extension_name VK_EXT_graphics_pipeline_library)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_COPY_IMAGE_TO_BUFFER_INFO_2_KHR VK_STRUCTURE_TYPE_COPY_IMAGE_TO_BUFFER_INFO_2)
 ```
 
-## VK_AMD_shader_early_and_late_fragment_tests
+#### Variable: VK\_STRUCTURE\_TYPE\_BLIT\_IMAGE\_INFO\_2\_KHR
 
-```lisp
-(defconstant vk_amd_shader_early_and_late_fragment_tests 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BLIT_IMAGE_INFO_2_KHR VK_STRUCTURE_TYPE_BLIT_IMAGE_INFO_2)
 ```
 
-## VK_AMD_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_RESOLVE\_IMAGE\_INFO\_2\_KHR
 
-```lisp
-(defconstant vk_amd_shader_early_and_late_fragment_tests_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_RESOLVE_IMAGE_INFO_2_KHR VK_STRUCTURE_TYPE_RESOLVE_IMAGE_INFO_2)
 ```
 
-## VK_AMD_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_BUFFER\_COPY\_2\_KHR
 
-```lisp
-(defconstant vk_amd_shader_early_and_late_fragment_tests_extension_name VK_AMD_shader_early_and_late_fragment_tests)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BUFFER_COPY_2_KHR VK_STRUCTURE_TYPE_BUFFER_COPY_2)
 ```
 
-## VK_NV_fragment_shading_rate_enums
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_COPY\_2\_KHR
 
-```lisp
-(defconstant vk_nv_fragment_shading_rate_enums 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_COPY_2_KHR VK_STRUCTURE_TYPE_IMAGE_COPY_2)
 ```
 
-## VK_NV_FRAGMENT_SHADING_RATE_ENUMS_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_BLIT\_2\_KHR
 
-```lisp
-(defconstant vk_nv_fragment_shading_rate_enums_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_BLIT_2_KHR VK_STRUCTURE_TYPE_IMAGE_BLIT_2)
 ```
 
-## VK_NV_FRAGMENT_SHADING_RATE_ENUMS_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_BUFFER\_IMAGE\_COPY\_2\_KHR
 
-```lisp
-(defconstant vk_nv_fragment_shading_rate_enums_extension_name VK_NV_fragment_shading_rate_enums)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2_KHR VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2)
 ```
 
-## VK_NV_ray_tracing_motion_blur
+#### Variable: VK\_STRUCTURE\_TYPE\_IMAGE\_RESOLVE\_2\_KHR
 
-```lisp
-(defconstant vk_nv_ray_tracing_motion_blur 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_IMAGE_RESOLVE_2_KHR VK_STRUCTURE_TYPE_IMAGE_RESOLVE_2)
 ```
 
-## VK_NV_RAY_TRACING_MOTION_BLUR_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_FORMAT\_PROPERTIES\_3\_KHR
 
-```lisp
-(defconstant vk_nv_ray_tracing_motion_blur_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_3_KHR VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_3)
 ```
 
-## VK_NV_RAY_TRACING_MOTION_BLUR_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PIPELINE\_INFO\_EXT
 
-```lisp
-(defconstant vk_nv_ray_tracing_motion_blur_extension_name VK_NV_ray_tracing_motion_blur)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PIPELINE_INFO_EXT VK_STRUCTURE_TYPE_PIPELINE_INFO_KHR)
 ```
 
-## VK_EXT_ycbcr_2plane_444_formats
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_GLOBAL\_PRIORITY\_QUERY\_FEATURES\_EXT
 
-```lisp
-(defconstant vk_ext_ycbcr_2plane_444_formats 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_KHR)
 ```
 
-## VK_EXT_YCBCR_2PLANE_444_FORMATS_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_QUEUE\_FAMILY\_GLOBAL\_PRIORITY\_PROPERTIES\_EXT
 
-```lisp
-(defconstant vk_ext_ycbcr_2plane_444_formats_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_KHR)
 ```
 
-## VK_EXT_YCBCR_2PLANE_444_FORMATS_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_MAINTENANCE\_4\_FEATURES\_KHR
 
-```lisp
-(defconstant vk_ext_ycbcr_2plane_444_formats_extension_name VK_EXT_ycbcr_2plane_444_formats)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES)
 ```
 
-## VK_EXT_fragment_density_map2
+#### Variable: VK\_STRUCTURE\_TYPE\_PHYSICAL\_DEVICE\_MAINTENANCE\_4\_PROPERTIES\_KHR
 
-```lisp
-(defconstant vk_ext_fragment_density_map2 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES_KHR VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES)
 ```
 
-## VK_EXT_FRAGMENT_DENSITY_MAP_2_SPEC_VERSION
+#### Variable: VK\_STRUCTURE\_TYPE\_DEVICE\_BUFFER\_MEMORY\_REQUIREMENTS\_KHR
 
-```lisp
-(defconstant vk_ext_fragment_density_map_2_spec_version 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS_KHR VK_STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS)
 ```
 
-## VK_EXT_FRAGMENT_DENSITY_MAP_2_EXTENSION_NAME
+#### Variable: VK\_STRUCTURE\_TYPE\_DEVICE\_IMAGE\_MEMORY\_REQUIREMENTS\_KHR
 
-```lisp
-(defconstant vk_ext_fragment_density_map_2_extension_name VK_EXT_fragment_density_map2)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_DEVICE_IMAGE_MEMORY_REQUIREMENTS_KHR VK_STRUCTURE_TYPE_DEVICE_IMAGE_MEMORY_REQUIREMENTS)
 ```
 
-## VK_QCOM_rotated_copy_commands
+#### Variable: VK\_STRUCTURE\_TYPE\_MAX\_ENUM
 
-```lisp
-(defconstant vk_qcom_rotated_copy_commands 1)
+```Lisp
+(defparameter VK_STRUCTURE_TYPE_MAX_ENUM 2147483647)
 ```
 
-## VK_QCOM_ROTATED_COPY_COMMANDS_SPEC_VERSION
+#### Variable: VK\_PIPELINE\_CACHE\_HEADER\_VERSION\_ONE
 
-```lisp
-(defconstant vk_qcom_rotated_copy_commands_spec_version 1)
+```Lisp
+(defparameter VK_PIPELINE_CACHE_HEADER_VERSION_ONE 1)
 ```
 
-## VK_QCOM_ROTATED_COPY_COMMANDS_EXTENSION_NAME
+#### Variable: VK\_PIPELINE\_CACHE\_HEADER\_VERSION\_MAX\_ENUM
 
-```lisp
-(defconstant vk_qcom_rotated_copy_commands_extension_name VK_QCOM_rotated_copy_commands)
+```Lisp
+(defparameter VK_PIPELINE_CACHE_HEADER_VERSION_MAX_ENUM 2147483647)
 ```
 
-## VK_EXT_image_robustness
+#### Variable: VK\_IMAGE\_LAYOUT\_UNDEFINED
 
-```lisp
-(defconstant vk_ext_image_robustness 1)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_UNDEFINED 0)
 ```
 
-## VK_EXT_IMAGE_ROBUSTNESS_SPEC_VERSION
+#### Variable: VK\_IMAGE\_LAYOUT\_GENERAL
 
-```lisp
-(defconstant vk_ext_image_robustness_spec_version 1)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_GENERAL 1)
 ```
 
-## VK_EXT_IMAGE_ROBUSTNESS_EXTENSION_NAME
+#### Variable: VK\_IMAGE\_LAYOUT\_COLOR\_ATTACHMENT\_OPTIMAL
 
-```lisp
-(defconstant vk_ext_image_robustness_extension_name VK_EXT_image_robustness)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL 2)
 ```
 
-## VK_EXT_image_compression_control
+#### Variable: VK\_IMAGE\_LAYOUT\_DEPTH\_STENCIL\_ATTACHMENT\_OPTIMAL
 
-```lisp
-(defconstant vk_ext_image_compression_control 1)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL 3)
 ```
 
-## VK_EXT_IMAGE_COMPRESSION_CONTROL_SPEC_VERSION
+#### Variable: VK\_IMAGE\_LAYOUT\_DEPTH\_STENCIL\_READ\_ONLY\_OPTIMAL
 
-```lisp
-(defconstant vk_ext_image_compression_control_spec_version 1)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL 4)
 ```
 
-## VK_EXT_IMAGE_COMPRESSION_CONTROL_EXTENSION_NAME
+#### Variable: VK\_IMAGE\_LAYOUT\_SHADER\_READ\_ONLY\_OPTIMAL
 
-```lisp
-(defconstant vk_ext_image_compression_control_extension_name VK_EXT_image_compression_control)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL 5)
 ```
 
-## VK_EXT_4444_formats
+#### Variable: VK\_IMAGE\_LAYOUT\_TRANSFER\_SRC\_OPTIMAL
 
-```lisp
-(defconstant vk_ext_4444_formats 1)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL 6)
 ```
 
-## VK_EXT_4444_FORMATS_SPEC_VERSION
+#### Variable: VK\_IMAGE\_LAYOUT\_TRANSFER\_DST\_OPTIMAL
 
-```lisp
-(defconstant vk_ext_4444_formats_spec_version 1)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL 7)
 ```
 
-## VK_EXT_4444_FORMATS_EXTENSION_NAME
+#### Variable: VK\_IMAGE\_LAYOUT\_PREINITIALIZED
 
-```lisp
-(defconstant vk_ext_4444_formats_extension_name VK_EXT_4444_formats)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_PREINITIALIZED 8)
 ```
 
-## VK_ARM_rasterization_order_attachment_access
+#### Variable: VK\_IMAGE\_LAYOUT\_DEPTH\_READ\_ONLY\_STENCIL\_ATTACHMENT\_OPTIMAL
 
-```lisp
-(defconstant vk_arm_rasterization_order_attachment_access 1)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL 1000117000)
 ```
 
-## VK_ARM_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_SPEC_VERSION
+#### Variable: VK\_IMAGE\_LAYOUT\_DEPTH\_ATTACHMENT\_STENCIL\_READ\_ONLY\_OPTIMAL
 
-```lisp
-(defconstant vk_arm_rasterization_order_attachment_access_spec_version 1)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL 1000117001)
 ```
 
-## VK_ARM_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_EXTENSION_NAME
+#### Variable: VK\_IMAGE\_LAYOUT\_DEPTH\_ATTACHMENT\_OPTIMAL
 
-```lisp
-(defconstant vk_arm_rasterization_order_attachment_access_extension_name VK_ARM_rasterization_order_attachment_access)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL 1000241000)
 ```
 
-## VK_EXT_rgba10x6_formats
+#### Variable: VK\_IMAGE\_LAYOUT\_DEPTH\_READ\_ONLY\_OPTIMAL
 
-```lisp
-(defconstant vk_ext_rgba10x6_formats 1)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL 1000241001)
 ```
 
-## VK_EXT_RGBA10X6_FORMATS_SPEC_VERSION
+#### Variable: VK\_IMAGE\_LAYOUT\_STENCIL\_ATTACHMENT\_OPTIMAL
 
-```lisp
-(defconstant vk_ext_rgba10x6_formats_spec_version 1)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL 1000241002)
 ```
 
-## VK_EXT_RGBA10X6_FORMATS_EXTENSION_NAME
+#### Variable: VK\_IMAGE\_LAYOUT\_STENCIL\_READ\_ONLY\_OPTIMAL
 
-```lisp
-(defconstant vk_ext_rgba10x6_formats_extension_name VK_EXT_rgba10x6_formats)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL 1000241003)
 ```
 
-## VK_NV_acquire_winrt_display
+#### Variable: VK\_IMAGE\_LAYOUT\_READ\_ONLY\_OPTIMAL
 
-```lisp
-(defconstant vk_nv_acquire_winrt_display 1)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_READ_ONLY_OPTIMAL 1000314000)
 ```
 
-## VK_NV_ACQUIRE_WINRT_DISPLAY_SPEC_VERSION
+#### Variable: VK\_IMAGE\_LAYOUT\_ATTACHMENT\_OPTIMAL
 
-```lisp
-(defconstant vk_nv_acquire_winrt_display_spec_version 1)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_ATTACHMENT_OPTIMAL 1000314001)
 ```
 
-## VK_NV_ACQUIRE_WINRT_DISPLAY_EXTENSION_NAME
+#### Variable: VK\_IMAGE\_LAYOUT\_PRESENT\_SRC\_KHR
 
-```lisp
-(defconstant vk_nv_acquire_winrt_display_extension_name VK_NV_acquire_winrt_display)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_PRESENT_SRC_KHR 1000001002)
 ```
 
-## VK_VALVE_mutable_descriptor_type
+#### Variable: VK\_IMAGE\_LAYOUT\_VIDEO\_DECODE\_DST\_KHR
 
-```lisp
-(defconstant vk_valve_mutable_descriptor_type 1)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_VIDEO_DECODE_DST_KHR 1000024000)
 ```
 
-## VK_VALVE_MUTABLE_DESCRIPTOR_TYPE_SPEC_VERSION
+#### Variable: VK\_IMAGE\_LAYOUT\_VIDEO\_DECODE\_SRC\_KHR
 
-```lisp
-(defconstant vk_valve_mutable_descriptor_type_spec_version 1)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_VIDEO_DECODE_SRC_KHR 1000024001)
 ```
 
-## VK_VALVE_MUTABLE_DESCRIPTOR_TYPE_EXTENSION_NAME
+#### Variable: VK\_IMAGE\_LAYOUT\_VIDEO\_DECODE\_DPB\_KHR
 
-```lisp
-(defconstant vk_valve_mutable_descriptor_type_extension_name VK_VALVE_mutable_descriptor_type)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_VIDEO_DECODE_DPB_KHR 1000024002)
 ```
 
-## VK_EXT_vertex_input_dynamic_state
+#### Variable: VK\_IMAGE\_LAYOUT\_SHARED\_PRESENT\_KHR
 
-```lisp
-(defconstant vk_ext_vertex_input_dynamic_state 1)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_SHARED_PRESENT_KHR 1000111000)
 ```
 
-## VK_EXT_VERTEX_INPUT_DYNAMIC_STATE_SPEC_VERSION
+#### Variable: VK\_IMAGE\_LAYOUT\_FRAGMENT\_DENSITY\_MAP\_OPTIMAL\_EXT
 
-```lisp
-(defconstant vk_ext_vertex_input_dynamic_state_spec_version 2)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_FRAGMENT_DENSITY_MAP_OPTIMAL_EXT 1000218000)
 ```
 
-## VK_EXT_VERTEX_INPUT_DYNAMIC_STATE_EXTENSION_NAME
+#### Variable: VK\_IMAGE\_LAYOUT\_FRAGMENT\_SHADING\_RATE\_ATTACHMENT\_OPTIMAL\_KHR
 
-```lisp
-(defconstant vk_ext_vertex_input_dynamic_state_extension_name VK_EXT_vertex_input_dynamic_state)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR 1000164003)
 ```
 
-## VK_EXT_physical_device_drm
+#### Variable: VK\_IMAGE\_LAYOUT\_VIDEO\_ENCODE\_DST\_KHR
 
-```lisp
-(defconstant vk_ext_physical_device_drm 1)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_VIDEO_ENCODE_DST_KHR 1000299000)
 ```
 
-## VK_EXT_PHYSICAL_DEVICE_DRM_SPEC_VERSION
+#### Variable: VK\_IMAGE\_LAYOUT\_VIDEO\_ENCODE\_SRC\_KHR
 
-```lisp
-(defconstant vk_ext_physical_device_drm_spec_version 1)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_VIDEO_ENCODE_SRC_KHR 1000299001)
 ```
 
-## VK_EXT_PHYSICAL_DEVICE_DRM_EXTENSION_NAME
+#### Variable: VK\_IMAGE\_LAYOUT\_VIDEO\_ENCODE\_DPB\_KHR
 
-```lisp
-(defconstant vk_ext_physical_device_drm_extension_name VK_EXT_physical_device_drm)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_VIDEO_ENCODE_DPB_KHR 1000299002)
 ```
 
-## VK_EXT_depth_clip_control
+#### Variable: VK\_IMAGE\_LAYOUT\_DEPTH\_READ\_ONLY\_STENCIL\_ATTACHMENT\_OPTIMAL\_KHR
 
-```lisp
-(defconstant vk_ext_depth_clip_control 1)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL_KHR VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL)
 ```
 
-## VK_EXT_DEPTH_CLIP_CONTROL_SPEC_VERSION
+#### Variable: VK\_IMAGE\_LAYOUT\_DEPTH\_ATTACHMENT\_STENCIL\_READ\_ONLY\_OPTIMAL\_KHR
 
-```lisp
-(defconstant vk_ext_depth_clip_control_spec_version 1)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL_KHR VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL)
 ```
 
-## VK_EXT_DEPTH_CLIP_CONTROL_EXTENSION_NAME
+#### Variable: VK\_IMAGE\_LAYOUT\_SHADING\_RATE\_OPTIMAL\_NV
 
-```lisp
-(defconstant vk_ext_depth_clip_control_extension_name VK_EXT_depth_clip_control)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_SHADING_RATE_OPTIMAL_NV VK_IMAGE_LAYOUT_FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR)
 ```
 
-## VK_EXT_primitive_topology_list_restart
+#### Variable: VK\_IMAGE\_LAYOUT\_DEPTH\_ATTACHMENT\_OPTIMAL\_KHR
 
-```lisp
-(defconstant vk_ext_primitive_topology_list_restart 1)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL)
 ```
 
-## VK_EXT_PRIMITIVE_TOPOLOGY_LIST_RESTART_SPEC_VERSION
+#### Variable: VK\_IMAGE\_LAYOUT\_DEPTH\_READ\_ONLY\_OPTIMAL\_KHR
 
-```lisp
-(defconstant vk_ext_primitive_topology_list_restart_spec_version 1)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL)
 ```
 
-## VK_EXT_PRIMITIVE_TOPOLOGY_LIST_RESTART_EXTENSION_NAME
+#### Variable: VK\_IMAGE\_LAYOUT\_STENCIL\_ATTACHMENT\_OPTIMAL\_KHR
 
-```lisp
-(defconstant vk_ext_primitive_topology_list_restart_extension_name VK_EXT_primitive_topology_list_restart)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL_KHR VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL)
 ```
 
-## VK_HUAWEI_subpass_shading
+#### Variable: VK\_IMAGE\_LAYOUT\_STENCIL\_READ\_ONLY\_OPTIMAL\_KHR
 
-```lisp
-(defconstant vk_huawei_subpass_shading 1)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL_KHR VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL)
 ```
 
-## VK_HUAWEI_SUBPASS_SHADING_SPEC_VERSION
+#### Variable: VK\_IMAGE\_LAYOUT\_READ\_ONLY\_OPTIMAL\_KHR
 
-```lisp
-(defconstant vk_huawei_subpass_shading_spec_version 2)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_READ_ONLY_OPTIMAL_KHR VK_IMAGE_LAYOUT_READ_ONLY_OPTIMAL)
 ```
 
-## VK_HUAWEI_SUBPASS_SHADING_EXTENSION_NAME
+#### Variable: VK\_IMAGE\_LAYOUT\_ATTACHMENT\_OPTIMAL\_KHR
 
-```lisp
-(defconstant vk_huawei_subpass_shading_extension_name VK_HUAWEI_subpass_shading)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_ATTACHMENT_OPTIMAL_KHR VK_IMAGE_LAYOUT_ATTACHMENT_OPTIMAL)
 ```
 
-## VK_HUAWEI_invocation_mask
+#### Variable: VK\_IMAGE\_LAYOUT\_MAX\_ENUM
 
-```lisp
-(defconstant vk_huawei_invocation_mask 1)
+```Lisp
+(defparameter VK_IMAGE_LAYOUT_MAX_ENUM 2147483647)
 ```
 
-## VK_HUAWEI_INVOCATION_MASK_SPEC_VERSION
+#### Variable: VK\_OBJECT\_TYPE\_UNKNOWN
 
-```lisp
-(defconstant vk_huawei_invocation_mask_spec_version 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_UNKNOWN 0)
 ```
 
-## VK_HUAWEI_INVOCATION_MASK_EXTENSION_NAME
+#### Variable: VK\_OBJECT\_TYPE\_INSTANCE
 
-```lisp
-(defconstant vk_huawei_invocation_mask_extension_name VK_HUAWEI_invocation_mask)
+```Lisp
+(defparameter VK_OBJECT_TYPE_INSTANCE 1)
 ```
 
-## VK_NV_external_memory_rdma
+#### Variable: VK\_OBJECT\_TYPE\_PHYSICAL\_DEVICE
 
-```lisp
-(defconstant vk_nv_external_memory_rdma 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_PHYSICAL_DEVICE 2)
 ```
 
-## VK_NV_EXTERNAL_MEMORY_RDMA_SPEC_VERSION
+#### Variable: VK\_OBJECT\_TYPE\_DEVICE
 
-```lisp
-(defconstant vk_nv_external_memory_rdma_spec_version 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_DEVICE 3)
 ```
 
-## VK_NV_EXTERNAL_MEMORY_RDMA_EXTENSION_NAME
+#### Variable: VK\_OBJECT\_TYPE\_QUEUE
 
-```lisp
-(defconstant vk_nv_external_memory_rdma_extension_name VK_NV_external_memory_rdma)
+```Lisp
+(defparameter VK_OBJECT_TYPE_QUEUE 4)
 ```
 
-## VK_EXT_pipeline_properties
+#### Variable: VK\_OBJECT\_TYPE\_SEMAPHORE
 
-```lisp
-(defconstant vk_ext_pipeline_properties 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_SEMAPHORE 5)
 ```
 
-## VK_EXT_PIPELINE_PROPERTIES_SPEC_VERSION
+#### Variable: VK\_OBJECT\_TYPE\_COMMAND\_BUFFER
 
-```lisp
-(defconstant vk_ext_pipeline_properties_spec_version 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_COMMAND_BUFFER 6)
 ```
 
-## VK_EXT_PIPELINE_PROPERTIES_EXTENSION_NAME
+#### Variable: VK\_OBJECT\_TYPE\_FENCE
 
-```lisp
-(defconstant vk_ext_pipeline_properties_extension_name VK_EXT_pipeline_properties)
+```Lisp
+(defparameter VK_OBJECT_TYPE_FENCE 7)
 ```
 
-## VK_EXT_extended_dynamic_state2
+#### Variable: VK\_OBJECT\_TYPE\_DEVICE\_MEMORY
 
-```lisp
-(defconstant vk_ext_extended_dynamic_state2 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_DEVICE_MEMORY 8)
 ```
 
-## VK_EXT_EXTENDED_DYNAMIC_STATE_2_SPEC_VERSION
+#### Variable: VK\_OBJECT\_TYPE\_BUFFER
 
-```lisp
-(defconstant vk_ext_extended_dynamic_state_2_spec_version 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_BUFFER 9)
 ```
 
-## VK_EXT_EXTENDED_DYNAMIC_STATE_2_EXTENSION_NAME
+#### Variable: VK\_OBJECT\_TYPE\_IMAGE
 
-```lisp
-(defconstant vk_ext_extended_dynamic_state_2_extension_name VK_EXT_extended_dynamic_state2)
+```Lisp
+(defparameter VK_OBJECT_TYPE_IMAGE 10)
 ```
 
-## VK_EXT_color_write_enable
+#### Variable: VK\_OBJECT\_TYPE\_EVENT
 
-```lisp
-(defconstant vk_ext_color_write_enable 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_EVENT 11)
 ```
 
-## VK_EXT_COLOR_WRITE_ENABLE_SPEC_VERSION
+#### Variable: VK\_OBJECT\_TYPE\_QUERY\_POOL
 
-```lisp
-(defconstant vk_ext_color_write_enable_spec_version 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_QUERY_POOL 12)
 ```
 
-## VK_EXT_COLOR_WRITE_ENABLE_EXTENSION_NAME
+#### Variable: VK\_OBJECT\_TYPE\_BUFFER\_VIEW
 
-```lisp
-(defconstant vk_ext_color_write_enable_extension_name VK_EXT_color_write_enable)
+```Lisp
+(defparameter VK_OBJECT_TYPE_BUFFER_VIEW 13)
 ```
 
-## VK_EXT_primitives_generated_query
+#### Variable: VK\_OBJECT\_TYPE\_IMAGE\_VIEW
 
-```lisp
-(defconstant vk_ext_primitives_generated_query 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_IMAGE_VIEW 14)
 ```
 
-## VK_EXT_PRIMITIVES_GENERATED_QUERY_SPEC_VERSION
+#### Variable: VK\_OBJECT\_TYPE\_SHADER\_MODULE
 
-```lisp
-(defconstant vk_ext_primitives_generated_query_spec_version 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_SHADER_MODULE 15)
 ```
 
-## VK_EXT_PRIMITIVES_GENERATED_QUERY_EXTENSION_NAME
+#### Variable: VK\_OBJECT\_TYPE\_PIPELINE\_CACHE
 
-```lisp
-(defconstant vk_ext_primitives_generated_query_extension_name VK_EXT_primitives_generated_query)
+```Lisp
+(defparameter VK_OBJECT_TYPE_PIPELINE_CACHE 16)
 ```
 
-## VK_EXT_global_priority_query
+#### Variable: VK\_OBJECT\_TYPE\_PIPELINE\_LAYOUT
 
-```lisp
-(defconstant vk_ext_global_priority_query 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_PIPELINE_LAYOUT 17)
 ```
 
-## VK_EXT_GLOBAL_PRIORITY_QUERY_SPEC_VERSION
+#### Variable: VK\_OBJECT\_TYPE\_RENDER\_PASS
 
-```lisp
-(defconstant vk_ext_global_priority_query_spec_version 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_RENDER_PASS 18)
 ```
 
-## VK_EXT_GLOBAL_PRIORITY_QUERY_EXTENSION_NAME
+#### Variable: VK\_OBJECT\_TYPE\_PIPELINE
 
-```lisp
-(defconstant vk_ext_global_priority_query_extension_name VK_EXT_global_priority_query)
+```Lisp
+(defparameter VK_OBJECT_TYPE_PIPELINE 19)
 ```
 
-## VK_MAX_GLOBAL_PRIORITY_SIZE_EXT
+#### Variable: VK\_OBJECT\_TYPE\_DESCRIPTOR\_SET\_LAYOUT
 
-```lisp
-(defconstant vk_max_global_priority_size_ext VK_MAX_GLOBAL_PRIORITY_SIZE_KHR)
+```Lisp
+(defparameter VK_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT 20)
 ```
 
-## VK_EXT_image_view_min_lod
+#### Variable: VK\_OBJECT\_TYPE\_SAMPLER
 
-```lisp
-(defconstant vk_ext_image_view_min_lod 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_SAMPLER 21)
 ```
 
-## VK_EXT_IMAGE_VIEW_MIN_LOD_SPEC_VERSION
+#### Variable: VK\_OBJECT\_TYPE\_DESCRIPTOR\_POOL
 
-```lisp
-(defconstant vk_ext_image_view_min_lod_spec_version 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_DESCRIPTOR_POOL 22)
 ```
 
-## VK_EXT_IMAGE_VIEW_MIN_LOD_EXTENSION_NAME
+#### Variable: VK\_OBJECT\_TYPE\_DESCRIPTOR\_SET
 
-```lisp
-(defconstant vk_ext_image_view_min_lod_extension_name VK_EXT_image_view_min_lod)
+```Lisp
+(defparameter VK_OBJECT_TYPE_DESCRIPTOR_SET 23)
 ```
 
-## VK_EXT_multi_draw
+#### Variable: VK\_OBJECT\_TYPE\_FRAMEBUFFER
 
-```lisp
-(defconstant vk_ext_multi_draw 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_FRAMEBUFFER 24)
 ```
 
-## VK_EXT_MULTI_DRAW_SPEC_VERSION
+#### Variable: VK\_OBJECT\_TYPE\_COMMAND\_POOL
 
-```lisp
-(defconstant vk_ext_multi_draw_spec_version 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_COMMAND_POOL 25)
 ```
 
-## VK_EXT_MULTI_DRAW_EXTENSION_NAME
+#### Variable: VK\_OBJECT\_TYPE\_SAMPLER\_YCBCR\_CONVERSION
 
-```lisp
-(defconstant vk_ext_multi_draw_extension_name VK_EXT_multi_draw)
+```Lisp
+(defparameter VK_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION 1000156000)
 ```
 
-## VK_EXT_image_2d_view_of_3d
+#### Variable: VK\_OBJECT\_TYPE\_DESCRIPTOR\_UPDATE\_TEMPLATE
 
-```lisp
-(defconstant vk_ext_image_2d_view_of_3d 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE 1000085000)
 ```
 
-## VK_EXT_IMAGE_2D_VIEW_OF_3D_SPEC_VERSION
+#### Variable: VK\_OBJECT\_TYPE\_PRIVATE\_DATA\_SLOT
 
-```lisp
-(defconstant vk_ext_image_2d_view_of_3d_spec_version 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_PRIVATE_DATA_SLOT 1000295000)
 ```
 
-## VK_EXT_IMAGE_2D_VIEW_OF_3D_EXTENSION_NAME
+#### Variable: VK\_OBJECT\_TYPE\_SURFACE\_KHR
 
-```lisp
-(defconstant vk_ext_image_2d_view_of_3d_extension_name VK_EXT_image_2d_view_of_3d)
+```Lisp
+(defparameter VK_OBJECT_TYPE_SURFACE_KHR 1000000000)
 ```
 
-## VK_EXT_load_store_op_none
+#### Variable: VK\_OBJECT\_TYPE\_SWAPCHAIN\_KHR
 
-```lisp
-(defconstant vk_ext_load_store_op_none 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_SWAPCHAIN_KHR 1000001000)
 ```
 
-## VK_EXT_LOAD_STORE_OP_NONE_SPEC_VERSION
+#### Variable: VK\_OBJECT\_TYPE\_DISPLAY\_KHR
 
-```lisp
-(defconstant vk_ext_load_store_op_none_spec_version 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_DISPLAY_KHR 1000002000)
 ```
 
-## VK_EXT_LOAD_STORE_OP_NONE_EXTENSION_NAME
+#### Variable: VK\_OBJECT\_TYPE\_DISPLAY\_MODE\_KHR
 
-```lisp
-(defconstant vk_ext_load_store_op_none_extension_name VK_EXT_load_store_op_none)
+```Lisp
+(defparameter VK_OBJECT_TYPE_DISPLAY_MODE_KHR 1000002001)
 ```
 
-## VK_EXT_border_color_swizzle
+#### Variable: VK\_OBJECT\_TYPE\_DEBUG\_REPORT\_CALLBACK\_EXT
 
-```lisp
-(defconstant vk_ext_border_color_swizzle 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT 1000011000)
 ```
 
-## VK_EXT_BORDER_COLOR_SWIZZLE_SPEC_VERSION
+#### Variable: VK\_OBJECT\_TYPE\_VIDEO\_SESSION\_KHR
 
-```lisp
-(defconstant vk_ext_border_color_swizzle_spec_version 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_VIDEO_SESSION_KHR 1000023000)
 ```
 
-## VK_EXT_BORDER_COLOR_SWIZZLE_EXTENSION_NAME
+#### Variable: VK\_OBJECT\_TYPE\_VIDEO\_SESSION\_PARAMETERS\_KHR
 
-```lisp
-(defconstant vk_ext_border_color_swizzle_extension_name VK_EXT_border_color_swizzle)
+```Lisp
+(defparameter VK_OBJECT_TYPE_VIDEO_SESSION_PARAMETERS_KHR 1000023001)
 ```
 
-## VK_EXT_pageable_device_local_memory
+#### Variable: VK\_OBJECT\_TYPE\_CU\_MODULE\_NVX
 
-```lisp
-(defconstant vk_ext_pageable_device_local_memory 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_CU_MODULE_NVX 1000029000)
 ```
 
-## VK_EXT_PAGEABLE_DEVICE_LOCAL_MEMORY_SPEC_VERSION
+#### Variable: VK\_OBJECT\_TYPE\_CU\_FUNCTION\_NVX
 
-```lisp
-(defconstant vk_ext_pageable_device_local_memory_spec_version 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_CU_FUNCTION_NVX 1000029001)
 ```
 
-## VK_EXT_PAGEABLE_DEVICE_LOCAL_MEMORY_EXTENSION_NAME
+#### Variable: VK\_OBJECT\_TYPE\_DEBUG\_UTILS\_MESSENGER\_EXT
 
-```lisp
-(defconstant vk_ext_pageable_device_local_memory_extension_name VK_EXT_pageable_device_local_memory)
+```Lisp
+(defparameter VK_OBJECT_TYPE_DEBUG_UTILS_MESSENGER_EXT 1000128000)
 ```
 
-## VK_VALVE_descriptor_set_host_mapping
+#### Variable: VK\_OBJECT\_TYPE\_ACCELERATION\_STRUCTURE\_KHR
 
-```lisp
-(defconstant vk_valve_descriptor_set_host_mapping 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_ACCELERATION_STRUCTURE_KHR 1000150000)
 ```
 
-## VK_VALVE_DESCRIPTOR_SET_HOST_MAPPING_SPEC_VERSION
+#### Variable: VK\_OBJECT\_TYPE\_VALIDATION\_CACHE\_EXT
 
-```lisp
-(defconstant vk_valve_descriptor_set_host_mapping_spec_version 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_VALIDATION_CACHE_EXT 1000160000)
 ```
 
-## VK_VALVE_DESCRIPTOR_SET_HOST_MAPPING_EXTENSION_NAME
+#### Variable: VK\_OBJECT\_TYPE\_ACCELERATION\_STRUCTURE\_NV
 
-```lisp
-(defconstant vk_valve_descriptor_set_host_mapping_extension_name VK_VALVE_descriptor_set_host_mapping)
+```Lisp
+(defparameter VK_OBJECT_TYPE_ACCELERATION_STRUCTURE_NV 1000165000)
 ```
 
-## VK_QCOM_fragment_density_map_offset
+#### Variable: VK\_OBJECT\_TYPE\_PERFORMANCE\_CONFIGURATION\_INTEL
 
-```lisp
-(defconstant vk_qcom_fragment_density_map_offset 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_PERFORMANCE_CONFIGURATION_INTEL 1000210000)
 ```
 
-## VK_QCOM_FRAGMENT_DENSITY_MAP_OFFSET_SPEC_VERSION
+#### Variable: VK\_OBJECT\_TYPE\_DEFERRED\_OPERATION\_KHR
 
-```lisp
-(defconstant vk_qcom_fragment_density_map_offset_spec_version 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_DEFERRED_OPERATION_KHR 1000268000)
 ```
 
-## VK_QCOM_FRAGMENT_DENSITY_MAP_OFFSET_EXTENSION_NAME
+#### Variable: VK\_OBJECT\_TYPE\_INDIRECT\_COMMANDS\_LAYOUT\_NV
 
-```lisp
-(defconstant vk_qcom_fragment_density_map_offset_extension_name VK_QCOM_fragment_density_map_offset)
+```Lisp
+(defparameter VK_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NV 1000277000)
 ```
 
-## VK_NV_linear_color_attachment
+#### Variable: VK\_OBJECT\_TYPE\_BUFFER\_COLLECTION\_FUCHSIA
 
-```lisp
-(defconstant vk_nv_linear_color_attachment 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_BUFFER_COLLECTION_FUCHSIA 1000366000)
 ```
 
-## VK_NV_LINEAR_COLOR_ATTACHMENT_SPEC_VERSION
+#### Variable: VK\_OBJECT\_TYPE\_DESCRIPTOR\_UPDATE\_TEMPLATE\_KHR
 
-```lisp
-(defconstant vk_nv_linear_color_attachment_spec_version 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR VK_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE)
 ```
 
-## VK_NV_LINEAR_COLOR_ATTACHMENT_EXTENSION_NAME
+#### Variable: VK\_OBJECT\_TYPE\_SAMPLER\_YCBCR\_CONVERSION\_KHR
 
-```lisp
-(defconstant vk_nv_linear_color_attachment_extension_name VK_NV_linear_color_attachment)
+```Lisp
+(defparameter VK_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_KHR VK_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION)
 ```
 
-## VK_GOOGLE_surfaceless_query
+#### Variable: VK\_OBJECT\_TYPE\_PRIVATE\_DATA\_SLOT\_EXT
 
-```lisp
-(defconstant vk_google_surfaceless_query 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_PRIVATE_DATA_SLOT_EXT VK_OBJECT_TYPE_PRIVATE_DATA_SLOT)
 ```
 
-## VK_GOOGLE_SURFACELESS_QUERY_SPEC_VERSION
+#### Variable: VK\_OBJECT\_TYPE\_MAX\_ENUM
 
-```lisp
-(defconstant vk_google_surfaceless_query_spec_version 1)
+```Lisp
+(defparameter VK_OBJECT_TYPE_MAX_ENUM 2147483647)
 ```
 
-## VK_GOOGLE_SURFACELESS_QUERY_EXTENSION_NAME
+#### Variable: VK\_VENDOR\_ID\_VIV
 
-```lisp
-(defconstant vk_google_surfaceless_query_extension_name VK_GOOGLE_surfaceless_query)
+```Lisp
+(defparameter VK_VENDOR_ID_VIV 65537)
 ```
 
-## VK_EXT_image_compression_control_swapchain
+#### Variable: VK\_VENDOR\_ID\_VSI
 
-```lisp
-(defconstant vk_ext_image_compression_control_swapchain 1)
+```Lisp
+(defparameter VK_VENDOR_ID_VSI 65538)
 ```
 
-## VK_EXT_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_SPEC_VERSION
+#### Variable: VK\_VENDOR\_ID\_KAZAN
 
-```lisp
-(defconstant vk_ext_image_compression_control_swapchain_spec_version 1)
+```Lisp
+(defparameter VK_VENDOR_ID_KAZAN 65539)
 ```
 
-## VK_EXT_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_EXTENSION_NAME
+#### Variable: VK\_VENDOR\_ID\_CODEPLAY
 
-```lisp
-(defconstant vk_ext_image_compression_control_swapchain_extension_name VK_EXT_image_compression_control_swapchain)
+```Lisp
+(defparameter VK_VENDOR_ID_CODEPLAY 65540)
 ```
 
-## VK_EXT_subpass_merge_feedback
+#### Variable: VK\_VENDOR\_ID\_MESA
 
-```lisp
-(defconstant vk_ext_subpass_merge_feedback 1)
+```Lisp
+(defparameter VK_VENDOR_ID_MESA 65541)
 ```
 
-## VK_EXT_SUBPASS_MERGE_FEEDBACK_SPEC_VERSION
+#### Variable: VK\_VENDOR\_ID\_POCL
 
-```lisp
-(defconstant vk_ext_subpass_merge_feedback_spec_version 2)
+```Lisp
+(defparameter VK_VENDOR_ID_POCL 65542)
 ```
 
-## VK_EXT_SUBPASS_MERGE_FEEDBACK_EXTENSION_NAME
+#### Variable: VK\_VENDOR\_ID\_MAX\_ENUM
 
-```lisp
-(defconstant vk_ext_subpass_merge_feedback_extension_name VK_EXT_subpass_merge_feedback)
+```Lisp
+(defparameter VK_VENDOR_ID_MAX_ENUM 2147483647)
 ```
 
-## VK_KHR_acceleration_structure
+#### Variable: VK\_SYSTEM\_ALLOCATION\_SCOPE\_COMMAND
 
-```lisp
-(defconstant vk_khr_acceleration_structure 1)
+```Lisp
+(defparameter VK_SYSTEM_ALLOCATION_SCOPE_COMMAND 0)
 ```
 
-## VK_KHR_ACCELERATION_STRUCTURE_SPEC_VERSION
+#### Variable: VK\_SYSTEM\_ALLOCATION\_SCOPE\_OBJECT
 
-```lisp
-(defconstant vk_khr_acceleration_structure_spec_version 13)
+```Lisp
+(defparameter VK_SYSTEM_ALLOCATION_SCOPE_OBJECT 1)
 ```
 
-## VK_KHR_ACCELERATION_STRUCTURE_EXTENSION_NAME
+#### Variable: VK\_SYSTEM\_ALLOCATION\_SCOPE\_CACHE
 
-```lisp
-(defconstant vk_khr_acceleration_structure_extension_name VK_KHR_acceleration_structure)
+```Lisp
+(defparameter VK_SYSTEM_ALLOCATION_SCOPE_CACHE 2)
 ```
 
-## VK_KHR_ray_tracing_pipeline
+#### Variable: VK\_SYSTEM\_ALLOCATION\_SCOPE\_DEVICE
 
-```lisp
-(defconstant vk_khr_ray_tracing_pipeline 1)
+```Lisp
+(defparameter VK_SYSTEM_ALLOCATION_SCOPE_DEVICE 3)
 ```
 
-## VK_KHR_RAY_TRACING_PIPELINE_SPEC_VERSION
+#### Variable: VK\_SYSTEM\_ALLOCATION\_SCOPE\_INSTANCE
 
-```lisp
-(defconstant vk_khr_ray_tracing_pipeline_spec_version 1)
+```Lisp
+(defparameter VK_SYSTEM_ALLOCATION_SCOPE_INSTANCE 4)
 ```
 
-## VK_KHR_RAY_TRACING_PIPELINE_EXTENSION_NAME
+#### Variable: VK\_SYSTEM\_ALLOCATION\_SCOPE\_MAX\_ENUM
 
-```lisp
-(defconstant vk_khr_ray_tracing_pipeline_extension_name VK_KHR_ray_tracing_pipeline)
+```Lisp
+(defparameter VK_SYSTEM_ALLOCATION_SCOPE_MAX_ENUM 2147483647)
 ```
 
-## VK_KHR_ray_query
+#### Variable: VK\_INTERNAL\_ALLOCATION\_TYPE\_EXECUTABLE
 
-```lisp
-(defconstant vk_khr_ray_query 1)
+```Lisp
+(defparameter VK_INTERNAL_ALLOCATION_TYPE_EXECUTABLE 0)
 ```
 
-## VK_KHR_RAY_QUERY_SPEC_VERSION
+#### Variable: VK\_INTERNAL\_ALLOCATION\_TYPE\_MAX\_ENUM
 
-```lisp
-(defconstant vk_khr_ray_query_spec_version 1)
+```Lisp
+(defparameter VK_INTERNAL_ALLOCATION_TYPE_MAX_ENUM 2147483647)
 ```
 
-## VK_KHR_RAY_QUERY_EXTENSION_NAME
+#### Variable: VK\_FORMAT\_UNDEFINED
 
-```lisp
-(defconstant vk_khr_ray_query_extension_name VK_KHR_ray_query)
+```Lisp
+(defparameter VK_FORMAT_UNDEFINED 0)
+```
+
+#### Variable: VK\_FORMAT\_R4G4\_UNORM\_PACK8
+
+```Lisp
+(defparameter VK_FORMAT_R4G4_UNORM_PACK8 1)
+```
+
+#### Variable: VK\_FORMAT\_R4G4B4A4\_UNORM\_PACK16
+
+```Lisp
+(defparameter VK_FORMAT_R4G4B4A4_UNORM_PACK16 2)
+```
+
+#### Variable: VK\_FORMAT\_B4G4R4A4\_UNORM\_PACK16
+
+```Lisp
+(defparameter VK_FORMAT_B4G4R4A4_UNORM_PACK16 3)
+```
+
+#### Variable: VK\_FORMAT\_R5G6B5\_UNORM\_PACK16
+
+```Lisp
+(defparameter VK_FORMAT_R5G6B5_UNORM_PACK16 4)
+```
+
+#### Variable: VK\_FORMAT\_B5G6R5\_UNORM\_PACK16
+
+```Lisp
+(defparameter VK_FORMAT_B5G6R5_UNORM_PACK16 5)
+```
+
+#### Variable: VK\_FORMAT\_R5G5B5A1\_UNORM\_PACK16
+
+```Lisp
+(defparameter VK_FORMAT_R5G5B5A1_UNORM_PACK16 6)
+```
+
+#### Variable: VK\_FORMAT\_B5G5R5A1\_UNORM\_PACK16
+
+```Lisp
+(defparameter VK_FORMAT_B5G5R5A1_UNORM_PACK16 7)
+```
+
+#### Variable: VK\_FORMAT\_A1R5G5B5\_UNORM\_PACK16
+
+```Lisp
+(defparameter VK_FORMAT_A1R5G5B5_UNORM_PACK16 8)
+```
+
+#### Variable: VK\_FORMAT\_R8\_UNORM
+
+```Lisp
+(defparameter VK_FORMAT_R8_UNORM 9)
+```
+
+#### Variable: VK\_FORMAT\_R8\_SNORM
+
+```Lisp
+(defparameter VK_FORMAT_R8_SNORM 10)
+```
+
+#### Variable: VK\_FORMAT\_R8\_USCALED
+
+```Lisp
+(defparameter VK_FORMAT_R8_USCALED 11)
+```
+
+#### Variable: VK\_FORMAT\_R8\_SSCALED
+
+```Lisp
+(defparameter VK_FORMAT_R8_SSCALED 12)
+```
+
+#### Variable: VK\_FORMAT\_R8\_UINT
+
+```Lisp
+(defparameter VK_FORMAT_R8_UINT 13)
+```
+
+#### Variable: VK\_FORMAT\_R8\_SINT
+
+```Lisp
+(defparameter VK_FORMAT_R8_SINT 14)
+```
+
+#### Variable: VK\_FORMAT\_R8\_SRGB
+
+```Lisp
+(defparameter VK_FORMAT_R8_SRGB 15)
+```
+
+#### Variable: VK\_FORMAT\_R8G8\_UNORM
+
+```Lisp
+(defparameter VK_FORMAT_R8G8_UNORM 16)
+```
+
+#### Variable: VK\_FORMAT\_R8G8\_SNORM
+
+```Lisp
+(defparameter VK_FORMAT_R8G8_SNORM 17)
+```
+
+#### Variable: VK\_FORMAT\_R8G8\_USCALED
+
+```Lisp
+(defparameter VK_FORMAT_R8G8_USCALED 18)
+```
+
+#### Variable: VK\_FORMAT\_R8G8\_SSCALED
+
+```Lisp
+(defparameter VK_FORMAT_R8G8_SSCALED 19)
+```
+
+#### Variable: VK\_FORMAT\_R8G8\_UINT
+
+```Lisp
+(defparameter VK_FORMAT_R8G8_UINT 20)
+```
+
+#### Variable: VK\_FORMAT\_R8G8\_SINT
+
+```Lisp
+(defparameter VK_FORMAT_R8G8_SINT 21)
+```
+
+#### Variable: VK\_FORMAT\_R8G8\_SRGB
+
+```Lisp
+(defparameter VK_FORMAT_R8G8_SRGB 22)
+```
+
+#### Variable: VK\_FORMAT\_R8G8B8\_UNORM
+
+```Lisp
+(defparameter VK_FORMAT_R8G8B8_UNORM 23)
+```
+
+#### Variable: VK\_FORMAT\_R8G8B8\_SNORM
+
+```Lisp
+(defparameter VK_FORMAT_R8G8B8_SNORM 24)
+```
+
+#### Variable: VK\_FORMAT\_R8G8B8\_USCALED
+
+```Lisp
+(defparameter VK_FORMAT_R8G8B8_USCALED 25)
+```
+
+#### Variable: VK\_FORMAT\_R8G8B8\_SSCALED
+
+```Lisp
+(defparameter VK_FORMAT_R8G8B8_SSCALED 26)
+```
+
+#### Variable: VK\_FORMAT\_R8G8B8\_UINT
+
+```Lisp
+(defparameter VK_FORMAT_R8G8B8_UINT 27)
+```
+
+#### Variable: VK\_FORMAT\_R8G8B8\_SINT
+
+```Lisp
+(defparameter VK_FORMAT_R8G8B8_SINT 28)
+```
+
+#### Variable: VK\_FORMAT\_R8G8B8\_SRGB
+
+```Lisp
+(defparameter VK_FORMAT_R8G8B8_SRGB 29)
+```
+
+#### Variable: VK\_FORMAT\_B8G8R8\_UNORM
+
+```Lisp
+(defparameter VK_FORMAT_B8G8R8_UNORM 30)
+```
+
+#### Variable: VK\_FORMAT\_B8G8R8\_SNORM
+
+```Lisp
+(defparameter VK_FORMAT_B8G8R8_SNORM 31)
+```
+
+#### Variable: VK\_FORMAT\_B8G8R8\_USCALED
+
+```Lisp
+(defparameter VK_FORMAT_B8G8R8_USCALED 32)
+```
+
+#### Variable: VK\_FORMAT\_B8G8R8\_SSCALED
+
+```Lisp
+(defparameter VK_FORMAT_B8G8R8_SSCALED 33)
+```
+
+#### Variable: VK\_FORMAT\_B8G8R8\_UINT
+
+```Lisp
+(defparameter VK_FORMAT_B8G8R8_UINT 34)
+```
+
+#### Variable: VK\_FORMAT\_B8G8R8\_SINT
+
+```Lisp
+(defparameter VK_FORMAT_B8G8R8_SINT 35)
+```
+
+#### Variable: VK\_FORMAT\_B8G8R8\_SRGB
+
+```Lisp
+(defparameter VK_FORMAT_B8G8R8_SRGB 36)
+```
+
+#### Variable: VK\_FORMAT\_R8G8B8A8\_UNORM
+
+```Lisp
+(defparameter VK_FORMAT_R8G8B8A8_UNORM 37)
+```
+
+#### Variable: VK\_FORMAT\_R8G8B8A8\_SNORM
+
+```Lisp
+(defparameter VK_FORMAT_R8G8B8A8_SNORM 38)
+```
+
+#### Variable: VK\_FORMAT\_R8G8B8A8\_USCALED
+
+```Lisp
+(defparameter VK_FORMAT_R8G8B8A8_USCALED 39)
+```
+
+#### Variable: VK\_FORMAT\_R8G8B8A8\_SSCALED
+
+```Lisp
+(defparameter VK_FORMAT_R8G8B8A8_SSCALED 40)
+```
+
+#### Variable: VK\_FORMAT\_R8G8B8A8\_UINT
+
+```Lisp
+(defparameter VK_FORMAT_R8G8B8A8_UINT 41)
+```
+
+#### Variable: VK\_FORMAT\_R8G8B8A8\_SINT
+
+```Lisp
+(defparameter VK_FORMAT_R8G8B8A8_SINT 42)
+```
+
+#### Variable: VK\_FORMAT\_R8G8B8A8\_SRGB
+
+```Lisp
+(defparameter VK_FORMAT_R8G8B8A8_SRGB 43)
+```
+
+#### Variable: VK\_FORMAT\_B8G8R8A8\_UNORM
+
+```Lisp
+(defparameter VK_FORMAT_B8G8R8A8_UNORM 44)
+```
+
+#### Variable: VK\_FORMAT\_B8G8R8A8\_SNORM
+
+```Lisp
+(defparameter VK_FORMAT_B8G8R8A8_SNORM 45)
+```
+
+#### Variable: VK\_FORMAT\_B8G8R8A8\_USCALED
+
+```Lisp
+(defparameter VK_FORMAT_B8G8R8A8_USCALED 46)
+```
+
+#### Variable: VK\_FORMAT\_B8G8R8A8\_SSCALED
+
+```Lisp
+(defparameter VK_FORMAT_B8G8R8A8_SSCALED 47)
+```
+
+#### Variable: VK\_FORMAT\_B8G8R8A8\_UINT
+
+```Lisp
+(defparameter VK_FORMAT_B8G8R8A8_UINT 48)
+```
+
+#### Variable: VK\_FORMAT\_B8G8R8A8\_SINT
+
+```Lisp
+(defparameter VK_FORMAT_B8G8R8A8_SINT 49)
+```
+
+#### Variable: VK\_FORMAT\_B8G8R8A8\_SRGB
+
+```Lisp
+(defparameter VK_FORMAT_B8G8R8A8_SRGB 50)
+```
+
+#### Variable: VK\_FORMAT\_A8B8G8R8\_UNORM\_PACK32
+
+```Lisp
+(defparameter VK_FORMAT_A8B8G8R8_UNORM_PACK32 51)
+```
+
+#### Variable: VK\_FORMAT\_A8B8G8R8\_SNORM\_PACK32
+
+```Lisp
+(defparameter VK_FORMAT_A8B8G8R8_SNORM_PACK32 52)
+```
+
+#### Variable: VK\_FORMAT\_A8B8G8R8\_USCALED\_PACK32
+
+```Lisp
+(defparameter VK_FORMAT_A8B8G8R8_USCALED_PACK32 53)
+```
+
+#### Variable: VK\_FORMAT\_A8B8G8R8\_SSCALED\_PACK32
+
+```Lisp
+(defparameter VK_FORMAT_A8B8G8R8_SSCALED_PACK32 54)
+```
+
+#### Variable: VK\_FORMAT\_A8B8G8R8\_UINT\_PACK32
+
+```Lisp
+(defparameter VK_FORMAT_A8B8G8R8_UINT_PACK32 55)
+```
+
+#### Variable: VK\_FORMAT\_A8B8G8R8\_SINT\_PACK32
+
+```Lisp
+(defparameter VK_FORMAT_A8B8G8R8_SINT_PACK32 56)
+```
+
+#### Variable: VK\_FORMAT\_A8B8G8R8\_SRGB\_PACK32
+
+```Lisp
+(defparameter VK_FORMAT_A8B8G8R8_SRGB_PACK32 57)
+```
+
+#### Variable: VK\_FORMAT\_A2R10G10B10\_UNORM\_PACK32
+
+```Lisp
+(defparameter VK_FORMAT_A2R10G10B10_UNORM_PACK32 58)
+```
+
+#### Variable: VK\_FORMAT\_A2R10G10B10\_SNORM\_PACK32
+
+```Lisp
+(defparameter VK_FORMAT_A2R10G10B10_SNORM_PACK32 59)
+```
+
+#### Variable: VK\_FORMAT\_A2R10G10B10\_USCALED\_PACK32
+
+```Lisp
+(defparameter VK_FORMAT_A2R10G10B10_USCALED_PACK32 60)
+```
+
+#### Variable: VK\_FORMAT\_A2R10G10B10\_SSCALED\_PACK32
+
+```Lisp
+(defparameter VK_FORMAT_A2R10G10B10_SSCALED_PACK32 61)
+```
+
+#### Variable: VK\_FORMAT\_A2R10G10B10\_UINT\_PACK32
+
+```Lisp
+(defparameter VK_FORMAT_A2R10G10B10_UINT_PACK32 62)
+```
+
+#### Variable: VK\_FORMAT\_A2R10G10B10\_SINT\_PACK32
+
+```Lisp
+(defparameter VK_FORMAT_A2R10G10B10_SINT_PACK32 63)
+```
+
+#### Variable: VK\_FORMAT\_A2B10G10R10\_UNORM\_PACK32
+
+```Lisp
+(defparameter VK_FORMAT_A2B10G10R10_UNORM_PACK32 64)
+```
+
+#### Variable: VK\_FORMAT\_A2B10G10R10\_SNORM\_PACK32
+
+```Lisp
+(defparameter VK_FORMAT_A2B10G10R10_SNORM_PACK32 65)
+```
+
+#### Variable: VK\_FORMAT\_A2B10G10R10\_USCALED\_PACK32
+
+```Lisp
+(defparameter VK_FORMAT_A2B10G10R10_USCALED_PACK32 66)
+```
+
+#### Variable: VK\_FORMAT\_A2B10G10R10\_SSCALED\_PACK32
+
+```Lisp
+(defparameter VK_FORMAT_A2B10G10R10_SSCALED_PACK32 67)
+```
+
+#### Variable: VK\_FORMAT\_A2B10G10R10\_UINT\_PACK32
+
+```Lisp
+(defparameter VK_FORMAT_A2B10G10R10_UINT_PACK32 68)
+```
+
+#### Variable: VK\_FORMAT\_A2B10G10R10\_SINT\_PACK32
+
+```Lisp
+(defparameter VK_FORMAT_A2B10G10R10_SINT_PACK32 69)
+```
+
+#### Variable: VK\_FORMAT\_R16\_UNORM
+
+```Lisp
+(defparameter VK_FORMAT_R16_UNORM 70)
+```
+
+#### Variable: VK\_FORMAT\_R16\_SNORM
+
+```Lisp
+(defparameter VK_FORMAT_R16_SNORM 71)
+```
+
+#### Variable: VK\_FORMAT\_R16\_USCALED
+
+```Lisp
+(defparameter VK_FORMAT_R16_USCALED 72)
+```
+
+#### Variable: VK\_FORMAT\_R16\_SSCALED
+
+```Lisp
+(defparameter VK_FORMAT_R16_SSCALED 73)
+```
+
+#### Variable: VK\_FORMAT\_R16\_UINT
+
+```Lisp
+(defparameter VK_FORMAT_R16_UINT 74)
+```
+
+#### Variable: VK\_FORMAT\_R16\_SINT
+
+```Lisp
+(defparameter VK_FORMAT_R16_SINT 75)
+```
+
+#### Variable: VK\_FORMAT\_R16\_SFLOAT
+
+```Lisp
+(defparameter VK_FORMAT_R16_SFLOAT 76)
+```
+
+#### Variable: VK\_FORMAT\_R16G16\_UNORM
+
+```Lisp
+(defparameter VK_FORMAT_R16G16_UNORM 77)
+```
+
+#### Variable: VK\_FORMAT\_R16G16\_SNORM
+
+```Lisp
+(defparameter VK_FORMAT_R16G16_SNORM 78)
+```
+
+#### Variable: VK\_FORMAT\_R16G16\_USCALED
+
+```Lisp
+(defparameter VK_FORMAT_R16G16_USCALED 79)
+```
+
+#### Variable: VK\_FORMAT\_R16G16\_SSCALED
+
+```Lisp
+(defparameter VK_FORMAT_R16G16_SSCALED 80)
+```
+
+#### Variable: VK\_FORMAT\_R16G16\_UINT
+
+```Lisp
+(defparameter VK_FORMAT_R16G16_UINT 81)
+```
+
+#### Variable: VK\_FORMAT\_R16G16\_SINT
+
+```Lisp
+(defparameter VK_FORMAT_R16G16_SINT 82)
+```
+
+#### Variable: VK\_FORMAT\_R16G16\_SFLOAT
+
+```Lisp
+(defparameter VK_FORMAT_R16G16_SFLOAT 83)
+```
+
+#### Variable: VK\_FORMAT\_R16G16B16\_UNORM
+
+```Lisp
+(defparameter VK_FORMAT_R16G16B16_UNORM 84)
+```
+
+#### Variable: VK\_FORMAT\_R16G16B16\_SNORM
+
+```Lisp
+(defparameter VK_FORMAT_R16G16B16_SNORM 85)
+```
+
+#### Variable: VK\_FORMAT\_R16G16B16\_USCALED
+
+```Lisp
+(defparameter VK_FORMAT_R16G16B16_USCALED 86)
+```
+
+#### Variable: VK\_FORMAT\_R16G16B16\_SSCALED
+
+```Lisp
+(defparameter VK_FORMAT_R16G16B16_SSCALED 87)
+```
+
+#### Variable: VK\_FORMAT\_R16G16B16\_UINT
+
+```Lisp
+(defparameter VK_FORMAT_R16G16B16_UINT 88)
+```
+
+#### Variable: VK\_FORMAT\_R16G16B16\_SINT
+
+```Lisp
+(defparameter VK_FORMAT_R16G16B16_SINT 89)
+```
+
+#### Variable: VK\_FORMAT\_R16G16B16\_SFLOAT
+
+```Lisp
+(defparameter VK_FORMAT_R16G16B16_SFLOAT 90)
+```
+
+#### Variable: VK\_FORMAT\_R16G16B16A16\_UNORM
+
+```Lisp
+(defparameter VK_FORMAT_R16G16B16A16_UNORM 91)
+```
+
+#### Variable: VK\_FORMAT\_R16G16B16A16\_SNORM
+
+```Lisp
+(defparameter VK_FORMAT_R16G16B16A16_SNORM 92)
+```
+
+#### Variable: VK\_FORMAT\_R16G16B16A16\_USCALED
+
+```Lisp
+(defparameter VK_FORMAT_R16G16B16A16_USCALED 93)
+```
+
+#### Variable: VK\_FORMAT\_R16G16B16A16\_SSCALED
+
+```Lisp
+(defparameter VK_FORMAT_R16G16B16A16_SSCALED 94)
+```
+
+#### Variable: VK\_FORMAT\_R16G16B16A16\_UINT
+
+```Lisp
+(defparameter VK_FORMAT_R16G16B16A16_UINT 95)
+```
+
+#### Variable: VK\_FORMAT\_R16G16B16A16\_SINT
+
+```Lisp
+(defparameter VK_FORMAT_R16G16B16A16_SINT 96)
+```
+
+#### Variable: VK\_FORMAT\_R16G16B16A16\_SFLOAT
+
+```Lisp
+(defparameter VK_FORMAT_R16G16B16A16_SFLOAT 97)
+```
+
+#### Variable: VK\_FORMAT\_R32\_UINT
+
+```Lisp
+(defparameter VK_FORMAT_R32_UINT 98)
+```
+
+#### Variable: VK\_FORMAT\_R32\_SINT
+
+```Lisp
+(defparameter VK_FORMAT_R32_SINT 99)
+```
+
+#### Variable: VK\_FORMAT\_R32\_SFLOAT
+
+```Lisp
+(defparameter VK_FORMAT_R32_SFLOAT 100)
+```
+
+#### Variable: VK\_FORMAT\_R32G32\_UINT
+
+```Lisp
+(defparameter VK_FORMAT_R32G32_UINT 101)
+```
+
+#### Variable: VK\_FORMAT\_R32G32\_SINT
+
+```Lisp
+(defparameter VK_FORMAT_R32G32_SINT 102)
+```
+
+#### Variable: VK\_FORMAT\_R32G32\_SFLOAT
+
+```Lisp
+(defparameter VK_FORMAT_R32G32_SFLOAT 103)
+```
+
+#### Variable: VK\_FORMAT\_R32G32B32\_UINT
+
+```Lisp
+(defparameter VK_FORMAT_R32G32B32_UINT 104)
+```
+
+#### Variable: VK\_FORMAT\_R32G32B32\_SINT
+
+```Lisp
+(defparameter VK_FORMAT_R32G32B32_SINT 105)
+```
+
+#### Variable: VK\_FORMAT\_R32G32B32\_SFLOAT
+
+```Lisp
+(defparameter VK_FORMAT_R32G32B32_SFLOAT 106)
+```
+
+#### Variable: VK\_FORMAT\_R32G32B32A32\_UINT
+
+```Lisp
+(defparameter VK_FORMAT_R32G32B32A32_UINT 107)
+```
+
+#### Variable: VK\_FORMAT\_R32G32B32A32\_SINT
+
+```Lisp
+(defparameter VK_FORMAT_R32G32B32A32_SINT 108)
+```
+
+#### Variable: VK\_FORMAT\_R32G32B32A32\_SFLOAT
+
+```Lisp
+(defparameter VK_FORMAT_R32G32B32A32_SFLOAT 109)
+```
+
+#### Variable: VK\_FORMAT\_R64\_UINT
+
+```Lisp
+(defparameter VK_FORMAT_R64_UINT 110)
+```
+
+#### Variable: VK\_FORMAT\_R64\_SINT
+
+```Lisp
+(defparameter VK_FORMAT_R64_SINT 111)
+```
+
+#### Variable: VK\_FORMAT\_R64\_SFLOAT
+
+```Lisp
+(defparameter VK_FORMAT_R64_SFLOAT 112)
+```
+
+#### Variable: VK\_FORMAT\_R64G64\_UINT
+
+```Lisp
+(defparameter VK_FORMAT_R64G64_UINT 113)
+```
+
+#### Variable: VK\_FORMAT\_R64G64\_SINT
+
+```Lisp
+(defparameter VK_FORMAT_R64G64_SINT 114)
+```
+
+#### Variable: VK\_FORMAT\_R64G64\_SFLOAT
+
+```Lisp
+(defparameter VK_FORMAT_R64G64_SFLOAT 115)
+```
+
+#### Variable: VK\_FORMAT\_R64G64B64\_UINT
+
+```Lisp
+(defparameter VK_FORMAT_R64G64B64_UINT 116)
+```
+
+#### Variable: VK\_FORMAT\_R64G64B64\_SINT
+
+```Lisp
+(defparameter VK_FORMAT_R64G64B64_SINT 117)
+```
+
+#### Variable: VK\_FORMAT\_R64G64B64\_SFLOAT
+
+```Lisp
+(defparameter VK_FORMAT_R64G64B64_SFLOAT 118)
+```
+
+#### Variable: VK\_FORMAT\_R64G64B64A64\_UINT
+
+```Lisp
+(defparameter VK_FORMAT_R64G64B64A64_UINT 119)
+```
+
+#### Variable: VK\_FORMAT\_R64G64B64A64\_SINT
+
+```Lisp
+(defparameter VK_FORMAT_R64G64B64A64_SINT 120)
+```
+
+#### Variable: VK\_FORMAT\_R64G64B64A64\_SFLOAT
+
+```Lisp
+(defparameter VK_FORMAT_R64G64B64A64_SFLOAT 121)
+```
+
+#### Variable: VK\_FORMAT\_B10G11R11\_UFLOAT\_PACK32
+
+```Lisp
+(defparameter VK_FORMAT_B10G11R11_UFLOAT_PACK32 122)
+```
+
+#### Variable: VK\_FORMAT\_E5B9G9R9\_UFLOAT\_PACK32
+
+```Lisp
+(defparameter VK_FORMAT_E5B9G9R9_UFLOAT_PACK32 123)
+```
+
+#### Variable: VK\_FORMAT\_D16\_UNORM
+
+```Lisp
+(defparameter VK_FORMAT_D16_UNORM 124)
+```
+
+#### Variable: VK\_FORMAT\_X8\_D24\_UNORM\_PACK32
+
+```Lisp
+(defparameter VK_FORMAT_X8_D24_UNORM_PACK32 125)
+```
+
+#### Variable: VK\_FORMAT\_D32\_SFLOAT
+
+```Lisp
+(defparameter VK_FORMAT_D32_SFLOAT 126)
+```
+
+#### Variable: VK\_FORMAT\_S8\_UINT
+
+```Lisp
+(defparameter VK_FORMAT_S8_UINT 127)
+```
+
+#### Variable: VK\_FORMAT\_D16\_UNORM\_S8\_UINT
+
+```Lisp
+(defparameter VK_FORMAT_D16_UNORM_S8_UINT 128)
+```
+
+#### Variable: VK\_FORMAT\_D24\_UNORM\_S8\_UINT
+
+```Lisp
+(defparameter VK_FORMAT_D24_UNORM_S8_UINT 129)
+```
+
+#### Variable: VK\_FORMAT\_D32\_SFLOAT\_S8\_UINT
+
+```Lisp
+(defparameter VK_FORMAT_D32_SFLOAT_S8_UINT 130)
+```
+
+#### Variable: VK\_FORMAT\_BC1\_RGB\_UNORM\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_BC1_RGB_UNORM_BLOCK 131)
+```
+
+#### Variable: VK\_FORMAT\_BC1\_RGB\_SRGB\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_BC1_RGB_SRGB_BLOCK 132)
+```
+
+#### Variable: VK\_FORMAT\_BC1\_RGBA\_UNORM\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_BC1_RGBA_UNORM_BLOCK 133)
+```
+
+#### Variable: VK\_FORMAT\_BC1\_RGBA\_SRGB\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_BC1_RGBA_SRGB_BLOCK 134)
+```
+
+#### Variable: VK\_FORMAT\_BC2\_UNORM\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_BC2_UNORM_BLOCK 135)
+```
+
+#### Variable: VK\_FORMAT\_BC2\_SRGB\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_BC2_SRGB_BLOCK 136)
+```
+
+#### Variable: VK\_FORMAT\_BC3\_UNORM\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_BC3_UNORM_BLOCK 137)
+```
+
+#### Variable: VK\_FORMAT\_BC3\_SRGB\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_BC3_SRGB_BLOCK 138)
+```
+
+#### Variable: VK\_FORMAT\_BC4\_UNORM\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_BC4_UNORM_BLOCK 139)
+```
+
+#### Variable: VK\_FORMAT\_BC4\_SNORM\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_BC4_SNORM_BLOCK 140)
+```
+
+#### Variable: VK\_FORMAT\_BC5\_UNORM\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_BC5_UNORM_BLOCK 141)
+```
+
+#### Variable: VK\_FORMAT\_BC5\_SNORM\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_BC5_SNORM_BLOCK 142)
+```
+
+#### Variable: VK\_FORMAT\_BC6H\_UFLOAT\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_BC6H_UFLOAT_BLOCK 143)
+```
+
+#### Variable: VK\_FORMAT\_BC6H\_SFLOAT\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_BC6H_SFLOAT_BLOCK 144)
+```
+
+#### Variable: VK\_FORMAT\_BC7\_UNORM\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_BC7_UNORM_BLOCK 145)
+```
+
+#### Variable: VK\_FORMAT\_BC7\_SRGB\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_BC7_SRGB_BLOCK 146)
+```
+
+#### Variable: VK\_FORMAT\_ETC2\_R8G8B8\_UNORM\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ETC2_R8G8B8_UNORM_BLOCK 147)
+```
+
+#### Variable: VK\_FORMAT\_ETC2\_R8G8B8\_SRGB\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ETC2_R8G8B8_SRGB_BLOCK 148)
+```
+
+#### Variable: VK\_FORMAT\_ETC2\_R8G8B8A1\_UNORM\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ETC2_R8G8B8A1_UNORM_BLOCK 149)
+```
+
+#### Variable: VK\_FORMAT\_ETC2\_R8G8B8A1\_SRGB\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ETC2_R8G8B8A1_SRGB_BLOCK 150)
+```
+
+#### Variable: VK\_FORMAT\_ETC2\_R8G8B8A8\_UNORM\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ETC2_R8G8B8A8_UNORM_BLOCK 151)
+```
+
+#### Variable: VK\_FORMAT\_ETC2\_R8G8B8A8\_SRGB\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ETC2_R8G8B8A8_SRGB_BLOCK 152)
+```
+
+#### Variable: VK\_FORMAT\_EAC\_R11\_UNORM\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_EAC_R11_UNORM_BLOCK 153)
+```
+
+#### Variable: VK\_FORMAT\_EAC\_R11\_SNORM\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_EAC_R11_SNORM_BLOCK 154)
+```
+
+#### Variable: VK\_FORMAT\_EAC\_R11G11\_UNORM\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_EAC_R11G11_UNORM_BLOCK 155)
+```
+
+#### Variable: VK\_FORMAT\_EAC\_R11G11\_SNORM\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_EAC_R11G11_SNORM_BLOCK 156)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_4X4\_UNORM\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_4X4_UNORM_BLOCK 157)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_4X4\_SRGB\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_4X4_SRGB_BLOCK 158)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_5X4\_UNORM\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_5X4_UNORM_BLOCK 159)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_5X4\_SRGB\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_5X4_SRGB_BLOCK 160)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_5X5\_UNORM\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_5X5_UNORM_BLOCK 161)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_5X5\_SRGB\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_5X5_SRGB_BLOCK 162)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_6X5\_UNORM\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_6X5_UNORM_BLOCK 163)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_6X5\_SRGB\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_6X5_SRGB_BLOCK 164)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_6X6\_UNORM\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_6X6_UNORM_BLOCK 165)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_6X6\_SRGB\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_6X6_SRGB_BLOCK 166)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_8X5\_UNORM\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_8X5_UNORM_BLOCK 167)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_8X5\_SRGB\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_8X5_SRGB_BLOCK 168)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_8X6\_UNORM\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_8X6_UNORM_BLOCK 169)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_8X6\_SRGB\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_8X6_SRGB_BLOCK 170)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_8X8\_UNORM\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_8X8_UNORM_BLOCK 171)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_8X8\_SRGB\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_8X8_SRGB_BLOCK 172)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_10X5\_UNORM\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_10X5_UNORM_BLOCK 173)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_10X5\_SRGB\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_10X5_SRGB_BLOCK 174)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_10X6\_UNORM\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_10X6_UNORM_BLOCK 175)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_10X6\_SRGB\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_10X6_SRGB_BLOCK 176)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_10X8\_UNORM\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_10X8_UNORM_BLOCK 177)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_10X8\_SRGB\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_10X8_SRGB_BLOCK 178)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_10X10\_UNORM\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_10X10_UNORM_BLOCK 179)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_10X10\_SRGB\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_10X10_SRGB_BLOCK 180)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_12X10\_UNORM\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_12X10_UNORM_BLOCK 181)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_12X10\_SRGB\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_12X10_SRGB_BLOCK 182)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_12X12\_UNORM\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_12X12_UNORM_BLOCK 183)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_12X12\_SRGB\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_12X12_SRGB_BLOCK 184)
+```
+
+#### Variable: VK\_FORMAT\_G8B8G8R8\_422\_UNORM
+
+```Lisp
+(defparameter VK_FORMAT_G8B8G8R8_422_UNORM 1000156000)
+```
+
+#### Variable: VK\_FORMAT\_B8G8R8G8\_422\_UNORM
+
+```Lisp
+(defparameter VK_FORMAT_B8G8R8G8_422_UNORM 1000156001)
+```
+
+#### Variable: VK\_FORMAT\_G8\_B8\_R8\_3PLANE\_420\_UNORM
+
+```Lisp
+(defparameter VK_FORMAT_G8_B8_R8_3PLANE_420_UNORM 1000156002)
+```
+
+#### Variable: VK\_FORMAT\_G8\_B8R8\_2PLANE\_420\_UNORM
+
+```Lisp
+(defparameter VK_FORMAT_G8_B8R8_2PLANE_420_UNORM 1000156003)
+```
+
+#### Variable: VK\_FORMAT\_G8\_B8\_R8\_3PLANE\_422\_UNORM
+
+```Lisp
+(defparameter VK_FORMAT_G8_B8_R8_3PLANE_422_UNORM 1000156004)
+```
+
+#### Variable: VK\_FORMAT\_G8\_B8R8\_2PLANE\_422\_UNORM
+
+```Lisp
+(defparameter VK_FORMAT_G8_B8R8_2PLANE_422_UNORM 1000156005)
+```
+
+#### Variable: VK\_FORMAT\_G8\_B8\_R8\_3PLANE\_444\_UNORM
+
+```Lisp
+(defparameter VK_FORMAT_G8_B8_R8_3PLANE_444_UNORM 1000156006)
+```
+
+#### Variable: VK\_FORMAT\_R10X6\_UNORM\_PACK16
+
+```Lisp
+(defparameter VK_FORMAT_R10X6_UNORM_PACK16 1000156007)
+```
+
+#### Variable: VK\_FORMAT\_R10X6G10X6\_UNORM\_2PACK16
+
+```Lisp
+(defparameter VK_FORMAT_R10X6G10X6_UNORM_2PACK16 1000156008)
+```
+
+#### Variable: VK\_FORMAT\_R10X6G10X6B10X6A10X6\_UNORM\_4PACK16
+
+```Lisp
+(defparameter VK_FORMAT_R10X6G10X6B10X6A10X6_UNORM_4PACK16 1000156009)
+```
+
+#### Variable: VK\_FORMAT\_G10X6B10X6G10X6R10X6\_422\_UNORM\_4PACK16
+
+```Lisp
+(defparameter VK_FORMAT_G10X6B10X6G10X6R10X6_422_UNORM_4PACK16 1000156010)
+```
+
+#### Variable: VK\_FORMAT\_B10X6G10X6R10X6G10X6\_422\_UNORM\_4PACK16
+
+```Lisp
+(defparameter VK_FORMAT_B10X6G10X6R10X6G10X6_422_UNORM_4PACK16 1000156011)
+```
+
+#### Variable: VK\_FORMAT\_G10X6\_B10X6\_R10X6\_3PLANE\_420\_UNORM\_3PACK16
+
+```Lisp
+(defparameter VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_420_UNORM_3PACK16 1000156012)
+```
+
+#### Variable: VK\_FORMAT\_G10X6\_B10X6R10X6\_2PLANE\_420\_UNORM\_3PACK16
+
+```Lisp
+(defparameter VK_FORMAT_G10X6_B10X6R10X6_2PLANE_420_UNORM_3PACK16 1000156013)
+```
+
+#### Variable: VK\_FORMAT\_G10X6\_B10X6\_R10X6\_3PLANE\_422\_UNORM\_3PACK16
+
+```Lisp
+(defparameter VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_422_UNORM_3PACK16 1000156014)
+```
+
+#### Variable: VK\_FORMAT\_G10X6\_B10X6R10X6\_2PLANE\_422\_UNORM\_3PACK16
+
+```Lisp
+(defparameter VK_FORMAT_G10X6_B10X6R10X6_2PLANE_422_UNORM_3PACK16 1000156015)
+```
+
+#### Variable: VK\_FORMAT\_G10X6\_B10X6\_R10X6\_3PLANE\_444\_UNORM\_3PACK16
+
+```Lisp
+(defparameter VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_444_UNORM_3PACK16 1000156016)
+```
+
+#### Variable: VK\_FORMAT\_R12X4\_UNORM\_PACK16
+
+```Lisp
+(defparameter VK_FORMAT_R12X4_UNORM_PACK16 1000156017)
+```
+
+#### Variable: VK\_FORMAT\_R12X4G12X4\_UNORM\_2PACK16
+
+```Lisp
+(defparameter VK_FORMAT_R12X4G12X4_UNORM_2PACK16 1000156018)
+```
+
+#### Variable: VK\_FORMAT\_R12X4G12X4B12X4A12X4\_UNORM\_4PACK16
+
+```Lisp
+(defparameter VK_FORMAT_R12X4G12X4B12X4A12X4_UNORM_4PACK16 1000156019)
+```
+
+#### Variable: VK\_FORMAT\_G12X4B12X4G12X4R12X4\_422\_UNORM\_4PACK16
+
+```Lisp
+(defparameter VK_FORMAT_G12X4B12X4G12X4R12X4_422_UNORM_4PACK16 1000156020)
+```
+
+#### Variable: VK\_FORMAT\_B12X4G12X4R12X4G12X4\_422\_UNORM\_4PACK16
+
+```Lisp
+(defparameter VK_FORMAT_B12X4G12X4R12X4G12X4_422_UNORM_4PACK16 1000156021)
+```
+
+#### Variable: VK\_FORMAT\_G12X4\_B12X4\_R12X4\_3PLANE\_420\_UNORM\_3PACK16
+
+```Lisp
+(defparameter VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_420_UNORM_3PACK16 1000156022)
+```
+
+#### Variable: VK\_FORMAT\_G12X4\_B12X4R12X4\_2PLANE\_420\_UNORM\_3PACK16
+
+```Lisp
+(defparameter VK_FORMAT_G12X4_B12X4R12X4_2PLANE_420_UNORM_3PACK16 1000156023)
+```
+
+#### Variable: VK\_FORMAT\_G12X4\_B12X4\_R12X4\_3PLANE\_422\_UNORM\_3PACK16
+
+```Lisp
+(defparameter VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_422_UNORM_3PACK16 1000156024)
+```
+
+#### Variable: VK\_FORMAT\_G12X4\_B12X4R12X4\_2PLANE\_422\_UNORM\_3PACK16
+
+```Lisp
+(defparameter VK_FORMAT_G12X4_B12X4R12X4_2PLANE_422_UNORM_3PACK16 1000156025)
+```
+
+#### Variable: VK\_FORMAT\_G12X4\_B12X4\_R12X4\_3PLANE\_444\_UNORM\_3PACK16
+
+```Lisp
+(defparameter VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_444_UNORM_3PACK16 1000156026)
+```
+
+#### Variable: VK\_FORMAT\_G16B16G16R16\_422\_UNORM
+
+```Lisp
+(defparameter VK_FORMAT_G16B16G16R16_422_UNORM 1000156027)
+```
+
+#### Variable: VK\_FORMAT\_B16G16R16G16\_422\_UNORM
+
+```Lisp
+(defparameter VK_FORMAT_B16G16R16G16_422_UNORM 1000156028)
+```
+
+#### Variable: VK\_FORMAT\_G16\_B16\_R16\_3PLANE\_420\_UNORM
+
+```Lisp
+(defparameter VK_FORMAT_G16_B16_R16_3PLANE_420_UNORM 1000156029)
+```
+
+#### Variable: VK\_FORMAT\_G16\_B16R16\_2PLANE\_420\_UNORM
+
+```Lisp
+(defparameter VK_FORMAT_G16_B16R16_2PLANE_420_UNORM 1000156030)
+```
+
+#### Variable: VK\_FORMAT\_G16\_B16\_R16\_3PLANE\_422\_UNORM
+
+```Lisp
+(defparameter VK_FORMAT_G16_B16_R16_3PLANE_422_UNORM 1000156031)
+```
+
+#### Variable: VK\_FORMAT\_G16\_B16R16\_2PLANE\_422\_UNORM
+
+```Lisp
+(defparameter VK_FORMAT_G16_B16R16_2PLANE_422_UNORM 1000156032)
+```
+
+#### Variable: VK\_FORMAT\_G16\_B16\_R16\_3PLANE\_444\_UNORM
+
+```Lisp
+(defparameter VK_FORMAT_G16_B16_R16_3PLANE_444_UNORM 1000156033)
+```
+
+#### Variable: VK\_FORMAT\_G8\_B8R8\_2PLANE\_444\_UNORM
+
+```Lisp
+(defparameter VK_FORMAT_G8_B8R8_2PLANE_444_UNORM 1000330000)
+```
+
+#### Variable: VK\_FORMAT\_G10X6\_B10X6R10X6\_2PLANE\_444\_UNORM\_3PACK16
+
+```Lisp
+(defparameter VK_FORMAT_G10X6_B10X6R10X6_2PLANE_444_UNORM_3PACK16 1000330001)
+```
+
+#### Variable: VK\_FORMAT\_G12X4\_B12X4R12X4\_2PLANE\_444\_UNORM\_3PACK16
+
+```Lisp
+(defparameter VK_FORMAT_G12X4_B12X4R12X4_2PLANE_444_UNORM_3PACK16 1000330002)
+```
+
+#### Variable: VK\_FORMAT\_G16\_B16R16\_2PLANE\_444\_UNORM
+
+```Lisp
+(defparameter VK_FORMAT_G16_B16R16_2PLANE_444_UNORM 1000330003)
+```
+
+#### Variable: VK\_FORMAT\_A4R4G4B4\_UNORM\_PACK16
+
+```Lisp
+(defparameter VK_FORMAT_A4R4G4B4_UNORM_PACK16 1000340000)
+```
+
+#### Variable: VK\_FORMAT\_A4B4G4R4\_UNORM\_PACK16
+
+```Lisp
+(defparameter VK_FORMAT_A4B4G4R4_UNORM_PACK16 1000340001)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_4X4\_SFLOAT\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_4X4_SFLOAT_BLOCK 1000066000)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_5X4\_SFLOAT\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_5X4_SFLOAT_BLOCK 1000066001)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_5X5\_SFLOAT\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_5X5_SFLOAT_BLOCK 1000066002)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_6X5\_SFLOAT\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_6X5_SFLOAT_BLOCK 1000066003)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_6X6\_SFLOAT\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_6X6_SFLOAT_BLOCK 1000066004)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_8X5\_SFLOAT\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_8X5_SFLOAT_BLOCK 1000066005)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_8X6\_SFLOAT\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_8X6_SFLOAT_BLOCK 1000066006)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_8X8\_SFLOAT\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_8X8_SFLOAT_BLOCK 1000066007)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_10X5\_SFLOAT\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_10X5_SFLOAT_BLOCK 1000066008)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_10X6\_SFLOAT\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_10X6_SFLOAT_BLOCK 1000066009)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_10X8\_SFLOAT\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_10X8_SFLOAT_BLOCK 1000066010)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_10X10\_SFLOAT\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_10X10_SFLOAT_BLOCK 1000066011)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_12X10\_SFLOAT\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_12X10_SFLOAT_BLOCK 1000066012)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_12X12\_SFLOAT\_BLOCK
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_12X12_SFLOAT_BLOCK 1000066013)
+```
+
+#### Variable: VK\_FORMAT\_PVRTC1\_2BPP\_UNORM\_BLOCK\_IMG
+
+```Lisp
+(defparameter VK_FORMAT_PVRTC1_2BPP_UNORM_BLOCK_IMG 1000054000)
+```
+
+#### Variable: VK\_FORMAT\_PVRTC1\_4BPP\_UNORM\_BLOCK\_IMG
+
+```Lisp
+(defparameter VK_FORMAT_PVRTC1_4BPP_UNORM_BLOCK_IMG 1000054001)
+```
+
+#### Variable: VK\_FORMAT\_PVRTC2\_2BPP\_UNORM\_BLOCK\_IMG
+
+```Lisp
+(defparameter VK_FORMAT_PVRTC2_2BPP_UNORM_BLOCK_IMG 1000054002)
+```
+
+#### Variable: VK\_FORMAT\_PVRTC2\_4BPP\_UNORM\_BLOCK\_IMG
+
+```Lisp
+(defparameter VK_FORMAT_PVRTC2_4BPP_UNORM_BLOCK_IMG 1000054003)
+```
+
+#### Variable: VK\_FORMAT\_PVRTC1\_2BPP\_SRGB\_BLOCK\_IMG
+
+```Lisp
+(defparameter VK_FORMAT_PVRTC1_2BPP_SRGB_BLOCK_IMG 1000054004)
+```
+
+#### Variable: VK\_FORMAT\_PVRTC1\_4BPP\_SRGB\_BLOCK\_IMG
+
+```Lisp
+(defparameter VK_FORMAT_PVRTC1_4BPP_SRGB_BLOCK_IMG 1000054005)
+```
+
+#### Variable: VK\_FORMAT\_PVRTC2\_2BPP\_SRGB\_BLOCK\_IMG
+
+```Lisp
+(defparameter VK_FORMAT_PVRTC2_2BPP_SRGB_BLOCK_IMG 1000054006)
+```
+
+#### Variable: VK\_FORMAT\_PVRTC2\_4BPP\_SRGB\_BLOCK\_IMG
+
+```Lisp
+(defparameter VK_FORMAT_PVRTC2_4BPP_SRGB_BLOCK_IMG 1000054007)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_4X4\_SFLOAT\_BLOCK\_EXT
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_4X4_SFLOAT_BLOCK_EXT VK_FORMAT_ASTC_4X4_SFLOAT_BLOCK)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_5X4\_SFLOAT\_BLOCK\_EXT
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_5X4_SFLOAT_BLOCK_EXT VK_FORMAT_ASTC_5X4_SFLOAT_BLOCK)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_5X5\_SFLOAT\_BLOCK\_EXT
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_5X5_SFLOAT_BLOCK_EXT VK_FORMAT_ASTC_5X5_SFLOAT_BLOCK)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_6X5\_SFLOAT\_BLOCK\_EXT
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_6X5_SFLOAT_BLOCK_EXT VK_FORMAT_ASTC_6X5_SFLOAT_BLOCK)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_6X6\_SFLOAT\_BLOCK\_EXT
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_6X6_SFLOAT_BLOCK_EXT VK_FORMAT_ASTC_6X6_SFLOAT_BLOCK)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_8X5\_SFLOAT\_BLOCK\_EXT
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_8X5_SFLOAT_BLOCK_EXT VK_FORMAT_ASTC_8X5_SFLOAT_BLOCK)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_8X6\_SFLOAT\_BLOCK\_EXT
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_8X6_SFLOAT_BLOCK_EXT VK_FORMAT_ASTC_8X6_SFLOAT_BLOCK)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_8X8\_SFLOAT\_BLOCK\_EXT
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_8X8_SFLOAT_BLOCK_EXT VK_FORMAT_ASTC_8X8_SFLOAT_BLOCK)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_10X5\_SFLOAT\_BLOCK\_EXT
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_10X5_SFLOAT_BLOCK_EXT VK_FORMAT_ASTC_10X5_SFLOAT_BLOCK)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_10X6\_SFLOAT\_BLOCK\_EXT
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_10X6_SFLOAT_BLOCK_EXT VK_FORMAT_ASTC_10X6_SFLOAT_BLOCK)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_10X8\_SFLOAT\_BLOCK\_EXT
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_10X8_SFLOAT_BLOCK_EXT VK_FORMAT_ASTC_10X8_SFLOAT_BLOCK)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_10X10\_SFLOAT\_BLOCK\_EXT
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_10X10_SFLOAT_BLOCK_EXT VK_FORMAT_ASTC_10X10_SFLOAT_BLOCK)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_12X10\_SFLOAT\_BLOCK\_EXT
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_12X10_SFLOAT_BLOCK_EXT VK_FORMAT_ASTC_12X10_SFLOAT_BLOCK)
+```
+
+#### Variable: VK\_FORMAT\_ASTC\_12X12\_SFLOAT\_BLOCK\_EXT
+
+```Lisp
+(defparameter VK_FORMAT_ASTC_12X12_SFLOAT_BLOCK_EXT VK_FORMAT_ASTC_12X12_SFLOAT_BLOCK)
+```
+
+#### Variable: VK\_FORMAT\_G8B8G8R8\_422\_UNORM\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_G8B8G8R8_422_UNORM_KHR VK_FORMAT_G8B8G8R8_422_UNORM)
+```
+
+#### Variable: VK\_FORMAT\_B8G8R8G8\_422\_UNORM\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_B8G8R8G8_422_UNORM_KHR VK_FORMAT_B8G8R8G8_422_UNORM)
+```
+
+#### Variable: VK\_FORMAT\_G8\_B8\_R8\_3PLANE\_420\_UNORM\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_G8_B8_R8_3PLANE_420_UNORM_KHR VK_FORMAT_G8_B8_R8_3PLANE_420_UNORM)
+```
+
+#### Variable: VK\_FORMAT\_G8\_B8R8\_2PLANE\_420\_UNORM\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_G8_B8R8_2PLANE_420_UNORM_KHR VK_FORMAT_G8_B8R8_2PLANE_420_UNORM)
+```
+
+#### Variable: VK\_FORMAT\_G8\_B8\_R8\_3PLANE\_422\_UNORM\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_G8_B8_R8_3PLANE_422_UNORM_KHR VK_FORMAT_G8_B8_R8_3PLANE_422_UNORM)
+```
+
+#### Variable: VK\_FORMAT\_G8\_B8R8\_2PLANE\_422\_UNORM\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_G8_B8R8_2PLANE_422_UNORM_KHR VK_FORMAT_G8_B8R8_2PLANE_422_UNORM)
+```
+
+#### Variable: VK\_FORMAT\_G8\_B8\_R8\_3PLANE\_444\_UNORM\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_G8_B8_R8_3PLANE_444_UNORM_KHR VK_FORMAT_G8_B8_R8_3PLANE_444_UNORM)
+```
+
+#### Variable: VK\_FORMAT\_R10X6\_UNORM\_PACK16\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_R10X6_UNORM_PACK16_KHR VK_FORMAT_R10X6_UNORM_PACK16)
+```
+
+#### Variable: VK\_FORMAT\_R10X6G10X6\_UNORM\_2PACK16\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_R10X6G10X6_UNORM_2PACK16_KHR VK_FORMAT_R10X6G10X6_UNORM_2PACK16)
+```
+
+#### Variable: VK\_FORMAT\_R10X6G10X6B10X6A10X6\_UNORM\_4PACK16\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_R10X6G10X6B10X6A10X6_UNORM_4PACK16_KHR VK_FORMAT_R10X6G10X6B10X6A10X6_UNORM_4PACK16)
+```
+
+#### Variable: VK\_FORMAT\_G10X6B10X6G10X6R10X6\_422\_UNORM\_4PACK16\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_G10X6B10X6G10X6R10X6_422_UNORM_4PACK16_KHR VK_FORMAT_G10X6B10X6G10X6R10X6_422_UNORM_4PACK16)
+```
+
+#### Variable: VK\_FORMAT\_B10X6G10X6R10X6G10X6\_422\_UNORM\_4PACK16\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_B10X6G10X6R10X6G10X6_422_UNORM_4PACK16_KHR VK_FORMAT_B10X6G10X6R10X6G10X6_422_UNORM_4PACK16)
+```
+
+#### Variable: VK\_FORMAT\_G10X6\_B10X6\_R10X6\_3PLANE\_420\_UNORM\_3PACK16\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_420_UNORM_3PACK16_KHR VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_420_UNORM_3PACK16)
+```
+
+#### Variable: VK\_FORMAT\_G10X6\_B10X6R10X6\_2PLANE\_420\_UNORM\_3PACK16\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_G10X6_B10X6R10X6_2PLANE_420_UNORM_3PACK16_KHR VK_FORMAT_G10X6_B10X6R10X6_2PLANE_420_UNORM_3PACK16)
+```
+
+#### Variable: VK\_FORMAT\_G10X6\_B10X6\_R10X6\_3PLANE\_422\_UNORM\_3PACK16\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_422_UNORM_3PACK16_KHR VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_422_UNORM_3PACK16)
+```
+
+#### Variable: VK\_FORMAT\_G10X6\_B10X6R10X6\_2PLANE\_422\_UNORM\_3PACK16\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_G10X6_B10X6R10X6_2PLANE_422_UNORM_3PACK16_KHR VK_FORMAT_G10X6_B10X6R10X6_2PLANE_422_UNORM_3PACK16)
+```
+
+#### Variable: VK\_FORMAT\_G10X6\_B10X6\_R10X6\_3PLANE\_444\_UNORM\_3PACK16\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_444_UNORM_3PACK16_KHR VK_FORMAT_G10X6_B10X6_R10X6_3PLANE_444_UNORM_3PACK16)
+```
+
+#### Variable: VK\_FORMAT\_R12X4\_UNORM\_PACK16\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_R12X4_UNORM_PACK16_KHR VK_FORMAT_R12X4_UNORM_PACK16)
+```
+
+#### Variable: VK\_FORMAT\_R12X4G12X4\_UNORM\_2PACK16\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_R12X4G12X4_UNORM_2PACK16_KHR VK_FORMAT_R12X4G12X4_UNORM_2PACK16)
+```
+
+#### Variable: VK\_FORMAT\_R12X4G12X4B12X4A12X4\_UNORM\_4PACK16\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_R12X4G12X4B12X4A12X4_UNORM_4PACK16_KHR VK_FORMAT_R12X4G12X4B12X4A12X4_UNORM_4PACK16)
+```
+
+#### Variable: VK\_FORMAT\_G12X4B12X4G12X4R12X4\_422\_UNORM\_4PACK16\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_G12X4B12X4G12X4R12X4_422_UNORM_4PACK16_KHR VK_FORMAT_G12X4B12X4G12X4R12X4_422_UNORM_4PACK16)
+```
+
+#### Variable: VK\_FORMAT\_B12X4G12X4R12X4G12X4\_422\_UNORM\_4PACK16\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_B12X4G12X4R12X4G12X4_422_UNORM_4PACK16_KHR VK_FORMAT_B12X4G12X4R12X4G12X4_422_UNORM_4PACK16)
+```
+
+#### Variable: VK\_FORMAT\_G12X4\_B12X4\_R12X4\_3PLANE\_420\_UNORM\_3PACK16\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_420_UNORM_3PACK16_KHR VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_420_UNORM_3PACK16)
+```
+
+#### Variable: VK\_FORMAT\_G12X4\_B12X4R12X4\_2PLANE\_420\_UNORM\_3PACK16\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_G12X4_B12X4R12X4_2PLANE_420_UNORM_3PACK16_KHR VK_FORMAT_G12X4_B12X4R12X4_2PLANE_420_UNORM_3PACK16)
+```
+
+#### Variable: VK\_FORMAT\_G12X4\_B12X4\_R12X4\_3PLANE\_422\_UNORM\_3PACK16\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_422_UNORM_3PACK16_KHR VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_422_UNORM_3PACK16)
+```
+
+#### Variable: VK\_FORMAT\_G12X4\_B12X4R12X4\_2PLANE\_422\_UNORM\_3PACK16\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_G12X4_B12X4R12X4_2PLANE_422_UNORM_3PACK16_KHR VK_FORMAT_G12X4_B12X4R12X4_2PLANE_422_UNORM_3PACK16)
+```
+
+#### Variable: VK\_FORMAT\_G12X4\_B12X4\_R12X4\_3PLANE\_444\_UNORM\_3PACK16\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_444_UNORM_3PACK16_KHR VK_FORMAT_G12X4_B12X4_R12X4_3PLANE_444_UNORM_3PACK16)
+```
+
+#### Variable: VK\_FORMAT\_G16B16G16R16\_422\_UNORM\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_G16B16G16R16_422_UNORM_KHR VK_FORMAT_G16B16G16R16_422_UNORM)
+```
+
+#### Variable: VK\_FORMAT\_B16G16R16G16\_422\_UNORM\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_B16G16R16G16_422_UNORM_KHR VK_FORMAT_B16G16R16G16_422_UNORM)
+```
+
+#### Variable: VK\_FORMAT\_G16\_B16\_R16\_3PLANE\_420\_UNORM\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_G16_B16_R16_3PLANE_420_UNORM_KHR VK_FORMAT_G16_B16_R16_3PLANE_420_UNORM)
+```
+
+#### Variable: VK\_FORMAT\_G16\_B16R16\_2PLANE\_420\_UNORM\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_G16_B16R16_2PLANE_420_UNORM_KHR VK_FORMAT_G16_B16R16_2PLANE_420_UNORM)
+```
+
+#### Variable: VK\_FORMAT\_G16\_B16\_R16\_3PLANE\_422\_UNORM\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_G16_B16_R16_3PLANE_422_UNORM_KHR VK_FORMAT_G16_B16_R16_3PLANE_422_UNORM)
+```
+
+#### Variable: VK\_FORMAT\_G16\_B16R16\_2PLANE\_422\_UNORM\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_G16_B16R16_2PLANE_422_UNORM_KHR VK_FORMAT_G16_B16R16_2PLANE_422_UNORM)
+```
+
+#### Variable: VK\_FORMAT\_G16\_B16\_R16\_3PLANE\_444\_UNORM\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_G16_B16_R16_3PLANE_444_UNORM_KHR VK_FORMAT_G16_B16_R16_3PLANE_444_UNORM)
+```
+
+#### Variable: VK\_FORMAT\_G8\_B8R8\_2PLANE\_444\_UNORM\_EXT
+
+```Lisp
+(defparameter VK_FORMAT_G8_B8R8_2PLANE_444_UNORM_EXT VK_FORMAT_G8_B8R8_2PLANE_444_UNORM)
+```
+
+#### Variable: VK\_FORMAT\_G10X6\_B10X6R10X6\_2PLANE\_444\_UNORM\_3PACK16\_EXT
+
+```Lisp
+(defparameter VK_FORMAT_G10X6_B10X6R10X6_2PLANE_444_UNORM_3PACK16_EXT VK_FORMAT_G10X6_B10X6R10X6_2PLANE_444_UNORM_3PACK16)
+```
+
+#### Variable: VK\_FORMAT\_G12X4\_B12X4R12X4\_2PLANE\_444\_UNORM\_3PACK16\_EXT
+
+```Lisp
+(defparameter VK_FORMAT_G12X4_B12X4R12X4_2PLANE_444_UNORM_3PACK16_EXT VK_FORMAT_G12X4_B12X4R12X4_2PLANE_444_UNORM_3PACK16)
+```
+
+#### Variable: VK\_FORMAT\_G16\_B16R16\_2PLANE\_444\_UNORM\_EXT
+
+```Lisp
+(defparameter VK_FORMAT_G16_B16R16_2PLANE_444_UNORM_EXT VK_FORMAT_G16_B16R16_2PLANE_444_UNORM)
+```
+
+#### Variable: VK\_FORMAT\_A4R4G4B4\_UNORM\_PACK16\_EXT
+
+```Lisp
+(defparameter VK_FORMAT_A4R4G4B4_UNORM_PACK16_EXT VK_FORMAT_A4R4G4B4_UNORM_PACK16)
+```
+
+#### Variable: VK\_FORMAT\_A4B4G4R4\_UNORM\_PACK16\_EXT
+
+```Lisp
+(defparameter VK_FORMAT_A4B4G4R4_UNORM_PACK16_EXT VK_FORMAT_A4B4G4R4_UNORM_PACK16)
+```
+
+#### Variable: VK\_FORMAT\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_FORMAT_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_IMAGE\_TILING\_OPTIMAL
+
+```Lisp
+(defparameter VK_IMAGE_TILING_OPTIMAL 0)
+```
+
+#### Variable: VK\_IMAGE\_TILING\_LINEAR
+
+```Lisp
+(defparameter VK_IMAGE_TILING_LINEAR 1)
+```
+
+#### Variable: VK\_IMAGE\_TILING\_DRM\_FORMAT\_MODIFIER\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT 1000158000)
+```
+
+#### Variable: VK\_IMAGE\_TILING\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_IMAGE_TILING_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_IMAGE\_TYPE\_1D
+
+```Lisp
+(defparameter VK_IMAGE_TYPE_1D 0)
+```
+
+#### Variable: VK\_IMAGE\_TYPE\_2D
+
+```Lisp
+(defparameter VK_IMAGE_TYPE_2D 1)
+```
+
+#### Variable: VK\_IMAGE\_TYPE\_3D
+
+```Lisp
+(defparameter VK_IMAGE_TYPE_3D 2)
+```
+
+#### Variable: VK\_IMAGE\_TYPE\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_IMAGE_TYPE_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_PHYSICAL\_DEVICE\_TYPE\_OTHER
+
+```Lisp
+(defparameter VK_PHYSICAL_DEVICE_TYPE_OTHER 0)
+```
+
+#### Variable: VK\_PHYSICAL\_DEVICE\_TYPE\_INTEGRATED\_GPU
+
+```Lisp
+(defparameter VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU 1)
+```
+
+#### Variable: VK\_PHYSICAL\_DEVICE\_TYPE\_DISCRETE\_GPU
+
+```Lisp
+(defparameter VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU 2)
+```
+
+#### Variable: VK\_PHYSICAL\_DEVICE\_TYPE\_VIRTUAL\_GPU
+
+```Lisp
+(defparameter VK_PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU 3)
+```
+
+#### Variable: VK\_PHYSICAL\_DEVICE\_TYPE\_CPU
+
+```Lisp
+(defparameter VK_PHYSICAL_DEVICE_TYPE_CPU 4)
+```
+
+#### Variable: VK\_PHYSICAL\_DEVICE\_TYPE\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_PHYSICAL_DEVICE_TYPE_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_QUERY\_TYPE\_OCCLUSION
+
+```Lisp
+(defparameter VK_QUERY_TYPE_OCCLUSION 0)
+```
+
+#### Variable: VK\_QUERY\_TYPE\_PIPELINE\_STATISTICS
+
+```Lisp
+(defparameter VK_QUERY_TYPE_PIPELINE_STATISTICS 1)
+```
+
+#### Variable: VK\_QUERY\_TYPE\_TIMESTAMP
+
+```Lisp
+(defparameter VK_QUERY_TYPE_TIMESTAMP 2)
+```
+
+#### Variable: VK\_QUERY\_TYPE\_RESULT\_STATUS\_ONLY\_KHR
+
+```Lisp
+(defparameter VK_QUERY_TYPE_RESULT_STATUS_ONLY_KHR 1000023000)
+```
+
+#### Variable: VK\_QUERY\_TYPE\_TRANSFORM\_FEEDBACK\_STREAM\_EXT
+
+```Lisp
+(defparameter VK_QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT 1000028004)
+```
+
+#### Variable: VK\_QUERY\_TYPE\_PERFORMANCE\_QUERY\_KHR
+
+```Lisp
+(defparameter VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR 1000116000)
+```
+
+#### Variable: VK\_QUERY\_TYPE\_ACCELERATION\_STRUCTURE\_COMPACTED\_SIZE\_KHR
+
+```Lisp
+(defparameter VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR 1000150000)
+```
+
+#### Variable: VK\_QUERY\_TYPE\_ACCELERATION\_STRUCTURE\_SERIALIZATION\_SIZE\_KHR
+
+```Lisp
+(defparameter VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR 1000150001)
+```
+
+#### Variable: VK\_QUERY\_TYPE\_ACCELERATION\_STRUCTURE\_COMPACTED\_SIZE\_NV
+
+```Lisp
+(defparameter VK_QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_NV 1000165000)
+```
+
+#### Variable: VK\_QUERY\_TYPE\_PERFORMANCE\_QUERY\_INTEL
+
+```Lisp
+(defparameter VK_QUERY_TYPE_PERFORMANCE_QUERY_INTEL 1000210000)
+```
+
+#### Variable: VK\_QUERY\_TYPE\_VIDEO\_ENCODE\_BITSTREAM\_BUFFER\_RANGE\_KHR
+
+```Lisp
+(defparameter VK_QUERY_TYPE_VIDEO_ENCODE_BITSTREAM_BUFFER_RANGE_KHR 1000299000)
+```
+
+#### Variable: VK\_QUERY\_TYPE\_PRIMITIVES\_GENERATED\_EXT
+
+```Lisp
+(defparameter VK_QUERY_TYPE_PRIMITIVES_GENERATED_EXT 1000382000)
+```
+
+#### Variable: VK\_QUERY\_TYPE\_ACCELERATION\_STRUCTURE\_SERIALIZATION\_BOTTOM\_LEVEL\_POINTERS\_KHR
+
+```Lisp
+(defparameter VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_BOTTOM_LEVEL_POINTERS_KHR 1000386000)
+```
+
+#### Variable: VK\_QUERY\_TYPE\_ACCELERATION\_STRUCTURE\_SIZE\_KHR
+
+```Lisp
+(defparameter VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SIZE_KHR 1000386001)
+```
+
+#### Variable: VK\_QUERY\_TYPE\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_QUERY_TYPE_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_SHARING\_MODE\_EXCLUSIVE
+
+```Lisp
+(defparameter VK_SHARING_MODE_EXCLUSIVE 0)
+```
+
+#### Variable: VK\_SHARING\_MODE\_CONCURRENT
+
+```Lisp
+(defparameter VK_SHARING_MODE_CONCURRENT 1)
+```
+
+#### Variable: VK\_SHARING\_MODE\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_SHARING_MODE_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_COMPONENT\_SWIZZLE\_IDENTITY
+
+```Lisp
+(defparameter VK_COMPONENT_SWIZZLE_IDENTITY 0)
+```
+
+#### Variable: VK\_COMPONENT\_SWIZZLE\_ZERO
+
+```Lisp
+(defparameter VK_COMPONENT_SWIZZLE_ZERO 1)
+```
+
+#### Variable: VK\_COMPONENT\_SWIZZLE\_ONE
+
+```Lisp
+(defparameter VK_COMPONENT_SWIZZLE_ONE 2)
+```
+
+#### Variable: VK\_COMPONENT\_SWIZZLE\_R
+
+```Lisp
+(defparameter VK_COMPONENT_SWIZZLE_R 3)
+```
+
+#### Variable: VK\_COMPONENT\_SWIZZLE\_G
+
+```Lisp
+(defparameter VK_COMPONENT_SWIZZLE_G 4)
+```
+
+#### Variable: VK\_COMPONENT\_SWIZZLE\_B
+
+```Lisp
+(defparameter VK_COMPONENT_SWIZZLE_B 5)
+```
+
+#### Variable: VK\_COMPONENT\_SWIZZLE\_A
+
+```Lisp
+(defparameter VK_COMPONENT_SWIZZLE_A 6)
+```
+
+#### Variable: VK\_COMPONENT\_SWIZZLE\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_COMPONENT_SWIZZLE_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_IMAGE\_VIEW\_TYPE\_1D
+
+```Lisp
+(defparameter VK_IMAGE_VIEW_TYPE_1D 0)
+```
+
+#### Variable: VK\_IMAGE\_VIEW\_TYPE\_2D
+
+```Lisp
+(defparameter VK_IMAGE_VIEW_TYPE_2D 1)
+```
+
+#### Variable: VK\_IMAGE\_VIEW\_TYPE\_3D
+
+```Lisp
+(defparameter VK_IMAGE_VIEW_TYPE_3D 2)
+```
+
+#### Variable: VK\_IMAGE\_VIEW\_TYPE\_CUBE
+
+```Lisp
+(defparameter VK_IMAGE_VIEW_TYPE_CUBE 3)
+```
+
+#### Variable: VK\_IMAGE\_VIEW\_TYPE\_1D\_ARRAY
+
+```Lisp
+(defparameter VK_IMAGE_VIEW_TYPE_1D_ARRAY 4)
+```
+
+#### Variable: VK\_IMAGE\_VIEW\_TYPE\_2D\_ARRAY
+
+```Lisp
+(defparameter VK_IMAGE_VIEW_TYPE_2D_ARRAY 5)
+```
+
+#### Variable: VK\_IMAGE\_VIEW\_TYPE\_CUBE\_ARRAY
+
+```Lisp
+(defparameter VK_IMAGE_VIEW_TYPE_CUBE_ARRAY 6)
+```
+
+#### Variable: VK\_IMAGE\_VIEW\_TYPE\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_IMAGE_VIEW_TYPE_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_BLEND\_FACTOR\_ZERO
+
+```Lisp
+(defparameter VK_BLEND_FACTOR_ZERO 0)
+```
+
+#### Variable: VK\_BLEND\_FACTOR\_ONE
+
+```Lisp
+(defparameter VK_BLEND_FACTOR_ONE 1)
+```
+
+#### Variable: VK\_BLEND\_FACTOR\_SRC\_COLOR
+
+```Lisp
+(defparameter VK_BLEND_FACTOR_SRC_COLOR 2)
+```
+
+#### Variable: VK\_BLEND\_FACTOR\_ONE\_MINUS\_SRC\_COLOR
+
+```Lisp
+(defparameter VK_BLEND_FACTOR_ONE_MINUS_SRC_COLOR 3)
+```
+
+#### Variable: VK\_BLEND\_FACTOR\_DST\_COLOR
+
+```Lisp
+(defparameter VK_BLEND_FACTOR_DST_COLOR 4)
+```
+
+#### Variable: VK\_BLEND\_FACTOR\_ONE\_MINUS\_DST\_COLOR
+
+```Lisp
+(defparameter VK_BLEND_FACTOR_ONE_MINUS_DST_COLOR 5)
+```
+
+#### Variable: VK\_BLEND\_FACTOR\_SRC\_ALPHA
+
+```Lisp
+(defparameter VK_BLEND_FACTOR_SRC_ALPHA 6)
+```
+
+#### Variable: VK\_BLEND\_FACTOR\_ONE\_MINUS\_SRC\_ALPHA
+
+```Lisp
+(defparameter VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA 7)
+```
+
+#### Variable: VK\_BLEND\_FACTOR\_DST\_ALPHA
+
+```Lisp
+(defparameter VK_BLEND_FACTOR_DST_ALPHA 8)
+```
+
+#### Variable: VK\_BLEND\_FACTOR\_ONE\_MINUS\_DST\_ALPHA
+
+```Lisp
+(defparameter VK_BLEND_FACTOR_ONE_MINUS_DST_ALPHA 9)
+```
+
+#### Variable: VK\_BLEND\_FACTOR\_CONSTANT\_COLOR
+
+```Lisp
+(defparameter VK_BLEND_FACTOR_CONSTANT_COLOR 10)
+```
+
+#### Variable: VK\_BLEND\_FACTOR\_ONE\_MINUS\_CONSTANT\_COLOR
+
+```Lisp
+(defparameter VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR 11)
+```
+
+#### Variable: VK\_BLEND\_FACTOR\_CONSTANT\_ALPHA
+
+```Lisp
+(defparameter VK_BLEND_FACTOR_CONSTANT_ALPHA 12)
+```
+
+#### Variable: VK\_BLEND\_FACTOR\_ONE\_MINUS\_CONSTANT\_ALPHA
+
+```Lisp
+(defparameter VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA 13)
+```
+
+#### Variable: VK\_BLEND\_FACTOR\_SRC\_ALPHA\_SATURATE
+
+```Lisp
+(defparameter VK_BLEND_FACTOR_SRC_ALPHA_SATURATE 14)
+```
+
+#### Variable: VK\_BLEND\_FACTOR\_SRC1\_COLOR
+
+```Lisp
+(defparameter VK_BLEND_FACTOR_SRC1_COLOR 15)
+```
+
+#### Variable: VK\_BLEND\_FACTOR\_ONE\_MINUS\_SRC1\_COLOR
+
+```Lisp
+(defparameter VK_BLEND_FACTOR_ONE_MINUS_SRC1_COLOR 16)
+```
+
+#### Variable: VK\_BLEND\_FACTOR\_SRC1\_ALPHA
+
+```Lisp
+(defparameter VK_BLEND_FACTOR_SRC1_ALPHA 17)
+```
+
+#### Variable: VK\_BLEND\_FACTOR\_ONE\_MINUS\_SRC1\_ALPHA
+
+```Lisp
+(defparameter VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA 18)
+```
+
+#### Variable: VK\_BLEND\_FACTOR\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_BLEND_FACTOR_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_BLEND\_OP\_ADD
+
+```Lisp
+(defparameter VK_BLEND_OP_ADD 0)
+```
+
+#### Variable: VK\_BLEND\_OP\_SUBTRACT
+
+```Lisp
+(defparameter VK_BLEND_OP_SUBTRACT 1)
+```
+
+#### Variable: VK\_BLEND\_OP\_REVERSE\_SUBTRACT
+
+```Lisp
+(defparameter VK_BLEND_OP_REVERSE_SUBTRACT 2)
+```
+
+#### Variable: VK\_BLEND\_OP\_MIN
+
+```Lisp
+(defparameter VK_BLEND_OP_MIN 3)
+```
+
+#### Variable: VK\_BLEND\_OP\_MAX
+
+```Lisp
+(defparameter VK_BLEND_OP_MAX 4)
+```
+
+#### Variable: VK\_BLEND\_OP\_ZERO\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_ZERO_EXT 1000148000)
+```
+
+#### Variable: VK\_BLEND\_OP\_SRC\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_SRC_EXT 1000148001)
+```
+
+#### Variable: VK\_BLEND\_OP\_DST\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_DST_EXT 1000148002)
+```
+
+#### Variable: VK\_BLEND\_OP\_SRC\_OVER\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_SRC_OVER_EXT 1000148003)
+```
+
+#### Variable: VK\_BLEND\_OP\_DST\_OVER\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_DST_OVER_EXT 1000148004)
+```
+
+#### Variable: VK\_BLEND\_OP\_SRC\_IN\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_SRC_IN_EXT 1000148005)
+```
+
+#### Variable: VK\_BLEND\_OP\_DST\_IN\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_DST_IN_EXT 1000148006)
+```
+
+#### Variable: VK\_BLEND\_OP\_SRC\_OUT\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_SRC_OUT_EXT 1000148007)
+```
+
+#### Variable: VK\_BLEND\_OP\_DST\_OUT\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_DST_OUT_EXT 1000148008)
+```
+
+#### Variable: VK\_BLEND\_OP\_SRC\_ATOP\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_SRC_ATOP_EXT 1000148009)
+```
+
+#### Variable: VK\_BLEND\_OP\_DST\_ATOP\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_DST_ATOP_EXT 1000148010)
+```
+
+#### Variable: VK\_BLEND\_OP\_XOR\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_XOR_EXT 1000148011)
+```
+
+#### Variable: VK\_BLEND\_OP\_MULTIPLY\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_MULTIPLY_EXT 1000148012)
+```
+
+#### Variable: VK\_BLEND\_OP\_SCREEN\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_SCREEN_EXT 1000148013)
+```
+
+#### Variable: VK\_BLEND\_OP\_OVERLAY\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_OVERLAY_EXT 1000148014)
+```
+
+#### Variable: VK\_BLEND\_OP\_DARKEN\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_DARKEN_EXT 1000148015)
+```
+
+#### Variable: VK\_BLEND\_OP\_LIGHTEN\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_LIGHTEN_EXT 1000148016)
+```
+
+#### Variable: VK\_BLEND\_OP\_COLORDODGE\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_COLORDODGE_EXT 1000148017)
+```
+
+#### Variable: VK\_BLEND\_OP\_COLORBURN\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_COLORBURN_EXT 1000148018)
+```
+
+#### Variable: VK\_BLEND\_OP\_HARDLIGHT\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_HARDLIGHT_EXT 1000148019)
+```
+
+#### Variable: VK\_BLEND\_OP\_SOFTLIGHT\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_SOFTLIGHT_EXT 1000148020)
+```
+
+#### Variable: VK\_BLEND\_OP\_DIFFERENCE\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_DIFFERENCE_EXT 1000148021)
+```
+
+#### Variable: VK\_BLEND\_OP\_EXCLUSION\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_EXCLUSION_EXT 1000148022)
+```
+
+#### Variable: VK\_BLEND\_OP\_INVERT\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_INVERT_EXT 1000148023)
+```
+
+#### Variable: VK\_BLEND\_OP\_INVERT\_RGB\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_INVERT_RGB_EXT 1000148024)
+```
+
+#### Variable: VK\_BLEND\_OP\_LINEARDODGE\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_LINEARDODGE_EXT 1000148025)
+```
+
+#### Variable: VK\_BLEND\_OP\_LINEARBURN\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_LINEARBURN_EXT 1000148026)
+```
+
+#### Variable: VK\_BLEND\_OP\_VIVIDLIGHT\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_VIVIDLIGHT_EXT 1000148027)
+```
+
+#### Variable: VK\_BLEND\_OP\_LINEARLIGHT\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_LINEARLIGHT_EXT 1000148028)
+```
+
+#### Variable: VK\_BLEND\_OP\_PINLIGHT\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_PINLIGHT_EXT 1000148029)
+```
+
+#### Variable: VK\_BLEND\_OP\_HARDMIX\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_HARDMIX_EXT 1000148030)
+```
+
+#### Variable: VK\_BLEND\_OP\_HSL\_HUE\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_HSL_HUE_EXT 1000148031)
+```
+
+#### Variable: VK\_BLEND\_OP\_HSL\_SATURATION\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_HSL_SATURATION_EXT 1000148032)
+```
+
+#### Variable: VK\_BLEND\_OP\_HSL\_COLOR\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_HSL_COLOR_EXT 1000148033)
+```
+
+#### Variable: VK\_BLEND\_OP\_HSL\_LUMINOSITY\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_HSL_LUMINOSITY_EXT 1000148034)
+```
+
+#### Variable: VK\_BLEND\_OP\_PLUS\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_PLUS_EXT 1000148035)
+```
+
+#### Variable: VK\_BLEND\_OP\_PLUS\_CLAMPED\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_PLUS_CLAMPED_EXT 1000148036)
+```
+
+#### Variable: VK\_BLEND\_OP\_PLUS\_CLAMPED\_ALPHA\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_PLUS_CLAMPED_ALPHA_EXT 1000148037)
+```
+
+#### Variable: VK\_BLEND\_OP\_PLUS\_DARKER\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_PLUS_DARKER_EXT 1000148038)
+```
+
+#### Variable: VK\_BLEND\_OP\_MINUS\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_MINUS_EXT 1000148039)
+```
+
+#### Variable: VK\_BLEND\_OP\_MINUS\_CLAMPED\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_MINUS_CLAMPED_EXT 1000148040)
+```
+
+#### Variable: VK\_BLEND\_OP\_CONTRAST\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_CONTRAST_EXT 1000148041)
+```
+
+#### Variable: VK\_BLEND\_OP\_INVERT\_OVG\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_INVERT_OVG_EXT 1000148042)
+```
+
+#### Variable: VK\_BLEND\_OP\_RED\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_RED_EXT 1000148043)
+```
+
+#### Variable: VK\_BLEND\_OP\_GREEN\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_GREEN_EXT 1000148044)
+```
+
+#### Variable: VK\_BLEND\_OP\_BLUE\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OP_BLUE_EXT 1000148045)
+```
+
+#### Variable: VK\_BLEND\_OP\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_BLEND_OP_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_COMPARE\_OP\_NEVER
+
+```Lisp
+(defparameter VK_COMPARE_OP_NEVER 0)
+```
+
+#### Variable: VK\_COMPARE\_OP\_LESS
+
+```Lisp
+(defparameter VK_COMPARE_OP_LESS 1)
+```
+
+#### Variable: VK\_COMPARE\_OP\_EQUAL
+
+```Lisp
+(defparameter VK_COMPARE_OP_EQUAL 2)
+```
+
+#### Variable: VK\_COMPARE\_OP\_LESS\_OR\_EQUAL
+
+```Lisp
+(defparameter VK_COMPARE_OP_LESS_OR_EQUAL 3)
+```
+
+#### Variable: VK\_COMPARE\_OP\_GREATER
+
+```Lisp
+(defparameter VK_COMPARE_OP_GREATER 4)
+```
+
+#### Variable: VK\_COMPARE\_OP\_NOT\_EQUAL
+
+```Lisp
+(defparameter VK_COMPARE_OP_NOT_EQUAL 5)
+```
+
+#### Variable: VK\_COMPARE\_OP\_GREATER\_OR\_EQUAL
+
+```Lisp
+(defparameter VK_COMPARE_OP_GREATER_OR_EQUAL 6)
+```
+
+#### Variable: VK\_COMPARE\_OP\_ALWAYS
+
+```Lisp
+(defparameter VK_COMPARE_OP_ALWAYS 7)
+```
+
+#### Variable: VK\_COMPARE\_OP\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_COMPARE_OP_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_VIEWPORT
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_VIEWPORT 0)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_SCISSOR
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_SCISSOR 1)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_LINE\_WIDTH
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_LINE_WIDTH 2)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_DEPTH\_BIAS
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_DEPTH_BIAS 3)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_BLEND\_CONSTANTS
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_BLEND_CONSTANTS 4)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_DEPTH\_BOUNDS
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_DEPTH_BOUNDS 5)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_STENCIL\_COMPARE\_MASK
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_STENCIL_COMPARE_MASK 6)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_STENCIL\_WRITE\_MASK
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_STENCIL_WRITE_MASK 7)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_STENCIL\_REFERENCE
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_STENCIL_REFERENCE 8)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_CULL\_MODE
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_CULL_MODE 1000267000)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_FRONT\_FACE
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_FRONT_FACE 1000267001)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_PRIMITIVE\_TOPOLOGY
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY 1000267002)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_VIEWPORT\_WITH\_COUNT
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT 1000267003)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_SCISSOR\_WITH\_COUNT
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT 1000267004)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_VERTEX\_INPUT\_BINDING\_STRIDE
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE 1000267005)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_DEPTH\_TEST\_ENABLE
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_DEPTH_TEST_ENABLE 1000267006)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_DEPTH\_WRITE\_ENABLE
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_DEPTH_WRITE_ENABLE 1000267007)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_DEPTH\_COMPARE\_OP
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_DEPTH_COMPARE_OP 1000267008)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_DEPTH\_BOUNDS\_TEST\_ENABLE
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE 1000267009)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_STENCIL\_TEST\_ENABLE
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_STENCIL_TEST_ENABLE 1000267010)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_STENCIL\_OP
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_STENCIL_OP 1000267011)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_RASTERIZER\_DISCARD\_ENABLE
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE 1000377001)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_DEPTH\_BIAS\_ENABLE
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_DEPTH_BIAS_ENABLE 1000377002)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_PRIMITIVE\_RESTART\_ENABLE
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE 1000377004)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_VIEWPORT\_W\_SCALING\_NV
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV 1000087000)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_DISCARD\_RECTANGLE\_EXT
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_DISCARD_RECTANGLE_EXT 1000099000)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_SAMPLE\_LOCATIONS\_EXT
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT 1000143000)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_RAY\_TRACING\_PIPELINE\_STACK\_SIZE\_KHR
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_RAY_TRACING_PIPELINE_STACK_SIZE_KHR 1000347000)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_VIEWPORT\_SHADING\_RATE\_PALETTE\_NV
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV 1000164004)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_VIEWPORT\_COARSE\_SAMPLE\_ORDER\_NV
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_VIEWPORT_COARSE_SAMPLE_ORDER_NV 1000164006)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_EXCLUSIVE\_SCISSOR\_NV
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_EXCLUSIVE_SCISSOR_NV 1000205001)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_FRAGMENT\_SHADING\_RATE\_KHR
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_FRAGMENT_SHADING_RATE_KHR 1000226000)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_LINE\_STIPPLE\_EXT
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_LINE_STIPPLE_EXT 1000259000)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_VERTEX\_INPUT\_EXT
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_VERTEX_INPUT_EXT 1000352000)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_PATCH\_CONTROL\_POINTS\_EXT
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_PATCH_CONTROL_POINTS_EXT 1000377000)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_LOGIC\_OP\_EXT
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_LOGIC_OP_EXT 1000377003)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_COLOR\_WRITE\_ENABLE\_EXT
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT 1000381000)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_CULL\_MODE\_EXT
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_CULL_MODE_EXT VK_DYNAMIC_STATE_CULL_MODE)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_FRONT\_FACE\_EXT
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_FRONT_FACE_EXT VK_DYNAMIC_STATE_FRONT_FACE)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_PRIMITIVE\_TOPOLOGY\_EXT
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_VIEWPORT\_WITH\_COUNT\_EXT
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_SCISSOR\_WITH\_COUNT\_EXT
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_VERTEX\_INPUT\_BINDING\_STRIDE\_EXT
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_DEPTH\_TEST\_ENABLE\_EXT
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_DEPTH_TEST_ENABLE_EXT VK_DYNAMIC_STATE_DEPTH_TEST_ENABLE)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_DEPTH\_WRITE\_ENABLE\_EXT
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_DEPTH_WRITE_ENABLE_EXT VK_DYNAMIC_STATE_DEPTH_WRITE_ENABLE)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_DEPTH\_COMPARE\_OP\_EXT
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_DEPTH_COMPARE_OP_EXT VK_DYNAMIC_STATE_DEPTH_COMPARE_OP)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_DEPTH\_BOUNDS\_TEST\_ENABLE\_EXT
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE_EXT VK_DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_STENCIL\_TEST\_ENABLE\_EXT
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_STENCIL_TEST_ENABLE_EXT VK_DYNAMIC_STATE_STENCIL_TEST_ENABLE)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_STENCIL\_OP\_EXT
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_STENCIL_OP_EXT VK_DYNAMIC_STATE_STENCIL_OP)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_RASTERIZER\_DISCARD\_ENABLE\_EXT
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE_EXT VK_DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_DEPTH\_BIAS\_ENABLE\_EXT
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_DEPTH_BIAS_ENABLE_EXT VK_DYNAMIC_STATE_DEPTH_BIAS_ENABLE)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_PRIMITIVE\_RESTART\_ENABLE\_EXT
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE_EXT VK_DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE)
+```
+
+#### Variable: VK\_DYNAMIC\_STATE\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_DYNAMIC_STATE_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_FRONT\_FACE\_COUNTER\_CLOCKWISE
+
+```Lisp
+(defparameter VK_FRONT_FACE_COUNTER_CLOCKWISE 0)
+```
+
+#### Variable: VK\_FRONT\_FACE\_CLOCKWISE
+
+```Lisp
+(defparameter VK_FRONT_FACE_CLOCKWISE 1)
+```
+
+#### Variable: VK\_FRONT\_FACE\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_FRONT_FACE_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_VERTEX\_INPUT\_RATE\_VERTEX
+
+```Lisp
+(defparameter VK_VERTEX_INPUT_RATE_VERTEX 0)
+```
+
+#### Variable: VK\_VERTEX\_INPUT\_RATE\_INSTANCE
+
+```Lisp
+(defparameter VK_VERTEX_INPUT_RATE_INSTANCE 1)
+```
+
+#### Variable: VK\_VERTEX\_INPUT\_RATE\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_VERTEX_INPUT_RATE_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_PRIMITIVE\_TOPOLOGY\_POINT\_LIST
+
+```Lisp
+(defparameter VK_PRIMITIVE_TOPOLOGY_POINT_LIST 0)
+```
+
+#### Variable: VK\_PRIMITIVE\_TOPOLOGY\_LINE\_LIST
+
+```Lisp
+(defparameter VK_PRIMITIVE_TOPOLOGY_LINE_LIST 1)
+```
+
+#### Variable: VK\_PRIMITIVE\_TOPOLOGY\_LINE\_STRIP
+
+```Lisp
+(defparameter VK_PRIMITIVE_TOPOLOGY_LINE_STRIP 2)
+```
+
+#### Variable: VK\_PRIMITIVE\_TOPOLOGY\_TRIANGLE\_LIST
+
+```Lisp
+(defparameter VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST 3)
+```
+
+#### Variable: VK\_PRIMITIVE\_TOPOLOGY\_TRIANGLE\_STRIP
+
+```Lisp
+(defparameter VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP 4)
+```
+
+#### Variable: VK\_PRIMITIVE\_TOPOLOGY\_TRIANGLE\_FAN
+
+```Lisp
+(defparameter VK_PRIMITIVE_TOPOLOGY_TRIANGLE_FAN 5)
+```
+
+#### Variable: VK\_PRIMITIVE\_TOPOLOGY\_LINE\_LIST\_WITH\_ADJACENCY
+
+```Lisp
+(defparameter VK_PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY 6)
+```
+
+#### Variable: VK\_PRIMITIVE\_TOPOLOGY\_LINE\_STRIP\_WITH\_ADJACENCY
+
+```Lisp
+(defparameter VK_PRIMITIVE_TOPOLOGY_LINE_STRIP_WITH_ADJACENCY 7)
+```
+
+#### Variable: VK\_PRIMITIVE\_TOPOLOGY\_TRIANGLE\_LIST\_WITH\_ADJACENCY
+
+```Lisp
+(defparameter VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY 8)
+```
+
+#### Variable: VK\_PRIMITIVE\_TOPOLOGY\_TRIANGLE\_STRIP\_WITH\_ADJACENCY
+
+```Lisp
+(defparameter VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY 9)
+```
+
+#### Variable: VK\_PRIMITIVE\_TOPOLOGY\_PATCH\_LIST
+
+```Lisp
+(defparameter VK_PRIMITIVE_TOPOLOGY_PATCH_LIST 10)
+```
+
+#### Variable: VK\_PRIMITIVE\_TOPOLOGY\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_PRIMITIVE_TOPOLOGY_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_POLYGON\_MODE\_FILL
+
+```Lisp
+(defparameter VK_POLYGON_MODE_FILL 0)
+```
+
+#### Variable: VK\_POLYGON\_MODE\_LINE
+
+```Lisp
+(defparameter VK_POLYGON_MODE_LINE 1)
+```
+
+#### Variable: VK\_POLYGON\_MODE\_POINT
+
+```Lisp
+(defparameter VK_POLYGON_MODE_POINT 2)
+```
+
+#### Variable: VK\_POLYGON\_MODE\_FILL\_RECTANGLE\_NV
+
+```Lisp
+(defparameter VK_POLYGON_MODE_FILL_RECTANGLE_NV 1000153000)
+```
+
+#### Variable: VK\_POLYGON\_MODE\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_POLYGON_MODE_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_STENCIL\_OP\_KEEP
+
+```Lisp
+(defparameter VK_STENCIL_OP_KEEP 0)
+```
+
+#### Variable: VK\_STENCIL\_OP\_ZERO
+
+```Lisp
+(defparameter VK_STENCIL_OP_ZERO 1)
+```
+
+#### Variable: VK\_STENCIL\_OP\_REPLACE
+
+```Lisp
+(defparameter VK_STENCIL_OP_REPLACE 2)
+```
+
+#### Variable: VK\_STENCIL\_OP\_INCREMENT\_AND\_CLAMP
+
+```Lisp
+(defparameter VK_STENCIL_OP_INCREMENT_AND_CLAMP 3)
+```
+
+#### Variable: VK\_STENCIL\_OP\_DECREMENT\_AND\_CLAMP
+
+```Lisp
+(defparameter VK_STENCIL_OP_DECREMENT_AND_CLAMP 4)
+```
+
+#### Variable: VK\_STENCIL\_OP\_INVERT
+
+```Lisp
+(defparameter VK_STENCIL_OP_INVERT 5)
+```
+
+#### Variable: VK\_STENCIL\_OP\_INCREMENT\_AND\_WRAP
+
+```Lisp
+(defparameter VK_STENCIL_OP_INCREMENT_AND_WRAP 6)
+```
+
+#### Variable: VK\_STENCIL\_OP\_DECREMENT\_AND\_WRAP
+
+```Lisp
+(defparameter VK_STENCIL_OP_DECREMENT_AND_WRAP 7)
+```
+
+#### Variable: VK\_STENCIL\_OP\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_STENCIL_OP_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_LOGIC\_OP\_CLEAR
+
+```Lisp
+(defparameter VK_LOGIC_OP_CLEAR 0)
+```
+
+#### Variable: VK\_LOGIC\_OP\_AND
+
+```Lisp
+(defparameter VK_LOGIC_OP_AND 1)
+```
+
+#### Variable: VK\_LOGIC\_OP\_AND\_REVERSE
+
+```Lisp
+(defparameter VK_LOGIC_OP_AND_REVERSE 2)
+```
+
+#### Variable: VK\_LOGIC\_OP\_COPY
+
+```Lisp
+(defparameter VK_LOGIC_OP_COPY 3)
+```
+
+#### Variable: VK\_LOGIC\_OP\_AND\_INVERTED
+
+```Lisp
+(defparameter VK_LOGIC_OP_AND_INVERTED 4)
+```
+
+#### Variable: VK\_LOGIC\_OP\_NO\_OP
+
+```Lisp
+(defparameter VK_LOGIC_OP_NO_OP 5)
+```
+
+#### Variable: VK\_LOGIC\_OP\_XOR
+
+```Lisp
+(defparameter VK_LOGIC_OP_XOR 6)
+```
+
+#### Variable: VK\_LOGIC\_OP\_OR
+
+```Lisp
+(defparameter VK_LOGIC_OP_OR 7)
+```
+
+#### Variable: VK\_LOGIC\_OP\_NOR
+
+```Lisp
+(defparameter VK_LOGIC_OP_NOR 8)
+```
+
+#### Variable: VK\_LOGIC\_OP\_EQUIVALENT
+
+```Lisp
+(defparameter VK_LOGIC_OP_EQUIVALENT 9)
+```
+
+#### Variable: VK\_LOGIC\_OP\_INVERT
+
+```Lisp
+(defparameter VK_LOGIC_OP_INVERT 10)
+```
+
+#### Variable: VK\_LOGIC\_OP\_OR\_REVERSE
+
+```Lisp
+(defparameter VK_LOGIC_OP_OR_REVERSE 11)
+```
+
+#### Variable: VK\_LOGIC\_OP\_COPY\_INVERTED
+
+```Lisp
+(defparameter VK_LOGIC_OP_COPY_INVERTED 12)
+```
+
+#### Variable: VK\_LOGIC\_OP\_OR\_INVERTED
+
+```Lisp
+(defparameter VK_LOGIC_OP_OR_INVERTED 13)
+```
+
+#### Variable: VK\_LOGIC\_OP\_NAND
+
+```Lisp
+(defparameter VK_LOGIC_OP_NAND 14)
+```
+
+#### Variable: VK\_LOGIC\_OP\_SET
+
+```Lisp
+(defparameter VK_LOGIC_OP_SET 15)
+```
+
+#### Variable: VK\_LOGIC\_OP\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_LOGIC_OP_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_BORDER\_COLOR\_FLOAT\_TRANSPARENT\_BLACK
+
+```Lisp
+(defparameter VK_BORDER_COLOR_FLOAT_TRANSPARENT_BLACK 0)
+```
+
+#### Variable: VK\_BORDER\_COLOR\_INT\_TRANSPARENT\_BLACK
+
+```Lisp
+(defparameter VK_BORDER_COLOR_INT_TRANSPARENT_BLACK 1)
+```
+
+#### Variable: VK\_BORDER\_COLOR\_FLOAT\_OPAQUE\_BLACK
+
+```Lisp
+(defparameter VK_BORDER_COLOR_FLOAT_OPAQUE_BLACK 2)
+```
+
+#### Variable: VK\_BORDER\_COLOR\_INT\_OPAQUE\_BLACK
+
+```Lisp
+(defparameter VK_BORDER_COLOR_INT_OPAQUE_BLACK 3)
+```
+
+#### Variable: VK\_BORDER\_COLOR\_FLOAT\_OPAQUE\_WHITE
+
+```Lisp
+(defparameter VK_BORDER_COLOR_FLOAT_OPAQUE_WHITE 4)
+```
+
+#### Variable: VK\_BORDER\_COLOR\_INT\_OPAQUE\_WHITE
+
+```Lisp
+(defparameter VK_BORDER_COLOR_INT_OPAQUE_WHITE 5)
+```
+
+#### Variable: VK\_BORDER\_COLOR\_FLOAT\_CUSTOM\_EXT
+
+```Lisp
+(defparameter VK_BORDER_COLOR_FLOAT_CUSTOM_EXT 1000287003)
+```
+
+#### Variable: VK\_BORDER\_COLOR\_INT\_CUSTOM\_EXT
+
+```Lisp
+(defparameter VK_BORDER_COLOR_INT_CUSTOM_EXT 1000287004)
+```
+
+#### Variable: VK\_BORDER\_COLOR\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_BORDER_COLOR_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_FILTER\_NEAREST
+
+```Lisp
+(defparameter VK_FILTER_NEAREST 0)
+```
+
+#### Variable: VK\_FILTER\_LINEAR
+
+```Lisp
+(defparameter VK_FILTER_LINEAR 1)
+```
+
+#### Variable: VK\_FILTER\_CUBIC\_IMG
+
+```Lisp
+(defparameter VK_FILTER_CUBIC_IMG 1000015000)
+```
+
+#### Variable: VK\_FILTER\_CUBIC\_EXT
+
+```Lisp
+(defparameter VK_FILTER_CUBIC_EXT VK_FILTER_CUBIC_IMG)
+```
+
+#### Variable: VK\_FILTER\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_FILTER_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_SAMPLER\_ADDRESS\_MODE\_REPEAT
+
+```Lisp
+(defparameter VK_SAMPLER_ADDRESS_MODE_REPEAT 0)
+```
+
+#### Variable: VK\_SAMPLER\_ADDRESS\_MODE\_MIRRORED\_REPEAT
+
+```Lisp
+(defparameter VK_SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT 1)
+```
+
+#### Variable: VK\_SAMPLER\_ADDRESS\_MODE\_CLAMP\_TO\_EDGE
+
+```Lisp
+(defparameter VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE 2)
+```
+
+#### Variable: VK\_SAMPLER\_ADDRESS\_MODE\_CLAMP\_TO\_BORDER
+
+```Lisp
+(defparameter VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER 3)
+```
+
+#### Variable: VK\_SAMPLER\_ADDRESS\_MODE\_MIRROR\_CLAMP\_TO\_EDGE
+
+```Lisp
+(defparameter VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE 4)
+```
+
+#### Variable: VK\_SAMPLER\_ADDRESS\_MODE\_MIRROR\_CLAMP\_TO\_EDGE\_KHR
+
+```Lisp
+(defparameter VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE_KHR VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE)
+```
+
+#### Variable: VK\_SAMPLER\_ADDRESS\_MODE\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_SAMPLER_ADDRESS_MODE_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_SAMPLER\_MIPMAP\_MODE\_NEAREST
+
+```Lisp
+(defparameter VK_SAMPLER_MIPMAP_MODE_NEAREST 0)
+```
+
+#### Variable: VK\_SAMPLER\_MIPMAP\_MODE\_LINEAR
+
+```Lisp
+(defparameter VK_SAMPLER_MIPMAP_MODE_LINEAR 1)
+```
+
+#### Variable: VK\_SAMPLER\_MIPMAP\_MODE\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_SAMPLER_MIPMAP_MODE_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_DESCRIPTOR\_TYPE\_SAMPLER
+
+```Lisp
+(defparameter VK_DESCRIPTOR_TYPE_SAMPLER 0)
+```
+
+#### Variable: VK\_DESCRIPTOR\_TYPE\_COMBINED\_IMAGE\_SAMPLER
+
+```Lisp
+(defparameter VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER 1)
+```
+
+#### Variable: VK\_DESCRIPTOR\_TYPE\_SAMPLED\_IMAGE
+
+```Lisp
+(defparameter VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE 2)
+```
+
+#### Variable: VK\_DESCRIPTOR\_TYPE\_STORAGE\_IMAGE
+
+```Lisp
+(defparameter VK_DESCRIPTOR_TYPE_STORAGE_IMAGE 3)
+```
+
+#### Variable: VK\_DESCRIPTOR\_TYPE\_UNIFORM\_TEXEL\_BUFFER
+
+```Lisp
+(defparameter VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER 4)
+```
+
+#### Variable: VK\_DESCRIPTOR\_TYPE\_STORAGE\_TEXEL\_BUFFER
+
+```Lisp
+(defparameter VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER 5)
+```
+
+#### Variable: VK\_DESCRIPTOR\_TYPE\_UNIFORM\_BUFFER
+
+```Lisp
+(defparameter VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER 6)
+```
+
+#### Variable: VK\_DESCRIPTOR\_TYPE\_STORAGE\_BUFFER
+
+```Lisp
+(defparameter VK_DESCRIPTOR_TYPE_STORAGE_BUFFER 7)
+```
+
+#### Variable: VK\_DESCRIPTOR\_TYPE\_UNIFORM\_BUFFER\_DYNAMIC
+
+```Lisp
+(defparameter VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC 8)
+```
+
+#### Variable: VK\_DESCRIPTOR\_TYPE\_STORAGE\_BUFFER\_DYNAMIC
+
+```Lisp
+(defparameter VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC 9)
+```
+
+#### Variable: VK\_DESCRIPTOR\_TYPE\_INPUT\_ATTACHMENT
+
+```Lisp
+(defparameter VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT 10)
+```
+
+#### Variable: VK\_DESCRIPTOR\_TYPE\_INLINE\_UNIFORM\_BLOCK
+
+```Lisp
+(defparameter VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK 1000138000)
+```
+
+#### Variable: VK\_DESCRIPTOR\_TYPE\_ACCELERATION\_STRUCTURE\_KHR
+
+```Lisp
+(defparameter VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR 1000150000)
+```
+
+#### Variable: VK\_DESCRIPTOR\_TYPE\_ACCELERATION\_STRUCTURE\_NV
+
+```Lisp
+(defparameter VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_NV 1000165000)
+```
+
+#### Variable: VK\_DESCRIPTOR\_TYPE\_MUTABLE\_VALVE
+
+```Lisp
+(defparameter VK_DESCRIPTOR_TYPE_MUTABLE_VALVE 1000351000)
+```
+
+#### Variable: VK\_DESCRIPTOR\_TYPE\_INLINE\_UNIFORM\_BLOCK\_EXT
+
+```Lisp
+(defparameter VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK)
+```
+
+#### Variable: VK\_DESCRIPTOR\_TYPE\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_DESCRIPTOR_TYPE_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_ATTACHMENT\_LOAD\_OP\_LOAD
+
+```Lisp
+(defparameter VK_ATTACHMENT_LOAD_OP_LOAD 0)
+```
+
+#### Variable: VK\_ATTACHMENT\_LOAD\_OP\_CLEAR
+
+```Lisp
+(defparameter VK_ATTACHMENT_LOAD_OP_CLEAR 1)
+```
+
+#### Variable: VK\_ATTACHMENT\_LOAD\_OP\_DONT\_CARE
+
+```Lisp
+(defparameter VK_ATTACHMENT_LOAD_OP_DONT_CARE 2)
+```
+
+#### Variable: VK\_ATTACHMENT\_LOAD\_OP\_NONE\_EXT
+
+```Lisp
+(defparameter VK_ATTACHMENT_LOAD_OP_NONE_EXT 1000400000)
+```
+
+#### Variable: VK\_ATTACHMENT\_LOAD\_OP\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_ATTACHMENT_LOAD_OP_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_ATTACHMENT\_STORE\_OP\_STORE
+
+```Lisp
+(defparameter VK_ATTACHMENT_STORE_OP_STORE 0)
+```
+
+#### Variable: VK\_ATTACHMENT\_STORE\_OP\_DONT\_CARE
+
+```Lisp
+(defparameter VK_ATTACHMENT_STORE_OP_DONT_CARE 1)
+```
+
+#### Variable: VK\_ATTACHMENT\_STORE\_OP\_NONE
+
+```Lisp
+(defparameter VK_ATTACHMENT_STORE_OP_NONE 1000301000)
+```
+
+#### Variable: VK\_ATTACHMENT\_STORE\_OP\_NONE\_KHR
+
+```Lisp
+(defparameter VK_ATTACHMENT_STORE_OP_NONE_KHR VK_ATTACHMENT_STORE_OP_NONE)
+```
+
+#### Variable: VK\_ATTACHMENT\_STORE\_OP\_NONE\_QCOM
+
+```Lisp
+(defparameter VK_ATTACHMENT_STORE_OP_NONE_QCOM VK_ATTACHMENT_STORE_OP_NONE)
+```
+
+#### Variable: VK\_ATTACHMENT\_STORE\_OP\_NONE\_EXT
+
+```Lisp
+(defparameter VK_ATTACHMENT_STORE_OP_NONE_EXT VK_ATTACHMENT_STORE_OP_NONE)
+```
+
+#### Variable: VK\_ATTACHMENT\_STORE\_OP\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_ATTACHMENT_STORE_OP_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_PIPELINE\_BIND\_POINT\_GRAPHICS
+
+```Lisp
+(defparameter VK_PIPELINE_BIND_POINT_GRAPHICS 0)
+```
+
+#### Variable: VK\_PIPELINE\_BIND\_POINT\_COMPUTE
+
+```Lisp
+(defparameter VK_PIPELINE_BIND_POINT_COMPUTE 1)
+```
+
+#### Variable: VK\_PIPELINE\_BIND\_POINT\_RAY\_TRACING\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_BIND_POINT_RAY_TRACING_KHR 1000165000)
+```
+
+#### Variable: VK\_PIPELINE\_BIND\_POINT\_SUBPASS\_SHADING\_HUAWEI
+
+```Lisp
+(defparameter VK_PIPELINE_BIND_POINT_SUBPASS_SHADING_HUAWEI 1000369003)
+```
+
+#### Variable: VK\_PIPELINE\_BIND\_POINT\_RAY\_TRACING\_NV
+
+```Lisp
+(defparameter VK_PIPELINE_BIND_POINT_RAY_TRACING_NV VK_PIPELINE_BIND_POINT_RAY_TRACING_KHR)
+```
+
+#### Variable: VK\_PIPELINE\_BIND\_POINT\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_PIPELINE_BIND_POINT_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_COMMAND\_BUFFER\_LEVEL\_PRIMARY
+
+```Lisp
+(defparameter VK_COMMAND_BUFFER_LEVEL_PRIMARY 0)
+```
+
+#### Variable: VK\_COMMAND\_BUFFER\_LEVEL\_SECONDARY
+
+```Lisp
+(defparameter VK_COMMAND_BUFFER_LEVEL_SECONDARY 1)
+```
+
+#### Variable: VK\_COMMAND\_BUFFER\_LEVEL\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_COMMAND_BUFFER_LEVEL_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_INDEX\_TYPE\_UINT16
+
+```Lisp
+(defparameter VK_INDEX_TYPE_UINT16 0)
+```
+
+#### Variable: VK\_INDEX\_TYPE\_UINT32
+
+```Lisp
+(defparameter VK_INDEX_TYPE_UINT32 1)
+```
+
+#### Variable: VK\_INDEX\_TYPE\_NONE\_KHR
+
+```Lisp
+(defparameter VK_INDEX_TYPE_NONE_KHR 1000165000)
+```
+
+#### Variable: VK\_INDEX\_TYPE\_UINT8\_EXT
+
+```Lisp
+(defparameter VK_INDEX_TYPE_UINT8_EXT 1000265000)
+```
+
+#### Variable: VK\_INDEX\_TYPE\_NONE\_NV
+
+```Lisp
+(defparameter VK_INDEX_TYPE_NONE_NV VK_INDEX_TYPE_NONE_KHR)
+```
+
+#### Variable: VK\_INDEX\_TYPE\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_INDEX_TYPE_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_SUBPASS\_CONTENTS\_INLINE
+
+```Lisp
+(defparameter VK_SUBPASS_CONTENTS_INLINE 0)
+```
+
+#### Variable: VK\_SUBPASS\_CONTENTS\_SECONDARY\_COMMAND\_BUFFERS
+
+```Lisp
+(defparameter VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS 1)
+```
+
+#### Variable: VK\_SUBPASS\_CONTENTS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_SUBPASS_CONTENTS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_ACCESS\_INDIRECT\_COMMAND\_READ\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_INDIRECT_COMMAND_READ_BIT 1)
+```
+
+#### Variable: VK\_ACCESS\_INDEX\_READ\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_INDEX_READ_BIT 2)
+```
+
+#### Variable: VK\_ACCESS\_VERTEX\_ATTRIBUTE\_READ\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_VERTEX_ATTRIBUTE_READ_BIT 4)
+```
+
+#### Variable: VK\_ACCESS\_UNIFORM\_READ\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_UNIFORM_READ_BIT 8)
+```
+
+#### Variable: VK\_ACCESS\_INPUT\_ATTACHMENT\_READ\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_INPUT_ATTACHMENT_READ_BIT 16)
+```
+
+#### Variable: VK\_ACCESS\_SHADER\_READ\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_SHADER_READ_BIT 32)
+```
+
+#### Variable: VK\_ACCESS\_SHADER\_WRITE\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_SHADER_WRITE_BIT 64)
+```
+
+#### Variable: VK\_ACCESS\_COLOR\_ATTACHMENT\_READ\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_COLOR_ATTACHMENT_READ_BIT 128)
+```
+
+#### Variable: VK\_ACCESS\_COLOR\_ATTACHMENT\_WRITE\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT 256)
+```
+
+#### Variable: VK\_ACCESS\_DEPTH\_STENCIL\_ATTACHMENT\_READ\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT 512)
+```
+
+#### Variable: VK\_ACCESS\_DEPTH\_STENCIL\_ATTACHMENT\_WRITE\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT 1024)
+```
+
+#### Variable: VK\_ACCESS\_TRANSFER\_READ\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_TRANSFER_READ_BIT 2048)
+```
+
+#### Variable: VK\_ACCESS\_TRANSFER\_WRITE\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_TRANSFER_WRITE_BIT 4096)
+```
+
+#### Variable: VK\_ACCESS\_HOST\_READ\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_HOST_READ_BIT 8192)
+```
+
+#### Variable: VK\_ACCESS\_HOST\_WRITE\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_HOST_WRITE_BIT 16384)
+```
+
+#### Variable: VK\_ACCESS\_MEMORY\_READ\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_MEMORY_READ_BIT 32768)
+```
+
+#### Variable: VK\_ACCESS\_MEMORY\_WRITE\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_MEMORY_WRITE_BIT 65536)
+```
+
+#### Variable: VK\_ACCESS\_NONE
+
+```Lisp
+(defparameter VK_ACCESS_NONE 0)
+```
+
+#### Variable: VK\_ACCESS\_TRANSFORM\_FEEDBACK\_WRITE\_BIT\_EXT
+
+```Lisp
+(defparameter VK_ACCESS_TRANSFORM_FEEDBACK_WRITE_BIT_EXT 33554432)
+```
+
+#### Variable: VK\_ACCESS\_TRANSFORM\_FEEDBACK\_COUNTER\_READ\_BIT\_EXT
+
+```Lisp
+(defparameter VK_ACCESS_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT 67108864)
+```
+
+#### Variable: VK\_ACCESS\_TRANSFORM\_FEEDBACK\_COUNTER\_WRITE\_BIT\_EXT
+
+```Lisp
+(defparameter VK_ACCESS_TRANSFORM_FEEDBACK_COUNTER_WRITE_BIT_EXT 134217728)
+```
+
+#### Variable: VK\_ACCESS\_CONDITIONAL\_RENDERING\_READ\_BIT\_EXT
+
+```Lisp
+(defparameter VK_ACCESS_CONDITIONAL_RENDERING_READ_BIT_EXT 1048576)
+```
+
+#### Variable: VK\_ACCESS\_COLOR\_ATTACHMENT\_READ\_NONCOHERENT\_BIT\_EXT
+
+```Lisp
+(defparameter VK_ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT 524288)
+```
+
+#### Variable: VK\_ACCESS\_ACCELERATION\_STRUCTURE\_READ\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_ACCELERATION_STRUCTURE_READ_BIT_KHR 2097152)
+```
+
+#### Variable: VK\_ACCESS\_ACCELERATION\_STRUCTURE\_WRITE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_ACCELERATION_STRUCTURE_WRITE_BIT_KHR 4194304)
+```
+
+#### Variable: VK\_ACCESS\_FRAGMENT\_DENSITY\_MAP\_READ\_BIT\_EXT
+
+```Lisp
+(defparameter VK_ACCESS_FRAGMENT_DENSITY_MAP_READ_BIT_EXT 16777216)
+```
+
+#### Variable: VK\_ACCESS\_FRAGMENT\_SHADING\_RATE\_ATTACHMENT\_READ\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT_KHR 8388608)
+```
+
+#### Variable: VK\_ACCESS\_COMMAND\_PREPROCESS\_READ\_BIT\_NV
+
+```Lisp
+(defparameter VK_ACCESS_COMMAND_PREPROCESS_READ_BIT_NV 131072)
+```
+
+#### Variable: VK\_ACCESS\_COMMAND\_PREPROCESS\_WRITE\_BIT\_NV
+
+```Lisp
+(defparameter VK_ACCESS_COMMAND_PREPROCESS_WRITE_BIT_NV 262144)
+```
+
+#### Variable: VK\_ACCESS\_SHADING\_RATE\_IMAGE\_READ\_BIT\_NV
+
+```Lisp
+(defparameter VK_ACCESS_SHADING_RATE_IMAGE_READ_BIT_NV VK_ACCESS_FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT_KHR)
+```
+
+#### Variable: VK\_ACCESS\_ACCELERATION\_STRUCTURE\_READ\_BIT\_NV
+
+```Lisp
+(defparameter VK_ACCESS_ACCELERATION_STRUCTURE_READ_BIT_NV VK_ACCESS_ACCELERATION_STRUCTURE_READ_BIT_KHR)
+```
+
+#### Variable: VK\_ACCESS\_ACCELERATION\_STRUCTURE\_WRITE\_BIT\_NV
+
+```Lisp
+(defparameter VK_ACCESS_ACCELERATION_STRUCTURE_WRITE_BIT_NV VK_ACCESS_ACCELERATION_STRUCTURE_WRITE_BIT_KHR)
+```
+
+#### Variable: VK\_ACCESS\_NONE\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_NONE_KHR VK_ACCESS_NONE)
+```
+
+#### Variable: VK\_ACCESS\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_ACCESS_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_IMAGE\_ASPECT\_COLOR\_BIT
+
+```Lisp
+(defparameter VK_IMAGE_ASPECT_COLOR_BIT 1)
+```
+
+#### Variable: VK\_IMAGE\_ASPECT\_DEPTH\_BIT
+
+```Lisp
+(defparameter VK_IMAGE_ASPECT_DEPTH_BIT 2)
+```
+
+#### Variable: VK\_IMAGE\_ASPECT\_STENCIL\_BIT
+
+```Lisp
+(defparameter VK_IMAGE_ASPECT_STENCIL_BIT 4)
+```
+
+#### Variable: VK\_IMAGE\_ASPECT\_METADATA\_BIT
+
+```Lisp
+(defparameter VK_IMAGE_ASPECT_METADATA_BIT 8)
+```
+
+#### Variable: VK\_IMAGE\_ASPECT\_PLANE\_0\_BIT
+
+```Lisp
+(defparameter VK_IMAGE_ASPECT_PLANE_0_BIT 16)
+```
+
+#### Variable: VK\_IMAGE\_ASPECT\_PLANE\_1\_BIT
+
+```Lisp
+(defparameter VK_IMAGE_ASPECT_PLANE_1_BIT 32)
+```
+
+#### Variable: VK\_IMAGE\_ASPECT\_PLANE\_2\_BIT
+
+```Lisp
+(defparameter VK_IMAGE_ASPECT_PLANE_2_BIT 64)
+```
+
+#### Variable: VK\_IMAGE\_ASPECT\_NONE
+
+```Lisp
+(defparameter VK_IMAGE_ASPECT_NONE 0)
+```
+
+#### Variable: VK\_IMAGE\_ASPECT\_MEMORY\_PLANE\_0\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_ASPECT_MEMORY_PLANE_0_BIT_EXT 128)
+```
+
+#### Variable: VK\_IMAGE\_ASPECT\_MEMORY\_PLANE\_1\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_ASPECT_MEMORY_PLANE_1_BIT_EXT 256)
+```
+
+#### Variable: VK\_IMAGE\_ASPECT\_MEMORY\_PLANE\_2\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_ASPECT_MEMORY_PLANE_2_BIT_EXT 512)
+```
+
+#### Variable: VK\_IMAGE\_ASPECT\_MEMORY\_PLANE\_3\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_ASPECT_MEMORY_PLANE_3_BIT_EXT 1024)
+```
+
+#### Variable: VK\_IMAGE\_ASPECT\_PLANE\_0\_BIT\_KHR
+
+```Lisp
+(defparameter VK_IMAGE_ASPECT_PLANE_0_BIT_KHR VK_IMAGE_ASPECT_PLANE_0_BIT)
+```
+
+#### Variable: VK\_IMAGE\_ASPECT\_PLANE\_1\_BIT\_KHR
+
+```Lisp
+(defparameter VK_IMAGE_ASPECT_PLANE_1_BIT_KHR VK_IMAGE_ASPECT_PLANE_1_BIT)
+```
+
+#### Variable: VK\_IMAGE\_ASPECT\_PLANE\_2\_BIT\_KHR
+
+```Lisp
+(defparameter VK_IMAGE_ASPECT_PLANE_2_BIT_KHR VK_IMAGE_ASPECT_PLANE_2_BIT)
+```
+
+#### Variable: VK\_IMAGE\_ASPECT\_NONE\_KHR
+
+```Lisp
+(defparameter VK_IMAGE_ASPECT_NONE_KHR VK_IMAGE_ASPECT_NONE)
+```
+
+#### Variable: VK\_IMAGE\_ASPECT\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_IMAGE_ASPECT_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_SAMPLED\_IMAGE\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT 1)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_STORAGE\_IMAGE\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT 2)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_STORAGE\_IMAGE\_ATOMIC\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT 4)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_UNIFORM\_TEXEL\_BUFFER\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_UNIFORM_TEXEL_BUFFER_BIT 8)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_STORAGE\_TEXEL\_BUFFER\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_BIT 16)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_STORAGE\_TEXEL\_BUFFER\_ATOMIC\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_ATOMIC_BIT 32)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_VERTEX\_BUFFER\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_VERTEX_BUFFER_BIT 64)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_COLOR\_ATTACHMENT\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT 128)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_COLOR\_ATTACHMENT\_BLEND\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT 256)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_DEPTH\_STENCIL\_ATTACHMENT\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT 512)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_BLIT\_SRC\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_BLIT_SRC_BIT 1024)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_BLIT\_DST\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_BLIT_DST_BIT 2048)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_SAMPLED\_IMAGE\_FILTER\_LINEAR\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT 4096)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_TRANSFER\_SRC\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_TRANSFER_SRC_BIT 16384)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_TRANSFER\_DST\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_TRANSFER_DST_BIT 32768)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_MIDPOINT\_CHROMA\_SAMPLES\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT 131072)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_SAMPLED\_IMAGE\_YCBCR\_CONVERSION\_LINEAR\_FILTER\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT 262144)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_SAMPLED\_IMAGE\_YCBCR\_CONVERSION\_SEPARATE\_RECONSTRUCTION\_FILTER\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT 524288)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_SAMPLED\_IMAGE\_YCBCR\_CONVERSION\_CHROMA\_RECONSTRUCTION\_EXPLICIT\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT 1048576)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_SAMPLED\_IMAGE\_YCBCR\_CONVERSION\_CHROMA\_RECONSTRUCTION\_EXPLICIT\_FORCEABLE\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT 2097152)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_DISJOINT\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_DISJOINT_BIT 4194304)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_COSITED\_CHROMA\_SAMPLES\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT 8388608)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_SAMPLED\_IMAGE\_FILTER\_MINMAX\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT 65536)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_SAMPLED\_IMAGE\_FILTER\_CUBIC\_BIT\_IMG
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG 8192)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_VIDEO\_DECODE\_OUTPUT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_VIDEO_DECODE_OUTPUT_BIT_KHR 33554432)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_VIDEO\_DECODE\_DPB\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_VIDEO_DECODE_DPB_BIT_KHR 67108864)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_ACCELERATION\_STRUCTURE\_VERTEX\_BUFFER\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_ACCELERATION_STRUCTURE_VERTEX_BUFFER_BIT_KHR 536870912)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_FRAGMENT\_DENSITY\_MAP\_BIT\_EXT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_FRAGMENT_DENSITY_MAP_BIT_EXT 16777216)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_FRAGMENT\_SHADING\_RATE\_ATTACHMENT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR 1073741824)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_VIDEO\_ENCODE\_INPUT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_VIDEO_ENCODE_INPUT_BIT_KHR 134217728)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_VIDEO\_ENCODE\_DPB\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_VIDEO_ENCODE_DPB_BIT_KHR 268435456)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_TRANSFER\_SRC\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_TRANSFER_SRC_BIT_KHR VK_FORMAT_FEATURE_TRANSFER_SRC_BIT)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_TRANSFER\_DST\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_TRANSFER_DST_BIT_KHR VK_FORMAT_FEATURE_TRANSFER_DST_BIT)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_SAMPLED\_IMAGE\_FILTER\_MINMAX\_BIT\_EXT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT_EXT VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_MIDPOINT\_CHROMA\_SAMPLES\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT_KHR VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_SAMPLED\_IMAGE\_YCBCR\_CONVERSION\_LINEAR\_FILTER\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT_KHR VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_SAMPLED\_IMAGE\_YCBCR\_CONVERSION\_SEPARATE\_RECONSTRUCTION\_FILTER\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT_KHR VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_SAMPLED\_IMAGE\_YCBCR\_CONVERSION\_CHROMA\_RECONSTRUCTION\_EXPLICIT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT_KHR VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_SAMPLED\_IMAGE\_YCBCR\_CONVERSION\_CHROMA\_RECONSTRUCTION\_EXPLICIT\_FORCEABLE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT_KHR VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_DISJOINT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_DISJOINT_BIT_KHR VK_FORMAT_FEATURE_DISJOINT_BIT)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_COSITED\_CHROMA\_SAMPLES\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT_KHR VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_SAMPLED\_IMAGE\_FILTER\_CUBIC\_BIT\_EXT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_IMAGE\_CREATE\_SPARSE\_BINDING\_BIT
+
+```Lisp
+(defparameter VK_IMAGE_CREATE_SPARSE_BINDING_BIT 1)
+```
+
+#### Variable: VK\_IMAGE\_CREATE\_SPARSE\_RESIDENCY\_BIT
+
+```Lisp
+(defparameter VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT 2)
+```
+
+#### Variable: VK\_IMAGE\_CREATE\_SPARSE\_ALIASED\_BIT
+
+```Lisp
+(defparameter VK_IMAGE_CREATE_SPARSE_ALIASED_BIT 4)
+```
+
+#### Variable: VK\_IMAGE\_CREATE\_MUTABLE\_FORMAT\_BIT
+
+```Lisp
+(defparameter VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT 8)
+```
+
+#### Variable: VK\_IMAGE\_CREATE\_CUBE\_COMPATIBLE\_BIT
+
+```Lisp
+(defparameter VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT 16)
+```
+
+#### Variable: VK\_IMAGE\_CREATE\_ALIAS\_BIT
+
+```Lisp
+(defparameter VK_IMAGE_CREATE_ALIAS_BIT 1024)
+```
+
+#### Variable: VK\_IMAGE\_CREATE\_SPLIT\_INSTANCE\_BIND\_REGIONS\_BIT
+
+```Lisp
+(defparameter VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT 64)
+```
+
+#### Variable: VK\_IMAGE\_CREATE\_2D\_ARRAY\_COMPATIBLE\_BIT
+
+```Lisp
+(defparameter VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT 32)
+```
+
+#### Variable: VK\_IMAGE\_CREATE\_BLOCK\_TEXEL\_VIEW\_COMPATIBLE\_BIT
+
+```Lisp
+(defparameter VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT 128)
+```
+
+#### Variable: VK\_IMAGE\_CREATE\_EXTENDED\_USAGE\_BIT
+
+```Lisp
+(defparameter VK_IMAGE_CREATE_EXTENDED_USAGE_BIT 256)
+```
+
+#### Variable: VK\_IMAGE\_CREATE\_PROTECTED\_BIT
+
+```Lisp
+(defparameter VK_IMAGE_CREATE_PROTECTED_BIT 2048)
+```
+
+#### Variable: VK\_IMAGE\_CREATE\_DISJOINT\_BIT
+
+```Lisp
+(defparameter VK_IMAGE_CREATE_DISJOINT_BIT 512)
+```
+
+#### Variable: VK\_IMAGE\_CREATE\_CORNER\_SAMPLED\_BIT\_NV
+
+```Lisp
+(defparameter VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV 8192)
+```
+
+#### Variable: VK\_IMAGE\_CREATE\_SAMPLE\_LOCATIONS\_COMPATIBLE\_DEPTH\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT 4096)
+```
+
+#### Variable: VK\_IMAGE\_CREATE\_SUBSAMPLED\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT 16384)
+```
+
+#### Variable: VK\_IMAGE\_CREATE\_2D\_VIEW\_COMPATIBLE\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_CREATE_2D_VIEW_COMPATIBLE_BIT_EXT 131072)
+```
+
+#### Variable: VK\_IMAGE\_CREATE\_FRAGMENT\_DENSITY\_MAP\_OFFSET\_BIT\_QCOM
+
+```Lisp
+(defparameter VK_IMAGE_CREATE_FRAGMENT_DENSITY_MAP_OFFSET_BIT_QCOM 32768)
+```
+
+#### Variable: VK\_IMAGE\_CREATE\_SPLIT\_INSTANCE\_BIND\_REGIONS\_BIT\_KHR
+
+```Lisp
+(defparameter VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT)
+```
+
+#### Variable: VK\_IMAGE\_CREATE\_2D\_ARRAY\_COMPATIBLE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT_KHR VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT)
+```
+
+#### Variable: VK\_IMAGE\_CREATE\_BLOCK\_TEXEL\_VIEW\_COMPATIBLE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT_KHR VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT)
+```
+
+#### Variable: VK\_IMAGE\_CREATE\_EXTENDED\_USAGE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_IMAGE_CREATE_EXTENDED_USAGE_BIT_KHR VK_IMAGE_CREATE_EXTENDED_USAGE_BIT)
+```
+
+#### Variable: VK\_IMAGE\_CREATE\_DISJOINT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_IMAGE_CREATE_DISJOINT_BIT_KHR VK_IMAGE_CREATE_DISJOINT_BIT)
+```
+
+#### Variable: VK\_IMAGE\_CREATE\_ALIAS\_BIT\_KHR
+
+```Lisp
+(defparameter VK_IMAGE_CREATE_ALIAS_BIT_KHR VK_IMAGE_CREATE_ALIAS_BIT)
+```
+
+#### Variable: VK\_IMAGE\_CREATE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_IMAGE_CREATE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_SAMPLE\_COUNT\_1\_BIT
+
+```Lisp
+(defparameter VK_SAMPLE_COUNT_1_BIT 1)
+```
+
+#### Variable: VK\_SAMPLE\_COUNT\_2\_BIT
+
+```Lisp
+(defparameter VK_SAMPLE_COUNT_2_BIT 2)
+```
+
+#### Variable: VK\_SAMPLE\_COUNT\_4\_BIT
+
+```Lisp
+(defparameter VK_SAMPLE_COUNT_4_BIT 4)
+```
+
+#### Variable: VK\_SAMPLE\_COUNT\_8\_BIT
+
+```Lisp
+(defparameter VK_SAMPLE_COUNT_8_BIT 8)
+```
+
+#### Variable: VK\_SAMPLE\_COUNT\_16\_BIT
+
+```Lisp
+(defparameter VK_SAMPLE_COUNT_16_BIT 16)
+```
+
+#### Variable: VK\_SAMPLE\_COUNT\_32\_BIT
+
+```Lisp
+(defparameter VK_SAMPLE_COUNT_32_BIT 32)
+```
+
+#### Variable: VK\_SAMPLE\_COUNT\_64\_BIT
+
+```Lisp
+(defparameter VK_SAMPLE_COUNT_64_BIT 64)
+```
+
+#### Variable: VK\_SAMPLE\_COUNT\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_SAMPLE_COUNT_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_IMAGE\_USAGE\_TRANSFER\_SRC\_BIT
+
+```Lisp
+(defparameter VK_IMAGE_USAGE_TRANSFER_SRC_BIT 1)
+```
+
+#### Variable: VK\_IMAGE\_USAGE\_TRANSFER\_DST\_BIT
+
+```Lisp
+(defparameter VK_IMAGE_USAGE_TRANSFER_DST_BIT 2)
+```
+
+#### Variable: VK\_IMAGE\_USAGE\_SAMPLED\_BIT
+
+```Lisp
+(defparameter VK_IMAGE_USAGE_SAMPLED_BIT 4)
+```
+
+#### Variable: VK\_IMAGE\_USAGE\_STORAGE\_BIT
+
+```Lisp
+(defparameter VK_IMAGE_USAGE_STORAGE_BIT 8)
+```
+
+#### Variable: VK\_IMAGE\_USAGE\_COLOR\_ATTACHMENT\_BIT
+
+```Lisp
+(defparameter VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT 16)
+```
+
+#### Variable: VK\_IMAGE\_USAGE\_DEPTH\_STENCIL\_ATTACHMENT\_BIT
+
+```Lisp
+(defparameter VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT 32)
+```
+
+#### Variable: VK\_IMAGE\_USAGE\_TRANSIENT\_ATTACHMENT\_BIT
+
+```Lisp
+(defparameter VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT 64)
+```
+
+#### Variable: VK\_IMAGE\_USAGE\_INPUT\_ATTACHMENT\_BIT
+
+```Lisp
+(defparameter VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT 128)
+```
+
+#### Variable: VK\_IMAGE\_USAGE\_VIDEO\_DECODE\_DST\_BIT\_KHR
+
+```Lisp
+(defparameter VK_IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR 1024)
+```
+
+#### Variable: VK\_IMAGE\_USAGE\_VIDEO\_DECODE\_SRC\_BIT\_KHR
+
+```Lisp
+(defparameter VK_IMAGE_USAGE_VIDEO_DECODE_SRC_BIT_KHR 2048)
+```
+
+#### Variable: VK\_IMAGE\_USAGE\_VIDEO\_DECODE\_DPB\_BIT\_KHR
+
+```Lisp
+(defparameter VK_IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR 4096)
+```
+
+#### Variable: VK\_IMAGE\_USAGE\_FRAGMENT\_DENSITY\_MAP\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT 512)
+```
+
+#### Variable: VK\_IMAGE\_USAGE\_FRAGMENT\_SHADING\_RATE\_ATTACHMENT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR 256)
+```
+
+#### Variable: VK\_IMAGE\_USAGE\_VIDEO\_ENCODE\_DST\_BIT\_KHR
+
+```Lisp
+(defparameter VK_IMAGE_USAGE_VIDEO_ENCODE_DST_BIT_KHR 8192)
+```
+
+#### Variable: VK\_IMAGE\_USAGE\_VIDEO\_ENCODE\_SRC\_BIT\_KHR
+
+```Lisp
+(defparameter VK_IMAGE_USAGE_VIDEO_ENCODE_SRC_BIT_KHR 16384)
+```
+
+#### Variable: VK\_IMAGE\_USAGE\_VIDEO\_ENCODE\_DPB\_BIT\_KHR
+
+```Lisp
+(defparameter VK_IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR 32768)
+```
+
+#### Variable: VK\_IMAGE\_USAGE\_INVOCATION\_MASK\_BIT\_HUAWEI
+
+```Lisp
+(defparameter VK_IMAGE_USAGE_INVOCATION_MASK_BIT_HUAWEI 262144)
+```
+
+#### Variable: VK\_IMAGE\_USAGE\_SHADING\_RATE\_IMAGE\_BIT\_NV
+
+```Lisp
+(defparameter VK_IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV VK_IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR)
+```
+
+#### Variable: VK\_IMAGE\_USAGE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_IMAGE_USAGE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_INSTANCE\_CREATE\_ENUMERATE\_PORTABILITY\_BIT\_KHR
+
+```Lisp
+(defparameter VK_INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR 1)
+```
+
+#### Variable: VK\_INSTANCE\_CREATE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_INSTANCE_CREATE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_MEMORY\_HEAP\_DEVICE\_LOCAL\_BIT
+
+```Lisp
+(defparameter VK_MEMORY_HEAP_DEVICE_LOCAL_BIT 1)
+```
+
+#### Variable: VK\_MEMORY\_HEAP\_MULTI\_INSTANCE\_BIT
+
+```Lisp
+(defparameter VK_MEMORY_HEAP_MULTI_INSTANCE_BIT 2)
+```
+
+#### Variable: VK\_MEMORY\_HEAP\_MULTI\_INSTANCE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_MEMORY_HEAP_MULTI_INSTANCE_BIT_KHR VK_MEMORY_HEAP_MULTI_INSTANCE_BIT)
+```
+
+#### Variable: VK\_MEMORY\_HEAP\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_MEMORY_HEAP_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_MEMORY\_PROPERTY\_DEVICE\_LOCAL\_BIT
+
+```Lisp
+(defparameter VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT 1)
+```
+
+#### Variable: VK\_MEMORY\_PROPERTY\_HOST\_VISIBLE\_BIT
+
+```Lisp
+(defparameter VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT 2)
+```
+
+#### Variable: VK\_MEMORY\_PROPERTY\_HOST\_COHERENT\_BIT
+
+```Lisp
+(defparameter VK_MEMORY_PROPERTY_HOST_COHERENT_BIT 4)
+```
+
+#### Variable: VK\_MEMORY\_PROPERTY\_HOST\_CACHED\_BIT
+
+```Lisp
+(defparameter VK_MEMORY_PROPERTY_HOST_CACHED_BIT 8)
+```
+
+#### Variable: VK\_MEMORY\_PROPERTY\_LAZILY\_ALLOCATED\_BIT
+
+```Lisp
+(defparameter VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT 16)
+```
+
+#### Variable: VK\_MEMORY\_PROPERTY\_PROTECTED\_BIT
+
+```Lisp
+(defparameter VK_MEMORY_PROPERTY_PROTECTED_BIT 32)
+```
+
+#### Variable: VK\_MEMORY\_PROPERTY\_DEVICE\_COHERENT\_BIT\_AMD
+
+```Lisp
+(defparameter VK_MEMORY_PROPERTY_DEVICE_COHERENT_BIT_AMD 64)
+```
+
+#### Variable: VK\_MEMORY\_PROPERTY\_DEVICE\_UNCACHED\_BIT\_AMD
+
+```Lisp
+(defparameter VK_MEMORY_PROPERTY_DEVICE_UNCACHED_BIT_AMD 128)
+```
+
+#### Variable: VK\_MEMORY\_PROPERTY\_RDMA\_CAPABLE\_BIT\_NV
+
+```Lisp
+(defparameter VK_MEMORY_PROPERTY_RDMA_CAPABLE_BIT_NV 256)
+```
+
+#### Variable: VK\_MEMORY\_PROPERTY\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_MEMORY_PROPERTY_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_QUEUE\_GRAPHICS\_BIT
+
+```Lisp
+(defparameter VK_QUEUE_GRAPHICS_BIT 1)
+```
+
+#### Variable: VK\_QUEUE\_COMPUTE\_BIT
+
+```Lisp
+(defparameter VK_QUEUE_COMPUTE_BIT 2)
+```
+
+#### Variable: VK\_QUEUE\_TRANSFER\_BIT
+
+```Lisp
+(defparameter VK_QUEUE_TRANSFER_BIT 4)
+```
+
+#### Variable: VK\_QUEUE\_SPARSE\_BINDING\_BIT
+
+```Lisp
+(defparameter VK_QUEUE_SPARSE_BINDING_BIT 8)
+```
+
+#### Variable: VK\_QUEUE\_PROTECTED\_BIT
+
+```Lisp
+(defparameter VK_QUEUE_PROTECTED_BIT 16)
+```
+
+#### Variable: VK\_QUEUE\_VIDEO\_DECODE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_QUEUE_VIDEO_DECODE_BIT_KHR 32)
+```
+
+#### Variable: VK\_QUEUE\_VIDEO\_ENCODE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_QUEUE_VIDEO_ENCODE_BIT_KHR 64)
+```
+
+#### Variable: VK\_QUEUE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_QUEUE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_DEVICE\_QUEUE\_CREATE\_PROTECTED\_BIT
+
+```Lisp
+(defparameter VK_DEVICE_QUEUE_CREATE_PROTECTED_BIT 1)
+```
+
+#### Variable: VK\_DEVICE\_QUEUE\_CREATE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_DEVICE_QUEUE_CREATE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_TOP\_OF\_PIPE\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT 1)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_DRAW\_INDIRECT\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT 2)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_VERTEX\_INPUT\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_VERTEX_INPUT_BIT 4)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_VERTEX\_SHADER\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_VERTEX_SHADER_BIT 8)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_TESSELLATION\_CONTROL\_SHADER\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT 16)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_TESSELLATION\_EVALUATION\_SHADER\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT 32)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_GEOMETRY\_SHADER\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT 64)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_FRAGMENT\_SHADER\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT 128)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_EARLY\_FRAGMENT\_TESTS\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT 256)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_LATE\_FRAGMENT\_TESTS\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT 512)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_COLOR\_ATTACHMENT\_OUTPUT\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT 1024)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_COMPUTE\_SHADER\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT 2048)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_TRANSFER\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_TRANSFER_BIT 4096)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_BOTTOM\_OF\_PIPE\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT 8192)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_HOST\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_HOST_BIT 16384)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_ALL\_GRAPHICS\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_ALL_GRAPHICS_BIT 32768)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_ALL\_COMMANDS\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_ALL_COMMANDS_BIT 65536)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_NONE
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_NONE 0)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_TRANSFORM\_FEEDBACK\_BIT\_EXT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_TRANSFORM_FEEDBACK_BIT_EXT 16777216)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_CONDITIONAL\_RENDERING\_BIT\_EXT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_CONDITIONAL_RENDERING_BIT_EXT 262144)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_ACCELERATION\_STRUCTURE\_BUILD\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR 33554432)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_RAY\_TRACING\_SHADER\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_RAY_TRACING_SHADER_BIT_KHR 2097152)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_TASK\_SHADER\_BIT\_NV
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV 524288)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_MESH\_SHADER\_BIT\_NV
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV 1048576)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_FRAGMENT\_DENSITY\_PROCESS\_BIT\_EXT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_FRAGMENT_DENSITY_PROCESS_BIT_EXT 8388608)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_FRAGMENT\_SHADING\_RATE\_ATTACHMENT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR 4194304)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_COMMAND\_PREPROCESS\_BIT\_NV
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_COMMAND_PREPROCESS_BIT_NV 131072)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_SHADING\_RATE\_IMAGE\_BIT\_NV
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_SHADING_RATE_IMAGE_BIT_NV VK_PIPELINE_STAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_RAY\_TRACING\_SHADER\_BIT\_NV
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_RAY_TRACING_SHADER_BIT_NV VK_PIPELINE_STAGE_RAY_TRACING_SHADER_BIT_KHR)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_ACCELERATION\_STRUCTURE\_BUILD\_BIT\_NV
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_NV VK_PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_NONE\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_NONE_KHR VK_PIPELINE_STAGE_NONE)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_SPARSE\_MEMORY\_BIND\_METADATA\_BIT
+
+```Lisp
+(defparameter VK_SPARSE_MEMORY_BIND_METADATA_BIT 1)
+```
+
+#### Variable: VK\_SPARSE\_MEMORY\_BIND\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_SPARSE_MEMORY_BIND_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_SPARSE\_IMAGE\_FORMAT\_SINGLE\_MIPTAIL\_BIT
+
+```Lisp
+(defparameter VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT 1)
+```
+
+#### Variable: VK\_SPARSE\_IMAGE\_FORMAT\_ALIGNED\_MIP\_SIZE\_BIT
+
+```Lisp
+(defparameter VK_SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT 2)
+```
+
+#### Variable: VK\_SPARSE\_IMAGE\_FORMAT\_NONSTANDARD\_BLOCK\_SIZE\_BIT
+
+```Lisp
+(defparameter VK_SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT 4)
+```
+
+#### Variable: VK\_SPARSE\_IMAGE\_FORMAT\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_SPARSE_IMAGE_FORMAT_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_FENCE\_CREATE\_SIGNALED\_BIT
+
+```Lisp
+(defparameter VK_FENCE_CREATE_SIGNALED_BIT 1)
+```
+
+#### Variable: VK\_FENCE\_CREATE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_FENCE_CREATE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_EVENT\_CREATE\_DEVICE\_ONLY\_BIT
+
+```Lisp
+(defparameter VK_EVENT_CREATE_DEVICE_ONLY_BIT 1)
+```
+
+#### Variable: VK\_EVENT\_CREATE\_DEVICE\_ONLY\_BIT\_KHR
+
+```Lisp
+(defparameter VK_EVENT_CREATE_DEVICE_ONLY_BIT_KHR VK_EVENT_CREATE_DEVICE_ONLY_BIT)
+```
+
+#### Variable: VK\_EVENT\_CREATE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_EVENT_CREATE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_QUERY\_PIPELINE\_STATISTIC\_INPUT\_ASSEMBLY\_VERTICES\_BIT
+
+```Lisp
+(defparameter VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_VERTICES_BIT 1)
+```
+
+#### Variable: VK\_QUERY\_PIPELINE\_STATISTIC\_INPUT\_ASSEMBLY\_PRIMITIVES\_BIT
+
+```Lisp
+(defparameter VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_PRIMITIVES_BIT 2)
+```
+
+#### Variable: VK\_QUERY\_PIPELINE\_STATISTIC\_VERTEX\_SHADER\_INVOCATIONS\_BIT
+
+```Lisp
+(defparameter VK_QUERY_PIPELINE_STATISTIC_VERTEX_SHADER_INVOCATIONS_BIT 4)
+```
+
+#### Variable: VK\_QUERY\_PIPELINE\_STATISTIC\_GEOMETRY\_SHADER\_INVOCATIONS\_BIT
+
+```Lisp
+(defparameter VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_INVOCATIONS_BIT 8)
+```
+
+#### Variable: VK\_QUERY\_PIPELINE\_STATISTIC\_GEOMETRY\_SHADER\_PRIMITIVES\_BIT
+
+```Lisp
+(defparameter VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_PRIMITIVES_BIT 16)
+```
+
+#### Variable: VK\_QUERY\_PIPELINE\_STATISTIC\_CLIPPING\_INVOCATIONS\_BIT
+
+```Lisp
+(defparameter VK_QUERY_PIPELINE_STATISTIC_CLIPPING_INVOCATIONS_BIT 32)
+```
+
+#### Variable: VK\_QUERY\_PIPELINE\_STATISTIC\_CLIPPING\_PRIMITIVES\_BIT
+
+```Lisp
+(defparameter VK_QUERY_PIPELINE_STATISTIC_CLIPPING_PRIMITIVES_BIT 64)
+```
+
+#### Variable: VK\_QUERY\_PIPELINE\_STATISTIC\_FRAGMENT\_SHADER\_INVOCATIONS\_BIT
+
+```Lisp
+(defparameter VK_QUERY_PIPELINE_STATISTIC_FRAGMENT_SHADER_INVOCATIONS_BIT 128)
+```
+
+#### Variable: VK\_QUERY\_PIPELINE\_STATISTIC\_TESSELLATION\_CONTROL\_SHADER\_PATCHES\_BIT
+
+```Lisp
+(defparameter VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_CONTROL_SHADER_PATCHES_BIT 256)
+```
+
+#### Variable: VK\_QUERY\_PIPELINE\_STATISTIC\_TESSELLATION\_EVALUATION\_SHADER\_INVOCATIONS\_BIT
+
+```Lisp
+(defparameter VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT 512)
+```
+
+#### Variable: VK\_QUERY\_PIPELINE\_STATISTIC\_COMPUTE\_SHADER\_INVOCATIONS\_BIT
+
+```Lisp
+(defparameter VK_QUERY_PIPELINE_STATISTIC_COMPUTE_SHADER_INVOCATIONS_BIT 1024)
+```
+
+#### Variable: VK\_QUERY\_PIPELINE\_STATISTIC\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_QUERY_PIPELINE_STATISTIC_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_QUERY\_RESULT\_64\_BIT
+
+```Lisp
+(defparameter VK_QUERY_RESULT_64_BIT 1)
+```
+
+#### Variable: VK\_QUERY\_RESULT\_WAIT\_BIT
+
+```Lisp
+(defparameter VK_QUERY_RESULT_WAIT_BIT 2)
+```
+
+#### Variable: VK\_QUERY\_RESULT\_WITH\_AVAILABILITY\_BIT
+
+```Lisp
+(defparameter VK_QUERY_RESULT_WITH_AVAILABILITY_BIT 4)
+```
+
+#### Variable: VK\_QUERY\_RESULT\_PARTIAL\_BIT
+
+```Lisp
+(defparameter VK_QUERY_RESULT_PARTIAL_BIT 8)
+```
+
+#### Variable: VK\_QUERY\_RESULT\_WITH\_STATUS\_BIT\_KHR
+
+```Lisp
+(defparameter VK_QUERY_RESULT_WITH_STATUS_BIT_KHR 16)
+```
+
+#### Variable: VK\_QUERY\_RESULT\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_QUERY_RESULT_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_BUFFER\_CREATE\_SPARSE\_BINDING\_BIT
+
+```Lisp
+(defparameter VK_BUFFER_CREATE_SPARSE_BINDING_BIT 1)
+```
+
+#### Variable: VK\_BUFFER\_CREATE\_SPARSE\_RESIDENCY\_BIT
+
+```Lisp
+(defparameter VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT 2)
+```
+
+#### Variable: VK\_BUFFER\_CREATE\_SPARSE\_ALIASED\_BIT
+
+```Lisp
+(defparameter VK_BUFFER_CREATE_SPARSE_ALIASED_BIT 4)
+```
+
+#### Variable: VK\_BUFFER\_CREATE\_PROTECTED\_BIT
+
+```Lisp
+(defparameter VK_BUFFER_CREATE_PROTECTED_BIT 8)
+```
+
+#### Variable: VK\_BUFFER\_CREATE\_DEVICE\_ADDRESS\_CAPTURE\_REPLAY\_BIT
+
+```Lisp
+(defparameter VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT 16)
+```
+
+#### Variable: VK\_BUFFER\_CREATE\_DEVICE\_ADDRESS\_CAPTURE\_REPLAY\_BIT\_EXT
+
+```Lisp
+(defparameter VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT)
+```
+
+#### Variable: VK\_BUFFER\_CREATE\_DEVICE\_ADDRESS\_CAPTURE\_REPLAY\_BIT\_KHR
+
+```Lisp
+(defparameter VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT)
+```
+
+#### Variable: VK\_BUFFER\_CREATE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_BUFFER_CREATE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_BUFFER\_USAGE\_TRANSFER\_SRC\_BIT
+
+```Lisp
+(defparameter VK_BUFFER_USAGE_TRANSFER_SRC_BIT 1)
+```
+
+#### Variable: VK\_BUFFER\_USAGE\_TRANSFER\_DST\_BIT
+
+```Lisp
+(defparameter VK_BUFFER_USAGE_TRANSFER_DST_BIT 2)
+```
+
+#### Variable: VK\_BUFFER\_USAGE\_UNIFORM\_TEXEL\_BUFFER\_BIT
+
+```Lisp
+(defparameter VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT 4)
+```
+
+#### Variable: VK\_BUFFER\_USAGE\_STORAGE\_TEXEL\_BUFFER\_BIT
+
+```Lisp
+(defparameter VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT 8)
+```
+
+#### Variable: VK\_BUFFER\_USAGE\_UNIFORM\_BUFFER\_BIT
+
+```Lisp
+(defparameter VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT 16)
+```
+
+#### Variable: VK\_BUFFER\_USAGE\_STORAGE\_BUFFER\_BIT
+
+```Lisp
+(defparameter VK_BUFFER_USAGE_STORAGE_BUFFER_BIT 32)
+```
+
+#### Variable: VK\_BUFFER\_USAGE\_INDEX\_BUFFER\_BIT
+
+```Lisp
+(defparameter VK_BUFFER_USAGE_INDEX_BUFFER_BIT 64)
+```
+
+#### Variable: VK\_BUFFER\_USAGE\_VERTEX\_BUFFER\_BIT
+
+```Lisp
+(defparameter VK_BUFFER_USAGE_VERTEX_BUFFER_BIT 128)
+```
+
+#### Variable: VK\_BUFFER\_USAGE\_INDIRECT\_BUFFER\_BIT
+
+```Lisp
+(defparameter VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT 256)
+```
+
+#### Variable: VK\_BUFFER\_USAGE\_SHADER\_DEVICE\_ADDRESS\_BIT
+
+```Lisp
+(defparameter VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT 131072)
+```
+
+#### Variable: VK\_BUFFER\_USAGE\_VIDEO\_DECODE\_SRC\_BIT\_KHR
+
+```Lisp
+(defparameter VK_BUFFER_USAGE_VIDEO_DECODE_SRC_BIT_KHR 8192)
+```
+
+#### Variable: VK\_BUFFER\_USAGE\_VIDEO\_DECODE\_DST\_BIT\_KHR
+
+```Lisp
+(defparameter VK_BUFFER_USAGE_VIDEO_DECODE_DST_BIT_KHR 16384)
+```
+
+#### Variable: VK\_BUFFER\_USAGE\_TRANSFORM\_FEEDBACK\_BUFFER\_BIT\_EXT
+
+```Lisp
+(defparameter VK_BUFFER_USAGE_TRANSFORM_FEEDBACK_BUFFER_BIT_EXT 2048)
+```
+
+#### Variable: VK\_BUFFER\_USAGE\_TRANSFORM\_FEEDBACK\_COUNTER\_BUFFER\_BIT\_EXT
+
+```Lisp
+(defparameter VK_BUFFER_USAGE_TRANSFORM_FEEDBACK_COUNTER_BUFFER_BIT_EXT 4096)
+```
+
+#### Variable: VK\_BUFFER\_USAGE\_CONDITIONAL\_RENDERING\_BIT\_EXT
+
+```Lisp
+(defparameter VK_BUFFER_USAGE_CONDITIONAL_RENDERING_BIT_EXT 512)
+```
+
+#### Variable: VK\_BUFFER\_USAGE\_ACCELERATION\_STRUCTURE\_BUILD\_INPUT\_READ\_ONLY\_BIT\_KHR
+
+```Lisp
+(defparameter VK_BUFFER_USAGE_ACCELERATION_STRUCTURE_BUILD_INPUT_READ_ONLY_BIT_KHR 524288)
+```
+
+#### Variable: VK\_BUFFER\_USAGE\_ACCELERATION\_STRUCTURE\_STORAGE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_BUFFER_USAGE_ACCELERATION_STRUCTURE_STORAGE_BIT_KHR 1048576)
+```
+
+#### Variable: VK\_BUFFER\_USAGE\_SHADER\_BINDING\_TABLE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_BUFFER_USAGE_SHADER_BINDING_TABLE_BIT_KHR 1024)
+```
+
+#### Variable: VK\_BUFFER\_USAGE\_VIDEO\_ENCODE\_DST\_BIT\_KHR
+
+```Lisp
+(defparameter VK_BUFFER_USAGE_VIDEO_ENCODE_DST_BIT_KHR 32768)
+```
+
+#### Variable: VK\_BUFFER\_USAGE\_VIDEO\_ENCODE\_SRC\_BIT\_KHR
+
+```Lisp
+(defparameter VK_BUFFER_USAGE_VIDEO_ENCODE_SRC_BIT_KHR 65536)
+```
+
+#### Variable: VK\_BUFFER\_USAGE\_RAY\_TRACING\_BIT\_NV
+
+```Lisp
+(defparameter VK_BUFFER_USAGE_RAY_TRACING_BIT_NV VK_BUFFER_USAGE_SHADER_BINDING_TABLE_BIT_KHR)
+```
+
+#### Variable: VK\_BUFFER\_USAGE\_SHADER\_DEVICE\_ADDRESS\_BIT\_EXT
+
+```Lisp
+(defparameter VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_EXT VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT)
+```
+
+#### Variable: VK\_BUFFER\_USAGE\_SHADER\_DEVICE\_ADDRESS\_BIT\_KHR
+
+```Lisp
+(defparameter VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_KHR VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT)
+```
+
+#### Variable: VK\_BUFFER\_USAGE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_BUFFER_USAGE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_IMAGE\_VIEW\_CREATE\_FRAGMENT\_DENSITY\_MAP\_DYNAMIC\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT 1)
+```
+
+#### Variable: VK\_IMAGE\_VIEW\_CREATE\_FRAGMENT\_DENSITY\_MAP\_DEFERRED\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DEFERRED_BIT_EXT 2)
+```
+
+#### Variable: VK\_IMAGE\_VIEW\_CREATE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_IMAGE_VIEW_CREATE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_PIPELINE\_CACHE\_CREATE\_EXTERNALLY\_SYNCHRONIZED\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_CACHE_CREATE_EXTERNALLY_SYNCHRONIZED_BIT 1)
+```
+
+#### Variable: VK\_PIPELINE\_CACHE\_CREATE\_EXTERNALLY\_SYNCHRONIZED\_BIT\_EXT
+
+```Lisp
+(defparameter VK_PIPELINE_CACHE_CREATE_EXTERNALLY_SYNCHRONIZED_BIT_EXT VK_PIPELINE_CACHE_CREATE_EXTERNALLY_SYNCHRONIZED_BIT)
+```
+
+#### Variable: VK\_PIPELINE\_CACHE\_CREATE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_PIPELINE_CACHE_CREATE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_COLOR\_COMPONENT\_R\_BIT
+
+```Lisp
+(defparameter VK_COLOR_COMPONENT_R_BIT 1)
+```
+
+#### Variable: VK\_COLOR\_COMPONENT\_G\_BIT
+
+```Lisp
+(defparameter VK_COLOR_COMPONENT_G_BIT 2)
+```
+
+#### Variable: VK\_COLOR\_COMPONENT\_B\_BIT
+
+```Lisp
+(defparameter VK_COLOR_COMPONENT_B_BIT 4)
+```
+
+#### Variable: VK\_COLOR\_COMPONENT\_A\_BIT
+
+```Lisp
+(defparameter VK_COLOR_COMPONENT_A_BIT 8)
+```
+
+#### Variable: VK\_COLOR\_COMPONENT\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_COLOR_COMPONENT_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_PIPELINE\_CREATE\_DISABLE\_OPTIMIZATION\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_CREATE_DISABLE_OPTIMIZATION_BIT 1)
+```
+
+#### Variable: VK\_PIPELINE\_CREATE\_ALLOW\_DERIVATIVES\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT 2)
+```
+
+#### Variable: VK\_PIPELINE\_CREATE\_DERIVATIVE\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_CREATE_DERIVATIVE_BIT 4)
+```
+
+#### Variable: VK\_PIPELINE\_CREATE\_VIEW\_INDEX\_FROM\_DEVICE\_INDEX\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT 8)
+```
+
+#### Variable: VK\_PIPELINE\_CREATE\_DISPATCH\_BASE\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_CREATE_DISPATCH_BASE_BIT 16)
+```
+
+#### Variable: VK\_PIPELINE\_CREATE\_FAIL\_ON\_PIPELINE\_COMPILE\_REQUIRED\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT 256)
+```
+
+#### Variable: VK\_PIPELINE\_CREATE\_EARLY\_RETURN\_ON\_FAILURE\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT 512)
+```
+
+#### Variable: VK\_PIPELINE\_CREATE\_RENDERING\_FRAGMENT\_SHADING\_RATE\_ATTACHMENT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_CREATE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR 2097152)
+```
+
+#### Variable: VK\_PIPELINE\_CREATE\_RENDERING\_FRAGMENT\_DENSITY\_MAP\_ATTACHMENT\_BIT\_EXT
+
+```Lisp
+(defparameter VK_PIPELINE_CREATE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT 4194304)
+```
+
+#### Variable: VK\_PIPELINE\_CREATE\_RAY\_TRACING\_NO\_NULL\_ANY\_HIT\_SHADERS\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_ANY_HIT_SHADERS_BIT_KHR 16384)
+```
+
+#### Variable: VK\_PIPELINE\_CREATE\_RAY\_TRACING\_NO\_NULL\_CLOSEST\_HIT\_SHADERS\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_CLOSEST_HIT_SHADERS_BIT_KHR 32768)
+```
+
+#### Variable: VK\_PIPELINE\_CREATE\_RAY\_TRACING\_NO\_NULL\_MISS\_SHADERS\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_MISS_SHADERS_BIT_KHR 65536)
+```
+
+#### Variable: VK\_PIPELINE\_CREATE\_RAY\_TRACING\_NO\_NULL\_INTERSECTION\_SHADERS\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_INTERSECTION_SHADERS_BIT_KHR 131072)
+```
+
+#### Variable: VK\_PIPELINE\_CREATE\_RAY\_TRACING\_SKIP\_TRIANGLES\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_CREATE_RAY_TRACING_SKIP_TRIANGLES_BIT_KHR 4096)
+```
+
+#### Variable: VK\_PIPELINE\_CREATE\_RAY\_TRACING\_SKIP\_AABBS\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_CREATE_RAY_TRACING_SKIP_AABBS_BIT_KHR 8192)
+```
+
+#### Variable: VK\_PIPELINE\_CREATE\_RAY\_TRACING\_SHADER\_GROUP\_HANDLE\_CAPTURE\_REPLAY\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_CREATE_RAY_TRACING_SHADER_GROUP_HANDLE_CAPTURE_REPLAY_BIT_KHR 524288)
+```
+
+#### Variable: VK\_PIPELINE\_CREATE\_DEFER\_COMPILE\_BIT\_NV
+
+```Lisp
+(defparameter VK_PIPELINE_CREATE_DEFER_COMPILE_BIT_NV 32)
+```
+
+#### Variable: VK\_PIPELINE\_CREATE\_CAPTURE\_STATISTICS\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_CREATE_CAPTURE_STATISTICS_BIT_KHR 64)
+```
+
+#### Variable: VK\_PIPELINE\_CREATE\_CAPTURE\_INTERNAL\_REPRESENTATIONS\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_CREATE_CAPTURE_INTERNAL_REPRESENTATIONS_BIT_KHR 128)
+```
+
+#### Variable: VK\_PIPELINE\_CREATE\_INDIRECT\_BINDABLE\_BIT\_NV
+
+```Lisp
+(defparameter VK_PIPELINE_CREATE_INDIRECT_BINDABLE_BIT_NV 262144)
+```
+
+#### Variable: VK\_PIPELINE\_CREATE\_LIBRARY\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_CREATE_LIBRARY_BIT_KHR 2048)
+```
+
+#### Variable: VK\_PIPELINE\_CREATE\_RETAIN\_LINK\_TIME\_OPTIMIZATION\_INFO\_BIT\_EXT
+
+```Lisp
+(defparameter VK_PIPELINE_CREATE_RETAIN_LINK_TIME_OPTIMIZATION_INFO_BIT_EXT 8388608)
+```
+
+#### Variable: VK\_PIPELINE\_CREATE\_LINK\_TIME\_OPTIMIZATION\_BIT\_EXT
+
+```Lisp
+(defparameter VK_PIPELINE_CREATE_LINK_TIME_OPTIMIZATION_BIT_EXT 1024)
+```
+
+#### Variable: VK\_PIPELINE\_CREATE\_RAY\_TRACING\_ALLOW\_MOTION\_BIT\_NV
+
+```Lisp
+(defparameter VK_PIPELINE_CREATE_RAY_TRACING_ALLOW_MOTION_BIT_NV 1048576)
+```
+
+#### Variable: VK\_PIPELINE\_CREATE\_DISPATCH\_BASE
+
+```Lisp
+(defparameter VK_PIPELINE_CREATE_DISPATCH_BASE VK_PIPELINE_CREATE_DISPATCH_BASE_BIT)
+```
+
+#### Variable: VK\_PIPELINE\_RASTERIZATION\_STATE\_CREATE\_FRAGMENT\_SHADING\_RATE\_ATTACHMENT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR VK_PIPELINE_CREATE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR)
+```
+
+#### Variable: VK\_PIPELINE\_RASTERIZATION\_STATE\_CREATE\_FRAGMENT\_DENSITY\_MAP\_ATTACHMENT\_BIT\_EXT
+
+```Lisp
+(defparameter VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT VK_PIPELINE_CREATE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT)
+```
+
+#### Variable: VK\_PIPELINE\_CREATE\_VIEW\_INDEX\_FROM\_DEVICE\_INDEX\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT_KHR VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT)
+```
+
+#### Variable: VK\_PIPELINE\_CREATE\_DISPATCH\_BASE\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_CREATE_DISPATCH_BASE_KHR VK_PIPELINE_CREATE_DISPATCH_BASE)
+```
+
+#### Variable: VK\_PIPELINE\_CREATE\_FAIL\_ON\_PIPELINE\_COMPILE\_REQUIRED\_BIT\_EXT
+
+```Lisp
+(defparameter VK_PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT_EXT VK_PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT)
+```
+
+#### Variable: VK\_PIPELINE\_CREATE\_EARLY\_RETURN\_ON\_FAILURE\_BIT\_EXT
+
+```Lisp
+(defparameter VK_PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT_EXT VK_PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT)
+```
+
+#### Variable: VK\_PIPELINE\_CREATE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_PIPELINE_CREATE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_PIPELINE\_SHADER\_STAGE\_CREATE\_ALLOW\_VARYING\_SUBGROUP\_SIZE\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT 1)
+```
+
+#### Variable: VK\_PIPELINE\_SHADER\_STAGE\_CREATE\_REQUIRE\_FULL\_SUBGROUPS\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT 2)
+```
+
+#### Variable: VK\_PIPELINE\_SHADER\_STAGE\_CREATE\_ALLOW\_VARYING\_SUBGROUP\_SIZE\_BIT\_EXT
+
+```Lisp
+(defparameter VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT)
+```
+
+#### Variable: VK\_PIPELINE\_SHADER\_STAGE\_CREATE\_REQUIRE\_FULL\_SUBGROUPS\_BIT\_EXT
+
+```Lisp
+(defparameter VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT)
+```
+
+#### Variable: VK\_PIPELINE\_SHADER\_STAGE\_CREATE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_PIPELINE_SHADER_STAGE_CREATE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_SHADER\_STAGE\_VERTEX\_BIT
+
+```Lisp
+(defparameter VK_SHADER_STAGE_VERTEX_BIT 1)
+```
+
+#### Variable: VK\_SHADER\_STAGE\_TESSELLATION\_CONTROL\_BIT
+
+```Lisp
+(defparameter VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT 2)
+```
+
+#### Variable: VK\_SHADER\_STAGE\_TESSELLATION\_EVALUATION\_BIT
+
+```Lisp
+(defparameter VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT 4)
+```
+
+#### Variable: VK\_SHADER\_STAGE\_GEOMETRY\_BIT
+
+```Lisp
+(defparameter VK_SHADER_STAGE_GEOMETRY_BIT 8)
+```
+
+#### Variable: VK\_SHADER\_STAGE\_FRAGMENT\_BIT
+
+```Lisp
+(defparameter VK_SHADER_STAGE_FRAGMENT_BIT 16)
+```
+
+#### Variable: VK\_SHADER\_STAGE\_COMPUTE\_BIT
+
+```Lisp
+(defparameter VK_SHADER_STAGE_COMPUTE_BIT 32)
+```
+
+#### Variable: VK\_SHADER\_STAGE\_ALL\_GRAPHICS
+
+```Lisp
+(defparameter VK_SHADER_STAGE_ALL_GRAPHICS 31)
+```
+
+#### Variable: VK\_SHADER\_STAGE\_ALL
+
+```Lisp
+(defparameter VK_SHADER_STAGE_ALL 2147483647)
+```
+
+#### Variable: VK\_SHADER\_STAGE\_RAYGEN\_BIT\_KHR
+
+```Lisp
+(defparameter VK_SHADER_STAGE_RAYGEN_BIT_KHR 256)
+```
+
+#### Variable: VK\_SHADER\_STAGE\_ANY\_HIT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_SHADER_STAGE_ANY_HIT_BIT_KHR 512)
+```
+
+#### Variable: VK\_SHADER\_STAGE\_CLOSEST\_HIT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_SHADER_STAGE_CLOSEST_HIT_BIT_KHR 1024)
+```
+
+#### Variable: VK\_SHADER\_STAGE\_MISS\_BIT\_KHR
+
+```Lisp
+(defparameter VK_SHADER_STAGE_MISS_BIT_KHR 2048)
+```
+
+#### Variable: VK\_SHADER\_STAGE\_INTERSECTION\_BIT\_KHR
+
+```Lisp
+(defparameter VK_SHADER_STAGE_INTERSECTION_BIT_KHR 4096)
+```
+
+#### Variable: VK\_SHADER\_STAGE\_CALLABLE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_SHADER_STAGE_CALLABLE_BIT_KHR 8192)
+```
+
+#### Variable: VK\_SHADER\_STAGE\_TASK\_BIT\_NV
+
+```Lisp
+(defparameter VK_SHADER_STAGE_TASK_BIT_NV 64)
+```
+
+#### Variable: VK\_SHADER\_STAGE\_MESH\_BIT\_NV
+
+```Lisp
+(defparameter VK_SHADER_STAGE_MESH_BIT_NV 128)
+```
+
+#### Variable: VK\_SHADER\_STAGE\_SUBPASS\_SHADING\_BIT\_HUAWEI
+
+```Lisp
+(defparameter VK_SHADER_STAGE_SUBPASS_SHADING_BIT_HUAWEI 16384)
+```
+
+#### Variable: VK\_SHADER\_STAGE\_RAYGEN\_BIT\_NV
+
+```Lisp
+(defparameter VK_SHADER_STAGE_RAYGEN_BIT_NV VK_SHADER_STAGE_RAYGEN_BIT_KHR)
+```
+
+#### Variable: VK\_SHADER\_STAGE\_ANY\_HIT\_BIT\_NV
+
+```Lisp
+(defparameter VK_SHADER_STAGE_ANY_HIT_BIT_NV VK_SHADER_STAGE_ANY_HIT_BIT_KHR)
+```
+
+#### Variable: VK\_SHADER\_STAGE\_CLOSEST\_HIT\_BIT\_NV
+
+```Lisp
+(defparameter VK_SHADER_STAGE_CLOSEST_HIT_BIT_NV VK_SHADER_STAGE_CLOSEST_HIT_BIT_KHR)
+```
+
+#### Variable: VK\_SHADER\_STAGE\_MISS\_BIT\_NV
+
+```Lisp
+(defparameter VK_SHADER_STAGE_MISS_BIT_NV VK_SHADER_STAGE_MISS_BIT_KHR)
+```
+
+#### Variable: VK\_SHADER\_STAGE\_INTERSECTION\_BIT\_NV
+
+```Lisp
+(defparameter VK_SHADER_STAGE_INTERSECTION_BIT_NV VK_SHADER_STAGE_INTERSECTION_BIT_KHR)
+```
+
+#### Variable: VK\_SHADER\_STAGE\_CALLABLE\_BIT\_NV
+
+```Lisp
+(defparameter VK_SHADER_STAGE_CALLABLE_BIT_NV VK_SHADER_STAGE_CALLABLE_BIT_KHR)
+```
+
+#### Variable: VK\_SHADER\_STAGE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_SHADER_STAGE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_CULL\_MODE\_NONE
+
+```Lisp
+(defparameter VK_CULL_MODE_NONE 0)
+```
+
+#### Variable: VK\_CULL\_MODE\_FRONT\_BIT
+
+```Lisp
+(defparameter VK_CULL_MODE_FRONT_BIT 1)
+```
+
+#### Variable: VK\_CULL\_MODE\_BACK\_BIT
+
+```Lisp
+(defparameter VK_CULL_MODE_BACK_BIT 2)
+```
+
+#### Variable: VK\_CULL\_MODE\_FRONT\_AND\_BACK
+
+```Lisp
+(defparameter VK_CULL_MODE_FRONT_AND_BACK 3)
+```
+
+#### Variable: VK\_CULL\_MODE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_CULL_MODE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_PIPELINE\_DEPTH\_STENCIL\_STATE\_CREATE\_RASTERIZATION\_ORDER\_ATTACHMENT\_DEPTH\_ACCESS\_BIT\_ARM
+
+```Lisp
+(defparameter VK_PIPELINE_DEPTH_STENCIL_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_BIT_ARM 1)
+```
+
+#### Variable: VK\_PIPELINE\_DEPTH\_STENCIL\_STATE\_CREATE\_RASTERIZATION\_ORDER\_ATTACHMENT\_STENCIL\_ACCESS\_BIT\_ARM
+
+```Lisp
+(defparameter VK_PIPELINE_DEPTH_STENCIL_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_ARM 2)
+```
+
+#### Variable: VK\_PIPELINE\_DEPTH\_STENCIL\_STATE\_CREATE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_PIPELINE_DEPTH_STENCIL_STATE_CREATE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_PIPELINE\_COLOR\_BLEND\_STATE\_CREATE\_RASTERIZATION\_ORDER\_ATTACHMENT\_ACCESS\_BIT\_ARM
+
+```Lisp
+(defparameter VK_PIPELINE_COLOR_BLEND_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_BIT_ARM 1)
+```
+
+#### Variable: VK\_PIPELINE\_COLOR\_BLEND\_STATE\_CREATE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_PIPELINE_COLOR_BLEND_STATE_CREATE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_PIPELINE\_LAYOUT\_CREATE\_INDEPENDENT\_SETS\_BIT\_EXT
+
+```Lisp
+(defparameter VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT 2)
+```
+
+#### Variable: VK\_PIPELINE\_LAYOUT\_CREATE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_PIPELINE_LAYOUT_CREATE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_SAMPLER\_CREATE\_SUBSAMPLED\_BIT\_EXT
+
+```Lisp
+(defparameter VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT 1)
+```
+
+#### Variable: VK\_SAMPLER\_CREATE\_SUBSAMPLED\_COARSE\_RECONSTRUCTION\_BIT\_EXT
+
+```Lisp
+(defparameter VK_SAMPLER_CREATE_SUBSAMPLED_COARSE_RECONSTRUCTION_BIT_EXT 2)
+```
+
+#### Variable: VK\_SAMPLER\_CREATE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_SAMPLER_CREATE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_DESCRIPTOR\_POOL\_CREATE\_FREE\_DESCRIPTOR\_SET\_BIT
+
+```Lisp
+(defparameter VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT 1)
+```
+
+#### Variable: VK\_DESCRIPTOR\_POOL\_CREATE\_UPDATE\_AFTER\_BIND\_BIT
+
+```Lisp
+(defparameter VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT 2)
+```
+
+#### Variable: VK\_DESCRIPTOR\_POOL\_CREATE\_HOST\_ONLY\_BIT\_VALVE
+
+```Lisp
+(defparameter VK_DESCRIPTOR_POOL_CREATE_HOST_ONLY_BIT_VALVE 4)
+```
+
+#### Variable: VK\_DESCRIPTOR\_POOL\_CREATE\_UPDATE\_AFTER\_BIND\_BIT\_EXT
+
+```Lisp
+(defparameter VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT_EXT VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT)
+```
+
+#### Variable: VK\_DESCRIPTOR\_POOL\_CREATE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_DESCRIPTOR_POOL_CREATE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_DESCRIPTOR\_SET\_LAYOUT\_CREATE\_UPDATE\_AFTER\_BIND\_POOL\_BIT
+
+```Lisp
+(defparameter VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT 2)
+```
+
+#### Variable: VK\_DESCRIPTOR\_SET\_LAYOUT\_CREATE\_PUSH\_DESCRIPTOR\_BIT\_KHR
+
+```Lisp
+(defparameter VK_DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR 1)
+```
+
+#### Variable: VK\_DESCRIPTOR\_SET\_LAYOUT\_CREATE\_HOST\_ONLY\_POOL\_BIT\_VALVE
+
+```Lisp
+(defparameter VK_DESCRIPTOR_SET_LAYOUT_CREATE_HOST_ONLY_POOL_BIT_VALVE 4)
+```
+
+#### Variable: VK\_DESCRIPTOR\_SET\_LAYOUT\_CREATE\_UPDATE\_AFTER\_BIND\_POOL\_BIT\_EXT
+
+```Lisp
+(defparameter VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT)
+```
+
+#### Variable: VK\_DESCRIPTOR\_SET\_LAYOUT\_CREATE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_DESCRIPTOR_SET_LAYOUT_CREATE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_ATTACHMENT\_DESCRIPTION\_MAY\_ALIAS\_BIT
+
+```Lisp
+(defparameter VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT 1)
+```
+
+#### Variable: VK\_ATTACHMENT\_DESCRIPTION\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_ATTACHMENT_DESCRIPTION_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_DEPENDENCY\_BY\_REGION\_BIT
+
+```Lisp
+(defparameter VK_DEPENDENCY_BY_REGION_BIT 1)
+```
+
+#### Variable: VK\_DEPENDENCY\_DEVICE\_GROUP\_BIT
+
+```Lisp
+(defparameter VK_DEPENDENCY_DEVICE_GROUP_BIT 4)
+```
+
+#### Variable: VK\_DEPENDENCY\_VIEW\_LOCAL\_BIT
+
+```Lisp
+(defparameter VK_DEPENDENCY_VIEW_LOCAL_BIT 2)
+```
+
+#### Variable: VK\_DEPENDENCY\_VIEW\_LOCAL\_BIT\_KHR
+
+```Lisp
+(defparameter VK_DEPENDENCY_VIEW_LOCAL_BIT_KHR VK_DEPENDENCY_VIEW_LOCAL_BIT)
+```
+
+#### Variable: VK\_DEPENDENCY\_DEVICE\_GROUP\_BIT\_KHR
+
+```Lisp
+(defparameter VK_DEPENDENCY_DEVICE_GROUP_BIT_KHR VK_DEPENDENCY_DEVICE_GROUP_BIT)
+```
+
+#### Variable: VK\_DEPENDENCY\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_DEPENDENCY_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_FRAMEBUFFER\_CREATE\_IMAGELESS\_BIT
+
+```Lisp
+(defparameter VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT 1)
+```
+
+#### Variable: VK\_FRAMEBUFFER\_CREATE\_IMAGELESS\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT)
+```
+
+#### Variable: VK\_FRAMEBUFFER\_CREATE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_FRAMEBUFFER_CREATE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_RENDER\_PASS\_CREATE\_TRANSFORM\_BIT\_QCOM
+
+```Lisp
+(defparameter VK_RENDER_PASS_CREATE_TRANSFORM_BIT_QCOM 2)
+```
+
+#### Variable: VK\_RENDER\_PASS\_CREATE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_RENDER_PASS_CREATE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_SUBPASS\_DESCRIPTION\_PER\_VIEW\_ATTRIBUTES\_BIT\_NVX
+
+```Lisp
+(defparameter VK_SUBPASS_DESCRIPTION_PER_VIEW_ATTRIBUTES_BIT_NVX 1)
+```
+
+#### Variable: VK\_SUBPASS\_DESCRIPTION\_PER\_VIEW\_POSITION\_X\_ONLY\_BIT\_NVX
+
+```Lisp
+(defparameter VK_SUBPASS_DESCRIPTION_PER_VIEW_POSITION_X_ONLY_BIT_NVX 2)
+```
+
+#### Variable: VK\_SUBPASS\_DESCRIPTION\_FRAGMENT\_REGION\_BIT\_QCOM
+
+```Lisp
+(defparameter VK_SUBPASS_DESCRIPTION_FRAGMENT_REGION_BIT_QCOM 4)
+```
+
+#### Variable: VK\_SUBPASS\_DESCRIPTION\_SHADER\_RESOLVE\_BIT\_QCOM
+
+```Lisp
+(defparameter VK_SUBPASS_DESCRIPTION_SHADER_RESOLVE_BIT_QCOM 8)
+```
+
+#### Variable: VK\_SUBPASS\_DESCRIPTION\_RASTERIZATION\_ORDER\_ATTACHMENT\_COLOR\_ACCESS\_BIT\_ARM
+
+```Lisp
+(defparameter VK_SUBPASS_DESCRIPTION_RASTERIZATION_ORDER_ATTACHMENT_COLOR_ACCESS_BIT_ARM 16)
+```
+
+#### Variable: VK\_SUBPASS\_DESCRIPTION\_RASTERIZATION\_ORDER\_ATTACHMENT\_DEPTH\_ACCESS\_BIT\_ARM
+
+```Lisp
+(defparameter VK_SUBPASS_DESCRIPTION_RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_BIT_ARM 32)
+```
+
+#### Variable: VK\_SUBPASS\_DESCRIPTION\_RASTERIZATION\_ORDER\_ATTACHMENT\_STENCIL\_ACCESS\_BIT\_ARM
+
+```Lisp
+(defparameter VK_SUBPASS_DESCRIPTION_RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_ARM 64)
+```
+
+#### Variable: VK\_SUBPASS\_DESCRIPTION\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_SUBPASS_DESCRIPTION_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_COMMAND\_POOL\_CREATE\_TRANSIENT\_BIT
+
+```Lisp
+(defparameter VK_COMMAND_POOL_CREATE_TRANSIENT_BIT 1)
+```
+
+#### Variable: VK\_COMMAND\_POOL\_CREATE\_RESET\_COMMAND\_BUFFER\_BIT
+
+```Lisp
+(defparameter VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT 2)
+```
+
+#### Variable: VK\_COMMAND\_POOL\_CREATE\_PROTECTED\_BIT
+
+```Lisp
+(defparameter VK_COMMAND_POOL_CREATE_PROTECTED_BIT 4)
+```
+
+#### Variable: VK\_COMMAND\_POOL\_CREATE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_COMMAND_POOL_CREATE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_COMMAND\_POOL\_RESET\_RELEASE\_RESOURCES\_BIT
+
+```Lisp
+(defparameter VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT 1)
+```
+
+#### Variable: VK\_COMMAND\_POOL\_RESET\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_COMMAND_POOL_RESET_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_COMMAND\_BUFFER\_USAGE\_ONE\_TIME\_SUBMIT\_BIT
+
+```Lisp
+(defparameter VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT 1)
+```
+
+#### Variable: VK\_COMMAND\_BUFFER\_USAGE\_RENDER\_PASS\_CONTINUE\_BIT
+
+```Lisp
+(defparameter VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT 2)
+```
+
+#### Variable: VK\_COMMAND\_BUFFER\_USAGE\_SIMULTANEOUS\_USE\_BIT
+
+```Lisp
+(defparameter VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT 4)
+```
+
+#### Variable: VK\_COMMAND\_BUFFER\_USAGE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_COMMAND_BUFFER_USAGE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_QUERY\_CONTROL\_PRECISE\_BIT
+
+```Lisp
+(defparameter VK_QUERY_CONTROL_PRECISE_BIT 1)
+```
+
+#### Variable: VK\_QUERY\_CONTROL\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_QUERY_CONTROL_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_COMMAND\_BUFFER\_RESET\_RELEASE\_RESOURCES\_BIT
+
+```Lisp
+(defparameter VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT 1)
+```
+
+#### Variable: VK\_COMMAND\_BUFFER\_RESET\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_COMMAND_BUFFER_RESET_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_STENCIL\_FACE\_FRONT\_BIT
+
+```Lisp
+(defparameter VK_STENCIL_FACE_FRONT_BIT 1)
+```
+
+#### Variable: VK\_STENCIL\_FACE\_BACK\_BIT
+
+```Lisp
+(defparameter VK_STENCIL_FACE_BACK_BIT 2)
+```
+
+#### Variable: VK\_STENCIL\_FACE\_FRONT\_AND\_BACK
+
+```Lisp
+(defparameter VK_STENCIL_FACE_FRONT_AND_BACK 3)
+```
+
+#### Variable: VK\_STENCIL\_FRONT\_AND\_BACK
+
+```Lisp
+(defparameter VK_STENCIL_FRONT_AND_BACK VK_STENCIL_FACE_FRONT_AND_BACK)
+```
+
+#### Variable: VK\_STENCIL\_FACE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_STENCIL_FACE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_VERSION\_1\_1
+
+```Lisp
+(defparameter VK_VERSION_1_1 1)
+```
+
+#### Variable: VK\_API\_VERSION\_1\_1
+
+```Lisp
+(defparameter VK_API_VERSION_1_1 (VK_MAKE_API_VERSION 0 1 1 0))
+```
+
+#### Variable: VK\_MAX\_DEVICE\_GROUP\_SIZE
+
+```Lisp
+(defparameter VK_MAX_DEVICE_GROUP_SIZE 32)
+```
+
+#### Variable: VK\_LUID\_SIZE
+
+```Lisp
+(defparameter VK_LUID_SIZE 8)
+```
+
+#### Variable: VK\_QUEUE\_FAMILY\_EXTERNAL
+
+```Lisp
+(defparameter VK_QUEUE_FAMILY_EXTERNAL (- UINT32_MAX 1))
+```
+
+#### Variable: VK\_POINT\_CLIPPING\_BEHAVIOR\_ALL\_CLIP\_PLANES
+
+```Lisp
+(defparameter VK_POINT_CLIPPING_BEHAVIOR_ALL_CLIP_PLANES 0)
+```
+
+#### Variable: VK\_POINT\_CLIPPING\_BEHAVIOR\_USER\_CLIP\_PLANES\_ONLY
+
+```Lisp
+(defparameter VK_POINT_CLIPPING_BEHAVIOR_USER_CLIP_PLANES_ONLY 1)
+```
+
+#### Variable: VK\_POINT\_CLIPPING\_BEHAVIOR\_ALL\_CLIP\_PLANES\_KHR
+
+```Lisp
+(defparameter VK_POINT_CLIPPING_BEHAVIOR_ALL_CLIP_PLANES_KHR VK_POINT_CLIPPING_BEHAVIOR_ALL_CLIP_PLANES)
+```
+
+#### Variable: VK\_POINT\_CLIPPING\_BEHAVIOR\_USER\_CLIP\_PLANES\_ONLY\_KHR
+
+```Lisp
+(defparameter VK_POINT_CLIPPING_BEHAVIOR_USER_CLIP_PLANES_ONLY_KHR VK_POINT_CLIPPING_BEHAVIOR_USER_CLIP_PLANES_ONLY)
+```
+
+#### Variable: VK\_POINT\_CLIPPING\_BEHAVIOR\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_POINT_CLIPPING_BEHAVIOR_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_TESSELLATION\_DOMAIN\_ORIGIN\_UPPER\_LEFT
+
+```Lisp
+(defparameter VK_TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT 0)
+```
+
+#### Variable: VK\_TESSELLATION\_DOMAIN\_ORIGIN\_LOWER\_LEFT
+
+```Lisp
+(defparameter VK_TESSELLATION_DOMAIN_ORIGIN_LOWER_LEFT 1)
+```
+
+#### Variable: VK\_TESSELLATION\_DOMAIN\_ORIGIN\_UPPER\_LEFT\_KHR
+
+```Lisp
+(defparameter VK_TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT_KHR VK_TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT)
+```
+
+#### Variable: VK\_TESSELLATION\_DOMAIN\_ORIGIN\_LOWER\_LEFT\_KHR
+
+```Lisp
+(defparameter VK_TESSELLATION_DOMAIN_ORIGIN_LOWER_LEFT_KHR VK_TESSELLATION_DOMAIN_ORIGIN_LOWER_LEFT)
+```
+
+#### Variable: VK\_TESSELLATION\_DOMAIN\_ORIGIN\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_TESSELLATION_DOMAIN_ORIGIN_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_SAMPLER\_YCBCR\_MODEL\_CONVERSION\_RGB\_IDENTITY
+
+```Lisp
+(defparameter VK_SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY 0)
+```
+
+#### Variable: VK\_SAMPLER\_YCBCR\_MODEL\_CONVERSION\_YCBCR\_IDENTITY
+
+```Lisp
+(defparameter VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_IDENTITY 1)
+```
+
+#### Variable: VK\_SAMPLER\_YCBCR\_MODEL\_CONVERSION\_YCBCR\_709
+
+```Lisp
+(defparameter VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_709 2)
+```
+
+#### Variable: VK\_SAMPLER\_YCBCR\_MODEL\_CONVERSION\_YCBCR\_601
+
+```Lisp
+(defparameter VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601 3)
+```
+
+#### Variable: VK\_SAMPLER\_YCBCR\_MODEL\_CONVERSION\_YCBCR\_2020
+
+```Lisp
+(defparameter VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020 4)
+```
+
+#### Variable: VK\_SAMPLER\_YCBCR\_MODEL\_CONVERSION\_RGB\_IDENTITY\_KHR
+
+```Lisp
+(defparameter VK_SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY_KHR VK_SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY)
+```
+
+#### Variable: VK\_SAMPLER\_YCBCR\_MODEL\_CONVERSION\_YCBCR\_IDENTITY\_KHR
+
+```Lisp
+(defparameter VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_IDENTITY_KHR VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_IDENTITY)
+```
+
+#### Variable: VK\_SAMPLER\_YCBCR\_MODEL\_CONVERSION\_YCBCR\_709\_KHR
+
+```Lisp
+(defparameter VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_709_KHR VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_709)
+```
+
+#### Variable: VK\_SAMPLER\_YCBCR\_MODEL\_CONVERSION\_YCBCR\_601\_KHR
+
+```Lisp
+(defparameter VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601_KHR VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601)
+```
+
+#### Variable: VK\_SAMPLER\_YCBCR\_MODEL\_CONVERSION\_YCBCR\_2020\_KHR
+
+```Lisp
+(defparameter VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020_KHR VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020)
+```
+
+#### Variable: VK\_SAMPLER\_YCBCR\_MODEL\_CONVERSION\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_SAMPLER_YCBCR_MODEL_CONVERSION_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_SAMPLER\_YCBCR\_RANGE\_ITU\_FULL
+
+```Lisp
+(defparameter VK_SAMPLER_YCBCR_RANGE_ITU_FULL 0)
+```
+
+#### Variable: VK\_SAMPLER\_YCBCR\_RANGE\_ITU\_NARROW
+
+```Lisp
+(defparameter VK_SAMPLER_YCBCR_RANGE_ITU_NARROW 1)
+```
+
+#### Variable: VK\_SAMPLER\_YCBCR\_RANGE\_ITU\_FULL\_KHR
+
+```Lisp
+(defparameter VK_SAMPLER_YCBCR_RANGE_ITU_FULL_KHR VK_SAMPLER_YCBCR_RANGE_ITU_FULL)
+```
+
+#### Variable: VK\_SAMPLER\_YCBCR\_RANGE\_ITU\_NARROW\_KHR
+
+```Lisp
+(defparameter VK_SAMPLER_YCBCR_RANGE_ITU_NARROW_KHR VK_SAMPLER_YCBCR_RANGE_ITU_NARROW)
+```
+
+#### Variable: VK\_SAMPLER\_YCBCR\_RANGE\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_SAMPLER_YCBCR_RANGE_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_CHROMA\_LOCATION\_COSITED\_EVEN
+
+```Lisp
+(defparameter VK_CHROMA_LOCATION_COSITED_EVEN 0)
+```
+
+#### Variable: VK\_CHROMA\_LOCATION\_MIDPOINT
+
+```Lisp
+(defparameter VK_CHROMA_LOCATION_MIDPOINT 1)
+```
+
+#### Variable: VK\_CHROMA\_LOCATION\_COSITED\_EVEN\_KHR
+
+```Lisp
+(defparameter VK_CHROMA_LOCATION_COSITED_EVEN_KHR VK_CHROMA_LOCATION_COSITED_EVEN)
+```
+
+#### Variable: VK\_CHROMA\_LOCATION\_MIDPOINT\_KHR
+
+```Lisp
+(defparameter VK_CHROMA_LOCATION_MIDPOINT_KHR VK_CHROMA_LOCATION_MIDPOINT)
+```
+
+#### Variable: VK\_CHROMA\_LOCATION\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_CHROMA_LOCATION_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_DESCRIPTOR\_UPDATE\_TEMPLATE\_TYPE\_DESCRIPTOR\_SET
+
+```Lisp
+(defparameter VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET 0)
+```
+
+#### Variable: VK\_DESCRIPTOR\_UPDATE\_TEMPLATE\_TYPE\_PUSH\_DESCRIPTORS\_KHR
+
+```Lisp
+(defparameter VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR 1)
+```
+
+#### Variable: VK\_DESCRIPTOR\_UPDATE\_TEMPLATE\_TYPE\_DESCRIPTOR\_SET\_KHR
+
+```Lisp
+(defparameter VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET_KHR VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET)
+```
+
+#### Variable: VK\_DESCRIPTOR\_UPDATE\_TEMPLATE\_TYPE\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_SUBGROUP\_FEATURE\_BASIC\_BIT
+
+```Lisp
+(defparameter VK_SUBGROUP_FEATURE_BASIC_BIT 1)
+```
+
+#### Variable: VK\_SUBGROUP\_FEATURE\_VOTE\_BIT
+
+```Lisp
+(defparameter VK_SUBGROUP_FEATURE_VOTE_BIT 2)
+```
+
+#### Variable: VK\_SUBGROUP\_FEATURE\_ARITHMETIC\_BIT
+
+```Lisp
+(defparameter VK_SUBGROUP_FEATURE_ARITHMETIC_BIT 4)
+```
+
+#### Variable: VK\_SUBGROUP\_FEATURE\_BALLOT\_BIT
+
+```Lisp
+(defparameter VK_SUBGROUP_FEATURE_BALLOT_BIT 8)
+```
+
+#### Variable: VK\_SUBGROUP\_FEATURE\_SHUFFLE\_BIT
+
+```Lisp
+(defparameter VK_SUBGROUP_FEATURE_SHUFFLE_BIT 16)
+```
+
+#### Variable: VK\_SUBGROUP\_FEATURE\_SHUFFLE\_RELATIVE\_BIT
+
+```Lisp
+(defparameter VK_SUBGROUP_FEATURE_SHUFFLE_RELATIVE_BIT 32)
+```
+
+#### Variable: VK\_SUBGROUP\_FEATURE\_CLUSTERED\_BIT
+
+```Lisp
+(defparameter VK_SUBGROUP_FEATURE_CLUSTERED_BIT 64)
+```
+
+#### Variable: VK\_SUBGROUP\_FEATURE\_QUAD\_BIT
+
+```Lisp
+(defparameter VK_SUBGROUP_FEATURE_QUAD_BIT 128)
+```
+
+#### Variable: VK\_SUBGROUP\_FEATURE\_PARTITIONED\_BIT\_NV
+
+```Lisp
+(defparameter VK_SUBGROUP_FEATURE_PARTITIONED_BIT_NV 256)
+```
+
+#### Variable: VK\_SUBGROUP\_FEATURE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_SUBGROUP_FEATURE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_PEER\_MEMORY\_FEATURE\_COPY\_SRC\_BIT
+
+```Lisp
+(defparameter VK_PEER_MEMORY_FEATURE_COPY_SRC_BIT 1)
+```
+
+#### Variable: VK\_PEER\_MEMORY\_FEATURE\_COPY\_DST\_BIT
+
+```Lisp
+(defparameter VK_PEER_MEMORY_FEATURE_COPY_DST_BIT 2)
+```
+
+#### Variable: VK\_PEER\_MEMORY\_FEATURE\_GENERIC\_SRC\_BIT
+
+```Lisp
+(defparameter VK_PEER_MEMORY_FEATURE_GENERIC_SRC_BIT 4)
+```
+
+#### Variable: VK\_PEER\_MEMORY\_FEATURE\_GENERIC\_DST\_BIT
+
+```Lisp
+(defparameter VK_PEER_MEMORY_FEATURE_GENERIC_DST_BIT 8)
+```
+
+#### Variable: VK\_PEER\_MEMORY\_FEATURE\_COPY\_SRC\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PEER_MEMORY_FEATURE_COPY_SRC_BIT_KHR VK_PEER_MEMORY_FEATURE_COPY_SRC_BIT)
+```
+
+#### Variable: VK\_PEER\_MEMORY\_FEATURE\_COPY\_DST\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PEER_MEMORY_FEATURE_COPY_DST_BIT_KHR VK_PEER_MEMORY_FEATURE_COPY_DST_BIT)
+```
+
+#### Variable: VK\_PEER\_MEMORY\_FEATURE\_GENERIC\_SRC\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PEER_MEMORY_FEATURE_GENERIC_SRC_BIT_KHR VK_PEER_MEMORY_FEATURE_GENERIC_SRC_BIT)
+```
+
+#### Variable: VK\_PEER\_MEMORY\_FEATURE\_GENERIC\_DST\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PEER_MEMORY_FEATURE_GENERIC_DST_BIT_KHR VK_PEER_MEMORY_FEATURE_GENERIC_DST_BIT)
+```
+
+#### Variable: VK\_PEER\_MEMORY\_FEATURE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_PEER_MEMORY_FEATURE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_MEMORY\_ALLOCATE\_DEVICE\_MASK\_BIT
+
+```Lisp
+(defparameter VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT 1)
+```
+
+#### Variable: VK\_MEMORY\_ALLOCATE\_DEVICE\_ADDRESS\_BIT
+
+```Lisp
+(defparameter VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT 2)
+```
+
+#### Variable: VK\_MEMORY\_ALLOCATE\_DEVICE\_ADDRESS\_CAPTURE\_REPLAY\_BIT
+
+```Lisp
+(defparameter VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT 4)
+```
+
+#### Variable: VK\_MEMORY\_ALLOCATE\_DEVICE\_MASK\_BIT\_KHR
+
+```Lisp
+(defparameter VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT_KHR VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT)
+```
+
+#### Variable: VK\_MEMORY\_ALLOCATE\_DEVICE\_ADDRESS\_BIT\_KHR
+
+```Lisp
+(defparameter VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT_KHR VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT)
+```
+
+#### Variable: VK\_MEMORY\_ALLOCATE\_DEVICE\_ADDRESS\_CAPTURE\_REPLAY\_BIT\_KHR
+
+```Lisp
+(defparameter VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT)
+```
+
+#### Variable: VK\_MEMORY\_ALLOCATE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_MEMORY_ALLOCATE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_HANDLE\_TYPE\_OPAQUE\_FD\_BIT
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT 1)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_HANDLE\_TYPE\_OPAQUE\_WIN32\_BIT
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT 2)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_HANDLE\_TYPE\_OPAQUE\_WIN32\_KMT\_BIT
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT 4)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_HANDLE\_TYPE\_D3D11\_TEXTURE\_BIT
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT 8)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_HANDLE\_TYPE\_D3D11\_TEXTURE\_KMT\_BIT
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT 16)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_HANDLE\_TYPE\_D3D12\_HEAP\_BIT
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT 32)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_HANDLE\_TYPE\_D3D12\_RESOURCE\_BIT
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT 64)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_HANDLE\_TYPE\_DMA\_BUF\_BIT\_EXT
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT 512)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_HANDLE\_TYPE\_ANDROID\_HARDWARE\_BUFFER\_BIT\_ANDROID
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID 1024)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_HANDLE\_TYPE\_HOST\_ALLOCATION\_BIT\_EXT
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT 128)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_HANDLE\_TYPE\_HOST\_MAPPED\_FOREIGN\_MEMORY\_BIT\_EXT
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT 256)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_HANDLE\_TYPE\_ZIRCON\_VMO\_BIT\_FUCHSIA
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_HANDLE_TYPE_ZIRCON_VMO_BIT_FUCHSIA 2048)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_HANDLE\_TYPE\_RDMA\_ADDRESS\_BIT\_NV
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_HANDLE_TYPE_RDMA_ADDRESS_BIT_NV 4096)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_HANDLE\_TYPE\_OPAQUE\_FD\_BIT\_KHR
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHR VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_HANDLE\_TYPE\_OPAQUE\_WIN32\_BIT\_KHR
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_HANDLE\_TYPE\_OPAQUE\_WIN32\_KMT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_HANDLE\_TYPE\_D3D11\_TEXTURE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT_KHR VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_HANDLE\_TYPE\_D3D11\_TEXTURE\_KMT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT_KHR VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_HANDLE\_TYPE\_D3D12\_HEAP\_BIT\_KHR
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT_KHR VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_HANDLE\_TYPE\_D3D12\_RESOURCE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT_KHR VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_HANDLE\_TYPE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_HANDLE_TYPE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_FEATURE\_DEDICATED\_ONLY\_BIT
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT 1)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_FEATURE\_EXPORTABLE\_BIT
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT 2)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_FEATURE\_IMPORTABLE\_BIT
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT 4)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_FEATURE\_DEDICATED\_ONLY\_BIT\_KHR
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_KHR VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_FEATURE\_EXPORTABLE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_KHR VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_FEATURE\_IMPORTABLE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_KHR VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_FEATURE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_FEATURE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_EXTERNAL\_FENCE\_HANDLE\_TYPE\_OPAQUE\_FD\_BIT
+
+```Lisp
+(defparameter VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT 1)
+```
+
+#### Variable: VK\_EXTERNAL\_FENCE\_HANDLE\_TYPE\_OPAQUE\_WIN32\_BIT
+
+```Lisp
+(defparameter VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT 2)
+```
+
+#### Variable: VK\_EXTERNAL\_FENCE\_HANDLE\_TYPE\_OPAQUE\_WIN32\_KMT\_BIT
+
+```Lisp
+(defparameter VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT 4)
+```
+
+#### Variable: VK\_EXTERNAL\_FENCE\_HANDLE\_TYPE\_SYNC\_FD\_BIT
+
+```Lisp
+(defparameter VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT 8)
+```
+
+#### Variable: VK\_EXTERNAL\_FENCE\_HANDLE\_TYPE\_OPAQUE\_FD\_BIT\_KHR
+
+```Lisp
+(defparameter VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT)
+```
+
+#### Variable: VK\_EXTERNAL\_FENCE\_HANDLE\_TYPE\_OPAQUE\_WIN32\_BIT\_KHR
+
+```Lisp
+(defparameter VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT)
+```
+
+#### Variable: VK\_EXTERNAL\_FENCE\_HANDLE\_TYPE\_OPAQUE\_WIN32\_KMT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT)
+```
+
+#### Variable: VK\_EXTERNAL\_FENCE\_HANDLE\_TYPE\_SYNC\_FD\_BIT\_KHR
+
+```Lisp
+(defparameter VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT_KHR VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT)
+```
+
+#### Variable: VK\_EXTERNAL\_FENCE\_HANDLE\_TYPE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_EXTERNAL_FENCE_HANDLE_TYPE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_EXTERNAL\_FENCE\_FEATURE\_EXPORTABLE\_BIT
+
+```Lisp
+(defparameter VK_EXTERNAL_FENCE_FEATURE_EXPORTABLE_BIT 1)
+```
+
+#### Variable: VK\_EXTERNAL\_FENCE\_FEATURE\_IMPORTABLE\_BIT
+
+```Lisp
+(defparameter VK_EXTERNAL_FENCE_FEATURE_IMPORTABLE_BIT 2)
+```
+
+#### Variable: VK\_EXTERNAL\_FENCE\_FEATURE\_EXPORTABLE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_EXTERNAL_FENCE_FEATURE_EXPORTABLE_BIT_KHR VK_EXTERNAL_FENCE_FEATURE_EXPORTABLE_BIT)
+```
+
+#### Variable: VK\_EXTERNAL\_FENCE\_FEATURE\_IMPORTABLE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_EXTERNAL_FENCE_FEATURE_IMPORTABLE_BIT_KHR VK_EXTERNAL_FENCE_FEATURE_IMPORTABLE_BIT)
+```
+
+#### Variable: VK\_EXTERNAL\_FENCE\_FEATURE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_EXTERNAL_FENCE_FEATURE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_FENCE\_IMPORT\_TEMPORARY\_BIT
+
+```Lisp
+(defparameter VK_FENCE_IMPORT_TEMPORARY_BIT 1)
+```
+
+#### Variable: VK\_FENCE\_IMPORT\_TEMPORARY\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FENCE_IMPORT_TEMPORARY_BIT_KHR VK_FENCE_IMPORT_TEMPORARY_BIT)
+```
+
+#### Variable: VK\_FENCE\_IMPORT\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_FENCE_IMPORT_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_SEMAPHORE\_IMPORT\_TEMPORARY\_BIT
+
+```Lisp
+(defparameter VK_SEMAPHORE_IMPORT_TEMPORARY_BIT 1)
+```
+
+#### Variable: VK\_SEMAPHORE\_IMPORT\_TEMPORARY\_BIT\_KHR
+
+```Lisp
+(defparameter VK_SEMAPHORE_IMPORT_TEMPORARY_BIT_KHR VK_SEMAPHORE_IMPORT_TEMPORARY_BIT)
+```
+
+#### Variable: VK\_SEMAPHORE\_IMPORT\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_SEMAPHORE_IMPORT_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_EXTERNAL\_SEMAPHORE\_HANDLE\_TYPE\_OPAQUE\_FD\_BIT
+
+```Lisp
+(defparameter VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT 1)
+```
+
+#### Variable: VK\_EXTERNAL\_SEMAPHORE\_HANDLE\_TYPE\_OPAQUE\_WIN32\_BIT
+
+```Lisp
+(defparameter VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT 2)
+```
+
+#### Variable: VK\_EXTERNAL\_SEMAPHORE\_HANDLE\_TYPE\_OPAQUE\_WIN32\_KMT\_BIT
+
+```Lisp
+(defparameter VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT 4)
+```
+
+#### Variable: VK\_EXTERNAL\_SEMAPHORE\_HANDLE\_TYPE\_D3D12\_FENCE\_BIT
+
+```Lisp
+(defparameter VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT 8)
+```
+
+#### Variable: VK\_EXTERNAL\_SEMAPHORE\_HANDLE\_TYPE\_SYNC\_FD\_BIT
+
+```Lisp
+(defparameter VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT 16)
+```
+
+#### Variable: VK\_EXTERNAL\_SEMAPHORE\_HANDLE\_TYPE\_ZIRCON\_EVENT\_BIT\_FUCHSIA
+
+```Lisp
+(defparameter VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_ZIRCON_EVENT_BIT_FUCHSIA 128)
+```
+
+#### Variable: VK\_EXTERNAL\_SEMAPHORE\_HANDLE\_TYPE\_D3D11\_FENCE\_BIT
+
+```Lisp
+(defparameter VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_FENCE_BIT VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT)
+```
+
+#### Variable: VK\_EXTERNAL\_SEMAPHORE\_HANDLE\_TYPE\_OPAQUE\_FD\_BIT\_KHR
+
+```Lisp
+(defparameter VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT)
+```
+
+#### Variable: VK\_EXTERNAL\_SEMAPHORE\_HANDLE\_TYPE\_OPAQUE\_WIN32\_BIT\_KHR
+
+```Lisp
+(defparameter VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT_KHR VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT)
+```
+
+#### Variable: VK\_EXTERNAL\_SEMAPHORE\_HANDLE\_TYPE\_OPAQUE\_WIN32\_KMT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_KHR VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT)
+```
+
+#### Variable: VK\_EXTERNAL\_SEMAPHORE\_HANDLE\_TYPE\_D3D12\_FENCE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT_KHR VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT)
+```
+
+#### Variable: VK\_EXTERNAL\_SEMAPHORE\_HANDLE\_TYPE\_SYNC\_FD\_BIT\_KHR
+
+```Lisp
+(defparameter VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT_KHR VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT)
+```
+
+#### Variable: VK\_EXTERNAL\_SEMAPHORE\_HANDLE\_TYPE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_EXTERNAL\_SEMAPHORE\_FEATURE\_EXPORTABLE\_BIT
+
+```Lisp
+(defparameter VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT 1)
+```
+
+#### Variable: VK\_EXTERNAL\_SEMAPHORE\_FEATURE\_IMPORTABLE\_BIT
+
+```Lisp
+(defparameter VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT 2)
+```
+
+#### Variable: VK\_EXTERNAL\_SEMAPHORE\_FEATURE\_EXPORTABLE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT_KHR VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT)
+```
+
+#### Variable: VK\_EXTERNAL\_SEMAPHORE\_FEATURE\_IMPORTABLE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT_KHR VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT)
+```
+
+#### Variable: VK\_EXTERNAL\_SEMAPHORE\_FEATURE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_EXTERNAL_SEMAPHORE_FEATURE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_VERSION\_1\_2
+
+```Lisp
+(defparameter VK_VERSION_1_2 1)
+```
+
+#### Variable: VK\_API\_VERSION\_1\_2
+
+```Lisp
+(defparameter VK_API_VERSION_1_2 (VK_MAKE_API_VERSION 0 1 2 0))
+```
+
+#### Variable: VK\_MAX\_DRIVER\_NAME\_SIZE
+
+```Lisp
+(defparameter VK_MAX_DRIVER_NAME_SIZE 256)
+```
+
+#### Variable: VK\_MAX\_DRIVER\_INFO\_SIZE
+
+```Lisp
+(defparameter VK_MAX_DRIVER_INFO_SIZE 256)
+```
+
+#### Variable: VK\_DRIVER\_ID\_AMD\_PROPRIETARY
+
+```Lisp
+(defparameter VK_DRIVER_ID_AMD_PROPRIETARY 1)
+```
+
+#### Variable: VK\_DRIVER\_ID\_AMD\_OPEN\_SOURCE
+
+```Lisp
+(defparameter VK_DRIVER_ID_AMD_OPEN_SOURCE 2)
+```
+
+#### Variable: VK\_DRIVER\_ID\_MESA\_RADV
+
+```Lisp
+(defparameter VK_DRIVER_ID_MESA_RADV 3)
+```
+
+#### Variable: VK\_DRIVER\_ID\_NVIDIA\_PROPRIETARY
+
+```Lisp
+(defparameter VK_DRIVER_ID_NVIDIA_PROPRIETARY 4)
+```
+
+#### Variable: VK\_DRIVER\_ID\_INTEL\_PROPRIETARY\_WINDOWS
+
+```Lisp
+(defparameter VK_DRIVER_ID_INTEL_PROPRIETARY_WINDOWS 5)
+```
+
+#### Variable: VK\_DRIVER\_ID\_INTEL\_OPEN\_SOURCE\_MESA
+
+```Lisp
+(defparameter VK_DRIVER_ID_INTEL_OPEN_SOURCE_MESA 6)
+```
+
+#### Variable: VK\_DRIVER\_ID\_IMAGINATION\_PROPRIETARY
+
+```Lisp
+(defparameter VK_DRIVER_ID_IMAGINATION_PROPRIETARY 7)
+```
+
+#### Variable: VK\_DRIVER\_ID\_QUALCOMM\_PROPRIETARY
+
+```Lisp
+(defparameter VK_DRIVER_ID_QUALCOMM_PROPRIETARY 8)
+```
+
+#### Variable: VK\_DRIVER\_ID\_ARM\_PROPRIETARY
+
+```Lisp
+(defparameter VK_DRIVER_ID_ARM_PROPRIETARY 9)
+```
+
+#### Variable: VK\_DRIVER\_ID\_GOOGLE\_SWIFTSHADER
+
+```Lisp
+(defparameter VK_DRIVER_ID_GOOGLE_SWIFTSHADER 10)
+```
+
+#### Variable: VK\_DRIVER\_ID\_GGP\_PROPRIETARY
+
+```Lisp
+(defparameter VK_DRIVER_ID_GGP_PROPRIETARY 11)
+```
+
+#### Variable: VK\_DRIVER\_ID\_BROADCOM\_PROPRIETARY
+
+```Lisp
+(defparameter VK_DRIVER_ID_BROADCOM_PROPRIETARY 12)
+```
+
+#### Variable: VK\_DRIVER\_ID\_MESA\_LLVMPIPE
+
+```Lisp
+(defparameter VK_DRIVER_ID_MESA_LLVMPIPE 13)
+```
+
+#### Variable: VK\_DRIVER\_ID\_MOLTENVK
+
+```Lisp
+(defparameter VK_DRIVER_ID_MOLTENVK 14)
+```
+
+#### Variable: VK\_DRIVER\_ID\_COREAVI\_PROPRIETARY
+
+```Lisp
+(defparameter VK_DRIVER_ID_COREAVI_PROPRIETARY 15)
+```
+
+#### Variable: VK\_DRIVER\_ID\_JUICE\_PROPRIETARY
+
+```Lisp
+(defparameter VK_DRIVER_ID_JUICE_PROPRIETARY 16)
+```
+
+#### Variable: VK\_DRIVER\_ID\_VERISILICON\_PROPRIETARY
+
+```Lisp
+(defparameter VK_DRIVER_ID_VERISILICON_PROPRIETARY 17)
+```
+
+#### Variable: VK\_DRIVER\_ID\_MESA\_TURNIP
+
+```Lisp
+(defparameter VK_DRIVER_ID_MESA_TURNIP 18)
+```
+
+#### Variable: VK\_DRIVER\_ID\_MESA\_V3DV
+
+```Lisp
+(defparameter VK_DRIVER_ID_MESA_V3DV 19)
+```
+
+#### Variable: VK\_DRIVER\_ID\_MESA\_PANVK
+
+```Lisp
+(defparameter VK_DRIVER_ID_MESA_PANVK 20)
+```
+
+#### Variable: VK\_DRIVER\_ID\_SAMSUNG\_PROPRIETARY
+
+```Lisp
+(defparameter VK_DRIVER_ID_SAMSUNG_PROPRIETARY 21)
+```
+
+#### Variable: VK\_DRIVER\_ID\_MESA\_VENUS
+
+```Lisp
+(defparameter VK_DRIVER_ID_MESA_VENUS 22)
+```
+
+#### Variable: VK\_DRIVER\_ID\_AMD\_PROPRIETARY\_KHR
+
+```Lisp
+(defparameter VK_DRIVER_ID_AMD_PROPRIETARY_KHR VK_DRIVER_ID_AMD_PROPRIETARY)
+```
+
+#### Variable: VK\_DRIVER\_ID\_AMD\_OPEN\_SOURCE\_KHR
+
+```Lisp
+(defparameter VK_DRIVER_ID_AMD_OPEN_SOURCE_KHR VK_DRIVER_ID_AMD_OPEN_SOURCE)
+```
+
+#### Variable: VK\_DRIVER\_ID\_MESA\_RADV\_KHR
+
+```Lisp
+(defparameter VK_DRIVER_ID_MESA_RADV_KHR VK_DRIVER_ID_MESA_RADV)
+```
+
+#### Variable: VK\_DRIVER\_ID\_NVIDIA\_PROPRIETARY\_KHR
+
+```Lisp
+(defparameter VK_DRIVER_ID_NVIDIA_PROPRIETARY_KHR VK_DRIVER_ID_NVIDIA_PROPRIETARY)
+```
+
+#### Variable: VK\_DRIVER\_ID\_INTEL\_PROPRIETARY\_WINDOWS\_KHR
+
+```Lisp
+(defparameter VK_DRIVER_ID_INTEL_PROPRIETARY_WINDOWS_KHR VK_DRIVER_ID_INTEL_PROPRIETARY_WINDOWS)
+```
+
+#### Variable: VK\_DRIVER\_ID\_INTEL\_OPEN\_SOURCE\_MESA\_KHR
+
+```Lisp
+(defparameter VK_DRIVER_ID_INTEL_OPEN_SOURCE_MESA_KHR VK_DRIVER_ID_INTEL_OPEN_SOURCE_MESA)
+```
+
+#### Variable: VK\_DRIVER\_ID\_IMAGINATION\_PROPRIETARY\_KHR
+
+```Lisp
+(defparameter VK_DRIVER_ID_IMAGINATION_PROPRIETARY_KHR VK_DRIVER_ID_IMAGINATION_PROPRIETARY)
+```
+
+#### Variable: VK\_DRIVER\_ID\_QUALCOMM\_PROPRIETARY\_KHR
+
+```Lisp
+(defparameter VK_DRIVER_ID_QUALCOMM_PROPRIETARY_KHR VK_DRIVER_ID_QUALCOMM_PROPRIETARY)
+```
+
+#### Variable: VK\_DRIVER\_ID\_ARM\_PROPRIETARY\_KHR
+
+```Lisp
+(defparameter VK_DRIVER_ID_ARM_PROPRIETARY_KHR VK_DRIVER_ID_ARM_PROPRIETARY)
+```
+
+#### Variable: VK\_DRIVER\_ID\_GOOGLE\_SWIFTSHADER\_KHR
+
+```Lisp
+(defparameter VK_DRIVER_ID_GOOGLE_SWIFTSHADER_KHR VK_DRIVER_ID_GOOGLE_SWIFTSHADER)
+```
+
+#### Variable: VK\_DRIVER\_ID\_GGP\_PROPRIETARY\_KHR
+
+```Lisp
+(defparameter VK_DRIVER_ID_GGP_PROPRIETARY_KHR VK_DRIVER_ID_GGP_PROPRIETARY)
+```
+
+#### Variable: VK\_DRIVER\_ID\_BROADCOM\_PROPRIETARY\_KHR
+
+```Lisp
+(defparameter VK_DRIVER_ID_BROADCOM_PROPRIETARY_KHR VK_DRIVER_ID_BROADCOM_PROPRIETARY)
+```
+
+#### Variable: VK\_DRIVER\_ID\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_DRIVER_ID_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_SHADER\_FLOAT\_CONTROLS\_INDEPENDENCE\_32\_BIT\_ONLY
+
+```Lisp
+(defparameter VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY 0)
+```
+
+#### Variable: VK\_SHADER\_FLOAT\_CONTROLS\_INDEPENDENCE\_ALL
+
+```Lisp
+(defparameter VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_ALL 1)
+```
+
+#### Variable: VK\_SHADER\_FLOAT\_CONTROLS\_INDEPENDENCE\_NONE
+
+```Lisp
+(defparameter VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_NONE 2)
+```
+
+#### Variable: VK\_SHADER\_FLOAT\_CONTROLS\_INDEPENDENCE\_32\_BIT\_ONLY\_KHR
+
+```Lisp
+(defparameter VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY_KHR VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY)
+```
+
+#### Variable: VK\_SHADER\_FLOAT\_CONTROLS\_INDEPENDENCE\_ALL\_KHR
+
+```Lisp
+(defparameter VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_ALL_KHR VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_ALL)
+```
+
+#### Variable: VK\_SHADER\_FLOAT\_CONTROLS\_INDEPENDENCE\_NONE\_KHR
+
+```Lisp
+(defparameter VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_NONE_KHR VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_NONE)
+```
+
+#### Variable: VK\_SHADER\_FLOAT\_CONTROLS\_INDEPENDENCE\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_SAMPLER\_REDUCTION\_MODE\_WEIGHTED\_AVERAGE
+
+```Lisp
+(defparameter VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE 0)
+```
+
+#### Variable: VK\_SAMPLER\_REDUCTION\_MODE\_MIN
+
+```Lisp
+(defparameter VK_SAMPLER_REDUCTION_MODE_MIN 1)
+```
+
+#### Variable: VK\_SAMPLER\_REDUCTION\_MODE\_MAX
+
+```Lisp
+(defparameter VK_SAMPLER_REDUCTION_MODE_MAX 2)
+```
+
+#### Variable: VK\_SAMPLER\_REDUCTION\_MODE\_WEIGHTED\_AVERAGE\_EXT
+
+```Lisp
+(defparameter VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_EXT VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE)
+```
+
+#### Variable: VK\_SAMPLER\_REDUCTION\_MODE\_MIN\_EXT
+
+```Lisp
+(defparameter VK_SAMPLER_REDUCTION_MODE_MIN_EXT VK_SAMPLER_REDUCTION_MODE_MIN)
+```
+
+#### Variable: VK\_SAMPLER\_REDUCTION\_MODE\_MAX\_EXT
+
+```Lisp
+(defparameter VK_SAMPLER_REDUCTION_MODE_MAX_EXT VK_SAMPLER_REDUCTION_MODE_MAX)
+```
+
+#### Variable: VK\_SAMPLER\_REDUCTION\_MODE\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_SAMPLER_REDUCTION_MODE_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_SEMAPHORE\_TYPE\_BINARY
+
+```Lisp
+(defparameter VK_SEMAPHORE_TYPE_BINARY 0)
+```
+
+#### Variable: VK\_SEMAPHORE\_TYPE\_TIMELINE
+
+```Lisp
+(defparameter VK_SEMAPHORE_TYPE_TIMELINE 1)
+```
+
+#### Variable: VK\_SEMAPHORE\_TYPE\_BINARY\_KHR
+
+```Lisp
+(defparameter VK_SEMAPHORE_TYPE_BINARY_KHR VK_SEMAPHORE_TYPE_BINARY)
+```
+
+#### Variable: VK\_SEMAPHORE\_TYPE\_TIMELINE\_KHR
+
+```Lisp
+(defparameter VK_SEMAPHORE_TYPE_TIMELINE_KHR VK_SEMAPHORE_TYPE_TIMELINE)
+```
+
+#### Variable: VK\_SEMAPHORE\_TYPE\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_SEMAPHORE_TYPE_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_RESOLVE\_MODE\_NONE
+
+```Lisp
+(defparameter VK_RESOLVE_MODE_NONE 0)
+```
+
+#### Variable: VK\_RESOLVE\_MODE\_SAMPLE\_ZERO\_BIT
+
+```Lisp
+(defparameter VK_RESOLVE_MODE_SAMPLE_ZERO_BIT 1)
+```
+
+#### Variable: VK\_RESOLVE\_MODE\_AVERAGE\_BIT
+
+```Lisp
+(defparameter VK_RESOLVE_MODE_AVERAGE_BIT 2)
+```
+
+#### Variable: VK\_RESOLVE\_MODE\_MIN\_BIT
+
+```Lisp
+(defparameter VK_RESOLVE_MODE_MIN_BIT 4)
+```
+
+#### Variable: VK\_RESOLVE\_MODE\_MAX\_BIT
+
+```Lisp
+(defparameter VK_RESOLVE_MODE_MAX_BIT 8)
+```
+
+#### Variable: VK\_RESOLVE\_MODE\_NONE\_KHR
+
+```Lisp
+(defparameter VK_RESOLVE_MODE_NONE_KHR VK_RESOLVE_MODE_NONE)
+```
+
+#### Variable: VK\_RESOLVE\_MODE\_SAMPLE\_ZERO\_BIT\_KHR
+
+```Lisp
+(defparameter VK_RESOLVE_MODE_SAMPLE_ZERO_BIT_KHR VK_RESOLVE_MODE_SAMPLE_ZERO_BIT)
+```
+
+#### Variable: VK\_RESOLVE\_MODE\_AVERAGE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_RESOLVE_MODE_AVERAGE_BIT_KHR VK_RESOLVE_MODE_AVERAGE_BIT)
+```
+
+#### Variable: VK\_RESOLVE\_MODE\_MIN\_BIT\_KHR
+
+```Lisp
+(defparameter VK_RESOLVE_MODE_MIN_BIT_KHR VK_RESOLVE_MODE_MIN_BIT)
+```
+
+#### Variable: VK\_RESOLVE\_MODE\_MAX\_BIT\_KHR
+
+```Lisp
+(defparameter VK_RESOLVE_MODE_MAX_BIT_KHR VK_RESOLVE_MODE_MAX_BIT)
+```
+
+#### Variable: VK\_RESOLVE\_MODE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_RESOLVE_MODE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_DESCRIPTOR\_BINDING\_UPDATE\_AFTER\_BIND\_BIT
+
+```Lisp
+(defparameter VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT 1)
+```
+
+#### Variable: VK\_DESCRIPTOR\_BINDING\_UPDATE\_UNUSED\_WHILE\_PENDING\_BIT
+
+```Lisp
+(defparameter VK_DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT 2)
+```
+
+#### Variable: VK\_DESCRIPTOR\_BINDING\_PARTIALLY\_BOUND\_BIT
+
+```Lisp
+(defparameter VK_DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT 4)
+```
+
+#### Variable: VK\_DESCRIPTOR\_BINDING\_VARIABLE\_DESCRIPTOR\_COUNT\_BIT
+
+```Lisp
+(defparameter VK_DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT 8)
+```
+
+#### Variable: VK\_DESCRIPTOR\_BINDING\_UPDATE\_AFTER\_BIND\_BIT\_EXT
+
+```Lisp
+(defparameter VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT)
+```
+
+#### Variable: VK\_DESCRIPTOR\_BINDING\_UPDATE\_UNUSED\_WHILE\_PENDING\_BIT\_EXT
+
+```Lisp
+(defparameter VK_DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT_EXT VK_DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT)
+```
+
+#### Variable: VK\_DESCRIPTOR\_BINDING\_PARTIALLY\_BOUND\_BIT\_EXT
+
+```Lisp
+(defparameter VK_DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT_EXT VK_DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT)
+```
+
+#### Variable: VK\_DESCRIPTOR\_BINDING\_VARIABLE\_DESCRIPTOR\_COUNT\_BIT\_EXT
+
+```Lisp
+(defparameter VK_DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT_EXT VK_DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT)
+```
+
+#### Variable: VK\_DESCRIPTOR\_BINDING\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_DESCRIPTOR_BINDING_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_SEMAPHORE\_WAIT\_ANY\_BIT
+
+```Lisp
+(defparameter VK_SEMAPHORE_WAIT_ANY_BIT 1)
+```
+
+#### Variable: VK\_SEMAPHORE\_WAIT\_ANY\_BIT\_KHR
+
+```Lisp
+(defparameter VK_SEMAPHORE_WAIT_ANY_BIT_KHR VK_SEMAPHORE_WAIT_ANY_BIT)
+```
+
+#### Variable: VK\_SEMAPHORE\_WAIT\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_SEMAPHORE_WAIT_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_VERSION\_1\_3
+
+```Lisp
+(defparameter VK_VERSION_1_3 1)
+```
+
+#### Variable: VK\_API\_VERSION\_1\_3
+
+```Lisp
+(defparameter VK_API_VERSION_1_3 (VK_MAKE_API_VERSION 0 1 3 0))
+```
+
+#### Variable: VK\_PIPELINE\_CREATION\_FEEDBACK\_VALID\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_CREATION_FEEDBACK_VALID_BIT 1)
+```
+
+#### Variable: VK\_PIPELINE\_CREATION\_FEEDBACK\_APPLICATION\_PIPELINE\_CACHE\_HIT\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_CREATION_FEEDBACK_APPLICATION_PIPELINE_CACHE_HIT_BIT 2)
+```
+
+#### Variable: VK\_PIPELINE\_CREATION\_FEEDBACK\_BASE\_PIPELINE\_ACCELERATION\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_CREATION_FEEDBACK_BASE_PIPELINE_ACCELERATION_BIT 4)
+```
+
+#### Variable: VK\_PIPELINE\_CREATION\_FEEDBACK\_VALID\_BIT\_EXT
+
+```Lisp
+(defparameter VK_PIPELINE_CREATION_FEEDBACK_VALID_BIT_EXT VK_PIPELINE_CREATION_FEEDBACK_VALID_BIT)
+```
+
+#### Variable: VK\_PIPELINE\_CREATION\_FEEDBACK\_APPLICATION\_PIPELINE\_CACHE\_HIT\_BIT\_EXT
+
+```Lisp
+(defparameter VK_PIPELINE_CREATION_FEEDBACK_APPLICATION_PIPELINE_CACHE_HIT_BIT_EXT VK_PIPELINE_CREATION_FEEDBACK_APPLICATION_PIPELINE_CACHE_HIT_BIT)
+```
+
+#### Variable: VK\_PIPELINE\_CREATION\_FEEDBACK\_BASE\_PIPELINE\_ACCELERATION\_BIT\_EXT
+
+```Lisp
+(defparameter VK_PIPELINE_CREATION_FEEDBACK_BASE_PIPELINE_ACCELERATION_BIT_EXT VK_PIPELINE_CREATION_FEEDBACK_BASE_PIPELINE_ACCELERATION_BIT)
+```
+
+#### Variable: VK\_PIPELINE\_CREATION\_FEEDBACK\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_PIPELINE_CREATION_FEEDBACK_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_TOOL\_PURPOSE\_VALIDATION\_BIT
+
+```Lisp
+(defparameter VK_TOOL_PURPOSE_VALIDATION_BIT 1)
+```
+
+#### Variable: VK\_TOOL\_PURPOSE\_PROFILING\_BIT
+
+```Lisp
+(defparameter VK_TOOL_PURPOSE_PROFILING_BIT 2)
+```
+
+#### Variable: VK\_TOOL\_PURPOSE\_TRACING\_BIT
+
+```Lisp
+(defparameter VK_TOOL_PURPOSE_TRACING_BIT 4)
+```
+
+#### Variable: VK\_TOOL\_PURPOSE\_ADDITIONAL\_FEATURES\_BIT
+
+```Lisp
+(defparameter VK_TOOL_PURPOSE_ADDITIONAL_FEATURES_BIT 8)
+```
+
+#### Variable: VK\_TOOL\_PURPOSE\_MODIFYING\_FEATURES\_BIT
+
+```Lisp
+(defparameter VK_TOOL_PURPOSE_MODIFYING_FEATURES_BIT 16)
+```
+
+#### Variable: VK\_TOOL\_PURPOSE\_DEBUG\_REPORTING\_BIT\_EXT
+
+```Lisp
+(defparameter VK_TOOL_PURPOSE_DEBUG_REPORTING_BIT_EXT 32)
+```
+
+#### Variable: VK\_TOOL\_PURPOSE\_DEBUG\_MARKERS\_BIT\_EXT
+
+```Lisp
+(defparameter VK_TOOL_PURPOSE_DEBUG_MARKERS_BIT_EXT 64)
+```
+
+#### Variable: VK\_TOOL\_PURPOSE\_VALIDATION\_BIT\_EXT
+
+```Lisp
+(defparameter VK_TOOL_PURPOSE_VALIDATION_BIT_EXT VK_TOOL_PURPOSE_VALIDATION_BIT)
+```
+
+#### Variable: VK\_TOOL\_PURPOSE\_PROFILING\_BIT\_EXT
+
+```Lisp
+(defparameter VK_TOOL_PURPOSE_PROFILING_BIT_EXT VK_TOOL_PURPOSE_PROFILING_BIT)
+```
+
+#### Variable: VK\_TOOL\_PURPOSE\_TRACING\_BIT\_EXT
+
+```Lisp
+(defparameter VK_TOOL_PURPOSE_TRACING_BIT_EXT VK_TOOL_PURPOSE_TRACING_BIT)
+```
+
+#### Variable: VK\_TOOL\_PURPOSE\_ADDITIONAL\_FEATURES\_BIT\_EXT
+
+```Lisp
+(defparameter VK_TOOL_PURPOSE_ADDITIONAL_FEATURES_BIT_EXT VK_TOOL_PURPOSE_ADDITIONAL_FEATURES_BIT)
+```
+
+#### Variable: VK\_TOOL\_PURPOSE\_MODIFYING\_FEATURES\_BIT\_EXT
+
+```Lisp
+(defparameter VK_TOOL_PURPOSE_MODIFYING_FEATURES_BIT_EXT VK_TOOL_PURPOSE_MODIFYING_FEATURES_BIT)
+```
+
+#### Variable: VK\_TOOL\_PURPOSE\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_TOOL_PURPOSE_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_NONE
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_NONE 0)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_NONE\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_NONE_KHR 0)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_TOP\_OF\_PIPE\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_TOP_OF_PIPE_BIT 1)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_TOP\_OF\_PIPE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_TOP_OF_PIPE_BIT_KHR 1)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_DRAW\_INDIRECT\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_DRAW_INDIRECT_BIT 2)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_DRAW\_INDIRECT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_DRAW_INDIRECT_BIT_KHR 2)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_VERTEX\_INPUT\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_VERTEX_INPUT_BIT 4)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_VERTEX\_INPUT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_VERTEX_INPUT_BIT_KHR 4)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_VERTEX\_SHADER\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_VERTEX_SHADER_BIT 8)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_VERTEX\_SHADER\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_VERTEX_SHADER_BIT_KHR 8)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_TESSELLATION\_CONTROL\_SHADER\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_TESSELLATION_CONTROL_SHADER_BIT 16)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_TESSELLATION\_CONTROL\_SHADER\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_TESSELLATION_CONTROL_SHADER_BIT_KHR 16)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_TESSELLATION\_EVALUATION\_SHADER\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_TESSELLATION_EVALUATION_SHADER_BIT 32)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_TESSELLATION\_EVALUATION\_SHADER\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_TESSELLATION_EVALUATION_SHADER_BIT_KHR 32)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_GEOMETRY\_SHADER\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_GEOMETRY_SHADER_BIT 64)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_GEOMETRY\_SHADER\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_GEOMETRY_SHADER_BIT_KHR 64)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_FRAGMENT\_SHADER\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT 128)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_FRAGMENT\_SHADER\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT_KHR 128)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_EARLY\_FRAGMENT\_TESTS\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT 256)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_EARLY\_FRAGMENT\_TESTS\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT_KHR 256)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_LATE\_FRAGMENT\_TESTS\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT 512)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_LATE\_FRAGMENT\_TESTS\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT_KHR 512)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_COLOR\_ATTACHMENT\_OUTPUT\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT 1024)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_COLOR\_ATTACHMENT\_OUTPUT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT_KHR 1024)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_COMPUTE\_SHADER\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_COMPUTE_SHADER_BIT 2048)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_COMPUTE\_SHADER\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_COMPUTE_SHADER_BIT_KHR 2048)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_ALL\_TRANSFER\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_ALL_TRANSFER_BIT 4096)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_ALL\_TRANSFER\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_ALL_TRANSFER_BIT_KHR 4096)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_TRANSFER\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_TRANSFER_BIT 4096)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_TRANSFER\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_TRANSFER_BIT_KHR 4096)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_BOTTOM\_OF\_PIPE\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_BOTTOM_OF_PIPE_BIT 8192)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_BOTTOM\_OF\_PIPE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_BOTTOM_OF_PIPE_BIT_KHR 8192)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_HOST\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_HOST_BIT 16384)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_HOST\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_HOST_BIT_KHR 16384)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_ALL\_GRAPHICS\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT 32768)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_ALL\_GRAPHICS\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT_KHR 32768)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_ALL\_COMMANDS\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT 65536)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_ALL\_COMMANDS\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR 65536)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_COPY\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_COPY_BIT 4294967296)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_COPY\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_COPY_BIT_KHR 4294967296)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_RESOLVE\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_RESOLVE_BIT 8589934592)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_RESOLVE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_RESOLVE_BIT_KHR 8589934592)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_BLIT\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_BLIT_BIT 17179869184)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_BLIT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_BLIT_BIT_KHR 17179869184)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_CLEAR\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_CLEAR_BIT 34359738368)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_CLEAR\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_CLEAR_BIT_KHR 34359738368)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_INDEX\_INPUT\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_INDEX_INPUT_BIT 68719476736)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_INDEX\_INPUT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_INDEX_INPUT_BIT_KHR 68719476736)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_VERTEX\_ATTRIBUTE\_INPUT\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_VERTEX_ATTRIBUTE_INPUT_BIT 137438953472)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_VERTEX\_ATTRIBUTE\_INPUT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_VERTEX_ATTRIBUTE_INPUT_BIT_KHR 137438953472)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_PRE\_RASTERIZATION\_SHADERS\_BIT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_PRE_RASTERIZATION_SHADERS_BIT 274877906944)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_PRE\_RASTERIZATION\_SHADERS\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_PRE_RASTERIZATION_SHADERS_BIT_KHR 274877906944)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_VIDEO\_DECODE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_VIDEO_DECODE_BIT_KHR 67108864)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_VIDEO\_ENCODE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_VIDEO_ENCODE_BIT_KHR 134217728)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_TRANSFORM\_FEEDBACK\_BIT\_EXT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT 16777216)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_CONDITIONAL\_RENDERING\_BIT\_EXT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_CONDITIONAL_RENDERING_BIT_EXT 262144)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_COMMAND\_PREPROCESS\_BIT\_NV
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_COMMAND_PREPROCESS_BIT_NV 131072)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_FRAGMENT\_SHADING\_RATE\_ATTACHMENT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR 4194304)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_SHADING\_RATE\_IMAGE\_BIT\_NV
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_SHADING_RATE_IMAGE_BIT_NV 4194304)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_ACCELERATION\_STRUCTURE\_BUILD\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR 33554432)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_RAY\_TRACING\_SHADER\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR 2097152)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_RAY\_TRACING\_SHADER\_BIT\_NV
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_NV 2097152)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_ACCELERATION\_STRUCTURE\_BUILD\_BIT\_NV
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_NV 33554432)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_FRAGMENT\_DENSITY\_PROCESS\_BIT\_EXT
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_BIT_EXT 8388608)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_TASK\_SHADER\_BIT\_NV
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_TASK_SHADER_BIT_NV 524288)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_MESH\_SHADER\_BIT\_NV
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_MESH_SHADER_BIT_NV 1048576)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_SUBPASS\_SHADING\_BIT\_HUAWEI
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_SUBPASS_SHADING_BIT_HUAWEI 549755813888)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_INVOCATION\_MASK\_BIT\_HUAWEI
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI 1099511627776)
+```
+
+#### Variable: VK\_PIPELINE\_STAGE\_2\_ACCELERATION\_STRUCTURE\_COPY\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_COPY_BIT_KHR 268435456)
+```
+
+#### Variable: VK\_ACCESS\_2\_NONE
+
+```Lisp
+(defparameter VK_ACCESS_2_NONE 0)
+```
+
+#### Variable: VK\_ACCESS\_2\_NONE\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_2_NONE_KHR 0)
+```
+
+#### Variable: VK\_ACCESS\_2\_INDIRECT\_COMMAND\_READ\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_2_INDIRECT_COMMAND_READ_BIT 1)
+```
+
+#### Variable: VK\_ACCESS\_2\_INDIRECT\_COMMAND\_READ\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_2_INDIRECT_COMMAND_READ_BIT_KHR 1)
+```
+
+#### Variable: VK\_ACCESS\_2\_INDEX\_READ\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_2_INDEX_READ_BIT 2)
+```
+
+#### Variable: VK\_ACCESS\_2\_INDEX\_READ\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_2_INDEX_READ_BIT_KHR 2)
+```
+
+#### Variable: VK\_ACCESS\_2\_VERTEX\_ATTRIBUTE\_READ\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_2_VERTEX_ATTRIBUTE_READ_BIT 4)
+```
+
+#### Variable: VK\_ACCESS\_2\_VERTEX\_ATTRIBUTE\_READ\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_2_VERTEX_ATTRIBUTE_READ_BIT_KHR 4)
+```
+
+#### Variable: VK\_ACCESS\_2\_UNIFORM\_READ\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_2_UNIFORM_READ_BIT 8)
+```
+
+#### Variable: VK\_ACCESS\_2\_UNIFORM\_READ\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_2_UNIFORM_READ_BIT_KHR 8)
+```
+
+#### Variable: VK\_ACCESS\_2\_INPUT\_ATTACHMENT\_READ\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_2_INPUT_ATTACHMENT_READ_BIT 16)
+```
+
+#### Variable: VK\_ACCESS\_2\_INPUT\_ATTACHMENT\_READ\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_2_INPUT_ATTACHMENT_READ_BIT_KHR 16)
+```
+
+#### Variable: VK\_ACCESS\_2\_SHADER\_READ\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_2_SHADER_READ_BIT 32)
+```
+
+#### Variable: VK\_ACCESS\_2\_SHADER\_READ\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_2_SHADER_READ_BIT_KHR 32)
+```
+
+#### Variable: VK\_ACCESS\_2\_SHADER\_WRITE\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_2_SHADER_WRITE_BIT 64)
+```
+
+#### Variable: VK\_ACCESS\_2\_SHADER\_WRITE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_2_SHADER_WRITE_BIT_KHR 64)
+```
+
+#### Variable: VK\_ACCESS\_2\_COLOR\_ATTACHMENT\_READ\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_2_COLOR_ATTACHMENT_READ_BIT 128)
+```
+
+#### Variable: VK\_ACCESS\_2\_COLOR\_ATTACHMENT\_READ\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_2_COLOR_ATTACHMENT_READ_BIT_KHR 128)
+```
+
+#### Variable: VK\_ACCESS\_2\_COLOR\_ATTACHMENT\_WRITE\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_2_COLOR_ATTACHMENT_WRITE_BIT 256)
+```
+
+#### Variable: VK\_ACCESS\_2\_COLOR\_ATTACHMENT\_WRITE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_2_COLOR_ATTACHMENT_WRITE_BIT_KHR 256)
+```
+
+#### Variable: VK\_ACCESS\_2\_DEPTH\_STENCIL\_ATTACHMENT\_READ\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_READ_BIT 512)
+```
+
+#### Variable: VK\_ACCESS\_2\_DEPTH\_STENCIL\_ATTACHMENT\_READ\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_READ_BIT_KHR 512)
+```
+
+#### Variable: VK\_ACCESS\_2\_DEPTH\_STENCIL\_ATTACHMENT\_WRITE\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT 1024)
+```
+
+#### Variable: VK\_ACCESS\_2\_DEPTH\_STENCIL\_ATTACHMENT\_WRITE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT_KHR 1024)
+```
+
+#### Variable: VK\_ACCESS\_2\_TRANSFER\_READ\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_2_TRANSFER_READ_BIT 2048)
+```
+
+#### Variable: VK\_ACCESS\_2\_TRANSFER\_READ\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_2_TRANSFER_READ_BIT_KHR 2048)
+```
+
+#### Variable: VK\_ACCESS\_2\_TRANSFER\_WRITE\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_2_TRANSFER_WRITE_BIT 4096)
+```
+
+#### Variable: VK\_ACCESS\_2\_TRANSFER\_WRITE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_2_TRANSFER_WRITE_BIT_KHR 4096)
+```
+
+#### Variable: VK\_ACCESS\_2\_HOST\_READ\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_2_HOST_READ_BIT 8192)
+```
+
+#### Variable: VK\_ACCESS\_2\_HOST\_READ\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_2_HOST_READ_BIT_KHR 8192)
+```
+
+#### Variable: VK\_ACCESS\_2\_HOST\_WRITE\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_2_HOST_WRITE_BIT 16384)
+```
+
+#### Variable: VK\_ACCESS\_2\_HOST\_WRITE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_2_HOST_WRITE_BIT_KHR 16384)
+```
+
+#### Variable: VK\_ACCESS\_2\_MEMORY\_READ\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_2_MEMORY_READ_BIT 32768)
+```
+
+#### Variable: VK\_ACCESS\_2\_MEMORY\_READ\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_2_MEMORY_READ_BIT_KHR 32768)
+```
+
+#### Variable: VK\_ACCESS\_2\_MEMORY\_WRITE\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_2_MEMORY_WRITE_BIT 65536)
+```
+
+#### Variable: VK\_ACCESS\_2\_MEMORY\_WRITE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_2_MEMORY_WRITE_BIT_KHR 65536)
+```
+
+#### Variable: VK\_ACCESS\_2\_SHADER\_SAMPLED\_READ\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_2_SHADER_SAMPLED_READ_BIT 4294967296)
+```
+
+#### Variable: VK\_ACCESS\_2\_SHADER\_SAMPLED\_READ\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_2_SHADER_SAMPLED_READ_BIT_KHR 4294967296)
+```
+
+#### Variable: VK\_ACCESS\_2\_SHADER\_STORAGE\_READ\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_2_SHADER_STORAGE_READ_BIT 8589934592)
+```
+
+#### Variable: VK\_ACCESS\_2\_SHADER\_STORAGE\_READ\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_2_SHADER_STORAGE_READ_BIT_KHR 8589934592)
+```
+
+#### Variable: VK\_ACCESS\_2\_SHADER\_STORAGE\_WRITE\_BIT
+
+```Lisp
+(defparameter VK_ACCESS_2_SHADER_STORAGE_WRITE_BIT 17179869184)
+```
+
+#### Variable: VK\_ACCESS\_2\_SHADER\_STORAGE\_WRITE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_2_SHADER_STORAGE_WRITE_BIT_KHR 17179869184)
+```
+
+#### Variable: VK\_ACCESS\_2\_VIDEO\_DECODE\_READ\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_2_VIDEO_DECODE_READ_BIT_KHR 34359738368)
+```
+
+#### Variable: VK\_ACCESS\_2\_VIDEO\_DECODE\_WRITE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_2_VIDEO_DECODE_WRITE_BIT_KHR 68719476736)
+```
+
+#### Variable: VK\_ACCESS\_2\_VIDEO\_ENCODE\_READ\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_2_VIDEO_ENCODE_READ_BIT_KHR 137438953472)
+```
+
+#### Variable: VK\_ACCESS\_2\_VIDEO\_ENCODE\_WRITE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_2_VIDEO_ENCODE_WRITE_BIT_KHR 274877906944)
+```
+
+#### Variable: VK\_ACCESS\_2\_TRANSFORM\_FEEDBACK\_WRITE\_BIT\_EXT
+
+```Lisp
+(defparameter VK_ACCESS_2_TRANSFORM_FEEDBACK_WRITE_BIT_EXT 33554432)
+```
+
+#### Variable: VK\_ACCESS\_2\_TRANSFORM\_FEEDBACK\_COUNTER\_READ\_BIT\_EXT
+
+```Lisp
+(defparameter VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT 67108864)
+```
+
+#### Variable: VK\_ACCESS\_2\_TRANSFORM\_FEEDBACK\_COUNTER\_WRITE\_BIT\_EXT
+
+```Lisp
+(defparameter VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_WRITE_BIT_EXT 134217728)
+```
+
+#### Variable: VK\_ACCESS\_2\_CONDITIONAL\_RENDERING\_READ\_BIT\_EXT
+
+```Lisp
+(defparameter VK_ACCESS_2_CONDITIONAL_RENDERING_READ_BIT_EXT 1048576)
+```
+
+#### Variable: VK\_ACCESS\_2\_COMMAND\_PREPROCESS\_READ\_BIT\_NV
+
+```Lisp
+(defparameter VK_ACCESS_2_COMMAND_PREPROCESS_READ_BIT_NV 131072)
+```
+
+#### Variable: VK\_ACCESS\_2\_COMMAND\_PREPROCESS\_WRITE\_BIT\_NV
+
+```Lisp
+(defparameter VK_ACCESS_2_COMMAND_PREPROCESS_WRITE_BIT_NV 262144)
+```
+
+#### Variable: VK\_ACCESS\_2\_FRAGMENT\_SHADING\_RATE\_ATTACHMENT\_READ\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_2_FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT_KHR 8388608)
+```
+
+#### Variable: VK\_ACCESS\_2\_SHADING\_RATE\_IMAGE\_READ\_BIT\_NV
+
+```Lisp
+(defparameter VK_ACCESS_2_SHADING_RATE_IMAGE_READ_BIT_NV 8388608)
+```
+
+#### Variable: VK\_ACCESS\_2\_ACCELERATION\_STRUCTURE\_READ\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR 2097152)
+```
+
+#### Variable: VK\_ACCESS\_2\_ACCELERATION\_STRUCTURE\_WRITE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_2_ACCELERATION_STRUCTURE_WRITE_BIT_KHR 4194304)
+```
+
+#### Variable: VK\_ACCESS\_2\_ACCELERATION\_STRUCTURE\_READ\_BIT\_NV
+
+```Lisp
+(defparameter VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_NV 2097152)
+```
+
+#### Variable: VK\_ACCESS\_2\_ACCELERATION\_STRUCTURE\_WRITE\_BIT\_NV
+
+```Lisp
+(defparameter VK_ACCESS_2_ACCELERATION_STRUCTURE_WRITE_BIT_NV 4194304)
+```
+
+#### Variable: VK\_ACCESS\_2\_FRAGMENT\_DENSITY\_MAP\_READ\_BIT\_EXT
+
+```Lisp
+(defparameter VK_ACCESS_2_FRAGMENT_DENSITY_MAP_READ_BIT_EXT 16777216)
+```
+
+#### Variable: VK\_ACCESS\_2\_COLOR\_ATTACHMENT\_READ\_NONCOHERENT\_BIT\_EXT
+
+```Lisp
+(defparameter VK_ACCESS_2_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT 524288)
+```
+
+#### Variable: VK\_ACCESS\_2\_INVOCATION\_MASK\_READ\_BIT\_HUAWEI
+
+```Lisp
+(defparameter VK_ACCESS_2_INVOCATION_MASK_READ_BIT_HUAWEI 549755813888)
+```
+
+#### Variable: VK\_ACCESS\_2\_SHADER\_BINDING\_TABLE\_READ\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCESS_2_SHADER_BINDING_TABLE_READ_BIT_KHR 1099511627776)
+```
+
+#### Variable: VK\_SUBMIT\_PROTECTED\_BIT
+
+```Lisp
+(defparameter VK_SUBMIT_PROTECTED_BIT 1)
+```
+
+#### Variable: VK\_SUBMIT\_PROTECTED\_BIT\_KHR
+
+```Lisp
+(defparameter VK_SUBMIT_PROTECTED_BIT_KHR VK_SUBMIT_PROTECTED_BIT)
+```
+
+#### Variable: VK\_SUBMIT\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_SUBMIT_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_RENDERING\_CONTENTS\_SECONDARY\_COMMAND\_BUFFERS\_BIT
+
+```Lisp
+(defparameter VK_RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT 1)
+```
+
+#### Variable: VK\_RENDERING\_SUSPENDING\_BIT
+
+```Lisp
+(defparameter VK_RENDERING_SUSPENDING_BIT 2)
+```
+
+#### Variable: VK\_RENDERING\_RESUMING\_BIT
+
+```Lisp
+(defparameter VK_RENDERING_RESUMING_BIT 4)
+```
+
+#### Variable: VK\_RENDERING\_CONTENTS\_SECONDARY\_COMMAND\_BUFFERS\_BIT\_KHR
+
+```Lisp
+(defparameter VK_RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT_KHR VK_RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT)
+```
+
+#### Variable: VK\_RENDERING\_SUSPENDING\_BIT\_KHR
+
+```Lisp
+(defparameter VK_RENDERING_SUSPENDING_BIT_KHR VK_RENDERING_SUSPENDING_BIT)
+```
+
+#### Variable: VK\_RENDERING\_RESUMING\_BIT\_KHR
+
+```Lisp
+(defparameter VK_RENDERING_RESUMING_BIT_KHR VK_RENDERING_RESUMING_BIT)
+```
+
+#### Variable: VK\_RENDERING\_FLAG\_BITS\_MAX\_ENUM
+
+```Lisp
+(defparameter VK_RENDERING_FLAG_BITS_MAX_ENUM 2147483647)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_SAMPLED\_IMAGE\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_BIT 1)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_SAMPLED\_IMAGE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_BIT_KHR 1)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_STORAGE\_IMAGE\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_STORAGE_IMAGE_BIT 2)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_STORAGE\_IMAGE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_STORAGE_IMAGE_BIT_KHR 2)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_STORAGE\_IMAGE\_ATOMIC\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_STORAGE_IMAGE_ATOMIC_BIT 4)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_STORAGE\_IMAGE\_ATOMIC\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_STORAGE_IMAGE_ATOMIC_BIT_KHR 4)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_UNIFORM\_TEXEL\_BUFFER\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_UNIFORM_TEXEL_BUFFER_BIT 8)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_UNIFORM\_TEXEL\_BUFFER\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_UNIFORM_TEXEL_BUFFER_BIT_KHR 8)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_STORAGE\_TEXEL\_BUFFER\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_STORAGE_TEXEL_BUFFER_BIT 16)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_STORAGE\_TEXEL\_BUFFER\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_STORAGE_TEXEL_BUFFER_BIT_KHR 16)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_STORAGE\_TEXEL\_BUFFER\_ATOMIC\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_STORAGE_TEXEL_BUFFER_ATOMIC_BIT 32)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_STORAGE\_TEXEL\_BUFFER\_ATOMIC\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_STORAGE_TEXEL_BUFFER_ATOMIC_BIT_KHR 32)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_VERTEX\_BUFFER\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_VERTEX_BUFFER_BIT 64)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_VERTEX\_BUFFER\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_VERTEX_BUFFER_BIT_KHR 64)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_COLOR\_ATTACHMENT\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_COLOR_ATTACHMENT_BIT 128)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_COLOR\_ATTACHMENT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_COLOR_ATTACHMENT_BIT_KHR 128)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_COLOR\_ATTACHMENT\_BLEND\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_COLOR_ATTACHMENT_BLEND_BIT 256)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_COLOR\_ATTACHMENT\_BLEND\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_COLOR_ATTACHMENT_BLEND_BIT_KHR 256)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_DEPTH\_STENCIL\_ATTACHMENT\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_DEPTH_STENCIL_ATTACHMENT_BIT 512)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_DEPTH\_STENCIL\_ATTACHMENT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_DEPTH_STENCIL_ATTACHMENT_BIT_KHR 512)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_BLIT\_SRC\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_BLIT_SRC_BIT 1024)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_BLIT\_SRC\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_BLIT_SRC_BIT_KHR 1024)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_BLIT\_DST\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_BLIT_DST_BIT 2048)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_BLIT\_DST\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_BLIT_DST_BIT_KHR 2048)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_SAMPLED\_IMAGE\_FILTER\_LINEAR\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_FILTER_LINEAR_BIT 4096)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_SAMPLED\_IMAGE\_FILTER\_LINEAR\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_FILTER_LINEAR_BIT_KHR 4096)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_SAMPLED\_IMAGE\_FILTER\_CUBIC\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_FILTER_CUBIC_BIT 8192)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_SAMPLED\_IMAGE\_FILTER\_CUBIC\_BIT\_EXT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT 8192)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_TRANSFER\_SRC\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_TRANSFER_SRC_BIT 16384)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_TRANSFER\_SRC\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_TRANSFER_SRC_BIT_KHR 16384)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_TRANSFER\_DST\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_TRANSFER_DST_BIT 32768)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_TRANSFER\_DST\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_TRANSFER_DST_BIT_KHR 32768)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_SAMPLED\_IMAGE\_FILTER\_MINMAX\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_FILTER_MINMAX_BIT 65536)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_SAMPLED\_IMAGE\_FILTER\_MINMAX\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_FILTER_MINMAX_BIT_KHR 65536)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_MIDPOINT\_CHROMA\_SAMPLES\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_MIDPOINT_CHROMA_SAMPLES_BIT 131072)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_MIDPOINT\_CHROMA\_SAMPLES\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_MIDPOINT_CHROMA_SAMPLES_BIT_KHR 131072)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_SAMPLED\_IMAGE\_YCBCR\_CONVERSION\_LINEAR\_FILTER\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT 262144)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_SAMPLED\_IMAGE\_YCBCR\_CONVERSION\_LINEAR\_FILTER\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT_KHR 262144)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_SAMPLED\_IMAGE\_YCBCR\_CONVERSION\_SEPARATE\_RECONSTRUCTION\_FILTER\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT 524288)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_SAMPLED\_IMAGE\_YCBCR\_CONVERSION\_SEPARATE\_RECONSTRUCTION\_FILTER\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT_KHR 524288)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_SAMPLED\_IMAGE\_YCBCR\_CONVERSION\_CHROMA\_RECONSTRUCTION\_EXPLICIT\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT 1048576)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_SAMPLED\_IMAGE\_YCBCR\_CONVERSION\_CHROMA\_RECONSTRUCTION\_EXPLICIT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT_KHR 1048576)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_SAMPLED\_IMAGE\_YCBCR\_CONVERSION\_CHROMA\_RECONSTRUCTION\_EXPLICIT\_FORCEABLE\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT 2097152)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_SAMPLED\_IMAGE\_YCBCR\_CONVERSION\_CHROMA\_RECONSTRUCTION\_EXPLICIT\_FORCEABLE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT_KHR 2097152)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_DISJOINT\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_DISJOINT_BIT 4194304)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_DISJOINT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_DISJOINT_BIT_KHR 4194304)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_COSITED\_CHROMA\_SAMPLES\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_COSITED_CHROMA_SAMPLES_BIT 8388608)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_COSITED\_CHROMA\_SAMPLES\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_COSITED_CHROMA_SAMPLES_BIT_KHR 8388608)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_STORAGE\_READ\_WITHOUT\_FORMAT\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT 2147483648)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_STORAGE\_READ\_WITHOUT\_FORMAT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR 2147483648)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_STORAGE\_WRITE\_WITHOUT\_FORMAT\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT 4294967296)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_STORAGE\_WRITE\_WITHOUT\_FORMAT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR 4294967296)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_SAMPLED\_IMAGE\_DEPTH\_COMPARISON\_BIT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_DEPTH_COMPARISON_BIT 8589934592)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_SAMPLED\_IMAGE\_DEPTH\_COMPARISON\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_DEPTH_COMPARISON_BIT_KHR 8589934592)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_VIDEO\_DECODE\_OUTPUT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_VIDEO_DECODE_OUTPUT_BIT_KHR 33554432)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_VIDEO\_DECODE\_DPB\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_VIDEO_DECODE_DPB_BIT_KHR 67108864)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_ACCELERATION\_STRUCTURE\_VERTEX\_BUFFER\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_ACCELERATION_STRUCTURE_VERTEX_BUFFER_BIT_KHR 536870912)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_FRAGMENT\_DENSITY\_MAP\_BIT\_EXT
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_FRAGMENT_DENSITY_MAP_BIT_EXT 16777216)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_FRAGMENT\_SHADING\_RATE\_ATTACHMENT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR 1073741824)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_VIDEO\_ENCODE\_INPUT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_VIDEO_ENCODE_INPUT_BIT_KHR 134217728)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_VIDEO\_ENCODE\_DPB\_BIT\_KHR
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_VIDEO_ENCODE_DPB_BIT_KHR 268435456)
+```
+
+#### Variable: VK\_FORMAT\_FEATURE\_2\_LINEAR\_COLOR\_ATTACHMENT\_BIT\_NV
+
+```Lisp
+(defparameter VK_FORMAT_FEATURE_2_LINEAR_COLOR_ATTACHMENT_BIT_NV 274877906944)
+```
+
+#### Variable: VK\_KHR\_SURFACE
+
+```Lisp
+(defparameter VK_KHR_SURFACE 1)
+```
+
+#### Variable: VK\_KHR\_SURFACE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_SURFACE_SPEC_VERSION 25)
+```
+
+#### Variable: VK\_KHR\_SURFACE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_SURFACE_EXTENSION_NAME "VK_KHR_surface")
+```
+
+#### Variable: VK\_PRESENT\_MODE\_IMMEDIATE\_KHR
+
+```Lisp
+(defparameter VK_PRESENT_MODE_IMMEDIATE_KHR 0)
+```
+
+#### Variable: VK\_PRESENT\_MODE\_MAILBOX\_KHR
+
+```Lisp
+(defparameter VK_PRESENT_MODE_MAILBOX_KHR 1)
+```
+
+#### Variable: VK\_PRESENT\_MODE\_FIFO\_KHR
+
+```Lisp
+(defparameter VK_PRESENT_MODE_FIFO_KHR 2)
+```
+
+#### Variable: VK\_PRESENT\_MODE\_FIFO\_RELAXED\_KHR
+
+```Lisp
+(defparameter VK_PRESENT_MODE_FIFO_RELAXED_KHR 3)
+```
+
+#### Variable: VK\_PRESENT\_MODE\_SHARED\_DEMAND\_REFRESH\_KHR
+
+```Lisp
+(defparameter VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR 1000111000)
+```
+
+#### Variable: VK\_PRESENT\_MODE\_SHARED\_CONTINUOUS\_REFRESH\_KHR
+
+```Lisp
+(defparameter VK_PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR 1000111001)
+```
+
+#### Variable: VK\_PRESENT\_MODE\_MAX\_ENUM\_KHR
+
+```Lisp
+(defparameter VK_PRESENT_MODE_MAX_ENUM_KHR 2147483647)
+```
+
+#### Variable: VK\_COLOR\_SPACE\_SRGB\_NONLINEAR\_KHR
+
+```Lisp
+(defparameter VK_COLOR_SPACE_SRGB_NONLINEAR_KHR 0)
+```
+
+#### Variable: VK\_COLOR\_SPACE\_DISPLAY\_P3\_NONLINEAR\_EXT
+
+```Lisp
+(defparameter VK_COLOR_SPACE_DISPLAY_P3_NONLINEAR_EXT 1000104001)
+```
+
+#### Variable: VK\_COLOR\_SPACE\_EXTENDED\_SRGB\_LINEAR\_EXT
+
+```Lisp
+(defparameter VK_COLOR_SPACE_EXTENDED_SRGB_LINEAR_EXT 1000104002)
+```
+
+#### Variable: VK\_COLOR\_SPACE\_DISPLAY\_P3\_LINEAR\_EXT
+
+```Lisp
+(defparameter VK_COLOR_SPACE_DISPLAY_P3_LINEAR_EXT 1000104003)
+```
+
+#### Variable: VK\_COLOR\_SPACE\_DCI\_P3\_NONLINEAR\_EXT
+
+```Lisp
+(defparameter VK_COLOR_SPACE_DCI_P3_NONLINEAR_EXT 1000104004)
+```
+
+#### Variable: VK\_COLOR\_SPACE\_BT709\_LINEAR\_EXT
+
+```Lisp
+(defparameter VK_COLOR_SPACE_BT709_LINEAR_EXT 1000104005)
+```
+
+#### Variable: VK\_COLOR\_SPACE\_BT709\_NONLINEAR\_EXT
+
+```Lisp
+(defparameter VK_COLOR_SPACE_BT709_NONLINEAR_EXT 1000104006)
+```
+
+#### Variable: VK\_COLOR\_SPACE\_BT2020\_LINEAR\_EXT
+
+```Lisp
+(defparameter VK_COLOR_SPACE_BT2020_LINEAR_EXT 1000104007)
+```
+
+#### Variable: VK\_COLOR\_SPACE\_HDR10\_ST2084\_EXT
+
+```Lisp
+(defparameter VK_COLOR_SPACE_HDR10_ST2084_EXT 1000104008)
+```
+
+#### Variable: VK\_COLOR\_SPACE\_DOLBYVISION\_EXT
+
+```Lisp
+(defparameter VK_COLOR_SPACE_DOLBYVISION_EXT 1000104009)
+```
+
+#### Variable: VK\_COLOR\_SPACE\_HDR10\_HLG\_EXT
+
+```Lisp
+(defparameter VK_COLOR_SPACE_HDR10_HLG_EXT 1000104010)
+```
+
+#### Variable: VK\_COLOR\_SPACE\_ADOBERGB\_LINEAR\_EXT
+
+```Lisp
+(defparameter VK_COLOR_SPACE_ADOBERGB_LINEAR_EXT 1000104011)
+```
+
+#### Variable: VK\_COLOR\_SPACE\_ADOBERGB\_NONLINEAR\_EXT
+
+```Lisp
+(defparameter VK_COLOR_SPACE_ADOBERGB_NONLINEAR_EXT 1000104012)
+```
+
+#### Variable: VK\_COLOR\_SPACE\_PASS\_THROUGH\_EXT
+
+```Lisp
+(defparameter VK_COLOR_SPACE_PASS_THROUGH_EXT 1000104013)
+```
+
+#### Variable: VK\_COLOR\_SPACE\_EXTENDED\_SRGB\_NONLINEAR\_EXT
+
+```Lisp
+(defparameter VK_COLOR_SPACE_EXTENDED_SRGB_NONLINEAR_EXT 1000104014)
+```
+
+#### Variable: VK\_COLOR\_SPACE\_DISPLAY\_NATIVE\_AMD
+
+```Lisp
+(defparameter VK_COLOR_SPACE_DISPLAY_NATIVE_AMD 1000213000)
+```
+
+#### Variable: VK\_COLORSPACE\_SRGB\_NONLINEAR\_KHR
+
+```Lisp
+(defparameter VK_COLORSPACE_SRGB_NONLINEAR_KHR VK_COLOR_SPACE_SRGB_NONLINEAR_KHR)
+```
+
+#### Variable: VK\_COLOR\_SPACE\_DCI\_P3\_LINEAR\_EXT
+
+```Lisp
+(defparameter VK_COLOR_SPACE_DCI_P3_LINEAR_EXT VK_COLOR_SPACE_DISPLAY_P3_LINEAR_EXT)
+```
+
+#### Variable: VK\_COLOR\_SPACE\_MAX\_ENUM\_KHR
+
+```Lisp
+(defparameter VK_COLOR_SPACE_MAX_ENUM_KHR 2147483647)
+```
+
+#### Variable: VK\_SURFACE\_TRANSFORM\_IDENTITY\_BIT\_KHR
+
+```Lisp
+(defparameter VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR 1)
+```
+
+#### Variable: VK\_SURFACE\_TRANSFORM\_ROTATE\_90\_BIT\_KHR
+
+```Lisp
+(defparameter VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR 2)
+```
+
+#### Variable: VK\_SURFACE\_TRANSFORM\_ROTATE\_180\_BIT\_KHR
+
+```Lisp
+(defparameter VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR 4)
+```
+
+#### Variable: VK\_SURFACE\_TRANSFORM\_ROTATE\_270\_BIT\_KHR
+
+```Lisp
+(defparameter VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR 8)
+```
+
+#### Variable: VK\_SURFACE\_TRANSFORM\_HORIZONTAL\_MIRROR\_BIT\_KHR
+
+```Lisp
+(defparameter VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_BIT_KHR 16)
+```
+
+#### Variable: VK\_SURFACE\_TRANSFORM\_HORIZONTAL\_MIRROR\_ROTATE\_90\_BIT\_KHR
+
+```Lisp
+(defparameter VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR 32)
+```
+
+#### Variable: VK\_SURFACE\_TRANSFORM\_HORIZONTAL\_MIRROR\_ROTATE\_180\_BIT\_KHR
+
+```Lisp
+(defparameter VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR 64)
+```
+
+#### Variable: VK\_SURFACE\_TRANSFORM\_HORIZONTAL\_MIRROR\_ROTATE\_270\_BIT\_KHR
+
+```Lisp
+(defparameter VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR 128)
+```
+
+#### Variable: VK\_SURFACE\_TRANSFORM\_INHERIT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR 256)
+```
+
+#### Variable: VK\_SURFACE\_TRANSFORM\_FLAG\_BITS\_MAX\_ENUM\_KHR
+
+```Lisp
+(defparameter VK_SURFACE_TRANSFORM_FLAG_BITS_MAX_ENUM_KHR 2147483647)
+```
+
+#### Variable: VK\_COMPOSITE\_ALPHA\_OPAQUE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR 1)
+```
+
+#### Variable: VK\_COMPOSITE\_ALPHA\_PRE\_MULTIPLIED\_BIT\_KHR
+
+```Lisp
+(defparameter VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR 2)
+```
+
+#### Variable: VK\_COMPOSITE\_ALPHA\_POST\_MULTIPLIED\_BIT\_KHR
+
+```Lisp
+(defparameter VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR 4)
+```
+
+#### Variable: VK\_COMPOSITE\_ALPHA\_INHERIT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR 8)
+```
+
+#### Variable: VK\_COMPOSITE\_ALPHA\_FLAG\_BITS\_MAX\_ENUM\_KHR
+
+```Lisp
+(defparameter VK_COMPOSITE_ALPHA_FLAG_BITS_MAX_ENUM_KHR 2147483647)
+```
+
+#### Variable: VK\_KHR\_SWAPCHAIN
+
+```Lisp
+(defparameter VK_KHR_SWAPCHAIN 1)
+```
+
+#### Variable: VK\_KHR\_SWAPCHAIN\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_SWAPCHAIN_SPEC_VERSION 70)
+```
+
+#### Variable: VK\_KHR\_SWAPCHAIN\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_SWAPCHAIN_EXTENSION_NAME "VK_KHR_swapchain")
+```
+
+#### Variable: VK\_SWAPCHAIN\_CREATE\_SPLIT\_INSTANCE\_BIND\_REGIONS\_BIT\_KHR
+
+```Lisp
+(defparameter VK_SWAPCHAIN_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR 1)
+```
+
+#### Variable: VK\_SWAPCHAIN\_CREATE\_PROTECTED\_BIT\_KHR
+
+```Lisp
+(defparameter VK_SWAPCHAIN_CREATE_PROTECTED_BIT_KHR 2)
+```
+
+#### Variable: VK\_SWAPCHAIN\_CREATE\_MUTABLE\_FORMAT\_BIT\_KHR
+
+```Lisp
+(defparameter VK_SWAPCHAIN_CREATE_MUTABLE_FORMAT_BIT_KHR 4)
+```
+
+#### Variable: VK\_SWAPCHAIN\_CREATE\_FLAG\_BITS\_MAX\_ENUM\_KHR
+
+```Lisp
+(defparameter VK_SWAPCHAIN_CREATE_FLAG_BITS_MAX_ENUM_KHR 2147483647)
+```
+
+#### Variable: VK\_DEVICE\_GROUP\_PRESENT\_MODE\_LOCAL\_BIT\_KHR
+
+```Lisp
+(defparameter VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR 1)
+```
+
+#### Variable: VK\_DEVICE\_GROUP\_PRESENT\_MODE\_REMOTE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHR 2)
+```
+
+#### Variable: VK\_DEVICE\_GROUP\_PRESENT\_MODE\_SUM\_BIT\_KHR
+
+```Lisp
+(defparameter VK_DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHR 4)
+```
+
+#### Variable: VK\_DEVICE\_GROUP\_PRESENT\_MODE\_LOCAL\_MULTI\_DEVICE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHR 8)
+```
+
+#### Variable: VK\_DEVICE\_GROUP\_PRESENT\_MODE\_FLAG\_BITS\_MAX\_ENUM\_KHR
+
+```Lisp
+(defparameter VK_DEVICE_GROUP_PRESENT_MODE_FLAG_BITS_MAX_ENUM_KHR 2147483647)
+```
+
+#### Variable: VK\_KHR\_DISPLAY
+
+```Lisp
+(defparameter VK_KHR_DISPLAY 1)
+```
+
+#### Variable: VK\_KHR\_DISPLAY\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_DISPLAY_SPEC_VERSION 23)
+```
+
+#### Variable: VK\_KHR\_DISPLAY\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_DISPLAY_EXTENSION_NAME "VK_KHR_display")
+```
+
+#### Variable: VK\_DISPLAY\_PLANE\_ALPHA\_OPAQUE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_DISPLAY_PLANE_ALPHA_OPAQUE_BIT_KHR 1)
+```
+
+#### Variable: VK\_DISPLAY\_PLANE\_ALPHA\_GLOBAL\_BIT\_KHR
+
+```Lisp
+(defparameter VK_DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR 2)
+```
+
+#### Variable: VK\_DISPLAY\_PLANE\_ALPHA\_PER\_PIXEL\_BIT\_KHR
+
+```Lisp
+(defparameter VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_BIT_KHR 4)
+```
+
+#### Variable: VK\_DISPLAY\_PLANE\_ALPHA\_PER\_PIXEL\_PREMULTIPLIED\_BIT\_KHR
+
+```Lisp
+(defparameter VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_PREMULTIPLIED_BIT_KHR 8)
+```
+
+#### Variable: VK\_DISPLAY\_PLANE\_ALPHA\_FLAG\_BITS\_MAX\_ENUM\_KHR
+
+```Lisp
+(defparameter VK_DISPLAY_PLANE_ALPHA_FLAG_BITS_MAX_ENUM_KHR 2147483647)
+```
+
+#### Variable: VK\_KHR\_DISPLAY\_SWAPCHAIN
+
+```Lisp
+(defparameter VK_KHR_DISPLAY_SWAPCHAIN 1)
+```
+
+#### Variable: VK\_KHR\_DISPLAY\_SWAPCHAIN\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_DISPLAY_SWAPCHAIN_SPEC_VERSION 10)
+```
+
+#### Variable: VK\_KHR\_DISPLAY\_SWAPCHAIN\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_DISPLAY_SWAPCHAIN_EXTENSION_NAME "VK_KHR_display_swapchain")
+```
+
+#### Variable: VK\_KHR\_SAMPLER\_MIRROR\_CLAMP\_TO\_EDGE
+
+```Lisp
+(defparameter VK_KHR_SAMPLER_MIRROR_CLAMP_TO_EDGE 1)
+```
+
+#### Variable: VK\_KHR\_SAMPLER\_MIRROR\_CLAMP\_TO\_EDGE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_SAMPLER_MIRROR_CLAMP_TO_EDGE_SPEC_VERSION 3)
+```
+
+#### Variable: VK\_KHR\_SAMPLER\_MIRROR\_CLAMP\_TO\_EDGE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_SAMPLER_MIRROR_CLAMP_TO_EDGE_EXTENSION_NAME "VK_KHR_sampler_mirror_clamp_to_edge")
+```
+
+#### Variable: VK\_KHR\_DYNAMIC\_RENDERING
+
+```Lisp
+(defparameter VK_KHR_DYNAMIC_RENDERING 1)
+```
+
+#### Variable: VK\_KHR\_DYNAMIC\_RENDERING\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_DYNAMIC_RENDERING_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_DYNAMIC\_RENDERING\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_DYNAMIC_RENDERING_EXTENSION_NAME "VK_KHR_dynamic_rendering")
+```
+
+#### Variable: VK\_KHR\_MULTIVIEW
+
+```Lisp
+(defparameter VK_KHR_MULTIVIEW 1)
+```
+
+#### Variable: VK\_KHR\_MULTIVIEW\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_MULTIVIEW_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_MULTIVIEW\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_MULTIVIEW_EXTENSION_NAME "VK_KHR_multiview")
+```
+
+#### Variable: VK\_KHR\_GET\_PHYSICAL\_DEVICE\_PROPERTIES2
+
+```Lisp
+(defparameter VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES2 1)
+```
+
+#### Variable: VK\_KHR\_GET\_PHYSICAL\_DEVICE\_PROPERTIES\_2\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_KHR\_GET\_PHYSICAL\_DEVICE\_PROPERTIES\_2\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_EXTENSION_NAME "VK_KHR_get_physical_device_properties2")
+```
+
+#### Variable: VK\_KHR\_DEVICE\_GROUP
+
+```Lisp
+(defparameter VK_KHR_DEVICE_GROUP 1)
+```
+
+#### Variable: VK\_KHR\_DEVICE\_GROUP\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_DEVICE_GROUP_SPEC_VERSION 4)
+```
+
+#### Variable: VK\_KHR\_DEVICE\_GROUP\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_DEVICE_GROUP_EXTENSION_NAME "VK_KHR_device_group")
+```
+
+#### Variable: VK\_KHR\_SHADER\_DRAW\_PARAMETERS
+
+```Lisp
+(defparameter VK_KHR_SHADER_DRAW_PARAMETERS 1)
+```
+
+#### Variable: VK\_KHR\_SHADER\_DRAW\_PARAMETERS\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_SHADER_DRAW_PARAMETERS_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_SHADER\_DRAW\_PARAMETERS\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_SHADER_DRAW_PARAMETERS_EXTENSION_NAME "VK_KHR_shader_draw_parameters")
+```
+
+#### Variable: VK\_KHR\_MAINTENANCE1
+
+```Lisp
+(defparameter VK_KHR_MAINTENANCE1 1)
+```
+
+#### Variable: VK\_KHR\_MAINTENANCE\_1\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_MAINTENANCE_1_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_KHR\_MAINTENANCE\_1\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_MAINTENANCE_1_EXTENSION_NAME "VK_KHR_maintenance1")
+```
+
+#### Variable: VK\_KHR\_MAINTENANCE1\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_MAINTENANCE1_SPEC_VERSION VK_KHR_MAINTENANCE_1_SPEC_VERSION)
+```
+
+#### Variable: VK\_KHR\_MAINTENANCE1\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_MAINTENANCE1_EXTENSION_NAME VK_KHR_MAINTENANCE_1_EXTENSION_NAME)
+```
+
+#### Variable: VK\_KHR\_DEVICE\_GROUP\_CREATION
+
+```Lisp
+(defparameter VK_KHR_DEVICE_GROUP_CREATION 1)
+```
+
+#### Variable: VK\_KHR\_DEVICE\_GROUP\_CREATION\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_DEVICE_GROUP_CREATION_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_DEVICE\_GROUP\_CREATION\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_DEVICE_GROUP_CREATION_EXTENSION_NAME "VK_KHR_device_group_creation")
+```
+
+#### Variable: VK\_MAX\_DEVICE\_GROUP\_SIZE\_KHR
+
+```Lisp
+(defparameter VK_MAX_DEVICE_GROUP_SIZE_KHR VK_MAX_DEVICE_GROUP_SIZE)
+```
+
+#### Variable: VK\_KHR\_EXTERNAL\_MEMORY\_CAPABILITIES
+
+```Lisp
+(defparameter VK_KHR_EXTERNAL_MEMORY_CAPABILITIES 1)
+```
+
+#### Variable: VK\_KHR\_EXTERNAL\_MEMORY\_CAPABILITIES\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_EXTERNAL_MEMORY_CAPABILITIES_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_EXTERNAL\_MEMORY\_CAPABILITIES\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION_NAME "VK_KHR_external_memory_capabilities")
+```
+
+#### Variable: VK\_LUID\_SIZE\_KHR
+
+```Lisp
+(defparameter VK_LUID_SIZE_KHR VK_LUID_SIZE)
+```
+
+#### Variable: VK\_KHR\_EXTERNAL\_MEMORY
+
+```Lisp
+(defparameter VK_KHR_EXTERNAL_MEMORY 1)
+```
+
+#### Variable: VK\_KHR\_EXTERNAL\_MEMORY\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_EXTERNAL_MEMORY_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_EXTERNAL\_MEMORY\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_EXTERNAL_MEMORY_EXTENSION_NAME "VK_KHR_external_memory")
+```
+
+#### Variable: VK\_QUEUE\_FAMILY\_EXTERNAL\_KHR
+
+```Lisp
+(defparameter VK_QUEUE_FAMILY_EXTERNAL_KHR VK_QUEUE_FAMILY_EXTERNAL)
+```
+
+#### Variable: VK\_KHR\_EXTERNAL\_MEMORY\_FD
+
+```Lisp
+(defparameter VK_KHR_EXTERNAL_MEMORY_FD 1)
+```
+
+#### Variable: VK\_KHR\_EXTERNAL\_MEMORY\_FD\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_EXTERNAL_MEMORY_FD_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_EXTERNAL\_MEMORY\_FD\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_EXTERNAL_MEMORY_FD_EXTENSION_NAME "VK_KHR_external_memory_fd")
+```
+
+#### Variable: VK\_KHR\_EXTERNAL\_SEMAPHORE\_CAPABILITIES
+
+```Lisp
+(defparameter VK_KHR_EXTERNAL_SEMAPHORE_CAPABILITIES 1)
+```
+
+#### Variable: VK\_KHR\_EXTERNAL\_SEMAPHORE\_CAPABILITIES\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_EXTERNAL_SEMAPHORE_CAPABILITIES_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_EXTERNAL\_SEMAPHORE\_CAPABILITIES\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_EXTERNAL_SEMAPHORE_CAPABILITIES_EXTENSION_NAME "VK_KHR_external_semaphore_capabilities")
+```
+
+#### Variable: VK\_KHR\_EXTERNAL\_SEMAPHORE
+
+```Lisp
+(defparameter VK_KHR_EXTERNAL_SEMAPHORE 1)
+```
+
+#### Variable: VK\_KHR\_EXTERNAL\_SEMAPHORE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_EXTERNAL_SEMAPHORE_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_EXTERNAL\_SEMAPHORE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_EXTERNAL_SEMAPHORE_EXTENSION_NAME "VK_KHR_external_semaphore")
+```
+
+#### Variable: VK\_KHR\_EXTERNAL\_SEMAPHORE\_FD
+
+```Lisp
+(defparameter VK_KHR_EXTERNAL_SEMAPHORE_FD 1)
+```
+
+#### Variable: VK\_KHR\_EXTERNAL\_SEMAPHORE\_FD\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_EXTERNAL_SEMAPHORE_FD_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_EXTERNAL\_SEMAPHORE\_FD\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_EXTERNAL_SEMAPHORE_FD_EXTENSION_NAME "VK_KHR_external_semaphore_fd")
+```
+
+#### Variable: VK\_KHR\_PUSH\_DESCRIPTOR
+
+```Lisp
+(defparameter VK_KHR_PUSH_DESCRIPTOR 1)
+```
+
+#### Variable: VK\_KHR\_PUSH\_DESCRIPTOR\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_PUSH_DESCRIPTOR_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_KHR\_PUSH\_DESCRIPTOR\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_PUSH_DESCRIPTOR_EXTENSION_NAME "VK_KHR_push_descriptor")
+```
+
+#### Variable: VK\_KHR\_SHADER\_FLOAT16\_INT8
+
+```Lisp
+(defparameter VK_KHR_SHADER_FLOAT16_INT8 1)
+```
+
+#### Variable: VK\_KHR\_SHADER\_FLOAT16\_INT8\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_SHADER_FLOAT16_INT8_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_SHADER\_FLOAT16\_INT8\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_SHADER_FLOAT16_INT8_EXTENSION_NAME "VK_KHR_shader_float16_int8")
+```
+
+#### Variable: VK\_KHR\_16BIT\_STORAGE
+
+```Lisp
+(defparameter VK_KHR_16BIT_STORAGE 1)
+```
+
+#### Variable: VK\_KHR\_16BIT\_STORAGE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_16BIT_STORAGE_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_16BIT\_STORAGE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_16BIT_STORAGE_EXTENSION_NAME "VK_KHR_16bit_storage")
+```
+
+#### Variable: VK\_KHR\_INCREMENTAL\_PRESENT
+
+```Lisp
+(defparameter VK_KHR_INCREMENTAL_PRESENT 1)
+```
+
+#### Variable: VK\_KHR\_INCREMENTAL\_PRESENT\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_INCREMENTAL_PRESENT_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_KHR\_INCREMENTAL\_PRESENT\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_INCREMENTAL_PRESENT_EXTENSION_NAME "VK_KHR_incremental_present")
+```
+
+#### Variable: VK\_KHR\_DESCRIPTOR\_UPDATE\_TEMPLATE
+
+```Lisp
+(defparameter VK_KHR_DESCRIPTOR_UPDATE_TEMPLATE 1)
+```
+
+#### Variable: VK\_KHR\_DESCRIPTOR\_UPDATE\_TEMPLATE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_DESCRIPTOR_UPDATE_TEMPLATE_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_DESCRIPTOR\_UPDATE\_TEMPLATE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_DESCRIPTOR_UPDATE_TEMPLATE_EXTENSION_NAME "VK_KHR_descriptor_update_template")
+```
+
+#### Variable: VK\_KHR\_IMAGELESS\_FRAMEBUFFER
+
+```Lisp
+(defparameter VK_KHR_IMAGELESS_FRAMEBUFFER 1)
+```
+
+#### Variable: VK\_KHR\_IMAGELESS\_FRAMEBUFFER\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_IMAGELESS_FRAMEBUFFER_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_IMAGELESS\_FRAMEBUFFER\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_IMAGELESS_FRAMEBUFFER_EXTENSION_NAME "VK_KHR_imageless_framebuffer")
+```
+
+#### Variable: VK\_KHR\_CREATE\_RENDERPASS2
+
+```Lisp
+(defparameter VK_KHR_CREATE_RENDERPASS2 1)
+```
+
+#### Variable: VK\_KHR\_CREATE\_RENDERPASS\_2\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_CREATE_RENDERPASS_2_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_CREATE\_RENDERPASS\_2\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_CREATE_RENDERPASS_2_EXTENSION_NAME "VK_KHR_create_renderpass2")
+```
+
+#### Variable: VK\_KHR\_SHARED\_PRESENTABLE\_IMAGE
+
+```Lisp
+(defparameter VK_KHR_SHARED_PRESENTABLE_IMAGE 1)
+```
+
+#### Variable: VK\_KHR\_SHARED\_PRESENTABLE\_IMAGE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_SHARED_PRESENTABLE_IMAGE_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_SHARED\_PRESENTABLE\_IMAGE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_SHARED_PRESENTABLE_IMAGE_EXTENSION_NAME "VK_KHR_shared_presentable_image")
+```
+
+#### Variable: VK\_KHR\_EXTERNAL\_FENCE\_CAPABILITIES
+
+```Lisp
+(defparameter VK_KHR_EXTERNAL_FENCE_CAPABILITIES 1)
+```
+
+#### Variable: VK\_KHR\_EXTERNAL\_FENCE\_CAPABILITIES\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_EXTERNAL_FENCE_CAPABILITIES_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_EXTERNAL\_FENCE\_CAPABILITIES\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_EXTERNAL_FENCE_CAPABILITIES_EXTENSION_NAME "VK_KHR_external_fence_capabilities")
+```
+
+#### Variable: VK\_KHR\_EXTERNAL\_FENCE
+
+```Lisp
+(defparameter VK_KHR_EXTERNAL_FENCE 1)
+```
+
+#### Variable: VK\_KHR\_EXTERNAL\_FENCE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_EXTERNAL_FENCE_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_EXTERNAL\_FENCE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_EXTERNAL_FENCE_EXTENSION_NAME "VK_KHR_external_fence")
+```
+
+#### Variable: VK\_KHR\_EXTERNAL\_FENCE\_FD
+
+```Lisp
+(defparameter VK_KHR_EXTERNAL_FENCE_FD 1)
+```
+
+#### Variable: VK\_KHR\_EXTERNAL\_FENCE\_FD\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_EXTERNAL_FENCE_FD_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_EXTERNAL\_FENCE\_FD\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_EXTERNAL_FENCE_FD_EXTENSION_NAME "VK_KHR_external_fence_fd")
+```
+
+#### Variable: VK\_KHR\_PERFORMANCE\_QUERY
+
+```Lisp
+(defparameter VK_KHR_PERFORMANCE_QUERY 1)
+```
+
+#### Variable: VK\_KHR\_PERFORMANCE\_QUERY\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_PERFORMANCE_QUERY_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_PERFORMANCE\_QUERY\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_PERFORMANCE_QUERY_EXTENSION_NAME "VK_KHR_performance_query")
+```
+
+#### Variable: VK\_PERFORMANCE\_COUNTER\_UNIT\_GENERIC\_KHR
+
+```Lisp
+(defparameter VK_PERFORMANCE_COUNTER_UNIT_GENERIC_KHR 0)
+```
+
+#### Variable: VK\_PERFORMANCE\_COUNTER\_UNIT\_PERCENTAGE\_KHR
+
+```Lisp
+(defparameter VK_PERFORMANCE_COUNTER_UNIT_PERCENTAGE_KHR 1)
+```
+
+#### Variable: VK\_PERFORMANCE\_COUNTER\_UNIT\_NANOSECONDS\_KHR
+
+```Lisp
+(defparameter VK_PERFORMANCE_COUNTER_UNIT_NANOSECONDS_KHR 2)
+```
+
+#### Variable: VK\_PERFORMANCE\_COUNTER\_UNIT\_BYTES\_KHR
+
+```Lisp
+(defparameter VK_PERFORMANCE_COUNTER_UNIT_BYTES_KHR 3)
+```
+
+#### Variable: VK\_PERFORMANCE\_COUNTER\_UNIT\_BYTES\_PER\_SECOND\_KHR
+
+```Lisp
+(defparameter VK_PERFORMANCE_COUNTER_UNIT_BYTES_PER_SECOND_KHR 4)
+```
+
+#### Variable: VK\_PERFORMANCE\_COUNTER\_UNIT\_KELVIN\_KHR
+
+```Lisp
+(defparameter VK_PERFORMANCE_COUNTER_UNIT_KELVIN_KHR 5)
+```
+
+#### Variable: VK\_PERFORMANCE\_COUNTER\_UNIT\_WATTS\_KHR
+
+```Lisp
+(defparameter VK_PERFORMANCE_COUNTER_UNIT_WATTS_KHR 6)
+```
+
+#### Variable: VK\_PERFORMANCE\_COUNTER\_UNIT\_VOLTS\_KHR
+
+```Lisp
+(defparameter VK_PERFORMANCE_COUNTER_UNIT_VOLTS_KHR 7)
+```
+
+#### Variable: VK\_PERFORMANCE\_COUNTER\_UNIT\_AMPS\_KHR
+
+```Lisp
+(defparameter VK_PERFORMANCE_COUNTER_UNIT_AMPS_KHR 8)
+```
+
+#### Variable: VK\_PERFORMANCE\_COUNTER\_UNIT\_HERTZ\_KHR
+
+```Lisp
+(defparameter VK_PERFORMANCE_COUNTER_UNIT_HERTZ_KHR 9)
+```
+
+#### Variable: VK\_PERFORMANCE\_COUNTER\_UNIT\_CYCLES\_KHR
+
+```Lisp
+(defparameter VK_PERFORMANCE_COUNTER_UNIT_CYCLES_KHR 10)
+```
+
+#### Variable: VK\_PERFORMANCE\_COUNTER\_UNIT\_MAX\_ENUM\_KHR
+
+```Lisp
+(defparameter VK_PERFORMANCE_COUNTER_UNIT_MAX_ENUM_KHR 2147483647)
+```
+
+#### Variable: VK\_PERFORMANCE\_COUNTER\_SCOPE\_COMMAND\_BUFFER\_KHR
+
+```Lisp
+(defparameter VK_PERFORMANCE_COUNTER_SCOPE_COMMAND_BUFFER_KHR 0)
+```
+
+#### Variable: VK\_PERFORMANCE\_COUNTER\_SCOPE\_RENDER\_PASS\_KHR
+
+```Lisp
+(defparameter VK_PERFORMANCE_COUNTER_SCOPE_RENDER_PASS_KHR 1)
+```
+
+#### Variable: VK\_PERFORMANCE\_COUNTER\_SCOPE\_COMMAND\_KHR
+
+```Lisp
+(defparameter VK_PERFORMANCE_COUNTER_SCOPE_COMMAND_KHR 2)
+```
+
+#### Variable: VK\_QUERY\_SCOPE\_COMMAND\_BUFFER\_KHR
+
+```Lisp
+(defparameter VK_QUERY_SCOPE_COMMAND_BUFFER_KHR VK_PERFORMANCE_COUNTER_SCOPE_COMMAND_BUFFER_KHR)
+```
+
+#### Variable: VK\_QUERY\_SCOPE\_RENDER\_PASS\_KHR
+
+```Lisp
+(defparameter VK_QUERY_SCOPE_RENDER_PASS_KHR VK_PERFORMANCE_COUNTER_SCOPE_RENDER_PASS_KHR)
+```
+
+#### Variable: VK\_QUERY\_SCOPE\_COMMAND\_KHR
+
+```Lisp
+(defparameter VK_QUERY_SCOPE_COMMAND_KHR VK_PERFORMANCE_COUNTER_SCOPE_COMMAND_KHR)
+```
+
+#### Variable: VK\_PERFORMANCE\_COUNTER\_SCOPE\_MAX\_ENUM\_KHR
+
+```Lisp
+(defparameter VK_PERFORMANCE_COUNTER_SCOPE_MAX_ENUM_KHR 2147483647)
+```
+
+#### Variable: VK\_PERFORMANCE\_COUNTER\_STORAGE\_INT32\_KHR
+
+```Lisp
+(defparameter VK_PERFORMANCE_COUNTER_STORAGE_INT32_KHR 0)
+```
+
+#### Variable: VK\_PERFORMANCE\_COUNTER\_STORAGE\_INT64\_KHR
+
+```Lisp
+(defparameter VK_PERFORMANCE_COUNTER_STORAGE_INT64_KHR 1)
+```
+
+#### Variable: VK\_PERFORMANCE\_COUNTER\_STORAGE\_UINT32\_KHR
+
+```Lisp
+(defparameter VK_PERFORMANCE_COUNTER_STORAGE_UINT32_KHR 2)
+```
+
+#### Variable: VK\_PERFORMANCE\_COUNTER\_STORAGE\_UINT64\_KHR
+
+```Lisp
+(defparameter VK_PERFORMANCE_COUNTER_STORAGE_UINT64_KHR 3)
+```
+
+#### Variable: VK\_PERFORMANCE\_COUNTER\_STORAGE\_FLOAT32\_KHR
+
+```Lisp
+(defparameter VK_PERFORMANCE_COUNTER_STORAGE_FLOAT32_KHR 4)
+```
+
+#### Variable: VK\_PERFORMANCE\_COUNTER\_STORAGE\_FLOAT64\_KHR
+
+```Lisp
+(defparameter VK_PERFORMANCE_COUNTER_STORAGE_FLOAT64_KHR 5)
+```
+
+#### Variable: VK\_PERFORMANCE\_COUNTER\_STORAGE\_MAX\_ENUM\_KHR
+
+```Lisp
+(defparameter VK_PERFORMANCE_COUNTER_STORAGE_MAX_ENUM_KHR 2147483647)
+```
+
+#### Variable: VK\_PERFORMANCE\_COUNTER\_DESCRIPTION\_PERFORMANCE\_IMPACTING\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PERFORMANCE_COUNTER_DESCRIPTION_PERFORMANCE_IMPACTING_BIT_KHR 1)
+```
+
+#### Variable: VK\_PERFORMANCE\_COUNTER\_DESCRIPTION\_CONCURRENTLY\_IMPACTED\_BIT\_KHR
+
+```Lisp
+(defparameter VK_PERFORMANCE_COUNTER_DESCRIPTION_CONCURRENTLY_IMPACTED_BIT_KHR 2)
+```
+
+#### Variable: VK\_PERFORMANCE\_COUNTER\_DESCRIPTION\_PERFORMANCE\_IMPACTING\_KHR
+
+```Lisp
+(defparameter VK_PERFORMANCE_COUNTER_DESCRIPTION_PERFORMANCE_IMPACTING_KHR VK_PERFORMANCE_COUNTER_DESCRIPTION_PERFORMANCE_IMPACTING_BIT_KHR)
+```
+
+#### Variable: VK\_PERFORMANCE\_COUNTER\_DESCRIPTION\_CONCURRENTLY\_IMPACTED\_KHR
+
+```Lisp
+(defparameter VK_PERFORMANCE_COUNTER_DESCRIPTION_CONCURRENTLY_IMPACTED_KHR VK_PERFORMANCE_COUNTER_DESCRIPTION_CONCURRENTLY_IMPACTED_BIT_KHR)
+```
+
+#### Variable: VK\_PERFORMANCE\_COUNTER\_DESCRIPTION\_FLAG\_BITS\_MAX\_ENUM\_KHR
+
+```Lisp
+(defparameter VK_PERFORMANCE_COUNTER_DESCRIPTION_FLAG_BITS_MAX_ENUM_KHR 2147483647)
+```
+
+#### Variable: VK\_ACQUIRE\_PROFILING\_LOCK\_FLAG\_BITS\_MAX\_ENUM\_KHR
+
+```Lisp
+(defparameter VK_ACQUIRE_PROFILING_LOCK_FLAG_BITS_MAX_ENUM_KHR 2147483647)
+```
+
+#### Variable: VK\_KHR\_MAINTENANCE2
+
+```Lisp
+(defparameter VK_KHR_MAINTENANCE2 1)
+```
+
+#### Variable: VK\_KHR\_MAINTENANCE\_2\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_MAINTENANCE_2_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_MAINTENANCE\_2\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_MAINTENANCE_2_EXTENSION_NAME "VK_KHR_maintenance2")
+```
+
+#### Variable: VK\_KHR\_MAINTENANCE2\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_MAINTENANCE2_SPEC_VERSION VK_KHR_MAINTENANCE_2_SPEC_VERSION)
+```
+
+#### Variable: VK\_KHR\_MAINTENANCE2\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_MAINTENANCE2_EXTENSION_NAME VK_KHR_MAINTENANCE_2_EXTENSION_NAME)
+```
+
+#### Variable: VK\_KHR\_GET\_SURFACE\_CAPABILITIES2
+
+```Lisp
+(defparameter VK_KHR_GET_SURFACE_CAPABILITIES2 1)
+```
+
+#### Variable: VK\_KHR\_GET\_SURFACE\_CAPABILITIES\_2\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_GET_SURFACE_CAPABILITIES_2_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_GET\_SURFACE\_CAPABILITIES\_2\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_GET_SURFACE_CAPABILITIES_2_EXTENSION_NAME "VK_KHR_get_surface_capabilities2")
+```
+
+#### Variable: VK\_KHR\_VARIABLE\_POINTERS
+
+```Lisp
+(defparameter VK_KHR_VARIABLE_POINTERS 1)
+```
+
+#### Variable: VK\_KHR\_VARIABLE\_POINTERS\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_VARIABLE_POINTERS_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_VARIABLE\_POINTERS\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_VARIABLE_POINTERS_EXTENSION_NAME "VK_KHR_variable_pointers")
+```
+
+#### Variable: VK\_KHR\_GET\_DISPLAY\_PROPERTIES2
+
+```Lisp
+(defparameter VK_KHR_GET_DISPLAY_PROPERTIES2 1)
+```
+
+#### Variable: VK\_KHR\_GET\_DISPLAY\_PROPERTIES\_2\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_GET_DISPLAY_PROPERTIES_2_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_GET\_DISPLAY\_PROPERTIES\_2\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_GET_DISPLAY_PROPERTIES_2_EXTENSION_NAME "VK_KHR_get_display_properties2")
+```
+
+#### Variable: VK\_KHR\_DEDICATED\_ALLOCATION
+
+```Lisp
+(defparameter VK_KHR_DEDICATED_ALLOCATION 1)
+```
+
+#### Variable: VK\_KHR\_DEDICATED\_ALLOCATION\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_DEDICATED_ALLOCATION_SPEC_VERSION 3)
+```
+
+#### Variable: VK\_KHR\_DEDICATED\_ALLOCATION\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_DEDICATED_ALLOCATION_EXTENSION_NAME "VK_KHR_dedicated_allocation")
+```
+
+#### Variable: VK\_KHR\_STORAGE\_BUFFER\_STORAGE\_CLASS
+
+```Lisp
+(defparameter VK_KHR_STORAGE_BUFFER_STORAGE_CLASS 1)
+```
+
+#### Variable: VK\_KHR\_STORAGE\_BUFFER\_STORAGE\_CLASS\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_STORAGE_BUFFER_STORAGE_CLASS_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_STORAGE\_BUFFER\_STORAGE\_CLASS\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_STORAGE_BUFFER_STORAGE_CLASS_EXTENSION_NAME "VK_KHR_storage_buffer_storage_class")
+```
+
+#### Variable: VK\_KHR\_RELAXED\_BLOCK\_LAYOUT
+
+```Lisp
+(defparameter VK_KHR_RELAXED_BLOCK_LAYOUT 1)
+```
+
+#### Variable: VK\_KHR\_RELAXED\_BLOCK\_LAYOUT\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_RELAXED_BLOCK_LAYOUT_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_RELAXED\_BLOCK\_LAYOUT\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_RELAXED_BLOCK_LAYOUT_EXTENSION_NAME "VK_KHR_relaxed_block_layout")
+```
+
+#### Variable: VK\_KHR\_GET\_MEMORY\_REQUIREMENTS2
+
+```Lisp
+(defparameter VK_KHR_GET_MEMORY_REQUIREMENTS2 1)
+```
+
+#### Variable: VK\_KHR\_GET\_MEMORY\_REQUIREMENTS\_2\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_GET_MEMORY_REQUIREMENTS_2_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_GET\_MEMORY\_REQUIREMENTS\_2\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_GET_MEMORY_REQUIREMENTS_2_EXTENSION_NAME "VK_KHR_get_memory_requirements2")
+```
+
+#### Variable: VK\_KHR\_IMAGE\_FORMAT\_LIST
+
+```Lisp
+(defparameter VK_KHR_IMAGE_FORMAT_LIST 1)
+```
+
+#### Variable: VK\_KHR\_IMAGE\_FORMAT\_LIST\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_IMAGE_FORMAT_LIST_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_IMAGE\_FORMAT\_LIST\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_IMAGE_FORMAT_LIST_EXTENSION_NAME "VK_KHR_image_format_list")
+```
+
+#### Variable: VK\_KHR\_SAMPLER\_YCBCR\_CONVERSION
+
+```Lisp
+(defparameter VK_KHR_SAMPLER_YCBCR_CONVERSION 1)
+```
+
+#### Variable: VK\_KHR\_SAMPLER\_YCBCR\_CONVERSION\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_SAMPLER_YCBCR_CONVERSION_SPEC_VERSION 14)
+```
+
+#### Variable: VK\_KHR\_SAMPLER\_YCBCR\_CONVERSION\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_SAMPLER_YCBCR_CONVERSION_EXTENSION_NAME "VK_KHR_sampler_ycbcr_conversion")
+```
+
+#### Variable: VK\_KHR\_BIND\_MEMORY2
+
+```Lisp
+(defparameter VK_KHR_BIND_MEMORY2 1)
+```
+
+#### Variable: VK\_KHR\_BIND\_MEMORY\_2\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_BIND_MEMORY_2_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_BIND\_MEMORY\_2\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_BIND_MEMORY_2_EXTENSION_NAME "VK_KHR_bind_memory2")
+```
+
+#### Variable: VK\_KHR\_MAINTENANCE3
+
+```Lisp
+(defparameter VK_KHR_MAINTENANCE3 1)
+```
+
+#### Variable: VK\_KHR\_MAINTENANCE\_3\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_MAINTENANCE_3_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_MAINTENANCE\_3\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_MAINTENANCE_3_EXTENSION_NAME "VK_KHR_maintenance3")
+```
+
+#### Variable: VK\_KHR\_MAINTENANCE3\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_MAINTENANCE3_SPEC_VERSION VK_KHR_MAINTENANCE_3_SPEC_VERSION)
+```
+
+#### Variable: VK\_KHR\_MAINTENANCE3\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_MAINTENANCE3_EXTENSION_NAME VK_KHR_MAINTENANCE_3_EXTENSION_NAME)
+```
+
+#### Variable: VK\_KHR\_DRAW\_INDIRECT\_COUNT
+
+```Lisp
+(defparameter VK_KHR_DRAW_INDIRECT_COUNT 1)
+```
+
+#### Variable: VK\_KHR\_DRAW\_INDIRECT\_COUNT\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_DRAW_INDIRECT_COUNT_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_DRAW\_INDIRECT\_COUNT\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_DRAW_INDIRECT_COUNT_EXTENSION_NAME "VK_KHR_draw_indirect_count")
+```
+
+#### Variable: VK\_KHR\_SHADER\_SUBGROUP\_EXTENDED\_TYPES
+
+```Lisp
+(defparameter VK_KHR_SHADER_SUBGROUP_EXTENDED_TYPES 1)
+```
+
+#### Variable: VK\_KHR\_SHADER\_SUBGROUP\_EXTENDED\_TYPES\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_SHADER_SUBGROUP_EXTENDED_TYPES_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_SHADER\_SUBGROUP\_EXTENDED\_TYPES\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_SHADER_SUBGROUP_EXTENDED_TYPES_EXTENSION_NAME "VK_KHR_shader_subgroup_extended_types")
+```
+
+#### Variable: VK\_KHR\_8BIT\_STORAGE
+
+```Lisp
+(defparameter VK_KHR_8BIT_STORAGE 1)
+```
+
+#### Variable: VK\_KHR\_8BIT\_STORAGE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_8BIT_STORAGE_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_8BIT\_STORAGE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_8BIT_STORAGE_EXTENSION_NAME "VK_KHR_8bit_storage")
+```
+
+#### Variable: VK\_KHR\_SHADER\_ATOMIC\_INT64
+
+```Lisp
+(defparameter VK_KHR_SHADER_ATOMIC_INT64 1)
+```
+
+#### Variable: VK\_KHR\_SHADER\_ATOMIC\_INT64\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_SHADER_ATOMIC_INT64_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_SHADER\_ATOMIC\_INT64\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_SHADER_ATOMIC_INT64_EXTENSION_NAME "VK_KHR_shader_atomic_int64")
+```
+
+#### Variable: VK\_KHR\_SHADER\_CLOCK
+
+```Lisp
+(defparameter VK_KHR_SHADER_CLOCK 1)
+```
+
+#### Variable: VK\_KHR\_SHADER\_CLOCK\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_SHADER_CLOCK_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_SHADER\_CLOCK\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_SHADER_CLOCK_EXTENSION_NAME "VK_KHR_shader_clock")
+```
+
+#### Variable: VK\_KHR\_GLOBAL\_PRIORITY
+
+```Lisp
+(defparameter VK_KHR_GLOBAL_PRIORITY 1)
+```
+
+#### Variable: VK\_MAX\_GLOBAL\_PRIORITY\_SIZE\_KHR
+
+```Lisp
+(defparameter VK_MAX_GLOBAL_PRIORITY_SIZE_KHR 16)
+```
+
+#### Variable: VK\_KHR\_GLOBAL\_PRIORITY\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_GLOBAL_PRIORITY_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_GLOBAL\_PRIORITY\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_GLOBAL_PRIORITY_EXTENSION_NAME "VK_KHR_global_priority")
+```
+
+#### Variable: VK\_QUEUE\_GLOBAL\_PRIORITY\_LOW\_KHR
+
+```Lisp
+(defparameter VK_QUEUE_GLOBAL_PRIORITY_LOW_KHR 128)
+```
+
+#### Variable: VK\_QUEUE\_GLOBAL\_PRIORITY\_MEDIUM\_KHR
+
+```Lisp
+(defparameter VK_QUEUE_GLOBAL_PRIORITY_MEDIUM_KHR 256)
+```
+
+#### Variable: VK\_QUEUE\_GLOBAL\_PRIORITY\_HIGH\_KHR
+
+```Lisp
+(defparameter VK_QUEUE_GLOBAL_PRIORITY_HIGH_KHR 512)
+```
+
+#### Variable: VK\_QUEUE\_GLOBAL\_PRIORITY\_REALTIME\_KHR
+
+```Lisp
+(defparameter VK_QUEUE_GLOBAL_PRIORITY_REALTIME_KHR 1024)
+```
+
+#### Variable: VK\_QUEUE\_GLOBAL\_PRIORITY\_LOW\_EXT
+
+```Lisp
+(defparameter VK_QUEUE_GLOBAL_PRIORITY_LOW_EXT VK_QUEUE_GLOBAL_PRIORITY_LOW_KHR)
+```
+
+#### Variable: VK\_QUEUE\_GLOBAL\_PRIORITY\_MEDIUM\_EXT
+
+```Lisp
+(defparameter VK_QUEUE_GLOBAL_PRIORITY_MEDIUM_EXT VK_QUEUE_GLOBAL_PRIORITY_MEDIUM_KHR)
+```
+
+#### Variable: VK\_QUEUE\_GLOBAL\_PRIORITY\_HIGH\_EXT
+
+```Lisp
+(defparameter VK_QUEUE_GLOBAL_PRIORITY_HIGH_EXT VK_QUEUE_GLOBAL_PRIORITY_HIGH_KHR)
+```
+
+#### Variable: VK\_QUEUE\_GLOBAL\_PRIORITY\_REALTIME\_EXT
+
+```Lisp
+(defparameter VK_QUEUE_GLOBAL_PRIORITY_REALTIME_EXT VK_QUEUE_GLOBAL_PRIORITY_REALTIME_KHR)
+```
+
+#### Variable: VK\_QUEUE\_GLOBAL\_PRIORITY\_MAX\_ENUM\_KHR
+
+```Lisp
+(defparameter VK_QUEUE_GLOBAL_PRIORITY_MAX_ENUM_KHR 2147483647)
+```
+
+#### Variable: VK\_KHR\_DRIVER\_PROPERTIES
+
+```Lisp
+(defparameter VK_KHR_DRIVER_PROPERTIES 1)
+```
+
+#### Variable: VK\_KHR\_DRIVER\_PROPERTIES\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_DRIVER_PROPERTIES_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_DRIVER\_PROPERTIES\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_DRIVER_PROPERTIES_EXTENSION_NAME "VK_KHR_driver_properties")
+```
+
+#### Variable: VK\_MAX\_DRIVER\_NAME\_SIZE\_KHR
+
+```Lisp
+(defparameter VK_MAX_DRIVER_NAME_SIZE_KHR VK_MAX_DRIVER_NAME_SIZE)
+```
+
+#### Variable: VK\_MAX\_DRIVER\_INFO\_SIZE\_KHR
+
+```Lisp
+(defparameter VK_MAX_DRIVER_INFO_SIZE_KHR VK_MAX_DRIVER_INFO_SIZE)
+```
+
+#### Variable: VK\_KHR\_SHADER\_FLOAT\_CONTROLS
+
+```Lisp
+(defparameter VK_KHR_SHADER_FLOAT_CONTROLS 1)
+```
+
+#### Variable: VK\_KHR\_SHADER\_FLOAT\_CONTROLS\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_SHADER_FLOAT_CONTROLS_SPEC_VERSION 4)
+```
+
+#### Variable: VK\_KHR\_SHADER\_FLOAT\_CONTROLS\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_SHADER_FLOAT_CONTROLS_EXTENSION_NAME "VK_KHR_shader_float_controls")
+```
+
+#### Variable: VK\_KHR\_DEPTH\_STENCIL\_RESOLVE
+
+```Lisp
+(defparameter VK_KHR_DEPTH_STENCIL_RESOLVE 1)
+```
+
+#### Variable: VK\_KHR\_DEPTH\_STENCIL\_RESOLVE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_DEPTH_STENCIL_RESOLVE_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_DEPTH\_STENCIL\_RESOLVE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_DEPTH_STENCIL_RESOLVE_EXTENSION_NAME "VK_KHR_depth_stencil_resolve")
+```
+
+#### Variable: VK\_KHR\_SWAPCHAIN\_MUTABLE\_FORMAT
+
+```Lisp
+(defparameter VK_KHR_SWAPCHAIN_MUTABLE_FORMAT 1)
+```
+
+#### Variable: VK\_KHR\_SWAPCHAIN\_MUTABLE\_FORMAT\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_SWAPCHAIN_MUTABLE_FORMAT_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_SWAPCHAIN\_MUTABLE\_FORMAT\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_SWAPCHAIN_MUTABLE_FORMAT_EXTENSION_NAME "VK_KHR_swapchain_mutable_format")
+```
+
+#### Variable: VK\_KHR\_TIMELINE\_SEMAPHORE
+
+```Lisp
+(defparameter VK_KHR_TIMELINE_SEMAPHORE 1)
+```
+
+#### Variable: VK\_KHR\_TIMELINE\_SEMAPHORE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_TIMELINE_SEMAPHORE_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_KHR\_TIMELINE\_SEMAPHORE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_TIMELINE_SEMAPHORE_EXTENSION_NAME "VK_KHR_timeline_semaphore")
+```
+
+#### Variable: VK\_KHR\_VULKAN\_MEMORY\_MODEL
+
+```Lisp
+(defparameter VK_KHR_VULKAN_MEMORY_MODEL 1)
+```
+
+#### Variable: VK\_KHR\_VULKAN\_MEMORY\_MODEL\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_VULKAN_MEMORY_MODEL_SPEC_VERSION 3)
+```
+
+#### Variable: VK\_KHR\_VULKAN\_MEMORY\_MODEL\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_VULKAN_MEMORY_MODEL_EXTENSION_NAME "VK_KHR_vulkan_memory_model")
+```
+
+#### Variable: VK\_KHR\_SHADER\_TERMINATE\_INVOCATION
+
+```Lisp
+(defparameter VK_KHR_SHADER_TERMINATE_INVOCATION 1)
+```
+
+#### Variable: VK\_KHR\_SHADER\_TERMINATE\_INVOCATION\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_SHADER_TERMINATE_INVOCATION_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_SHADER\_TERMINATE\_INVOCATION\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_SHADER_TERMINATE_INVOCATION_EXTENSION_NAME "VK_KHR_shader_terminate_invocation")
+```
+
+#### Variable: VK\_KHR\_FRAGMENT\_SHADING\_RATE
+
+```Lisp
+(defparameter VK_KHR_FRAGMENT_SHADING_RATE 1)
+```
+
+#### Variable: VK\_KHR\_FRAGMENT\_SHADING\_RATE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_FRAGMENT_SHADING_RATE_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_KHR\_FRAGMENT\_SHADING\_RATE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_FRAGMENT_SHADING_RATE_EXTENSION_NAME "VK_KHR_fragment_shading_rate")
+```
+
+#### Variable: VK\_FRAGMENT\_SHADING\_RATE\_COMBINER\_OP\_KEEP\_KHR
+
+```Lisp
+(defparameter VK_FRAGMENT_SHADING_RATE_COMBINER_OP_KEEP_KHR 0)
+```
+
+#### Variable: VK\_FRAGMENT\_SHADING\_RATE\_COMBINER\_OP\_REPLACE\_KHR
+
+```Lisp
+(defparameter VK_FRAGMENT_SHADING_RATE_COMBINER_OP_REPLACE_KHR 1)
+```
+
+#### Variable: VK\_FRAGMENT\_SHADING\_RATE\_COMBINER\_OP\_MIN\_KHR
+
+```Lisp
+(defparameter VK_FRAGMENT_SHADING_RATE_COMBINER_OP_MIN_KHR 2)
+```
+
+#### Variable: VK\_FRAGMENT\_SHADING\_RATE\_COMBINER\_OP\_MAX\_KHR
+
+```Lisp
+(defparameter VK_FRAGMENT_SHADING_RATE_COMBINER_OP_MAX_KHR 3)
+```
+
+#### Variable: VK\_FRAGMENT\_SHADING\_RATE\_COMBINER\_OP\_MUL\_KHR
+
+```Lisp
+(defparameter VK_FRAGMENT_SHADING_RATE_COMBINER_OP_MUL_KHR 4)
+```
+
+#### Variable: VK\_FRAGMENT\_SHADING\_RATE\_COMBINER\_OP\_MAX\_ENUM\_KHR
+
+```Lisp
+(defparameter VK_FRAGMENT_SHADING_RATE_COMBINER_OP_MAX_ENUM_KHR 2147483647)
+```
+
+#### Variable: VK\_KHR\_SPIRV\_1\_4
+
+```Lisp
+(defparameter VK_KHR_SPIRV_1_4 1)
+```
+
+#### Variable: VK\_KHR\_SPIRV\_1\_4\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_SPIRV_1_4_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_SPIRV\_1\_4\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_SPIRV_1_4_EXTENSION_NAME "VK_KHR_spirv_1_4")
+```
+
+#### Variable: VK\_KHR\_SURFACE\_PROTECTED\_CAPABILITIES
+
+```Lisp
+(defparameter VK_KHR_SURFACE_PROTECTED_CAPABILITIES 1)
+```
+
+#### Variable: VK\_KHR\_SURFACE\_PROTECTED\_CAPABILITIES\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_SURFACE_PROTECTED_CAPABILITIES_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_SURFACE\_PROTECTED\_CAPABILITIES\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_SURFACE_PROTECTED_CAPABILITIES_EXTENSION_NAME "VK_KHR_surface_protected_capabilities")
+```
+
+#### Variable: VK\_KHR\_SEPARATE\_DEPTH\_STENCIL\_LAYOUTS
+
+```Lisp
+(defparameter VK_KHR_SEPARATE_DEPTH_STENCIL_LAYOUTS 1)
+```
+
+#### Variable: VK\_KHR\_SEPARATE\_DEPTH\_STENCIL\_LAYOUTS\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_SEPARATE_DEPTH_STENCIL_LAYOUTS_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_SEPARATE\_DEPTH\_STENCIL\_LAYOUTS\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_SEPARATE_DEPTH_STENCIL_LAYOUTS_EXTENSION_NAME "VK_KHR_separate_depth_stencil_layouts")
+```
+
+#### Variable: VK\_KHR\_PRESENT\_WAIT
+
+```Lisp
+(defparameter VK_KHR_PRESENT_WAIT 1)
+```
+
+#### Variable: VK\_KHR\_PRESENT\_WAIT\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_PRESENT_WAIT_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_PRESENT\_WAIT\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_PRESENT_WAIT_EXTENSION_NAME "VK_KHR_present_wait")
+```
+
+#### Variable: VK\_KHR\_UNIFORM\_BUFFER\_STANDARD\_LAYOUT
+
+```Lisp
+(defparameter VK_KHR_UNIFORM_BUFFER_STANDARD_LAYOUT 1)
+```
+
+#### Variable: VK\_KHR\_UNIFORM\_BUFFER\_STANDARD\_LAYOUT\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_UNIFORM_BUFFER_STANDARD_LAYOUT_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_UNIFORM\_BUFFER\_STANDARD\_LAYOUT\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_UNIFORM_BUFFER_STANDARD_LAYOUT_EXTENSION_NAME "VK_KHR_uniform_buffer_standard_layout")
+```
+
+#### Variable: VK\_KHR\_BUFFER\_DEVICE\_ADDRESS
+
+```Lisp
+(defparameter VK_KHR_BUFFER_DEVICE_ADDRESS 1)
+```
+
+#### Variable: VK\_KHR\_BUFFER\_DEVICE\_ADDRESS\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_BUFFER_DEVICE_ADDRESS_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_BUFFER\_DEVICE\_ADDRESS\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_BUFFER_DEVICE_ADDRESS_EXTENSION_NAME "VK_KHR_buffer_device_address")
+```
+
+#### Variable: VK\_KHR\_DEFERRED\_HOST\_OPERATIONS
+
+```Lisp
+(defparameter VK_KHR_DEFERRED_HOST_OPERATIONS 1)
+```
+
+#### Variable: VK\_KHR\_DEFERRED\_HOST\_OPERATIONS\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_DEFERRED_HOST_OPERATIONS_SPEC_VERSION 4)
+```
+
+#### Variable: VK\_KHR\_DEFERRED\_HOST\_OPERATIONS\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_DEFERRED_HOST_OPERATIONS_EXTENSION_NAME "VK_KHR_deferred_host_operations")
+```
+
+#### Variable: VK\_KHR\_PIPELINE\_EXECUTABLE\_PROPERTIES
+
+```Lisp
+(defparameter VK_KHR_PIPELINE_EXECUTABLE_PROPERTIES 1)
+```
+
+#### Variable: VK\_KHR\_PIPELINE\_EXECUTABLE\_PROPERTIES\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_PIPELINE_EXECUTABLE_PROPERTIES_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_PIPELINE\_EXECUTABLE\_PROPERTIES\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_PIPELINE_EXECUTABLE_PROPERTIES_EXTENSION_NAME "VK_KHR_pipeline_executable_properties")
+```
+
+#### Variable: VK\_PIPELINE\_EXECUTABLE\_STATISTIC\_FORMAT\_BOOL32\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_BOOL32_KHR 0)
+```
+
+#### Variable: VK\_PIPELINE\_EXECUTABLE\_STATISTIC\_FORMAT\_INT64\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_INT64_KHR 1)
+```
+
+#### Variable: VK\_PIPELINE\_EXECUTABLE\_STATISTIC\_FORMAT\_UINT64\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_UINT64_KHR 2)
+```
+
+#### Variable: VK\_PIPELINE\_EXECUTABLE\_STATISTIC\_FORMAT\_FLOAT64\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_FLOAT64_KHR 3)
+```
+
+#### Variable: VK\_PIPELINE\_EXECUTABLE\_STATISTIC\_FORMAT\_MAX\_ENUM\_KHR
+
+```Lisp
+(defparameter VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_MAX_ENUM_KHR 2147483647)
+```
+
+#### Variable: VK\_KHR\_SHADER\_INTEGER\_DOT\_PRODUCT
+
+```Lisp
+(defparameter VK_KHR_SHADER_INTEGER_DOT_PRODUCT 1)
+```
+
+#### Variable: VK\_KHR\_SHADER\_INTEGER\_DOT\_PRODUCT\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_SHADER_INTEGER_DOT_PRODUCT_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_SHADER\_INTEGER\_DOT\_PRODUCT\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_SHADER_INTEGER_DOT_PRODUCT_EXTENSION_NAME "VK_KHR_shader_integer_dot_product")
+```
+
+#### Variable: VK\_KHR\_PIPELINE\_LIBRARY
+
+```Lisp
+(defparameter VK_KHR_PIPELINE_LIBRARY 1)
+```
+
+#### Variable: VK\_KHR\_PIPELINE\_LIBRARY\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_PIPELINE_LIBRARY_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_PIPELINE\_LIBRARY\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_PIPELINE_LIBRARY_EXTENSION_NAME "VK_KHR_pipeline_library")
+```
+
+#### Variable: VK\_KHR\_SHADER\_NON\_SEMANTIC\_INFO
+
+```Lisp
+(defparameter VK_KHR_SHADER_NON_SEMANTIC_INFO 1)
+```
+
+#### Variable: VK\_KHR\_SHADER\_NON\_SEMANTIC\_INFO\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_SHADER_NON_SEMANTIC_INFO_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_SHADER\_NON\_SEMANTIC\_INFO\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_SHADER_NON_SEMANTIC_INFO_EXTENSION_NAME "VK_KHR_shader_non_semantic_info")
+```
+
+#### Variable: VK\_KHR\_PRESENT\_ID
+
+```Lisp
+(defparameter VK_KHR_PRESENT_ID 1)
+```
+
+#### Variable: VK\_KHR\_PRESENT\_ID\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_PRESENT_ID_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_PRESENT\_ID\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_PRESENT_ID_EXTENSION_NAME "VK_KHR_present_id")
+```
+
+#### Variable: VK\_KHR\_SYNCHRONIZATION2
+
+```Lisp
+(defparameter VK_KHR_SYNCHRONIZATION2 1)
+```
+
+#### Variable: VK\_KHR\_SYNCHRONIZATION\_2\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_SYNCHRONIZATION_2_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_SYNCHRONIZATION\_2\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_SYNCHRONIZATION_2_EXTENSION_NAME "VK_KHR_synchronization2")
+```
+
+#### Variable: VK\_KHR\_FRAGMENT\_SHADER\_BARYCENTRIC
+
+```Lisp
+(defparameter VK_KHR_FRAGMENT_SHADER_BARYCENTRIC 1)
+```
+
+#### Variable: VK\_KHR\_FRAGMENT\_SHADER\_BARYCENTRIC\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_FRAGMENT_SHADER_BARYCENTRIC_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_FRAGMENT\_SHADER\_BARYCENTRIC\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_FRAGMENT_SHADER_BARYCENTRIC_EXTENSION_NAME "VK_KHR_fragment_shader_barycentric")
+```
+
+#### Variable: VK\_KHR\_SHADER\_SUBGROUP\_UNIFORM\_CONTROL\_FLOW
+
+```Lisp
+(defparameter VK_KHR_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW 1)
+```
+
+#### Variable: VK\_KHR\_SHADER\_SUBGROUP\_UNIFORM\_CONTROL\_FLOW\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_SHADER\_SUBGROUP\_UNIFORM\_CONTROL\_FLOW\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_EXTENSION_NAME "VK_KHR_shader_subgroup_uniform_control_flow")
+```
+
+#### Variable: VK\_KHR\_ZERO\_INITIALIZE\_WORKGROUP\_MEMORY
+
+```Lisp
+(defparameter VK_KHR_ZERO_INITIALIZE_WORKGROUP_MEMORY 1)
+```
+
+#### Variable: VK\_KHR\_ZERO\_INITIALIZE\_WORKGROUP\_MEMORY\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_ZERO_INITIALIZE_WORKGROUP_MEMORY_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_ZERO\_INITIALIZE\_WORKGROUP\_MEMORY\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_ZERO_INITIALIZE_WORKGROUP_MEMORY_EXTENSION_NAME "VK_KHR_zero_initialize_workgroup_memory")
+```
+
+#### Variable: VK\_KHR\_WORKGROUP\_MEMORY\_EXPLICIT\_LAYOUT
+
+```Lisp
+(defparameter VK_KHR_WORKGROUP_MEMORY_EXPLICIT_LAYOUT 1)
+```
+
+#### Variable: VK\_KHR\_WORKGROUP\_MEMORY\_EXPLICIT\_LAYOUT\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_WORKGROUP_MEMORY_EXPLICIT_LAYOUT_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_WORKGROUP\_MEMORY\_EXPLICIT\_LAYOUT\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_WORKGROUP_MEMORY_EXPLICIT_LAYOUT_EXTENSION_NAME "VK_KHR_workgroup_memory_explicit_layout")
+```
+
+#### Variable: VK\_KHR\_COPY\_COMMANDS2
+
+```Lisp
+(defparameter VK_KHR_COPY_COMMANDS2 1)
+```
+
+#### Variable: VK\_KHR\_COPY\_COMMANDS\_2\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_COPY_COMMANDS_2_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_COPY\_COMMANDS\_2\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_COPY_COMMANDS_2_EXTENSION_NAME "VK_KHR_copy_commands2")
+```
+
+#### Variable: VK\_KHR\_FORMAT\_FEATURE\_FLAGS2
+
+```Lisp
+(defparameter VK_KHR_FORMAT_FEATURE_FLAGS2 1)
+```
+
+#### Variable: VK\_KHR\_FORMAT\_FEATURE\_FLAGS\_2\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_FORMAT_FEATURE_FLAGS_2_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_FORMAT\_FEATURE\_FLAGS\_2\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_FORMAT_FEATURE_FLAGS_2_EXTENSION_NAME "VK_KHR_format_feature_flags2")
+```
+
+#### Variable: VK\_KHR\_RAY\_TRACING\_MAINTENANCE1
+
+```Lisp
+(defparameter VK_KHR_RAY_TRACING_MAINTENANCE1 1)
+```
+
+#### Variable: VK\_KHR\_RAY\_TRACING\_MAINTENANCE\_1\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_RAY_TRACING_MAINTENANCE_1_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_RAY\_TRACING\_MAINTENANCE\_1\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_RAY_TRACING_MAINTENANCE_1_EXTENSION_NAME "VK_KHR_ray_tracing_maintenance1")
+```
+
+#### Variable: VK\_KHR\_PORTABILITY\_ENUMERATION
+
+```Lisp
+(defparameter VK_KHR_PORTABILITY_ENUMERATION 1)
+```
+
+#### Variable: VK\_KHR\_PORTABILITY\_ENUMERATION\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_PORTABILITY_ENUMERATION_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_PORTABILITY\_ENUMERATION\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_PORTABILITY_ENUMERATION_EXTENSION_NAME "VK_KHR_portability_enumeration")
+```
+
+#### Variable: VK\_KHR\_MAINTENANCE4
+
+```Lisp
+(defparameter VK_KHR_MAINTENANCE4 1)
+```
+
+#### Variable: VK\_KHR\_MAINTENANCE\_4\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_MAINTENANCE_4_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_KHR\_MAINTENANCE\_4\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_MAINTENANCE_4_EXTENSION_NAME "VK_KHR_maintenance4")
+```
+
+#### Variable: VK\_EXT\_DEBUG\_REPORT
+
+```Lisp
+(defparameter VK_EXT_DEBUG_REPORT 1)
+```
+
+#### Variable: VK\_EXT\_DEBUG\_REPORT\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_DEBUG_REPORT_SPEC_VERSION 10)
+```
+
+#### Variable: VK\_EXT\_DEBUG\_REPORT\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_DEBUG_REPORT_EXTENSION_NAME "VK_EXT_debug_report")
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_UNKNOWN\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT 0)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_INSTANCE\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_INSTANCE_EXT 1)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_PHYSICAL\_DEVICE\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_PHYSICAL_DEVICE_EXT 2)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_DEVICE\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_DEVICE_EXT 3)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_QUEUE\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_QUEUE_EXT 4)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_SEMAPHORE\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_SEMAPHORE_EXT 5)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_COMMAND\_BUFFER\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_BUFFER_EXT 6)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_FENCE\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_FENCE_EXT 7)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_DEVICE\_MEMORY\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_DEVICE_MEMORY_EXT 8)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_BUFFER\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_EXT 9)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_IMAGE\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_IMAGE_EXT 10)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_EVENT\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_EVENT_EXT 11)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_QUERY\_POOL\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_QUERY_POOL_EXT 12)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_BUFFER\_VIEW\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_VIEW_EXT 13)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_IMAGE\_VIEW\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_IMAGE_VIEW_EXT 14)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_SHADER\_MODULE\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_SHADER_MODULE_EXT 15)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_PIPELINE\_CACHE\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_CACHE_EXT 16)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_PIPELINE\_LAYOUT\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_LAYOUT_EXT 17)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_RENDER\_PASS\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_RENDER_PASS_EXT 18)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_PIPELINE\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_EXT 19)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_DESCRIPTOR\_SET\_LAYOUT\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT_EXT 20)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_SAMPLER\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_EXT 21)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_DESCRIPTOR\_POOL\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_POOL_EXT 22)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_DESCRIPTOR\_SET\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_EXT 23)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_FRAMEBUFFER\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_FRAMEBUFFER_EXT 24)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_COMMAND\_POOL\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_POOL_EXT 25)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_SURFACE\_KHR\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_SURFACE_KHR_EXT 26)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_SWAPCHAIN\_KHR\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN_KHR_EXT 27)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_DEBUG\_REPORT\_CALLBACK\_EXT\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT 28)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_DISPLAY\_KHR\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_KHR_EXT 29)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_DISPLAY\_MODE\_KHR\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT 30)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_VALIDATION\_CACHE\_EXT\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT_EXT 33)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_SAMPLER\_YCBCR\_CONVERSION\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_EXT 1000156000)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_DESCRIPTOR\_UPDATE\_TEMPLATE\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_EXT 1000085000)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_CU\_MODULE\_NVX\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_CU_MODULE_NVX_EXT 1000029000)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_CU\_FUNCTION\_NVX\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_CU_FUNCTION_NVX_EXT 1000029001)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_ACCELERATION\_STRUCTURE\_KHR\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_ACCELERATION_STRUCTURE_KHR_EXT 1000150000)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_ACCELERATION\_STRUCTURE\_NV\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_ACCELERATION_STRUCTURE_NV_EXT 1000165000)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_BUFFER\_COLLECTION\_FUCHSIA\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_COLLECTION_FUCHSIA_EXT 1000366000)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_DEBUG\_REPORT\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_VALIDATION\_CACHE\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT_EXT)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_DESCRIPTOR\_UPDATE\_TEMPLATE\_KHR\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR_EXT VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_EXT)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_SAMPLER\_YCBCR\_CONVERSION\_KHR\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_KHR_EXT VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_EXT)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_OBJECT\_TYPE\_MAX\_ENUM\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_OBJECT_TYPE_MAX_ENUM_EXT 2147483647)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_INFORMATION\_BIT\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_INFORMATION_BIT_EXT 1)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_WARNING\_BIT\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_WARNING_BIT_EXT 2)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_PERFORMANCE\_WARNING\_BIT\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT 4)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_ERROR\_BIT\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_ERROR_BIT_EXT 8)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_DEBUG\_BIT\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_DEBUG_BIT_EXT 16)
+```
+
+#### Variable: VK\_DEBUG\_REPORT\_FLAG\_BITS\_MAX\_ENUM\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_REPORT_FLAG_BITS_MAX_ENUM_EXT 2147483647)
+```
+
+#### Variable: VK\_NV\_GLSL\_SHADER
+
+```Lisp
+(defparameter VK_NV_GLSL_SHADER 1)
+```
+
+#### Variable: VK\_NV\_GLSL\_SHADER\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_GLSL_SHADER_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_NV\_GLSL\_SHADER\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_GLSL_SHADER_EXTENSION_NAME "VK_NV_glsl_shader")
+```
+
+#### Variable: VK\_EXT\_DEPTH\_RANGE\_UNRESTRICTED
+
+```Lisp
+(defparameter VK_EXT_DEPTH_RANGE_UNRESTRICTED 1)
+```
+
+#### Variable: VK\_EXT\_DEPTH\_RANGE\_UNRESTRICTED\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_DEPTH_RANGE_UNRESTRICTED_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_DEPTH\_RANGE\_UNRESTRICTED\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_DEPTH_RANGE_UNRESTRICTED_EXTENSION_NAME "VK_EXT_depth_range_unrestricted")
+```
+
+#### Variable: VK\_IMG\_FILTER\_CUBIC
+
+```Lisp
+(defparameter VK_IMG_FILTER_CUBIC 1)
+```
+
+#### Variable: VK\_IMG\_FILTER\_CUBIC\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_IMG_FILTER_CUBIC_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_IMG\_FILTER\_CUBIC\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_IMG_FILTER_CUBIC_EXTENSION_NAME "VK_IMG_filter_cubic")
+```
+
+#### Variable: VK\_AMD\_RASTERIZATION\_ORDER
+
+```Lisp
+(defparameter VK_AMD_RASTERIZATION_ORDER 1)
+```
+
+#### Variable: VK\_AMD\_RASTERIZATION\_ORDER\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_AMD_RASTERIZATION_ORDER_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_AMD\_RASTERIZATION\_ORDER\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_AMD_RASTERIZATION_ORDER_EXTENSION_NAME "VK_AMD_rasterization_order")
+```
+
+#### Variable: VK\_RASTERIZATION\_ORDER\_STRICT\_AMD
+
+```Lisp
+(defparameter VK_RASTERIZATION_ORDER_STRICT_AMD 0)
+```
+
+#### Variable: VK\_RASTERIZATION\_ORDER\_RELAXED\_AMD
+
+```Lisp
+(defparameter VK_RASTERIZATION_ORDER_RELAXED_AMD 1)
+```
+
+#### Variable: VK\_RASTERIZATION\_ORDER\_MAX\_ENUM\_AMD
+
+```Lisp
+(defparameter VK_RASTERIZATION_ORDER_MAX_ENUM_AMD 2147483647)
+```
+
+#### Variable: VK\_AMD\_SHADER\_TRINARY\_MINMAX
+
+```Lisp
+(defparameter VK_AMD_SHADER_TRINARY_MINMAX 1)
+```
+
+#### Variable: VK\_AMD\_SHADER\_TRINARY\_MINMAX\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_AMD_SHADER_TRINARY_MINMAX_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_AMD\_SHADER\_TRINARY\_MINMAX\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_AMD_SHADER_TRINARY_MINMAX_EXTENSION_NAME "VK_AMD_shader_trinary_minmax")
+```
+
+#### Variable: VK\_AMD\_SHADER\_EXPLICIT\_VERTEX\_PARAMETER
+
+```Lisp
+(defparameter VK_AMD_SHADER_EXPLICIT_VERTEX_PARAMETER 1)
+```
+
+#### Variable: VK\_AMD\_SHADER\_EXPLICIT\_VERTEX\_PARAMETER\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_AMD_SHADER_EXPLICIT_VERTEX_PARAMETER_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_AMD\_SHADER\_EXPLICIT\_VERTEX\_PARAMETER\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_AMD_SHADER_EXPLICIT_VERTEX_PARAMETER_EXTENSION_NAME "VK_AMD_shader_explicit_vertex_parameter")
+```
+
+#### Variable: VK\_EXT\_DEBUG\_MARKER
+
+```Lisp
+(defparameter VK_EXT_DEBUG_MARKER 1)
+```
+
+#### Variable: VK\_EXT\_DEBUG\_MARKER\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_DEBUG_MARKER_SPEC_VERSION 4)
+```
+
+#### Variable: VK\_EXT\_DEBUG\_MARKER\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_DEBUG_MARKER_EXTENSION_NAME "VK_EXT_debug_marker")
+```
+
+#### Variable: VK\_AMD\_GCN\_SHADER
+
+```Lisp
+(defparameter VK_AMD_GCN_SHADER 1)
+```
+
+#### Variable: VK\_AMD\_GCN\_SHADER\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_AMD_GCN_SHADER_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_AMD\_GCN\_SHADER\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_AMD_GCN_SHADER_EXTENSION_NAME "VK_AMD_gcn_shader")
+```
+
+#### Variable: VK\_NV\_DEDICATED\_ALLOCATION
+
+```Lisp
+(defparameter VK_NV_DEDICATED_ALLOCATION 1)
+```
+
+#### Variable: VK\_NV\_DEDICATED\_ALLOCATION\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_DEDICATED_ALLOCATION_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_NV\_DEDICATED\_ALLOCATION\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_DEDICATED_ALLOCATION_EXTENSION_NAME "VK_NV_dedicated_allocation")
+```
+
+#### Variable: VK\_EXT\_TRANSFORM\_FEEDBACK
+
+```Lisp
+(defparameter VK_EXT_TRANSFORM_FEEDBACK 1)
+```
+
+#### Variable: VK\_EXT\_TRANSFORM\_FEEDBACK\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_TRANSFORM_FEEDBACK_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_TRANSFORM\_FEEDBACK\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_TRANSFORM_FEEDBACK_EXTENSION_NAME "VK_EXT_transform_feedback")
+```
+
+#### Variable: VK\_NVX\_BINARY\_IMPORT
+
+```Lisp
+(defparameter VK_NVX_BINARY_IMPORT 1)
+```
+
+#### Variable: VK\_NVX\_BINARY\_IMPORT\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NVX_BINARY_IMPORT_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_NVX\_BINARY\_IMPORT\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NVX_BINARY_IMPORT_EXTENSION_NAME "VK_NVX_binary_import")
+```
+
+#### Variable: VK\_NVX\_IMAGE\_VIEW\_HANDLE
+
+```Lisp
+(defparameter VK_NVX_IMAGE_VIEW_HANDLE 1)
+```
+
+#### Variable: VK\_NVX\_IMAGE\_VIEW\_HANDLE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NVX_IMAGE_VIEW_HANDLE_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_NVX\_IMAGE\_VIEW\_HANDLE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NVX_IMAGE_VIEW_HANDLE_EXTENSION_NAME "VK_NVX_image_view_handle")
+```
+
+#### Variable: VK\_AMD\_DRAW\_INDIRECT\_COUNT
+
+```Lisp
+(defparameter VK_AMD_DRAW_INDIRECT_COUNT 1)
+```
+
+#### Variable: VK\_AMD\_DRAW\_INDIRECT\_COUNT\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_AMD_DRAW_INDIRECT_COUNT_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_AMD\_DRAW\_INDIRECT\_COUNT\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_AMD_DRAW_INDIRECT_COUNT_EXTENSION_NAME "VK_AMD_draw_indirect_count")
+```
+
+#### Variable: VK\_AMD\_NEGATIVE\_VIEWPORT\_HEIGHT
+
+```Lisp
+(defparameter VK_AMD_NEGATIVE_VIEWPORT_HEIGHT 1)
+```
+
+#### Variable: VK\_AMD\_NEGATIVE\_VIEWPORT\_HEIGHT\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_AMD_NEGATIVE_VIEWPORT_HEIGHT_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_AMD\_NEGATIVE\_VIEWPORT\_HEIGHT\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_AMD_NEGATIVE_VIEWPORT_HEIGHT_EXTENSION_NAME "VK_AMD_negative_viewport_height")
+```
+
+#### Variable: VK\_AMD\_GPU\_SHADER\_HALF\_FLOAT
+
+```Lisp
+(defparameter VK_AMD_GPU_SHADER_HALF_FLOAT 1)
+```
+
+#### Variable: VK\_AMD\_GPU\_SHADER\_HALF\_FLOAT\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_AMD_GPU_SHADER_HALF_FLOAT_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_AMD\_GPU\_SHADER\_HALF\_FLOAT\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_AMD_GPU_SHADER_HALF_FLOAT_EXTENSION_NAME "VK_AMD_gpu_shader_half_float")
+```
+
+#### Variable: VK\_AMD\_SHADER\_BALLOT
+
+```Lisp
+(defparameter VK_AMD_SHADER_BALLOT 1)
+```
+
+#### Variable: VK\_AMD\_SHADER\_BALLOT\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_AMD_SHADER_BALLOT_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_AMD\_SHADER\_BALLOT\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_AMD_SHADER_BALLOT_EXTENSION_NAME "VK_AMD_shader_ballot")
+```
+
+#### Variable: VK\_AMD\_TEXTURE\_GATHER\_BIAS\_LOD
+
+```Lisp
+(defparameter VK_AMD_TEXTURE_GATHER_BIAS_LOD 1)
+```
+
+#### Variable: VK\_AMD\_TEXTURE\_GATHER\_BIAS\_LOD\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_AMD_TEXTURE_GATHER_BIAS_LOD_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_AMD\_TEXTURE\_GATHER\_BIAS\_LOD\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_AMD_TEXTURE_GATHER_BIAS_LOD_EXTENSION_NAME "VK_AMD_texture_gather_bias_lod")
+```
+
+#### Variable: VK\_AMD\_SHADER\_INFO
+
+```Lisp
+(defparameter VK_AMD_SHADER_INFO 1)
+```
+
+#### Variable: VK\_AMD\_SHADER\_INFO\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_AMD_SHADER_INFO_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_AMD\_SHADER\_INFO\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_AMD_SHADER_INFO_EXTENSION_NAME "VK_AMD_shader_info")
+```
+
+#### Variable: VK\_SHADER\_INFO\_TYPE\_STATISTICS\_AMD
+
+```Lisp
+(defparameter VK_SHADER_INFO_TYPE_STATISTICS_AMD 0)
+```
+
+#### Variable: VK\_SHADER\_INFO\_TYPE\_BINARY\_AMD
+
+```Lisp
+(defparameter VK_SHADER_INFO_TYPE_BINARY_AMD 1)
+```
+
+#### Variable: VK\_SHADER\_INFO\_TYPE\_DISASSEMBLY\_AMD
+
+```Lisp
+(defparameter VK_SHADER_INFO_TYPE_DISASSEMBLY_AMD 2)
+```
+
+#### Variable: VK\_SHADER\_INFO\_TYPE\_MAX\_ENUM\_AMD
+
+```Lisp
+(defparameter VK_SHADER_INFO_TYPE_MAX_ENUM_AMD 2147483647)
+```
+
+#### Variable: VK\_AMD\_SHADER\_IMAGE\_LOAD\_STORE\_LOD
+
+```Lisp
+(defparameter VK_AMD_SHADER_IMAGE_LOAD_STORE_LOD 1)
+```
+
+#### Variable: VK\_AMD\_SHADER\_IMAGE\_LOAD\_STORE\_LOD\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_AMD_SHADER_IMAGE_LOAD_STORE_LOD_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_AMD\_SHADER\_IMAGE\_LOAD\_STORE\_LOD\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_AMD_SHADER_IMAGE_LOAD_STORE_LOD_EXTENSION_NAME "VK_AMD_shader_image_load_store_lod")
+```
+
+#### Variable: VK\_NV\_CORNER\_SAMPLED\_IMAGE
+
+```Lisp
+(defparameter VK_NV_CORNER_SAMPLED_IMAGE 1)
+```
+
+#### Variable: VK\_NV\_CORNER\_SAMPLED\_IMAGE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_CORNER_SAMPLED_IMAGE_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_NV\_CORNER\_SAMPLED\_IMAGE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_CORNER_SAMPLED_IMAGE_EXTENSION_NAME "VK_NV_corner_sampled_image")
+```
+
+#### Variable: VK\_IMG\_FORMAT\_PVRTC
+
+```Lisp
+(defparameter VK_IMG_FORMAT_PVRTC 1)
+```
+
+#### Variable: VK\_IMG\_FORMAT\_PVRTC\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_IMG_FORMAT_PVRTC_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_IMG\_FORMAT\_PVRTC\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_IMG_FORMAT_PVRTC_EXTENSION_NAME "VK_IMG_format_pvrtc")
+```
+
+#### Variable: VK\_NV\_EXTERNAL\_MEMORY\_CAPABILITIES
+
+```Lisp
+(defparameter VK_NV_EXTERNAL_MEMORY_CAPABILITIES 1)
+```
+
+#### Variable: VK\_NV\_EXTERNAL\_MEMORY\_CAPABILITIES\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_EXTERNAL_MEMORY_CAPABILITIES_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_NV\_EXTERNAL\_MEMORY\_CAPABILITIES\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION_NAME "VK_NV_external_memory_capabilities")
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_HANDLE\_TYPE\_OPAQUE\_WIN32\_BIT\_NV
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV 1)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_HANDLE\_TYPE\_OPAQUE\_WIN32\_KMT\_BIT\_NV
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_NV 2)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_HANDLE\_TYPE\_D3D11\_IMAGE\_BIT\_NV
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_BIT_NV 4)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_HANDLE\_TYPE\_D3D11\_IMAGE\_KMT\_BIT\_NV
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_KMT_BIT_NV 8)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_HANDLE\_TYPE\_FLAG\_BITS\_MAX\_ENUM\_NV
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_HANDLE_TYPE_FLAG_BITS_MAX_ENUM_NV 2147483647)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_FEATURE\_DEDICATED\_ONLY\_BIT\_NV
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_NV 1)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_FEATURE\_EXPORTABLE\_BIT\_NV
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_NV 2)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_FEATURE\_IMPORTABLE\_BIT\_NV
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_NV 4)
+```
+
+#### Variable: VK\_EXTERNAL\_MEMORY\_FEATURE\_FLAG\_BITS\_MAX\_ENUM\_NV
+
+```Lisp
+(defparameter VK_EXTERNAL_MEMORY_FEATURE_FLAG_BITS_MAX_ENUM_NV 2147483647)
+```
+
+#### Variable: VK\_NV\_EXTERNAL\_MEMORY
+
+```Lisp
+(defparameter VK_NV_EXTERNAL_MEMORY 1)
+```
+
+#### Variable: VK\_NV\_EXTERNAL\_MEMORY\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_EXTERNAL_MEMORY_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_NV\_EXTERNAL\_MEMORY\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_EXTERNAL_MEMORY_EXTENSION_NAME "VK_NV_external_memory")
+```
+
+#### Variable: VK\_EXT\_VALIDATION\_FLAGS
+
+```Lisp
+(defparameter VK_EXT_VALIDATION_FLAGS 1)
+```
+
+#### Variable: VK\_EXT\_VALIDATION\_FLAGS\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_VALIDATION_FLAGS_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_EXT\_VALIDATION\_FLAGS\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_VALIDATION_FLAGS_EXTENSION_NAME "VK_EXT_validation_flags")
+```
+
+#### Variable: VK\_VALIDATION\_CHECK\_ALL\_EXT
+
+```Lisp
+(defparameter VK_VALIDATION_CHECK_ALL_EXT 0)
+```
+
+#### Variable: VK\_VALIDATION\_CHECK\_SHADERS\_EXT
+
+```Lisp
+(defparameter VK_VALIDATION_CHECK_SHADERS_EXT 1)
+```
+
+#### Variable: VK\_VALIDATION\_CHECK\_MAX\_ENUM\_EXT
+
+```Lisp
+(defparameter VK_VALIDATION_CHECK_MAX_ENUM_EXT 2147483647)
+```
+
+#### Variable: VK\_EXT\_SHADER\_SUBGROUP\_BALLOT
+
+```Lisp
+(defparameter VK_EXT_SHADER_SUBGROUP_BALLOT 1)
+```
+
+#### Variable: VK\_EXT\_SHADER\_SUBGROUP\_BALLOT\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_SHADER_SUBGROUP_BALLOT_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_SHADER\_SUBGROUP\_BALLOT\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_SHADER_SUBGROUP_BALLOT_EXTENSION_NAME "VK_EXT_shader_subgroup_ballot")
+```
+
+#### Variable: VK\_EXT\_SHADER\_SUBGROUP\_VOTE
+
+```Lisp
+(defparameter VK_EXT_SHADER_SUBGROUP_VOTE 1)
+```
+
+#### Variable: VK\_EXT\_SHADER\_SUBGROUP\_VOTE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_SHADER_SUBGROUP_VOTE_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_SHADER\_SUBGROUP\_VOTE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_SHADER_SUBGROUP_VOTE_EXTENSION_NAME "VK_EXT_shader_subgroup_vote")
+```
+
+#### Variable: VK\_EXT\_TEXTURE\_COMPRESSION\_ASTC\_HDR
+
+```Lisp
+(defparameter VK_EXT_TEXTURE_COMPRESSION_ASTC_HDR 1)
+```
+
+#### Variable: VK\_EXT\_TEXTURE\_COMPRESSION\_ASTC\_HDR\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_TEXTURE_COMPRESSION_ASTC_HDR_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_TEXTURE\_COMPRESSION\_ASTC\_HDR\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_TEXTURE_COMPRESSION_ASTC_HDR_EXTENSION_NAME "VK_EXT_texture_compression_astc_hdr")
+```
+
+#### Variable: VK\_EXT\_ASTC\_DECODE\_MODE
+
+```Lisp
+(defparameter VK_EXT_ASTC_DECODE_MODE 1)
+```
+
+#### Variable: VK\_EXT\_ASTC\_DECODE\_MODE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_ASTC_DECODE_MODE_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_ASTC\_DECODE\_MODE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_ASTC_DECODE_MODE_EXTENSION_NAME "VK_EXT_astc_decode_mode")
+```
+
+#### Variable: VK\_EXT\_CONDITIONAL\_RENDERING
+
+```Lisp
+(defparameter VK_EXT_CONDITIONAL_RENDERING 1)
+```
+
+#### Variable: VK\_EXT\_CONDITIONAL\_RENDERING\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_CONDITIONAL_RENDERING_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_EXT\_CONDITIONAL\_RENDERING\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_CONDITIONAL_RENDERING_EXTENSION_NAME "VK_EXT_conditional_rendering")
+```
+
+#### Variable: VK\_CONDITIONAL\_RENDERING\_INVERTED\_BIT\_EXT
+
+```Lisp
+(defparameter VK_CONDITIONAL_RENDERING_INVERTED_BIT_EXT 1)
+```
+
+#### Variable: VK\_CONDITIONAL\_RENDERING\_FLAG\_BITS\_MAX\_ENUM\_EXT
+
+```Lisp
+(defparameter VK_CONDITIONAL_RENDERING_FLAG_BITS_MAX_ENUM_EXT 2147483647)
+```
+
+#### Variable: VK\_NV\_CLIP\_SPACE\_W\_SCALING
+
+```Lisp
+(defparameter VK_NV_CLIP_SPACE_W_SCALING 1)
+```
+
+#### Variable: VK\_NV\_CLIP\_SPACE\_W\_SCALING\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_CLIP_SPACE_W_SCALING_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_NV\_CLIP\_SPACE\_W\_SCALING\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_CLIP_SPACE_W_SCALING_EXTENSION_NAME "VK_NV_clip_space_w_scaling")
+```
+
+#### Variable: VK\_EXT\_DIRECT\_MODE\_DISPLAY
+
+```Lisp
+(defparameter VK_EXT_DIRECT_MODE_DISPLAY 1)
+```
+
+#### Variable: VK\_EXT\_DIRECT\_MODE\_DISPLAY\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_DIRECT_MODE_DISPLAY_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_DIRECT\_MODE\_DISPLAY\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_DIRECT_MODE_DISPLAY_EXTENSION_NAME "VK_EXT_direct_mode_display")
+```
+
+#### Variable: VK\_EXT\_DISPLAY\_SURFACE\_COUNTER
+
+```Lisp
+(defparameter VK_EXT_DISPLAY_SURFACE_COUNTER 1)
+```
+
+#### Variable: VK\_EXT\_DISPLAY\_SURFACE\_COUNTER\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_DISPLAY_SURFACE_COUNTER_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_DISPLAY\_SURFACE\_COUNTER\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_DISPLAY_SURFACE_COUNTER_EXTENSION_NAME "VK_EXT_display_surface_counter")
+```
+
+#### Variable: VK\_SURFACE\_COUNTER\_VBLANK\_BIT\_EXT
+
+```Lisp
+(defparameter VK_SURFACE_COUNTER_VBLANK_BIT_EXT 1)
+```
+
+#### Variable: VK\_SURFACE\_COUNTER\_VBLANK\_EXT
+
+```Lisp
+(defparameter VK_SURFACE_COUNTER_VBLANK_EXT VK_SURFACE_COUNTER_VBLANK_BIT_EXT)
+```
+
+#### Variable: VK\_SURFACE\_COUNTER\_FLAG\_BITS\_MAX\_ENUM\_EXT
+
+```Lisp
+(defparameter VK_SURFACE_COUNTER_FLAG_BITS_MAX_ENUM_EXT 2147483647)
+```
+
+#### Variable: VK\_EXT\_DISPLAY\_CONTROL
+
+```Lisp
+(defparameter VK_EXT_DISPLAY_CONTROL 1)
+```
+
+#### Variable: VK\_EXT\_DISPLAY\_CONTROL\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_DISPLAY_CONTROL_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_DISPLAY\_CONTROL\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_DISPLAY_CONTROL_EXTENSION_NAME "VK_EXT_display_control")
+```
+
+#### Variable: VK\_DISPLAY\_POWER\_STATE\_OFF\_EXT
+
+```Lisp
+(defparameter VK_DISPLAY_POWER_STATE_OFF_EXT 0)
+```
+
+#### Variable: VK\_DISPLAY\_POWER\_STATE\_SUSPEND\_EXT
+
+```Lisp
+(defparameter VK_DISPLAY_POWER_STATE_SUSPEND_EXT 1)
+```
+
+#### Variable: VK\_DISPLAY\_POWER\_STATE\_ON\_EXT
+
+```Lisp
+(defparameter VK_DISPLAY_POWER_STATE_ON_EXT 2)
+```
+
+#### Variable: VK\_DISPLAY\_POWER\_STATE\_MAX\_ENUM\_EXT
+
+```Lisp
+(defparameter VK_DISPLAY_POWER_STATE_MAX_ENUM_EXT 2147483647)
+```
+
+#### Variable: VK\_DEVICE\_EVENT\_TYPE\_DISPLAY\_HOTPLUG\_EXT
+
+```Lisp
+(defparameter VK_DEVICE_EVENT_TYPE_DISPLAY_HOTPLUG_EXT 0)
+```
+
+#### Variable: VK\_DEVICE\_EVENT\_TYPE\_MAX\_ENUM\_EXT
+
+```Lisp
+(defparameter VK_DEVICE_EVENT_TYPE_MAX_ENUM_EXT 2147483647)
+```
+
+#### Variable: VK\_DISPLAY\_EVENT\_TYPE\_FIRST\_PIXEL\_OUT\_EXT
+
+```Lisp
+(defparameter VK_DISPLAY_EVENT_TYPE_FIRST_PIXEL_OUT_EXT 0)
+```
+
+#### Variable: VK\_DISPLAY\_EVENT\_TYPE\_MAX\_ENUM\_EXT
+
+```Lisp
+(defparameter VK_DISPLAY_EVENT_TYPE_MAX_ENUM_EXT 2147483647)
+```
+
+#### Variable: VK\_GOOGLE\_DISPLAY\_TIMING
+
+```Lisp
+(defparameter VK_GOOGLE_DISPLAY_TIMING 1)
+```
+
+#### Variable: VK\_GOOGLE\_DISPLAY\_TIMING\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_GOOGLE_DISPLAY_TIMING_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_GOOGLE\_DISPLAY\_TIMING\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_GOOGLE_DISPLAY_TIMING_EXTENSION_NAME "VK_GOOGLE_display_timing")
+```
+
+#### Variable: VK\_NV\_SAMPLE\_MASK\_OVERRIDE\_COVERAGE
+
+```Lisp
+(defparameter VK_NV_SAMPLE_MASK_OVERRIDE_COVERAGE 1)
+```
+
+#### Variable: VK\_NV\_SAMPLE\_MASK\_OVERRIDE\_COVERAGE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_SAMPLE_MASK_OVERRIDE_COVERAGE_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_NV\_SAMPLE\_MASK\_OVERRIDE\_COVERAGE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_SAMPLE_MASK_OVERRIDE_COVERAGE_EXTENSION_NAME "VK_NV_sample_mask_override_coverage")
+```
+
+#### Variable: VK\_NV\_GEOMETRY\_SHADER\_PASSTHROUGH
+
+```Lisp
+(defparameter VK_NV_GEOMETRY_SHADER_PASSTHROUGH 1)
+```
+
+#### Variable: VK\_NV\_GEOMETRY\_SHADER\_PASSTHROUGH\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_GEOMETRY_SHADER_PASSTHROUGH_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_NV\_GEOMETRY\_SHADER\_PASSTHROUGH\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_GEOMETRY_SHADER_PASSTHROUGH_EXTENSION_NAME "VK_NV_geometry_shader_passthrough")
+```
+
+#### Variable: VK\_NV\_VIEWPORT\_ARRAY2
+
+```Lisp
+(defparameter VK_NV_VIEWPORT_ARRAY2 1)
+```
+
+#### Variable: VK\_NV\_VIEWPORT\_ARRAY\_2\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_VIEWPORT_ARRAY_2_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_NV\_VIEWPORT\_ARRAY\_2\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_VIEWPORT_ARRAY_2_EXTENSION_NAME "VK_NV_viewport_array2")
+```
+
+#### Variable: VK\_NV\_VIEWPORT\_ARRAY2\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_VIEWPORT_ARRAY2_SPEC_VERSION VK_NV_VIEWPORT_ARRAY_2_SPEC_VERSION)
+```
+
+#### Variable: VK\_NV\_VIEWPORT\_ARRAY2\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_VIEWPORT_ARRAY2_EXTENSION_NAME VK_NV_VIEWPORT_ARRAY_2_EXTENSION_NAME)
+```
+
+#### Variable: VK\_NVX\_MULTIVIEW\_PER\_VIEW\_ATTRIBUTES
+
+```Lisp
+(defparameter VK_NVX_MULTIVIEW_PER_VIEW_ATTRIBUTES 1)
+```
+
+#### Variable: VK\_NVX\_MULTIVIEW\_PER\_VIEW\_ATTRIBUTES\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NVX_MULTIVIEW_PER_VIEW_ATTRIBUTES_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_NVX\_MULTIVIEW\_PER\_VIEW\_ATTRIBUTES\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NVX_MULTIVIEW_PER_VIEW_ATTRIBUTES_EXTENSION_NAME "VK_NVX_multiview_per_view_attributes")
+```
+
+#### Variable: VK\_NV\_VIEWPORT\_SWIZZLE
+
+```Lisp
+(defparameter VK_NV_VIEWPORT_SWIZZLE 1)
+```
+
+#### Variable: VK\_NV\_VIEWPORT\_SWIZZLE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_VIEWPORT_SWIZZLE_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_NV\_VIEWPORT\_SWIZZLE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_VIEWPORT_SWIZZLE_EXTENSION_NAME "VK_NV_viewport_swizzle")
+```
+
+#### Variable: VK\_VIEWPORT\_COORDINATE\_SWIZZLE\_POSITIVE\_X\_NV
+
+```Lisp
+(defparameter VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_X_NV 0)
+```
+
+#### Variable: VK\_VIEWPORT\_COORDINATE\_SWIZZLE\_NEGATIVE\_X\_NV
+
+```Lisp
+(defparameter VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_X_NV 1)
+```
+
+#### Variable: VK\_VIEWPORT\_COORDINATE\_SWIZZLE\_POSITIVE\_Y\_NV
+
+```Lisp
+(defparameter VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_Y_NV 2)
+```
+
+#### Variable: VK\_VIEWPORT\_COORDINATE\_SWIZZLE\_NEGATIVE\_Y\_NV
+
+```Lisp
+(defparameter VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_Y_NV 3)
+```
+
+#### Variable: VK\_VIEWPORT\_COORDINATE\_SWIZZLE\_POSITIVE\_Z\_NV
+
+```Lisp
+(defparameter VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_Z_NV 4)
+```
+
+#### Variable: VK\_VIEWPORT\_COORDINATE\_SWIZZLE\_NEGATIVE\_Z\_NV
+
+```Lisp
+(defparameter VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_Z_NV 5)
+```
+
+#### Variable: VK\_VIEWPORT\_COORDINATE\_SWIZZLE\_POSITIVE\_W\_NV
+
+```Lisp
+(defparameter VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_W_NV 6)
+```
+
+#### Variable: VK\_VIEWPORT\_COORDINATE\_SWIZZLE\_NEGATIVE\_W\_NV
+
+```Lisp
+(defparameter VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_W_NV 7)
+```
+
+#### Variable: VK\_VIEWPORT\_COORDINATE\_SWIZZLE\_MAX\_ENUM\_NV
+
+```Lisp
+(defparameter VK_VIEWPORT_COORDINATE_SWIZZLE_MAX_ENUM_NV 2147483647)
+```
+
+#### Variable: VK\_EXT\_DISCARD\_RECTANGLES
+
+```Lisp
+(defparameter VK_EXT_DISCARD_RECTANGLES 1)
+```
+
+#### Variable: VK\_EXT\_DISCARD\_RECTANGLES\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_DISCARD_RECTANGLES_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_DISCARD\_RECTANGLES\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_DISCARD_RECTANGLES_EXTENSION_NAME "VK_EXT_discard_rectangles")
+```
+
+#### Variable: VK\_DISCARD\_RECTANGLE\_MODE\_INCLUSIVE\_EXT
+
+```Lisp
+(defparameter VK_DISCARD_RECTANGLE_MODE_INCLUSIVE_EXT 0)
+```
+
+#### Variable: VK\_DISCARD\_RECTANGLE\_MODE\_EXCLUSIVE\_EXT
+
+```Lisp
+(defparameter VK_DISCARD_RECTANGLE_MODE_EXCLUSIVE_EXT 1)
+```
+
+#### Variable: VK\_DISCARD\_RECTANGLE\_MODE\_MAX\_ENUM\_EXT
+
+```Lisp
+(defparameter VK_DISCARD_RECTANGLE_MODE_MAX_ENUM_EXT 2147483647)
+```
+
+#### Variable: VK\_EXT\_CONSERVATIVE\_RASTERIZATION
+
+```Lisp
+(defparameter VK_EXT_CONSERVATIVE_RASTERIZATION 1)
+```
+
+#### Variable: VK\_EXT\_CONSERVATIVE\_RASTERIZATION\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_CONSERVATIVE_RASTERIZATION_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_CONSERVATIVE\_RASTERIZATION\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_CONSERVATIVE_RASTERIZATION_EXTENSION_NAME "VK_EXT_conservative_rasterization")
+```
+
+#### Variable: VK\_CONSERVATIVE\_RASTERIZATION\_MODE\_DISABLED\_EXT
+
+```Lisp
+(defparameter VK_CONSERVATIVE_RASTERIZATION_MODE_DISABLED_EXT 0)
+```
+
+#### Variable: VK\_CONSERVATIVE\_RASTERIZATION\_MODE\_OVERESTIMATE\_EXT
+
+```Lisp
+(defparameter VK_CONSERVATIVE_RASTERIZATION_MODE_OVERESTIMATE_EXT 1)
+```
+
+#### Variable: VK\_CONSERVATIVE\_RASTERIZATION\_MODE\_UNDERESTIMATE\_EXT
+
+```Lisp
+(defparameter VK_CONSERVATIVE_RASTERIZATION_MODE_UNDERESTIMATE_EXT 2)
+```
+
+#### Variable: VK\_CONSERVATIVE\_RASTERIZATION\_MODE\_MAX\_ENUM\_EXT
+
+```Lisp
+(defparameter VK_CONSERVATIVE_RASTERIZATION_MODE_MAX_ENUM_EXT 2147483647)
+```
+
+#### Variable: VK\_EXT\_DEPTH\_CLIP\_ENABLE
+
+```Lisp
+(defparameter VK_EXT_DEPTH_CLIP_ENABLE 1)
+```
+
+#### Variable: VK\_EXT\_DEPTH\_CLIP\_ENABLE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_DEPTH_CLIP_ENABLE_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_DEPTH\_CLIP\_ENABLE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_DEPTH_CLIP_ENABLE_EXTENSION_NAME "VK_EXT_depth_clip_enable")
+```
+
+#### Variable: VK\_EXT\_SWAPCHAIN\_COLORSPACE
+
+```Lisp
+(defparameter VK_EXT_SWAPCHAIN_COLORSPACE 1)
+```
+
+#### Variable: VK\_EXT\_SWAPCHAIN\_COLOR\_SPACE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_SWAPCHAIN_COLOR_SPACE_SPEC_VERSION 4)
+```
+
+#### Variable: VK\_EXT\_SWAPCHAIN\_COLOR\_SPACE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_SWAPCHAIN_COLOR_SPACE_EXTENSION_NAME "VK_EXT_swapchain_colorspace")
+```
+
+#### Variable: VK\_EXT\_HDR\_METADATA
+
+```Lisp
+(defparameter VK_EXT_HDR_METADATA 1)
+```
+
+#### Variable: VK\_EXT\_HDR\_METADATA\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_HDR_METADATA_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_EXT\_HDR\_METADATA\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_HDR_METADATA_EXTENSION_NAME "VK_EXT_hdr_metadata")
+```
+
+#### Variable: VK\_EXT\_EXTERNAL\_MEMORY\_DMA\_BUF
+
+```Lisp
+(defparameter VK_EXT_EXTERNAL_MEMORY_DMA_BUF 1)
+```
+
+#### Variable: VK\_EXT\_EXTERNAL\_MEMORY\_DMA\_BUF\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_EXTERNAL_MEMORY_DMA_BUF_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_EXTERNAL\_MEMORY\_DMA\_BUF\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_EXTERNAL_MEMORY_DMA_BUF_EXTENSION_NAME "VK_EXT_external_memory_dma_buf")
+```
+
+#### Variable: VK\_EXT\_QUEUE\_FAMILY\_FOREIGN
+
+```Lisp
+(defparameter VK_EXT_QUEUE_FAMILY_FOREIGN 1)
+```
+
+#### Variable: VK\_EXT\_QUEUE\_FAMILY\_FOREIGN\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_QUEUE_FAMILY_FOREIGN_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_QUEUE\_FAMILY\_FOREIGN\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_QUEUE_FAMILY_FOREIGN_EXTENSION_NAME "VK_EXT_queue_family_foreign")
+```
+
+#### Variable: VK\_QUEUE\_FAMILY\_FOREIGN\_EXT
+
+```Lisp
+(defparameter VK_QUEUE_FAMILY_FOREIGN_EXT (- UINT32_MAX 2))
+```
+
+#### Variable: VK\_EXT\_DEBUG\_UTILS
+
+```Lisp
+(defparameter VK_EXT_DEBUG_UTILS 1)
+```
+
+#### Variable: VK\_EXT\_DEBUG\_UTILS\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_DEBUG_UTILS_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_EXT\_DEBUG\_UTILS\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_DEBUG_UTILS_EXTENSION_NAME "VK_EXT_debug_utils")
+```
+
+#### Variable: VK\_DEBUG\_UTILS\_MESSAGE\_SEVERITY\_VERBOSE\_BIT\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT 1)
+```
+
+#### Variable: VK\_DEBUG\_UTILS\_MESSAGE\_SEVERITY\_INFO\_BIT\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT 16)
+```
+
+#### Variable: VK\_DEBUG\_UTILS\_MESSAGE\_SEVERITY\_WARNING\_BIT\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT 256)
+```
+
+#### Variable: VK\_DEBUG\_UTILS\_MESSAGE\_SEVERITY\_ERROR\_BIT\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT 4096)
+```
+
+#### Variable: VK\_DEBUG\_UTILS\_MESSAGE\_SEVERITY\_FLAG\_BITS\_MAX\_ENUM\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_UTILS_MESSAGE_SEVERITY_FLAG_BITS_MAX_ENUM_EXT 2147483647)
+```
+
+#### Variable: VK\_DEBUG\_UTILS\_MESSAGE\_TYPE\_GENERAL\_BIT\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT 1)
+```
+
+#### Variable: VK\_DEBUG\_UTILS\_MESSAGE\_TYPE\_VALIDATION\_BIT\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT 2)
+```
+
+#### Variable: VK\_DEBUG\_UTILS\_MESSAGE\_TYPE\_PERFORMANCE\_BIT\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT 4)
+```
+
+#### Variable: VK\_DEBUG\_UTILS\_MESSAGE\_TYPE\_FLAG\_BITS\_MAX\_ENUM\_EXT
+
+```Lisp
+(defparameter VK_DEBUG_UTILS_MESSAGE_TYPE_FLAG_BITS_MAX_ENUM_EXT 2147483647)
+```
+
+#### Variable: VK\_EXT\_SAMPLER\_FILTER\_MINMAX
+
+```Lisp
+(defparameter VK_EXT_SAMPLER_FILTER_MINMAX 1)
+```
+
+#### Variable: VK\_EXT\_SAMPLER\_FILTER\_MINMAX\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_SAMPLER_FILTER_MINMAX_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_EXT\_SAMPLER\_FILTER\_MINMAX\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_SAMPLER_FILTER_MINMAX_EXTENSION_NAME "VK_EXT_sampler_filter_minmax")
+```
+
+#### Variable: VK\_AMD\_GPU\_SHADER\_INT16
+
+```Lisp
+(defparameter VK_AMD_GPU_SHADER_INT16 1)
+```
+
+#### Variable: VK\_AMD\_GPU\_SHADER\_INT16\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_AMD_GPU_SHADER_INT16_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_AMD\_GPU\_SHADER\_INT16\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_AMD_GPU_SHADER_INT16_EXTENSION_NAME "VK_AMD_gpu_shader_int16")
+```
+
+#### Variable: VK\_AMD\_MIXED\_ATTACHMENT\_SAMPLES
+
+```Lisp
+(defparameter VK_AMD_MIXED_ATTACHMENT_SAMPLES 1)
+```
+
+#### Variable: VK\_AMD\_MIXED\_ATTACHMENT\_SAMPLES\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_AMD_MIXED_ATTACHMENT_SAMPLES_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_AMD\_MIXED\_ATTACHMENT\_SAMPLES\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_AMD_MIXED_ATTACHMENT_SAMPLES_EXTENSION_NAME "VK_AMD_mixed_attachment_samples")
+```
+
+#### Variable: VK\_AMD\_SHADER\_FRAGMENT\_MASK
+
+```Lisp
+(defparameter VK_AMD_SHADER_FRAGMENT_MASK 1)
+```
+
+#### Variable: VK\_AMD\_SHADER\_FRAGMENT\_MASK\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_AMD_SHADER_FRAGMENT_MASK_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_AMD\_SHADER\_FRAGMENT\_MASK\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_AMD_SHADER_FRAGMENT_MASK_EXTENSION_NAME "VK_AMD_shader_fragment_mask")
+```
+
+#### Variable: VK\_EXT\_INLINE\_UNIFORM\_BLOCK
+
+```Lisp
+(defparameter VK_EXT_INLINE_UNIFORM_BLOCK 1)
+```
+
+#### Variable: VK\_EXT\_INLINE\_UNIFORM\_BLOCK\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_INLINE_UNIFORM_BLOCK_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_INLINE\_UNIFORM\_BLOCK\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_INLINE_UNIFORM_BLOCK_EXTENSION_NAME "VK_EXT_inline_uniform_block")
+```
+
+#### Variable: VK\_EXT\_SHADER\_STENCIL\_EXPORT
+
+```Lisp
+(defparameter VK_EXT_SHADER_STENCIL_EXPORT 1)
+```
+
+#### Variable: VK\_EXT\_SHADER\_STENCIL\_EXPORT\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_SHADER_STENCIL_EXPORT_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_SHADER\_STENCIL\_EXPORT\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_SHADER_STENCIL_EXPORT_EXTENSION_NAME "VK_EXT_shader_stencil_export")
+```
+
+#### Variable: VK\_EXT\_SAMPLE\_LOCATIONS
+
+```Lisp
+(defparameter VK_EXT_SAMPLE_LOCATIONS 1)
+```
+
+#### Variable: VK\_EXT\_SAMPLE\_LOCATIONS\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_SAMPLE_LOCATIONS_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_SAMPLE\_LOCATIONS\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_SAMPLE_LOCATIONS_EXTENSION_NAME "VK_EXT_sample_locations")
+```
+
+#### Variable: VK\_EXT\_BLEND\_OPERATION\_ADVANCED
+
+```Lisp
+(defparameter VK_EXT_BLEND_OPERATION_ADVANCED 1)
+```
+
+#### Variable: VK\_EXT\_BLEND\_OPERATION\_ADVANCED\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_BLEND_OPERATION_ADVANCED_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_EXT\_BLEND\_OPERATION\_ADVANCED\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_BLEND_OPERATION_ADVANCED_EXTENSION_NAME "VK_EXT_blend_operation_advanced")
+```
+
+#### Variable: VK\_BLEND\_OVERLAP\_UNCORRELATED\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OVERLAP_UNCORRELATED_EXT 0)
+```
+
+#### Variable: VK\_BLEND\_OVERLAP\_DISJOINT\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OVERLAP_DISJOINT_EXT 1)
+```
+
+#### Variable: VK\_BLEND\_OVERLAP\_CONJOINT\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OVERLAP_CONJOINT_EXT 2)
+```
+
+#### Variable: VK\_BLEND\_OVERLAP\_MAX\_ENUM\_EXT
+
+```Lisp
+(defparameter VK_BLEND_OVERLAP_MAX_ENUM_EXT 2147483647)
+```
+
+#### Variable: VK\_NV\_FRAGMENT\_COVERAGE\_TO\_COLOR
+
+```Lisp
+(defparameter VK_NV_FRAGMENT_COVERAGE_TO_COLOR 1)
+```
+
+#### Variable: VK\_NV\_FRAGMENT\_COVERAGE\_TO\_COLOR\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_FRAGMENT_COVERAGE_TO_COLOR_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_NV\_FRAGMENT\_COVERAGE\_TO\_COLOR\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_FRAGMENT_COVERAGE_TO_COLOR_EXTENSION_NAME "VK_NV_fragment_coverage_to_color")
+```
+
+#### Variable: VK\_NV\_FRAMEBUFFER\_MIXED\_SAMPLES
+
+```Lisp
+(defparameter VK_NV_FRAMEBUFFER_MIXED_SAMPLES 1)
+```
+
+#### Variable: VK\_NV\_FRAMEBUFFER\_MIXED\_SAMPLES\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_FRAMEBUFFER_MIXED_SAMPLES_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_NV\_FRAMEBUFFER\_MIXED\_SAMPLES\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_FRAMEBUFFER_MIXED_SAMPLES_EXTENSION_NAME "VK_NV_framebuffer_mixed_samples")
+```
+
+#### Variable: VK\_COVERAGE\_MODULATION\_MODE\_NONE\_NV
+
+```Lisp
+(defparameter VK_COVERAGE_MODULATION_MODE_NONE_NV 0)
+```
+
+#### Variable: VK\_COVERAGE\_MODULATION\_MODE\_RGB\_NV
+
+```Lisp
+(defparameter VK_COVERAGE_MODULATION_MODE_RGB_NV 1)
+```
+
+#### Variable: VK\_COVERAGE\_MODULATION\_MODE\_ALPHA\_NV
+
+```Lisp
+(defparameter VK_COVERAGE_MODULATION_MODE_ALPHA_NV 2)
+```
+
+#### Variable: VK\_COVERAGE\_MODULATION\_MODE\_RGBA\_NV
+
+```Lisp
+(defparameter VK_COVERAGE_MODULATION_MODE_RGBA_NV 3)
+```
+
+#### Variable: VK\_COVERAGE\_MODULATION\_MODE\_MAX\_ENUM\_NV
+
+```Lisp
+(defparameter VK_COVERAGE_MODULATION_MODE_MAX_ENUM_NV 2147483647)
+```
+
+#### Variable: VK\_NV\_FILL\_RECTANGLE
+
+```Lisp
+(defparameter VK_NV_FILL_RECTANGLE 1)
+```
+
+#### Variable: VK\_NV\_FILL\_RECTANGLE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_FILL_RECTANGLE_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_NV\_FILL\_RECTANGLE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_FILL_RECTANGLE_EXTENSION_NAME "VK_NV_fill_rectangle")
+```
+
+#### Variable: VK\_NV\_SHADER\_SM\_BUILTINS
+
+```Lisp
+(defparameter VK_NV_SHADER_SM_BUILTINS 1)
+```
+
+#### Variable: VK\_NV\_SHADER\_SM\_BUILTINS\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_SHADER_SM_BUILTINS_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_NV\_SHADER\_SM\_BUILTINS\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_SHADER_SM_BUILTINS_EXTENSION_NAME "VK_NV_shader_sm_builtins")
+```
+
+#### Variable: VK\_EXT\_POST\_DEPTH\_COVERAGE
+
+```Lisp
+(defparameter VK_EXT_POST_DEPTH_COVERAGE 1)
+```
+
+#### Variable: VK\_EXT\_POST\_DEPTH\_COVERAGE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_POST_DEPTH_COVERAGE_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_POST\_DEPTH\_COVERAGE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_POST_DEPTH_COVERAGE_EXTENSION_NAME "VK_EXT_post_depth_coverage")
+```
+
+#### Variable: VK\_EXT\_IMAGE\_DRM\_FORMAT\_MODIFIER
+
+```Lisp
+(defparameter VK_EXT_IMAGE_DRM_FORMAT_MODIFIER 1)
+```
+
+#### Variable: VK\_EXT\_IMAGE\_DRM\_FORMAT\_MODIFIER\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_IMAGE_DRM_FORMAT_MODIFIER_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_EXT\_IMAGE\_DRM\_FORMAT\_MODIFIER\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_IMAGE_DRM_FORMAT_MODIFIER_EXTENSION_NAME "VK_EXT_image_drm_format_modifier")
+```
+
+#### Variable: VK\_EXT\_VALIDATION\_CACHE
+
+```Lisp
+(defparameter VK_EXT_VALIDATION_CACHE 1)
+```
+
+#### Variable: VK\_EXT\_VALIDATION\_CACHE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_VALIDATION_CACHE_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_VALIDATION\_CACHE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_VALIDATION_CACHE_EXTENSION_NAME "VK_EXT_validation_cache")
+```
+
+#### Variable: VK\_VALIDATION\_CACHE\_HEADER\_VERSION\_ONE\_EXT
+
+```Lisp
+(defparameter VK_VALIDATION_CACHE_HEADER_VERSION_ONE_EXT 1)
+```
+
+#### Variable: VK\_VALIDATION\_CACHE\_HEADER\_VERSION\_MAX\_ENUM\_EXT
+
+```Lisp
+(defparameter VK_VALIDATION_CACHE_HEADER_VERSION_MAX_ENUM_EXT 2147483647)
+```
+
+#### Variable: VK\_EXT\_DESCRIPTOR\_INDEXING
+
+```Lisp
+(defparameter VK_EXT_DESCRIPTOR_INDEXING 1)
+```
+
+#### Variable: VK\_EXT\_DESCRIPTOR\_INDEXING\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_DESCRIPTOR_INDEXING_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_EXT\_DESCRIPTOR\_INDEXING\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_DESCRIPTOR_INDEXING_EXTENSION_NAME "VK_EXT_descriptor_indexing")
+```
+
+#### Variable: VK\_EXT\_SHADER\_VIEWPORT\_INDEX\_LAYER
+
+```Lisp
+(defparameter VK_EXT_SHADER_VIEWPORT_INDEX_LAYER 1)
+```
+
+#### Variable: VK\_EXT\_SHADER\_VIEWPORT\_INDEX\_LAYER\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_SHADER_VIEWPORT_INDEX_LAYER_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_SHADER\_VIEWPORT\_INDEX\_LAYER\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_SHADER_VIEWPORT_INDEX_LAYER_EXTENSION_NAME "VK_EXT_shader_viewport_index_layer")
+```
+
+#### Variable: VK\_NV\_SHADING\_RATE\_IMAGE
+
+```Lisp
+(defparameter VK_NV_SHADING_RATE_IMAGE 1)
+```
+
+#### Variable: VK\_NV\_SHADING\_RATE\_IMAGE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_SHADING_RATE_IMAGE_SPEC_VERSION 3)
+```
+
+#### Variable: VK\_NV\_SHADING\_RATE\_IMAGE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_SHADING_RATE_IMAGE_EXTENSION_NAME "VK_NV_shading_rate_image")
+```
+
+#### Variable: VK\_SHADING\_RATE\_PALETTE\_ENTRY\_NO\_INVOCATIONS\_NV
+
+```Lisp
+(defparameter VK_SHADING_RATE_PALETTE_ENTRY_NO_INVOCATIONS_NV 0)
+```
+
+#### Variable: VK\_SHADING\_RATE\_PALETTE\_ENTRY\_16\_INVOCATIONS\_PER\_PIXEL\_NV
+
+```Lisp
+(defparameter VK_SHADING_RATE_PALETTE_ENTRY_16_INVOCATIONS_PER_PIXEL_NV 1)
+```
+
+#### Variable: VK\_SHADING\_RATE\_PALETTE\_ENTRY\_8\_INVOCATIONS\_PER\_PIXEL\_NV
+
+```Lisp
+(defparameter VK_SHADING_RATE_PALETTE_ENTRY_8_INVOCATIONS_PER_PIXEL_NV 2)
+```
+
+#### Variable: VK\_SHADING\_RATE\_PALETTE\_ENTRY\_4\_INVOCATIONS\_PER\_PIXEL\_NV
+
+```Lisp
+(defparameter VK_SHADING_RATE_PALETTE_ENTRY_4_INVOCATIONS_PER_PIXEL_NV 3)
+```
+
+#### Variable: VK\_SHADING\_RATE\_PALETTE\_ENTRY\_2\_INVOCATIONS\_PER\_PIXEL\_NV
+
+```Lisp
+(defparameter VK_SHADING_RATE_PALETTE_ENTRY_2_INVOCATIONS_PER_PIXEL_NV 4)
+```
+
+#### Variable: VK\_SHADING\_RATE\_PALETTE\_ENTRY\_1\_INVOCATION\_PER\_PIXEL\_NV
+
+```Lisp
+(defparameter VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_PIXEL_NV 5)
+```
+
+#### Variable: VK\_SHADING\_RATE\_PALETTE\_ENTRY\_1\_INVOCATION\_PER\_2X1\_PIXELS\_NV
+
+```Lisp
+(defparameter VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_2X1_PIXELS_NV 6)
+```
+
+#### Variable: VK\_SHADING\_RATE\_PALETTE\_ENTRY\_1\_INVOCATION\_PER\_1X2\_PIXELS\_NV
+
+```Lisp
+(defparameter VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_1X2_PIXELS_NV 7)
+```
+
+#### Variable: VK\_SHADING\_RATE\_PALETTE\_ENTRY\_1\_INVOCATION\_PER\_2X2\_PIXELS\_NV
+
+```Lisp
+(defparameter VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_2X2_PIXELS_NV 8)
+```
+
+#### Variable: VK\_SHADING\_RATE\_PALETTE\_ENTRY\_1\_INVOCATION\_PER\_4X2\_PIXELS\_NV
+
+```Lisp
+(defparameter VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_4X2_PIXELS_NV 9)
+```
+
+#### Variable: VK\_SHADING\_RATE\_PALETTE\_ENTRY\_1\_INVOCATION\_PER\_2X4\_PIXELS\_NV
+
+```Lisp
+(defparameter VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_2X4_PIXELS_NV 10)
+```
+
+#### Variable: VK\_SHADING\_RATE\_PALETTE\_ENTRY\_1\_INVOCATION\_PER\_4X4\_PIXELS\_NV
+
+```Lisp
+(defparameter VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_4X4_PIXELS_NV 11)
+```
+
+#### Variable: VK\_SHADING\_RATE\_PALETTE\_ENTRY\_MAX\_ENUM\_NV
+
+```Lisp
+(defparameter VK_SHADING_RATE_PALETTE_ENTRY_MAX_ENUM_NV 2147483647)
+```
+
+#### Variable: VK\_COARSE\_SAMPLE\_ORDER\_TYPE\_DEFAULT\_NV
+
+```Lisp
+(defparameter VK_COARSE_SAMPLE_ORDER_TYPE_DEFAULT_NV 0)
+```
+
+#### Variable: VK\_COARSE\_SAMPLE\_ORDER\_TYPE\_CUSTOM\_NV
+
+```Lisp
+(defparameter VK_COARSE_SAMPLE_ORDER_TYPE_CUSTOM_NV 1)
+```
+
+#### Variable: VK\_COARSE\_SAMPLE\_ORDER\_TYPE\_PIXEL\_MAJOR\_NV
+
+```Lisp
+(defparameter VK_COARSE_SAMPLE_ORDER_TYPE_PIXEL_MAJOR_NV 2)
+```
+
+#### Variable: VK\_COARSE\_SAMPLE\_ORDER\_TYPE\_SAMPLE\_MAJOR\_NV
+
+```Lisp
+(defparameter VK_COARSE_SAMPLE_ORDER_TYPE_SAMPLE_MAJOR_NV 3)
+```
+
+#### Variable: VK\_COARSE\_SAMPLE\_ORDER\_TYPE\_MAX\_ENUM\_NV
+
+```Lisp
+(defparameter VK_COARSE_SAMPLE_ORDER_TYPE_MAX_ENUM_NV 2147483647)
+```
+
+#### Variable: VK\_NV\_RAY\_TRACING
+
+```Lisp
+(defparameter VK_NV_RAY_TRACING 1)
+```
+
+#### Variable: VK\_NV\_RAY\_TRACING\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_RAY_TRACING_SPEC_VERSION 3)
+```
+
+#### Variable: VK\_NV\_RAY\_TRACING\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_RAY_TRACING_EXTENSION_NAME "VK_NV_ray_tracing")
+```
+
+#### Variable: VK\_SHADER\_UNUSED\_KHR
+
+```Lisp
+(defparameter VK_SHADER_UNUSED_KHR (- UINT32_MAX 0))
+```
+
+#### Variable: VK\_SHADER\_UNUSED\_NV
+
+```Lisp
+(defparameter VK_SHADER_UNUSED_NV VK_SHADER_UNUSED_KHR)
+```
+
+#### Variable: VK\_RAY\_TRACING\_SHADER\_GROUP\_TYPE\_GENERAL\_KHR
+
+```Lisp
+(defparameter VK_RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_KHR 0)
+```
+
+#### Variable: VK\_RAY\_TRACING\_SHADER\_GROUP\_TYPE\_TRIANGLES\_HIT\_GROUP\_KHR
+
+```Lisp
+(defparameter VK_RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_KHR 1)
+```
+
+#### Variable: VK\_RAY\_TRACING\_SHADER\_GROUP\_TYPE\_PROCEDURAL\_HIT\_GROUP\_KHR
+
+```Lisp
+(defparameter VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR 2)
+```
+
+#### Variable: VK\_RAY\_TRACING\_SHADER\_GROUP\_TYPE\_GENERAL\_NV
+
+```Lisp
+(defparameter VK_RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_NV VK_RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_KHR)
+```
+
+#### Variable: VK\_RAY\_TRACING\_SHADER\_GROUP\_TYPE\_TRIANGLES\_HIT\_GROUP\_NV
+
+```Lisp
+(defparameter VK_RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_NV VK_RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_KHR)
+```
+
+#### Variable: VK\_RAY\_TRACING\_SHADER\_GROUP\_TYPE\_PROCEDURAL\_HIT\_GROUP\_NV
+
+```Lisp
+(defparameter VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_NV VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR)
+```
+
+#### Variable: VK\_RAY\_TRACING\_SHADER\_GROUP\_TYPE\_MAX\_ENUM\_KHR
+
+```Lisp
+(defparameter VK_RAY_TRACING_SHADER_GROUP_TYPE_MAX_ENUM_KHR 2147483647)
+```
+
+#### Variable: VK\_GEOMETRY\_TYPE\_TRIANGLES\_KHR
+
+```Lisp
+(defparameter VK_GEOMETRY_TYPE_TRIANGLES_KHR 0)
+```
+
+#### Variable: VK\_GEOMETRY\_TYPE\_AABBS\_KHR
+
+```Lisp
+(defparameter VK_GEOMETRY_TYPE_AABBS_KHR 1)
+```
+
+#### Variable: VK\_GEOMETRY\_TYPE\_INSTANCES\_KHR
+
+```Lisp
+(defparameter VK_GEOMETRY_TYPE_INSTANCES_KHR 2)
+```
+
+#### Variable: VK\_GEOMETRY\_TYPE\_TRIANGLES\_NV
+
+```Lisp
+(defparameter VK_GEOMETRY_TYPE_TRIANGLES_NV VK_GEOMETRY_TYPE_TRIANGLES_KHR)
+```
+
+#### Variable: VK\_GEOMETRY\_TYPE\_AABBS\_NV
+
+```Lisp
+(defparameter VK_GEOMETRY_TYPE_AABBS_NV VK_GEOMETRY_TYPE_AABBS_KHR)
+```
+
+#### Variable: VK\_GEOMETRY\_TYPE\_MAX\_ENUM\_KHR
+
+```Lisp
+(defparameter VK_GEOMETRY_TYPE_MAX_ENUM_KHR 2147483647)
+```
+
+#### Variable: VK\_ACCELERATION\_STRUCTURE\_TYPE\_TOP\_LEVEL\_KHR
+
+```Lisp
+(defparameter VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR 0)
+```
+
+#### Variable: VK\_ACCELERATION\_STRUCTURE\_TYPE\_BOTTOM\_LEVEL\_KHR
+
+```Lisp
+(defparameter VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_KHR 1)
+```
+
+#### Variable: VK\_ACCELERATION\_STRUCTURE\_TYPE\_GENERIC\_KHR
+
+```Lisp
+(defparameter VK_ACCELERATION_STRUCTURE_TYPE_GENERIC_KHR 2)
+```
+
+#### Variable: VK\_ACCELERATION\_STRUCTURE\_TYPE\_TOP\_LEVEL\_NV
+
+```Lisp
+(defparameter VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NV VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR)
+```
+
+#### Variable: VK\_ACCELERATION\_STRUCTURE\_TYPE\_BOTTOM\_LEVEL\_NV
+
+```Lisp
+(defparameter VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NV VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_KHR)
+```
+
+#### Variable: VK\_ACCELERATION\_STRUCTURE\_TYPE\_MAX\_ENUM\_KHR
+
+```Lisp
+(defparameter VK_ACCELERATION_STRUCTURE_TYPE_MAX_ENUM_KHR 2147483647)
+```
+
+#### Variable: VK\_COPY\_ACCELERATION\_STRUCTURE\_MODE\_CLONE\_KHR
+
+```Lisp
+(defparameter VK_COPY_ACCELERATION_STRUCTURE_MODE_CLONE_KHR 0)
+```
+
+#### Variable: VK\_COPY\_ACCELERATION\_STRUCTURE\_MODE\_COMPACT\_KHR
+
+```Lisp
+(defparameter VK_COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_KHR 1)
+```
+
+#### Variable: VK\_COPY\_ACCELERATION\_STRUCTURE\_MODE\_SERIALIZE\_KHR
+
+```Lisp
+(defparameter VK_COPY_ACCELERATION_STRUCTURE_MODE_SERIALIZE_KHR 2)
+```
+
+#### Variable: VK\_COPY\_ACCELERATION\_STRUCTURE\_MODE\_DESERIALIZE\_KHR
+
+```Lisp
+(defparameter VK_COPY_ACCELERATION_STRUCTURE_MODE_DESERIALIZE_KHR 3)
+```
+
+#### Variable: VK\_COPY\_ACCELERATION\_STRUCTURE\_MODE\_CLONE\_NV
+
+```Lisp
+(defparameter VK_COPY_ACCELERATION_STRUCTURE_MODE_CLONE_NV VK_COPY_ACCELERATION_STRUCTURE_MODE_CLONE_KHR)
+```
+
+#### Variable: VK\_COPY\_ACCELERATION\_STRUCTURE\_MODE\_COMPACT\_NV
+
+```Lisp
+(defparameter VK_COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_NV VK_COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_KHR)
+```
+
+#### Variable: VK\_COPY\_ACCELERATION\_STRUCTURE\_MODE\_MAX\_ENUM\_KHR
+
+```Lisp
+(defparameter VK_COPY_ACCELERATION_STRUCTURE_MODE_MAX_ENUM_KHR 2147483647)
+```
+
+#### Variable: VK\_ACCELERATION\_STRUCTURE\_MEMORY\_REQUIREMENTS\_TYPE\_OBJECT\_NV
+
+```Lisp
+(defparameter VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_OBJECT_NV 0)
+```
+
+#### Variable: VK\_ACCELERATION\_STRUCTURE\_MEMORY\_REQUIREMENTS\_TYPE\_BUILD\_SCRATCH\_NV
+
+```Lisp
+(defparameter VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_BUILD_SCRATCH_NV 1)
+```
+
+#### Variable: VK\_ACCELERATION\_STRUCTURE\_MEMORY\_REQUIREMENTS\_TYPE\_UPDATE\_SCRATCH\_NV
+
+```Lisp
+(defparameter VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_UPDATE_SCRATCH_NV 2)
+```
+
+#### Variable: VK\_ACCELERATION\_STRUCTURE\_MEMORY\_REQUIREMENTS\_TYPE\_MAX\_ENUM\_NV
+
+```Lisp
+(defparameter VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_MAX_ENUM_NV 2147483647)
+```
+
+#### Variable: VK\_GEOMETRY\_OPAQUE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_GEOMETRY_OPAQUE_BIT_KHR 1)
+```
+
+#### Variable: VK\_GEOMETRY\_NO\_DUPLICATE\_ANY\_HIT\_INVOCATION\_BIT\_KHR
+
+```Lisp
+(defparameter VK_GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_KHR 2)
+```
+
+#### Variable: VK\_GEOMETRY\_OPAQUE\_BIT\_NV
+
+```Lisp
+(defparameter VK_GEOMETRY_OPAQUE_BIT_NV VK_GEOMETRY_OPAQUE_BIT_KHR)
+```
+
+#### Variable: VK\_GEOMETRY\_NO\_DUPLICATE\_ANY\_HIT\_INVOCATION\_BIT\_NV
+
+```Lisp
+(defparameter VK_GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_NV VK_GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_KHR)
+```
+
+#### Variable: VK\_GEOMETRY\_FLAG\_BITS\_MAX\_ENUM\_KHR
+
+```Lisp
+(defparameter VK_GEOMETRY_FLAG_BITS_MAX_ENUM_KHR 2147483647)
+```
+
+#### Variable: VK\_GEOMETRY\_INSTANCE\_TRIANGLE\_FACING\_CULL\_DISABLE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_GEOMETRY_INSTANCE_TRIANGLE_FACING_CULL_DISABLE_BIT_KHR 1)
+```
+
+#### Variable: VK\_GEOMETRY\_INSTANCE\_TRIANGLE\_FLIP\_FACING\_BIT\_KHR
+
+```Lisp
+(defparameter VK_GEOMETRY_INSTANCE_TRIANGLE_FLIP_FACING_BIT_KHR 2)
+```
+
+#### Variable: VK\_GEOMETRY\_INSTANCE\_FORCE\_OPAQUE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_KHR 4)
+```
+
+#### Variable: VK\_GEOMETRY\_INSTANCE\_FORCE\_NO\_OPAQUE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_KHR 8)
+```
+
+#### Variable: VK\_GEOMETRY\_INSTANCE\_TRIANGLE\_FRONT\_COUNTERCLOCKWISE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_GEOMETRY_INSTANCE_TRIANGLE_FRONT_COUNTERCLOCKWISE_BIT_KHR VK_GEOMETRY_INSTANCE_TRIANGLE_FLIP_FACING_BIT_KHR)
+```
+
+#### Variable: VK\_GEOMETRY\_INSTANCE\_TRIANGLE\_CULL\_DISABLE\_BIT\_NV
+
+```Lisp
+(defparameter VK_GEOMETRY_INSTANCE_TRIANGLE_CULL_DISABLE_BIT_NV VK_GEOMETRY_INSTANCE_TRIANGLE_FACING_CULL_DISABLE_BIT_KHR)
+```
+
+#### Variable: VK\_GEOMETRY\_INSTANCE\_TRIANGLE\_FRONT\_COUNTERCLOCKWISE\_BIT\_NV
+
+```Lisp
+(defparameter VK_GEOMETRY_INSTANCE_TRIANGLE_FRONT_COUNTERCLOCKWISE_BIT_NV VK_GEOMETRY_INSTANCE_TRIANGLE_FRONT_COUNTERCLOCKWISE_BIT_KHR)
+```
+
+#### Variable: VK\_GEOMETRY\_INSTANCE\_FORCE\_OPAQUE\_BIT\_NV
+
+```Lisp
+(defparameter VK_GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_NV VK_GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_KHR)
+```
+
+#### Variable: VK\_GEOMETRY\_INSTANCE\_FORCE\_NO\_OPAQUE\_BIT\_NV
+
+```Lisp
+(defparameter VK_GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_NV VK_GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_KHR)
+```
+
+#### Variable: VK\_GEOMETRY\_INSTANCE\_FLAG\_BITS\_MAX\_ENUM\_KHR
+
+```Lisp
+(defparameter VK_GEOMETRY_INSTANCE_FLAG_BITS_MAX_ENUM_KHR 2147483647)
+```
+
+#### Variable: VK\_BUILD\_ACCELERATION\_STRUCTURE\_ALLOW\_UPDATE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR 1)
+```
+
+#### Variable: VK\_BUILD\_ACCELERATION\_STRUCTURE\_ALLOW\_COMPACTION\_BIT\_KHR
+
+```Lisp
+(defparameter VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR 2)
+```
+
+#### Variable: VK\_BUILD\_ACCELERATION\_STRUCTURE\_PREFER\_FAST\_TRACE\_BIT\_KHR
+
+```Lisp
+(defparameter VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_KHR 4)
+```
+
+#### Variable: VK\_BUILD\_ACCELERATION\_STRUCTURE\_PREFER\_FAST\_BUILD\_BIT\_KHR
+
+```Lisp
+(defparameter VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_KHR 8)
+```
+
+#### Variable: VK\_BUILD\_ACCELERATION\_STRUCTURE\_LOW\_MEMORY\_BIT\_KHR
+
+```Lisp
+(defparameter VK_BUILD_ACCELERATION_STRUCTURE_LOW_MEMORY_BIT_KHR 16)
+```
+
+#### Variable: VK\_BUILD\_ACCELERATION\_STRUCTURE\_MOTION\_BIT\_NV
+
+```Lisp
+(defparameter VK_BUILD_ACCELERATION_STRUCTURE_MOTION_BIT_NV 32)
+```
+
+#### Variable: VK\_BUILD\_ACCELERATION\_STRUCTURE\_ALLOW\_UPDATE\_BIT\_NV
+
+```Lisp
+(defparameter VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_NV VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR)
+```
+
+#### Variable: VK\_BUILD\_ACCELERATION\_STRUCTURE\_ALLOW\_COMPACTION\_BIT\_NV
+
+```Lisp
+(defparameter VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_NV VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR)
+```
+
+#### Variable: VK\_BUILD\_ACCELERATION\_STRUCTURE\_PREFER\_FAST\_TRACE\_BIT\_NV
+
+```Lisp
+(defparameter VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_NV VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_KHR)
+```
+
+#### Variable: VK\_BUILD\_ACCELERATION\_STRUCTURE\_PREFER\_FAST\_BUILD\_BIT\_NV
+
+```Lisp
+(defparameter VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_NV VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_KHR)
+```
+
+#### Variable: VK\_BUILD\_ACCELERATION\_STRUCTURE\_LOW\_MEMORY\_BIT\_NV
+
+```Lisp
+(defparameter VK_BUILD_ACCELERATION_STRUCTURE_LOW_MEMORY_BIT_NV VK_BUILD_ACCELERATION_STRUCTURE_LOW_MEMORY_BIT_KHR)
+```
+
+#### Variable: VK\_BUILD\_ACCELERATION\_STRUCTURE\_FLAG\_BITS\_MAX\_ENUM\_KHR
+
+```Lisp
+(defparameter VK_BUILD_ACCELERATION_STRUCTURE_FLAG_BITS_MAX_ENUM_KHR 2147483647)
+```
+
+#### Variable: VK\_NV\_REPRESENTATIVE\_FRAGMENT\_TEST
+
+```Lisp
+(defparameter VK_NV_REPRESENTATIVE_FRAGMENT_TEST 1)
+```
+
+#### Variable: VK\_NV\_REPRESENTATIVE\_FRAGMENT\_TEST\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_REPRESENTATIVE_FRAGMENT_TEST_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_NV\_REPRESENTATIVE\_FRAGMENT\_TEST\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_REPRESENTATIVE_FRAGMENT_TEST_EXTENSION_NAME "VK_NV_representative_fragment_test")
+```
+
+#### Variable: VK\_EXT\_FILTER\_CUBIC
+
+```Lisp
+(defparameter VK_EXT_FILTER_CUBIC 1)
+```
+
+#### Variable: VK\_EXT\_FILTER\_CUBIC\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_FILTER_CUBIC_SPEC_VERSION 3)
+```
+
+#### Variable: VK\_EXT\_FILTER\_CUBIC\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_FILTER_CUBIC_EXTENSION_NAME "VK_EXT_filter_cubic")
+```
+
+#### Variable: VK\_QCOM\_RENDER\_PASS\_SHADER\_RESOLVE
+
+```Lisp
+(defparameter VK_QCOM_RENDER_PASS_SHADER_RESOLVE 1)
+```
+
+#### Variable: VK\_QCOM\_RENDER\_PASS\_SHADER\_RESOLVE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_QCOM_RENDER_PASS_SHADER_RESOLVE_SPEC_VERSION 4)
+```
+
+#### Variable: VK\_QCOM\_RENDER\_PASS\_SHADER\_RESOLVE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_QCOM_RENDER_PASS_SHADER_RESOLVE_EXTENSION_NAME "VK_QCOM_render_pass_shader_resolve")
+```
+
+#### Variable: VK\_EXT\_GLOBAL\_PRIORITY
+
+```Lisp
+(defparameter VK_EXT_GLOBAL_PRIORITY 1)
+```
+
+#### Variable: VK\_EXT\_GLOBAL\_PRIORITY\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_GLOBAL_PRIORITY_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_EXT\_GLOBAL\_PRIORITY\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_GLOBAL_PRIORITY_EXTENSION_NAME "VK_EXT_global_priority")
+```
+
+#### Variable: VK\_EXT\_EXTERNAL\_MEMORY\_HOST
+
+```Lisp
+(defparameter VK_EXT_EXTERNAL_MEMORY_HOST 1)
+```
+
+#### Variable: VK\_EXT\_EXTERNAL\_MEMORY\_HOST\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_EXTERNAL_MEMORY_HOST_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_EXTERNAL\_MEMORY\_HOST\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_EXTERNAL_MEMORY_HOST_EXTENSION_NAME "VK_EXT_external_memory_host")
+```
+
+#### Variable: VK\_AMD\_BUFFER\_MARKER
+
+```Lisp
+(defparameter VK_AMD_BUFFER_MARKER 1)
+```
+
+#### Variable: VK\_AMD\_BUFFER\_MARKER\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_AMD_BUFFER_MARKER_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_AMD\_BUFFER\_MARKER\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_AMD_BUFFER_MARKER_EXTENSION_NAME "VK_AMD_buffer_marker")
+```
+
+#### Variable: VK\_AMD\_PIPELINE\_COMPILER\_CONTROL
+
+```Lisp
+(defparameter VK_AMD_PIPELINE_COMPILER_CONTROL 1)
+```
+
+#### Variable: VK\_AMD\_PIPELINE\_COMPILER\_CONTROL\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_AMD_PIPELINE_COMPILER_CONTROL_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_AMD\_PIPELINE\_COMPILER\_CONTROL\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_AMD_PIPELINE_COMPILER_CONTROL_EXTENSION_NAME "VK_AMD_pipeline_compiler_control")
+```
+
+#### Variable: VK\_PIPELINE\_COMPILER\_CONTROL\_FLAG\_BITS\_MAX\_ENUM\_AMD
+
+```Lisp
+(defparameter VK_PIPELINE_COMPILER_CONTROL_FLAG_BITS_MAX_ENUM_AMD 2147483647)
+```
+
+#### Variable: VK\_EXT\_CALIBRATED\_TIMESTAMPS
+
+```Lisp
+(defparameter VK_EXT_CALIBRATED_TIMESTAMPS 1)
+```
+
+#### Variable: VK\_EXT\_CALIBRATED\_TIMESTAMPS\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_CALIBRATED_TIMESTAMPS_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_EXT\_CALIBRATED\_TIMESTAMPS\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_CALIBRATED_TIMESTAMPS_EXTENSION_NAME "VK_EXT_calibrated_timestamps")
+```
+
+#### Variable: VK\_TIME\_DOMAIN\_DEVICE\_EXT
+
+```Lisp
+(defparameter VK_TIME_DOMAIN_DEVICE_EXT 0)
+```
+
+#### Variable: VK\_TIME\_DOMAIN\_CLOCK\_MONOTONIC\_EXT
+
+```Lisp
+(defparameter VK_TIME_DOMAIN_CLOCK_MONOTONIC_EXT 1)
+```
+
+#### Variable: VK\_TIME\_DOMAIN\_CLOCK\_MONOTONIC\_RAW\_EXT
+
+```Lisp
+(defparameter VK_TIME_DOMAIN_CLOCK_MONOTONIC_RAW_EXT 2)
+```
+
+#### Variable: VK\_TIME\_DOMAIN\_QUERY\_PERFORMANCE\_COUNTER\_EXT
+
+```Lisp
+(defparameter VK_TIME_DOMAIN_QUERY_PERFORMANCE_COUNTER_EXT 3)
+```
+
+#### Variable: VK\_TIME\_DOMAIN\_MAX\_ENUM\_EXT
+
+```Lisp
+(defparameter VK_TIME_DOMAIN_MAX_ENUM_EXT 2147483647)
+```
+
+#### Variable: VK\_AMD\_SHADER\_CORE\_PROPERTIES
+
+```Lisp
+(defparameter VK_AMD_SHADER_CORE_PROPERTIES 1)
+```
+
+#### Variable: VK\_AMD\_SHADER\_CORE\_PROPERTIES\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_AMD_SHADER_CORE_PROPERTIES_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_AMD\_SHADER\_CORE\_PROPERTIES\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_AMD_SHADER_CORE_PROPERTIES_EXTENSION_NAME "VK_AMD_shader_core_properties")
+```
+
+#### Variable: VK\_AMD\_MEMORY\_OVERALLOCATION\_BEHAVIOR
+
+```Lisp
+(defparameter VK_AMD_MEMORY_OVERALLOCATION_BEHAVIOR 1)
+```
+
+#### Variable: VK\_AMD\_MEMORY\_OVERALLOCATION\_BEHAVIOR\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_AMD_MEMORY_OVERALLOCATION_BEHAVIOR_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_AMD\_MEMORY\_OVERALLOCATION\_BEHAVIOR\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_AMD_MEMORY_OVERALLOCATION_BEHAVIOR_EXTENSION_NAME "VK_AMD_memory_overallocation_behavior")
+```
+
+#### Variable: VK\_MEMORY\_OVERALLOCATION\_BEHAVIOR\_DEFAULT\_AMD
+
+```Lisp
+(defparameter VK_MEMORY_OVERALLOCATION_BEHAVIOR_DEFAULT_AMD 0)
+```
+
+#### Variable: VK\_MEMORY\_OVERALLOCATION\_BEHAVIOR\_ALLOWED\_AMD
+
+```Lisp
+(defparameter VK_MEMORY_OVERALLOCATION_BEHAVIOR_ALLOWED_AMD 1)
+```
+
+#### Variable: VK\_MEMORY\_OVERALLOCATION\_BEHAVIOR\_DISALLOWED\_AMD
+
+```Lisp
+(defparameter VK_MEMORY_OVERALLOCATION_BEHAVIOR_DISALLOWED_AMD 2)
+```
+
+#### Variable: VK\_MEMORY\_OVERALLOCATION\_BEHAVIOR\_MAX\_ENUM\_AMD
+
+```Lisp
+(defparameter VK_MEMORY_OVERALLOCATION_BEHAVIOR_MAX_ENUM_AMD 2147483647)
+```
+
+#### Variable: VK\_EXT\_VERTEX\_ATTRIBUTE\_DIVISOR
+
+```Lisp
+(defparameter VK_EXT_VERTEX_ATTRIBUTE_DIVISOR 1)
+```
+
+#### Variable: VK\_EXT\_VERTEX\_ATTRIBUTE\_DIVISOR\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_VERTEX_ATTRIBUTE_DIVISOR_SPEC_VERSION 3)
+```
+
+#### Variable: VK\_EXT\_VERTEX\_ATTRIBUTE\_DIVISOR\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_VERTEX_ATTRIBUTE_DIVISOR_EXTENSION_NAME "VK_EXT_vertex_attribute_divisor")
+```
+
+#### Variable: VK\_EXT\_PIPELINE\_CREATION\_FEEDBACK
+
+```Lisp
+(defparameter VK_EXT_PIPELINE_CREATION_FEEDBACK 1)
+```
+
+#### Variable: VK\_EXT\_PIPELINE\_CREATION\_FEEDBACK\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_PIPELINE_CREATION_FEEDBACK_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_PIPELINE\_CREATION\_FEEDBACK\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_PIPELINE_CREATION_FEEDBACK_EXTENSION_NAME "VK_EXT_pipeline_creation_feedback")
+```
+
+#### Variable: VK\_NV\_SHADER\_SUBGROUP\_PARTITIONED
+
+```Lisp
+(defparameter VK_NV_SHADER_SUBGROUP_PARTITIONED 1)
+```
+
+#### Variable: VK\_NV\_SHADER\_SUBGROUP\_PARTITIONED\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_SHADER_SUBGROUP_PARTITIONED_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_NV\_SHADER\_SUBGROUP\_PARTITIONED\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_SHADER_SUBGROUP_PARTITIONED_EXTENSION_NAME "VK_NV_shader_subgroup_partitioned")
+```
+
+#### Variable: VK\_NV\_COMPUTE\_SHADER\_DERIVATIVES
+
+```Lisp
+(defparameter VK_NV_COMPUTE_SHADER_DERIVATIVES 1)
+```
+
+#### Variable: VK\_NV\_COMPUTE\_SHADER\_DERIVATIVES\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_COMPUTE_SHADER_DERIVATIVES_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_NV\_COMPUTE\_SHADER\_DERIVATIVES\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_COMPUTE_SHADER_DERIVATIVES_EXTENSION_NAME "VK_NV_compute_shader_derivatives")
+```
+
+#### Variable: VK\_NV\_MESH\_SHADER
+
+```Lisp
+(defparameter VK_NV_MESH_SHADER 1)
+```
+
+#### Variable: VK\_NV\_MESH\_SHADER\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_MESH_SHADER_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_NV\_MESH\_SHADER\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_MESH_SHADER_EXTENSION_NAME "VK_NV_mesh_shader")
+```
+
+#### Variable: VK\_NV\_FRAGMENT\_SHADER\_BARYCENTRIC
+
+```Lisp
+(defparameter VK_NV_FRAGMENT_SHADER_BARYCENTRIC 1)
+```
+
+#### Variable: VK\_NV\_FRAGMENT\_SHADER\_BARYCENTRIC\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_FRAGMENT_SHADER_BARYCENTRIC_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_NV\_FRAGMENT\_SHADER\_BARYCENTRIC\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_FRAGMENT_SHADER_BARYCENTRIC_EXTENSION_NAME "VK_NV_fragment_shader_barycentric")
+```
+
+#### Variable: VK\_NV\_SHADER\_IMAGE\_FOOTPRINT
+
+```Lisp
+(defparameter VK_NV_SHADER_IMAGE_FOOTPRINT 1)
+```
+
+#### Variable: VK\_NV\_SHADER\_IMAGE\_FOOTPRINT\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_SHADER_IMAGE_FOOTPRINT_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_NV\_SHADER\_IMAGE\_FOOTPRINT\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_SHADER_IMAGE_FOOTPRINT_EXTENSION_NAME "VK_NV_shader_image_footprint")
+```
+
+#### Variable: VK\_NV\_SCISSOR\_EXCLUSIVE
+
+```Lisp
+(defparameter VK_NV_SCISSOR_EXCLUSIVE 1)
+```
+
+#### Variable: VK\_NV\_SCISSOR\_EXCLUSIVE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_SCISSOR_EXCLUSIVE_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_NV\_SCISSOR\_EXCLUSIVE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_SCISSOR_EXCLUSIVE_EXTENSION_NAME "VK_NV_scissor_exclusive")
+```
+
+#### Variable: VK\_NV\_DEVICE\_DIAGNOSTIC\_CHECKPOINTS
+
+```Lisp
+(defparameter VK_NV_DEVICE_DIAGNOSTIC_CHECKPOINTS 1)
+```
+
+#### Variable: VK\_NV\_DEVICE\_DIAGNOSTIC\_CHECKPOINTS\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_DEVICE_DIAGNOSTIC_CHECKPOINTS_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_NV\_DEVICE\_DIAGNOSTIC\_CHECKPOINTS\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_DEVICE_DIAGNOSTIC_CHECKPOINTS_EXTENSION_NAME "VK_NV_device_diagnostic_checkpoints")
+```
+
+#### Variable: VK\_INTEL\_SHADER\_INTEGER\_FUNCTIONS2
+
+```Lisp
+(defparameter VK_INTEL_SHADER_INTEGER_FUNCTIONS2 1)
+```
+
+#### Variable: VK\_INTEL\_SHADER\_INTEGER\_FUNCTIONS\_2\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_INTEL_SHADER_INTEGER_FUNCTIONS_2_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_INTEL\_SHADER\_INTEGER\_FUNCTIONS\_2\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_INTEL_SHADER_INTEGER_FUNCTIONS_2_EXTENSION_NAME "VK_INTEL_shader_integer_functions2")
+```
+
+#### Variable: VK\_INTEL\_PERFORMANCE\_QUERY
+
+```Lisp
+(defparameter VK_INTEL_PERFORMANCE_QUERY 1)
+```
+
+#### Variable: VK\_INTEL\_PERFORMANCE\_QUERY\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_INTEL_PERFORMANCE_QUERY_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_INTEL\_PERFORMANCE\_QUERY\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_INTEL_PERFORMANCE_QUERY_EXTENSION_NAME "VK_INTEL_performance_query")
+```
+
+#### Variable: VK\_PERFORMANCE\_CONFIGURATION\_TYPE\_COMMAND\_QUEUE\_METRICS\_DISCOVERY\_ACTIVATED\_INTEL
+
+```Lisp
+(defparameter VK_PERFORMANCE_CONFIGURATION_TYPE_COMMAND_QUEUE_METRICS_DISCOVERY_ACTIVATED_INTEL 0)
+```
+
+#### Variable: VK\_PERFORMANCE\_CONFIGURATION\_TYPE\_MAX\_ENUM\_INTEL
+
+```Lisp
+(defparameter VK_PERFORMANCE_CONFIGURATION_TYPE_MAX_ENUM_INTEL 2147483647)
+```
+
+#### Variable: VK\_QUERY\_POOL\_SAMPLING\_MODE\_MANUAL\_INTEL
+
+```Lisp
+(defparameter VK_QUERY_POOL_SAMPLING_MODE_MANUAL_INTEL 0)
+```
+
+#### Variable: VK\_QUERY\_POOL\_SAMPLING\_MODE\_MAX\_ENUM\_INTEL
+
+```Lisp
+(defparameter VK_QUERY_POOL_SAMPLING_MODE_MAX_ENUM_INTEL 2147483647)
+```
+
+#### Variable: VK\_PERFORMANCE\_OVERRIDE\_TYPE\_NULL\_HARDWARE\_INTEL
+
+```Lisp
+(defparameter VK_PERFORMANCE_OVERRIDE_TYPE_NULL_HARDWARE_INTEL 0)
+```
+
+#### Variable: VK\_PERFORMANCE\_OVERRIDE\_TYPE\_FLUSH\_GPU\_CACHES\_INTEL
+
+```Lisp
+(defparameter VK_PERFORMANCE_OVERRIDE_TYPE_FLUSH_GPU_CACHES_INTEL 1)
+```
+
+#### Variable: VK\_PERFORMANCE\_OVERRIDE\_TYPE\_MAX\_ENUM\_INTEL
+
+```Lisp
+(defparameter VK_PERFORMANCE_OVERRIDE_TYPE_MAX_ENUM_INTEL 2147483647)
+```
+
+#### Variable: VK\_PERFORMANCE\_PARAMETER\_TYPE\_HW\_COUNTERS\_SUPPORTED\_INTEL
+
+```Lisp
+(defparameter VK_PERFORMANCE_PARAMETER_TYPE_HW_COUNTERS_SUPPORTED_INTEL 0)
+```
+
+#### Variable: VK\_PERFORMANCE\_PARAMETER\_TYPE\_STREAM\_MARKER\_VALID\_BITS\_INTEL
+
+```Lisp
+(defparameter VK_PERFORMANCE_PARAMETER_TYPE_STREAM_MARKER_VALID_BITS_INTEL 1)
+```
+
+#### Variable: VK\_PERFORMANCE\_PARAMETER\_TYPE\_MAX\_ENUM\_INTEL
+
+```Lisp
+(defparameter VK_PERFORMANCE_PARAMETER_TYPE_MAX_ENUM_INTEL 2147483647)
+```
+
+#### Variable: VK\_PERFORMANCE\_VALUE\_TYPE\_UINT32\_INTEL
+
+```Lisp
+(defparameter VK_PERFORMANCE_VALUE_TYPE_UINT32_INTEL 0)
+```
+
+#### Variable: VK\_PERFORMANCE\_VALUE\_TYPE\_UINT64\_INTEL
+
+```Lisp
+(defparameter VK_PERFORMANCE_VALUE_TYPE_UINT64_INTEL 1)
+```
+
+#### Variable: VK\_PERFORMANCE\_VALUE\_TYPE\_FLOAT\_INTEL
+
+```Lisp
+(defparameter VK_PERFORMANCE_VALUE_TYPE_FLOAT_INTEL 2)
+```
+
+#### Variable: VK\_PERFORMANCE\_VALUE\_TYPE\_BOOL\_INTEL
+
+```Lisp
+(defparameter VK_PERFORMANCE_VALUE_TYPE_BOOL_INTEL 3)
+```
+
+#### Variable: VK\_PERFORMANCE\_VALUE\_TYPE\_STRING\_INTEL
+
+```Lisp
+(defparameter VK_PERFORMANCE_VALUE_TYPE_STRING_INTEL 4)
+```
+
+#### Variable: VK\_PERFORMANCE\_VALUE\_TYPE\_MAX\_ENUM\_INTEL
+
+```Lisp
+(defparameter VK_PERFORMANCE_VALUE_TYPE_MAX_ENUM_INTEL 2147483647)
+```
+
+#### Variable: VK\_EXT\_PCI\_BUS\_INFO
+
+```Lisp
+(defparameter VK_EXT_PCI_BUS_INFO 1)
+```
+
+#### Variable: VK\_EXT\_PCI\_BUS\_INFO\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_PCI_BUS_INFO_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_EXT\_PCI\_BUS\_INFO\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_PCI_BUS_INFO_EXTENSION_NAME "VK_EXT_pci_bus_info")
+```
+
+#### Variable: VK\_AMD\_DISPLAY\_NATIVE\_HDR
+
+```Lisp
+(defparameter VK_AMD_DISPLAY_NATIVE_HDR 1)
+```
+
+#### Variable: VK\_AMD\_DISPLAY\_NATIVE\_HDR\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_AMD_DISPLAY_NATIVE_HDR_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_AMD\_DISPLAY\_NATIVE\_HDR\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_AMD_DISPLAY_NATIVE_HDR_EXTENSION_NAME "VK_AMD_display_native_hdr")
+```
+
+#### Variable: VK\_EXT\_FRAGMENT\_DENSITY\_MAP
+
+```Lisp
+(defparameter VK_EXT_FRAGMENT_DENSITY_MAP 1)
+```
+
+#### Variable: VK\_EXT\_FRAGMENT\_DENSITY\_MAP\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_FRAGMENT_DENSITY_MAP_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_EXT\_FRAGMENT\_DENSITY\_MAP\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_FRAGMENT_DENSITY_MAP_EXTENSION_NAME "VK_EXT_fragment_density_map")
+```
+
+#### Variable: VK\_EXT\_SCALAR\_BLOCK\_LAYOUT
+
+```Lisp
+(defparameter VK_EXT_SCALAR_BLOCK_LAYOUT 1)
+```
+
+#### Variable: VK\_EXT\_SCALAR\_BLOCK\_LAYOUT\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_SCALAR_BLOCK_LAYOUT_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_SCALAR\_BLOCK\_LAYOUT\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_SCALAR_BLOCK_LAYOUT_EXTENSION_NAME "VK_EXT_scalar_block_layout")
+```
+
+#### Variable: VK\_GOOGLE\_HLSL\_FUNCTIONALITY1
+
+```Lisp
+(defparameter VK_GOOGLE_HLSL_FUNCTIONALITY1 1)
+```
+
+#### Variable: VK\_GOOGLE\_HLSL\_FUNCTIONALITY\_1\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_GOOGLE_HLSL_FUNCTIONALITY_1_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_GOOGLE\_HLSL\_FUNCTIONALITY\_1\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_GOOGLE_HLSL_FUNCTIONALITY_1_EXTENSION_NAME "VK_GOOGLE_hlsl_functionality1")
+```
+
+#### Variable: VK\_GOOGLE\_HLSL\_FUNCTIONALITY1\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_GOOGLE_HLSL_FUNCTIONALITY1_SPEC_VERSION VK_GOOGLE_HLSL_FUNCTIONALITY_1_SPEC_VERSION)
+```
+
+#### Variable: VK\_GOOGLE\_HLSL\_FUNCTIONALITY1\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_GOOGLE_HLSL_FUNCTIONALITY1_EXTENSION_NAME VK_GOOGLE_HLSL_FUNCTIONALITY_1_EXTENSION_NAME)
+```
+
+#### Variable: VK\_GOOGLE\_DECORATE\_STRING
+
+```Lisp
+(defparameter VK_GOOGLE_DECORATE_STRING 1)
+```
+
+#### Variable: VK\_GOOGLE\_DECORATE\_STRING\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_GOOGLE_DECORATE_STRING_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_GOOGLE\_DECORATE\_STRING\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_GOOGLE_DECORATE_STRING_EXTENSION_NAME "VK_GOOGLE_decorate_string")
+```
+
+#### Variable: VK\_EXT\_SUBGROUP\_SIZE\_CONTROL
+
+```Lisp
+(defparameter VK_EXT_SUBGROUP_SIZE_CONTROL 1)
+```
+
+#### Variable: VK\_EXT\_SUBGROUP\_SIZE\_CONTROL\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_SUBGROUP_SIZE_CONTROL_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_EXT\_SUBGROUP\_SIZE\_CONTROL\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_SUBGROUP_SIZE_CONTROL_EXTENSION_NAME "VK_EXT_subgroup_size_control")
+```
+
+#### Variable: VK\_AMD\_SHADER\_CORE\_PROPERTIES2
+
+```Lisp
+(defparameter VK_AMD_SHADER_CORE_PROPERTIES2 1)
+```
+
+#### Variable: VK\_AMD\_SHADER\_CORE\_PROPERTIES\_2\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_AMD_SHADER_CORE_PROPERTIES_2_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_AMD\_SHADER\_CORE\_PROPERTIES\_2\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_AMD_SHADER_CORE_PROPERTIES_2_EXTENSION_NAME "VK_AMD_shader_core_properties2")
+```
+
+#### Variable: VK\_SHADER\_CORE\_PROPERTIES\_FLAG\_BITS\_MAX\_ENUM\_AMD
+
+```Lisp
+(defparameter VK_SHADER_CORE_PROPERTIES_FLAG_BITS_MAX_ENUM_AMD 2147483647)
+```
+
+#### Variable: VK\_AMD\_DEVICE\_COHERENT\_MEMORY
+
+```Lisp
+(defparameter VK_AMD_DEVICE_COHERENT_MEMORY 1)
+```
+
+#### Variable: VK\_AMD\_DEVICE\_COHERENT\_MEMORY\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_AMD_DEVICE_COHERENT_MEMORY_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_AMD\_DEVICE\_COHERENT\_MEMORY\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_AMD_DEVICE_COHERENT_MEMORY_EXTENSION_NAME "VK_AMD_device_coherent_memory")
+```
+
+#### Variable: VK\_EXT\_SHADER\_IMAGE\_ATOMIC\_INT64
+
+```Lisp
+(defparameter VK_EXT_SHADER_IMAGE_ATOMIC_INT64 1)
+```
+
+#### Variable: VK\_EXT\_SHADER\_IMAGE\_ATOMIC\_INT64\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_SHADER_IMAGE_ATOMIC_INT64_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_SHADER\_IMAGE\_ATOMIC\_INT64\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_SHADER_IMAGE_ATOMIC_INT64_EXTENSION_NAME "VK_EXT_shader_image_atomic_int64")
+```
+
+#### Variable: VK\_EXT\_MEMORY\_BUDGET
+
+```Lisp
+(defparameter VK_EXT_MEMORY_BUDGET 1)
+```
+
+#### Variable: VK\_EXT\_MEMORY\_BUDGET\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_MEMORY_BUDGET_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_MEMORY\_BUDGET\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_MEMORY_BUDGET_EXTENSION_NAME "VK_EXT_memory_budget")
+```
+
+#### Variable: VK\_EXT\_MEMORY\_PRIORITY
+
+```Lisp
+(defparameter VK_EXT_MEMORY_PRIORITY 1)
+```
+
+#### Variable: VK\_EXT\_MEMORY\_PRIORITY\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_MEMORY_PRIORITY_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_MEMORY\_PRIORITY\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_MEMORY_PRIORITY_EXTENSION_NAME "VK_EXT_memory_priority")
+```
+
+#### Variable: VK\_NV\_DEDICATED\_ALLOCATION\_IMAGE\_ALIASING
+
+```Lisp
+(defparameter VK_NV_DEDICATED_ALLOCATION_IMAGE_ALIASING 1)
+```
+
+#### Variable: VK\_NV\_DEDICATED\_ALLOCATION\_IMAGE\_ALIASING\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_DEDICATED_ALLOCATION_IMAGE_ALIASING_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_NV\_DEDICATED\_ALLOCATION\_IMAGE\_ALIASING\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_DEDICATED_ALLOCATION_IMAGE_ALIASING_EXTENSION_NAME "VK_NV_dedicated_allocation_image_aliasing")
+```
+
+#### Variable: VK\_EXT\_BUFFER\_DEVICE\_ADDRESS
+
+```Lisp
+(defparameter VK_EXT_BUFFER_DEVICE_ADDRESS 1)
+```
+
+#### Variable: VK\_EXT\_BUFFER\_DEVICE\_ADDRESS\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_BUFFER_DEVICE_ADDRESS_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_EXT\_BUFFER\_DEVICE\_ADDRESS\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_BUFFER_DEVICE_ADDRESS_EXTENSION_NAME "VK_EXT_buffer_device_address")
+```
+
+#### Variable: VK\_EXT\_TOOLING\_INFO
+
+```Lisp
+(defparameter VK_EXT_TOOLING_INFO 1)
+```
+
+#### Variable: VK\_EXT\_TOOLING\_INFO\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_TOOLING_INFO_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_TOOLING\_INFO\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_TOOLING_INFO_EXTENSION_NAME "VK_EXT_tooling_info")
+```
+
+#### Variable: VK\_EXT\_SEPARATE\_STENCIL\_USAGE
+
+```Lisp
+(defparameter VK_EXT_SEPARATE_STENCIL_USAGE 1)
+```
+
+#### Variable: VK\_EXT\_SEPARATE\_STENCIL\_USAGE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_SEPARATE_STENCIL_USAGE_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_SEPARATE\_STENCIL\_USAGE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_SEPARATE_STENCIL_USAGE_EXTENSION_NAME "VK_EXT_separate_stencil_usage")
+```
+
+#### Variable: VK\_EXT\_VALIDATION\_FEATURES
+
+```Lisp
+(defparameter VK_EXT_VALIDATION_FEATURES 1)
+```
+
+#### Variable: VK\_EXT\_VALIDATION\_FEATURES\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_VALIDATION_FEATURES_SPEC_VERSION 5)
+```
+
+#### Variable: VK\_EXT\_VALIDATION\_FEATURES\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_VALIDATION_FEATURES_EXTENSION_NAME "VK_EXT_validation_features")
+```
+
+#### Variable: VK\_VALIDATION\_FEATURE\_ENABLE\_GPU\_ASSISTED\_EXT
+
+```Lisp
+(defparameter VK_VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_EXT 0)
+```
+
+#### Variable: VK\_VALIDATION\_FEATURE\_ENABLE\_GPU\_ASSISTED\_RESERVE\_BINDING\_SLOT\_EXT
+
+```Lisp
+(defparameter VK_VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_RESERVE_BINDING_SLOT_EXT 1)
+```
+
+#### Variable: VK\_VALIDATION\_FEATURE\_ENABLE\_BEST\_PRACTICES\_EXT
+
+```Lisp
+(defparameter VK_VALIDATION_FEATURE_ENABLE_BEST_PRACTICES_EXT 2)
+```
+
+#### Variable: VK\_VALIDATION\_FEATURE\_ENABLE\_DEBUG\_PRINTF\_EXT
+
+```Lisp
+(defparameter VK_VALIDATION_FEATURE_ENABLE_DEBUG_PRINTF_EXT 3)
+```
+
+#### Variable: VK\_VALIDATION\_FEATURE\_ENABLE\_SYNCHRONIZATION\_VALIDATION\_EXT
+
+```Lisp
+(defparameter VK_VALIDATION_FEATURE_ENABLE_SYNCHRONIZATION_VALIDATION_EXT 4)
+```
+
+#### Variable: VK\_VALIDATION\_FEATURE\_ENABLE\_MAX\_ENUM\_EXT
+
+```Lisp
+(defparameter VK_VALIDATION_FEATURE_ENABLE_MAX_ENUM_EXT 2147483647)
+```
+
+#### Variable: VK\_VALIDATION\_FEATURE\_DISABLE\_ALL\_EXT
+
+```Lisp
+(defparameter VK_VALIDATION_FEATURE_DISABLE_ALL_EXT 0)
+```
+
+#### Variable: VK\_VALIDATION\_FEATURE\_DISABLE\_SHADERS\_EXT
+
+```Lisp
+(defparameter VK_VALIDATION_FEATURE_DISABLE_SHADERS_EXT 1)
+```
+
+#### Variable: VK\_VALIDATION\_FEATURE\_DISABLE\_THREAD\_SAFETY\_EXT
+
+```Lisp
+(defparameter VK_VALIDATION_FEATURE_DISABLE_THREAD_SAFETY_EXT 2)
+```
+
+#### Variable: VK\_VALIDATION\_FEATURE\_DISABLE\_API\_PARAMETERS\_EXT
+
+```Lisp
+(defparameter VK_VALIDATION_FEATURE_DISABLE_API_PARAMETERS_EXT 3)
+```
+
+#### Variable: VK\_VALIDATION\_FEATURE\_DISABLE\_OBJECT\_LIFETIMES\_EXT
+
+```Lisp
+(defparameter VK_VALIDATION_FEATURE_DISABLE_OBJECT_LIFETIMES_EXT 4)
+```
+
+#### Variable: VK\_VALIDATION\_FEATURE\_DISABLE\_CORE\_CHECKS\_EXT
+
+```Lisp
+(defparameter VK_VALIDATION_FEATURE_DISABLE_CORE_CHECKS_EXT 5)
+```
+
+#### Variable: VK\_VALIDATION\_FEATURE\_DISABLE\_UNIQUE\_HANDLES\_EXT
+
+```Lisp
+(defparameter VK_VALIDATION_FEATURE_DISABLE_UNIQUE_HANDLES_EXT 6)
+```
+
+#### Variable: VK\_VALIDATION\_FEATURE\_DISABLE\_SHADER\_VALIDATION\_CACHE\_EXT
+
+```Lisp
+(defparameter VK_VALIDATION_FEATURE_DISABLE_SHADER_VALIDATION_CACHE_EXT 7)
+```
+
+#### Variable: VK\_VALIDATION\_FEATURE\_DISABLE\_MAX\_ENUM\_EXT
+
+```Lisp
+(defparameter VK_VALIDATION_FEATURE_DISABLE_MAX_ENUM_EXT 2147483647)
+```
+
+#### Variable: VK\_NV\_COOPERATIVE\_MATRIX
+
+```Lisp
+(defparameter VK_NV_COOPERATIVE_MATRIX 1)
+```
+
+#### Variable: VK\_NV\_COOPERATIVE\_MATRIX\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_COOPERATIVE_MATRIX_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_NV\_COOPERATIVE\_MATRIX\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_COOPERATIVE_MATRIX_EXTENSION_NAME "VK_NV_cooperative_matrix")
+```
+
+#### Variable: VK\_COMPONENT\_TYPE\_FLOAT16\_NV
+
+```Lisp
+(defparameter VK_COMPONENT_TYPE_FLOAT16_NV 0)
+```
+
+#### Variable: VK\_COMPONENT\_TYPE\_FLOAT32\_NV
+
+```Lisp
+(defparameter VK_COMPONENT_TYPE_FLOAT32_NV 1)
+```
+
+#### Variable: VK\_COMPONENT\_TYPE\_FLOAT64\_NV
+
+```Lisp
+(defparameter VK_COMPONENT_TYPE_FLOAT64_NV 2)
+```
+
+#### Variable: VK\_COMPONENT\_TYPE\_SINT8\_NV
+
+```Lisp
+(defparameter VK_COMPONENT_TYPE_SINT8_NV 3)
+```
+
+#### Variable: VK\_COMPONENT\_TYPE\_SINT16\_NV
+
+```Lisp
+(defparameter VK_COMPONENT_TYPE_SINT16_NV 4)
+```
+
+#### Variable: VK\_COMPONENT\_TYPE\_SINT32\_NV
+
+```Lisp
+(defparameter VK_COMPONENT_TYPE_SINT32_NV 5)
+```
+
+#### Variable: VK\_COMPONENT\_TYPE\_SINT64\_NV
+
+```Lisp
+(defparameter VK_COMPONENT_TYPE_SINT64_NV 6)
+```
+
+#### Variable: VK\_COMPONENT\_TYPE\_UINT8\_NV
+
+```Lisp
+(defparameter VK_COMPONENT_TYPE_UINT8_NV 7)
+```
+
+#### Variable: VK\_COMPONENT\_TYPE\_UINT16\_NV
+
+```Lisp
+(defparameter VK_COMPONENT_TYPE_UINT16_NV 8)
+```
+
+#### Variable: VK\_COMPONENT\_TYPE\_UINT32\_NV
+
+```Lisp
+(defparameter VK_COMPONENT_TYPE_UINT32_NV 9)
+```
+
+#### Variable: VK\_COMPONENT\_TYPE\_UINT64\_NV
+
+```Lisp
+(defparameter VK_COMPONENT_TYPE_UINT64_NV 10)
+```
+
+#### Variable: VK\_COMPONENT\_TYPE\_MAX\_ENUM\_NV
+
+```Lisp
+(defparameter VK_COMPONENT_TYPE_MAX_ENUM_NV 2147483647)
+```
+
+#### Variable: VK\_SCOPE\_DEVICE\_NV
+
+```Lisp
+(defparameter VK_SCOPE_DEVICE_NV 1)
+```
+
+#### Variable: VK\_SCOPE\_WORKGROUP\_NV
+
+```Lisp
+(defparameter VK_SCOPE_WORKGROUP_NV 2)
+```
+
+#### Variable: VK\_SCOPE\_SUBGROUP\_NV
+
+```Lisp
+(defparameter VK_SCOPE_SUBGROUP_NV 3)
+```
+
+#### Variable: VK\_SCOPE\_QUEUE\_FAMILY\_NV
+
+```Lisp
+(defparameter VK_SCOPE_QUEUE_FAMILY_NV 5)
+```
+
+#### Variable: VK\_SCOPE\_MAX\_ENUM\_NV
+
+```Lisp
+(defparameter VK_SCOPE_MAX_ENUM_NV 2147483647)
+```
+
+#### Variable: VK\_NV\_COVERAGE\_REDUCTION\_MODE
+
+```Lisp
+(defparameter VK_NV_COVERAGE_REDUCTION_MODE 1)
+```
+
+#### Variable: VK\_NV\_COVERAGE\_REDUCTION\_MODE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_COVERAGE_REDUCTION_MODE_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_NV\_COVERAGE\_REDUCTION\_MODE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_COVERAGE_REDUCTION_MODE_EXTENSION_NAME "VK_NV_coverage_reduction_mode")
+```
+
+#### Variable: VK\_COVERAGE\_REDUCTION\_MODE\_MERGE\_NV
+
+```Lisp
+(defparameter VK_COVERAGE_REDUCTION_MODE_MERGE_NV 0)
+```
+
+#### Variable: VK\_COVERAGE\_REDUCTION\_MODE\_TRUNCATE\_NV
+
+```Lisp
+(defparameter VK_COVERAGE_REDUCTION_MODE_TRUNCATE_NV 1)
+```
+
+#### Variable: VK\_COVERAGE\_REDUCTION\_MODE\_MAX\_ENUM\_NV
+
+```Lisp
+(defparameter VK_COVERAGE_REDUCTION_MODE_MAX_ENUM_NV 2147483647)
+```
+
+#### Variable: VK\_EXT\_FRAGMENT\_SHADER\_INTERLOCK
+
+```Lisp
+(defparameter VK_EXT_FRAGMENT_SHADER_INTERLOCK 1)
+```
+
+#### Variable: VK\_EXT\_FRAGMENT\_SHADER\_INTERLOCK\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_FRAGMENT_SHADER_INTERLOCK_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_FRAGMENT\_SHADER\_INTERLOCK\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_FRAGMENT_SHADER_INTERLOCK_EXTENSION_NAME "VK_EXT_fragment_shader_interlock")
+```
+
+#### Variable: VK\_EXT\_YCBCR\_IMAGE\_ARRAYS
+
+```Lisp
+(defparameter VK_EXT_YCBCR_IMAGE_ARRAYS 1)
+```
+
+#### Variable: VK\_EXT\_YCBCR\_IMAGE\_ARRAYS\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_YCBCR_IMAGE_ARRAYS_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_YCBCR\_IMAGE\_ARRAYS\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_YCBCR_IMAGE_ARRAYS_EXTENSION_NAME "VK_EXT_ycbcr_image_arrays")
+```
+
+#### Variable: VK\_EXT\_PROVOKING\_VERTEX
+
+```Lisp
+(defparameter VK_EXT_PROVOKING_VERTEX 1)
+```
+
+#### Variable: VK\_EXT\_PROVOKING\_VERTEX\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_PROVOKING_VERTEX_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_PROVOKING\_VERTEX\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_PROVOKING_VERTEX_EXTENSION_NAME "VK_EXT_provoking_vertex")
+```
+
+#### Variable: VK\_PROVOKING\_VERTEX\_MODE\_FIRST\_VERTEX\_EXT
+
+```Lisp
+(defparameter VK_PROVOKING_VERTEX_MODE_FIRST_VERTEX_EXT 0)
+```
+
+#### Variable: VK\_PROVOKING\_VERTEX\_MODE\_LAST\_VERTEX\_EXT
+
+```Lisp
+(defparameter VK_PROVOKING_VERTEX_MODE_LAST_VERTEX_EXT 1)
+```
+
+#### Variable: VK\_PROVOKING\_VERTEX\_MODE\_MAX\_ENUM\_EXT
+
+```Lisp
+(defparameter VK_PROVOKING_VERTEX_MODE_MAX_ENUM_EXT 2147483647)
+```
+
+#### Variable: VK\_EXT\_HEADLESS\_SURFACE
+
+```Lisp
+(defparameter VK_EXT_HEADLESS_SURFACE 1)
+```
+
+#### Variable: VK\_EXT\_HEADLESS\_SURFACE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_HEADLESS_SURFACE_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_HEADLESS\_SURFACE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_HEADLESS_SURFACE_EXTENSION_NAME "VK_EXT_headless_surface")
+```
+
+#### Variable: VK\_EXT\_LINE\_RASTERIZATION
+
+```Lisp
+(defparameter VK_EXT_LINE_RASTERIZATION 1)
+```
+
+#### Variable: VK\_EXT\_LINE\_RASTERIZATION\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_LINE_RASTERIZATION_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_LINE\_RASTERIZATION\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_LINE_RASTERIZATION_EXTENSION_NAME "VK_EXT_line_rasterization")
+```
+
+#### Variable: VK\_LINE\_RASTERIZATION\_MODE\_DEFAULT\_EXT
+
+```Lisp
+(defparameter VK_LINE_RASTERIZATION_MODE_DEFAULT_EXT 0)
+```
+
+#### Variable: VK\_LINE\_RASTERIZATION\_MODE\_RECTANGULAR\_EXT
+
+```Lisp
+(defparameter VK_LINE_RASTERIZATION_MODE_RECTANGULAR_EXT 1)
+```
+
+#### Variable: VK\_LINE\_RASTERIZATION\_MODE\_BRESENHAM\_EXT
+
+```Lisp
+(defparameter VK_LINE_RASTERIZATION_MODE_BRESENHAM_EXT 2)
+```
+
+#### Variable: VK\_LINE\_RASTERIZATION\_MODE\_RECTANGULAR\_SMOOTH\_EXT
+
+```Lisp
+(defparameter VK_LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_EXT 3)
+```
+
+#### Variable: VK\_LINE\_RASTERIZATION\_MODE\_MAX\_ENUM\_EXT
+
+```Lisp
+(defparameter VK_LINE_RASTERIZATION_MODE_MAX_ENUM_EXT 2147483647)
+```
+
+#### Variable: VK\_EXT\_SHADER\_ATOMIC\_FLOAT
+
+```Lisp
+(defparameter VK_EXT_SHADER_ATOMIC_FLOAT 1)
+```
+
+#### Variable: VK\_EXT\_SHADER\_ATOMIC\_FLOAT\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_SHADER_ATOMIC_FLOAT_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_SHADER\_ATOMIC\_FLOAT\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_SHADER_ATOMIC_FLOAT_EXTENSION_NAME "VK_EXT_shader_atomic_float")
+```
+
+#### Variable: VK\_EXT\_HOST\_QUERY\_RESET
+
+```Lisp
+(defparameter VK_EXT_HOST_QUERY_RESET 1)
+```
+
+#### Variable: VK\_EXT\_HOST\_QUERY\_RESET\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_HOST_QUERY_RESET_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_HOST\_QUERY\_RESET\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_HOST_QUERY_RESET_EXTENSION_NAME "VK_EXT_host_query_reset")
+```
+
+#### Variable: VK\_EXT\_INDEX\_TYPE\_UINT8
+
+```Lisp
+(defparameter VK_EXT_INDEX_TYPE_UINT8 1)
+```
+
+#### Variable: VK\_EXT\_INDEX\_TYPE\_UINT8\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_INDEX_TYPE_UINT8_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_INDEX\_TYPE\_UINT8\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_INDEX_TYPE_UINT8_EXTENSION_NAME "VK_EXT_index_type_uint8")
+```
+
+#### Variable: VK\_EXT\_EXTENDED\_DYNAMIC\_STATE
+
+```Lisp
+(defparameter VK_EXT_EXTENDED_DYNAMIC_STATE 1)
+```
+
+#### Variable: VK\_EXT\_EXTENDED\_DYNAMIC\_STATE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_EXTENDED_DYNAMIC_STATE_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_EXTENDED\_DYNAMIC\_STATE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_EXTENDED_DYNAMIC_STATE_EXTENSION_NAME "VK_EXT_extended_dynamic_state")
+```
+
+#### Variable: VK\_EXT\_SHADER\_ATOMIC\_FLOAT2
+
+```Lisp
+(defparameter VK_EXT_SHADER_ATOMIC_FLOAT2 1)
+```
+
+#### Variable: VK\_EXT\_SHADER\_ATOMIC\_FLOAT\_2\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_SHADER_ATOMIC_FLOAT_2_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_SHADER\_ATOMIC\_FLOAT\_2\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_SHADER_ATOMIC_FLOAT_2_EXTENSION_NAME "VK_EXT_shader_atomic_float2")
+```
+
+#### Variable: VK\_EXT\_SHADER\_DEMOTE\_TO\_HELPER\_INVOCATION
+
+```Lisp
+(defparameter VK_EXT_SHADER_DEMOTE_TO_HELPER_INVOCATION 1)
+```
+
+#### Variable: VK\_EXT\_SHADER\_DEMOTE\_TO\_HELPER\_INVOCATION\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_SHADER_DEMOTE_TO_HELPER_INVOCATION_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_SHADER\_DEMOTE\_TO\_HELPER\_INVOCATION\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_SHADER_DEMOTE_TO_HELPER_INVOCATION_EXTENSION_NAME "VK_EXT_shader_demote_to_helper_invocation")
+```
+
+#### Variable: VK\_NV\_DEVICE\_GENERATED\_COMMANDS
+
+```Lisp
+(defparameter VK_NV_DEVICE_GENERATED_COMMANDS 1)
+```
+
+#### Variable: VK\_NV\_DEVICE\_GENERATED\_COMMANDS\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_DEVICE_GENERATED_COMMANDS_SPEC_VERSION 3)
+```
+
+#### Variable: VK\_NV\_DEVICE\_GENERATED\_COMMANDS\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_DEVICE_GENERATED_COMMANDS_EXTENSION_NAME "VK_NV_device_generated_commands")
+```
+
+#### Variable: VK\_INDIRECT\_COMMANDS\_TOKEN\_TYPE\_SHADER\_GROUP\_NV
+
+```Lisp
+(defparameter VK_INDIRECT_COMMANDS_TOKEN_TYPE_SHADER_GROUP_NV 0)
+```
+
+#### Variable: VK\_INDIRECT\_COMMANDS\_TOKEN\_TYPE\_STATE\_FLAGS\_NV
+
+```Lisp
+(defparameter VK_INDIRECT_COMMANDS_TOKEN_TYPE_STATE_FLAGS_NV 1)
+```
+
+#### Variable: VK\_INDIRECT\_COMMANDS\_TOKEN\_TYPE\_INDEX\_BUFFER\_NV
+
+```Lisp
+(defparameter VK_INDIRECT_COMMANDS_TOKEN_TYPE_INDEX_BUFFER_NV 2)
+```
+
+#### Variable: VK\_INDIRECT\_COMMANDS\_TOKEN\_TYPE\_VERTEX\_BUFFER\_NV
+
+```Lisp
+(defparameter VK_INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_NV 3)
+```
+
+#### Variable: VK\_INDIRECT\_COMMANDS\_TOKEN\_TYPE\_PUSH\_CONSTANT\_NV
+
+```Lisp
+(defparameter VK_INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NV 4)
+```
+
+#### Variable: VK\_INDIRECT\_COMMANDS\_TOKEN\_TYPE\_DRAW\_INDEXED\_NV
+
+```Lisp
+(defparameter VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_INDEXED_NV 5)
+```
+
+#### Variable: VK\_INDIRECT\_COMMANDS\_TOKEN\_TYPE\_DRAW\_NV
+
+```Lisp
+(defparameter VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_NV 6)
+```
+
+#### Variable: VK\_INDIRECT\_COMMANDS\_TOKEN\_TYPE\_DRAW\_TASKS\_NV
+
+```Lisp
+(defparameter VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_TASKS_NV 7)
+```
+
+#### Variable: VK\_INDIRECT\_COMMANDS\_TOKEN\_TYPE\_MAX\_ENUM\_NV
+
+```Lisp
+(defparameter VK_INDIRECT_COMMANDS_TOKEN_TYPE_MAX_ENUM_NV 2147483647)
+```
+
+#### Variable: VK\_INDIRECT\_STATE\_FLAG\_FRONTFACE\_BIT\_NV
+
+```Lisp
+(defparameter VK_INDIRECT_STATE_FLAG_FRONTFACE_BIT_NV 1)
+```
+
+#### Variable: VK\_INDIRECT\_STATE\_FLAG\_BITS\_MAX\_ENUM\_NV
+
+```Lisp
+(defparameter VK_INDIRECT_STATE_FLAG_BITS_MAX_ENUM_NV 2147483647)
+```
+
+#### Variable: VK\_INDIRECT\_COMMANDS\_LAYOUT\_USAGE\_EXPLICIT\_PREPROCESS\_BIT\_NV
+
+```Lisp
+(defparameter VK_INDIRECT_COMMANDS_LAYOUT_USAGE_EXPLICIT_PREPROCESS_BIT_NV 1)
+```
+
+#### Variable: VK\_INDIRECT\_COMMANDS\_LAYOUT\_USAGE\_INDEXED\_SEQUENCES\_BIT\_NV
+
+```Lisp
+(defparameter VK_INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NV 2)
+```
+
+#### Variable: VK\_INDIRECT\_COMMANDS\_LAYOUT\_USAGE\_UNORDERED\_SEQUENCES\_BIT\_NV
+
+```Lisp
+(defparameter VK_INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NV 4)
+```
+
+#### Variable: VK\_INDIRECT\_COMMANDS\_LAYOUT\_USAGE\_FLAG\_BITS\_MAX\_ENUM\_NV
+
+```Lisp
+(defparameter VK_INDIRECT_COMMANDS_LAYOUT_USAGE_FLAG_BITS_MAX_ENUM_NV 2147483647)
+```
+
+#### Variable: VK\_NV\_INHERITED\_VIEWPORT\_SCISSOR
+
+```Lisp
+(defparameter VK_NV_INHERITED_VIEWPORT_SCISSOR 1)
+```
+
+#### Variable: VK\_NV\_INHERITED\_VIEWPORT\_SCISSOR\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_INHERITED_VIEWPORT_SCISSOR_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_NV\_INHERITED\_VIEWPORT\_SCISSOR\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_INHERITED_VIEWPORT_SCISSOR_EXTENSION_NAME "VK_NV_inherited_viewport_scissor")
+```
+
+#### Variable: VK\_EXT\_TEXEL\_BUFFER\_ALIGNMENT
+
+```Lisp
+(defparameter VK_EXT_TEXEL_BUFFER_ALIGNMENT 1)
+```
+
+#### Variable: VK\_EXT\_TEXEL\_BUFFER\_ALIGNMENT\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_TEXEL_BUFFER_ALIGNMENT_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_TEXEL\_BUFFER\_ALIGNMENT\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_TEXEL_BUFFER_ALIGNMENT_EXTENSION_NAME "VK_EXT_texel_buffer_alignment")
+```
+
+#### Variable: VK\_QCOM\_RENDER\_PASS\_TRANSFORM
+
+```Lisp
+(defparameter VK_QCOM_RENDER_PASS_TRANSFORM 1)
+```
+
+#### Variable: VK\_QCOM\_RENDER\_PASS\_TRANSFORM\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_QCOM_RENDER_PASS_TRANSFORM_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_QCOM\_RENDER\_PASS\_TRANSFORM\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_QCOM_RENDER_PASS_TRANSFORM_EXTENSION_NAME "VK_QCOM_render_pass_transform")
+```
+
+#### Variable: VK\_EXT\_DEVICE\_MEMORY\_REPORT
+
+```Lisp
+(defparameter VK_EXT_DEVICE_MEMORY_REPORT 1)
+```
+
+#### Variable: VK\_EXT\_DEVICE\_MEMORY\_REPORT\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_DEVICE_MEMORY_REPORT_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_EXT\_DEVICE\_MEMORY\_REPORT\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_DEVICE_MEMORY_REPORT_EXTENSION_NAME "VK_EXT_device_memory_report")
+```
+
+#### Variable: VK\_DEVICE\_MEMORY\_REPORT\_EVENT\_TYPE\_ALLOCATE\_EXT
+
+```Lisp
+(defparameter VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATE_EXT 0)
+```
+
+#### Variable: VK\_DEVICE\_MEMORY\_REPORT\_EVENT\_TYPE\_FREE\_EXT
+
+```Lisp
+(defparameter VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_FREE_EXT 1)
+```
+
+#### Variable: VK\_DEVICE\_MEMORY\_REPORT\_EVENT\_TYPE\_IMPORT\_EXT
+
+```Lisp
+(defparameter VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_IMPORT_EXT 2)
+```
+
+#### Variable: VK\_DEVICE\_MEMORY\_REPORT\_EVENT\_TYPE\_UNIMPORT\_EXT
+
+```Lisp
+(defparameter VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_UNIMPORT_EXT 3)
+```
+
+#### Variable: VK\_DEVICE\_MEMORY\_REPORT\_EVENT\_TYPE\_ALLOCATION\_FAILED\_EXT
+
+```Lisp
+(defparameter VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATION_FAILED_EXT 4)
+```
+
+#### Variable: VK\_DEVICE\_MEMORY\_REPORT\_EVENT\_TYPE\_MAX\_ENUM\_EXT
+
+```Lisp
+(defparameter VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_MAX_ENUM_EXT 2147483647)
+```
+
+#### Variable: VK\_EXT\_ACQUIRE\_DRM\_DISPLAY
+
+```Lisp
+(defparameter VK_EXT_ACQUIRE_DRM_DISPLAY 1)
+```
+
+#### Variable: VK\_EXT\_ACQUIRE\_DRM\_DISPLAY\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_ACQUIRE_DRM_DISPLAY_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_ACQUIRE\_DRM\_DISPLAY\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_ACQUIRE_DRM_DISPLAY_EXTENSION_NAME "VK_EXT_acquire_drm_display")
+```
+
+#### Variable: VK\_EXT\_ROBUSTNESS2
+
+```Lisp
+(defparameter VK_EXT_ROBUSTNESS2 1)
+```
+
+#### Variable: VK\_EXT\_ROBUSTNESS\_2\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_ROBUSTNESS_2_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_ROBUSTNESS\_2\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_ROBUSTNESS_2_EXTENSION_NAME "VK_EXT_robustness2")
+```
+
+#### Variable: VK\_EXT\_CUSTOM\_BORDER\_COLOR
+
+```Lisp
+(defparameter VK_EXT_CUSTOM_BORDER_COLOR 1)
+```
+
+#### Variable: VK\_EXT\_CUSTOM\_BORDER\_COLOR\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_CUSTOM_BORDER_COLOR_SPEC_VERSION 12)
+```
+
+#### Variable: VK\_EXT\_CUSTOM\_BORDER\_COLOR\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_CUSTOM_BORDER_COLOR_EXTENSION_NAME "VK_EXT_custom_border_color")
+```
+
+#### Variable: VK\_GOOGLE\_USER\_TYPE
+
+```Lisp
+(defparameter VK_GOOGLE_USER_TYPE 1)
+```
+
+#### Variable: VK\_GOOGLE\_USER\_TYPE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_GOOGLE_USER_TYPE_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_GOOGLE\_USER\_TYPE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_GOOGLE_USER_TYPE_EXTENSION_NAME "VK_GOOGLE_user_type")
+```
+
+#### Variable: VK\_EXT\_PRIVATE\_DATA
+
+```Lisp
+(defparameter VK_EXT_PRIVATE_DATA 1)
+```
+
+#### Variable: VK\_EXT\_PRIVATE\_DATA\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_PRIVATE_DATA_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_PRIVATE\_DATA\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_PRIVATE_DATA_EXTENSION_NAME "VK_EXT_private_data")
+```
+
+#### Variable: VK\_EXT\_PIPELINE\_CREATION\_CACHE\_CONTROL
+
+```Lisp
+(defparameter VK_EXT_PIPELINE_CREATION_CACHE_CONTROL 1)
+```
+
+#### Variable: VK\_EXT\_PIPELINE\_CREATION\_CACHE\_CONTROL\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_PIPELINE_CREATION_CACHE_CONTROL_SPEC_VERSION 3)
+```
+
+#### Variable: VK\_EXT\_PIPELINE\_CREATION\_CACHE\_CONTROL\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_PIPELINE_CREATION_CACHE_CONTROL_EXTENSION_NAME "VK_EXT_pipeline_creation_cache_control")
+```
+
+#### Variable: VK\_NV\_DEVICE\_DIAGNOSTICS\_CONFIG
+
+```Lisp
+(defparameter VK_NV_DEVICE_DIAGNOSTICS_CONFIG 1)
+```
+
+#### Variable: VK\_NV\_DEVICE\_DIAGNOSTICS\_CONFIG\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_DEVICE_DIAGNOSTICS_CONFIG_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_NV\_DEVICE\_DIAGNOSTICS\_CONFIG\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_DEVICE_DIAGNOSTICS_CONFIG_EXTENSION_NAME "VK_NV_device_diagnostics_config")
+```
+
+#### Variable: VK\_DEVICE\_DIAGNOSTICS\_CONFIG\_ENABLE\_SHADER\_DEBUG\_INFO\_BIT\_NV
+
+```Lisp
+(defparameter VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_SHADER_DEBUG_INFO_BIT_NV 1)
+```
+
+#### Variable: VK\_DEVICE\_DIAGNOSTICS\_CONFIG\_ENABLE\_RESOURCE\_TRACKING\_BIT\_NV
+
+```Lisp
+(defparameter VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_RESOURCE_TRACKING_BIT_NV 2)
+```
+
+#### Variable: VK\_DEVICE\_DIAGNOSTICS\_CONFIG\_ENABLE\_AUTOMATIC\_CHECKPOINTS\_BIT\_NV
+
+```Lisp
+(defparameter VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_AUTOMATIC_CHECKPOINTS_BIT_NV 4)
+```
+
+#### Variable: VK\_DEVICE\_DIAGNOSTICS\_CONFIG\_ENABLE\_SHADER\_ERROR\_REPORTING\_BIT\_NV
+
+```Lisp
+(defparameter VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_SHADER_ERROR_REPORTING_BIT_NV 8)
+```
+
+#### Variable: VK\_DEVICE\_DIAGNOSTICS\_CONFIG\_FLAG\_BITS\_MAX\_ENUM\_NV
+
+```Lisp
+(defparameter VK_DEVICE_DIAGNOSTICS_CONFIG_FLAG_BITS_MAX_ENUM_NV 2147483647)
+```
+
+#### Variable: VK\_QCOM\_RENDER\_PASS\_STORE\_OPS
+
+```Lisp
+(defparameter VK_QCOM_RENDER_PASS_STORE_OPS 1)
+```
+
+#### Variable: VK\_QCOM\_RENDER\_PASS\_STORE\_OPS\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_QCOM_RENDER_PASS_STORE_OPS_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_QCOM\_RENDER\_PASS\_STORE\_OPS\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_QCOM_RENDER_PASS_STORE_OPS_EXTENSION_NAME "VK_QCOM_render_pass_store_ops")
+```
+
+#### Variable: VK\_EXT\_GRAPHICS\_PIPELINE\_LIBRARY
+
+```Lisp
+(defparameter VK_EXT_GRAPHICS_PIPELINE_LIBRARY 1)
+```
+
+#### Variable: VK\_EXT\_GRAPHICS\_PIPELINE\_LIBRARY\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_GRAPHICS_PIPELINE_LIBRARY_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_GRAPHICS\_PIPELINE\_LIBRARY\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_GRAPHICS_PIPELINE_LIBRARY_EXTENSION_NAME "VK_EXT_graphics_pipeline_library")
+```
+
+#### Variable: VK\_GRAPHICS\_PIPELINE\_LIBRARY\_VERTEX\_INPUT\_INTERFACE\_BIT\_EXT
+
+```Lisp
+(defparameter VK_GRAPHICS_PIPELINE_LIBRARY_VERTEX_INPUT_INTERFACE_BIT_EXT 1)
+```
+
+#### Variable: VK\_GRAPHICS\_PIPELINE\_LIBRARY\_PRE\_RASTERIZATION\_SHADERS\_BIT\_EXT
+
+```Lisp
+(defparameter VK_GRAPHICS_PIPELINE_LIBRARY_PRE_RASTERIZATION_SHADERS_BIT_EXT 2)
+```
+
+#### Variable: VK\_GRAPHICS\_PIPELINE\_LIBRARY\_FRAGMENT\_SHADER\_BIT\_EXT
+
+```Lisp
+(defparameter VK_GRAPHICS_PIPELINE_LIBRARY_FRAGMENT_SHADER_BIT_EXT 4)
+```
+
+#### Variable: VK\_GRAPHICS\_PIPELINE\_LIBRARY\_FRAGMENT\_OUTPUT\_INTERFACE\_BIT\_EXT
+
+```Lisp
+(defparameter VK_GRAPHICS_PIPELINE_LIBRARY_FRAGMENT_OUTPUT_INTERFACE_BIT_EXT 8)
+```
+
+#### Variable: VK\_GRAPHICS\_PIPELINE\_LIBRARY\_FLAG\_BITS\_MAX\_ENUM\_EXT
+
+```Lisp
+(defparameter VK_GRAPHICS_PIPELINE_LIBRARY_FLAG_BITS_MAX_ENUM_EXT 2147483647)
+```
+
+#### Variable: VK\_AMD\_SHADER\_EARLY\_AND\_LATE\_FRAGMENT\_TESTS
+
+```Lisp
+(defparameter VK_AMD_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS 1)
+```
+
+#### Variable: VK\_AMD\_SHADER\_EARLY\_AND\_LATE\_FRAGMENT\_TESTS\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_AMD_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_AMD\_SHADER\_EARLY\_AND\_LATE\_FRAGMENT\_TESTS\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_AMD_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_EXTENSION_NAME "VK_AMD_shader_early_and_late_fragment_tests")
+```
+
+#### Variable: VK\_NV\_FRAGMENT\_SHADING\_RATE\_ENUMS
+
+```Lisp
+(defparameter VK_NV_FRAGMENT_SHADING_RATE_ENUMS 1)
+```
+
+#### Variable: VK\_NV\_FRAGMENT\_SHADING\_RATE\_ENUMS\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_FRAGMENT_SHADING_RATE_ENUMS_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_NV\_FRAGMENT\_SHADING\_RATE\_ENUMS\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_FRAGMENT_SHADING_RATE_ENUMS_EXTENSION_NAME "VK_NV_fragment_shading_rate_enums")
+```
+
+#### Variable: VK\_FRAGMENT\_SHADING\_RATE\_TYPE\_FRAGMENT\_SIZE\_NV
+
+```Lisp
+(defparameter VK_FRAGMENT_SHADING_RATE_TYPE_FRAGMENT_SIZE_NV 0)
+```
+
+#### Variable: VK\_FRAGMENT\_SHADING\_RATE\_TYPE\_ENUMS\_NV
+
+```Lisp
+(defparameter VK_FRAGMENT_SHADING_RATE_TYPE_ENUMS_NV 1)
+```
+
+#### Variable: VK\_FRAGMENT\_SHADING\_RATE\_TYPE\_MAX\_ENUM\_NV
+
+```Lisp
+(defparameter VK_FRAGMENT_SHADING_RATE_TYPE_MAX_ENUM_NV 2147483647)
+```
+
+#### Variable: VK\_FRAGMENT\_SHADING\_RATE\_1\_INVOCATION\_PER\_PIXEL\_NV
+
+```Lisp
+(defparameter VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_PIXEL_NV 0)
+```
+
+#### Variable: VK\_FRAGMENT\_SHADING\_RATE\_1\_INVOCATION\_PER\_1X2\_PIXELS\_NV
+
+```Lisp
+(defparameter VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_1X2_PIXELS_NV 1)
+```
+
+#### Variable: VK\_FRAGMENT\_SHADING\_RATE\_1\_INVOCATION\_PER\_2X1\_PIXELS\_NV
+
+```Lisp
+(defparameter VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_2X1_PIXELS_NV 4)
+```
+
+#### Variable: VK\_FRAGMENT\_SHADING\_RATE\_1\_INVOCATION\_PER\_2X2\_PIXELS\_NV
+
+```Lisp
+(defparameter VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_2X2_PIXELS_NV 5)
+```
+
+#### Variable: VK\_FRAGMENT\_SHADING\_RATE\_1\_INVOCATION\_PER\_2X4\_PIXELS\_NV
+
+```Lisp
+(defparameter VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_2X4_PIXELS_NV 6)
+```
+
+#### Variable: VK\_FRAGMENT\_SHADING\_RATE\_1\_INVOCATION\_PER\_4X2\_PIXELS\_NV
+
+```Lisp
+(defparameter VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_4X2_PIXELS_NV 9)
+```
+
+#### Variable: VK\_FRAGMENT\_SHADING\_RATE\_1\_INVOCATION\_PER\_4X4\_PIXELS\_NV
+
+```Lisp
+(defparameter VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_4X4_PIXELS_NV 10)
+```
+
+#### Variable: VK\_FRAGMENT\_SHADING\_RATE\_2\_INVOCATIONS\_PER\_PIXEL\_NV
+
+```Lisp
+(defparameter VK_FRAGMENT_SHADING_RATE_2_INVOCATIONS_PER_PIXEL_NV 11)
+```
+
+#### Variable: VK\_FRAGMENT\_SHADING\_RATE\_4\_INVOCATIONS\_PER\_PIXEL\_NV
+
+```Lisp
+(defparameter VK_FRAGMENT_SHADING_RATE_4_INVOCATIONS_PER_PIXEL_NV 12)
+```
+
+#### Variable: VK\_FRAGMENT\_SHADING\_RATE\_8\_INVOCATIONS\_PER\_PIXEL\_NV
+
+```Lisp
+(defparameter VK_FRAGMENT_SHADING_RATE_8_INVOCATIONS_PER_PIXEL_NV 13)
+```
+
+#### Variable: VK\_FRAGMENT\_SHADING\_RATE\_16\_INVOCATIONS\_PER\_PIXEL\_NV
+
+```Lisp
+(defparameter VK_FRAGMENT_SHADING_RATE_16_INVOCATIONS_PER_PIXEL_NV 14)
+```
+
+#### Variable: VK\_FRAGMENT\_SHADING\_RATE\_NO\_INVOCATIONS\_NV
+
+```Lisp
+(defparameter VK_FRAGMENT_SHADING_RATE_NO_INVOCATIONS_NV 15)
+```
+
+#### Variable: VK\_FRAGMENT\_SHADING\_RATE\_MAX\_ENUM\_NV
+
+```Lisp
+(defparameter VK_FRAGMENT_SHADING_RATE_MAX_ENUM_NV 2147483647)
+```
+
+#### Variable: VK\_NV\_RAY\_TRACING\_MOTION\_BLUR
+
+```Lisp
+(defparameter VK_NV_RAY_TRACING_MOTION_BLUR 1)
+```
+
+#### Variable: VK\_NV\_RAY\_TRACING\_MOTION\_BLUR\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_RAY_TRACING_MOTION_BLUR_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_NV\_RAY\_TRACING\_MOTION\_BLUR\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_RAY_TRACING_MOTION_BLUR_EXTENSION_NAME "VK_NV_ray_tracing_motion_blur")
+```
+
+#### Variable: VK\_ACCELERATION\_STRUCTURE\_MOTION\_INSTANCE\_TYPE\_STATIC\_NV
+
+```Lisp
+(defparameter VK_ACCELERATION_STRUCTURE_MOTION_INSTANCE_TYPE_STATIC_NV 0)
+```
+
+#### Variable: VK\_ACCELERATION\_STRUCTURE\_MOTION\_INSTANCE\_TYPE\_MATRIX\_MOTION\_NV
+
+```Lisp
+(defparameter VK_ACCELERATION_STRUCTURE_MOTION_INSTANCE_TYPE_MATRIX_MOTION_NV 1)
+```
+
+#### Variable: VK\_ACCELERATION\_STRUCTURE\_MOTION\_INSTANCE\_TYPE\_SRT\_MOTION\_NV
+
+```Lisp
+(defparameter VK_ACCELERATION_STRUCTURE_MOTION_INSTANCE_TYPE_SRT_MOTION_NV 2)
+```
+
+#### Variable: VK\_ACCELERATION\_STRUCTURE\_MOTION\_INSTANCE\_TYPE\_MAX\_ENUM\_NV
+
+```Lisp
+(defparameter VK_ACCELERATION_STRUCTURE_MOTION_INSTANCE_TYPE_MAX_ENUM_NV 2147483647)
+```
+
+#### Variable: VK\_EXT\_YCBCR\_2PLANE\_444\_FORMATS
+
+```Lisp
+(defparameter VK_EXT_YCBCR_2PLANE_444_FORMATS 1)
+```
+
+#### Variable: VK\_EXT\_YCBCR\_2PLANE\_444\_FORMATS\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_YCBCR_2PLANE_444_FORMATS_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_YCBCR\_2PLANE\_444\_FORMATS\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_YCBCR_2PLANE_444_FORMATS_EXTENSION_NAME "VK_EXT_ycbcr_2plane_444_formats")
+```
+
+#### Variable: VK\_EXT\_FRAGMENT\_DENSITY\_MAP2
+
+```Lisp
+(defparameter VK_EXT_FRAGMENT_DENSITY_MAP2 1)
+```
+
+#### Variable: VK\_EXT\_FRAGMENT\_DENSITY\_MAP\_2\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_FRAGMENT_DENSITY_MAP_2_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_FRAGMENT\_DENSITY\_MAP\_2\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_FRAGMENT_DENSITY_MAP_2_EXTENSION_NAME "VK_EXT_fragment_density_map2")
+```
+
+#### Variable: VK\_QCOM\_ROTATED\_COPY\_COMMANDS
+
+```Lisp
+(defparameter VK_QCOM_ROTATED_COPY_COMMANDS 1)
+```
+
+#### Variable: VK\_QCOM\_ROTATED\_COPY\_COMMANDS\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_QCOM_ROTATED_COPY_COMMANDS_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_QCOM\_ROTATED\_COPY\_COMMANDS\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_QCOM_ROTATED_COPY_COMMANDS_EXTENSION_NAME "VK_QCOM_rotated_copy_commands")
+```
+
+#### Variable: VK\_EXT\_IMAGE\_ROBUSTNESS
+
+```Lisp
+(defparameter VK_EXT_IMAGE_ROBUSTNESS 1)
+```
+
+#### Variable: VK\_EXT\_IMAGE\_ROBUSTNESS\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_IMAGE_ROBUSTNESS_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_IMAGE\_ROBUSTNESS\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_IMAGE_ROBUSTNESS_EXTENSION_NAME "VK_EXT_image_robustness")
+```
+
+#### Variable: VK\_EXT\_IMAGE\_COMPRESSION\_CONTROL
+
+```Lisp
+(defparameter VK_EXT_IMAGE_COMPRESSION_CONTROL 1)
+```
+
+#### Variable: VK\_EXT\_IMAGE\_COMPRESSION\_CONTROL\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_IMAGE_COMPRESSION_CONTROL_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_IMAGE\_COMPRESSION\_CONTROL\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_IMAGE_COMPRESSION_CONTROL_EXTENSION_NAME "VK_EXT_image_compression_control")
+```
+
+#### Variable: VK\_IMAGE\_COMPRESSION\_DEFAULT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_COMPRESSION_DEFAULT_EXT 0)
+```
+
+#### Variable: VK\_IMAGE\_COMPRESSION\_FIXED\_RATE\_DEFAULT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_COMPRESSION_FIXED_RATE_DEFAULT_EXT 1)
+```
+
+#### Variable: VK\_IMAGE\_COMPRESSION\_FIXED\_RATE\_EXPLICIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_COMPRESSION_FIXED_RATE_EXPLICIT_EXT 2)
+```
+
+#### Variable: VK\_IMAGE\_COMPRESSION\_DISABLED\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_COMPRESSION_DISABLED_EXT 4)
+```
+
+#### Variable: VK\_IMAGE\_COMPRESSION\_FLAG\_BITS\_MAX\_ENUM\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_COMPRESSION_FLAG_BITS_MAX_ENUM_EXT 2147483647)
+```
+
+#### Variable: VK\_IMAGE\_COMPRESSION\_FIXED\_RATE\_NONE\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_COMPRESSION_FIXED_RATE_NONE_EXT 0)
+```
+
+#### Variable: VK\_IMAGE\_COMPRESSION\_FIXED\_RATE\_1BPC\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_COMPRESSION_FIXED_RATE_1BPC_BIT_EXT 1)
+```
+
+#### Variable: VK\_IMAGE\_COMPRESSION\_FIXED\_RATE\_2BPC\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_COMPRESSION_FIXED_RATE_2BPC_BIT_EXT 2)
+```
+
+#### Variable: VK\_IMAGE\_COMPRESSION\_FIXED\_RATE\_3BPC\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_COMPRESSION_FIXED_RATE_3BPC_BIT_EXT 4)
+```
+
+#### Variable: VK\_IMAGE\_COMPRESSION\_FIXED\_RATE\_4BPC\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_COMPRESSION_FIXED_RATE_4BPC_BIT_EXT 8)
+```
+
+#### Variable: VK\_IMAGE\_COMPRESSION\_FIXED\_RATE\_5BPC\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_COMPRESSION_FIXED_RATE_5BPC_BIT_EXT 16)
+```
+
+#### Variable: VK\_IMAGE\_COMPRESSION\_FIXED\_RATE\_6BPC\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_COMPRESSION_FIXED_RATE_6BPC_BIT_EXT 32)
+```
+
+#### Variable: VK\_IMAGE\_COMPRESSION\_FIXED\_RATE\_7BPC\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_COMPRESSION_FIXED_RATE_7BPC_BIT_EXT 64)
+```
+
+#### Variable: VK\_IMAGE\_COMPRESSION\_FIXED\_RATE\_8BPC\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_COMPRESSION_FIXED_RATE_8BPC_BIT_EXT 128)
+```
+
+#### Variable: VK\_IMAGE\_COMPRESSION\_FIXED\_RATE\_9BPC\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_COMPRESSION_FIXED_RATE_9BPC_BIT_EXT 256)
+```
+
+#### Variable: VK\_IMAGE\_COMPRESSION\_FIXED\_RATE\_10BPC\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_COMPRESSION_FIXED_RATE_10BPC_BIT_EXT 512)
+```
+
+#### Variable: VK\_IMAGE\_COMPRESSION\_FIXED\_RATE\_11BPC\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_COMPRESSION_FIXED_RATE_11BPC_BIT_EXT 1024)
+```
+
+#### Variable: VK\_IMAGE\_COMPRESSION\_FIXED\_RATE\_12BPC\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_COMPRESSION_FIXED_RATE_12BPC_BIT_EXT 2048)
+```
+
+#### Variable: VK\_IMAGE\_COMPRESSION\_FIXED\_RATE\_13BPC\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_COMPRESSION_FIXED_RATE_13BPC_BIT_EXT 4096)
+```
+
+#### Variable: VK\_IMAGE\_COMPRESSION\_FIXED\_RATE\_14BPC\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_COMPRESSION_FIXED_RATE_14BPC_BIT_EXT 8192)
+```
+
+#### Variable: VK\_IMAGE\_COMPRESSION\_FIXED\_RATE\_15BPC\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_COMPRESSION_FIXED_RATE_15BPC_BIT_EXT 16384)
+```
+
+#### Variable: VK\_IMAGE\_COMPRESSION\_FIXED\_RATE\_16BPC\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_COMPRESSION_FIXED_RATE_16BPC_BIT_EXT 32768)
+```
+
+#### Variable: VK\_IMAGE\_COMPRESSION\_FIXED\_RATE\_17BPC\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_COMPRESSION_FIXED_RATE_17BPC_BIT_EXT 65536)
+```
+
+#### Variable: VK\_IMAGE\_COMPRESSION\_FIXED\_RATE\_18BPC\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_COMPRESSION_FIXED_RATE_18BPC_BIT_EXT 131072)
+```
+
+#### Variable: VK\_IMAGE\_COMPRESSION\_FIXED\_RATE\_19BPC\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_COMPRESSION_FIXED_RATE_19BPC_BIT_EXT 262144)
+```
+
+#### Variable: VK\_IMAGE\_COMPRESSION\_FIXED\_RATE\_20BPC\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_COMPRESSION_FIXED_RATE_20BPC_BIT_EXT 524288)
+```
+
+#### Variable: VK\_IMAGE\_COMPRESSION\_FIXED\_RATE\_21BPC\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_COMPRESSION_FIXED_RATE_21BPC_BIT_EXT 1048576)
+```
+
+#### Variable: VK\_IMAGE\_COMPRESSION\_FIXED\_RATE\_22BPC\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_COMPRESSION_FIXED_RATE_22BPC_BIT_EXT 2097152)
+```
+
+#### Variable: VK\_IMAGE\_COMPRESSION\_FIXED\_RATE\_23BPC\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_COMPRESSION_FIXED_RATE_23BPC_BIT_EXT 4194304)
+```
+
+#### Variable: VK\_IMAGE\_COMPRESSION\_FIXED\_RATE\_24BPC\_BIT\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_COMPRESSION_FIXED_RATE_24BPC_BIT_EXT 8388608)
+```
+
+#### Variable: VK\_IMAGE\_COMPRESSION\_FIXED\_RATE\_FLAG\_BITS\_MAX\_ENUM\_EXT
+
+```Lisp
+(defparameter VK_IMAGE_COMPRESSION_FIXED_RATE_FLAG_BITS_MAX_ENUM_EXT 2147483647)
+```
+
+#### Variable: VK\_EXT\_4444\_FORMATS
+
+```Lisp
+(defparameter VK_EXT_4444_FORMATS 1)
+```
+
+#### Variable: VK\_EXT\_4444\_FORMATS\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_4444_FORMATS_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_4444\_FORMATS\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_4444_FORMATS_EXTENSION_NAME "VK_EXT_4444_formats")
+```
+
+#### Variable: VK\_ARM\_RASTERIZATION\_ORDER\_ATTACHMENT\_ACCESS
+
+```Lisp
+(defparameter VK_ARM_RASTERIZATION_ORDER_ATTACHMENT_ACCESS 1)
+```
+
+#### Variable: VK\_ARM\_RASTERIZATION\_ORDER\_ATTACHMENT\_ACCESS\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_ARM_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_ARM\_RASTERIZATION\_ORDER\_ATTACHMENT\_ACCESS\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_ARM_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_EXTENSION_NAME "VK_ARM_rasterization_order_attachment_access")
+```
+
+#### Variable: VK\_EXT\_RGBA10X6\_FORMATS
+
+```Lisp
+(defparameter VK_EXT_RGBA10X6_FORMATS 1)
+```
+
+#### Variable: VK\_EXT\_RGBA10X6\_FORMATS\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_RGBA10X6_FORMATS_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_RGBA10X6\_FORMATS\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_RGBA10X6_FORMATS_EXTENSION_NAME "VK_EXT_rgba10x6_formats")
+```
+
+#### Variable: VK\_NV\_ACQUIRE\_WINRT\_DISPLAY
+
+```Lisp
+(defparameter VK_NV_ACQUIRE_WINRT_DISPLAY 1)
+```
+
+#### Variable: VK\_NV\_ACQUIRE\_WINRT\_DISPLAY\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_ACQUIRE_WINRT_DISPLAY_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_NV\_ACQUIRE\_WINRT\_DISPLAY\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_ACQUIRE_WINRT_DISPLAY_EXTENSION_NAME "VK_NV_acquire_winrt_display")
+```
+
+#### Variable: VK\_VALVE\_MUTABLE\_DESCRIPTOR\_TYPE
+
+```Lisp
+(defparameter VK_VALVE_MUTABLE_DESCRIPTOR_TYPE 1)
+```
+
+#### Variable: VK\_VALVE\_MUTABLE\_DESCRIPTOR\_TYPE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_VALVE_MUTABLE_DESCRIPTOR_TYPE_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_VALVE\_MUTABLE\_DESCRIPTOR\_TYPE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_VALVE_MUTABLE_DESCRIPTOR_TYPE_EXTENSION_NAME "VK_VALVE_mutable_descriptor_type")
+```
+
+#### Variable: VK\_EXT\_VERTEX\_INPUT\_DYNAMIC\_STATE
+
+```Lisp
+(defparameter VK_EXT_VERTEX_INPUT_DYNAMIC_STATE 1)
+```
+
+#### Variable: VK\_EXT\_VERTEX\_INPUT\_DYNAMIC\_STATE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_VERTEX_INPUT_DYNAMIC_STATE_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_EXT\_VERTEX\_INPUT\_DYNAMIC\_STATE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_VERTEX_INPUT_DYNAMIC_STATE_EXTENSION_NAME "VK_EXT_vertex_input_dynamic_state")
+```
+
+#### Variable: VK\_EXT\_PHYSICAL\_DEVICE\_DRM
+
+```Lisp
+(defparameter VK_EXT_PHYSICAL_DEVICE_DRM 1)
+```
+
+#### Variable: VK\_EXT\_PHYSICAL\_DEVICE\_DRM\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_PHYSICAL_DEVICE_DRM_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_PHYSICAL\_DEVICE\_DRM\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_PHYSICAL_DEVICE_DRM_EXTENSION_NAME "VK_EXT_physical_device_drm")
+```
+
+#### Variable: VK\_EXT\_DEPTH\_CLIP\_CONTROL
+
+```Lisp
+(defparameter VK_EXT_DEPTH_CLIP_CONTROL 1)
+```
+
+#### Variable: VK\_EXT\_DEPTH\_CLIP\_CONTROL\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_DEPTH_CLIP_CONTROL_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_DEPTH\_CLIP\_CONTROL\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_DEPTH_CLIP_CONTROL_EXTENSION_NAME "VK_EXT_depth_clip_control")
+```
+
+#### Variable: VK\_EXT\_PRIMITIVE\_TOPOLOGY\_LIST\_RESTART
+
+```Lisp
+(defparameter VK_EXT_PRIMITIVE_TOPOLOGY_LIST_RESTART 1)
+```
+
+#### Variable: VK\_EXT\_PRIMITIVE\_TOPOLOGY\_LIST\_RESTART\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_PRIMITIVE_TOPOLOGY_LIST_RESTART_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_PRIMITIVE\_TOPOLOGY\_LIST\_RESTART\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_PRIMITIVE_TOPOLOGY_LIST_RESTART_EXTENSION_NAME "VK_EXT_primitive_topology_list_restart")
+```
+
+#### Variable: VK\_HUAWEI\_SUBPASS\_SHADING
+
+```Lisp
+(defparameter VK_HUAWEI_SUBPASS_SHADING 1)
+```
+
+#### Variable: VK\_HUAWEI\_SUBPASS\_SHADING\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_HUAWEI_SUBPASS_SHADING_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_HUAWEI\_SUBPASS\_SHADING\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_HUAWEI_SUBPASS_SHADING_EXTENSION_NAME "VK_HUAWEI_subpass_shading")
+```
+
+#### Variable: VK\_HUAWEI\_INVOCATION\_MASK
+
+```Lisp
+(defparameter VK_HUAWEI_INVOCATION_MASK 1)
+```
+
+#### Variable: VK\_HUAWEI\_INVOCATION\_MASK\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_HUAWEI_INVOCATION_MASK_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_HUAWEI\_INVOCATION\_MASK\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_HUAWEI_INVOCATION_MASK_EXTENSION_NAME "VK_HUAWEI_invocation_mask")
+```
+
+#### Variable: VK\_NV\_EXTERNAL\_MEMORY\_RDMA
+
+```Lisp
+(defparameter VK_NV_EXTERNAL_MEMORY_RDMA 1)
+```
+
+#### Variable: VK\_NV\_EXTERNAL\_MEMORY\_RDMA\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_EXTERNAL_MEMORY_RDMA_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_NV\_EXTERNAL\_MEMORY\_RDMA\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_EXTERNAL_MEMORY_RDMA_EXTENSION_NAME "VK_NV_external_memory_rdma")
+```
+
+#### Variable: VK\_EXT\_PIPELINE\_PROPERTIES
+
+```Lisp
+(defparameter VK_EXT_PIPELINE_PROPERTIES 1)
+```
+
+#### Variable: VK\_EXT\_PIPELINE\_PROPERTIES\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_PIPELINE_PROPERTIES_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_PIPELINE\_PROPERTIES\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_PIPELINE_PROPERTIES_EXTENSION_NAME "VK_EXT_pipeline_properties")
+```
+
+#### Variable: VK\_EXT\_EXTENDED\_DYNAMIC\_STATE2
+
+```Lisp
+(defparameter VK_EXT_EXTENDED_DYNAMIC_STATE2 1)
+```
+
+#### Variable: VK\_EXT\_EXTENDED\_DYNAMIC\_STATE\_2\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_EXTENDED_DYNAMIC_STATE_2_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_EXTENDED\_DYNAMIC\_STATE\_2\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_EXTENDED_DYNAMIC_STATE_2_EXTENSION_NAME "VK_EXT_extended_dynamic_state2")
+```
+
+#### Variable: VK\_EXT\_COLOR\_WRITE\_ENABLE
+
+```Lisp
+(defparameter VK_EXT_COLOR_WRITE_ENABLE 1)
+```
+
+#### Variable: VK\_EXT\_COLOR\_WRITE\_ENABLE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_COLOR_WRITE_ENABLE_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_COLOR\_WRITE\_ENABLE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_COLOR_WRITE_ENABLE_EXTENSION_NAME "VK_EXT_color_write_enable")
+```
+
+#### Variable: VK\_EXT\_PRIMITIVES\_GENERATED\_QUERY
+
+```Lisp
+(defparameter VK_EXT_PRIMITIVES_GENERATED_QUERY 1)
+```
+
+#### Variable: VK\_EXT\_PRIMITIVES\_GENERATED\_QUERY\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_PRIMITIVES_GENERATED_QUERY_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_PRIMITIVES\_GENERATED\_QUERY\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_PRIMITIVES_GENERATED_QUERY_EXTENSION_NAME "VK_EXT_primitives_generated_query")
+```
+
+#### Variable: VK\_EXT\_GLOBAL\_PRIORITY\_QUERY
+
+```Lisp
+(defparameter VK_EXT_GLOBAL_PRIORITY_QUERY 1)
+```
+
+#### Variable: VK\_EXT\_GLOBAL\_PRIORITY\_QUERY\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_GLOBAL_PRIORITY_QUERY_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_GLOBAL\_PRIORITY\_QUERY\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_GLOBAL_PRIORITY_QUERY_EXTENSION_NAME "VK_EXT_global_priority_query")
+```
+
+#### Variable: VK\_MAX\_GLOBAL\_PRIORITY\_SIZE\_EXT
+
+```Lisp
+(defparameter VK_MAX_GLOBAL_PRIORITY_SIZE_EXT VK_MAX_GLOBAL_PRIORITY_SIZE_KHR)
+```
+
+#### Variable: VK\_EXT\_IMAGE\_VIEW\_MIN\_LOD
+
+```Lisp
+(defparameter VK_EXT_IMAGE_VIEW_MIN_LOD 1)
+```
+
+#### Variable: VK\_EXT\_IMAGE\_VIEW\_MIN\_LOD\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_IMAGE_VIEW_MIN_LOD_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_IMAGE\_VIEW\_MIN\_LOD\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_IMAGE_VIEW_MIN_LOD_EXTENSION_NAME "VK_EXT_image_view_min_lod")
+```
+
+#### Variable: VK\_EXT\_MULTI\_DRAW
+
+```Lisp
+(defparameter VK_EXT_MULTI_DRAW 1)
+```
+
+#### Variable: VK\_EXT\_MULTI\_DRAW\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_MULTI_DRAW_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_MULTI\_DRAW\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_MULTI_DRAW_EXTENSION_NAME "VK_EXT_multi_draw")
+```
+
+#### Variable: VK\_EXT\_IMAGE\_2D\_VIEW\_OF\_3D
+
+```Lisp
+(defparameter VK_EXT_IMAGE_2D_VIEW_OF_3D 1)
+```
+
+#### Variable: VK\_EXT\_IMAGE\_2D\_VIEW\_OF\_3D\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_IMAGE_2D_VIEW_OF_3D_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_IMAGE\_2D\_VIEW\_OF\_3D\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_IMAGE_2D_VIEW_OF_3D_EXTENSION_NAME "VK_EXT_image_2d_view_of_3d")
+```
+
+#### Variable: VK\_EXT\_LOAD\_STORE\_OP\_NONE
+
+```Lisp
+(defparameter VK_EXT_LOAD_STORE_OP_NONE 1)
+```
+
+#### Variable: VK\_EXT\_LOAD\_STORE\_OP\_NONE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_LOAD_STORE_OP_NONE_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_LOAD\_STORE\_OP\_NONE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_LOAD_STORE_OP_NONE_EXTENSION_NAME "VK_EXT_load_store_op_none")
+```
+
+#### Variable: VK\_EXT\_BORDER\_COLOR\_SWIZZLE
+
+```Lisp
+(defparameter VK_EXT_BORDER_COLOR_SWIZZLE 1)
+```
+
+#### Variable: VK\_EXT\_BORDER\_COLOR\_SWIZZLE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_BORDER_COLOR_SWIZZLE_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_BORDER\_COLOR\_SWIZZLE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_BORDER_COLOR_SWIZZLE_EXTENSION_NAME "VK_EXT_border_color_swizzle")
+```
+
+#### Variable: VK\_EXT\_PAGEABLE\_DEVICE\_LOCAL\_MEMORY
+
+```Lisp
+(defparameter VK_EXT_PAGEABLE_DEVICE_LOCAL_MEMORY 1)
+```
+
+#### Variable: VK\_EXT\_PAGEABLE\_DEVICE\_LOCAL\_MEMORY\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_PAGEABLE_DEVICE_LOCAL_MEMORY_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_PAGEABLE\_DEVICE\_LOCAL\_MEMORY\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_PAGEABLE_DEVICE_LOCAL_MEMORY_EXTENSION_NAME "VK_EXT_pageable_device_local_memory")
+```
+
+#### Variable: VK\_VALVE\_DESCRIPTOR\_SET\_HOST\_MAPPING
+
+```Lisp
+(defparameter VK_VALVE_DESCRIPTOR_SET_HOST_MAPPING 1)
+```
+
+#### Variable: VK\_VALVE\_DESCRIPTOR\_SET\_HOST\_MAPPING\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_VALVE_DESCRIPTOR_SET_HOST_MAPPING_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_VALVE\_DESCRIPTOR\_SET\_HOST\_MAPPING\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_VALVE_DESCRIPTOR_SET_HOST_MAPPING_EXTENSION_NAME "VK_VALVE_descriptor_set_host_mapping")
+```
+
+#### Variable: VK\_QCOM\_FRAGMENT\_DENSITY\_MAP\_OFFSET
+
+```Lisp
+(defparameter VK_QCOM_FRAGMENT_DENSITY_MAP_OFFSET 1)
+```
+
+#### Variable: VK\_QCOM\_FRAGMENT\_DENSITY\_MAP\_OFFSET\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_QCOM_FRAGMENT_DENSITY_MAP_OFFSET_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_QCOM\_FRAGMENT\_DENSITY\_MAP\_OFFSET\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_QCOM_FRAGMENT_DENSITY_MAP_OFFSET_EXTENSION_NAME "VK_QCOM_fragment_density_map_offset")
+```
+
+#### Variable: VK\_NV\_LINEAR\_COLOR\_ATTACHMENT
+
+```Lisp
+(defparameter VK_NV_LINEAR_COLOR_ATTACHMENT 1)
+```
+
+#### Variable: VK\_NV\_LINEAR\_COLOR\_ATTACHMENT\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_NV_LINEAR_COLOR_ATTACHMENT_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_NV\_LINEAR\_COLOR\_ATTACHMENT\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_NV_LINEAR_COLOR_ATTACHMENT_EXTENSION_NAME "VK_NV_linear_color_attachment")
+```
+
+#### Variable: VK\_GOOGLE\_SURFACELESS\_QUERY
+
+```Lisp
+(defparameter VK_GOOGLE_SURFACELESS_QUERY 1)
+```
+
+#### Variable: VK\_GOOGLE\_SURFACELESS\_QUERY\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_GOOGLE_SURFACELESS_QUERY_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_GOOGLE\_SURFACELESS\_QUERY\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_GOOGLE_SURFACELESS_QUERY_EXTENSION_NAME "VK_GOOGLE_surfaceless_query")
+```
+
+#### Variable: VK\_EXT\_IMAGE\_COMPRESSION\_CONTROL\_SWAPCHAIN
+
+```Lisp
+(defparameter VK_EXT_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN 1)
+```
+
+#### Variable: VK\_EXT\_IMAGE\_COMPRESSION\_CONTROL\_SWAPCHAIN\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_EXT\_IMAGE\_COMPRESSION\_CONTROL\_SWAPCHAIN\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_EXTENSION_NAME "VK_EXT_image_compression_control_swapchain")
+```
+
+#### Variable: VK\_EXT\_SUBPASS\_MERGE\_FEEDBACK
+
+```Lisp
+(defparameter VK_EXT_SUBPASS_MERGE_FEEDBACK 1)
+```
+
+#### Variable: VK\_EXT\_SUBPASS\_MERGE\_FEEDBACK\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_EXT_SUBPASS_MERGE_FEEDBACK_SPEC_VERSION 2)
+```
+
+#### Variable: VK\_EXT\_SUBPASS\_MERGE\_FEEDBACK\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_EXT_SUBPASS_MERGE_FEEDBACK_EXTENSION_NAME "VK_EXT_subpass_merge_feedback")
+```
+
+#### Variable: VK\_SUBPASS\_MERGE\_STATUS\_MERGED\_EXT
+
+```Lisp
+(defparameter VK_SUBPASS_MERGE_STATUS_MERGED_EXT 0)
+```
+
+#### Variable: VK\_SUBPASS\_MERGE\_STATUS\_DISALLOWED\_EXT
+
+```Lisp
+(defparameter VK_SUBPASS_MERGE_STATUS_DISALLOWED_EXT 1)
+```
+
+#### Variable: VK\_SUBPASS\_MERGE\_STATUS\_NOT\_MERGED\_SIDE\_EFFECTS\_EXT
+
+```Lisp
+(defparameter VK_SUBPASS_MERGE_STATUS_NOT_MERGED_SIDE_EFFECTS_EXT 2)
+```
+
+#### Variable: VK\_SUBPASS\_MERGE\_STATUS\_NOT\_MERGED\_SAMPLES\_MISMATCH\_EXT
+
+```Lisp
+(defparameter VK_SUBPASS_MERGE_STATUS_NOT_MERGED_SAMPLES_MISMATCH_EXT 3)
+```
+
+#### Variable: VK\_SUBPASS\_MERGE\_STATUS\_NOT\_MERGED\_VIEWS\_MISMATCH\_EXT
+
+```Lisp
+(defparameter VK_SUBPASS_MERGE_STATUS_NOT_MERGED_VIEWS_MISMATCH_EXT 4)
+```
+
+#### Variable: VK\_SUBPASS\_MERGE\_STATUS\_NOT\_MERGED\_ALIASING\_EXT
+
+```Lisp
+(defparameter VK_SUBPASS_MERGE_STATUS_NOT_MERGED_ALIASING_EXT 5)
+```
+
+#### Variable: VK\_SUBPASS\_MERGE\_STATUS\_NOT\_MERGED\_DEPENDENCIES\_EXT
+
+```Lisp
+(defparameter VK_SUBPASS_MERGE_STATUS_NOT_MERGED_DEPENDENCIES_EXT 6)
+```
+
+#### Variable: VK\_SUBPASS\_MERGE\_STATUS\_NOT\_MERGED\_INCOMPATIBLE\_INPUT\_ATTACHMENT\_EXT
+
+```Lisp
+(defparameter VK_SUBPASS_MERGE_STATUS_NOT_MERGED_INCOMPATIBLE_INPUT_ATTACHMENT_EXT 7)
+```
+
+#### Variable: VK\_SUBPASS\_MERGE\_STATUS\_NOT\_MERGED\_TOO\_MANY\_ATTACHMENTS\_EXT
+
+```Lisp
+(defparameter VK_SUBPASS_MERGE_STATUS_NOT_MERGED_TOO_MANY_ATTACHMENTS_EXT 8)
+```
+
+#### Variable: VK\_SUBPASS\_MERGE\_STATUS\_NOT\_MERGED\_INSUFFICIENT\_STORAGE\_EXT
+
+```Lisp
+(defparameter VK_SUBPASS_MERGE_STATUS_NOT_MERGED_INSUFFICIENT_STORAGE_EXT 9)
+```
+
+#### Variable: VK\_SUBPASS\_MERGE\_STATUS\_NOT\_MERGED\_DEPTH\_STENCIL\_COUNT\_EXT
+
+```Lisp
+(defparameter VK_SUBPASS_MERGE_STATUS_NOT_MERGED_DEPTH_STENCIL_COUNT_EXT 10)
+```
+
+#### Variable: VK\_SUBPASS\_MERGE\_STATUS\_NOT\_MERGED\_RESOLVE\_ATTACHMENT\_REUSE\_EXT
+
+```Lisp
+(defparameter VK_SUBPASS_MERGE_STATUS_NOT_MERGED_RESOLVE_ATTACHMENT_REUSE_EXT 11)
+```
+
+#### Variable: VK\_SUBPASS\_MERGE\_STATUS\_NOT\_MERGED\_SINGLE\_SUBPASS\_EXT
+
+```Lisp
+(defparameter VK_SUBPASS_MERGE_STATUS_NOT_MERGED_SINGLE_SUBPASS_EXT 12)
+```
+
+#### Variable: VK\_SUBPASS\_MERGE\_STATUS\_NOT\_MERGED\_UNSPECIFIED\_EXT
+
+```Lisp
+(defparameter VK_SUBPASS_MERGE_STATUS_NOT_MERGED_UNSPECIFIED_EXT 13)
+```
+
+#### Variable: VK\_SUBPASS\_MERGE\_STATUS\_MAX\_ENUM\_EXT
+
+```Lisp
+(defparameter VK_SUBPASS_MERGE_STATUS_MAX_ENUM_EXT 2147483647)
+```
+
+#### Variable: VK\_KHR\_ACCELERATION\_STRUCTURE
+
+```Lisp
+(defparameter VK_KHR_ACCELERATION_STRUCTURE 1)
+```
+
+#### Variable: VK\_KHR\_ACCELERATION\_STRUCTURE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_ACCELERATION_STRUCTURE_SPEC_VERSION 13)
+```
+
+#### Variable: VK\_KHR\_ACCELERATION\_STRUCTURE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_ACCELERATION_STRUCTURE_EXTENSION_NAME "VK_KHR_acceleration_structure")
+```
+
+#### Variable: VK\_BUILD\_ACCELERATION\_STRUCTURE\_MODE\_BUILD\_KHR
+
+```Lisp
+(defparameter VK_BUILD_ACCELERATION_STRUCTURE_MODE_BUILD_KHR 0)
+```
+
+#### Variable: VK\_BUILD\_ACCELERATION\_STRUCTURE\_MODE\_UPDATE\_KHR
+
+```Lisp
+(defparameter VK_BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR 1)
+```
+
+#### Variable: VK\_BUILD\_ACCELERATION\_STRUCTURE\_MODE\_MAX\_ENUM\_KHR
+
+```Lisp
+(defparameter VK_BUILD_ACCELERATION_STRUCTURE_MODE_MAX_ENUM_KHR 2147483647)
+```
+
+#### Variable: VK\_ACCELERATION\_STRUCTURE\_BUILD\_TYPE\_HOST\_KHR
+
+```Lisp
+(defparameter VK_ACCELERATION_STRUCTURE_BUILD_TYPE_HOST_KHR 0)
+```
+
+#### Variable: VK\_ACCELERATION\_STRUCTURE\_BUILD\_TYPE\_DEVICE\_KHR
+
+```Lisp
+(defparameter VK_ACCELERATION_STRUCTURE_BUILD_TYPE_DEVICE_KHR 1)
+```
+
+#### Variable: VK\_ACCELERATION\_STRUCTURE\_BUILD\_TYPE\_HOST\_OR\_DEVICE\_KHR
+
+```Lisp
+(defparameter VK_ACCELERATION_STRUCTURE_BUILD_TYPE_HOST_OR_DEVICE_KHR 2)
+```
+
+#### Variable: VK\_ACCELERATION\_STRUCTURE\_BUILD\_TYPE\_MAX\_ENUM\_KHR
+
+```Lisp
+(defparameter VK_ACCELERATION_STRUCTURE_BUILD_TYPE_MAX_ENUM_KHR 2147483647)
+```
+
+#### Variable: VK\_ACCELERATION\_STRUCTURE\_COMPATIBILITY\_COMPATIBLE\_KHR
+
+```Lisp
+(defparameter VK_ACCELERATION_STRUCTURE_COMPATIBILITY_COMPATIBLE_KHR 0)
+```
+
+#### Variable: VK\_ACCELERATION\_STRUCTURE\_COMPATIBILITY\_INCOMPATIBLE\_KHR
+
+```Lisp
+(defparameter VK_ACCELERATION_STRUCTURE_COMPATIBILITY_INCOMPATIBLE_KHR 1)
+```
+
+#### Variable: VK\_ACCELERATION\_STRUCTURE\_COMPATIBILITY\_MAX\_ENUM\_KHR
+
+```Lisp
+(defparameter VK_ACCELERATION_STRUCTURE_COMPATIBILITY_MAX_ENUM_KHR 2147483647)
+```
+
+#### Variable: VK\_ACCELERATION\_STRUCTURE\_CREATE\_DEVICE\_ADDRESS\_CAPTURE\_REPLAY\_BIT\_KHR
+
+```Lisp
+(defparameter VK_ACCELERATION_STRUCTURE_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR 1)
+```
+
+#### Variable: VK\_ACCELERATION\_STRUCTURE\_CREATE\_MOTION\_BIT\_NV
+
+```Lisp
+(defparameter VK_ACCELERATION_STRUCTURE_CREATE_MOTION_BIT_NV 4)
+```
+
+#### Variable: VK\_ACCELERATION\_STRUCTURE\_CREATE\_FLAG\_BITS\_MAX\_ENUM\_KHR
+
+```Lisp
+(defparameter VK_ACCELERATION_STRUCTURE_CREATE_FLAG_BITS_MAX_ENUM_KHR 2147483647)
+```
+
+#### Variable: VK\_KHR\_RAY\_TRACING\_PIPELINE
+
+```Lisp
+(defparameter VK_KHR_RAY_TRACING_PIPELINE 1)
+```
+
+#### Variable: VK\_KHR\_RAY\_TRACING\_PIPELINE\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_RAY_TRACING_PIPELINE_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_RAY\_TRACING\_PIPELINE\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_RAY_TRACING_PIPELINE_EXTENSION_NAME "VK_KHR_ray_tracing_pipeline")
+```
+
+#### Variable: VK\_SHADER\_GROUP\_SHADER\_GENERAL\_KHR
+
+```Lisp
+(defparameter VK_SHADER_GROUP_SHADER_GENERAL_KHR 0)
+```
+
+#### Variable: VK\_SHADER\_GROUP\_SHADER\_CLOSEST\_HIT\_KHR
+
+```Lisp
+(defparameter VK_SHADER_GROUP_SHADER_CLOSEST_HIT_KHR 1)
+```
+
+#### Variable: VK\_SHADER\_GROUP\_SHADER\_ANY\_HIT\_KHR
+
+```Lisp
+(defparameter VK_SHADER_GROUP_SHADER_ANY_HIT_KHR 2)
+```
+
+#### Variable: VK\_SHADER\_GROUP\_SHADER\_INTERSECTION\_KHR
+
+```Lisp
+(defparameter VK_SHADER_GROUP_SHADER_INTERSECTION_KHR 3)
+```
+
+#### Variable: VK\_SHADER\_GROUP\_SHADER\_MAX\_ENUM\_KHR
+
+```Lisp
+(defparameter VK_SHADER_GROUP_SHADER_MAX_ENUM_KHR 2147483647)
+```
+
+#### Variable: VK\_KHR\_RAY\_QUERY
+
+```Lisp
+(defparameter VK_KHR_RAY_QUERY 1)
+```
+
+#### Variable: VK\_KHR\_RAY\_QUERY\_SPEC\_VERSION
+
+```Lisp
+(defparameter VK_KHR_RAY_QUERY_SPEC_VERSION 1)
+```
+
+#### Variable: VK\_KHR\_RAY\_QUERY\_EXTENSION\_NAME
+
+```Lisp
+(defparameter VK_KHR_RAY_QUERY_EXTENSION_NAME "VK_KHR_ray_query")
 ```
 

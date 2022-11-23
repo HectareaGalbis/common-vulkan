@@ -1,22 +1,20 @@
 
 (asdf:defsystem "common-vulkan"
-   :depends-on ("cffi" "more-cffi" "iterate" "alexandria")
+   :depends-on ("cffi" "more-cffi" "alexandria" "adp")
    :components ((:file "package")
 		
                 ;; Vulkan
-		(:module "vulkan"
-		 :components ((:file "load-vulkan")
-			      (:file "ctypes" :depends-on ("src/constants"))
-			      (:file "cfunctions")))
+		(:file "vulkan/load-vulkan")
+		(:file "vulkan/ctypes" :depends-on ("src/constants"))
+		(:file "vulkan/cfunctions")
                 
 		;; Common Vulkan
-		(:module "src"
-		 :components ((:file "initial-parameters")
-			      (:file "helper-functions")
-			      (:file "constants")
-			      (:file "structs")
-			      (:file "functions")
-			      (:file "callbacks")))))
+		;; (:file "initial-parameters")
+		;; (:file "helper-functions")
+		(:file "src/constants")
+		(:file "src/structs")
+		(:file "src/functions")
+		(:file "src/callbacks")))
 
 
 (asdf:defsystem "common-vulkan/generation"
@@ -24,4 +22,25 @@
   :components ((:file "package")
 	       (:module "vulkan"
 		:components ((:file "generate")))))
+
+
+(asdf:defsystem "common-vulkan/docs"
+  :depends-on ("cffi" "more-cffi" "alexandria" "adp")
+  :components ((:file "package")
+	       
+               ;; Vulkan
+	       (:file "vulkan/load-vulkan")
+	       (:file "vulkan/ctypes" :depends-on ("src/constants"))
+	       (:file "vulkan/cfunctions")
+               
+	       ;; Common Vulkan
+	       ;; (:file "initial-parameters")
+	       ;; (:file "helper-functions")
+	       (:file "src/constants")
+	       (:file "src/structs")
+	       (:file "src/functions")
+	       (:file "src/callbacks")
+
+	       ;; Documentation
+	       (:file "README")))
 		

@@ -1,19 +1,21 @@
-# common-vulkan
+# Common Vulkan
 
-Common Lisp bindings for the vulkan library. 
+Welcome to Common Vulkan! This library defines the Common Lisp bindings for the Vulkan library.
 
-**WARNING**: This library is still in development. My first objective is to be able to complete the official vulkan tutorial with these bindings. I'll be adding code and documentation in my free time. I want to make my own game engine made completely with Common Lisp, so I think this project will be active for a long time.
+## Documentation
 
-# Documentation
+## Installation
 
-The [documentation](https://hectarea1996.github.io/common-vulkan/) contains an API reference and a Vulkan guide.
+Common Vulkan is available on Ultralisp. If you don't have it, add it with `(ql-dist:install-dist "http://dist.ultralisp.org/" :prompt nil)`.
 
-# Dependencies
+Finally, install Common Vulkan with `(ql:quickload :common-vulkan)`.
 
-It only depends on the [more-cffi](https://github.com/Hectarea1996/more-cffi) library. Clone it to your `quicklisp/local-projects/` folder.
+## Progression
 
-# Installation
+The next values are an estimation of the completeness of this library:
 
-You need the vulkan SDK installed in your computer. You can get it on its [main page](https://vulkan.lunarg.com). 
+* Callbacks: 0/8 (0%)
+* Functions: 0/491 (0%)
+* Structs: 0/660 (0%)
+* Total: 0/1159 (0%)
 
-Afterwards, clone the [more-cffi](https://github.com/Hectarea1996/more-cffi) library into your `quicklisp/local-projects/` folder. Finally, clone this repository into your `quicklisp/local-projects/` folder.
