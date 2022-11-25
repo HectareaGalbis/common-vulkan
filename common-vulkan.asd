@@ -24,6 +24,12 @@
 		:components ((:file "generate")))))
 
 
+(asdf:defsystem "common-vulkan/guide"
+  :depends-on ("common-vulkan" "adp" "cl-glfw")
+  :components ((:file "guide/package")
+	       (:file "guide/base-code")))
+
+
 (asdf:defsystem "common-vulkan/docs"
   :depends-on ("cffi" "more-cffi" "alexandria" "adp")
   :components ((:file "package")
@@ -42,5 +48,10 @@
 	       (:file "src/callbacks")
 
 	       ;; Documentation
-	       (:file "README")))
+	       (:file "README")
+
+	       ;; Guide
+	       (:file "guide/package")
+	       (:file "guide/common-vulkan-guide")
+	       (:file "guide/base-code")))
 		
