@@ -513,7 +513,7 @@ Return a context structure with the information."
   (declare (type context context) (type stream stream))
   (format stream "~%~s~%~%" '(in-package :cvk))
   (format stream "~s~%~%"
-	  '(adp:write-in-file #P"docs/api/structs"))
+	  '(adp:in-file #P"docs/api/structs"))
   (format stream "~s~%~%" `(cffi:defctype handle :pointer))
   (format stream "~s"
 	  `(eval-when (:compile-toplevel :load-toplevel :execute)
@@ -529,7 +529,7 @@ Return a context structure with the information."
   (declare (type context context) (type stream stream))
   (format stream "~%~s~%~%" '(in-package :cvk))
   (format stream "~s~%~%"
-	  '(adp:write-in-file #P"docs/api/functions"))
+	  '(adp:in-file #P"docs/api/functions"))
   (format stream "~s"
 	  '(defmacro multiple-defcfun ((foreign-name name funcall-name) ret-type &body args)
 	    (let ((name-args (mapcar #'car args))
@@ -551,7 +551,7 @@ Return a context structure with the information."
   (declare (type context context) (type stream stream))
   (format stream "~%~s~%~%" '(in-package :cvk))
   (format stream "~s~%~%"
-	  '(adp:write-in-file #P"docs/api/constants"))
+	  '(adp:in-file #P"docs/api/constants"))
   (format stream "~s~%~%"
 	  '(adp:defmacro VK_MAKE_API_VERSION (variant major minor patch)
 	    `(logior (ash ,variant 29) (ash ,major 22) (ash ,minor 12) ,patch)))

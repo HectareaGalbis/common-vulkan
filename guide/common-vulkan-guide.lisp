@@ -1,7 +1,7 @@
 
 (in-package :cvg)
 
-(adp:write-in-file #P"docs/guide/common-vulkan-guide")
+(adp:in-file #P"docs/guide/common-vulkan-guide")
 
 (adp:header "Common Vulkan Guide")
 
@@ -11,10 +11,10 @@
 
 (adp:text "I think I’m not missing anything so…, let’s code!")
 
-(adp:itemize (:item "Introduction")
-	     (:itemize (:item @h(introduction-header)))
-	     (:item "Setup")
-	     (:itemize (:item @h(base-code-header))))
+(adp:itemize (adp:item "Introduction")
+	     (adp:itemize (adp:item @h(introduction-header)))
+	     (adp:item "Setup")
+	     (adp:itemize (adp:item @h(base-code-header))))
 
 
 (defmacro next-previous (next-header previous-header &key ((:main main-link) nil) ((:vertex vertex-link) nil) ((:fragment fragment-link) nil))
@@ -27,10 +27,10 @@
   `(progn
      ,@(when (or main-link vertex-link fragment-link)
 	 `((adp:itemize ,@(when main-link
-			    `(:item @b("Common Lisp code") ": " @w("main.lisp" ,main-link)))
+			    `(adp:item @b("Common Lisp code") ": " @w("main.lisp" ,main-link)))
 			,@(when vertex-link
-			    `(:item @b("Vertex shader") ": " @w("shader.vert" ,vertex-link)))
+			    `(adp:item @b("Vertex shader") ": " @w("shader.vert" ,vertex-link)))
 			,@(when fragment-link
-			    `(:item @b("Fragment shader") ": " @w("shader.frag" ,fragment-link))))))
-     (adp:itemize (:item @b("Next") ": " @h(,next-header))
-		  (:item @b("Previous") ": " @h(,previous-header)))))
+			    `(adp:item @b("Fragment shader") ": " @w("shader.frag" ,fragment-link))))))
+     (adp:itemize (adp:item @b("Next") ": " @h(,next-header))
+		  (adp:item @b("Previous") ": " @h(,previous-header)))))

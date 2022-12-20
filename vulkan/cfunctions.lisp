@@ -1,7 +1,7 @@
 
 (IN-PACKAGE :CVK)
 
-(ADP:WRITE-IN-FILE #P"docs/api/functions")
+(ADP:IN-FILE #P"docs/api/functions")
 
 (DEFMACRO MULTIPLE-DEFCFUN
           ((FOREIGN-NAME NAME FUNCALL-NAME) RET-TYPE &BODY ARGS)

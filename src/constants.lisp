@@ -1,7 +1,7 @@
 
 (IN-PACKAGE :CVK)
 
-(ADP:WRITE-IN-FILE #P"docs/api/constants")
+(ADP:IN-FILE #P"docs/api/constants")
 
 (ADP:DEFMACRO
   VK_MAKE_API_VERSION

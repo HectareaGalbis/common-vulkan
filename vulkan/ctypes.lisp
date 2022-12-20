@@ -1,7 +1,7 @@
 
 (IN-PACKAGE :CVK)
 
-(ADP:WRITE-IN-FILE #P"docs/api/structs")
+(ADP:IN-FILE #P"docs/api/structs")
 
 (CFFI:DEFCTYPE HANDLE :POINTER)
 

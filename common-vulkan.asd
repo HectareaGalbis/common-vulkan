@@ -26,8 +26,9 @@
 
 (asdf:defsystem "common-vulkan/guide"
   :depends-on ("common-vulkan" "adp" "cl-glfw")
-  :components ((:file "guide/package")
-	       (:file "guide/base-code")))
+  :components ((:module "guide"
+		:components ((:file "package")
+			     (:file "base-code/main")))))
 
 
 (asdf:defsystem "common-vulkan/docs"
@@ -51,7 +52,8 @@
 	       (:file "README")
 
 	       ;; Guide
-	       (:file "guide/package")
-	       (:file "guide/common-vulkan-guide")
-	       (:file "guide/base-code")))
+	       (:module "guide"
+		:components ((:file "guide/package")
+			     (:file "guide/common-vulkan-guide")
+			     (:file "guide/base-code")))))
 		
