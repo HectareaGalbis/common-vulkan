@@ -42,7 +42,7 @@ We are going to start with the following code in our ``` main.lisp ``` file\.
 <h2 id="header:ADP:HEADERTAG10">Resource management</h2>
 
 Like in C\, we still need to allocate and deallocate the objects we will create using GLFW or Vulkan\. 
-The ``` common-vulkan ``` library provides ``` with- ``` macros to avoid calling the destructor every time\. You can find them in the <a href="/README.md#header:COMMON-VULKAN:API-REFERENCE-HEADER">Common Vulkan Reference</a>\.
+The ``` common-vulkan ``` library provides ``` with- ``` macros to avoid calling the destructor every time\. You can find them in the <a href="/docs/reference/reference.md#header:COMMON-VULKAN:API-REFERENCE-HEADER">Common Vulkan Reference</a>\.
 
 <h2 id="header:ADP:HEADERTAG11">Integrating GLFW</h2>
 

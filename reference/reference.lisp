@@ -1,6 +1,7 @@
 
 (in-package :cvk)
 
+(adp:in-file #P"docs/reference/reference")
 
 (adp:header "Common Vulkan Reference" api-reference-header)
 
