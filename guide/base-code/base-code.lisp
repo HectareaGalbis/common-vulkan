@@ -1,6 +1,8 @@
 
 (in-package :cvg)
 
+(adp:in-file #P"docs/guide/base-code/base-code")
+
 (adp:header "Base code" base-code-header)
 
 

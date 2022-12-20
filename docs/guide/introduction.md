@@ -51,6 +51,6 @@ Now\, we have a project that can be loaded\. But first\, we need to make sure AS
 
 And that\'s all\. As the official tutorial says\, you are now set for the real thing\.
 
-* <strong>Next</strong>\: <a href="/docs/guide/base-code/main.md#header:CVG:BASE-CODE-HEADER">Base code</a>
+* <strong>Next</strong>\: <a href="/docs/guide/base-code/base-code.md#header:CVG:BASE-CODE-HEADER">Base code</a>
 * <strong>Previous</strong>\: <a href="/docs/guide/common-vulkan-guide.md#header:CVG:COMMON-VULKAN-GUIDE-HEADER">Common Vulkan Guide</a>
 

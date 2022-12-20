@@ -9,5 +9,5 @@ I think I’m not missing anything so…\, let’s code\!
 * Introduction
   * <a href="/docs/guide/introduction.md#header:CVG:INTRODUCTION-HEADER">Introduction</a>
 * Setup
-  * <a href="/docs/guide/base-code/main.md#header:CVG:BASE-CODE-HEADER">Base code</a>
+  * <a href="/docs/guide/base-code/base-code.md#header:CVG:BASE-CODE-HEADER">Base code</a>
 
