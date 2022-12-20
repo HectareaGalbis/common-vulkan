@@ -48,9 +48,6 @@
 	       (:file "src/functions")
 	       (:file "src/callbacks")
 
-	       ;; Documentation
-	       (:file "README")
-
 	       ;; API
 	       (:module "reference"
 		:components ((:file "reference")))
@@ -62,5 +59,9 @@
 			     (:file "introduction")
 			     (:file "base-code/main")
 			     (:file "base-code/base-code")
-			     (:file "instance/instance")))))
+			     (:file "instance/instance")))
+
+	       ;; Readme
+	       (:file "README")
+))
 		

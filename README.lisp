@@ -10,7 +10,7 @@
 
 (adp:subheader "Documentation")
 
-;(adp:text "You can visit the " @h(api-reference-header) " or the " @h(common-vulkan-guide-header) ".")
+(adp:text "You can visit the " @h(api-reference-header) " or the " @h(cvg::common-vulkan-guide-header) ".")
 
 
 (adp:subheader "Installation")

@@ -1,6 +1,6 @@
 <h1 id="header:CVG:INTRODUCTION-HEADER">Introduction</h1>
 
-<h2 id="header:ADP:HEADERTAG7">Installing GLFW and Vulkan</h2>
+<h2 id="header:ADP:HEADERTAG3">Installing GLFW and Vulkan</h2>
 
 First we need to install the GLFW library and the Vulkan SDK\.
 
@@ -8,7 +8,7 @@ In the [GLFW main page](https://www.glfw.org/) you will see how to install its l
 
 The same goes to Vulkan\. Go to its [main page](https://vulkan.lunarg.com/) and install the SDK in your computer\.
 
-<h2 id="header:ADP:HEADERTAG8">Installing some Common Lisp libraries</h2>
+<h2 id="header:ADP:HEADERTAG4">Installing some Common Lisp libraries</h2>
 
 This guide will use the project [cl\-glfw](https://github.com/Hectarea1996/cl-glfw)\. It is available on Quicklisp\, so just eval in your REPL ``` (ql:quickload :cl-glfw) ```\.
 

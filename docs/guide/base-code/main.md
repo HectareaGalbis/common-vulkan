@@ -19,7 +19,7 @@
 
 <h1 id="header:CVG:BASE-CODE-HEADER">Base code</h1>
 
-<h2 id="header:ADP:HEADERTAG9">General structure</h2>
+<h2 id="header:ADP:HEADERTAG5">General structure</h2>
 
 We are going to start with the following code in our ``` main.lisp ``` file\.
 
@@ -39,12 +39,12 @@ We are going to start with the following code in our ``` main.lisp ``` file\.
     (RUN APP)))
 `````
 
-<h2 id="header:ADP:HEADERTAG10">Resource management</h2>
+<h2 id="header:ADP:HEADERTAG6">Resource management</h2>
 
 Like in C\, we still need to allocate and deallocate the objects we will create using GLFW or Vulkan\. 
 The ``` common-vulkan ``` library provides ``` with- ``` macros to avoid calling the destructor every time\. You can find them in the <a href="/docs/reference/reference.md#header:COMMON-VULKAN:API-REFERENCE-HEADER">Common Vulkan Reference</a>\.
 
-<h2 id="header:ADP:HEADERTAG11">Integrating GLFW</h2>
+<h2 id="header:ADP:HEADERTAG7">Integrating GLFW</h2>
 
 Here I\'m using GLFW but you don\'t to use it if you don\'t want to\.
 
