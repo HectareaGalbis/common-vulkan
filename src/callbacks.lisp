@@ -1,5 +1,9 @@
 (in-package :cvk)
 
+(adp:in-file #P"docs/api/callbacks")
+
+(adp:header "Callbacks" callbacks-header)
+
 ;; (mcffi:define-foreign-callback-definer doc-file "PFN_vkAllocationFunction"
 ;;   def-allocation-function-callback)
 

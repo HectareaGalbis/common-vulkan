@@ -1,9 +1,9 @@
 
 (in-package :cvg)
 
-(adp:write-in-file #P"docs/guide/introduction")
+(adp:in-file #P"docs/guide/introduction")
 
-(adp:header "Introduction")
+(adp:header "Introduction" introduction-header)
 
 
 (adp:subheader "Installing GLFW and Vulkan")

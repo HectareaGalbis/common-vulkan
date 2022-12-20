@@ -1,88 +1,56 @@
+<h1 id="header:CVG:INTRODUCTION-HEADER">Introduction</h1>
 
-# Introduction
+<h2 id="header:ADP:HEADERTAG7">Installing GLFW and Vulkan</h2>
 
-## Installing GLFW and Vulkan
+First we need to install the GLFW library and the Vulkan SDK\.
 
-The first we need is to install the GLFW library and the Vulkan SDK.
+In the [GLFW main page](https://www.glfw.org/) you will see how to install its library in your computer\.
 
-In the [GLFW main page](https://www.glfw.org) you will see how to install its library in your computer. 
+The same goes to Vulkan\. Go to its [main page](https://vulkan.lunarg.com/) and install the SDK in your computer\.
 
-The same goes to Vulkan. Go to its [main page](https://vulkan.lunarg.com) and install the SDK in your computer.
+<h2 id="header:ADP:HEADERTAG8">Installing some Common Lisp libraries</h2>
 
-## Installing some Common Lisp libraries
+This guide will use the project [cl\-glfw](https://github.com/Hectarea1996/cl-glfw)\. It is available on Quicklisp\, so just eval in your REPL ``` (ql:quickload :cl-glfw) ```\.
 
-The `common-vulkan` bindings depends on another libary named [more-cffi](https://github.com/Hectarea1996/more-cffi). Just clone it to your
-`quicklisp/local-projects/` folder.
+Our own project
 
-GLFW also need foreign bindings, but we can encounter them in the [cl-glfw](https://github.com/Hectarea1996/cl-glfw) library. Just clone it to your
-`quicklisp/local-projects/` folder.
+We have already all we need to start coding\. You should create a new project that depends on the previous ones \(cl\-glfw and common\-vulkan\)\.
 
-Finally, clone the [common-vulkan](https://github.com/Hectarea1996/common-vulkan) (if you didn't do that already) into your `quicklisp/local-projects/` 
-folder.
+You can place your project where you want\, but I prefer to create them in the ``` quicklisp/local-projects/ ``` folder\. Create a new folder named common\-vulkan\-guide\. Now\, inside this folder we are going to create some files to generate our project\.
 
-## Our own project
+First\, create a ``` common-vulkan-guide.asd ``` file to create a system\. It will have the following content\.
 
-We have already all we need to start coding. You should create a new project that depends on the previous ones (cl-glfw and common-vulkan). 
+`````Lisp
+(ASDF/DEFSYSTEM:DEFSYSTEM "common-vulkan-guide"
+  :DEPENDS-ON
+  ("cl-glfw" "common-vulkan")
+  :COMPONENTS
+  ((:FILE "package") (:FILE "main")))
+`````
 
-You can place your project where you want, but I prefer to create them in the same folder as the rest. In order to do this, create a folder into your
-`quicklisp/local-projects/` folder named `common-vulkan-guide`. You should have something like this: `quicklisp/local-projects/common-vulkan-guide`. 
-Now, inside this folder we are going to create some files to generate our project.  
+Next\, we are going to create the ``` package.lisp ``` file\. It is always a good idea to put your projects into a different namespace to avoid name conflicts\.
 
-First, create a `common-vulkan-guide.asd` file to create a system. It will have the following content.
-```lisp
-;;; common-vulkan-guide.asd
+`````Lisp
+(DEFPACKAGE "common-vulkan-guide"
+  (:USE :CL)
+  (:NICKNAMES :CVG)
+  (:EXPORT MAIN))
+`````
 
-(asdf:defsystem "common-vulkan-guide"
-  :depends-on ("cl-glfw" "common-vulkan")
-  :components ((:file "package")
-	             (:file "main")))
-```
+Now\, create a ``` main.lisp ``` file where we will put the main code\. For now\, put inside the next code\.
 
-Next, we are going to create the `package.lisp` file. It is always a good idea to put your projects into a different namespace to avoid name conflicts.
+`````Lisp
+(IN-PACKAGE :CVG)
 
-```lisp
-;;; package.lisp
+(DEFUN MAIN () (PRINT "Hello world"))
+`````
 
-(defpackage "common-vulkan-guide"
-  (:use :cl)
-  (:nicknames :cvg)
-  (:export #:main))
-```
+As you can see\, it is a simple <em>Hello world</em> program\.
 
-Now, create a `main.lisp` file when we will put the main code. For now, put inside the next code.
+Now\, we have a project that can be loaded\. But first\, we need to make sure ASDF can find our new system\. We can do that evaluating in the REPL ``` (ql:register-local-projects) ```\. After that\, just eval ``` (asdf:load-system :common-vulkan-guide) ```\. If you see again the package we created before\, the ``` main ``` function is exported\. If you eval ``` (cvg:main) ``` you will see the awesome ``` Hello world ``` sentence\.
 
-```lisp
-;;; main.lisp
+And that\'s all\. As the official tutorial says\, you are now set for the real thing\.
 
-(in-package :cvg)
+* <strong>Next</strong>\: <a href="/docs/guide/base-code/main.md#header:CVG:BASE-CODE-HEADER">Base code</a>
+* <strong>Previous</strong>\: <a href="/docs/guide/common-vulkan-guide.md#header:CVG:COMMON-VULKAN-GUIDE-HEADER">Common Vulkan Guide</a>
 
-(defun main ()
-  (print "Hello world"))
-```
-
-As you can see, it is a simple *Hello world* program.
-
-Lastly, to make thing a bit simpler, create this `run.lisp` file:
-
-```lisp
-;;; run.lisp
-
-(asdf:load-system "common-vulkan-guide")
-
-(cvg:main)
-```
-
-This last file is just a script that load our entirely new project. We oly need to load this file to load the project and execute the main function.
-
-Now, we have a project that runs a *Hello world* project. Try to load the `run.lisp` file. If you are using emacs, make current the window whit this
-file and use `C-c C-k`. Another way is to tell *slime* to run `(load "run.lisp")`. If you are using *alive* in VSCode or *slima* in Atom, you can use
-the last way too. 
-
-> It is possible that *slime* (or *alive* or *slima*) generates an error because it doesn't find the "common-vulkan-guide" component. This is possibly
-> due to have generated the asd file manually. Try to run in *slime* `(ql:register-local-projects)`. If the problems persist, make sure that you 
-> wrote every name correctly.
-
-As the official tutorial says, you are now all set for the real thing.
-
-* **Next**: [Base code](https://Hectarea1996.github.io/common-vulkan/guide/base-code.html)
-* **Previous**: [Common Vulkan Guide](https://hectarea1996.github.io/common-vulkan/guide/index.html)

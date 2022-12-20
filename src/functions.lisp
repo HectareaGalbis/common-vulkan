@@ -1,5 +1,8 @@
 (in-package :cvk)
 
+(adp:in-file #P"docs/api/functions")
+
+(adp:header "Functions" functions-header)
 
 ;; 					;(defmacro multiple-defun )
 

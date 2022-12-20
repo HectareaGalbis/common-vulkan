@@ -32,7 +32,7 @@
 
 
 (asdf:defsystem "common-vulkan/docs"
-  :depends-on ("cffi" "more-cffi" "alexandria" "adp")
+  :depends-on ("cffi" "more-cffi" "alexandria" "cl-glfw" "adp")
   :components ((:file "package")
 	       
                ;; Vulkan
@@ -51,9 +51,16 @@
 	       ;; Documentation
 	       (:file "README")
 
+	       ;; API
+	       (:module "reference"
+		:components ((:file "reference")))
+	       
 	       ;; Guide
 	       (:module "guide"
-		:components ((:file "guide/package")
-			     (:file "guide/common-vulkan-guide")
-			     (:file "guide/base-code")))))
+		:components ((:file "package")
+			     (:file "common-vulkan-guide")
+			     (:file "introduction")
+			     (:file "base-code/main")
+			     (:file "base-code/base-code")
+			     (:file "instance/instance")))))
 		

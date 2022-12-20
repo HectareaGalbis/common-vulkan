@@ -553,6 +553,8 @@ Return a context structure with the information."
   (format stream "~s~%~%"
 	  '(adp:in-file #P"docs/api/constants"))
   (format stream "~s~%~%"
+	  '(adp:header "Constants" constants-header))
+  (format stream "~s~%~%"
 	  '(adp:defmacro VK_MAKE_API_VERSION (variant major minor patch)
 	    `(logior (ash ,variant 29) (ash ,major 22) (ash ,minor 12) ,patch)))
   (format stream "~s~%~%"

@@ -1,6 +1,9 @@
 
-
 (in-package :cvk)
+
+(adp:in-file #P"docs/api/structs")
+
+(adp:header "Structs" structs-header)
 
 ;; (defmacro create-pointer (slot slot-arg)
 ;;   `(setf ,slot (or ,slot-arg (cffi-sys:null-pointer))))

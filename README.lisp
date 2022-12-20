@@ -1,7 +1,7 @@
 
 (in-package :cvk)
 
-(adp:write-in-file #P"README")
+(adp:in-file #P"README")
 
 (adp:header "Common Vulkan")
 
@@ -64,7 +64,7 @@
     (multiple-value-bind (cstructs-count structs-count) (defined-structs-count)
       (let ((ctotal-count (+ 8 cfunctions-count cstructs-count))
 	    (total-count (+ callbacks-count functions-count structs-count)))
-	(adp:itemize (:item "Callbacks: " callbacks-count "/8" " (" (floor callbacks-count 8) "%)")
-		     (:item "Functions: " functions-count "/" cfunctions-count " (" (floor functions-count cfunctions-count) "%)")
-		     (:item "Structs: " structs-count "/" cstructs-count " (" (floor structs-count cstructs-count) "%)")
-		     (:item "Total: " total-count "/" ctotal-count " (" (floor total-count ctotal-count) "%)"))))))
+	(adp:itemize (adp:item "Callbacks: " callbacks-count "/8" " (" (floor callbacks-count 8) "%)")
+		     (adp:item "Functions: " functions-count "/" cfunctions-count " (" (floor functions-count cfunctions-count) "%)")
+		     (adp:item "Structs: " structs-count "/" cstructs-count " (" (floor structs-count cstructs-count) "%)")
+		     (adp:item "Total: " total-count "/" ctotal-count " (" (floor total-count ctotal-count) "%)"))))))
