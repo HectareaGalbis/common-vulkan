@@ -34,7 +34,7 @@ We are going to start with the following code in our ``` main.lisp ``` file\.
 
 (DEFUN RUN (APP) (INIT-VULKAN APP) (MAIN-LOOP APP) (CLEANUP APP))
 
-(DEFUN MAIN ()
+(DEFUN CVG:MAIN ()
   (LET ((APP (MAKE-TRIANGLE-APP)))
     (RUN APP)))
 `````

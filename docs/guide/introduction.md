@@ -42,7 +42,7 @@ Now\, create a ``` main.lisp ``` file where we will put the main code\. For now\
 `````Lisp
 (IN-PACKAGE :CVG)
 
-(DEFUN MAIN () (PRINT "Hello world"))
+(DEFUN CVG:MAIN () (PRINT "Hello world"))
 `````
 
 As you can see\, it is a simple <em>Hello world</em> program\.

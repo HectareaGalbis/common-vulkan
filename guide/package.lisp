@@ -1,3 +1,4 @@
 
 (defpackage "CVG"
-  (:use "CL"))
+  (:use "CL")
+  (:export main))
