@@ -3,7 +3,7 @@
 
 (adp:in-file #P"docs/guide/base-code/main")
 
-(adp:header "Base code source" base-code-source-header)
+(adp:header "Base code source code" base-code-source-header)
 
 (adp:code-block (base-code-tag)
   base-code-tag)
