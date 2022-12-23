@@ -10,7 +10,7 @@
 
 (adp:subheader "Documentation")
 
-(adp:text "You can visit the " @h(api-reference-header) " or the " @h(cvg::common-vulkan-guide-header) ".")
+(adp:text "You can visit the " @h(api-reference-header) ".")
 
 
 (adp:subheader "Installation")
@@ -38,11 +38,11 @@
 	 (cfunctions-count (with-open-file (istream cfunctions-file)
 			     (loop for expr = (read istream nil)
 				   while expr
-				   count (eq (car expr) 'multiple-defcfun))))
+				   count (eq (car expr) 'vulkan-defcfun))))
 	 (functions-count (with-open-file (istream functions-file)
 			    (loop for expr = (read istream nil)
 				  while expr
-				  count (eq (car expr) 'multiple-defun)))))
+				  count (eq (car expr) 'vulkan-defun)))))
     (values cfunctions-count functions-count)))
 
 (defun defined-structs-count ()

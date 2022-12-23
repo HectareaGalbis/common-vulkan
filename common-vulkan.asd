@@ -52,15 +52,6 @@
 	       (:module "reference"
 		:components ((:file "reference")))
 	       
-	       ;; Guide
-	       (:module "guide"
-		:components ((:file "package")
-			     (:file "common-vulkan-guide")
-			     (:file "introduction")
-			     (:file "base-code/main")
-			     (:file "base-code/base-code")
-			     (:file "instance/instance")))
-
 	       ;; Readme
 	       (:file "README")
 ))

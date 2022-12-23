@@ -4,36 +4,45 @@
 
 (adp:header "Functions" functions-header)
 
-;; 					;(defmacro multiple-defun )
+
+(defmacro vulkan-defun ((foreign-function name) (&rest args) &body body)
+  (let ((funcall-name (intern (format nil "FUNCALL-~a" (symbol-name name))))
+	(foreign-funcall-function (intern (format nil "FUNCALL-~a" (symbol-name foreign-function)))))
+    (with-gensyms (func-pointer macrolet-args)
+      `(progn
+	 (adp:defun ,name (,@args)
+	   ,@body)
+	 (macrolet ((,foreign-function (&rest ,macrolet-args)
+		      `(,',foreign-funcall-function ,',func-pointer ,@,macrolet-args)))
+	   (defun ,funcall-name (,func-pointer ,@args)
+	     ,@body))))))
 
 
-;; (more-cffi:def-foreign-function doc-file
-;;     ("vkCreateInstance" create-instance funcall-create-instance)
-;;   (pcreateinfo pallocator)
-;;   (declare-types ("VkInstanceCreateInfo" "pCreateInfo")
-;; 		 ("VkAllocationCallbacks" "pAllocator") :return ("VkInstance" instance)
-;; 		 ("VkResult" result))
-;;   (let ((pallocator-c (or pallocator (cffi-sys:null-pointer))))
-;;     (cffi:with-foreign-object (pinstance 'vkinstance)
-;;       (let ((result (vkcreateinstance pcreateinfo pallocator-c pinstance)))
-;;         (values (cffi:mem-ref pinstance 'vkinstance) result
-;;                 (if pallocator
-;;                     pallocator-c
-;;                     nil))))))
+(adp:subsubheader "vkCreateInstance")
 
-;; (more-cffi:def-foreign-function doc-file
-;;     ("vkDestroyInstance" destroy-instance funcall-destroy-instance)
-;;   (instance pallocator)
-;;   (declare-types ("VkInstance" instance)
-;; 		 ("VkAllocationCallbacks" "pAllocator"))
-;;   (let ((pallocator-c (or pallocator (cffi-sys:null-pointer))))
-;;     (vkdestroyinstance instance pallocator-c)))
+(vulkan-defun (vkCreateInstance create-instance) (pCreateInfo pAllocator)
+  "Create a new Vulkan instance"
+  (let ((pAllocator-c (or pAllocator (cffi-sys:null-pointer))))
+    (cffi:with-foreign-object (pInstance 'VkInstance)
+      (let ((result (vkCreateInstance pCreateInfo pAllocator-c pInstance)))
+        (values (cffi:mem-ref pInstance 'VkInstance) result
+                (if pAllocator
+                    pAllocator-c
+                    nil))))))
 
-;; (more-cffi:defwith doc-file with-instance create-instance destroy-instance
-;;   :destructor-arguments (0 2))
+(adp:subsubheader "vkDestroyInstance")
 
-;; (more-cffi:doc-note doc-file
-;;                     "The allocator is passed to both constructor and destructor.")
+(vulkan-defun (vkDestroyInstance destroy-instance) (instance pallocator)
+  "Destroy an instance of Vulkan"
+  (let ((pAllocator-c (or pAllocator (cffi-sys:null-pointer))))
+    (vkDestroyInstance instance pAllocator-c)))
+
+(adp:subheader "with-instance")
+
+(mcffi:defwith with-instance create-instance destroy-instance (0 2))
+
+(adp:itemize (adp:item @e("Note") ": The allocator is received by both the constructor and the destructor."))
+
 
 ;; (more-cffi:def-foreign-function doc-file
 ;;     ("vkEnumeratePhysicalDevices" enumerate-physical-devices

@@ -391,7 +391,7 @@ wrap."
 	    for arg-name = (cdr function-arg)
 	    collect `(,(string-to-symbol arg-name) ,(get-cffi-type arg-type))
 	      into arg-slots
-	    finally (add-function-definition context `(multiple-defcfun (,func-name ,(string-to-symbol func-name) ,(string-to-symbol (concatenate 'string "FUNCALL-" func-name)))
+	    finally (add-function-definition context `(vulkan-defcfun (,func-name ,(string-to-symbol func-name))
 								        ,ret-type ,@arg-slots))))))
 
 
@@ -531,8 +531,9 @@ Return a context structure with the information."
   (format stream "~s~%~%"
 	  '(adp:in-file #P"docs/api/functions"))
   (format stream "~s"
-	  '(defmacro multiple-defcfun ((foreign-name name funcall-name) ret-type &body args)
-	    (let ((name-args (mapcar #'car args))
+	  '(defmacro vulkan-defcfun ((foreign-name name) ret-type &body args)
+	    (let ((funcall-name (intern (format nil "FUNCALL-~a" (symbol-name name))))
+		  (name-args (mapcar #'car args))
 		  (ordered-args (mapcan (lambda (arg)
 					  (list (cadr arg) (car arg)))
 					args)))
