@@ -23,6 +23,7 @@
   width
   height)
 
+
 (adp:subsubheader "VkExtent3D")
 
 (vulkan-defstruct (:struct VkExtent3D) extent-3d
@@ -31,12 +32,14 @@
   height
   depth)
 
+
 (adp:subsubheader "VkOffset2D")
 
 (vulkan-defstruct (:struct VkOffset2D) offset-2d
     (:default-constructors :default-readers :default-writers)
   x
   y)
+
 
 (adp:subsubheader "VkOffset3D")
 
@@ -45,6 +48,7 @@
   x
   y
   z)
+
 
 (adp:subsubheader "VkRect2D")
 
@@ -62,6 +66,100 @@
 		   (memcpy extent extent-arg (cffi:foreign-type-size '(:struct VkExtent2D))))))
 
 
+(adp:subsubheader "VkBaseInStructure")
+
+(vulkan-defstruct (:struct VkBaseInStructure) base-in-structure
+    (:default-constructors :default-readers :default-writers)
+  sType
+  (pNext :constructor ((pNext-arg)
+		       (setf pNext (or pNext-arg (cffi:null-pointer))))
+	 :reader (() (if (cffi:null-pointer-p pNext)
+			 nil
+			 pNext))
+	 :writer ((pNext-arg)
+		  (setf pNext (or pNext-arg (cffi:null-pointer))))))
+
+
+(adp:subsubheader "VkBaseOutStructure")
+
+(vulkan-defstruct (:struct VkBaseOutStructure) base-out-structure
+    (:default-constructors :default-readers :default-writers)
+  sType
+  (pNext :constructor ((pNext-arg)
+		       (setf pNext (or pNext-arg (cffi:null-pointer))))
+	 :reader (() (if (cffi:null-pointer-p pNext)
+			 nil
+			 pNext))
+	 :writer ((pNext-arg)
+		  (setf pNext (or pNext-arg (cffi:null-pointer))))))
+
+
+(adp:subsubheader "VkBufferMemoryBarrier")
+
+(vulkan-defstruct (:struct VkBufferMemoryBarrier) buffer-memory-barrier
+    (:default-constructors :default-readers :default-writers)
+  sType
+  (pNext :constructor ((pNext-arg)
+		       (setf pNext (or pNext-arg (cffi:null-pointer))))
+	 :reader (() (if (cffi:null-pointer-p pNext)
+			 nil
+			 pNext))
+	 :writer ((pNext-arg)
+		  (setf pNext (or pNext-arg (cffi:null-pointer)))))
+  srcAccessMask
+  dstAccessMask
+  srcQueueFamilyIndex
+  dstQueueFamilyIndex
+  (buffer :constructor ((buffer-arg)
+			(setf buffer (or buffer-arg (cffi:null-pointer))))
+	  :reader (() (if (cffi:null-pointer-p buffer)
+			  nil
+			  buffer))
+	  :writer ((buffer-arg)
+		   (setf buffer (or buffer-arg (cffi:null-pointer)))))
+  offset
+  size)
+
+
+(adp:subsubheader "VkDispatchIndirectCommand")
+
+(vulkan-defstruct (:struct VkDispatchIndirectCommand) dispatch-indirect-command
+    (:default-constructors :default-readers :default-writers)
+  x
+  y
+  z)
+
+
+(adp:subsubheader "VkDrawIndexedIndirectCommand")
+
+(vulkan-defstruct (:struct VkDrawIndexedIndirectCommand) draw-indexed-indirect-command
+    (:default-constructors :default-readers :default-writers)
+  indexCount
+  instanceCount
+  firstIndex
+  vertexOffset
+  firstInstance)
+
+
+(adp:subsubheader "VkDrawIndirectCommand")
+
+(vulkan-defstruct (:struct VkDrawIndirectCommand) draw-indirect-command
+    (:default-constructors :default-readers :default-writers)
+  vertexCount
+  instanceCount
+  firstVertex
+  firstInstance)
+
+
+(adp:subsubheader "VkImageSubresourceRange")
+
+(vulkan-defstruct (:struct VkImageSubresourceRange) image-subresource-range
+    (:default-constructors :default-readers :default-writers)
+  aspectMask
+  baseMipLevel
+  levelCount
+  baseArrayLayer
+  layerCount)
 
 ;; (defmacro create-pointer (slot slot-arg)
 ;;   `(setf ,slot (or ,slot-arg (cffi-sys:null-pointer))))

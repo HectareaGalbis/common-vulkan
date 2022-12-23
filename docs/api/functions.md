@@ -1,6 +1,6 @@
 <h1 id="header:COMMON-VULKAN:FUNCTIONS-HEADER">Functions</h1>
 
-<h3 id="header:ADP:HEADERTAG5">vkCreateInstance</h3>
+<h3 id="header:ADP:HEADERTAG12">vkCreateInstance</h3>
 
 <h4 id="function:COMMON-VULKAN:CREATE-INSTANCE">Function: CREATE-INSTANCE</h4>
 
@@ -13,7 +13,7 @@
 Create a new Vulkan instance
 ````
 
-<h3 id="header:ADP:HEADERTAG6">vkDestroyInstance</h3>
+<h3 id="header:ADP:HEADERTAG13">vkDestroyInstance</h3>
 
 <h4 id="function:COMMON-VULKAN:DESTROY-INSTANCE">Function: DESTROY-INSTANCE</h4>
 
@@ -26,12 +26,12 @@ Create a new Vulkan instance
 Destroy an instance of Vulkan
 ````
 
-<h2 id="header:ADP:HEADERTAG7">with-instance</h2>
+<h2 id="header:ADP:HEADERTAG14">with-instance</h2>
 
 <h4 id="function:COMMON-VULKAN:WITH-INSTANCE">Macro: WITH-INSTANCE</h4>
 
 ```Lisp
-(defmacro WITH-INSTANCE (VAR1427 ARGS1428 &BODY BODY1429)
+(defmacro WITH-INSTANCE (VAR1595 ARGS1596 &BODY BODY1597)
   ...)
 ```
 
@@ -51,7 +51,7 @@ with the instance and the allocator.
 Enumerates the physical devices accessible to a Vulkan instance
 ````
 
-<h3 id="header:ADP:HEADERTAG8">vkGetPhysicalDeviceFeatures</h3>
+<h3 id="header:ADP:HEADERTAG15">vkGetPhysicalDeviceFeatures</h3>
 
 <h4 id="function:COMMON-VULKAN:CREATE-GET-PHYSICAL-DEVICE-FEATURES">Function: CREATE-GET-PHYSICAL-DEVICE-FEATURES</h4>
 
@@ -78,7 +78,7 @@ Destroy the structure returned by create-get-physical-device-features
 <h4 id="function:COMMON-VULKAN:WITH-GET-PHYSICAL-DEVICE-FEATURES">Macro: WITH-GET-PHYSICAL-DEVICE-FEATURES</h4>
 
 ```Lisp
-(defmacro WITH-GET-PHYSICAL-DEVICE-FEATURES (VAR1437 ARGS1438 &BODY BODY1439)
+(defmacro WITH-GET-PHYSICAL-DEVICE-FEATURES (VAR1605 ARGS1606 &BODY BODY1607)
   ...)
 ```
 
@@ -87,7 +87,7 @@ Binds the results of create-get-physical-device-features and evaluates the body 
 destroy-get-physical-device-features is called with the device features structure.
 ````
 
-<h3 id="header:ADP:HEADERTAG9">vkGetPhysicalDeviceFormatProperties</h3>
+<h3 id="header:ADP:HEADERTAG16">vkGetPhysicalDeviceFormatProperties</h3>
 
 <h4 id="function:COMMON-VULKAN:CREATE-GET-PHYSICAL-DEVICE-FORMAT-PROPERTIES">Function: CREATE-GET-PHYSICAL-DEVICE-FORMAT-PROPERTIES</h4>
 
@@ -114,8 +114,8 @@ Destroys a VkFormatProperties structure returned by create-get-physical-device-f
 <h4 id="function:COMMON-VULKAN:WITH-GET-PHYSICAL-DEVICE-FORMAT-PROPERTIES">Macro: WITH-GET-PHYSICAL-DEVICE-FORMAT-PROPERTIES</h4>
 
 ```Lisp
-(defmacro WITH-GET-PHYSICAL-DEVICE-FORMAT-PROPERTIES (VAR1445 ARGS1446 &BODY
-                                                      BODY1447)
+(defmacro WITH-GET-PHYSICAL-DEVICE-FORMAT-PROPERTIES (VAR1613 ARGS1614 &BODY
+                                                      BODY1615)
   ...)
 ```
 
@@ -124,7 +124,7 @@ Binds the results of create-get-physical-device-format-properties and evaluates 
 destroy-get-physical-device-format-properties is called with the format properties structure.
 ````
 
-<h3 id="header:ADP:HEADERTAG10">vkGetPhysicalDeviceImageFormatProperties</h3>
+<h3 id="header:ADP:HEADERTAG17">vkGetPhysicalDeviceImageFormatProperties</h3>
 
 <h4 id="function:COMMON-VULKAN:CREATE-GET-PHYSICAL-DEVICE-IMAGE-FORMAT-PROPERTIES">Function: CREATE-GET-PHYSICAL-DEVICE-IMAGE-FORMAT-PROPERTIES</h4>
 
@@ -153,8 +153,8 @@ Destroys the VkImageFormatProperties structure returned by create-get-physical-d
 <h4 id="function:COMMON-VULKAN:WITH-GET-PHYSICAL-DEVICE-IMAGE-FORMAT-PROPERTIES">Macro: WITH-GET-PHYSICAL-DEVICE-IMAGE-FORMAT-PROPERTIES</h4>
 
 ```Lisp
-(defmacro WITH-GET-PHYSICAL-DEVICE-IMAGE-FORMAT-PROPERTIES (VAR1453 ARGS1454
-                                                            &BODY BODY1455)
+(defmacro WITH-GET-PHYSICAL-DEVICE-IMAGE-FORMAT-PROPERTIES (VAR1621 ARGS1622
+                                                            &BODY BODY1623)
   ...)
 ```
 
@@ -163,7 +163,7 @@ Binds the results of create-get-physical-device-image-format-properties and eval
 end, destroy-get-physical-device-image-format-properties is called with the image format properties structure.
 ````
 
-<h3 id="header:ADP:HEADERTAG11">vkGetPhysicalDeviceProperties</h3>
+<h3 id="header:ADP:HEADERTAG18">vkGetPhysicalDeviceProperties</h3>
 
 <h4 id="function:COMMON-VULKAN:CREATE-GET-PHYSICAL-DEVICE-PROPERTIES">Function: CREATE-GET-PHYSICAL-DEVICE-PROPERTIES</h4>
 
@@ -190,7 +190,7 @@ Destroys a VkPhysicalDeviceProperties returned by create-get-physical-device-pro
 <h4 id="function:COMMON-VULKAN:WITH-GET-PHYSICAL-DEVICE-PROPERTIES">Macro: WITH-GET-PHYSICAL-DEVICE-PROPERTIES</h4>
 
 ```Lisp
-(defmacro WITH-GET-PHYSICAL-DEVICE-PROPERTIES (VAR1461 ARGS1462 &BODY BODY1463)
+(defmacro WITH-GET-PHYSICAL-DEVICE-PROPERTIES (VAR1629 ARGS1630 &BODY BODY1631)
   ...)
 ```
 
@@ -199,7 +199,7 @@ Binds the results of create-get-physical-device-properties and evaluates the bod
 end, destroy-get-physical-device-properties is called with the physical device properties structure.
 ````
 
-<h3 id="header:ADP:HEADERTAG12">vkGetPhysicalDeviceQueueFamilyProperties</h3>
+<h3 id="header:ADP:HEADERTAG19">vkGetPhysicalDeviceQueueFamilyProperties</h3>
 
 <h4 id="function:COMMON-VULKAN:CREATE-GET-PHSYICAL-DEVICE-QUEUE-FAMILY-PROPERTIES">Function: CREATE-GET-PHSYICAL-DEVICE-QUEUE-FAMILY-PROPERTIES</h4>
 
@@ -226,8 +226,8 @@ Destroy the vector of VkQueueFamilyProperties structures returned by create-get-
 <h4 id="function:COMMON-VULKAN:WITH-GET-PHSYICAL-DEVICE-QUEUE-FAMILY-PROPERTIES">Macro: WITH-GET-PHSYICAL-DEVICE-QUEUE-FAMILY-PROPERTIES</h4>
 
 ```Lisp
-(defmacro WITH-GET-PHSYICAL-DEVICE-QUEUE-FAMILY-PROPERTIES (VAR1469 ARGS1470
-                                                            &BODY BODY1471)
+(defmacro WITH-GET-PHSYICAL-DEVICE-QUEUE-FAMILY-PROPERTIES (VAR1637 ARGS1638
+                                                            &BODY BODY1639)
   ...)
 ```
 
@@ -236,7 +236,7 @@ Binds the results of create-get-phsyical-device-queue-family-properties and eval
 end, destroy-get-phsyical-device-queue-family-properties is called with the queue family properties structures.
 ````
 
-<h3 id="header:ADP:HEADERTAG13">vkGetPhysicalDeviceMemoryProperties</h3>
+<h3 id="header:ADP:HEADERTAG20">vkGetPhysicalDeviceMemoryProperties</h3>
 
 <h4 id="function:COMMON-VULKAN:CREATE-GET-PHYSICAL-DEVICE-MEMORY-PROPERTIES">Function: CREATE-GET-PHYSICAL-DEVICE-MEMORY-PROPERTIES</h4>
 
@@ -263,8 +263,8 @@ Destroys a VkPhysicalDeviceMemoryProperties structure returned by create-get-phy
 <h4 id="function:COMMON-VULKAN:WITH-GET-PHYSICAL-DEVICE-MEMORY-PROPERTIES">Macro: WITH-GET-PHYSICAL-DEVICE-MEMORY-PROPERTIES</h4>
 
 ```Lisp
-(defmacro WITH-GET-PHYSICAL-DEVICE-MEMORY-PROPERTIES (VAR1477 ARGS1478 &BODY
-                                                      BODY1479)
+(defmacro WITH-GET-PHYSICAL-DEVICE-MEMORY-PROPERTIES (VAR1645 ARGS1646 &BODY
+                                                      BODY1647)
   ...)
 ```
 
@@ -273,7 +273,7 @@ Binds the results of create-get-physical-device-memory-properties and evaluates 
 end, destroy-get-physical-device-memory-properties is called with the memory properties structure.
 ````
 
-<h3 id="header:ADP:HEADERTAG14">vkGetInstanceProcAddr</h3>
+<h3 id="header:ADP:HEADERTAG21">vkGetInstanceProcAddr</h3>
 
 <h4 id="function:COMMON-VULKAN:GET-INSTANCE-PROC-ADDR">Function: GET-INSTANCE-PROC-ADDR</h4>
 
@@ -286,7 +286,7 @@ end, destroy-get-physical-device-memory-properties is called with the memory pro
 Return a function pointer for a command.
 ````
 
-<h3 id="header:ADP:HEADERTAG15">vkGetDeviceProcAddr</h3>
+<h3 id="header:ADP:HEADERTAG22">vkGetDeviceProcAddr</h3>
 
 <h4 id="function:COMMON-VULKAN:GET-DEVICE-PROC-ADDR">Function: GET-DEVICE-PROC-ADDR</h4>
 
@@ -299,7 +299,7 @@ Return a function pointer for a command.
 Return a function pointer for a command
 ````
 
-<h3 id="header:ADP:HEADERTAG16">vkCreateDevice</h3>
+<h3 id="header:ADP:HEADERTAG23">vkCreateDevice</h3>
 
 <h4 id="function:COMMON-VULKAN:CREATE-DEVICE">Function: CREATE-DEVICE</h4>
 
@@ -312,7 +312,7 @@ Return a function pointer for a command
 Create a new device instance.
 ````
 
-<h3 id="header:ADP:HEADERTAG17">vkDestroyDevice</h3>
+<h3 id="header:ADP:HEADERTAG24">vkDestroyDevice</h3>
 
 <h4 id="function:COMMON-VULKAN:DESTROY-DEVICE">Function: DESTROY-DEVICE</h4>
 
@@ -321,12 +321,12 @@ Create a new device instance.
   ...)
 ```
 
-<h3 id="header:ADP:HEADERTAG18">with-device</h3>
+<h3 id="header:ADP:HEADERTAG25">with-device</h3>
 
 <h4 id="function:COMMON-VULKAN:WITH-DEVICE">Macro: WITH-DEVICE</h4>
 
 ```Lisp
-(defmacro WITH-DEVICE (VAR1495 ARGS1496 &BODY BODY1497)
+(defmacro WITH-DEVICE (VAR1663 ARGS1664 &BODY BODY1665)
   ...)
 ```
 
@@ -335,7 +335,7 @@ Binds the results of create-device and evaluates the body forms. At the end, des
 the device and allocator.
 ````
 
-<h3 id="header:ADP:HEADERTAG19">vkEnumerateInstanceExtensionProperties</h3>
+<h3 id="header:ADP:HEADERTAG26">vkEnumerateInstanceExtensionProperties</h3>
 
 <h4 id="function:COMMON-VULKAN:CREATE-ENUMERATE-INSTANCE-EXTENSION-PROPERTIES">Function: CREATE-ENUMERATE-INSTANCE-EXTENSION-PROPERTIES</h4>
 
@@ -362,8 +362,8 @@ Destroys the vector of extension properties returned by create-enumerate-instanc
 <h4 id="function:COMMON-VULKAN:WITH-ENUMERATE-INSTANCE-EXTENSION-PROPERTIES">Macro: WITH-ENUMERATE-INSTANCE-EXTENSION-PROPERTIES</h4>
 
 ```Lisp
-(defmacro WITH-ENUMERATE-INSTANCE-EXTENSION-PROPERTIES (VAR1503 ARGS1504 &BODY
-                                                        BODY1505)
+(defmacro WITH-ENUMERATE-INSTANCE-EXTENSION-PROPERTIES (VAR1671 ARGS1672 &BODY
+                                                        BODY1673)
   ...)
 ```
 
