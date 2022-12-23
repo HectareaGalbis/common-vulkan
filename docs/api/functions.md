@@ -31,7 +31,7 @@ Destroy an instance of Vulkan
 <h4 id="function:COMMON-VULKAN:WITH-INSTANCE">Macro: WITH-INSTANCE</h4>
 
 ```Lisp
-(defmacro WITH-INSTANCE (VAR1475 ARGS1476 &BODY BODY1477)
+(defmacro WITH-INSTANCE (VAR1427 ARGS1428 &BODY BODY1429)
   ...)
 ```
 
@@ -78,7 +78,7 @@ Destroy the structure returned by create-get-physical-device-features
 <h4 id="function:COMMON-VULKAN:WITH-GET-PHYSICAL-DEVICE-FEATURES">Macro: WITH-GET-PHYSICAL-DEVICE-FEATURES</h4>
 
 ```Lisp
-(defmacro WITH-GET-PHYSICAL-DEVICE-FEATURES (VAR1485 ARGS1486 &BODY BODY1487)
+(defmacro WITH-GET-PHYSICAL-DEVICE-FEATURES (VAR1437 ARGS1438 &BODY BODY1439)
   ...)
 ```
 
@@ -114,8 +114,8 @@ Destroys a VkFormatProperties structure returned by create-get-physical-device-f
 <h4 id="function:COMMON-VULKAN:WITH-GET-PHYSICAL-DEVICE-FORMAT-PROPERTIES">Macro: WITH-GET-PHYSICAL-DEVICE-FORMAT-PROPERTIES</h4>
 
 ```Lisp
-(defmacro WITH-GET-PHYSICAL-DEVICE-FORMAT-PROPERTIES (VAR1493 ARGS1494 &BODY
-                                                      BODY1495)
+(defmacro WITH-GET-PHYSICAL-DEVICE-FORMAT-PROPERTIES (VAR1445 ARGS1446 &BODY
+                                                      BODY1447)
   ...)
 ```
 
@@ -153,8 +153,8 @@ Destroys the VkImageFormatProperties structure returned by create-get-physical-d
 <h4 id="function:COMMON-VULKAN:WITH-GET-PHYSICAL-DEVICE-IMAGE-FORMAT-PROPERTIES">Macro: WITH-GET-PHYSICAL-DEVICE-IMAGE-FORMAT-PROPERTIES</h4>
 
 ```Lisp
-(defmacro WITH-GET-PHYSICAL-DEVICE-IMAGE-FORMAT-PROPERTIES (VAR1501 ARGS1502
-                                                            &BODY BODY1503)
+(defmacro WITH-GET-PHYSICAL-DEVICE-IMAGE-FORMAT-PROPERTIES (VAR1453 ARGS1454
+                                                            &BODY BODY1455)
   ...)
 ```
 
@@ -190,7 +190,7 @@ Destroys a VkPhysicalDeviceProperties returned by create-get-physical-device-pro
 <h4 id="function:COMMON-VULKAN:WITH-GET-PHYSICAL-DEVICE-PROPERTIES">Macro: WITH-GET-PHYSICAL-DEVICE-PROPERTIES</h4>
 
 ```Lisp
-(defmacro WITH-GET-PHYSICAL-DEVICE-PROPERTIES (VAR1509 ARGS1510 &BODY BODY1511)
+(defmacro WITH-GET-PHYSICAL-DEVICE-PROPERTIES (VAR1461 ARGS1462 &BODY BODY1463)
   ...)
 ```
 
@@ -215,19 +215,19 @@ Reports properties of the queues of the specified physical device.
 <h4 id="function:COMMON-VULKAN:DESTROY-GET-PHSYICAL-DEVICE-QUEUE-FAMILY-PROPERTIES">Function: DESTROY-GET-PHSYICAL-DEVICE-QUEUE-FAMILY-PROPERTIES</h4>
 
 ```Lisp
-(defun DESTROY-GET-PHSYICAL-DEVICE-QUEUE-FAMILY-PROPERTIES (PQUEUEFAMILYPROPERTIES)
+(defun DESTROY-GET-PHSYICAL-DEVICE-QUEUE-FAMILY-PROPERTIES (QUEUE-FAMILY-PROPERTIES)
   ...)
 ```
 
 ````
-Destroy the list of VkQueueFamilyProperties structures returned by create-get-phsyical-device-queue-family-properties.
+Destroy the vector of VkQueueFamilyProperties structures returned by create-get-phsyical-device-queue-family-properties.
 ````
 
 <h4 id="function:COMMON-VULKAN:WITH-GET-PHSYICAL-DEVICE-QUEUE-FAMILY-PROPERTIES">Macro: WITH-GET-PHSYICAL-DEVICE-QUEUE-FAMILY-PROPERTIES</h4>
 
 ```Lisp
-(defmacro WITH-GET-PHSYICAL-DEVICE-QUEUE-FAMILY-PROPERTIES (VAR1517 ARGS1518
-                                                            &BODY BODY1519)
+(defmacro WITH-GET-PHSYICAL-DEVICE-QUEUE-FAMILY-PROPERTIES (VAR1469 ARGS1470
+                                                            &BODY BODY1471)
   ...)
 ```
 
@@ -263,13 +263,112 @@ Destroys a VkPhysicalDeviceMemoryProperties structure returned by create-get-phy
 <h4 id="function:COMMON-VULKAN:WITH-GET-PHYSICAL-DEVICE-MEMORY-PROPERTIES">Macro: WITH-GET-PHYSICAL-DEVICE-MEMORY-PROPERTIES</h4>
 
 ```Lisp
-(defmacro WITH-GET-PHYSICAL-DEVICE-MEMORY-PROPERTIES (VAR1525 ARGS1526 &BODY
-                                                      BODY1527)
+(defmacro WITH-GET-PHYSICAL-DEVICE-MEMORY-PROPERTIES (VAR1477 ARGS1478 &BODY
+                                                      BODY1479)
   ...)
 ```
 
 ````
 Binds the results of create-get-physical-device-memory-properties and evaluates the body forms. At the
 end, destroy-get-physical-device-memory-properties is called with the memory properties structure.
+````
+
+<h3 id="header:ADP:HEADERTAG14">vkGetInstanceProcAddr</h3>
+
+<h4 id="function:COMMON-VULKAN:GET-INSTANCE-PROC-ADDR">Function: GET-INSTANCE-PROC-ADDR</h4>
+
+```Lisp
+(defun GET-INSTANCE-PROC-ADDR (INSTANCE PNAME)
+  ...)
+```
+
+````
+Return a function pointer for a command.
+````
+
+<h3 id="header:ADP:HEADERTAG15">vkGetDeviceProcAddr</h3>
+
+<h4 id="function:COMMON-VULKAN:GET-DEVICE-PROC-ADDR">Function: GET-DEVICE-PROC-ADDR</h4>
+
+```Lisp
+(defun GET-DEVICE-PROC-ADDR (DEVICE PNAME)
+  ...)
+```
+
+````
+Return a function pointer for a command
+````
+
+<h3 id="header:ADP:HEADERTAG16">vkCreateDevice</h3>
+
+<h4 id="function:COMMON-VULKAN:CREATE-DEVICE">Function: CREATE-DEVICE</h4>
+
+```Lisp
+(defun CREATE-DEVICE (PHYSICALDEVICE PCREATEINFO PALLOCATOR)
+  ...)
+```
+
+````
+Create a new device instance.
+````
+
+<h3 id="header:ADP:HEADERTAG17">vkDestroyDevice</h3>
+
+<h4 id="function:COMMON-VULKAN:DESTROY-DEVICE">Function: DESTROY-DEVICE</h4>
+
+```Lisp
+(defun DESTROY-DEVICE (DEVICE PALLOCATOR)
+  ...)
+```
+
+<h3 id="header:ADP:HEADERTAG18">with-device</h3>
+
+<h4 id="function:COMMON-VULKAN:WITH-DEVICE">Macro: WITH-DEVICE</h4>
+
+```Lisp
+(defmacro WITH-DEVICE (VAR1495 ARGS1496 &BODY BODY1497)
+  ...)
+```
+
+````
+Binds the results of create-device and evaluates the body forms. At the end, destroy-device is called with
+the device and allocator.
+````
+
+<h3 id="header:ADP:HEADERTAG19">vkEnumerateInstanceExtensionProperties</h3>
+
+<h4 id="function:COMMON-VULKAN:CREATE-ENUMERATE-INSTANCE-EXTENSION-PROPERTIES">Function: CREATE-ENUMERATE-INSTANCE-EXTENSION-PROPERTIES</h4>
+
+```Lisp
+(defun CREATE-ENUMERATE-INSTANCE-EXTENSION-PROPERTIES (PLAYERNAME)
+  ...)
+```
+
+````
+Returns up to requested number of global extension properties.
+````
+
+<h4 id="function:COMMON-VULKAN:DESTROY-ENUMERATE-INSTANCE-EXTENSION-PROPERTIES">Function: DESTROY-ENUMERATE-INSTANCE-EXTENSION-PROPERTIES</h4>
+
+```Lisp
+(defun DESTROY-ENUMERATE-INSTANCE-EXTENSION-PROPERTIES (PROPERTIES)
+  ...)
+```
+
+````
+Destroys the vector of extension properties returned by create-enumerate-instance-extension-properties.
+````
+
+<h4 id="function:COMMON-VULKAN:WITH-ENUMERATE-INSTANCE-EXTENSION-PROPERTIES">Macro: WITH-ENUMERATE-INSTANCE-EXTENSION-PROPERTIES</h4>
+
+```Lisp
+(defmacro WITH-ENUMERATE-INSTANCE-EXTENSION-PROPERTIES (VAR1503 ARGS1504 &BODY
+                                                        BODY1505)
+  ...)
+```
+
+````
+Binds the results of create-enumerate-instance-extension-properties and evaluates the body forms. At the end
+, destroy-enumerate-instance-extension-properties is called with the extension properties structures.
 ````
 

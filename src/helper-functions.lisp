@@ -2,6 +2,13 @@
 (in-package :cvk)
 
 
+(defun c-func-name-to-lisp (func-name)
+  "Turns a C function name into a lisp function name."
+  (string-downcase (string (cffi:translate-camelcase-name func-name
+							  :special-words
+							  '("2D" "3D" "KHR" "EXT" "VALVE" "GOOGLE" "AMD" "INTEL" "NVX" "NV" "HUAWEI")))))
+
+
 (cffi:defcfun "memcpy" :void
   (dest :pointer) (src :pointer) (n :size))
 

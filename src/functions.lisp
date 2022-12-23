@@ -150,12 +150,13 @@ end, destroy-get-physical-device-properties is called with the physical device p
     (let* ((queue-family-property-count (cffi:mem-ref pQueueFamilyPropertyCount :uint32))
 	   (pQueueFamilyProperties (cffi:foreign-alloc '(:struct VkQueueFamilyProperties) :count queue-family-property-count)))
       (vkGetPhysicalDeviceQueueFamilyProperties physicalDevice pQueueFamilyPropertyCount pQueueFamilyProperties)
-      (loop for i from 0 below queue-family-property-count
-	    collect (cffi:mem-aptr pQueueFamilyProperties '(:struct VkQueueFamilyProperties) i)))))
+      (let ((queue-family-properties (make-array queue-family-property-count)))
+	(loop for i from 0 below queue-family-property-count
+	      do (setf (aref queue-family-properties i) (cffi:mem-aptr pQueueFamilyProperties '(:struct VkQueueFamilyProperties) i)))))))
 
-(adp:defun destroy-get-phsyical-device-queue-family-properties (pQueueFamilyProperties)
-  "Destroy the list of VkQueueFamilyProperties structures returned by create-get-phsyical-device-queue-family-properties."
-  (cffi:foreign-free (car pQueueFamilyProperties)))
+(adp:defun destroy-get-phsyical-device-queue-family-properties (queue-family-properties)
+  "Destroy the vector of VkQueueFamilyProperties structures returned by create-get-phsyical-device-queue-family-properties."
+  (cffi:foreign-free (aref queue-family-properties 0)))
 
 (mcffi:defwith with-get-phsyical-device-queue-family-properties
     create-get-phsyical-device-queue-family-properties
@@ -184,104 +185,94 @@ end, destroy-get-phsyical-device-queue-family-properties is called with the queu
   "Binds the results of create-get-physical-device-memory-properties and evaluates the body forms. At the
 end, destroy-get-physical-device-memory-properties is called with the memory properties structure.")
 
-;; (more-cffi:def-foreign-function doc-file
-;;     ("vkGetInstanceProcAddr" get-instance-proc-addr
-;; 			     funcall-get-instance-proc-addr)
-;;   (instance pname)
-;;   (declare-types ("VkInstance" instance) (string "pName") :return #'result)
-;;   (let ((instance-c (or instance (cffi-sys:null-pointer))))
-;;     (cffi:with-foreign-string (pname-c pname)
-;;       (let ((func-pointer (vkgetinstanceprocaddr instance-c pname-c)))
-;;         (if (cffi-sys:null-pointer-p func-pointer)
-;;             nil
-;;             (let* ((lisp-function-name
-;;                      (subseq
-;;                       (string
-;;                        (cffi:translate-camelcase-name pname :special-words
-;;                                                       '("2D" "3D" "KHR" "EXT"
-;;                                                         "VALVE" "GOOGLE" "AMD"
-;;                                                         "INTEL" "NVX" "NV"
-;;                                                         "HUAWEI")))
-;;                       3))
-;;                    (funcall-function
-;;                      (intern
-;;                       (concatenate 'string "FUNCALL-" lisp-function-name)
-;;                       :cvk)))
-;;               (lambda (&rest args)
-;;                 (apply funcall-function func-pointer args))))))))
 
-;; (more-cffi:def-foreign-function doc-file
-;;     ("vkGetDeviceProcAddr" get-device-proc-addr funcall-get-device-proc-addr)
-;;   (device pname)
-;;   (declare-types ("VkDevice" device) (char "pName") :return
-;; 		 ("PFN_vkVoidFunction" return-value))
-;;   (vkgetdeviceprocaddr device pname))
+(adp:subsubheader "vkGetInstanceProcAddr")
 
-;; (more-cffi:doc-note doc-file
-;;                     "This function needs to be revised. Please, post an issue to request it.")
+(vulkan-defun (vkGetInstanceProcAddr get-instance-proc-addr) (instance pName)
+  "Return a function pointer for a command."
+  (let ((instance-c (or instance (cffi:null-pointer))))
+    (cffi:with-foreign-string (pName-c pName)
+      (let ((func-pointer (vkGetInstanceProcAddr instance-c pName-c)))
+	(if (cffi:null-pointer-p func-pointer)
+	    nil
+	    (let* ((lisp-function-name (c-func-name-to-lisp pName))
+		   (funcall-function (find-symbol (format nil "FUNCALL-~a" (symbol-name lisp-function-name)))))
+	      (lambda (&rest args)
+		(apply funcall-function func-pointer args))))))))
 
-;; (more-cffi:def-foreign-function doc-file
-;;     ("vkCreateDevice" create-device funcall-create-device)
-;;   (physicaldevice pcreateinfo pallocator)
-;;   (declare-types ("VkPhysicalDevice" "physicalDevice")
-;; 		 ("VkDeviceCreateInfo" "pCreateInfo")
-;; 		 ("VkAllocationCallbacks" "pAllocator") :return ("VkDevice" "pDevice")
-;; 		 ("VkResult" result))
-;;   (let ((pallocator-c (or pallocator (cffi-sys:null-pointer))))
-;;     (cffi:with-foreign-object (pdevice 'vkdevice)
-;;       (let ((result
-;;               (vkcreatedevice physicaldevice pcreateinfo pallocator-c
-;; 			      pdevice)))
-;;         (values (cffi:mem-ref pdevice 'vkdevice) result
-;;                 (if pallocator
-;;                     pallocator-c
-;;                     nil))))))
 
-;; (more-cffi:def-foreign-function doc-file
-;;     ("vkDestroyDevice" destroy-device funcall-destroy-device)
-;;   (device pallocator)
-;;   (declare-types ("VkDevice" device) ("VkAllocationCallbacks" "pAllocator"))
-;;   (let ((pallocator-c (or pallocator (cffi-sys:null-pointer))))
-;;     (vkdestroydevice device pallocator-c)))
+(adp:subsubheader "vkGetDeviceProcAddr")
 
-;; (more-cffi:defwith doc-file with-device create-device destroy-device
-;;   :destructor-arguments (0 2))
+(vulkan-defun (vkGetDeviceProcAddr get-device-proc-addr) (device pName)
+  "Return a function pointer for a command"
+  (let ((device-c (or device (cffi:null-pointer))))
+    (cffi:with-foreign-string (pName-c pName)
+      (let ((func-pointer (vkGetDeviceProcAddr device-c pName-c)))
+	(if (cffi:null-pointer-p func-pointer)
+	    nil
+	    (let* ((lisp-function-name (c-func-name-to-lisp pName))
+		   (funcall-function (find-symbol (format nil "FUNCALL-~a" (symbol-name lisp-function-name)))))
+	      (lambda (&rest args)
+		(apply funcall-function func-pointer args))))))))
 
-;; (more-cffi:def-foreign-function doc-file
-;;     ("vkEnumerateInstanceExtensionProperties"
-;;      create-enumerate-instance-extension-properties
-;;      funcall-enumerate-instance-extension-properties)
-;;   (playername)
-;;   (declare-types (string "pLayerName") :return
-;; 		 ((list "VkExtensionProperties") extension-props))
-;;   (let ((playername-c
-;;           (if playername
-;;               (cffi:foreign-string-alloc playername)
-;;               (cffi-sys:null-pointer))))
-;;     (cffi:with-foreign-object (ppropertycount :uint32)
-;;       (vkenumerateinstanceextensionproperties playername-c ppropertycount
-;; 					      (cffi-sys:null-pointer))
-;;       (let* ((property-count (cffi:mem-ref ppropertycount :uint32))
-;;              (pproperties
-;;                (cffi:foreign-alloc '(:struct vkextensionproperties) :count
-;;                                    property-count)))
-;;         (vkenumerateinstanceextensionproperties playername-c ppropertycount
-;; 						pproperties)
-;;         (iter
-;;          (for i from 0 below property-count)
-;;          (collect
-;;              (cffi:mem-aptr pproperties '(:struct vkextensionproperties)
-;;                             i)))))))
 
-;; (more-cffi:def-lisp-function doc-file
-;;   destroy-enumerate-instance-extension-properties
-;;   (extension-props)
-;;   (declare-types ("(list VkExtensionProperties)" extension-props))
-;;   (cffi-sys:foreign-free (car extension-props)))
+(adp:subsubheader "vkCreateDevice")
 
-;; (more-cffi:defwith doc-file with-enumerate-instance-extension-properties
-;;   create-enumerate-instance-extension-properties
-;;   destroy-enumerate-instance-extension-properties)
+(vulkan-defun (vkCreateDevice create-device) (physicalDevice pCreateInfo pAllocator)
+  "Create a new device instance."
+  (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
+    (cffi:with-foreign-object (pDevice 'VkDevice)
+      (let ((result (vkCreateDevice physicalDevice pCreateInfo pAllocator-c pDevice)))
+	(values (cffi:mem-ref pDevice 'VkDevice) result pAllocator)))))
+
+
+(adp:subsubheader "vkDestroyDevice")
+
+(vulkan-defun (vkDestroyDevice destroy-device) (device pAllocator)
+  (let ((pAllocator-c (or pAllocator (cffi:null-pointer))))
+    (vkDestroyDevice device pAllocator-c)))
+
+
+(adp:subsubheader "with-device")
+
+(mcffi:defwith with-device
+    create-device
+    destroy-device
+    1
+  "Binds the results of create-device and evaluates the body forms. At the end, destroy-device is called with
+the device and allocator.")
+
+
+(adp:subsubheader "vkEnumerateInstanceExtensionProperties")
+
+(vulkan-defun (vkEnumerateInstanceExtensionProperties create-enumerate-instance-extension-properties funcall-enumerate-instance-extension-properties) (pLayerName)
+  "Returns up to requested number of global extension properties."
+  (cffi:with-foreign-object (pPropertyCount :uint32)
+    (if pLayerName
+	(cffi:with-foreign-string (pLayerName-c pLayerName)
+	  (vkEnumerateInstanceExtensionProperties pLayerName-c pPropertyCount (cffi:null-pointer)))
+	(vkEnumerateInstanceExtensionProperties (cffi:null-pointer) pPropertyCount (cffi:null-pointer)))
+    (let* ((property-count (cffi:mem-ref pPropertyCount :uint32))
+	   (pProperties (cffi:foreign-alloc '(:struct VkExtensionProperties) :count property-count))
+	   (result (if pLayerName
+		       (cffi:with-foreign-string (pLayerName-c pLayerName)
+			 (vkEnumerateInstanceExtensionProperties pLayerName-c pPropertyCount pProperties))
+		       (vkEnumerateInstanceExtensionProperties (cffi:null-pointer) pPropertyCount pProperties))))
+      (let ((properties (make-array property-count)))
+	(loop for i from 0 below property-count
+	      do (setf (aref properties i) (cffi:mem-aptr pProperties '(:struct VkExtensionProperties) i)))
+	(values properties result)))))
+
+(adp:defun destroy-enumerate-instance-extension-properties (properties)
+  "Destroys the vector of extension properties returned by create-enumerate-instance-extension-properties."
+  (cffi:foreign-free (aref properties 0)))
+
+(mcffi:defwith with-enumerate-instance-extension-properties
+    create-enumerate-instance-extension-properties
+    destroy-enumerate-instance-extension-properties
+    1
+  "Binds the results of create-enumerate-instance-extension-properties and evaluates the body forms. At the end
+, destroy-enumerate-instance-extension-properties is called with the extension properties structures.")
 
 ;; (more-cffi:def-foreign-function doc-file
 ;;     ("vkEnumerateDeviceExtensionProperties"
