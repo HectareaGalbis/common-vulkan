@@ -5,8 +5,9 @@
 (adp:header "Functions" functions-header)
 
 
-(defmacro vulkan-defun ((foreign-function name) (&rest args) &body body)
-  (let ((funcall-name (intern (format nil "FUNCALL-~a" (symbol-name name))))
+(defmacro vulkan-defun ((foreign-function name &optional funcall-name) (&rest args) &body body)
+  (let ((funcall-name-function (or funcall-name
+				   (intern (format nil "FUNCALL-~a" (symbol-name name)))))
 	(foreign-funcall-function (intern (format nil "FUNCALL-~a" (symbol-name foreign-function)))))
     (with-gensyms (func-pointer macrolet-args)
       `(progn
@@ -14,7 +15,7 @@
 	   ,@body)
 	 (macrolet ((,foreign-function (&rest ,macrolet-args)
 		      `(,',foreign-funcall-function ,',func-pointer ,@,macrolet-args)))
-	   (defun ,funcall-name (,func-pointer ,@args)
+	   (defun ,funcall-name-function (,func-pointer ,@args)
 	     ,@body))))))
 
 
@@ -39,48 +40,42 @@
 
 (adp:subheader "with-instance")
 
-(mcffi:defwith with-instance create-instance destroy-instance (0 2))
+(mcffi:defwith with-instance create-instance destroy-instance (0 2)
+  "Binds the results of create-instance and evaluates the body forms. At the end, destroy-instance is called
+with the instance and the allocator.")
 
-(adp:itemize (adp:item @e("Note") ": The allocator is received by both the constructor and the destructor."))
+(vulkan-defun (vkEnumeratePhysicalDevices enumerate-physical-devices) (instance)
+  "Enumerates the physical devices accessible to a Vulkan instance"
+  (cffi:with-foreign-object (pPhysicalDeviceCount :uint32)
+    (vkEnumeratePhysicalDevices instance pPhysicalDeviceCount
+				(cffi-sys:null-pointer))
+    (let ((physical-device-count (cffi:mem-ref pPhysicalDeviceCount :uint32)))
+      (cffi:with-foreign-object (pPhysicalDevices 'VkPhysicalDevice
+				 physical-device-count)
+        (vkEnumeratePhysicalDevices instance pPhysicalDeviceCount
+				    pPhysicalDevices)
+        (loop for i from 0 below physical-device-count
+              collect (cffi:mem-aref pPhysicalDevices 'VkPhysicalDevice
+                                     i))))))
 
+(adp:subsubheader "vkGetPhysicalDeviceFeatures")
 
-;; (more-cffi:def-foreign-function doc-file
-;;     ("vkEnumeratePhysicalDevices" enumerate-physical-devices
-;; 				  funcall-enumerate-physical-devices)
-;;   (instance)
-;;   (declare-types ("VkInstance" instance) :return
-;; 		 ((list "VkPhysicalDevice") "pPhysicalDevices") ("VkResult" result))
-;;   (cffi:with-foreign-object (pphysicaldevicecount :uint32)
-;;     (vkenumeratephysicaldevices instance pphysicaldevicecount
-;; 				(cffi-sys:null-pointer))
-;;     (let ((physical-device-count (cffi:mem-ref pphysicaldevicecount :uint32)))
-;;       (cffi:with-foreign-object (pphysicaldevices 'vkphysicaldevice
-;; 						  physical-device-count)
-;;         (vkenumeratephysicaldevices instance pphysicaldevicecount
-;; 				    pphysicaldevices)
-;;         (loop for i from 0 below physical-device-count
-;;               collect (cffi:mem-aref pphysicaldevices 'vkphysicaldevice
-;;                                      i))))))
+(vulkan-defun (vkGetPhysicalDeviceFeatures create-get-physical-device-features funcall-get-physical-device-features) (physicalDevice)
+  "Reports capabilities of a physical device"
+  (let ((pFeatures (cffi:foreign-alloc '(:struct VkPhysicalDeviceFeatures))))
+    (vkGetPhysicalDeviceFeatures physicalDevice pFeatures)
+    (values pFeatures)))
 
-;; (more-cffi:def-foreign-function doc-file
-;;     ("vkGetPhysicalDeviceFeatures" create-get-physical-device-features
-;; 				   funcall-get-physical-device-features)
-;;   (physicaldevice)
-;;   (declare-types ("VkPhysicalDevice" "physicalDevice") :return
-;; 		 ("VkPhysicalDeviceFeatures" pfeatures))
-;;   (let ((pfeatures (cffi:foreign-alloc '(:struct vkphysicaldevicefeatures))))
-;;     (vkgetphysicaldevicefeatures physicaldevice pfeatures)
-;;     (values pfeatures)))
+(adp:defun destroy-get-physical-device-features (pFeatures)
+  "Destroy the structure returned by create-get-physical-device-features"
+  (cffi-sys:foreign-free pFeatures))
 
-;; (more-cffi:def-lisp-function doc-file
-;;   destroy-get-physical-device-features
-;;   (pfeatures)
-;;   (declare-types ("VkPhysicalDeviceFeatures" "pFeatures"))
-;;   (cffi-sys:foreign-free pfeatures))
-
-;; (more-cffi:defwith doc-file with-get-physical-device-features
-;;   create-get-physical-device-features
-;;   destroy-get-physical-device-features)
+(mcffi:defwith with-get-physical-device-features
+    create-get-physical-device-features
+    destroy-get-physical-device-features
+    1
+  "Binds the results of create-get-physical-device-features and evaluates the body forms. At the end, 
+destroy-get-physical-device-features is called with the device features structure.")
 
 ;; (more-cffi:def-foreign-function doc-file
 ;;     ("vkGetPhysicalDeviceFormatProperties"

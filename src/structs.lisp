@@ -5,6 +5,64 @@
 
 (adp:header "Structs" structs-header)
 
+
+(defmacro vulkan-defstruct (struct-types infix options &body slot-descriptors)
+  (let* ((struct-or-union (car struct-types))
+	 (foreign-struct-definitions (loop for struct-type in (cdr struct-types)
+					   collect `(mcffi:define-foreign-struct ,(list struct-or-union struct-type) ,infix
+							,options
+						      ,@slot-descriptors))))
+    `(progn
+       ,@foreign-struct-definitions)))
+
+
+(adp:subsubheader "VkExtent2D")
+
+(vulkan-defstruct (:struct VkExtent2D) extent-2d
+    (:default-constructors :default-readers :default-writers)
+  width
+  height)
+
+(adp:subsubheader "VkExtent3D")
+
+(vulkan-defstruct (:struct VkExtent3D) extent-3d
+    (:default-constructors :default-readers :default-writers)
+  width
+  height
+  depth)
+
+(adp:subsubheader "VkOffset2D")
+
+(vulkan-defstruct (:struct VkOffset2D) offset-2d
+    (:default-constructors :default-readers :default-writers)
+  x
+  y)
+
+(adp:subsubheader "VkOffset3D")
+
+(vulkan-defstruct (:struct VkOffset3D) offset-3d
+    (:default-constructors :default-readers :default-writers)
+  x
+  y
+  z)
+
+(adp:subsubheader "VkRect2D")
+
+(vulkan-defstruct (:struct VkRect2D) rect-2d
+    (:default-constructors :default-readers :default-writers)
+  (offset :pointer t
+	  :constructor ((offset-arg)
+			(memcpy offset offset-arg (cffi:foreign-type-size '(:struct VkOffset2D))))
+	  :writer ((offset-arg)
+		   (memcpy offset offset-arg (cffi:foreign-type-size '(:struct VkOffset2D)))))
+  (extent :pointer t
+	  :constructor ((extent-arg)
+			(memcpy extent extent-arg (cffi:foreign-type-size '(:struct VkExtent2D))))
+	  :writer ((extent-arg)
+		   (memcpy extent extent-arg (cffi:foreign-type-size '(:struct VkExtent2D))))))
+
+
+
 ;; (defmacro create-pointer (slot slot-arg)
 ;;   `(setf ,slot (or ,slot-arg (cffi-sys:null-pointer))))
 

@@ -10,7 +10,7 @@
                 
 		;; Common Vulkan
 		;; (:file "initial-parameters")
-		;; (:file "helper-functions")
+		(:file "src/helper-functions")
 		(:file "src/constants")
 		(:file "src/structs")
 		(:file "src/functions")
@@ -42,7 +42,7 @@
                
 	       ;; Common Vulkan
 	       ;; (:file "initial-parameters")
-	       ;; (:file "helper-functions")
+	       (:file "src/helper-functions")
 	       (:file "src/constants")
 	       (:file "src/structs")
 	       (:file "src/functions")

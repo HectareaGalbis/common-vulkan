@@ -55,7 +55,7 @@
 	 (structs-count (with-open-file (istream structs-file)
 			  (loop for expr = (read istream nil)
 				while expr
-				count (eq (car expr) 'mcffi:define-foreign-struct)))))
+				count (eq (car expr) 'vulkan-defstruct)))))
     (values cstructs-count structs-count)))
 
 
