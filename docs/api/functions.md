@@ -31,7 +31,7 @@ Destroy an instance of Vulkan
 <h4 id="function:COMMON-VULKAN:WITH-INSTANCE">Macro: WITH-INSTANCE</h4>
 
 ```Lisp
-(defmacro WITH-INSTANCE (VAR1430 ARGS1431 &BODY BODY1432)
+(defmacro WITH-INSTANCE (VAR1475 ARGS1476 &BODY BODY1477)
   ...)
 ```
 
@@ -78,7 +78,7 @@ Destroy the structure returned by create-get-physical-device-features
 <h4 id="function:COMMON-VULKAN:WITH-GET-PHYSICAL-DEVICE-FEATURES">Macro: WITH-GET-PHYSICAL-DEVICE-FEATURES</h4>
 
 ```Lisp
-(defmacro WITH-GET-PHYSICAL-DEVICE-FEATURES (VAR1440 ARGS1441 &BODY BODY1442)
+(defmacro WITH-GET-PHYSICAL-DEVICE-FEATURES (VAR1485 ARGS1486 &BODY BODY1487)
   ...)
 ```
 
@@ -114,8 +114,8 @@ Destroys a VkFormatProperties structure returned by create-get-physical-device-f
 <h4 id="function:COMMON-VULKAN:WITH-GET-PHYSICAL-DEVICE-FORMAT-PROPERTIES">Macro: WITH-GET-PHYSICAL-DEVICE-FORMAT-PROPERTIES</h4>
 
 ```Lisp
-(defmacro WITH-GET-PHYSICAL-DEVICE-FORMAT-PROPERTIES (VAR1448 ARGS1449 &BODY
-                                                      BODY1450)
+(defmacro WITH-GET-PHYSICAL-DEVICE-FORMAT-PROPERTIES (VAR1493 ARGS1494 &BODY
+                                                      BODY1495)
   ...)
 ```
 
@@ -153,8 +153,8 @@ Destroys the VkImageFormatProperties structure returned by create-get-physical-d
 <h4 id="function:COMMON-VULKAN:WITH-GET-PHYSICAL-DEVICE-IMAGE-FORMAT-PROPERTIES">Macro: WITH-GET-PHYSICAL-DEVICE-IMAGE-FORMAT-PROPERTIES</h4>
 
 ```Lisp
-(defmacro WITH-GET-PHYSICAL-DEVICE-IMAGE-FORMAT-PROPERTIES (VAR1456 ARGS1457
-                                                            &BODY BODY1458)
+(defmacro WITH-GET-PHYSICAL-DEVICE-IMAGE-FORMAT-PROPERTIES (VAR1501 ARGS1502
+                                                            &BODY BODY1503)
   ...)
 ```
 
@@ -190,7 +190,7 @@ Destroys a VkPhysicalDeviceProperties returned by create-get-physical-device-pro
 <h4 id="function:COMMON-VULKAN:WITH-GET-PHYSICAL-DEVICE-PROPERTIES">Macro: WITH-GET-PHYSICAL-DEVICE-PROPERTIES</h4>
 
 ```Lisp
-(defmacro WITH-GET-PHYSICAL-DEVICE-PROPERTIES (VAR1464 ARGS1465 &BODY BODY1466)
+(defmacro WITH-GET-PHYSICAL-DEVICE-PROPERTIES (VAR1509 ARGS1510 &BODY BODY1511)
   ...)
 ```
 
@@ -226,8 +226,8 @@ Destroy the list of VkQueueFamilyProperties structures returned by create-get-ph
 <h4 id="function:COMMON-VULKAN:WITH-GET-PHSYICAL-DEVICE-QUEUE-FAMILY-PROPERTIES">Macro: WITH-GET-PHSYICAL-DEVICE-QUEUE-FAMILY-PROPERTIES</h4>
 
 ```Lisp
-(defmacro WITH-GET-PHSYICAL-DEVICE-QUEUE-FAMILY-PROPERTIES (VAR1472 ARGS1473
-                                                            &BODY BODY1474)
+(defmacro WITH-GET-PHSYICAL-DEVICE-QUEUE-FAMILY-PROPERTIES (VAR1517 ARGS1518
+                                                            &BODY BODY1519)
   ...)
 ```
 
@@ -263,8 +263,8 @@ Destroys a VkPhysicalDeviceMemoryProperties structure returned by create-get-phy
 <h4 id="function:COMMON-VULKAN:WITH-GET-PHYSICAL-DEVICE-MEMORY-PROPERTIES">Macro: WITH-GET-PHYSICAL-DEVICE-MEMORY-PROPERTIES</h4>
 
 ```Lisp
-(defmacro WITH-GET-PHYSICAL-DEVICE-MEMORY-PROPERTIES (VAR1480 ARGS1481 &BODY
-                                                      BODY1482)
+(defmacro WITH-GET-PHYSICAL-DEVICE-MEMORY-PROPERTIES (VAR1525 ARGS1526 &BODY
+                                                      BODY1527)
   ...)
 ```
 

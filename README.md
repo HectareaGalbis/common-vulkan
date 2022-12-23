@@ -17,7 +17,7 @@ Finally\, install Common Vulkan with ``` (ql:quickload :common-vulkan) ```\.
 The next values are an estimation of the completeness of this library\:
 
 * Callbacks\: 0\/8 \(0\%\)
-* Functions\: 9\/491 \(0\%\)
+* Functions\: 9\/491 \(1\%\)
 * Structs\: 5\/660 \(0\%\)
-* Total\: 14\/1159 \(0\%\)
+* Total\: 14\/1159 \(1\%\)
 
