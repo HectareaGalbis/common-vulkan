@@ -31,12 +31,14 @@
                     pAllocator-c
                     nil))))))
 
+
 (adp:subsubheader "vkDestroyInstance")
 
 (vulkan-defun (vkDestroyInstance destroy-instance) (instance pallocator)
   "Destroy an instance of Vulkan"
   (let ((pAllocator-c (or pAllocator (cffi-sys:null-pointer))))
     (vkDestroyInstance instance pAllocator-c)))
+
 
 (adp:subheader "with-instance")
 
@@ -58,6 +60,7 @@ with the instance and the allocator.")
               collect (cffi:mem-aref pPhysicalDevices 'VkPhysicalDevice
                                      i))))))
 
+
 (adp:subsubheader "vkGetPhysicalDeviceFeatures")
 
 (vulkan-defun (vkGetPhysicalDeviceFeatures create-get-physical-device-features funcall-get-physical-device-features) (physicalDevice)
@@ -77,108 +80,109 @@ with the instance and the allocator.")
   "Binds the results of create-get-physical-device-features and evaluates the body forms. At the end, 
 destroy-get-physical-device-features is called with the device features structure.")
 
-;; (more-cffi:def-foreign-function doc-file
-;;     ("vkGetPhysicalDeviceFormatProperties"
-;;      get-physical-device-format-properties
-;;      funcall-get-physical-device-format-properties)
-;;   (physicaldevice format pformatproperties)
-;;   (declare-types ("VkPhysicalDevice" "physicalDevice") ("VkFormat" format)
-;; 		 ("VkFormatProperties" "pFormatProperties") :return ("void" return-value))
-;;   (vkgetphysicaldeviceformatproperties physicaldevice format
-;; 				       pformatproperties))
 
-;; (more-cffi:doc-note doc-file
-;;                     "This function needs to be revised. Please, post an issue to request it.")
+(adp:subsubheader "vkGetPhysicalDeviceFormatProperties")
 
-;; (more-cffi:def-foreign-function doc-file
-;;     ("vkGetPhysicalDeviceImageFormatProperties"
-;;      get-physical-device-image-format-properties
-;;      funcall-get-physical-device-image-format-properties)
-;;   (physicaldevice format type tiling usage flags pimageformatproperties)
-;;   (declare-types ("VkPhysicalDevice" "physicalDevice") ("VkFormat" format)
-;; 		 ("VkImageType" type) ("VkImageTiling" tiling) ("VkImageUsageFlags" usage)
-;; 		 ("VkImageCreateFlags" flags)
-;; 		 ("VkImageFormatProperties" "pImageFormatProperties") :return
-;; 		 ("VkResult" return-value))
-;;   (vkgetphysicaldeviceimageformatproperties physicaldevice format type tiling
-;; 					    usage flags pimageformatproperties))
+(vulkan-defun (vkGetPhysicalDeviceFormatProperties create-get-physical-device-format-properties funcall-get-physical-device-format-properties) (physicalDevice format)
+  "Lists physical device's format capabilities."
+  (let ((pFormatProperties (cffi:foreign-alloc '(:struct VkFormatProperties))))
+    (vkGetPhysicalDeviceFormatProperties physicalDevice format pFormatProperties)
+    (values pFormatProperties)))
 
-;; (more-cffi:doc-note doc-file
-;;                     "This function needs to be revised. Please, post an issue to request it.")
+(adp:defun destroy-get-physical-device-format-properties (pFormatProperties)
+  "Destroys a VkFormatProperties structure returned by create-get-physical-device-format-properties."
+  (cffi:foreign-free pFormatProperties))
 
-;; (more-cffi:def-foreign-function doc-file
-;;     ("vkGetPhysicalDeviceProperties" create-get-physical-device-properties
-;; 				     funcall-get-physical-device-properties)
-;;   (physicaldevice)
-;;   (declare-types ("VkPhysicalDevice" "physicalDevice") :return
-;; 		 ("VkPhysicalDeviceProperties" "pProperties"))
-;;   (let ((pproperties
-;;           (cffi:foreign-alloc '(:struct vkphysicaldeviceproperties))))
-;;     (vkgetphysicaldeviceproperties physicaldevice pproperties)
-;;     (values pproperties)))
+(mcffi:defwith with-get-physical-device-format-properties
+    create-get-physical-device-properties
+    destroy-get-physical-device-properties
+    1
+  "Binds the results of create-get-physical-device-format-properties and evaluates the body forms. At the end,
+destroy-get-physical-device-format-properties is called with the format properties structure.")
 
-;; (more-cffi:def-lisp-function doc-file
-;;   destroy-get-physical-device-properties
-;;   (pproperties)
-;;   (declare-types ("VkPhysicalDeviceProperties" "pProperties"))
-;;   (cffi-sys:foreign-free pproperties))
 
-;; (more-cffi:defwith doc-file with-get-physical-device-properties
-;;   create-get-physical-device-properties
-;;   destroy-get-physical-device-properties)
+(adp:subsubheader "vkGetPhysicalDeviceImageFormatProperties")
 
-;; (more-cffi:def-foreign-function doc-file
-;;     ("vkGetPhysicalDeviceQueueFamilyProperties"
-;;      create-get-physical-device-queue-family-properties
-;;      funcall-get-physical-device-queue-family-properties)
-;;   (physicaldevice)
-;;   (declare-types ("VkPhysicalDevice" "physicalDevice") :return
-;; 		 ((list "VkQueueFamilyProperties") "pQueueFamilyProperties"))
-;;   (cffi:with-foreign-object (pqueuefamilypropertycount :uint32)
-;;     (vkgetphysicaldevicequeuefamilyproperties physicaldevice
-;; 					      pqueuefamilypropertycount (cffi-sys:null-pointer))
-;;     (let* ((queue-family-property-count
-;;              (cffi:mem-ref pqueuefamilypropertycount :uint32))
-;;            (pqueuefamilyproperties
-;;              (cffi:foreign-alloc '(:struct vkqueuefamilyproperties) :count
-;;                                  queue-family-property-count)))
-;;       (vkgetphysicaldevicequeuefamilyproperties physicaldevice
-;; 						pqueuefamilypropertycount pqueuefamilyproperties)
-;;       (loop for i from 0 below queue-family-property-count
-;;             collect (cffi:mem-aptr pqueuefamilyproperties
-;;                                    '(:struct vkqueuefamilyproperties) i)))))
+(vulkan-defun (vkGetPhysicalDeviceImageFormatProperties create-get-physical-device-image-format-properties funcall-get-physical-device-image-format-properties) (physicalDevice format type tiling usage flags)
+  "Lists physical device's image format capabilities."
+  (let ((pImageFormatProperties (cffi:foreign-alloc '(:struct VkImageFormatProperties))))
+    (vkGetPhysicalDeviceImageFormatProperties physicalDevice format type tiling usage flags pImageFormatProperties)
+    (values pImageFormatProperties)))
 
-;; (more-cffi:def-lisp-function doc-file
-;;   destroy-get-physical-device-queue-family-properties
-;;   (pqueuefamilyproperties)
-;;   (declare-types ((list "VkQueueFamilyProperties") pqueuefamilyproperties))
-;;   (cffi-sys:foreign-free (car pqueuefamilyproperties)))
+(adp:defun destroy-get-physical-device-image-format-properties (pImageFormatProperties)
+  "Destroys the VkImageFormatProperties structure returned by create-get-physical-device-image-format-properties."
+  (cffi:foreign-free pImageFormatProperties))
 
-;; (more-cffi:defwith doc-file with-get-physical-device-queue-family-properties
-;;   create-get-physical-device-queue-family-properties
-;;   destroy-get-physical-device-queue-family-properties)
+(mcffi:defwith with-get-physical-device-image-format-properties
+    create-get-physical-device-image-format-properties
+    destroy-get-physical-device-image-format-properties
+    1
+  "Binds the results of create-get-physical-device-image-format-properties and evaluates the body forms. At the
+end, destroy-get-physical-device-image-format-properties is called with the image format properties structure.")
 
-;; (more-cffi:def-foreign-function doc-file
-;;     ("vkGetPhysicalDeviceMemoryProperties"
-;;      create-get-physical-device-memory-properties
-;;      funcall-get-physical-device-memory-properties)
-;;   (physicaldevice)
-;;   (declare-types ("VkPhysicalDevice" "physicalDevice") :return
-;; 		 ("VkPhysicalDeviceMemoryProperties" "pMemoryProperties"))
-;;   (let ((pmemoryproperties
-;;           (cffi:foreign-alloc '(:struct vkphysicaldevicememoryproperties))))
-;;     (vkgetphysicaldevicememoryproperties physicaldevice pmemoryproperties)
-;;     (values pmemoryproperties)))
 
-;; (more-cffi:def-lisp-function doc-file
-;;   destroy-get-physical-device-memory-properties
-;;   (pmemoryproperties)
-;;   (declare-types ("VkPhysicalDeviceMemoryProperties" "pMemoryProperties"))
-;;   (cffi-sys:foreign-free pmemoryproperties))
+(adp:subsubheader "vkGetPhysicalDeviceProperties")
 
-;; (more-cffi:defwith doc-file with-get-physical-device-memory-properties
-;;   create-get-physical-device-memory-properties
-;;   destroy-get-physical-device-memory-properties)
+(vulkan-defun (vkGetPhysicalDeviceProperties create-get-physical-device-properties funcall-get-physical-device-properties) (physicalDevice)
+  "Returns properties of a physical device."
+  (let ((pProperties (cffi:foreign-alloc '(:struct VkPhysicalDeviceProperties))))
+    (vkGetPhysicalDeviceProperties physicalDevice pProperties)
+    (values pProperties)))
+
+(adp:defun destroy-get-physical-device-properties (pProperties)
+  "Destroys a VkPhysicalDeviceProperties returned by create-get-physical-device-properties."
+  (cffi:foreign-free pProperties))
+
+(mcffi:defwith with-get-physical-device-properties
+    create-get-physical-device-properties
+    destroy-get-physical-device-properties
+    1
+  "Binds the results of create-get-physical-device-properties and evaluates the body forms. At the
+end, destroy-get-physical-device-properties is called with the physical device properties structure.")
+
+
+(adp:subsubheader "vkGetPhysicalDeviceQueueFamilyProperties")
+
+(vulkan-defun (vkGetPhysicalDeviceQueueFamilyProperties create-get-phsyical-device-queue-family-properties funcall-get-physical-device-queue-family-properties) (physicalDevice)
+  "Reports properties of the queues of the specified physical device."
+  (cffi:with-foreign-object (pQueueFamilyPropertyCount :uint32)
+    (vkGetPhysicalDeviceQueueFamilyProperties physicalDevice pQueueFamilyPropertyCount (cffi:null-pointer))
+    (let* ((queue-family-property-count (cffi:mem-ref pQueueFamilyPropertyCount :uint32))
+	   (pQueueFamilyProperties (cffi:foreign-alloc '(:struct VkQueueFamilyProperties) :count queue-family-property-count)))
+      (vkGetPhysicalDeviceQueueFamilyProperties physicalDevice pQueueFamilyPropertyCount pQueueFamilyProperties)
+      (loop for i from 0 below queue-family-property-count
+	    collect (cffi:mem-aptr pQueueFamilyProperties '(:struct VkQueueFamilyProperties) i)))))
+
+(adp:defun destroy-get-phsyical-device-queue-family-properties (pQueueFamilyProperties)
+  "Destroy the list of VkQueueFamilyProperties structures returned by create-get-phsyical-device-queue-family-properties."
+  (cffi:foreign-free (car pQueueFamilyProperties)))
+
+(mcffi:defwith with-get-phsyical-device-queue-family-properties
+    create-get-phsyical-device-queue-family-properties
+    destroy-get-phsyical-device-queue-family-properties
+    1
+  "Binds the results of create-get-phsyical-device-queue-family-properties and evaluates the body forms. At the
+end, destroy-get-phsyical-device-queue-family-properties is called with the queue family properties structures.")
+
+
+(adp:subsubheader "vkGetPhysicalDeviceMemoryProperties")
+
+(vulkan-defun (vkGetPhysicalDeviceMemoryProperties create-get-physical-device-memory-properties funcall-get-physical-device-memory-properties) (physicalDevice)
+  "Reports memory information for the specified physical device."
+  (let ((pMemoryProperties (cffi:foreign-alloc '(:struct VkPhysicalDeviceMemoryProperties))))
+    (vkGetPhysicalDeviceMemoryProperties physicalDevice pMemoryProperties)
+    (values pMemoryProperties)))
+
+(adp:defun destroy-get-physical-device-memory-properties (pMemoryProperties)
+  "Destroys a VkPhysicalDeviceMemoryProperties structure returned by create-get-physical-device-memory-properties."
+  (cffi:foreign-free pMemoryProperties))
+
+(mcffi:defwith with-get-physical-device-memory-properties
+    create-get-physical-device-memory-properties
+    destroy-get-physical-device-memory-properties
+    1
+  "Binds the results of create-get-physical-device-memory-properties and evaluates the body forms. At the
+end, destroy-get-physical-device-memory-properties is called with the memory properties structure.")
 
 ;; (more-cffi:def-foreign-function doc-file
 ;;     ("vkGetInstanceProcAddr" get-instance-proc-addr
